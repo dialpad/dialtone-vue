@@ -1,4 +1,4 @@
-name: Unit Tests
+name: Linters
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  unit_tests:
+  linters:
 
     runs-on: ubuntu-latest
 
