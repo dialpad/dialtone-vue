@@ -11,6 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
     steps:
       - name: Check out branch
       - uses: actions/checkout@v2
@@ -26,6 +29,3 @@ jobs:
 
       - name: Run unit tests
         run: npm run test
-
-      env:
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
