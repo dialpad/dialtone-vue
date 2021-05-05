@@ -1,124 +1,39 @@
-import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
 import RadioDefault from './radio_default.story.vue';
-import RadioMdx from './radio.mdx';
-import HsRadio from './radio';
-
+import option, * as name from './radio_controls';
 import * as validation from './radio_validation.stories.js';
-
-// Default Prop Values
-export const argsData = {
-  value: 'Value',
-  name: 'Name',
-  label: 'Radio',
-  description: '',
-  validationState: '',
-  onInput: action('input'),
-};
-// Prop Controls
-export const argTypesData = {
-  // Props
-  'v-model': {
-    description: 'Supported by this component',
-    control: null,
-  },
-  description: {
-    description: 'Describes the radio option',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-  checked: {
-    description: 'Used to set the initial state of the radio',
-    control: 'boolean',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'boolean',
-      },
-    },
-  },
-  validationState: {
-    table: {
-      type: {
-        summary: 'string',
-      },
-    },
-    control: {
-      type: 'select',
-      options: ['', ...Object.values(VALIDATION_MESSAGE_TYPES)],
-    },
-  },
-  labelChildProps: {
-    control: null,
-  },
-  descriptionChildProps: {
-    control: null,
-  },
-
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-  descriptionSlot: {
-    name: 'description',
-    description: 'slot for Radio Description',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-
-  // Action Event Handlers
-  onInput: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
-// Story Collection
-export default {
-  title: 'Forms/Radio',
-  component: HsRadio,
-  args: argsData,
-  argTypes: argTypesData,
-  excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: RadioMdx,
-    },
-  },
-};
+export default option;
+export const argsData = name.argsData;
+export const argTypesData = name.argTypesData;
 
 // Radio Templates
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, RadioDefault);
-
 // Stories
 export const Default = Template.bind({});
 Default.args = {};
 
 export const WithDescription = Template.bind({});
 WithDescription.args = {
-  name: 'ValueWDesc',
+  name: 'WithDescription',
   label: 'Label',
   description: 'Description',
   value: 'Value',
+};
+
+WithDescription.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>
+  <hs-radio
+      name="WithDescription"
+      value="Value"
+      label="Label"
+      description="Description"
+  />
+</template>`,
+    },
+  },
 };
 
 export const WithSlottedLabel = Template.bind({});
@@ -127,16 +42,19 @@ WithSlottedLabel.args = {
   value: 'Value',
   default: 'With Slotted Label',
 };
+
 WithSlottedLabel.parameters = {
   docs: {
     source: {
       code: `
-       <hs-radio
-          name="WithSlottedLabel"
-          value="Value"
-        >
-          With Slotted Label
-        </hs-radio>`,
+<template>
+  <hs-radio
+    name="WithSlottedLabel"
+    value="Value"
+  >
+    With Slotted Label
+  </hs-radio>
+</template>`,
     },
   },
 };
@@ -152,15 +70,17 @@ WithSlottedDescription.parameters = {
   docs: {
     source: {
       code: `
-        <hs-radio
-          name="ValueWSlottedDescription"
-          value="Value"
-        >
-          <template #description>
-            Slotted Description
-          </template>
-        </hs-radio>
-      `,
+<template>
+  <hs-radio
+    name="ValueWSlottedDescription"
+    value="Value"
+    label="Label"
+  >
+    <template #description>
+      Slotted Description
+    </template>
+  </hs-radio>
+</template>`,
     },
   },
 };
@@ -176,16 +96,17 @@ WithSlottedLabelAndDescription.parameters = {
   docs: {
     source: {
       code: `
-        <hs-radio
-          name="WithSlottedLabelAndDescription"
-          value="Value"
-        >
-          With Slotted Label
-          <template #description>
-            And Slotted Description
-          </template>
-        </hs-radio>
-      `,
+<template>
+  <hs-radio
+    name="WithSlottedLabelAndDescription"
+    value="Value"
+  >
+    With Slotted Label
+    <template #description>
+      And Slotted Description
+    </template>
+  </hs-radio>
+</template>`,
     },
   },
 };
@@ -197,6 +118,21 @@ Checked.args = {
   value: 'Checked',
   checked: true,
 };
+Checked.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>
+  <hs-radio
+    name="Checked"
+    value="Checked"
+    label="label"
+    checked
+  />
+</template>`,
+    },
+  },
+};
 
 export const CheckedWithDescription = Template.bind({});
 CheckedWithDescription.args = {
@@ -206,6 +142,22 @@ CheckedWithDescription.args = {
   description: 'With Description',
   checked: true,
 };
+CheckedWithDescription.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>
+  <hs-radio
+    name="CheckedWithDescription"
+    value="Checked"
+    label="Checked"
+    description="With Description"
+    checked
+  />
+</template>`,
+    },
+  },
+};
 
 export const SuccessWithDescription = Template.bind({});
 SuccessWithDescription.args = {
@@ -213,8 +165,23 @@ SuccessWithDescription.args = {
   label: 'Success',
   value: 'Validation',
   description: 'With Description',
-  checked: true,
   validationState: 'success',
+};
+SuccessWithDescription.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>
+  <hs-radio
+    name="SuccessWithDescription"
+    label="Success"
+    value="Validation"
+    description="With Description"
+    validationState="success"
+  />
+</template>`,
+    },
+  },
 };
 
 export const WarningWithDescription = Template.bind({});
@@ -223,8 +190,23 @@ WarningWithDescription.args = {
   label: 'Warning',
   value: 'Validation',
   description: 'With Description',
-  checked: true,
   validationState: 'warning',
+};
+WarningWithDescription.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>
+  <hs-radio
+    name="WarningWithDescription"
+    value="Validation"
+    label="Warning"
+    description="With Description"
+    validationState="warning"
+  />
+</template>`,
+    },
+  },
 };
 
 export const ErrorWithDescription = Template.bind({});
@@ -233,8 +215,24 @@ ErrorWithDescription.args = {
   label: 'Error',
   value: 'Validation',
   description: 'With Description',
-  checked: true,
   validationState: 'error',
+};
+
+ErrorWithDescription.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>
+  <hs-radio
+    name="ErrorWithDescription"
+    label="Error"
+    value="Validation"
+    description="With Description"
+    validationState="error"
+  />
+</template>`,
+    },
+  },
 };
 
 export const CheckedSuccessWithDescription = Template.bind({});
@@ -246,27 +244,26 @@ CheckedSuccessWithDescription.args = {
   checked: true,
   validationState: 'success',
 };
-
-export const CheckedWarningWithDescription = Template.bind({});
-CheckedWarningWithDescription.args = {
-  name: 'CheckedWarningWithDescription',
-  label: 'Warning',
-  value: 'Validation',
-  description: 'With Description',
-  checked: true,
-  validationState: 'warning',
+CheckedSuccessWithDescription.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>
+  <hs-radio
+    name="CheckedSuccessWithDescription"
+    value="Validation"
+    label="Success"
+    description="With Description"
+    validationState="success"
+    checked
+  />
+</template>`,
+    },
+  },
 };
 
-export const CheckedErrorWithDescription = Template.bind({});
-CheckedErrorWithDescription.args = {
-  name: 'CheckedErrorWithDescription',
-  label: 'Error',
-  value: 'Validation',
-  description: 'With Description',
-  checked: true,
-  validationState: 'error',
-};
-
+export const CheckedWarningWithDescription = validation.CheckedWarningWithDescription;
+export const CheckedErrorWithDescription = validation.CheckedErrorWithDescription;
 export const Disabled = validation.Disabled;
 export const DisabledWithDescription = validation.DisabledWithDescription;
 export const DisabledAndChecked = validation.DisabledAndChecked;
