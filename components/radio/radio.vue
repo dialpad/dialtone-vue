@@ -76,7 +76,6 @@ export default {
       default: '',
     },
   },
-emits: ['input'],
 
   computed: {
     inputValidationClass () {
