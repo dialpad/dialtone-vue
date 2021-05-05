@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '../storybook_utils';
 import RadioDefault from './radio_default.story.vue';
 import option, * as name from './radio_controls';
-import * as validation from './radio_validation.stories.js';
+import * as RadioValidationStories from './radio_validation.stories.js';
 export default option;
 export const argsData = name.argsData;
 export const argTypesData = name.argTypesData;
@@ -262,13 +262,13 @@ CheckedSuccessWithDescription.parameters = {
   },
 };
 
-export const CheckedWarningWithDescription = validation.CheckedWarningWithDescription;
-export const CheckedErrorWithDescription = validation.CheckedErrorWithDescription;
-export const Disabled = validation.Disabled;
-export const DisabledWithDescription = validation.DisabledWithDescription;
-export const DisabledAndChecked = validation.DisabledAndChecked;
-export const DisabledAndCheckedWithDescription = validation.DisabledAndCheckedWithDescription;
-export const ValidationMessageSuccess = validation.ValidationMessageSuccess;
-export const ValidationMessageWarning = validation.ValidationMessageWarning;
-export const ValidationMessageError = validation.ValidationMessageError;
-export const MultipleValidationMessageError = validation.MultipleValidationMessageError;
+export const CheckedWarningWithDescription = RadioValidationStories.CheckedWarningWithDescription;
+export const CheckedErrorWithDescription = RadioValidationStories.CheckedErrorWithDescription;
+export const Disabled = RadioValidationStories.Disabled;
+export const DisabledWithDescription = RadioValidationStories.DisabledWithDescription;
+export const DisabledAndChecked = RadioValidationStories.DisabledAndChecked;
+export const DisabledAndCheckedWithDescription = RadioValidationStories.DisabledAndCheckedWithDescription;
+export const ValidationMessageSuccess = RadioValidationStories.ValidationMessageSuccess;
+export const ValidationMessageWarning = RadioValidationStories.ValidationMessageWarning;
+export const ValidationMessageError = RadioValidationStories.ValidationMessageError;
+export const MultipleValidationMessageError = RadioValidationStories.MultipleValidationMessageError;
