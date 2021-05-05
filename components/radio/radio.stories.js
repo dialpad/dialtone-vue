@@ -74,7 +74,7 @@ export const argTypesData = {
   },
   descriptionSlot: {
     name: 'description',
-    description: 'slot huy123 for Radio Description',
+    description: 'slot for Radio Description',
     control: 'text',
     table: {
       category: 'slots',
