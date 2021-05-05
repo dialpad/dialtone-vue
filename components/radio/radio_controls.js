@@ -1,4 +1,3 @@
-// Default Prop Values
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
 import HsRadio from './radio';
 import RadioMdx from './radio.mdx';
