@@ -9,7 +9,7 @@
   "main": "./dist/dialtone-vue.common.js",
   "scripts": {
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
-    "deploy:npm": "npm pack",
+    "deploy:npm": "npm publish",
     "deploy": "run-s build deploy:npm",
     "prepublishOnly": "npm run build",
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
