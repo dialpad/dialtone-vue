@@ -171,10 +171,57 @@
       disabled
     />
     <!-- Disabled and Checked With Description -->
+
+    <!-- Disabled and Checked With Description. With Warning Message -->
+    <hs-radio
+        name="CheckedDisabledWDesc"
+        value="Checked"
+        label="Disabled & Checked"
+        description="With Description"
+        :messages="[{ message: 'Warning', type: VALIDATION_MESSAGE_TYPES.WARNING }]"
+        checked
+    />
+    <!-- Disabled and Checked With Description -->
+
+    <!-- Disabled and Checked With Description. With Error Message -->
+    <hs-radio
+        name="CheckedDisabledWDesc"
+        value="Checked"
+        label="Disabled & Checked"
+        description="With Description"
+        :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+        checked
+    />
+    <!-- Disabled and Checked With Description -->
+
+    <!-- Disabled and Checked With Description. With Success Message -->
+    <hs-radio
+      name="CheckedDisabledWDesc"
+      value="Checked"
+      label="Disabled & Checked"
+      description="With Description"
+      :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+      checked
+    />
+    <!-- Disabled and Checked With Description -->
+
+    <hs-radio
+        name="CheckedDisabledWDesc"
+        value="Checked"
+        label="Disabled & Checked"
+        description="With Description"
+        :messages="[
+            { message: 'Error', type: VALIDATION_MESSAGE_TYPES.SUCCESS },
+            { message: 'Error', type: VALIDATION_MESSAGE_TYPES.SUCCESS },
+            { message: 'Error', type: VALIDATION_MESSAGE_TYPES.SUCCESS },
+        ]"
+        checked
+    />
   </div>
 </template>
 
 <script>
+import { VALIDATION_MESSAGE_TYPES } from '../constants';
 import HsRadio from './radio';
 import fixDefaultSlot from '../plugins/fixDefaultSlot';
 
@@ -182,5 +229,8 @@ export default {
   name: 'RadioVariants',
   components: { HsRadio },
   mixins: [fixDefaultSlot],
+  created () {
+    this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
+  },
 };
 </script>

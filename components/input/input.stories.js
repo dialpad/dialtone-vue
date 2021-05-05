@@ -179,7 +179,7 @@ WithError.parameters = {
 
 export const WithSuccess = Template.bind({});
 WithSuccess.args = {
-  messages: [{ message: 'This is a success message', type: 'success' }],
+  messages: [{ message: 'This is a123123 success message', type: 'success' }],
 };
 WithSuccess.parameters = {
   docs: {
