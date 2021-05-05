@@ -53,18 +53,17 @@ import {
   InputMixin,
   CheckableMixin,
   GroupableMixin,
+  MessagesMixin,
 } from '../mixins/input.js';
 import { RADIO_INPUT_VALIDATION_CLASSES, RADIO_DESCRIPTION_VALIDATION_CLASSES } from './radio_constants';
 import { HsValidationMessages } from '../validation_messages';
-import { formatMessages } from '../utils';
-import { validationMessageValidator } from '../validators';
 
 export default {
   name: 'HsRadio',
 
   components: { HsValidationMessages },
 
-  mixins: [InputMixin, CheckableMixin, GroupableMixin],
+  mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 
   inheritAttrs: false,
 
@@ -76,48 +75,10 @@ export default {
       type: [String, Number],
       default: '',
     },
-
-    /**
-     * Used to customize the the validation messages component
-     */
-    messagesClass: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * A set of props that are passed into the validation messages component
-     */
-    messagesChildProps: {
-      type: Object,
-      default: () => ({}),
-    },
-
-    /**
-     * Used to hide / show the validation messages
-     */
-    showMessages: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Validation messages
-     */
-    messages: {
-      type: Array,
-      default: () => [],
-      validator: messages => {
-        return validationMessageValidator(messages);
-      },
-    },
   },
+emits: ['input'],
 
   computed: {
-    formattedMessages () {
-      return formatMessages(this.messages);
-    },
-
     inputValidationClass () {
       return RADIO_INPUT_VALIDATION_CLASSES[this.internalValidationState];
     },
