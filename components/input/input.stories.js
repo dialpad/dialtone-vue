@@ -184,7 +184,7 @@ WithSuccess.args = {
 WithSuccess.parameters = {
   docs: {
     source: {
-      code: '<hs-input :messages="[{ message: \'This is a success message\', type: \'success\' }]" />',
+      code: '<hs-input :messages="[{ message: \'This is success message\', type: \'success\' }]" />',
     },
   },
 };
