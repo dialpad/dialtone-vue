@@ -1,6 +1,7 @@
 <template>
   <div
     v-if="showMessages && !isFilteredValidationMessagesEmpty"
+    :class="['base-input__messages']"
     data-qa="validation-messages-container"
   >
     <div
