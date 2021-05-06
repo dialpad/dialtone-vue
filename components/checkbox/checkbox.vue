@@ -39,7 +39,7 @@
           :show-messages="showMessages"
           :class="messagesClass"
           v-bind="messagesChildProps"
-          data-qa="hs-checkbox-messages"
+          data-qa="hs-checkbox-validation-messages"
         />
       </div>
     </div>
@@ -60,9 +60,9 @@ import { HsValidationMessages } from '../validation_messages';
 export default {
   name: 'HsCheckbox',
 
-  mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
-
   components: { HsValidationMessages },
+
+  mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 
   inheritAttrs: false,
 
