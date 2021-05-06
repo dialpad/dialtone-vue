@@ -187,7 +187,7 @@
 
 <script>
 import HsCheckbox from './checkbox';
-import {VALIDATION_MESSAGE_TYPES} from "../constants";
+import { VALIDATION_MESSAGE_TYPES } from '../constants';
 
 export default {
   name: 'CheckboxVariants',
