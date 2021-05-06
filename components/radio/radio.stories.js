@@ -1,7 +1,8 @@
 import { createTemplateFromVueFile } from '../storybook_utils';
 import RadioDefault from './radio_default.story.vue';
-import option, * as name from './radio_controls';
+import option, * as name from './radio.stories.controls';
 import * as RadioValidationStories from './radio_validation.stories.js';
+
 export default option;
 export const argsData = name.argsData;
 export const argTypesData = name.argTypesData;
