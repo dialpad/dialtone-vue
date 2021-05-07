@@ -3,7 +3,6 @@
     :id="id"
     :href="url"
     :class="['d-link', linkValidationClass, linkModifierClassDisabled, linkModifierClassInverted]"
-    :disabled="disabled"
     data-qa="hs-link"
     v-bind="$attrs"
   >
