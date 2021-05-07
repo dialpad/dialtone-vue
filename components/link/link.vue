@@ -75,8 +75,9 @@ export default {
     },
 
     linkModifierClassDisabled () {
-      if (this.disabled && !this.inverted) return LINK_MODIFIERS.disabled;
-      if (this.disabled && this.inverted) return LINK_MODIFIERS.invertedDisabled;
+      if (!this.disabled) return '';
+
+      return this.inverted ? LINK_MODIFIERS.invertedDisabled : LINK_MODIFIERS.disabled;
     },
 
     linkModifierClassInverted () {
