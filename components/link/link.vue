@@ -2,7 +2,7 @@
   <a
     :id="id"
     :href="url"
-    :class="['d-link', linkValidationClass, linkModifierClassDisabled, linkModifierClassInverted]"
+    :class="['d-link', linkKindClass, linkModifierClassDisabled, linkModifierClassInverted]"
     data-qa="hs-link"
   >
     <span data-qa="hs-link-label">
@@ -68,7 +68,7 @@ export default {
   },
 
   computed: {
-    linkValidationClass () {
+    linkKindClass () {
       return LINK_VALIDATION_CLASSES[this.kind];
     },
 
