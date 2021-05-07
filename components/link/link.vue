@@ -81,13 +81,17 @@ export default {
     },
 
     linkModifierClassDisabled () {
-      if (!this.disabled) return '';
+      if (!this.disabled) {
+        return '';
+      }
 
       return this.inverted ? LINK_MODIFIERS.invertedDisabled : LINK_MODIFIERS.disabled;
     },
 
     linkModifierClassInverted () {
-      if (this.kind === 'danger' && this.inverted) return LINK_MODIFIERS.invertedDanger;
+      if (this.kind === 'danger' && this.inverted) {
+        return LINK_MODIFIERS.invertedDanger;
+      }
 
       return this.inverted ? LINK_MODIFIERS.inverted : '';
     },
