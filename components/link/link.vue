@@ -1,10 +1,10 @@
 <template>
   <a
     :href="url"
-    :class="['d-link', linkValidationClass, linkModifierClass]"
+    :class="['d-link', linkValidationClass, linkModifierClassDisabled, linkModifierClassInverted]"
     :disabled="disabled"
-    v-bind="$attrs"
     data-qa="hs-link"
+    v-bind="$attrs"
   >
     <span data-qa="hs-link-label">
       <slot>
@@ -74,9 +74,12 @@ export default {
       return LINK_VALIDATION_CLASSES[this.kind];
     },
 
-    linkModifierClass () {
+    linkModifierClassDisabled () {
       if (this.disabled && !this.inverted) return LINK_MODIFIERS.disabled;
       if (this.disabled && this.inverted) return LINK_MODIFIERS.invertedDisabled;
+    },
+
+    linkModifierClassInverted () {
       if (this.kind === 'danger' && this.inverted) return LINK_MODIFIERS.invertedDanger;
 
       return this.inverted ? LINK_MODIFIERS.inverted : '';
