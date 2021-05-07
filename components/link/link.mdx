@@ -1,0 +1,50 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import HsLink from './link';
+
+# Links
+
+<Subtitle>
+  Links allow users to click their way from page to page.
+</Subtitle>
+
+## Base Style
+
+Links allow users to click their way from page to page.
+
+<Canvas>
+  <Story id="<GROUP>-hs-link--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="<GROUP>-hs-link--variants" />
+</Canvas>
+
+## Props, Slots & Events
+
+<ArgsTable of={HsLink} />
+
+## Usage
+
+### Import
+
+```jsx
+import { HsLink } from '@dialpad/handset';
+```
+
+### With Some Variant
+
+```vue
+<hs-link
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<hs-link
+  some-other="variant"
+/>
+```
