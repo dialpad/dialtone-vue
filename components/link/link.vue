@@ -1,5 +1,6 @@
 <template>
   <a
+    :id="id"
     :href="url"
     :class="['d-link', linkValidationClass, linkModifierClassDisabled, linkModifierClassInverted]"
     :disabled="disabled"
@@ -7,15 +8,15 @@
     v-bind="$attrs"
   >
     <span data-qa="hs-link-label">
-      <slot>
-        {{ label }}
-      </slot>
+      {{ label }}
+      <slot v-if="!label" />
     </span>
   </a>
 </template>
 
 <script>
 import { LINK_VALIDATION_CLASSES, LINK_MODIFIERS } from './link_constants.js';
+import { getUniqueString } from '../utils';
 
 export default {
   name: 'HsLink',
@@ -27,6 +28,11 @@ export default {
   inheritAttrs: false,
 
   props: {
+    id: {
+      type: String,
+      default: () => getUniqueString(),
+    },
+
     /**
      * Provides the url for the link
      */

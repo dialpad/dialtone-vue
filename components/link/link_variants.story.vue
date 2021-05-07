@@ -21,12 +21,6 @@
       <template v-if="defaultSlot">
         <span v-html="defaultSlot" />
       </template>
-      <template
-        v-if="someSlot"
-        #some
-      >
-        <span v-html="someSlot" />
-      </template>
     </hs-link>
     <hs-link
       url="#"
