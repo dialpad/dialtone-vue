@@ -194,20 +194,4 @@ describe('HsTest Tests', function () {
       assert.strictEqual(wrapper.vm.linkModifierClassInverted, LINK_MODIFIERS.invertedDanger);
     });
   });
-
-  describe('Extendability Tests', function () {
-    // Test Setup
-    beforeEach(function () {
-      _setWrappers();
-    });
-
-    it('should handle pass through props/attrs', async function () {
-      // Validating all attrs from base-input get passed down to the native input.
-      assert.include(nativeLink.attributes(), attrs);
-      assert.isUndefined(nativeLink.attributes().disabled);
-
-      await wrapper.setProps({ disabled: true });
-      assert.equal(nativeLink.attributes().disabled, 'disabled');
-    });
-  });
 });
