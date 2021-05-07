@@ -4,7 +4,6 @@
     :href="url"
     :class="['d-link', linkValidationClass, linkModifierClassDisabled, linkModifierClassInverted]"
     data-qa="hs-link"
-    v-bind="$attrs"
   >
     <span data-qa="hs-link-label">
       {{ label }}
@@ -19,12 +18,6 @@ import { getUniqueString } from '../utils';
 
 export default {
   name: 'HsLink',
-
-  /* inheritAttrs: false is generally an option we want to set on library
-    components. This allows any attributes passed in that are not recognized
-    as props to be passed down to another element or component using v-bind:$attrs
-    more info: https://vuejs.org/v2/api/#inheritAttrs */
-  inheritAttrs: false,
 
   props: {
     id: {
