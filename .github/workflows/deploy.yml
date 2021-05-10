@@ -11,7 +11,6 @@ jobs:
 
     env:
       NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      GH_AUTH_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
 
     steps:
       - name: Check out branch
