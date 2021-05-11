@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import { DESCRIPTION_SIZE_TYPES } from '../constants.js';
 import { INPUT_TYPES, INPUT_SIZE_TYPES } from './input_constants.js';
 import {
   getUniqueString,
@@ -213,9 +214,10 @@ export default {
     },
 
     descriptionSizeModifierClass () {
-      if (!this.size || !Object.values(INPUT_SIZE_TYPES).includes(this.size)) {
+      if (!this.size || !Object.values(DESCRIPTION_SIZE_TYPES).includes(this.size)) {
         return '';
       }
+
       return `d-description--${this.size}`;
     },
 
