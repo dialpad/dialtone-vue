@@ -30,7 +30,7 @@ Dialtone Vue uses [Storybook][storybook] for documentation of components, as wel
 
 All components in Dialtone Vue should have stories written for them in Storybook. For more information on how to write stories, see the [documentation][stories].
 
-[storybook]: https://storybook.js.orgs
+[storybook]: https://storybook.js.org
 [handbook]: https://dialtone-vue.netlify.app
 [stories]: https://dialtone-vue.netlify.app/?path=/story/docs-storybook-getting-started--page
 
