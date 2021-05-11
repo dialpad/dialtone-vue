@@ -4,7 +4,7 @@ Before contributing a new component to Dialtone Vue, please check the [Github Pr
 
 ## Pull Requests
 
-Changes to the Dialtone Vue library should ideally be separate from any other changes to other project code. All pull requests should be assigned to the `@dialpad/dialtone-vue` team and require at least one approval to merge.s
+Changes to the Dialtone Vue library should ideally be separate from any other changes to other project code. All pull requests should be assigned to the `@dialpad/dialtone-vue` team and require at least one approval to merge.
 
 ## Requirements
 
