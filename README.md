@@ -58,6 +58,18 @@ Remember that Dialtone Vue is a separate project, so be sure to run the lint and
 
 See [CONTRIBUTING](./CONTRIBUTING.md).
 
+### Project Setup
+
+#### NPM_AUTH_TOKEN
+
+Ensure that `NPM_AUTH_TOKEN` is set in your path. You will need to set the token to an NPM authentication token which has read level access to the `@dialpad` organization.
+
+#### Install Dependencies
+
+```bash
+npm install
+```
+
 ### CSS & Dialtone
 
 Dialtone components should utilize the global immutable CSS classes provided by Dialtone whenever possible. It is a requirement of any project using Dialtone Vue to include these classes.

@@ -10,7 +10,15 @@ Changes to the Dialtone Vue library should ideally be separate from any other ch
 
 Any new components or updates to existing components require at least:
 
-- Unit tests covering the entire change.
-- Storybook documentation.
+- Unit tests covering the entire change
+- Storybook documentation
+- Unit tests are passing locally
+  - `npm run test`
+- Linters are passing locally
+  - `npm run lint`
+- Library builds locally
+  - `npm run build`
+- Documentation builds locally
+  - `npm run storybook:build`
 
 [project]: https://github.com/dialpad/firespotter/projects/1
