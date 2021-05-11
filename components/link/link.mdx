@@ -12,13 +12,13 @@ import HsLink from './link';
 Links allow users to click their way from page to page.
 
 <Canvas>
-  <Story id="<GROUP>-hs-link--default" />
+  <Story id="elements-link--default" />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="<GROUP>-hs-link--variants" />
+  <Story id="elements-link--variants" />
 </Canvas>
 
 ## Props, Slots & Events
@@ -33,18 +33,24 @@ Links allow users to click their way from page to page.
 import { HsLink } from '@dialpad/handset';
 ```
 
-### With Some Variant
+### With Some Kind
 
 ```vue
 <hs-link
-  some="variant"
-/>
+  href="#"
+  kind="variant"
+>
+Link
+</hs-link>
 ```
 
-### With Some Other Variant
+### With Some Other Kind
 
 ```vue
 <hs-link
-  some-other="variant"
-/>
+  href="#"
+  kind="'' | danger | warning | success | muted"
+>
+Link
+</hs-link>
 ```

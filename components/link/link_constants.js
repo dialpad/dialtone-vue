@@ -1,14 +1,23 @@
-export const LINK_VALIDATION_CLASSES = {
-  danger: 'd-link--danger',
-  warning: 'd-link--warning',
-  success: 'd-link--success',
-  muted: 'd-link--muted',
+export const DANGER = 'danger';
+export const WARNING = 'warning';
+export const SUCCESS = 'success';
+export const MUTED = 'muted';
+export const DISABLED = 'disabled';
+export const INVERTED = 'inverted';
+export const LINK_CLASS = 'd-link';
+export const ALLOW_KINDS = ['', DANGER, WARNING, SUCCESS, MUTED];
+const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
 
+export const LINK_VALIDATION_CLASSES = {
+  [DANGER]: `${LINK_CLASS}--${DANGER}`,
+  [WARNING]: `${LINK_CLASS}--${WARNING}`,
+  [SUCCESS]: `${LINK_CLASS}--${SUCCESS}`,
+  [MUTED]: `${LINK_CLASS}--${MUTED}`,
 };
 
 export const LINK_MODIFIERS = {
-  disabled: 'd-link--disabled',
-  inverted: 'd-link--inverted',
-  invertedDanger: 'd-link--inverted-danger',
-  invertedDisabled: 'd-link--inverted-disabled',
+  [DISABLED]: `${LINK_CLASS}--${DISABLED}`,
+  [INVERTED]: `${LINK_CLASS}--${INVERTED}`,
+  [`${INVERTED}${capitalize(DANGER)}`]: `${LINK_CLASS}--${INVERTED}-${DANGER}`,
+  [`${INVERTED}${capitalize(DISABLED)}`]: `${LINK_CLASS}--${INVERTED}-${DISABLED}`,
 };

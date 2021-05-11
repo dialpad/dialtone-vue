@@ -1,70 +1,45 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
   <div>
-    <!--
-    We can bind the data that the user entered into the storybook controls to props by using a property of the same name
-    as the storybook control defined in the corresponding `.story.js` file.
-  -->
     <hs-link
-      url="#"
-      :label="label"
+      href="#"
     >
-      <!--
-        We can also bind any slot data that the user has entered into the storybook controls. In this example we
-        conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
-
-        The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-
-        We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-        same name.
-      -->
-      <template v-if="defaultSlot">
-        <span v-html="defaultSlot" />
-      </template>
+      {{ defaultSlot }}
     </hs-link>
     <hs-link
-      url="#"
+      href="#"
       kind="danger"
-      label="Danger link"
-    />
+    >Danger link</hs-link>
     <hs-link
-      url="#"
+      href="#"
       kind="warning"
-      label="Warning link"
-    />
+    >Warning link</hs-link>
     <hs-link
-      url="#"
+      href="#"
       kind="success"
-      label="Success link"
-    />
+    >Success link</hs-link>
     <hs-link
-      url="#"
+      href="#"
       kind="muted"
-      label="Dark link"
-    />
+    >Dark link</hs-link>
     <hs-link
-      url="#"
-      disabled
-      label="Disabled link"
-    />
+      href="#"
+      :disabled="true"
+    >Disabled link</hs-link>
     <div class="d-bgc-blue-800">
       <hs-link
-        url="#"
-        disabled
-        inverted
-        label="Inverted Disabled link"
-      />
+        href="#"
+        :disabled="true"
+        :inverted="true"
+      >Inverted Disabled link</hs-link>
       <hs-link
-        url="#"
-        inverted
-        label="Inverted link"
-      />
+        href="#"
+        :inverted="true"
+      >Inverted link</hs-link>
       <hs-link
-        url="#"
+        href="#"
         kind="danger"
-        inverted
-        label="Inverted Danger link"
-      />
+        :inverted="true"
+      >Inverted Danger link</hs-link>
     </div>
   </div>
 </template>

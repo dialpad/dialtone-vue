@@ -1,20 +1,17 @@
 <template>
   <a
     :id="id"
-    :href="url"
+    :href="href"
     :class="['d-link', linkKindClass, linkModifierClassDisabled, linkModifierClassInverted]"
     data-qa="hs-link"
   >
-    <span data-qa="hs-link-label">
-      {{ label }}
-      <slot v-if="!label" />
-    </span>
+    <slot />
   </a>
 </template>
 
 <script>
-import { LINK_VALIDATION_CLASSES, LINK_MODIFIERS } from './link_constants.js';
-import { getUniqueString } from '../utils';
+import { LINK_VALIDATION_CLASSES, LINK_MODIFIERS, DANGER, ALLOW_KINDS } from './link_constants.js';
+import util from '../utils';
 
 export default {
   name: 'HsLink',
@@ -22,23 +19,17 @@ export default {
   props: {
     id: {
       type: String,
-      default: () => getUniqueString(),
+      default () {
+        return util.getUniqueString();
+      },
     },
 
     /**
      * Provides the url for the link
      */
-    url: {
+    href: {
       type: String,
       required: true,
-    },
-
-    /**
-     * Provides a label for the link, overridden by default slot.
-     */
-    label: {
-      type: String,
-      default: '',
     },
 
     /**
@@ -47,7 +38,9 @@ export default {
     kind: {
       type: String,
       default: '',
-      validator: kind => kind === '' || !!LINK_VALIDATION_CLASSES[kind],
+      validator (kind) {
+        return ALLOW_KINDS.includes(kind);
+      },
     },
 
     /**
@@ -59,7 +52,7 @@ export default {
     },
 
     /**
-     * Disables the link
+     * Applies the disabled styles to the link
      */
     disabled: {
       type: Boolean,
@@ -81,7 +74,7 @@ export default {
     },
 
     linkModifierClassInverted () {
-      if (this.kind === 'danger' && this.inverted) {
+      if (this.kind === DANGER && this.inverted) {
         return LINK_MODIFIERS.invertedDanger;
       }
 

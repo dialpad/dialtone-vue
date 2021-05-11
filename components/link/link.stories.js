@@ -6,8 +6,9 @@ import HsLinkVariantsTemplate from './link_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  label: 'Default link',
-  url: '#',
+  default: 'Default link',
+  href: '#',
+  id: undefined,
 };
 
 /*

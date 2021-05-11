@@ -5,24 +5,20 @@ import { LINK_MODIFIERS } from '../link';
 
 // Constants
 const basePropsData = {
-  url: '#',
-  label: 'Link',
+  href: '#',
 };
 
 describe('HsTest Tests', function () {
   // Wrappers
   let wrapper;
-  let label;
   let nativeLink;
 
   // Environment
   let propsData = basePropsData;
   let slots = {};
-  const attrs = { 'aria-label': 'anchor' };
 
   // Helpers
   const _setWrappers = () => {
-    label = wrapper.find('[data-qa="hs-link-label"]');
     nativeLink = wrapper.find('.d-link');
   };
 
@@ -30,7 +26,6 @@ describe('HsTest Tests', function () {
     wrapper = mount(HsLink, {
       propsData,
       slots,
-      attrs,
       localVue: this.localVue,
     });
     _setWrappers();
@@ -55,21 +50,14 @@ describe('HsTest Tests', function () {
   describe('Presentation Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
     it('should have a generated id', function () { assert.exists(nativeLink.attributes('id')); });
-    it('should have a label', function () { assert.equal(label.text(), 'Link'); });
 
-    describe('When a label is provided via slot', function () {
-      beforeEach(async function () {
+    describe('When a default slot is provided', function () {
+      beforeEach(function () {
         slots = { default: 'Slotted Link' };
         _mountWrapper();
         _setWrappers();
-        await wrapper.setProps({ label: '' });
       });
-      it('should have a label', function () { assert.equal(label.text(), 'Slotted Link'); });
-      it('shouldn\'t have a slotted label', async function () {
-        await wrapper.setProps({ label: 'Link' });
-        assert.notEqual(label.text(), 'Slotted Link');
-        assert.equal(label.text(), 'Link');
-      });
+      it('should have a default slot', function () { assert.equal(nativeLink.text(), 'Slotted Link'); });
     });
 
     describe('When type is danger', function () {
