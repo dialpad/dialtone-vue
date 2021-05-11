@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount, createLocalVue } from '@vue/test-utils';
-import HsInput from './input.vue';
+import DtInput from './input.vue';
 
 // Constants
 const basePropsData = {
@@ -31,14 +31,14 @@ describe('Handset Input tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    label = wrapper.find('[data-qa="hs-input-label"]');
-    description = wrapper.find('[data-qa="hs-input-description"]');
+    label = wrapper.find('[data-qa="dt-input-label"]');
+    description = wrapper.find('[data-qa="dt-input-description"]');
     nativeInput = wrapper.find('input');
     nativeTextarea = wrapper.find('textarea');
   };
 
   const _mountWrapper = () => {
-    wrapper = mount(HsInput, {
+    wrapper = mount(DtInput, {
       propsData,
       attrs,
       slots,

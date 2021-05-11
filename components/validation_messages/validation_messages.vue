@@ -26,7 +26,7 @@ import {
 } from '../utils';
 
 export default {
-  name: 'HsValidationMessages',
+  name: 'DtValidationMessages',
 
   props: {
     /**

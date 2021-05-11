@@ -21,7 +21,7 @@ Our goal is to have a stable 1.0 release in early 2021. At this point, we will s
 Handset components can be imported directly from the package. Some components also export named constants, which can be imported as well:
 
 ```js
-import { HsInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
+import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/handset';
 ```
 
 ## Storybook Component Documentation
@@ -76,7 +76,7 @@ When adding a new component, please add its exports to `index.js`, including any
 
 ```js
 export {
-  default as HsInput,
+  default as DtInput,
   INPUT_SIZE_TYPES,
 } from './components/input.vue';
 ```

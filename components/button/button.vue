@@ -66,7 +66,7 @@ export const LINK_KIND_MODIFIERS = {
  * @displayName HSButton
  */
 export default {
-  name: 'HsButton',
+  name: 'DtButton',
 
   props: {
     /**
