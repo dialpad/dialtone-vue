@@ -49,7 +49,6 @@ describe('HsTest Tests', function () {
 
   describe('Presentation Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-    it('should have a generated id', function () { assert.exists(nativeLink.attributes('id')); });
 
     describe('When a default slot is provided', function () {
       beforeEach(function () {
