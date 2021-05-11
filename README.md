@@ -14,7 +14,7 @@ Dialtone Vue is a new project, and as such it is under constant development as w
 
 ### Timeline
 
-Our goal is to have a stable 1.0 release in early 2021. At this point, we will split Dialtone Vue into a separate repository and follow semantic versioning.
+Our goal is to have a stable 1.0 release in Q3 2021. At this point, we will split Dialtone Vue into a separate repository and follow semantic versioning.
 
 ## Usage
 
@@ -30,9 +30,9 @@ Dialtone Vue uses [Storybook][storybook] for documentation of components, as wel
 
 All components in Dialtone Vue should have stories written for them in Storybook. For more information on how to write stories, see the [documentation][stories].
 
-[storybook]: https://storybook.js.org
-[handbook]: https://static.dialpadcdn.com/storybook/index.html
-[stories]: https://static.dialpadcdn.com/storybook/index.html?path=/story/docs-storybook-getting-started--page
+[storybook]: https://storybook.js.orgs
+[handbook]: https://dialtone-vue.netlify.app
+[stories]: https://dialtone-vue.netlify.app/?path=/story/docs-storybook-getting-started--page
 
 ### Running Storybook Locally
 
