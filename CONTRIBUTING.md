@@ -1,10 +1,10 @@
 # Contributing
 
-Before contributing a new component to Handset, please check the [Github Project][project] board to see if there is already an issue for it and if not, add it.
+Before contributing a new component to Dialtone Vue, please check the [Github Project][project] board to see if there is already an issue for it and if not, add it.
 
 ## Pull Requests
 
-Changes to the Handset library should ideally be separate from any other changes to other project code. All pull requests should be assigned to the `@dialpad/handset` team and require at least one approval to merge.
+Changes to the Dialtone Vue library should ideally be separate from any other changes to other project code. All pull requests should be assigned to the `@dialpad/dialtone-vue` team and require at least one approval to merge.s
 
 ## Requirements
 

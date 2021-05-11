@@ -14,7 +14,7 @@ const baseAttrs = {
   name: 'input-name',
 };
 
-describe('Handset Input tests', function () {
+describe('Dialtone Vue Input tests', function () {
   // Wrappers
   let wrapper;
   let label;
