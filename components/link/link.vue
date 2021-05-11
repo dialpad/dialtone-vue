@@ -1,6 +1,5 @@
 <template>
   <a
-    :id="id"
     :href="href"
     :class="['d-link', linkKindClass, linkModifierClassDisabled, linkModifierClassInverted]"
     data-qa="hs-link"
@@ -11,19 +10,11 @@
 
 <script>
 import { LINK_VALIDATION_CLASSES, LINK_MODIFIERS, DANGER, ALLOW_KINDS } from './link_constants.js';
-import util from '../utils';
 
 export default {
   name: 'HsLink',
 
   props: {
-    id: {
-      type: String,
-      default () {
-        return util.getUniqueString();
-      },
-    },
-
     /**
      * Provides the url for the link
      */
