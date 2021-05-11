@@ -34,7 +34,7 @@ All components in Dialtone Vue should have stories written for them in Storybook
 [handbook]: https://static.dialpadcdn.com/storybook/index.html
 [stories]: https://static.dialpadcdn.com/storybook/index.html?path=/story/docs-storybook-getting-started--page
 
-### Running Storybook Locallys
+### Running Storybook Locally
 
 Storybook provides a sandbox to develop and experiment with components locally, in isolation from the rest of the app. With Storybook you get live reloading of component templates and styles, just like you would in the app. You can also test different props and slots and see the effects in real time, test accessibility issues, and more.
 
