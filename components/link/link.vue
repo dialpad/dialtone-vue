@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { LINK_MODIFIERS, DANGER, LINK_KINDS } from './link_constants.js';
+import { LINK_MODIFIERS_CLASSES, DANGER, LINK_KINDS } from './link_constants.js';
 
 export default {
   name: 'DtLink',
@@ -62,13 +62,13 @@ export default {
     },
   },
 
-  methodt: {
+  methods: {
     linkDisabledClass () {
-      return this.inverted ? LINK_MODIFIERS.invertedDisabled : LINK_MODIFIERS.disabled;
+      return this.inverted ? LINK_MODIFIERS_CLASSES.invertedDisabled : LINK_MODIFIERS_CLASSES.disabled;
     },
 
     linkInvertedClass () {
-      return this.kind === DANGER ? LINK_MODIFIERS.invertedDanger : LINK_MODIFIERS.inverted;
+      return this.kind === DANGER ? LINK_MODIFIERS_CLASSES.invertedDanger : LINK_MODIFIERS_CLASSES.inverted;
     },
   },
 };

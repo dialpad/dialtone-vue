@@ -15,7 +15,7 @@ export const LINK_VALIDATION_CLASSES = {
   [MUTED]: `${LINK_CLASS}--${MUTED}`,
 };
 
-export const LINK_MODIFIERS = {
+export const LINK_MODIFIERS_CLASSES = {
   [DISABLED]: `${LINK_CLASS}--${DISABLED}`,
   [INVERTED]: `${LINK_CLASS}--${INVERTED}`,
   [`${INVERTED}${capitalize(DANGER)}`]: `${LINK_CLASS}--${INVERTED}-${DANGER}`,
