@@ -11,7 +11,6 @@
     :show-messages="showMessages"
     :messages-class="messagesClass"
     :placeholder="placeholder"
-    :show-clear-button="showClearButton"
     @input="onInput"
     @clear="onClear"
   >

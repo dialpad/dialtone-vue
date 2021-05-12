@@ -141,6 +141,22 @@ WithDescription.args = {
   description: 'Description',
 };
 
+export const WithLeftIcon = Template.bind({});
+WithLeftIcon.args = {
+  leftIcon: 'IconSend',
+};
+
+export const WithRightIcon = Template.bind({});
+WithRightIcon.args = {
+  rightIcon: 'IconLock',
+};
+
+export const WithBothIcons = Template.bind({});
+WithBothIcons.args = {
+  leftIcon: 'IconSend',
+  rightIcon: 'IconLock',
+};
+
 export const WithWarn = Template.bind({});
 WithWarn.args = {
   messages: [{ message: 'This is a warning message', type: 'warning' }],
