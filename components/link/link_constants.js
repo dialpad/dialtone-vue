@@ -8,6 +8,13 @@ export const LINK_CLASS = 'd-link';
 export const LINK_KINDS = ['', DANGER, WARNING, SUCCESS, MUTED];
 const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
 
+export const LINK_VALIDATION_CLASSES = {
+  [DANGER]: `${LINK_CLASS}--${DANGER}`,
+  [WARNING]: `${LINK_CLASS}--${WARNING}`,
+  [SUCCESS]: `${LINK_CLASS}--${SUCCESS}`,
+  [MUTED]: `${LINK_CLASS}--${MUTED}`,
+};
+
 export const LINK_MODIFIERS = {
   [DISABLED]: `${LINK_CLASS}--${DISABLED}`,
   [INVERTED]: `${LINK_CLASS}--${INVERTED}`,

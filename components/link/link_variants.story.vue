@@ -1,33 +1,12 @@
 <template>
   <div>
     <hs-link
+      v-for="kind in LINK_KINDS"
+      :key="kind"
       href="#"
+      :kind="kind"
     >
-      {{ defaultSlot }}
-    </hs-link>
-    <hs-link
-      href="#"
-      kind="danger"
-    >
-      Danger link
-    </hs-link>
-    <hs-link
-      href="#"
-      kind="warning"
-    >
-      Warning link
-    </hs-link>
-    <hs-link
-      href="#"
-      kind="success"
-    >
-      Success link
-    </hs-link>
-    <hs-link
-      href="#"
-      kind="muted"
-    >
-      Dark link
+      {{ kind }} link
     </hs-link>
     <hs-link
       href="#"
@@ -51,7 +30,7 @@
       </hs-link>
       <hs-link
         href="#"
-        kind="danger"
+        :kind="DANGER"
         inverted
       >
         Inverted Danger link
@@ -62,9 +41,16 @@
 
 <script>
 import HsLink from './link';
+import { LINK_KINDS, DANGER } from './link_constants';
 
 export default {
   name: 'HsLinkVariants',
   components: { HsLink },
+  data () {
+    return {
+      LINK_KINDS,
+      DANGER,
+    };
+  },
 };
 </script>
