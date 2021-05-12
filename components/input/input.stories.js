@@ -141,12 +141,6 @@ WithDescription.args = {
   description: 'Description',
 };
 
-export const WithClearButton = Template.bind({});
-WithClearButton.args = {
-  label: 'Label',
-  showClearButton: true,
-};
-
 export const WithWarn = Template.bind({});
 WithWarn.args = {
   messages: [{ message: 'This is a warning message', type: 'warning' }],
