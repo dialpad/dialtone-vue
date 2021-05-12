@@ -2,7 +2,7 @@
   <a
     :href="href"
     :class="['d-link', linkClasses]"
-    data-qa="hs-link"
+    data-qa="ds-link"
   >
     <slot />
   </a>
@@ -12,7 +12,7 @@
 import { LINK_MODIFIERS, DANGER, LINK_KINDS } from './link_constants.js';
 
 export default {
-  name: 'HsLink',
+  name: 'DsLink',
 
   props: {
     /**

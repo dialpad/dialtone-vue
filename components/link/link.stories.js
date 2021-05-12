@@ -1,8 +1,8 @@
 import { createTemplateFromVueFile } from '../storybook_utils';
-import HsLink from './link';
-import HsLinkMdx from './link.mdx';
-import HsLinkDefaultTemplate from './link_default.story.vue';
-import HsLinkVariantsTemplate from './link_variants.story.vue';
+import DsLink from './link';
+import DsLinkMdx from './link.mdx';
+import DsLinkDefaultTemplate from './link_default.story.vue';
+import DsLinkVariantsTemplate from './link_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
@@ -35,20 +35,20 @@ export const argTypesData = {
 // Story Collection
 export default {
   title: 'Elements/Link',
-  component: HsLink,
+  component: DsLink,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
     docs: {
-      page: HsLinkMdx,
+      page: DsLinkMdx,
     },
   },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, HsLinkDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, HsLinkVariantsTemplate);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DsLinkDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DsLinkVariantsTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
