@@ -1,7 +1,5 @@
-export const NOTICE_KINDS = ['base', 'error', 'info', 'success', 'warning'];
-export const NOTICE_ROLES = ['alert', 'alertdialog', 'status'];
+export const NOTICE_KINDS = ['', 'info', 'warning', 'error', 'success'];
 
 export default {
   NOTICE_KINDS,
-  NOTICE_ROLES,
 };
