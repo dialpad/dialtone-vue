@@ -1,7 +1,7 @@
 <template>
   <a
     :href="href"
-    :class="['d-link', linkKindClass, linkModifierClassDisabled, linkModifierClassInverted]"
+    :class="['d-link', linkClasses]"
     data-qa="hs-link"
   >
     <slot />
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { LINK_VALIDATION_CLASSES, LINK_MODIFIERS, DANGER, ALLOW_KINDS } from './link_constants.js';
+import { LINK_MODIFIERS, DANGER, LINK_KINDS } from './link_constants.js';
 
 export default {
   name: 'HsLink',
@@ -30,7 +30,7 @@ export default {
       type: String,
       default: '',
       validator (kind) {
-        return ALLOW_KINDS.includes(kind);
+        return LINK_KINDS.includes(kind);
       },
     },
 
@@ -52,24 +52,23 @@ export default {
   },
 
   computed: {
-    linkKindClass () {
-      return LINK_VALIDATION_CLASSES[this.kind];
+    linkClasses () {
+      return [
+        'd-link',
+        { [`d-link--${this.kind}`]: this.kind.length > 0 },
+        { [this.linkDisabledClass()]: this.disabled },
+        { [this.linkInvertedClass()]: this.inverted },
+      ];
     },
+  },
 
-    linkModifierClassDisabled () {
-      if (!this.disabled) {
-        return '';
-      }
-
+  methods: {
+    linkDisabledClass () {
       return this.inverted ? LINK_MODIFIERS.invertedDisabled : LINK_MODIFIERS.disabled;
     },
 
-    linkModifierClassInverted () {
-      if (this.kind === DANGER && this.inverted) {
-        return LINK_MODIFIERS.invertedDanger;
-      }
-
-      return this.inverted ? LINK_MODIFIERS.inverted : '';
+    linkInvertedClass () {
+      return this.kind === DANGER ? LINK_MODIFIERS.invertedDanger : LINK_MODIFIERS.inverted;
     },
   },
 };

@@ -31,28 +31,28 @@
     </hs-link>
     <hs-link
       href="#"
-      :disabled="true"
+      disabled
     >
       Disabled link
     </hs-link>
     <div class="d-bgc-blue-800">
       <hs-link
         href="#"
-        :disabled="true"
-        :inverted="true"
+        disabled
+        inverted
       >
         Inverted Disabled link
       </hs-link>
       <hs-link
         href="#"
-        :inverted="true"
+        inverted
       >
         Inverted link
       </hs-link>
       <hs-link
         href="#"
         kind="danger"
-        :inverted="true"
+        inverted
       >
         Inverted Danger link
       </hs-link>
