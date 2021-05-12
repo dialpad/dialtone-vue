@@ -4,8 +4,6 @@
     class="base-input"
     data-qa="hs-input"
   >
-    <!-- @slot slot for Icon -->
-    <slot name="icon" />
     <label
       class="base-input__label"
       :aria-details="$slots.description || description ? descriptionKey : undefined"
@@ -13,27 +11,26 @@
     >
       <!-- @slot slot for label, defaults to label prop -->
       <slot name="labelSlot">
-        <div :class="['base-input__label-text', 'd-label', 'd-margin-bottom2', labelSizeModifierClass]">
+        <div :class="['base-input__label-text', 'd-label', labelSizeModifierClass]">
           {{ label }}
         </div>
       </slot>
       <div
         v-if="$slots.description || description"
         :id="descriptionKey"
-        :class="['d-description', 'd-margin-bottom2', descriptionSizeModifierClass]"
+        :class="['base-input__description', 'd-description', descriptionSizeModifierClass]"
         data-qa="hs-input-description"
       >
         <!-- @slot slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
       </div>
-      <div class="d-d-flex d-ai-center">
-        <div
-          v-if="$slots.innerLeft"
-          class="d-p-absolute d-z-index--base1 d-ml8 d-pl2 d-lh-none"
-          @focusout="onBlur"
+      <div class="d-ps-relative">
+        <span
+          v-if="$slots.leftIcon"
+          :class="inputIconClasses('left')"
         >
-          <slot name="innerLeft" />
-        </div>
+          <slot name="leftIcon" />
+        </span>
         <textarea
           v-if="isTextarea"
           ref="input"
@@ -57,15 +54,12 @@
           data-qa="hs-input-input"
           v-on="inputListeners"
         >
-        <div class="d-p-relative">
-          <div
-            v-if="$slots.innerRight"
-            class="d-z-index--base1 d-p0 d-m0 d-lh-none d-p-absolute d-ln24 d-tn8"
-            @focusout="onBlur"
-          >
-            <slot name="innerRight" />
-          </div>
-        </div>
+        <span
+          v-if="$slots.rightIcon"
+          :class="inputIconClasses('right')"
+        >
+          <slot name="rightIcon" />
+        </span>
       </div>
     </label>
     <hs-validation-messages
@@ -226,12 +220,19 @@ export default {
   methods: {
     inputClasses () {
       return [
+        'base-input__input',
         `d-${this.inputComponent}`,
         { [`d-${this.inputComponent}--${this.inputState} base-input__input--${this.inputState}`]: this.showInputState },
-        { 'd-pl32': this.$slots.innerLeft },
-        { 'd-pr32': this.$slots.innerRight },
         this.sizeModifierClass,
-        'base-input__input',
+      ];
+    },
+
+    inputIconClasses (side) {
+      return [
+        `base-input__icon--${side}`,
+        'd-input-icon',
+        `d-input-icon--${side}`,
+        { [`d-input-icon--${this.size}`]: this.size.length > 1 },
       ];
     },
 
@@ -267,7 +268,4 @@ export default {
 </script>
 
 <style lang="less">
-.base-input .base-button__icon {
-  margin: 0;
-}
 </style>

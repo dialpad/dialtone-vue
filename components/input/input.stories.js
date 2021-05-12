@@ -65,13 +65,7 @@ export const argTypesData = {
     },
   },
 
-  icon: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-  },
-
-  innerLeft: {
+  leftIcon: {
     table: {
       type: { summary: 'VNode' },
     },
@@ -81,7 +75,7 @@ export const argTypesData = {
     },
   },
 
-  innerRight: {
+  rightIcon: {
     table: {
       type: { summary: 'VNode' },
     },
