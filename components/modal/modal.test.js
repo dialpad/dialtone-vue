@@ -103,10 +103,10 @@ describe('Handset Modal Tests', function () {
 
   it('Should pass content class through to root modal element', async function () {
     // TODO: Use a shared test case for this
-    const contentClass = 'content-class';
-    assert.isFalse(overlay.classes(contentClass));
+    const modalClass = 'content-class';
+    assert.isFalse(overlay.classes(modalClass));
 
-    await wrapper.setProps({ contentClass });
-    assert.isTrue(overlay.classes(contentClass));
+    await wrapper.setProps({ modalClass });
+    assert.isTrue(overlay.classes(modalClass));
   });
 });

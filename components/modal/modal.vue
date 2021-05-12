@@ -18,24 +18,24 @@
       <div
         v-if="$slots.header"
         :id="labelledById"
-        class="d-modal__title"
+        class="d-modal__header"
         data-qa="hs-modal-title"
       >
         <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
         <slot name="header" />
       </div>
-      <h1
+      <h2
         v-else
         :id="labelledById"
-        class="d-modal__title"
+        class="d-modal__header"
         data-qa="hs-modal-title"
       >
         {{ title }}
-      </h1>
+      </h2>
 
       <div
         v-if="$slots.default"
-        class="d-modal__copy"
+        class="d-modal__content"
         data-qa="hs-modal-copy"
       >
         <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
@@ -43,7 +43,7 @@
       </div>
       <p
         v-else
-        class="d-modal__copy"
+        class="d-modal__content"
         data-qa="hs-modal-copy"
       >
         {{ copy }}
@@ -59,6 +59,7 @@
       <hs-button
         class="d-modal__close"
         circle
+        link
         importance="clear"
         :aria-label="closeButtonProps.ariaLabel"
         v-bind="closeButtonProps"
@@ -173,7 +174,7 @@ export default {
      * Can accept all of String, Object, and Array, i.e. has the
      * same api as Vue's built-in handling of the class attribute.
      */
-    contentClass: {
+    modalClass: {
       type: [String, Object, Array],
       default: '',
     },
@@ -191,7 +192,7 @@ export default {
           [`d-modal--${this.kind}`]: this.kind,
           [`d-modal--${this.size}`]: this.size,
         },
-        this.contentClass,
+        this.modalClass,
       ];
     },
   },
