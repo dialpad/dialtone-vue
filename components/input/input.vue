@@ -28,8 +28,19 @@
         <span
           v-if="$slots.leftIcon"
           :class="inputIconClasses('left')"
+          data-qa="hs-input-left-icon-wrapper"
         >
           <slot name="leftIcon" />
+        </span>
+        <!--
+          Right Icon must come before input / textarea as there is no such thing as a previous sibling css selector
+        -->
+        <span
+          v-if="$slots.rightIcon"
+          :class="inputIconClasses('right')"
+          data-qa="hs-input-right-icon-wrapper"
+        >
+          <slot name="rightIcon" />
         </span>
         <textarea
           v-if="isTextarea"
@@ -54,12 +65,6 @@
           data-qa="hs-input-input"
           v-on="inputListeners"
         >
-        <span
-          v-if="$slots.rightIcon"
-          :class="inputIconClasses('right')"
-        >
-          <slot name="rightIcon" />
-        </span>
       </div>
     </label>
     <hs-validation-messages
