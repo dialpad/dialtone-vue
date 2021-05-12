@@ -7,11 +7,14 @@
     <label
       class="base-input__label"
       :aria-details="$slots.description || description ? descriptionKey : undefined"
-      data-qa="hs-input-label"
+      data-qa="hs-input-label-wrapper"
     >
       <!-- @slot slot for label, defaults to label prop -->
       <slot name="labelSlot">
-        <div :class="['base-input__label-text', 'd-label', labelSizeModifierClass]">
+        <div
+          data-qa="hs-input-label"
+          :class="['base-input__label-text', 'd-label', labelSizeModifierClass]"
+        >
           {{ label }}
         </div>
       </slot>
