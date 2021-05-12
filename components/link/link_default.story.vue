@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ds-link
+    <dt-link
       :id="id"
       :href="href"
       :kind="kind"
@@ -8,16 +8,16 @@
       :disabled="disabled"
     >
       {{ defaultSlot }}
-    </ds-link>
+    </dt-link>
   </div>
 </template>
 
 <script>
-import DsLink from './link';
+import DtLink from './link';
 
 export default {
-  name: 'DsLinkDefault',
-  components: { DsLink },
+  name: 'DtLinkDefault',
+  components: { DtLink },
   inheritAttrs: false,
 };
 </script>

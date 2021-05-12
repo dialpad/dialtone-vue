@@ -1,51 +1,51 @@
 <template>
   <div>
-    <ds-link
+    <dt-link
       v-for="kind in LINK_KINDS"
       :key="kind"
       href="#"
       :kind="kind"
     >
       {{ kind }} link
-    </ds-link>
-    <ds-link
+    </dt-link>
+    <dt-link
       href="#"
       disabled
     >
       Disabled link
-    </ds-link>
+    </dt-link>
     <div class="d-bgc-blue-800">
-      <ds-link
+      <dt-link
         href="#"
         disabled
         inverted
       >
         Inverted Disabled link
-      </ds-link>
-      <ds-link
+      </dt-link>
+      <dt-link
         href="#"
         inverted
       >
         Inverted link
-      </ds-link>
-      <ds-link
+      </dt-link>
+      <dt-link
         href="#"
         :kind="DANGER"
         inverted
       >
         Inverted Danger link
-      </ds-link>
+      </dt-link>
     </div>
   </div>
 </template>
 
 <script>
-import DsLink from './link';
+import DtLink from './link';
 import { LINK_KINDS, DANGER } from './link_constants';
 
 export default {
-  name: 'DsLinkVariants',
-  components: { DsLink },
+  name: 'DtLinkVariants',
+  components: { DtLink },
   data () {
     return {
       LINK_KINDS,

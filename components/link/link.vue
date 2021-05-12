@@ -2,7 +2,7 @@
   <a
     :href="href"
     :class="['d-link', linkClasses]"
-    data-qa="ds-link"
+    data-qa="dt-link"
   >
     <slot />
   </a>
@@ -12,7 +12,7 @@
 import { LINK_MODIFIERS, DANGER, LINK_KINDS } from './link_constants.js';
 
 export default {
-  name: 'DsLink',
+  name: 'DtLink',
 
   props: {
     /**
@@ -62,7 +62,7 @@ export default {
     },
   },
 
-  methods: {
+  methodt: {
     linkDisabledClass () {
       return this.inverted ? LINK_MODIFIERS.invertedDisabled : LINK_MODIFIERS.disabled;
     },
