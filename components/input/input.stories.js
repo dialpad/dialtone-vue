@@ -188,9 +188,12 @@ WithMultipleMessages.args = {
 
 export const ExtraSmall = Template.bind({});
 ExtraSmall.args = { size: 'xs' };
+
 export const Small = Template.bind({});
 Small.args = { size: 'sm' };
+
 export const Large = Template.bind({});
 Large.args = { size: 'lg' };
+
 export const ExtraLarge = Template.bind({});
 ExtraLarge.args = { size: 'xl' };
