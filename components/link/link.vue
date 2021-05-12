@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { LINK_MODIFIERS_CLASSES, DANGER, LINK_KINDS } from './link_constants.js';
+import { LINK_MODIFIER_CLASSES, DANGER, LINK_KIND_CLASSES } from './link_constants.js';
 
 export default {
   name: 'DtLink',
@@ -30,7 +30,7 @@ export default {
       type: String,
       default: '',
       validator (kind) {
-        return LINK_KINDS.includes(kind);
+        return LINK_KIND_CLASSES.includes(kind);
       },
     },
 
@@ -64,11 +64,11 @@ export default {
 
   methods: {
     linkDisabledClass () {
-      return this.inverted ? LINK_MODIFIERS_CLASSES.invertedDisabled : LINK_MODIFIERS_CLASSES.disabled;
+      return this.inverted ? LINK_MODIFIER_CLASSES.invertedDisabled : LINK_MODIFIER_CLASSES.disabled;
     },
 
     linkInvertedClass () {
-      return this.kind === DANGER ? LINK_MODIFIERS_CLASSES.invertedDanger : LINK_MODIFIERS_CLASSES.inverted;
+      return this.kind === DANGER ? LINK_MODIFIER_CLASSES.invertedDanger : LINK_MODIFIER_CLASSES.inverted;
     },
   },
 };

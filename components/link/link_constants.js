@@ -7,7 +7,7 @@ export const MUTED = 'muted';
 export const DISABLED = 'disabled';
 export const INVERTED = 'inverted';
 export const LINK_CLASS = 'd-link';
-export const LINK_KINDS = ['', DANGER, WARNING, SUCCESS, MUTED];
+export const LINK_KIND_CLASSES = ['', DANGER, WARNING, SUCCESS, MUTED];
 
 export const LINK_VALIDATION_CLASSES = {
   [DANGER]: `${LINK_CLASS}--${DANGER}`,
@@ -16,7 +16,7 @@ export const LINK_VALIDATION_CLASSES = {
   [MUTED]: `${LINK_CLASS}--${MUTED}`,
 };
 
-export const LINK_MODIFIERS_CLASSES = {
+export const LINK_MODIFIER_CLASSES = {
   [DISABLED]: `${LINK_CLASS}--${DISABLED}`,
   [INVERTED]: `${LINK_CLASS}--${INVERTED}`,
   [`${INVERTED}${capitalize(DANGER)}`]: `${LINK_CLASS}--${INVERTED}-${DANGER}`,

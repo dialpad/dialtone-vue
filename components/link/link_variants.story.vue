@@ -1,7 +1,7 @@
 <template>
   <div>
     <dt-link
-      v-for="kind in LINK_KINDS"
+      v-for="kind in LINK_KIND_CLASSES"
       :key="kind"
       href="#"
       :kind="kind"
@@ -41,14 +41,14 @@
 
 <script>
 import DtLink from './link';
-import { LINK_KINDS, DANGER } from './link_constants';
+import { LINK_KIND_CLASSES, DANGER } from './link_constants';
 
 export default {
   name: 'DtLinkVariants',
   components: { DtLink },
   data () {
     return {
-      LINK_KINDS,
+      LINK_KIND_CLASSES,
       DANGER,
     };
   },
