@@ -3,7 +3,7 @@ import { assert } from 'chai';
 import { mount, createLocalVue } from '@vue/test-utils';
 import { INPUT_SIZE_TYPES } from './input_constants';
 import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd.vue';
-import HsInput from './input.vue';
+import DtInput from './input.vue';
 
 // Constants
 const basePropsData = {
@@ -16,7 +16,7 @@ const baseAttrs = {
   name: 'input-name',
 };
 
-describe('Handset Input tests', function () {
+describe('Dialtone Vue Input tests', function () {
   // Wrappers
   let wrapper;
   let labelWrapper;
@@ -36,17 +36,17 @@ describe('Handset Input tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    labelWrapper = wrapper.find('[data-qa="hs-input-label-wrapper"]');
-    label = wrapper.find('[data-qa="hs-input-label"]');
-    description = wrapper.find('[data-qa="hs-input-description"]');
+    labelWrapper = wrapper.find('[data-qa="dt-input-label-wrapper"]');
+    label = wrapper.find('[data-qa="dt-input-label"]');
+    description = wrapper.find('[data-qa="dt-input-description"]');
     nativeInput = wrapper.find('input');
     nativeTextarea = wrapper.find('textarea');
-    leftIconWrapper = wrapper.find('[data-qa="hs-input-left-icon-wrapper"]');
-    rightIconWrapper = wrapper.find('[data-qa="hs-input-right-icon-wrapper"]');
+    leftIconWrapper = wrapper.find('[data-qa="dt-input-left-icon-wrapper"]');
+    rightIconWrapper = wrapper.find('[data-qa="dt-input-right-icon-wrapper"]');
   };
 
   const _mountWrapper = () => {
-    wrapper = mount(HsInput, {
+    wrapper = mount(DtInput, {
       propsData,
       attrs,
       slots,

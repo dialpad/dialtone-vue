@@ -2,17 +2,17 @@
   <div
     ref="container"
     class="base-input"
-    data-qa="hs-input"
+    data-qa="dt-input"
   >
     <label
       class="base-input__label"
       :aria-details="$slots.description || description ? descriptionKey : undefined"
-      data-qa="hs-input-label-wrapper"
+      data-qa="dt-input-label-wrapper"
     >
       <!-- @slot slot for label, defaults to label prop -->
       <slot name="labelSlot">
         <div
-          data-qa="hs-input-label"
+          data-qa="dt-input-label"
           :class="['base-input__label-text', 'd-label', labelSizeModifierClass]"
         >
           {{ label }}
@@ -22,7 +22,7 @@
         v-if="$slots.description || description"
         :id="descriptionKey"
         :class="['base-input__description', 'd-description', descriptionSizeModifierClass]"
-        data-qa="hs-input-description"
+        data-qa="dt-input-description"
       >
         <!-- @slot slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
@@ -31,7 +31,7 @@
         <span
           v-if="$slots.leftIcon"
           :class="inputIconClasses('left')"
-          data-qa="hs-input-left-icon-wrapper"
+          data-qa="dt-input-left-icon-wrapper"
         >
           <slot name="leftIcon" />
         </span>
@@ -41,7 +41,7 @@
         <span
           v-if="$slots.rightIcon"
           :class="inputIconClasses('right')"
-          data-qa="hs-input-right-icon-wrapper"
+          data-qa="dt-input-right-icon-wrapper"
         >
           <slot name="rightIcon" />
         </span>
@@ -53,7 +53,7 @@
           :disabled="disabled"
           :class="inputClasses()"
           v-bind="$attrs"
-          data-qa="hs-input-input"
+          data-qa="dt-input-input"
           v-on="inputListeners"
         />
         <input
@@ -65,7 +65,7 @@
           :disabled="disabled"
           :class="inputClasses()"
           v-bind="$attrs"
-          data-qa="hs-input-input"
+          data-qa="dt-input-input"
           v-on="inputListeners"
         >
       </div>
@@ -75,7 +75,7 @@
       :show-messages="showMessages"
       :class="messagesClass"
       v-bind="messagesChildProps"
-      data-qa="hs-input-messages"
+      data-qa="dt-input-messages"
     />
   </div>
 </template>
@@ -91,7 +91,7 @@ import { HsValidationMessages } from '../validation_messages';
 import { MessagesMixin } from '../mixins/input.js';
 
 export default {
-  name: 'HsInput',
+  name: 'DtInput',
 
   components: { HsValidationMessages },
 
