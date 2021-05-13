@@ -1,12 +1,13 @@
 import { capitalize } from '../utils';
 
+const LINK_CLASS = 'd-link';
+
 export const DANGER = 'danger';
 export const WARNING = 'warning';
 export const SUCCESS = 'success';
 export const MUTED = 'muted';
 export const DISABLED = 'disabled';
 export const INVERTED = 'inverted';
-export const LINK_CLASS = 'd-link';
 export const LINK_KIND_CLASSES = ['', DANGER, WARNING, SUCCESS, MUTED];
 
 export const LINK_VALIDATION_CLASSES = {
