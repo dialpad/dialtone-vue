@@ -74,6 +74,9 @@
       "git add"
     ]
   },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
   "engineStrict": true,
   "engines": {
     "node": ">= 14"
