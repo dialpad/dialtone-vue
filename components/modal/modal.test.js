@@ -9,7 +9,7 @@ const basePropsData = {
   },
 };
 
-describe('Handset Modal Tests', function () {
+describe('Dialtone Vue Modal Tests', function () {
   let wrapper;
 
   let closeBtn;

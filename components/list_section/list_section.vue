@@ -91,13 +91,13 @@ export default {
 
     textMore: {
       type: String,
-      // TODO needs to be translated, but handset can't do it.
+      // TODO needs to be translated, but Dialtone Vue can't do it.
       default: 'Show more',
     },
 
     textLess: {
       type: String,
-      // TODO needs to be translated, but handset can't do it.
+      // TODO needs to be translated, but Dialtone Vue can't do it.
       default: 'Show less',
     },
   },

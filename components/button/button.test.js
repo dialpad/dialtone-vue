@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import BaseButton from './button.vue';
 import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 
-describe('Handset button tests', function () {
+describe('Dialtone Vue button tests', function () {
   let wrapper;
   let button;
   let icon;
