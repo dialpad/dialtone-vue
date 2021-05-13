@@ -51,7 +51,6 @@
     "jsdom-global": "3.0.2",
     "less": "3.9.0",
     "less-loader": "^6.2.0",
-    "lint-staged": "^11.0.0",
     "markdownlint": "^0.22.0",
     "markdownlint-cli": "^0.26.0",
     "mocha": "^6.2.3",
