@@ -40,6 +40,7 @@
     </div>
   </aside>
 </template>
+
 <script>
 import HsNoticeIcon from '../notice/notice_icon';
 import HsNoticeContent from '../notice/notice_content';
@@ -67,6 +68,7 @@ export default {
       type: String,
       default () { return util.getUniqueString(); },
     },
+
     /**
      * Sets an ID on the content element of the component. Useful for aria-describedby or aria-labelledby or any other reason you may need an id to refer to the content.
      */
@@ -74,6 +76,7 @@ export default {
       type: String,
       default () { return util.getUniqueString(); },
     },
+
     /**
      * Title header of the notice. This can be left blank to remove the title from the notice entirely.
      */
@@ -81,6 +84,7 @@ export default {
       type: String,
       default: '',
     },
+
     /**
      * Used in scenarios where the message needs to visually dominate the screen. This will also change the aria role from status to alertdialog.
      * and will modally trap the keyboard focus in the dialog as soon as it displays.
@@ -89,6 +93,7 @@ export default {
       type: Boolean,
       default: false,
     },
+
     /**
      * Pins the banner to the top of the window and pushes all app content down.
      */
@@ -96,6 +101,7 @@ export default {
       type: Boolean,
       default: false,
     },
+
     /**
      * Severity level of the notice, sets the icon and background
      */
@@ -106,6 +112,7 @@ export default {
         return NOTICE_KINDS.includes(kind);
       },
     },
+
     /**
      * Props for the notice close button.
      */
@@ -113,6 +120,7 @@ export default {
       type: Object,
       default: () => ({}),
     },
+
     /**
      * Hides the close button from the notice
      */
@@ -129,8 +137,8 @@ export default {
 
     bannerClass () {
       return ['d-banner',
-        `d-banner--${this.kind}`,
         {
+          [`d-banner--${this.kind}`]: this.kind.length > 1,
           'd-banner--important': this.important,
           'd-banner--pinned': this.pinned,
         },
