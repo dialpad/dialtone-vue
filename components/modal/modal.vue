@@ -32,7 +32,19 @@
       >
         {{ title }}
       </h2>
-
+      <hs-button
+        class="d-modal__close"
+        circle
+        link
+        importance="clear"
+        :aria-label="closeButtonProps.ariaLabel"
+        v-bind="closeButtonProps"
+        @click="close"
+      >
+        <template #icon>
+          <icon-close />
+        </template>
+      </hs-button>
       <div
         v-if="$slots.default"
         class="d-modal__content"
@@ -48,7 +60,6 @@
       >
         {{ copy }}
       </p>
-
       <footer
         v-if="hasFooterSlot"
         class="d-modal__footer"
@@ -56,19 +67,6 @@
         <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
         <slot name="footer" />
       </footer>
-      <hs-button
-        class="d-modal__close"
-        circle
-        link
-        importance="clear"
-        :aria-label="closeButtonProps.ariaLabel"
-        v-bind="closeButtonProps"
-        @click="close"
-      >
-        <template #icon>
-          <icon-close />
-        </template>
-      </hs-button>
     </div>
   </div>
 </template>
