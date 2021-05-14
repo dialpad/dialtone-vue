@@ -1,0 +1,50 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import DtTooltip from './tooltip';
+
+# DtTooltip
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas>
+  <Story id="<GROUP>-dt-tooltip--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="<GROUP>-dt-tooltip--variants" />
+</Canvas>
+
+## Props, Slots & Events
+
+<ArgsTable of={DtTooltip} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtTooltip } from '@dialpad/handset';
+```
+
+### With Some Variant
+
+```vue
+<dt-tooltip
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-tooltip
+  some-other="variant"
+/>
+```
