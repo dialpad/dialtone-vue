@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import DtTooltip from './tooltip';
 import DtTooltipMdx from './tooltip.mdx';
@@ -7,8 +6,9 @@ import DtTooltipVariantsTemplate from './tooltip_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  some: 'prop',
-  onEvent: action('event'),
+  message: 'message',
+  anchorSlot: 'anchor',
+  default: 'default',
 };
 
 /**
@@ -31,16 +31,14 @@ export const argsData = {
 */
 export const argTypesData = {
   // Props
-  some: {
-    description: 'Describes the some prop',
+  show: {
+    description: 'Used to show tooltip',
+    control: 'boolean',
     table: {
       category: 'props',
       type: {
-        summary: 'string',
+        summary: 'boolean',
       },
-    },
-    control: {
-      type: 'text',
     },
   },
 
@@ -58,9 +56,10 @@ export const argTypesData = {
     the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
     table and description within the controls accurately reflects the correct names of our component's props and slots.
   */
-  someSlot: {
-    name: 'some',
-    description: 'Slot for some',
+
+  anchorSlot: {
+    name: 'anchor',
+    description: 'slot for tooltip',
     control: 'text',
     table: {
       category: 'slots',
@@ -69,18 +68,11 @@ export const argTypesData = {
       },
     },
   },
-
-  // Action Event Handlers
-  onEvent: {
-    table: {
-      disable: true,
-    },
-  },
 };
 
 // Story Collection
 export default {
-  title: 'Group/DtTooltip',
+  title: 'Elements/Tooltip',
   component: DtTooltip,
   args: argsData,
   argTypes: argTypesData,

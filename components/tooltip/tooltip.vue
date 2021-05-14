@@ -1,38 +1,81 @@
 <template>
-  <div></div>
-  <!-- template -->
+  <div
+    data-qa="dt-tooltip-container"
+    :class="tooltipContainerClasses"
+  >
+    <slot name="anchor" />
+    <div
+      :class="tooltipClasses"
+      data-qa="dt-tooltip"
+      v-bind="$attrs"
+    >
+      {{ message }}
+      <template v-if="!message">
+        <slot />
+      </template>
+    </div>
+  </div>
 </template>
 
 <script>
-import {} from './tooltip_constants.js';
+import { TOOLTIP_DIRECTION_MODIFIERS, TOOLTIP_STATE_MODIFIERS, INVERTED } from './tooltip_constants.js';
 
 export default {
   name: 'DtTooltip',
 
-  components: {},
+  inheritAttrs: false,
 
-  mixins: [],
+  props: {
+    message: {
+      type: String,
+      default: '',
+    },
 
-  /* inheritAttrs: false is generally an option we want to set on library
-    components. This allows any attributes passed in that are not recognized
-    as props to be passed down to another element or component using v-bind:$attrs
-    more info: https://vuejs.org/v2/api/#inheritAttrs */
-  // inheritAttrs: false,
+    arrowDirection: {
+      type: String,
+      default: 'bottom-center',
+      validator (direction) {
+        return TOOLTIP_DIRECTION_MODIFIERS.includes(direction);
+      },
+    },
 
-  props: {},
+    show: {
+      type: Boolean,
+      default: false,
+    },
 
-  data () {
-    return {};
+    hover: {
+      type: Boolean,
+      default: false,
+    },
+
+    inverted: {
+      type: Boolean,
+      default: false,
+    },
   },
 
-  computed: {},
+  computed: {
+    tooltipContainerClasses () {
+      return [
+        'd-ps-relative',
+        {
+          'd-tooltip--hover': this.hover,
+        },
+      ];
+    },
 
-  watch: {},
-
-  methods: {},
+    tooltipClasses () {
+      return [
+        'd-tooltip',
+        'd-ps-absolute',
+        `d-tooltip__arrow--${this.arrowDirection}`,
+        `d-tooltip--${this.show ? TOOLTIP_STATE_MODIFIERS.show : TOOLTIP_STATE_MODIFIERS.hide}`,
+        {
+          [`d-tooltip--${INVERTED}`]: this.inverted,
+        },
+      ];
+    },
+  },
 };
 </script>
-
-<style lang="less">
-
-</style>

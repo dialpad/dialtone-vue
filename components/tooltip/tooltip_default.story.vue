@@ -1,38 +1,46 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
-  <!--
-    We can bind the data that the user entered into the storybook controls to props by using a property of the same name
-    as the storybook control defined in the corresponding `.story.js` file.
-  -->
-  <dt-tooltip
-    :some="some"
-  >
-    <!--
-      We can also bind any slot data that the user has entered into the storybook controls. In this example we
-      conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
-
-      The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-
-      We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-      same name.
-    -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
-    </template>
-    <template
-      v-if="someSlot"
-      #some
+  <div class="container">
+    <dt-tooltip
+      v-for="arrowDirection in TOOLTIP_DIRECTION_MODIFIERS"
+      :key="arrowDirection"
+      :message="message"
+      :arrow-direction="arrowDirection"
+      :show="show"
+      :inverted="inverted"
+      :hover="hover"
     >
-      <span v-html="someSlot" />
-    </template>
-  </dt-tooltip>
+      {{ defaultSlot }}
+      <template
+        v-if="anchorSlot"
+        #anchor
+      >
+        <span v-html="anchorSlot" />
+      </template>
+    </dt-tooltip>
+  </div>
 </template>
 
 <script>
 import DtTooltip from './tooltip';
+import fixDefaultSlot from '../plugins/fixDefaultSlot';
+import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
 
 export default {
   name: 'DtTooltipDefault',
   components: { DtTooltip },
+  mixins: [fixDefaultSlot],
+  data () {
+    return {
+      TOOLTIP_DIRECTION_MODIFIERS,
+    };
+  },
 };
 </script>
+
+<style lang="less" scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>
