@@ -2,7 +2,7 @@
   <div
     :class="modalClasses"
     data-qa="hs-modal"
-    :aria-hidden="(!show).toString()"
+    :aria-hidden="open"
     @click.self="close"
     @keydown.esc="close"
     @keydown.tab="trapFocus"
@@ -39,6 +39,7 @@
         importance="clear"
         :aria-label="closeButtonProps.ariaLabel"
         v-bind="closeButtonProps"
+        :kind="kind"
         @click="close"
       >
         <template #icon>
@@ -179,6 +180,10 @@ export default {
   },
 
   computed: {
+    open () {
+      return `${!this.show}`;
+    },
+
     hasFooterSlot () {
       return !!this.$slots.footer;
     },
