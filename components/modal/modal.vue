@@ -35,7 +35,7 @@
       <hs-button
         class="d-modal__close"
         circle
-        link
+        size="lg"
         importance="clear"
         :aria-label="closeButtonProps.ariaLabel"
         v-bind="closeButtonProps"
