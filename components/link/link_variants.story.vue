@@ -1,70 +1,56 @@
 <template>
   <div>
-    <hs-link
+    <dt-link
+      v-for="kind in LINK_KIND_CLASSES"
+      :key="kind"
       href="#"
+      :kind="kind"
     >
-      {{ defaultSlot }}
-    </hs-link>
-    <hs-link
+      {{ kind }} link
+    </dt-link>
+    <dt-link
       href="#"
-      kind="danger"
-    >
-      Danger link
-    </hs-link>
-    <hs-link
-      href="#"
-      kind="warning"
-    >
-      Warning link
-    </hs-link>
-    <hs-link
-      href="#"
-      kind="success"
-    >
-      Success link
-    </hs-link>
-    <hs-link
-      href="#"
-      kind="muted"
-    >
-      Dark link
-    </hs-link>
-    <hs-link
-      href="#"
-      :disabled="true"
+      disabled
     >
       Disabled link
-    </hs-link>
+    </dt-link>
     <div class="d-bgc-blue-800">
-      <hs-link
+      <dt-link
         href="#"
-        :disabled="true"
-        :inverted="true"
+        disabled
+        inverted
       >
         Inverted Disabled link
-      </hs-link>
-      <hs-link
+      </dt-link>
+      <dt-link
         href="#"
-        :inverted="true"
+        inverted
       >
         Inverted link
-      </hs-link>
-      <hs-link
+      </dt-link>
+      <dt-link
         href="#"
-        kind="danger"
-        :inverted="true"
+        :kind="DANGER"
+        inverted
       >
         Inverted Danger link
-      </hs-link>
+      </dt-link>
     </div>
   </div>
 </template>
 
 <script>
-import HsLink from './link';
+import DtLink from './link';
+import { LINK_KIND_CLASSES, DANGER } from './link_constants';
 
 export default {
-  name: 'HsLinkVariants',
-  components: { HsLink },
+  name: 'DtLinkVariants',
+  components: { DtLink },
+  data () {
+    return {
+      LINK_KIND_CLASSES,
+      DANGER,
+    };
+  },
 };
 </script>

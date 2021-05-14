@@ -1,12 +1,14 @@
+import { capitalize } from '../utils';
+
+const LINK_CLASS = 'd-link';
+
 export const DANGER = 'danger';
 export const WARNING = 'warning';
 export const SUCCESS = 'success';
 export const MUTED = 'muted';
 export const DISABLED = 'disabled';
 export const INVERTED = 'inverted';
-export const LINK_CLASS = 'd-link';
-export const ALLOW_KINDS = ['', DANGER, WARNING, SUCCESS, MUTED];
-const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+export const LINK_KIND_CLASSES = ['', DANGER, WARNING, SUCCESS, MUTED];
 
 export const LINK_VALIDATION_CLASSES = {
   [DANGER]: `${LINK_CLASS}--${DANGER}`,
@@ -15,7 +17,7 @@ export const LINK_VALIDATION_CLASSES = {
   [MUTED]: `${LINK_CLASS}--${MUTED}`,
 };
 
-export const LINK_MODIFIERS = {
+export const LINK_MODIFIER_CLASSES = {
   [DISABLED]: `${LINK_CLASS}--${DISABLED}`,
   [INVERTED]: `${LINK_CLASS}--${INVERTED}`,
   [`${INVERTED}${capitalize(DANGER)}`]: `${LINK_CLASS}--${INVERTED}-${DANGER}`,
