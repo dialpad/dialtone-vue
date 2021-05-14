@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import HsLink from './link.vue';
-import { LINK_MODIFIERS, LINK_VALIDATION_CLASSES, LINK_CLASS, DANGER, SUCCESS, WARNING, MUTED } from '../link';
+import { LINK_MODIFIER_CLASSES, LINK_VALIDATION_CLASSES, DANGER, SUCCESS, WARNING, MUTED } from '../link';
 
 // Constants
 const basePropsData = {
@@ -19,7 +19,7 @@ describe('HsTest Tests', function () {
 
   // Helpers
   const _setWrappers = () => {
-    nativeLink = wrapper.find(`.${LINK_CLASS}`);
+    nativeLink = wrapper.find('.d-link');
   };
 
   const _mountWrapper = () => {
@@ -69,7 +69,7 @@ describe('HsTest Tests', function () {
       it('should have danger class', function () { assert.isTrue(nativeLink.classes().includes(LINK_VALIDATION_CLASSES.danger)); });
       it('should have danger inverted class', async function () {
         await wrapper.setProps({ inverted: true });
-        assert.isTrue(nativeLink.classes().includes(LINK_MODIFIERS.invertedDanger));
+        assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.invertedDanger));
       });
     });
 
@@ -82,7 +82,7 @@ describe('HsTest Tests', function () {
       it('should have success class', function () { assert.isTrue(nativeLink.classes().includes(LINK_VALIDATION_CLASSES.success)); });
       it('shouldn\'t have success inverted class', async function () {
         await wrapper.setProps({ inverted: true });
-        assert.isFalse(nativeLink.classes().includes(`${LINK_MODIFIERS.inverted}-${SUCCESS}`));
+        assert.isFalse(nativeLink.classes().includes(`${LINK_MODIFIER_CLASSES.inverted}-${SUCCESS}`));
       });
     });
 
@@ -95,7 +95,7 @@ describe('HsTest Tests', function () {
       it('should have warning class', function () { assert.isTrue(nativeLink.classes().includes(LINK_VALIDATION_CLASSES.warning)); });
       it('shouldn\'t have warning inverted class', async function () {
         await wrapper.setProps({ inverted: true });
-        assert.isFalse(nativeLink.classes().includes(`${LINK_MODIFIERS.inverted}-${WARNING}`));
+        assert.isFalse(nativeLink.classes().includes(`${LINK_MODIFIER_CLASSES.inverted}-${WARNING}`));
       });
     });
 
@@ -108,7 +108,7 @@ describe('HsTest Tests', function () {
       it('should have muted class', function () { assert.isTrue(nativeLink.classes().includes(LINK_VALIDATION_CLASSES.muted)); });
       it('shouldn\'t have muted inverted class', async function () {
         await wrapper.setProps({ inverted: true });
-        assert.isFalse(nativeLink.classes().includes(`${LINK_MODIFIERS.inverted}-${WARNING}`));
+        assert.isFalse(nativeLink.classes().includes(`${LINK_MODIFIER_CLASSES.inverted}-${WARNING}`));
       });
     });
 
@@ -118,10 +118,10 @@ describe('HsTest Tests', function () {
         _setWrappers();
       });
 
-      it('should have disabled class', function () { assert.isTrue(nativeLink.classes().includes(LINK_MODIFIERS.disabled)); });
+      it('should have disabled class', function () { assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.disabled)); });
       it('should have disabled inverted class', async function () {
         await wrapper.setProps({ inverted: true });
-        assert.isTrue(nativeLink.classes().includes(LINK_MODIFIERS.invertedDisabled));
+        assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.invertedDisabled));
       });
     });
 
@@ -131,10 +131,10 @@ describe('HsTest Tests', function () {
         _setWrappers();
       });
 
-      it('should have inverted class', function () { assert.isTrue(nativeLink.classes().includes(LINK_MODIFIERS.inverted)); });
+      it('should have inverted class', function () { assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.inverted)); });
       it('should have inverted danger class', async function () {
         await wrapper.setProps({ kind: DANGER });
-        assert.isTrue(nativeLink.classes().includes(LINK_MODIFIERS.invertedDanger));
+        assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.invertedDanger));
       });
     });
 
@@ -143,11 +143,11 @@ describe('HsTest Tests', function () {
         _mountWrapper();
       });
       it('should has correct disabled modifier class', function () {
-        assert.isFalse(nativeLink.classes().includes(LINK_MODIFIERS.disabled));
+        assert.isFalse(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.disabled));
       });
 
       it('should has correct inverted modifier class', function () {
-        assert.isFalse(nativeLink.classes().includes(LINK_MODIFIERS.inverted));
+        assert.isFalse(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.inverted));
       });
     });
 
@@ -157,7 +157,7 @@ describe('HsTest Tests', function () {
         _setWrappers();
       });
       it('should has correct modifier class', function () {
-        assert.isTrue(nativeLink.classes().includes(LINK_MODIFIERS.disabled));
+        assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.disabled));
       });
     });
 
@@ -167,18 +167,18 @@ describe('HsTest Tests', function () {
         _setWrappers();
       });
       it('should has correct modifier class', function () {
-        assert.isTrue(nativeLink.classes().includes(LINK_MODIFIERS.invertedDisabled));
+        assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.invertedDisabled));
       });
     });
 
     it('should has correct inverted modifier class in inverted case', async function () {
       await wrapper.setProps({ disabled: false, inverted: true });
-      assert.isTrue(nativeLink.classes().includes(LINK_MODIFIERS.inverted));
+      assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.inverted));
     });
 
     it('should has correct inverted modifier class in danger and inverted case', async function () {
       await wrapper.setProps({ kind: DANGER, inverted: true });
-      assert.isTrue(nativeLink.classes().includes(LINK_MODIFIERS.invertedDanger));
+      assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.invertedDanger));
     });
   });
 });
