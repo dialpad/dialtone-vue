@@ -23,7 +23,8 @@
         v-on="$listeners"
       >
         <template #titleOverride>
-          <!-- @slot Allows you to override the title, only use this if you need to override with something other than text. Otherwise use the "title" prop. -->
+          <!-- @slot Allows you to override the title, only use this if you need to override
+          with something other than text. Otherwise use the "title" prop. -->
           <slot name="titleOverride" />
         </template>
         <!-- @slot the main textual content of the banner -->
@@ -62,7 +63,8 @@ export default {
 
   props: {
     /**
-     * Sets an ID on the title element of the component. Useful for aria-describedby or aria-labelledby or any other reason you may need an id to refer to the title.
+     * Sets an ID on the title element of the component. Useful for aria-describedby
+     * or aria-labelledby or any other reason you may need an id to refer to the title.
      */
     titleId: {
       type: String,
@@ -70,7 +72,8 @@ export default {
     },
 
     /**
-     * Sets an ID on the content element of the component. Useful for aria-describedby or aria-labelledby or any other reason you may need an id to refer to the content.
+     * Sets an ID on the content element of the component. Useful for aria-describedby
+     * or aria-labelledby or any other reason you may need an id to refer to the content.
      */
     contentId: {
       type: String,
@@ -86,7 +89,8 @@ export default {
     },
 
     /**
-     * Used in scenarios where the message needs to visually dominate the screen. This will also change the aria role from status to alertdialog.
+     * Used in scenarios where the message needs to visually dominate the screen.
+     *  This will also change the aria role from status to alertdialog.
      * and will modally trap the keyboard focus in the dialog as soon as it displays.
      */
     important: {
