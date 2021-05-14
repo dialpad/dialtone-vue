@@ -7,7 +7,7 @@ import { LINK_KIND_CLASSES } from './link_constants';
 
 // Default Prop Values
 export const argsData = {
-  default: 'Default link',
+  default: 'default link',
   href: '#',
 };
 

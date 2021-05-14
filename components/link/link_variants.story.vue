@@ -6,7 +6,7 @@
       href="#"
       :kind="kind"
     >
-      {{ kind }} link
+      {{ kind || 'default' }} link
     </dt-link>
     <dt-link
       href="#"

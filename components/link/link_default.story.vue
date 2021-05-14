@@ -1,7 +1,6 @@
 <template>
   <div>
     <dt-link
-      :id="id"
       :href="href"
       :kind="kind"
       :inverted="inverted"
