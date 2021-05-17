@@ -3,6 +3,7 @@
     :class="noticeClass"
     :role="role"
     v-on="$listeners"
+    data-qa="notice"
   >
     <dt-notice-icon
       :kind="kind"

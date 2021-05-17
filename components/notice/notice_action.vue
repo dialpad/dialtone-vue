@@ -1,5 +1,8 @@
 <template>
-  <div class="d-notice__actions">
+  <div
+    class="d-notice__actions"
+    data-qa="notice-content-actions"
+  >
     <slot />
     <dt-button
       v-if="!hideClose"
