@@ -21,17 +21,11 @@
 <script>
 import DtTooltip from './tooltip';
 import fixDefaultSlot from '../plugins/fixDefaultSlot';
-import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
 
 export default {
   name: 'DtTooltipDefault',
   components: { DtTooltip },
   mixins: [fixDefaultSlot],
-  data () {
-    return {
-      TOOLTIP_DIRECTION_MODIFIERS,
-    };
-  },
 };
 </script>
 
