@@ -19,7 +19,7 @@
         v-if="$slots.header"
         :id="labelledById"
         class="d-modal__header"
-        data-qa="hs-modal-title"
+        data-qa="dt-modal-title"
       >
         <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
         <slot name="header" />
@@ -28,11 +28,11 @@
         v-else
         :id="labelledById"
         class="d-modal__header"
-        data-qa="hs-modal-title"
+        data-qa="dt-modal-title"
       >
         {{ title }}
       </h2>
-      <hs-button
+      <dt-button
         class="d-modal__close"
         circle
         size="lg"
@@ -45,11 +45,11 @@
         <template #icon>
           <icon-close />
         </template>
-      </hs-button>
+      </dt-button>
       <div
         v-if="$slots.default"
         class="d-modal__content"
-        data-qa="hs-modal-copy"
+        data-qa="dt-modal-copy"
       >
         <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
         <slot />
@@ -57,7 +57,7 @@
       <p
         v-else
         class="d-modal__content"
-        data-qa="hs-modal-copy"
+        data-qa="dt-modal-copy"
       >
         {{ copy }}
       </p>
