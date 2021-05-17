@@ -29,11 +29,17 @@
       :transition="transition"
       :show="open"
       :class="[
-        'd-border d-border-color--ash-dark d-border-radius--sm d-bgc-white d-box-shadow--md d-mt4 d-p-absolute d-z-index--popover',
-        'dt-popover__content',
-        `dt-popover__content--align-${alignment}`,
-        `dt-popover__content--valign-${verticalAlignment}`,
-        `dt-popover__content--pad-${padding}`,
+        'd-border',
+        'd-border-color--ash-dark',
+        'd-border-radius--sm',
+        'd-bgc-white d-box-shadow--md',
+        'd-mt4',
+        'd-p-absolute',
+        'd-z-index--popover',
+        'hs-popover__content',
+        `hs-popover__content--align-${alignment}`,
+        `hs-popover__content--valign-${verticalAlignment}`,
+        `hs-popover__content--pad-${padding}`,
         contentClass,
       ]"
       tabindex="-1"
