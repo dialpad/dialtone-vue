@@ -82,6 +82,12 @@ describe('DtNotice tests', function () {
       });
     });
 
+    describe('When kind is not specified', function () {
+      it('Does not add notice kind class', async function () {
+        assert.strictEqual(rootElement.classes('d-notice--'), false);
+      });
+    });
+
     describe('When kind is set to error', function () {
       beforeEach(async function () {
         await wrapper.setProps({ kind: 'error' });
