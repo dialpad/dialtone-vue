@@ -1,7 +1,7 @@
 <template>
   <div
     :class="modalClasses"
-    data-qa="hs-modal"
+    data-qa="dt-modal"
     :aria-hidden="open"
     @click.self="close"
     @keydown.esc="close"
@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import HsButton from '../button/button.vue';
+import DtButton from '../button/button.vue';
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import Modal from '../mixins/modal.js';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
@@ -81,13 +81,13 @@ import { getUniqueString } from '../utils';
 
 /**
  * Base Vue component for Dialtone Modal.
- * @displayName HsModal
+ * @displayName DtModal
  */
 export default {
-  name: 'HsModal',
+  name: 'DtModal',
 
   components: {
-    HsButton,
+    DtButton,
     IconClose,
   },
 
