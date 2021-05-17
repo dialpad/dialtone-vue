@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-notice__content d-fw-wrap"
+    class="d-notice__content"
   >
     <h1
       v-if="title || this.$slots.titleOverride"

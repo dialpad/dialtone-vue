@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="defaultIcon || $slots.default"
-    class="d-notice__icon d-as-center"
+    class="d-notice__icon"
   >
     <slot>
       <component
