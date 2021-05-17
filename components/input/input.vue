@@ -70,7 +70,7 @@
         >
       </div>
     </label>
-    <hs-validation-messages
+    <dt-validation-messages
       :validation-messages="formattedMessages"
       :show-messages="showMessages"
       :class="messagesClass"
@@ -87,13 +87,13 @@ import {
   getUniqueString,
   getValidationState,
 } from '../utils';
-import { HsValidationMessages } from '../validation_messages';
+import { DtValidationMessages } from '../validation_messages';
 import { MessagesMixin } from '../mixins/input.js';
 
 export default {
   name: 'DtInput',
 
-  components: { HsValidationMessages },
+  components: { DtValidationMessages },
 
   mixins: [MessagesMixin],
 
