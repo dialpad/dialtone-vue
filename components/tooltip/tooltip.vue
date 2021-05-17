@@ -117,7 +117,6 @@ export default {
   methods: {
     onHover (isHover) {
       this.isHover = isHover;
-      console.log(isHover, 'focusin');
     },
   },
 };
