@@ -1,6 +1,7 @@
 <template>
   <div
     v-if="defaultIcon || $slots.default"
+    aria-hidden="true"
     class="d-notice__icon"
   >
     <slot>

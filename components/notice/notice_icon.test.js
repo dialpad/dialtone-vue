@@ -49,8 +49,13 @@ describe('DtNoticeIcon tests', function () {
       it('Should render notice icon component', function () {
         assert.isTrue(wrapper.exists());
       });
+
       it('Should render an icon', function () {
         assert.isTrue(warningIcon.exists());
+      });
+
+      it('Should have aria-hidden set to true', function () {
+        assert.strictEqual(wrapper.attributes('aria-hidden'), 'true');
       });
     });
 
@@ -59,6 +64,7 @@ describe('DtNoticeIcon tests', function () {
         await wrapper.setProps({ kind: 'base' });
         _setChildWrappers();
       });
+
       it('Should render no icon', function () {
         assert.isFalse(iconDiv.exists());
       });

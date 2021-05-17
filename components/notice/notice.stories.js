@@ -1,5 +1,5 @@
 import DtNotice from './notice';
-import { NOTICE_KINDS } from './notice_constants';
+import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
 import NoticeDefault from './notice_default.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 
@@ -8,6 +8,12 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: NOTICE_KINDS,
+    },
+  },
+  role: {
+    control: {
+      type: 'select',
+      options: NOTICE_ROLES,
     },
   },
   titleOverride: {

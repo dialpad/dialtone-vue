@@ -32,10 +32,12 @@ export default {
       type: String,
       default: '',
     },
+
     titleId: {
       type: String,
       default: undefined,
     },
+
     contentId: {
       type: String,
       default: undefined,
