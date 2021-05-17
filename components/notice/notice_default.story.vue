@@ -8,11 +8,13 @@
     :hide-close="hideClose"
   >
     <span v-html="defaultSlot" />
-    <template
-      v-if="action"
-      #action
-    >
-      <span v-html="action" />
+    <template #action>
+      <dt-button
+        size="sm"
+        importance="outlined"
+      >
+        Action
+      </dt-button>
     </template>
     <template
       v-if="icon"
@@ -30,12 +32,13 @@
 </template>
 
 <script>
+import { DtButton } from '../button';
 import DtNotice from './notice';
 import icon from '../mixins/icon';
 
 export default {
   name: 'NoticeDefault',
-  components: { DtNotice },
+  components: { DtButton, DtNotice },
   mixins: [icon],
 };
 </script>

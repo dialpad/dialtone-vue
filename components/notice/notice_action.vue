@@ -4,9 +4,9 @@
     <dt-button
       v-if="!hideClose"
       ref="closeButton"
+      size="sm"
       importance="clear"
       circle
-      class="d-notice__btn d-notice__close"
       :aria-label="closeButtonProps.ariaLabel ? closeButtonProps.ariaLabel : null"
       v-bind="closeButtonProps"
       @click="close"
