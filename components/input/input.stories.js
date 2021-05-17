@@ -157,11 +157,11 @@ WithBothIcons.args = {
   rightIcon: 'IconLock',
 };
 
-export const WithWarn = Template.bind({});
-WithWarn.args = {
+export const WithWarning = Template.bind({});
+WithWarning.args = {
   messages: [{ message: 'This is a warning message', type: 'warning' }],
 };
-WithWarn.parameters = {
+WithWarning.parameters = {
   docs: {
     source: {
       code: '<dt-input :messages="[{ message: \'This is a warning message\', type: \'warning\' }]" />',
