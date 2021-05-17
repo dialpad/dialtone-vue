@@ -4,7 +4,6 @@ import sinon from 'sinon';
 import DtButton from './button.vue';
 import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 
-
 describe('Dialtone Vue Button tests', function () {
   let wrapper;
   let button;
