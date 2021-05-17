@@ -1,12 +1,25 @@
 <template>
   <div
     data-qa="dt-tooltip-container"
-    :class="tooltipContainerClasses"
+    :tabindex="tabIndex"
+    :class="tooltipContainerClasses "
+    @mouseover="onHover(true)"
+    @focus="onHover(true)"
+    @blur="onHover(false)"
+    @mouseleave="onHover(false)"
   >
-    <slot name="anchor" />
     <div
+      :aria-describedby="id"
+    >
+      <slot name="anchor" />
+    </div>
+
+    <div
+      :id="id"
       :class="tooltipClasses"
       data-qa="dt-tooltip"
+      :aria-hidden="ariaHidden"
+      role="tooltip"
       v-bind="$attrs"
     >
       {{ message }}
@@ -19,6 +32,7 @@
 
 <script>
 import { TOOLTIP_DIRECTION_MODIFIERS, TOOLTIP_STATE_MODIFIERS, INVERTED } from './tooltip_constants.js';
+import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtTooltip',
@@ -26,6 +40,11 @@ export default {
   inheritAttrs: false,
 
   props: {
+    id: {
+      type: String,
+      default () { return getUniqueString(); },
+    },
+
     message: {
       type: String,
       default: '',
@@ -53,9 +72,26 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    tabIndex: {
+      type: String,
+      default: '0',
+    },
+  },
+
+  data () {
+    return {
+      isHover: false,
+    };
   },
 
   computed: {
+    ariaHidden () {
+      const ariaHidden = this.hover ? this.isHover : this.show;
+
+      return `${!ariaHidden}`;
+    },
+
     tooltipContainerClasses () {
       return [
         'd-ps-relative',
@@ -77,5 +113,21 @@ export default {
       ];
     },
   },
+
+  methods: {
+    onHover (isHover) {
+      this.isHover = isHover;
+      console.log(isHover, 'focusin');
+    },
+  },
 };
 </script>
+
+<style lang="less" scoped>
+.d-tooltip--hover:focus {
+  .d-tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+</style>

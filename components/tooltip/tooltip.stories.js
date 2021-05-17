@@ -3,32 +3,16 @@ import DtTooltip from './tooltip';
 import DtTooltipMdx from './tooltip.mdx';
 import DtTooltipDefaultTemplate from './tooltip_default.story.vue';
 import DtTooltipVariantsTemplate from './tooltip_variants.story.vue';
+import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
 
 // Default Prop Values
 export const argsData = {
   message: 'message',
   anchorSlot: 'anchor',
   default: 'default',
+  show: true,
 };
 
-/**
- * example prop description decorator
- */
-
-/*
-  Controls
-  ========
-
-  Here we define any custom controls or control overrides for our components.
-
-  By default storybook will attempt to provide an appropriate control of the same name for each property in the
-  component as well as include any description provided using a prop decorator within your component (see above).
-
-  Storybook will also attempt to provide an appropriate control for each slot in the component as well as include any
-  description provided using a slot decorator within your component (see below).
-
-  <!-- @slot example slot decorator -->
-*/
 export const argTypesData = {
   // Props
   show: {
@@ -42,6 +26,13 @@ export const argTypesData = {
     },
   },
 
+  arrowDirection: {
+    control: {
+      type: 'select',
+      options: TOOLTIP_DIRECTION_MODIFIERS,
+    },
+  },
+
   // Slots
   default: {
     control: 'text',
@@ -51,11 +42,6 @@ export const argTypesData = {
       },
     },
   },
-  /*
-    We use the following naming scheme `<SLOT_NAME>Slot` for slot controls to prevent conflicts with props that share
-    the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
-    table and description within the controls accurately reflects the correct names of our component's props and slots.
-  */
 
   anchorSlot: {
     name: 'anchor',

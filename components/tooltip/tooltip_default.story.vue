@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     <dt-tooltip
-      v-for="arrowDirection in TOOLTIP_DIRECTION_MODIFIERS"
-      :key="arrowDirection"
       :message="message"
       :arrow-direction="arrowDirection"
       :show="show"
@@ -42,7 +40,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   height: 600px;
 }
 </style>
