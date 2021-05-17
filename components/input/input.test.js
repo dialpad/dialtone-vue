@@ -171,8 +171,12 @@ describe('Dialtone Vue Input tests', function () {
       // Shared Examples
       const itBehavesLikeRendersLeftInputIcon = (size = '') => {
         it('should render the icon wrapper', function () { assert.isTrue(leftIconWrapper.exists()); });
-        it('should have input icon class', function () { assert.isTrue(leftIconWrapper.classes().includes('d-input-icon')); });
-        it('should have input icon side class', function () { assert.isTrue(leftIconWrapper.classes().includes('d-input-icon--left')); });
+        it('should have input icon class', function () {
+          assert.isTrue(leftIconWrapper.classes().includes('d-input-icon'));
+        });
+        it('should have input icon side class', function () {
+          assert.isTrue(leftIconWrapper.classes().includes('d-input-icon--left'));
+        });
         it('should have input icon size class', function () { itBehavesLikeHasIconSizeClass(leftIconWrapper, size); });
         it('should render the provided icon', function () { assert.isTrue(wrapper.findComponent(IconAdd).exists()); });
       };
@@ -208,8 +212,12 @@ describe('Dialtone Vue Input tests', function () {
       // Shared Examples
       const itBehavesLikeRendersRightInputIcon = (size = '') => {
         it('should render the icon wrapper', function () { assert.isTrue(rightIconWrapper.exists()); });
-        it('should have input icon class', function () { assert.isTrue(rightIconWrapper.classes().includes('d-input-icon')); });
-        it('should have input icon side class', function () { assert.isTrue(rightIconWrapper.classes().includes('d-input-icon--right')); });
+        it('should have input icon class', function () {
+          assert.isTrue(rightIconWrapper.classes().includes('d-input-icon'));
+        });
+        it('should have input icon side class', function () {
+          assert.isTrue(rightIconWrapper.classes().includes('d-input-icon--right'));
+        });
         it('should have input icon size class', function () { itBehavesLikeHasIconSizeClass(rightIconWrapper, size); });
         it('should render the provided icon', function () { assert.isTrue(wrapper.findComponent(IconAdd).exists()); });
       };
@@ -335,7 +343,9 @@ describe('Dialtone Vue Input tests', function () {
 
       // Shared Examples
       const itBehavesLikeAddsInputAndLabelSizeClasses = () => {
-        it('should add input size class', function () { assert.isTrue(nativeInput.classes().includes(`d-input--${size}`)); });
+        it('should add input size class', function () {
+          assert.isTrue(nativeInput.classes().includes(`d-input--${size}`));
+        });
         it('should add label size class', function () { assert.isTrue(label.classes().includes(`d-label--${size}`)); });
       };
 
@@ -353,7 +363,9 @@ describe('Dialtone Vue Input tests', function () {
         });
 
         itBehavesLikeAddsInputAndLabelSizeClasses();
-        it('should not add description size class', function () { assert.isFalse(description.classes().includes(`d-description--${size}`)); });
+        it('should not add description size class', function () {
+          assert.isFalse(description.classes().includes(`d-description--${size}`));
+        });
       });
 
       describe('When size is EXTRA_LARGE', function () {
@@ -363,7 +375,9 @@ describe('Dialtone Vue Input tests', function () {
         });
 
         itBehavesLikeAddsInputAndLabelSizeClasses();
-        it('should add description size class', function () { assert.isTrue(description.classes().includes(`d-description--${size}`)); });
+        it('should add description size class', function () {
+          assert.isTrue(description.classes().includes(`d-description--${size}`));
+        });
       });
     });
   });
