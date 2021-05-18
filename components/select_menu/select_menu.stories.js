@@ -80,7 +80,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Group/DtSelectMenu',
+  title: 'Forms/Select Menu',
   component: DtSelectMenu,
   args: argsData,
   argTypes: argTypesData,
