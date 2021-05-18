@@ -5,6 +5,7 @@
       :key="kind"
       href="#"
       :kind="kind"
+      class="base-link"
     >
       {{ kind }} link
     </dt-link>
@@ -54,3 +55,9 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+.base-link {
+  text-transform: capitalize;
+}
+</style>
