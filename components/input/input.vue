@@ -240,7 +240,7 @@ export default {
         `base-input__icon--${side}`,
         'd-input-icon',
         `d-input-icon--${side}`,
-        { [`d-input-icon--${this.size}`]: this.size.length > 1 },
+        { [`d-input-icon--${this.size}`]: this.size.length > 0 },
       ];
     },
 
