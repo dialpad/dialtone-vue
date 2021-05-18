@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount, createLocalVue } from '@vue/test-utils';
-import { INPUT_SIZE_TYPES } from './input_constants';
+import { INPUT_SIZES } from './input_constants';
 import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd.vue';
 import DtInput from './input.vue';
 
@@ -199,12 +199,12 @@ describe('Dialtone Vue Input tests', function () {
       describe('When a size is provided', function () {
         // Test Setup
         beforeEach(async function () {
-          propsData = { size: INPUT_SIZE_TYPES.EXTRA_LARGE };
+          propsData = { size: INPUT_SIZES.EXTRA_LARGE };
           _mountWrapper();
           _setChildWrappers();
         });
 
-        itBehavesLikeRendersLeftInputIcon(INPUT_SIZE_TYPES.EXTRA_LARGE);
+        itBehavesLikeRendersLeftInputIcon(INPUT_SIZES.EXTRA_LARGE);
       });
     });
 
@@ -240,12 +240,12 @@ describe('Dialtone Vue Input tests', function () {
       describe('When a size is provided', function () {
         // Test Setup
         beforeEach(async function () {
-          propsData = { size: INPUT_SIZE_TYPES.EXTRA_LARGE };
+          propsData = { size: INPUT_SIZES.EXTRA_LARGE };
           _mountWrapper();
           _setChildWrappers();
         });
 
-        itBehavesLikeRendersRightInputIcon(INPUT_SIZE_TYPES.EXTRA_LARGE);
+        itBehavesLikeRendersRightInputIcon(INPUT_SIZES.EXTRA_LARGE);
       });
     });
 
@@ -359,7 +359,7 @@ describe('Dialtone Vue Input tests', function () {
       describe('When size is EXTRA_SMALL', function () {
         // Test Setup
         before(function () {
-          size = INPUT_SIZE_TYPES.EXTRA_SMALL;
+          size = INPUT_SIZES.EXTRA_SMALL;
         });
 
         itBehavesLikeAddsInputAndLabelSizeClasses();
@@ -371,7 +371,7 @@ describe('Dialtone Vue Input tests', function () {
       describe('When size is EXTRA_LARGE', function () {
         // Test Setup
         before(function () {
-          size = INPUT_SIZE_TYPES.EXTRA_LARGE;
+          size = INPUT_SIZES.EXTRA_LARGE;
         });
 
         itBehavesLikeAddsInputAndLabelSizeClasses();

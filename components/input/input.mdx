@@ -223,22 +223,22 @@ import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 
 |name           |prop value                     |size|Example                                |
 |---            |---                            |--- |---                                    |
-|**Extra Small**|INPUT_SIZE_TYPES.EXTRA_SMALL   |12px|<Story id="forms-input--extra-small" />|
-|**Small**      |INPUT_SIZE_TYPES.SMALL         |14px|<Story id="forms-input--small" />      |
+|**Extra Small**|INPUT_SIZES.EXTRA_SMALL   |12px|<Story id="forms-input--extra-small" />|
+|**Small**      |INPUT_SIZES.SMALL         |14px|<Story id="forms-input--small" />      |
 |**Default**    |-                              |16px|<Story id="forms-input--default" />    |
-|**Large**      |INPUT_SIZE_TYPES.LARGE         |20px|<Story id="forms-input--large" />      |
-|**Extra Large**|INPUT_SIZE_TYPES.EXTRA_LARGE   |24px|<Story id="forms-input--extra-large" />|
+|**Large**      |INPUT_SIZES.LARGE         |20px|<Story id="forms-input--large" />      |
+|**Extra Large**|INPUT_SIZES.EXTRA_LARGE   |24px|<Story id="forms-input--extra-large" />|
 
 ### Usage
 
 ```js
-import { DtInput, INPUT_SIZE_TYPES } from '@dialpad/dialtone-vue';
+import { DtInput, INPUT_SIZES } from '@dialpad/dialtone-vue';
 ```
 
 ```html
 <dt-input
   v-model="text"
   placeholder="placeholder"
-  :size="INPUT_SIZE_TYPES.<SIZE>"
+  :size="INPUT_SIZES.<SIZE>"
 />
 ```

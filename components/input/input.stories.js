@@ -1,6 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 import DtInput from './input';
+import { INPUT_SIZES } from './input_constants';
 import InputMdx from './input.mdx';
 import InputDefault from './input_default.story.vue';
 
@@ -28,7 +29,13 @@ export const argTypesData = {
   size: {
     control: {
       type: 'select',
-      options: ['xs', 'sm', '', 'lg', 'xl'],
+      options: Object.values(INPUT_SIZES),
+    },
+    defaultValue: INPUT_SIZES.DEFAULT,
+    table: {
+      defaultValue: {
+        summary: INPUT_SIZES.DEFAULT,
+      },
     },
   },
   messagesChildProps: { control: null },

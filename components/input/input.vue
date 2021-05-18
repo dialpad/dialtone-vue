@@ -84,7 +84,7 @@
 
 <script>
 import { DESCRIPTION_SIZE_TYPES } from '../constants.js';
-import { INPUT_TYPES, INPUT_SIZE_TYPES } from './input_constants.js';
+import { INPUT_TYPES, INPUT_SIZES } from './input_constants.js';
 import {
   getUniqueString,
   getValidationState,
@@ -153,12 +153,12 @@ export default {
     },
 
     /**
-     * Size of the input, one of `xs`, `sm`, `''`, `lg`, `xl`
+     * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
      */
     size: {
       type: String,
-      default: '',
-      validator: (t) => Object.values(INPUT_SIZE_TYPES).includes(t),
+      default: INPUT_SIZES.DEFAULT,
+      validator: (t) => Object.values(INPUT_SIZES).includes(t),
     },
   },
 
@@ -168,6 +168,10 @@ export default {
 
     isTextarea () {
       return this.type === INPUT_TYPES.TEXTAREA;
+    },
+
+    isDefaultSize () {
+      return this.size === INPUT_SIZES.DEFAULT;
     },
 
     inputComponent () {
@@ -203,7 +207,7 @@ export default {
     },
 
     sizeModifierClass () {
-      if (!this.size || !Object.values(INPUT_SIZE_TYPES).includes(this.size)) {
+      if (this.isDefaultSize || !Object.values(INPUT_SIZES).includes(this.size)) {
         return '';
       }
 
@@ -211,14 +215,14 @@ export default {
     },
 
     labelSizeModifierClass () {
-      if (!this.size || !Object.values(INPUT_SIZE_TYPES).includes(this.size)) {
+      if (this.isDefaultSize || !Object.values(INPUT_SIZES).includes(this.size)) {
         return '';
       }
       return `d-label--${this.size}`;
     },
 
     descriptionSizeModifierClass () {
-      if (!this.size || !Object.values(DESCRIPTION_SIZE_TYPES).includes(this.size)) {
+      if (this.isDefaultSize || !Object.values(DESCRIPTION_SIZE_TYPES).includes(this.size)) {
         return '';
       }
 
@@ -242,7 +246,7 @@ export default {
         `base-input__icon--${side}`,
         'd-input-icon',
         `d-input-icon--${side}`,
-        { [`d-input-icon--${this.size}`]: this.size.length > 0 },
+        { [`d-input-icon--${this.size}`]: !this.isDefaultSize },
       ];
     },
 
