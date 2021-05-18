@@ -34,7 +34,7 @@
         'd-border-radius--sm',
         'd-bgc-white d-box-shadow--md',
         'd-mt4',
-        'd-p-absolute',
+        'd-ps-absolute',
         'd-z-index--popover',
         'dt-popover__content',
         `dt-popover__content--align-${alignment}`,
