@@ -78,7 +78,7 @@ describe('Dialtone Vue Input tests', function () {
   describe('Presentation Tests', function () {
     // Shared Examples
     function itBehavesLikeHasIconSizeClass (iconWrapper, size) {
-      if (size.length > 1) {
+      if (size !== INPUT_SIZES.DEFAULT) {
         assert.isTrue(iconWrapper.classes().includes(`d-input-icon--${size}`));
       } else {
         assert.isFalse(iconWrapper.classes().includes(`d-input-icon--${size}`));
@@ -169,7 +169,7 @@ describe('Dialtone Vue Input tests', function () {
 
     describe('When a left icon is provided', function () {
       // Shared Examples
-      const itBehavesLikeRendersLeftInputIcon = (size = '') => {
+      const itBehavesLikeRendersLeftInputIcon = (size = INPUT_SIZES.DEFAULT) => {
         it('should render the icon wrapper', function () { assert.isTrue(leftIconWrapper.exists()); });
         it('should have input icon class', function () {
           assert.isTrue(leftIconWrapper.classes().includes('d-input-icon'));
@@ -210,7 +210,7 @@ describe('Dialtone Vue Input tests', function () {
 
     describe('When a right icon is provided', function () {
       // Shared Examples
-      const itBehavesLikeRendersRightInputIcon = (size = '') => {
+      const itBehavesLikeRendersRightInputIcon = (size = INPUT_SIZES.DEFAULT) => {
         it('should render the icon wrapper', function () { assert.isTrue(rightIconWrapper.exists()); });
         it('should have input icon class', function () {
           assert.isTrue(rightIconWrapper.classes().includes('d-input-icon'));
