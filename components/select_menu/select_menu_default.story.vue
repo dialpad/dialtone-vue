@@ -5,25 +5,37 @@
     as the storybook control defined in the corresponding `.story.js` file.
   -->
   <dt-select-menu
-    :some="some"
+    :name="name"
+    :label="label"
+    :size="size"
+    :description="description"
+    :messages="messages"
+    :messages-child-props="messagesChildProps"
+    :disabled="disabled"
+    :show-messages="showMessages"
+    :messages-class="messagesClass"
   >
-    <!--
-      We can also bind any slot data that the user has entered into the storybook controls. In this example we
-      conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
-
-      The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-
-      We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-      same name.
-    -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
+    <template
+      #label
+      v-if="labelSlot"
+    >
+      <span v-html="labelSlot" />
     </template>
     <template
-      #some
-      v-if="someSlot"
+      #description
+      v-if="descriptionSlot"
     >
-      <span v-html="someSlot" />
+      <span v-html="descriptionSlot" />
+    </template>
+    <!--
+    <template v-if="defaultSlot">
+      <div v-html="defaultSlot" />
+    </template>
+    -->
+    <template>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
     </template>
   </dt-select-menu>
 </template>

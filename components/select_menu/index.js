@@ -1,2 +1,5 @@
 export { default as DtSelectMenu } from './select_menu.vue';
-export {} from './select_menu_constants';
+export {
+  SELECT_SIZE_MODIFIERS,
+  SELECT_STATE_MODIFIERS,
+} from './select_menu_constants';

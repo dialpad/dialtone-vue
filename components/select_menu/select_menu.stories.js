@@ -1,5 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
+import { SELECT_SIZE_MODIFIERS } from './select_menu_constants';
 import DtSelectMenu from './select_menu';
 import DtSelectMenuMdx from './select_menu.mdx';
 import DtSelectMenuDefaultTemplate from './select_menu_default.story.vue';
@@ -7,60 +8,55 @@ import DtSelectMenuVariantsTemplate from './select_menu_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  some: 'prop',
+  label: 'Label',
   onEvent: action('event'),
 };
 
-/**
- * example prop description decorator
- */
-
-/*
-  Controls
-  ========
-
-  Here we define any custom controls or control overrides for our components.
-
-  By default storybook will attempt to provide an appropriate control of the same name for each property in the
-  component as well as include any description provided using a prop decorator within your component (see above).
-
-  Storybook will also attempt to provide an appropriate control for each slot in the component as well as include any
-  description provided using a slot decorator within your component (see below).
-
-  <!-- @slot example slot decorator -->
-*/
 export const argTypesData = {
   // Props
-  some: {
-    description: 'Describes the some prop',
+  messages: {
+    control: 'object',
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: Object.keys(SELECT_SIZE_MODIFIERS),
+    },
+    defaultValue: 'md',
     table: {
-      category: 'props',
-      type: {
-        summary: 'string',
+      defaultValue: {
+        summary: 'md',
       },
     },
-    control: {
-      type: 'text',
-    },
   },
+  messagesChildProps: { control: null },
 
   // Slots
-  default: {
+  labelSlot: {
+    name: 'label',
+    description: 'Slot for select menu label',
     control: 'text',
     table: {
+      category: 'slots',
       type: {
         summary: 'text/html',
       },
     },
   },
-  /*
-    We use the following naming scheme `<SLOT_NAME>Slot` for slot controls to prevent conflicts with props that share
-    the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
-    table and description within the controls accurately reflects the correct names of our component's props and slots.
-  */
-  someSlot: {
-    name: 'some',
-    description: 'Slot for some',
+  descriptionSlot: {
+    name: 'description',
+    description: 'Slot for select menu description',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+  defaultSlot: {
+    name: 'default',
+    description: 'Slot for select menu options',
     control: 'text',
     table: {
       category: 'slots',
