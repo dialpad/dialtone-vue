@@ -10,7 +10,7 @@
       size="sm"
       importance="clear"
       circle
-      :aria-label="closeButtonProps.ariaLabel ? closeButtonProps.ariaLabel : null"
+      :aria-label="closeButtonProps.ariaLabel ? closeButtonProps.ariaLabel : 'Close'"
       v-bind="closeButtonProps"
       @click="close"
     >
