@@ -1,27 +1,27 @@
-import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import DtSelectMenu from './select_menu.vue';
+// import { assert } from 'chai';
+import { createLocalVue /* , shallowMount */ } from '@vue/test-utils';
+// import DtSelectMenu from './select_menu.vue';
 
 // Constants
-const basePropsData = {};
+// const basePropsData = {};
 
 describe('DtSelectMenu Tests', function () {
   // Wrappers
-  let wrapper;
-  let childContainer;
+  /* let wrapper;
+  let childContainer; */
 
   // Environment
-  let propsData = basePropsData;
+  /* let propsData = basePropsData;
   let attrs = {};
   let slots = {};
-  let provide = {};
+  let provide = {}; */
 
   // Helpers
-  const _setChildWrappers = () => {
+  /* const _setChildWrappers = () => {
     childContainer = wrapper.find('[data-qa="child-container"]');
-  };
+  }; */
 
-  const _setWrappers = () => {
+  /* const _setWrappers = () => {
     wrapper = shallowMount(DtSelectMenu, {
       propsData,
       attrs,
@@ -30,12 +30,12 @@ describe('DtSelectMenu Tests', function () {
       localVue: this.localVue,
     });
     _setChildWrappers();
-  };
+  }; */
 
   // Shared Examples
-  const itBehavesLikeSomeExpectation = () => {
+  /* const itBehavesLikeSomeExpectation = () => {
     it('should be equal', function () { assert.strictEqual(1, 1); });
-  };
+  }; */
 
   // Setup
   before(function () {
@@ -45,10 +45,10 @@ describe('DtSelectMenu Tests', function () {
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    /* propsData = basePropsData;
     attrs = {};
     slots = {};
-    provide = {};
+    provide = {}; */
   });
   after(function () {});
 

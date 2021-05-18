@@ -11,11 +11,9 @@ export const argsData = {
   onEvent: action('event'),
 };
 
-
 /**
  * example prop description decorator
  */
-
 
 /*
   Controls
@@ -95,8 +93,16 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtSelectMenuDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtSelectMenuVariantsTemplate);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtSelectMenuDefaultTemplate,
+);
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtSelectMenuVariantsTemplate,
+);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
