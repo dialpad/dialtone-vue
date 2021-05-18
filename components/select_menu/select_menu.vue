@@ -36,7 +36,7 @@
       :show-messages="showMessages"
       :class="messagesClass"
       v-bind="messagesChildProps"
-      data-qa="dt-input-messages"
+      data-qa="dt-select-messages"
     />
   </div>
 </template>

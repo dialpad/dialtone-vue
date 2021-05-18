@@ -14,8 +14,17 @@ export const argsData = {
 
 export const argTypesData = {
   // Props
-  messages: {
-    control: 'object',
+  description: {
+    description: 'Describes the radio option',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'string',
+      },
+    },
+    control: {
+      type: 'text',
+    },
   },
   size: {
     control: {
@@ -29,6 +38,8 @@ export const argTypesData = {
       },
     },
   },
+  labelChildProps: { control: null },
+  descriptionChildProps: { control: null },
   messagesChildProps: { control: null },
 
   // Slots

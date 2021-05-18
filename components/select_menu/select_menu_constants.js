@@ -7,11 +7,9 @@ export const SELECT_SIZE_MODIFIERS = {
 };
 
 export const SELECT_STATE_MODIFIERS = {
-  xs: 'd-select--xs',
-  sm: 'd-select--sm',
-  md: '',
-  lg: 'd-select--lg',
-  xl: 'd-select--xl',
+  warning: 'd-select__input--warning',
+  error:   'd-select__input--error',
+  success: 'd-select__input--success',
 };
 
 export default {
