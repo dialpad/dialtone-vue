@@ -32,6 +32,7 @@
           v-if="$slots.leftIcon"
           :class="inputIconClasses('left')"
           data-qa="dt-input-left-icon-wrapper"
+          @focusout="onBlur"
         >
           <slot name="leftIcon" />
         </span>
@@ -42,6 +43,7 @@
           v-if="$slots.rightIcon"
           :class="inputIconClasses('right')"
           data-qa="dt-input-right-icon-wrapper"
+          @focusout="onBlur"
         >
           <slot name="rightIcon" />
         </span>
