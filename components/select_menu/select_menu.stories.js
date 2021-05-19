@@ -15,19 +15,39 @@ export const argsData = {
 
 export const argTypesData = {
   // Props
-  description: {
-    description: 'Describes the radio option',
+  label: {
+    description: 'Label for the select',
     table: {
       category: 'props',
       type: {
         summary: 'string',
+      },
+      defaultValue: {
+        summary: '',
       },
     },
     control: {
       type: 'text',
     },
   },
+  description: {
+    description: 'Describes the select',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'string',
+      },
+      defaultValue: {
+        summary: '',
+      },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
   options: {
+    description: 'Provides a list of options for the select',
     control: {
       type: 'object',
     },
@@ -36,22 +56,69 @@ export const argTypesData = {
       { value: 2, label: 'Option 2' },
       { value: 3, label: 'Option 3' },
     ],
+    table: {
+      category: 'props',
+      type: {
+        summary: 'object',
+      },
+      defaultValue: {
+        summary: [],
+      },
+    },
   },
+
   size: {
+    description: 'Controls the size of the select',
     control: {
       type: 'select',
       options: Object.keys(SELECT_SIZE_MODIFIERS),
     },
     defaultValue: 'md',
     table: {
+      category: 'props',
+      type: {
+        summary: 'string',
+      },
       defaultValue: {
         summary: 'md',
       },
     },
   },
-  labelChildProps: { control: null },
-  descriptionChildProps: { control: null },
-  messagesChildProps: { control: null },
+
+  // Native Props
+  name: {
+    description: 'Provides a name for the select',
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+    table: {
+      category: 'native props',
+      type: {
+        summary: 'string',
+      },
+      defaultValue: {
+        summary: '',
+      },
+    },
+  },
+
+  disabled: {
+    description: 'Disables the select',
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+    table: {
+      category: 'native props',
+      type: {
+        summary: 'boolean',
+      },
+      defaultValue: {
+        summary: false,
+      },
+    },
+  },
 
   // Slots
   labelSlot: {
@@ -65,6 +132,7 @@ export const argTypesData = {
       },
     },
   },
+
   descriptionSlot: {
     name: 'description',
     description: 'Slot for select menu description',
@@ -76,6 +144,7 @@ export const argTypesData = {
       },
     },
   },
+
   defaultSlot: {
     name: 'default',
     description: 'Slot for select menu options',
@@ -88,8 +157,19 @@ export const argTypesData = {
     },
   },
 
+  // Disabled Prop Controls
+  labelChildProps: { control: null },
+  descriptionChildProps: { control: null },
+  messagesChildProps: { control: null },
+
   // Action Event Handlers
-  onEvent: {
+  onInput: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onChange: {
     table: {
       disable: true,
     },

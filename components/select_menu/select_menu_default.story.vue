@@ -1,15 +1,15 @@
 <template>
   <dt-select-menu
-    :name="name"
     :label="label"
     :options="options"
     :size="size"
     :description="description"
-    :messages="messages"
-    :messages-child-props="messagesChildProps"
-    :disabled="disabled"
     :show-messages="showMessages"
+    :messages="messages"
     :messages-class="messagesClass"
+    :messages-child-props="messagesChildProps"
+    :name="name"
+    :disabled="disabled"
     @input="onInput"
     @change="onChange"
   >

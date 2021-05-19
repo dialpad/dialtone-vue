@@ -21,7 +21,6 @@
       </div>
       <div :class="selectClasses">
         <select
-          :name="name"
           :class="selectInputClasses"
           v-bind="$attrs"
           v-on="selectListeners"
@@ -119,22 +118,6 @@ export default {
           return true;
         });
       },
-    },
-
-    /**
-     * Name property of the select element (TODO: See if we can bind attrs instead and use a native prop)
-     */
-    name: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Disables the select  (TODO: See if we can bind attrs instead and use a native prop)
-     */
-    disabled: {
-      type: Boolean,
-      default: false,
     },
 
     /**
