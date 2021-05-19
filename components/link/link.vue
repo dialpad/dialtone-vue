@@ -2,7 +2,6 @@
   <a
     :class="linkClasses"
     data-qa="dt-link"
-    v-bind="$attrs"
   >
     <slot />
   </a>
@@ -13,8 +12,7 @@ import { LINK_MODIFIER_CLASSES, LINK_VARIANT_CLASSES } from './link_constants.js
 
 export default {
   name: 'DtLink',
-
-  inheritAttrs: false,
+  inheritAttrs: true,
 
   props: {
     /**
