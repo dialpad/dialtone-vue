@@ -59,7 +59,7 @@ describe('Dialtone Vue Link tests', function () {
   describe('Presentation Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
 
-    function itBehavesLikeHasCorrectClass (kind) {
+    function itBehavesLikeHasCorrectKindClass (kind) {
       it('should have correct class', async function () {
         assert.isTrue(nativeLink.classes().includes(LINK_VALIDATION_CLASSES[kind]));
       });
@@ -81,7 +81,7 @@ describe('Dialtone Vue Link tests', function () {
       });
 
       it('should render the native anchor', function () { assert.isTrue(nativeLink.exists()); });
-      itBehavesLikeHasCorrectClass(DANGER);
+      itBehavesLikeHasCorrectKindClass(DANGER);
     });
 
     describe('When kind is inverted', function () {
@@ -90,7 +90,7 @@ describe('Dialtone Vue Link tests', function () {
         _setWrappers();
       });
 
-      itBehavesLikeHasCorrectClass(INVERTED);
+      itBehavesLikeHasCorrectKindClass(INVERTED);
     });
 
     describe('When kind is success', function () {
@@ -99,7 +99,7 @@ describe('Dialtone Vue Link tests', function () {
         _setWrappers();
       });
 
-      itBehavesLikeHasCorrectClass(SUCCESS);
+      itBehavesLikeHasCorrectKindClass(SUCCESS);
     });
 
     describe('When kind is warning', function () {
@@ -108,7 +108,7 @@ describe('Dialtone Vue Link tests', function () {
         _setWrappers();
       });
 
-      itBehavesLikeHasCorrectClass(WARNING);
+      itBehavesLikeHasCorrectKindClass(WARNING);
     });
 
     describe('When kind is muted', function () {
@@ -117,7 +117,7 @@ describe('Dialtone Vue Link tests', function () {
         _setWrappers();
       });
 
-      itBehavesLikeHasCorrectClass(MUTED);
+      itBehavesLikeHasCorrectKindClass(MUTED);
     });
 
     describe('When anchor is disabled', function () {
