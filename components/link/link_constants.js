@@ -8,7 +8,7 @@ export const DISABLED = 'disabled';
 export const INVERTED = 'inverted';
 export const LINK_VARIANTS = ['', DANGER, WARNING, SUCCESS, MUTED, INVERTED];
 
-export const LINK_VARIANT_CLASSES = {
+export const LINK_VARIANTS_CLASSES = {
   [DANGER]: `${LINK_CLASS}--${DANGER}`,
   [WARNING]: `${LINK_CLASS}--${WARNING}`,
   [SUCCESS]: `${LINK_CLASS}--${SUCCESS}`,
