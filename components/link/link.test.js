@@ -1,16 +1,16 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtLink from './link.vue';
 import {
   LINK_MODIFIER_CLASSES,
-  LINK_VALIDATION_CLASSES,
+  LINK_VARIANTS_CLASSES,
   DANGER,
   SUCCESS,
   WARNING,
   MUTED,
   INVERTED,
   DISABLED,
-} from '../link';
+} from './link_constants';
 
 // Constants
 const basePropsData = {
@@ -28,11 +28,11 @@ describe('Dialtone Vue Link tests', function () {
 
   // Helpers
   const _setWrappers = () => {
-    nativeLink = wrapper.find('.d-link');
+    nativeLink = wrapper.find('[data-qa="dt-link"]');
   };
 
   const _mountWrapper = () => {
-    wrapper = mount(DtLink, {
+    wrapper = shallowMount(DtLink, {
       propsData,
       slots,
       localVue: this.localVue,
@@ -61,7 +61,7 @@ describe('Dialtone Vue Link tests', function () {
 
     function itBehavesLikeHasCorrectKindClass (kind) {
       it('should have correct class', async function () {
-        assert.isTrue(nativeLink.classes().includes(LINK_VALIDATION_CLASSES[kind]));
+        assert.isTrue(nativeLink.classes().includes(LINK_VARIANTS_CLASSES[kind]));
       });
     }
 
@@ -69,7 +69,6 @@ describe('Dialtone Vue Link tests', function () {
       beforeEach(function () {
         slots = { default: 'Slotted Link' };
         _mountWrapper();
-        _setWrappers();
       });
       it('should render the provided data', function () { assert.equal(nativeLink.text(), 'Slotted Link'); });
     });
@@ -104,7 +103,7 @@ describe('Dialtone Vue Link tests', function () {
 
     describe('When kind is warning', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ kind: WARNING, inverted: false });
+        await wrapper.setProps({ kind: WARNING });
         _setWrappers();
       });
 
@@ -113,7 +112,7 @@ describe('Dialtone Vue Link tests', function () {
 
     describe('When kind is muted', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ kind: MUTED, inverted: false });
+        await wrapper.setProps({ kind: MUTED });
         _setWrappers();
       });
 
@@ -135,6 +134,7 @@ describe('Dialtone Vue Link tests', function () {
       beforeEach(function () {
         _mountWrapper();
       });
+
       it('should has correct disabled modifier class', function () {
         assert.isFalse(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.disabled));
       });
