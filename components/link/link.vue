@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { LINK_MODIFIER_CLASSES, DANGER, LINK_KIND_CLASSES } from './link_constants.js';
+import { LINK_MODIFIER_CLASSES, LINK_KIND_CLASSES } from './link_constants.js';
 
 export default {
   name: 'DtLink',
@@ -35,14 +35,6 @@ export default {
     },
 
     /**
-     * Applies the inverted styles to the link
-     */
-    inverted: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
      * Applies the disabled styles to the link
      */
     disabled: {
@@ -56,19 +48,8 @@ export default {
       return [
         'd-link',
         { [`d-link--${this.kind}`]: this.kind.length > 0 },
-        { [this.linkDisabledClass()]: this.disabled },
-        { [this.linkInvertedClass()]: this.inverted },
+        { [LINK_MODIFIER_CLASSES.disabled]: this.disabled },
       ];
-    },
-  },
-
-  methods: {
-    linkDisabledClass () {
-      return this.inverted ? LINK_MODIFIER_CLASSES.invertedDisabled : LINK_MODIFIER_CLASSES.disabled;
-    },
-
-    linkInvertedClass () {
-      return this.kind === DANGER ? LINK_MODIFIER_CLASSES.invertedDanger : LINK_MODIFIER_CLASSES.inverted;
     },
   },
 };
