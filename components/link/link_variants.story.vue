@@ -3,19 +3,19 @@
     <dt-link
       v-for="kind in filteredKindClasses"
       :key="kind"
-      :kind="kind"
       href="#"
-      class="base-link"
+      :kind="kind"
+      class="d-tt-capitalize"
     >
-      {{ kind || 'default' }} link
+      {{ kind }} link
     </dt-link>
     <div class="d-bgc-blue-800">
       <dt-link
-        :kind="INVERTED"
+        kind="inverted"
         href="#"
-        class="base-link"
+        class="d-tt-capitalize"
       >
-        {{ INVERTED }} link
+        Inverted link
       </dt-link>
     </div>
   </div>
@@ -23,27 +23,21 @@
 
 <script>
 import DtLink from './link';
-import { LINK_KIND_CLASSES, INVERTED } from './link_constants';
+import { LINK_VARIANTS, INVERTED } from './link_constants';
 
 export default {
   name: 'DtLinkVariants',
   components: { DtLink },
   data () {
     return {
-      INVERTED,
+      LINK_VARIANTS,
     };
   },
 
   computed: {
     filteredKindClasses () {
-      return LINK_KIND_CLASSES.filter(kind => kind !== INVERTED);
+      return LINK_VARIANTS.filter(kind => kind !== INVERTED);
     },
   },
 };
 </script>
-
-<style lang="less">
-.base-link {
-  text-transform: capitalize;
-}
-</style>
