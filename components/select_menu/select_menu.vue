@@ -1,6 +1,6 @@
 <template>
   <!-- template -->
-  <div data-qa="dt-select">
+  <div>
     <label>
       <div
         :aria-details="labelAriaDetails"
@@ -19,16 +19,13 @@
         <!-- @slot slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
       </div>
-      <div
-        :class="selectClasses"
-        data-qa="dt-select-wrapper"
-      >
+      <div :class="selectClasses">
         <select
           :name="name"
           :class="selectInputClasses"
           v-bind="$attrs"
           v-on="selectListeners"
-          data-qa="dt-select-input"
+          data-qa="dt-select"
         >
           <!-- @slot Select menu options -->
           <slot>
