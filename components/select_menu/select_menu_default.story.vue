@@ -23,9 +23,7 @@
     >
       <span v-html="descriptionSlot" />
     </template>
-    <template v-if="defaultSlot">
-      <div v-html="defaultSlot" />
-    </template>
+    <div v-if="defaultSlot" v-html="defaultSlot" />
   </dt-select-menu>
 </template>
 
