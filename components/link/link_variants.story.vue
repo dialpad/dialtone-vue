@@ -3,18 +3,19 @@
     <dt-link
       v-for="kind in filteredKindClasses"
       :key="kind"
-      href="#"
       :kind="kind"
+      href="#"
       class="base-link"
     >
       {{ kind || 'default' }} link
     </dt-link>
     <div class="d-bgc-blue-800">
       <dt-link
-        kind="inverted"
+        :kind="INVERTED"
         href="#"
+        class="base-link"
       >
-        Inverted link
+        {{ INVERTED }} link
       </dt-link>
     </div>
   </div>
@@ -29,7 +30,7 @@ export default {
   components: { DtLink },
   data () {
     return {
-      LINK_KIND_CLASSES,
+      INVERTED,
     };
   },
 

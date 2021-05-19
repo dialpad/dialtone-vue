@@ -4,7 +4,8 @@ import DtLink from './link';
 # Links
 
 <Subtitle>
-  Links allow users to click their way from page to page.
+  Links are navigational elements and appear within or directly following a sentence,
+  They’re easy to but generally shouldn’t be confused with Buttons, which represent actions.
 </Subtitle>
 
 ## Base Style
@@ -48,53 +49,7 @@ Link
 ```jsx
 <dt-link
   href="#"
-  kind="danger | warning | success | muted"
->
-Link
-</dt-link>
-```
-
-### Disabled
-
-```jsx
-<dt-link
-  href="#"
-  disabled
->
-Link
-</dt-link>
-```
-
-### Inverted
-
-```jsx
-<dt-link
-  href="#"
-  inverted
->
-Link
-</dt-link>
-```
-
-### With Disabled and Inverted
-
-```jsx
-<dt-link
-  href="#"
-  disabled
-  inverted
->
-Link
-</dt-link>
-```
-
-### With Inverted and Danger
-
-```jsx
-<dt-link
-  href="#"
-  inverted
-  kind="danger"
+  kind="danger | warning | success | muted | inverted"
 >
 Link
 </dt-link>
