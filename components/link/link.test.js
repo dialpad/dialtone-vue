@@ -58,6 +58,7 @@ describe('Dialtone Vue Link tests', function () {
 
   describe('Presentation Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
+    it('should render the native anchor', function () { assert.isTrue(nativeLink.exists()); });
 
     function itBehavesLikeHasCorrectKindClass (kind) {
       it('should have correct class', async function () {
@@ -65,11 +66,22 @@ describe('Dialtone Vue Link tests', function () {
       });
     }
 
+    describe('When the link has default state', function () {
+      beforeEach(function () {
+        _mountWrapper();
+      });
+
+      it('should has correct disabled modifier class', function () {
+        assert.isFalse(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.disabled));
+      });
+    });
+
     describe('When a default slot is provided', function () {
       beforeEach(function () {
         slots = { default: 'Slotted Link' };
         _mountWrapper();
       });
+
       it('should render the provided data', function () { assert.equal(nativeLink.text(), 'Slotted Link'); });
     });
 
@@ -79,7 +91,6 @@ describe('Dialtone Vue Link tests', function () {
         _setWrappers();
       });
 
-      it('should render the native anchor', function () { assert.isTrue(nativeLink.exists()); });
       itBehavesLikeHasCorrectKindClass(DANGER);
     });
 
@@ -127,16 +138,6 @@ describe('Dialtone Vue Link tests', function () {
 
       it('should have correct class', function () {
         assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES[DISABLED]));
-      });
-    });
-
-    describe('When the link has default state', function () {
-      beforeEach(function () {
-        _mountWrapper();
-      });
-
-      it('should has correct disabled modifier class', function () {
-        assert.isFalse(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.disabled));
       });
     });
   });
