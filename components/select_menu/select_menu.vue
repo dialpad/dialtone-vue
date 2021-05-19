@@ -75,6 +75,8 @@ export default {
 
   inheritAttrs: false,
 
+  // TODO: see if we need to add provide / inject for now
+
   props: {
     /**
      * Label for the select
@@ -91,6 +93,8 @@ export default {
       type: String,
       default: '',
     },
+
+    // TODO: see if we need to add a value prop and internal value
 
     /**
      * Select Menu Options, overridden by default slot
