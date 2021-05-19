@@ -3,7 +3,6 @@
     <dt-link
       :href="href"
       :kind="kind"
-      class="base-link"
     >
       {{ defaultSlot }}
     </dt-link>
@@ -19,9 +18,3 @@ export default {
   inheritAttrs: false,
 };
 </script>
-
-<style lang="less">
-.base-link {
-  text-transform: capitalize;
-}
-</style>
