@@ -1,28 +1,22 @@
 <template>
   <a
-    :href="href"
-    :class="['d-link', linkClasses]"
+    :class="linkClasses"
     data-qa="dt-link"
+    v-bind="$attrs"
   >
     <slot />
   </a>
 </template>
 
 <script>
-import { LINK_MODIFIER_CLASSES, LINK_KIND_CLASSES } from './link_constants.js';
+import { LINK_MODIFIER_CLASSES, LINK_VARIANT_CLASSES } from './link_constants.js';
 
 export default {
   name: 'DtLink',
 
-  props: {
-    /**
-     * Provides the url for the link
-     */
-    href: {
-      type: String,
-      required: true,
-    },
+  inheritAttrs: false,
 
+  props: {
     /**
      * Applies the link variant styles
      */
@@ -30,7 +24,7 @@ export default {
       type: String,
       default: '',
       validator (kind) {
-        return LINK_KIND_CLASSES.includes(kind);
+        return LINK_VARIANT_CLASSES.includes(kind);
       },
     },
 

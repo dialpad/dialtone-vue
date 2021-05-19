@@ -4,7 +4,6 @@
       :id="id"
       :href="href"
       :kind="kind"
-      :inverted="inverted"
       :disabled="disabled"
     >
       {{ defaultSlot }}
