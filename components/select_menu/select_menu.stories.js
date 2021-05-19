@@ -9,7 +9,8 @@ import DtSelectMenuVariantsTemplate from './select_menu_variants.story.vue';
 // Default Prop Values
 export const argsData = {
   label: 'Label',
-  onEvent: action('event'),
+  onInput: action('input'),
+  onChange: action('change'),
 };
 
 export const argTypesData = {

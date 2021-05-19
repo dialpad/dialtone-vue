@@ -26,6 +26,8 @@
         <select
           :name="name"
           :class="selectInputClasses"
+          v-bind="$attrs"
+          v-on="selectListeners"
           data-qa="dt-select-input"
         >
           <!-- @slot Select menu options -->
@@ -151,6 +153,24 @@ export default {
   },
 
   computed: {
+    selectListeners () {
+      return {
+        /* TODO
+            Check if any usages of this component leverage $listeners and either remove if unused or scope the removal
+            and migration prior to upgrading to Vue 3.x
+        */
+        // eslint-disable-next-line vue/no-deprecated-dollar-listeners-api
+        ...this.$listeners,
+        /*
+         * Override input listener to as no-op. Prevents parent input listeners from being passed through onto the input
+         * element which will result in the hander being called twice (once on the select element and once by the emitted
+         * input event by the change listener).
+        */
+        input: () => {},
+        change: event => this.emitValue(event.target.value),
+      };
+    },
+
     state () {
       return getValidationState(this.formattedMessages);
     },
@@ -198,7 +218,12 @@ export default {
 
   watch: {},
 
-  methods: {},
+  methods: {
+    emitValue (value) {
+      this.$emit('input', value);
+      this.$emit('change', value);
+    },
+  },
 };
 </script>
 

@@ -10,6 +10,8 @@
     :disabled="disabled"
     :show-messages="showMessages"
     :messages-class="messagesClass"
+    @input="onInput"
+    @change="onChange"
   >
     <template
       #label
