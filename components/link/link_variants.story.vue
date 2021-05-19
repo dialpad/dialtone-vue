@@ -1,7 +1,7 @@
 <template>
   <div>
     <dt-link
-      v-for="kind in LINK_KIND_CLASSES"
+      v-for="kind in filteredKindClasses"
       :key="kind"
       href="#"
       :kind="kind"
@@ -9,32 +9,12 @@
     >
       {{ kind }} link
     </dt-link>
-    <dt-link
-      href="#"
-      disabled
-    >
-      Disabled link
-    </dt-link>
     <div class="d-bgc-blue-800">
       <dt-link
+        kind="inverted"
         href="#"
-        disabled
-        inverted
-      >
-        Inverted Disabled link
-      </dt-link>
-      <dt-link
-        href="#"
-        inverted
       >
         Inverted link
-      </dt-link>
-      <dt-link
-        href="#"
-        :kind="DANGER"
-        inverted
-      >
-        Inverted Danger link
       </dt-link>
     </div>
   </div>
@@ -42,7 +22,7 @@
 
 <script>
 import DtLink from './link';
-import { LINK_KIND_CLASSES, DANGER } from './link_constants';
+import { LINK_KIND_CLASSES, INVERTED } from './link_constants';
 
 export default {
   name: 'DtLinkVariants',
@@ -50,8 +30,13 @@ export default {
   data () {
     return {
       LINK_KIND_CLASSES,
-      DANGER,
     };
+  },
+
+  computed: {
+    filteredKindClasses () {
+      return LINK_KIND_CLASSES.filter(kind => kind !== INVERTED);
+    },
   },
 };
 </script>
