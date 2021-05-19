@@ -2,11 +2,13 @@
   <div
     data-qa="dt-tooltip-container"
     :tabindex="tabIndex"
-    :class="tooltipContainerClasses "
+    :class="tooltipContainerClasses"
     @mouseover="onHover(true)"
     @focus="onHover(true)"
     @blur="onHover(false)"
     @mouseleave="onHover(false)"
+    @focusout="onFocusOut"
+    @keyup.esc="onEsc"
   >
     <div
       :aria-describedby="id"
@@ -19,7 +21,6 @@
       :class="tooltipClasses"
       data-qa="dt-tooltip"
       :aria-hidden="ariaHidden"
-      role="tooltip"
       v-bind="$attrs"
     >
       {{ message }}
@@ -82,12 +83,13 @@ export default {
   data () {
     return {
       isHover: false,
+      localShow: false,
     };
   },
 
   computed: {
     ariaHidden () {
-      const ariaHidden = this.hover ? this.isHover : this.show;
+      const ariaHidden = this.hover ? this.isHover : this.localShow;
 
       return `${!ariaHidden}`;
     },
@@ -106,7 +108,7 @@ export default {
         'd-tooltip',
         'd-ps-absolute',
         `d-tooltip__arrow--${this.arrowDirection}`,
-        `d-tooltip--${this.show ? TOOLTIP_STATE_MODIFIERS.show : TOOLTIP_STATE_MODIFIERS.hide}`,
+        `d-tooltip--${this.localShow ? TOOLTIP_STATE_MODIFIERS.show : TOOLTIP_STATE_MODIFIERS.hide}`,
         {
           [`d-tooltip--${INVERTED}`]: this.inverted,
         },
@@ -117,6 +119,28 @@ export default {
   methods: {
     onHover (isHover) {
       this.isHover = isHover;
+    },
+
+    onEsc () {
+      this.localShow = false;
+    },
+
+    onFocusOut () {
+      this.isHover = false;
+      this.syncShowProp();
+    },
+
+    syncShowProp () {
+      this.localShow = this.hover ? this.isHover : this.show;
+    },
+  },
+
+  watch: {
+    show: {
+      immediate: true,
+      handler () {
+        this.syncShowProp();
+      },
     },
   },
 };
