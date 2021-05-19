@@ -5,7 +5,7 @@
       :key="kind"
       href="#"
       :kind="kind"
-      class="base-link"
+      class="d-tt-capitalize"
     >
       {{ kind }} link
     </dt-link>
@@ -13,6 +13,7 @@
       <dt-link
         kind="inverted"
         href="#"
+        class="d-tt-capitalize"
       >
         Inverted link
       </dt-link>
@@ -22,27 +23,21 @@
 
 <script>
 import DtLink from './link';
-import { LINK_KIND_CLASSES, INVERTED } from './link_constants';
+import { LINK_VARIANTS, INVERTED } from './link_constants';
 
 export default {
   name: 'DtLinkVariants',
   components: { DtLink },
   data () {
     return {
-      LINK_KIND_CLASSES,
+      LINK_VARIANTS,
     };
   },
 
   computed: {
     filteredKindClasses () {
-      return LINK_KIND_CLASSES.filter(kind => kind !== INVERTED);
+      return LINK_VARIANTS.filter(kind => kind !== INVERTED);
     },
   },
 };
 </script>
-
-<style lang="less">
-.base-link {
-  text-transform: capitalize;
-}
-</style>
