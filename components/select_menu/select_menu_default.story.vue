@@ -2,6 +2,7 @@
   <dt-select-menu
     :name="name"
     :label="label"
+    :options="options"
     :size="size"
     :description="description"
     :messages="messages"
@@ -22,15 +23,8 @@
     >
       <span v-html="descriptionSlot" />
     </template>
-    <!--
     <template v-if="defaultSlot">
       <div v-html="defaultSlot" />
-    </template>
-    -->
-    <template>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
     </template>
   </dt-select-menu>
 </template>

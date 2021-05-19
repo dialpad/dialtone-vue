@@ -26,6 +26,16 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  options: {
+    control: {
+      type: 'object',
+    },
+    defaultValue: [
+      { value: 1, label: 'Option 1' },
+      { value: 2, label: 'Option 2' },
+      { value: 3, label: 'Option 3' },
+    ],
+  },
   size: {
     control: {
       type: 'select',

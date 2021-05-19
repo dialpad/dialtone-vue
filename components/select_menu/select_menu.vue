@@ -29,7 +29,15 @@
           data-qa="dt-select-input"
         >
           <!-- @slot Select menu options -->
-          <slot />
+          <slot>
+            <option
+              v-for="option in options"
+              :key="option.value"
+              :value="option.value"
+            >
+              {{ option.label }}
+            </option>
+          </slot>
         </select>
       </div>
     </label>
@@ -83,6 +91,31 @@ export default {
     description: {
       type: String,
       default: '',
+    },
+
+    /**
+     * Select Menu Options, overridden by default slot
+     */
+    options: {
+      type: Array,
+      default: [],
+      validator: options => {
+        return options.every(option => {
+          if (option.index && typeof option.index !== 'number') {
+            return false;
+          }
+
+          if (!option.value || (typeof option.value !== 'string' && typeof option.value !== 'number')) {
+            return false;
+          }
+
+          if (!option.label || typeof option.label !== 'string') {
+            return false;
+          }
+
+          return true;
+        });
+      },
     },
 
     /**
