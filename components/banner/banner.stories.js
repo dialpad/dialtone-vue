@@ -1,4 +1,5 @@
 import DtBanner from './banner';
+import BaseBannerMdx from './banner.mdx';
 import BannerDefault from './banner_default.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import { argTypesData } from '../notice/notice.stories.js';
@@ -23,6 +24,11 @@ argTypesData.contentId = {
 export default {
   title: 'Elements/Banner',
   component: DtBanner,
+  parameters: {
+    docs: {
+      page: BaseBannerMdx,
+    },
+  },
   argTypes: argTypesData,
   excludeStories: /.Data$/,
 };
@@ -47,3 +53,6 @@ Error.args = { ...Default.args, kind: 'error' };
 
 export const Success = Template.bind({});
 Success.args = { ...Default.args, kind: 'success' };
+
+export const Pinned = Template.bind({});
+Pinned.args = { ...Default.args, pinned: true };
