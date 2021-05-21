@@ -5,9 +5,8 @@
     :class="tooltipContainerClasses"
     @mouseover="onHover(true)"
     @focus="onHover(true)"
-    @blur="onHover(false)"
-    @mouseleave="onHover(false)"
-    @focusout="onFocusOut"
+    @blur="onLeave(false)"
+    @mouseleave="onLeave(false)"
     @keyup.esc="onEsc"
   >
     <div
@@ -15,7 +14,6 @@
     >
       <slot name="anchor" />
     </div>
-
     <div
       :id="id"
       :class="tooltipClasses"
@@ -83,22 +81,24 @@ export default {
   data () {
     return {
       isHover: false,
-      localShow: false,
+      isESCPressed: false,
     };
   },
 
   computed: {
-    ariaHidden () {
-      const ariaHidden = this.hover ? this.isHover : this.localShow;
+    isTooltipVisible () {
+      return this.hover ? (this.isHover && !this.isESCPressed) : (this.show && !this.isESCPressed);
+    },
 
-      return `${!ariaHidden}`;
+    ariaHidden () {
+      return `${!this.isTooltipVisible}`;
     },
 
     tooltipContainerClasses () {
       return [
         'd-ps-relative',
         {
-          'd-tooltip--hover': this.hover,
+          'd-tooltip--hover': this.hover && !this.isESCPressed,
         },
       ];
     },
@@ -108,7 +108,7 @@ export default {
         'd-tooltip',
         'd-ps-absolute',
         `d-tooltip__arrow--${this.arrowDirection}`,
-        `d-tooltip--${this.localShow ? TOOLTIP_STATE_MODIFIERS.show : TOOLTIP_STATE_MODIFIERS.hide}`,
+        `d-tooltip--${this.isTooltipVisible ? TOOLTIP_STATE_MODIFIERS.show : TOOLTIP_STATE_MODIFIERS.hide}`,
         {
           [`d-tooltip--${INVERTED}`]: this.inverted,
         },
@@ -121,26 +121,14 @@ export default {
       this.isHover = isHover;
     },
 
-    onEsc () {
-      this.localShow = false;
-    },
-
-    onFocusOut () {
+    onLeave () {
       this.isHover = false;
-      this.syncShowProp();
+      this.isESCPressed = false;
     },
 
-    syncShowProp () {
-      this.localShow = this.hover ? this.isHover : this.show;
-    },
-  },
-
-  watch: {
-    show: {
-      immediate: true,
-      handler () {
-        this.syncShowProp();
-      },
+    onEsc () {
+      if (!this.hover && this.show) return;
+      this.isESCPressed = true;
     },
   },
 };

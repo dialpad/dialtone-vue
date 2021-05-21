@@ -2,7 +2,6 @@ import { createTemplateFromVueFile } from '../storybook_utils';
 import DtTooltip from './tooltip';
 import DtTooltipMdx from './tooltip.mdx';
 import DtTooltipDefaultTemplate from './tooltip_default.story.vue';
-import DtTooltipVariantsTemplate from './tooltip_variants.story.vue';
 import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
 
 // Default Prop Values
@@ -72,11 +71,7 @@ export default {
 
 // Templates
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipVariantsTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
-
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
