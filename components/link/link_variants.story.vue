@@ -5,7 +5,7 @@
       :key="kind"
       href="#"
       :kind="kind"
-      class="d-tt-capitalize"
+      class="d-tt-capitalize d-mr8"
     >
       {{ kind }} link
     </dt-link>
