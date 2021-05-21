@@ -14,6 +14,20 @@ export const argsData = {
 // Controls
 export const argTypesData = {
   // Props
+  href: {
+    description: 'native "href" prop',
+    defaultValue: '#',
+    type: {
+      summary: 'string',
+    },
+    table: {
+      category: 'native props',
+      defaultValue: {
+        summary: 'Whatever the default is',
+      },
+    },
+    control: 'text',
+  },
   kind: {
     defaultValue: '',
     control: {
