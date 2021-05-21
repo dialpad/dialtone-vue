@@ -64,7 +64,7 @@ export default {
 
     hover: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     inverted: {
