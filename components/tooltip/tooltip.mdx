@@ -4,22 +4,24 @@ import DtTooltip from './tooltip';
 # DtTooltip
 
 <Subtitle>
-  Some description of the component functionality.
+    Floating labels that briefly explain an action, function, or an element.
+    Their content is exclusively text. If richer media is desired, consider using a popover instead.
 </Subtitle>
 
-## Base Style
-
-Some description of how to use the base component, potential gotchas and limitations.
+## Default tooltip
 
 <Canvas>
-  <Story id="<GROUP>-dt-tooltip--default" />
+  <Story id="elements-tooltip--default" />
 </Canvas>
 
-## Variants
+## Arrow Directions
 
-<Canvas>
-  <Story id="<GROUP>-dt-tooltip--variants" />
-</Canvas>
+|  |  |  |
+|-|-|-|
+|**top-left**|**top-center**|**top-right**|
+|**right-top**|**right-center**|**right-bottom**|
+|**bottom-left**|**bottom-center**|**bottom-right**|
+|**left-top**|**left-center**|**left-bottom**|
 
 ## Props, Slots & Events
 
@@ -33,18 +35,13 @@ Some description of how to use the base component, potential gotchas and limitat
 import { DtTooltip } from '@dialpad/handset';
 ```
 
-### With Some Variant
+### Default
 
-```vue
-<dt-tooltip
-  some="variant"
-/>
-```
-
-### With Some Other Variant
-
-```vue
-<dt-tooltip
-  some-other="variant"
-/>
+```html
+<dt-tooltip>
+    Message
+    <template #anchor>
+      Anchor
+    </template>
+</dt-tooltip>
 ```
