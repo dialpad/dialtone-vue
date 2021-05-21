@@ -1,5 +1,5 @@
 <template>
-  <dt-breadcrumbs :breadcrumbs="breadcrumbs" />
+  <dt-breadcrumbs :breadcrumbs="breadcrumbs" :inverted="inverted"/>
 </template>
 
 <script>
