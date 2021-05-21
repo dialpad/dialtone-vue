@@ -4,21 +4,35 @@ import DtBreadcrumbs from './breadcrumbs';
 # DtBreadcrumbs
 
 <Subtitle>
-  Some description of the component functionality.
+Element used to provide context for the currently-viewed page and where it is located within the overall site structure.
+
+Breadcrumbs show users where they are within a site’s hierarchy.
+Breadcrumbs help orient the user and allow for navigation to previous page levels.
+It can be appropriate to use a breadcrumb when:
+
+- The user is many levels of navigation deep
+- The current page does not have its own navigation
+- The user needs to quickly go back to the previous parent page
+
+Breadcrumbs should be the first page element—placed directly above the page’s title.
+All pages that appear in the breadcrumb should link to their respective page.
+The page the user is on should always be the last page listed and not linked.
+
 </Subtitle>
 
-## Base Style
+## When not to use
 
-Some description of how to use the base component, potential gotchas and limitations.
+Breadcrumbs are always treated as secondary and should not entirely replace the primary navigation.
+They shouldn’t be used for products that have single level navigation because they create unnecessary clutter.
 
 <Canvas>
-  <Story id="<GROUP>-dt-breadcrumbs--default" />
+  <Story id="elements-breadcrumbs--default" />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="<GROUP>-dt-breadcrumbs--variants" />
+  <Story id="elements-breadcrumbs--variants" />
 </Canvas>
 
 ## Props, Slots & Events
@@ -33,18 +47,27 @@ Some description of how to use the base component, potential gotchas and limitat
 import { DtBreadcrumbs } from '@dialpad/handset';
 ```
 
-### With Some Variant
+### With Props
 
 ```vue
 <dt-breadcrumbs
-  some="variant"
+  :breadcrumbs="breadcrumbs"
 />
 ```
 
-### With Some Other Variant
+### With inverted and slot
 
 ```vue
-<dt-breadcrumbs
-  some-other="variant"
-/>
+<dt-breadcrumbs inverted>
+  <dt-breadcrumb-item
+      :href="href"
+      :kind="kind"
+      :inverted="inverted"
+      :disabled="disabled"
+      :aria-current="ariaCurrent"
+  >
+    breadcrumb-item
+  </dt-breadcrumb-item>
+</dt-breadcrumbs>
+
 ```

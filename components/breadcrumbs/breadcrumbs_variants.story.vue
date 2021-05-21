@@ -16,5 +16,25 @@ import DtBreadcrumbs from './breadcrumbs';
 export default {
   name: 'DtBreadcrumbsVariants',
   components: { DtBreadcrumbs },
+  data () {
+    return {
+      breadcrumbsInverted: [{
+        href: '#',
+        label: 'string',
+        inverted: true,
+      },
+      {
+        href: '#',
+        label: 'string',
+        inverted: true,
+      },
+      {
+        href: '#',
+        label: 'string',
+        inverted: true,
+        selected: true,
+      }],
+    };
+  },
 };
 </script>
