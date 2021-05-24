@@ -39,11 +39,17 @@ export default {
   inheritAttrs: false,
 
   props: {
+    /**
+     * The id of the tooltip
+     */
     id: {
       type: String,
       default () { return getUniqueString(); },
     },
 
+    /**
+     * A provided message for the tooltip content
+     */
     message: {
       type: String,
       default: '',
@@ -57,21 +63,34 @@ export default {
       },
     },
 
+    /**
+     * Whether the tooltip should be shown. Anchor can sync on this value
+     * by tooltip wrapper to control the tooltip's visibility.
+     */
     show: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Mode of tooltip to control the tooltip's visibility.
+     */
     hover: {
       type: Boolean,
       default: true,
     },
 
+    /**
+     * Add inverted class
+     */
     inverted: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * This property is needed for focus event
+     */
     tabIndex: {
       type: String,
       default: '0',
