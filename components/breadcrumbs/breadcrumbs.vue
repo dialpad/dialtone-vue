@@ -2,6 +2,7 @@
   <div
     :class="breadcrumbClasses"
     :aria-label="'breadcrumb'"
+    data-qa="dt-breadcrumbs"
   >
     <ol>
       <template v-if="breadcrumbs.length">

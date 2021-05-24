@@ -1,5 +1,5 @@
 <template>
-  <li :class="breadcrumbItemClasses">
+  <li :class="breadcrumbItemClasses" data-qa="dt-breadcrumb">
     <dt-link
       :href="href"
       :kind="kind"
