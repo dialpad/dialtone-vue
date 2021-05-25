@@ -127,10 +127,6 @@ export default {
     },
   },
 
-  data () {
-    return {};
-  },
-
   computed: {
     selectListeners () {
       return {
@@ -198,8 +194,6 @@ export default {
       return undefined;
     },
   },
-
-  watch: {},
 
   methods: {
     emitValue (value) {
