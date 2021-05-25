@@ -9,6 +9,7 @@
     :messages-class="messagesClass"
     :messages-child-props="messagesChildProps"
     :name="name"
+    :value="value"
     :disabled="disabled"
     @input="onInput"
     @change="onChange"

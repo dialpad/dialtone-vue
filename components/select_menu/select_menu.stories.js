@@ -6,6 +6,13 @@ import DtSelectMenuMdx from './select_menu.mdx';
 import DtSelectMenuDefaultTemplate from './select_menu_default.story.vue';
 import DtSelectMenuVariantsTemplate from './select_menu_variants.story.vue';
 
+// Constants
+const SELECT_OPTIONS = [
+  { value: 1, label: 'Option 1' },
+  { value: 2, label: 'Option 2' },
+  { value: 3, label: 'Option 3' },
+];
+
 // Default Prop Values
 export const argsData = {
   label: 'Label',
@@ -51,11 +58,7 @@ export const argTypesData = {
     control: {
       type: 'object',
     },
-    defaultValue: [
-      { value: 1, label: 'Option 1' },
-      { value: 2, label: 'Option 2' },
-      { value: 3, label: 'Option 3' },
-    ],
+    defaultValue: SELECT_OPTIONS,
     table: {
       category: 'props',
       type: {
@@ -86,6 +89,23 @@ export const argTypesData = {
   },
 
   // Native Props
+  value: {
+    description: 'Provides a value for the select',
+    control: {
+      type: 'select',
+      options: SELECT_OPTIONS.map(option => option.value),
+    },
+    defaultValue: SELECT_OPTIONS[0].value,
+    table: {
+      category: 'native props',
+      type: {
+        summary: 'string',
+      },
+      defaultValue: {
+        summary: '',
+      },
+    },
+  },
   name: {
     description: 'Provides a name for the select',
     control: {
