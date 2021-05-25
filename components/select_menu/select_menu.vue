@@ -1,5 +1,4 @@
 <template>
-  <!-- template -->
   <div>
     <label>
       <div
