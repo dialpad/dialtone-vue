@@ -62,6 +62,7 @@ import {
   getValidationState,
 } from '../utils';
 import { MessagesMixin } from '../mixins/input.js';
+import { optionsValidator } from './select_menu_validators.js';
 import { DtValidationMessages } from '../validation_messages';
 
 export default {
@@ -96,23 +97,7 @@ export default {
     options: {
       type: Array,
       default: () => [],
-      validator: options => {
-        return options.every(option => {
-          if (option.index && typeof option.index !== 'number') {
-            return false;
-          }
-
-          if (!option.value || (typeof option.value !== 'string' && typeof option.value !== 'number')) {
-            return false;
-          }
-
-          if (!option.label || typeof option.label !== 'string') {
-            return false;
-          }
-
-          return true;
-        });
-      },
+      validator: options => optionsValidator(options),
     },
 
     /**
