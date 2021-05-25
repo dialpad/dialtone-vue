@@ -30,7 +30,7 @@
           <slot>
             <option
               v-for="option in options"
-              :key="option.value"
+              :key="getOptionKey(option.value)"
               :value="option.value"
             >
               {{ option.label }}
@@ -187,8 +187,12 @@ export default {
       ];
     },
 
+    selectKey () {
+      return getUniqueString();
+    },
+
     descriptionKey () {
-      return `select-description-${getUniqueString()}`;
+      return `select-${this.selectKey}-description`;
     },
 
     labelAriaDetails () {
@@ -206,6 +210,10 @@ export default {
     emitValue (value) {
       this.$emit('input', value);
       this.$emit('change', value);
+    },
+
+    getOptionKey (value) {
+      return `select-${this.selectKey}-option-${value}`;
     },
   },
 };
