@@ -95,7 +95,7 @@ export default {
      */
     options: {
       type: Array,
-      default: [],
+      default: () => [],
       validator: options => {
         return options.every(option => {
           if (option.index && typeof option.index !== 'number') {
@@ -138,8 +138,8 @@ export default {
         ...this.$listeners,
         /*
          * Override input listener to as no-op. Prevents parent input listeners from being passed through onto the input
-         * element which will result in the hander being called twice (once on the select element and once by the emitted
-         * input event by the change listener).
+         * element which will result in the hander being called twice (once on the select element and once by the
+         * emitted input event by the change listener).
         */
         input: () => {},
         change: event => this.emitValue(event.target.value),

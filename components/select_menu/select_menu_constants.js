@@ -7,8 +7,8 @@ export const SELECT_SIZE_MODIFIERS = {
 };
 
 export const SELECT_STATE_MODIFIERS = {
+  error: 'd-select__input--error',
   warning: 'd-select__input--warning',
-  error:   'd-select__input--error',
   success: 'd-select__input--success',
 };
 
