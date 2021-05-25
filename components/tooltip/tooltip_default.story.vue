@@ -8,23 +8,24 @@
       :hover="hover"
     >
       {{ defaultSlot }}
-      <template
-        v-if="anchorSlot"
-        #anchor
-      >
-        <span v-html="anchorSlot" />
+
+      <template #anchor>
+        <dt-button importance="outlined">
+          {{ anchorSlot }}
+        </dt-button>
       </template>
     </dt-tooltip>
   </div>
 </template>
 
 <script>
-import DtTooltip from './tooltip';
+import { DtTooltip } from './';
+import { DtButton } from '../button';
 import fixDefaultSlot from '../plugins/fixDefaultSlot';
 
 export default {
   name: 'DtTooltipDefault',
-  components: { DtTooltip },
+  components: { DtTooltip, DtButton },
   mixins: [fixDefaultSlot],
 };
 </script>

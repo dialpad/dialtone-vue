@@ -3,17 +3,13 @@
     data-qa="dt-tooltip-container"
     :tabindex="tabIndex"
     :class="tooltipContainerClasses"
+    class="test"
     @mouseover="onHover(true)"
     @focus="onHover(true)"
     @blur="onLeave(false)"
     @mouseleave="onLeave(false)"
     @keyup.esc="onEsc"
   >
-    <div
-      :aria-describedby="id"
-    >
-      <slot name="anchor" />
-    </div>
     <div
       :id="id"
       :class="tooltipClasses"
@@ -22,10 +18,16 @@
       v-bind="$attrs"
     >
       {{ message }}
-      <template v-if="!message">
-        <slot />
-      </template>
+      <!--      <template v-if="!message"> -->
+      <!--        <slot /> -->
+      <!--      </template> -->
     </div>
+
+    <!--    <div -->
+    <!--      :aria-describedby="id" -->
+    <!--    > -->
+    <slot name="anchor" />
+    <!--    </div> -->
   </div>
 </template>
 
@@ -159,5 +161,12 @@ export default {
     visibility: visible;
     opacity: 1;
   }
+}
+
+.test {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
