@@ -23,7 +23,7 @@ describe('Dialtone Vue Link tests', function () {
   let nativeLink;
 
   // Environment
-  const propsData = basePropsData;
+  let propsData = basePropsData;
   const slots = { default: 'Slotted Link' };
 
   // Helpers
@@ -47,14 +47,12 @@ describe('Dialtone Vue Link tests', function () {
     });
   };
 
-  // Test Teardown
-  afterEach(function () {});
-  after(function () {});
+  // Setup
+  beforeEach(function () {
+    _mountWrapper();
+  });
 
   describe('Presentation Tests', function () {
-    // Setup
-    _mountWrapper();
-
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
     it('should render the native anchor', function () { assert.isTrue(nativeLink.exists()); });
 
@@ -79,8 +77,14 @@ describe('Dialtone Vue Link tests', function () {
     describe('When kind is muted', function () { itBehavesLikeHasCorrectKindClass(MUTED); });
 
     describe('When anchor is disabled', function () {
-      it('should have correct class', async function () {
-        await wrapper.setProps({ kind: '', disabled: true });
+      before(function () {
+        propsData = {
+          ...basePropsData,
+          kind: '',
+          disabled: true,
+        };
+      });
+      it('should have correct class', function () {
         assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES[DISABLED]));
       });
     });
