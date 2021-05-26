@@ -165,8 +165,7 @@ export const argTypesData = {
     },
   },
 
-  defaultSlot: {
-    name: 'default',
+  default: {
     description: 'Slot for select menu options',
     control: 'text',
     table: {
