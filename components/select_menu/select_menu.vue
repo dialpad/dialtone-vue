@@ -181,7 +181,7 @@ export default {
         return this.descriptionKey;
       }
 
-      return undefined;
+      return this.$attrs['aria-details'];
     },
   },
 
