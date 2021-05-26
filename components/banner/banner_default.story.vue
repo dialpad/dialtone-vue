@@ -1,8 +1,9 @@
 <template>
   <div>
-    <button @click="displayBanner = true">
+    <dt-button @click="displayBanner = true">
       Click to show!
-    </button>
+    </dt-button>
+
     <dt-banner
       v-if="displayBanner"
       :kind="kind"
@@ -19,7 +20,12 @@
         v-if="action"
         #action
       >
-        <span v-html="action" />
+        <dt-button
+          importance="outlined"
+          class="d-btn--muted"
+        >
+          {{ action }}
+        </dt-button>
       </template>
       <template
         v-if="icon"

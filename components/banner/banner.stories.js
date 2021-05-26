@@ -37,9 +37,9 @@ const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argType
 
 export const Default = Template.bind({});
 Default.args = {
-  title: 'Banner title',
-  default: 'Main content of the banner goes here.',
-  action: 'try this <a href="https://www.dialpad.com" target="_blank">action</a>',
+  title: 'Optional title',
+  default: 'Message body with <a href="#">a link.</a>',
+  action: 'Action',
 };
 
 export const Info = Template.bind({});
