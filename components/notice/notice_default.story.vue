@@ -6,6 +6,7 @@
     :content-id="contentId"
     :important="important"
     :hide-close="hideClose"
+    :closeButtonProps="computedCloseButtonProps"
   >
     <span v-html="defaultSlot" />
     <template #action>
@@ -51,6 +52,12 @@ export default {
       }
 
       return 'muted';
+    },
+
+    computedCloseButtonProps () {
+      return {
+        kind: this.actionKind,
+      };
     },
   },
 };
