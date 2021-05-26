@@ -8,7 +8,7 @@ import { LINK_VARIANTS } from './link_constants';
 // Default Prop Values
 export const argsData = {
   default: 'Default link',
-  href: '#',
+  href: undefined,
 };
 
 // Controls
@@ -16,14 +16,14 @@ export const argTypesData = {
   // Props
   href: {
     description: 'native "href" prop',
-    defaultValue: '#',
+    defaultValue: undefined,
     type: {
       summary: 'string',
     },
     table: {
       category: 'native props',
       defaultValue: {
-        summary: '',
+        summary: 'undefined',
       },
     },
     control: 'text',
