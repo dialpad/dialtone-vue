@@ -2,7 +2,7 @@
   <div
     :tabindex="tabIndex"
     :class="tooltipContainerClasses"
-    class="d-ps-relative d-fl-center d-d-inline-flex "
+    class="d-ps-relative d-fl-center d-d-inline-flex"
     @mouseover="onHover(true)"
     @focus="onHover(true)"
     @blur="onLeave(false)"
