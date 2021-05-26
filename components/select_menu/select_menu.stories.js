@@ -176,10 +176,12 @@ export const argTypesData = {
     },
   },
 
-  // Disabled Prop Controls
-  labelChildProps: { control: null },
-  descriptionChildProps: { control: null },
-  messagesChildProps: { control: null },
+  // Pass Through Prop Controls
+  messagesChildProps: {
+    table: {
+      category: 'pass through props',
+    },
+  },
 
   // Action Event Handlers
   onInput: {
