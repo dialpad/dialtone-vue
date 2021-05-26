@@ -12,6 +12,7 @@
       <dt-button
         size="sm"
         importance="outlined"
+        :kind="actionKind"
       >
         Action
       </dt-button>
@@ -38,7 +39,19 @@ import icon from '../mixins/icon';
 
 export default {
   name: 'NoticeDefault',
-  components: { DtButton, DtNotice },
+
   mixins: [icon],
+
+  components: { DtButton, DtNotice },
+
+  computed: {
+    actionKind () {
+      if (this.important && (this.kind === 'base' || this.kind === 'info' || this.kind === 'error')) {
+        return 'inverted';
+      }
+
+      return 'muted';
+    },
+  },
 };
 </script>
