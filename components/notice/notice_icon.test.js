@@ -8,13 +8,12 @@ const basePropsData = {
   kind: 'warning',
 };
 
-const baseSlotsData = {
-};
+const baseSlotsData = {};
 
 describe('DtNoticeIcon tests', function () {
   let wrapper;
-  let iconDiv;
   let cameraIcon;
+  let baseIcon;
   let warningIcon;
   let propsData;
   let slotsData;
@@ -29,8 +28,8 @@ describe('DtNoticeIcon tests', function () {
   };
 
   const _setChildWrappers = () => {
-    iconDiv = wrapper.find('.d-notice__icon');
     cameraIcon = wrapper.findComponent(IconCamera);
+    baseIcon = wrapper.find('icontranscript-stub');
     warningIcon = wrapper.find('iconwarning-stub');
   };
 
@@ -65,8 +64,8 @@ describe('DtNoticeIcon tests', function () {
         _setChildWrappers();
       });
 
-      it('Should render no icon', function () {
-        assert.isFalse(iconDiv.exists());
+      it('Should render base icon', function () {
+        assert.isTrue(baseIcon.exists());
       });
     });
 

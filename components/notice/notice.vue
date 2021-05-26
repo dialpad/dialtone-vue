@@ -131,7 +131,7 @@ export default {
     noticeClass () {
       return [
         'd-notice',
-        { [`d-notice--${this.kind}`]: this.kind.length > 0 },
+        `d-notice--${this.kind}`,
         { 'd-notice--important': this.important },
       ];
     },
