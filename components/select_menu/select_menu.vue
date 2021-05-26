@@ -4,6 +4,7 @@
       <div
         :aria-details="labelAriaDetails"
         :class="labelClasses"
+        v-bind="labelChildProps"
         data-qa="dt-select-label"
       >
         <!-- @slot slot for label, defaults to label prop -->
@@ -13,6 +14,7 @@
         v-if="$slots.description || description"
         :id="descriptionKey"
         :class="descriptionClasses"
+        v-bind="descriptionChildProps"
         data-qa="dt-select-description"
       >
         <!-- @slot slot for description, defaults to description prop -->
@@ -31,6 +33,8 @@
               v-for="option in options"
               :key="getOptionKey(option.value)"
               :value="option.value"
+              :class="optionClass"
+              v-bind="optionChildProps"
             >
               {{ option.label }}
             </option>
@@ -115,6 +119,62 @@ export default {
       default: 'md',
       validator: (s) => Object.keys(SELECT_SIZE_MODIFIERS).includes(s),
     },
+
+    /**
+     * Used to customize the label container
+     */
+    labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the description container
+     */
+    descriptionClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the select
+     */
+    selectClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize each option, should options be provided via prop
+     */
+    optionClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * A set of props that are passed into the label container
+     */
+    labelChildProps: {
+      type: Object,
+      default: () => ({}),
+    },
+
+    /**
+     * A set of props that are passed into the description container
+     */
+    descriptionChildProps: {
+      type: Object,
+      default: () => ({}),
+    },
+
+    /**
+     * A set of props that are passed into each option, should options be provided via prop
+     */
+    optionChildProps: {
+      type: Object,
+      default: () => ({}),
+    },
   },
 
   computed: {
@@ -144,6 +204,7 @@ export default {
       return [
         'd-select',
         SELECT_SIZE_MODIFIERS[this.size],
+        this.selectClass,
       ];
     },
 
@@ -158,6 +219,7 @@ export default {
       return [
         'd-label',
         LABEL_SIZE_MODIFIERS[this.size],
+        this.labelClass,
       ];
     },
 
@@ -165,6 +227,7 @@ export default {
       return [
         'd-description',
         DESCRIPTION_SIZE_MODIFIERS[this.size],
+        this.descriptionClass,
       ];
     },
 
