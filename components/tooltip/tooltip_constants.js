@@ -1,6 +1,3 @@
-const SHOW = 'show';
-const HIDE = 'hide';
-
 export const INVERTED = 'inverted';
 
 export const TOOLTIP_DIRECTION_MODIFIERS = [
@@ -11,6 +8,6 @@ export const TOOLTIP_DIRECTION_MODIFIERS = [
 ];
 
 export const TOOLTIP_STATE_MODIFIERS = {
-  [SHOW]: SHOW,
-  [HIDE]: HIDE,
+  show: 'show',
+  hide: 'hide',
 };

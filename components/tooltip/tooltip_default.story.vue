@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="d-fl-center d-fd-column d-h216">
     <dt-tooltip
       :message="message"
       :arrow-direction="arrowDirection"
@@ -7,8 +7,9 @@
       :inverted="inverted"
       :hover="hover"
     >
-      {{ defaultSlot }}
-
+      <template v-if="defaultSlot">
+        {{ defaultSlot }}
+      </template>
       <template #anchor>
         <dt-button importance="outlined">
           {{ anchorSlot }}
@@ -29,13 +30,3 @@ export default {
   mixins: [fixDefaultSlot],
 };
 </script>
-
-<style lang="less" scoped>
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 600px;
-}
-</style>

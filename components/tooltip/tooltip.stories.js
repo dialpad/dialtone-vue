@@ -6,7 +6,7 @@ import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
 
 // Default Prop Values
 export const argsData = {
-  message: 'This is a simp',
+  message: 'This is a Tooltip',
   anchorSlot: 'Hover over me to see a tooltip',
   default: 'default',
   show: true,

@@ -1,9 +1,8 @@
 <template>
   <div
-    data-qa="dt-tooltip-container"
     :tabindex="tabIndex"
     :class="tooltipContainerClasses"
-    class="test"
+    class="d-ps-relative d-fl-center d-d-inline-flex "
     @mouseover="onHover(true)"
     @focus="onHover(true)"
     @blur="onLeave(false)"
@@ -17,17 +16,17 @@
       :aria-hidden="ariaHidden"
       v-bind="$attrs"
     >
-      {{ message }}
-      <!--      <template v-if="!message"> -->
-      <!--        <slot /> -->
-      <!--      </template> -->
+      <slot>
+        {{ message }}
+      </slot>
     </div>
 
-    <!--    <div -->
-    <!--      :aria-describedby="id" -->
-    <!--    > -->
-    <slot name="anchor" />
-    <!--    </div> -->
+    <div
+      :aria-describedby="id"
+      data-qa="dt-tooltip-anchor"
+    >
+      <slot name="anchor" />
+    </div>
   </div>
 </template>
 
@@ -108,7 +107,11 @@ export default {
 
   computed: {
     isTooltipVisible () {
-      return this.hover ? (this.isHover && !this.isESCPressed) : (this.show && !this.isESCPressed);
+      if (this.isESCPressed) {
+        return false;
+      }
+
+      return this.hover ? this.isHover : this.show;
     },
 
     ariaHidden () {
@@ -126,8 +129,8 @@ export default {
 
     tooltipClasses () {
       return [
-        'd-tooltip',
         'd-ps-absolute',
+        'd-tooltip',
         `d-tooltip__arrow--${this.arrowDirection}`,
         `d-tooltip--${this.isTooltipVisible ? TOOLTIP_STATE_MODIFIERS.show : TOOLTIP_STATE_MODIFIERS.hide}`,
         {
@@ -148,8 +151,7 @@ export default {
     },
 
     onEsc () {
-      if (!this.hover && this.show) return;
-      this.isESCPressed = true;
+      this.isESCPressed = (this.hover && this.isHover) || !this.show;
     },
   },
 };
@@ -161,12 +163,5 @@ export default {
     visibility: visible;
     opacity: 1;
   }
-}
-
-.test {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
 }
 </style>
