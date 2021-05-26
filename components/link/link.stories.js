@@ -31,28 +31,28 @@ export const argTypesData = {
   rel: {
     description: `native "rel" prop. Relationship between the location in the document containing the hyperlink
         and the destination resource.`,
-    defaultValue: '',
+    defaultValue: undefined,
     type: {
       summary: 'string',
     },
     table: {
       category: 'native props',
       defaultValue: {
-        summary: '',
+        summary: 'undefined',
       },
     },
     control: 'text',
   },
   target: {
     description: `native "target" prop. Browsing context for hyperlink navigation`,
-    defaultValue: '',
+    defaultValue: undefined,
     type: {
       summary: 'string',
     },
     table: {
       category: 'native props',
       defaultValue: {
-        summary: '',
+        summary: 'undefined',
       },
     },
     control: {
