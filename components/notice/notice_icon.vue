@@ -10,6 +10,7 @@
     </slot>
   </div>
 </template>
+
 <script>
 import IconInfo from '@dialpad/dialtone/lib/dist/vue/icons/IconInfo';
 import IconWarning from '@dialpad/dialtone/lib/dist/vue/icons/IconWarning';
@@ -22,7 +23,7 @@ const kindToIcon = new Map([
   ['success', 'IconCheckmark'],
   ['warning', 'IconWarning'],
   ['error', 'IconError'],
-  ['base', null], // IconTranscript ?
+  ['base', null],
 ]);
 
 export default {
