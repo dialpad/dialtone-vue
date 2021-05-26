@@ -16,6 +16,7 @@ const SELECT_OPTIONS = [
 // Default Prop Values
 export const argsData = {
   label: 'Label',
+  options: SELECT_OPTIONS,
   onInput: action('input'),
   onChange: action('change'),
 };
