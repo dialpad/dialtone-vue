@@ -23,10 +23,42 @@ export const argTypesData = {
     table: {
       category: 'native props',
       defaultValue: {
-        summary: 'Whatever the default is',
+        summary: '',
       },
     },
     control: 'text',
+  },
+  rel: {
+    description: `native "rel" prop. Relationship between the location in the document containing the hyperlink
+        and the destination resource.`,
+    defaultValue: '',
+    type: {
+      summary: 'string',
+    },
+    table: {
+      category: 'native props',
+      defaultValue: {
+        summary: '',
+      },
+    },
+    control: 'text',
+  },
+  target: {
+    description: `native "target" prop. Browsing context for hyperlink navigation`,
+    defaultValue: '',
+    type: {
+      summary: 'string',
+    },
+    table: {
+      category: 'native props',
+      defaultValue: {
+        summary: '',
+      },
+    },
+    control: {
+      type: 'select',
+      options: ['_blank', '_self', '_parent', '_top'],
+    },
   },
   kind: {
     defaultValue: '',
