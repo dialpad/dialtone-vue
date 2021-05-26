@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { LINK_MODIFIER_CLASSES, LINK_VARIANTS_CLASSES } from './link_constants.js';
+import { LINK_MODIFIER_CLASSES, LINK_VARIANTS } from './link_constants.js';
 
 export default {
   name: 'DtLink',
@@ -22,7 +22,7 @@ export default {
       type: String,
       default: '',
       validator (kind) {
-        return LINK_VARIANTS_CLASSES.includes(kind);
+        return LINK_VARIANTS.includes(kind);
       },
     },
 
