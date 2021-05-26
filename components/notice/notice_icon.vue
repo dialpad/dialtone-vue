@@ -22,7 +22,7 @@ const kindToIcon = new Map([
   ['success', 'IconCheckmark'],
   ['warning', 'IconWarning'],
   ['error', 'IconError'],
-  ['base', null],
+  ['base', null], // IconTranscript ?
 ]);
 
 export default {
