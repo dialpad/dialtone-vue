@@ -58,25 +58,18 @@ Default.args = {
   default: 'Message body with <a href="#" class="d-link d-link--muted">a link.</a>',
 };
 
-export const Info = Template.bind({});
-Info.args = {
-  ...Default.args,
-  title: 'Info title (optional)',
-  kind: 'info',
-};
-
-export const Warning = Template.bind({});
-Warning.args = {
-  ...Default.args,
-  title: 'Warning title (optional)',
-  kind: 'warning',
-};
-
 export const Error = Template.bind({});
 Error.args = {
   ...Default.args,
   title: 'Error title (optional)',
   kind: 'error',
+};
+
+export const Info = Template.bind({});
+Info.args = {
+  ...Default.args,
+  title: 'Info title (optional)',
+  kind: 'info',
 };
 
 export const Success = Template.bind({});
@@ -86,24 +79,18 @@ Success.args = {
   kind: 'success',
 };
 
+export const Warning = Template.bind({});
+Warning.args = {
+  ...Default.args,
+  title: 'Warning title (optional)',
+  kind: 'warning',
+};
+
 export const Important = Template.bind({});
 Important.args = {
   ...Default.args,
   important: true,
   default: 'Message body with <a href="#" class="d-link d-link--inverted">a link.</a>',
-};
-
-export const ImportantInfo = Template.bind({});
-ImportantInfo.args = {
-  ...Important.args,
-  ...Info.args,
-  default: Important.args.default,
-};
-
-export const ImportantWarning = Template.bind({});
-ImportantWarning.args = {
-  ...Important.args,
-  ...Warning.args,
 };
 
 export const ImportantError = Template.bind({});
@@ -113,8 +100,21 @@ ImportantError.args = {
   default: Important.args.default,
 };
 
+export const ImportantInfo = Template.bind({});
+ImportantInfo.args = {
+  ...Important.args,
+  ...Info.args,
+  default: Important.args.default,
+};
+
 export const ImportantSuccess = Template.bind({});
 ImportantSuccess.args = {
   ...Important.args,
   ...Success.args,
+};
+
+export const ImportantWarning = Template.bind({});
+ImportantWarning.args = {
+  ...Important.args,
+  ...Warning.args,
 };
