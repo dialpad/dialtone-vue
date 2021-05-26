@@ -3,7 +3,6 @@
     <dt-link
       :href="href"
       :kind="kind"
-      :target="target"
       :rel="rel"
     >
       {{ defaultSlot }}

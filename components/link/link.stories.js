@@ -43,23 +43,6 @@ export const argTypesData = {
     },
     control: 'text',
   },
-  target: {
-    description: `native "target" prop. Browsing context for hyperlink navigation`,
-    defaultValue: undefined,
-    type: {
-      summary: 'string',
-    },
-    table: {
-      category: 'native props',
-      defaultValue: {
-        summary: 'undefined',
-      },
-    },
-    control: {
-      type: 'select',
-      options: ['_blank', '_self', '_parent', '_top'],
-    },
-  },
   kind: {
     defaultValue: '',
     control: {
