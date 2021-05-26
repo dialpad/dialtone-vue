@@ -1,9 +1,10 @@
 <template>
   <div>
     <dt-link
-      :id="id"
       :href="href"
       :kind="kind"
+      :target="target"
+      :rel="rel"
     >
       {{ defaultSlot }}
     </dt-link>
