@@ -156,12 +156,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.d-tooltip--hover:focus {
-  .d-tooltip {
-    visibility: visible;
-    opacity: 1;
-  }
-}
-</style>
