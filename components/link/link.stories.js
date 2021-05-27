@@ -8,7 +8,7 @@ import { LINK_VARIANTS } from './link_constants';
 // Default Prop Values
 export const argsData = {
   default: 'Default link',
-  href: undefined,
+  href: '#',
 };
 
 // Controls
