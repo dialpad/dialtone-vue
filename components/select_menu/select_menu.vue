@@ -7,7 +7,7 @@
         v-bind="labelChildProps"
         data-qa="dt-select-label"
       >
-        <!-- @slot slot for label, defaults to label prop -->
+        <!-- @slot Slot for label, defaults to label prop -->
         <slot name="label">{{ label }}</slot>
       </div>
       <div
@@ -17,7 +17,7 @@
         v-bind="descriptionChildProps"
         data-qa="dt-select-description"
       >
-        <!-- @slot slot for description, defaults to description prop -->
+        <!-- @slot Slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
       </div>
       <div :class="selectClasses">
@@ -27,7 +27,7 @@
           v-on="selectListeners"
           data-qa="dt-select"
         >
-          <!-- @slot Select menu options -->
+          <!-- @slot Slot for select menu options, defaults to options prop -->
           <slot>
             <option
               v-for="option in options"
