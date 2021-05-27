@@ -7,7 +7,7 @@
         v-bind="labelChildProps"
         data-qa="dt-select-label"
       >
-        <!-- @slot slot for label, defaults to label prop -->
+        <!-- @slot Slot for label, defaults to label prop -->
         <slot name="label">{{ label }}</slot>
       </div>
       <div
@@ -17,7 +17,7 @@
         v-bind="descriptionChildProps"
         data-qa="dt-select-description"
       >
-        <!-- @slot slot for description, defaults to description prop -->
+        <!-- @slot Slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
       </div>
       <div :class="selectClasses">
@@ -27,7 +27,7 @@
           v-on="selectListeners"
           data-qa="dt-select"
         >
-          <!-- @slot Select menu options -->
+          <!-- @slot Slot for select menu options, defaults to options prop -->
           <slot>
             <option
               v-for="option in options"
@@ -97,7 +97,7 @@ export default {
 
     /**
      * Select Menu Options, overridden by default slot. Each option has the following structure:
-     * `{ index: number (optional), value: number | string (required), label: string (required) }`
+     * `{ index: number (optional), value: number || string (required), label: string (required) }`
      * @param {Object[]} options - Optional - A list that can be used to create a list of select menu options
      * @param {number} options[].index - Optional - The index of the option
      * @param {number|string} options[].value - Required - The option value
@@ -110,7 +110,7 @@ export default {
     },
 
     /**
-     * The size of the button.
+     * Controls the size of the select
      * @values xs, s, md, lg, xl
      * @see https://dialpad.design/components/select
      */

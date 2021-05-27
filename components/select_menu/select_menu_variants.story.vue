@@ -1,38 +1,172 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
-  <!--
-    We can bind the data that the user entered into the storybook controls to props by using a property of the same name
-    as the storybook control defined in the corresponding `.story.js` file.
-  -->
-  <dt-select-menu
-    :some="some"
+  <div
+    id="forms-select-menu--variants-container"
+    class="d-d-flex d-fd-column d-stack32 d-p32"
   >
-    <!--
-      We can also bind any slot data that the user has entered into the storybook controls. In this example we
-      conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
+    <!-- Default -->
+    <dt-select-menu
+      id="default"
+      name="default"
+      label="Default"
+      :options="options"
+    />
+    <!-- Default -->
 
-      The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
+    <!-- With Description -->
+    <dt-select-menu
+      id="with-description"
+      name="with-description"
+      label="With"
+      description="Description"
+      :options="options"
+    />
+    <!-- With Description -->
 
-      We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-      same name.
-    -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
-    </template>
-    <template
-      #some
-      v-if="someSlot"
+    <!-- With Slotted Label -->
+    <dt-select-menu
+      id="with-slotted-label"
+      name="with-slotted-label"
+      :options="options"
     >
-      <span v-html="someSlot" />
-    </template>
-  </dt-select-menu>
+      <template #label>
+        With Slotted Label
+      </template>
+    </dt-select-menu>
+    <!-- With Slotted Label -->
+
+    <!-- With Slotted Description -->
+    <dt-select-menu
+      id="with-slotted-description"
+      name="with-slotted-description"
+      label="With"
+      :options="options"
+    >
+      <template #description>
+        Slotted Description
+      </template>
+    </dt-select-menu>
+    <!-- With Slotted Description -->
+
+    <!-- With Slotted Options -->
+    <dt-select-menu
+      id="with-slotted-options"
+      name="with-slotted-options"
+      label="With Slotted Options"
+    >
+      <option
+        v-for="option in options"
+        :key="`with-slotted-options-${option.value}`"
+        :value="option.value"
+      >
+        {{ option.label }}
+      </option>
+    </dt-select-menu>
+    <!-- With Slotted Options -->
+
+    <!-- With Error Message -->
+    <dt-select-menu
+      id="with-error-message"
+      name="with-error-message"
+      label="With Error Message"
+      :options="options"
+      :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+    />
+    <!-- With Error Message -->
+
+    <!-- With Error Messages Hidden -->
+    <dt-select-menu
+      id="with-error-messages-hidden"
+      name="with-error-messages-hidden"
+      label="With Error Messages Hidden"
+      :options="options"
+      :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+      :show-messages="false"
+    />
+    <!-- With Error Messages Hidden -->
+
+    <!-- With Success Message -->
+    <dt-select-menu
+      id="with-success-message"
+      name="with-success-message"
+      label="With Success Message"
+      :options="options"
+      :messages="[{ message: 'Success', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+    />
+    <!-- With Success Message -->
+
+    <!-- With Warning Message -->
+    <dt-select-menu
+      id="with-warning-message"
+      name="with-warning-message"
+      label="With Warning Message"
+      :options="options"
+      :messages="[{ message: 'Warning', type: VALIDATION_MESSAGE_TYPES.WARNING }]"
+    />
+    <!-- With Warning Message -->
+
+    <!-- Disabled -->
+    <dt-select-menu
+      id="disabled"
+      name="disabled"
+      label="Disabled"
+      :options="options"
+      disabled
+    />
+    <!-- Disabled -->
+
+    <!-- Extra Small -->
+    <dt-select-menu
+      id="extra-small"
+      name="extra-small"
+      label="Extra Small"
+      :options="options"
+      size="xs"
+    />
+    <!-- Extra Small -->
+
+    <!-- Small -->
+    <dt-select-menu
+      id="small"
+      name="small"
+      label="Small"
+      :options="options"
+      size="sm"
+    />
+    <!-- Small -->
+
+    <!-- Large -->
+    <dt-select-menu
+      id="large"
+      name="large"
+      label="Large"
+      :options="options"
+      size="lg"
+    />
+    <!-- Large -->
+
+    <!-- Extra Large -->
+    <dt-select-menu
+      id="extra-large"
+      name="extra-large"
+      label="Extra Large"
+      :options="options"
+      size="xl"
+    />
+    <!-- Extra Large -->
+  </div>
 </template>
 
 <script>
+import { VALIDATION_MESSAGE_TYPES } from '../constants';
 import DtSelectMenu from './select_menu';
 
 export default {
   name: 'DtSelectMenuVariants',
+
   components: { DtSelectMenu },
+
+  beforeCreate () {
+    this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
+  },
 };
 </script>
