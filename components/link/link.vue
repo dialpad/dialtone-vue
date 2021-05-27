@@ -12,6 +12,7 @@ import { LINK_MODIFIER_CLASSES, LINK_VARIANTS } from './link_constants.js';
 
 export default {
   name: 'DtLink',
+
   inheritAttrs: true,
 
   props: {
