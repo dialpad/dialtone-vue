@@ -27,24 +27,116 @@ Some description of how to use the base component, potential gotchas and limitat
 
 ## Usage
 
-### Import
+### Option Object Structure
 
-```jsx
-import { DtSelectMenu } from '@dialpad/dialtone-vue';
+```js
+{
+  index: number,           // Optional
+  value: [number, string], // Required
+  label: string,           // Required
+}
 ```
 
-### With Some Variant
+### Import
 
-```vue
+```js
+import { DtSelectMenu, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
+
+const options = [
+  { value: 1, label: 'Option 1' },
+  { value: 2, label: 'Option 2' },
+  { value: 3, label: 'Option 3' },
+];
+
+const validationMessages = [
+  { message: 'Success Validation Message 1', type: VALIDATION_MESSAGE_TYPES.SUCCESS },
+  { message: 'Success Validation Message 2', type: VALIDATION_MESSAGE_TYPES.SUCCESS },
+];
+```
+
+### Default
+
+```html
 <dt-select-menu
-  some="variant"
+  name="select-menu"
+  label="Select Menu"
+  :options="options"
 />
 ```
 
-### With Some Other Variant
+### With Description
 
-```vue
+```html
 <dt-select-menu
-  some-other="variant"
+  name="select-menu"
+  label="Select Menu"
+  description="With Description"
+  :options="options"
+/>
+```
+
+### With Slotted Label
+
+```html
+<dt-select-menu
+  name="select-menu"
+  :options="options"
+>
+  <template #label>
+    Select Menu
+  </template>
+</dt-select-menu>
+```
+
+### With Slotted Description
+
+```html
+<dt-select-menu
+  name="select-menu"
+  label="Select Menu"
+  :options="options"
+>
+  <template #description>
+    Some Description
+  </template>
+</dt-select-menu>
+```
+
+### With Slotted Options
+
+```html
+<dt-select-menu
+  name="select-menu"
+  label="Select Menu"
+>
+  <option
+    v-for="option in options"
+    :key="`select-menu-option-${option.value}`"
+    :value="option.value"
+  >
+    {{ option.label }}
+  </option>
+</dt-select-menu>
+```
+
+### With Validation Messages
+
+```html
+<dt-select-menu
+  name="select-menu"
+  label="Select Menu"
+  :options="options"
+  :messages="validationMessages"
+/>
+```
+
+### With Size
+
+```html
+<dt-select-menu
+  name="select-menu"
+  label="Select Menu"
+  :options="options"
+  size="xs"
 />
 ```
