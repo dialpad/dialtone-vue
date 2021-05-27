@@ -20,7 +20,10 @@
         <!-- @slot slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
       </div>
-      <div :class="selectClasses">
+      <div
+        :class="selectClasses"
+        data-qa="dt-select-wrapper"
+      >
         <select
           :class="selectInputClasses"
           v-bind="$attrs"
