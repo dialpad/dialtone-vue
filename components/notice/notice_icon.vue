@@ -11,6 +11,7 @@
     </slot>
   </div>
 </template>
+
 <script>
 import IconTranscript from '@dialpad/dialtone/lib/dist/vue/icons/IconTranscript';
 import IconInfo from '@dialpad/dialtone/lib/dist/vue/icons/IconInfo';
