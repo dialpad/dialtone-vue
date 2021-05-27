@@ -199,7 +199,7 @@ export const argTypesData = {
   // Slots
   labelSlot: {
     name: 'label',
-    description: 'Slot for select menu label',
+    description: 'Slot for label, defaults to label prop',
     control: 'text',
     table: {
       category: 'slots',
@@ -211,7 +211,7 @@ export const argTypesData = {
 
   descriptionSlot: {
     name: 'description',
-    description: 'Slot for select menu description',
+    description: 'Slot for description, defaults to description prop',
     control: 'text',
     table: {
       category: 'slots',
@@ -222,7 +222,6 @@ export const argTypesData = {
   },
 
   default: {
-    description: 'Slot for select menu options',
     control: 'text',
     table: {
       category: 'slots',
