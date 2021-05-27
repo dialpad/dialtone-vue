@@ -14,6 +14,15 @@ export const argsData = {
 // Controls
 export const argTypesData = {
   // Props
+  kind: {
+    defaultValue: '',
+    control: {
+      type: 'select',
+      options: LINK_VARIANTS,
+    },
+  },
+
+  // Native Props
   href: {
     description: 'native "href" prop',
     defaultValue: undefined,
@@ -42,13 +51,6 @@ export const argTypesData = {
       },
     },
     control: 'text',
-  },
-  kind: {
-    defaultValue: '',
-    control: {
-      type: 'select',
-      options: LINK_VARIANTS,
-    },
   },
 
   // Slots
