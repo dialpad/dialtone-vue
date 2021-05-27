@@ -48,11 +48,6 @@ const options = [
   { value: 2, label: 'Option 2' },
   { value: 3, label: 'Option 3' },
 ];
-
-const validationMessages = [
-  { message: 'Success Validation Message 1', type: VALIDATION_MESSAGE_TYPES.SUCCESS },
-  { message: 'Success Validation Message 2', type: VALIDATION_MESSAGE_TYPES.SUCCESS },
-];
 ```
 
 ### Default
@@ -127,7 +122,7 @@ const validationMessages = [
   name="select-menu"
   label="Select Menu"
   :options="options"
-  :messages="validationMessages"
+  :messages="[{ message: 'Some Success Message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
 />
 ```
 

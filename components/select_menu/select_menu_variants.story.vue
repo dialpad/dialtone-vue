@@ -63,15 +63,46 @@
     </dt-select-menu>
     <!-- With Slotted Options -->
 
-    <!-- With Validation Messages -->
+    <!-- With Error Message -->
     <dt-select-menu
-      id="with-validation-messages"
-      name="with-validation-messages"
-      label="With Validation Messages"
+      id="with-error-message"
+      name="with-error-message"
+      label="With Error Message"
       :options="options"
-      :messages="validationMessages"
+      :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
     />
-    <!-- With Validation Messages -->
+    <!-- With Error Message -->
+
+    <!-- With Error Messages Hidden -->
+    <dt-select-menu
+      id="with-error-messages-hidden"
+      name="with-error-messages-hidden"
+      label="With Error Messages Hidden"
+      :options="options"
+      :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+      :show-messages="false"
+    />
+    <!-- With Error Messages Hidden -->
+
+    <!-- With Success Message -->
+    <dt-select-menu
+      id="with-success-message"
+      name="with-success-message"
+      label="With Success Message"
+      :options="options"
+      :messages="[{ message: 'Success', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+    />
+    <!-- With Success Message -->
+
+    <!-- With Warning Message -->
+    <dt-select-menu
+      id="with-warning-message"
+      name="with-warning-message"
+      label="With Warning Message"
+      :options="options"
+      :messages="[{ message: 'Warning', type: VALIDATION_MESSAGE_TYPES.WARNING }]"
+    />
+    <!-- With Warning Message -->
 
     <!-- Disabled -->
     <dt-select-menu
@@ -134,13 +165,8 @@ export default {
 
   components: { DtSelectMenu },
 
-  data () {
-    return {
-      validationMessages: [
-        { message: 'Success Validation Message 1', type: VALIDATION_MESSAGE_TYPES.SUCCESS },
-        { message: 'Success Validation Message 2', type: VALIDATION_MESSAGE_TYPES.SUCCESS },
-      ],
-    };
+  beforeCreate () {
+    this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
   },
 };
 </script>
