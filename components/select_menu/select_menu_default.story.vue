@@ -6,11 +6,18 @@
     :description="description"
     :show-messages="showMessages"
     :messages="messages"
-    :messages-class="messagesClass"
-    :messages-child-props="messagesChildProps"
     :name="name"
     :value="value"
     :disabled="disabled"
+    :label-class="labelClass"
+    :description-class="descriptionClass"
+    :select-class="selectClass"
+    :option-class="optionClass"
+    :messages-class="messagesClass"
+    :label-child-props="labelChildProps"
+    :description-child-props="descriptionChildProps"
+    :option-child-props="optionChildProps"
+    :messages-child-props="messagesChildProps"
     @input="onInput"
     @change="onChange"
   >
@@ -26,7 +33,9 @@
     >
       <span v-html="descriptionSlot" />
     </template>
-    <div v-if="defaultSlot" v-html="defaultSlot" />
+    <div v-if="defaultSlot">
+      <div v-html="defaultSlot" />
+    </div>
   </dt-select-menu>
 </template>
 

@@ -16,6 +16,7 @@ const SELECT_OPTIONS = [
 // Default Prop Values
 export const argsData = {
   label: 'Label',
+  options: SELECT_OPTIONS,
   onInput: action('input'),
   onChange: action('change'),
 };
@@ -88,6 +89,13 @@ export const argTypesData = {
   },
 
   // Native Props
+  'v-model': {
+    description: 'Supported by this component',
+    control: null,
+    table: {
+      category: 'native props',
+    },
+  },
   value: {
     description: 'Provides a value for the select',
     control: {
@@ -139,10 +147,59 @@ export const argTypesData = {
     },
   },
 
+  // Pass Through Class Controls
+  labelClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+  descriptionClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+  selectClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+  optionClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+  messagesClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+
+  // Pass Through Prop Controls
+  labelChildProps: {
+    table: {
+      category: 'pass through props',
+    },
+  },
+  descriptionChildProps: {
+    table: {
+      category: 'pass through props',
+    },
+  },
+  optionChildProps: {
+    table: {
+      category: 'pass through props',
+    },
+  },
+  messagesChildProps: {
+    table: {
+      category: 'pass through props',
+    },
+  },
+
   // Slots
   labelSlot: {
     name: 'label',
-    description: 'Slot for select menu label',
+    description: 'Slot for label, defaults to label prop',
     control: 'text',
     table: {
       category: 'slots',
@@ -154,7 +211,7 @@ export const argTypesData = {
 
   descriptionSlot: {
     name: 'description',
-    description: 'Slot for select menu description',
+    description: 'Slot for description, defaults to description prop',
     control: 'text',
     table: {
       category: 'slots',
@@ -164,9 +221,7 @@ export const argTypesData = {
     },
   },
 
-  defaultSlot: {
-    name: 'default',
-    description: 'Slot for select menu options',
+  default: {
     control: 'text',
     table: {
       category: 'slots',
@@ -175,11 +230,6 @@ export const argTypesData = {
       },
     },
   },
-
-  // Disabled Prop Controls
-  labelChildProps: { control: null },
-  descriptionChildProps: { control: null },
-  messagesChildProps: { control: null },
 
   // Action Event Handlers
   onInput: {
