@@ -97,7 +97,7 @@ export default {
 
     /**
      * Select Menu Options, overridden by default slot. Each option has the following structure:
-     * `{ index: number (optional), value: number | string (required), label: string (required) }`
+     * `{ index: number (optional), value: number || string (required), label: string (required) }`
      * @param {Object[]} options - Optional - A list that can be used to create a list of select menu options
      * @param {number} options[].index - Optional - The index of the option
      * @param {number|string} options[].value - Required - The option value
@@ -110,7 +110,7 @@ export default {
     },
 
     /**
-     * The size of the button.
+     * Controls the size of the select
      * @values xs, s, md, lg, xl
      * @see https://dialpad.design/components/select
      */
