@@ -9,7 +9,7 @@
     >
       {{ kind }} link
     </dt-link>
-    <div class="d-bgc-blue-800">
+    <div class="d-bgc-purple-800">
       <dt-link
         kind="inverted"
         href="#"
