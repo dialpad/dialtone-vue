@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { LINK_MODIFIER_CLASSES, LINK_VARIANTS } from './link_constants.js';
+import { LINK_VARIANTS } from './link_constants.js';
 
 export default {
   name: 'DtLink',
@@ -26,14 +26,6 @@ export default {
         return LINK_VARIANTS.includes(kind);
       },
     },
-
-    /**
-     * Applies the disabled styles to the link
-     */
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   computed: {
@@ -41,7 +33,6 @@ export default {
       return [
         'd-link',
         { [`d-link--${this.kind}`]: this.kind.length > 0 },
-        { [LINK_MODIFIER_CLASSES.disabled]: this.disabled },
       ];
     },
   },

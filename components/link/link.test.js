@@ -2,14 +2,12 @@ import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtLink from './link.vue';
 import {
-  LINK_MODIFIER_CLASSES,
   LINK_VARIANTS_CLASSES,
   DANGER,
   SUCCESS,
   WARNING,
   MUTED,
   INVERTED,
-  DISABLED,
 } from './link_constants';
 
 // Constants
@@ -23,7 +21,7 @@ describe('Dialtone Vue Link tests', function () {
   let nativeLink;
 
   // Environment
-  let propsData = basePropsData;
+  const propsData = basePropsData;
   const slots = { default: 'Slotted Link' };
 
   // Helpers
@@ -56,12 +54,6 @@ describe('Dialtone Vue Link tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
     it('should render the native anchor', function () { assert.isTrue(nativeLink.exists()); });
 
-    describe('When the link has default state', function () {
-      it('should has correct disabled modifier class', function () {
-        assert.isFalse(nativeLink.classes().includes(LINK_MODIFIER_CLASSES.disabled));
-      });
-    });
-
     describe('When a default slot is provided', function () {
       it('should render the provided data', function () { assert.equal(nativeLink.text(), slots.default); });
     });
@@ -75,18 +67,5 @@ describe('Dialtone Vue Link tests', function () {
     describe('When kind is warning', function () { itBehavesLikeHasCorrectKindClass(WARNING); });
 
     describe('When kind is muted', function () { itBehavesLikeHasCorrectKindClass(MUTED); });
-
-    describe('When anchor is disabled', function () {
-      before(function () {
-        propsData = {
-          ...basePropsData,
-          kind: '',
-          disabled: true,
-        };
-      });
-      it('should have correct class', function () {
-        assert.isTrue(nativeLink.classes().includes(LINK_MODIFIER_CLASSES[DISABLED]));
-      });
-    });
   });
 });
