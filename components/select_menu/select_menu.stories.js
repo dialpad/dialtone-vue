@@ -140,6 +140,55 @@ export const argTypesData = {
     },
   },
 
+  // Pass Through Class Controls
+  labelClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+  descriptionClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+  selectClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+  optionClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+  messagesClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+
+  // Pass Through Prop Controls
+  labelChildProps: {
+    table: {
+      category: 'pass through props',
+    },
+  },
+  descriptionChildProps: {
+    table: {
+      category: 'pass through props',
+    },
+  },
+  optionChildProps: {
+    table: {
+      category: 'pass through props',
+    },
+  },
+  messagesChildProps: {
+    table: {
+      category: 'pass through props',
+    },
+  },
+
   // Slots
   labelSlot: {
     name: 'label',
@@ -173,13 +222,6 @@ export const argTypesData = {
       type: {
         summary: 'text/html',
       },
-    },
-  },
-
-  // Pass Through Prop Controls
-  messagesChildProps: {
-    table: {
-      category: 'pass through props',
     },
   },
 
