@@ -92,29 +92,3 @@ Important.args = {
   important: true,
   default: 'Message body with <a href="#" class="d-link d-link--inverted">a link.</a>',
 };
-
-export const ImportantError = Template.bind({});
-ImportantError.args = {
-  ...Important.args,
-  ...Error.args,
-  default: Important.args.default,
-};
-
-export const ImportantInfo = Template.bind({});
-ImportantInfo.args = {
-  ...Important.args,
-  ...Info.args,
-  default: Important.args.default,
-};
-
-export const ImportantSuccess = Template.bind({});
-ImportantSuccess.args = {
-  ...Important.args,
-  ...Success.args,
-};
-
-export const ImportantWarning = Template.bind({});
-ImportantWarning.args = {
-  ...Important.args,
-  ...Warning.args,
-};
