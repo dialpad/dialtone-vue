@@ -89,6 +89,13 @@ export const argTypesData = {
   },
 
   // Native Props
+  'v-model': {
+    description: 'Supported by this component',
+    control: null,
+    table: {
+      category: 'native props',
+    },
+  },
   value: {
     description: 'Provides a value for the select',
     control: {
