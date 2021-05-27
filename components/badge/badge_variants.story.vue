@@ -1,5 +1,5 @@
 <template>
-  <div id="elements-button--variants-container">
+  <div id="elements-badge--variants-container">
     <dt-badge
       v-for="color in colors"
       :key="color"
