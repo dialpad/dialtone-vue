@@ -55,7 +55,6 @@ export const argTypesData = {
   },
 
   options: {
-    description: 'Provides a list of options for the select',
     control: {
       type: 'object',
     },
