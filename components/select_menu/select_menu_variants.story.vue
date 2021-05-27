@@ -142,9 +142,5 @@ export default {
       ],
     };
   },
-
-  created () {
-    this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
-  },
 };
 </script>
