@@ -8,12 +8,41 @@ import { LINK_VARIANTS } from './link_constants';
 // Default Prop Values
 export const argsData = {
   default: 'Default link',
-  href: '#',
+  href: undefined,
 };
 
 // Controls
 export const argTypesData = {
   // Props
+  href: {
+    description: 'native "href" prop',
+    defaultValue: undefined,
+    type: {
+      summary: 'string',
+    },
+    table: {
+      category: 'native props',
+      defaultValue: {
+        summary: 'undefined',
+      },
+    },
+    control: 'text',
+  },
+  rel: {
+    description: `native "rel" prop. Relationship between the location in the document containing the hyperlink
+        and the destination resource.`,
+    defaultValue: undefined,
+    type: {
+      summary: 'string',
+    },
+    table: {
+      category: 'native props',
+      defaultValue: {
+        summary: 'undefined',
+      },
+    },
+    control: 'text',
+  },
   kind: {
     defaultValue: '',
     control: {
