@@ -3,7 +3,7 @@
     :class="badgeClasses"
     data-qa="dt-badge"
   >
-    <!-- @slot Allows you to override the "text" prop. -->
+    <!-- @slot Slot for badge content, defaults to text prop -->
     <slot>
       {{ text }}
     </slot>
