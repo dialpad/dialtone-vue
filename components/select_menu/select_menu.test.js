@@ -160,7 +160,20 @@ describe('DtSelectMenu Tests', function () {
     });
 
     describe('When options are provided via slot', function () {
-      // TODO
+      // Test Environment
+      const slottedOptions = '<option value="1">Option 1</option><option value="2">Option 2</option>';
+
+      // Test Setup
+      beforeEach(function () {
+        slots = {
+          default: slottedOptions,
+        };
+        _setWrappers();
+      });
+
+      it('should render the select menu options', function () {
+        assert.exists(select.findAll('option').length, 2);
+      });
     });
 
     describe('When a size is provided', function () {
