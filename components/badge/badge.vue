@@ -1,6 +1,6 @@
 <template>
   <span
-    :class="badgeClass"
+    :class="badgeClasses"
     data-qa="dt-badge"
   >
     <!-- @slot Allows you to override the "text" prop. -->
@@ -36,7 +36,7 @@ export default {
   },
 
   computed: {
-    badgeClass () {
+    badgeClasses () {
       return ['d-badge', BADGE_COLOR_MODIFIERS[this.color]];
     },
   },
