@@ -21,8 +21,8 @@
         #action
       >
         <dt-button
-          importance="outlined"
-          class="d-btn--muted"
+          :link-kind="important ? 'inverted' : 'muted'"
+          link
         >
           {{ action }}
         </dt-button>

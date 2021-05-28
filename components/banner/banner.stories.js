@@ -37,9 +37,10 @@ const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argType
 
 export const Default = Template.bind({});
 Default.args = {
-  title: 'Optional title',
-  default: 'Message body with <a href="#">a link.</a>',
+  title: '',
+  default: 'Your meeting invite has been sent to Ted, Vicky, David, and Trinh.',
   action: 'Action',
+  kind: 'base',
 };
 
 export const Info = Template.bind({});
