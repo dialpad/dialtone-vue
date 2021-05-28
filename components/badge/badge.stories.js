@@ -3,6 +3,7 @@ import DtBadge from './badge';
 import DtBadgeDefaultTemplate from './badge_default.story.vue';
 import DtBadgeVariantsTemplate from './badge_variants.story.vue';
 import { BADGE_COLOR_MODIFIERS } from './badge_constants';
+import DtBadgeMdx from './badge.mdx';
 
 export const argTypesData = {
   // Props
@@ -31,6 +32,11 @@ export default {
   component: DtBadge,
   excludeStories: /.*Data$/,
   argTypes: argTypesData,
+  parameters: {
+    docs: {
+      page: DtBadgeMdx,
+    },
+  },
 };
 
 // Templates
