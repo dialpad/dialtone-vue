@@ -1,7 +1,7 @@
 <template>
   <div
     :tabindex="tabIndex"
-    :class="tooltipContainerClasses"
+    :class="tooltipContainerClass"
     class="d-ps-relative d-fl-center d-d-inline-flex"
     @mouseover="onHover(true)"
     @focus="onHover(true)"
@@ -120,13 +120,10 @@ export default {
       return `${!this.isTooltipVisible}`;
     },
 
-    tooltipContainerClasses () {
-      return [
-        'd-ps-relative',
-        {
-          'd-tooltip--hover': this.hover && !this.isESCPressed,
-        },
-      ];
+    tooltipContainerClass () {
+      return {
+        'd-tooltip--hover': this.hover && !this.isESCPressed,
+      };
     },
 
     tooltipClasses () {
