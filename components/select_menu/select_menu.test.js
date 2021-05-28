@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
 import {
   LABEL_SIZE_MODIFIERS,
   DESCRIPTION_SIZE_MODIFIERS,
@@ -36,12 +36,10 @@ describe('DtSelectMenu Tests', function () {
   let description;
   let messages;
 
-
   // Environment
   let propsData = basePropsData;
   let attrs = baseAttrs;
   let slots = {};
-  let provide = {};
 
   // Helpers
   const _setChildWrappers = () => {
@@ -57,16 +55,22 @@ describe('DtSelectMenu Tests', function () {
       propsData,
       attrs,
       slots,
-      provide,
+      localVue: this.localVue,
+    });
+    _setChildWrappers();
+  };
+
+  const _mountWrappers = () => {
+    wrapper = mount(DtSelectMenu, {
+      propsData,
+      attrs,
+      slots,
       localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Shared Examples
-  /* const itBehavesLikeSomeExpectation = () => {
-    it('should be equal', function () { assert.strictEqual(1, 1); });
-  }; */
 
   // Setup
   before(function () {
@@ -130,7 +134,7 @@ describe('DtSelectMenu Tests', function () {
         propsData = {
           ...basePropsData,
           description: DESCRIPTION,
-        }
+        };
         _setWrappers();
       });
 
@@ -186,7 +190,7 @@ describe('DtSelectMenu Tests', function () {
           ...basePropsData,
           description: DESCRIPTION,
           size,
-        }
+        };
         _setWrappers();
       });
 
@@ -198,6 +202,49 @@ describe('DtSelectMenu Tests', function () {
       });
       it('should have size variant class on select menu', function () {
         assert.isTrue(selectWrapper.classes(SELECT_SIZE_MODIFIERS[size]));
+      });
+    });
+
+    describe('When validation messages are provided', function () {
+      // Test Environment
+      const message = 'Validation Message';
+
+      // Test Setup
+      beforeEach(function () {
+        propsData = {
+          ...basePropsData,
+          messages: [message],
+        };
+      });
+
+      // Shared Examples
+      const itBehavesLikeHasSelectInputStateClass = () => {
+        it('should be equal', function () { assert.isTrue(select.classes(SELECT_STATE_MODIFIERS.error)); });
+      };
+
+      describe('When validation messages are shown', function () {
+        // Test Setup
+        beforeEach(function () {
+          _mountWrappers();
+        });
+
+        itBehavesLikeHasSelectInputStateClass();
+        it('should render validation message', function () {
+          assert.strictEqual(messages?.findAll('[data-qa="validation-message"]').length, 1);
+        });
+      });
+
+      describe('When validation messages are hidden', function () {
+        // Test Setup
+        beforeEach(function () {
+          propsData.showMessages = false;
+          _mountWrappers();
+        });
+
+        itBehavesLikeHasSelectInputStateClass();
+        it('should not render any validation messages', function () {
+          assert.isFalse(messages.exists());
+        });
       });
     });
   });
