@@ -111,7 +111,7 @@ export default {
      */
     kind: {
       type: String,
-      default: '',
+      default: 'base',
       validate (kind) {
         return NOTICE_KINDS.includes(kind);
       },
