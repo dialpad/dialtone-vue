@@ -5,7 +5,6 @@ import DtBadgeVariantsTemplate from './badge_variants.story.vue';
 import { BADGE_COLOR_MODIFIERS } from './badge_constants';
 
 export const argTypesData = {
-
   // Props
   color: {
     defaultValue: '',

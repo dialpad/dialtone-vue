@@ -16,7 +16,9 @@ import { BADGE_COLOR_MODIFIERS } from './badge_constants';
 
 export default {
   name: 'DtBadgeVariants',
+
   components: { DtBadge },
+
   data () {
     return {
       BADGE_COLOR_MODIFIERS,

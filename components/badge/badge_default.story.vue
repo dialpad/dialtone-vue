@@ -14,6 +14,7 @@ import DtBadge from './badge';
 
 export default {
   name: 'DtBadgeDefault',
+
   components: { DtBadge },
 };
 </script>
