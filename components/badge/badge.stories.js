@@ -8,7 +8,7 @@ import DtBadgeMdx from './badge.mdx';
 export const argTypesData = {
   // Props
   color: {
-    defaultValue: '',
+    defaultValue: 'base',
     control: {
       type: 'select',
       options: Object.keys(BADGE_COLOR_MODIFIERS),
