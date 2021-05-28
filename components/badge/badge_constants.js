@@ -1,5 +1,5 @@
 export const BADGE_COLOR_MODIFIERS = {
-  default: '',
+  base: '',
   white: 'd-badge--white',
   'black-700': 'd-badge--black-700',
   'purple-100': 'd-badge--purple-100',

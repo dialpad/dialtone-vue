@@ -30,7 +30,7 @@ export default {
      */
     color: {
       type: String,
-      default: 'default',
+      default: 'base',
       validator: (color) => Object.keys(BADGE_COLOR_MODIFIERS).includes(color),
     },
   },
