@@ -22,11 +22,9 @@
 <script>
 import { DtTooltip } from './';
 import { DtButton } from '../button';
-import fixDefaultSlot from '../plugins/fixDefaultSlot';
 
 export default {
   name: 'DtTooltipDefault',
   components: { DtTooltip, DtButton },
-  mixins: [fixDefaultSlot],
 };
 </script>

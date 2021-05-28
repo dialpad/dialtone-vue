@@ -20,7 +20,6 @@
         {{ message }}
       </slot>
     </div>
-
     <div
       :aria-describedby="id"
       data-qa="dt-tooltip-anchor"
@@ -56,6 +55,9 @@ export default {
       default: '',
     },
 
+    /**
+     * Describes the preferred placement of the tooltip
+     */
     arrowDirection: {
       type: String,
       default: 'bottom-center',
