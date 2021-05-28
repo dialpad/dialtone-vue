@@ -13,6 +13,7 @@
       :important="important"
       :pinned="pinned"
       :hide-close="hideClose"
+      :close-button-props="buttonCloseProps"
       @close="displayBanner = false"
     >
       <span v-html="defaultSlot" />
@@ -21,7 +22,7 @@
         #action
       >
         <dt-button
-          :link-kind="important ? 'inverted' : 'muted'"
+          :link-kind="buttonKind"
           link
         >
           {{ action }}
@@ -50,12 +51,33 @@ import icon from '../mixins/icon';
 
 export default {
   name: 'BannerDefault',
+
   components: { DtBanner, DtButton },
+
   mixins: [icon],
+
   data () {
     return {
       displayBanner: false,
     };
+  },
+
+  computed: {
+    isButtonInverted () {
+      return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
+    },
+
+    buttonKind () {
+      return this.important && this.isButtonInverted ? 'inverted' : 'muted';
+    },
+
+    buttonCloseProps () {
+      return {
+        ...this.closeButtonProps,
+        kind: this.buttonKind,
+        ariaLabel: 'Close',
+      };
+    },
   },
 };
 </script>
