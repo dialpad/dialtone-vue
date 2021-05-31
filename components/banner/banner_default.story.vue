@@ -76,7 +76,7 @@ export default {
     },
 
     isInverted () {
-      return this.important && this.isButtonInverted;
+      return this.important && this.shouldInvertButton;
     },
 
     buttonKind () {
