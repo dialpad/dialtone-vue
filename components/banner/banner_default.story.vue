@@ -63,7 +63,7 @@ export default {
   },
 
   computed: {
-    isButtonInverted () {
+    shouldInvertButton () {
       return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
     },
 
