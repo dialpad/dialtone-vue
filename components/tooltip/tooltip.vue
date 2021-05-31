@@ -1,11 +1,10 @@
 <template>
   <div
-    :tabindex="tabIndex"
     :class="tooltipContainerClass"
     class="d-ps-relative d-fl-center d-d-inline-flex"
     @mouseover="onHover(true)"
-    @focus="onHover(true)"
-    @blur="onLeave(false)"
+    @focus.capture="onFocusChild(true)"
+    @blur.capture="onLeave(false)"
     @mouseleave="onLeave(false)"
     @keyup.esc="onEsc"
   >
@@ -21,8 +20,14 @@
       </slot>
     </div>
     <div
+      ref="anchor"
+      :tabindex="anchorTabIndex"
       :aria-describedby="id"
+      class="d-tooltip--show"
       data-qa="dt-tooltip-anchor"
+      @focus="onFocusChild"
+      @blur="onLeave(false)"
+      @keyup.esc="onEsc"
     >
       <slot name="anchor" />
     </div>
@@ -31,7 +36,7 @@
 
 <script>
 import { TOOLTIP_DIRECTION_MODIFIERS, TOOLTIP_STATE_MODIFIERS, INVERTED } from './tooltip_constants.js';
-import { getUniqueString } from '../utils';
+import { getUniqueString, findFirstFocusableNode } from '../utils';
 
 export default {
   name: 'DtTooltip',
@@ -104,6 +109,8 @@ export default {
     return {
       isHover: false,
       isESCPressed: false,
+      isChildFocus: false,
+      anchorTabIndex: '-1',
     };
   },
 
@@ -123,6 +130,7 @@ export default {
     tooltipContainerClass () {
       return {
         'd-tooltip--hover': this.hover && !this.isESCPressed,
+        'd-tooltip--open': this.isChildFocus,
       };
     },
 
@@ -139,7 +147,17 @@ export default {
     },
   },
 
+  mounted () {
+    if (findFirstFocusableNode(this.$refs.anchor)) return;
+    this.anchorTabIndex = this.tabIndex;
+  },
+
   methods: {
+    onFocusChild () {
+      this.onHover(true);
+      this.isChildFocus = true;
+    },
+
     onHover (isHover) {
       this.isHover = isHover;
     },
@@ -147,11 +165,22 @@ export default {
     onLeave () {
       this.isHover = false;
       this.isESCPressed = false;
+      this.isChildFocus = false;
     },
 
     onEsc () {
       this.isESCPressed = (this.hover && this.isHover) || !this.show;
+      this.isChildFocus = false;
     },
   },
 };
 </script>
+
+<style lang="less">
+// styles for programmatically determining which element is in need of focus
+// will be moved to dialtone design
+.d-tooltip--open .d-tooltip{
+  opacity: 1;
+  visibility: visible;
+}
+</style>
