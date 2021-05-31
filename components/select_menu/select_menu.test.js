@@ -1,5 +1,6 @@
 import { assert } from 'chai';
 import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
+import { itBehavesLikeEmitsExpectedEvent } from '../../tests/shared_examples/events';
 import {
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeFailsCustomPropValidation,
@@ -300,18 +301,24 @@ describe('DtSelectMenu Tests', function () {
   });
 
   describe('Interactivity Tests', function () {
-    /*
-     * Test(s) to ensure that the component correctly handles user input
-     */
+    describe('When select menu value has changed', function () {
+      // Test Environment
+      const selectedValue = OPTIONS[1].value;
 
-    describe('When some description of the current environment', function () {});
-    /*
-      TODO:
-        Test that value is updated
-        Test that input event is emitted
-        Test that change event is emitted
+      // Test Setup
+      beforeEach(function () {
+        _setWrappers();
+        select.element.value = selectedValue;
+        select.trigger('change');
+      });
 
-    */
+      it('should emit input event', function () {
+        itBehavesLikeEmitsExpectedEvent(wrapper, 'input', selectedValue.toString());
+      });
+      it('should emit change event', function () {
+        itBehavesLikeEmitsExpectedEvent(wrapper, 'change', selectedValue.toString());
+      });
+    });
   });
 
   describe('Validation Tests', function () {
