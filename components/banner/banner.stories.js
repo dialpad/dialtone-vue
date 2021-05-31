@@ -38,7 +38,6 @@ const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argType
 export const Default = Template.bind({});
 Default.args = {
   title: 'Optional title',
-  default: 'Message body with <a href="#" class="d-link d-link--muted">a link.</a>',
   action: 'Action',
   kind: 'base',
 };
@@ -54,14 +53,6 @@ Success.args = { ...Default.args, kind: 'success' };
 
 export const Warning = Template.bind({});
 Warning.args = { ...Default.args, kind: 'warning' };
-
-export const Important = Template.bind({});
-Important.args = {
-  ...Default.args,
-  kind: 'info',
-  important: true,
-  default: 'Message body with <a href="#" class="d-link d-link--inverted">a link.</a>',
-};
 
 export const Pinned = Template.bind({});
 Pinned.args = { ...Default.args, pinned: true };
