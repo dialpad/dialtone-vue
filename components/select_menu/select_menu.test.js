@@ -79,8 +79,6 @@ describe('DtSelectMenu Tests', function () {
     _setChildWrappers();
   };
 
-  // Shared Examples
-
   // Setup
   before(function () {
     this.localVue = createLocalVue();
@@ -228,7 +226,9 @@ describe('DtSelectMenu Tests', function () {
 
       // Shared Examples
       const itBehavesLikeHasSelectInputStateClass = () => {
-        it('should be equal', function () { assert.isTrue(select.classes(SELECT_STATE_MODIFIERS.error)); });
+        it('should have error state class on select menu', function () {
+          assert.isTrue(select.classes(SELECT_STATE_MODIFIERS.error));
+        });
       };
 
       describe('When validation messages are shown', function () {
