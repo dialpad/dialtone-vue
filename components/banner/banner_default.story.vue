@@ -22,8 +22,8 @@
         #action
       >
         <dt-button
-          :link-kind="buttonKind"
-          link
+          :kind="buttonKind"
+          importance="outlined"
         >
           {{ action }}
         </dt-button>
