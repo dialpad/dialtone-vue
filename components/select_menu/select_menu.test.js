@@ -1,6 +1,14 @@
 import { assert } from 'chai';
 import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
 import {
+  itBehavesLikePassesCustomPropValidation,
+  itBehavesLikeFailsCustomPropValidation,
+} from '../../tests/shared_examples/validation';
+import {
+  itBehavesLikeAppliesClassToChild,
+  itBehavesLikeAppliesChildProp,
+} from '../../tests/shared_examples/extendability';
+import {
   LABEL_SIZE_MODIFIERS,
   DESCRIPTION_SIZE_MODIFIERS,
 } from '../constants';
@@ -86,7 +94,7 @@ describe('DtSelectMenu Tests', function () {
   });
   after(function () {});
 
-  describe.only('Presentation Tests', function () {
+  describe('Presentation Tests', function () {
     describe('When rendered with required content', function () {
       // Test Setup
       beforeEach(function () { _setWrappers(); });
@@ -255,6 +263,11 @@ describe('DtSelectMenu Tests', function () {
      */
 
     describe('When some description of the current environment', function () {});
+    /*
+      TODO:
+        Test aria details (with description and without description)
+
+    */
   });
 
   describe('Interactivity Tests', function () {
@@ -263,21 +276,142 @@ describe('DtSelectMenu Tests', function () {
      */
 
     describe('When some description of the current environment', function () {});
+    /*
+      TODO:
+        Test that value is updated
+        Test that input event is emitted
+        Test that change event is emitted
+
+    */
   });
 
   describe('Validation Tests', function () {
-    /*
-     * Test(s) to ensure that custom validators are working as expected
-     */
+    describe('Size Validator', function () {
+      // Test Environment
+      const prop = DtSelectMenu.props.size;
 
-    describe('When some description of the current environment', function () {});
+      describe('When provided size is in SELECT_SIZE_MODIFIERS', function () {
+        itBehavesLikePassesCustomPropValidation(prop, prop.default);
+      });
+
+      describe('when provided size is not in SELECT_SIZE_MODIFIERS', function () {
+        itBehavesLikeFailsCustomPropValidation(prop, `NOT${SELECT_SIZE_MODIFIERS.md}`);
+      });
+    });
   });
 
   describe('Extendability Tests', function () {
-    /*
-     * Test(s) to ensure that the component can be correctly extended
-     */
+    // Test Environment
+    let element;
+    const customClass = 'my-custom-class';
+    const propName = 'some';
+    const propValue = 'prop';
+    const childProps = {};
 
-    describe('When some description of the current environment', function () {});
+    // Helpers
+    const _setupChildClassTest = (childClassName, selector) => {
+      propsData[childClassName] = customClass;
+      _setWrappers();
+      element = wrapper.find(selector);
+    };
+
+    const _setupChildPropsTest = (childPropsName, selector) => {
+      propsData[childPropsName] = childProps;
+      _setWrappers();
+      element = wrapper.find(selector);
+    };
+
+    // Shared Examples
+    const itBehavesLikeAppliesClassToChildLocal = () => {
+      it('should apply custom class to child', function () {
+        itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', element);
+      });
+    };
+
+    const itBehavesLikeAppliesChildPropLocal = () => {
+      it('should have provided child prop', function () {
+        itBehavesLikeAppliesChildProp(element, propName, propValue);
+      });
+    };
+
+    // Test Setup
+    before(function () {
+      childProps[propName] = propValue;
+    });
+    beforeEach(function () {
+      propsData = { ...propsData, description: DESCRIPTION };
+    });
+
+    describe('When a label class is provided', function () {
+      beforeEach(function () { _setupChildClassTest('labelClass', '[data-qa="dt-select-label"]'); });
+      itBehavesLikeAppliesClassToChildLocal();
+    });
+
+    describe('When a description class is provided', function () {
+      beforeEach(function () { _setupChildClassTest('descriptionClass', '[data-qa="dt-select-description"]'); });
+      itBehavesLikeAppliesClassToChildLocal();
+    });
+
+    describe('When a select class is provided', function () {
+      beforeEach(function () { _setupChildClassTest('selectClass', '[data-qa="dt-select-wrapper"]'); });
+      itBehavesLikeAppliesClassToChildLocal();
+    });
+
+    describe('When an option class is provided', function () {
+      // Test Environment
+      let options;
+
+      // Test Setup
+      beforeEach(function () {
+        propsData.optionClass = customClass;
+        _setWrappers();
+        options = select.findAll('option');
+      });
+
+      it('should apply child class to each option', function () {
+        options.wrappers.forEach(option => {
+          assert.isTrue(option.classes(customClass));
+        });
+      });
+    });
+
+    describe('When label child props are provided', function () {
+      beforeEach(function () { _setupChildPropsTest('labelChildProps', '[data-qa="dt-select-label"]'); });
+      itBehavesLikeAppliesChildPropLocal();
+    });
+
+    describe('When description child props are provided', function () {
+      beforeEach(function () { _setupChildPropsTest('descriptionChildProps', '[data-qa="dt-select-description"]'); });
+      itBehavesLikeAppliesChildPropLocal();
+    });
+
+    describe('When option child props are provided', function () {
+      // Test Environment
+      let options;
+
+      // Test Setup
+      beforeEach(function () {
+        propsData.optionChildProps = childProps;
+        _setWrappers();
+        options = select.findAll('option');
+      });
+
+      it('should apply child props to each option', function () {
+        options.wrappers.forEach(option => {
+          itBehavesLikeAppliesChildProp(option, propName, propValue);
+        });
+      });
+    });
+
+    describe('When attrs are provided', function () {
+      // Test Setup
+      beforeEach(function () {
+        attrs = { some: 'prop' };
+        _setWrappers();
+        element = select;
+      });
+
+      itBehavesLikeAppliesChildPropLocal();
+    });
   });
 });

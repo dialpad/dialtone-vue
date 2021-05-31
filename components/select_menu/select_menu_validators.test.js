@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { optionsValidator } from './select_menu_validators';
 
-describe.only('Select Menu Validator Tests', function () {
+describe('Select Menu Validator Tests', function () {
   describe('optionsValidator', function () {
     // Test Environment
     let options;
