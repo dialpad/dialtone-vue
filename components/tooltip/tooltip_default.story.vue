@@ -20,6 +20,7 @@
     </div>
 
     <dt-tooltip
+      :message="message"
       :arrow-direction="arrowDirection"
       :show="show"
       :inverted="inverted"

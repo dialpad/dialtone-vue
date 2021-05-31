@@ -2,11 +2,10 @@
   <div
     :class="tooltipContainerClass"
     class="d-ps-relative d-fl-center d-d-inline-flex"
-    @mouseover="onHover(true)"
-    @focus.capture="onFocusChild(true)"
-    @blur.capture="onLeave(false)"
-    @mouseleave="onLeave(false)"
+    @focus.capture="onFocus"
+    @blur.capture="onBlur"
     @keyup.esc="onEsc"
+    @mouseover="onHover"
   >
     <div
       :id="id"
@@ -24,9 +23,6 @@
       :tabindex="anchorTabIndex"
       :aria-describedby="id"
       data-qa="dt-tooltip-anchor"
-      @focus="onFocusChild"
-      @blur="onLeave(false)"
-      @keyup.esc="onEsc"
     >
       <slot name="anchor" />
     </div>
@@ -109,7 +105,7 @@ export default {
       isHover: false,
       isESCPressed: false,
       isChildFocus: false,
-      anchorTabIndex: '-1',
+      anchorTabIndex: '-1', // anchor is not tabbable by default
     };
   },
 
@@ -128,9 +124,13 @@ export default {
 
     tooltipContainerClass () {
       return {
-        'd-tooltip--hover': this.hover && !this.isESCPressed,
-        'd-tooltip--open': this.isChildFocus,
+        'd-tooltip--hover': this.hover && !this.isESCPressed && !this.isChildFocus,
+        'd-tooltip--show': this.isChildFocus,
       };
+    },
+
+    isTooltipHasShowModifier () {
+      return this.isTooltipVisible || this.isChildFocus;
     },
 
     tooltipClasses () {
@@ -141,6 +141,8 @@ export default {
         `d-tooltip--${this.isTooltipVisible ? TOOLTIP_STATE_MODIFIERS.show : TOOLTIP_STATE_MODIFIERS.hide}`,
         {
           [`d-tooltip--${INVERTED}`]: this.inverted,
+          [`d-tooltip--${TOOLTIP_STATE_MODIFIERS.show}`]: this.isTooltipHasShowModifier,
+          [`d-tooltip--${TOOLTIP_STATE_MODIFIERS.hide}`]: !this.isTooltipHasShowModifier,
         },
       ];
     },
@@ -152,7 +154,7 @@ export default {
   },
 
   methods: {
-    onFocusChild () {
+    onFocus () {
       this.onHover(true);
       this.isChildFocus = true;
     },
@@ -161,7 +163,7 @@ export default {
       this.isHover = isHover;
     },
 
-    onLeave () {
+    onBlur () {
       this.isHover = false;
       this.isESCPressed = false;
       this.isChildFocus = false;
@@ -174,19 +176,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-// styles for programmatically determining which element is in need of focus
-// will be moved to dialtone design
-.d-tooltip--open {
-  .d-tooltip {
-    transform: translate(0,0);
-    opacity: 1;
-    visibility: visible;
-    transition:
-        visibility 0s 0s,
-        transform 200ms var(--ttf-in-out) 10ms,
-        opacity 200ms var(--ttf-in-out) 10ms;
-  }
-}
-</style>
