@@ -258,16 +258,45 @@ describe('DtSelectMenu Tests', function () {
   });
 
   describe('Accessibility Tests', function () {
-    /*
-     * Test(s) to ensure that the component is accessible
-     */
+    describe('When a description is provided', function () {
+      // Test Setup
+      beforeEach(function () {
+        propsData = { ...basePropsData, description: DESCRIPTION };
+        _setWrappers();
+      });
 
-    describe('When some description of the current environment', function () {});
-    /*
-      TODO:
-        Test aria details (with description and without description)
+      it('label aria-details should match the id of the description', function () {
+        assert.strictEqual(label.attributes('aria-details'), description.attributes('id'));
+      });
+    });
 
-    */
+    describe('When a description is not provided', function () {
+      describe('When aria-details are not provided', function () {
+        // Test Setup
+        beforeEach(function () {
+          _setWrappers();
+        });
+
+        it('label aria-details should not exist', function () {
+          assert.notExists(label.attributes('aria-details'));
+        });
+      });
+
+      describe('When aria-details are provided', function () {
+        // Test Environment
+        const ariaDetails = 'some-id';
+
+        // Test Setup
+        beforeEach(function () {
+          attrs = { ...baseAttrs, 'aria-details': ariaDetails };
+          _setWrappers();
+        });
+
+        it('label aria-details should match those provided by attrs', function () {
+          assert.strictEqual(label.attributes('aria-details'), ariaDetails);
+        });
+      });
+    });
   });
 
   describe('Interactivity Tests', function () {
