@@ -23,7 +23,6 @@
       ref="anchor"
       :tabindex="anchorTabIndex"
       :aria-describedby="id"
-      class="d-tooltip--show"
       data-qa="dt-tooltip-anchor"
       @focus="onFocusChild"
       @blur="onLeave(false)"
@@ -179,8 +178,15 @@ export default {
 <style lang="less">
 // styles for programmatically determining which element is in need of focus
 // will be moved to dialtone design
-.d-tooltip--open .d-tooltip{
-  opacity: 1;
-  visibility: visible;
+.d-tooltip--open {
+  .d-tooltip {
+    transform: translate(0,0);
+    opacity: 1;
+    visibility: visible;
+    transition:
+        visibility 0s 0s,
+        transform 200ms var(--ttf-in-out) 10ms,
+        opacity 200ms var(--ttf-in-out) 10ms;
+  }
 }
 </style>
