@@ -1,19 +1,13 @@
 <template>
   <div
-    data-qa="dt-tooltip-container"
-    :tabindex="tabIndex"
-    :class="tooltipContainerClasses"
-    @mouseover="onHover(true)"
-    @focus="onHover(true)"
-    @blur="onLeave(false)"
-    @mouseleave="onLeave(false)"
+    ref="anchorWrapper"
+    :class="tooltipContainerClass"
+    class="d-ps-relative d-fl-center d-d-inline-flex"
+    @focus.capture="onFocus"
+    @blur.capture="onBlur"
     @keyup.esc="onEsc"
+    @mouseover="onHover"
   >
-    <div
-      :aria-describedby="id"
-    >
-      <slot name="anchor" />
-    </div>
     <div
       :id="id"
       :class="tooltipClasses"
@@ -21,17 +15,22 @@
       :aria-hidden="ariaHidden"
       v-bind="$attrs"
     >
-      {{ message }}
-      <template v-if="!message">
-        <slot />
-      </template>
+      <slot>
+        {{ message }}
+      </slot>
+    </div>
+    <div
+      ref="anchor"
+      data-qa="dt-tooltip-anchor"
+    >
+      <slot name="anchor" />
     </div>
   </div>
 </template>
 
 <script>
 import { TOOLTIP_DIRECTION_MODIFIERS, TOOLTIP_STATE_MODIFIERS, INVERTED } from './tooltip_constants.js';
-import { getUniqueString } from '../utils';
+import { getUniqueString, findFirstFocusableNode } from '../utils';
 
 export default {
   name: 'DtTooltip',
@@ -39,16 +38,25 @@ export default {
   inheritAttrs: false,
 
   props: {
+    /**
+     * The id of the tooltip
+     */
     id: {
       type: String,
       default () { return getUniqueString(); },
     },
 
+    /**
+     * A provided message for the tooltip content
+     */
     message: {
       type: String,
       default: '',
     },
 
+    /**
+     * Describes the preferred placement of the tooltip
+     */
     arrowDirection: {
       type: String,
       default: 'bottom-center',
@@ -57,21 +65,34 @@ export default {
       },
     },
 
+    /**
+     * Whether the tooltip should be shown. Anchor can sync on this value
+     * by tooltip wrapper to control the tooltip's visibility.
+     */
     show: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Mode of tooltip to control the tooltip's visibility.
+     */
     hover: {
       type: Boolean,
       default: true,
     },
 
+    /**
+     * Add inverted class
+     */
     inverted: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * This property is needed for focus event
+     */
     tabIndex: {
       type: String,
       default: '0',
@@ -82,63 +103,80 @@ export default {
     return {
       isHover: false,
       isESCPressed: false,
+      isChildFocus: false,
+      anchorTabIndex: '-1', // anchor is not tabbable by default
     };
   },
 
   computed: {
     isTooltipVisible () {
-      return this.hover ? (this.isHover && !this.isESCPressed) : (this.show && !this.isESCPressed);
+      if (this.isESCPressed) {
+        return false;
+      }
+
+      return this.hover ? this.isHover : this.show;
     },
 
     ariaHidden () {
       return `${!this.isTooltipVisible}`;
     },
 
-    tooltipContainerClasses () {
-      return [
-        'd-ps-relative',
-        {
-          'd-tooltip--hover': this.hover && !this.isESCPressed,
-        },
-      ];
+    tooltipContainerClass () {
+      return {
+        'd-tooltip--hover': this.hover && !this.isESCPressed && !this.isChildFocus,
+        'd-tooltip--show': this.isChildFocus,
+      };
+    },
+
+    isTooltipHasShowModifier () {
+      return this.isTooltipVisible || this.isChildFocus;
     },
 
     tooltipClasses () {
       return [
-        'd-tooltip',
         'd-ps-absolute',
+        'd-tooltip',
         `d-tooltip__arrow--${this.arrowDirection}`,
         `d-tooltip--${this.isTooltipVisible ? TOOLTIP_STATE_MODIFIERS.show : TOOLTIP_STATE_MODIFIERS.hide}`,
         {
           [`d-tooltip--${INVERTED}`]: this.inverted,
+          [`d-tooltip--${TOOLTIP_STATE_MODIFIERS.show}`]: this.isTooltipHasShowModifier,
+          [`d-tooltip--${TOOLTIP_STATE_MODIFIERS.hide}`]: !this.isTooltipHasShowModifier,
         },
       ];
     },
   },
 
+  mounted () {
+    if (findFirstFocusableNode(this.$refs.anchor)) {
+      this.$refs.anchorWrapper.setAttribute('aria-labelledby', this.id);
+      return;
+    }
+    this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
+    this.$refs.anchor.setAttribute('aria-describedby', this.id);
+    // this.$refs.anchorWrapper.setAttribute('aria-labelledby', this.id); double check this
+  },
+
   methods: {
+    onFocus () {
+      this.onHover(true);
+      this.isChildFocus = true;
+    },
+
     onHover (isHover) {
       this.isHover = isHover;
     },
 
-    onLeave () {
+    onBlur () {
       this.isHover = false;
       this.isESCPressed = false;
+      this.isChildFocus = false;
     },
 
     onEsc () {
-      if (!this.hover && this.show) return;
-      this.isESCPressed = true;
+      this.isESCPressed = (this.hover && this.isHover) || !this.show;
+      this.isChildFocus = false;
     },
   },
 };
 </script>
-
-<style lang="less" scoped>
-.d-tooltip--hover:focus {
-  .d-tooltip {
-    visibility: visible;
-    opacity: 1;
-  }
-}
-</style>
