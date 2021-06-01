@@ -22,6 +22,7 @@
     </div>
     <div
       ref="anchor"
+      :tabindex="hasFocusableAnchorNode ? undefined : tabIndex"
       data-qa="dt-tooltip-anchor"
     >
       <slot name="anchor" />
@@ -153,12 +154,22 @@ export default {
   },
 
   mounted () {
-    if (this.hasFocusableAnchorNode) {
+    console.log('anchor slot', this.$slots.anchor)
+    console.log('anchor ref', this.$refs.anchor)
+
+    this.$refs.anchor?.children?.forEach(child => {
+      child.setAttribute('aria-describedby', this.id);
+    });
+
+    // TODO: set tabIndex in the event that anchor does not have a focusable node
+
+    // Previous implementation, to be deleted
+    /*if (this.hasFocusableAnchorNode) {
       this.$refs.anchorWrapper.setAttribute('aria-labelledby', this.id);
       return;
     }
     this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
-    this.$refs.anchor.setAttribute('aria-describedby', this.id);
+    this.$refs.anchor.setAttribute('aria-describedby', this.id);*/
   },
 
   methods: {
