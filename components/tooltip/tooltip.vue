@@ -149,7 +149,7 @@ export default {
 
   mounted () {
     if (findFirstFocusableNode(this.$refs.anchor)) {
-      this.$refs.anchorWrapper.setAttribute('aria-labelledby', this.id);
+      this.$refs.anchorWrapper.setAttribute('aria-describedby', this.id);
       return;
     }
     this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
