@@ -59,20 +59,22 @@ describe('Dialtone Vue Badge tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
 
     describe('When a text is provided via slot', function () {
+      const slotText = 'Default slot text';
       beforeEach(function () {
-        slots = { default: 'Default slot text' };
+        slots = { default: slotText };
         _setWrappers();
       });
 
-      itBehavesLikeRendersText('Default slot text');
+      itBehavesLikeRendersText(slotText);
     });
 
     describe('When a text is provided via prop', function () {
+      const propText = 'Prop text';
       beforeEach(async function () {
-        await wrapper.setProps({ text: 'Text prop' });
+        await wrapper.setProps({ text: propText });
       });
 
-      itBehavesLikeRendersText('Text prop');
+      itBehavesLikeRendersText(propText);
     });
 
     describe('When color is black-700', function () { itBehavesLikeHasCorrectColorClass('black-700'); });
