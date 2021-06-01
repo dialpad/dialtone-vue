@@ -14,7 +14,7 @@
 
 <script>
 import { SELECTED } from './breadcrumbs_constants.js';
-import { LINK_KIND_CLASSES } from '../link/link_constants';
+import { LINK_VARIANTS } from '../link/link_constants';
 import { DtLink } from '../link';
 
 export default {
@@ -40,7 +40,7 @@ export default {
       type: String,
       default: '',
       validator (kind) {
-        return LINK_KIND_CLASSES.includes(kind);
+        return LINK_VARIANTS.includes(kind);
       },
     },
 
