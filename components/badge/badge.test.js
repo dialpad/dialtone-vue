@@ -41,6 +41,7 @@ describe('Dialtone Vue Badge tests', function () {
   });
 
   describe('Presentation Tests', function () {
+    // Shared Examples
     const itBehavesLikeRendersText = text => {
       it('should render the badge', function () { assert.isTrue(badge.exists()); });
       it('should display the correct text', function () { assert.strictEqual(badge.text(), text); });
