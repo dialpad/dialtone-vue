@@ -157,6 +157,7 @@ export default {
     console.log('anchor slot', this.$slots.anchor)
     console.log('anchor ref', this.$refs.anchor)
 
+    // Add aria description to each anchored child (we can further refine this to assign the appropriate aria attrs)
     this.$refs.anchor?.children?.forEach(child => {
       child.setAttribute('aria-describedby', this.id);
     });
