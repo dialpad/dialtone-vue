@@ -161,7 +161,7 @@ export default {
       child.setAttribute('aria-describedby', this.id);
     });
 
-    // TODO: set tabIndex in the event that anchor does not have a focusable node
+    // TODO: set tabIndex in the event that anchor does not have a focusable node (might be able to move this logic to the template)
 
     // Previous implementation, to be deleted
     /*if (this.hasFocusableAnchorNode) {
