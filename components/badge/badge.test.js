@@ -62,6 +62,7 @@ describe('Dialtone Vue Badge tests', function () {
       // Test Environment
       const slotText = 'Default slot text';
 
+      // Test Setup
       beforeEach(function () {
         slots = { default: slotText };
         _setWrappers();
@@ -74,6 +75,7 @@ describe('Dialtone Vue Badge tests', function () {
       // Test Environment
       const propText = 'Prop text';
 
+      // Test Setup
       beforeEach(async function () {
         await wrapper.setProps({ text: propText });
       });
