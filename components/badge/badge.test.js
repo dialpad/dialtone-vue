@@ -59,7 +59,9 @@ describe('Dialtone Vue Badge tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
 
     describe('When a text is provided via slot', function () {
+      // Test Environment
       const slotText = 'Default slot text';
+
       beforeEach(function () {
         slots = { default: slotText };
         _setWrappers();
@@ -69,7 +71,9 @@ describe('Dialtone Vue Badge tests', function () {
     });
 
     describe('When a text is provided via prop', function () {
+      // Test Environment
       const propText = 'Prop text';
+
       beforeEach(async function () {
         await wrapper.setProps({ text: propText });
       });
