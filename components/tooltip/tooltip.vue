@@ -12,6 +12,7 @@
       :id="id"
       :class="tooltipClasses"
       data-qa="dt-tooltip"
+      role="tooltip"
       :aria-hidden="ariaHidden"
       v-bind="$attrs"
     >
@@ -154,7 +155,6 @@ export default {
     }
     this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
     this.$refs.anchor.setAttribute('aria-describedby', this.id);
-    // this.$refs.anchorWrapper.setAttribute('aria-labelledby', this.id); double check this
   },
 
   methods: {
