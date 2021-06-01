@@ -110,6 +110,10 @@ export default {
   },
 
   computed: {
+    hasFocusableAnchorNode () {
+      return !!findFirstFocusableNode(this.$refs.anchor);
+    },
+
     isTooltipVisible () {
       if (this.isESCPressed) {
         return false;
@@ -149,7 +153,7 @@ export default {
   },
 
   mounted () {
-    if (findFirstFocusableNode(this.$refs.anchor)) {
+    if (this.hasFocusableAnchorNode) {
       this.$refs.anchorWrapper.setAttribute('aria-labelledby', this.id);
       return;
     }
