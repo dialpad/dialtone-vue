@@ -2,6 +2,7 @@ import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtBadge from './badge.vue';
 import { BADGE_COLOR_MODIFIERS } from './badge_constants';
+import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 
 // Constants
 const basePropsData = {};
@@ -51,7 +52,7 @@ describe('Dialtone Vue Badge tests', function () {
     const itBehavesLikeHasCorrectColorClass = color => {
       it('should have correct class', async function () {
         await wrapper.setProps({ color });
-        assert.isTrue(badge.classes().includes(BADGE_COLOR_MODIFIERS[color]));
+        itBehavesLikeHasCorrectClass(badge, BADGE_COLOR_MODIFIERS[color]);
       });
     };
 
