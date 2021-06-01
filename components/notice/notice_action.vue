@@ -1,32 +1,35 @@
 <template>
-  <div class="d-notice__actions">
+  <div
+    class="d-notice__actions"
+    data-qa="notice-content-actions"
+  >
     <slot />
-    <hs-button
+    <dt-button
       v-if="!hideClose"
       ref="closeButton"
+      size="sm"
       importance="clear"
       circle
-      class="d-notice__btn d-notice__close"
-      :aria-label="closeButtonProps.ariaLabel ? closeButtonProps.ariaLabel : null"
+      :aria-label="closeButtonProps.ariaLabel ? closeButtonProps.ariaLabel : 'Close'"
       v-bind="closeButtonProps"
       @click="close"
     >
       <template #icon>
         <icon-close />
       </template>
-    </hs-button>
+    </dt-button>
   </div>
 </template>
 <script>
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
-import HsButton from '../button/button';
+import DtButton from '../button/button';
 
 export default {
-  name: 'HsNoticeAction',
+  name: 'DtNoticeAction',
 
   components: {
     IconClose,
-    HsButton,
+    DtButton,
   },
 
   props: {

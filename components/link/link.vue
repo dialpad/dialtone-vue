@@ -1,7 +1,6 @@
 <template>
   <a
-    :href="href"
-    :class="['d-link', linkClasses]"
+    :class="linkClasses"
     data-qa="dt-link"
   >
     <slot />
@@ -9,20 +8,14 @@
 </template>
 
 <script>
-import { LINK_MODIFIER_CLASSES, DANGER, LINK_KIND_CLASSES } from './link_constants.js';
+import { LINK_VARIANTS } from './link_constants.js';
 
 export default {
   name: 'DtLink',
 
-  props: {
-    /**
-     * Provides the url for the link
-     */
-    href: {
-      type: String,
-      required: true,
-    },
+  inheritAttrs: true,
 
+  props: {
     /**
      * Applies the link variant styles
      */
@@ -30,24 +23,8 @@ export default {
       type: String,
       default: '',
       validator (kind) {
-        return LINK_KIND_CLASSES.includes(kind);
+        return LINK_VARIANTS.includes(kind);
       },
-    },
-
-    /**
-     * Applies the inverted styles to the link
-     */
-    inverted: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * Applies the disabled styles to the link
-     */
-    disabled: {
-      type: Boolean,
-      default: false,
     },
   },
 
@@ -56,19 +33,7 @@ export default {
       return [
         'd-link',
         { [`d-link--${this.kind}`]: this.kind.length > 0 },
-        { [this.linkDisabledClass()]: this.disabled },
-        { [this.linkInvertedClass()]: this.inverted },
       ];
-    },
-  },
-
-  methods: {
-    linkDisabledClass () {
-      return this.inverted ? LINK_MODIFIER_CLASSES.invertedDisabled : LINK_MODIFIER_CLASSES.disabled;
-    },
-
-    linkInvertedClass () {
-      return this.kind === DANGER ? LINK_MODIFIER_CLASSES.invertedDanger : LINK_MODIFIER_CLASSES.inverted;
     },
   },
 };
