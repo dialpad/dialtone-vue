@@ -28,9 +28,10 @@
     >
       <template v-if="defaultSlot">
         {{ defaultSlot }}
+        defaultSlot VO test
       </template>
       <template #anchor>
-        some text
+        some text Voice Over anchor
       </template>
     </dt-tooltip>
   </div>

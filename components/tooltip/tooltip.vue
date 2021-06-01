@@ -1,7 +1,6 @@
 <template>
   <div
-    :tabindex="anchorTabIndex"
-    :aria-labelledby="id"
+    ref="anchorWrapper"
     :class="tooltipContainerClass"
     class="d-ps-relative d-fl-center d-d-inline-flex"
     @focus.capture="onFocus"
@@ -22,7 +21,6 @@
     </div>
     <div
       ref="anchor"
-      :aria-describedby="id"
       data-qa="dt-tooltip-anchor"
     >
       <slot name="anchor" />
@@ -150,8 +148,13 @@ export default {
   },
 
   mounted () {
-    if (findFirstFocusableNode(this.$refs.anchor)) return;
-    this.anchorTabIndex = this.tabIndex;
+    if (findFirstFocusableNode(this.$refs.anchor)) {
+      this.$refs.anchorWrapper.setAttribute('aria-labelledby', this.id);
+      return;
+    }
+    this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
+    this.$refs.anchor.setAttribute('aria-describedby', this.id);
+    // this.$refs.anchorWrapper.setAttribute('aria-labelledby', this.id); double check this
   },
 
   methods: {
