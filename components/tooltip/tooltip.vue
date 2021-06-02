@@ -12,6 +12,7 @@
       :id="id"
       :class="tooltipClasses"
       data-qa="dt-tooltip"
+      role="tooltip"
       :aria-hidden="ariaHidden"
       v-bind="$attrs"
     >
@@ -148,16 +149,25 @@ export default {
   },
 
   mounted () {
-    if (findFirstFocusableNode(this.$refs.anchor)) {
-      this.$refs.anchorWrapper.setAttribute('aria-describedby', this.id);
-      return;
+    if (this.hasFocusableAnchorNode()) {
+      /* TODO: In the future we might want to refine this to apply the appropriate aria attrs given the child element
+       * type.
+       */
+      // Add aria description to each anchored child
+      this.$refs.anchor?.children?.forEach(child => {
+        child.setAttribute('aria-describedby', this.id);
+      });
+    } else {
+      this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
+      this.$refs.anchor.setAttribute('aria-describedby', this.id);
     }
-    this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
-    this.$refs.anchor.setAttribute('aria-describedby', this.id);
-    // this.$refs.anchorWrapper.setAttribute('aria-labelledby', this.id); double check this
   },
 
   methods: {
+    hasFocusableAnchorNode () {
+      return !!findFirstFocusableNode(this.$refs.anchor);
+    },
+
     onFocus () {
       this.onHover(true);
       this.isChildFocus = true;
