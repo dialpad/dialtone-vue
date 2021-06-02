@@ -64,7 +64,7 @@
       </dt-tooltip>
     </div>
 
-    <div class="d-bgc-purple-800 d-py64">
+    <div class="d-bgc-purple-800 d-pt64">
       <div class="d-py64 d-px64">
         <!-- Inverted state -->
         <dt-tooltip

@@ -1,6 +1,6 @@
 <template>
-  <div class="d-fl-center d-fd-column d-h216">
-    <div class="d-mb64">
+  <div class="d-fl-center d-fd-column d-pt64">
+    <div class="d-pt16">
       <dt-tooltip
         :message="message"
         :arrow-direction="arrowDirection"
@@ -18,22 +18,6 @@
         </template>
       </dt-tooltip>
     </div>
-
-    <dt-tooltip
-      :message="message"
-      :arrow-direction="arrowDirection"
-      :show="show"
-      :inverted="inverted"
-      :hover="hover"
-    >
-      <template v-if="defaultSlot">
-        {{ defaultSlot }}
-        defaultSlot VO test
-      </template>
-      <template #anchor>
-        some text Voice Over anchor
-      </template>
-    </dt-tooltip>
   </div>
 </template>
 

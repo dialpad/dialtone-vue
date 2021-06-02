@@ -16,8 +16,8 @@ screen element or component, a text box displays information about that element 
 function, or what an abbreviation stands for). The tooltip is displayed continuously as long as the user hovers over the
 element
 
-A tooltip has 2 major pieces that are provided as required named slot  the anchor and the content which could be a slot
-or prop message.
+A tooltip has 2 major pieces that are provided as required named slot for **the anchor** and **the content** which could
+be a slot or prop message.
 
 ## Styles
 
@@ -35,7 +35,6 @@ or prop message.
 Due to the different contexts in which a tooltip can be used, focus management and
 keyboard shortcut ESC is provided.
 You are encouraged to consult the ARIA documentation for the particualr role
-you are implementing to see how keyboard focus and shortcuts should be implemented.
 
 ## Anchor
 
@@ -57,12 +56,15 @@ with the correct values as the `attrs` to the anchor slot. Applying them is as s
 Defines which side of the tooltip its arrow appears.
 No arrow direction is assigned by default. You must select a direction.
 
-|  |  |  |
-|-|-|-|
-|**top-left**|**top-center**|**top-right**|
-|**right-top**|**right-center**|**right-bottom**|
-|**bottom-left**|**bottom-center**|**bottom-right**|
-|**left-top**|**left-center**|**left-bottom**|
+| top  | right | left | bottom |
+|-|-|-|-|
+|**top-left**|**right-top**|**left-top**|**bottom-left**|
+|**top-center**|**right-center**|**left-center**|**bottom-center**|
+|**top-right**|**right-bottom**|**left-bottom**|**bottom-right**|
+
+<Canvas>
+  <Story id="elements-tooltip--variants" />
+</Canvas>
 
 ## Props, Slots & Events
 

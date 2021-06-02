@@ -9,7 +9,7 @@ import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
 export const argsData = {
   message: 'This is a Tooltip',
   anchorSlot: 'Hover over me to see a tooltip',
-  default: 'default',
+  default: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
   show: true,
 };
 
@@ -43,7 +43,7 @@ export const argTypesData = {
     },
   },
 
-  anchorSlot: {
+  anchor: {
     name: 'anchor',
     description: 'slot for tooltip',
     control: 'text',
