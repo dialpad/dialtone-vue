@@ -27,44 +27,27 @@ export const argsData = {
     label: 'Current Page',
     selected: true,
   }],
-  breadcrumbsInverted: [{
-    url: '#',
-    label: 'Root',
-  },
-  {
-    url: '#',
-    label: 'Section',
-  },
-  {
-    url: '#',
-    label: 'Section',
-  },
-  {
-    url: '#',
-    label: 'Section',
-  },
-  {
-    url: '#',
-    label: 'Current Page',
-    selected: true,
-  }],
+  id: 'uniq id',
+  inverted: false,
 };
 
 export const argTypesData = {
-  // Props
-  some: {
-    description: 'Describes the some prop',
+  breadcrumbs: {
+    control: 'object',
     table: {
-      category: 'props',
-      type: {
-        summary: 'string',
+      defaultValue: {
+        summary: '{ url: string, label: string }[]',
       },
     },
-    control: {
-      type: 'text',
+  },
+  id: {
+    control: 'text',
+    table: {
+      defaultValue: {
+        summary: 'uniq id',
+      },
     },
   },
-
   // Slots
   default: {
     control: 'text',
@@ -72,24 +55,6 @@ export const argTypesData = {
       type: {
         summary: 'text/html',
       },
-    },
-  },
-  someSlot: {
-    name: 'some',
-    description: 'Slot for some',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-
-  // Action Event Handlers
-  onEvent: {
-    table: {
-      disable: true,
     },
   },
 };

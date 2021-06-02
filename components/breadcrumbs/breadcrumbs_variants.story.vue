@@ -22,19 +22,24 @@ export default {
   data () {
     return {
       breadcrumbsInverted: [{
-        href: '#',
-        label: 'string',
-        inverted: true,
+        url: '#',
+        label: 'Root',
       },
       {
-        href: '#',
-        label: 'string',
-        inverted: true,
+        url: '#',
+        label: 'Section',
       },
       {
-        href: '#',
-        label: 'string',
-        inverted: true,
+        url: '#',
+        label: 'Section',
+      },
+      {
+        url: '#',
+        label: 'Section',
+      },
+      {
+        url: '#',
+        label: 'Current Page',
         selected: true,
       }],
     };

@@ -2,6 +2,7 @@
   <dt-breadcrumbs
     class="d-py16 d-px12"
     :breadcrumbs="breadcrumbs"
+    :inverted="inverted"
   />
 </template>
 
