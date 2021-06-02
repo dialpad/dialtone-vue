@@ -8,7 +8,7 @@
       <template v-if="breadcrumbs.length">
         <dt-breadcrumb-item
           v-for="(item, index) in breadcrumbs"
-          :key="getMessageKey(item.url, index)"
+          :key="getBreadcrumbItemKey(item.url, index)"
           :inverted="inverted"
           v-bind="item"
         >
@@ -75,7 +75,7 @@ export default {
   },
 
   methods: {
-    getMessageKey (url, index) {
+    getBreadcrumbItemKey (url, index) {
       return `breadcrumb-item-${url}-${index}`;
     },
   },
