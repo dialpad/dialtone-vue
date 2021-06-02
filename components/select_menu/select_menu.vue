@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {
   LABEL_SIZE_MODIFIERS,
   DESCRIPTION_SIZE_MODIFIERS,
@@ -260,6 +261,20 @@ export default {
     getOptionKey (value) {
       return `select-${this.selectKey}-option-${value}`;
     },
+
+    validateOptionsPresence () {
+      if (this.options?.length < 1 && !this.$slots.default) {
+        Vue.util.warn('Options are expected to be provided via prop or slot', this);
+      }
+    },
+  },
+
+  mounted () {
+    this.validateOptionsPresence();
+  },
+
+  beforeUpdate () {
+    this.validateOptionsPresence();
   },
 };
 </script>

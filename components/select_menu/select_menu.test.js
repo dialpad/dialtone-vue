@@ -1,5 +1,7 @@
 import { assert } from 'chai';
 import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
+import sinon from 'sinon';
+import Vue from 'vue';
 import { itBehavesLikeEmitsExpectedEvent } from '../../tests/shared_examples/events';
 import {
   itBehavesLikePassesCustomPropValidation,
@@ -332,6 +334,75 @@ describe('DtSelectMenu Tests', function () {
 
       describe('when provided size is not in SELECT_SIZE_MODIFIERS', function () {
         itBehavesLikeFailsCustomPropValidation(prop, `NOT${SELECT_SIZE_MODIFIERS.md}`);
+      });
+    });
+
+    describe('Options Validation', function () {
+      // Test Setup
+      before(function () {
+        Vue.config.silent = true;
+        sinon.spy(Vue.util, 'warn');
+      });
+
+      // Test Teardown
+      afterEach(function () {
+        Vue.util.warn.resetHistory();
+      });
+
+      after(function () {
+        Vue.util.warn.restore();
+        Vue.config.silent = false;
+      });
+
+      // Shared Examples
+      const itBehavesLikeDoesNotRaiseAnyWarnings = () => {
+        it('should not raise any warnings', function () { assert.isTrue(Vue.util.warn.notCalled); });
+      };
+
+      const itBehavesLikeRaisesWarning = () => {
+        it('should raise a single warning', function () { assert.isTrue(Vue.util.warn.calledOnce); });
+        it('should have expected warning message', function () {
+          assert.strictEqual(Vue.util.warn.firstCall.args[0], 'Options are expected to be provided via prop or slot');
+        });
+      };
+
+      describe('When options are provided via prop', function () {
+        // Test Setup
+        beforeEach(function () {
+          _mountWrappers();
+        });
+
+        itBehavesLikeDoesNotRaiseAnyWarnings();
+
+        describe('When updated options are empty', function () {
+          // Test Setup
+          beforeEach(async function () {
+            await wrapper.setProps({ options: [] });
+          });
+
+          itBehavesLikeRaisesWarning();
+        });
+      });
+
+      describe('When options are provided via slot', function () {
+        // Test Setup
+        beforeEach(function () {
+          propsData = { ...propsData, options: undefined };
+          slots = { default: '<option value="1">Option 1</option><option value="2">Option 2</option>' };
+          _mountWrappers();
+        });
+
+        itBehavesLikeDoesNotRaiseAnyWarnings();
+      });
+
+      describe('When options are not provided', function () {
+        // Test Setup
+        beforeEach(function () {
+          propsData = { ...propsData, options: undefined };
+          _mountWrappers();
+        });
+
+        itBehavesLikeRaisesWarning();
       });
     });
   });
