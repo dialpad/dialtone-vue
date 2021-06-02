@@ -7,35 +7,45 @@ import DtBreadcrumbsVariantsTemplate from './breadcrumbs_variants.story.vue';
 // Default Prop Values
 export const argsData = {
   breadcrumbs: [{
-    href: '#',
-    label: 'string',
-    kind: 'muted',
+    url: '#',
+    label: 'Root',
   },
   {
-    href: '#',
-    label: 'string',
-    kind: 'muted',
+    url: '#',
+    label: 'Section',
   },
   {
-    href: '#',
-    label: 'string',
-    kind: 'muted',
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Current Page',
     selected: true,
   }],
   breadcrumbsInverted: [{
-    href: '#',
-    label: 'string',
-    inverted: true,
+    url: '#',
+    label: 'Root',
   },
   {
-    href: '#',
-    label: 'string',
-    inverted: true,
+    url: '#',
+    label: 'Section',
   },
   {
-    href: '#',
-    label: 'string',
-    inverted: true,
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Current Page',
     selected: true,
   }],
 };
