@@ -7,24 +7,64 @@ import DtBreadcrumbsVariantsTemplate from './breadcrumbs_variants.story.vue';
 // Default Prop Values
 export const argsData = {
   breadcrumbs: [{
-    href: '#',
-    label: 'string',
-    kind: 'muted',
+    url: '#',
+    label: 'Root',
   },
   {
-    href: '#',
-    label: 'string',
-    kind: 'muted',
+    url: '#',
+    label: 'Section',
   },
   {
-    href: '#',
-    label: 'string',
-    kind: 'muted',
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Current Page',
+    selected: true,
+  }],
+  breadcrumbsInverted: [{
+    url: '#',
+    label: 'Root',
+  },
+  {
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Current Page',
     selected: true,
   }],
 };
 
 export const argTypesData = {
+  // Props
+  some: {
+    description: 'Describes the some prop',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'string',
+      },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
   // Slots
   default: {
     control: 'text',
@@ -32,6 +72,24 @@ export const argTypesData = {
       type: {
         summary: 'text/html',
       },
+    },
+  },
+  someSlot: {
+    name: 'some',
+    description: 'Slot for some',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+
+  // Action Event Handlers
+  onEvent: {
+    table: {
+      disable: true,
     },
   },
 };
@@ -51,8 +109,10 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBreadcrumbsDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBreadcrumbsVariantsTemplate);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBreadcrumbsDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBreadcrumbsVariantsTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});

@@ -1,5 +1,8 @@
 <template>
-  <dt-breadcrumbs :breadcrumbs="breadcrumbs" :inverted="inverted"/>
+  <dt-breadcrumbs
+    class="d-py16 d-px12"
+    :breadcrumbs="breadcrumbs"
+  />
 </template>
 
 <script>

@@ -1,21 +1,23 @@
 <template>
   <li :class="breadcrumbItemClasses">
     <dt-link
-      :href="href"
-      :kind="kind"
-      :inverted="inverted"
-      :disabled="disabled"
+      :kind="kindLink"
       :aria-current="ariaCurrent"
+      :href="url"
+      data-qa="breadcrumb"
+      v-bind="$attrs"
     >
-      <slot />
+      <slot>
+        {{ label }}
+      </slot>
     </dt-link>
   </li>
 </template>
 
 <script>
 import { SELECTED } from './breadcrumbs_constants.js';
-import { LINK_KIND_CLASSES } from '../link/link_constants';
 import { DtLink } from '../link';
+import { INVERTED, MUTED } from '../link/link_constants';
 
 export default {
   name: 'DtBreadcrumbItem',
@@ -24,26 +26,9 @@ export default {
     DtLink,
   },
 
+  inheritAttrs: false,
+
   props: {
-    /**
-     * Provides the url for the link
-     */
-    href: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * Applies the link variant styles
-     */
-    kind: {
-      type: String,
-      default: '',
-      validator (kind) {
-        return LINK_KIND_CLASSES.includes(kind);
-      },
-    },
-
     /**
      * Applies the inverted styles to the link
      */
@@ -53,20 +38,35 @@ export default {
     },
 
     /**
-     * Applies the disabled styles to the link
+     * Applies selected styles to the breadcrumb
      */
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-
     selected: {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Describes the breadcrumb. Overridden by default slot
+     * */
+    label: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Provides the link element with a URL
+     * */
+    url: {
+      type: String,
+      required: true,
+    },
   },
 
   computed: {
+    kindLink () {
+      return this.inverted ? INVERTED : MUTED;
+    },
+
     ariaCurrent () {
       return this.selected ? 'location' : '';
     },

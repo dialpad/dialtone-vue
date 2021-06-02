@@ -1,5 +1,5 @@
 <template>
-  <hs-radio
+  <dt-radio
     :label="label"
     :name="name"
     :value="value"
@@ -24,16 +24,14 @@
     >
       <span v-html="descriptionSlot" />
     </template>
-  </hs-radio>
+  </dt-radio>
 </template>
 
 <script>
-import HsRadio from './radio';
-import fixDefaultSlot from '../plugins/fixDefaultSlot';
+import DtRadio from './radio';
 
 export default {
   name: 'RadioDefault',
-  components: { HsRadio },
-  mixins: [fixDefaultSlot],
+  components: { DtRadio },
 };
 </script>

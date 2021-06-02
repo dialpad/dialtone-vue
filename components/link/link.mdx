@@ -4,7 +4,7 @@ import DtLink from './link';
 # Links
 
 <Subtitle>
-  Links allow users to click their way from page to page.
+  A link is a navigational element that can be found on its own, within other text, or directly following content.
 </Subtitle>
 
 ## Base Style
@@ -23,6 +23,9 @@ Links allow users to click their way from page to page.
 
 ## Props, Slots & Events
 
+This element's attributes include [The Anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a)
+attributes.
+
 <ArgsTable of={DtLink} />
 
 ## Usage
@@ -33,24 +36,23 @@ Links allow users to click their way from page to page.
 import { DtLink } from '@dialpad/handtet';
 ```
 
-### With Some Kind
+### Default
 
-```vue
+```jsx
 <dt-link
   href="#"
-  kind="variant"
 >
-Link
+  Link
 </dt-link>
 ```
 
-### With Some Other Kind
+### With Kind
 
-```vue
+```jsx
 <dt-link
   href="#"
-  kind="'' | danger | warning | success | muted"
+  kind="danger | warning | success | muted | inverted"
 >
-Link
+  Link
 </dt-link>
 ```
