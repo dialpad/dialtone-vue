@@ -22,7 +22,6 @@
     </div>
     <div
       ref="anchor"
-      :tabindex="hasFocusableAnchorNode ? undefined : tabIndex"
       data-qa="dt-tooltip-anchor"
     >
       <slot name="anchor" />
@@ -111,10 +110,6 @@ export default {
   },
 
   computed: {
-    hasFocusableAnchorNode () {
-      return !!findFirstFocusableNode(this.$refs.anchor);
-    },
-
     isTooltipVisible () {
       if (this.isESCPressed) {
         return false;
@@ -154,26 +149,25 @@ export default {
   },
 
   mounted () {
-    console.log('anchor slot', this.$slots.anchor)
-    console.log('anchor ref', this.$refs.anchor)
-
-    // Add aria description to each anchored child (we can further refine this to assign the appropriate aria attrs)
-    this.$refs.anchor?.children?.forEach(child => {
-      child.setAttribute('aria-describedby', this.id);
-    });
-
-    // TODO: set tabIndex in the event that anchor does not have a focusable node (might be able to move this logic to the template)
-
-    // Previous implementation, to be deleted
-    /*if (this.hasFocusableAnchorNode) {
-      this.$refs.anchorWrapper.setAttribute('aria-labelledby', this.id);
-      return;
+    if (this.hasFocusableAnchorNode()) {
+      /* TODO: In the future we might want to refine this to apply the appropriate aria attrs given the child element
+       * type.
+       */
+      // Add aria description to each anchored child
+      this.$refs.anchor?.children?.forEach(child => {
+        child.setAttribute('aria-describedby', this.id);
+      });
+    } else {
+      this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
+      this.$refs.anchor.setAttribute('aria-describedby', this.id);
     }
-    this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
-    this.$refs.anchor.setAttribute('aria-describedby', this.id);*/
   },
 
   methods: {
+    hasFocusableAnchorNode () {
+      return !!findFirstFocusableNode(this.$refs.anchor);
+    },
+
     onFocus () {
       this.onHover(true);
       this.isChildFocus = true;
