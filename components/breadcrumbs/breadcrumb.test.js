@@ -1,10 +1,6 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtBreadcrumb from './breadcrumbs.vue';
-import {
-  INVERTED,
-  SELECTED,
-} from './breadcrumbs_constants';
 
 // Constants
 const basePropsData = {
@@ -56,20 +52,6 @@ describe('Dialtone Vue Breadcrumb tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
     it('should render the breadcrumbs', function () { assert.exists(breadcrumbs.exists(), 'breadcrumbs exists'); });
     it('should render the item breadcrumb', function () { assert.exists(breadcrumbItems.exists(), 'ite,s exists'); });
-
-    describe('When the breadcrumb has default state', function () {
-      it('should has correct aria-current', function () {
-          console.log(breadcrumbItems.filter(item => {
-              const v = item.find('[aria-current="location"]')
-              console.log(v.__proto__.constructor.name)
-              return v.__proto__.constructor.name === 'VueWrapper'
-          }).length)
-        //   breadcrumbItems.find(['aria-current="location"'])
-        //
-        //
-        // assert.isFalse(breadcrumbItems.find(['aria-current="location"']));
-      });
-    });
   //
   //   describe('When a default slot is provided', function () {
   //     it('should render the provided data', function () { assert.equal(nativeLink.text(), slots.default); });

@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 
-import HsNotice from './notice';
+import DtNotice from './notice';
 
 // Constants
 const basePropsData = {
@@ -15,7 +15,7 @@ const baseSlotsData = {
   icon: 'icon slot content',
 };
 
-describe('HsNotice tests', function () {
+describe('DtNotice tests', function () {
   let wrapper;
 
   let rootElement;
@@ -24,7 +24,7 @@ describe('HsNotice tests', function () {
   let iconChildStub;
 
   const _setWrappers = () => {
-    wrapper = shallowMount(HsNotice, {
+    wrapper = shallowMount(DtNotice, {
       propsData: basePropsData,
       slots: baseSlotsData,
       localVue: this.localVue,
@@ -34,9 +34,9 @@ describe('HsNotice tests', function () {
 
   const _setChildWrappers = () => {
     rootElement = wrapper.find('aside');
-    actionChildStub = wrapper.find('hs-notice-action-stub');
-    contentChildStub = wrapper.find('hs-notice-content-stub');
-    iconChildStub = wrapper.find('hs-notice-icon-stub');
+    actionChildStub = wrapper.find('dt-notice-action-stub');
+    contentChildStub = wrapper.find('dt-notice-content-stub');
+    iconChildStub = wrapper.find('dt-notice-icon-stub');
   };
 
   before(function () {
@@ -82,6 +82,12 @@ describe('HsNotice tests', function () {
       });
     });
 
+    describe('When kind is not specified', function () {
+      it('Does not add notice kind class', async function () {
+        assert.strictEqual(rootElement.classes('d-notice--'), false);
+      });
+    });
+
     describe('When kind is set to error', function () {
       beforeEach(async function () {
         await wrapper.setProps({ kind: 'error' });
@@ -102,16 +108,17 @@ describe('HsNotice tests', function () {
   describe('Accessibility Tests', function () {
     describe('When rendered with default content', function () {
       it('Shows correct role', function () {
-        assert.strictEqual(rootElement.attributes().role, 'status');
+        assert.strictEqual(contentChildStub.attributes('role'), 'status');
       });
     });
 
-    describe('When important is true', function () {
+    describe('When role is alert', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ important: true });
+        await wrapper.setProps({ role: 'alert' });
       });
+
       it('Shows correct role', async function () {
-        assert.strictEqual(rootElement.attributes().role, 'alert');
+        assert.strictEqual(contentChildStub.attributes('role'), 'alert');
       });
     });
   });

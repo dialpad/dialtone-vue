@@ -3,7 +3,7 @@ import DtLink from './link';
 import DtLinkMdx from './link.mdx';
 import DtLinkDefaultTemplate from './link_default.story.vue';
 import DtLinkVariantsTemplate from './link_variants.story.vue';
-import { LINK_KIND_CLASSES } from './link_constants';
+import { LINK_VARIANTS } from './link_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -18,8 +18,39 @@ export const argTypesData = {
     defaultValue: '',
     control: {
       type: 'select',
-      options: LINK_KIND_CLASSES,
+      options: LINK_VARIANTS,
     },
+  },
+
+  // Native Props
+  href: {
+    description: 'native "href" prop',
+    defaultValue: undefined,
+    type: {
+      summary: 'string',
+    },
+    table: {
+      category: 'native props',
+      defaultValue: {
+        summary: 'undefined',
+      },
+    },
+    control: 'text',
+  },
+  rel: {
+    description: `native "rel" prop. Relationship between the location in the document containing the hyperlink
+        and the destination resource.`,
+    defaultValue: undefined,
+    type: {
+      summary: 'string',
+    },
+    table: {
+      category: 'native props',
+      defaultValue: {
+        summary: 'undefined',
+      },
+    },
+    control: 'text',
   },
 
   // Slots

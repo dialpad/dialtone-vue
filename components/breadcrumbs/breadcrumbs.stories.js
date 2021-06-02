@@ -7,57 +7,49 @@ import DtBreadcrumbsVariantsTemplate from './breadcrumbs_variants.story.vue';
 // Default Prop Values
 export const argsData = {
   breadcrumbs: [{
-    href: '#',
-    label: 'string',
-    kind: 'muted',
+    url: '#',
+    label: 'Root',
   },
   {
-    href: '#',
-    label: 'string',
-    kind: 'muted',
+    url: '#',
+    label: 'Section',
   },
   {
-    href: '#',
-    label: 'string',
-    kind: 'muted',
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Current Page',
     selected: true,
   }],
   breadcrumbsInverted: [{
-    href: '#',
-    label: 'string',
-    inverted: true,
+    url: '#',
+    label: 'Root',
   },
   {
-    href: '#',
-    label: 'string',
-    inverted: true,
+    url: '#',
+    label: 'Section',
   },
   {
-    href: '#',
-    label: 'string',
-    inverted: true,
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Section',
+  },
+  {
+    url: '#',
+    label: 'Current Page',
     selected: true,
   }],
 };
 
-/**
- * example prop description decorator
- */
-
-/*
-  Controls
-  ========
-
-  Here we define any custom controls or control overrides for our components.
-
-  By default storybook will attempt to provide an appropriate control of the same name for each property in the
-  component as well as include any description provided using a prop decorator within your component (see above).
-
-  Storybook will also attempt to provide an appropriate control for each slot in the component as well as include any
-  description provided using a slot decorator within your component (see below).
-
-  <!-- @slot example slot decorator -->
-*/
 export const argTypesData = {
   // Props
   some: {
@@ -82,11 +74,6 @@ export const argTypesData = {
       },
     },
   },
-  /*
-    We use the following naming scheme `<SLOT_NAME>Slot` for slot controls to prevent conflicts with props that share
-    the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
-    table and description within the controls accurately reflects the correct names of our component's props and slots.
-  */
   someSlot: {
     name: 'some',
     description: 'Slot for some',
@@ -122,8 +109,10 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBreadcrumbsDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBreadcrumbsVariantsTemplate);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBreadcrumbsDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBreadcrumbsVariantsTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
