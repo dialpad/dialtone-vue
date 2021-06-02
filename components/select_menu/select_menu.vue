@@ -20,7 +20,10 @@
         <!-- @slot Slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
       </div>
-      <div :class="selectClasses">
+      <div
+        :class="selectClasses"
+        data-qa="dt-select-wrapper"
+      >
         <select
           :class="selectInputClasses"
           v-bind="$attrs"
@@ -53,6 +56,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {
   LABEL_SIZE_MODIFIERS,
   DESCRIPTION_SIZE_MODIFIERS,
@@ -257,6 +261,20 @@ export default {
     getOptionKey (value) {
       return `select-${this.selectKey}-option-${value}`;
     },
+
+    validateOptionsPresence () {
+      if (this.options?.length < 1 && !this.$slots.default) {
+        Vue.util.warn('Options are expected to be provided via prop or slot', this);
+      }
+    },
+  },
+
+  mounted () {
+    this.validateOptionsPresence();
+  },
+
+  beforeUpdate () {
+    this.validateOptionsPresence();
   },
 };
 </script>

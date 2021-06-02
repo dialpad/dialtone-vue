@@ -17,6 +17,10 @@ const hasValidOptionLabel = option => {
 };
 
 export const optionsValidator = options => {
+  if (!options) {
+    return true;
+  }
+
   return options.every(option => {
     if (!hasValidOptionIndex(option)) {
       return false;
