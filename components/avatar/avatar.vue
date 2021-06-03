@@ -2,6 +2,7 @@
   <div
     :id="id"
     :class="avatarClasses"
+    data-qa="dt-avatar"
   >
     <!-- @slot Slot for avatar content -->
     <slot>
