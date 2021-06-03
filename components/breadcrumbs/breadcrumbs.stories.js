@@ -7,23 +7,23 @@ import DtBreadcrumbsVariantsTemplate from './breadcrumbs_variants.story.vue';
 // Default Prop Values
 export const argsData = {
   breadcrumbs: [{
-    url: '#',
+    href: '#',
     label: 'Root',
   },
   {
-    url: '#',
+    href: '#',
     label: 'Section',
   },
   {
-    url: '#',
+    href: '#',
     label: 'Section',
   },
   {
-    url: '#',
+    href: '#',
     label: 'Section',
   },
   {
-    url: '#',
+    href: '#',
     label: 'Current Page',
     selected: true,
   }],
