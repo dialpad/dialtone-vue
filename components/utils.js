@@ -68,10 +68,6 @@ export function hasFormattedMessageOfType (formattedMessages, messageType) {
   return formattedMessages.some(message => message?.type === messageType);
 }
 
-export function capitalize (str = '') {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 export default {
   getUniqueString,
   formatMessages,

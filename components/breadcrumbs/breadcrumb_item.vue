@@ -3,8 +3,7 @@
     <dt-link
       :kind="kindLink"
       :aria-current="ariaCurrent"
-      :href="url"
-      data-qa="breadcrumb"
+      data-qa="breadcrumb-item"
       v-bind="$attrs"
     >
       <slot>
@@ -51,14 +50,6 @@ export default {
     label: {
       type: String,
       default: '',
-    },
-
-    /**
-     * Provides the link element with a URL
-     * */
-    url: {
-      type: String,
-      required: true,
     },
   },
 
