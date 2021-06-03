@@ -12,9 +12,6 @@
         :alt="alt"
       >
     </slot>
-
-    <!-- @slot Slot for avatar presence component -->
-    <slot name="presence" />
   </div>
 </template>
 

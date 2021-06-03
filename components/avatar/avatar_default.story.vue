@@ -19,12 +19,6 @@
         v-html="defaultSlot"
       />
     </template>
-
-    <template
-      #presence
-    >
-      {{ presence }}
-    </template>
   </dt-avatar>
 </template>
 

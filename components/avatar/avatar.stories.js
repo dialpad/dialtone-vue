@@ -54,14 +54,6 @@ export const argTypesData = {
       },
     },
   },
-  presence: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
 };
 
 // Story Collection
