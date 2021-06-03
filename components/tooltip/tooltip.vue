@@ -1,6 +1,5 @@
 <template>
   <div
-    ref="anchorWrapper"
     :class="tooltipContainerClass"
     class="d-ps-relative d-fl-center d-d-inline-flex"
     @focus.capture="onFocus"
@@ -30,7 +29,12 @@
 </template>
 
 <script>
-import { TOOLTIP_DIRECTION_MODIFIERS, TOOLTIP_STATE_MODIFIERS, INVERTED } from './tooltip_constants.js';
+import {
+  TOOLTIP_DIRECTION_MODIFIERS,
+  TOOLTIP_STATE_MODIFIERS,
+  INVERTED,
+  TOOLTIP_KIND_MODIFIERS,
+} from './tooltip_constants.js';
 import { getUniqueString, findFirstFocusableNode } from '../utils';
 
 export default {
@@ -129,7 +133,7 @@ export default {
       };
     },
 
-    isTooltipHasShowModifier () {
+    shouldShowTooltip () {
       return this.isTooltipVisible || this.isChildFocus;
     },
 
@@ -138,11 +142,10 @@ export default {
         'd-ps-absolute',
         'd-tooltip',
         `d-tooltip__arrow--${this.arrowDirection}`,
-        `d-tooltip--${this.isTooltipVisible ? TOOLTIP_STATE_MODIFIERS.show : TOOLTIP_STATE_MODIFIERS.hide}`,
         {
-          [`d-tooltip--${INVERTED}`]: this.inverted,
-          [`d-tooltip--${TOOLTIP_STATE_MODIFIERS.show}`]: this.isTooltipHasShowModifier,
-          [`d-tooltip--${TOOLTIP_STATE_MODIFIERS.hide}`]: !this.isTooltipHasShowModifier,
+          [TOOLTIP_KIND_MODIFIERS[INVERTED]]: this.inverted,
+          [TOOLTIP_KIND_MODIFIERS[TOOLTIP_STATE_MODIFIERS.show]]: this.shouldShowTooltip,
+          [TOOLTIP_KIND_MODIFIERS[TOOLTIP_STATE_MODIFIERS.hide]]: !this.shouldShowTooltip,
         },
       ];
     },
