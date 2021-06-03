@@ -1,38 +1,37 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
-  <!--
-    We can bind the data that the user entered into the storybook controls to props by using a property of the same name
-    as the storybook control defined in the corresponding `.story.js` file.
-  -->
   <dt-tabs
-    :some="some"
+    :size="size"
+    :inverted="inverted"
+    :borderless="borderless"
   >
-    <!--
-      We can also bind any slot data that the user has entered into the storybook controls. In this example we
-      conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
-
-      The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-
-      We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-      same name.
-    -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
+    <template #tabs>
+      <dt-tab panel-id="1">
+        First
+      </dt-tab>
+      <dt-tab
+        panel-id="2"
+        selected
+      >
+        Second
+      </dt-tab>
     </template>
-    <template
-      #some
-      v-if="someSlot"
-    >
-      <span v-html="someSlot" />
-    </template>
+
+    <dt-tab-panel tab-id="1">
+      First Panel
+    </dt-tab-panel>
+    <dt-tab-panel tab-id="2">
+      Second Panel
+    </dt-tab-panel>
   </dt-tabs>
 </template>
 
 <script>
 import DtTabs from './tabs';
+import DtTab from './tab';
+import DtTabPanel from './tab-panel';
 
 export default {
   name: 'DtTabsDefault',
-  components: { DtTabs },
+  components: { DtTabs, DtTab, DtTabPanel },
 };
 </script>

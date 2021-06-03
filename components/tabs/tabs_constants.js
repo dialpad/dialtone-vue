@@ -1,5 +1,4 @@
-export const DEFAULT_CONSTANTS = null;
-
-export default {
-  DEFAULT_CONSTANTS,
-};
+export const TABS_SIZES = ['', 'sm'];
+export const INVERTED = 'inverted';
+export const NO_BORDER = 'no-border';
+export const SELECTED = 'selected';

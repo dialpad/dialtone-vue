@@ -1,39 +1,127 @@
 <template>
-  <div>
-    <!-- template -->
+  <div
+    class="d-d-flex d-fd-column d-w100p d-stack16"
+    data-qa="dt-tabs"
+  >
+    <div
+      :class="tabsClasses"
+      role="tablist"
+      :aria-label="label"
+    >
+      <slot name="tabs" />
+    </div>
+    <slot />
   </div>
 </template>
 
 <script>
-import {} from './tabs_constants.js';
+import { TABS_SIZES, INVERTED, NO_BORDER } from './tabs_constants.js';
 
 export default {
   name: 'DtTabs',
 
-  components: {},
-
-  mixins: [],
-
-  /* inheritAttrs: false is generally an option we want to set on library
-    components. This allows any attributes passed in that are not recognized
-    as props to be passed down to another element or component using v-bind:$attrs
-    more info: https://vuejs.org/v2/api/#inheritAttrs */
-  // inheritAttrs: false,
-
-  props: {},
-
-  data () {
-    return {};
+  provide () {
+    return {
+      groupContext: this.provideObj,
+      changeContentPanel: this.changeContentPanel,
+    };
   },
 
-  computed: {},
+  props: {
+    /**
+     * Identifies the tab group
+     */
+    label: {
+      type: String,
+      default: '',
+    },
 
-  watch: {},
+    /**
+     * The id of the selected tab panel which should be displayed
+     */
+    selected: {
+      type: String,
+      default: '',
+    },
 
-  methods: {},
+    /**
+     * If true, disables the tab group
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * If true, applies inverted styles to the tab group
+     */
+    inverted: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * If true, applies borderless styles to the tab group
+     */
+    borderless: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * If provided, applies size styles to the tab group
+     */
+    size: {
+      type: String,
+      default: '',
+      validate (kind) {
+        return TABS_SIZES.includes(kind);
+      },
+    },
+  },
+
+  data () {
+    return {
+      provideObj: {
+        selected: '', // The id of the currently displayed tab content panel
+        disabled: false, // Used to disable the group
+      },
+    };
+  },
+
+  computed: {
+    tabsClasses () {
+      return [
+        'd-tablist',
+        `d-tablist--${this.size}`,
+        {
+          [`d-tablist--${INVERTED}`]: this.inverted,
+          [`d-tablist--${NO_BORDER}`]: this.borderless,
+        },
+      ];
+    },
+  },
+
+  mounted () {
+    /**
+     * Prevent override tab selected by default
+     */
+    if (!this.provideObj.selected) {
+      this.provideObj.selected = this.selected;
+    }
+
+    this.provideObj.disabled = this.disabled;
+  },
+
+  methods: {
+    onChange () {
+      this.$emit('change', { ...this.provideObj });
+    },
+
+    changeContentPanel ({ selected }) {
+      this.provideObj.selected = selected;
+      this.onChange();
+    },
+  },
 };
 </script>
-
-<style lang="less">
-
-</style>
