@@ -1,5 +1,8 @@
 <template>
-  <div :class="avatarClasses">
+  <div
+    :id="id"
+    :class="avatarClasses"
+  >
     <!-- @slot Slot for avatar content -->
     <slot>
       <img
@@ -22,6 +25,7 @@ import {
   AVATAR_COLOR_MODIFIERS,
   AVATAR_KIND_MODIFIERS,
 } from './avatar_constants.js';
+import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtAvatar',
@@ -29,6 +33,14 @@ export default {
   inheritAttrs: false,
 
   props: {
+    /**
+     * Id of the avatar content wrapper element
+     */
+    id: {
+      type: String,
+      default () { return getUniqueString(); },
+    },
+
     /**
      * URL for the avatar image
      */
@@ -38,7 +50,7 @@ export default {
     },
 
     /**
-     * Description of the image
+     * Description of the image. Required if imageUrl is present
      */
     alt: {
       type: String,
