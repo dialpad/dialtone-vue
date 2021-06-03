@@ -83,7 +83,8 @@ export default {
 
   computed: {
     avatarClasses () {
-      return ['d-avatar',
+      return [
+        'd-avatar',
         AVATAR_KIND_MODIFIERS[this.kind],
         AVATAR_SIZE_MODIFIERS[this.size],
         AVATAR_COLOR_MODIFIERS[this.color],
