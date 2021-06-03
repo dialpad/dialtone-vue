@@ -6,18 +6,6 @@ import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } 
 
 export const argTypesData = {
   // Props
-  imageUrl: {
-    control: {
-      type: 'text',
-    },
-  },
-
-  alt: {
-    control: {
-      type: 'text',
-    },
-  },
-
   kind: {
     defaultValue: 'default',
     control: {
@@ -39,6 +27,24 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: Object.keys(AVATAR_COLOR_MODIFIERS),
+    },
+  },
+
+  imageUrl: {
+    table: {
+      category: 'Image props',
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
+  alt: {
+    table: {
+      category: 'Image props',
+    },
+    control: {
+      type: 'text',
     },
   },
 
