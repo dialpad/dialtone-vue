@@ -12,7 +12,6 @@ export const argTypesData = {
       options: Object.keys(AVATAR_KIND_MODIFIERS),
     },
   },
-
   size: {
     defaultValue: 'md',
     control: {
@@ -20,7 +19,6 @@ export const argTypesData = {
       options: Object.keys(AVATAR_SIZE_MODIFIERS),
     },
   },
-
   color: {
     defaultValue: 'base',
     control: {
@@ -29,6 +27,7 @@ export const argTypesData = {
     },
   },
 
+  // Image Props
   imageUrl: {
     table: {
       category: 'Image props',
@@ -37,7 +36,6 @@ export const argTypesData = {
       type: 'text',
     },
   },
-
   alt: {
     table: {
       category: 'Image props',
@@ -56,7 +54,6 @@ export const argTypesData = {
       },
     },
   },
-
   presence: {
     control: 'text',
     table: {

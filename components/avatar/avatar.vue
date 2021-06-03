@@ -96,6 +96,5 @@ export default {
       return this.imageUrl && this.alt;
     },
   },
-
 };
 </script>
