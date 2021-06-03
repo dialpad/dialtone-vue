@@ -27,12 +27,12 @@ jobs:
 
       - name: Cache node_modules
         uses: actions/cache@v2
-          with:
-            path: |
-              ./node_modules/
-              ${{ env.STORYBOOK_ROOT }}/node_modules/
-              ~/.npm
-            key: ${{ format('{0}-dialtone-vue-node-modules-{1}-{2}-{3}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles(format('package-lock.json')), hashFiles(format('{0}/package-lock.json', env.STORYBOOK_ROOT))) }}
+        with:
+          path: |
+            ./node_modules/
+            ${{ env.STORYBOOK_ROOT }}/node_modules/
+            ~/.npm
+          key: ${{ format('{0}-dialtone-vue-node-modules-{1}-{2}-{3}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles(format('package-lock.json')), hashFiles(format('{0}/package-lock.json', env.STORYBOOK_ROOT))) }}
 
       - name: Install Vue CLI
         run: npm install -g @vue/cli
