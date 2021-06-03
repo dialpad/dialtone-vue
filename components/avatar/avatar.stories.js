@@ -1,7 +1,6 @@
 import { createTemplateFromVueFile } from '../storybook_utils';
 import DtAvatar from './avatar';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
-import DtAvatarVariantsTemplate from './avatar_variants.story.vue';
 import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 
 export const argTypesData = {
@@ -82,15 +81,28 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   argTypes,
   DtAvatarDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtAvatarVariantsTemplate,
-);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
+export const Image = DefaultTemplate.bind({});
+Image.args = {
+  color: 'purple-200',
+  imageUrl: 'https://avatars.githubusercontent.com/u/583231?v=4',
+  alt: 'Dialpad Avatar',
+};
+
+export const Icons = DefaultTemplate.bind({});
+Icons.args = {
+  color: 'purple-200',
+  kind: 'icon',
+  default: 'IconGroup',
+};
+
+export const Initials = DefaultTemplate.bind({});
+Initials.args = {
+  color: 'purple-200',
+  kind: 'initials',
+  default: 'DP',
+};
