@@ -13,9 +13,7 @@
     </slot>
 
     <!-- @slot Slot for avatar presence component -->
-    <template>
-      <slot name="presence" />
-    </template>
+    <slot name="presence" />
   </div>
 </template>
 
