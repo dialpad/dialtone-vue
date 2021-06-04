@@ -27,8 +27,27 @@ export const argsData = {
     label: 'Current Page',
     selected: true,
   }],
-  id: 'uniq id',
-  inverted: false,
+  breadcrumbsInverted: [{
+    href: '#',
+    label: 'Root',
+  },
+  {
+    href: '#',
+    label: 'Section',
+  },
+  {
+    href: '#',
+    label: 'Section',
+  },
+  {
+    href: '#',
+    label: 'Section',
+  },
+  {
+    href: '#',
+    label: 'Current Page',
+    selected: true,
+  }],
 };
 
 export const argTypesData = {

@@ -1,2 +1,2 @@
-export const SELECTED = 'selected';
-export const INVERTED = 'inverted';
+export const BREADCRUMB_ITEM_SELECTED_MODIFIER = 'd-breadcrumb--selected';
+export const BREADCRUMBS_INVERTED_MODIFIER = 'd-breadcrumbs--inverted';
