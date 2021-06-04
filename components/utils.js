@@ -6,9 +6,13 @@ import {
 
 let UNIQUE_ID_COUNTER = 0;
 
+// selector to find focusable not hidden inputs
 const FOCUSABLE_SELECTOR_NOT_HIDDEN = 'input:not([type=hidden]):not(:disabled)';
+// selector to find focusable not disables elements
 const FOCUSABLE_SELECTOR_NOT_DISABLED = 'select:not(:disabled),textarea:not(:disabled),button:not(:disabled)';
+// // selector to find focusable not hidden and disabled elements
 const FOCUSABLE_SELECTOR_NOT_HIDDEN_DISABLED = `${FOCUSABLE_SELECTOR_NOT_HIDDEN},${FOCUSABLE_SELECTOR_NOT_DISABLED}`;
+// selector to find focusable elements
 const FOCUSABLE_SELECTOR = `a,frame,iframe,${FOCUSABLE_SELECTOR_NOT_HIDDEN_DISABLED},*[tabindex]`;
 
 export function getUniqueString (prefix = DEFAULT_PREFIX) {
@@ -74,7 +78,7 @@ export function hasFormattedMessageOfType (formattedMessages, messageType) {
 }
 
 export function findFirstFocusableNode (element) {
-  return element.?querySelector(FOCUSABLE_SELECTOR);
+  return element?.querySelector(FOCUSABLE_SELECTOR);
 }
 
 export default {
