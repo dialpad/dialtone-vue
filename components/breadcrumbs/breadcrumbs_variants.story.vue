@@ -10,14 +10,26 @@
         :breadcrumbs="breadcrumbsInverted"
       />
     </div>
+
+    <dt-breadcrumbs
+      class="d-py16 d-px12"
+    >
+      <dt-breadcrumb-item
+        v-for="breadcrumb in breadcrumbs"
+        :key="breadcrumb.label"
+        v-bind="breadcrumb"
+      />
+    </dt-breadcrumbs>
   </div>
 </template>
 
 <script>
 import DtBreadcrumbs from './breadcrumbs';
+import DtBreadcrumbItem from './breadcrumb_item';
 
 export default {
   name: 'DtBreadcrumbsVariants',
+<<<<<<< HEAD
   components: { DtBreadcrumbs },
   data () {
     return {
@@ -44,5 +56,8 @@ export default {
       }],
     };
   },
+=======
+  components: { DtBreadcrumbs, DtBreadcrumbItem },
+>>>>>>> af92084 (resolve comments)
 };
 </script>
