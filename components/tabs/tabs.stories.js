@@ -80,7 +80,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Group/DtTabs',
+  title: 'Elements/Tabs',
   component: DtTabs,
   args: argsData,
   argTypes: argTypesData,
