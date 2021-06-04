@@ -7,7 +7,6 @@
     <!-- @slot Slot for avatar content -->
     <slot>
       <img
-        v-if="shouldRenderImage"
         v-bind="$attrs"
         :alt="$attrs.alt"
       >
@@ -16,6 +15,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {
   AVATAR_SIZE_MODIFIERS,
   AVATAR_COLOR_MODIFIERS,
@@ -74,9 +74,24 @@ export default {
         AVATAR_COLOR_MODIFIERS[this.color],
       ];
     },
+  },
 
-    shouldRenderImage () {
-      return this.$attrs.src && this.$attrs.alt;
+  mounted () {
+    this.validateImageAttrsPresence();
+  },
+
+  beforeUpdate () {
+    this.validateImageAttrsPresence();
+  },
+
+  methods: {
+    validateImageAttrsPresence () {
+      if (this.kind === 'default' && !this.$slots.default) {
+        // Check that default slot image required attributes are provided
+        if (!this.$attrs || !this.$attrs.alt) {
+          Vue.util.warn('src and alt attributes are required if default slot is not provided', this);
+        }
+      }
     },
   },
 };
