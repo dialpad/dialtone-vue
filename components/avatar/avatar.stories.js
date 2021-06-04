@@ -28,7 +28,7 @@ export const argTypesData = {
   },
 
   // Image Props
-  imageUrl: {
+  src: {
     table: {
       category: 'Image props',
     },
@@ -78,7 +78,7 @@ Default.args = {};
 export const Image = DefaultTemplate.bind({});
 Image.args = {
   color: 'purple-200',
-  imageUrl: 'https://avatars.githubusercontent.com/u/583231?v=4',
+  src: 'https://avatars.githubusercontent.com/u/583231?v=4',
   alt: 'Dialpad Avatar',
 };
 

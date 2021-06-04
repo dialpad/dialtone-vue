@@ -3,7 +3,7 @@
     :kind="kind"
     :size="size"
     :color="color"
-    :image-url="imageUrl"
+    :src="src"
     :alt="alt"
   >
     <template

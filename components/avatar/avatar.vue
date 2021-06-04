@@ -8,8 +8,8 @@
     <slot>
       <img
         v-if="shouldRenderImage"
-        :src="imageUrl"
-        :alt="alt"
+        v-bind="$attrs"
+        alt=""
       >
     </slot>
   </div>
@@ -35,22 +35,6 @@ export default {
     id: {
       type: String,
       default () { return getUniqueString(); },
-    },
-
-    /**
-     * URL for the avatar image
-     */
-    imageUrl: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Description of the image. Required if imageUrl is present
-     */
-    alt: {
-      type: String,
-      default: '',
     },
 
     /**
@@ -92,7 +76,7 @@ export default {
     },
 
     shouldRenderImage () {
-      return this.imageUrl && this.alt;
+      return this.$attrs.src && this.$attrs.alt;
     },
   },
 };
