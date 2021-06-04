@@ -9,7 +9,7 @@
       <img
         v-if="shouldRenderImage"
         v-bind="$attrs"
-        alt=""
+        :alt="$attrs.alt"
       >
     </slot>
   </div>
