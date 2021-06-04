@@ -1,20 +1,15 @@
 <template>
-  <div
-    :id="id"
-    :class="breadcrumbClasses"
-  >
-    <ol>
-      <template v-if="breadcrumbs.length">
-        <dt-breadcrumb-item
-          v-for="(item, index) in breadcrumbs"
-          :key="getBreadcrumbItemKey(item.url, index)"
-          :inverted="inverted"
-          v-bind="item"
-        />
-      </template>
-      <template v-else>
-        <slot />
-      </template>
+  <div :class="breadcrumbClasses">
+    <ol v-if="breadcrumbs.length">
+      <dt-breadcrumb-item
+        v-for="(item, index) in breadcrumbs"
+        :key="getBreadcrumbItemKey(item.url, index)"
+        :inverted="inverted"
+        v-bind="item"
+      />
+    </ol>
+    <ol v-else>
+      <slot />
     </ol>
   </div>
 </template>
@@ -22,7 +17,6 @@
 <script>
 import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants.js';
 import DtBreadcrumbItem from './breadcrumb_item';
-import utils from '../utils';
 
 export default {
   name: 'DtBreadcrumbs',
@@ -32,14 +26,6 @@ export default {
   },
 
   props: {
-    /**
-     * The id of the breadcrumbs
-     */
-    id: {
-      type: String,
-      default () { return utils.getUniqueString(); },
-    },
-
     /**
      * A provided list of breadcrumbs. Overridden by default slot
      */
