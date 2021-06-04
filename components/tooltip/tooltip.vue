@@ -10,6 +10,7 @@
     <div
       :id="id"
       :class="tooltipClasses"
+      class="d-ps-absolute d-tooltip"
       data-qa="dt-tooltip"
       role="tooltip"
       :aria-hidden="ariaHidden"
@@ -31,8 +32,6 @@
 <script>
 import {
   TOOLTIP_DIRECTION_MODIFIERS,
-  TOOLTIP_STATE_MODIFIERS,
-  INVERTED,
   TOOLTIP_KIND_MODIFIERS,
 } from './tooltip_constants.js';
 import { getUniqueString, findFirstFocusableNode } from '../utils';
@@ -122,6 +121,10 @@ export default {
       return this.hover ? this.isHover : this.show;
     },
 
+    shouldShowTooltip () {
+      return this.isTooltipVisible || this.isChildFocus;
+    },
+
     ariaHidden () {
       return `${!this.isTooltipVisible}`;
     },
@@ -133,19 +136,12 @@ export default {
       };
     },
 
-    shouldShowTooltip () {
-      return this.isTooltipVisible || this.isChildFocus;
-    },
-
     tooltipClasses () {
       return [
-        'd-ps-absolute',
-        'd-tooltip',
         `d-tooltip__arrow--${this.arrowDirection}`,
+        TOOLTIP_KIND_MODIFIERS[this.shouldShowTooltip ? 'show' : 'hide'],
         {
-          [TOOLTIP_KIND_MODIFIERS[INVERTED]]: this.inverted,
-          [TOOLTIP_KIND_MODIFIERS[TOOLTIP_STATE_MODIFIERS.show]]: this.shouldShowTooltip,
-          [TOOLTIP_KIND_MODIFIERS[TOOLTIP_STATE_MODIFIERS.hide]]: !this.shouldShowTooltip,
+          [TOOLTIP_KIND_MODIFIERS.inverted]: this.inverted,
         },
       ];
     },

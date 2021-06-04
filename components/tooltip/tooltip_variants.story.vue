@@ -90,7 +90,7 @@
 <script>
 import DtTooltip from './tooltip';
 import { DtButton } from './../button';
-import { TOOLTIP_DIRECTION_MODIFIERS, TOOLTIP_STATE_MODIFIERS } from './tooltip_constants';
+import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
 
 export default {
   name: 'TooltipVariants',
@@ -98,7 +98,6 @@ export default {
   data () {
     return {
       TOOLTIP_DIRECTION_MODIFIERS,
-      TOOLTIP_STATE_MODIFIERS,
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
       localAnchor: 'Hover over me to see a tooltip',
     };
