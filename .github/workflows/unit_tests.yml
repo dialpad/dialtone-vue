@@ -19,8 +19,6 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
-        with:
-          npm_auth_token: ${{ NPM_AUTH_TOKEN }}
 
       - name: Run unit tests
         run: npm run test
