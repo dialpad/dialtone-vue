@@ -1,11 +1,21 @@
-name: 'Setup'
-description: 'Sets up workflow environment'
-env:
-  NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-  STORYBOOK_ROOT: ./storybook
-  NODE_MODULES_CACHE_VERSION: v1
+name: Setup
+
+description: Sets up workflow environment
+
+inputs:
+  npm_auth_token:
+    description: 'Used to private install npm packages'
+    required: true
+  node_modules_cache_version:
+    description: 'Controls node_modules cache version'
+    default: v1
+  storybook_root:
+    description: 'Path to storybook'
+    default: ./storybook
+
 runs:
   using: "composite"
+
   steps:
     - name: Use Node.js
       uses: actions/setup-node@v1
@@ -29,3 +39,5 @@ runs:
 
     - name: Install dependencies
       run: npm ci
+      env:
+        NPM_AUTH_TOKEN: ${{ npm_auth_token }}
