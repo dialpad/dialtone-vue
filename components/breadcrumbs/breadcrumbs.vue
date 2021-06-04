@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { INVERTED } from './breadcrumbs_constants.js';
+import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants.js';
 import DtBreadcrumbItem from './breadcrumb_item';
 import utils from '../utils';
 
@@ -69,7 +69,7 @@ export default {
     breadcrumbClasses () {
       return [
         'd-breadcrumbs',
-        { [`d-breadcrumbs--${INVERTED}`]: this.inverted },
+        { [BREADCRUMBS_INVERTED_MODIFIER]: this.inverted },
       ];
     },
   },

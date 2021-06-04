@@ -1,7 +1,7 @@
 <template>
   <li :class="breadcrumbItemClasses">
     <dt-link
-      :kind="kindLink"
+      :kind="linkKind"
       :aria-current="ariaCurrent"
       data-qa="breadcrumb-item"
       v-bind="$attrs"
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { SELECTED } from './breadcrumbs_constants.js';
+import { BREADCRUMB_ITEM_SELECTED_MODIFIER } from './breadcrumbs_constants';
 import { DtLink } from '../link';
 import { INVERTED, MUTED } from '../link/link_constants';
 
@@ -54,7 +54,7 @@ export default {
   },
 
   computed: {
-    kindLink () {
+    linkKind () {
       return this.inverted ? INVERTED : MUTED;
     },
 
@@ -65,7 +65,7 @@ export default {
     breadcrumbItemClasses () {
       return [
         'd-breadcrumbs__item',
-        { [`d-breadcrumbs__item--${SELECTED}`]: this.selected },
+        { [BREADCRUMB_ITEM_SELECTED_MODIFIER]: this.selected },
       ];
     },
   },
