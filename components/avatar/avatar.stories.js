@@ -27,22 +27,32 @@ export const argTypesData = {
     },
   },
 
-  // Image Props
+  // Native Props
   src: {
+    description: 'native image src',
     table: {
-      category: 'Image props',
+      category: 'native props',
+      defaultValue: {
+        summary: 'undefined',
+      },
     },
-    control: {
-      type: 'text',
+    type: {
+      summary: 'string',
     },
+    control: 'text',
   },
   alt: {
+    description: 'native image alt',
     table: {
-      category: 'Image props',
+      category: 'native props',
+      defaultValue: {
+        summary: 'undefined',
+      },
     },
-    control: {
-      type: 'text',
+    type: {
+      summary: 'string',
     },
+    control: 'text',
   },
 
   // Slots
