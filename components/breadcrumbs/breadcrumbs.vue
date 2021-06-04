@@ -1,17 +1,16 @@
 <template>
-  <div :class="breadcrumbClasses">
-    <ol v-if="breadcrumbs.length">
-      <dt-breadcrumb-item
-        v-for="(item, index) in breadcrumbs"
-        :key="getBreadcrumbItemKey(item.url, index)"
-        :inverted="inverted"
-        v-bind="item"
-      />
+  <nav :class="breadcrumbClasses">
+    <ol>
+      <slot>
+        <dt-breadcrumb-item
+          v-for="(item, index) in breadcrumbs"
+          :key="getBreadcrumbItemKey(item.url, index)"
+          :inverted="inverted"
+          v-bind="item"
+        />
+      </slot>
     </ol>
-    <ol v-else>
-      <slot />
-    </ol>
-  </div>
+  </nav>
 </template>
 
 <script>
