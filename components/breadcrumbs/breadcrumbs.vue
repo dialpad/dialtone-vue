@@ -2,7 +2,6 @@
   <div
     :id="id"
     :class="breadcrumbClasses"
-    :aria-label="ariaLabel"
   >
     <ol>
       <template v-if="breadcrumbs.length">
@@ -64,10 +63,6 @@ export default {
   },
 
   computed: {
-    ariaLabel () {
-      return 'breadcrumbs';
-    },
-
     breadcrumbClasses () {
       return [
         'd-breadcrumbs',
