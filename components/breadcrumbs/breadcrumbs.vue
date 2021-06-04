@@ -2,7 +2,7 @@
   <div
     :id="id"
     :class="breadcrumbClasses"
-    :aria-label="'breadcrumbs'"
+    :aria-label="ariaLabel"
   >
     <ol>
       <template v-if="breadcrumbs.length">
@@ -11,9 +11,7 @@
           :key="getBreadcrumbItemKey(item.url, index)"
           :inverted="inverted"
           v-bind="item"
-        >
-          {{ item.label }}
-        </dt-breadcrumb-item>
+        />
       </template>
       <template v-else>
         <slot />
@@ -66,6 +64,10 @@ export default {
   },
 
   computed: {
+    ariaLabel () {
+      return 'breadcrumbs';
+    },
+
     breadcrumbClasses () {
       return [
         'd-breadcrumbs',
