@@ -12,8 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out branch
+        uses: actions/checkout@v2
+
       - name: Setup
-        uses: actions/setup@v1
+        uses: ./.github/actions/setup
 
       - name: Run unit tests
         run: npm run test

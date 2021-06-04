@@ -7,9 +7,6 @@ runs:
     STORYBOOK_ROOT: ./storybook
     NODE_MODULES_CACHE_VERSION: v1
   steps:
-    - name: Check out branch
-      uses: actions/checkout@v2
-
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
