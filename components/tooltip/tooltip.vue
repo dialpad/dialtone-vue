@@ -125,13 +125,17 @@ export default {
       return this.isTooltipVisible || this.isChildFocus;
     },
 
+    shouldHasHoverModifier () {
+      return this.hover && !this.isESCPressed && !this.isChildFocus;
+    },
+
     ariaHidden () {
       return `${!this.isTooltipVisible}`;
     },
 
     tooltipContainerClass () {
       return {
-        'd-tooltip--hover': this.hover && !this.isESCPressed && !this.isChildFocus,
+        'd-tooltip--hover': this.shouldHasHoverModifier,
         'd-tooltip--show': this.isChildFocus,
       };
     },
