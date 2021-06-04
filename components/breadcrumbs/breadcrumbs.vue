@@ -1,28 +1,21 @@
 <template>
-  <div
-    :class="[
-      'd-breadcrumbs',
-      { [BREADCRUMBS_INVERTED_MODIFIER]: inverted },
-    ]"
-  >
-    <ol v-if="isBreadcrumbsExist">
-      <dt-breadcrumb-item
-        v-for="item in breadcrumbs"
-        :key="getBreadcrumbItemKey(item)"
-        :inverted="inverted"
-        v-bind="item"
-      />
+  <nav :class="breadcrumbClasses">
+    <ol>
+      <slot>
+        <dt-breadcrumb-item
+          v-for="(item, index) in breadcrumbs"
+          :key="getBreadcrumbItemKey(item.url, index)"
+          :inverted="inverted"
+          v-bind="item"
+        />
+      </slot>
     </ol>
-    <ol v-else>
-      <slot />
-    </ol>
-  </div>
+  </nav>
 </template>
 
 <script>
 import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants.js';
 import DtBreadcrumbItem from './breadcrumb_item';
-import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtBreadcrumbs',
@@ -54,21 +47,18 @@ export default {
     },
   },
 
-  data () {
-    return {
-      BREADCRUMBS_INVERTED_MODIFIER,
-    };
-  },
-
   computed: {
-    isBreadcrumbsExist () {
-      return this.breadcrumbs.length !== 0;
+    breadcrumbClasses () {
+      return [
+        'd-breadcrumbs',
+        { [BREADCRUMBS_INVERTED_MODIFIER]: this.inverted },
+      ];
     },
   },
 
   methods: {
-    getBreadcrumbItemKey () {
-      return getUniqueString('breadcrumbs');
+    getBreadcrumbItemKey (url, index) {
+      return `breadcrumb-item-${url}-${index}`;
     },
   },
 };
