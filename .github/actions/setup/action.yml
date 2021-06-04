@@ -1,11 +1,11 @@
 name: 'Setup'
 description: 'Sets up workflow environment'
+env:
+  NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+  STORYBOOK_ROOT: ./storybook
+  NODE_MODULES_CACHE_VERSION: v1
 runs:
   using: "composite"
-  env:
-    NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-    STORYBOOK_ROOT: ./storybook
-    NODE_MODULES_CACHE_VERSION: v1
   steps:
     - name: Use Node.js
       uses: actions/setup-node@v1
