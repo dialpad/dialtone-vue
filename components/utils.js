@@ -74,7 +74,7 @@ export function hasFormattedMessageOfType (formattedMessages, messageType) {
 }
 
 export function findFirstFocusableNode (element) {
-  return element.querySelector(FOCUSABLE_SELECTOR);
+  return element.?querySelector(FOCUSABLE_SELECTOR);
 }
 
 export default {
