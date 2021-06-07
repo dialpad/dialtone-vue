@@ -5,16 +5,15 @@
       { [BREADCRUMBS_INVERTED_MODIFIER]: inverted },
     ]"
   >
-    <ol v-if="isBreadcrumbsExist">
-      <dt-breadcrumb-item
-        v-for="item in breadcrumbs"
-        :key="getBreadcrumbItemKey(item)"
-        :inverted="inverted"
-        v-bind="item"
-      />
-    </ol>
-    <ol v-else>
-      <slot />
+    <ol>
+      <slot>
+        <dt-breadcrumb-item
+          v-for="item in breadcrumbs"
+          :key="getBreadcrumbItemKey(item)"
+          :inverted="inverted"
+          v-bind="item"
+        />
+      </slot>
     </ol>
   </nav>
 </template>
@@ -58,12 +57,6 @@ export default {
     return {
       BREADCRUMBS_INVERTED_MODIFIER,
     };
-  },
-
-  computed: {
-    isBreadcrumbsExist () {
-      return this.breadcrumbs.length !== 0;
-    },
   },
 
   methods: {
