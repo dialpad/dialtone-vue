@@ -1,5 +1,10 @@
 <template>
-  <li :class="breadcrumbItemClasses">
+  <li
+    :class="[
+      'd-breadcrumbs__item',
+      { [BREADCRUMB_ITEM_SELECTED_MODIFIER]: selected },
+    ]"
+  >
     <dt-link
       :kind="linkKind"
       :aria-current="ariaCurrent"
@@ -53,20 +58,19 @@ export default {
     },
   },
 
+  data () {
+    return {
+      BREADCRUMB_ITEM_SELECTED_MODIFIER,
+    };
+  },
+
   computed: {
     linkKind () {
       return this.inverted ? INVERTED : MUTED;
     },
 
     ariaCurrent () {
-      return this.selected ? 'location' : '';
-    },
-
-    breadcrumbItemClasses () {
-      return [
-        'd-breadcrumbs__item',
-        { [BREADCRUMB_ITEM_SELECTED_MODIFIER]: this.selected },
-      ];
+      return this.selected ? 'location' : undefined;
     },
   },
 };
