@@ -2,6 +2,7 @@
   <div
     :class="tooltipContainerClass"
     class="d-ps-relative d-fl-center d-d-inline-flex"
+    data-qa="dt-tooltip-container"
     @focus.capture="onFocus"
     @blur.capture="onBlur"
     @keyup.esc="onEsc"

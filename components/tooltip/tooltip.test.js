@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtTooltip from './tooltip.vue';
 import {
-  TOOLTIP_STATE_MODIFIERS,
+  TOOLTIP_KIND_MODIFIERS,
   TOOLTIP_DIRECTION_MODIFIERS,
 } from './tooltip_constants';
 
@@ -38,9 +38,8 @@ describe('Dialtone Vue Tooltip tests', function () {
         function () { itBehavesLikeHasCorrectDirectionClass(arrowDirection); }));
 
   const mouseover = () => wrapper.trigger('mouseover');
-  const mouseleave = () => wrapper.trigger('mouseleave');
-  const focus = () => wrapper.trigger('focus');
-  const blur = () => wrapper.trigger('blur');
+  const focus = () => wrapper.trigger('focus.capture');
+  const blur = () => wrapper.trigger('blur.capture');
   const escape = () => wrapper.trigger('keyup.esc');
 
   describe('Presentation Tests', function () {
@@ -56,55 +55,44 @@ describe('Dialtone Vue Tooltip tests', function () {
   describe('Events', function () {
     it('mouseover show tooltip', async function () {
       await mouseover();
-      assert.isTrue(tooltip.classes().includes(`d-tooltip--${TOOLTIP_STATE_MODIFIERS.show}`));
-    });
-
-    it('mouseleave hide tooltip', async function () {
-      await mouseleave();
-      assert.isTrue(tooltip.classes().includes(`d-tooltip--${TOOLTIP_STATE_MODIFIERS.hide}`));
+      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.show));
     });
 
     it('focus show tooltip', async function () {
       await focus();
-      assert.isTrue(tooltip.classes().includes(`d-tooltip--${TOOLTIP_STATE_MODIFIERS.show}`));
+      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.show));
     });
 
     it('blur hide tooltip', async function () {
       await blur();
-      assert.isTrue(tooltip.classes().includes(`d-tooltip--${TOOLTIP_STATE_MODIFIERS.hide}`));
+      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
     });
 
     it('Escape on focus', async function () {
       await focus();
-      assert.isTrue(tooltip.classes().includes(`d-tooltip--${TOOLTIP_STATE_MODIFIERS.show}`));
+      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.show));
       await escape();
-      assert.isTrue(tooltip.classes().includes(`d-tooltip--${TOOLTIP_STATE_MODIFIERS.hide}`));
+      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
       await blur();
     });
 
     it('Escape on mouseover', async function () {
       await mouseover();
-      assert.isTrue(tooltip.classes().includes(`d-tooltip--${TOOLTIP_STATE_MODIFIERS.show}`));
+      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.show));
       await escape();
-      assert.isTrue(tooltip.classes().includes(`d-tooltip--${TOOLTIP_STATE_MODIFIERS.hide}`));
-      await mouseleave();
+      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
     });
   });
 
   describe('Accessibility Tests', function () {
     describe('When tooltip has focus, blur, mouseover, mouseleave, escape', function () {
-      it('has focus', async function () {
-        await focus();
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
+      it('has escape', async function () {
+        await escape();
+        assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
       });
 
       it('has blur', async function () {
         await blur();
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-      });
-
-      it('has mouseleave', async function () {
-        await mouseleave();
         assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
       });
 
@@ -113,9 +101,9 @@ describe('Dialtone Vue Tooltip tests', function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
 
-      it('has escape', async function () {
-        await escape();
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+      it('has focus', async function () {
+        await focus();
+        assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
     });
   });
