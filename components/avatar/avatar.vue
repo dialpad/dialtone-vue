@@ -48,7 +48,7 @@ export default {
     kind: {
       type: String,
       default: 'default',
-      validation: (kind) => Object.keys(AVATAR_KIND_MODIFIERS).includes(kind),
+      validator: (kind) => Object.keys(AVATAR_KIND_MODIFIERS).includes(kind),
     },
 
     /**
@@ -57,7 +57,7 @@ export default {
     size: {
       type: String,
       default: 'md',
-      validation: (size) => Object.keys(AVATAR_SIZE_MODIFIERS).includes(size),
+      validator: (size) => Object.keys(AVATAR_SIZE_MODIFIERS).includes(size),
     },
 
     /**
@@ -66,7 +66,7 @@ export default {
     color: {
       type: String,
       default: 'base',
-      validation: (color) => Object.keys(AVATAR_COLOR_MODIFIERS).includes(color),
+      validator: (color) => Object.keys(AVATAR_COLOR_MODIFIERS).includes(color),
     },
   },
 
