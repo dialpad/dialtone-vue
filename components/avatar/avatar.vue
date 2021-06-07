@@ -1,7 +1,12 @@
 <template>
   <div
     :id="id"
-    :class="avatarClasses"
+    :class="[
+      'd-avatar',
+      AVATAR_KIND_MODIFIERS[kind],
+      AVATAR_SIZE_MODIFIERS[size],
+      AVATAR_COLOR_MODIFIERS[color],
+    ]"
     data-qa="dt-avatar"
   >
     <!-- @slot Slot for avatar content -->
@@ -65,15 +70,12 @@ export default {
     },
   },
 
-  computed: {
-    avatarClasses () {
-      return [
-        'd-avatar',
-        AVATAR_KIND_MODIFIERS[this.kind],
-        AVATAR_SIZE_MODIFIERS[this.size],
-        AVATAR_COLOR_MODIFIERS[this.color],
-      ];
-    },
+  data () {
+    return {
+      AVATAR_SIZE_MODIFIERS,
+      AVATAR_COLOR_MODIFIERS,
+      AVATAR_KIND_MODIFIERS,
+    };
   },
 
   mounted () {
