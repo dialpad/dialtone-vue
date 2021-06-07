@@ -16,25 +16,21 @@ screen element or component, a text box displays information about that element 
 function, or what an abbreviation stands for). The tooltip is displayed continuously as long as the user hovers over the
 element
 
-A tooltip has 2 major pieces that are provided as required named slot for **the anchor** and **the content** which could
-be a slot or prop message.
+A tooltip has two slots:
+
+1. **the anchor** required slot
+2. **the default** slot (which could be replaced with prop message)
 
 ## Styles
 
 1. **Twelve directions are offered:** three on each face of the tooltip.
 2. **Inverted:** Inverts styles to work on dark backgrounds.
 
-## Default tooltip
+## Default Tooltip
 
 <Canvas>
   <Story id="elements-tooltip--default" />
 </Canvas>
-
-## Focus & Keyboard
-
-Due to the different contexts in which a tooltip can be used, focus management and
-keyboard shortcut ESC is provided.
-You are encouraged to consult the ARIA documentation for the particualr role
 
 ## Anchor
 
@@ -50,6 +46,12 @@ with the correct values as the `attrs` to the anchor slot. Applying them is as s
 
 1. Ensures more reliable voiceover support.
 2. Reads out the tooltip content as a supplementary description for its trigger when the trigger is focused.
+
+### Focus & Keyboard
+
+Due to the different contexts in which a tooltip can be used, focus management and
+keyboard shortcut ESC is provided.
+You are encouraged to consult the ARIA documentation for the particular role
 
 ## Arrow Directions
 

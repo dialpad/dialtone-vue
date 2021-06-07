@@ -3,25 +3,12 @@
     id="forms-radio--variants-container"
     class="d-pt64 d-px64"
   >
-    <div class="d-pt16 d-mb64 d-px64">
-      <!-- Default -->
-      <dt-tooltip
-        :message="localMessage"
-      >
-        <template #anchor>
-          <dt-button importance="outlined">
-            {{ localAnchor }}
-          </dt-button>
-        </template>
-      </dt-tooltip>
-    </div>
-
     <!-- Arrow Description -->
     <div class="d-d-flex d-fw-wrap d-ff-row-wrap">
       <div
         v-for="direction in TOOLTIP_DIRECTION_MODIFIERS"
         :key="direction"
-        class="d-mb64 d-px64"
+        class="d-mb64 d-px64 d-w30p"
       >
         <dt-tooltip
           :arrow-direction="direction"
@@ -29,7 +16,7 @@
         >
           <template #anchor>
             <dt-button importance="outlined">
-              {{ localAnchor }}
+              {{ direction }}
             </dt-button>
           </template>
         </dt-tooltip>
