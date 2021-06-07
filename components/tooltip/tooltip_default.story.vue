@@ -30,7 +30,9 @@ import { DtButton } from '../button';
 
 export default {
   name: 'DtTooltipDefault',
+
   components: { DtTooltip, DtButton },
+
   computed: {
     buttonKind () {
       return this.inverted ? 'inverted' : 'default';
