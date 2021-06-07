@@ -1,5 +1,5 @@
 <template>
-  <div
+  <nav
     :class="[
       'd-breadcrumbs',
       { [BREADCRUMBS_INVERTED_MODIFIER]: inverted },
@@ -16,7 +16,7 @@
     <ol v-else>
       <slot />
     </ol>
-  </div>
+  </nav>
 </template>
 
 <script>
