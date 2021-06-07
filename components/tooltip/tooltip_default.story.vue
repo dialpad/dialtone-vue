@@ -1,40 +1,32 @@
 <template>
-  <div class="container">
-    <dt-tooltip
-      :message="message"
-      :arrow-direction="arrowDirection"
-      :show="show"
-      :inverted="inverted"
-      :hover="hover"
-    >
-      {{ defaultSlot }}
-      <template
-        v-if="anchorSlot"
-        #anchor
+  <div class="d-fl-center d-fd-column d-pt64">
+    <div class="d-pt16">
+      <dt-tooltip
+        :message="message"
+        :arrow-direction="arrowDirection"
+        :show="show"
+        :inverted="inverted"
+        :hover="hover"
       >
-        <span v-html="anchorSlot" />
-      </template>
-    </dt-tooltip>
+        <template v-if="defaultSlot">
+          {{ defaultSlot }}
+        </template>
+        <template #anchor>
+          <dt-button importance="outlined">
+            {{ anchorSlot }}
+          </dt-button>
+        </template>
+      </dt-tooltip>
+    </div>
   </div>
 </template>
 
 <script>
-import DtTooltip from './tooltip';
-import fixDefaultSlot from '../plugins/fixDefaultSlot';
+import { DtTooltip } from './';
+import { DtButton } from '../button';
 
 export default {
   name: 'DtTooltipDefault',
-  components: { DtTooltip },
-  mixins: [fixDefaultSlot],
+  components: { DtTooltip, DtButton },
 };
 </script>
-
-<style lang="less" scoped>
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 600px;
-}
-</style>

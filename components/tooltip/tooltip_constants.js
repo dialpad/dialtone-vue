@@ -1,8 +1,3 @@
-const SHOW = 'show';
-const HIDE = 'hide';
-
-export const INVERTED = 'inverted';
-
 export const TOOLTIP_DIRECTION_MODIFIERS = [
   'top-left', 'top-center', 'top-right',
   'right-top', 'right-center', 'right-bottom',
@@ -10,7 +5,8 @@ export const TOOLTIP_DIRECTION_MODIFIERS = [
   'left-top', 'left-center', 'left-bottom',
 ];
 
-export const TOOLTIP_STATE_MODIFIERS = {
-  [SHOW]: SHOW,
-  [HIDE]: HIDE,
+export const TOOLTIP_KIND_MODIFIERS = {
+  inverted: `d-tooltip--inverted`,
+  show: `d-tooltip--show`,
+  hide: `d-tooltip--hide`,
 };

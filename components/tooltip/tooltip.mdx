@@ -1,24 +1,69 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
 import DtTooltip from './tooltip';
 
-# DtTooltip
+# Tooltip
 
 <Subtitle>
-  Some description of the component functionality.
+    A tooltip is a floating label that briefly explains an action, function, or an element.
+    Its content is exclusively text and shouldn't be vital information for users.
+    If richer media is desired, consider using a popover instead.
 </Subtitle>
 
-## Base Style
+## Basic Usage
 
-Some description of how to use the base component, potential gotchas and limitations.
+The tooltip, also known as infotip or hint, is a common graphical user interface element in which, when hovering over a
+screen element or component, a text box displays information about that element (such as a description of a button's
+function, or what an abbreviation stands for). The tooltip is displayed continuously as long as the user hovers over the
+element
+
+A tooltip has 2 major pieces that are provided as required named slot for **the anchor** and **the content** which could
+be a slot or prop message.
+
+## Styles
+
+1. **Twelve directions are offered:** three on each face of the tooltip.
+2. **Inverted:** Inverts styles to work on dark backgrounds.
+
+## Default tooltip
 
 <Canvas>
-  <Story id="<GROUP>-dt-tooltip--default" />
+  <Story id="elements-tooltip--default" />
 </Canvas>
 
-## Variants
+## Focus & Keyboard
+
+Due to the different contexts in which a tooltip can be used, focus management and
+keyboard shortcut ESC is provided.
+You are encouraged to consult the ARIA documentation for the particualr role
+
+## Anchor
+
+The anchor element that activates the tooltip should be fully accessible by keyboard. The easiest way to do this is by
+using an element like an `DtButton` that is already accessible. The user should also be able to close the tooltip
+content using the `ESC` key for most ARIA roles.
+
+There are some required ARIA attributes for the anchor element (such as `aria-hidden` set based on `open`).
+To make this as straightforward as possible, these ARIA attributes are passed
+with the correct values as the `attrs` to the anchor slot. Applying them is as simple as using `v-bind`:
+
+## Accessibility
+
+1. Ensures more reliable voiceover support.
+2. Reads out the tooltip content as a supplementary description for its trigger when the trigger is focused.
+
+## Arrow Directions
+
+Defines which side of the tooltip its arrow appears.
+No arrow direction is assigned by default. You must select a direction.
+
+| top  | right | left | bottom |
+|-|-|-|-|
+|**top-left**|**right-top**|**left-top**|**bottom-left**|
+|**top-center**|**right-center**|**left-center**|**bottom-center**|
+|**top-right**|**right-bottom**|**left-bottom**|**bottom-right**|
 
 <Canvas>
-  <Story id="<GROUP>-dt-tooltip--variants" />
+  <Story id="elements-tooltip--variants" />
 </Canvas>
 
 ## Props, Slots & Events
@@ -33,18 +78,13 @@ Some description of how to use the base component, potential gotchas and limitat
 import { DtTooltip } from '@dialpad/handset';
 ```
 
-### With Some Variant
+### Default
 
-```vue
-<dt-tooltip
-  some="variant"
-/>
-```
-
-### With Some Other Variant
-
-```vue
-<dt-tooltip
-  some-other="variant"
-/>
+```html
+<dt-tooltip>
+    Message
+    <template #anchor>
+      Anchor
+    </template>
+</dt-tooltip>
 ```
