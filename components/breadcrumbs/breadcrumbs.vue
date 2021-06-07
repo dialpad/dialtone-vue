@@ -1,10 +1,15 @@
 <template>
-  <nav :class="breadcrumbClasses">
+  <nav
+    :class="[
+      'd-breadcrumbs',
+      { [BREADCRUMBS_INVERTED_MODIFIER]: inverted },
+    ]"
+  >
     <ol>
       <slot>
         <dt-breadcrumb-item
-          v-for="(item, index) in breadcrumbs"
-          :key="getBreadcrumbItemKey(item.url, index)"
+          v-for="item in breadcrumbs"
+          :key="getBreadcrumbItemKey(item)"
           :inverted="inverted"
           v-bind="item"
         />
@@ -16,6 +21,7 @@
 <script>
 import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants.js';
 import DtBreadcrumbItem from './breadcrumb_item';
+import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtBreadcrumbs',
@@ -47,18 +53,15 @@ export default {
     },
   },
 
-  computed: {
-    breadcrumbClasses () {
-      return [
-        'd-breadcrumbs',
-        { [BREADCRUMBS_INVERTED_MODIFIER]: this.inverted },
-      ];
-    },
+  data () {
+    return {
+      BREADCRUMBS_INVERTED_MODIFIER,
+    };
   },
 
   methods: {
-    getBreadcrumbItemKey (url, index) {
-      return `breadcrumb-item-${url}-${index}`;
+    getBreadcrumbItemKey () {
+      return getUniqueString('breadcrumbs');
     },
   },
 };
