@@ -91,7 +91,7 @@ export default {
       if (this.kind === 'default' && !this.$slots.default) {
         // Check that default slot image required attributes are provided
         if (!this.$attrs || !this.$attrs.alt) {
-          Vue.util.warn('src and alt attributes are required if default slot is not provided', this);
+          Vue.util.warn('src and alt attributes are required for image avatars', this);
         }
       }
     },
