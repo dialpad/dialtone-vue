@@ -12,6 +12,7 @@
     <!-- @slot Slot for avatar content -->
     <slot>
       <img
+        data-qa="dt-avatar-image"
         v-bind="$attrs"
         :alt="$attrs.alt"
       >
