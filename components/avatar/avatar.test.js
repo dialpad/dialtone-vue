@@ -87,12 +87,39 @@ describe('DtAvatar Tests', function () {
         _setWrappers();
       });
 
+      it('image should exist', function () {
+        assert.exists(image);
+      });
+
       it('src should match those provided by attrs', function () {
         assert.strictEqual(image.attributes('src'), src);
       });
 
       it('alt should match those provided by attrs', function () {
         assert.strictEqual(image.attributes('alt'), alt);
+      });
+    });
+
+    describe('When the avatar renders image via slot', function () {
+      // Test Environment
+      const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
+
+      // Test Setup
+      beforeEach(function () {
+        slots = { default: imageSlot };
+        _setWrappers();
+      });
+
+      it('image should exist', function () {
+        assert.exists(image);
+      });
+
+      it('src should match those provided by attrs', function () {
+        assert.strictEqual(image.attributes('src'), IMAGE_ATTRS.SRC);
+      });
+
+      it('alt should match those provided by attrs', function () {
+        assert.strictEqual(image.attributes('alt'), IMAGE_ATTRS.ALT);
       });
     });
 
