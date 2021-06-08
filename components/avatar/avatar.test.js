@@ -16,8 +16,9 @@ const IMAGE = {
   ALT: 'Avatar image',
 };
 const basePropsData = {};
+const baseAttrs = {};
 
-describe('Dialtone Vue Avatar tests', function () {
+describe('DtAvatar Tests', function () {
   // Wrappers
   let wrapper;
   let avatar;
@@ -25,7 +26,7 @@ describe('Dialtone Vue Avatar tests', function () {
 
   // Environment
   let propsData = basePropsData;
-  let attrs = {};
+  let attrs = baseAttrs;
   let slots = {};
 
   // Helpers
@@ -59,10 +60,6 @@ describe('Dialtone Vue Avatar tests', function () {
   after(function () {});
 
   describe('Presentation Tests', function () {
-    /*
-     * Test(s) to ensure that the component is correctly rendering
-     */
-
     describe('When the avatar renders', function () {
       // Test Setup
       beforeEach(function () { _setWrappers(); });
@@ -78,8 +75,8 @@ describe('Dialtone Vue Avatar tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = {
-          ...basePropsData,
+        attrs = {
+          ...baseAttrs,
           src,
           alt,
         };
@@ -151,7 +148,7 @@ describe('Dialtone Vue Avatar tests', function () {
         _setWrappers();
       });
 
-      it('should have size variant class on the label', function () {
+      it('should have size variant class on the avatar', function () {
         assert.isTrue(avatar.classes(AVATAR_SIZE_MODIFIERS[size]));
       });
     });
@@ -169,7 +166,7 @@ describe('Dialtone Vue Avatar tests', function () {
         _setWrappers();
       });
 
-      it('should have color variant class on the label', function () {
+      it('should have color variant class on the avatar', function () {
         assert.isTrue(avatar.classes(AVATAR_COLOR_MODIFIERS[color]));
       });
     });
@@ -189,7 +186,7 @@ describe('Dialtone Vue Avatar tests', function () {
       });
     });
 
-    describe('Image Attributes Validation', function () {
+    describe('Image Attrs Validation', function () {
       // Test Setup
       before(function () {
         Vue.config.silent = true;
@@ -221,8 +218,8 @@ describe('Dialtone Vue Avatar tests', function () {
       describe('When image src and alt attributes are provided', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = {
-            ...basePropsData,
+          attrs = {
+            ...baseAttrs,
             src: IMAGE.SRC,
             alt: IMAGE.ALT,
           };
@@ -235,8 +232,8 @@ describe('Dialtone Vue Avatar tests', function () {
       describe('When image alt attribute is not provided', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = {
-            ...propsData,
+          attrs = {
+            ...baseAttrs,
             src: IMAGE.SRC,
           };
           _setWrappers();
@@ -248,8 +245,8 @@ describe('Dialtone Vue Avatar tests', function () {
       describe('When image src attribute is not provided', function () {
         // Test Setup
         beforeEach(function () {
-          propsData = {
-            ...propsData,
+          attrs = {
+            ...baseAttrs,
             alt: IMAGE.ALT,
           };
           _setWrappers();
