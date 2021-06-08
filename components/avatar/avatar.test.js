@@ -11,6 +11,7 @@ import Vue from 'vue';
 import sinon from 'sinon';
 
 // Constants
+const DEFAULT_SLOT = 'DP';
 const IMAGE = {
   SRC: 'image.png',
   ALT: 'Avatar image',
@@ -62,7 +63,10 @@ describe('DtAvatar Tests', function () {
   describe('Presentation Tests', function () {
     describe('When the avatar renders', function () {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(function () {
+        slots = { default: DEFAULT_SLOT };
+        _setWrappers();
+      });
 
       it('should exists', function () { assert.exists(wrapper); });
       it('should render the avatar', function () { assert.isTrue(avatar.exists()); });
@@ -145,6 +149,7 @@ describe('DtAvatar Tests', function () {
           ...basePropsData,
           size,
         };
+        slots = { default: DEFAULT_SLOT };
         _setWrappers();
       });
 
@@ -163,6 +168,7 @@ describe('DtAvatar Tests', function () {
           ...basePropsData,
           color,
         };
+        slots = { default: DEFAULT_SLOT };
         _setWrappers();
       });
 
