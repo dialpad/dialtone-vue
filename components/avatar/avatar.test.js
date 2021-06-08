@@ -12,7 +12,7 @@ import sinon from 'sinon';
 
 // Constants
 const DEFAULT_SLOT = 'DP';
-const IMAGE = {
+const IMAGE_ATTRS = {
   SRC: 'image.png',
   ALT: 'Avatar image',
 };
@@ -72,10 +72,10 @@ describe('DtAvatar Tests', function () {
       it('should render the avatar', function () { assert.isTrue(avatar.exists()); });
     });
 
-    describe('When the avatar renders image using attrs', function () {
+    describe('When the avatar renders image via attrs', function () {
       // Test Environment
-      const src = IMAGE.SRC;
-      const alt = IMAGE.ALT;
+      const src = IMAGE_ATTRS.SRC;
+      const alt = IMAGE_ATTRS.ALT;
 
       // Test Setup
       beforeEach(function () {
@@ -226,8 +226,8 @@ describe('DtAvatar Tests', function () {
         beforeEach(function () {
           attrs = {
             ...baseAttrs,
-            src: IMAGE.SRC,
-            alt: IMAGE.ALT,
+            src: IMAGE_ATTRS.SRC,
+            alt: IMAGE_ATTRS.ALT,
           };
           _setWrappers();
         });
@@ -240,7 +240,7 @@ describe('DtAvatar Tests', function () {
         beforeEach(function () {
           attrs = {
             ...baseAttrs,
-            src: IMAGE.SRC,
+            src: IMAGE_ATTRS.SRC,
           };
           _setWrappers();
         });
@@ -253,7 +253,7 @@ describe('DtAvatar Tests', function () {
         beforeEach(function () {
           attrs = {
             ...baseAttrs,
-            alt: IMAGE.ALT,
+            alt: IMAGE_ATTRS.ALT,
           };
           _setWrappers();
         });
