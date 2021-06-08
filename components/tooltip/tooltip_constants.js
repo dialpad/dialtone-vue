@@ -7,6 +7,7 @@ export const TOOLTIP_DIRECTION_MODIFIERS = [
 
 export const TOOLTIP_KIND_MODIFIERS = {
   inverted: `d-tooltip--inverted`,
+  hover: `d-tooltip--hover`,
   show: `d-tooltip--show`,
   hide: `d-tooltip--hide`,
 };
