@@ -8,8 +8,8 @@
     <ol>
       <slot>
         <dt-breadcrumb-item
-          v-for="item in breadcrumbs"
-          :key="getBreadcrumbItemKey(item)"
+          v-for="(item, index) in breadcrumbs"
+          :key="getBreadcrumbItemKey(index)"
           :inverted="inverted"
           v-bind="item"
         />
@@ -21,7 +21,7 @@
 <script>
 import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants.js';
 import DtBreadcrumbItem from './breadcrumb_item';
-import { getUniqueString } from '../utils';
+import util from '../utils';
 
 export default {
   name: 'DtBreadcrumbs',
@@ -60,8 +60,8 @@ export default {
   },
 
   methods: {
-    getBreadcrumbItemKey () {
-      return getUniqueString('breadcrumbs');
+    getBreadcrumbItemKey (index) {
+      return `breadcrumbs-item-${index}-${util.getUniqueString()}`;
     },
   },
 };
