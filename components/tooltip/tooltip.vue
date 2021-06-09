@@ -11,6 +11,7 @@
     <div
       :id="id"
       :class="[
+        'd-ps-absolute',
         'd-tooltip',
         `d-tooltip__arrow--${arrowDirection}`,
         TOOLTIP_KIND_MODIFIERS[shouldShowTooltip ? 'show' : 'hide'],
