@@ -214,8 +214,21 @@ describe('DtAvatar Tests', function () {
         itBehavesLikePassesCustomPropValidation(prop, prop.default);
       });
 
-      describe('when provided size is not in AVATAR_SIZE_MODIFIERS', function () {
+      describe('When provided size is not in AVATAR_SIZE_MODIFIERS', function () {
         itBehavesLikeFailsCustomPropValidation(prop, `INVALID_SIZE`);
+      });
+    });
+
+    describe('Kind Validator', function () {
+      // Test Environment
+      const prop = DtAvatar.props.kind;
+
+      describe('When provided kind is in AVATAR_KIND_MODIFIERS', function () {
+        itBehavesLikePassesCustomPropValidation(prop, prop.default);
+      });
+
+      describe('When provided kind is not in AVATAR_KIND_MODIFIERS', function () {
+        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_KIND`);
       });
     });
 
