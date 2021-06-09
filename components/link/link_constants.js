@@ -6,7 +6,7 @@ export const INVERTED = 'inverted';
 export const LINK_VARIANTS = ['', DANGER, WARNING, SUCCESS, MUTED, INVERTED];
 
 export const LINK_KIND_MODIFIERS = {
-  default: '', // is needed for button compatibility
+  default: '',
   warning: 'd-link--warning',
   danger: 'd-link--danger',
   success: 'd-link--success',
