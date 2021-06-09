@@ -7,6 +7,7 @@ import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
 } from '../../tests/shared_examples/validation';
+import { itBehavesLikeAppliesChildProp } from '../../tests/shared_examples/extendability';
 import Vue from 'vue';
 import sinon from 'sinon';
 
@@ -313,6 +314,36 @@ describe('DtAvatar Tests', function () {
 
         itBehavesLikeRaisesWarning();
       });
+    });
+  });
+
+  describe('Extendability Tests', function () {
+    // Test Environment
+    let element;
+    const propName = 'some';
+    const propValue = 'prop';
+
+    // Shared Examples
+    const itBehavesLikeAppliesChildPropLocal = () => {
+      it('should have provided child prop', function () {
+        itBehavesLikeAppliesChildProp(element, propName, propValue);
+      });
+    };
+
+    // Test Setup
+    describe('When attrs are provided', function () {
+      // Test Setup
+      beforeEach(function () {
+        attrs = {
+          some: 'prop',
+          src: IMAGE_ATTRS.SRC,
+          alt: IMAGE_ATTRS.ALT,
+        };
+        _setWrappers();
+        element = image;
+      });
+
+      itBehavesLikeAppliesChildPropLocal();
     });
   });
 });
