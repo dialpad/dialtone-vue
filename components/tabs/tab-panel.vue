@@ -1,7 +1,6 @@
 <template>
   <div
     :id="tabId"
-    class="js-tab-panel"
     role="tabpanel"
     tabindex="0"
     :aria-labelledby="tabId"

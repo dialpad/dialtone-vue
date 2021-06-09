@@ -8,7 +8,7 @@
     :aria-label="label"
     data-qa="dt-tab"
     tabindex="0"
-    :disabled="disabled"
+    :disabled="isDisabled"
     @click="selectPanel"
   >
     <slot />
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { SELECTED } from './tabs_constants.js';
+import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants.js';
 
 export default {
   name: 'DtTab',
@@ -61,7 +61,7 @@ export default {
       return [
         'd-tab',
         {
-          [`d-tab--${SELECTED}`]: this.isSelected,
+          [TAB_IMPORTANCE_MODIFIERS.selected]: this.isSelected,
         },
       ];
     },
@@ -72,6 +72,10 @@ export default {
 
     isSelected () {
       return this.groupContext.selected === this.panelId;
+    },
+
+    isDisabled () {
+      return this.groupContext.disabled || this.disabled;
     },
   },
 

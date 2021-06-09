@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { TABS_SIZES, INVERTED, NO_BORDER } from './tabs_constants.js';
+import { TABS_SIZES, TABS_KIND_MODIFIERS, TABS_IMPORTANCE_MODIFIERS, TABS_SIZE_MODIFIERS } from './tabs_constants.js';
 
 export default {
   name: 'DtTabs',
@@ -93,12 +93,22 @@ export default {
     tabsClasses () {
       return [
         'd-tablist',
-        `d-tablist--${this.size}`,
+        TABS_SIZE_MODIFIERS[this.size],
         {
-          [`d-tablist--${INVERTED}`]: this.inverted,
-          [`d-tablist--${NO_BORDER}`]: this.borderless,
+          [TABS_KIND_MODIFIERS.inverted]: this.inverted,
+          [TABS_IMPORTANCE_MODIFIERS.borderless]: this.borderless,
+
         },
       ];
+    },
+  },
+
+  watch: {
+    disabled: {
+      immediate: true,
+      handler () {
+        this.provideObj.disabled = this.disabled;
+      },
     },
   },
 
@@ -109,8 +119,6 @@ export default {
     if (!this.provideObj.selected) {
       this.provideObj.selected = this.selected;
     }
-
-    this.provideObj.disabled = this.disabled;
   },
 
   methods: {
