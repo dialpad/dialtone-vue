@@ -232,6 +232,19 @@ describe('DtAvatar Tests', function () {
       });
     });
 
+    describe('Color Validator', function () {
+      // Test Environment
+      const prop = DtAvatar.props.color;
+
+      describe('When provided color is in AVATAR_COLOR_MODIFIERS', function () {
+        itBehavesLikePassesCustomPropValidation(prop, prop.default);
+      });
+
+      describe('When provided color is not in AVATAR_COLOR_MODIFIERS', function () {
+        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_COLOR`);
+      });
+    });
+
     describe('Image Attrs Validation', function () {
       // Test Setup
       before(function () {
