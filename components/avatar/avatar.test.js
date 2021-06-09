@@ -6,6 +6,8 @@ import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } 
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
+  itBehavesLikeDoesNotRaiseAnyWarnings,
+  itBehavesLikeRaisesWarning,
 } from '../../tests/shared_examples/validation';
 import { itBehavesLikeAppliesChildProp } from '../../tests/shared_examples/extendability';
 import Vue from 'vue';
@@ -263,18 +265,6 @@ describe('DtAvatar Tests', function () {
         Vue.config.silent = false;
       });
 
-      // Shared Examples
-      const itBehavesLikeDoesNotRaiseAnyWarnings = () => {
-        it('should not raise any warnings', function () { assert.isTrue(Vue.util.warn.notCalled); });
-      };
-
-      const itBehavesLikeRaisesWarning = () => {
-        it('should raise a single warning', function () { assert.isTrue(Vue.util.warn.calledOnce); });
-        it('should have expected warning message', function () {
-          assert.strictEqual(Vue.util.warn.firstCall.args[0], 'src and alt attributes are required for image avatars');
-        });
-      };
-
       describe('When image src and alt attributes are provided', function () {
         // Test Setup
         beforeEach(function () {
@@ -299,7 +289,7 @@ describe('DtAvatar Tests', function () {
           _setWrappers();
         });
 
-        itBehavesLikeRaisesWarning();
+        itBehavesLikeRaisesWarning('src and alt attributes are required for image avatars');
       });
 
       describe('When image src attribute is not provided', function () {
@@ -312,7 +302,7 @@ describe('DtAvatar Tests', function () {
           _setWrappers();
         });
 
-        itBehavesLikeRaisesWarning();
+        itBehavesLikeRaisesWarning('src and alt attributes are required for image avatars');
       });
     });
   });

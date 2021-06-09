@@ -6,6 +6,8 @@ import { itBehavesLikeEmitsExpectedEvent } from '../../tests/shared_examples/eve
 import {
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeFailsCustomPropValidation,
+  itBehavesLikeDoesNotRaiseAnyWarnings,
+  itBehavesLikeRaisesWarning,
 } from '../../tests/shared_examples/validation';
 import {
   itBehavesLikeAppliesClassToChild,
@@ -354,18 +356,6 @@ describe('DtSelectMenu Tests', function () {
         Vue.config.silent = false;
       });
 
-      // Shared Examples
-      const itBehavesLikeDoesNotRaiseAnyWarnings = () => {
-        it('should not raise any warnings', function () { assert.isTrue(Vue.util.warn.notCalled); });
-      };
-
-      const itBehavesLikeRaisesWarning = () => {
-        it('should raise a single warning', function () { assert.isTrue(Vue.util.warn.calledOnce); });
-        it('should have expected warning message', function () {
-          assert.strictEqual(Vue.util.warn.firstCall.args[0], 'Options are expected to be provided via prop or slot');
-        });
-      };
-
       describe('When options are provided via prop', function () {
         // Test Setup
         beforeEach(function () {
@@ -380,7 +370,7 @@ describe('DtSelectMenu Tests', function () {
             await wrapper.setProps({ options: [] });
           });
 
-          itBehavesLikeRaisesWarning();
+          itBehavesLikeRaisesWarning('Options are expected to be provided via prop or slot');
         });
       });
 
@@ -402,7 +392,7 @@ describe('DtSelectMenu Tests', function () {
           _mountWrappers();
         });
 
-        itBehavesLikeRaisesWarning();
+        itBehavesLikeRaisesWarning('Options are expected to be provided via prop or slot');
       });
     });
   });
