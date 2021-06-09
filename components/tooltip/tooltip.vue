@@ -10,11 +10,15 @@
   >
     <div
       :id="id"
-      class="d-tooltip"
-      :class="[tooltipClasses, {
-        [ TOOLTIP_KIND_MODIFIERS.hover ]: shouldHasHoverModifier,
-        [ TOOLTIP_KIND_MODIFIERS.show ]: shouldHasShowModifier,
-      }]"
+      :class="[
+        'd-tooltip',
+        `d-tooltip__arrow--${arrowDirection}`,
+        TOOLTIP_KIND_MODIFIERS[shouldShowTooltip ? 'show' : 'hide'],
+        {
+          [ TOOLTIP_KIND_MODIFIERS.hover ]: shouldHasHoverModifier,
+          [ TOOLTIP_KIND_MODIFIERS.inverted ]: inverted,
+        },
+      ]"
       data-qa="dt-tooltip"
       role="tooltip"
       :aria-hidden="ariaHidden"
@@ -141,41 +145,32 @@ export default {
     ariaHidden () {
       return `${!this.isTooltipVisible}`;
     },
-
-    tooltipContainerClass () {
-      return {
-        'd-tooltip--hover': this.shouldHasHoverModifier,
-        'd-tooltip--show': this.isChildFocused,
-      };
-    },
-
-    tooltipClasses () {
-      return [
-        `d-tooltip__arrow--${this.arrowDirection}`,
-        TOOLTIP_KIND_MODIFIERS[this.shouldShowTooltip ? 'show' : 'hide'],
-        {
-          [TOOLTIP_KIND_MODIFIERS.inverted]: this.inverted,
-        },
-      ];
-    },
   },
 
   mounted () {
-    if (this.hasFocusableAnchorNode()) {
-      /* TODO: In the future we might want to refine this to apply the appropriate aria attrs given the child element
-       * type.
-       */
-      // Add aria description to each anchored child
-      this.$refs.anchor?.children?.forEach(child => {
-        child.setAttribute('aria-describedby', this.id);
-      });
-    } else {
-      this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
-      this.$refs.anchor.setAttribute('aria-describedby', this.id);
-    }
+    this.initAttributes();
+  },
+
+  beforeUpdate () {
+    this.initAttributes();
   },
 
   methods: {
+    initAttributes () {
+      if (this.hasFocusableAnchorNode()) {
+        /* TODO: In the future we might want to refine this to apply the appropriate aria attrs given the child element
+         * type.
+         */
+        // Add aria description to each anchored child
+        this.$refs.anchor?.children?.forEach(child => {
+          child.setAttribute('aria-describedby', this.id);
+        });
+      } else {
+        this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
+        this.$refs.anchor.setAttribute('aria-describedby', this.id);
+      }
+    },
+
     hasFocusableAnchorNode () {
       return !!findFirstFocusableNode(this.$refs.anchor);
     },
