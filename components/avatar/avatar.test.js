@@ -123,7 +123,7 @@ describe('DtAvatar Tests', function () {
       });
     });
 
-    describe('With kind icon and slot populated', function () {
+    describe('With kind icon', function () {
       // Test Environment
       const icon = '<svg></svg>';
 
@@ -143,7 +143,7 @@ describe('DtAvatar Tests', function () {
       });
     });
 
-    describe('With kind initials and slot populated', function () {
+    describe('With kind initials', function () {
       // Test Environment
       const initials = 'DP';
 
