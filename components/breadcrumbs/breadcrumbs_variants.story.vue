@@ -29,8 +29,7 @@ import DtBreadcrumbItem from './breadcrumb_item';
 
 export default {
   name: 'DtBreadcrumbsVariants',
-<<<<<<< HEAD
-  components: { DtBreadcrumbs },
+  components: { DtBreadcrumbs, DtBreadcrumbItem },
   data () {
     return {
       breadcrumbsInverted: [{
@@ -56,8 +55,5 @@ export default {
       }],
     };
   },
-=======
-  components: { DtBreadcrumbs, DtBreadcrumbItem },
->>>>>>> af92084 (resolve comments)
 };
 </script>
