@@ -1,5 +1,12 @@
 <template>
-  <div :class="tooltipClasses">
+  <div
+    :class="[
+      'd-fl-center d-fd-column d-pt64',
+      {
+        'd-bgc-purple-800 d-pb64': inverted,
+      },
+    ]"
+  >
     <div class="d-pt16">
       <dt-tooltip
         :message="message"
@@ -36,18 +43,6 @@ export default {
   computed: {
     buttonKind () {
       return this.inverted ? 'inverted' : 'default';
-    },
-
-    tooltipClasses () {
-      return [
-        'd-fl-center',
-        'd-fd-column',
-        'd-pt64',
-        {
-          'd-bgc-purple-800': this.inverted,
-          'd-pb64': this.inverted,
-        },
-      ];
     },
   },
 };
