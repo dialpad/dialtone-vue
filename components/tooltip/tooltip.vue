@@ -1,17 +1,25 @@
 <template>
   <div
-    :class="tooltipContainerClass"
-    class="d-ps-relative d-fl-center d-d-inline-flex"
+    class="d-tooltip-container"
     data-qa="dt-tooltip-container"
     @focus.capture="onFocus"
     @blur.capture="onBlur"
     @keyup.esc="onEsc"
     @mouseover="onHover"
+    @mouseleave="onBlur"
   >
     <div
       :id="id"
-      :class="tooltipClasses"
-      class="d-ps-absolute d-tooltip"
+      :class="[
+        'd-ps-absolute',
+        'd-tooltip',
+        `d-tooltip__arrow--${arrowDirection}`,
+        TOOLTIP_KIND_MODIFIERS[shouldShowTooltip ? 'show' : 'hide'],
+        {
+          [ TOOLTIP_KIND_MODIFIERS.hover ]: shouldHasHoverModifier,
+          [ TOOLTIP_KIND_MODIFIERS.inverted ]: inverted,
+        },
+      ]"
       data-qa="dt-tooltip"
       role="tooltip"
       :aria-hidden="ariaHidden"
@@ -106,10 +114,11 @@ export default {
 
   data () {
     return {
-      isHover: false,
-      isESCPressed: false,
-      isChildFocus: false,
+      isHover: false, // is hovered local state
+      isESCPressed: false, // is escape key pressed local state
+      isChildFocused: false, // is child element focused local state
       anchorTabIndex: '-1', // anchor is not tabbable by default
+      TOOLTIP_KIND_MODIFIERS,
     };
   },
 
@@ -123,73 +132,68 @@ export default {
     },
 
     shouldShowTooltip () {
-      return this.isTooltipVisible || this.isChildFocus;
+      return this.isTooltipVisible || this.isChildFocused;
     },
 
     shouldHasHoverModifier () {
-      return this.hover && !this.isESCPressed && !this.isChildFocus;
+      return this.hover && !this.isESCPressed && !this.isChildFocused;
+    },
+
+    shouldHasShowModifier () {
+      return this.isChildFocused;
     },
 
     ariaHidden () {
       return `${!this.isTooltipVisible}`;
     },
-
-    tooltipContainerClass () {
-      return {
-        'd-tooltip--hover': this.shouldHasHoverModifier,
-        'd-tooltip--show': this.isChildFocus,
-      };
-    },
-
-    tooltipClasses () {
-      return [
-        `d-tooltip__arrow--${this.arrowDirection}`,
-        TOOLTIP_KIND_MODIFIERS[this.shouldShowTooltip ? 'show' : 'hide'],
-        {
-          [TOOLTIP_KIND_MODIFIERS.inverted]: this.inverted,
-        },
-      ];
-    },
   },
 
   mounted () {
-    if (this.hasFocusableAnchorNode()) {
-      /* TODO: In the future we might want to refine this to apply the appropriate aria attrs given the child element
-       * type.
-       */
-      // Add aria description to each anchored child
-      this.$refs.anchor?.children?.forEach(child => {
-        child.setAttribute('aria-describedby', this.id);
-      });
-    } else {
-      this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
-      this.$refs.anchor.setAttribute('aria-describedby', this.id);
-    }
+    this.initAttributes();
+  },
+
+  beforeUpdate () {
+    this.initAttributes();
   },
 
   methods: {
+    initAttributes () {
+      if (this.hasFocusableAnchorNode()) {
+        /* TODO: In the future we might want to refine this to apply the appropriate aria attrs given the child element
+         * type.
+         */
+        // Add aria description to each anchored child
+        this.$refs.anchor?.children?.forEach(child => {
+          child.setAttribute('aria-describedby', this.id);
+        });
+      } else {
+        this.$refs.anchor.setAttribute('tabIndex', this.tabIndex);
+        this.$refs.anchor.setAttribute('aria-describedby', this.id);
+      }
+    },
+
     hasFocusableAnchorNode () {
       return !!findFirstFocusableNode(this.$refs.anchor);
     },
 
     onFocus () {
-      this.onHover(true);
-      this.isChildFocus = true;
+      this.onHover();
+      this.isChildFocused = true;
     },
 
-    onHover (isHover) {
-      this.isHover = isHover;
+    onHover () {
+      this.isHover = true;
     },
 
     onBlur () {
       this.isHover = false;
       this.isESCPressed = false;
-      this.isChildFocus = false;
+      this.isChildFocused = false;
     },
 
     onEsc () {
       this.isESCPressed = (this.hover && this.isHover) || !this.show;
-      this.isChildFocus = false;
+      this.isChildFocused = false;
     },
   },
 };
