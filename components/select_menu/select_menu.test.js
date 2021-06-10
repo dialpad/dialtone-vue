@@ -6,8 +6,8 @@ import { itBehavesLikeEmitsExpectedEvent } from '../../tests/shared_examples/eve
 import {
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeFailsCustomPropValidation,
-  itBehavesLikeDoesNotRaiseAnyWarnings,
-  itBehavesLikeRaisesWarning,
+  itBehavesLikeDoesNotRaiseAnyVueWarnings,
+  itBehavesLikeRaisesSingleVueWarning,
 } from '../../tests/shared_examples/validation';
 import {
   itBehavesLikeAppliesClassToChild,
@@ -365,7 +365,7 @@ describe('DtSelectMenu Tests', function () {
           _mountWrappers();
         });
 
-        itBehavesLikeDoesNotRaiseAnyWarnings();
+        itBehavesLikeDoesNotRaiseAnyVueWarnings();
 
         describe('When updated options are empty', function () {
           // Test Setup
@@ -373,7 +373,7 @@ describe('DtSelectMenu Tests', function () {
             await wrapper.setProps({ options: [] });
           });
 
-          itBehavesLikeRaisesWarning(warningMessage);
+          itBehavesLikeRaisesSingleVueWarning(warningMessage);
         });
       });
 
@@ -385,7 +385,7 @@ describe('DtSelectMenu Tests', function () {
           _mountWrappers();
         });
 
-        itBehavesLikeDoesNotRaiseAnyWarnings();
+        itBehavesLikeDoesNotRaiseAnyVueWarnings();
       });
 
       describe('When options are not provided', function () {
@@ -395,7 +395,7 @@ describe('DtSelectMenu Tests', function () {
           _mountWrappers();
         });
 
-        itBehavesLikeRaisesWarning(warningMessage);
+        itBehavesLikeRaisesSingleVueWarning(warningMessage);
       });
     });
   });

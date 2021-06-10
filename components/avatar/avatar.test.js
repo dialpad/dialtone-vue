@@ -6,8 +6,8 @@ import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } 
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
-  itBehavesLikeDoesNotRaiseAnyWarnings,
-  itBehavesLikeRaisesWarning,
+  itBehavesLikeDoesNotRaiseAnyVueWarnings,
+  itBehavesLikeRaisesSingleVueWarning,
 } from '../../tests/shared_examples/validation';
 import { itBehavesLikeAppliesChildProp } from '../../tests/shared_examples/extendability';
 import Vue from 'vue';
@@ -279,7 +279,7 @@ describe('DtAvatar Tests', function () {
           _setWrappers();
         });
 
-        itBehavesLikeDoesNotRaiseAnyWarnings();
+        itBehavesLikeDoesNotRaiseAnyVueWarnings();
       });
 
       describe('When image alt attribute is not provided', function () {
@@ -292,7 +292,7 @@ describe('DtAvatar Tests', function () {
           _setWrappers();
         });
 
-        itBehavesLikeRaisesWarning(warningMessage);
+        itBehavesLikeRaisesSingleVueWarning(warningMessage);
       });
 
       describe('When image src attribute is not provided', function () {
@@ -305,7 +305,7 @@ describe('DtAvatar Tests', function () {
           _setWrappers();
         });
 
-        itBehavesLikeRaisesWarning(warningMessage);
+        itBehavesLikeRaisesSingleVueWarning(warningMessage);
       });
     });
   });
