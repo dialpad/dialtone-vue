@@ -55,6 +55,13 @@ export const argTypesData = {
     control: 'text',
   },
 
+  // Pass Through Class Controls
+  avatarClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+
   // Slots
   default: {
     control: 'text',
