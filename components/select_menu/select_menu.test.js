@@ -340,6 +340,9 @@ describe('DtSelectMenu Tests', function () {
     });
 
     describe('Options Validation', function () {
+      // Test Environment
+      const warningMessage = 'Options are expected to be provided via prop or slot';
+
       // Test Setup
       before(function () {
         Vue.config.silent = true;
@@ -370,7 +373,7 @@ describe('DtSelectMenu Tests', function () {
             await wrapper.setProps({ options: [] });
           });
 
-          itBehavesLikeRaisesWarning('Options are expected to be provided via prop or slot');
+          itBehavesLikeRaisesWarning(warningMessage);
         });
       });
 
@@ -392,7 +395,7 @@ describe('DtSelectMenu Tests', function () {
           _mountWrappers();
         });
 
-        itBehavesLikeRaisesWarning('Options are expected to be provided via prop or slot');
+        itBehavesLikeRaisesWarning(warningMessage);
       });
     });
   });

@@ -249,6 +249,9 @@ describe('DtAvatar Tests', function () {
     });
 
     describe('Image Attrs Validation', function () {
+      // Test Environment
+      const warningMessage = 'src and alt attributes are required for image avatars';
+
       // Test Setup
       before(function () {
         Vue.config.silent = true;
@@ -289,7 +292,7 @@ describe('DtAvatar Tests', function () {
           _setWrappers();
         });
 
-        itBehavesLikeRaisesWarning('src and alt attributes are required for image avatars');
+        itBehavesLikeRaisesWarning(warningMessage);
       });
 
       describe('When image src attribute is not provided', function () {
@@ -302,7 +305,7 @@ describe('DtAvatar Tests', function () {
           _setWrappers();
         });
 
-        itBehavesLikeRaisesWarning('src and alt attributes are required for image avatars');
+        itBehavesLikeRaisesWarning(warningMessage);
       });
     });
   });
