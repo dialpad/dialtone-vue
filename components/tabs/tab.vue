@@ -1,14 +1,19 @@
 <template>
   <button
-    :id="panelId"
-    :class="tabClasses"
+    :id="`base-tab-${panelId}`"
+    :class="[
+      'd-tab',
+      {
+        [TAB_IMPORTANCE_MODIFIERS.selected]: isSelected,
+      },
+    ]"
     role="tab"
-    :aria-selected="ariaSelected"
-    :aria-controls="panelId"
+    :aria-selected="`${isSelected}`"
+    :aria-controls="`base-panel-${panelId}`"
     :aria-label="label"
     data-qa="dt-tab"
-    tabindex="0"
-    :disabled="isDisabled"
+    :tabindex="isSelected ? '0' : '-1'"
+    :disabled="groupContext.disabled || disabled"
     @click="selectPanel"
   >
     <slot />
@@ -56,26 +61,15 @@ export default {
     },
   },
 
+  data () {
+    return {
+      TAB_IMPORTANCE_MODIFIERS,
+    };
+  },
+
   computed: {
-    tabClasses () {
-      return [
-        'd-tab',
-        {
-          [TAB_IMPORTANCE_MODIFIERS.selected]: this.isSelected,
-        },
-      ];
-    },
-
-    ariaSelected () {
-      return `${this.isSelected}`;
-    },
-
     isSelected () {
       return this.groupContext.selected === this.panelId;
-    },
-
-    isDisabled () {
-      return this.groupContext.disabled || this.disabled;
     },
   },
 
@@ -94,7 +88,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>

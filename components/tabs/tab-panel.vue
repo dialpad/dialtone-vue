@@ -1,10 +1,10 @@
 <template>
   <div
-    :id="tabId"
+    :id="`base-panel-${tabId}`"
     role="tabpanel"
     tabindex="0"
-    :aria-labelledby="tabId"
-    :aria-hidden="ariaHidden"
+    :aria-labelledby="`base-tab-${tabId}`"
+    :aria-hidden="`${!isShow}`"
     :class="{
       'd-d-none': !isShow,
     }"
@@ -40,10 +40,6 @@ export default {
   },
 
   computed: {
-    ariaHidden () {
-      return `${this.isShow}`;
-    },
-
     isShow () {
       return this.groupContext.selected === this.tabId;
     },

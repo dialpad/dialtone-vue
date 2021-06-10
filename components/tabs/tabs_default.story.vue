@@ -23,10 +23,10 @@
       </template>
 
       <dt-tab-panel tab-id="1">
-        First Panel
+        <p> First Panel </p>
       </dt-tab-panel>
       <dt-tab-panel tab-id="2">
-        Second Panel
+        <p> Second Panel </p>
       </dt-tab-panel>
     </dt-tabs>
   </div>
