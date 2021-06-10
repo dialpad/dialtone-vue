@@ -4,7 +4,14 @@
     data-qa="dt-tabs"
   >
     <div
-      :class="tabsClasses"
+      :class="[
+        'd-tablist',
+        TABS_SIZE_MODIFIERS[size],
+        {
+          [TABS_KIND_MODIFIERS.inverted]: inverted,
+          [TABS_IMPORTANCE_MODIFIERS.borderless]: borderless,
+        },
+      ]"
       role="tablist"
       :aria-label="label"
     >
@@ -74,8 +81,8 @@ export default {
     size: {
       type: String,
       default: '',
-      validate (kind) {
-        return TABS_SIZES.includes(kind);
+      validate (size) {
+        return TABS_SIZES.includes(size);
       },
     },
   },
@@ -83,24 +90,14 @@ export default {
   data () {
     return {
       provideObj: {
-        selected: '', // The id of the currently displayed tab content panel
-        disabled: false, // Used to disable the group
+        selected: '', // the currently displayed tab id
+        disabled: false, // disable group
       },
+
+      TABS_SIZE_MODIFIERS,
+      TABS_KIND_MODIFIERS,
+      TABS_IMPORTANCE_MODIFIERS,
     };
-  },
-
-  computed: {
-    tabsClasses () {
-      return [
-        'd-tablist',
-        TABS_SIZE_MODIFIERS[this.size],
-        {
-          [TABS_KIND_MODIFIERS.inverted]: this.inverted,
-          [TABS_IMPORTANCE_MODIFIERS.borderless]: this.borderless,
-
-        },
-      ];
-    },
   },
 
   watch: {

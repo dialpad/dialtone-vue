@@ -5,7 +5,9 @@
     tabindex="0"
     :aria-labelledby="tabId"
     :aria-hidden="ariaHidden"
-    :style="togglePanel"
+    :class="{
+      'd-d-none': !isShow,
+    }"
     data-qa="dt-tab-panel"
   >
     <template v-if="!hidden">
@@ -44,10 +46,6 @@ export default {
 
     isShow () {
       return this.groupContext.selected === this.tabId;
-    },
-
-    togglePanel () {
-      return this.isShow ? 'display: block' : 'display: none';
     },
   },
 };
