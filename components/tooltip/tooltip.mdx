@@ -9,7 +9,7 @@ import DtTooltip from './tooltip';
     If richer media is desired, consider using a popover instead.
 </Subtitle>
 
-## Basic Usage
+## Base Style
 
 The tooltip, also known as infotip or hint, is a common graphical user interface element in which, when hovering over a
 screen element or component, a text box displays information about that element (such as a description of a button's
@@ -21,16 +21,24 @@ A tooltip has two slots:
 1. **the anchor** required slot
 2. **the default** slot (which could be replaced with prop message)
 
+<Canvas>
+  <Story id="elements-tooltip--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="elements-tooltip--variants" />
+</Canvas>
+
+## Props, Slots & Events
+
+<ArgsTable of={DtTooltip} />
+
 ## Styles
 
 1. **Twelve directions are offered:** three on each face of the tooltip.
 2. **Inverted:** Inverts styles to work on dark backgrounds.
-
-## Default Tooltip
-
-<Canvas>
-  <Story id="elements-tooltip--default" />
-</Canvas>
 
 ## Anchor
 
@@ -58,26 +66,12 @@ You are encouraged to consult the ARIA documentation for the particular role
 Defines which side of the tooltip its arrow appears.
 No arrow direction is assigned by default. You must select a direction.
 
-| top  | right | left | bottom |
-|-|-|-|-|
-|**top-left**|**right-top**|**left-top**|**bottom-left**|
-|**top-center**|**right-center**|**left-center**|**bottom-center**|
-|**top-right**|**right-bottom**|**left-bottom**|**bottom-right**|
-
-<Canvas>
-  <Story id="elements-tooltip--variants" />
-</Canvas>
-
-## Props, Slots & Events
-
-<ArgsTable of={DtTooltip} />
-
 ## Usage
 
 ### Import
 
 ```jsx
-import { DtTooltip } from '@dialpad/handset';
+import { DtTooltip } from '@dialpad/dialtone-vue';
 ```
 
 ### Default
