@@ -6,6 +6,7 @@
       AVATAR_KIND_MODIFIERS[kind],
       AVATAR_SIZE_MODIFIERS[size],
       AVATAR_COLOR_MODIFIERS[color],
+      avatarClass,
     ]"
     data-qa="dt-avatar"
   >
@@ -68,6 +69,14 @@ export default {
       type: String,
       default: 'base',
       validator: (color) => Object.keys(AVATAR_COLOR_MODIFIERS).includes(color),
+    },
+
+    /**
+     * Used to customize the avatar container
+     */
+    avatarClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

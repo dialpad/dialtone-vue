@@ -55,6 +55,13 @@ export const argTypesData = {
     control: 'text',
   },
 
+  // Pass Through Class Controls
+  avatarClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+
   // Slots
   default: {
     control: 'text',
@@ -81,9 +88,14 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtAvatarDefaultTemplate,
 );
 
+const defaultImage = require('./person.png');
+
 // Stories
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
+Default.args = {
+  src: defaultImage,
+  alt: 'Person Avatar',
+};
 
 export const Image = DefaultTemplate.bind({});
 Image.args = {
