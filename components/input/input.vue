@@ -16,7 +16,7 @@
           :class="[
             'base-input__label-text',
             'd-label',
-            (isDefaultSize || !isValidSize) ? '' : `d-label--${size}`,
+            { [`d-label--${size}`]: (!isDefaultSize && isValidSize) },
           ]"
         >
           {{ label }}
@@ -28,7 +28,7 @@
         :class="[
           'base-input__description',
           'd-description',
-          (isDefaultSize || !isValidDescriptionSize) ? '' : `d-description--${size}`,
+          { [`d-description--${size}`]: (!isDefaultSize && isValidDescriptionSize) },
         ]"
         data-qa="dt-input-description"
       >
