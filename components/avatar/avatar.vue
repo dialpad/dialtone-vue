@@ -1,21 +1,28 @@
 <template>
   <div
     :id="id"
-    :class="avatarClasses"
+    :class="[
+      'd-avatar',
+      AVATAR_KIND_MODIFIERS[kind],
+      AVATAR_SIZE_MODIFIERS[size],
+      AVATAR_COLOR_MODIFIERS[color],
+      avatarClass,
+    ]"
     data-qa="dt-avatar"
   >
     <!-- @slot Slot for avatar content -->
     <slot>
       <img
-        v-if="shouldRenderImage"
+        data-qa="dt-avatar-image"
         v-bind="$attrs"
-        alt=""
+        :alt="$attrs.alt"
       >
     </slot>
   </div>
 </template>
 
 <script>
+import Vue from 'vue';
 import {
   AVATAR_SIZE_MODIFIERS,
   AVATAR_COLOR_MODIFIERS,
@@ -43,7 +50,7 @@ export default {
     kind: {
       type: String,
       default: 'default',
-      validation: (kind) => Object.keys(AVATAR_KIND_MODIFIERS).includes(kind),
+      validator: (kind) => Object.keys(AVATAR_KIND_MODIFIERS).includes(kind),
     },
 
     /**
@@ -52,7 +59,7 @@ export default {
     size: {
       type: String,
       default: 'md',
-      validation: (size) => Object.keys(AVATAR_SIZE_MODIFIERS).includes(size),
+      validator: (size) => Object.keys(AVATAR_SIZE_MODIFIERS).includes(size),
     },
 
     /**
@@ -61,22 +68,42 @@ export default {
     color: {
       type: String,
       default: 'base',
-      validation: (color) => Object.keys(AVATAR_COLOR_MODIFIERS).includes(color),
+      validator: (color) => Object.keys(AVATAR_COLOR_MODIFIERS).includes(color),
+    },
+
+    /**
+     * Used to customize the avatar container
+     */
+    avatarClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 
-  computed: {
-    avatarClasses () {
-      return [
-        'd-avatar',
-        AVATAR_KIND_MODIFIERS[this.kind],
-        AVATAR_SIZE_MODIFIERS[this.size],
-        AVATAR_COLOR_MODIFIERS[this.color],
-      ];
-    },
+  data () {
+    return {
+      AVATAR_SIZE_MODIFIERS,
+      AVATAR_COLOR_MODIFIERS,
+      AVATAR_KIND_MODIFIERS,
+    };
+  },
 
-    shouldRenderImage () {
-      return this.$attrs.src && this.$attrs.alt;
+  mounted () {
+    this.validateImageAttrsPresence();
+  },
+
+  beforeUpdate () {
+    this.validateImageAttrsPresence();
+  },
+
+  methods: {
+    validateImageAttrsPresence () {
+      if (this.kind === 'default' && !this.$slots.default) {
+        // Check that default slot image required attributes are provided
+        if (!this.$attrs.src || !this.$attrs.alt) {
+          Vue.util.warn('src and alt attributes are required for image avatars', this);
+        }
+      }
     },
   },
 };

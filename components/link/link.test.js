@@ -2,13 +2,14 @@ import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtLink from './link.vue';
 import {
-  LINK_VARIANTS_CLASSES,
+  LINK_KIND_MODIFIERS,
   DANGER,
   SUCCESS,
   WARNING,
   MUTED,
   INVERTED,
 } from './link_constants';
+import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 
 // Constants
 const basePropsData = {
@@ -41,7 +42,7 @@ describe('Dialtone Vue Link tests', function () {
   const itBehavesLikeHasCorrectKindClass = kind => {
     it('should have correct class', async function () {
       await wrapper.setProps({ kind });
-      assert.isTrue(nativeLink.classes().includes(LINK_VARIANTS_CLASSES[kind]));
+      itBehavesLikeHasCorrectClass(nativeLink, LINK_KIND_MODIFIERS[kind]);
     });
   };
 

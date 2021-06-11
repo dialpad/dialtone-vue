@@ -28,21 +28,38 @@ export const argTypesData = {
     },
   },
 
-  // Image Props
+  // Native Props
   src: {
+    description: 'native image src',
     table: {
-      category: 'Image props',
+      category: 'native props',
+      defaultValue: {
+        summary: 'undefined',
+      },
     },
-    control: {
-      type: 'text',
+    type: {
+      summary: 'string',
     },
+    control: 'text',
   },
   alt: {
+    description: 'native image alt',
     table: {
-      category: 'Image props',
+      category: 'native props',
+      defaultValue: {
+        summary: 'undefined',
+      },
     },
-    control: {
-      type: 'text',
+    type: {
+      summary: 'string',
+    },
+    control: 'text',
+  },
+
+  // Pass Through Class Controls
+  avatarClass: {
+    table: {
+      category: 'pass through classes',
     },
   },
 
@@ -77,19 +94,17 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtAvatarDefaultTemplate,
 );
 
+const defaultImage = require('./person.png');
+
 // Stories
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
-
-export const Image = DefaultTemplate.bind({});
-Image.args = {
-  color: 'purple-200',
-  src: 'https://avatars.githubusercontent.com/u/583231?v=4',
-  alt: 'Dialpad Avatar',
+Default.args = {
+  src: defaultImage,
+  alt: 'Person Avatar',
 };
 
-export const Icons = DefaultTemplate.bind({});
-Icons.args = {
+export const Icon = DefaultTemplate.bind({});
+Icon.args = {
   color: 'purple-200',
   kind: 'icon',
   default: 'IconGroup',
