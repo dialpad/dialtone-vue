@@ -115,7 +115,7 @@ export default {
   data () {
     return {
       isHover: false, // is hovered local state
-      isESCPressed: false, // is escape key pressed local state
+      isDismissed: false, // is dismissed (for ex. escape key pressed) local state
       isChildFocused: false, // is child element focused local state
       anchorTabIndex: '-1', // anchor is not tabbable by default
       TOOLTIP_KIND_MODIFIERS,
@@ -124,7 +124,7 @@ export default {
 
   computed: {
     isTooltipVisible () {
-      if (this.isESCPressed) {
+      if (this.isDismissed) {
         return false;
       }
 
@@ -136,7 +136,7 @@ export default {
     },
 
     shouldHasHoverModifier () {
-      return this.hover && !this.isESCPressed && !this.isChildFocused;
+      return this.hover && !this.isDismissed && !this.isChildFocused;
     },
 
     shouldHasShowModifier () {
@@ -187,12 +187,12 @@ export default {
 
     onBlur () {
       this.isHover = false;
-      this.isESCPressed = false;
+      this.isDismissed = false;
       this.isChildFocused = false;
     },
 
     onEsc () {
-      this.isESCPressed = (this.hover && this.isHover) || !this.show;
+      this.isDismissed = (this.hover && this.isHover) || !this.show;
       this.isChildFocused = false;
     },
   },
