@@ -1,18 +1,19 @@
 <template>
   <div
-    :id="`base-panel-${tabId}`"
+    :id="`dt-panel-${id}`"
     role="tabpanel"
     tabindex="0"
-    :aria-labelledby="`base-tab-${tabId}`"
-    :aria-hidden="`${!isShow}`"
-    :class="{
-      'd-d-none': !isShow,
-    }"
+    :aria-labelledby="`dt-tab-${tabId}`"
+    :aria-hidden="`${hidePanel}`"
+    :class="[
+      {
+        'd-d-none': hidePanel,
+      },
+      tabPanelClass,
+    ]"
     data-qa="dt-tab-panel"
   >
-    <template v-if="!hidden">
-      <slot />
-    </template>
+    <slot v-show="!hidden" />
   </div>
 </template>
 
@@ -22,6 +23,14 @@ export default {
 
   inject: ['groupContext'],
   props: {
+    /**
+     * Id of the panel
+     */
+    id: {
+      type: String,
+      required: true,
+    },
+
     /**
      * Id of the associated tab
      */
@@ -37,11 +46,19 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Used to customize the tab element
+     */
+    tabPanelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
   },
 
   computed: {
-    isShow () {
-      return this.groupContext.selected === this.tabId;
+    hidePanel () {
+      return this.groupContext.selected !== this.id || this.hidden;
     },
   },
 };

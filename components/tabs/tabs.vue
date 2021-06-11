@@ -6,10 +6,11 @@
     <div
       :class="[
         'd-tablist',
-        TABS_SIZE_MODIFIERS[size],
+        TAB_LIST_SIZE_MODIFIERS[size],
+        TAB_LIST_SIZE_MODIFIERS[size],
         {
-          [TABS_KIND_MODIFIERS.inverted]: inverted,
-          [TABS_IMPORTANCE_MODIFIERS.borderless]: borderless,
+          [TAB_LIST_KIND_MODIFIERS.inverted]: inverted,
+          [TAB_LIST_IMPORTANCE_MODIFIERS.borderless]: borderless,
         },
       ]"
       role="tablist"
@@ -22,10 +23,15 @@
 </template>
 
 <script>
-import { TABS_SIZES, TABS_KIND_MODIFIERS, TABS_IMPORTANCE_MODIFIERS, TABS_SIZE_MODIFIERS } from './tabs_constants.js';
+import {
+  TAB_LIST_SIZES,
+  TAB_LIST_KIND_MODIFIERS,
+  TAB_LIST_IMPORTANCE_MODIFIERS,
+  TAB_LIST_SIZE_MODIFIERS,
+} from './tabs_constants.js';
 
 export default {
-  name: 'DtTabs',
+  name: 'DtTabGroup',
 
   provide () {
     return {
@@ -82,7 +88,7 @@ export default {
       type: String,
       default: '',
       validate (size) {
-        return TABS_SIZES.includes(size);
+        return TAB_LIST_SIZES.includes(size);
       },
     },
   },
@@ -94,9 +100,9 @@ export default {
         disabled: false, // disable group
       },
 
-      TABS_SIZE_MODIFIERS,
-      TABS_KIND_MODIFIERS,
-      TABS_IMPORTANCE_MODIFIERS,
+      TAB_LIST_SIZE_MODIFIERS,
+      TAB_LIST_KIND_MODIFIERS,
+      TAB_LIST_IMPORTANCE_MODIFIERS,
     };
   },
 

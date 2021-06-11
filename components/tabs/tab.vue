@@ -1,15 +1,16 @@
 <template>
   <button
-    :id="`base-tab-${panelId}`"
+    :id="`dt-tab-${id}`"
     :class="[
       'd-tab',
       {
         [TAB_IMPORTANCE_MODIFIERS.selected]: isSelected,
       },
+      tabClass,
     ]"
     role="tab"
     :aria-selected="`${isSelected}`"
-    :aria-controls="`base-panel-${panelId}`"
+    :aria-controls="`dt-panel-${panelId}`"
     :aria-label="label"
     data-qa="dt-tab"
     :tabindex="isSelected ? '0' : '-1'"
@@ -28,6 +29,13 @@ export default {
 
   inject: ['changeContentPanel', 'groupContext'],
   props: {
+    /**
+     * Id of the tab
+     */
+    id: {
+      type: String,
+      required: true,
+    },
     /**
      * Id of the associated content panel
      */
@@ -58,6 +66,13 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+    /**
+     * Used to customize the tab element
+     */
+    tabClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 
