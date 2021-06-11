@@ -97,13 +97,6 @@ Default.args = {
   alt: 'Person Avatar',
 };
 
-export const Image = DefaultTemplate.bind({});
-Image.args = {
-  color: 'purple-200',
-  src: 'https://avatars.githubusercontent.com/u/583231?v=4',
-  alt: 'Dialpad Avatar',
-};
-
 export const Icons = DefaultTemplate.bind({});
 Icons.args = {
   color: 'purple-200',
