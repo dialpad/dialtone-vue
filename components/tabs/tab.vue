@@ -28,6 +28,7 @@ export default {
   name: 'DtTab',
 
   inject: ['changeContentPanel', 'groupContext'],
+
   props: {
     /**
      * Id of the tab
