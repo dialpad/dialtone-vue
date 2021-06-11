@@ -11,7 +11,10 @@
       :disabled="disabled"
     >
       <template #tabs>
-        <dt-tab panel-id="2" id="1">
+        <dt-tab
+          id="1"
+          panel-id="2"
+        >
           First
         </dt-tab>
         <dt-tab
@@ -22,21 +25,31 @@
           Second
         </dt-tab>
         <dt-tab
-            id="5"
-            panel-id="6"
-            selected
+          id="5"
+          panel-id="6"
+          selected
         >
           Third
         </dt-tab>
       </template>
 
-      <dt-tab-panel tab-id="1" id="2">
+      <dt-tab-panel
+        id="2"
+        tab-id="1"
+      >
         <p> First Panel </p>
       </dt-tab-panel>
-      <dt-tab-panel tab-id="3" id="4">
+      <dt-tab-panel
+        id="4"
+        tab-id="3"
+      >
         <p> Second Panel </p>
       </dt-tab-panel>
-      <dt-tab-panel tab-id="5" id="6" hidden>
+      <dt-tab-panel
+        id="6"
+        tab-id="5"
+        hidden
+      >
         <p> Third Panel </p>
       </dt-tab-panel>
     </dt-tabs>
