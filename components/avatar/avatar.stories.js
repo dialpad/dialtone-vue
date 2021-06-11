@@ -97,8 +97,8 @@ Default.args = {
   alt: 'Person Avatar',
 };
 
-export const Icons = DefaultTemplate.bind({});
-Icons.args = {
+export const Icon = DefaultTemplate.bind({});
+Icon.args = {
   color: 'purple-200',
   kind: 'icon',
   default: 'IconGroup',
