@@ -9,7 +9,10 @@ import {
   itBehavesLikeDoesNotRaiseAnyVueWarnings,
   itBehavesLikeRaisesSingleVueWarning,
 } from '../../tests/shared_examples/validation';
-import { itBehavesLikeAppliesChildProp } from '../../tests/shared_examples/extendability';
+import {
+  itBehavesLikeAppliesChildProp,
+  itBehavesLikeAppliesClassToChild,
+} from '../../tests/shared_examples/extendability';
 import Vue from 'vue';
 import sinon from 'sinon';
 
@@ -313,17 +316,38 @@ describe('DtAvatar Tests', function () {
   describe('Extendability Tests', function () {
     // Test Environment
     let element;
+    const customClass = 'my-custom-class';
     const propName = 'some';
     const propValue = 'prop';
 
+    // Helpers
+    const _setupChildClassTest = (childClassName, selector) => {
+      propsData[childClassName] = customClass;
+      slots = { default: DEFAULT_SLOT };
+      _setWrappers();
+      element = wrapper.find(selector);
+    };
+
     // Shared Examples
+    const itBehavesLikeAppliesClassToChildLocal = () => {
+      it('should apply custom class to child', function () {
+        itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', element);
+      });
+    };
+
     const itBehavesLikeAppliesChildPropLocal = () => {
       it('should have provided child prop', function () {
         itBehavesLikeAppliesChildProp(element, propName, propValue);
       });
     };
 
-    // Test Setup
+    describe('When an avatar class is provided', function () {
+      // Test Setup
+      beforeEach(function () { _setupChildClassTest('avatarClass', '[data-qa="dt-avatar"]'); });
+
+      itBehavesLikeAppliesClassToChildLocal();
+    });
+
     describe('When attrs are provided', function () {
       // Test Setup
       beforeEach(function () {
