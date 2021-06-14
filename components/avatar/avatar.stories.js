@@ -30,11 +30,11 @@ export const argTypesData = {
 
   // Native Props
   src: {
-    description: 'native image src',
+    description: 'Native image src. Required for image avatars. Overridden by the default slot',
     table: {
       category: 'native props',
       defaultValue: {
-        summary: 'undefined',
+        summary: '',
       },
     },
     type: {
@@ -43,11 +43,11 @@ export const argTypesData = {
     control: 'text',
   },
   alt: {
-    description: 'native image alt',
+    description: 'Native image alt. Required for image avatars. Overridden by the default slot',
     table: {
       category: 'native props',
       defaultValue: {
-        summary: 'undefined',
+        summary: '',
       },
     },
     type: {
@@ -59,7 +59,7 @@ export const argTypesData = {
   // Pass Through Class Controls
   avatarClass: {
     table: {
-      category: 'pass through classes',
+      category: 'Pass through classes',
     },
   },
 
