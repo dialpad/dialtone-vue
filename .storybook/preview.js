@@ -54,6 +54,10 @@ export const parameters = {
             'Unit Tests',
             'Pull Request',
           ],
+          'Dialtone',
+          [
+            'V6 Migration',
+          ],
         ],
       ],
     },
