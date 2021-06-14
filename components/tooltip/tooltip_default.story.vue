@@ -23,7 +23,7 @@
             importance="outlined"
             :kind="buttonKind"
           >
-            {{ anchorSlot }}
+            {{ anchor }}
           </dt-button>
         </template>
       </dt-tooltip>

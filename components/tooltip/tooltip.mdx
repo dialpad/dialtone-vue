@@ -9,7 +9,7 @@ import DtTooltip from './tooltip';
     If richer media is desired, consider using a popover instead.
 </Subtitle>
 
-## Base Style
+## Default
 
 The tooltip, also known as infotip or hint, is a common graphical user interface element in which, when hovering over a
 screen element or component, a text box displays information about that element (such as a description of a button's
@@ -31,16 +31,20 @@ A tooltip has two slots:
   <Story id="elements-tooltip--variants" />
 </Canvas>
 
-## Props, Slots & Events
+## Props & Slots
 
 <ArgsTable of={DtTooltip} />
 
-## Styles
+## Accessibility
+
+Reads out the tooltip content as a supplementary description for its trigger when the trigger is focused.
+
+### General info
 
 1. **Twelve directions are offered:** three on each face of the tooltip.
 2. **Inverted:** Inverts styles to work on dark backgrounds.
 
-## Anchor
+### Anchor
 
 The anchor element that activates the tooltip should be fully accessible by keyboard. The easiest way to do this is by
 using an element like an `DtButton` that is already accessible. The user should also be able to close the tooltip
@@ -48,12 +52,7 @@ content using the `ESC` key for most ARIA roles.
 
 There are some required ARIA attributes for the anchor element (such as `aria-hidden` set based on `open`).
 To make this as straightforward as possible, these ARIA attributes are passed
-with the correct values as the `attrs` to the anchor slot. Applying them is as simple as using `v-bind`:
-
-## Accessibility
-
-1. Ensures more reliable voiceover support.
-2. Reads out the tooltip content as a supplementary description for its trigger when the trigger is focused.
+with the correct values as the `attrs` to the anchor slot. Applying them is as simple as using `v-bind`.
 
 ### Focus & Keyboard
 
@@ -61,12 +60,12 @@ Due to the different contexts in which a tooltip can be used, focus management a
 keyboard shortcut ESC is provided.
 You are encouraged to consult the ARIA documentation for the particular role
 
-## Arrow Directions
+## Usage
+
+### Arrow Directions
 
 Defines which side of the tooltip its arrow appears.
 No arrow direction is assigned by default. You must select a direction.
-
-## Usage
 
 ### Import
 
