@@ -1,6 +1,13 @@
 <template>
   <div
-    :class="modalClasses"
+    :class="[
+      {
+        'd-modal': true,
+        [`d-modal--${kind}`]: kind,
+        [`d-modal--${size}`]: size,
+      },
+      modalClass,
+    ]"
     data-qa="dt-modal"
     :aria-hidden="open"
     @click.self="close"
@@ -186,17 +193,6 @@ export default {
 
     hasFooterSlot () {
       return !!this.$slots.footer;
-    },
-
-    modalClasses () {
-      return [
-        {
-          'd-modal': true,
-          [`d-modal--${this.kind}`]: this.kind,
-          [`d-modal--${this.size}`]: this.size,
-        },
-        this.modalClass,
-      ];
     },
   },
 
