@@ -34,7 +34,7 @@ export const argTypesData = {
     table: {
       category: 'native props',
       defaultValue: {
-        summary: '',
+        summary: 'undefined',
       },
     },
     type: {
@@ -47,7 +47,7 @@ export const argTypesData = {
     table: {
       category: 'native props',
       defaultValue: {
-        summary: '',
+        summary: 'undefined',
       },
     },
     type: {
