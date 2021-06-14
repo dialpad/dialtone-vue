@@ -2,10 +2,11 @@ import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtBreadcrumb from './breadcrumbs.vue';
 import DtBreadcrumbItem from './breadcrumb_item.vue';
-import { INVERTED, SELECTED } from './breadcrumbs_constants';
+import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 
 // Constants
 const basePropsData = {
+  'aria-label': 'breadcrumbs',
   inverted: false,
   breadcrumbs: [{
     url: '#',
@@ -49,7 +50,7 @@ describe('Dialtone Vue Breadcrumb tests', function () {
   // Helpers
   const _setWrappers = () => {
     breadcrumbs = wrapper.find('[aria-label="breadcrumbs"]');
-    breadcrumbItems = wrapper.findAll('[data-qa="breadcrumb"]');
+    breadcrumbItems = wrapper.findAll('.d-breadcrumbs__item');
   };
 
   const _mountWrapper = () => {
@@ -106,14 +107,14 @@ describe('Dialtone Vue Breadcrumb tests', function () {
         basePropsData.inverted = true;
       });
       it('should render label', function () {
-        assert.isTrue(breadcrumbs.classes().includes(`d-breadcrumbs--${INVERTED}`));
+        assert.isTrue(breadcrumbs.classes().includes(BREADCRUMBS_INVERTED_MODIFIER));
       });
     });
 
     describe('When a selected is provided to breadcrumbs', function () {
       it('should render label', function () {
         const elementWithValidAria = breadcrumbItems.filter(item => {
-          return item.classes().includes(`d-breadcrumbs__item--${SELECTED}`);
+          return item.classes().includes(BREADCRUMB_ITEM_SELECTED_MODIFIER);
         });
         assert.equal(elementWithValidAria.length, 1);
       });
