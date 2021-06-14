@@ -1,9 +1,14 @@
 <template>
-  <li :class="breadcrumbItemClasses" data-qa="breadcrumb">
+  <li
+    :class="[
+      'd-breadcrumbs__item',
+      { [BREADCRUMB_ITEM_SELECTED_MODIFIER]: selected },
+    ]"
+  >
     <dt-link
-      :kind="kindLink"
+      :kind="linkKind"
       :aria-current="ariaCurrent"
-      :href="url"
+      data-qa="breadcrumb-item"
       v-bind="$attrs"
     >
       <slot>
@@ -14,7 +19,7 @@
 </template>
 
 <script>
-import { SELECTED } from './breadcrumbs_constants.js';
+import { BREADCRUMB_ITEM_SELECTED_MODIFIER } from './breadcrumbs_constants';
 import { DtLink } from '../link';
 import { INVERTED, MUTED } from '../link/link_constants';
 
@@ -51,30 +56,21 @@ export default {
       type: String,
       default: '',
     },
+  },
 
-    /**
-     * Provides the link element with a URL
-     * */
-    url: {
-      type: String,
-      required: true,
-    },
+  data () {
+    return {
+      BREADCRUMB_ITEM_SELECTED_MODIFIER,
+    };
   },
 
   computed: {
-    kindLink () {
+    linkKind () {
       return this.inverted ? INVERTED : MUTED;
     },
 
     ariaCurrent () {
-      return this.selected ? 'location' : '';
-    },
-
-    breadcrumbItemClasses () {
-      return [
-        'd-breadcrumbs__item',
-        { [`d-breadcrumbs__item--${SELECTED}`]: this.selected },
-      ];
+      return this.selected ? 'location' : undefined;
     },
   },
 };

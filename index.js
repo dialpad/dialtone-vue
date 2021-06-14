@@ -1,5 +1,7 @@
 // Components
+export * from './components/badge';
 export * from './components/banner';
+export * from './components/breadcrumbs';
 export * from './components/button';
 export * from './components/input';
 export * from './components/input_group';
@@ -15,6 +17,7 @@ export * from './components/radio_group';
 export * from './components/validation_messages';
 export * from './components/checkbox';
 export * from './components/checkbox_group';
+export * from './components/select_menu';
 
 // Mixins
 export * from './components/mixins';
