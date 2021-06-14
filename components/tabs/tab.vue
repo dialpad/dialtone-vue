@@ -17,6 +17,7 @@
     :disabled="groupContext.disabled || disabled"
     @click="selectPanel"
   >
+    <!-- @slot default slot with button text -->
     <slot />
   </button>
 </template>
