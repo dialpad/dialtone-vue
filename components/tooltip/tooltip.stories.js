@@ -35,7 +35,6 @@ export const argTypesData = {
 
   // Slots
   default: {
-    description: 'Default slot with tooltip message',
     control: 'text',
     table: {
       type: {
@@ -46,7 +45,6 @@ export const argTypesData = {
 
   anchor: {
     name: 'anchor',
-    description: 'The anchor element that activates the tooltip',
     control: 'text',
     table: {
       category: 'slots',
