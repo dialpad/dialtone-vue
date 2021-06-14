@@ -16,8 +16,10 @@
       role="tablist"
       :aria-label="label"
     >
+      <!-- @slot tabs slot -->
       <slot name="tabs" />
     </div>
+    <!-- @slot default slot -->
     <slot />
   </div>
 </template>
