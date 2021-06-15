@@ -108,12 +108,6 @@ export default {
     if (this.selected) {
       this.selectPanel();
     }
-    // this.setOrder({
-    //   context: this,
-    //   id: this.id,
-    //   label: this.label,
-    //   panelId: this.panelId,
-    // });
   },
 
   methods: {

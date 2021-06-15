@@ -40,7 +40,6 @@ export default {
       changeContentPanel: this.changeContentPanel,
       tabListClass: this.tabListClass,
       tabListChildProps: this.tabListChildProps,
-      // setOrder: this.setOrder,
     };
   },
 
@@ -116,7 +115,6 @@ export default {
   data () {
     return {
       preSelectedTab: null,
-      // tabs: [],
       provideObj: {
         selected: '', // the currently displayed tab id
         disabled: false, // disable group
@@ -157,10 +155,6 @@ export default {
         }));
     },
 
-    // setOrder (option) {
-    //   this.tabs.push(option);
-    // },
-
     onChange () {
       this.$emit('change', { ...this.provideObj });
     },
@@ -171,29 +165,18 @@ export default {
     },
 
     tabLeft () {
-      const tabs = this.getTabChildren();
-      const index = tabs.findIndex((context) => context.isSelected);
+      const { index, tabs } = this.getIndexAndTabs();
       if (index === -1) return;
       const indexElement = index - 1 < 0 ? tabs.length - 1 : index - 1;
       this.selectTabByIndex(indexElement, tabs);
-      // const index = this.tabs.findIndex(({ context }) => context.isSelected);
-      // if (index === -1) return;
-      // const indexElement = index - 1 < 0 ? this.tabs.length - 1 : index - 1;
-      // this.selectTabByIndex(indexElement);
     },
 
     tabRight () {
-      const tabs = this.getTabChildren();
-      const index = tabs.findIndex((context) => context.isSelected);
+      const { index, tabs } = this.getIndexAndTabs();
       if (index === -1) return;
 
       const indexElement = index + 1 > tabs.length - 1 ? 0 : index + 1;
       this.selectTabByIndex(indexElement, tabs);
-
-      // const index = this.tabs.findIndex(({ context }) => context.isSelected);
-      // if (index === -1) return;
-      // const indexElement = index + 1 > this.tabs.length - 1 ? 0 : index + 1;
-      // this.selectTabByIndex(indexElement);
     },
 
     selectTabByIndex (index, tabs) {
@@ -202,11 +185,15 @@ export default {
       context.focus();
     },
 
-    // selectTabByIndex (index) {
-    //   const { context } = this.tabs[index];
-    //   this.provideObj.selected = context.panelId;
-    //   context.$el.focus();
-    // },
+    getIndexAndTabs () {
+      const tabs = this.getTabChildren();
+      const index = tabs.findIndex((context) => context.isSelected);
+
+      return {
+        tabs,
+        index,
+      };
+    },
   },
 };
 </script>
