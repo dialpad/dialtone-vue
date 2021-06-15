@@ -1,7 +1,6 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtBreadcrumb from './breadcrumbs.vue';
-import DtBreadcrumbItem from './breadcrumb_item.vue';
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 
 // Constants
@@ -30,17 +29,9 @@ const basePropsData = {
     selected: true,
   }],
 };
-
-const breadcrumbItemOption = {
-  url: '#',
-  label: 'Section',
-};
-let breadcrumbItemSlot = { default: 'Slotted section' };
-
 describe('Dialtone Vue Breadcrumb tests', function () {
   // Wrappers
   let wrapper;
-  let breadcrumbItem;
   let breadcrumbs;
   let breadcrumbItems;
 
@@ -54,11 +45,6 @@ describe('Dialtone Vue Breadcrumb tests', function () {
   };
 
   const _mountWrapper = () => {
-    breadcrumbItem = mount(DtBreadcrumbItem, {
-      propsData: breadcrumbItemOption,
-      slots: breadcrumbItemSlot,
-      localVue: createLocalVue(),
-    });
     wrapper = mount(DtBreadcrumb, {
       propsData,
       localVue: createLocalVue(),
@@ -85,20 +71,15 @@ describe('Dialtone Vue Breadcrumb tests', function () {
 
         assert.equal(elementWithValidAria.length, 1);
       });
-    });
-
-    describe('When a default slot is provided to breadcrumb item', function () {
-      it('should render default slot label', function () {
-        assert.equal(breadcrumbItem.text(), 'Slotted section');
+      it('should has correct rendered items', function () {
+        assert.equal(breadcrumbItems.length, basePropsData.breadcrumbs.length);
       });
-    });
 
-    describe('When a label is provided to breadcrumb item', function () {
-      before(function () {
-        breadcrumbItemSlot = {};
-      });
-      it('should render label', function () {
-        assert.equal(breadcrumbItem.text(), 'Section');
+      it('should has correct sequence', function () {
+        assert.equal(breadcrumbItems.length, basePropsData.breadcrumbs.length);
+        basePropsData.breadcrumbs.forEach(({ label }, i) => {
+          assert.equal(breadcrumbItems.at(i).text(), label);
+        });
       });
     });
 
