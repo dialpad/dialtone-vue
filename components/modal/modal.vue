@@ -1,8 +1,8 @@
 <template>
   <div
     :class="[
+      'd-modal',
       {
-        'd-modal': true,
         [`d-modal--${kind}`]: kind,
         [`d-modal--${size}`]: size,
       },
