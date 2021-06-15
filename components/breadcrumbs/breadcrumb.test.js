@@ -54,7 +54,6 @@ describe('Dialtone Vue Breadcrumb tests', function () {
 
   // Setup
   beforeEach(function () {
-    // Setup
     _mountWrapper();
   });
 
