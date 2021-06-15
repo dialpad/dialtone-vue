@@ -85,25 +85,30 @@ describe('Dialtone Vue Tooltip tests', function () {
   });
 
   describe('Accessibility Tests', function () {
-    describe('When tooltip has focus, blur, mouseover, mouseleave, escape', function () {
+    beforeEach(async function () {
+      await blur();
+    });
+    describe('When anchor has focus', function () {
+      it('has focus', async function () {
+        await focus();
+        assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
+      });
       it('has escape', async function () {
+        await focus();
         await escape();
         assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
       });
+    });
 
-      it('has blur', async function () {
-        await blur();
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-      });
-
+    describe('When anchor has mouseover', function () {
       it('has mouseover', async function () {
         await mouseover();
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
-
-      it('has focus', async function () {
+      it('has escape', async function () {
         await focus();
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
+        await escape();
+        assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
       });
     });
   });
