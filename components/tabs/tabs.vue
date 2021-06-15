@@ -12,6 +12,8 @@
       ]"
       role="tablist"
       :aria-label="label"
+      @keyup.left="tabLeft"
+      @keyup.right="tabRight"
     >
       <!-- @slot slot for tabs -->
       <slot name="tabs" />
@@ -38,6 +40,7 @@ export default {
       changeContentPanel: this.changeContentPanel,
       tabListClass: this.tabListClass,
       tabListChildProps: this.tabListChildProps,
+      // setOrder: this.setOrder,
     };
   },
 
@@ -112,6 +115,8 @@ export default {
 
   data () {
     return {
+      preSelectedTab: null,
+      // tabs: [],
       provideObj: {
         selected: '', // the currently displayed tab id
         disabled: false, // disable group
@@ -142,6 +147,20 @@ export default {
   },
 
   methods: {
+    getTabChildren () {
+      return this.$children.map(({ $el }) => $el)
+        .filter(({ className }) => className.includes('d-tab'))
+        .map(el => ({
+          context: el,
+          panelId: el.getAttribute('aria-controls').replace('dt-panel-', ''),
+          isSelected: el.getAttribute('aria-selected') === 'true',
+        }));
+    },
+
+    // setOrder (option) {
+    //   this.tabs.push(option);
+    // },
+
     onChange () {
       this.$emit('change', { ...this.provideObj });
     },
@@ -150,6 +169,44 @@ export default {
       this.provideObj.selected = selected;
       this.onChange();
     },
+
+    tabLeft () {
+      const tabs = this.getTabChildren();
+      const index = tabs.findIndex((context) => context.isSelected);
+      if (index === -1) return;
+      const indexElement = index - 1 < 0 ? tabs.length - 1 : index - 1;
+      this.selectTabByIndex(indexElement, tabs);
+      // const index = this.tabs.findIndex(({ context }) => context.isSelected);
+      // if (index === -1) return;
+      // const indexElement = index - 1 < 0 ? this.tabs.length - 1 : index - 1;
+      // this.selectTabByIndex(indexElement);
+    },
+
+    tabRight () {
+      const tabs = this.getTabChildren();
+      const index = tabs.findIndex((context) => context.isSelected);
+      if (index === -1) return;
+
+      const indexElement = index + 1 > tabs.length - 1 ? 0 : index + 1;
+      this.selectTabByIndex(indexElement, tabs);
+
+      // const index = this.tabs.findIndex(({ context }) => context.isSelected);
+      // if (index === -1) return;
+      // const indexElement = index + 1 > this.tabs.length - 1 ? 0 : index + 1;
+      // this.selectTabByIndex(indexElement);
+    },
+
+    selectTabByIndex (index, tabs) {
+      const { context, panelId } = tabs[index];
+      this.provideObj.selected = panelId;
+      context.focus();
+    },
+
+    // selectTabByIndex (index) {
+    //   const { context } = this.tabs[index];
+    //   this.provideObj.selected = context.panelId;
+    //   context.$el.focus();
+    // },
   },
 };
 </script>
