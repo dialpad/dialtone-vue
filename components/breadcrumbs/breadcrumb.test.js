@@ -67,13 +67,11 @@ describe('Dialtone Vue Breadcrumb tests', function () {
         const elementWithValidAria = breadcrumbItems.filter(item => {
           return item.find('[aria-current="location"]').constructor.name === 'VueWrapper';
         });
-
         assert.equal(elementWithValidAria.length, 1);
       });
       it('should has correct rendered items', function () {
         assert.equal(breadcrumbItems.length, basePropsData.breadcrumbs.length);
       });
-
       it('should has correct sequence', function () {
         assert.equal(breadcrumbItems.length, basePropsData.breadcrumbs.length);
         basePropsData.breadcrumbs.forEach(({ label }, i) => {
