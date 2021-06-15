@@ -64,8 +64,22 @@ You are encouraged to consult the ARIA documentation for the particular role
 
 ### Arrow Directions
 
-Defines which side of the tooltip its arrow appears.
-No arrow direction is assigned by default. You must select a direction.
+No arrow direction is assigned by default.
+You must select a direction.
+Twelve directions are offered: three on each face of the tooltip.
+
+```html
+<dt-tooltip
+  arrow-direction="top-center"
+  :message="localMessage"
+>
+  <template #anchor>
+    <dt-button importance="outlined">
+      Anchor
+    </dt-button>
+  </template>
+</dt-tooltip>
+```
 
 ### Import
 
@@ -80,6 +94,24 @@ import { DtTooltip } from '@dialpad/dialtone-vue';
     Message
     <template #anchor>
       Anchor
+    </template>
+</dt-tooltip>
+```
+
+### Open state
+
+```html
+<dt-tooltip
+    :show="true"
+    :hover="false"
+    message="Message"
+>
+    <template #anchor>
+      <dt-button
+        importance="outlined"
+      >
+        Open default state
+      </dt-button>
     </template>
 </dt-tooltip>
 ```

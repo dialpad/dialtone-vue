@@ -7,7 +7,7 @@
       <div
         v-for="(rowDirection, i) in TOOLTIP_DIRECTION_MODIFIERS"
         :key="i"
-        class="d-mb64 d-d-flex  d-jc-space-between d-ai-center"
+        class="d-mb64 d-d-flex d-jc-space-between d-ai-center"
       >
         <dt-tooltip
           v-for="direction in rowDirection"
