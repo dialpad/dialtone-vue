@@ -13,7 +13,7 @@
     ]"
     data-qa="dt-tab-panel"
   >
-    <!-- @slot default slot with panel content -->
+    <!-- @slot slot default with panel content -->
     <slot v-show="!hidden" />
   </div>
 </template>

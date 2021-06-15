@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="d-d-flex d-fd-column d-w100p d-stack16"
-    data-qa="dt-tabs"
-  >
+  <div data-qa="dt-tabs">
     <div
       :class="[
         'd-tablist',
@@ -16,10 +13,10 @@
       role="tablist"
       :aria-label="label"
     >
-      <!-- @slot tabs slot -->
+      <!-- @slot slot for tabs -->
       <slot name="tabs" />
     </div>
-    <!-- @slot default slot -->
+    <!-- @slot slot for panel -->
     <slot />
   </div>
 </template>
@@ -39,10 +36,28 @@ export default {
     return {
       groupContext: this.provideObj,
       changeContentPanel: this.changeContentPanel,
+      tabListClass: this.tabListClass,
+      tabListChildProps: this.tabListChildProps,
     };
   },
 
   props: {
+    /**
+     * Additional class name for the tab's list elements.
+     */
+    tabListClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional props for the tab list elements.
+     */
+    tabListChildProps: {
+      type: Object,
+      default: () => ({}),
+    },
+
     /**
      * Identifies the tab group
      */

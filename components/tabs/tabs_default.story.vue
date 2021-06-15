@@ -53,6 +53,15 @@
         <p> Third Panel </p>
       </dt-tab-panel>
     </dt-tabs>
+
+    <dt-tabs
+        :size="size"
+        :inverted="inverted"
+        :borderless="borderless"
+        :disabled="disabled"
+    >
+
+    </dt-tabs>
   </div>
 </template>
 

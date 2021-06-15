@@ -1,5 +1,5 @@
 <template>
-  <button
+  <dt-button
     :id="`dt-tab-${id}`"
     :class="[
       'd-tab',
@@ -7,7 +7,9 @@
         [TAB_IMPORTANCE_MODIFIERS.selected]: isSelected,
       },
       tabClass,
+      tabListClass,
     ]"
+
     role="tab"
     :aria-selected="`${isSelected}`"
     :aria-controls="`dt-panel-${panelId}`"
@@ -15,20 +17,30 @@
     data-qa="dt-tab"
     :tabindex="isSelected ? '0' : '-1'"
     :disabled="groupContext.disabled || disabled"
+    v-bind="{
+      ...$attrs,
+      ...tabListChildProps,
+    }"
     @click="selectPanel"
   >
-    <!-- @slot default slot with button text -->
+    <!-- @slot slot default with button text -->
     <slot />
-  </button>
+  </dt-button>
 </template>
 
 <script>
 import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants.js';
+import { DtButton } from '../button';
 
 export default {
   name: 'DtTab',
+  components: {
+    DtButton,
+  },
 
-  inject: ['changeContentPanel', 'groupContext'],
+  inject: ['changeContentPanel', 'groupContext', 'tabListClass', 'tabListChildProps'],
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -38,6 +50,7 @@ export default {
       type: String,
       required: true,
     },
+
     /**
      * Id of the associated content panel
      */
@@ -69,6 +82,7 @@ export default {
       type: Boolean,
       default: false,
     },
+
     /**
      * Used to customize the tab element
      */
