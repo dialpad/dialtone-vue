@@ -114,7 +114,6 @@ export default {
 
   data () {
     return {
-      preSelectedTab: null,
       provideObj: {
         selected: '', // the currently displayed tab id
         disabled: false, // disable group
