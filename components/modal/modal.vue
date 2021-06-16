@@ -2,10 +2,8 @@
   <div
     :class="[
       'd-modal',
-      {
-        [`d-modal--${kind}`]: kind,
-        [`d-modal--${size}`]: size,
-      },
+      MODAL_KIND_MODIFIERS[kind],
+      MODAL_SIZE_MODIFIERS[size],
       modalClass,
     ]"
     data-qa="dt-modal"
@@ -160,8 +158,8 @@ export default {
      */
     kind: {
       type: String,
-      default: '',
-      validator: (k) => Object.values(MODAL_KIND_MODIFIERS).includes(k),
+      default: 'default',
+      validator: (k) => Object.keys(MODAL_KIND_MODIFIERS).includes(k),
     },
 
     /**
@@ -171,8 +169,8 @@ export default {
      */
     size: {
       type: String,
-      default: '',
-      validator: (s) => Object.values(MODAL_SIZE_MODIFIERS).includes(s),
+      default: 'default',
+      validator: (s) => Object.keys(MODAL_SIZE_MODIFIERS).includes(s),
     },
 
     /**
@@ -184,6 +182,13 @@ export default {
       type: [String, Object, Array],
       default: '',
     },
+  },
+
+  data () {
+    return {
+      MODAL_KIND_MODIFIERS,
+      MODAL_SIZE_MODIFIERS,
+    };
   },
 
   computed: {
