@@ -1,38 +1,105 @@
 <!-- Use this template story to allow the user control the component's props and slots -->
 <template>
-  <!--
-    We can bind the data that the user entered into the storybook controls to props by using a property of the same name
-    as the storybook control defined in the corresponding `.story.js` file.
-  -->
-  <dt-toast
-    :some="some"
-  >
-    <!--
-      We can also bind any slot data that the user has entered into the storybook controls. In this example we
-      conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
+  <div>
+    <dt-button @click="buttonClicked">
+      Click to show!
+    </dt-button>
 
-      The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-
-      We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-      same name.
-    -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
-    </template>
-    <template
-      #some
-      v-if="someSlot"
+    <dt-toast
+      ref="toast"
+      :kind="kind"
+      :title="title"
+      :title-id="titleId"
+      :content-id="contentId"
+      :important="important"
+      :hide-close="hideClose"
+      :close-button-props="buttonCloseProps"
+      @close="displayToast = false"
     >
-      <span v-html="someSlot" />
-    </template>
-  </dt-toast>
+      <span>
+        Message body with
+        <a
+          href="#"
+          class="d-link"
+          :class="linkClass"
+        >a link.</a>
+      </span>
+
+      <template
+        v-if="action"
+        #action
+      >
+        <dt-button
+          :kind="buttonKind"
+          importance="outlined"
+        >
+          {{ action }}
+        </dt-button>
+      </template>
+      <template
+        v-if="icon"
+        #icon
+      >
+        <component :is="icon" />
+      </template>
+      <template
+        v-if="titleOverride"
+        #titleOverride
+      >
+        <span v-html="titleOverride" />
+      </template>
+    </dt-toast>
+  </div>
 </template>
 
 <script>
 import DtToast from './toast';
+import DtButton from '../button/button';
+import icon from '../mixins/icon';
 
 export default {
-  name: 'DtToastDefault',
-  components: { DtToast },
+  name: 'ToastDefault',
+
+  components: { DtToast, DtButton },
+
+  mixins: [icon],
+
+  data () {
+    return {
+      displayToast: false,
+    };
+  },
+
+  computed: {
+    shouldInvertButton () {
+      return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
+    },
+
+    isInverted () {
+      return this.important && this.shouldInvertButton;
+    },
+
+    buttonKind () {
+      return this.isInverted ? 'inverted' : 'muted';
+    },
+
+    linkClass () {
+      return this.isInverted ? 'd-link--inverted' : 'd-link--muted';
+    },
+
+    buttonCloseProps () {
+      return {
+        ...this.closeButtonProps,
+        kind: this.buttonKind,
+        ariaLabel: 'Close',
+      };
+    },
+  },
+
+  methods: {
+    buttonClicked () {
+      this.$refs.toast.show();
+    },
+  },
 };
 </script>
