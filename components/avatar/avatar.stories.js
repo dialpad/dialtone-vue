@@ -2,6 +2,7 @@ import { createTemplateFromVueFile } from '../storybook_utils';
 import DtAvatar from './avatar';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
+import DtAvatarMdx from './avatar.mdx';
 
 export const argTypesData = {
   // Props
@@ -29,7 +30,7 @@ export const argTypesData = {
 
   // Native Props
   src: {
-    description: 'native image src',
+    description: 'Native image src. Required for image avatars. Overridden by the default slot',
     table: {
       category: 'native props',
       defaultValue: {
@@ -42,7 +43,7 @@ export const argTypesData = {
     control: 'text',
   },
   alt: {
-    description: 'native image alt',
+    description: 'Native image alt. Required for image avatars. Overridden by the default slot',
     table: {
       category: 'native props',
       defaultValue: {
@@ -58,7 +59,7 @@ export const argTypesData = {
   // Pass Through Class Controls
   avatarClass: {
     table: {
-      category: 'pass through classes',
+      category: 'Pass through classes',
     },
   },
 
@@ -79,6 +80,11 @@ export default {
   component: DtAvatar,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
+  parameters: {
+    docs: {
+      page: DtAvatarMdx,
+    },
+  },
 };
 
 // Templates
