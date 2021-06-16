@@ -15,10 +15,10 @@
       @keyup.left="tabLeft"
       @keyup.right="tabRight"
     >
-      <!-- @slot slot for tabs -->
+      <!-- @slot Slot for Tabs -->
       <slot name="tabs" />
     </div>
-    <!-- @slot slot for panel -->
+    <!-- @slot Default slot for Panel -->
     <slot />
   </div>
 </template>

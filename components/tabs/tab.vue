@@ -9,7 +9,6 @@
       tabClass,
       tabListClass,
     ]"
-
     role="tab"
     :aria-selected="`${isSelected}`"
     :aria-controls="`dt-panel-${panelId}`"
@@ -23,7 +22,7 @@
     }"
     @click="selectPanel"
   >
-    <!-- @slot slot default with button text -->
+    <!-- @slot default slot, defaults contains dt-button -->
     <slot />
   </dt-button>
 </template>
