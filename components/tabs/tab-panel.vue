@@ -23,6 +23,7 @@ export default {
   name: 'DtTabPanel',
 
   inject: ['groupContext'],
+
   props: {
     /**
      * Id of the panel
