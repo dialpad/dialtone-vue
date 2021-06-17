@@ -9,6 +9,7 @@
       ref="toast"
       :kind="kind"
       :title="title"
+      :message="message"
       :title-id="titleId"
       :content-id="contentId"
       :important="important"
@@ -16,14 +17,12 @@
       :close-button-props="buttonCloseProps"
       @close="displayToast = false"
     >
-      <span>
-        Message body with
-        <a
-          href="#"
-          class="d-link"
-          :class="linkClass"
-        >a link.</a>
-      </span>
+      <template
+        v-if="defaultSlot"
+        #default
+      >
+        <span v-html="defaultSlot" />
+      </template>
 
       <template
         v-if="action"

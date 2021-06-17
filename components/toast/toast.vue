@@ -25,7 +25,9 @@
             <slot name="titleSlot" />
           </template>
           <!-- @slot the main textual content of the toast -->
-          <slot />
+          <slot>
+            {{ message }}
+          </slot>
         </dt-notice-content>
         <dt-notice-action
           :hide-close="hideClose"
@@ -82,6 +84,14 @@ export default {
      * Title header of the notice. This can be left blank to remove the title from the notice entirely.
      */
     title: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Message of the toast. Overridden by default slot.
+     */
+    message: {
       type: String,
       default: '',
     },

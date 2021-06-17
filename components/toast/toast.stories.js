@@ -8,6 +8,7 @@ import { argTypesData } from '../notice/notice.stories.js';
 
 // Default Prop Values
 export const argsData = {
+  default: '<span>Message body with <a href="#" class="d-link">a link.</a></span>',
 };
 
 argTypesData.titleId = {
