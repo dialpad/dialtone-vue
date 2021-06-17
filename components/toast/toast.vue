@@ -134,7 +134,7 @@ export default {
     },
 
     /**
-     * the duration the toast will display before disappearing
+     * the duration in ms the toast will display before disappearing
      */
     duration: {
       type: Number,

@@ -14,6 +14,7 @@
       :content-id="contentId"
       :important="important"
       :hide-close="hideClose"
+      :duration="duration"
       :close-button-props="buttonCloseProps"
       @close="displayToast = false"
     >
