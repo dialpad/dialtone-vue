@@ -44,7 +44,6 @@ describe('Dialtone Vue Tooltip tests', function () {
   });
   describe('When an arrow direction is provided', function () {
     TOOLTIP_DIRECTION_MODIFIERS.forEach(arrowDirection => describe(`When direction is ${arrowDirection}`, function () {
-      // Setup
       beforeEach(async function () {
         await wrapper.setProps({ arrowDirection });
       });
@@ -106,35 +105,51 @@ describe('Dialtone Vue Tooltip tests', function () {
         });
       });
     });
+    describe('on mouseover', function () {
+      before(async function () {
+        await blur();
+        await mouseover();
+      });
 
-    it('mouseover show tooltip', async function () {
-      await mouseover();
-      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.show));
+      it('shows tooltip', async function () {
+        assert.strictEqual(tooltip.attributes('aria-hidden'), 'false');
+      });
     });
 
-    it('focus show tooltip', async function () {
-      await focus();
-      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.show));
+    describe('on focus', function () {
+      before(async function () { await focus(); });
+
+      it('shows tooltip', async function () {
+        assert.strictEqual(tooltip.attributes('aria-hidden'), 'false');
+      });
     });
 
-    it('blur hide tooltip', async function () {
-      await blur();
-      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
+    describe('on blur', function () {
+      before(async function () { await blur(); });
+
+      it('hide tooltip', async function () {
+        assert.strictEqual(tooltip.attributes('aria-hidden'), 'true');
+      });
     });
 
-    it('Escape on focus', async function () {
-      await focus();
-      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.show));
-      await escape();
-      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
-      await blur();
-    });
+    describe('on escape', function () {
+      before(async function () { await blur(); });
 
-    it('Escape on mouseover', async function () {
-      await mouseover();
-      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.show));
-      await escape();
-      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
+      describe('escape on focus', function () {
+        before(async function () { await focus(); await escape(); });
+
+        it('hide tooltip', async function () {
+          assert.strictEqual(tooltip.attributes('aria-hidden'), 'true');
+        });
+      });
+
+      describe('escape on mouseover', function () {
+        before(async function () { await mouseover(); await escape(); });
+
+        it('hide tooltip', async function () {
+          assert.strictEqual(tooltip.attributes('aria-hidden'), 'true');
+        });
+      });
     });
   });
 
@@ -143,24 +158,26 @@ describe('Dialtone Vue Tooltip tests', function () {
       await blur();
     });
     describe('When anchor has focus', function () {
-      it('has focus', async function () {
+      beforeEach(async function () {
         await focus();
+      });
+      it('has focus', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
       it('has escape', async function () {
-        await focus();
         await escape();
         assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
       });
     });
 
     describe('When anchor has mouseover', function () {
-      it('has mouseover', async function () {
+      beforeEach(async function () {
         await mouseover();
+      });
+      it('has mouseover', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
       it('has escape', async function () {
-        await focus();
         await escape();
         assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
       });
