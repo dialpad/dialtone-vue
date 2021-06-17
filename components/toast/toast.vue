@@ -81,7 +81,7 @@ export default {
     },
 
     /**
-     * Title header of the notice. This can be left blank to remove the title from the notice entirely.
+     * Title header of the toast. This can be left blank to remove the title from the toast entirely.
      */
     title: {
       type: String,
@@ -97,16 +97,6 @@ export default {
     },
 
     /**
-     * Used in scenarios where the message needs to visually dominate the screen.
-     *  This will also change the aria role from status to alertdialog.
-     * and will modally trap the keyboard focus in the dialog as soon as it displays.
-     */
-    important: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
      * Severity level of the toast, sets the icon and background
      */
     kind: {
@@ -115,6 +105,16 @@ export default {
       validate (kind) {
         return NOTICE_KINDS.includes(kind);
       },
+    },
+
+    /**
+     * Used in scenarios where the message needs to visually dominate the screen.
+     *  This will also change the aria role from status to alertdialog.
+     * and will modally trap the keyboard focus in the dialog as soon as it displays.
+     */
+    important: {
+      type: Boolean,
+      default: false,
     },
 
     /**
