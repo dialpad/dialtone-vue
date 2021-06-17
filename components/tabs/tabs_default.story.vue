@@ -28,6 +28,7 @@
           id="5"
           panel-id="6"
           selected
+          label="Third Label"
         >
           Third
         </dt-tab>
@@ -66,9 +67,9 @@
 </template>
 
 <script>
-import DtTabs from './tabs';
+import DtTabs from './tab_group';
 import DtTab from './tab';
-import DtTabPanel from './tab-panel';
+import DtTabPanel from './tab_panel';
 
 export default {
   name: 'DtTabsDefault',

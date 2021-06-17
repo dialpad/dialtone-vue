@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import DtTabs from './tabs';
+import DtTabs from './tab_group';
 
 export default {
   name: 'DtTabsVariants',
