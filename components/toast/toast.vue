@@ -19,10 +19,10 @@
           :title="title"
           v-on="$listeners"
         >
-          <template #titleSlot>
+          <template #titleOverride>
             <!-- @slot Allows you to override the title, only use this if you need to override
           with something other than text. Otherwise use the "title" prop. -->
-            <slot name="titleSlot" />
+            <slot name="titleOverride" />
           </template>
           <!-- @slot the main textual content of the toast -->
           <slot>
