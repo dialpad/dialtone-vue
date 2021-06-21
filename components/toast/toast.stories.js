@@ -56,7 +56,9 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 
 // Stories
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
+Default.args = {
+  title: 'Optional title',
+};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
