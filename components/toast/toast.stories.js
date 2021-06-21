@@ -30,7 +30,7 @@ argTypesData.contentId = {
 
 // Story Collection
 export default {
-  title: 'Group/DtToast',
+  title: 'Elements/Toast',
   component: DtToast,
   args: argsData,
   argTypes: argTypesData,
