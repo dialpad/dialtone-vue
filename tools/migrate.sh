@@ -8,6 +8,13 @@
 # Args:                                                                                                                   #
 #  $1: A relative path to the migration map file, the file should contain lines with the following format OLD_STR:NEW_STR #
 #  $2: A relative path to the directory to be migrated                                                                    #
+# Notes:                                                                                                                  #
+#  Migration Map:                                                                                                         #
+#    Order matters, ensure that the longest matches appear first in the file.                                             #
+#    Example:                                                                                                             #
+#      class-to-migrate--variant-1                                                                                        #
+#      class-to-migrate--variant-2                                                                                        #
+#      class-to-migrate                                                                                                   #
 ###########################################################################################################################
 
 if [ -z "$1" ]
