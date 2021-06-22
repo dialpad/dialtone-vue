@@ -3,8 +3,8 @@
 --grid-content-col:--content-width
 --grid-header-row:--header-height
 --grid-content-row:--content-height
---grid-col:--grid-columns
 --grid-col-width:--grid-column-width
+--grid-col:--grid-columns
 --grid-auto-col:--grid-column-auto
 --text-size--xxs:--fs11
 --text-size--xs:--fs12
@@ -37,11 +37,11 @@
 --bgg-pattern-slanted-stripes--light:--bgg-pattern-slanted-stripes-light
 --bgg-pattern-steps--light:--bgg-pattern-steps-light
 --bgg-pattern-stripe--light:--bgg-pattern-stripe-light
+--primary-color--hover:--primary-color-hover
 --primary-color--h:--primary-color-h
 --primary-color--s:--primary-color-s
 --primary-color--l:--primary-color-h
---primary-color--hover:--primary-color-hover
---nav__background-color: --nav-background-color
 --nav__background-color--h:--nav-background-color-h
 --nav__background-color--s:--nav-background-color-s
 --nav__background-color--l:--nav-background-color-l
+--nav__background-color: --nav-background-color
