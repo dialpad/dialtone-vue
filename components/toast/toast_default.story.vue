@@ -1,4 +1,3 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
   <div>
     <dt-button @click="buttonClicked">

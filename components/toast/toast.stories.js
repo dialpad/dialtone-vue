@@ -1,29 +1,64 @@
-import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 import DtToast from './toast';
 import DtToastMdx from './toast.mdx';
 import DtToastDefaultTemplate from './toast_default.story.vue';
 import DtToastVariantsTemplate from './toast_variants.story.vue';
-import { argTypesData } from '../notice/notice.stories.js';
+import { NOTICE_KINDS } from '../notice';
 
 // Default Prop Values
 export const argsData = {
   default: '<span>Message body with <a href="#" class="d-link d-link--muted">a link.</a></span>',
 };
 
-argTypesData.titleId = {
-  defaultValue: '',
-  table: {
-    defaultValue: {
-      summary: 'generated unique ID',
+export const argTypesData = {
+  // Props
+  titleId: {
+    defaultValue: '',
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
     },
   },
-};
-argTypesData.contentId = {
-  defaultValue: '',
-  table: {
-    defaultValue: {
-      summary: 'generated unique ID',
+  contentId: {
+    defaultValue: '',
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  kind: {
+    control: {
+      type: 'select',
+      options: NOTICE_KINDS,
+    },
+  },
+
+  // Slots
+  titleOverride: {
+    table: {
+      type: { summary: 'text/html' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  icon: {
+    table: {
+      type: { summary: 'component' },
+    },
+    control: {
+      type: 'select',
+      options: getIconNames(),
+    },
+  },
+  default: {
+    table: {
+      type: { summary: 'text/html' },
+    },
+    control: {
+      type: 'text',
     },
   },
 };
@@ -58,6 +93,7 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   title: 'Optional title',
+  kind: 'base',
 };
 
 export const Variants = VariantsTemplate.bind({});
