@@ -7,7 +7,7 @@
     <div class="d-bgc-black-700 d-py16 d-px12">
       <dt-breadcrumbs
         inverted
-        :breadcrumbs="breadcrumbsInverted"
+        :breadcrumbs="breadcrumbs"
       />
     </div>
 
@@ -30,30 +30,5 @@ import DtBreadcrumbItem from './breadcrumb_item';
 export default {
   name: 'DtBreadcrumbsVariants',
   components: { DtBreadcrumbs, DtBreadcrumbItem },
-  data () {
-    return {
-      breadcrumbsInverted: [{
-        href: '#',
-        label: 'Root',
-      },
-      {
-        href: '#',
-        label: 'Section',
-      },
-      {
-        href: '#',
-        label: 'Section',
-      },
-      {
-        href: '#',
-        label: 'Section',
-      },
-      {
-        href: '#',
-        label: 'Current Page',
-        selected: true,
-      }],
-    };
-  },
 };
 </script>
