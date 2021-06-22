@@ -9,7 +9,7 @@
 #  -m <string>: A relative path to the migration map file, the file should contain lines with the following format OLD_STR:NEW_STR #
 #  -d <string>: A relative path to the directory to be migrated                                                                    #
 #  -e <string>: Provides an exclusion string for files to be excluded in the search                                                #
-#  -r: Enables recursive traversal of the directory                                                                                #
+#  -r:          Enables recursive traversal of the directory                                                                       #
 # Notes:                                                                                                                           #
 #  Migration Map:                                                                                                                  #
 #    Order matters, ensure that the longest matches appear first in the file.                                                      #
