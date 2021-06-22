@@ -41,5 +41,5 @@ while read -r line; do
   REPLACEMENT_STRING="$(cut -d':' -f2 <<< "$line")"
 
   # Find and replace strings ("" is required on macos when using xargs and sed)
-  grep -rl "${FIND_STRING}" "${DIRECTORY}" | xargs sed -i "" "s/${FIND_STRING}/${REPLACEMENT_STRING}/g"
+  grep -rl --include=\*.{js,vue,handlebars} "${FIND_STRING}" "${DIRECTORY}" | xargs sed -i "" "s/${FIND_STRING}/${REPLACEMENT_STRING}/g"
 done < "$MIGRATION_MAP_FILE"
