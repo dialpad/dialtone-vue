@@ -4,29 +4,32 @@
     class="d-pt64 d-px64"
   >
     <!-- Arrow Description -->
-      <div
-        v-for="(rowDirection, i) in TOOLTIP_DIRECTION_MODIFIERS"
-        :key="i"
-        class="d-mb64 d-d-flex d-jc-space-between d-ai-center"
+    <div
+      v-for="(rowDirection, i) in TOOLTIP_DIRECTION_MODIFIERS"
+      :key="i"
+      class="d-mb64 d-d-flex d-jc-space-between d-ai-center"
+    >
+      <dt-tooltip
+        v-for="direction in rowDirection"
+        :key="direction"
+        :arrow-direction="direction"
+        :message="localMessage"
       >
-        <dt-tooltip
-          v-for="direction in rowDirection"
-          :key="direction"
-          :arrow-direction="direction"
-          :message="localMessage"
-        >
-          <template #anchor>
-            <dt-button importance="outlined" class="d-w128">
-              {{ direction }}
-            </dt-button>
-          </template>
-        </dt-tooltip>
-      </div>
+        <template #anchor>
+          <dt-button
+            importance="outlined"
+            class="d-w128"
+          >
+            {{ direction }}
+          </dt-button>
+        </template>
+      </dt-tooltip>
+    </div>
     <div class="d-d-flex d-jc-center d-w100p">
       <!-- Text -->
       <dt-tooltip
-          class="d-mb64"
-          :message="localMessage"
+        class="d-mb64"
+        :message="localMessage"
       >
         <template #anchor>
           {{ localAnchor }}
