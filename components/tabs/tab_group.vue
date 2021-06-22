@@ -125,10 +125,8 @@ export default {
         selected: '', // the currently displayed tab id
         disabled: false, // disable group
       },
-
       focusId: null,
       tabs: [],
-
       TAB_LIST_SIZE_MODIFIERS,
       TAB_LIST_KIND_MODIFIERS,
       TAB_LIST_IMPORTANCE_MODIFIERS,
