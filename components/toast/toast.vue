@@ -1,7 +1,11 @@
 <template>
   <aside class="d-toast-wrapper">
     <div
-      class="d-toast"
+      :class="[
+        'd-toast',
+        `d-toast--${kind}`,
+        { 'd-toast--important': important },
+      ]"
       role="status"
       :aria-hidden="hidden"
     >
