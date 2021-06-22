@@ -27,27 +27,6 @@ export const argsData = {
     label: 'Current Page',
     selected: true,
   }],
-  breadcrumbsInverted: [{
-    href: '#',
-    label: 'Root',
-  },
-  {
-    href: '#',
-    label: 'Section',
-  },
-  {
-    href: '#',
-    label: 'Section',
-  },
-  {
-    href: '#',
-    label: 'Section',
-  },
-  {
-    href: '#',
-    label: 'Current Page',
-    selected: true,
-  }],
 };
 
 export const argTypesData = {

@@ -70,7 +70,27 @@ import { DtBreadcrumbs } from '@dialpad/handset';
 
 ```vue
 <dt-breadcrumbs
-  :breadcrumbs="[{'href':'#','label':'Root'}]"
+  :breadcrumbs="[{
+    href: '#',
+    label: 'Root',
+  },
+  {
+    href: '#',
+    label: 'Section',
+  },
+  {
+    href: '#',
+    label: 'Section',
+  },
+  {
+    href: '#',
+    label: 'Section',
+  },
+  {
+    href: '#',
+    label: 'Current Page',
+    selected: true,
+  }]"
 />
 ```
 
