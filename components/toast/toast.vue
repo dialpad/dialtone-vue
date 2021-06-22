@@ -113,8 +113,6 @@ export default {
 
     /**
      * Used in scenarios where the message needs to visually dominate the screen.
-     *  This will also change the aria role from status to alertdialog.
-     * and will modally trap the keyboard focus in the dialog as soon as it displays.
      */
     important: {
       type: Boolean,
