@@ -112,7 +112,7 @@ describe('Dialtone Vue Tooltip tests', function () {
       });
 
       it('shows tooltip', async function () {
-        assert.strictEqual(tooltip.attributes('aria-hidden'), 'false');
+        assert.isTrue(wrapper.vm.isTooltipVisible);
       });
     });
 
@@ -120,7 +120,7 @@ describe('Dialtone Vue Tooltip tests', function () {
       before(async function () { await focus(); });
 
       it('shows tooltip', async function () {
-        assert.strictEqual(tooltip.attributes('aria-hidden'), 'false');
+        assert.isTrue(wrapper.vm.isTooltipVisible);
       });
     });
 
@@ -128,7 +128,7 @@ describe('Dialtone Vue Tooltip tests', function () {
       before(async function () { await blur(); });
 
       it('hide tooltip', async function () {
-        assert.strictEqual(tooltip.attributes('aria-hidden'), 'true');
+        assert.isFalse(wrapper.vm.isTooltipVisible);
       });
     });
 
@@ -139,7 +139,7 @@ describe('Dialtone Vue Tooltip tests', function () {
         before(async function () { await focus(); await escape(); });
 
         it('hide tooltip', async function () {
-          assert.strictEqual(tooltip.attributes('aria-hidden'), 'true');
+          assert.isFalse(wrapper.vm.isTooltipVisible);
         });
       });
 
@@ -147,7 +147,7 @@ describe('Dialtone Vue Tooltip tests', function () {
         before(async function () { await mouseover(); await escape(); });
 
         it('hide tooltip', async function () {
-          assert.strictEqual(tooltip.attributes('aria-hidden'), 'true');
+          assert.isFalse(wrapper.vm.isTooltipVisible);
         });
       });
     });
@@ -164,10 +164,6 @@ describe('Dialtone Vue Tooltip tests', function () {
       it('has focus', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
-      it('has escape', async function () {
-        await escape();
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-      });
     });
 
     describe('When anchor has mouseover', function () {
@@ -177,9 +173,57 @@ describe('Dialtone Vue Tooltip tests', function () {
       it('has mouseover', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
-      it('has escape', async function () {
-        await escape();
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+    });
+    describe('When anchor has blur', function () {
+      before(async function () {
+        await focus();
+      });
+      describe('When anchor has blur on focus', function () {
+        beforeEach(async function () {
+          await blur();
+        });
+        it('it hide tooltip', function () {
+          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+        });
+      });
+    });
+    describe('When anchor has onmouseover', function () {
+      beforeEach(async function () {
+        await mouseover();
+      });
+      describe('When anchor has blur on mouseover', function () {
+        beforeEach(async function () {
+          await blur();
+        });
+        it('it hide tooltip', function () {
+          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+        });
+      });
+    });
+    describe('When anchor has escape on focus', function () {
+      before(async function () {
+        await focus();
+      });
+      describe('When anchor has escape on focus', function () {
+        beforeEach(async function () {
+          await escape();
+        });
+        it('it hide tooltip', function () {
+          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+        });
+      });
+    });
+    describe('When anchor has escape on onmouseover', function () {
+      before(async function () {
+        await mouseover();
+      });
+      describe('When anchor has escape on mouseover', function () {
+        beforeEach(async function () {
+          await escape();
+        });
+        it('it hide tooltip', function () {
+          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+        });
       });
     });
   });
