@@ -7,8 +7,7 @@ import DtTabsVariantsTemplate from './tabs_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  some: 'prop',
-  onEvent: action('event'),
+  onChange: action('change'),
 };
 
 /**

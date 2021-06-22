@@ -21,6 +21,7 @@
       ...tabListChildProps,
     }"
     @click="selectPanel"
+    @focus="setFocus(id)"
   >
     <!-- @slot default slot, defaults contains dt-button -->
     <slot />
@@ -37,7 +38,7 @@ export default {
     DtButton,
   },
 
-  inject: ['changeContentPanel', 'groupContext', 'tabListClass', 'tabListChildProps'],
+  inject: ['changeContentPanel', 'groupContext', 'tabListClass', 'tabListChildProps', 'setFocus'],
 
   inheritAttrs: false,
 

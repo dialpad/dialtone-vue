@@ -1,5 +1,7 @@
 <template>
-  <div data-qa="dt-tabs">
+  <div
+    data-qa="dt-tabs"
+  >
     <div
       :class="[
         'd-tablist',
@@ -14,6 +16,10 @@
       :aria-label="label"
       @keyup.left="tabLeft"
       @keyup.right="tabRight"
+      @keyup.enter="selectTab"
+      @keyup.space="selectTab"
+      @keydown.home="onHomeButton"
+      @keydown.end="onEndButton"
     >
       <!-- @slot Slot for Tabs -->
       <slot name="tabs" />
@@ -40,6 +46,7 @@ export default {
       changeContentPanel: this.changeContentPanel,
       tabListClass: this.tabListClass,
       tabListChildProps: this.tabListChildProps,
+      setFocus: this.setFocus,
     };
   },
 
@@ -119,6 +126,9 @@ export default {
         disabled: false, // disable group
       },
 
+      focusId: null,
+      tabs: [],
+
       TAB_LIST_SIZE_MODIFIERS,
       TAB_LIST_KIND_MODIFIERS,
       TAB_LIST_IMPORTANCE_MODIFIERS,
@@ -141,17 +151,25 @@ export default {
     if (!this.provideObj.selected) {
       this.provideObj.selected = this.selected;
     }
+    this.tabs = this.getTabChildren();
   },
 
   methods: {
+    setFocus (focusId) {
+      this.focusId = focusId;
+    },
+
     getTabChildren () {
       return this.$children.map(({ $el }) => $el)
         .filter(({ className }) => className.includes('d-tab'))
-        .map(el => ({
-          context: el,
-          panelId: el.getAttribute('aria-controls').replace('dt-panel-', ''),
-          isSelected: el.getAttribute('aria-selected') === 'true',
-        }));
+        .map(el => {
+          return ({
+            context: el,
+            panelId: el.getAttribute('aria-controls').replace('dt-panel-', ''),
+            id: el.getAttribute('id').replace('dt-tab-', ''),
+            isSelected: el.getAttribute('aria-selected') === 'true',
+          });
+        });
     },
 
     onChange () {
@@ -167,7 +185,7 @@ export default {
       const { index, tabs } = this.getIndexAndTabs();
       if (index === -1) return;
       const indexElement = index - 1 < 0 ? tabs.length - 1 : index - 1;
-      this.selectTabByIndex(indexElement, tabs);
+      this.selectFocusOnTab(indexElement, tabs);
     },
 
     tabRight () {
@@ -175,7 +193,17 @@ export default {
       if (index === -1) return;
 
       const indexElement = index + 1 > tabs.length - 1 ? 0 : index + 1;
-      this.selectTabByIndex(indexElement, tabs);
+      this.selectFocusOnTab(indexElement, tabs);
+    },
+
+    selectFocusOnTab (index, tabs) {
+      const { context } = tabs[index];
+      context.focus();
+    },
+
+    selectTab () {
+      const { tabs, index } = this.getIndexAndTabs();
+      this.selectTabByIndex(index, tabs);
     },
 
     selectTabByIndex (index, tabs) {
@@ -185,13 +213,22 @@ export default {
     },
 
     getIndexAndTabs () {
-      const tabs = this.getTabChildren();
-      const index = tabs.findIndex((context) => context.isSelected);
-
+      const index = this.tabs.findIndex((context) =>
+        this.focusId ? context.id === `${this.focusId}` : context.isSelected);
       return {
-        tabs,
+        tabs: this.tabs,
         index,
       };
+    },
+
+    onHomeButton () {
+      if (this.tabs.length === 0) return;
+      this.tabs[0].context.focus();
+    },
+
+    onEndButton () {
+      if (this.tabs.length === 0) return;
+      this.tabs[this.tabs.length - 1].context.focus();
     },
   },
 };
