@@ -16,7 +16,7 @@
       :hide-close="hideClose"
       :duration="duration"
       :close-button-props="buttonCloseProps"
-      @close="displayToast = false"
+      @close="closeToast"
     >
       <template
         v-if="defaultSlot"
@@ -99,6 +99,10 @@ export default {
   methods: {
     buttonClicked () {
       this.$refs.toast.show();
+    },
+
+    closeToast () {
+      this.$refs.toast.close();
     },
   },
 };

@@ -168,6 +168,11 @@ export default {
         this.hidden = true;
       }, this.duration);
     },
+
+    close () {
+      this.hidden = true;
+      clearTimeout(this.displayTimer);
+    },
   },
 };
 </script>
