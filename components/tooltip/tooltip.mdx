@@ -31,6 +31,186 @@ A tooltip has two slots:
   <Story id="elements-tooltip--variants" />
 </Canvas>
 
+### top-left
+
+```html
+<dt-tooltip
+    arrow-direction="top-left"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            top-left
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### top-center
+
+```html
+<dt-tooltip
+    arrow-direction="top-center"
+    message="Message"
+    >
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            top-center
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### top-right
+
+```html
+<dt-tooltip
+    arrow-direction="top-right"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            top-right
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### right-top
+
+```html
+<dt-tooltip
+    arrow-direction="right-top"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            right-top
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### right-center
+
+```html
+<dt-tooltip
+    arrow-direction="right-center"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            right-center
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### right-bottom
+
+```html
+<dt-tooltip
+    arrow-direction="right-bottom"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            right-bottom
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### bottom-left
+
+```html
+<dt-tooltip
+    arrow-direction="bottom-left"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            bottom-left
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### bottom-center
+
+```html
+<dt-tooltip
+    arrow-direction="bottom-center"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            bottom-center
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### bottom-right
+
+```html
+<dt-tooltip
+    arrow-direction="bottom-right"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+           bottom-right
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### left-top
+
+```html
+<dt-tooltip
+        arrow-direction="left-top"
+        message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+           left-top
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### left-center
+
+```html
+<dt-tooltip
+        arrow-direction="left-center"
+        message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+           left-center
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### left-bottom
+
+```html
+<dt-tooltip
+    arrow-direction="left-bottom"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+           left-bottom
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
 ## Props & Slots
 
 <ArgsTable of={DtTooltip} />
@@ -64,14 +244,12 @@ You are encouraged to consult the ARIA documentation for the particular role
 
 ### Arrow Directions
 
-No arrow direction is assigned by default.
-You must select a direction.
+'bottom-center' is assigned by default.
 Twelve directions are offered: three on each face of the tooltip.
 
 ```html
 <dt-tooltip
-  arrow-direction="top-center"
-  :message="localMessage"
+  message="Message"
 >
   <template #anchor>
     <dt-button importance="outlined">
