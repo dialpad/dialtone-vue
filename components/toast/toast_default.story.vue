@@ -23,16 +23,13 @@
       >
         <span v-html="defaultSlot" />
       </template>
-
-      <template
-        v-if="action"
-        #action
-      >
+      <template #action>
         <dt-button
-          :kind="buttonKind"
+          size="sm"
           importance="outlined"
+          :kind="buttonKind"
         >
-          {{ action }}
+          Action
         </dt-button>
       </template>
       <template
@@ -80,10 +77,6 @@ export default {
 
     buttonKind () {
       return this.isInverted ? 'inverted' : 'muted';
-    },
-
-    linkClass () {
-      return this.isInverted ? 'd-link--inverted' : 'd-link--muted';
     },
 
     buttonCloseProps () {
