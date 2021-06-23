@@ -6,6 +6,7 @@
         `d-toast--${kind}`,
         { 'd-toast--important': important },
       ]"
+      data-qa="dt-toast"
       role="status"
       :aria-hidden="hidden"
     >
