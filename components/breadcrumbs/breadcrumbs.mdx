@@ -1,5 +1,6 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
 import DtBreadcrumbs from './breadcrumbs';
+import DtBreadcrumbItem from './breadcrumb_item';
 
 # Breadcrumbs
 
@@ -54,9 +55,15 @@ hierarchy to screen readers.
 
 ## Props, Slots & Events
 
-Breadcrumb items include [The Link element](/?path=/docs/elements-link--default).
+### Breadcrumb props
 
 <ArgsTable of={DtBreadcrumbs} />
+
+### BreadcrumbItem props
+
+Breadcrumb items include [Link component](/?path=/docs/elements-link--default).
+
+<ArgsTable of={DtBreadcrumbItem} />
 
 ## Usage
 
