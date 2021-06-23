@@ -4,11 +4,6 @@ import DtToastMdx from './toast.mdx';
 import DtToastDefaultTemplate from './toast_default.story.vue';
 import { NOTICE_KINDS } from '../notice';
 
-// Default Prop Values
-export const argsData = {
-  default: '<span>Message body with <a href="#" class="d-link d-link--muted">a link.</a></span>',
-};
-
 export const argTypesData = {
   // Props
   titleId: {
@@ -66,7 +61,6 @@ export const argTypesData = {
 export default {
   title: 'Elements/Toast',
   component: DtToast,
-  args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
