@@ -62,8 +62,6 @@ export default {
     DtNoticeAction,
   },
 
-  mixins: [],
-
   props: {
     /**
      * Sets an ID on the title element of the component. Useful for aria-describedby
@@ -148,10 +146,6 @@ export default {
       hidden: true,
     };
   },
-
-  computed: {},
-
-  watch: {},
 
   // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
   destroyed () {
