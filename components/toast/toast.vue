@@ -51,7 +51,6 @@ import DtNoticeIcon from '../notice/notice_icon';
 import DtNoticeContent from '../notice/notice_content';
 import DtNoticeAction from '../notice/notice_action';
 import { NOTICE_KINDS } from '../notice/notice_constants';
-import {} from './toast_constants.js';
 import util from '../utils';
 
 export default {

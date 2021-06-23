@@ -17,6 +17,7 @@ export * from './components/validation_messages';
 export * from './components/checkbox';
 export * from './components/checkbox_group';
 export * from './components/select_menu';
+export * from './components/toast';
 
 // Mixins
 export * from './components/mixins';
