@@ -1,6 +1,6 @@
 <template>
   <div
-    data-qa="dt-tabs"
+    data-qa="dt-tab-group"
   >
     <div
       :class="[
