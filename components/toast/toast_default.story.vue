@@ -60,12 +60,6 @@ export default {
 
   mixins: [icon],
 
-  data () {
-    return {
-      displayToast: false,
-    };
-  },
-
   computed: {
     shouldInvertButton () {
       return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
