@@ -19,7 +19,6 @@ usage() {
 
 # Constants
 GREP_FLAGS=()
-OUTPUT=''
 
 # Get arguments
 while getopts "f:d:r" option; do
