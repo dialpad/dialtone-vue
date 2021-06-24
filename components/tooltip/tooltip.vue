@@ -25,6 +25,7 @@
       :aria-hidden="ariaHidden"
       v-bind="$attrs"
     >
+      <!-- @slot default slot with tooltip message -->
       <slot>
         {{ message }}
       </slot>
@@ -33,6 +34,7 @@
       ref="anchor"
       data-qa="dt-tooltip-anchor"
     >
+      <!-- @slot the anchor element that activates the tooltip -->
       <slot name="anchor" />
     </div>
   </div>
