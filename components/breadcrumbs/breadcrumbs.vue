@@ -6,6 +6,7 @@
     ]"
   >
     <ol>
+      <!-- @slot default slot for breadcrumbs content -->
       <slot>
         <dt-breadcrumb-item
           v-for="(item, index) in breadcrumbs"
