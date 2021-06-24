@@ -31,36 +31,6 @@ A tooltip has two slots:
   <Story id="elements-tooltip--variants" />
 </Canvas>
 
-### top-left
-
-```html
-<dt-tooltip
-    arrow-direction="top-left"
-    message="Message"
->
-    <template #anchor>
-        <dt-button importance="outlined" class="d-w128">
-            top-left
-        </dt-button>
-    </template>
-</dt-tooltip>
-```
-
-### top-center
-
-```html
-<dt-tooltip
-    arrow-direction="top-center"
-    message="Message"
-    >
-    <template #anchor>
-        <dt-button importance="outlined" class="d-w128">
-            top-center
-        </dt-button>
-    </template>
-</dt-tooltip>
-```
-
 ## Props & Slots
 
 <ArgsTable of={DtTooltip} />
@@ -141,6 +111,36 @@ Twelve directions are offered: three on each face of the tooltip.
       >
         Open default state
       </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### top-left
+
+```html
+<dt-tooltip
+    arrow-direction="top-left"
+    message="Message"
+>
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            top-left
+        </dt-button>
+    </template>
+</dt-tooltip>
+```
+
+### top-center
+
+```html
+<dt-tooltip
+    arrow-direction="top-center"
+    message="Message"
+    >
+    <template #anchor>
+        <dt-button importance="outlined" class="d-w128">
+            top-center
+        </dt-button>
     </template>
 </dt-tooltip>
 ```
