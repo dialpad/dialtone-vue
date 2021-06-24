@@ -82,7 +82,6 @@ export const Default = DefaultTemplate.bind({});
 Default.args = {
   title: 'Base title (optional)',
   default: 'Message body with <a href="#" class="d-link d-link--muted">a link.</a>',
-  kind: 'base',
 };
 
 export const Error = DefaultTemplate.bind({});
