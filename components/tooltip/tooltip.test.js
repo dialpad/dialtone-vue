@@ -174,8 +174,27 @@ describe('Dialtone Vue Tooltip tests', function () {
       beforeEach(async function () {
         await focus();
       });
+
       it('has focus', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
+      });
+
+      describe('When anchor has blur', function () {
+        beforeEach(async function () {
+          await blur();
+        });
+        it('hide tooltip', function () {
+          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+        });
+      });
+
+      describe('When escape pressed', function () {
+        beforeEach(async function () {
+          await escape();
+        });
+        it('hide tooltip', function () {
+          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+        });
       });
     });
 
@@ -183,58 +202,25 @@ describe('Dialtone Vue Tooltip tests', function () {
       beforeEach(async function () {
         await mouseover();
       });
+
       it('has mouseover', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
-    });
-    describe('When anchor has blur', function () {
-      before(async function () {
-        await focus();
-      });
-      describe('When anchor has blur on focus', function () {
+
+      describe('When anchor has blur', function () {
         beforeEach(async function () {
           await blur();
         });
-        it('it hide tooltip', function () {
+        it('hide tooltip', function () {
           assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
         });
       });
-    });
-    describe('When anchor has onmouseover', function () {
-      beforeEach(async function () {
-        await mouseover();
-      });
-      describe('When anchor has blur on mouseover', function () {
-        beforeEach(async function () {
-          await blur();
-        });
-        it('it hide tooltip', function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-        });
-      });
-    });
-    describe('When anchor has escape on focus', function () {
-      before(async function () {
-        await focus();
-      });
-      describe('When anchor has escape on focus', function () {
+
+      describe('When escape was pressed', function () {
         beforeEach(async function () {
           await escape();
         });
-        it('it hide tooltip', function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-        });
-      });
-    });
-    describe('When anchor has escape on onmouseover', function () {
-      before(async function () {
-        await mouseover();
-      });
-      describe('When anchor has escape on mouseover', function () {
-        beforeEach(async function () {
-          await escape();
-        });
-        it('it hide tooltip', function () {
+        it('hide tooltip', function () {
           assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
         });
       });
