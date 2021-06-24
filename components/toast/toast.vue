@@ -152,6 +152,9 @@ export default {
     duration: {
       type: Number,
       default: 6000,
+      validator: (duration) => {
+        return duration > 0;
+      },
     },
   },
 
