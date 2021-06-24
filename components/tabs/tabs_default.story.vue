@@ -1,38 +1,76 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
-  <!--
-    We can bind the data that the user entered into the storybook controls to props by using a property of the same name
-    as the storybook control defined in the corresponding `.story.js` file.
-  -->
-  <dt-tabs
-    :some="some"
+  <div
+    :class="{
+      'd-bgc-purple-800': inverted,
+    }"
   >
-    <!--
-      We can also bind any slot data that the user has entered into the storybook controls. In this example we
-      conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
-
-      The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-
-      We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-      same name.
-    -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
-    </template>
-    <template
-      #some
-      v-if="someSlot"
+    <dt-tab-group
+      :size="size"
+      :inverted="inverted"
+      :borderless="borderless"
+      :disabled="disabled"
     >
-      <span v-html="someSlot" />
-    </template>
-  </dt-tabs>
+      <template #tabs>
+        <dt-tab
+          id="1"
+          panel-id="2"
+        >
+          First
+        </dt-tab>
+        <dt-tab
+          id="3"
+          panel-id="4"
+          selected
+        >
+          Second
+        </dt-tab>
+        <dt-tab
+          id="5"
+          panel-id="6"
+          selected
+          label="Third Label"
+        >
+          Third
+        </dt-tab>
+      </template>
+
+      <dt-tab-panel
+        id="2"
+        tab-id="1"
+      >
+        <p> First Panel </p>
+      </dt-tab-panel>
+      <dt-tab-panel
+        id="4"
+        tab-id="3"
+      >
+        <p> Second Panel </p>
+      </dt-tab-panel>
+      <dt-tab-panel
+        id="6"
+        tab-id="5"
+        hidden
+      >
+        <p> Third Panel </p>
+      </dt-tab-panel>
+    </dt-tab-group>
+
+    <dt-tab-group
+      :size="size"
+      :inverted="inverted"
+      :borderless="borderless"
+      :disabled="disabled"
+    />
+  </div>
 </template>
 
 <script>
-import DtTabs from './tabs';
+import DtTabGroup from './tab_group';
+import DtTab from './tab';
+import DtTabPanel from './tab_panel';
 
 export default {
   name: 'DtTabsDefault',
-  components: { DtTabs },
+  components: { DtTabGroup, DtTab, DtTabPanel },
 };
 </script>

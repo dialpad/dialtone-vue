@@ -4,7 +4,7 @@
     We can bind the data that the user entered into the storybook controls to props by using a property of the same name
     as the storybook control defined in the corresponding `.story.js` file.
   -->
-  <dt-tabs
+  <dt-tab-group
     :some="some"
   >
     <!--
@@ -25,14 +25,14 @@
     >
       <span v-html="someSlot" />
     </template>
-  </dt-tabs>
+  </dt-tab-group>
 </template>
 
 <script>
-import DtTabs from './tabs';
+import DtTabGroup from './tab_group';
 
 export default {
   name: 'DtTabsVariants',
-  components: { DtTabs },
+  components: { DtTabGroup },
 };
 </script>

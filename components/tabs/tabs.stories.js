@@ -1,14 +1,13 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
-import DtTabs from './tabs';
+import DtTabGroup from './tab_group';
 import DtTabsMdx from './tabs.mdx';
 import DtTabsDefaultTemplate from './tabs_default.story.vue';
 import DtTabsVariantsTemplate from './tabs_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  some: 'prop',
-  onEvent: action('event'),
+  onChange: action('change'),
 };
 
 /**
@@ -80,8 +79,8 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Group/DtTabs',
-  component: DtTabs,
+  title: 'Elements/Tabs',
+  component: DtTabGroup,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
