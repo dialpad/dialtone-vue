@@ -147,13 +147,14 @@ export default {
     },
 
     /**
-     * the duration in ms the toast will display before disappearing
+     * The duration in ms the toast will display before disappearing. It should have
+     * a value of at least 6000 ms to give the user enough time to read the message
      */
     duration: {
       type: Number,
       default: 6000,
       validator: (duration) => {
-        return duration > 0;
+        return duration >= 6000;
       },
     },
   },
