@@ -42,9 +42,9 @@ describe('Dialtone Vue Tooltip tests', function () {
     it('should render the container', function () { assert.isTrue(tooltipContainer.exists()); });
     it('should render the tooltip', function () { assert.isTrue(tooltip.exists()); });
     it('should be set default classes', function () {
-      assert.isTrue(tooltip.classes().includes('d-tooltip__arrow--bottom-center'));
-      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
-      assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hover));
+      assert.isTrue(tooltip.classes('d-tooltip__arrow--bottom-center'));
+      assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hide));
+      assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hover));
     });
   });
   describe('When an arrow direction is provided', function () {
@@ -54,14 +54,14 @@ describe('Dialtone Vue Tooltip tests', function () {
       });
 
       it('should have correct arrow direction class', async function () {
-        assert.isTrue(tooltip.classes().includes(`d-tooltip__arrow--${arrowDirection}`));
+        assert.isTrue(tooltip.classes(`d-tooltip__arrow--${arrowDirection}`));
       });
     }));
   });
   describe('Message provided via prop', function () {
     it('should render the message', async function () {
       await wrapper.setProps({ message: 'Message Prop' });
-      assert.equal(tooltip.text(), 'Message Prop');
+      assert.strictEqual(tooltip.text(), 'Message Prop');
     });
   });
 
@@ -72,13 +72,13 @@ describe('Dialtone Vue Tooltip tests', function () {
     });
     it('should render the message', async function () {
       await wrapper.setProps({ message: 'Message Slot' });
-      assert.equal(tooltip.text(), 'Message Slot');
+      assert.strictEqual(tooltip.text(), 'Message Slot');
     });
   });
 
   describe('Anchor slot', function () {
     it('should render the anchor slot', async function () {
-      assert.equal(anchor.text(), 'Anchor Slot');
+      assert.strictEqual(anchor.text(), 'Anchor Slot');
     });
   });
 
@@ -95,21 +95,21 @@ describe('Dialtone Vue Tooltip tests', function () {
         await wrapper.setProps({ show: true, hover: false });
         wrapper.vm.$nextTick(() => {
           assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
-          assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.show));
+          assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.show));
         });
       });
       it('should be closed', async function () {
         await wrapper.setProps({ show: false, hover: false });
         wrapper.vm.$nextTick(() => {
           assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-          assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
+          assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hide));
         });
       });
       it('should be invisible', async function () {
         await wrapper.setProps({ show: true, hover: true });
         wrapper.vm.$nextTick(() => {
           assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-          assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
+          assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hide));
         });
       });
     });
@@ -121,7 +121,7 @@ describe('Dialtone Vue Tooltip tests', function () {
 
       it('shows tooltip', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
-        assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.show));
+        assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.show));
       });
     });
 
@@ -130,7 +130,7 @@ describe('Dialtone Vue Tooltip tests', function () {
 
       it('shows tooltip', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
-        assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.show));
+        assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.show));
       });
     });
 
@@ -139,7 +139,7 @@ describe('Dialtone Vue Tooltip tests', function () {
 
       it('hide tooltip', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-        assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
+        assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hide));
       });
     });
 
@@ -151,7 +151,7 @@ describe('Dialtone Vue Tooltip tests', function () {
 
         it('hide tooltip', async function () {
           assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-          assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
+          assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hide));
         });
       });
 
