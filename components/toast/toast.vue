@@ -166,7 +166,7 @@ export default {
   },
 
   /* TODO Vue 3 Migration
-   * destroyed() should be updated() to unmounted when migrating to Vue 3.
+   * destroyed() should be updated to unmounted() when migrating to Vue 3.
    */
   // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
   destroyed () {
