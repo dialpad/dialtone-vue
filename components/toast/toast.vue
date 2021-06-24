@@ -7,7 +7,7 @@
         { 'd-toast--important': important },
       ]"
       data-qa="dt-toast"
-      role="status"
+      :role="role"
       :aria-hidden="hidden"
     >
       <div class="d-toast__dialog">
@@ -53,6 +53,7 @@ import DtNoticeContent from '../notice/notice_content';
 import DtNoticeAction from '../notice/notice_action';
 import { NOTICE_KINDS } from '../notice/notice_constants';
 import util from '../utils';
+import { TOAST_ROLES } from './toast_constants';
 
 export default {
   name: 'DtToast',
@@ -96,6 +97,18 @@ export default {
     message: {
       type: String,
       default: '',
+    },
+
+    /**
+     * Provides a role for the toast. 'status' is used by default to communicate a message. 'alert' is used to
+     * communicate an important message like an error that does not contain any interactive elements.
+     */
+    role: {
+      type: String,
+      default: 'status',
+      validate (role) {
+        return TOAST_ROLES.includes(role);
+      },
     },
 
     /**
