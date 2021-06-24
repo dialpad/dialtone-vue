@@ -8,7 +8,7 @@ import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
 // Default Prop Values
 export const argsData = {
   message: 'This is a Tooltip',
-  anchorSlot: 'Hover over me to see a tooltip',
+  anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
   show: true,
 };
@@ -45,7 +45,6 @@ export const argTypesData = {
 
   anchor: {
     name: 'anchor',
-    description: 'slot for tooltip',
     control: 'text',
     table: {
       category: 'slots',

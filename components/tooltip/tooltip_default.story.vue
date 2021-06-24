@@ -1,5 +1,12 @@
 <template>
-  <div class="d-fl-center d-fd-column d-pt64">
+  <div
+    :class="[
+      'd-fl-center d-fd-column d-pt64',
+      {
+        'd-bgc-purple-800 d-pb64': inverted,
+      },
+    ]"
+  >
     <div class="d-pt16">
       <dt-tooltip
         :message="message"
@@ -12,8 +19,11 @@
           {{ defaultSlot }}
         </template>
         <template #anchor>
-          <dt-button importance="outlined">
-            {{ anchorSlot }}
+          <dt-button
+            importance="outlined"
+            :kind="buttonKind"
+          >
+            {{ anchor }}
           </dt-button>
         </template>
       </dt-tooltip>
@@ -27,6 +37,13 @@ import { DtButton } from '../button';
 
 export default {
   name: 'DtTooltipDefault',
+
   components: { DtTooltip, DtButton },
+
+  computed: {
+    buttonKind () {
+      return this.inverted ? 'inverted' : 'default';
+    },
+  },
 };
 </script>
