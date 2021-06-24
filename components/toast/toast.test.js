@@ -1,6 +1,7 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtToast from './toast.vue';
+import {itBehavesLikeHasCorrectClass} from "../../tests/shared_examples/classes";
 
 // Constants
 const basePropsData = {};
@@ -8,7 +9,7 @@ const basePropsData = {};
 describe('DtToast Tests', function () {
   // Wrappers
   let wrapper;
-  let childContainer;
+  let toast;
 
   // Environment
   let propsData = basePropsData;
@@ -18,7 +19,7 @@ describe('DtToast Tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    childContainer = wrapper.find('[data-qa="child-container"]');
+    toast = wrapper.find('[data-qa="dt-toast"]');
   };
 
   const _setWrappers = () => {
@@ -53,9 +54,28 @@ describe('DtToast Tests', function () {
   after(function () {});
 
   describe('Presentation Tests', function () {
-    /*
-     * Test(s) to ensure that the component is correctly rendering
-     */
+    describe('When the toast renders', function () {
+      // Test Setup
+      beforeEach(function () { _setWrappers(); });
+
+      it('should exist', function () { assert.exists(wrapper); });
+    });
+
+    describe('When kind is not specified', function () {
+      it('should use the default kind', function () {
+        itBehavesLikeHasCorrectClass(toast, 'd-toast--base');
+      });
+    });
+
+    describe('When kind is set to error', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ kind: 'error' });
+      });
+
+      it('has correct class', function () {
+        itBehavesLikeHasCorrectClass(toast, 'd-toast--error');
+      });
+    });
 
     describe('When some description of the current environment', function () {});
   });
