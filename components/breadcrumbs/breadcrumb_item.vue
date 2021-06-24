@@ -11,6 +11,7 @@
       data-qa="breadcrumb-item"
       v-bind="$attrs"
     >
+      <!-- @slot default slot for breadcrumb item's label -->
       <slot>
         {{ label }}
       </slot>

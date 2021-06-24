@@ -4,10 +4,10 @@
       class="d-py16 d-px12"
       :breadcrumbs="breadcrumbs"
     />
-    <div class="d-bgc-black-700 d-py16 d-px12">
+    <div class="d-bgc-purple-800 d-py16 d-px12">
       <dt-breadcrumbs
         inverted
-        :breadcrumbs="breadcrumbsInverted"
+        :breadcrumbs="breadcrumbs"
       />
     </div>
 
