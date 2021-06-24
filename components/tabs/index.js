@@ -1,4 +1,4 @@
-export { default as DtTabs } from './tab_group.vue';
+export { default as DtTabGroup } from './tab_group.vue';
 export { default as DtTab } from './tab.vue';
 export { default as DtTabPanel } from './tab_panel.vue';
 export {

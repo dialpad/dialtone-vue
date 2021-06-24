@@ -4,7 +4,7 @@
       'd-bgc-purple-800': inverted,
     }"
   >
-    <dt-tabs
+    <dt-tab-group
       :size="size"
       :inverted="inverted"
       :borderless="borderless"
@@ -53,26 +53,24 @@
       >
         <p> Third Panel </p>
       </dt-tab-panel>
-    </dt-tabs>
+    </dt-tab-group>
 
-    <dt-tabs
-        :size="size"
-        :inverted="inverted"
-        :borderless="borderless"
-        :disabled="disabled"
-    >
-
-    </dt-tabs>
+    <dt-tab-group
+      :size="size"
+      :inverted="inverted"
+      :borderless="borderless"
+      :disabled="disabled"
+    />
   </div>
 </template>
 
 <script>
-import DtTabs from './tab_group';
+import DtTabGroup from './tab_group';
 import DtTab from './tab';
 import DtTabPanel from './tab_panel';
 
 export default {
   name: 'DtTabsDefault',
-  components: { DtTabs, DtTab, DtTabPanel },
+  components: { DtTabGroup, DtTab, DtTabPanel },
 };
 </script>

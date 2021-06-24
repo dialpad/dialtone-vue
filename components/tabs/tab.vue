@@ -7,7 +7,6 @@
         [TAB_IMPORTANCE_MODIFIERS.selected]: isSelected,
       },
       tabClass,
-      tabListClass,
     ]"
     role="tab"
     :aria-selected="`${isSelected}`"
@@ -16,10 +15,7 @@
     data-qa="dt-tab"
     :tabindex="isSelected ? '0' : '-1'"
     :disabled="groupContext.disabled || disabled"
-    v-bind="{
-      ...$attrs,
-      ...tabListChildProps,
-    }"
+    v-bind="$attrs"
     @click="selectPanel"
     @focus="setFocus(id)"
   >
@@ -38,7 +34,7 @@ export default {
     DtButton,
   },
 
-  inject: ['changeContentPanel', 'groupContext', 'tabListClass', 'tabListChildProps', 'setFocus'],
+  inject: ['changeContentPanel', 'groupContext', 'setFocus'],
 
   inheritAttrs: false,
 
@@ -105,12 +101,16 @@ export default {
   },
 
   mounted () {
-    if (this.selected) {
-      this.selectPanel();
-    }
+    this.setSelectedPanelByDefault();
   },
 
   methods: {
+    setSelectedPanelByDefault () {
+      if (this.selected) {
+        this.selectPanel();
+      }
+    },
+
     selectPanel () {
       this.changeContentPanel({
         selected: this.panelId,

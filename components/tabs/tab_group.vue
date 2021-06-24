@@ -44,29 +44,11 @@ export default {
     return {
       groupContext: this.provideObj,
       changeContentPanel: this.changeContentPanel,
-      tabListClass: this.tabListClass,
-      tabListChildProps: this.tabListChildProps,
       setFocus: this.setFocus,
     };
   },
 
   props: {
-    /**
-     * Additional class name for the tab's list elements.
-     */
-    tabListClass: {
-      type: [String, Array, Object],
-      default: '',
-    },
-
-    /**
-     * Additional props for the tab list elements.
-     */
-    tabListChildProps: {
-      type: Object,
-      default: () => ({}),
-    },
-
     /**
      * Identifies the tab group
      */
@@ -143,16 +125,24 @@ export default {
   },
 
   mounted () {
-    /**
-     * Prevent override tab selected by default
-     */
-    if (!this.provideObj.selected) {
-      this.provideObj.selected = this.selected;
-    }
-    this.tabs = this.getTabChildren();
+    this.updateSelected();
+  },
+
+  beforeUpdate () {
+    this.updateSelected();
   },
 
   methods: {
+    updateSelected () {
+      /**
+       * Prevent override tab selected by default
+       */
+      if (!this.provideObj.selected) {
+        this.provideObj.selected = this.selected;
+      }
+      this.tabs = this.getTabChildren();
+    },
+
     setFocus (focusId) {
       this.focusId = focusId;
     },
@@ -163,8 +153,8 @@ export default {
         .map(el => {
           return ({
             context: el,
-            panelId: el.getAttribute('aria-controls').replace('dt-panel-', ''),
-            id: el.getAttribute('id').replace('dt-tab-', ''),
+            panelId: el.getAttribute('aria-controls')?.replace('dt-panel-', ''),
+            id: el.getAttribute('id')?.replace('dt-tab-', ''),
             isSelected: el.getAttribute('aria-selected') === 'true',
           });
         });
@@ -221,12 +211,12 @@ export default {
 
     onHomeButton () {
       if (this.tabs.length === 0) return;
-      this.tabs[0].context.focus();
+      this.tabs[0]?.context?.focus();
     },
 
     onEndButton () {
       if (this.tabs.length === 0) return;
-      this.tabs[this.tabs.length - 1].context.focus();
+      this.tabs[this.tabs.length - 1]?.context?.focus();
     },
   },
 };

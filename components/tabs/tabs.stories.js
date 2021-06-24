@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
-import DtTabs from './tab_group';
+import DtTabGroup from './tab_group';
 import DtTabsMdx from './tabs.mdx';
 import DtTabsDefaultTemplate from './tabs_default.story.vue';
 import DtTabsVariantsTemplate from './tabs_variants.story.vue';
@@ -80,7 +80,7 @@ export const argTypesData = {
 // Story Collection
 export default {
   title: 'Elements/Tabs',
-  component: DtTabs,
+  component: DtTabGroup,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
