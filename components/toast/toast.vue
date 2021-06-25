@@ -7,7 +7,6 @@
         { 'd-toast--important': important },
       ]"
       data-qa="dt-toast"
-      :role="role"
       :aria-hidden="hidden"
     >
       <div class="d-toast__dialog">
@@ -22,6 +21,7 @@
           :title-id="titleId"
           :content-id="contentId"
           :title="title"
+          :role="role"
           v-on="$listeners"
         >
           <template #titleOverride>
