@@ -29,6 +29,7 @@ const basePropsData = {
     selected: true,
   }],
 };
+
 describe('Dialtone Vue Breadcrumb tests', function () {
   // Wrappers
   let wrapper;
