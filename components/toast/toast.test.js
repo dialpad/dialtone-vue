@@ -10,9 +10,7 @@ describe('DtToast Tests', function () {
   // Wrappers
   let wrapper;
   let toast;
-  let actionChildStub;
   let contentChildStub;
-  let iconChildStub;
 
   // Environment
   let propsData = basePropsData;
@@ -25,9 +23,7 @@ describe('DtToast Tests', function () {
     await wrapper.setData({ hidden: false });
 
     toast = wrapper.find('[data-qa="dt-toast"]');
-    actionChildStub = wrapper.find('dt-notice-action-stub');
     contentChildStub = wrapper.find('dt-notice-content-stub');
-    iconChildStub = wrapper.find('dt-notice-icon-stub');
   };
 
   const _setWrappers = () => {
@@ -39,11 +35,6 @@ describe('DtToast Tests', function () {
       localVue: this.localVue,
     });
     _setChildWrappers();
-  };
-
-  // Shared Examples
-  const itBehavesLikeSomeExpectation = () => {
-    it('should be equal', function () { assert.strictEqual(1, 1); });
   };
 
   // Setup
