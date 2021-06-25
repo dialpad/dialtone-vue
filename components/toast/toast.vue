@@ -7,6 +7,7 @@
         { 'd-toast--important': important },
       ]"
       data-qa="dt-toast"
+      v-if="!hidden"
       :aria-hidden="hidden"
     >
       <div class="d-toast__dialog">
