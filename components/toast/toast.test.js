@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtToast from './toast.vue';
-import {itBehavesLikeHasCorrectClass} from "../../tests/shared_examples/classes";
+import { itBehavesLikeDoesntHaveClass, itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 
 // Constants
 const basePropsData = {};
@@ -74,6 +74,22 @@ describe('DtToast Tests', function () {
 
       it('has correct class', function () {
         itBehavesLikeHasCorrectClass(toast, 'd-toast--error');
+      });
+    });
+
+    describe('When important is false', function () {
+      it('Doesnt have important class', function () {
+        itBehavesLikeDoesntHaveClass(toast, 'd-toast--important');
+      });
+    });
+
+    describe('When important is true', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ important: true });
+      });
+
+      it('Has correct class', function () {
+        itBehavesLikeHasCorrectClass(toast, 'd-toast--important');
       });
     });
 
