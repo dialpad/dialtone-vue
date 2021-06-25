@@ -47,6 +47,7 @@ describe('Dialtone Vue Tooltip tests', function () {
       assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hover));
     });
   });
+
   describe('When an arrow direction is provided', function () {
     TOOLTIP_DIRECTION_MODIFIERS.forEach(arrowDirection => describe(`When direction is ${arrowDirection}`, function () {
       beforeEach(async function () {
@@ -58,6 +59,7 @@ describe('Dialtone Vue Tooltip tests', function () {
       });
     }));
   });
+
   describe('Message provided via prop', function () {
     it('should render the message', async function () {
       await wrapper.setProps({ message: 'Message Prop' });
