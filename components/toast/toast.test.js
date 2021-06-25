@@ -10,6 +10,9 @@ describe('DtToast Tests', function () {
   // Wrappers
   let wrapper;
   let toast;
+  let actionChildStub;
+  let contentChildStub;
+  let iconChildStub;
 
   // Environment
   let propsData = basePropsData;
@@ -18,8 +21,13 @@ describe('DtToast Tests', function () {
   let provide = {};
 
   // Helpers
-  const _setChildWrappers = () => {
+  const _setChildWrappers = async () => {
+    await wrapper.setData({ hidden: false });
+
     toast = wrapper.find('[data-qa="dt-toast"]');
+    actionChildStub = wrapper.find('dt-notice-action-stub');
+    contentChildStub = wrapper.find('dt-notice-content-stub');
+    iconChildStub = wrapper.find('dt-notice-icon-stub');
   };
 
   const _setWrappers = () => {
@@ -78,7 +86,7 @@ describe('DtToast Tests', function () {
     });
 
     describe('When important is false', function () {
-      it('Doesnt have important class', function () {
+      it('doesnt have important class', function () {
         itBehavesLikeDoesntHaveClass(toast, 'd-toast--important');
       });
     });
@@ -97,11 +105,21 @@ describe('DtToast Tests', function () {
   });
 
   describe('Accessibility Tests', function () {
-    /*
-     * Test(s) to ensure that the component is accessible
-     */
+    describe('When rendered with default content', function () {
+      it('shows correct default role', function () {
+        assert.strictEqual(contentChildStub.attributes('role'), 'status');
+      });
+    });
 
-    describe('When some description of the current environment', function () {});
+    describe('When role is alert', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ role: 'alert' });
+      });
+
+      it('shows correct role', function () {
+        assert.strictEqual(contentChildStub.attributes('role'), 'alert');
+      });
+    });
   });
 
   describe('Interactivity Tests', function () {
