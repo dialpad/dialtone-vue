@@ -1,13 +1,13 @@
 <template>
   <aside class="d-toast-wrapper">
     <div
+      v-if="!hidden"
       :class="[
         'd-toast',
         `d-toast--${kind}`,
         { 'd-toast--important': important },
       ]"
       data-qa="dt-toast"
-      v-if="!hidden"
       :aria-hidden="hidden"
     >
       <div class="d-toast__dialog">
