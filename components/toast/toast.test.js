@@ -5,6 +5,7 @@ import { itBehavesLikeDoesntHaveClass, itBehavesLikeHasCorrectClass } from '../.
 
 // Constants
 const basePropsData = {};
+const baseData = {};
 
 describe('DtToast Tests', function () {
   // Wrappers
@@ -13,6 +14,7 @@ describe('DtToast Tests', function () {
   let contentChildStub;
 
   // Environment
+  let data = baseData;
   let propsData = basePropsData;
   let attrs = {};
   let slots = {};
@@ -20,14 +22,13 @@ describe('DtToast Tests', function () {
 
   // Helpers
   const _setChildWrappers = async () => {
-    await wrapper.setData({ hidden: false });
-
     toast = wrapper.find('[data-qa="dt-toast"]');
     contentChildStub = wrapper.find('dt-notice-content-stub');
   };
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtToast, {
+      data () { return data; },
       propsData,
       attrs,
       slots,
@@ -45,6 +46,7 @@ describe('DtToast Tests', function () {
 
   // Teardown
   afterEach(function () {
+    data = baseData;
     propsData = basePropsData;
     attrs = {};
     slots = {};
@@ -55,20 +57,33 @@ describe('DtToast Tests', function () {
   describe('Presentation Tests', function () {
     describe('When the toast renders', function () {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(function () {
+        data = { ...baseData, hidden: false };
+        _setWrappers();
+      });
 
       it('should exist', function () { assert.exists(wrapper); });
+      it('should render the toast', function () { assert.isTrue(toast.exists()); });
     });
 
     describe('When kind is not specified', function () {
+      // Test Setup
+      beforeEach(function () {
+        data = { ...baseData, hidden: false };
+        _setWrappers();
+      });
+
       it('should use the default kind', function () {
         itBehavesLikeHasCorrectClass(toast, 'd-toast--base');
       });
     });
 
     describe('When kind is set to error', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({ kind: 'error' });
+      // Test Setup
+      beforeEach(function () {
+        data = { ...baseData, hidden: false };
+        propsData = { ...basePropsData, kind: 'error' };
+        _setWrappers();
       });
 
       it('has correct class', function () {
@@ -76,15 +91,24 @@ describe('DtToast Tests', function () {
       });
     });
 
-    describe('When important is false', function () {
+    describe('When important is not provided', function () {
+      // Test Setup
+      beforeEach(function () {
+        data = { ...baseData, hidden: false };
+        _setWrappers();
+      });
+
       it('doesnt have important class', function () {
         itBehavesLikeDoesntHaveClass(toast, 'd-toast--important');
       });
     });
 
     describe('When important is true', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({ important: true });
+      // Test Setup
+      beforeEach(function () {
+        data = { ...baseData, hidden: false };
+        propsData = { ...basePropsData, important: true };
+        _setWrappers();
       });
 
       it('Has correct class', function () {
@@ -97,14 +121,26 @@ describe('DtToast Tests', function () {
 
   describe('Accessibility Tests', function () {
     describe('When rendered with default content', function () {
+      // Test Environment
+      const role = DtToast.props.role.default;
+
+      // Test Setup
+      beforeEach(function () {
+        data = { ...baseData, hidden: false };
+        _setWrappers();
+      });
+
       it('shows correct default role', function () {
-        assert.strictEqual(contentChildStub.attributes('role'), 'status');
+        assert.strictEqual(contentChildStub.attributes('role'), role);
       });
     });
 
     describe('When role is alert', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({ role: 'alert' });
+      // Test Setup
+      beforeEach(function () {
+        data = { ...baseData, hidden: false };
+        propsData = { ...basePropsData, role: 'alert' };
+        _setWrappers();
       });
 
       it('shows correct role', function () {
