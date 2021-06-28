@@ -116,6 +116,50 @@ describe('DtToast Tests', function () {
       });
     });
 
+    describe('When duration is not provided', function () {
+      // Test Environment
+      const duration = DtToast.props.duration.default;
+
+      // Test Setup
+      beforeEach(function () {
+        _setWrappers();
+      });
+
+      it('should close toast after default duration', async function () {
+        wrapper.vm.show();
+        await wrapper.vm.$nextTick();
+        await _setChildWrappers();
+
+        assert.isTrue(toast.exists());
+
+        await new Promise(resolve => setTimeout(() => { resolve(); }, duration));
+        await _setChildWrappers();
+
+        assert.isFalse(toast.exists());
+      });
+    });
+
+    describe('When duration is provided', function () {
+      // Test Setup
+      beforeEach(function () {
+        propsData = { ...basePropsData, duration: 6500 };
+        _setWrappers();
+      });
+
+      it('should close toast after duration time is finished', async function () {
+        wrapper.vm.show();
+        await wrapper.vm.$nextTick();
+        await _setChildWrappers();
+
+        assert.isTrue(toast.exists());
+
+        await new Promise(resolve => setTimeout(() => { resolve(); }, 6800));
+        await _setChildWrappers();
+
+        assert.isFalse(toast.exists());
+      });
+    });
+
     describe('When some description of the current environment', function () {});
   });
 
