@@ -1,24 +1,49 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
 import DtToast from './toast';
 
-# DtToast
+# Toast
 
 <Subtitle>
-  Some description of the component functionality.
+  A toast notice, sometimes called a snackbar, is a time-based message that appears based on users' actions.
+  It contains at-a-glance information about outcomes and can be paired with actions.
 </Subtitle>
 
 ## Base Style
 
-Some description of how to use the base component, potential gotchas and limitations.
-
 <Canvas>
-  <Story id="<GROUP>-dt-toast--default" />
+  <Story id="elements-toast--default" />
 </Canvas>
 
 ## Variants
 
+### Error
+
 <Canvas>
-  <Story id="<GROUP>-dt-toast--variants" />
+  <Story id="elements-toast--error" />
+</Canvas>
+
+### Info
+
+<Canvas>
+  <Story id="elements-toast--info" />
+</Canvas>
+
+### Success
+
+<Canvas>
+  <Story id="elements-toast--success" />
+</Canvas>
+
+### Warning
+
+<Canvas>
+  <Story id="elements-toast--warning" />
+</Canvas>
+
+### Important
+
+<Canvas>
+  <Story id="elements-toast--important" />
 </Canvas>
 
 ## Props, Slots & Events
@@ -37,14 +62,6 @@ import { DtToast } from '@dialpad/dialtone-vue';
 
 ```vue
 <dt-toast
-  some="variant"
-/>
-```
-
-### With Some Other Variant
-
-```vue
-<dt-toast
-  some-other="variant"
+  kind="base | error | info | success | warning"
 />
 ```
