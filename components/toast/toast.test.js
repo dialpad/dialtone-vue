@@ -2,6 +2,10 @@ import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtToast from './toast.vue';
 import { itBehavesLikeDoesntHaveClass, itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
+import {
+  itBehavesLikeFailsCustomPropValidation,
+  itBehavesLikePassesCustomPropValidation,
+} from '../../tests/shared_examples/validation';
 
 // Constants
 const basePropsData = {};
@@ -111,7 +115,7 @@ describe('DtToast Tests', function () {
         _setWrappers();
       });
 
-      it('Has correct class', function () {
+      it('has correct class', function () {
         itBehavesLikeHasCorrectClass(toast, 'd-toast--important');
       });
     });
@@ -202,11 +206,49 @@ describe('DtToast Tests', function () {
   });
 
   describe('Validation Tests', function () {
-    /*
-     * Test(s) to ensure that custom validators are working as expected
-     */
+    // Test Setup
+    beforeEach(function () {
+      _setWrappers();
+    });
 
-    describe('When some description of the current environment', function () {});
+    describe('Role Validator', function () {
+      // Test Environment
+      const prop = DtToast.props.role;
+
+      describe('When provided role is in TOAST_ROLES', function () {
+        itBehavesLikePassesCustomPropValidation(prop, prop.default);
+      });
+
+      describe('When provided role is not in TOAST_ROLES', function () {
+        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_ROLE`);
+      });
+    });
+
+    describe('Kind Validator', function () {
+      // Test Environment
+      const prop = DtToast.props.kind;
+
+      describe('When provided kind is in NOTICE_KINDS', function () {
+        itBehavesLikePassesCustomPropValidation(prop, prop.default);
+      });
+
+      describe('When provided kind is not in NOTICE_KINDS', function () {
+        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_KIND`);
+      });
+    });
+
+    describe('Duration Validator', function () {
+      // Test Environment
+      const prop = DtToast.props.duration;
+
+      describe('When provided duration is a valid duration', function () {
+        itBehavesLikePassesCustomPropValidation(prop, prop.default);
+      });
+
+      describe('When provided duration is not a valid duration', function () {
+        itBehavesLikeFailsCustomPropValidation(prop, 350);
+      });
+    });
   });
 
   describe('Extendability Tests', function () {
