@@ -6,6 +6,7 @@ import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
 } from '../../tests/shared_examples/validation';
+import { useFakeTimers } from 'sinon';
 
 // Constants
 const basePropsData = {};
@@ -33,6 +34,7 @@ describe('DtToast Tests', function () {
     contentChildStub = wrapper.find('dt-notice-content-stub');
     iconChildStub = wrapper.find('dt-notice-icon-stub');
   };
+  let clock;
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtToast, {
@@ -196,6 +198,11 @@ describe('DtToast Tests', function () {
       // Test Setup
       beforeEach(function () {
         _setWrappers();
+        clock = useFakeTimers(global);
+      });
+
+      afterEach(function () {
+        clock.restore();
       });
 
       it('should close the toast after default duration', async function () {
@@ -205,7 +212,8 @@ describe('DtToast Tests', function () {
 
         assert.isTrue(toast.exists());
 
-        await new Promise(resolve => setTimeout(() => { resolve(); }, duration));
+        clock.tick(duration);
+        await wrapper.vm.$nextTick();
         await _setChildWrappers();
 
         assert.isFalse(toast.exists());
@@ -217,6 +225,11 @@ describe('DtToast Tests', function () {
       beforeEach(function () {
         propsData = { ...basePropsData, duration: 6500 };
         _setWrappers();
+        clock = useFakeTimers(global);
+      });
+
+      afterEach(function () {
+        clock.restore();
       });
 
       it('should close the toast after duration time is finished', async function () {
@@ -226,7 +239,8 @@ describe('DtToast Tests', function () {
 
         assert.isTrue(toast.exists());
 
-        await new Promise(resolve => setTimeout(() => { resolve(); }, 6800));
+        clock.tick(6600);
+        await wrapper.vm.$nextTick();
         await _setChildWrappers();
 
         assert.isFalse(toast.exists());
