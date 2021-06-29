@@ -25,7 +25,6 @@ describe('DtToast Tests', function () {
   let propsData = basePropsData;
   let attrs = {};
   let slots = baseSlotsData;
-  let provide = {};
 
   // Helpers
   const _setChildWrappers = async () => {
@@ -41,7 +40,6 @@ describe('DtToast Tests', function () {
       propsData,
       attrs,
       slots,
-      provide,
       localVue: this.localVue,
     });
     _setChildWrappers();
@@ -59,7 +57,6 @@ describe('DtToast Tests', function () {
     propsData = basePropsData;
     attrs = {};
     slots = baseSlotsData;
-    provide = {};
   });
   after(function () {});
 
@@ -249,8 +246,6 @@ describe('DtToast Tests', function () {
         assert.isFalse(toast.exists());
       });
     });
-
-    describe('When some description of the current environment', function () {});
   });
 
   describe('Accessibility Tests', function () {
@@ -281,14 +276,6 @@ describe('DtToast Tests', function () {
         assert.strictEqual(contentChildStub.attributes('role'), 'alert');
       });
     });
-  });
-
-  describe('Interactivity Tests', function () {
-    /*
-     * Test(s) to ensure that the component correctly handles user input
-     */
-
-    describe('When some description of the current environment', function () {});
   });
 
   describe('Validation Tests', function () {
@@ -335,13 +322,5 @@ describe('DtToast Tests', function () {
         itBehavesLikeFailsCustomPropValidation(prop, 350);
       });
     });
-  });
-
-  describe('Extendability Tests', function () {
-    /*
-     * Test(s) to ensure that the component can be correctly extended
-     */
-
-    describe('When some description of the current environment', function () {});
   });
 });
