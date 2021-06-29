@@ -6,7 +6,6 @@
       :class="[
         'd-tablist',
         TAB_LIST_SIZE_MODIFIERS[size],
-        TAB_LIST_SIZE_MODIFIERS[size],
         {
           [TAB_LIST_KIND_MODIFIERS.inverted]: inverted,
           [TAB_LIST_IMPORTANCE_MODIFIERS.borderless]: borderless,

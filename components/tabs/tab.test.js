@@ -51,7 +51,7 @@ describe('Dialtone Vue Tab tests', function () {
     it('should render the component', function () {
       assert.exists(wrapper, 'wrapper exists');
     });
-    it('should be set default classes', function () {
+    it('should have default class', function () {
       assert.isTrue(tab.classes('d-tab'));
     });
     it('should render the slot', function () {
@@ -59,28 +59,28 @@ describe('Dialtone Vue Tab tests', function () {
     });
 
     describe('Default areas', function () {
-      it('should be set default aria-selected', function () {
+      it('aria-selected should be "false"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'false');
       });
-      it('should be set default aria-controls', function () {
+      it('aria-controls should be default', function () {
         assert.strictEqual(tab.attributes('aria-controls'), `dt-panel-${panelId}`);
       });
-      it('should be set default aria-label', function () {
+      it('aria-label should be default', function () {
         assert.strictEqual(tab.attributes('aria-label'), label);
       });
-      it('should be set valid role', function () {
+      it('role should be valid', function () {
         assert.strictEqual(tab.attributes('role'), 'tab');
       });
     });
 
     describe('Attributes', function () {
-      it('should be set valid id', function () {
+      it('should have valid id', function () {
         assert.strictEqual(tab.attributes('id'), `dt-tab-${id}`);
       });
-      it('should be set valid tabindex', function () {
+      it('should have valid tabindex', function () {
         assert.strictEqual(tab.attributes('tabindex'), '-1');
       });
-      it('should be set valid disabled', function () {
+      it('should not be disabled', function () {
         assert.strictEqual(tab.attributes('disabled'), undefined);
       });
     });
@@ -92,13 +92,13 @@ describe('Dialtone Vue Tab tests', function () {
         groupContext.selected = panelId;
         _mountWrapper();
       });
-      it('should be set selected class', function () {
+      it('should have selected class', function () {
         assert.isTrue(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected));
       });
-      it('should be set valid tabindex', function () {
+      it('should have valid tabindex', function () {
         assert.strictEqual(tab.attributes('tabindex'), '0');
       });
-      it('should be set default aria-selected', function () {
+      it('aria-selected should be "true"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'true');
       });
     });
@@ -108,13 +108,13 @@ describe('Dialtone Vue Tab tests', function () {
         groupContext.selected = '';
         _mountWrapper();
       });
-      it('should be set selected class', function () {
+      it('should not have selected class', function () {
         assert.isFalse(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected));
       });
-      it('should be set valid tabindex', function () {
+      it('should have valid tabindex', function () {
         assert.strictEqual(tab.attributes('tabindex'), '-1');
       });
-      it('should be set default aria-selected', function () {
+      it('aria-selected should be "false"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'false');
       });
     });
@@ -150,22 +150,22 @@ describe('Dialtone Vue Tab tests', function () {
   });
 
   describe('Accessibility Tests', function () {
-    describe('Selected aria-selected', function () {
+    describe('When panel is selected', function () {
       beforeEach(function () {
         groupContext.selected = panelId;
         _mountWrapper();
       });
-      it('should be set default aria-selected', function () {
+      it('aria-selected should be "true"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'true');
       });
     });
 
-    describe('Unselected aria-selected', function () {
+    describe('When panel is unselected', function () {
       beforeEach(function () {
         groupContext.selected = '';
         _mountWrapper();
       });
-      it('should be set default aria-selected', function () {
+      it('aria-selected should be "false"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'false');
       });
     });
