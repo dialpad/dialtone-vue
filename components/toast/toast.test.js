@@ -201,7 +201,7 @@ describe('DtToast Tests', function () {
         _setWrappers();
       });
 
-      it('should close toast after default duration', async function () {
+      it('should close the toast after default duration', async function () {
         wrapper.vm.show();
         await wrapper.vm.$nextTick();
         await _setChildWrappers();
@@ -222,7 +222,7 @@ describe('DtToast Tests', function () {
         _setWrappers();
       });
 
-      it('should close toast after duration time is finished', async function () {
+      it('should close the toast after duration time is finished', async function () {
         wrapper.vm.show();
         await wrapper.vm.$nextTick();
         await _setChildWrappers();
@@ -230,6 +230,20 @@ describe('DtToast Tests', function () {
         assert.isTrue(toast.exists());
 
         await new Promise(resolve => setTimeout(() => { resolve(); }, 6800));
+        await _setChildWrappers();
+
+        assert.isFalse(toast.exists());
+      });
+
+      it('should close the toast with close method', async function () {
+        wrapper.vm.show();
+        await wrapper.vm.$nextTick();
+        await _setChildWrappers();
+
+        assert.isTrue(toast.exists());
+
+        wrapper.vm.close();
+        await wrapper.vm.$nextTick();
         await _setChildWrappers();
 
         assert.isFalse(toast.exists());
