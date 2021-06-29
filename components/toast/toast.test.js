@@ -10,24 +10,29 @@ import {
 // Constants
 const basePropsData = {};
 const baseData = {};
+const baseSlotsData = {};
 
 describe('DtToast Tests', function () {
   // Wrappers
   let wrapper;
   let toast;
+  let actionChildStub;
   let contentChildStub;
+  let iconChildStub;
 
   // Environment
   let data = baseData;
   let propsData = basePropsData;
   let attrs = {};
-  let slots = {};
+  let slots = baseSlotsData;
   let provide = {};
 
   // Helpers
   const _setChildWrappers = async () => {
     toast = wrapper.find('[data-qa="dt-toast"]');
+    actionChildStub = wrapper.find('dt-notice-action-stub');
     contentChildStub = wrapper.find('dt-notice-content-stub');
+    iconChildStub = wrapper.find('dt-notice-icon-stub');
   };
 
   const _setWrappers = () => {
@@ -53,7 +58,7 @@ describe('DtToast Tests', function () {
     data = baseData;
     propsData = basePropsData;
     attrs = {};
-    slots = {};
+    slots = baseSlotsData;
     provide = {};
   });
   after(function () {});
@@ -68,6 +73,73 @@ describe('DtToast Tests', function () {
 
       it('should exist', function () { assert.exists(wrapper); });
       it('should render the toast', function () { assert.isTrue(toast.exists()); });
+    });
+
+    describe('When the toast renders with slots', function () {
+      // Test Setup
+      beforeEach(function () {
+        data = { ...baseData, hidden: false };
+        slots = {
+          ...baseSlotsData,
+          default: 'default slot content',
+          action: 'action slot content',
+          icon: 'icon slot content',
+        };
+        _setWrappers();
+      });
+
+      it('action slot is passed down correctly', function () {
+        assert.strictEqual(actionChildStub.text(), slots.action);
+      });
+
+      it('default slot is passed down correctly', function () {
+        assert.strictEqual(contentChildStub.text(), slots.default);
+      });
+
+      it('icon slot is passed down correctly', function () {
+        assert.strictEqual(iconChildStub.text(), slots.icon);
+      });
+    });
+
+    describe('When the toast renders with props', function () {
+      // Test Setup
+      beforeEach(function () {
+        data = { ...baseData, hidden: false };
+        propsData = {
+          ...basePropsData,
+          titleId: 'titleId prop content',
+          contentId: 'contentId prop content',
+          title: 'title prop content',
+          message: 'message prop content',
+          closeButtonProps: { ariaLabel: 'close' },
+          hideClose: true,
+        };
+        _setWrappers();
+      });
+
+      it('titleId prop is passed down correctly', function () {
+        assert.strictEqual(contentChildStub.props().titleId, propsData.titleId);
+      });
+
+      it('contentId prop is passed down correctly', function () {
+        assert.strictEqual(contentChildStub.props().contentId, propsData.contentId);
+      });
+
+      it('title prop is passed down correctly', function () {
+        assert.strictEqual(contentChildStub.props().title, propsData.title);
+      });
+
+      it('message prop is passed down correctly', function () {
+        assert.strictEqual(contentChildStub.text(), propsData.message);
+      });
+
+      it('closeButtonProps prop is passed down correctly', function () {
+        assert.deepEqual(actionChildStub.props().closeButtonProps, { ariaLabel: 'close' });
+      });
+
+      it('hideClose prop is passed down correctly', function () {
+        assert.strictEqual(actionChildStub.props().hideClose, propsData.hideClose);
+      });
     });
 
     describe('When kind is not specified', function () {
