@@ -1,88 +1,66 @@
-import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 import DtToast from './toast';
 import DtToastMdx from './toast.mdx';
 import DtToastDefaultTemplate from './toast_default.story.vue';
-import DtToastVariantsTemplate from './toast_variants.story.vue';
+import { NOTICE_KINDS } from '../notice';
 
-// Default Prop Values
-export const argsData = {
-  some: 'prop',
-  onEvent: action('event'),
-};
-
-/**
- * example prop description decorator
- */
-
-/*
-  Controls
-  ========
-
-  Here we define any custom controls or control overrides for our components.
-
-  By default storybook will attempt to provide an appropriate control of the same name for each property in the
-  component as well as include any description provided using a prop decorator within your component (see above).
-
-  Storybook will also attempt to provide an appropriate control for each slot in the component as well as include any
-  description provided using a slot decorator within your component (see below).
-
-  <!-- @slot example slot decorator -->
-*/
 export const argTypesData = {
   // Props
-  some: {
-    description: 'Describes the some prop',
+  titleId: {
+    defaultValue: '',
     table: {
-      category: 'props',
-      type: {
-        summary: 'string',
+      defaultValue: {
+        summary: 'generated unique ID',
       },
+    },
+  },
+  contentId: {
+    defaultValue: '',
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  kind: {
+    control: {
+      type: 'select',
+      options: NOTICE_KINDS,
+    },
+  },
+
+  // Slots
+  titleOverride: {
+    table: {
+      type: { summary: 'text/html' },
     },
     control: {
       type: 'text',
     },
   },
-
-  // Slots
+  icon: {
+    table: {
+      type: { summary: 'component' },
+    },
+    control: {
+      type: 'select',
+      options: getIconNames(),
+    },
+  },
   default: {
-    control: 'text',
     table: {
-      type: {
-        summary: 'text/html',
-      },
+      type: { summary: 'text/html' },
     },
-  },
-  /*
-    We use the following naming scheme `<SLOT_NAME>Slot` for slot controls to prevent conflicts with props that share
-    the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
-    table and description within the controls accurately reflects the correct names of our component's props and slots.
-  */
-  someSlot: {
-    name: 'some',
-    description: 'Slot for some',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-
-  // Action Event Handlers
-  onEvent: {
-    table: {
-      disable: true,
+    control: {
+      type: 'text',
     },
   },
 };
 
 // Story Collection
 export default {
-  title: 'Group/DtToast',
+  title: 'Elements/Toast',
   component: DtToast,
-  args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
@@ -98,15 +76,45 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   argTypes,
   DtToastDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtToastVariantsTemplate,
-);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
+Default.args = {
+  title: 'Base title (optional)',
+  default: 'Message body with <a href="#" class="d-link d-link--muted">a link.</a>',
+};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
+export const Error = DefaultTemplate.bind({});
+Error.args = {
+  ...Default.args,
+  title: 'Error title (optional)',
+  kind: 'error',
+};
+
+export const Info = DefaultTemplate.bind({});
+Info.args = {
+  ...Default.args,
+  title: 'Info title (optional)',
+  kind: 'info',
+};
+
+export const Success = DefaultTemplate.bind({});
+Success.args = {
+  ...Default.args,
+  title: 'Success title (optional)',
+  kind: 'success',
+};
+
+export const Warning = DefaultTemplate.bind({});
+Warning.args = {
+  ...Default.args,
+  title: 'Warning title (optional)',
+  kind: 'warning',
+};
+
+export const Important = DefaultTemplate.bind({});
+Important.args = {
+  ...Default.args,
+  important: true,
+  default: 'Message body with <a href="#" class="d-link d-link--inverted">a link.</a>',
+};

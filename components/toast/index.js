@@ -1,2 +1,2 @@
 export { default as DtToast } from './toast.vue';
-export {} from './toast_constants';
+export { TOAST_ROLES } from './toast_constants';

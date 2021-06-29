@@ -1,5 +1,5 @@
-export const DEFAULT_CONSTANTS = null;
+export const TOAST_ROLES = ['status', 'alert'];
 
 export default {
-  DEFAULT_CONSTANTS,
+  TOAST_ROLES,
 };
