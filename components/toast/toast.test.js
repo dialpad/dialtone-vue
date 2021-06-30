@@ -1,7 +1,10 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtToast from './toast.vue';
-import { itBehavesLikeDoesntHaveClass, itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
+import {
+  itBehavesLikeDoesNotHaveClass,
+  itBehavesLikeHasCorrectClass,
+} from '../../tests/shared_examples/classes';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
@@ -173,7 +176,7 @@ describe('DtToast Tests', function () {
       });
 
       it('doesnt have important class', function () {
-        itBehavesLikeDoesntHaveClass(toast, 'd-toast--important');
+        itBehavesLikeDoesNotHaveClass(toast, 'd-toast--important');
       });
     });
 
