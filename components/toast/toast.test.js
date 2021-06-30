@@ -61,9 +61,9 @@ describe('DtToast Tests', function () {
   // Teardown
   afterEach(function () {
     data = baseData;
-    propsData = basePropsData;
+    propsData = { ...basePropsData };
     attrs = {};
-    slots = baseSlotsData;
+    slots = { ...baseSlotsData };
   });
   after(function () {});
 
