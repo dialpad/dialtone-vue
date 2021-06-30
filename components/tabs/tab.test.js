@@ -123,7 +123,7 @@ describe('Dialtone Vue Tab tests', function () {
       beforeEach(function () {
         _mountWrapper();
       });
-      describe('disabled by inject', function () {
+      describe('Disabled by inject', function () {
         before(function () {
           groupContext.disabled = true;
         });
@@ -135,7 +135,7 @@ describe('Dialtone Vue Tab tests', function () {
         });
       });
 
-      describe('disabled by prop', function () {
+      describe('Disabled by prop', function () {
         before(function () {
           propsData.disabled = true;
         });
