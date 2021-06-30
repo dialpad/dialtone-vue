@@ -223,9 +223,12 @@ describe('DtToast Tests', function () {
     });
 
     describe('When duration is provided', function () {
+      // Test Environment
+      const duration = 6500;
+
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, duration: 6500 };
+        propsData = { ...basePropsData, duration };
         _setWrappers();
         clock = useFakeTimers(global);
       });
@@ -241,7 +244,7 @@ describe('DtToast Tests', function () {
 
         assert.isTrue(toast.exists());
 
-        clock.tick(6600);
+        clock.tick(duration + 1);
         await wrapper.vm.$nextTick();
         await _setChildWrappers();
 
