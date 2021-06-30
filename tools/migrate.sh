@@ -25,6 +25,52 @@ usage() {
   exit 1;
 }
 
+# Replacement method
+#  Args:
+#    $1 <string>: The find string parsed from the file
+#    $2 <string>: The replacement string parsed from the file
+replaceString() {
+  LOCAL_FIND_STRING=$1
+  LOCAL_REPLACEMENT_STRING=$2
+
+  # Find and replace strings ("" is required on macos when using xargs and sed)
+  grep ${GREP_FLAGS[@]} ${GREP_INCLUDE[@]} "${LOCAL_FIND_STRING}" "${DIRECTORY}" | xargs sed -i "" "s/${LOCAL_FIND_STRING}/${LOCAL_REPLACEMENT_STRING}/g"
+}
+
+# Mixin replacement method
+#  Args:
+#    $1 <string>: The find string parsed from the file
+#    $2 <string>: The replacement string parsed from the file
+replaceMixins() {
+  LOCAL_FIND_MIXIN_STRING=".${1}();"
+  LOCAL_REPLACEMENT_MIXIN_STRING=''
+
+  # Get replacement classes
+  IFS=' ' read -r -a LOCAL_REPLACEMENT_CLASSES <<< "${2}"
+  LOCAL_REPLACEMENT_CLASS_COUNT=${#LOCAL_REPLACEMENT_CLASSES[@]}
+
+  if [ ${LOCAL_REPLACEMENT_CLASS_COUNT} -eq 1 ]
+    then
+      replaceString "${LOCAL_FIND_MIXIN_STRING}" ".${LOCAL_REPLACEMENT_CLASSES[0]}();"
+    elif [ ${LOCAL_REPLACEMENT_CLASS_COUNT} -gt 1 ]
+      then
+        MAX_INDEX=$((${LOCAL_REPLACEMENT_CLASS_COUNT} - 1))
+
+        # Create replacement mixin string
+        for index in "${!LOCAL_REPLACEMENT_CLASSES[@]}"
+        do
+          LOCAL_REPLACEMENT_MIXIN_STRING+=".${LOCAL_REPLACEMENT_CLASSES[index]}();"
+          if [ ${index} -lt ${MAX_INDEX} ]
+            then
+              LOCAL_REPLACEMENT_MIXIN_STRING+=' '
+          fi
+        done
+
+        replaceString "${LOCAL_FIND_MIXIN_STRING}" "${LOCAL_REPLACEMENT_MIXIN_STRING}"
+  fi
+}
+
+
 # Constants
 GREP_FLAGS=(-l)
 GREP_INCLUDE=(--include=\*.{js,vue,handlebars})
@@ -69,6 +115,9 @@ while read -r line; do
   FIND_STRING="$(cut -d':' -f1 <<< "$line")"
   REPLACEMENT_STRING="$(cut -d':' -f2 <<< "$line")"
 
-  # Find and replace strings ("" is required on macos when using xargs and sed)
-  grep ${GREP_FLAGS[@]} ${GREP_INCLUDE[@]} "${FIND_STRING}" "${DIRECTORY}" | xargs sed -i "" "s/${FIND_STRING}/${REPLACEMENT_STRING}/g"
+  # Replace mixins
+  replaceMixins "${FIND_STRING}" "${REPLACEMENT_STRING}"
+
+  # Replace classes
+  replaceString "${FIND_STRING}" "${REPLACEMENT_STRING}"
 done < "$MIGRATION_MAP_FILE"
