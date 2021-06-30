@@ -51,7 +51,6 @@ describe('DtToast Tests', function () {
   before(function () {
     this.localVue = createLocalVue();
   });
-  beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
