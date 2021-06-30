@@ -116,15 +116,15 @@ describe('DtToast Tests', function () {
       });
 
       it('titleId prop is passed down correctly', function () {
-        assert.strictEqual(contentChildStub.props().titleId, propsData.titleId);
+        assert.strictEqual(contentChildStub.props('titleId'), propsData.titleId);
       });
 
       it('contentId prop is passed down correctly', function () {
-        assert.strictEqual(contentChildStub.props().contentId, propsData.contentId);
+        assert.strictEqual(contentChildStub.props('contentId'), propsData.contentId);
       });
 
       it('title prop is passed down correctly', function () {
-        assert.strictEqual(contentChildStub.props().title, propsData.title);
+        assert.strictEqual(contentChildStub.props('title'), propsData.title);
       });
 
       it('message prop is passed down correctly', function () {
@@ -132,11 +132,11 @@ describe('DtToast Tests', function () {
       });
 
       it('closeButtonProps prop is passed down correctly', function () {
-        assert.deepEqual(actionChildStub.props().closeButtonProps, { ariaLabel: 'close' });
+        assert.deepEqual(actionChildStub.props('closeButtonProps'), { ariaLabel: 'close' });
       });
 
       it('hideClose prop is passed down correctly', function () {
-        assert.strictEqual(actionChildStub.props().hideClose, propsData.hideClose);
+        assert.strictEqual(actionChildStub.props('hideClose'), propsData.hideClose);
       });
     });
 
