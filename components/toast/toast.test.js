@@ -332,13 +332,14 @@ describe('DtToast Tests', function () {
     describe('Duration Validator', function () {
       // Test Environment
       const prop = DtToast.props.duration;
+      const duration = prop.default;
 
       describe('When provided duration is a valid duration', function () {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
+        itBehavesLikePassesCustomPropValidation(prop, duration);
       });
 
       describe('When provided duration is not a valid duration', function () {
-        itBehavesLikeFailsCustomPropValidation(prop, 350);
+        itBehavesLikeFailsCustomPropValidation(prop, duration - 1);
       });
     });
   });
