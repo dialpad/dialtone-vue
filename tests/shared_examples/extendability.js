@@ -9,7 +9,12 @@ export function itBehavesLikeAppliesChildProp (element, propName, propValue) {
   assert.strictEqual(element.attributes(propName), propValue, 'has provided child prop');
 }
 
+export function itBehavesLikePassesDownChildProp (element, propName, propValue) {
+  assert.strictEqual(element.props(propName), propValue, 'has passed down child prop');
+}
+
 export default {
   itBehavesLikeAppliesClassToChild,
   itBehavesLikeAppliesChildProp,
+  itBehavesLikePassesDownChildProp,
 };

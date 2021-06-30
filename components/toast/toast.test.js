@@ -10,6 +10,9 @@ import {
   itBehavesLikePassesCustomPropValidation,
 } from '../../tests/shared_examples/validation';
 import { useFakeTimers } from 'sinon';
+import {
+  itBehavesLikePassesDownChildProp,
+} from '../../tests/shared_examples/extendability';
 
 // Constants
 const basePropsData = {};
@@ -112,7 +115,6 @@ describe('DtToast Tests', function () {
           contentId: 'contentId prop content',
           title: 'title prop content',
           message: 'message prop content',
-          closeButtonProps: { ariaLabel: 'close' },
           hideClose: true,
         };
         _setWrappers();
@@ -132,10 +134,6 @@ describe('DtToast Tests', function () {
 
       it('message prop is passed down correctly', function () {
         assert.strictEqual(contentChildStub.text(), propsData.message);
-      });
-
-      it('closeButtonProps prop is passed down correctly', function () {
-        assert.deepEqual(actionChildStub.props('closeButtonProps'), { ariaLabel: 'close' });
       });
 
       it('hideClose prop is passed down correctly', function () {
@@ -341,6 +339,40 @@ describe('DtToast Tests', function () {
       describe('When provided duration is not a valid duration', function () {
         itBehavesLikeFailsCustomPropValidation(prop, duration - 1);
       });
+    });
+  });
+
+  describe('Extendability Tests', function () {
+    // Test Environment
+    let element;
+    let propName;
+    const propValue = {
+      ariaLabel: 'close',
+    };
+
+    // Helpers
+    const _setupChildPropsTest = async (childPropName) => {
+      propsData[childPropName] = propValue;
+      _setWrappers();
+      wrapper.vm.show();
+      await wrapper.vm.$nextTick();
+      await _setChildWrappers();
+    };
+
+    // Shared Examples
+    const itBehavesLikePassesDownChildPropLocal = () => {
+      it('should pass down provided child prop', function () {
+        itBehavesLikePassesDownChildProp(element, propName, propValue);
+      });
+    };
+
+    describe('When close button child props are provided', function () {
+      beforeEach(async function () {
+        propName = 'closeButtonProps';
+        await _setupChildPropsTest(propName);
+        element = actionChildStub;
+      });
+      itBehavesLikePassesDownChildPropLocal();
     });
   });
 });
