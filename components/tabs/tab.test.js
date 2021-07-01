@@ -57,24 +57,6 @@ describe('Dialtone Vue Tab tests', function () {
       assert.strictEqual(tab.text(), defaultSlot);
     });
 
-    describe('Default A11y Attrs', function () {
-      it('aria-selected should be "false"', function () {
-        assert.strictEqual(tab.attributes('aria-selected'), 'false');
-      });
-
-      it('aria-controls should content the panel id', function () {
-        assert.strictEqual(tab.attributes('aria-controls'), `dt-panel-${panelId}`);
-      });
-
-      it('aria-label should match the provided label', function () {
-        assert.strictEqual(tab.attributes('aria-label'), label);
-      });
-
-      it('role should be tab', function () {
-        assert.strictEqual(tab.attributes('role'), 'tab');
-      });
-    });
-
     describe('Selected by default', function () {
       beforeEach(function () {
         propsData.selected = true;
@@ -170,6 +152,24 @@ describe('Dialtone Vue Tab tests', function () {
   });
 
   describe('Accessibility Tests', function () {
+    describe('Default A11y Attrs', function () {
+      it('aria-selected should be "false"', function () {
+        assert.strictEqual(tab.attributes('aria-selected'), 'false');
+      });
+
+      it('aria-controls should content the panel id', function () {
+        assert.strictEqual(tab.attributes('aria-controls'), `dt-panel-${panelId}`);
+      });
+
+      it('aria-label should match the provided label', function () {
+        assert.strictEqual(tab.attributes('aria-label'), label);
+      });
+
+      it('role should be tab', function () {
+        assert.strictEqual(tab.attributes('role'), 'tab');
+      });
+    });
+
     describe('When panel is selected', function () {
       beforeEach(function () {
         groupContext.selected = panelId;

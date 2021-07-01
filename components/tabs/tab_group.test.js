@@ -130,6 +130,20 @@ describe('Dialtone Vue Tab Group tests', function () {
     });
   });
   describe('Interactivity Tests', function () {
+    describe('Correct selected state', function () {
+      beforeEach(async function () {
+        optionTabs[0].selected = true;
+        optionTabs[1].selected = false;
+        _mountWrapper();
+      });
+
+      it('selected element should be correct', function () {
+        assert.strictEqual(tabs.at(0).attributes('aria-selected'), 'true');
+        assert.strictEqual(tabPanels.at(0).attributes('aria-hidden'), 'false');
+        assert.strictEqual(tabs.at(1).attributes('aria-selected'), 'false');
+        assert.strictEqual(tabPanels.at(1).attributes('aria-hidden'), 'true');
+      });
+    });
     describe('Correct key navigation', function () {
       describe('On keyup left', function () {
         beforeEach(async function () {
