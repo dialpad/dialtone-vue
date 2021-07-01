@@ -65,7 +65,6 @@ describe('DtToast Tests', function () {
     attrs = {};
     slots = { ...baseSlotsData };
   });
-  after(function () {});
 
   describe('Presentation Tests', function () {
     describe('When the toast renders', function () {
