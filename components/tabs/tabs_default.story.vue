@@ -34,33 +34,32 @@
         </dt-tab>
       </template>
 
-      <dt-tab-panel
-        id="2"
-        tab-id="1"
+      <div
+        :class="{
+          'd-fc-white': inverted,
+        }"
       >
-        <p> First Panel </p>
-      </dt-tab-panel>
-      <dt-tab-panel
-        id="4"
-        tab-id="3"
-      >
-        <p> Second Panel </p>
-      </dt-tab-panel>
-      <dt-tab-panel
-        id="6"
-        tab-id="5"
-        hidden
-      >
-        <p> Third Panel </p>
-      </dt-tab-panel>
+        <dt-tab-panel
+          id="2"
+          tab-id="1"
+        >
+          <p>First Panel</p>
+        </dt-tab-panel>
+        <dt-tab-panel
+          id="4"
+          tab-id="3"
+        >
+          <p>Second Panel</p>
+        </dt-tab-panel>
+        <dt-tab-panel
+          id="6"
+          tab-id="5"
+          hidden
+        >
+          <p>Third Panel</p>
+        </dt-tab-panel>
+      </div>
     </dt-tab-group>
-
-    <dt-tab-group
-      :size="size"
-      :inverted="inverted"
-      :borderless="borderless"
-      :disabled="disabled"
-    />
   </div>
 </template>
 
