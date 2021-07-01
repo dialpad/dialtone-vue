@@ -8,7 +8,7 @@
         { 'd-toast--important': important },
       ]"
       data-qa="dt-toast"
-      :aria-hidden="hidden"
+      :aria-hidden="hidden.toString()"
     >
       <div class="d-toast__dialog">
         <dt-notice-icon
