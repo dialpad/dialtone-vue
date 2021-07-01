@@ -278,6 +278,10 @@ describe('DtToast Tests', function () {
       it('shows correct default role', function () {
         assert.strictEqual(contentChildStub.attributes('role'), role);
       });
+
+      it('should have aria-hidden set to false when toast is shown', function () {
+        assert.strictEqual(toast.attributes('aria-hidden'), 'false');
+      });
     });
 
     describe('When role is alert', function () {
