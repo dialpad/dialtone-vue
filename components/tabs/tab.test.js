@@ -68,7 +68,7 @@ describe('Dialtone Vue Tab tests', function () {
       it('aria-label should be default', function () {
         assert.strictEqual(tab.attributes('aria-label'), label);
       });
-      it('role should be valid', function () {
+      it('role should be tab', function () {
         assert.strictEqual(tab.attributes('role'), 'tab');
       });
     });
