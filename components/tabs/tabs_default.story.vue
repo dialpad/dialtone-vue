@@ -14,20 +14,19 @@
         <dt-tab
           id="1"
           panel-id="2"
+          selected
         >
           First
         </dt-tab>
         <dt-tab
           id="3"
           panel-id="4"
-          selected
         >
           Second
         </dt-tab>
         <dt-tab
           id="5"
           panel-id="6"
-          selected
           label="Third Label"
         >
           Third
@@ -54,7 +53,6 @@
         <dt-tab-panel
           id="6"
           tab-id="5"
-          hidden
         >
           <p>Third Panel</p>
         </dt-tab-panel>
