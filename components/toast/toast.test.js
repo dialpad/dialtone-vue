@@ -121,15 +121,15 @@ describe('DtToast Tests', function () {
       });
 
       it('titleId prop is passed down correctly', function () {
-        assert.strictEqual(contentChildStub.props('titleId'), propsData.titleId);
+        itBehavesLikePassesDownChildProp(contentChildStub, 'titleId', propsData.titleId);
       });
 
       it('contentId prop is passed down correctly', function () {
-        assert.strictEqual(contentChildStub.props('contentId'), propsData.contentId);
+        itBehavesLikePassesDownChildProp(contentChildStub, 'contentId', propsData.contentId);
       });
 
       it('title prop is passed down correctly', function () {
-        assert.strictEqual(contentChildStub.props('title'), propsData.title);
+        itBehavesLikePassesDownChildProp(contentChildStub, 'title', propsData.title);
       });
 
       it('message prop is passed down correctly', function () {
@@ -137,7 +137,7 @@ describe('DtToast Tests', function () {
       });
 
       it('hideClose prop is passed down correctly', function () {
-        assert.strictEqual(actionChildStub.props('hideClose'), propsData.hideClose);
+        itBehavesLikePassesDownChildProp(actionChildStub, 'hideClose', propsData.hideClose);
       });
     });
 
