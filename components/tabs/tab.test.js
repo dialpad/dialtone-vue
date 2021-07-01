@@ -58,7 +58,7 @@ describe('Dialtone Vue Tab tests', function () {
       assert.strictEqual(tab.text(), defaultSlot);
     });
 
-    describe('Default areas', function () {
+    describe('Default A11y Attrs', function () {
       it('aria-selected should be "false"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'false');
       });
