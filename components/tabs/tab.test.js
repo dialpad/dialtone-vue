@@ -62,7 +62,7 @@ describe('Dialtone Vue Tab tests', function () {
       it('aria-selected should be "false"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'false');
       });
-      it('aria-controls should be default', function () {
+      it('aria-controls should match the panel id', function () {
         assert.strictEqual(tab.attributes('aria-controls'), `dt-panel-${panelId}`);
       });
       it('aria-label should match the provided label', function () {
