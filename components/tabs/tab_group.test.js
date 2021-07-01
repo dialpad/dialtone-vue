@@ -65,11 +65,6 @@ describe('Dialtone Vue Tab Group tests', function () {
 
   const propsData = {
     label: 'area-label',
-    selected: '',
-    disabled: false,
-    inverted: false,
-    borderless: false,
-    size: '',
   };
 
   const _setWrappers = () => {
@@ -100,20 +95,13 @@ describe('Dialtone Vue Tab Group tests', function () {
     it('should render the component', function () {
       assert.exists(wrapper, 'wrapper exists');
     });
-    it('should render correct attributes', function () {
-      assert.strictEqual(tabList.attributes('role'), 'tablist');
-      assert.strictEqual(tabList.attributes('aria-label'), propsData.label);
-    });
-    it('should have selected element', function () {
-      assert.strictEqual(tabs.at(1).attributes('aria-selected'), 'true');
-    });
-  });
-  describe('Interactivity Tests', function () {
+
     describe('Correct size modifiers', function () {
       beforeEach(function () {
         propsData.size = 'sm';
         _mountWrapper();
       });
+
       it('should have correct class modifier', function () {
         assert.isTrue(tabList.classes(TAB_LIST_SIZE_MODIFIERS.sm));
       });
@@ -124,6 +112,7 @@ describe('Dialtone Vue Tab Group tests', function () {
         propsData.inverted = true;
         _mountWrapper();
       });
+
       it('should have correct kind modifier', function () {
         assert.isTrue(tabList.classes(TAB_LIST_KIND_MODIFIERS.inverted));
       });
@@ -134,11 +123,13 @@ describe('Dialtone Vue Tab Group tests', function () {
         propsData.borderless = true;
         _mountWrapper();
       });
+
       it('should have correct importance modifier', function () {
         assert.isTrue(tabList.classes(TAB_LIST_IMPORTANCE_MODIFIERS.borderless));
       });
     });
-
+  });
+  describe('Interactivity Tests', function () {
     describe('Correct key navigation', function () {
       describe('On keyup left', function () {
         beforeEach(async function () {
@@ -146,6 +137,7 @@ describe('Dialtone Vue Tab Group tests', function () {
           await tabList.trigger('keyup.left');
           await tabList.trigger('keyup.space');
         });
+
         it('selected element should be correct', function () {
           assert.strictEqual(tabs.at(2).attributes('aria-selected'), 'true');
           assert.strictEqual(tabPanels.at(2).attributes('aria-hidden'), 'false');
@@ -153,42 +145,51 @@ describe('Dialtone Vue Tab Group tests', function () {
 
         describe('On double keyup left and space', function () {
           beforeEach(async function () {
+            tabs.at(0).vm.$el.focus();
             await tabList.trigger('keyup.left');
             await tabList.trigger('keyup.left');
             await tabList.trigger('keyup.space');
           });
+
           it('aria-selected should be "true"', function () {
-            assert.strictEqual(tabs.at(0).attributes('aria-selected'), 'true');
+            assert.strictEqual(tabs.at(1).attributes('aria-selected'), 'true');
           });
+
           it('aria-hidden should be "false"', function () {
-            assert.strictEqual(tabPanels.at(0).attributes('aria-hidden'), 'false');
+            assert.strictEqual(tabPanels.at(1).attributes('aria-hidden'), 'false');
           });
         });
       });
+
       describe('On right and enter', function () {
         beforeEach(async function () {
           tabs.at(0).vm.$el.focus();
           await tabList.trigger('keyup.right');
           await tabList.trigger('keyup.enter');
         });
+
         it('aria-selected should be "true"', function () {
           assert.strictEqual(tabs.at(1).attributes('aria-selected'), 'true');
         });
+
         it('aria-hidden should be "false"', function () {
           assert.strictEqual(tabPanels.at(1).attributes('aria-hidden'), 'false');
         });
 
         describe('On double keyup right and enter', function () {
           beforeEach(async function () {
+            tabs.at(0).vm.$el.focus();
             await tabList.trigger('keyup.right');
             await tabList.trigger('keyup.right');
             await tabList.trigger('keyup.enter');
           });
+
           it('aria-selected should be "true"', function () {
-            assert.strictEqual(tabs.at(0).attributes('aria-selected'), 'true');
+            assert.strictEqual(tabs.at(2).attributes('aria-selected'), 'true');
           });
+
           it('aria-hidden should be "false"', function () {
-            assert.strictEqual(tabPanels.at(0).attributes('aria-hidden'), 'false');
+            assert.strictEqual(tabPanels.at(2).attributes('aria-hidden'), 'false');
           });
         });
       });
@@ -198,9 +199,11 @@ describe('Dialtone Vue Tab Group tests', function () {
           await tabList.trigger('keydown.home');
           await tabList.trigger('keyup.enter');
         });
+
         it('aria-selected should be "true"', function () {
           assert.strictEqual(tabs.at(0).attributes('aria-selected'), 'true');
         });
+
         it('aria-hidden should be "false"', function () {
           assert.strictEqual(tabPanels.at(0).attributes('aria-hidden'), 'false');
         });
@@ -212,9 +215,11 @@ describe('Dialtone Vue Tab Group tests', function () {
           await tabList.trigger('keydown.end');
           await tabList.trigger('keyup.enter');
         });
+
         it('aria-selected should be "true"', function () {
           assert.strictEqual(tabs.at(2).attributes('aria-selected'), 'true');
         });
+
         it('aria-hidden should be "false"', function () {
           assert.strictEqual(tabPanels.at(2).attributes('aria-hidden'), 'false');
         });
@@ -223,6 +228,20 @@ describe('Dialtone Vue Tab Group tests', function () {
   });
 
   describe('Accessibility Tests', function () {
+    beforeEach(async function () {
+      tabs.at(0).vm.$el.focus();
+      await tabList.trigger('keyup.enter');
+    });
+
+    it('should render correct attributes', function () {
+      assert.strictEqual(tabList.attributes('role'), 'tablist');
+      assert.strictEqual(tabList.attributes('aria-label'), propsData.label);
+    });
+
+    it('should have selected element', function () {
+      assert.strictEqual(tabs.at(0).attributes('aria-selected'), 'true');
+    });
+
     describe('Correct aria attributes', function () {
       describe('Attributes after keyup left', function () {
         let lastTab;
@@ -234,17 +253,20 @@ describe('Dialtone Vue Tab Group tests', function () {
           lastTab = tabs.at(2).attributes();
           lastPanel = tabPanels.at(2).attributes();
         });
+
         it('has correct attributes', function () {
           assert.strictEqual(lastTab.id, lastPanel['aria-labelledby']);
           assert.strictEqual(lastTab['aria-controls'], lastPanel.id);
         });
       });
+
       describe('attributes after keyup right', function () {
         beforeEach(async function () {
           tabs.at(0).vm.$el.focus();
           await tabList.trigger('keyup.right');
           await tabList.trigger('keyup.enter');
         });
+
         it('should have correct id for aria-labelledby and aria-controls', function () {
           const tabAttrs = tabs.at(1).attributes();
           const tabPanelAttrs = tabPanels.at(1).attributes();
@@ -252,12 +274,14 @@ describe('Dialtone Vue Tab Group tests', function () {
           assert.strictEqual(tabAttrs['aria-controls'], tabPanelAttrs.id);
         });
       });
+
       describe('attributes after keydown home', function () {
         beforeEach(async function () {
           tabs.at(2).vm.$el.focus();
           await tabList.trigger('keydown.home');
           await tabList.trigger('keyup.enter');
         });
+
         it('should have correct id for aria-labelledby and aria-controls', function () {
           const tabAttrs = tabs.at(0).attributes();
           const tabPanelAttrs = tabPanels.at(0).attributes();
@@ -272,6 +296,7 @@ describe('Dialtone Vue Tab Group tests', function () {
           await tabList.trigger('keydown.end');
           await tabList.trigger('keyup.enter');
         });
+
         it('should have correct id for aria-labelledby and aria-controls', function () {
           const tabAttrs = tabs.at(2).attributes();
           const tabPanelAttrs = tabPanels.at(2).attributes();

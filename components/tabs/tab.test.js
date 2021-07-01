@@ -22,14 +22,11 @@ describe('Dialtone Vue Tab tests', function () {
     id,
     panelId,
     label,
-    selected: false,
-    disabled: false,
-    tabClass: '',
   };
   const _setWrappers = () => {
     tab = wrapper.find('[data-qa="dt-tab"]');
   };
-
+  const changeContentPanel = sinon.spy();
   const _mountWrapper = () => {
     wrapper = shallowMount(DtTab, {
       localVue: createLocalVue(),
@@ -38,7 +35,7 @@ describe('Dialtone Vue Tab tests', function () {
       provide: {
         setFocus: sinon.spy(),
         groupContext,
-        changeContentPanel: sinon.spy(),
+        changeContentPanel,
       },
     });
     _setWrappers();
@@ -51,9 +48,11 @@ describe('Dialtone Vue Tab tests', function () {
     it('should render the component', function () {
       assert.exists(wrapper, 'wrapper exists');
     });
+
     it('should have default class', function () {
       assert.isTrue(tab.classes('d-tab'));
     });
+
     it('should render the slot', function () {
       assert.strictEqual(tab.text(), defaultSlot);
     });
@@ -62,24 +61,42 @@ describe('Dialtone Vue Tab tests', function () {
       it('aria-selected should be "false"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'false');
       });
-      it('aria-controls should match the panel id', function () {
+
+      it('aria-controls should content the panel id', function () {
         assert.strictEqual(tab.attributes('aria-controls'), `dt-panel-${panelId}`);
       });
+
       it('aria-label should match the provided label', function () {
         assert.strictEqual(tab.attributes('aria-label'), label);
       });
+
       it('role should be tab', function () {
         assert.strictEqual(tab.attributes('role'), 'tab');
       });
     });
 
+    describe('Selected by default', function () {
+      beforeEach(function () {
+        propsData.selected = true;
+        _mountWrapper();
+      });
+
+      it('changeContentPanel should be called with valid data', function () {
+        assert.isTrue(changeContentPanel.calledWith({
+          selected: propsData.panelId,
+        }));
+      });
+    });
+
     describe('Attributes', function () {
-      it('should have valid id', function () {
+      it('id should match the provided id', function () {
         assert.strictEqual(tab.attributes('id'), `dt-tab-${id}`);
       });
-      it('should have valid tabindex', function () {
+
+      it('tabindex should be -1 ', function () {
         assert.strictEqual(tab.attributes('tabindex'), '-1');
       });
+
       it('should not be disabled', function () {
         assert.strictEqual(tab.attributes('disabled'), undefined);
       });
@@ -92,14 +109,13 @@ describe('Dialtone Vue Tab tests', function () {
         groupContext.selected = panelId;
         _mountWrapper();
       });
-      it('should have selected class', function () {
+
+      it('tab classes should content selected class', function () {
         assert.isTrue(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected));
       });
-      it('should have valid tabindex', function () {
+
+      it('tabindex should be 0', function () {
         assert.strictEqual(tab.attributes('tabindex'), '0');
-      });
-      it('aria-selected should be "true"', function () {
-        assert.strictEqual(tab.attributes('aria-selected'), 'true');
       });
     });
 
@@ -108,14 +124,13 @@ describe('Dialtone Vue Tab tests', function () {
         groupContext.selected = '';
         _mountWrapper();
       });
-      it('should not have selected class', function () {
+
+      it('tab classes should not content selected class', function () {
         assert.isFalse(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected));
       });
-      it('should have valid tabindex', function () {
+
+      it('tabindex should be -1', function () {
         assert.strictEqual(tab.attributes('tabindex'), '-1');
-      });
-      it('aria-selected should be "false"', function () {
-        assert.strictEqual(tab.attributes('aria-selected'), 'false');
       });
     });
 
@@ -123,13 +138,16 @@ describe('Dialtone Vue Tab tests', function () {
       beforeEach(function () {
         _mountWrapper();
       });
+
       describe('Disabled by inject', function () {
         before(function () {
           groupContext.disabled = true;
         });
+
         after(function () {
           groupContext.disabled = false;
         });
+
         it('should be disabled', function () {
           assert.strictEqual(tab.attributes('disabled'), 'true');
         });
@@ -139,10 +157,12 @@ describe('Dialtone Vue Tab tests', function () {
         before(function () {
           propsData.disabled = true;
         });
+
         after(function () {
           propsData.disabled = false;
         });
-        it('should be disabled', function () {
+
+        it('disabled attribute should be "true"', function () {
           assert.strictEqual(tab.attributes('disabled'), 'true');
         });
       });
@@ -155,6 +175,7 @@ describe('Dialtone Vue Tab tests', function () {
         groupContext.selected = panelId;
         _mountWrapper();
       });
+
       it('aria-selected should be "true"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'true');
       });
@@ -165,6 +186,7 @@ describe('Dialtone Vue Tab tests', function () {
         groupContext.selected = '';
         _mountWrapper();
       });
+
       it('aria-selected should be "false"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'false');
       });

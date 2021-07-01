@@ -16,8 +16,6 @@ describe('Dialtone Vue Tab Panel tests', function () {
   const propsData = {
     id: '1',
     tabId: '2',
-    hidden: false,
-    tabPanelClass: '',
   };
   const _setWrappers = () => {
     tabPanel = wrapper.find('[data-qa="dt-tab-panel"]');
@@ -42,27 +40,31 @@ describe('Dialtone Vue Tab Panel tests', function () {
     it('should render the component', function () {
       assert.exists(wrapper, 'wrapper exists');
     });
-    it('should render the slot', function () {
+
+    it('should render the default slot', function () {
       assert.strictEqual(tabPanel.text(), defaultSlot);
     });
 
-    describe('Default areas', function () {
-      it('should be default aria-hidden', function () {
+    describe('Default A11y Attrs', function () {
+      it('aria-hidden should be "true"', function () {
         assert.strictEqual(tabPanel.attributes('aria-hidden'), 'true');
       });
-      it('should be default aria-labelledby', function () {
+
+      it('aria-labelledby should be match the tab id', function () {
         assert.strictEqual(tabPanel.attributes('aria-labelledby'), `dt-tab-${propsData.tabId}`);
       });
-      it('should be set valid role', function () {
+
+      it('role should be "tabpanel"', function () {
         assert.strictEqual(tabPanel.attributes('role'), 'tabpanel');
       });
     });
 
     describe('Attributes', function () {
-      it('should be valid id', function () {
+      it('id attribute should be content the prop id', function () {
         assert.strictEqual(tabPanel.attributes('id'), `dt-panel-${propsData.id}`);
       });
-      it('should be valid tabindex', function () {
+
+      it('tabindex should be "0"', function () {
         assert.strictEqual(tabPanel.attributes('tabindex'), '0');
       });
     });
@@ -74,19 +76,9 @@ describe('Dialtone Vue Tab Panel tests', function () {
         groupContext.selected = propsData.id;
         _mountWrapper();
       });
-      it('should be default slot', function () {
-        assert.strictEqual(tabPanel.text(), defaultSlot);
-        assert.strictEqual(tabPanel.attributes('aria-hidden'), 'false');
-      });
-    });
 
-    describe('Unselected state', function () {
-      beforeEach(function () {
-        groupContext.selected = '';
-        _mountWrapper();
-      });
-      it('should be hidden', function () {
-        assert.strictEqual(tabPanel.attributes('aria-hidden'), 'true');
+      it('default slot should be shown', function () {
+        assert.strictEqual(tabPanel.text(), defaultSlot);
       });
     });
 
@@ -100,10 +92,12 @@ describe('Dialtone Vue Tab Panel tests', function () {
         before(function () {
           propsData.hidden = true;
         });
+
         after(function () {
           propsData.hidden = false;
         });
-        it('should be hidden', function () {
+
+        it('aria-hidden should be "true"', function () {
           assert.strictEqual(tabPanel.attributes('aria-hidden'), 'true');
         });
       });
@@ -116,7 +110,8 @@ describe('Dialtone Vue Tab Panel tests', function () {
         groupContext.selected = propsData.id;
         _mountWrapper();
       });
-      it('should be equal false', function () {
+
+      it('aria-hidden should be "false"', function () {
         assert.strictEqual(tabPanel.attributes('aria-hidden'), 'false');
       });
     });
@@ -126,7 +121,8 @@ describe('Dialtone Vue Tab Panel tests', function () {
         groupContext.selected = '';
         _mountWrapper();
       });
-      it('should be set default aria-selected', function () {
+
+      it('aria-hidden should be "true"', function () {
         assert.strictEqual(tabPanel.attributes('aria-hidden'), 'true');
       });
     });
