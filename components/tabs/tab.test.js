@@ -95,10 +95,6 @@ describe('Dialtone Vue Tab tests', function () {
       it('tab classes should content selected class', function () {
         assert.isTrue(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected));
       });
-
-      it('tabindex should be 0', function () {
-        assert.strictEqual(tab.attributes('tabindex'), '0');
-      });
     });
 
     describe('Unselected state', function () {
@@ -109,10 +105,6 @@ describe('Dialtone Vue Tab tests', function () {
 
       it('tab classes should not content selected class', function () {
         assert.isFalse(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected));
-      });
-
-      it('tabindex should be -1', function () {
-        assert.strictEqual(tab.attributes('tabindex'), '-1');
       });
     });
 
@@ -179,6 +171,10 @@ describe('Dialtone Vue Tab tests', function () {
       it('aria-selected should be "true"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'true');
       });
+
+      it('tabindex should be 0', function () {
+        assert.strictEqual(tab.attributes('tabindex'), '0');
+      });
     });
 
     describe('When panel is unselected', function () {
@@ -189,6 +185,10 @@ describe('Dialtone Vue Tab tests', function () {
 
       it('aria-selected should be "false"', function () {
         assert.strictEqual(tab.attributes('aria-selected'), 'false');
+      });
+
+      it('tabindex should be -1', function () {
+        assert.strictEqual(tab.attributes('tabindex'), '-1');
       });
     });
   });

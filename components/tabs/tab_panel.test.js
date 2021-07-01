@@ -45,27 +45,9 @@ describe('Dialtone Vue Tab Panel tests', function () {
       assert.strictEqual(tabPanel.text(), defaultSlot);
     });
 
-    describe('Default A11y Attrs', function () {
-      it('aria-hidden should be "true"', function () {
-        assert.strictEqual(tabPanel.attributes('aria-hidden'), 'true');
-      });
-
-      it('aria-labelledby should be match the tab id', function () {
-        assert.strictEqual(tabPanel.attributes('aria-labelledby'), `dt-tab-${propsData.tabId}`);
-      });
-
-      it('role should be "tabpanel"', function () {
-        assert.strictEqual(tabPanel.attributes('role'), 'tabpanel');
-      });
-    });
-
     describe('Attributes', function () {
       it('id attribute should be content the prop id', function () {
         assert.strictEqual(tabPanel.attributes('id'), `dt-panel-${propsData.id}`);
-      });
-
-      it('tabindex should be "0"', function () {
-        assert.strictEqual(tabPanel.attributes('tabindex'), '0');
       });
     });
   });
@@ -116,7 +98,7 @@ describe('Dialtone Vue Tab Panel tests', function () {
       });
     });
 
-    describe('Selected aria-hidden', function () {
+    describe('Default A11y Attrs', function () {
       beforeEach(function () {
         groupContext.selected = '';
         _mountWrapper();
@@ -124,6 +106,18 @@ describe('Dialtone Vue Tab Panel tests', function () {
 
       it('aria-hidden should be "true"', function () {
         assert.strictEqual(tabPanel.attributes('aria-hidden'), 'true');
+      });
+
+      it('aria-labelledby should be match the tab id', function () {
+        assert.strictEqual(tabPanel.attributes('aria-labelledby'), `dt-tab-${propsData.tabId}`);
+      });
+
+      it('role should be "tabpanel"', function () {
+        assert.strictEqual(tabPanel.attributes('role'), 'tabpanel');
+      });
+
+      it('tabindex should be "0"', function () {
+        assert.strictEqual(tabPanel.attributes('tabindex'), '0');
       });
     });
   });
