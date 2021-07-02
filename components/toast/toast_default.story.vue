@@ -17,12 +17,15 @@
       :close-button-props="buttonCloseProps"
       @close="closeToast"
     >
-      <template
-        v-if="defaultSlot"
-        #default
-      >
-        <span v-html="defaultSlot" />
-      </template>
+      <span>
+        Message body with
+        <a
+          href="#"
+          class="d-link"
+          :class="linkClass"
+        >a link</a>.
+      </span>
+
       <template #action>
         <dt-button
           size="sm"
@@ -71,6 +74,10 @@ export default {
 
     buttonKind () {
       return this.isInverted ? 'inverted' : 'muted';
+    },
+
+    linkClass () {
+      return this.isInverted ? 'd-link--inverted' : 'd-link--muted';
     },
 
     buttonCloseProps () {

@@ -81,7 +81,6 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   title: 'Base title (optional)',
-  default: 'Message body with <a href="#" class="d-link d-link--muted">a link.</a>',
   kind: 'base',
 };
 
@@ -117,5 +116,4 @@ export const Important = DefaultTemplate.bind({});
 Important.args = {
   ...Default.args,
   important: true,
-  default: 'Message body with <a href="#" class="d-link d-link--inverted">a link.</a>',
 };
