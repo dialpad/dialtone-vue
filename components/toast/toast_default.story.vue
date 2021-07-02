@@ -15,7 +15,7 @@
       :hide-close="hideClose"
       :duration="duration"
       :close-button-props="buttonCloseProps"
-      @close="closeToast"
+      @close="closeToast(); onClose($event)"
     >
       <span>
         Message body with
