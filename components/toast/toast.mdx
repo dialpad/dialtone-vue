@@ -8,11 +8,90 @@ import DtToast from './toast';
   It contains at-a-glance information about outcomes and can be paired with actions.
 </Subtitle>
 
+## Accessibility
+
+`role="status"` is the default role attribute, and it's the recommended unless you want to show an error message where
+`role="alert"` will be valid. Take into account that if you invoke multiple toasts with `role="alert"`, screen readers
+could override its speech queue and causes to miss a toast message.
+
 ## Base Style
 
 <Canvas>
   <Story id="elements-toast--default" />
 </Canvas>
+
+
+## Props, Slots & Events
+
+<ArgsTable of={DtToast} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtToast } from '@dialpad/dialtone-vue';
+```
+
+### Methods 
+
+Instance methods can be executed assigning a reference ID to the component using [ref](https://v3.vuejs.org/guide/component-template-refs.html) attribute.
+
+#### show()
+
+Instance method that shows the toast element for the default or provided duration time.
+
+#### close()
+
+Instance method that closes the toasts and removed it from the DOM.
+
+#### Example
+
+```html
+<template>
+  <button type="button" @click="openToast">Click to show!</button>
+  <dt-toast
+    ref="toast"
+    :title="title"
+    :message="message"
+    @close="closeToast"
+  ></dt-toast>
+</template>
+
+<script>
+import { DtToast } from '@dialpad/dialtone-vue';
+
+export default {
+  components: { DtToast },
+  data () {
+    return {
+      title: 'Title',
+      message: 'Message body.'
+    }
+  },
+  methods: {
+    openToast () {
+      this.$refs.toast.open();
+    },
+    closeToast () {
+      this.$refs.toast.close();
+    },
+  },
+}
+</script>
+```
+
+### With duration
+
+It's recommended to use a time of at least 6000 ms to give users enough time to read the toast.
+
+```html
+<dt-toast
+  title="Title"
+  message="Message"
+  duration="7500"
+/>
+```
 
 ## Variants
 
@@ -45,23 +124,3 @@ import DtToast from './toast';
 <Canvas>
   <Story id="elements-toast--important" />
 </Canvas>
-
-## Props, Slots & Events
-
-<ArgsTable of={DtToast} />
-
-## Usage
-
-### Import
-
-```jsx
-import { DtToast } from '@dialpad/dialtone-vue';
-```
-
-### With Some Variant
-
-```vue
-<dt-toast
-  kind="base | error | info | success | warning"
-/>
-```
