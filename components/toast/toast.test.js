@@ -11,7 +11,7 @@ import {
 } from '../../tests/shared_examples/validation';
 import { useFakeTimers } from 'sinon';
 import {
-  itBehavesLikePassesDownChildProp,
+  itBehavesLikePassesChildProp,
 } from '../../tests/shared_examples/extendability';
 
 // Constants
@@ -121,15 +121,15 @@ describe('DtToast Tests', function () {
       });
 
       it('titleId prop is passed down correctly', function () {
-        itBehavesLikePassesDownChildProp(contentChildStub, 'titleId', propsData.titleId);
+        itBehavesLikePassesChildProp(contentChildStub, 'titleId', propsData.titleId);
       });
 
       it('contentId prop is passed down correctly', function () {
-        itBehavesLikePassesDownChildProp(contentChildStub, 'contentId', propsData.contentId);
+        itBehavesLikePassesChildProp(contentChildStub, 'contentId', propsData.contentId);
       });
 
       it('title prop is passed down correctly', function () {
-        itBehavesLikePassesDownChildProp(contentChildStub, 'title', propsData.title);
+        itBehavesLikePassesChildProp(contentChildStub, 'title', propsData.title);
       });
 
       it('message prop is passed down correctly', function () {
@@ -137,7 +137,7 @@ describe('DtToast Tests', function () {
       });
 
       it('hideClose prop is passed down correctly', function () {
-        itBehavesLikePassesDownChildProp(actionChildStub, 'hideClose', propsData.hideClose);
+        itBehavesLikePassesChildProp(actionChildStub, 'hideClose', propsData.hideClose);
       });
     });
 
@@ -356,9 +356,9 @@ describe('DtToast Tests', function () {
     };
 
     // Shared Examples
-    const itBehavesLikePassesDownChildPropLocal = () => {
+    const itBehavesLikePassesChildPropLocal = () => {
       it('should pass down provided child prop', function () {
-        itBehavesLikePassesDownChildProp(element, propName, propValue);
+        itBehavesLikePassesChildProp(element, propName, propValue);
       });
     };
 
@@ -368,7 +368,7 @@ describe('DtToast Tests', function () {
         await _setupChildPropsTest(propName);
         element = actionChildStub;
       });
-      itBehavesLikePassesDownChildPropLocal();
+      itBehavesLikePassesChildPropLocal();
     });
   });
 });
