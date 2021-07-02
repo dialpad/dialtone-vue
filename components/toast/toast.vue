@@ -8,7 +8,7 @@
         { 'd-toast--important': important },
       ]"
       data-qa="dt-toast"
-      :aria-hidden="hidden"
+      :aria-hidden="hidden.toString()"
     >
       <div class="d-toast__dialog">
         <dt-notice-icon
@@ -107,7 +107,7 @@ export default {
     role: {
       type: String,
       default: 'status',
-      validate (role) {
+      validator: (role) => {
         return TOAST_ROLES.includes(role);
       },
     },
@@ -118,7 +118,7 @@ export default {
     kind: {
       type: String,
       default: 'base',
-      validate (kind) {
+      validator: (kind) => {
         return NOTICE_KINDS.includes(kind);
       },
     },
