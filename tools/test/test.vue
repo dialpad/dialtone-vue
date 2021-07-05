@@ -1,12 +1,17 @@
 <template>
   <div class="d-input-message--warning d-some-other-class-that-wont-be-matched">
-    Some text
-  </div>  
+    {{ text }}
+  </div>
 </template>
 
 <script>
 export default {
   name: 'SomeComponent',
+  data () {
+    return {
+      text: 'Some text',
+    };
+  },
 };
 </script>
 
