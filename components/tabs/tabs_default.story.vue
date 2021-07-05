@@ -9,6 +9,7 @@
       :inverted="inverted"
       :borderless="borderless"
       :disabled="disabled"
+      @change="onChange"
     >
       <template #tabs>
         <dt-tab

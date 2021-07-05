@@ -1,9 +1,15 @@
+import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import DtTabGroup from './tab_group';
 import DtTabsMdx from './tabs.mdx';
 import DtTabsDefaultTemplate from './tabs_default.story.vue';
 import DtTabsVariantsTemplate from './tabs_variants.story.vue';
 import { TAB_LIST_SIZES } from './tabs_constants';
+
+// Default Prop Values
+export const argsData = {
+  onChange: action('change'),
+};
 
 export const argTypesData = {
   // Action Event Handlers
@@ -14,12 +20,11 @@ export const argTypesData = {
       options: TAB_LIST_SIZES,
     },
   },
-  change: {
+
+  // Action Event Handlers
+  onChange: {
     table: {
-      category: 'events',
-      type: {
-        summary: 'event',
-      },
+      disable: true,
     },
   },
 };
@@ -28,6 +33,7 @@ export const argTypesData = {
 export default {
   title: 'Elements/Tabs',
   component: DtTabGroup,
+  args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
