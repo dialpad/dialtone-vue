@@ -10,6 +10,7 @@
 #  -d <string>: A relative path to the directory to be migrated                                                                    #
 #  -e <string>: Provides an exclusion string for files to be excluded in the search                                                #
 #  -r:          Enables recursive traversal of the directory                                                                       #
+#  -v:          Disables mixin replacement logic and enables variable replacement logic                                            #
 # Notes:                                                                                                                           #
 #  Migration Map:                                                                                                                  #
 #    Order matters, ensure that the longest matches appear first in the file.                                                      #
@@ -21,7 +22,7 @@
 
 # Usage method
 usage() {
-  echo "Usage: $0 [-m <string>] [-d <string>] [-e <string>] [-r]";
+  echo "Usage: $0 [-m <string>] [-d <string>] [-e <string>] [-r] [-v]";
   exit 1;
 }
 
@@ -34,7 +35,7 @@ replaceString() {
   LOCAL_REPLACEMENT_STRING=$2
 
   # Find and replace strings ("" is required on macos when using xargs and sed)
-  grep ${GREP_FLAGS[@]} ${GREP_INCLUDE[@]} "${LOCAL_FIND_STRING}" "${DIRECTORY}" | xargs sed -i "" "s/${LOCAL_FIND_STRING}/${LOCAL_REPLACEMENT_STRING}/g"
+  grep ${GREP_FLAGS[@]} ${GREP_INCLUDE[@]} -e "${LOCAL_FIND_STRING}" "${DIRECTORY}" | xargs sed -i "" "s/${LOCAL_FIND_STRING}/${LOCAL_REPLACEMENT_STRING}/g"
 }
 
 # Mixin replacement method
@@ -70,13 +71,13 @@ replaceMixins() {
   fi
 }
 
-
 # Constants
 GREP_FLAGS=(-l)
 GREP_INCLUDE=(--include=\*.{js,vue,handlebars})
+REPLACE_VARS=false
 
 # Get arguments
-while getopts "m:d:e:r" option; do
+while getopts "m:d:e:rv" option; do
   case "${option}" in
     m)
       MIGRATION_MAP_FILE=$OPTARG
@@ -89,6 +90,9 @@ while getopts "m:d:e:r" option; do
       ;;
     r)
       GREP_FLAGS+=(-r)
+      ;;
+    v)
+      REPLACE_VARS=true
       ;;
     *)
       usage
@@ -116,8 +120,11 @@ while read -r line; do
   REPLACEMENT_STRING="$(cut -d':' -f2 <<< "$line")"
 
   # Replace mixins
-  replaceMixins "${FIND_STRING}" "${REPLACEMENT_STRING}"
+  if [ ${REPLACE_VARS} = false ]
+    then
+      replaceMixins "${FIND_STRING}" "${REPLACEMENT_STRING}"
+  fi
 
-  # Replace classes
+  # Replace variables and classes
   replaceString "${FIND_STRING}" "${REPLACEMENT_STRING}"
 done < "$MIGRATION_MAP_FILE"
