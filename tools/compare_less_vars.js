@@ -27,7 +27,7 @@ try {
   lessVarsV5.forEach(lessVar => {
     if (!lessVarsV6.includes(lessVar)) {
       lessVarsRemoved.push(lessVar);
-      content += `${lessVar}\n`
+      content += `${lessVar}\n`;
     }
   });
 
