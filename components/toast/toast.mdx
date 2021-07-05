@@ -119,7 +119,10 @@ export default {
 
 ### With duration
 
-It's recommended to use a time of at least 6000 ms to give users enough time to read the toast.
+It's recommended to use a time of at least 6000 ms (minimum duration and default value) to give users enough time
+to read the toast. Take into account that the time necessary to read and comprehend the message could vary in users.
+For instance, users using assistive technology, or users with language barriers could potentially need more time to
+read and understand the message.
 
 ```html
 <dt-toast
