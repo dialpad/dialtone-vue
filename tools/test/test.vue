@@ -16,4 +16,8 @@ export default {
     .d-some-other-class-that-wont-be-matched();
     .d-some-class2();
   }
+  .some-other-local-class {
+    background: var(--some-css-var);
+    size: @some-less-var;
+  }
 </style>
