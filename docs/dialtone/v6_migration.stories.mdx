@@ -86,7 +86,7 @@ import { DtBadge } from '@dialpad/dialtone-vue';
 ### Vue Example
 
 ```html
-import { DtBanner } from '@dialpad/dialtone-vue';
+import { DtBanner, DtButton } from '@dialpad/dialtone-vue';
 
 <dt-banner title='...'>
   <template #action>
@@ -164,19 +164,8 @@ import { DtButton } from '@dialpad/dialtone-vue';
 ```html
 import { DtBreadcrumbs, DtBreadcrumbItem  } from '@dialpad/dialtone-vue';
 
-<dt-breadcrumbs
-    :breadcrumbs="[{
-        href: '#',
-        label: '...',
-        muted: true,
-    }, {
-        href: '#',
-        label: '...',
-        selected: true,
-    }]"
-/>
 <dt-breadcrumbs>
-      <dt-breadcrumb-item href="#" label="..." muted />
+      <dt-breadcrumb-item href="#" label="..." kind="muted" />
       <dt-breadcrumb-item href="#" label="..." selected />
 </dt-breadcrumbs>
 ```
@@ -243,7 +232,7 @@ import { DtCheckbox } from '@dialpad/dialtone-vue';
 ```html
 import { DtInput } from '@dialpad/dialtone-vue';
 
-<dt-input v-model="..." placeholder="..." />
+<dt-input v-model="..." placeholder="..." label="..."/>
 ```
 
 ### Text Area
@@ -340,9 +329,13 @@ import { DtLink } from '@dialpad/dialtone-vue';
 ```
 
 ```html
-import { DtModal } from '@dialpad/dialtone-vue';
+import { DtModal, DtButton } from '@dialpad/dialtone-vue';
 
-<dt-modal :closeButtonProps="{ ariaLabel: 'Close'}" show>...</dt-modal>
+<dt-modal :closeButtonProps="{ ariaLabel: 'Close'}" :title="..." :copy="..." show>
+    <template #footer>
+        <dt-button>...</dt-button>
+    </template>
+</dt-modal>
 ```
 
 ## Notice
@@ -387,9 +380,14 @@ import { DtModal } from '@dialpad/dialtone-vue';
 ### Vue Example
 
 ```html
-import { DtNotice } from '@dialpad/dialtone-vue';
+import { DtNotice, DtButton } from '@dialpad/dialtone-vue';
 
-<dt-notice>...</dt-notice>
+<dt-notice :title="...">
+    <template #icon>...</template>
+    <template #action>
+        <dt-button kind="muted">...</dt-button>
+    </template>
+</dt-notice>
 ```
 
 ## Radio
@@ -464,9 +462,13 @@ import { DtRadio } from '@dialpad/dialtone-vue';
 ### Vue Example
 
 ```html
-import { DtSelectMenu } from '@dialpad/dialtone-vue';
+import { DtSelectMenu, DtValidationMessages } from '@dialpad/dialtone-vue';
 
-<dt-select-menu  label="Default" :options="[]" />
+<dt-select-menu  label="Default" :options="[{ value: '...', label: '...' }]" />
+<dt-validation-messages :validationMessages="[{
+    message: '...',
+    type: 'error',
+}]"/>
 ```
 
 ## Table
