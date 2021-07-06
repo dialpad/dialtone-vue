@@ -464,11 +464,14 @@ import { DtRadio } from '@dialpad/dialtone-vue';
 ```html
 import { DtSelectMenu, DtValidationMessages } from '@dialpad/dialtone-vue';
 
-<dt-select-menu  label="Default" :options="[{ value: '...', label: '...' }]" />
-<dt-validation-messages :validationMessages="[{
-    message: '...',
-    type: 'error',
-}]"/>
+<dt-select-menu
+    label="..."
+    :options="[{ value: '...', label: '...' }]"
+    :messages="[{
+        message: '...',
+        type: 'error',
+    }]"
+/>
 ```
 
 ## Table
