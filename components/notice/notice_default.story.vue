@@ -6,7 +6,8 @@
     :content-id="contentId"
     :important="important"
     :hide-close="hideClose"
-    :closeButtonProps="computedCloseButtonProps"
+    :close-button-props="computedCloseButtonProps"
+    @close="onClose($event)"
   >
     <span>
       Message body with

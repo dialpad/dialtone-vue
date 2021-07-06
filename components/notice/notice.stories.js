@@ -1,7 +1,13 @@
+import { action } from '@storybook/addon-actions';
 import DtNotice from './notice';
 import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
 import NoticeDefault from './notice_default.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
+
+// Default Prop Values
+export const argsData = {
+  onClose: action('close'),
+};
 
 export const argTypesData = {
   kind: {
@@ -41,11 +47,19 @@ export const argTypesData = {
       type: 'text',
     },
   },
+
+  // Action Event Handlers
+  onClose: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 export default {
   title: 'Elements/Notice',
   component: DtNotice,
+  args: argsData,
   argTypes: argTypesData,
   excludeStories: /.Data$/,
 };

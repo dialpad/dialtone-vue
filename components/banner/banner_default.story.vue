@@ -14,7 +14,7 @@
       :pinned="pinned"
       :hide-close="hideClose"
       :close-button-props="buttonCloseProps"
-      @close="displayBanner = false"
+      @close="displayBanner = false; onClose($event)"
     >
       <span>
         Message body with
