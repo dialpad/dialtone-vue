@@ -9,58 +9,56 @@
       :inverted="inverted"
       :borderless="borderless"
       :disabled="disabled"
+      @change="onChange"
     >
       <template #tabs>
         <dt-tab
           id="1"
           panel-id="2"
+          selected
         >
           First
         </dt-tab>
         <dt-tab
           id="3"
           panel-id="4"
-          selected
         >
           Second
         </dt-tab>
         <dt-tab
           id="5"
           panel-id="6"
-          selected
           label="Third Label"
         >
           Third
         </dt-tab>
       </template>
 
-      <dt-tab-panel
-        id="2"
-        tab-id="1"
+      <div
+        :class="{
+          'd-fc-white': inverted,
+        }"
       >
-        <p> First Panel </p>
-      </dt-tab-panel>
-      <dt-tab-panel
-        id="4"
-        tab-id="3"
-      >
-        <p> Second Panel </p>
-      </dt-tab-panel>
-      <dt-tab-panel
-        id="6"
-        tab-id="5"
-        hidden
-      >
-        <p> Third Panel </p>
-      </dt-tab-panel>
+        <dt-tab-panel
+          id="2"
+          tab-id="1"
+        >
+          <p>First Panel</p>
+        </dt-tab-panel>
+        <dt-tab-panel
+          id="4"
+          tab-id="3"
+        >
+          <p>Second Panel</p>
+        </dt-tab-panel>
+        <dt-tab-panel
+          id="6"
+          tab-id="5"
+        >
+          <p>Third Panel</p>
+        </dt-tab-panel>
+      </div>
     </dt-tab-group>
-
-    <dt-tab-group
-      :size="size"
-      :inverted="inverted"
-      :borderless="borderless"
-      :disabled="disabled"
-    />
   </div>
 </template>
 

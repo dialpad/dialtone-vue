@@ -4,73 +4,25 @@ import DtTabGroup from './tab_group';
 import DtTabsMdx from './tabs.mdx';
 import DtTabsDefaultTemplate from './tabs_default.story.vue';
 import DtTabsVariantsTemplate from './tabs_variants.story.vue';
+import { TAB_LIST_SIZES } from './tabs_constants';
 
 // Default Prop Values
 export const argsData = {
   onChange: action('change'),
 };
 
-/**
- * example prop description decorator
- */
-
-/*
-  Controls
-  ========
-
-  Here we define any custom controls or control overrides for our components.
-
-  By default storybook will attempt to provide an appropriate control of the same name for each property in the
-  component as well as include any description provided using a prop decorator within your component (see above).
-
-  Storybook will also attempt to provide an appropriate control for each slot in the component as well as include any
-  description provided using a slot decorator within your component (see below).
-
-  <!-- @slot example slot decorator -->
-*/
 export const argTypesData = {
-  // Props
-  some: {
-    description: 'Describes the some prop',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-    },
+  // Action Event Handlers
+  size: {
+    defaultValue: '',
     control: {
-      type: 'text',
-    },
-  },
-
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-  /*
-    We use the following naming scheme `<SLOT_NAME>Slot` for slot controls to prevent conflicts with props that share
-    the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
-    table and description within the controls accurately reflects the correct names of our component's props and slots.
-  */
-  someSlot: {
-    name: 'some',
-    description: 'Slot for some',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
+      type: 'select',
+      options: TAB_LIST_SIZES,
     },
   },
 
   // Action Event Handlers
-  onEvent: {
+  onChange: {
     table: {
       disable: true,
     },
