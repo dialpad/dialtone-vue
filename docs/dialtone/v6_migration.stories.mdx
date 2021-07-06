@@ -12,9 +12,6 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 <div class="d-avatar d-avatar--md d-avatar--icon d-avatar--purple-600">
   ...
 </div>
-<div class="d-avatar d-avatar--md d-avatar--icon d-avatar--purple-600">
-  <img src="..." alt="" />
-</div>
 ```
 
 ### Vue Example
@@ -432,7 +429,7 @@ import { DtNotice } from '@dialpad/dialtone-vue';
 ```html
 import { DtRadio } from '@dialpad/dialtone-vue';
 
-<dt-radio label="label" />
+<dt-radio label="..." />
 ```
 
 ## Select
@@ -623,15 +620,15 @@ import { DtSelectMenu } from '@dialpad/dialtone-vue';
 ```html
 import { DtTooltip } from '@dialpad/dialtone-vue';
 
-<dt-tooltip message="...">
+<dt-tooltip message="..." hover>
       <template #anchor>
-        ...
+        Anchored Content
       </template>
 </dt-tooltip>
 <dt-tooltip>
       ...
       <template #anchor>
-        ...
+        Anchored Content
       </template>
 </dt-tooltip>
 ```
