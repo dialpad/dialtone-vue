@@ -1,0 +1,11 @@
+d-height1: 31
+d-min-height1: 2
+d-width1: 94
+d-max-width6: 2
+d-border--solid: 16
+d-border-right--solid: 1
+d-border-bottom--solid: 3
+d-grid-layout--with-columns: 1
+d-z-index--modal-bg: 1
+d-linear-gradient--dark-to-top: 5
+d-list-reset: 8
