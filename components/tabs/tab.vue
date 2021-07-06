@@ -107,13 +107,14 @@ export default {
   methods: {
     setSelectedPanelByDefault () {
       if (this.selected) {
-        this.selectPanel();
+        this.selectPanel(true);
       }
     },
 
-    selectPanel () {
+    selectPanel (isDefaultSelect = false) {
       this.changeContentPanel({
         selected: this.panelId,
+        isDefaultSelect,
       });
     },
   },

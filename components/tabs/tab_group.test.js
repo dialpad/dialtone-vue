@@ -96,6 +96,10 @@ describe('Dialtone Vue Tab Group tests', function () {
       assert.exists(wrapper, 'wrapper exists');
     });
 
+    it('should not emitted on mount', function () {
+      assert.strictEqual(wrapper.emitted('change'), undefined);
+    });
+
     describe('Correct size modifiers', function () {
       beforeEach(function () {
         propsData.size = 'sm';
@@ -142,6 +146,15 @@ describe('Dialtone Vue Tab Group tests', function () {
         assert.strictEqual(tabPanels.at(0).attributes('aria-hidden'), 'false');
         assert.strictEqual(tabs.at(1).attributes('aria-selected'), 'false');
         assert.strictEqual(tabPanels.at(1).attributes('aria-hidden'), 'true');
+      });
+    });
+    describe('Correct change event', function () {
+      beforeEach(function () {
+        tabs.at(1).vm.selectPanel();
+      });
+
+      it('should emitted on mount', function () {
+        assert.strictEqual(wrapper.emitted().change.length, 1);
       });
     });
     describe('Correct key navigation', function () {

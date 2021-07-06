@@ -163,9 +163,9 @@ export default {
       this.$emit('change', { ...this.provideObj });
     },
 
-    changeContentPanel ({ selected }) {
+    changeContentPanel ({ selected, isDefaultSelect }) {
       this.provideObj.selected = selected;
-      this.onChange();
+      if (!isDefaultSelect) this.onChange();
     },
 
     tabLeft () {
