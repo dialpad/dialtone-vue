@@ -22,7 +22,7 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 ```html
 import { DtAvatar } from '@dialpad/dialtone-vue';
 
-<dt-avatar>...</dt-avatar>
+<dt-avatar kind="icon" color="purple-600" >...</dt-avatar>
 ```
 
 ## Badge
@@ -40,6 +40,7 @@ import { DtAvatar } from '@dialpad/dialtone-vue';
 import { DtBadge } from '@dialpad/dialtone-vue';
 
 <dt-badge>...</dt-badge>
+<dt-badge color="black-700">...</dt-badge>
 ```
 
 ## Banner
@@ -90,7 +91,16 @@ import { DtBadge } from '@dialpad/dialtone-vue';
 ```html
 import { DtBanner } from '@dialpad/dialtone-vue';
 
-<dt-banner title='...'>...</dt-banner>
+<dt-banner title='...'>
+  <template #action>
+    <dt-button
+      kind="muted"
+      importance="outlined"
+    >
+      ...
+    </dt-button>
+  </template>
+</dt-banner>
 ```
 
 ## Button
@@ -157,9 +167,20 @@ import { DtButton } from '@dialpad/dialtone-vue';
 ```html
 import { DtBreadcrumbs, DtBreadcrumbItem  } from '@dialpad/dialtone-vue';
 
-<dt-breadcrumbs :breadcrumbs="..." />
+<dt-breadcrumbs
+    :breadcrumbs="[{
+        href: '#',
+        label: '...',
+        muted: true,
+    }, {
+        href: '#',
+        label: '...',
+        selected: true,
+    }]"
+/>
 <dt-breadcrumbs>
-      <dt-breadcrumb-item  href="..." label="..." />
+      <dt-breadcrumb-item href="#" label="..." muted />
+      <dt-breadcrumb-item href="#" label="..." selected />
 </dt-breadcrumbs>
 ```
 
@@ -200,7 +221,7 @@ import { DtBreadcrumbs, DtBreadcrumbItem  } from '@dialpad/dialtone-vue';
 ```html
 import { DtCheckbox } from '@dialpad/dialtone-vue';
 
-<dt-checkbox label="Label" />
+<dt-checkbox v-model="..." label="..." />
 ```
 
 ## Input
@@ -225,7 +246,7 @@ import { DtCheckbox } from '@dialpad/dialtone-vue';
 ```html
 import { DtInput } from '@dialpad/dialtone-vue';
 
-<dt-input />
+<dt-input v-model="..." placeholder="..." />
 ```
 
 ### Text Area
@@ -268,6 +289,7 @@ import { DtInput } from '@dialpad/dialtone-vue';
 import { DtLink } from '@dialpad/dialtone-vue';
 
 <dt-link href="#">...</dt-link>
+<dt-link href="#" kind="danger">...</dt-link>
 ```
 
 ## Modal
