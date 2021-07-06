@@ -8,12 +8,20 @@
     :hide-close="hideClose"
     :closeButtonProps="computedCloseButtonProps"
   >
-    <span v-html="defaultSlot" />
+    <span>
+      Message body with
+      <a
+        href="#"
+        class="d-link"
+        :class="linkClass"
+      >a link</a>.
+    </span>
+
     <template #action>
       <dt-button
         size="sm"
         importance="outlined"
-        :kind="actionKind"
+        :kind="buttonKind"
       >
         Action
       </dt-button>
@@ -46,17 +54,25 @@ export default {
   components: { DtButton, DtNotice },
 
   computed: {
-    actionKind () {
-      if (this.important && (this.kind === 'base' || this.kind === 'info' || this.kind === 'error')) {
-        return 'inverted';
-      }
+    shouldInvertButton () {
+      return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
+    },
 
-      return 'muted';
+    isInverted () {
+      return this.important && this.shouldInvertButton;
+    },
+
+    buttonKind () {
+      return this.isInverted ? 'inverted' : 'muted';
+    },
+
+    linkClass () {
+      return this.isInverted ? 'd-link--inverted' : 'd-link--muted';
     },
 
     computedCloseButtonProps () {
       return {
-        kind: this.actionKind,
+        kind: this.buttonKind,
       };
     },
   },

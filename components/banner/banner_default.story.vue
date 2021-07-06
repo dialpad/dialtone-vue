@@ -22,7 +22,7 @@
           href="#"
           class="d-link"
           :class="linkClass"
-        >a link.</a>
+        >a link</a>.
       </span>
 
       <template
