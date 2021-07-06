@@ -1,6 +1,7 @@
 <template>
   <nav
     :aria-label="ariaLabel"
+    data-qa="dt-breadcrumbs"
     :class="[
       'd-breadcrumbs',
       { [BREADCRUMBS_INVERTED_MODIFIER]: inverted },
@@ -53,12 +54,19 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Descriptive label for the navigation content.
+     */
+    ariaLabel: {
+      type: String,
+      default: 'breadcrumb',
+    },
   },
 
   data () {
     return {
       BREADCRUMBS_INVERTED_MODIFIER,
-      ariaLabel: 'breadcrumb',
     };
   },
 
