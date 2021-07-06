@@ -54,6 +54,6 @@ fi
 
 while read -r line; do
   # Count the number of occurances of a removed class or variable 
-  OCCURENCES=$(grep ${GREP_FLAGS[@]} "${line}" "${DIRECTORY}" | wc -l | xargs)
+  OCCURENCES=$(grep ${GREP_FLAGS[@]} -e "${line}" "${DIRECTORY}" | wc -l | xargs)
   echo "${line}: ${OCCURENCES}"
 done < "$VALIDATION_FILE"
