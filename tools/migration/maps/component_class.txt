@@ -33,9 +33,9 @@ d-btn--circle--xl:d-btn d-btn--circle d-btn--xl
 d-btn--loading--white:d-btn d-btn--loading d-btn--inverted
 d-btn--loading--dark:d-btn d-btn--loading d-btn--muted
 d-btn--loading--danger:d-btn d-btn--loading d-btn--danger
-d-input-message--warning:d-validation-message--warning
-d-input-message--error:d-validation-message--error
-d-input-message--success:d-validation-message--success
+d-input-message--warning:d-validation-message d-validation-message--warning
+d-input-message--error:d-validation-message d-validation-message--error
+d-input-message--success:d-validation-message d-validation-message--success
 d-input-message:d-validation-message
 d-link--dark:d-link--muted
 d-modal__title:d-modal__header
