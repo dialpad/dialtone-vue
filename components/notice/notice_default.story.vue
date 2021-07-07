@@ -73,7 +73,9 @@ export default {
 
     computedCloseButtonProps () {
       return {
+        ...this.closeButtonProps,
         kind: this.buttonKind,
+        ariaLabel: 'Close',
       };
     },
   },
