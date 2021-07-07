@@ -14,7 +14,7 @@ d-btn--inverted--primary:d-btn d-btn--inverted d-btn--primary
 d-btn--circle--loading:d-btn d-btn--circle d-btn--loading
 d-btn--circle--outlined--loading:d-btn d-btn--circle d-btn--outlined d-btn--loading
 d-btn--circle--outlined:d-btn d-btn--circle d-btn--outlined
-d-btn--circle--danger-hover--loading:d-btn d-btn--circle d-btn--danger d-btn-loading
+d-btn--circle--danger-hover--loading:d-btn d-btn--circle d-btn--danger d-btn--loading
 d-btn--circle--danger-hover:d-btn d-btn--circle d-btn--danger
 d-btn--circle--danger--loading:d-btn d-btn--circle d-btn--danger d-btn--loading
 d-btn--circle--danger--primary--loading:d-btn d-btn--circle d-btn--primary d-btn--loading
