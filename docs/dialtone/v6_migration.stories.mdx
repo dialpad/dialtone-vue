@@ -253,6 +253,14 @@ import { DtInput } from '@dialpad/dialtone-vue';
 <textarea class="d-textarea" id="Dialtone--TextareaExample" type="text" placeholder="..."></textarea>
 ```
 
+### Vue Example
+
+```html
+import { DtInput } from '@dialpad/dialtone-vue';
+
+<dt-input v-model="..." placeholder="..." label="..." type="textarea" :description="..."/>
+```
+
 ## Link
 
 ### V5 Example
@@ -383,6 +391,7 @@ import { DtModal, DtButton } from '@dialpad/dialtone-vue';
 import { DtNotice, DtButton } from '@dialpad/dialtone-vue';
 
 <dt-notice :title="...">
+    <template>...</template>
     <template #icon>...</template>
     <template #action>
         <dt-button kind="muted">...</dt-button>
