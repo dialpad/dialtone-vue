@@ -589,7 +589,6 @@ d-border-left-radius--md:d-blr8
 d-border-left-radius--lg:d-blr12
 d-border-left-radius--xl:d-blr16
 d-border-left-radius--circle:d-blr-circle
-d-border:d-ba
 d-grid-layout--with-sidebar-content:d-gl-sidebar
 d-grid-layout--with-header-content:d-gl-header
 d-grid-gap0:d-gg0
@@ -969,3 +968,4 @@ d-background-opacity--slate50:d-bgc-black-900 d-bgo50
 d-background-opacity--slate25:d-bgc-black-900 d-bgo25
 d-background-opacity--slate10:d-bgc-black-900 d-bgo10
 d-background-opacity--slate0:d-bgc-black-900 d-bgo0
+d-border:d-ba
