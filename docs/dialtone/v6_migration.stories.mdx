@@ -4,6 +4,42 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 
 # Dialtone V6 Migration
 
+## Avatar
+
+### V6 Example
+
+```html
+<div class="d-avatar d-avatar--md d-avatar--icon d-avatar--purple-600">
+  ...
+</div>
+```
+
+### Vue Example
+
+```html
+import { DtAvatar } from '@dialpad/dialtone-vue';
+
+<dt-avatar kind="icon" color="purple-600" >...</dt-avatar>
+```
+
+## Badge
+
+### V6 Example
+
+```html
+<span class="d-badge">...</span>
+<span class="d-badge d-badge--black-700">...</span>
+```
+
+### Vue Example
+
+```html
+import { DtBadge } from '@dialpad/dialtone-vue';
+
+<dt-badge>...</dt-badge>
+<dt-badge color="black-700">...</dt-badge>
+```
+
 ## Banner
 
 ### V5 Example
@@ -47,6 +83,23 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 </aside>
 ```
 
+### Vue Example
+
+```html
+import { DtBanner, DtButton } from '@dialpad/dialtone-vue';
+
+<dt-banner title='...'>
+  <template #action>
+    <dt-button
+      kind="muted"
+      importance="outlined"
+    >
+      ...
+    </dt-button>
+  </template>
+</dt-banner>
+```
+
 ## Button
 
 ### V5 Example
@@ -63,6 +116,14 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 <button class="d-btn d-btn--primary" type="button">
   <span class="d-btn__label">...</span>
 </button>
+```
+
+### Vue Example
+
+```html
+import { DtButton } from '@dialpad/dialtone-vue';
+
+<dt-button>...</dt-button>
 ```
 
 ## Breadcrumbs
@@ -98,6 +159,17 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 </nav>
 ```
 
+### Vue Example
+
+```html
+import { DtBreadcrumbs, DtBreadcrumbItem  } from '@dialpad/dialtone-vue';
+
+<dt-breadcrumbs>
+      <dt-breadcrumb-item href="#" label="..." kind="muted" />
+      <dt-breadcrumb-item href="#" label="..." selected />
+</dt-breadcrumbs>
+```
+
 ## Checkbox
 
 ### V5 Example
@@ -130,6 +202,14 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 </fieldset>
 ```
 
+### Vue Example
+
+```html
+import { DtCheckbox } from '@dialpad/dialtone-vue';
+
+<dt-checkbox v-model="..." label="..." />
+```
+
 ## Input
 
 ### V5 Example
@@ -145,6 +225,14 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 ```html
 <label class="d-label" for="Dialtone--InputExample">...</label>
 <input class="d-input" id="Dialtone--InputExample" type="text" placeholder="..." />
+```
+
+### Vue Example
+
+```html
+import { DtInput } from '@dialpad/dialtone-vue';
+
+<dt-input v-model="..." placeholder="..." label="..."/>
 ```
 
 ### Text Area
@@ -165,6 +253,14 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 <textarea class="d-textarea" id="Dialtone--TextareaExample" type="text" placeholder="..."></textarea>
 ```
 
+### Vue Example
+
+```html
+import { DtInput } from '@dialpad/dialtone-vue';
+
+<dt-input v-model="..." placeholder="..." label="..." type="textarea" :description="..."/>
+```
+
 ## Link
 
 ### V5 Example
@@ -179,6 +275,15 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 ```html
 <a href="#" class="d-link">...</a>
 <a href="#" class="d-link d-link--danger">...</a>
+```
+
+### Vue Example
+
+```html
+import { DtLink } from '@dialpad/dialtone-vue';
+
+<dt-link href="#">...</dt-link>
+<dt-link href="#" kind="danger">...</dt-link>
 ```
 
 ## Modal
@@ -221,7 +326,7 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 >
   <div class="d-modal__dialog" role="document">
     <h2 class="d-modal__header" id="modal-title">...</h2>
-    <button href="#" class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">...</button>
+    <button class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">...</button>
     <p class="d-modal__content" id="modal-description">...</p>
     <footer class="d-modal__footer">
       <button class="d-btn" type="button">...</button>
@@ -229,6 +334,16 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
     </footer>
   </div>
 </aside>
+```
+
+```html
+import { DtModal, DtButton } from '@dialpad/dialtone-vue';
+
+<dt-modal :closeButtonProps="{ ariaLabel: 'Close'}" :title="..." :copy="..." show>
+    <template #footer>
+        <dt-button>...</dt-button>
+    </template>
+</dt-modal>
 ```
 
 ## Notice
@@ -270,6 +385,20 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 </aside>
 ```
 
+### Vue Example
+
+```html
+import { DtNotice, DtButton } from '@dialpad/dialtone-vue';
+
+<dt-notice :title="...">
+    <template>...</template>
+    <template #icon>...</template>
+    <template #action>
+        <dt-button kind="muted">...</dt-button>
+    </template>
+</dt-notice>
+```
+
 ## Radio
 
 ### V5 Example
@@ -302,6 +431,14 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
 </fieldset>
 ```
 
+### Vue Example
+
+```html
+import { DtRadio } from '@dialpad/dialtone-vue';
+
+<dt-radio label="..." />
+```
+
 ## Select
 
 ### V5 Example
@@ -329,6 +466,21 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
   </div>
   <div class="d-validation-message d-validation-message--error">...</div>
 </div>
+```
+
+### Vue Example
+
+```html
+import { DtSelectMenu, DtValidationMessages } from '@dialpad/dialtone-vue';
+
+<dt-select-menu
+    label="..."
+    :options="[{ value: '...', label: '...' }]"
+    :messages="[{
+        message: '...',
+        type: 'error',
+    }]"
+/>
 ```
 
 ## Table
@@ -475,6 +627,24 @@ import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
     <span>Anchored Content</span>
   </div>
 </div>
+```
+
+### Vue Example
+
+```html
+import { DtTooltip } from '@dialpad/dialtone-vue';
+
+<dt-tooltip message="..." hover>
+      <template #anchor>
+        Anchored Content
+      </template>
+</dt-tooltip>
+<dt-tooltip>
+      ...
+      <template #anchor>
+        Anchored Content
+      </template>
+</dt-tooltip>
 ```
 
 # Did we miss anything?

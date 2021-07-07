@@ -44,7 +44,7 @@ try {
   cssVarsV5.forEach(cssVar => {
     if (!cssVarsV6.includes(cssVar)) {
       cssVarsRemoved.push(cssVar);
-      content += `${cssVar}\n`
+      content += `${cssVar}\n`;
     }
   });
 
