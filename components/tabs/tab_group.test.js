@@ -150,11 +150,11 @@ describe('Dialtone Vue Tab Group tests', function () {
     });
     describe('Correct change event', function () {
       beforeEach(function () {
-        tabs.at(1).vm.selectPanel();
+        tabs.at(1).vm.$el.click();
       });
 
       it('should emitted on mount', function () {
-        assert.strictEqual(wrapper.emitted().change.length, 1);
+        assert.strictEqual(wrapper.emitted('change').length, 1);
       });
     });
     describe('Correct key navigation', function () {

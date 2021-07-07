@@ -163,9 +163,9 @@ export default {
       this.$emit('change', { ...this.provideObj });
     },
 
-    changeContentPanel ({ selected, isDefaultSelect }) {
+    changeContentPanel ({ selected, selectOverride }) {
       this.provideObj.selected = selected;
-      if (!isDefaultSelect) this.onChange();
+      if (!selectOverride) this.onChange();
     },
 
     tabLeft () {

@@ -16,7 +16,7 @@
     :tabindex="isSelected ? '0' : '-1'"
     :disabled="groupContext.disabled || disabled"
     v-bind="$attrs"
-    @click="selectPanel"
+    @click="selectPanel()"
     @focus="setFocus(id)"
   >
     <!-- @slot default slot, defaults contains dt-button -->
@@ -111,10 +111,10 @@ export default {
       }
     },
 
-    selectPanel (isDefaultSelect = false) {
+    selectPanel (selectOverride = false) {
       this.changeContentPanel({
         selected: this.panelId,
-        isDefaultSelect,
+        selectOverride,
       });
     },
   },

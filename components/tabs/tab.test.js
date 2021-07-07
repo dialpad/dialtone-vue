@@ -66,7 +66,7 @@ describe('Dialtone Vue Tab tests', function () {
       it('changeContentPanel should be called with valid data', function () {
         assert.isTrue(changeContentPanel.calledWith({
           selected: propsData.panelId,
-          isDefaultSelect: true,
+          selectOverride: true,
         }));
       });
     });
