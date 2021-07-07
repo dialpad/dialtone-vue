@@ -148,8 +148,8 @@ export default {
     },
 
     /**
-     * The duration in ms the toast will display before disappearing. It should have
-     * a value of at least 6000 ms to give the user enough time to read the message
+     * The duration in ms the toast will display before disappearing.
+     * Defaults to 6000 ms and the prop validation is that provided duration is equal to or greater than 6000.
      */
     duration: {
       type: Number,

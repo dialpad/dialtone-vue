@@ -1,8 +1,14 @@
+import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 import DtToast from './toast';
 import DtToastMdx from './toast.mdx';
 import DtToastDefaultTemplate from './toast_default.story.vue';
 import { NOTICE_KINDS } from '../notice';
+
+// Default Prop Values
+export const argsData = {
+  onClose: action('close'),
+};
 
 export const argTypesData = {
   // Props
@@ -55,12 +61,20 @@ export const argTypesData = {
       type: 'text',
     },
   },
+
+  // Action Event Handlers
+  onClose: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Story Collection
 export default {
   title: 'Elements/Toast',
   component: DtToast,
+  args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
@@ -81,7 +95,7 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   title: 'Base title (optional)',
-  default: 'Message body with <a href="#" class="d-link d-link--muted">a link.</a>',
+  kind: 'base',
 };
 
 export const Error = DefaultTemplate.bind({});
@@ -116,5 +130,4 @@ export const Important = DefaultTemplate.bind({});
 Important.args = {
   ...Default.args,
   important: true,
-  default: 'Message body with <a href="#" class="d-link d-link--inverted">a link.</a>',
 };
