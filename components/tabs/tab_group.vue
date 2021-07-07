@@ -165,7 +165,9 @@ export default {
 
     changeContentPanel ({ selected, selectOverride }) {
       this.provideObj.selected = selected;
-      if (!selectOverride) this.onChange();
+      if (!selectOverride) {
+        this.onChange();
+      }
     },
 
     tabLeft () {
