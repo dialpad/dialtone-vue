@@ -153,7 +153,7 @@ describe('Dialtone Vue Tab Group tests', function () {
         tabs.at(1).vm.$el.click();
       });
 
-      it('should emitted on mount', function () {
+      it('should emitted on click', function () {
         assert.strictEqual(wrapper.emitted('change').length, 1);
       });
     });
