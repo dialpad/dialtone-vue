@@ -548,12 +548,6 @@ d-border-y-width1:d-byw1
 d-border-y-width2:d-byw2
 d-border-y-width4:d-byw4
 d-border-y-width6:d-byw6
-d-border-top:d-bt
-d-border-right:d-br
-d-border-bottom:d-bb
-d-border-left:d-bl
-d-border-x:d-bx
-d-border-y:d-by
 d-border--dashed:d-bas-dashed
 d-border-top--dashed:d-bts-dashed
 d-border-right--dashed:d-brs-dashed
@@ -968,4 +962,10 @@ d-background-opacity--slate50:d-bgc-black-900 d-bgo50
 d-background-opacity--slate25:d-bgc-black-900 d-bgo25
 d-background-opacity--slate10:d-bgc-black-900 d-bgo10
 d-background-opacity--slate0:d-bgc-black-900 d-bgo0
+d-border-top:d-bt
+d-border-right:d-br
+d-border-bottom:d-bb
+d-border-left:d-bl
+d-border-x:d-bx
+d-border-y:d-by
 d-border:d-ba
