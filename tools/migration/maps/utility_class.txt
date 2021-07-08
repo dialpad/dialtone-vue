@@ -836,7 +836,7 @@ d-bgc-rose-light:d-bgc-pink-200
 d-bgc-rose:d-bgc-pink-400
 d-border-color--white:d-bc-white
 d-border-color--current:d-bc-current
-d-border-color--transparent:d-bc-transparent 
+d-border-color--transparent:d-bc-transparent
 d-border-color--slate-lighter:d-bc-black-600
 d-border-color--slate-lightest:d-bc-black-500
 d-border-color--slate-light:d-bc-black-800

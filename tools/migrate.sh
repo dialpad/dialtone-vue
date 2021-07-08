@@ -73,7 +73,7 @@ replaceMixins() {
 
 # Constants
 GREP_FLAGS=(-l)
-GREP_INCLUDE=(--include=\*.{js,vue,handlebars})
+GREP_INCLUDE=(--include=\*.{js,vue,handlebars,less})
 REPLACE_VARS=false
 
 # Get arguments
