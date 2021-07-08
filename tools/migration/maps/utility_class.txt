@@ -962,6 +962,26 @@ d-background-opacity--slate50:d-bgc-black-900 d-bgo50
 d-background-opacity--slate25:d-bgc-black-900 d-bgo25
 d-background-opacity--slate10:d-bgc-black-900 d-bgo10
 d-background-opacity--slate0:d-bgc-black-900 d-bgo0
+d-bgg-pattern-blob--dark:d-bgg-pattern-blob-dark
+d-bgg-pattern-chevrons--dark:d-bgg-pattern-chevrons-dark
+d-bgg-pattern-crosses--dark:d-bgg-pattern-crosses-dark
+d-bgg-pattern-crosshatch--dark:d-bgg-pattern-crosshatch-dark
+d-bgg-pattern-dot-dash--dark:d-bgg-pattern-dot-dash-dark
+d-bgg-pattern-dots-circles--dark:d-bgg-pattern-dots-circles-dark
+d-bgg-pattern-horz-stripes--dark:d-bgg-pattern-horz-stripes-dark
+d-bgg-pattern-slanted-stripes--dark:d-bgg-pattern-slanted-stripes-dark
+d-bgg-pattern-steps--dark:d-bgg-pattern-steps-dark
+d-bgg-pattern-stripe--dark:d-bgg-pattern-stripe-dark
+d-bgg-pattern-blob--light:d-bgg-pattern-blob-light
+d-bgg-pattern-chevrons--light:d-bgg-pattern-chevrons-light
+d-bgg-pattern-crosses--light:d-bgg-pattern-crosses-light
+d-bgg-pattern-crosshatch--light:d-bgg-pattern-crosshatch-light
+d-bgg-pattern-dot-dash--light:d-bgg-pattern-dot-dash-light
+d-bgg-pattern-dots-circles--light:d-bgg-pattern-dots-circles-light
+d-bgg-pattern-horz-stripes--light:d-bgg-pattern-horz-stripes-light
+d-bgg-pattern-slanted-stripes--light:d-bgg-pattern-slanted-stripes-light
+d-bgg-pattern-steps--light:d-bgg-pattern-steps-light
+d-bgg-pattern-stripe--light:d-bgg-pattern-stripe-light
 d-border-top:d-bt
 d-border-right:d-br
 d-border-bottom:d-bb
