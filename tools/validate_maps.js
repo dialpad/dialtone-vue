@@ -47,7 +47,6 @@ try {
       });
     }
   });
-
 } catch (err) {
   console.error('An error has occurred:', err);
 }
