@@ -1,4 +1,3 @@
-d-btn--disabled
 d-btn__icon--last
 d-label--normal
 d-input-message--lg
