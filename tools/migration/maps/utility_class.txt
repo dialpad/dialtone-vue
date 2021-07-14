@@ -989,3 +989,4 @@ d-border-left:d-bl
 d-border-x:d-bx
 d-border-y:d-by
 d-border:d-ba
+d-list-reset:d-ls-reset

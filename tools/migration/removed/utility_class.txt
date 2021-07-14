@@ -77,9 +77,6 @@ d-background-opacity--white5
 d-background-opacity--white15
 d-background-opacity--white80
 d-background-opacity--white85
-d-list-reset
-d-ls-reset
-d-ls-none
 d-bgg-white
 d-bgg-slate-lighter
 d-bgg-slate-lightest
