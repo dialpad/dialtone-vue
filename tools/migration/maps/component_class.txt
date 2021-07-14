@@ -40,3 +40,4 @@ d-input-message:d-validation-message
 d-link--dark:d-link--muted
 d-modal__title:d-modal__header
 d-modal__copy:d-modal__content
+d-tooltip-hover:d-tooltip--hover

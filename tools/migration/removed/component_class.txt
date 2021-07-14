@@ -17,7 +17,6 @@ d-toast__icon--info
 d-toast__icon
 d-toast__message
 d-toast__meta
-d-tooltip-hover
 d-link--disabled
 d-link--inverted--danger
 d-link--inverted--disabled
