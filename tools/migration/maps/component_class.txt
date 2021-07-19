@@ -17,8 +17,8 @@ d-btn--circle--outlined:d-btn d-btn--circle d-btn--outlined
 d-btn--circle--danger-hover--loading:d-btn d-btn--circle d-btn--danger d-btn--loading
 d-btn--circle--danger-hover:d-btn d-btn--circle d-btn--danger
 d-btn--circle--danger--loading:d-btn d-btn--circle d-btn--danger d-btn--loading
-d-btn--circle--danger--primary--loading:d-btn d-btn--circle d-btn--primary d-btn--loading
-d-btn--circle--danger--primary:d-btn d-btn--circle d-btn--primary
+d-btn--circle--danger--primary--loading:d-btn d-btn--circle d-btn--danger d-btn--primary d-btn--loading
+d-btn--circle--danger--primary:d-btn d-btn--circle d-btn--danger d-btn--primary
 d-btn--circle--danger:d-btn d-btn--circle d-btn--danger
 d-btn--circle--inverted--loading:d-btn d-btn--circle d-btn--inverted d-btn--loading
 d-btn--circle--inverted--outlined--loading:d-btn d-btn--circle d-btn--inverted d-btn--outlined d-btn--loading
