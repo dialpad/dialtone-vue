@@ -721,6 +721,17 @@ d-layout__stack2 > * + *:d-stack2 > * + *
 d-layout__stack4 > * + *:d-stack4 > * + *
 d-layout__stack6 > * + *:d-stack6 > * + *
 d-layout__stack8 > * + *:d-stack8 > * + *
+d-layout__stack12:d-stack12
+d-layout__stack16:d-stack16
+d-layout__stack24:d-stack24
+d-layout__stack32:d-stack32
+d-layout__stack48:d-stack48
+d-layout__stack64:d-stack64
+d-layout__stack1:d-stack1
+d-layout__stack2:d-stack2
+d-layout__stack4:d-stack4
+d-layout__stack6:d-stack6
+d-layout__stack8:d-stack8
 d-d-flex-inline:d-d-inline-flex
 d-flex-columns:d-d-flex
 d-flex--center:d-fl-center
