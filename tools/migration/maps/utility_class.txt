@@ -195,11 +195,11 @@ d-top4--negative:d-tn4
 d-top6--negative:d-tn6
 d-top8--negative:d-tn8
 d-top0:d-t0
-d-top12: d-t12
-d-top16: d-t16
+d-top12:d-t12
+d-top16:d-t16
 d-top24:d-t24
-d-top32: d-t32
-d-top48: d-t48
+d-top32:d-t32
+d-top48:d-t48
 d-top64:d-t64
 d-top1:d-t1
 d-top2:d-t2
