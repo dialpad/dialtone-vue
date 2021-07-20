@@ -128,7 +128,7 @@
 @font-family--mono:@ff-mono
 @font-weight--normal:@fw-normal
 @font-weight--medium:@fw-medium
-@font-weight--bold :@fw-bold
+@font-weight--bold:@fw-bold
 @headline--xl:@fs42
 @headline--lg:@fs36
 @headline--md:@fs32
@@ -159,3 +159,10 @@
 @spacing4:@su4
 @spacing6:@su6
 @spacing8:@su8
+@border-width0:@su0
+@border-width1:@su1
+@border-width2:@su2
+@border-width4:@su4
+@border-width6:@su6
+@transition--cubic-inOut:var(--ttf-in-out)
+@transition--quint-easeOut:var(--ttf-out)

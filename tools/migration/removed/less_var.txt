@@ -14,8 +14,6 @@
 @fixed-size1
 @fixed-size6
 @z-index--modal-bg
-@transition--cubic-inOut
-@transition--quint-easeOut
 @transition--duration0
 @transition--quad-easeInOut
 @transition--duration30
@@ -23,8 +21,3 @@
 @transition--duration120
 @transition--duration360
 @transition--duration600
-@border-width0
-@border-width1
-@border-width2
-@border-width4
-@border-width6
