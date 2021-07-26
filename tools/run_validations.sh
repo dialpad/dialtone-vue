@@ -58,12 +58,12 @@ sh ./validate.sh -m ${VALIDATION_MAP_DIR}/utility_class.txt -d ${VALIDATION_DIR}
 echo "Utility Classes Validated!"
 
 echo "Validating CSS Variables..."
-sh ./validate.sh -m ${VALIDATION_MAP_DIR}/css_var.txt -d ${VALIDATION_DIR} -v -r
+sh ./validate.sh -m ${VALIDATION_MAP_DIR}/css_var.txt -d ${VALIDATION_DIR} -r
 echo "CSS Variables Validated!"
 sleep 5s
 
 echo "Validating LESS Variables..."
-sh ./validate.sh -m ${VALIDATION_MAP_DIR}/less_var.txt -d ${VALIDATION_DIR} -v -r
+sh ./validate.sh -m ${VALIDATION_MAP_DIR}/less_var.txt -d ${VALIDATION_DIR} -r
 echo "LESS Variables Validated!"
 sleep 5s
 
