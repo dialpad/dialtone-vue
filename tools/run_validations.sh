@@ -48,6 +48,15 @@ fi
 echo "Starting validation in 10 seconds"
 sleep 10s
 
+echo "Validating Component Classes..."
+sh ./validate.sh -m ${VALIDATION_MAP_DIR}/component_class.txt -d ${VALIDATION_DIR} -r
+echo "Component Classes Validated!"
+sleep 5s
+
+echo "Validating Utility Classes..."
+sh ./validate.sh -m ${VALIDATION_MAP_DIR}/utility_class.txt -d ${VALIDATION_DIR} -r
+echo "Utility Classes Validated!"
+
 echo "Validating CSS Variables..."
 sh ./validate.sh -m ${VALIDATION_MAP_DIR}/css_var.txt -d ${VALIDATION_DIR} -v -r
 echo "CSS Variables Validated!"
@@ -57,14 +66,5 @@ echo "Validating LESS Variables..."
 sh ./validate.sh -m ${VALIDATION_MAP_DIR}/less_var.txt -d ${VALIDATION_DIR} -v -r
 echo "LESS Variables Validated!"
 sleep 5s
-
-echo "Validating Component Classes..."
-sh ./validate.sh -m ${VALIDATION_MAP_DIR}/component_class.txt -d ${VALIDATION_DIR} -r
-echo "Component Classes Validated!"
-sleep 5s
-
-echo "Validating Utility Classes..."
-sh ./validate.sh -m ${VALIDATION_MAP_DIR}/utility_class.txt -d ${VALIDATION_DIR} -r
-echo "Utility Classes Validated!"
 
 echo "Validation Complete!"
