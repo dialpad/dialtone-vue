@@ -45,18 +45,188 @@ d-bbr-circle:border-bottom-right-radius: 50% !important;\nborder-bottom-left-rad
 d-bbr-pill:border-bottom-right-radius: 100em !important;\nborder-bottom-left-radius: 100em !important;
 
 d-blr
+d-blr0:border-top-left-radius: 0 !important;\nborder-bottom-left-radius: 0 !important;
+d-blr2:border-top-left-radius: 0.2rem !important;\nborder-bottom-left-radius: 0.2rem !important;
+d-blr4:border-top-left-radius: 0.4rem !important;\nborder-bottom-left-radius: 0.4rem !important;
+d-blr8:border-top-left-radius: 0.8rem !important;\nborder-bottom-left-radius: 0.8rem !important;
+d-blr12:border-top-left-radius: 1.2rem !important;\nborder-bottom-left-radius: 1.2rem !important;
+d-blr16:border-top-left-radius: 1.6rem !important;\nborder-bottom-left-radius: 1.6rem !important;
+d-blr24:border-top-left-radius: 2.4rem !important;\nborder-bottom-left-radius: 2.4rem !important;
+d-blr32:border-top-left-radius: 3.2rem !important;\nborder-bottom-left-radius: 3.2rem !important;
+d-blr-circle:border-top-left-radius: 50% !important;\nborder-bottom-left-radius: 50% !important
+d-blr-pill:border-top-left-radius: 100em !important;\nborder-bottom-left-radius: 100em !important;
 
 d-g-cols
+d-g-cols1:grid-template-columns: [full-start] repeat(1, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(1, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(1, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+d-g-cols2:grid-template-columns: [full-start] repeat(2, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(2, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(2, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+d-g-cols3:grid-template-columns: [full-start] repeat(3, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(3, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(3, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+d-g-cols4:grid-template-columns: [full-start] repeat(4, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(4, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(4, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+d-g-cols5:grid-template-columns: [full-start] repeat(5, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(5, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(5, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+d-g-cols6:grid-template-columns: [full-start] repeat(6, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(6, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(6, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+d-g-cols7:grid-template-columns: [full-start] repeat(7, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(7, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(7, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+d-g-cols8:grid-template-columns: [full-start] repeat(8, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(8, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(8, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+d-g-cols9:grid-template-columns: [full-start] repeat(9, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(9, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(9, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+d-g-cols10:grid-template-columns: [full-start] repeat(10, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(10, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(10, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important
+d-g-cols11:grid-template-columns: [full-start] repeat(11, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(11, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(11, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+d-g-cols12:grid-template-columns: [full-start] repeat(12, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(12, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;\ngrid-template-columns: [full-start] repeat(12, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important
+
 d-gcs
+d-gcs1:grid-column-start: 1 !important;
+d-gcs2:grid-column-start: 2 !important;
+d-gcs3:grid-column-start: 3 !important;
+d-gcs4:grid-column-start: 4 !important;
+d-gcs5:grid-column-start: 5 !important;
+d-gcs6:grid-column-start: 6 !important;
+d-gcs7:grid-column-start: 7 !important;
+d-gcs8:grid-column-start: 8 !important;
+d-gcs9:grid-column-start: 9 !important;
+d-gcs10:grid-column-start: 10 !important;
+d-gcs11:grid-column-start: 11 !important;
+d-gcs12:grid-column-start: 12 !important;
+d-gcs-auto:grid-column-start: auto !important;
+d-gcs-unset:grid-column-start: unset !important;
+
 d-gce
+d-gce1:grid-column-end: 1 !important;
+d-gce2:grid-column-end: 2 !important;
+d-gce3:grid-column-end: 3 !important;
+d-gce4:grid-column-end: 4 !important;
+d-gce5:grid-column-end: 5 !important;
+d-gce6:grid-column-end: 6 !important;
+d-gce7:grid-column-end: 7 !important;
+d-gce8:grid-column-end: 8 !important;
+d-gce9:grid-column-end: 9 !important;
+d-gce10:grid-column-end: 10 !important;
+d-gce11:grid-column-end: 11 !important;
+d-gce12:grid-column-end: 12 !important;
+d-gce-auto:grid-column-end: auto !important;
+d-gce-unset:grid-column-end: unset !important;
+
 d-gc
+d-gc1:grid-column: span 1  /  span 1 !important;
+d-gc2:grid-column: span 2  /  span 2 !important;
+d-gc3:grid-column: span 3  /  span 3 !important;
+d-gc4:grid-column: span 4  /  span 4 !important;
+d-gc5:grid-column: span 5  /  span 5 !important;
+d-gc6:grid-column: span 6  /  span 6 !important;
+d-gc7:grid-column: span 7  /  span 7 !important;
+d-gc8:grid-column: span 8  /  span 8 !important;
+d-gc9:grid-column: span 9  /  span 9 !important;
+d-gc10:grid-column: span 10  /  span 10 !important;
+d-gc11:grid-column: span 11  /  span 11 !important;
+d-gc12:grid-column: span 12  /  span 12 !important;
+d-gc-full:grid-column: 1  /  -1 !important;
+d-gc-auto:grid-column: auto !important;
+d-gc-unset:grid-column: unset !important;
+
 d-gg
+d-gg0:grid-gap: 0 !important;
+d-gg1:grid-gap: 0.1rem !important;
+d-gg2:grid-gap: 0.2rem !important;
+d-gg4:grid-gap: 0.4rem !important;
+d-gg6:grid-gap: 0.6rem !important;
+d-gg8:grid-gap: 0.8rem !important;
+d-gg12:grid-gap: 1.2rem !important;
+d-gg16:grid-gap: 1.6rem !important;
+d-gg24:grid-gap: 2.4rem !important;
+d-gg32:grid-gap: 3.2rem !important;
+d-gg48:grid-gap: 4.8rem !important;
+d-gg64:grid-gap: 6.4rem !important;
+d-gg-unset:grid-gap: unset !important;
+
 d-grg
+d-grg0:grid-row-gap: 0 !important;
+d-grg1:grid-row-gap: 0.1rem !important;
+d-grg2:grid-row-gap: 0.2rem !important;
+d-grg4:grid-row-gap: 0.4rem !important;
+d-grg6:grid-row-gap: 0.6rem !important;
+d-grg8:grid-row-gap: 0.8rem !important;
+d-grg12:grid-row-gap: 1.2rem !important;
+d-grg16:grid-row-gap: 1.6rem !important;
+d-grg24:grid-row-gap: 2.4rem !important;
+d-grg32:grid-row-gap: 3.2rem !important;
+d-grg48:grid-row-gap: 4.8rem !important;
+d-grg64:grid-row-gap: 6.4rem !important;
+d-grg-unset:grid-row-gap: unset !important;
+
 d-gcg
+d-gcg0:grid-column-gap: 0 !important;
+d-gcg1:grid-column-gap: 0.1rem !important;
+d-gcg2:grid-column-gap: 0.2rem !important;
+d-gcg4:grid-column-gap: 0.4rem !important;
+d-gcg6:grid-column-gap: 0.6rem !important;
+d-gcg8:grid-column-gap: 0.8rem !important;
+d-gcg12:grid-column-gap: 1.2rem !important;
+d-gcg16:grid-column-gap: 1.6rem !important;
+d-gcg24:grid-column-gap: 2.4rem !important;
+d-gcg32:grid-column-gap: 3.2rem !important;
+d-gcg48:grid-column-gap: 4.8rem !important;
+d-gcg64:grid-column-gap: 6.4rem !important;
+d-gcg-unset:grid-column-gap: unset !important;
+
 d-g-rows
+d-g-rows1:grid-template-rows: [full-start] repeat(1, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+d-g-rows2:grid-template-rows: [full-start] repeat(2, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+d-g-rows3:grid-template-rows: [full-start] repeat(3, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+d-g-rows4:grid-template-rows: [full-start] repeat(4, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+d-g-rows5:grid-template-rows: [full-start] repeat(5, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+d-g-rows6:grid-template-rows: [full-start] repeat(6, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+d-g-rows7:grid-template-rows: [full-start] repeat(7, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+d-g-rows8:grid-template-rows: [full-start] repeat(8, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+d-g-rows9:grid-template-rows: [full-start] repeat(9, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+d-g-rows10:grid-template-rows: [full-start] repeat(10, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+d-g-rows11:grid-template-rows: [full-start] repeat(11, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+d-g-rows12:grid-template-rows: [full-start] repeat(12, [col-start] minmax(0, 1fr) [col-end]) [full-end] !important;
+
 d-grs
+d-grs1:grid-row-start: 1 !important;
+d-grs2:grid-row-start: 2 !important;
+d-grs3:grid-row-start: 3 !important;
+d-grs4:grid-row-start: 4 !important;
+d-grs5:grid-row-start: 5 !important;
+d-grs6:grid-row-start: 6 !important;
+d-grs7:grid-row-start: 7 !important;
+d-grs8:grid-row-start: 8 !important;
+d-grs9:grid-row-start: 9 !important;
+d-grs10:grid-row-start: 10 !important;
+d-grs11:grid-row-start: 11 !important;
+d-grs12:grid-row-start: 12 !important;
+d-grs-auto:grid-row-start: auto !important;
+d-grs-unset:grid-row-start: unset !important;
+
 d-gre
+d-gre1:grid-row-end: 1 !important;
+d-gre2:grid-row-end: 2 !important;
+d-gre3:grid-row-end: 3 !important;
+d-gre4:grid-row-end: 4 !important;
+d-gre5:grid-row-end: 5 !important;
+d-gre6:grid-row-end: 6 !important;
+d-gre7:grid-row-end: 7 !important;
+d-gre8:grid-row-end: 8 !important;
+d-gre9:grid-row-end: 9 !important;
+d-gre10:grid-row-end: 10 !important;
+d-gre11:grid-row-end: 11 !important;
+d-gre12:grid-row-end: 12 !important;
+d-gre-auto:grid-row-end: auto !important;
+d-gre-unset:grid-row-end: unset !important;
+
 d-gr
+d-gr1:grid-row: span 1  /  span 1 !important;
+d-gr2:grid-row: span 2  /  span 2 !important;
+d-gr3:grid-row: span 3  /  span 3 !important;
+d-gr4:grid-row: span 4  /  span 4 !important;
+d-gr5:grid-row: span 5  /  span 5 !important;
+d-gr6:grid-row: span 6  /  span 6 !important;
+d-gr7:grid-row: span 7  /  span 7 !important;
+d-gr8:grid-row: span 8  /  span 8 !important;
+d-gr9:grid-row: span 9  /  span 9 !important;
+d-gr10:grid-row: span 10  /  span 10 !important;
+d-gr11:grid-row: span 11  /  span 11 !important;
+d-gr12:grid-row: span 12  /  span 12 !important;
+d-gr-full:grid-row: 1  /  -1 !important;
+d-gr-auto:grid-row: auto !important;
+d-gr-unset:grid-row: unset !important;
+
 d-t
 d-r
 d-b
