@@ -1,0 +1,93 @@
+d-bar0:border-radius: 0 !important;
+d-bar2:border-radius: 0.2rem !important;
+d-bar4:border-radius: 0.4rem !important;
+d-bar8:border-radius: 0.8rem !important;
+d-bar12:border-radius: 1.2rem !important;
+d-bar16:border-radius: 1.6rem !important;
+d-bar24:border-radius: 2.4rem !important;
+d-bar32:border-radius: 3.2rem !important;
+d-bar-unset:border-radius: unset !important;
+d-bar-circle:border-radius: 50% !important;
+d-bar-pill:border-radius: 100em !important;
+
+d-btr0:border-top-left-radius: 0 !important;\nborder-top-right-radius: 0 !important;
+d-btr2:border-top-left-radius: 0.2rem !important;\nborder-top-right-radius: 0.2rem !important;
+d-btr4:border-top-left-radius: 0.4rem !important;\nborder-top-right-radius: 0.4rem !important;
+d-btr8:border-top-left-radius: 0.8rem !important;\nborder-top-right-radius: 0.8rem !important;
+d-btr12:border-top-left-radius: 1.2rem !important;\nborderd-btr0-top-right-radius: 1.2rem !important;
+d-btr16:border-top-left-radius: 1.6rem !important;\nborder-top-right-radius: 1.6rem !important;
+d-btr24:border-top-left-radius: 2.4rem !important;\nborder-top-right-radius: 2.4rem !important;
+d-btr32:border-top-left-radius: 3.2rem !important;\nborder-top-right-radius: 3.2rem !important;
+d-btr-circle:border-top-left-radius: 50% !important;\nborder-top-right-radius: 50% !important;
+d-btr-pill:border-top-left-radius: 100em !important;\nborder-top-right-radius: 100em !important;
+
+d-brr0:border-top-right-radius: 0 !important;\nborder-bottom-right-radius: 0 !important;
+d-brr2:border-top-right-radius: 0.2rem !important;\nborder-bottom-right-radius: 0.2rem !important;
+d-brr4:border-top-right-radius: 0.4rem !important;\nborder-bottom-right-radius: 0.4rem !important;
+d-brr8:border-top-right-radius: 0.8rem !important;\nborder-bottom-right-radius: 0.8rem !important;
+d-brr12:border-top-right-radius: 1.2rem !important;\nborder-bottom-right-radius: 1.2rem !important;
+d-brr16:border-top-right-radius: 1.6rem !important;\nborder-bottom-right-radius: 1.6rem !important;
+d-brr24:border-top-right-radius: 2.4rem !important;\nborder-bottom-right-radius: 2.4rem !important;
+d-brr32:border-top-right-radius: 3.2rem !important;\nborder-bottom-right-radius: 3.2rem !important;
+d-brr-circle:border-top-right-radius: 50% !important;\nborder-bottom-right-radius: 50% !important;
+d-brr-pill:border-top-right-radius: 100em !important;\nborder-bottom-right-radius: 100em !important;
+
+d-bbr
+d-bbr0:border-bottom-right-radius: 0 !important;\nborder-bottom-left-radius: 0 !important;
+d-bbr2:border-bottom-right-radius: 0.2rem !important;\nborder-bottom-left-radius: 0.2rem !important;
+d-bbr4:border-bottom-right-radius: 0.4rem !important;\nborder-bottom-left-radius: 0.4rem !important;
+d-bbr8:border-bottom-right-radius: 0.8rem !important;\nborder-bottom-left-radius: 0.8rem !important;
+d-bbr12:border-bottom-right-radius: 1.2rem !important;\nborder-bottom-left-radius: 1.2rem !important;
+d-bbr16:border-bottom-right-radius: 1.6rem !important;\nborder-bottom-left-radius: 1.6rem !important;
+d-bbr24:border-bottom-right-radius: 2.4rem !important;\nborder-bottom-left-radius: 2.4rem !important;
+d-bbr32:border-bottom-right-radius: 3.2rem !important;\nborder-bottom-left-radius: 3.2rem !important;
+d-bbr-circle:border-bottom-right-radius: 50% !important;\nborder-bottom-left-radius: 50% !important;
+d-bbr-pill:border-bottom-right-radius: 100em !important;\nborder-bottom-left-radius: 100em !important;
+
+d-blr
+
+d-g-cols
+d-gcs
+d-gce
+d-gc
+d-gg
+d-grg
+d-gcg
+d-g-rows
+d-grs
+d-gre
+d-gr
+d-t
+d-r
+d-b
+d-l
+d-y
+d-x
+d-all
+d-h
+d-hmn
+d-hmx
+d-w
+d-wmn
+d-wmx
+d-m
+d-mt
+d-mr
+d-mb
+d-ml
+d-mx
+d-my
+d-mn
+d-mtn
+d-mrn
+d-mbn
+d-mln
+d-mxn
+d-myn
+d-p
+d-pt
+d-pr
+d-pb
+d-pl
+d-px
+d-py
