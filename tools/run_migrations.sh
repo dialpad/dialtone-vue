@@ -67,4 +67,9 @@ sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/less_var.txt -d ${MIGRATION_DIR} -v -r
 echo "LESS Variables Migrated!"
 sleep 5s
 
+echo "Migrating Auto Generated Dialtone Classes..."
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/auto_generated_classes.txt  -d ${MIGRATION_DIR} -a -r
+echo "Auto Generated Dialtone Classes Migrated!"
+sleep 5s
+
 echo "Migration Complete!"
