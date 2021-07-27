@@ -543,7 +543,7 @@ d-border-x-width1:d-bxw1
 d-border-x-width2:d-bxw2
 d-border-x-width4:d-bxw4
 d-border-x-width6:d-bxw6
-d-border-y-width0:d-byw0 
+d-border-y-width0:d-byw0
 d-border-y-width1:d-byw1
 d-border-y-width2:d-byw2
 d-border-y-width4:d-byw4
