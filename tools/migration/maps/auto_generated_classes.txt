@@ -534,7 +534,6 @@ d-hmn6:min-height: 0.6rem;
 d-hmn8:min-height: 0.8rem;
 d-hmn-auto:min-height: auto;
 d-hmn-unset:min-height: unset;
-
 d-hmx100p:max-height: 100%;
 d-hmx10p:max-height: 10%;
 d-hmx20p:max-height: 20%;
@@ -547,7 +546,6 @@ d-hmx70p:max-height: 70%;
 d-hmx75p:max-height: 75%;
 d-hmx80p:max-height: 80%;
 d-hmx90p:max-height: 90%;
-
 d-hmx1024:max-height: 102.4rem;
 d-hmx1140:max-height: 114rem;
 d-hmx1268:max-height: 126.8rem;
