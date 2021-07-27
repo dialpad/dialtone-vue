@@ -460,7 +460,7 @@ d-alln64:top: -6.4rem !important;\nright: -6.4rem !important;\nbottom: -6.4rem !
 d-alln72:top: -7.2rem !important;\nright: -7.2rem !important;\nbottom: -7.2rem !important;\nleft: -7.2rem !important;
 d-alln84:top: -8.4rem !important;\nright: -8.4rem !important;\nbottom: -8.4rem !important;\nleft: -8.4rem !important;
 d-alln96:top: -9.6rem !important;\nright: -9.6rem !important;\nbottom: -9.6rem !important;\nleft: -9.6rem !important;
-d-alln102:top: -10.2rem !important;\nright: -10.2rem !important;\nbottom: -10.2rem !important;\nleft: -10.2rem !important
+d-alln102:top: -10.2rem !important;\nright: -10.2rem !important;\nbottom: -10.2rem !important;\nleft: -10.2rem !important;
 
 d-h10p:height: 10% !important;
 d-h20p:height: 20% !important;
