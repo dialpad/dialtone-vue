@@ -40,7 +40,7 @@
 --primary-color--hover:--primary-color-hover
 --primary-color--h:--primary-color-h
 --primary-color--s:--primary-color-s
---primary-color--l:--primary-color-h
+--primary-color--l:--primary-color-l
 --nav__background-color--h:--nav-background-color-h
 --nav__background-color--s:--nav-background-color-s
 --nav__background-color--l:--nav-background-color-l
