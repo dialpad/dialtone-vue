@@ -129,6 +129,7 @@ while read -r line; do
 
   if [ ${REPLACE_AUTO_MIXINS} = true ]
   then
+    # Replace auto generated mixins
     replaceString ".${FIND_STRING}();" "${REPLACEMENT_STRING}"
     replaceString ".${FIND_STRING};" "${REPLACEMENT_STRING}"
   else
