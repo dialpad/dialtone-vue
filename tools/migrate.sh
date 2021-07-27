@@ -11,6 +11,7 @@
 #  -e <string>: Provides an exclusion string for files to be excluded in the search                                                #
 #  -r:          Enables recursive traversal of the directory                                                                       #
 #  -v:          Disables mixin replacement logic and enables variable replacement logic                                            #
+#  -a:          Enables auto generated mixin replacement logic, disables all other logic                                           #
 # Notes:                                                                                                                           #
 #  Migration Map:                                                                                                                  #
 #    Order matters, ensure that the longest matches appear first in the file.                                                      #
@@ -22,7 +23,7 @@
 
 # Usage method
 usage() {
-  echo "Usage: $0 [-m <string>] [-d <string>] [-e <string>] [-r] [-v]";
+  echo "Usage: $0 [-m <string>] [-d <string>] [-e <string>] [-r] [-v] [-a]";
   exit 1;
 }
 
@@ -43,7 +44,8 @@ replaceString() {
 #    $1 <string>: The find string parsed from the file
 #    $2 <string>: The replacement string parsed from the file
 replaceMixins() {
-  LOCAL_FIND_MIXIN_STRING=".${1}();"
+  LOCAL_FIND_MIXIN_STRING_1=".${1}();"
+  LOCAL_FIND_MIXIN_STRING_2=".${1};"
   LOCAL_REPLACEMENT_MIXIN_STRING=''
 
   # Get replacement classes
@@ -52,7 +54,8 @@ replaceMixins() {
 
   if [ ${LOCAL_REPLACEMENT_CLASS_COUNT} -eq 1 ]
     then
-      replaceString "${LOCAL_FIND_MIXIN_STRING}" ".${LOCAL_REPLACEMENT_CLASSES[0]}();"
+      replaceString "${LOCAL_FIND_MIXIN_STRING_1}" ".${LOCAL_REPLACEMENT_CLASSES[0]}();"
+      replaceString "${LOCAL_FIND_MIXIN_STRING_2}" ".${LOCAL_REPLACEMENT_CLASSES[0]}();"
     elif [ ${LOCAL_REPLACEMENT_CLASS_COUNT} -gt 1 ]
       then
         MAX_INDEX=$((${LOCAL_REPLACEMENT_CLASS_COUNT} - 1))
@@ -67,7 +70,8 @@ replaceMixins() {
           fi
         done
 
-        replaceString "${LOCAL_FIND_MIXIN_STRING}" "${LOCAL_REPLACEMENT_MIXIN_STRING}"
+        replaceString "${LOCAL_FIND_MIXIN_STRING_1}" "${LOCAL_REPLACEMENT_MIXIN_STRING}"
+        replaceString "${LOCAL_FIND_MIXIN_STRING_2}" "${LOCAL_REPLACEMENT_MIXIN_STRING}"
   fi
 }
 
@@ -75,9 +79,10 @@ replaceMixins() {
 GREP_FLAGS=(-l)
 GREP_INCLUDE=(--include=\*.{js,vue,handlebars,less})
 REPLACE_VARS=false
+REPLACE_AUTO_MIXINS=false
 
 # Get arguments
-while getopts "m:d:e:rv" option; do
+while getopts "m:d:e:rva" option; do
   case "${option}" in
     m)
       MIGRATION_MAP_FILE=$OPTARG
@@ -93,6 +98,9 @@ while getopts "m:d:e:rv" option; do
       ;;
     v)
       REPLACE_VARS=true
+      ;;
+    a)
+      REPLACE_AUTO_MIXINS=true
       ;;
     *)
       usage
@@ -119,12 +127,18 @@ while read -r line; do
   FIND_STRING="$(cut -d':' -f1 <<< "$line")"
   REPLACEMENT_STRING="$(cut -d':' -f2 <<< "$line")"
 
-  # Replace mixins
-  if [ ${REPLACE_VARS} = false ]
-    then
-      replaceMixins "${FIND_STRING}" "${REPLACEMENT_STRING}"
-  fi
+  if [ ${REPLACE_AUTO_MIXINS} = true ]
+  then
+    replaceString ".${FIND_STRING}();" "${REPLACEMENT_STRING}"
+    replaceString ".${FIND_STRING};" "${REPLACEMENT_STRING}"
+  else
+    # Replace mixins
+    if [ ${REPLACE_VARS} = false ]
+      then
+        replaceMixins "${FIND_STRING}" "${REPLACEMENT_STRING}"
+    fi
 
-  # Replace variables and classes
-  replaceString "${FIND_STRING}" "${REPLACEMENT_STRING}"
+    # Replace variables and classes
+    replaceString "${FIND_STRING}" "${REPLACEMENT_STRING}"
+  fi
 done < "$MIGRATION_MAP_FILE"
