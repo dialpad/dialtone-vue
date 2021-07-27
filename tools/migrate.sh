@@ -122,17 +122,22 @@ if [ -z "$DIRECTORY" ]
     exit 1
 fi
 
-while read -r line; do
-  # Parse line from migration map
-  FIND_STRING="$(cut -d':' -f1 <<< "$line")"
-  REPLACEMENT_STRING="$(cut -d':' -f2 <<< "$line")"
 
+while read -r line; do
   if [ ${REPLACE_AUTO_MIXINS} = true ]
   then
+    # Parse line from migration map
+    FIND_STRING="$(cut -d'|' -f1 <<< "$line")"
+    REPLACEMENT_STRING="$(cut -d'|' -f2 <<< "$line")"
+
     # Replace auto generated mixins
     replaceString ".${FIND_STRING}();" "${REPLACEMENT_STRING}"
     replaceString ".${FIND_STRING};" "${REPLACEMENT_STRING}"
   else
+    # Parse line from migration map
+    FIND_STRING="$(cut -d':' -f1 <<< "$line")"
+    REPLACEMENT_STRING="$(cut -d':' -f2 <<< "$line")"
+
     # Replace mixins
     if [ ${REPLACE_VARS} = false ]
       then
