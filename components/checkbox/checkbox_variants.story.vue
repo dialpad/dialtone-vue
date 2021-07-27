@@ -178,6 +178,7 @@
       value="Value"
       label="Checked"
       description="With Description"
+      validation-state="success"
       :messages="[{ message: 'Success', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
       checked
     />
