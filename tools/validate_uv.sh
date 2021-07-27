@@ -1,13 +1,13 @@
 #!/bin/bash
 
 #####################################################################################################################################
-# validate_uc.sh                                                                                                                    #
+# validate_uv.sh                                                                                                                    #
 #####################################################################################################################################
 # Description:                                                                                                                      #
 #  The following script will run the validate script for css / less vars, component classes and utility classes against a directory #
 # Args:                                                                                                                             #
 #  -m <string>: A relative path to the class / var validation maps directory                                                        #
-#  -d <string>: A relative path to the UC directory                                                                                 #
+#  -d <string>: A relative path to the UV directory                                                                                 #
 #####################################################################################################################################
 
 # Usage method
@@ -23,7 +23,7 @@ while getopts "m:d:" option; do
       VALIDATION_MAP_DIR=$OPTARG
       ;;
     d)
-      UC_DIR=$OPTARG
+      UV_DIR=$OPTARG
       ;;
     *)
       usage
@@ -38,23 +38,23 @@ if [ -z "$VALIDATION_MAP_DIR" ]
     exit 1
 fi
 
-if [ -z "$UC_DIR" ]
+if [ -z "$UV_DIR" ]
   then
     echo "Please provide a path to the UC directory"
     usage
     exit 1
 fi
 
-echo "Starting UC validation in 10 seconds"
+echo "Starting UV validation in 10 seconds"
 sleep 10s
 
-echo "Validating SRC Directory..."
-sh ./validate.sh -m ${VALIDATION_MAP_DIR} -d ${UC_DIR}/src
-echo "SRC Directory Validated!"
+echo "Validating CSS Directory..."
+sh ./validate.sh -m ${VALIDATION_MAP_DIR} -d ${UV_DIR}/static/css
+echo "CSS Directory Validated!"
 sleep 5s
 
-echo "Validating Less Directory..."
-sh ./validate.sh -m ${VALIDATION_MAP_DIR} -d ${UC_DIR}/less
-echo "Less Directory Validated!"
+echo "Validating JS Directory..."
+sh ./validate.sh -m ${VALIDATION_MAP_DIR} -d ${UV_DIR}/static/js
+echo "JS Directory Validated!"
 
-echo "UC Validation Complete!"
+echo "UV Validation Complete!"
