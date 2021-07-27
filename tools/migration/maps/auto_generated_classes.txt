@@ -9,7 +9,6 @@ d-bar8:border-radius: 0.8rem;
 d-bar-unset:border-radius: unset;
 d-bar-circle:border-radius: 50%;
 d-bar-pill:border-radius: 100em;
-
 d-btr12:border-top-left-radius: 1.2rem;\nborderd-btr0-top-right-radius: 1.2rem;
 d-btr16:border-top-left-radius: 1.6rem;\nborder-top-right-radius: 1.6rem;
 d-btr24:border-top-left-radius: 2.4rem;\nborder-top-right-radius: 2.4rem;
@@ -20,7 +19,6 @@ d-btr4:border-top-left-radius: 0.4rem;\nborder-top-right-radius: 0.4rem;
 d-btr8:border-top-left-radius: 0.8rem;\nborder-top-right-radius: 0.8rem;
 d-btr-circle:border-top-left-radius: 50%;\nborder-top-right-radius: 50%;
 d-btr-pill:border-top-left-radius: 100em;\nborder-top-right-radius: 100em;
-
 d-brr12:border-top-right-radius: 1.2rem;\nborder-bottom-right-radius: 1.2rem;
 d-brr16:border-top-right-radius: 1.6rem;\nborder-bottom-right-radius: 1.6rem;
 d-brr24:border-top-right-radius: 2.4rem;\nborder-bottom-right-radius: 2.4rem;
@@ -31,7 +29,6 @@ d-brr4:border-top-right-radius: 0.4rem;\nborder-bottom-right-radius: 0.4rem;
 d-brr8:border-top-right-radius: 0.8rem;\nborder-bottom-right-radius: 0.8rem;
 d-brr-circle:border-top-right-radius: 50%;\nborder-bottom-right-radius: 50%;
 d-brr-pill:border-top-right-radius: 100em;\nborder-bottom-right-radius: 100em;
-
 d-bbr12:border-bottom-right-radius: 1.2rem;\nborder-bottom-left-radius: 1.2rem;
 d-bbr16:border-bottom-right-radius: 1.6rem;\nborder-bottom-left-radius: 1.6rem;
 d-bbr24:border-bottom-right-radius: 2.4rem;\nborder-bottom-left-radius: 2.4rem;
@@ -42,7 +39,6 @@ d-bbr4:border-bottom-right-radius: 0.4rem;\nborder-bottom-left-radius: 0.4rem;
 d-bbr8:border-bottom-right-radius: 0.8rem;\nborder-bottom-left-radius: 0.8rem;
 d-bbr-circle:border-bottom-right-radius: 50%;\nborder-bottom-left-radius: 50%;
 d-bbr-pill:border-bottom-right-radius: 100em;\nborder-bottom-left-radius: 100em;
-
 d-blr12:border-top-left-radius: 1.2rem;\nborder-bottom-left-radius: 1.2rem;
 d-blr16:border-top-left-radius: 1.6rem;\nborder-bottom-left-radius: 1.6rem;
 d-blr24:border-top-left-radius: 2.4rem;\nborder-bottom-left-radius: 2.4rem;
@@ -53,7 +49,6 @@ d-blr4:border-top-left-radius: 0.4rem;\nborder-bottom-left-radius: 0.4rem;
 d-blr8:border-top-left-radius: 0.8rem;\nborder-bottom-left-radius: 0.8rem;
 d-blr-circle:border-top-left-radius: 50%;\nborder-bottom-left-radius: 50%
 d-blr-pill:border-top-left-radius: 100em;\nborder-bottom-left-radius: 100em;
-
 d-g-cols10:grid-template-columns: [full-start] repeat(10, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(10, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(10, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end]
 d-g-cols11:grid-template-columns: [full-start] repeat(11, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(11, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(11, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end];
 d-g-cols12:grid-template-columns: [full-start] repeat(12, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(12, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(12, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end]
@@ -66,7 +61,6 @@ d-g-cols6:grid-template-columns: [full-start] repeat(6, [col-start] minmax(0, 1f
 d-g-cols7:grid-template-columns: [full-start] repeat(7, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(7, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(7, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end];
 d-g-cols8:grid-template-columns: [full-start] repeat(8, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(8, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(8, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end];
 d-g-cols9:grid-template-columns: [full-start] repeat(9, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(9, [col-start] minmax(0, 1fr) [col-end]) [full-end];\ngrid-template-columns: [full-start] repeat(9, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end];
-
 d-gcs10:grid-column-start: 10;
 d-gcs11:grid-column-start: 11;
 d-gcs12:grid-column-start: 12;
@@ -81,7 +75,6 @@ d-gcs8:grid-column-start: 8;
 d-gcs9:grid-column-start: 9;
 d-gcs-auto:grid-column-start: auto;
 d-gcs-unset:grid-column-start: unset;
-
 d-gce10:grid-column-end: 10;
 d-gce11:grid-column-end: 11;
 d-gce12:grid-column-end: 12;
@@ -96,7 +89,6 @@ d-gce8:grid-column-end: 8;
 d-gce9:grid-column-end: 9;
 d-gce-auto:grid-column-end: auto;
 d-gce-unset:grid-column-end: unset;
-
 d-gc10:grid-column: span 10  /  span 10;
 d-gc11:grid-column: span 11  /  span 11;
 d-gc12:grid-column: span 12  /  span 12;
@@ -112,7 +104,6 @@ d-gc9:grid-column: span 9  /  span 9;
 d-gc-full:grid-column: 1  /  -1;
 d-gc-auto:grid-column: auto;
 d-gc-unset:grid-column: unset;
-
 d-gg12:grid-gap: 1.2rem;
 d-gg16:grid-gap: 1.6rem;
 d-gg24:grid-gap: 2.4rem;
@@ -126,7 +117,6 @@ d-gg4:grid-gap: 0.4rem;
 d-gg6:grid-gap: 0.6rem;
 d-gg8:grid-gap: 0.8rem;
 d-gg-unset:grid-gap: unset;
-
 d-grg12:grid-row-gap: 1.2rem;
 d-grg16:grid-row-gap: 1.6rem;
 d-grg24:grid-row-gap: 2.4rem;
@@ -140,7 +130,6 @@ d-grg4:grid-row-gap: 0.4rem;
 d-grg6:grid-row-gap: 0.6rem;
 d-grg8:grid-row-gap: 0.8rem;
 d-grg-unset:grid-row-gap: unset;
-
 d-gcg12:grid-column-gap: 1.2rem;
 d-gcg16:grid-column-gap: 1.6rem;
 d-gcg24:grid-column-gap: 2.4rem;
@@ -154,7 +143,6 @@ d-gcg4:grid-column-gap: 0.4rem;
 d-gcg6:grid-column-gap: 0.6rem;
 d-gcg8:grid-column-gap: 0.8rem;
 d-gcg-unset:grid-column-gap: unset;
-
 d-g-rows10:grid-template-rows: [full-start] repeat(10, [col-start] minmax(0, 1fr) [col-end]) [full-end];
 d-g-rows11:grid-template-rows: [full-start] repeat(11, [col-start] minmax(0, 1fr) [col-end]) [full-end];
 d-g-rows12:grid-template-rows: [full-start] repeat(12, [col-start] minmax(0, 1fr) [col-end]) [full-end];
@@ -167,7 +155,6 @@ d-g-rows6:grid-template-rows: [full-start] repeat(6, [col-start] minmax(0, 1fr) 
 d-g-rows7:grid-template-rows: [full-start] repeat(7, [col-start] minmax(0, 1fr) [col-end]) [full-end];
 d-g-rows8:grid-template-rows: [full-start] repeat(8, [col-start] minmax(0, 1fr) [col-end]) [full-end];
 d-g-rows9:grid-template-rows: [full-start] repeat(9, [col-start] minmax(0, 1fr) [col-end]) [full-end];
-
 d-grs10:grid-row-start: 10;
 d-grs11:grid-row-start: 11;
 d-grs12:grid-row-start: 12;
@@ -182,7 +169,6 @@ d-grs8:grid-row-start: 8;
 d-grs9:grid-row-start: 9;
 d-grs-auto:grid-row-start: auto;
 d-grs-unset:grid-row-start: unset;
-
 d-gre10:grid-row-end: 10;
 d-gre11:grid-row-end: 11;
 d-gre12:grid-row-end: 12;
@@ -197,7 +183,6 @@ d-gre8:grid-row-end: 8;
 d-gre9:grid-row-end: 9;
 d-gre-auto:grid-row-end: auto;
 d-gre-unset:grid-row-end: unset;
-
 d-gr10:grid-row: span 10  /  span 10;
 d-gr11:grid-row: span 11  /  span 11;
 d-gr12:grid-row: span 12  /  span 12;
@@ -213,15 +198,12 @@ d-gr9:grid-row: span 9  /  span 9;
 d-gr-full:grid-row: 1  /  -1;
 d-gr-auto:grid-row: auto;
 d-gr-unset:grid-row: unset;
-
 d-t50p:top: 50%;
 d-t100p-calc:top: calc(100% + 8px);\ntop: calc(100% + 8px);\ntop: calc(100% + var(--fixed-value, 8px));
 d-t100p:top: 100%;
-
 d-tn50p:top: -50%;
 d-tn100p-calc:top: calc(-100% + 8px);\ntop: calc(-100% + 8px);\ntop: calc(-100% + var(--fixed-value, 8px));
 d-tn100p:top: -100%;
-
 d-t12:top: 1.2rem;
 d-t16:top: 1.6rem;
 d-t24:top: 2.4rem;
@@ -238,7 +220,6 @@ d-t2:top: 0.2rem;
 d-t4:top: 0.4rem;
 d-t6:top: 0.6rem;
 d-t8:top: 0.8rem;
-
 d-tn12:top: -1.2rem;
 d-tn16:top: -1.6rem;
 d-tn24:top: -2.4rem;
@@ -254,15 +235,12 @@ d-tn2:top: -0.2rem;
 d-tn4:top: -0.4rem;
 d-tn6:top: -0.6rem;
 d-tn8:top: -0.8rem;
-
 d-r50p:right: 50%;
 d-r100p-calc:right: calc(100% + 8px);\nright: calc(100% + 8px);\nright: calc(100% + var(--fixed-value, 8px));
 d-r100p:right: 100%;
-
 d-rn50p:right: -50%;
 d-rn100p-calc:right: calc(-100% + 8px);\nright: calc(-100% + 8px);\nright: calc(-100% + var(--fixed-value, 8px));
 d-rn100p:right: -100%;
-
 d-r12:right: 1.2rem;
 d-r16:right: 1.6rem;
 d-r24:right: 2.4rem;
@@ -279,7 +257,6 @@ d-r2:right: 0.2rem;
 d-r4:right: 0.4rem;
 d-r6:right: 0.6rem;
 d-r8:right: 0.8rem;
-
 d-rn12:right: -1.2rem;
 d-rn16:right: -1.6rem;
 d-rn24:right: -2.4rem;
@@ -295,15 +272,12 @@ d-rn2:right: -0.2rem;
 d-rn4:right: -0.4rem;
 d-rn6:right: -0.6rem;
 d-rn8:right: -0.8rem;
-
 d-b50p:bottom: 50%;
 d-b100p-calc:bottom: calc(100% + 8px);\nbottom: calc(100% + 8px);\nbottom: calc(100% + var(--fixed-value, 8px));
 d-b100p:bottom: 100%;
-
 d-bn50p:bottom: -50%;
 d-bn100p-calc:bottom: calc(-100% + 8px);\nbottom: calc(-100% + 8px);\nbottom: calc(-100% + var(--fixed-value, 8px));
 d-bn100p:bottom: -100%;
-
 d-b12:bottom: 1.2rem;
 d-b16:bottom: 1.6rem;
 d-b24:bottom: 2.4rem;
@@ -320,7 +294,6 @@ d-b2:bottom: 0.2rem;
 d-b4:bottom: 0.4rem;
 d-b6:bottom: 0.6rem;
 d-b8:bottom: 0.8rem;
-
 d-bn12:bottom: -1.2rem;
 d-bn16:bottom: -1.6rem;
 d-bn24:bottom: -2.4rem;
@@ -336,15 +309,12 @@ d-bn2:bottom: -0.2rem;
 d-bn4:bottom: -0.4rem;
 d-bn6:bottom: -0.6rem;
 d-bn8:bottom: -0.8rem;
-
 d-l50p:left: 50%;
 d-l100p-calc:left: calc(100% + 8px);\nleft: calc(100% + 8px);\nleft: calc(100% + var(--fixed-value, 8px));
 d-l100p:left: 100%;
-
 d-ln50p:left: -50%;
 d-ln100p-calc:left: calc(-100% + 8px);\nleft: calc(-100% + 8px);\nleft: calc(-100% + var(--fixed-value, 8px));
 d-ln100p:left: -100%;
-
 d-l12:left: 1.2rem;
 d-l16:left: 1.6rem;
 d-l24:left: 2.4rem;
@@ -361,7 +331,6 @@ d-l2:left: 0.2rem;
 d-l4:left: 0.4rem;
 d-l6:left: 0.6rem;
 d-l8:left: 0.8rem;
-
 d-ln12:left: -1.2rem;
 d-ln16:left: -1.6rem;
 d-ln24:left: -2.4rem;
@@ -377,7 +346,6 @@ d-ln2:left: -0.2rem;
 d-ln4:left: -0.4rem;
 d-ln6:left: -0.6rem;
 d-ln8:left: -0.8rem;
-
 d-y12:top: 1.2rem;\nbottom: 1.2rem;
 d-y16:top: 1.6rem;\nbottom: 1.6rem;
 d-y24:top: 2.4rem;\nbottom: 2.4rem;
@@ -394,7 +362,6 @@ d-y2:top: 0.2rem;\nbottom: 0.2rem;
 d-y4:top: 0.4rem;\nbottom: 0.4rem;
 d-y6:top: 0.6rem;\nbottom: 0.6rem;
 d-y8:top: 0.8rem;\nbottom: 0.8rem;
-
 d-yn12:top: -1.2rem;\nbottom: -1.2rem;
 d-yn16:top: -1.6rem;\nbottom: -1.6rem;
 d-yn24:top: -2.4rem;\nbottom: -2.4rem;
@@ -410,7 +377,6 @@ d-yn2:top: -0.2rem;\nbottom: -0.2rem;
 d-yn4:top: -0.4rem;\nbottom: -0.4rem;
 d-yn6:top: -0.6rem;\nbottom: -0.6rem;
 d-yn8:top: -0.8rem;\nbottom: -0.8rem
-
 d-x12:right: 1.2rem;\nleft: 1.2rem;
 d-x16:right: 1.6rem;\nleft: 1.6rem;
 d-x24:right: 2.4rem;\nleft: 2.4rem;
@@ -427,7 +393,6 @@ d-x2:right: 0.2rem;\nleft: 0.2rem;
 d-x4:right: 0.4rem;\nleft: 0.4rem;
 d-x6:right: 0.6rem;\nleft: 0.6rem;
 d-x8:right: 0.8rem;\nleft: 0.8rem;
-
 d-xn12:right: -1.2rem;\nleft: -1.2rem;
 d-xn16:right: -1.6rem;\nleft: -1.6rem;
 d-xn24:right: -2.4rem;\nleft: -2.4rem;
@@ -443,7 +408,6 @@ d-xn2:right: -0.2rem;\nleft: -0.2rem;
 d-xn4:right: -0.4rem;\nleft: -0.4rem;
 d-xn6:right: -0.6rem;\nleft: -0.6rem;
 d-xn8:right: -0.8rem;\nleft: -0.8rem;
-
 d-all12:top: 1.2rem;\nright: 1.2rem;\nbottom: 1.2rem;\nleft: 1.2rem;
 d-all16:top: 1.6rem;\nright: 1.6rem;\nbottom: 1.6rem;\nleft: 1.6rem;
 d-all24:top: 2.4rem;\nright: 2.4rem;\nbottom: 2.4rem;\nleft: 2.4rem;
@@ -460,7 +424,6 @@ d-all2:top: 0.2rem;\nright: 0.2rem;\nbottom: 0.2rem;\nleft: 0.2rem;
 d-all4:top: 0.4rem;\nright: 0.4rem;\nbottom: 0.4rem;\nleft: 0.4rem;
 d-all6:top: 0.6rem;\nright: 0.6rem;\nbottom: 0.6rem;\nleft: 0.6rem;
 d-all8:top: 0.8rem;\nright: 0.8rem;\nbottom: 0.8rem;\nleft: 0.8rem;
-
 d-alln12:top: -1.2rem;\nright: -1.2rem;\nbottom: -1.2rem;\nleft: -1.2rem;
 d-alln16:top: -1.6rem;\nright: -1.6rem;\nbottom: -1.6rem;\nleft: -1.6rem;
 d-alln24:top: -2.4rem;\nright: -2.4rem;\nbottom: -2.4rem;\nleft: -2.4rem;
@@ -476,7 +439,6 @@ d-alln2:top: -0.2rem;\nright: -0.2rem;\nbottom: -0.2rem;\nleft: -0.2rem;
 d-alln4:top: -0.4rem;\nright: -0.4rem;\nbottom: -0.4rem;\nleft: -0.4rem;
 d-alln6:top: -0.6rem;\nright: -0.6rem;\nbottom: -0.6rem;\nleft: -0.6rem;
 d-alln8:top: -0.8rem;\nright: -0.8rem;\nbottom: -0.8rem;\nleft: -0.8rem;
-
 d-h100p:height: 100%;
 d-h10p:height: 10%;
 d-h20p:height: 20%;
@@ -489,7 +451,6 @@ d-h70p:height: 70%;
 d-h75p:height: 75%;
 d-h80p:height: 80%;
 d-h90p:height: 90%;
-
 d-h1024:height: 102.4rem;
 d-h1140:height: 114rem;
 d-h1268:height: 126.8rem;
@@ -526,7 +487,6 @@ d-h6:height: 0.6rem;
 d-h8:height: 0.8rem;
 d-h-auto:height: auto;
 d-h-unset:height: unset;
-
 d-hmn100p:min-height: 100%;
 d-hmn10p:min-height: 10%;
 d-hmn20p:min-height: 20%;
@@ -539,7 +499,6 @@ d-hmn70p:min-height: 70%;
 d-hmn75p:min-height: 75%;
 d-hmn80p:min-height: 80%;
 d-hmn90p:min-height: 90%;
-
 d-hmn1024:min-height: 102.4rem;
 d-hmn1140:min-height: 114rem;
 d-hmn1268:min-height: 126.8rem;
@@ -624,7 +583,6 @@ d-hmx6:max-height: 0.6rem;
 d-hmx8:max-height: 0.8rem;
 d-hmx-auto:max-height: auto;
 d-hmx-unset:max-height: unset;
-
 d-w100p:width: 100%;
 d-w10p:width: 10%;
 d-w20p:width: 20%;
@@ -637,7 +595,6 @@ d-w70p:width: 70%;
 d-w75p:width: 75%;
 d-w80p:width: 80%;
 d-w90p:width: 90%;
-
 d-w60ch:width: 60ch;
 d-w75ch:width: 75ch;
 d-w90ch:width: 90ch;
@@ -677,7 +634,6 @@ d-w6:width: 0.6rem;
 d-w8:width: 0.8rem;
 d-w-auto:width: auto;
 d-w-unset:width: unset;
-
 d-wmn100p:min-width: 100%;
 d-wmn10p:min-width: 10%;
 d-wmn20p:min-width: 20%;
@@ -690,7 +646,6 @@ d-wmn70p:min-width: 70%;
 d-wmn75p:min-width: 75%;
 d-wmn80p:min-width: 80%;
 d-wmn90p:min-width: 90%;
-
 d-wmn60ch:min-width: 60ch;
 d-wmn75ch:min-width: 75ch;
 d-wmn90ch:min-width: 90ch;
@@ -729,7 +684,6 @@ d-wmn6:min-width: 0.6rem;
 d-wmn8:min-width: 0.8rem;
 d-wmn-auto:min-width: auto;
 d-wmn-unset:min-width: unset;
-
 d-wmx100p:max-width: 100%;
 d-wmx10p:max-width: 10%;
 d-wmx20p:max-width: 20%;
@@ -742,7 +696,6 @@ d-wmx70p:max-width: 70%
 d-wmx75p:max-width: 75%;
 d-wmx80p:max-width: 80%;
 d-wmx90p:max-width: 90%;
-
 d-wmx60ch:max-width: 60ch;
 d-wmx75ch:max-width: 75ch;
 d-wmx90ch:max-width: 90ch;
@@ -781,7 +734,6 @@ d-wmx6:max-width: 0.6rem;
 d-wmx8:max-width: 0.8rem;
 d-wmx-auto:max-width: auto;
 d-wmx-unset:max-width: unset;
-
 d-m12:margin: 1.2rem;
 d-m16:margin: 1.6rem;
 d-m24:margin: 2.4rem;
@@ -796,7 +748,6 @@ d-m6:margin: 0.6rem;
 d-m8:margin: 0.8rem;
 d-m-auto:margin: auto;
 d-m-unset:margin: unset;
-
 d-mt12:margin-top: 1.2rem;
 d-mt16:margin-top: 1.6rem;
 d-mt24:margin-top: 2.4rem;
@@ -811,7 +762,6 @@ d-mt6:margin-top: 0.6rem;
 d-mt8:margin-top: 0.8rem;
 d-mt-auto:margin-top: auto;
 d-mt-unset:margin-top: unset;
-
 d-mr12:margin-right: 1.2rem;
 d-mr16:margin-right: 1.6rem;
 d-mr24:margin-right: 2.4rem;
@@ -826,7 +776,6 @@ d-mr6:margin-right: 0.6rem;
 d-mr8:margin-right: 0.8rem;
 d-mr-auto:margin-right: auto;
 d-mr-unset:margin-right: unset;
-
 d-mb12:margin-bottom: 1.2rem;
 d-mb16:margin-bottom: 1.6rem;
 d-mb24:margin-bottom: 2.4rem;
@@ -841,7 +790,6 @@ d-mb6:margin-bottom: 0.6rem;
 d-mb8:margin-bottom: 0.8rem;
 d-mb-auto:margin-bottom: auto;
 d-mb-unset:margin-bottom: unset;
-
 d-ml12:margin-left: 1.2rem;
 d-ml16:margin-left: 1.6rem;
 d-ml24:margin-left: 2.4rem;
@@ -856,7 +804,6 @@ d-ml6:margin-left: 0.6rem;
 d-ml8:margin-left: 0.8rem;
 d-ml-auto:margin-left: auto;
 d-ml-unset:margin-left: unset;
-
 d-mx12:margin-right: 1.2rem;\nmargin-left: 1.2rem;
 d-mx16:margin-right: 1.6rem;\nmargin-left: 1.6rem;
 d-mx24:margin-right: 2.4rem;\nmargin-left: 2.4rem;
@@ -871,7 +818,6 @@ d-mx6:margin-right: 0.6rem;\nmargin-left: 0.6rem;
 d-mx8:margin-right: 0.8rem;\nmargin-left: 0.8rem;
 d-mx-auto:margin-right: auto;\nmargin-left: auto;
 d-mx-unset:margin-right: unset;\nmargin-left: unset;
-
 d-my12:margin-top: 1.2rem;\nmargin-bottom: 1.2rem;
 d-my16:margin-top: 1.6rem;\nmargin-bottom: 1.6rem;
 d-my24:margin-top: 2.4rem;\nmargin-bottom: 2.4rem;
@@ -886,7 +832,6 @@ d-my6:margin-top: 0.6rem;\nmargin-bottom: 0.6rem;
 d-my8:margin-top: 0.8rem;\nmargin-bottom: 0.8rem;
 d-my-auto:margin-top: auto;\nmargin-bottom: auto;
 d-my-unset:margin-top: unset;\nmargin-bottom: unset;
-
 d-mn12:margin: -1.2rem;
 d-mn16:margin: -1.6rem;
 d-mn24:margin: -2.4rem;
@@ -898,7 +843,6 @@ d-mn2:margin: -0.2rem;
 d-mn4:margin: -0.4rem;
 d-mn6:margin: -0.6rem;
 d-mn8:margin: -0.8rem;
-
 d-mtn12:margin-top: -1.2rem;
 d-mtn16:margin-top: -1.6rem;
 d-mtn24:margin-top: -2.4rem;
@@ -910,7 +854,6 @@ d-mtn2:margin-top: -0.2rem;
 d-mtn4:margin-top: -0.4rem;
 d-mtn6:margin-top: -0.6rem;
 d-mtn8:margin-top: -0.8rem;
-
 d-mrn12:margin-right: -1.2rem;
 d-mrn16:margin-right: -1.6rem;
 d-mrn24:margin-right: -2.4rem;
@@ -922,7 +865,6 @@ d-mrn2:margin-right: -0.2rem;
 d-mrn4:margin-right: -0.4rem;
 d-mrn6:margin-right: -0.6rem;
 d-mrn8:margin-right: -0.8rem;
-
 d-mbn12:margin-bottom: -1.2rem;
 d-mbn16:margin-bottom: -1.6rem;
 d-mbn24:margin-bottom: -2.4rem;
@@ -934,7 +876,6 @@ d-mbn2:margin-bottom: -0.2rem;
 d-mbn4:margin-bottom: -0.4rem;
 d-mbn6:margin-bottom: -0.6rem;
 d-mbn8:margin-bottom: -0.8rem;
-
 d-mln12:margin-left: -1.2rem;
 d-mln16:margin-left: -1.6rem;
 d-mln24:margin-left: -2.4rem;
@@ -946,7 +887,6 @@ d-mln2:margin-left: -0.2rem;
 d-mln4:margin-left: -0.4rem;
 d-mln6:margin-left: -0.6rem;
 d-mln8:margin-left: -0.8rem;
-
 d-mxn12:margin-right: -1.2rem;\nmargin-left: -1.2rem;
 d-mxn16:margin-right: -1.6rem;\nmargin-left: -1.6rem;
 d-mxn24:margin-right: -2.4rem;\nmargin-left: -2.4rem;
@@ -958,7 +898,6 @@ d-mxn2:margin-right: -0.2rem;\nmargin-left: -0.2rem;
 d-mxn4:margin-right: -0.4rem;\nmargin-left: -0.4rem;
 d-mxn6:margin-right: -0.6rem;\nmargin-left: -0.6rem;
 d-mxn8:margin-right: -0.8rem;\nmargin-left: -0.8rem;
-
 d-myn12:margin-top: -1.2rem;\nmargin-bottom: -1.2rem;
 d-myn16:margin-top: -1.6rem;\nmargin-bottom: -1.6rem;
 d-myn24:margin-top: -2.4rem;\nmargin-bottom: -2.4rem;
@@ -970,7 +909,6 @@ d-myn2:margin-top: -0.2rem;\nmargin-bottom: -0.2rem;
 d-myn4:margin-top: -0.4rem;\nmargin-bottom: -0.4rem;
 d-myn6:margin-top: -0.6rem;\nmargin-bottom: -0.6rem;
 d-myn8:margin-top: -0.8rem;\nmargin-bottom: -0.8rem;
-
 d-p12:padding: 1.2rem;
 d-p16:padding: 1.6rem;
 d-p24:padding: 2.4rem;
@@ -984,7 +922,6 @@ d-p4:padding: 0.4rem;
 d-p6:padding: 0.6rem;
 d-p8:padding: 0.8rem;
 d-p-unset:padding: unset;
-
 d-pt12:padding-top: 1.2rem;
 d-pt16:padding-top: 1.6rem;
 d-pt24:padding-top: 2.4rem;
@@ -998,7 +935,6 @@ d-pt4:padding-top: 0.4rem;
 d-pt6:padding-top: 0.6rem;
 d-pt8:padding-top: 0.8rem;
 d-pt-unset:padding-top: unset;
-
 d-pr12:padding-right: 1.2rem;
 d-pr16:padding-right: 1.6rem;
 d-pr24:padding-right: 2.4rem;
@@ -1012,7 +948,6 @@ d-pr4:padding-right: 0.4rem;
 d-pr6:padding-right: 0.6rem;
 d-pr8:padding-right: 0.8rem;
 d-pr-unset:padding-right: unset;
-
 d-pb12:padding-bottom: 1.2rem;
 d-pb16:padding-bottom: 1.6rem;
 d-pb24:padding-bottom: 2.4rem;
@@ -1026,7 +961,6 @@ d-pb4:padding-bottom: 0.4rem;
 d-pb6:padding-bottom: 0.6rem;
 d-pb8:padding-bottom: 0.8rem;
 d-pb-unset:padding-bottom: unset;
-
 d-pl12:padding-left: 1.2rem;
 d-pl16:padding-left: 1.6rem;
 d-pl24:padding-left: 2.4rem;
@@ -1040,7 +974,6 @@ d-pl4:padding-left: 0.4rem;
 d-pl6:padding-left: 0.6rem;
 d-pl8:padding-left: 0.8rem;
 d-pl-unset:padding-left: unset;
-
 d-px12:padding-right: 1.2rem;\npadding-left: 1.2rem;
 d-px16:padding-right: 1.6rem;\npadding-left: 1.6rem;
 d-px24:padding-right: 2.4rem;\npadding-left: 2.4rem;
@@ -1054,7 +987,6 @@ d-px4:padding-right: 0.4rem;\npadding-left: 0.4rem;
 d-px6:padding-right: 0.6rem;\npadding-left: 0.6rem;
 d-px8:padding-right: 0.8rem;\npadding-left: 0.8rem;
 d-px-unset:padding-right: unset;\npadding-left: unset;
-
 d-py12:padding-top: 1.2rem;\npadding-bottom: 1.2rem;
 d-py16:padding-top: 1.6rem;\npadding-bottom: 1.6rem;
 d-py24:padding-top: 2.4rem;\npadding-bottom: 2.4rem;
