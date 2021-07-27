@@ -25,4 +25,8 @@ export default {
     background: var(--some-css-var);
     size: @some-less-var;
   }
+  .another-local-class {
+    .d-some-auto-gen-class;
+    .d-some-auto-gen-class();
+  }
 </style>
