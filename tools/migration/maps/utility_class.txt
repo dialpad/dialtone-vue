@@ -65,7 +65,7 @@ d-max-width4:d-wmx464
 d-max-width5:d-wmx628
 d-max-width7:d-wmx912
 d-max-width8:d-wmx1024
-d-max-width-auto :d-wmx-auto
+d-max-width-auto:d-wmx-auto
 d-width-unset:d-w-unset
 d-height-unset:d-h-unset
 d-w-60ch:d-w60ch
