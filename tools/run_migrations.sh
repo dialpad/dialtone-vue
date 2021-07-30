@@ -72,4 +72,9 @@ sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/auto_generated_classes.txt  -d ${MIGRATI
 echo "Auto Generated Dialtone Classes Migrated!"
 sleep 5s
 
+echo "Migrating Mixin Corrections..."
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/migration_mixin_corrections.txt  -d ${MIGRATION_DIR} -a -r
+echo "Mixin Corrections Migrated!"
+sleep 5s
+
 echo "Migration Complete!"
