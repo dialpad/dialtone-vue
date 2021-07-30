@@ -47,11 +47,11 @@ d-blr0|border-top-left-radius: 0; border-bottom-left-radius: 0;
 d-blr2|border-top-left-radius: 0.2rem; border-bottom-left-radius: 0.2rem;
 d-blr4|border-top-left-radius: 0.4rem; border-bottom-left-radius: 0.4rem;
 d-blr8|border-top-left-radius: 0.8rem; border-bottom-left-radius: 0.8rem;
-d-blr-circle|border-top-left-radius: 50%; border-bottom-left-radius: 50%
+d-blr-circle|border-top-left-radius: 50%; border-bottom-left-radius: 50%;
 d-blr-pill|border-top-left-radius: 100em; border-bottom-left-radius: 100em;
-d-g-cols10|grid-template-columns: [full-start] repeat(10, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(10, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(10, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end]
+d-g-cols10|grid-template-columns: [full-start] repeat(10, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(10, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(10, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end];
 d-g-cols11|grid-template-columns: [full-start] repeat(11, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(11, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(11, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end];
-d-g-cols12|grid-template-columns: [full-start] repeat(12, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(12, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(12, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end]
+d-g-cols12|grid-template-columns: [full-start] repeat(12, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(12, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(12, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end];
 d-g-cols1|grid-template-columns: [full-start] repeat(1, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(1, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(1, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end];
 d-g-cols2|grid-template-columns: [full-start] repeat(2, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(2, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(2, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end];
 d-g-cols3|grid-template-columns: [full-start] repeat(3, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(3, [col-start] minmax(0, 1fr) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(3, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end];
@@ -376,7 +376,7 @@ d-yn1|top: -0.1rem; bottom: -0.1rem;
 d-yn2|top: -0.2rem; bottom: -0.2rem;
 d-yn4|top: -0.4rem; bottom: -0.4rem;
 d-yn6|top: -0.6rem; bottom: -0.6rem;
-d-yn8|top: -0.8rem; bottom: -0.8rem
+d-yn8|top: -0.8rem; bottom: -0.8rem;
 d-x12|right: 1.2rem; left: 1.2rem;
 d-x16|right: 1.6rem; left: 1.6rem;
 d-x24|right: 2.4rem; left: 2.4rem;
@@ -388,7 +388,7 @@ d-x84|right: 8.4rem; left: 8.4rem;
 d-x96|right: 9.6rem; left: 9.6rem;
 d-x102|right: 10.2rem; left: 10.2rem;
 d-x0|right: 0; left: 0;
-d-x1|right: 0.1rem; left: 0.1rem
+d-x1|right: 0.1rem; left: 0.1rem;
 d-x2|right: 0.2rem; left: 0.2rem;
 d-x4|right: 0.4rem; left: 0.4rem;
 d-x6|right: 0.6rem; left: 0.6rem;
@@ -411,7 +411,7 @@ d-xn8|right: -0.8rem; left: -0.8rem;
 d-all12|top: 1.2rem; right: 1.2rem; bottom: 1.2rem; left: 1.2rem;
 d-all16|top: 1.6rem; right: 1.6rem; bottom: 1.6rem; left: 1.6rem;
 d-all24|top: 2.4rem; right: 2.4rem; bottom: 2.4rem; left: 2.4rem;
-d-all32|top: 3.2rem; right: 3.2rem; bottom: 3.2rem; left: 3.2rem
+d-all32|top: 3.2rem; right: 3.2rem; bottom: 3.2rem; left: 3.2rem;
 d-all48|top: 4.8rem; right: 4.8rem; bottom: 4.8rem; left: 4.8rem;
 d-all64|top: 6.4rem; right: 6.4rem; bottom: 6.4rem; left: 6.4rem;
 d-all72|top: 7.2rem; right: 7.2rem; bottom: 7.2rem; left: 7.2rem;
@@ -690,7 +690,7 @@ d-wmx30p|max-width: 30%;
 d-wmx40p|max-width: 40%;
 d-wmx50p|max-width: 50%;
 d-wmx60p|max-width: 60%;
-d-wmx70p|max-width: 70%
+d-wmx70p|max-width: 70%;
 d-wmx75p|max-width: 75%;
 d-wmx80p|max-width: 80%;
 d-wmx90p|max-width: 90%;
