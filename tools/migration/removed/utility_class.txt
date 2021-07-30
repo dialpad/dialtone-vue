@@ -123,3 +123,8 @@ d-bgg-rose-darker
 d-bgg-rose-dark
 d-bgg-rose-light
 d-bgg-rose
+d-border--solid
+d-border-top--solid
+d-border-bottom--solid
+d-border-left--solid
+d-border-right--solid

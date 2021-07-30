@@ -1,0 +1,10 @@
+d-ba--solid|border-style: solid;
+d-bt--solid|border-top-style: solid;
+d-bb--solid|border-bottom-style: solid;
+d-bl--solid|border-left-style: solid;
+d-br--solid|border-right-style: solid;
+d-border--solid|border-style: solid;
+d-border-top--solid|border-top-style: solid;
+d-border-bottom--solid|border-bottom-style: solid;
+d-border-left--solid|border-left-style: solid;
+d-border-right--solid|border-right-style: solid;
