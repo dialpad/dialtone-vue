@@ -1,0 +1,5 @@
+d-ba--solid:d-border--solid
+d-bt--solid:d-border-top--solid
+d-bb--solid:d-border-bottom--solid
+d-bl--solid:d-border-left--solid
+d-br--solid:d-border-right--solid
