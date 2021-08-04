@@ -1,5 +1,6 @@
 import DtModal from './modal.vue';
 import ModalMdx from './modal.mdx';
+import DtModalDefaultTemplate from './modal_default.story.vue';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { generateTemplate } from '../storybook_utils';
 import DtButton from '../button/button';
@@ -70,7 +71,7 @@ viverra iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. V
 maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat vel. \
 Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
 orci ipsum et velit.`,
-  show: true,
+  show: false,
   title: 'Example Title',
 };
 
@@ -87,7 +88,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const modalTemplate = generateTemplate(DtModal, {
+const modalTemplate = generateTemplate(DtModalDefaultTemplate, {
   customProps: ['class="d-p-static"'],
 });
 const defaultTemplate = (args, { argTypes }) => {
