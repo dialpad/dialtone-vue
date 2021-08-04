@@ -41,15 +41,27 @@ d-link--dark:d-link--muted
 d-modal__title:d-modal__header
 d-modal__copy:d-modal__content
 d-tooltip-hover:d-tooltip--hover
-d-tooltip__top-left--inverted:d-tooltip d-tooltip__top-left d-tooltip--inverted
-d-tooltip__top-center--inverted:d-tooltip d-tooltip__top-center d-tooltip--inverted
-d-tooltip__top-right--inverted:d-tooltip d-tooltip__top-right d-tooltip--inverted
-d-tooltip__bottom-left--inverted:d-tooltip d-tooltip__bottom-left d-tooltip--inverted
-d-tooltip__bottom-center--inverted:d-tooltip d-tooltip__bottom-center d-tooltip--inverted
-d-tooltip__bottom-right--inverted:d-tooltip d-tooltip__bottom-right d-tooltip--inverted
-d-tooltip__right-top--inverted:d-tooltip d-tooltip__right-top d-tooltip--inverted
-d-tooltip__right-center--inverted:d-tooltip d-tooltip__right-center d-tooltip--inverted
-d-tooltip__right-bottom--inverted:d-tooltip d-tooltip__right-bottom d-tooltip--inverted
-d-tooltip__left-top--inverted:d-tooltip d-tooltip__left-top d-tooltip--inverted
-d-tooltip__left-center--invertedd-tooltip d-tooltip__left-center d-tooltip--inverted
-d-tooltip__left-bottom--inverted:d-tooltip d-tooltip__left-bottom d-tooltip--inverted
+d-tooltip__top-left--inverted:d-tooltip d-tooltip__arrow--top-left d-tooltip--inverted
+d-tooltip__top-center--inverted:d-tooltip d-tooltip__arrow--top-center d-tooltip--inverted
+d-tooltip__top-right--inverted:d-tooltip d-tooltip__arrow--top-right d-tooltip--inverted
+d-tooltip__bottom-left--inverted:d-tooltip d-tooltip__arrow--bottom-left d-tooltip--inverted
+d-tooltip__bottom-center--inverted:d-tooltip d-tooltip__arrow--bottom-center d-tooltip--inverted
+d-tooltip__bottom-right--inverted:d-tooltip d-tooltip__arrow--bottom-right d-tooltip--inverted
+d-tooltip__right-top--inverted:d-tooltip d-tooltip__arrow--right-top d-tooltip--inverted
+d-tooltip__right-center--inverted:d-tooltip d-tooltip__arrow--right-center d-tooltip--inverted
+d-tooltip__right-bottom--inverted:d-tooltip d-tooltip__arrow--right-bottom d-tooltip--inverted
+d-tooltip__left-top--inverted:d-tooltip d-tooltip__arrow--left-top d-tooltip--inverted
+d-tooltip__left-center--inverted:d-tooltip d-tooltip__arrow--left-center d-tooltip--inverted
+d-tooltip__left-bottom--inverted:d-tooltip d-tooltip__arrow--left-bottom d-tooltip--inverted
+d-tooltip__top-left:d-tooltip d-tooltip__arrow--top-left
+d-tooltip__top-center:d-tooltip d-tooltip__arrow--top-center
+d-tooltip__top-right:d-tooltip d-tooltip__arrow--top-right
+d-tooltip__bottom-left:d-tooltip d-tooltip__arrow--bottom-left
+d-tooltip__bottom-center:d-tooltip d-tooltip__arrow--bottom-center
+d-tooltip__bottom-right:d-tooltip d-tooltip__arrow--bottom-right
+d-tooltip__right-top:d-tooltip d-tooltip__arrow--right-top
+d-tooltip__right-center:d-tooltip d-tooltip__arrow--right-center
+d-tooltip__right-bottom:d-tooltip d-tooltip__arrow--right-bottom
+d-tooltip__left-top:d-tooltip d-tooltip__arrow--left-top
+d-tooltip__left-center:d-tooltip d-tooltip__arrow--left-center
+d-tooltip__left-bottom:d-tooltip d-tooltip__arrow--left-bottom
