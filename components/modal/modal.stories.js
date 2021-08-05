@@ -2,7 +2,7 @@ import DtModal from './modal.vue';
 import ModalMdx from './modal.mdx';
 import DtModalDefaultTemplate from './modal_default.story.vue';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
-import { generateTemplate } from '../storybook_utils';
+import { createTemplateFromVueFile, generateTemplate } from '../storybook_utils';
 import DtButton from '../button/button';
 
 export const argTypesData = {
@@ -47,6 +47,7 @@ a 2-way binding to control modal visibility.`,
   },
 
   size: {
+    defaultValue: 'default',
     control: {
       type: 'select',
       options: Object.keys(MODAL_SIZE_MODIFIERS),
@@ -54,9 +55,16 @@ a 2-way binding to control modal visibility.`,
   },
 
   kind: {
+    defaultValue: 'default',
     control: {
       type: 'select',
       options: Object.keys(MODAL_KIND_MODIFIERS),
+    },
+  },
+
+  showFooter: {
+    table: {
+      disable: true,
     },
   },
 };
@@ -88,41 +96,30 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const modalTemplate = generateTemplate(DtModalDefaultTemplate, {
-  customProps: ['class="d-p-static"'],
-});
-const defaultTemplate = (args, { argTypes }) => {
-  return {
-    components: { DtModal },
-    template: modalTemplate,
-    props: Object.keys(argTypes),
-  };
+// Templates
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtModalDefaultTemplate);
+
+// Stories
+export const Default = DefaultTemplate.bind({});
+Default.args = {
 };
-export const Default = defaultTemplate.bind({});
 
-const footerTemplate = generateTemplate(DtModal, {
-  childTemplate: `
-    <template #footer>
-      <dt-button :kind="kind" importance="primary">Confirm</dt-button>
-      <dt-button :kind="kind" importance="clear">Cancel</dt-button>
-    </template>
-  `,
-  customProps: ['class="d-p-static"'],
-});
-const withFooterTemplate = (args, { argTypes }) => {
-  return {
-    components: { DtButton, DtModal },
-    template: footerTemplate,
-    props: Object.keys(argTypes),
-  };
+export const WithFooter = DefaultTemplate.bind({});
+WithFooter.args = {
+  showFooter: true,
 };
-export const WithFooter = withFooterTemplate.bind({});
 
-export const WithDangerStyle = withFooterTemplate.bind({});
-WithDangerStyle.args = { kind: 'danger' };
+export const WithDangerStyle = DefaultTemplate.bind({});
+WithDangerStyle.args = {
+  kind: 'danger',
+  showFooter: true,
+};
 
-export const WithFullSize = defaultTemplate.bind({});
-WithFullSize.args = { size: 'full' };
+export const WithFullSize = DefaultTemplate.bind({});
+WithFullSize.args = {
+  size: 'full',
+  showFooter: true,
+};
 
 const slotsTemplate = generateTemplate(DtModal, {
   childTemplate: `
