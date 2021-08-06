@@ -6,9 +6,21 @@
       :show="isOpen"
       :kind="kind"
       :size="size"
+      :copy="copy"
       @update:show="close"
     >
-      <div>custom content</div>
+      <template
+        v-if="header"
+        #header
+      >
+        <span v-html="header"></span>
+      </template>
+      <template
+        v-if="defaultSlot"
+        #default
+      >
+        <span v-html="defaultSlot"></span>
+      </template>
       <template
         v-if="showFooter"
         #footer

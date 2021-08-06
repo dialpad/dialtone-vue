@@ -2,8 +2,7 @@ import DtModal from './modal.vue';
 import ModalMdx from './modal.mdx';
 import DtModalDefaultTemplate from './modal_default.story.vue';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
-import { createTemplateFromVueFile, generateTemplate } from '../storybook_utils';
-import DtButton from '../button/button';
+import { createTemplateFromVueFile } from '../storybook_utils';
 
 export const argTypesData = {
   // Slots
@@ -121,24 +120,14 @@ WithFullSize.args = {
   showFooter: true,
 };
 
-const slotsTemplate = generateTemplate(DtModal, {
-  childTemplate: `
-    <template #header>
-      <div class="d-fl-center d-p12 d-bgc-purple-100">
-        <div>[custom header]</div>
-      </div>
-    </template>
+export const WithCustomHeaderAndContent = DefaultTemplate.bind({});
+WithCustomHeaderAndContent.args = {
+  header: `
+    <div class="d-fl-center d-p12 d-bgc-purple-100">
+      <div>[custom header]</div>
+    </div>`,
+  default: `
     <div class="d-fl-center d-p32 d-bgc-yellow-300">
       <h2>[custom body]</h2>
-    </div>
-  `,
-  customProps: ['class="d-p-static"'],
-});
-const withCustomHeaderAndContentTemplate = (args, { argTypes }) => {
-  return {
-    components: { DtButton, DtModal },
-    template: slotsTemplate,
-    props: Object.keys(argTypes),
-  };
+    </div>`,
 };
-export const WithCustomHeaderAndContent = withCustomHeaderAndContentTemplate.bind({});
