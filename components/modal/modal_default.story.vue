@@ -50,14 +50,6 @@ export default {
   },
 
   props: {
-    /**
-     * Whether the modal should be shown.
-     */
-    show: {
-      type: Boolean,
-      default: false,
-    },
-
     showFooter: {
       type: Boolean,
       default: false,
