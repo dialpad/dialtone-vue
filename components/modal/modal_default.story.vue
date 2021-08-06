@@ -51,7 +51,7 @@ export default {
 
   props: {
     /**
-     * Whether the modal should be shown.  Parent component can sync on this value to control the modal's visibility.
+     * Whether the modal should be shown.
      */
     show: {
       type: Boolean,

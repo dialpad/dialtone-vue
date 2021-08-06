@@ -45,6 +45,7 @@ a 2-way binding to control modal visibility.`,
     },
   },
 
+  // Props
   size: {
     defaultValue: 'default',
     control: {
