@@ -1,7 +1,7 @@
 <template>
   <div>
     <dt-modal
-      title="Modal title"
+      :title="title"
       :close-button-props="buttonCloseProps"
       :show="isOpen"
       :kind="kind"
