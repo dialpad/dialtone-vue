@@ -65,3 +65,5 @@ d-tooltip__right-bottom:d-tooltip d-tooltip__arrow--right-bottom
 d-tooltip__left-top:d-tooltip d-tooltip__arrow--left-top
 d-tooltip__left-center:d-tooltip d-tooltip__arrow--left-center
 d-tooltip__left-bottom:d-tooltip d-tooltip__arrow--left-bottom
+d-radio__description:d-description
+d-checkbox__description:d-description
