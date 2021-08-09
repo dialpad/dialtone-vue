@@ -11,3 +11,4 @@ d-border-right--solid|border-right-style: solid;
 d-height1|height: 10.8rem;
 d-grid-layout--with-columns|grid-auto-columns: 1fr; grid-auto-columns: 1fr; grid-auto-columns: var(--grid-auto-col); grid-template-columns: [full-start] repeat(12, [col-start] minmax(-webkit-min-content, 25.6rem) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(12, [col-start] minmax(min-content, 25.6rem) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(12, [col-start] minmax(min-content, 25.6rem) [col-end]) [full-end]; grid-template-columns: [full-start] repeat(var(--grid-col), [col-start] var(--grid-col-width) [col-end]) [full-end];
 d-z-index--modal-bg:z-index: calc(var(--zi-modal) - 1);
+d-zi-modal-bg:z-index: calc(var(--zi-modal) - 1);
