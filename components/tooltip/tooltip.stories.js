@@ -1,5 +1,6 @@
 import { createTemplateFromVueFile } from '../storybook_utils';
 import DtTooltip from './tooltip';
+import DtTooltipTippyTemplate from './tooltip-tippy.story.vue';
 import DtTooltipMdx from './tooltip.mdx';
 import DtTooltipDefaultTemplate from './tooltip_default.story.vue';
 import DtTooltipVariantsTemplate from './tooltip_variants.story';
@@ -72,6 +73,7 @@ export default {
 // Templates
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipDefaultTemplate);
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipVariantsTemplate);
+const TippyTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipTippyTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
@@ -79,3 +81,6 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+
+export const Tooltip2 = TippyTemplate.bind({});
+TippyTemplate.args = {};
