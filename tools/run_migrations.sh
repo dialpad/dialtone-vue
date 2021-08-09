@@ -57,14 +57,14 @@ echo "Migrating Utility Classes..."
 sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/utility_class.txt -d ${MIGRATION_DIR} -r
 echo "Utility Classes Migrated!"
 
-echo "Migrating CSS Variables..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/css_var.txt -d ${MIGRATION_DIR} -v -r
-echo "CSS Variables Migrated!"
-sleep 5s
-
 echo "Migrating LESS Variables..."
 sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/less_var.txt -d ${MIGRATION_DIR} -v -r
 echo "LESS Variables Migrated!"
+sleep 5s
+
+echo "Migrating CSS Variables..."
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/css_var.txt -d ${MIGRATION_DIR} -v -r
+echo "CSS Variables Migrated!"
 sleep 5s
 
 echo "Migrating Dialtone Icons..."
