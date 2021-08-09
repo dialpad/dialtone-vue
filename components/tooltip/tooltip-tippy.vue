@@ -7,7 +7,10 @@
       <slot name="anchor" />
     </div>
 
-    <div ref="content" data-tippy-root>
+    <div
+      ref="content"
+      data-tippy-root
+    >
       <slot />
     </div>
   </div>
@@ -28,7 +31,7 @@ export default {
     triggerTarget: {},
     popperOptions: {
       type: Object,
-      default: () => ({ f: 34 }),
+      default: () => ({}),
     },
   },
 
@@ -85,10 +88,10 @@ export default {
     }
   },
 
-  beforeDestroy () {
-    if (!this.tip) return;
-    this.tip.destroy();
-  },
+  // beforeDestroy () {
+  //   if (!this.tip) return;
+  //   this.tip.destroy();
+  // },
 
   methods: {
     init () {
@@ -144,7 +147,7 @@ export default {
 
     filterOptions () {
       const getValue = (key, value) => {
-        if (booleanProps.hasOwnProperty(key)) {
+        if (booleanProps[key] !== undefined) {
           if (value === '') return true;
           if (value === 'false') return false;
           if (value === 'true') return true;
@@ -152,7 +155,7 @@ export default {
         return value;
       };
       for (const key of Object.keys(this.options)) {
-        if (!defaultProps.hasOwnProperty(key)) {
+        if (!defaultProps[key] === undefined) {
           // We're replacing this.options anyway, we don't have to worry about modifying the object
           delete this.options[key];
         } else {
@@ -170,31 +173,31 @@ export default {
       Object.assign(this.options, this.$attrs);
 
       this.filterOptions();
-      if (!this.options.onShow && this.$listeners && this.$listeners.show) {
-        this.options.onShow = (...args) => {
-          return this.$listeners.show.fns(...args);
-        };
-      }
-      if (!this.options.onShow && this.$listeners && this.$listeners.shown) {
-        this.options.onShown = (...args) => {
-          return this.$listeners.shown.fns(...args);
-        };
-      }
-      if (!this.options.onHidden && this.$listeners && this.$listeners.hidden) {
-        this.options.onHidden = (...args) => {
-          return this.$listeners.hidden.fns(...args);
-        };
-      }
-      if (!this.options.onHide && this.$listeners && this.$listeners.hide) {
-        this.options.onHide = (...args) => {
-          return this.$listeners.hide.fns(...args);
-        };
-      }
-      if (!this.options.onMount && this.$listeners && this.$listeners.mount) {
-        this.options.onMount = (...args) => {
-          return this.$listeners.mount.fns(...args);
-        };
-      }
+      // if (!this.options.onShow && this.$listeners && this.$listeners.show) {
+      //   this.options.onShow = (...args) => {
+      //     return this.$listeners.show.fns(...args);
+      //   };
+      // }
+      // if (!this.options.onShow && this.$listeners && this.$listeners.shown) {
+      //   this.options.onShown = (...args) => {
+      //     return this.$listeners.shown.fns(...args);
+      //   };
+      // }
+      // if (!this.options.onHidden && this.$listeners && this.$listeners.hidden) {
+      //   this.options.onHidden = (...args) => {
+      //     return this.$listeners.hidden.fns(...args);
+      //   };
+      // }
+      // if (!this.options.onHide && this.$listeners && this.$listeners.hide) {
+      //   this.options.onHide = (...args) => {
+      //     return this.$listeners.hide.fns(...args);
+      //   };
+      // }
+      // if (!this.options.onMount && this.$listeners && this.$listeners.mount) {
+      //   this.options.onMount = (...args) => {
+      //     return this.$listeners.mount.fns(...args);
+      //   };
+      // }
       this.options.triggerTarget = this.triggerTarget;
       return this.options;
     },
@@ -202,6 +205,6 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
-@import '~tippy.js/dist/tippy.css';
+<style lang="less">
+  @import '~tippy.js/dist/tippy.css';
 </style>
