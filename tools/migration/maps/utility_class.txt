@@ -1001,3 +1001,5 @@ d-border-x:d-bx
 d-border-y:d-by
 d-border:d-ba
 d-list-reset:d-ls-reset
+d-min-height1:d-hmn102
+d-max-width6:d-wmx764
