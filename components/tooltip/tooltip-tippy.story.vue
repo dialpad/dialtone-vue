@@ -1,22 +1,18 @@
 <template>
-  <div class="tooltip-holder">
+  <div
+    ref="tooltip-holder"
+    class="tooltip-holder"
+  >
     <div class="container">
       <div class="some-text" />
       <tooltip-tippy
+        v-if="modifiers.length"
         trigger="click"
         interactive
         class="d-mt12"
         placement="auto"
-        :append-to="appendTo"
         :popper-options="{
-          modifiers: [
-            {
-              name: 'flip',
-              options: {
-                fallbackPlacements: ['top', 'bottom'],
-              },
-            },
-          ],
+          modifiers: modifiers,
         }"
       >
         <template #anchor>
@@ -57,10 +53,19 @@ export default {
 
   data: () => ({
     appendTo: null,
+    modifiers: [],
   }),
 
-  created () {
+  mounted () {
     this.appendTo = document.body;
+    this.modifiers.push([
+      {
+        name: 'flip',
+        options: {
+          fallbackPlacements: ['top', 'bottom'],
+        },
+      },
+    ]);
   },
 };
 </script>

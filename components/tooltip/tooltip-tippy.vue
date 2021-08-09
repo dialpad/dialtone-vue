@@ -199,7 +199,10 @@ export default {
       //   };
       // }
       this.options.triggerTarget = this.triggerTarget;
-      return this.options;
+      return {
+        ...this.options,
+        appendTo: 'parent',
+      };
     },
   },
 };
