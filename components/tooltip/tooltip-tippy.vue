@@ -1,15 +1,23 @@
 <template>
-  <div>
+  <div data-tippy-root>
     <div
-      ref="trigger"
-      class="d-tooltip-container"
+      ref="anchor"
+      class="d-d-inline-block"
     >
       <slot name="anchor" />
     </div>
-
     <div
       ref="content"
-      data-tippy-root
+      data-qa="dt-tooltip"
+      :class="[
+        'd-ps-absolute',
+        'd-tooltip',
+        'd-tooltip__arrow--top-center',
+        TOOLTIP_KIND_MODIFIERS[shouldShowTooltip ? 'show' : 'hide'],
+        {
+          [ TOOLTIP_KIND_MODIFIERS.inverted ]: inverted,
+        },
+      ]"
     >
       <slot />
     </div>
@@ -17,75 +25,51 @@
 </template>
 
 <script>
-import tippy from 'tippy.js';
+import tippy from 'tippy.js/headless';
 import defaultProps, { booleanProps } from './props';
+import { TOOLTIP_KIND_MODIFIERS } from './tooltip_constants';
+import { getUniqueString } from '../utils';
 export default {
   name: 'TooltipTippy',
   props: {
-    to: {},
-    toSelector: {},
-    toElement: {},
-    content: {},
-    enabled: {},
-    visible: {},
-    triggerTarget: {},
-    popperOptions: {
-      type: Object,
-      default: () => ({}),
+    /**
+     * The id of the tooltip
+     */
+    id: {
+      type: String,
+      default () { return getUniqueString(); },
+    },
+
+    visible: {
+      type: Boolean,
+      default: false,
+    },
+
+    flip: {
+      type: Array,
+      default: () => ['right', 'top'],
+    },
+
+    /**
+     * Add inverted class
+     */
+    inverted: {
+      type: Boolean,
+      default: false,
     },
   },
 
   data () {
     return {
+      shouldShowTooltip: false,
+      TOOLTIP_KIND_MODIFIERS,
       tip: null,
-      options: {
-        popperOptions: {},
-      },
+      options: {},
     };
   },
 
-  computed: {
-    isManualTrigger () {
-      return this.options.trigger === 'manual';
-    },
-  },
-
-  watch: {
-    content () {
-      // if (this.tip) {
-      //   this.tip.set(this.getOptions());
-      // }
-    },
-
-    enabled (val) {
-      if (!this.tip) return;
-      if (val) {
-        this.tip.enable();
-      } else {
-        this.tip.hide();
-        this.tip.disable();
-      }
-    },
-
-    visible (val) {
-      if (!this.tip) return;
-      if (val) {
-        this.tip.show();
-      } else {
-        this.tip.hide();
-      }
-    },
-  },
-
   mounted () {
-    // console.log(this.$refs.trigger, this.popperOptions);
-    this.init();
-  },
-
-  updated () {
-    if (this.tip && !this.content) {
-      // this.tip.set(this.getOptions());
-    }
+    this.tip = tippy(this.$refs.anchor.children[0], this.getOptions());
   },
 
   // beforeDestroy () {
@@ -94,57 +78,6 @@ export default {
   // },
 
   methods: {
-    init () {
-      if (this.tip) {
-        try {
-          this.tip.destroy();
-        } catch (error) { }
-        this.tip = null;
-      }
-      let elm = this.toElement;
-      if (elm == null) {
-        if (this.to) {
-          elm = document.querySelector(`[name='${this.to}']`);
-        } else if (this.toSelector) {
-          elm = document.querySelector(this.toSelector);
-        } else if (
-          this.$refs.trigger &&
-            this.$refs.trigger.childElementCount > 0
-        ) {
-          elm = this.$refs.trigger;
-        } else {
-          elm = this.$el.parentElement;
-        }
-      }
-      if (!elm) {
-        return;
-      }
-      const tip = tippy(elm, this.getOptions());
-      if (!tip) {
-        return;
-      }
-      if (Array.isArray(tip)) {
-        if (tip.length > 0) {
-          this.tip = tip[0];
-        } else {
-          return;
-        }
-      }
-      this.tip = tip;
-      this.$emit('onCreate', this.tip);
-      this.$emit('init', this.tip);
-      if (this.enabled === false) {
-        this.tip.disable();
-      }
-      if (this.isManualTrigger && this.visible === true) {
-        this.tip.show();
-      }
-    },
-
-    tippy () {
-      return this.tip;
-    },
-
     filterOptions () {
       const getValue = (key, value) => {
         if (booleanProps[key] !== undefined) {
@@ -165,43 +98,61 @@ export default {
       return this.options;
     },
 
-    getOptions () {
-      this.options.content = this.content ? this.content : this.$refs.content;
-      this.options.popperOptions = this.popperOptions;
+    toCamelCase (str) {
+      return str.split('-').map((word, index) => {
+        if (!index) return word.toLowerCase();
 
-      // TODO convert to camel case
-      Object.assign(this.options, this.$attrs);
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      }).join('');
+    },
+
+    attrsToCamelCase () {
+      return Object.entries(this.$attrs).reduce((acc, [key, value]) => {
+        return {
+          ...acc,
+          [this.toCamelCase(key)]: value,
+        };
+      }, {});
+    },
+
+    getOptions () {
+      const popper = this.$refs.content;
+      this.options = { ...this.attrsToCamelCase() };
 
       this.filterOptions();
-      // if (!this.options.onShow && this.$listeners && this.$listeners.show) {
-      //   this.options.onShow = (...args) => {
-      //     return this.$listeners.show.fns(...args);
-      //   };
-      // }
-      // if (!this.options.onShow && this.$listeners && this.$listeners.shown) {
-      //   this.options.onShown = (...args) => {
-      //     return this.$listeners.shown.fns(...args);
-      //   };
-      // }
-      // if (!this.options.onHidden && this.$listeners && this.$listeners.hidden) {
-      //   this.options.onHidden = (...args) => {
-      //     return this.$listeners.hidden.fns(...args);
-      //   };
-      // }
-      // if (!this.options.onHide && this.$listeners && this.$listeners.hide) {
-      //   this.options.onHide = (...args) => {
-      //     return this.$listeners.hide.fns(...args);
-      //   };
-      // }
-      // if (!this.options.onMount && this.$listeners && this.$listeners.mount) {
-      //   this.options.onMount = (...args) => {
-      //     return this.$listeners.mount.fns(...args);
-      //   };
-      // }
-      this.options.triggerTarget = this.triggerTarget;
+
       return {
         ...this.options,
-        appendTo: 'parent',
+        render () {
+          return {
+            popper,
+          };
+        },
+
+        allowHTML: true,
+        trigger: 'mouseenter focus click',
+        popperOptions: {
+          modifiers: [
+            {
+              name: 'flip',
+              options: {
+                fallbackPlacements: this.flip,
+              },
+            },
+          ],
+        },
+
+        onHide: () => {
+          this.shouldShowTooltip = false;
+        },
+
+        onShow: () => {
+          this.shouldShowTooltip = true;
+        },
+
+        onDestroy () {},
+        onTrigger () {},
+        onBeforeUpdate () {},
       };
     },
   },
@@ -209,5 +160,20 @@ export default {
 </script>
 
 <style lang="less">
-  @import '~tippy.js/dist/tippy.css';
+@import (reference) '@dialpad/dialtone/lib/build/less/dialtone.less';
+div[data-popper-placement="bottom"] {
+  .d-tooltip__arrow--top-center();
+}
+
+div[data-popper-placement="right"] {
+  .d-tooltip__arrow--left-center();
+}
+
+div[data-popper-placement="left"] {
+  .d-tooltip__arrow--right-center();
+}
+
+div[data-popper-placement="top"] {
+  .d-tooltip__arrow--bottom-center();
+}
 </style>
