@@ -236,9 +236,8 @@ export default {
           {
             name: 'flip',
             options: {
-              fallbackPlacements: [],
+              fallbackPlacements: this.convertedFlip,
               boundary: this.flipBoundary,
-              // flipVariations: this.flipVariations
             },
           },
           {
@@ -257,7 +256,7 @@ export default {
 
     getOptions () {
       const content = this.$refs.content;
-      console.log(this.arrowDirection, this.tippyPlacement, 'tippyPlacement');
+
       return {
         maxWidth: 100,
         hideOnClick: false,
