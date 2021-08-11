@@ -30,6 +30,7 @@ d-btn--circle--xs:d-btn d-btn--circle d-btn--xs
 d-btn--circle--sm:d-btn d-btn--circle d-btn--sm
 d-btn--circle--lg:d-btn d-btn--circle d-btn--lg
 d-btn--circle--xl:d-btn d-btn--circle d-btn--xl
+d-btn-loading--white:d-btn d-btn--loading d-btn--inverted
 d-btn--loading--white:d-btn d-btn--loading d-btn--inverted
 d-btn--loading--dark:d-btn d-btn--loading d-btn--muted
 d-btn--loading--danger:d-btn d-btn--loading d-btn--danger
