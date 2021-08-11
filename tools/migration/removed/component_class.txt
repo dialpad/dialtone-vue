@@ -24,4 +24,3 @@ d-list-group--link
 d-list-group__item
 d-list-group--header
 d-list-group
-btn-inverted-clear-states
