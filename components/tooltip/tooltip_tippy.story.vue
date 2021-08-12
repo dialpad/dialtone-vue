@@ -1,13 +1,10 @@
 <template>
   <div class="d-m64">
     <div
-      id="boundary"
       ref="container"
       class="container"
     >
-      <div
-        class="some-text"
-      />
+      <div class="some-text"/>
       <div class="some-text">
         <tooltip-tippy
           v-if="parentNode"
@@ -30,9 +27,7 @@
           </template>
         </tooltip-tippy>
       </div>
-      <div
-        class="some-text"
-      />
+      <div class="some-text" />
     </div>
   </div>
 </template>
@@ -68,7 +63,7 @@ export default {
 .tooltip-holder {
   margin: 150px;
 }
-//
+
 .container {
   position: relative;
   width: 800px;

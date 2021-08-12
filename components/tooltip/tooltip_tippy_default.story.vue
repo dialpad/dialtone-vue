@@ -11,10 +11,7 @@
       <tooltip-tippy
         :arrow-direction="arrowDirection"
         :inverted="inverted"
-        :hover="hover"
-        :show="show"
         :message="message"
-        class="tooltip"
       >
         <template #anchor>
           <dt-button
@@ -43,18 +40,10 @@ export default {
     DtButton,
   },
 
-  data: () => ({
-    parentNode: null,
-  }),
-
   computed: {
     buttonKind () {
       return this.inverted ? 'inverted' : 'default';
     },
-  },
-
-  mounted () {
-    this.parentNode = this.$refs.container;
   },
 };
 </script>
