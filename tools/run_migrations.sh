@@ -87,4 +87,9 @@ sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/migration_mixin_corrections.txt  -d ${MI
 echo "Mixin Corrections Migrated!"
 sleep 5s
 
+echo "Migrating Corrections..."
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/migration_corrections.txt  -d ${MIGRATION_DIR} -v -r
+echo "Corrections Migrated!"
+sleep 5s
+
 echo "Migration Complete!"
