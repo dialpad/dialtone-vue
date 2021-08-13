@@ -178,4 +178,3 @@
 @border-width6:@su6
 @transition--cubic-inOut:var(--ttf-in-out)
 @transition--quint-easeOut:var(--ttf-out)
-@primary-color:var(--primary-color)
