@@ -6,6 +6,7 @@ import {
   POPOVER_ROLES,
 } from './';
 import PopoverDefault from './popover_default.story.vue';
+import PopoverTippyDefault from './popover_tippy.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import PopoverMdx from './popover.mdx';
 
@@ -117,3 +118,7 @@ NoPadding.parameters = {
     },
   },
 };
+
+const PopoverTippyTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverTippyDefault);
+export const PopoverTippy = PopoverTippyTemplate.bind({});
+PopoverTippy.args = {};
