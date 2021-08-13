@@ -49,12 +49,12 @@ echo "Starting UC validation in 10 seconds"
 sleep 10s
 
 echo "Validating SRC Directory..."
-sh ./validate.sh -m ${VALIDATION_MAP_DIR} -d ${UC_DIR}/src
+sh ./run_validations.sh -m ${VALIDATION_MAP_DIR} -d ${UC_DIR}/src
 echo "SRC Directory Validated!"
 sleep 5s
 
 echo "Validating Less Directory..."
-sh ./validate.sh -m ${VALIDATION_MAP_DIR} -d ${UC_DIR}/less
+sh ./run_validations.sh -m ${VALIDATION_MAP_DIR} -d ${UC_DIR}/less
 echo "Less Directory Validated!"
 
 echo "UC Validation Complete!"

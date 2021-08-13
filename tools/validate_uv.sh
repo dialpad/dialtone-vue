@@ -49,12 +49,12 @@ echo "Starting UV validation in 10 seconds"
 sleep 10s
 
 echo "Validating CSS Directory..."
-sh ./validate.sh -m ${VALIDATION_MAP_DIR} -d ${UV_DIR}/static/css
+sh ./run_validations.sh -m ${VALIDATION_MAP_DIR} -d ${UV_DIR}/static/css
 echo "CSS Directory Validated!"
 sleep 5s
 
 echo "Validating JS Directory..."
-sh ./validate.sh -m ${VALIDATION_MAP_DIR} -d ${UV_DIR}/static/js
+sh ./run_validations.sh -m ${VALIDATION_MAP_DIR} -d ${UV_DIR}/static/js
 echo "JS Directory Validated!"
 
 echo "UV Validation Complete!"
