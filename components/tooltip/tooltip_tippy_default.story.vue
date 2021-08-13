@@ -13,10 +13,11 @@
         :inverted="inverted"
         :message="message"
       >
-        <template #anchor>
+        <template #anchor="{ attrs }">
           <dt-button
             importance="outlined"
             :kind="buttonKind"
+            v-bind="attrs"
           >
             {{ anchor }}
           </dt-button>

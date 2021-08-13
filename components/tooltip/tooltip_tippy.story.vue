@@ -12,10 +12,11 @@
           class="tooltip"
           :flip-boundary="parentNode"
         >
-          <template #anchor>
+          <template #anchor="{ attrs }">
             <dt-button
               importance="outlined"
               :kind="buttonKind"
+              v-bind="attrs"
             >
               {{ anchor }}
             </dt-button>

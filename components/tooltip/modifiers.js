@@ -3,7 +3,7 @@ export const hideOnEsc = {
   defaultValue: true,
   fn ({ hide }) {
     function onKeyDown (event) {
-      if (event.keyCode === 27) {
+      if (event.key === 'Escape') {
         hide();
       }
     }

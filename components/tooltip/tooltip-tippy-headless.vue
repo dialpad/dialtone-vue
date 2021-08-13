@@ -1,7 +1,13 @@
 <template>
   <div>
     <div ref="anchor">
-      <slot name="anchor" />
+      <slot
+        name="anchor"
+        :attrs="{
+          tabIndex: tabIndex,
+          'aria-describedby': id,
+        }"
+      />
     </div>
     <div
       :id="id"
@@ -35,7 +41,7 @@ import {
 import { getUniqueString } from '../utils';
 import { hideOnEsc } from './modifiers';
 export default {
-  name: 'TooltipTippy',
+  name: 'Tooltip',
   props: {
     /**
      * The id of the tooltip
@@ -50,6 +56,10 @@ export default {
       default: false,
     },
 
+    /**
+     * This property is needed for define fallback placements
+     * by providing a list of placements to try.
+     * */
     flip: {
       type: Array,
       default: () => ['left-center', 'top-center'],
@@ -67,15 +77,22 @@ export default {
      * This property is needed for focus event
      */
     tabIndex: {
-      type: String,
+      type: [String, Number],
       default: '0',
     },
 
+    /**
+     *  Displaces the tippy from its reference element
+     *  in pixels (skidding and distance).
+     */
     offset: {
       type: Array,
       default: () => [0, 0],
     },
 
+    /**
+     * Describes the preferred placement of the tooltip
+     */
     arrowDirection: {
       type: String,
       default: 'bottom-center',
@@ -84,21 +101,36 @@ export default {
       },
     },
 
+    /**
+     * The element to append the tippy to.
+     */
     appendTo: {
-      type: [String, HTMLBodyElement],
+      type: [String, HTMLElement],
       default: () => document.body,
     },
 
+    /**
+     * Determines if the tippy has interactive content inside of it,
+     * so that it can be hovered over and clicked inside without hiding.
+     */
     interactive: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * This describes the area that the element
+     * will be checked for overflow relative to.
+     */
     flipBoundary: {
       type: [String, HTMLElement],
       default: 'popper',
     },
 
+    /**
+     * Determines the size of the invisible border around the
+     * tippy that will prevent it from hiding if the cursor left it.
+     * */
     interactiveBorder: {
       type: Number,
       default: 2,
@@ -112,11 +144,10 @@ export default {
       default: '',
     },
 
-    flipVariations: {
-      type: Boolean,
-      default: false,
-    },
-
+    /**
+     * Determines the events that cause the tippy to show.
+     * Multiple event names are separated by spaces.
+     * **/
     trigger: {
       type: String,
       default: 'mouseenter focus click',
@@ -145,26 +176,21 @@ export default {
     arrowDirection: {
       handler () {
         this.placement = this.arrowDirection;
-        if (this.tip) {
-          this.tip.setProps({
-            placement: this.tippyPlacement,
-          });
-        }
+        this.tip?.setProps({
+          placement: this.tippyPlacement,
+        });
       },
     },
   },
 
   mounted () {
     const anchor = this.$refs.anchor.children[0];
-    anchor.setAttribute('tabIndex', this.tabIndex);
-    anchor.setAttribute('aria-describedby', this.id);
     this.placement = this.arrowDirection;
     this.tip = tippy(anchor, this.getOptions());
   },
 
   beforeDestroy () {
-    if (!this.tip) return;
-    this.tip.destroy();
+    this.tip?.destroy();
   },
 
   methods: {
@@ -185,6 +211,7 @@ export default {
             fn: ({ state }) => {
               this.placement = TOOLTIP_TIPPY_DIRECTIONS[state.placement];
             },
+
             requiresIfExists: ['offset'],
           },
         ],
@@ -211,6 +238,7 @@ export default {
             popper,
           };
         },
+
         plugins: [hideOnEsc],
       };
     },
