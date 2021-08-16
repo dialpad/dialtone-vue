@@ -1,116 +1,70 @@
 <template>
-  <component
-    :is="elementType"
-    v-click-outside="() => close('click-outside')"
-    class="d-ps-relative dt-popover"
-  >
-    <div
-      :id="!ariaLabelledby && labelledBy"
-      ref="anchor"
-    >
-      <!-- @slot Anchor element that activates the popover. -->
+  <div>
+    <div ref="anchor">
       <slot
         name="anchor"
         :attrs="{
-          'aria-expanded': open.toString(),
-          'aria-controls': id,
-          'aria-haspopup': role,
+          tabIndex: tabIndex,
+          'aria-describedby': id,
         }"
       />
     </div>
-    <dt-lazy-show
+    <div
       :id="id"
-      ref="container"
+      ref="content"
       :role="role"
-      :aria-hidden="!open"
-      :aria-labelledby="labelledBy"
-      :aria-label="ariaLabel"
-      :aria-modal="isDialog"
-      :transition="transition"
-      :show="open"
+      aria-hidden="false"
+      data-qa="dt-tooltip"
       :class="[
-        'd-ba',
-        'd-bc-black-075',
-        'd-bar4',
+        'popover',
         'd-bgc-white',
+        'd-bc-black-075',
         'd-bs-md',
-        'd-mt4',
-        'd-ps-absolute',
-        'd-zi-popover',
-        'dt-popover__content',
+        'd-wmx-unset',
+        'd-bar4',
+        `dt-popover__content--pad-${padding}`,
         `dt-popover__content--align-${alignment}`,
         `dt-popover__content--valign-${verticalAlignment}`,
-        `dt-popover__content--pad-${padding}`,
+        'd-m0',
         contentClass,
       ]"
-      tabindex="-1"
-      v-on="dialogListeners"
     >
-      <!-- @slot Content that is displayed in the popover when it is open. -->
-      <slot name="content" />
-
+      <slot>
+        {{ message }}
+      </slot>
       <div
         v-if="hasCaret"
         class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret"
       />
-    </dt-lazy-show>
-  </component>
+    </div>
+  </div>
 </template>
 
 <script>
-import { DtLazyShow } from '../lazy_show';
+import tippy from 'tippy.js/headless';
+import tippyMixin from '../mixins/tippy.js';
 import {
+  POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_PADDING_CLASSES,
   POPOVER_ROLES,
-  POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_VERTICAL_ALIGNMENT,
 } from './popover_constants';
-import util from '../utils';
-import clickOutside from 'v-click-outside';
-import Modal from '../mixins/modal.js';
 
 export default {
-  name: 'DtPopover',
+  name: 'Popover',
+  mixins: [tippyMixin],
 
-  /********************
-   * CHILD COMPONENTS *
-   ********************/
-  components: {
-    DtLazyShow,
-  },
-
-  directives: {
-    clickOutside: clickOutside.directive,
-  },
-
-  mixins: [Modal],
-
-  /******************
-   *     PROPS      *
-   ******************/
   props: {
     /**
-     * Element type (tag name) of the root element of the component.
+     * ARIA role for the content of the popover. Defaults to "dialog".
+     * @see https://www.w3.org/TR/wai-aria/#aria-haspopup
      */
-    elementType: {
+    role: {
       type: String,
-      default: 'div',
-    },
-
-    /**
-     * Additional class name for the content wrapper element.
-     */
-    contentClass: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Whether or not the popover content is shown. Supports .sync modifier.
-     */
-    open: {
-      type: Boolean,
-      required: true,
+      default: 'dialog',
+      validator: (role) => {
+        return POPOVER_ROLES.includes(role);
+      },
     },
 
     /**
@@ -125,21 +79,17 @@ export default {
     },
 
     /**
-     * Whether or not a carat (arrow) should be shown from the content pointing
-     * at the anchor.
+     * Fixed vertical alignment of the popover content. If passed, the popover
+     * will always display anchored to the top or bottom of the anchor element.
+     * If null, the content will be positioned on whichever side has the most
+     * available space relative to the root Vue element. String values must be
+     * one of `top` or `bottom`.
      */
-    hasCaret: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Named transition when the content display is toggled.
-     * @see DtLazyShow
-     */
-    transition: {
+    fixedVerticalAlignment: {
       type: String,
-      default: 'fade',
+      validator: (align) => {
+        return POPOVER_VERTICAL_ALIGNMENT.includes(align);
+      },
     },
 
     /**
@@ -151,69 +101,27 @@ export default {
      */
     fixedAlignment: {
       type: String,
-      default: null,
+      default: 'right',
       validator: (align) => {
         return POPOVER_HORIZONTAL_ALIGNMENT.includes(align);
       },
     },
 
     /**
-     * Fixed vertical alignment of the popover content. If passed, the popover
-     * will always display anchored to the top or bottom of the anchor element.
-     * If null, the content will be positioned on whichever side has the most
-     * available space relative to the root Vue element. String values must be
-     * one of `top` or `bottom`.
+     * Additional class name for the content wrapper element.
      */
-    fixedVerticalAlignment: {
+    contentClass: {
       type: String,
-      default: null,
-      validator: (align) => {
-        return POPOVER_VERTICAL_ALIGNMENT.includes(align);
-      },
+      default: '',
     },
 
     /**
-     * `id` of the popover content wrapper element.
-     * @default [String] automatically generated unique string.
+     * Whether or not a carat (arrow) should be shown from the content pointing
+     * at the anchor.
      */
-    id: {
-      type: String,
-      default () {
-        return util.getUniqueString('DtPopover__content');
-      },
-    },
-
-    /**
-     * ARIA role for the content of the popover. Defaults to "dialog".
-     * @see https://www.w3.org/TR/wai-aria/#aria-haspopup
-     */
-    role: {
-      type: String,
-      default: 'dialog',
-      validator: (role) => {
-        return POPOVER_ROLES.includes(role);
-      },
-    },
-
-    /**
-     * ID of the element that serves as the label for the popover content.
-     * Defaults to the "anchor" element; this exists to provide a different
-     * ID of the label element if, for example, the anchor slot contains
-     * other items that do not serve as a label. You should provide this
-     * or ariaLabel, but not both.
-     */
-    ariaLabelledby: {
-      type: String,
-      default: null,
-    },
-
-    /**
-     * Descriptive label for the popover content. You should provide this
-     * or ariaLabelledby, but not both.
-     */
-    ariaLabel: {
-      type: String,
-      default: null,
+    hasCaret: {
+      type: Boolean,
+      default: true,
     },
 
     focusAnchorOnClose: {
@@ -222,176 +130,143 @@ export default {
     },
   },
 
-  emits: [
-    'update:open',
-  ],
-
-  /******************
-   *      DATA      *
-   ******************/
-  data () {
-    return {
-      autoAlignment: 'left',
-      autoVerticalAlignment: 'bottom',
-    };
-  },
+  data: () => ({
+    verticalAlignment: '',
+    show: false,
+  }),
 
   computed: {
+    placement () {
+      const verticalAlignment = this.fixedVerticalAlignment || 'bottom';
+      const horizontalAlignment = this.fixedAlignment === 'left' ? 'start' : 'end';
+      return `${verticalAlignment}-${horizontalAlignment}`;
+    },
+
     alignment () {
-      return this.fixedAlignment || this.autoAlignment;
-    },
-
-    verticalAlignment () {
-      return this.fixedVerticalAlignment || this.autoVerticalAlignment;
-    },
-
-    labelledBy () {
-      // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
-      // there is no aria-label and the labelledby should point to the anchor.
-      return this.ariaLabelledby || (!this.ariaLabel && util.getUniqueString('DtPopover__anchor'));
-    },
-
-    isDialog () {
-      return this.role === 'dialog';
-    },
-
-    dialogListeners (e) {
-      if (this.isDialog) {
-        return {
-          keydown: (e) => {
-            if (e.key === 'Tab') {
-              this.trapFocus(e);
-            }
-            if (e.key === 'Escape') {
-              this.close('esc');
-            }
-          },
-        };
-      }
-      return null;
+      return this.fixedAlignment;
     },
   },
 
   watch: {
-    open (isOpen, wasOpen) {
-      this.manageFocusOnOpenClose();
-      this.closedByClickOutside = false;
-      if (!isOpen || (this.fixedAlignment && this.fixedVerticalAlignment)) {
-        return;
-      }
-      this.updateAlignment();
+    placement (placement) {
+      this.tip?.setProps({
+        placement,
+      });
     },
   },
 
-  /******************
-   *     METHODS    *
-   ******************/
+  mounted () {
+    this.verticalAlignment = this.fixedVerticalAlignment;
+    const anchor = this.$refs.anchor.children[0];
+    this.tip = tippy(anchor, this.getOptions({
+      popperOptions: this.getPopperOptions(),
+      tippyOptions: {
+        trigger: 'click',
+        interactive: true,
+        placement: this.placement,
+        hideOnClick: 'toggle',
+        onHide: (instance) => {
+          const box = instance.popper.firstElementChild;
+          this.$emit('update:open', false);
+          if (this.focusAnchorOnClose) {
+            anchor?.focus?.();
+          }
+          this.animateHide(box, instance);
+        },
+        onMount: instance => {
+          const box = instance.popper.firstElementChild;
+          this.animateShow(box);
+          this.$emit('update:open', true);
+        },
+      },
+    }));
+  },
+
   methods: {
-
-    manageFocusOnOpenClose () {
-      if (!this.isDialog) {
-        return;
-      }
-      if (this.open) {
-        return this.focusFirstElement(this.$refs.container.$el);
-      }
-      if (this.focusAnchorOnClose && !this.closedByClickOutside) {
-        this.focusFirstElement(this.$refs.anchor);
-      }
+    convertTippyToPopperVerticalPlacement (tippyPlacement) {
+      return tippyPlacement.includes('top') ? 'top' : 'bottom';
     },
 
-    trapFocus (e) {
-      this.focusTrappedTabPress(e, this.$refs.container.$el);
-    },
+    getPopperOptions () {
+      return {
+        modifiers: [
+          {
+            name: 'flip',
+            options: {
+              boundary: this.flipBoundary,
+            },
+          },
+          {
+            name: 'arrowDetected',
+            enabled: true,
+            phase: 'main',
+            fn: ({ state }) => {
+              this.verticalAlignment = this.convertTippyToPopperVerticalPlacement(state.placement);
+            },
 
-    close (method) {
-      /**
-       * Emitted when the `open` property changes, such as when the user clicks
-       * outside the popover content.
-       * @type {Event}
-       */
-      if (method === 'click-outside') {
-        this.closedByClickOutside = true;
-      }
-      this.$emit('update:open', false);
-    },
-
-    async updateAlignment () {
-      // Reset autoAlignment to the default, let it render, then check if it's outside the page boundary.
-      this.autoAlignment = 'left';
-      this.autoVerticalAlignment = 'bottom';
-      await this.$nextTick();
-      const popoverBoundary = this.$refs.container.$el.getBoundingClientRect();
-      const pageBoundary = this.$root.$el.getBoundingClientRect();
-
-      if (popoverBoundary.right > pageBoundary.right) {
-        // Dropdown is clipping off the page, so we want to align however it has the most space.
-        // Since the page x-scrolls at low widths, check with the scrollWidth rather than just page-right.
-        const pageScrollWidth = this.$root.$el.scrollWidth;
-        const anchorBoundary = this.$refs.anchor.getBoundingClientRect();
-        const spaceOnLeft = anchorBoundary.left - pageBoundary.left;
-        const spaceOnRight = (pageBoundary.left + pageScrollWidth) - anchorBoundary.right;
-        this.autoAlignment = spaceOnRight < spaceOnLeft ? 'right' : 'left';
-      }
-
-      if (popoverBoundary.bottom > pageBoundary.bottom) {
-        const pageScrollHeight = this.$root.$el.scrollHeight;
-        const anchorBoundary = this.$refs.anchor.getBoundingClientRect();
-        const spaceAbove = anchorBoundary.top - pageBoundary.top;
-        const spaceBelow = (pageBoundary.top + pageScrollHeight) - anchorBoundary.bottom;
-        this.autoVerticalAlignment = spaceAbove < spaceBelow ? 'bottom' : 'top';
-      }
+            requiresIfExists: ['offset'],
+          },
+        ],
+      };
     },
   },
 };
 </script>
 
 <style lang="less">
-  @import "../../css/dialtone.less";
+@import "../../css/dialtone.less";
 
-  .dt-popover__content {
-    &--align-right {
-      right: @su0;
+.dt-popover__content {
+  &--align-right {
+    right: @su0;
 
-      .dt-popover__caret {
-        right: @su24;
-      }
-    }
-
-    &--valign-top {
-      bottom: 100%;
-      margin-top: @su0;
-      margin-bottom: @su4;
-
-      .dt-popover__caret {
-        top: auto;
-        bottom: -@su4;
-        transform: rotate(225deg);
-      }
-    }
-
-    &--pad-none {
-      padding: @su0;
-    }
-
-    &--pad-small {
-      padding: @su8;
-    }
-
-    &--pad-medium {
-      padding: @su16;
-    }
-
-    &--pad-large {
-      padding: @su24;
+    .dt-popover__caret {
+      right: @su24;
     }
   }
 
-  .dt-popover__caret {
-    top: @su0;
-    height: @su6;
-    width: @su6;
-    transform: rotate(45deg);
-    position: absolute;
+  &--valign-top {
+    bottom: 100%;
+    margin-top: @su0;
+    margin-bottom: @su4;
+
+    .dt-popover__caret {
+      top: auto;
+      bottom: -@su4;
+      transform: rotate(225deg);
+    }
   }
+
+  &--pad-none {
+    padding: @su0;
+  }
+
+  &--pad-small {
+    padding: @su8;
+  }
+
+  &--pad-medium {
+    padding: @su16;
+  }
+
+  &--pad-large {
+    padding: @su24;
+  }
+}
+
+.dt-popover__caret {
+  top: @su0;
+  height: @su6;
+  width: @su6;
+  transform: rotate(45deg);
+  position: absolute;
+}
+
+.tippy-box[data-popper-reference-hidden],
+.tippy-box[data-popper-escaped] {
+  .popover {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
 </style>
