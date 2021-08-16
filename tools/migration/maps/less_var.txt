@@ -28,8 +28,8 @@
 @color--light-darkest:@black-300
 @color--light-dark:@black-075
 @color--light:@black-025
-@color--blue-text:@purple-500
-@color--navy-text:@purple-500
+@color--blue-text:@purple-600
+@color--navy-text:@purple-700
 @color--bright-emerald-text:@green-600
 @color--emerald-text:@green-600
 @color--sunflower-text:@yellow-600
@@ -37,8 +37,8 @@
 @color--crimson-text:@red-700
 @color--berry-text:@pink-600
 @color--rose-text:@pink-600
-@fc-blue-text:@purple-500
-@fc-navy-text:@purple-500
+@fc-blue-text:@purple-600
+@fc-navy-text:@purple-700
 @fc-bright-emerald-text:@green-600
 @fc-emerald-text:@green-600
 @fc-sunflower-text:@yellow-600
