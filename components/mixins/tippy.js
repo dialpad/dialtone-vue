@@ -32,11 +32,6 @@ export default {
       default () { return getUniqueString(); },
     },
 
-    isPopover: {
-      type: Boolean,
-      default: false,
-    },
-
     /**
      * This property is needed for define fallback placements
      * by providing a list of placements to try.

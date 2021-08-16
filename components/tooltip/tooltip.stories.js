@@ -1,10 +1,7 @@
 import { createTemplateFromVueFile } from '../storybook_utils';
 import DtTooltip from './tooltip';
-import DtTooltipTippyTemplate from './tooltip_tippy.story.vue';
-import DtTooltipMdx from './tooltip.mdx';
-import DtTooltipDefaultTemplate from './tooltip_default.story.vue';
-import DtTooltipVariantsTemplate from './tooltip_variants.story';
-import DtTooltipTippyDefault from './tooltip_tippy_default.story';
+import DtTooltipOverflowTemplate from './tooltip_overflow.story.vue';
+import DtTooltipDefault from './tooltip_default.story';
 
 import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
 
@@ -65,27 +62,15 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtTooltipMdx,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipVariantsTemplate);
-const TippyBodyTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipTippyTemplate);
-const TooltipTippyDefault = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipTippyDefault);
-// Stories
-export const Default = DefaultTemplate.bind({});
+const TooltipOverflowTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTooltipOverflowTemplate);
+const TooltipDefault = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipDefault);
+
+export const Default = TooltipDefault.bind({});
 Default.args = {};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-
-export const TippyHeadlessDefault = TooltipTippyDefault.bind({});
-TippyHeadlessDefault.args = {};
-
-export const TippyHeadlessBody = TippyBodyTemplate.bind({});
-TippyHeadlessBody.args = {};
+export const OverflowTemplate = TooltipOverflowTemplate.bind({});
+OverflowTemplate.args = {};

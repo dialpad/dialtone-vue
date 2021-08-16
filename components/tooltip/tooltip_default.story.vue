@@ -9,22 +9,21 @@
   >
     <div class="d-pt16">
       <dt-tooltip
-        :message="message"
         :arrow-direction="arrowDirection"
-        :show="show"
         :inverted="inverted"
-        :hover="hover"
+        :message="message"
       >
-        <template v-if="defaultSlot">
-          {{ defaultSlot }}
-        </template>
-        <template #anchor>
+        <template #anchor="{ attrs }">
           <dt-button
             importance="outlined"
             :kind="buttonKind"
+            v-bind="attrs"
           >
             {{ anchor }}
           </dt-button>
+        </template>
+        <template v-if="defaultSlot">
+          {{ defaultSlot }}
         </template>
       </dt-tooltip>
     </div>
@@ -32,13 +31,15 @@
 </template>
 
 <script>
-import { DtTooltip } from './';
+import DtTooltip from './tooltip';
 import { DtButton } from '../button';
 
 export default {
-  name: 'DtTooltipDefault',
-
-  components: { DtTooltip, DtButton },
+  name: 'TooltipDefault',
+  components: {
+    DtTooltip,
+    DtButton,
+  },
 
   computed: {
     buttonKind () {
