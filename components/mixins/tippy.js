@@ -146,6 +146,23 @@ export default {
   },
 
   methods: {
+    animateShow (box) {
+      requestAnimationFrame(() => {
+        box.classList.add('fade-in');
+        box.classList.remove('fade-out');
+      });
+    },
+
+    animateHide (box, instance) {
+      box.classList.remove('fade-in');
+      box.classList.add('fade-out');
+
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          instance.unmount();
+        });
+      }, 150);
+    },
     getOptions ({ popperOptions, tippyOptions } = {}) {
       return {
         hideOnClick: this.hideOnClick,
@@ -156,6 +173,8 @@ export default {
         allowHTML: true,
         trigger: this.trigger,
         popperOptions: popperOptions || {},
+        animation: true,
+        delay: [180, 180],
         render: () => {
           // The recommended structure is to use the popper as an outer wrapper
           const popper = document.createElement('div');

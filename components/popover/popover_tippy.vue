@@ -26,12 +26,17 @@
         `dt-popover__content--align-${alignment}`,
         `dt-popover__content--valign-${verticalAlignment}`,
         'd-m0',
+        'bounce-leave-active',
+        contentClass,
       ]"
     >
       <slot>
         {{ message }}
       </slot>
-      <div class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret" />
+      <div
+        v-if="hasCaret"
+        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret"
+      />
     </div>
   </div>
 </template>
@@ -97,19 +102,45 @@ export default {
      */
     fixedAlignment: {
       type: String,
+      default: 'right',
       validator: (align) => {
         return POPOVER_HORIZONTAL_ALIGNMENT.includes(align);
       },
+    },
+
+    /**
+     * Additional class name for the content wrapper element.
+     */
+    contentClass: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Whether or not a carat (arrow) should be shown from the content pointing
+     * at the anchor.
+     */
+    hasCaret: {
+      type: Boolean,
+      default: true,
+    },
+
+    focusAnchorOnClose: {
+      type: Boolean,
+      default: true,
     },
   },
 
   data: () => ({
     verticalAlignment: '',
+    show: false,
   }),
 
   computed: {
     placement () {
-      return `${this.fixedVerticalAlignment || 'bottom'}-${this.fixedAlignment === 'left' ? 'start' : 'end'}`;
+      const verticalAlignment = this.fixedVerticalAlignment || 'bottom';
+      const horizontalAlignment = this.fixedAlignment === 'left' ? 'start' : 'end';
+      return `${verticalAlignment}-${horizontalAlignment}`;
     },
 
     alignment () {
@@ -134,11 +165,29 @@ export default {
         trigger: 'click',
         interactive: true,
         placement: this.placement,
+        hideOnClick: 'toggle',
+        onHide: (instance) => {
+          const box = instance.popper.firstElementChild;
+          this.$emit('update:open', false);
+          if (this.focusAnchorOnClose) {
+            anchor?.focus?.();
+          }
+          this.animateHide(box, instance);
+        },
+        onMount: instance => {
+          const box = instance.popper.firstElementChild;
+          this.animateShow(box);
+          this.$emit('update:open', true);
+        },
       },
     }));
   },
 
   methods: {
+    convertTippyToPopperVerticalPlacement (tippyPlacement) {
+      return tippyPlacement.includes('top') ? 'top' : 'bottom';
+    },
+
     getPopperOptions () {
       return {
         modifiers: [
@@ -153,7 +202,7 @@ export default {
             enabled: true,
             phase: 'main',
             fn: ({ state }) => {
-              this.verticalAlignment = state.placement.includes('top') ? 'top' : 'bottom';
+              this.verticalAlignment = this.convertTippyToPopperVerticalPlacement(state.placement);
             },
 
             requiresIfExists: ['offset'],

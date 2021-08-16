@@ -78,6 +78,14 @@ export default {
       popperOptions: this.getPopperOptions(),
       tippyOptions: {
         placement: this.tippyPlacement,
+        onHide: (instance) => {
+          const box = instance.popper.firstElementChild;
+          this.animateHide(box, instance);
+        },
+        onMount: instance => {
+          const box = instance.popper.firstElementChild;
+          this.animateShow(box);
+        },
       },
     }));
   },

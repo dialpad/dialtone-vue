@@ -4,6 +4,9 @@
       <popover-tippy
         :fixed-alignment="fixedAlignment"
         :fixed-vertical-alignment="fixedVerticalAlignment"
+        :content-class="contentClass"
+        :has-caret="hasCaret"
+        :padding="padding"
       >
         <template #anchor="{ attrs }">
           <dt-button
