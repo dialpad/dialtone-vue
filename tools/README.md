@@ -192,7 +192,67 @@ TODO
 
 ### Dialpad Meetings (formerly UC)
 
+1. Cut from master
+
+```bash
+gco -b my-migration-branch-name
+```
+
+2. Apply Manual Migrations via cherry pick (ebf821e, 7e2064f98b21e86facbe896e740c2353512537e7)
+
+```bash
+git cherry-pick ebf821e
+git cherry-pick 7e2064f98b21e86facbe896e740c2353512537e7
+...
+```
+
+3. Run migration script
+
+```bash
+cd dialtone-vue
+gco add-dialtone-migration-mapping-and-scripts
+git pull
+cd tools
+./migrate_uc.sh -m ./migration/maps -d ../../firespotter/uc_client
+```
+
+4. Update Dialtone, Add Dialtone Vue
+
+```json
+"@dialpad/dialtone": "^6.0.0-beta.12",
+"@dialpad/dialtone-vue": "^1.0.0-beta.5",
+```
+
+5. Install dependencies
+
+```bash
+npm install
+```
+
+6. Test build
+
+```bash
+npm run dev
+```
+
+7. Add CSS Loader for Dialtone Vue
+
+```txt
 TODO
+```
+
+8. Apply recommended Cleanup Steps:
+    1. Remove duplicate btn classes
+
+    ```text
+      Find using the following regex `\.d-btn\(\);.*\.d-btn\(\);`
+    ```
+
+    2. Remove duplicate link classes
+
+    ```text
+    Find using the following regex `\.d-link\(\);.*\.d-link\(\);`
+    ```
 
 ### Dialpad (UV)
 
