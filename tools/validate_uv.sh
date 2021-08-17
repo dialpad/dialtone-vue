@@ -46,12 +46,10 @@ if [ -z "$UV_DIR" ]
 fi
 
 echo "Starting UV validation in 10 seconds"
-sleep 10s
 
 echo "Validating CSS Directory..."
 sh ./run_validations.sh -m ${VALIDATION_MAP_DIR} -d ${UV_DIR}/static/css
 echo "CSS Directory Validated!"
-sleep 5s
 
 echo "Validating JS Directory..."
 sh ./run_validations.sh -m ${VALIDATION_MAP_DIR} -d ${UV_DIR}/static/js

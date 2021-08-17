@@ -46,16 +46,13 @@ if [ -z "$UC_DIR" ]
 fi
 
 echo "Starting UC migration in 10 seconds"
-sleep 10s
 
 echo "Migrating SRC Directory..."
 sh ./run_migrations.sh -m ${MIGRATION_MAP_DIR} -d ${UC_DIR}/src
 echo "SRC Directory Migrated!"
-sleep 5s
 
 echo "Migrating Less Directory..."
 sh ./run_migrations.sh -m ${MIGRATION_MAP_DIR} -d ${UC_DIR}/less
 echo "Less Directory Migrated!"
-sleep 5s
 
 echo "UC Migration Complete!"

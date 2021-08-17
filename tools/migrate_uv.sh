@@ -46,16 +46,13 @@ if [ -z "$UV_DIR" ]
 fi
 
 echo "Starting UV migration in 10 seconds"
-sleep 10s
 
 echo "Migrating CSS Directory..."
 sh ./run_migrations.sh -m ${MIGRATION_MAP_DIR} -d ${UV_DIR}/static/css
 echo "CSS Directory Migrated!"
-sleep 5s
 
 echo "Migrating JS Directory..."
 sh ./run_migrations.sh -m ${MIGRATION_MAP_DIR} -d ${UV_DIR}/static/js
 echo "JS Directory Migrated!"
-sleep 5s
 
 echo "UV Migration Complete!"
