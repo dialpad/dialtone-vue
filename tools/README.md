@@ -49,39 +49,39 @@ The migration maps are located within the following sub directories.
 
 ### File(s)
 
-#### component_class.txt
+#### `component_class.txt`
 
 Contains mappings for Dialtone component classes.
 
-#### utility_class.txt
+#### `utility_class.txt`
 
 Contains mappings for Dialtone utility classes.
 
-#### css_var.txt
+#### `css_var.txt`
 
 Contains mappings for Dialtone CSS variables.
 
-#### less_var.txt
+#### `less_var.txt`
 
 Contains mappings for Dialtone Less variables.
 
-#### icons.txt
+#### `icons.txt`
 
 Contains mappings for Dialtone icons.
 
-#### auto_generated_classes.txt
+#### `auto_generated_classes.txt`
 
 Contains mappings for auto generated Dialtone classes that will not resolve in Less.
 
-#### migration_class_corrections.txt
+#### `migration_class_corrections.txt`
 
 Contains mappings for any incorrectly migrated Dialtone classes.
 
-#### migration_mixin_corrections.txt
+#### `migration_mixin_corrections.txt`
 
 Contains mappings for any incorrectly migrated Dialtone mixins.
 
-#### migration_corrections.txt
+#### `migration_corrections.txt`
 
 Contains mappings for anything else that might have been incorrectly migrated.
 
@@ -89,7 +89,7 @@ Contains mappings for anything else that might have been incorrectly migrated.
 
 ### Migration Scripts
 
-#### migrate_uc.sh
+#### `migrate_uc.sh`
 
 The following script is used to apply migrations to Dialpad Meetings (formerly UC).
 
@@ -105,7 +105,7 @@ The following script is used to apply migrations to Dialpad Meetings (formerly U
 ./migrate_uc.sh -m ./migration/maps -d ../../firespotter/uc_client
 ```
 
-#### migrate_uv.sh
+#### `migrate_uv.sh`
 
 The following script is used to apply migrations to Dialpad (UV).
 
@@ -121,7 +121,7 @@ The following script is used to apply migrations to Dialpad (UV).
 ./migrate_uv.sh -m ./migration/maps -d ../../firespotter/ubervoice
 ```
 
-#### run_migrations.sh
+#### `run_migrations.sh`
 
 The following script is used to run a set of migrations against a specified directory.
 
@@ -137,7 +137,7 @@ The following script is used to run a set of migrations against a specified dire
 ./run_migrations.sh -m ./migration/maps -d ../../firespotter/ubervoice/static/js
 ```
 
-#### migrate.sh
+#### `migrate.sh`
 
 The following script is used to run a migration map against a specified directory.
 
@@ -155,7 +155,7 @@ The following script is used to run a migration map against a specified director
 
 ### Validation Scripts
 
-#### validate_uc.sh
+#### `validate_uc.sh`
 
 The following script will run validate the Dialpad Meetings (UC) codebase for usages of
 removed classes and variables.
@@ -172,7 +172,7 @@ removed classes and variables.
 ./validate_uc.sh -m ./migration/removed -d ../../firespotter/uc_client
 ```
 
-#### validate_uv.sh
+#### `validate_uv.sh`
 
 The following script will run validate the Dialpad (UV) codebase for usages of
 removed classes and variables.
@@ -189,7 +189,7 @@ removed classes and variables.
 ./validate_uv.sh -m ./migration/removed -d ../../firespotter/ubervoice
 ```
 
-#### run_validations.sh
+#### `run_validations.sh`
 
 The following script will validate a specified directory for usages of removed classes and variables.
 
@@ -205,7 +205,7 @@ The following script will validate a specified directory for usages of removed c
 ./run_validations.sh -m ./migration/removed -d ../../firespotter/uc_client/src
 ```
 
-#### validate.sh
+#### `validate.sh`
 
 The following script will validate a speficied directory for usages of removed classes and variables using
 a provided validation list.
