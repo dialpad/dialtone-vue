@@ -5,6 +5,22 @@
 The following directory contains a set of scripts and migration maps used by the scripts in order to migrate our codebases
 from Dialtone V5 to Dialtone V6 (Our In-House Design System).
 
+## Known Issues
+
+### Spacing
+
+Some of the spacing values have changed within the Dialtone component classes. As a result, the migrated code may be
+visually different. To address these issues, we will have to manually update components which do not match the previous
+design.
+
+## Assumptions
+
+### Development Time
+
+We did not want to spend too much time working on scripts to migrate our codebase. As a result, we have created a more or
+less a find/replace solution; not a tokenizer. Due to this limitation, there will be cases of multiples of the same
+classes and mixins since we cannot determine how many of a given class or mixin is in a given block of code.
+
 ## Migration Maps
 
 These files are used by the scripts in this directory and contain a list of from:to mappings or a list of classnames to
@@ -236,11 +252,12 @@ TODO
 gco -b my-migration-branch-name
 ```
 
-2. Apply Manual Migrations via cherry pick (ebf821e, 7e2064f98b21e86facbe896e740c2353512537e7)
+2. Apply Manual Migrations via cherry pick (ebf821e, 7e2064f98b21e86facbe896e740c2353512537e7, a47da3c)
 
 ```bash
 git cherry-pick ebf821e
 git cherry-pick 7e2064f98b21e86facbe896e740c2353512537e7
+git cherry-pick a47da3c
 ...
 ```
 
