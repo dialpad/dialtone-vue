@@ -47,6 +47,44 @@ The migration maps are located within the following sub directories.
 /migration/removed
 ```
 
+### File(s)
+
+#### component_class.txt
+
+Contains mappings for Dialtone component classes.
+
+#### utility_class.txt
+
+Contains mappings for Dialtone utility classes.
+
+#### css_var.txt
+
+Contains mappings for Dialtone CSS variables.
+
+#### less_var.txt
+
+Contains mappings for Dialtone Less variables.
+
+#### icons.txt
+
+Contains mappings for Dialtone icons.
+
+#### auto_generated_classes.txt
+
+Contains mappings for auto generated Dialtone classes that will not resolve in Less.
+
+#### migration_class_corrections.txt
+
+Contains mappings for any incorrectly migrated Dialtone classes.
+
+#### migration_mixin_corrections.txt
+
+Contains mappings for any incorrectly migrated Dialtone mixins.
+
+#### migration_corrections.txt
+
+Contains mappings for anything else that might have been incorrectly migrated.
+
 ## Scripts
 
 ### Migration Scripts
