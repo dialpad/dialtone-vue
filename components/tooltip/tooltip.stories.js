@@ -11,6 +11,7 @@ export const argsData = {
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
   show: true,
+  inverted: false,
 };
 
 export const argTypesData = {

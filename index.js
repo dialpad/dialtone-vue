@@ -21,7 +21,10 @@ export * from './components/checkbox';
 export * from './components/checkbox_group';
 export * from './components/select_menu';
 export * from './components/toast';
+
+// TODO added tooltip import here because of unresolved storybook error import and export tippy mixing
 export * from './components/tooltip';
+export { default as DtTooltip } from './components/tooltip/tooltip';
 
 // Mixins
 export * from './components/mixins';
