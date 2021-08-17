@@ -83,4 +83,8 @@ echo "Migrating Corrections..."
 sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/migration_corrections.txt  -d ${MIGRATION_DIR} -v -r
 echo "Corrections Migrated!"
 
+echo "Migrating Handset Components..."
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/handset.txt  -d ${MIGRATION_DIR} -v -r
+echo "Handset Components Migrated!"
+
 echo "Migration Complete!"
