@@ -1,5 +1,5 @@
 <hs-:<dt-
-</hs-:</dt-
+<\/hs-:<\/dt-
 HsBanner:DtBanner
 HsButton:DtButton
 HsModal:DtModal
@@ -12,3 +12,5 @@ HsInputGroup:DtInputGroup
 HsRadio:DtRadio
 HsRadioGroup:DtRadioGroup
 HsValidationMessages:DtValidationMessages
+HsLazyShow:DtLazyShow
+HsList:DtList
