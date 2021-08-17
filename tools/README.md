@@ -252,12 +252,13 @@ TODO
 gco -b my-migration-branch-name
 ```
 
-2. Apply Manual Migrations via cherry pick (ebf821e, 7e2064f98b21e86facbe896e740c2353512537e7, a47da3c)
+2. Apply Manual Migrations via cherry pick (ebf821e, 7e2064f98b21e86facbe896e740c2353512537e7, a47da3c, 5463de3)
 
 ```bash
 git cherry-pick ebf821e
 git cherry-pick 7e2064f98b21e86facbe896e740c2353512537e7
 git cherry-pick a47da3c
+git cherry-pick 5463de3
 ...
 ```
 
