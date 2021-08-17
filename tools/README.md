@@ -101,6 +101,10 @@ Contains mappings for any incorrectly migrated Dialtone mixins.
 
 Contains mappings for anything else that might have been incorrectly migrated.
 
+#### `handset.txt`
+
+Contains mappings for handset components.
+
 ## Scripts
 
 ### Migration Scripts
