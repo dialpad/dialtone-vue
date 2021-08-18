@@ -2,88 +2,82 @@
   <dt-lazy-show
     transition="d-modal"
     :show="show"
+    :class="[
+      'd-modal',
+      MODAL_KIND_MODIFIERS[kind],
+      MODAL_SIZE_MODIFIERS[size],
+      modalClass,
+    ]"
+    data-qa="dt-modal"
+    :aria-hidden="open"
+    @click.self="close"
+    @keydown.esc="close"
+    @keydown.tab="trapFocus"
+    @transitionend.self="setFocusAfterTransition"
   >
-    <div
-      :class="[
-        'd-modal',
-        MODAL_KIND_MODIFIERS[kind],
-        MODAL_SIZE_MODIFIERS[size],
-        modalClass,
-      ]"
-      data-qa="dt-modal"
-      :aria-hidden="open"
-      @click.self="close"
-      @keydown.esc="close"
-      @keydown.tab="trapFocus"
-      @transitionend.self="setFocusAfterTransition"
+    <dt-lazy-show
+      transition="d-modal-dialog"
+      :show="show"
+      class="d-modal__dialog"
+      role="dialog"
+      aria-modal="true"
+      :aria-describedby="describedById"
+      :aria-labelledby="labelledById"
     >
-      <dt-lazy-show
-        transition="d-modal-dialog"
-        :show="show"
+      <div
+        v-if="$slots.header"
+        :id="labelledById"
+        class="d-modal__header"
+        data-qa="dt-modal-title"
       >
-        <div
-          class="d-modal__dialog"
-          role="dialog"
-          aria-modal="true"
-          :aria-describedby="describedById"
-          :aria-labelledby="labelledById"
-        >
-          <div
-            v-if="$slots.header"
-            :id="labelledById"
-            class="d-modal__header"
-            data-qa="dt-modal-title"
-          >
-            <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
-            <slot name="header" />
-          </div>
-          <h2
-            v-else
-            :id="labelledById"
-            class="d-modal__header"
-            data-qa="dt-modal-title"
-          >
-            {{ title }}
-          </h2>
-          <dt-button
-            class="d-modal__close"
-            circle
-            size="lg"
-            importance="clear"
-            :aria-label="closeButtonProps.ariaLabel"
-            v-bind="closeButtonProps"
-            :kind="kind"
-            @click="close"
-          >
-            <template #icon>
-              <icon-close />
-            </template>
-          </dt-button>
-          <div
-            v-if="$slots.default"
-            class="d-modal__content"
-            data-qa="dt-modal-copy"
-          >
-            <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
-            <slot />
-          </div>
-          <p
-            v-else
-            class="d-modal__content"
-            data-qa="dt-modal-copy"
-          >
-            {{ copy }}
-          </p>
-          <footer
-            v-if="hasFooterSlot"
-            class="d-modal__footer"
-          >
-            <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
-            <slot name="footer" />
-          </footer>
-        </div>
-      </dt-lazy-show>
-    </div>
+        <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
+        <slot name="header" />
+      </div>
+      <h2
+        v-else
+        :id="labelledById"
+        class="d-modal__header"
+        data-qa="dt-modal-title"
+      >
+        {{ title }}
+      </h2>
+      <dt-button
+        class="d-modal__close"
+        circle
+        size="lg"
+        importance="clear"
+        :aria-label="closeButtonProps.ariaLabel"
+        v-bind="closeButtonProps"
+        :kind="kind"
+        @click="close"
+      >
+        <template #icon>
+          <icon-close />
+        </template>
+      </dt-button>
+      <div
+        v-if="$slots.default"
+        class="d-modal__content"
+        data-qa="dt-modal-copy"
+      >
+        <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
+        <slot />
+      </div>
+      <p
+        v-else
+        class="d-modal__content"
+        data-qa="dt-modal-copy"
+      >
+        {{ copy }}
+      </p>
+      <footer
+        v-if="hasFooterSlot"
+        class="d-modal__footer"
+      >
+        <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
+        <slot name="footer" />
+      </footer>
+    </dt-lazy-show>
   </dt-lazy-show>
 </template>
 
@@ -254,29 +248,51 @@ export default {
 </script>
 
 <style lang="less">
-.d-modal-enter-active, .d-modal-leave-active {
-  transition:
-      opacity 100ms var(--ttf-in-out) 10ms,
-      z-index 0s 0s,
-      visibility 0s 0s,
-      transform 100ms var(--ttf-in-out) 10ms;
-}
 .d-modal-enter, .d-modal-leave-to {
-  visibility: visible;
   z-index: var(--zi-hide);
+  visibility: hidden;
   opacity: 0;
+  backface-visibility: hidden;
+  will-change: visibility, z-index, opacity;
 }
 
-.d-modal-dialog-enter-active, .d-modal-dialog-leave-active {
+.d-modal-enter-active {
+  transition:
+      opacity 100ms var(--ttf-in-out) 10ms,
+      z-index 0s 0s,
+      visibility 0s 0s,
+      transform 100ms var(--ttf-in-out) 10ms
+}
+
+.d-modal-leave-active {
+  transition:
+      opacity 100ms var(--ttf-in-out) 10ms,
+      z-index 0s 200ms,
+      visibility 0s 200ms,
+      transform 100ms var(--ttf-in-out) 10ms;
+}
+
+.d-modal-dialog-enter, .d-modal-dialog-leave-to {
+  z-index: var(--zi-hide);
+  visibility: hidden;
+  opacity: 0;
+  backface-visibility: hidden;
+  transform: translate3d(0,30%,0) scale3d(.75,.75,.75);;
+}
+
+.d-modal-dialog-enter-active {
   transition:
       opacity 100ms var(--ttf-in-out) 10ms,
       z-index 0s 0s,
       visibility 0s 0s,
       transform 100ms var(--ttf-in-out) 10ms;
 }
-.d-modal-dialog-enter {
-  opacity: 0;
-  transform: translate3d(0,30%,0) scale3d(.75,.75,.75);
-  visibility: visible;
+
+.d-modal-dialog-leave-active {
+  transition:
+      opacity 200ms var(--ttf-in-out) 0s,
+      z-index 0s 200ms,
+      visibility 0s 200ms,
+      transform 100ms var(--ttf-in-out) 0s;
 }
 </style>
