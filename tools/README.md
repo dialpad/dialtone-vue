@@ -279,7 +279,7 @@ cd tools
 4. Update Dialtone, Add Dialtone Vue
 
 ```json
-"@dialpad/dialtone": "^6.0.0-beta.12",
+"@dialpad/dialtone": "^6.0.0-beta.13",
 "@dialpad/dialtone-vue": "^1.0.0-beta.5",
 ```
 
