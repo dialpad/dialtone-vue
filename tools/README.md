@@ -295,13 +295,7 @@ npm install
 npm run dev
 ```
 
-7. Add CSS Loader for Dialtone Vue
-
-```txt
-TODO
-```
-
-8. Apply recommended Cleanup Steps:
+7. Apply recommended Cleanup Steps:
     1. Remove duplicate btn classes
 
     ```text
@@ -316,4 +310,57 @@ TODO
 
 ### Dialpad (UV)
 
-TBD
+1. Cut from master
+
+```bash
+gco -b my-migration-branch-name
+```
+
+2. Apply Manual Migrations via cherry pick (TBD)
+
+```bash
+git cherry-pick TBD
+...
+```
+
+3. Run migration script
+
+```bash
+cd dialtone-vue
+gco add-dialtone-migration-mapping-and-scripts
+git pull
+cd tools
+./migrate_uv.sh -m ./migration/maps -d ../../firespotter/ubervoice
+```
+
+4. Update Dialtone, Add Dialtone Vue
+
+```json
+"@dialpad/dialtone": "^6.0.0-beta.13",
+"@dialpad/dialtone-vue": "^1.0.0-beta.5",
+```
+
+5. Install dependencies
+
+```bash
+npm install
+```
+
+6. Test build
+
+```bash
+npm run dev
+```
+
+7. Apply recommended Cleanup Steps:
+    1. Remove duplicate btn classes
+
+    ```text
+      Find using the following regex `\.d-btn\(\);.*\.d-btn\(\);`
+    ```
+
+    2. Remove duplicate link classes
+
+    ```text
+    Find using the following regex `\.d-link\(\);.*\.d-link\(\);`
+    ```
