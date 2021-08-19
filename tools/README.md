@@ -244,7 +244,72 @@ a provided validation list.
 
 ### Utility Scripts
 
-TODO
+#### `parse_less_variables.sh`
+
+The following script will extract and output less variables from a given directory.
+
+##### Usage
+
+```bash
+./parse_less_variables.sh -d <PATH_TO_DIRECTORY> -r
+```
+
+##### Example
+
+```bash
+./parse_less_variables.sh -d ../../dialtone/lib/build/less -r > less_variables_v6.txt
+```
+
+#### `compare_css_vars.js`
+
+The following script will compare V5 and V6 CSS variables, it will output a file `removed.txt` containing any variables
+that are no longer present in Dialtone V6.
+
+##### Usage
+
+```bash
+node compare_css_vars.js <PATH_TO_FILE_CONTAINING_V5_CSS_VARS> <PATH_TO_FILE_CONTAINING_V6_CSS_VARS>
+```
+
+##### Example
+
+```bash
+node compare_css_vars.js output/css_variables_v5.txt output/css_variables_v6.txt
+```
+
+#### `compare_less_vars.js`
+
+The following script will compare V5 and V6 Less variables, it will output a file `removed.txt` containing any variables
+that are no longer present in Dialtone V6.
+
+##### Usage
+
+```bash
+node compare_less_vars.js <PATH_TO_FILE_CONTAINING_V5_LESS_VARS> <PATH_TO_FILE_CONTAINING_V6_LESS_VARS>
+```
+
+##### Example
+
+```bash
+node compare_less_vars.js output/less_variables_v5.txt output/less_variables_v6.txt
+```
+
+#### `validate_maps.js`
+
+The following script will ensure that variables and classes present in a migration map file are also present in
+Dialtone V6.
+
+##### Usage
+
+```bash
+node validate_maps.js <PATH_TO_MAP_FILE> <PATH_TO_DIALTONE_LESS_DIRECTORY> <PATH_TO_DIALTONE_CSS>
+```
+
+##### Example
+
+```bash
+node validate_maps.js migration/maps/less_var.txt ../../dialtone/lib/build/less/ ../../dialtone/lib/dist/css/dialtone.css
+```
 
 ## Dialtone Migration Instructions
 
