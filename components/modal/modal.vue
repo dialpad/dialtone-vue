@@ -13,10 +13,10 @@
     @click.self="close"
     @keydown.esc="close"
     @keydown.tab="trapFocus"
-    @transitionend.self="setFocusAfterTransition"
+    @after-enter.self="setFocusAfterTransition"
   >
     <dt-lazy-show
-      transition="d-modal-dialog"
+      transition="d-modal__dialog"
       :show="show"
       class="d-modal__dialog"
       role="dialog"
@@ -228,13 +228,7 @@ export default {
       this.$emit('update:show', false);
     },
 
-    setFocusAfterTransition ({ propertyName }) {
-      // We only focus if the dialog is showing, and 'transform' seems to be the most reliable property to track.
-      // Note: 'visibility' would be an ideal prop to watch here, but it doesn't fire if the previous close transition
-      // was still in progress, making it a little flakey when quickly opening/closing a modal repeatedly.
-      if (!this.show || propertyName !== 'transform') {
-        return;
-      }
+    setFocusAfterTransition () {
       this.focusFirstElement();
     },
 
@@ -248,51 +242,25 @@ export default {
 </script>
 
 <style lang="less">
+@import "../../css/dialtone.less";
+
 .d-modal-enter, .d-modal-leave-to {
-  z-index: var(--zi-hide);
-  visibility: hidden;
-  opacity: 0;
-  backface-visibility: hidden;
-  will-change: visibility, z-index, opacity;
+  .d-modal--animate();
 }
 
-.d-modal-enter-active {
-  transition:
-      opacity 100ms var(--ttf-in-out) 10ms,
-      z-index 0s 0s,
-      visibility 0s 0s,
-      transform 100ms var(--ttf-in-out) 10ms
+.d-modal__dialog-enter, .d-modal__dialog-leave-to {
+  .d-modal__dialog--animate();
+}
+
+.d-modal-enter-active, .d-modal__dialog-enter-active {
+  .d-modal--animate-in();
 }
 
 .d-modal-leave-active {
-  transition:
-      opacity 100ms var(--ttf-in-out) 10ms,
-      z-index 0s 200ms,
-      visibility 0s 200ms,
-      transform 100ms var(--ttf-in-out) 10ms;
+  .d-modal--animate-out();
 }
 
-.d-modal-dialog-enter, .d-modal-dialog-leave-to {
-  z-index: var(--zi-hide);
-  visibility: hidden;
-  opacity: 0;
-  backface-visibility: hidden;
-  transform: translate3d(0,30%,0) scale3d(.75,.75,.75);;
-}
-
-.d-modal-dialog-enter-active {
-  transition:
-      opacity 100ms var(--ttf-in-out) 10ms,
-      z-index 0s 0s,
-      visibility 0s 0s,
-      transform 100ms var(--ttf-in-out) 10ms;
-}
-
-.d-modal-dialog-leave-active {
-  transition:
-      opacity 200ms var(--ttf-in-out) 0s,
-      z-index 0s 200ms,
-      visibility 0s 200ms,
-      transform 100ms var(--ttf-in-out) 0s;
+.d-modal__dialog-leave-active {
+  .d-modal__dialog--animate-out();
 }
 </style>
