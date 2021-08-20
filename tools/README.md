@@ -429,3 +429,37 @@ npm run dev
     ```text
     Find using the following regex `\.d-link\(\);.*\.d-link\(\);`
     ```
+
+## Dialtone Migration Branches
+
+### UC Manual Migration
+
+Contains manual migrations for the Dialpad Meetings (UC) codebase.
+
+`dialtone-6-uc-manual-migration`
+
+### UV Manual Migration
+
+Contains manual migrations for the Dialpad (UV) codebase.
+
+`dialtone-6-uv-manual-migration`
+### UC Migration
+
+We are unlikely to use this branch. Instead we will either create a new migration branch and cherry-pick the manual
+migration changes, then run the migration script or we will use the manual migration branch and run the automated
+migration just prior to merging.
+
+
+`dialtone-6-uc-migration-uv-changes-removed`
+
+### UV Migration
+
+We are unlikely to use this branch. Instead we will either create a new migration branch and cherry-pick the manual
+migration changes, then run the migration script or we will use the manual migration branch and run the automated
+migration just prior to merging.
+
+`dialtone-6-uv-migration`
+
+## Dialtone 6 Migration Guide (Public Link)
+
+https://ginger-cairnsmore-d47.notion.site/Dialtone-V6-Migration-Guide-b071189401174341b40217969abce8a0
