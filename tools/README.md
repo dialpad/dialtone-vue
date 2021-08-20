@@ -374,6 +374,13 @@ npm run dev
     Find using the following regex `\.d-link\(\);.*\.d-link\(\);`
     ```
 
+#### Potential Debugging Steps
+
+You may also have to do the following to get a working build:
+
+1. Migrate @primary-color to @purple-500
+2. Fix missing semi colon error in the following class `.dashboard-conferences__fetching-more-calls`
+
 ### Dialpad (UV)
 
 1. Cut from master
