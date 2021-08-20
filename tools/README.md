@@ -348,7 +348,7 @@ cd tools
 
 ```json
 "@dialpad/dialtone": "^6.0.0-beta.13",
-"@dialpad/dialtone-vue": "^1.0.0-beta.5",
+"@dialpad/dialtone-vue": "^1.0.0-beta.6",
 ```
 
 5. Install dependencies
@@ -412,7 +412,7 @@ cd tools
 
 ```json
 "@dialpad/dialtone": "^6.0.0-beta.13",
-"@dialpad/dialtone-vue": "^1.0.0-beta.5",
+"@dialpad/dialtone-vue": "^1.0.0-beta.6",
 ```
 
 5. Install dependencies
