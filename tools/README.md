@@ -327,10 +327,10 @@ gco -b my-migration-branch-name
 ```bash
 git cherry-pick ebf821e
 git cherry-pick 7e2064f98b21e86facbe896e740c2353512537e7
-git cherry-pick a47da3c
-git cherry-pick a939321
-git cherry-pick 1e388d9
-git cherry-pick db5ac0a
+git cherry-pick a47da3c # Selects Migration
+git cherry-pick a939321 # Brand Buttons Migration
+git cherry-pick 1e388d9 # Fonts
+git cherry-pick db5ac0a # Less Compiler Options Fix
 ...
 ```
 
