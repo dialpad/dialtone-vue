@@ -321,7 +321,8 @@ node validate_maps.js migration/maps/less_var.txt ../../dialtone/lib/build/less/
 gco -b my-migration-branch-name
 ```
 
-2. Apply Manual Migrations via cherry pick (ebf821e, 7e2064f98b21e86facbe896e740c2353512537e7, a47da3c, a939321, 1e388d9)
+2. Apply Manual Migrations via cherry pick
+(ebf821e, 7e2064f98b21e86facbe896e740c2353512537e7, a47da3c, a939321, 1e388d9, db5ac0a)
 
 ```bash
 git cherry-pick ebf821e
@@ -329,6 +330,7 @@ git cherry-pick 7e2064f98b21e86facbe896e740c2353512537e7
 git cherry-pick a47da3c
 git cherry-pick a939321
 git cherry-pick 1e388d9
+git cherry-pick db5ac0a
 ...
 ```
 
