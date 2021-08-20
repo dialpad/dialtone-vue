@@ -1,5 +1,9 @@
 <template>
-  <transition :name="transition">
+  <transition
+    :name="transition"
+    appear
+    v-on="$listeners"
+  >
     <div
       v-show="show"
       v-on="$listeners"
