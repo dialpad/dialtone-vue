@@ -14,3 +14,4 @@ HsRadioGroup:DtRadioGroup
 HsValidationMessages:DtValidationMessages
 HsLazyShow:DtLazyShow
 HsList:DtList
+@dialpad/handset:@dialpad/dialtone-vue

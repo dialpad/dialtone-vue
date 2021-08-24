@@ -32,8 +32,8 @@ d-btn--circle--lg:d-btn d-btn--circle d-btn--lg
 d-btn--circle--xl:d-btn d-btn--circle d-btn--xl
 d-btn-loading--white:d-btn d-btn--loading d-btn--inverted
 d-btn--loading--white:d-btn d-btn--loading d-btn--inverted
-d-btn--loading--dark:d-btn d-btn--loading d-btn--muted
-d-btn--loading--danger:d-btn d-btn--loading d-btn--danger
+d-btn-loading--dark:d-btn d-btn--loading d-btn--muted
+d-btn-loading--danger:d-btn d-btn--loading d-btn--danger
 btn-inverted-clear-states:d-btn d-btn--inverted
 d-input-message--warning:d-validation-message d-validation-message--warning
 d-input-message--error:d-validation-message d-validation-message--error
