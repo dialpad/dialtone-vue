@@ -56,6 +56,10 @@ See [CONTRIBUTING](./CONTRIBUTING.md).
 
 ### Project Setup
 
+#### NPM_AUTH_TOKEN
+
+Ensure that `NPM_AUTH_TOKEN` is set in your path. You will need to set the token to an NPM authentication token which has read level access to the `@dialpad` organization. For now, this will be the same NPM token used in our `.npmrc` under both UC/UV projects.
+
 #### Install Dependencies
 
 ```bash
