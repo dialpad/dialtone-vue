@@ -16,18 +16,20 @@
       </div>
       <div
         class="d-checkbox__copy d-checkbox__label"
+        v-if="hasLabelOrDescription"
         data-qa="checkbox-label-description-container"
       >
         <div
           :class="labelClass"
           v-bind="labelChildProps"
+          v-if="hasLabel"
           data-qa="checkbox-label"
         >
           <!-- @slot slot for Checkbox Label -->
           <slot>{{ label }}</slot>
         </div>
         <div
-          v-if="$slots.description || description"
+          v-if="hasDescription"
           :class="['d-description', descriptionClass]"
           v-bind="descriptionChildProps"
           data-qa="checkbox-description"
@@ -74,6 +76,18 @@ export default {
 
     checkboxGroupValueChecked () {
       return this.groupContext?.selectedValues?.includes(this.value) ?? false;
+    },
+
+    hasLabel () {
+      return Boolean(this.$slots.label || this.label);
+    },
+
+    hasDescription () {
+      return Boolean(this.$slots.description || this.description);
+    },
+
+    hasLabelOrDescription () {
+      return this.hasLabel || this.hasDescription;
     },
 
     inputListeners () {
