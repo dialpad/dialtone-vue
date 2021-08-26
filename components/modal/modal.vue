@@ -15,69 +15,73 @@
     @keydown.tab="trapFocus"
     @after-enter.self="setFocusAfterTransition"
   >
-    <dt-lazy-show
-      transition="d-modal__dialog"
-      :show="show"
-      class="d-modal__dialog"
-      role="dialog"
-      aria-modal="true"
-      :aria-describedby="describedById"
-      :aria-labelledby="labelledById"
+    <transition
+      appear
+      name="d-modal__dialog"
     >
       <div
-        v-if="$slots.header"
-        :id="labelledById"
-        class="d-modal__header"
-        data-qa="dt-modal-title"
+        v-show="show"
+        class="d-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        :aria-describedby="describedById"
+        :aria-labelledby="labelledById"
       >
-        <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
-        <slot name="header" />
+        <div
+          v-if="$slots.header"
+          :id="labelledById"
+          class="d-modal__header"
+          data-qa="dt-modal-title"
+        >
+          <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
+          <slot name="header" />
+        </div>
+        <h2
+          v-else
+          :id="labelledById"
+          class="d-modal__header"
+          data-qa="dt-modal-title"
+        >
+          {{ title }}
+        </h2>
+        <dt-button
+          class="d-modal__close"
+          circle
+          size="lg"
+          importance="clear"
+          :aria-label="closeButtonProps.ariaLabel"
+          v-bind="closeButtonProps"
+          :kind="kind"
+          @click="close"
+        >
+          <template #icon>
+            <icon-close />
+          </template>
+        </dt-button>
+        <div
+          v-if="$slots.default"
+          class="d-modal__content"
+          data-qa="dt-modal-copy"
+        >
+          <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
+          <slot />
+        </div>
+        <p
+          v-else
+          class="d-modal__content"
+          data-qa="dt-modal-copy"
+        >
+          {{ copy }}
+        </p>
+        <footer
+          v-if="hasFooterSlot"
+          class="d-modal__footer"
+        >
+          <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
+          <slot name="footer" />
+        </footer>
       </div>
-      <h2
-        v-else
-        :id="labelledById"
-        class="d-modal__header"
-        data-qa="dt-modal-title"
-      >
-        {{ title }}
-      </h2>
-      <dt-button
-        class="d-modal__close"
-        circle
-        size="lg"
-        importance="clear"
-        :aria-label="closeButtonProps.ariaLabel"
-        v-bind="closeButtonProps"
-        :kind="kind"
-        @click="close"
-      >
-        <template #icon>
-          <icon-close />
-        </template>
-      </dt-button>
-      <div
-        v-if="$slots.default"
-        class="d-modal__content"
-        data-qa="dt-modal-copy"
-      >
-        <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
-        <slot />
-      </div>
-      <p
-        v-else
-        class="d-modal__content"
-        data-qa="dt-modal-copy"
-      >
-        {{ copy }}
-      </p>
-      <footer
-        v-if="hasFooterSlot"
-        class="d-modal__footer"
-      >
-        <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
-        <slot name="footer" />
-      </footer>
-    </dt-lazy-show>
+    </transition>
   </dt-lazy-show>
 </template>
 
@@ -229,6 +233,7 @@ export default {
     },
 
     setFocusAfterTransition () {
+      console.log(`EXECUTED`);
       this.focusFirstElement();
     },
 
