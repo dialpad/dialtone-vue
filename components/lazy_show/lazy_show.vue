@@ -1,7 +1,6 @@
 <template>
   <transition
     :name="transition"
-    appear
     v-on="$listeners"
   >
     <div
