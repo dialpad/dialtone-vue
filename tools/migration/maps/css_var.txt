@@ -100,7 +100,7 @@
 --rose-dark:--pink-500
 --rose-light:--pink-200
 --rose:--pink-400
---sunflower-dark:--yellow-600
+--sunflower-dark:--yellow-500
 --sunflower-lighter:--yellow-200
 --sunflower-light:--yellow-300
 --sunflower:--yellow-500

@@ -787,7 +787,7 @@ d-background-color--emerald-dark:d-bgc-green-600
 d-background-color--emerald-lighter:d-bgc-green-100
 d-background-color--emerald-light:d-bgc-green-300
 d-background-color--emerald:d-bgc-green-500
-d-background-color--sunflower-dark:d-bgc-yellow-600
+d-background-color--sunflower-dark:d-bgc-yellow-500
 d-background-color--sunflower-lighter:d-bgc-yellow-200
 d-background-color--sunflower-light:d-bgc-yellow-300
 d-background-color--sunflower:d-bgc-yellow-500
@@ -840,7 +840,7 @@ d-bgc-wildberry-dark:d-bgc-pink-600
 d-bgc-wildberry-lighter:d-bgc-pink-200
 d-bgc-wildberry-light:d-bgc-pink-400
 d-bgc-wildberry:d-bgc-pink-500
-d-bgc-sunflower-dark:d-bgc-yellow-600
+d-bgc-sunflower-dark:d-bgc-yellow-500
 d-bgc-sunflower-lighter:d-bgc-yellow-200
 d-bgc-sunflower-light:d-bgc-yellow-300
 d-bgc-sunflower:d-bgc-yellow-500
@@ -880,7 +880,7 @@ d-border-color--emerald-dark:d-bc-green-600
 d-border-color--emerald-lighter:d-bc-green-100
 d-border-color--emerald-light:d-bc-green-300
 d-border-color--emerald:d-bc-green-500
-d-border-color--sunflower-dark:d-bc-yellow-600
+d-border-color--sunflower-dark:d-bc-yellow-500
 d-border-color--sunflower-lighter:d-bc-yellow-200
 d-border-color--sunflower-light:d-bc-yellow-300
 d-border-color--sunflower:d-bc-yellow-500
@@ -957,7 +957,7 @@ d-fc-wildberry-lighter:d-fc-pink-200
 d-fc-wildberry-light:d-fc-pink-400
 d-fc-wildberry-text:d-fc-pink
 d-fc-wildberry:d-fc-pink-500
-d-fc-sunflower-dark:d-fc-yellow-600
+d-fc-sunflower-dark:d-fc-yellow-500
 d-fc-sunflower-lighter:d-fc-yellow-200
 d-fc-sunflower-light:d-fc-yellow-300
 d-fc-sunflower-text:d-fc-yellow
