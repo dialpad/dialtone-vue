@@ -1,9 +1,3 @@
-d-btn--outlined:d-btn d-btn--outlined
-d-btn--primary:d-btn d-btn--primary
-d-btn--danger:d-btn d-btn--danger
-d-btn--inverted:d-btn d-btn--inverted
-d-btn--circle:d-btn d-btn--circle
-d-btn--loading:d-btn d-btn--loading
 d-btn--outlined--loading:d-btn d-btn--outlined d-btn--loading
 d-btn--primary--disabled:d-btn d-btn--primary d-btn--disabled
 d-btn--primary--loading:d-btn d-btn--primary d-btn--loading
