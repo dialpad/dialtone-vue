@@ -8,6 +8,7 @@
           :name="internalName"
           :value="value"
           :disabled="internalDisabled"
+          :aria-label="ariaLabel"
           :class="['d-checkbox', inputValidationClass, inputClass]"
           v-bind="$attrs"
           :indeterminate.prop="indeterminate"
@@ -15,14 +16,14 @@
         >
       </div>
       <div
-        class="d-checkbox__copy d-checkbox__label"
         v-if="hasLabelOrDescription"
+        class="d-checkbox__copy d-checkbox__label"
         data-qa="checkbox-label-description-container"
       >
         <div
+          v-if="hasLabel"
           :class="labelClass"
           v-bind="labelChildProps"
-          v-if="hasLabel"
           data-qa="checkbox-label"
         >
           <!-- @slot slot for Checkbox Label -->
@@ -59,6 +60,7 @@ import {
 } from '../mixins/input.js';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
+import Vue from 'vue';
 
 export default {
   name: 'DtCheckbox',
@@ -79,7 +81,7 @@ export default {
     },
 
     hasLabel () {
-      return Boolean(this.$slots.label || this.label);
+      return Boolean(this.$slots.default || this.label);
     },
 
     hasDescription () {
@@ -121,6 +123,10 @@ export default {
     },
   },
 
+  mounted () {
+    this.runValidations();
+  },
+
   methods: {
     emitValue (value, checked) {
       // update provided value if injected
@@ -128,6 +134,15 @@ export default {
 
       // emit the state of the checkbox
       this.$emit('input', checked);
+    },
+
+    runValidations () {
+      if (!this.hasLabel && !this.ariaLabel) {
+        Vue.util.warn(
+          'DtCheckbox: You must provide an aria-label when there is no label passed',
+          this,
+        );
+      }
     },
   },
 };
