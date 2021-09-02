@@ -30,7 +30,7 @@
     <!-- Note: must have an aria-label if no label is passed either through props/slots -->
 
     <dt-checkbox
-      name="with-label-or-description"
+      name="without-label-nor-description"
       aria-label="My aria label"
       value="Value"
     />
