@@ -5,11 +5,14 @@
 .d-btn d-btn--circle();:.d-btn(); .d-btn--circle();
 .d-btn d-btn--loading();:.d-btn(); .d-btn--loading();
 .d-btn d-btn--loading d-btn--muted();:.d-btn(); .d-btn--muted(); .d-btn--loading();
+.d-btn(); .d-btn(); .d-btn--circle(); .d-btn(); .d-btn--danger();:.d-btn(); .d-btn--circle(); .d-btn--danger();
+.d-btn(); .d-btn(); .d-btn--primary(); .d-btn(); .d-btn--loading();:.d-btn(); .d-btn--primary(); .d-btn--loading();
 .d-link d-link--warning();:.d-link(); .d-link--warning();
 .d-link d-link--danger();:.d-link(); .d-link--danger();
 .d-link d-link--success();:.d-link(); .d-link--success();
 .d-link d-link--dark();:.d-link(); .d-link--dark();
 .d-link d-link--inverted();:.d-link(); .d-link--inverted();
+.d-btn(); .d-btn();:.d-btn();
 .d-btn(); .d-btn();:.d-btn();
 .d-link(); .d-link();:.d-link();
 .d-validation-message d-validation-message--error():.d-validation-message(); .d-validation-message--error();

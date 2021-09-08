@@ -36,7 +36,7 @@ replaceString() {
   LOCAL_REPLACEMENT_STRING=$2
 
   # Find and replace strings ("" is required on macos when using xargs and sed)
-  grep ${GREP_FLAGS[@]} ${GREP_INCLUDE[@]} -e "${LOCAL_FIND_STRING}" "${DIRECTORY}" | xargs sed -i "" "s/${LOCAL_FIND_STRING}/${LOCAL_REPLACEMENT_STRING}/g"
+  grep ${GREP_FLAGS[@]} ${GREP_INCLUDE[@]} ${GREP_EXCLUDE[@]} -e "${LOCAL_FIND_STRING}" "${DIRECTORY}" | xargs sed -i "" "s/${LOCAL_FIND_STRING}/${LOCAL_REPLACEMENT_STRING}/g"
 }
 
 # Mixin replacement method
@@ -78,6 +78,7 @@ replaceMixins() {
 # Constants
 GREP_FLAGS=(-l)
 GREP_INCLUDE=(--include=\*.{js,vue,handlebars,less,css})
+GREP_EXCLUDE=(--exclude-dir=node_modules)
 REPLACE_VARS=false
 REPLACE_AUTO_MIXINS=false
 
