@@ -7,6 +7,7 @@
 .d-btn d-btn--loading d-btn--muted();:.d-btn(); .d-btn--muted(); .d-btn--loading();
 .d-btn(); .d-btn(); .d-btn--circle(); .d-btn(); .d-btn--danger();:.d-btn(); .d-btn--circle(); .d-btn--danger();
 .d-btn(); .d-btn(); .d-btn--primary(); .d-btn(); .d-btn--loading();:.d-btn(); .d-btn--primary(); .d-btn--loading();
+.d-btn(); .d-btn--circle(); .d-btn(); .d-btn--inverted(); .d-btn(); .d-btn--outlined();:.d-btn(); .d-btn--circle(); .d-btn--inverted(); .d-btn--outlined();
 .d-link d-link--warning();:.d-link(); .d-link--warning();
 .d-link d-link--danger();:.d-link(); .d-link--danger();
 .d-link d-link--success();:.d-link(); .d-link--success();
