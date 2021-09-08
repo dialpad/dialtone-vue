@@ -264,3 +264,8 @@ d-td-underline|text-decoration: underline !important;
 d-wb-break-all|word-break: break-all !important;
 d-tt-none|text-transform: none !important;
 d-ow-anywhere|overflow-wrap: anywhere !important;
+d-headline42|font-size: var(--fs42) !important; font-weight: var(--fw-bold) !important;
+d-headline36|font-size: var(--fs36) !important; font-weight: var(--fw-bold) !important;
+d-headline32|font-size: var(--fs32) !important; font-weight: var(--fw-bold) !important;
+d-headline24|font-size: var(--fs24) !important; font-weight: var(--fw-bold) !important;
+d-headline10|font-size: var(--fs10) !important; font-weight: var(--fw-bold) !important;

@@ -692,11 +692,11 @@ d-font-family--custom:d-ff-custom
 d-font-family--sans:d-ff-sans
 d-font-family--mono:d-ff-mono
 d-font-family--unset:d-ff-unset
-d-headline--xl:d-fs42
-d-headline--lg:d-fs36
-d-headline--md:d-fs32
-d-headline--sm:d-fs24
-d-headline--xs:d-fs10
+d-headline--xl:d-headline42
+d-headline--lg:d-headline36
+d-headline--md:d-headline32
+d-headline--sm:d-headline24
+d-headline--xs:d-headline10
 d-text--xl:d-fs20
 d-text--lg:d-fs18
 d-text--md:d-fs16
