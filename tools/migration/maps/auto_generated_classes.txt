@@ -738,7 +738,7 @@ d-m24|margin: var(--su24);
 d-m32|margin: var(--su32);
 d-m48|margin: var(--su48);
 d-m64|margin: var(--su64);
-d-m0|margin: var(--su0)
+d-m0|margin: var(--su0);
 d-m1|margin: var(--su1);
 d-m2|margin: var(--su2);
 d-m4|margin: var(--su4);
@@ -752,7 +752,7 @@ d-mt24|margin-top: var(--su24);
 d-mt32|margin-top: var(--su32);
 d-mt48|margin-top: var(--su48);
 d-mt64|margin-top: var(--su64);
-d-mt0|margin-top: var(--su0)
+d-mt0|margin-top: var(--su0);
 d-mt1|margin-top: var(--su1);
 d-mt2|margin-top: var(--su2);
 d-mt4|margin-top: var(--su4);
@@ -766,7 +766,7 @@ d-mr24|margin-right: var(--su24);
 d-mr32|margin-right: var(--su32);
 d-mr48|margin-right: var(--su48);
 d-mr64|margin-right: var(--su64);
-d-mr0|margin-right: var(--su0)
+d-mr0|margin-right: var(--su0);
 d-mr1|margin-right: var(--su1);
 d-mr2|margin-right: var(--su2);
 d-mr4|margin-right: var(--su4);
@@ -780,7 +780,7 @@ d-mb24|margin-bottom: var(--su24);
 d-mb32|margin-bottom: var(--su32);
 d-mb48|margin-bottom: var(--su48);
 d-mb64|margin-bottom: var(--su64);
-d-mb0|margin-bottom: var(--su0)
+d-mb0|margin-bottom: var(--su0);
 d-mb1|margin-bottom: var(--su1);
 d-mb2|margin-bottom: var(--su2);
 d-mb4|margin-bottom: var(--su4);
@@ -794,7 +794,7 @@ d-ml24|margin-left: var(--su24);
 d-ml32|margin-left: var(--su32);
 d-ml48|margin-left: var(--su48);
 d-ml64|margin-left: var(--su64);
-d-ml0|margin-left: var(--su0)
+d-ml0|margin-left: var(--su0);
 d-ml1|margin-left: var(--su1);
 d-ml2|margin-left: var(--su2);
 d-ml4|margin-left: var(--su4);
@@ -808,7 +808,7 @@ d-mx24|margin-right: var(--su24); margin-left: var(--su24);
 d-mx32|margin-right: var(--su32); margin-left: var(--su32);
 d-mx48|margin-right: var(--su48); margin-left: var(--su48);
 d-mx64|margin-right: var(--su64); margin-left: var(--su64);
-d-mx0|margin-right: var(--su0) margin-left: var(--su0)
+d-mx0|margin-right: var(--su0); margin-left: var(--su0);
 d-mx1|margin-right: var(--su1); margin-left: var(--su1);
 d-mx2|margin-right: var(--su2); margin-left: var(--su2);
 d-mx4|margin-right: var(--su4); margin-left: var(--su4);
@@ -822,7 +822,7 @@ d-my24|margin-top: var(--su24); margin-bottom: var(--su24);
 d-my32|margin-top: var(--su32); margin-bottom: var(--su32);
 d-my48|margin-top: var(--su48); margin-bottom: var(--su48);
 d-my64|margin-top: var(--su64); margin-bottom: var(--su64);
-d-my0|margin-top: var(--su0) margin-bottom: var(--su0)
+d-my0|margin-top: var(--su0); margin-bottom: var(--su0);
 d-my1|margin-top: var(--su1); margin-bottom: var(--su1);
 d-my2|margin-top: var(--su2); margin-bottom: var(--su2);
 d-my4|margin-top: var(--su4); margin-bottom: var(--su4);
@@ -913,7 +913,7 @@ d-p24|padding: var(--su24);
 d-p32|padding: var(--su32);
 d-p48|padding: var(--su48);
 d-p64|padding: var(--su64);
-d-p0|padding: var(--su0)
+d-p0|padding: var(--su0);
 d-p1|padding: var(--su1);
 d-p2|padding: var(--su2);
 d-p4|padding: var(--su4);
@@ -926,7 +926,7 @@ d-pt24|padding-top: var(--su24);
 d-pt32|padding-top: var(--su32);
 d-pt48|padding-top: var(--su48);
 d-pt64|padding-top: var(--su64);
-d-pt0|padding-top: var(--su0)
+d-pt0|padding-top: var(--su0);
 d-pt1|padding-top: var(--su1);
 d-pt2|padding-top: var(--su2);
 d-pt4|padding-top: var(--su4);
@@ -939,7 +939,7 @@ d-pr24|padding-right: var(--su24);
 d-pr32|padding-right: var(--su32);
 d-pr48|padding-right: var(--su48);
 d-pr64|padding-right: var(--su64);
-d-pr0|padding-right: var(--su0)
+d-pr0|padding-right: var(--su0);
 d-pr1|padding-right: var(--su1);
 d-pr2|padding-right: var(--su2);
 d-pr4|padding-right: var(--su4);
@@ -952,7 +952,7 @@ d-pb24|padding-bottom: var(--su24);
 d-pb32|padding-bottom: var(--su32);
 d-pb48|padding-bottom: var(--su48);
 d-pb64|padding-bottom: var(--su64);
-d-pb0|padding-bottom: var(--su0)
+d-pb0|padding-bottom: var(--su0);
 d-pb1|padding-bottom: var(--su1);
 d-pb2|padding-bottom: var(--su2);
 d-pb4|padding-bottom: var(--su4);
@@ -965,7 +965,7 @@ d-pl24|padding-left: var(--su24);
 d-pl32|padding-left: var(--su32);
 d-pl48|padding-left: var(--su48);
 d-pl64|padding-left: var(--su64);
-d-pl0|padding-left: var(--su0)
+d-pl0|padding-left: var(--su0);
 d-pl1|padding-left: var(--su1);
 d-pl2|padding-left: var(--su2);
 d-pl4|padding-left: var(--su4);
@@ -978,7 +978,7 @@ d-px24|padding-right: var(--su24); padding-left: var(--su24);
 d-px32|padding-right: var(--su32); padding-left: var(--su32);
 d-px48|padding-right: var(--su48); padding-left: var(--su48);
 d-px64|padding-right: var(--su64); padding-left: var(--su64);
-d-px0|padding-right: var(--su0) padding-left: var(--su0)
+d-px0|padding-right: var(--su0); padding-left: var(--su0);
 d-px1|padding-right: var(--su1); padding-left: var(--su1);
 d-px2|padding-right: var(--su2); padding-left: var(--su2);
 d-px4|padding-right: var(--su4); padding-left: var(--su4);
@@ -991,7 +991,7 @@ d-py24|padding-top: var(--su24); padding-bottom: var(--su24);
 d-py32|padding-top: var(--su32); padding-bottom: var(--su32);
 d-py48|padding-top: var(--su48); padding-bottom: var(--su48);
 d-py64|padding-top: var(--su64); padding-bottom: var(--su64);
-d-py0|padding-top: var(--su0) padding-bottom: var(--su0)
+d-py0|padding-top: var(--su0); padding-bottom: var(--su0);
 d-py1|padding-top: var(--su1); padding-bottom: var(--su1);
 d-py2|padding-top: var(--su2); padding-bottom: var(--su2);
 d-py4|padding-top: var(--su4); padding-bottom: var(--su4);
@@ -1004,4 +1004,4 @@ d-br|border-right: var(--su1) solid currentColor;
 d-bb|border-bottom: var(--su1) solid currentColor;
 d-bl|border-left: var(--su1) solid currentColor;
 d-bx|border-right: var(--su1) solid currentColor; border-left: var(--su1) solid currentColor;
-d-by|border-top: var(--su1) solid currentColor;border-bottom: var(--su1) solid currentColor;
+d-by|border-top: var(--su1) solid currentColor; border-bottom: var(--su1) solid currentColor;
