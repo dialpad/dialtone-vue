@@ -7,7 +7,7 @@
 #  The following script will run the migrate script for css / less vars, component classes and utility classes against a directory #
 # Args:                                                                                                                            #
 #  -m <string>: A relative path to the class / var maps directory                                                                  #
-#  -d <string>: A relative path to a directory to migrate                                                                          #
+#  -d <string>: A relative path to a directory or file to migrate                                                                  #
 ####################################################################################################################################
 
 # Usage method
@@ -23,7 +23,7 @@ while getopts "m:d:" option; do
       MIGRATION_MAP_DIR=$OPTARG
       ;;
     d)
-      MIGRATION_DIR=$OPTARG
+      MIGRATION_PATH=$OPTARG
       ;;
     *)
       usage
@@ -38,9 +38,9 @@ if [ -z "$MIGRATION_MAP_DIR" ]
     exit 1
 fi
 
-if [ -z "$MIGRATION_DIR" ]
+if [ -z "$MIGRATION_PATH" ]
   then
-    echo "Please provide a path to a directory to migrate"
+    echo "Please provide a path to a directory or file to migrate"
     usage
     exit 1
 fi
@@ -48,43 +48,43 @@ fi
 echo "Starting migration in 10 seconds"
 
 echo "Migrating Component Classes..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/component_class.txt -d ${MIGRATION_DIR} -r
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/component_class.txt -d ${MIGRATION_PATH} -r
 echo "Component Classes Migrated!"
 
 echo "Migrating Utility Classes..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/utility_class.txt -d ${MIGRATION_DIR} -r
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/utility_class.txt -d ${MIGRATION_PATH} -r
 echo "Utility Classes Migrated!"
 
 echo "Migrating LESS Variables..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/less_var.txt -d ${MIGRATION_DIR} -v -r
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/less_var.txt -d ${MIGRATION_PATH} -v -r
 echo "LESS Variables Migrated!"
 
 echo "Migrating CSS Variables..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/css_var.txt -d ${MIGRATION_DIR} -v -r
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/css_var.txt -d ${MIGRATION_PATH} -v -r
 echo "CSS Variables Migrated!"
 
 echo "Migrating Dialtone Icons..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/icons.txt  -d ${MIGRATION_DIR} -v -r
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/icons.txt  -d ${MIGRATION_PATH} -v -r
 echo "Dialtone Icons Migrated!"
 
 echo "Migrating Auto Generated Dialtone Classes..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/auto_generated_classes.txt  -d ${MIGRATION_DIR} -a -r
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/auto_generated_classes.txt  -d ${MIGRATION_PATH} -a -r
 echo "Auto Generated Dialtone Classes Migrated!"
 
 echo "Migrating Class Corrections..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/migration_class_corrections.txt  -d ${MIGRATION_DIR} -r
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/migration_class_corrections.txt  -d ${MIGRATION_PATH} -r
 echo "Class Corrections Migrated!"
 
 echo "Migrating Mixin Corrections..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/migration_mixin_corrections.txt  -d ${MIGRATION_DIR} -a -r
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/migration_mixin_corrections.txt  -d ${MIGRATION_PATH} -a -r
 echo "Mixin Corrections Migrated!"
 
 echo "Migrating Corrections..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/migration_corrections.txt  -d ${MIGRATION_DIR} -v -r
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/migration_corrections.txt  -d ${MIGRATION_PATH} -v -r
 echo "Corrections Migrated!"
 
 echo "Migrating Handset Components..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/handset.txt  -d ${MIGRATION_DIR} -v -r
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/handset.txt  -d ${MIGRATION_PATH} -v -r
 echo "Handset Components Migrated!"
 
 echo "Migration Complete!"
