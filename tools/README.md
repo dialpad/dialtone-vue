@@ -143,7 +143,7 @@ The following script is used to apply migrations to Dialpad (UV).
 
 #### `run_migrations.sh`
 
-The following script is used to run a set of migrations against a specified directory.
+The following script is used to run a set of migrations against a specified file or directory.
 
 ##### Usage
 
@@ -159,7 +159,7 @@ The following script is used to run a set of migrations against a specified dire
 
 #### `migrate.sh`
 
-The following script is used to run a migration map against a specified directory.
+The following script is used to run a migration map against a specified file or directory.
 
 ##### Usage
 
