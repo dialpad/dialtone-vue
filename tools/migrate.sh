@@ -36,7 +36,7 @@ replaceString() {
   LOCAL_REPLACEMENT_STRING=$2
 
   # Find and replace strings ("" is required on macos when using xargs and sed)
-  grep ${GREP_FLAGS[@]} ${GREP_INCLUDE[@]} ${GREP_EXCLUDE[@]} -e "${LOCAL_FIND_STRING}" "${DIRECTORY}" | xargs sed -i "" "s/${LOCAL_FIND_STRING}/${LOCAL_REPLACEMENT_STRING}/g"
+  grep ${GREP_FLAGS[@]} ${GREP_INCLUDE[@]} ${GREP_EXCLUDE[@]} -e "${LOCAL_FIND_STRING}" "${MIGRATION_PATH}" | xargs sed -i "" "s/${LOCAL_FIND_STRING}/${LOCAL_REPLACEMENT_STRING}/g"
 }
 
 # Mixin replacement method
@@ -89,7 +89,7 @@ while getopts "m:d:e:rva" option; do
       MIGRATION_MAP_FILE=$OPTARG
       ;;
     d)
-      DIRECTORY=$(cd "$(dirname "$OPTARG")"; pwd)/$(basename "$OPTARG")
+      MIGRATION_PATH=$(cd "$(dirname "$OPTARG")"; pwd)/$(basename "$OPTARG")
       ;;
     e)
       GREP_FLAGS+=(--exclude=${OPTARG})
@@ -116,9 +116,9 @@ if [ -z "$MIGRATION_MAP_FILE" ]
     exit 1
 fi
 
-if [ -z "$DIRECTORY" ]
+if [ -z "$MIGRATION_PATH" ]
   then
-    echo "Please provide a directory to migrate"
+    echo "Please provide a directory or file to migrate"
     usage
     exit 1
 fi

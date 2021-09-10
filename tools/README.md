@@ -148,7 +148,7 @@ The following script is used to run a set of migrations against a specified dire
 ##### Usage
 
 ```bash
-./run_migrations.sh -m <PATH_TO_MIGRATION_MAPS_DIRECTORY> -d <PATH_TO_DIRECTORY_TO_MIGRATE>
+./run_migrations.sh -m <PATH_TO_MIGRATION_MAPS_DIRECTORY> -d <PATH_TO_DIRECTORY_OR_FILE_TO_MIGRATE>
 ```
 
 ##### Example
@@ -164,7 +164,7 @@ The following script is used to run a migration map against a specified director
 ##### Usage
 
 ```bash
-./migrate.sh -m <PATH_TO_MIGRATION_MAP>  -d <PATH_TO_DIRECTORY_TO_MIGRATE> -r -v
+./migrate.sh -m <PATH_TO_MIGRATION_MAP>  -d <PATH_TO_DIRECTORY_OR_FILE_TO_MIGRATE> -r -v
 ```
 
 ##### Example
