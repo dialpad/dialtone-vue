@@ -134,8 +134,6 @@ while read -r line; do
     # Replace auto generated mixins
     replaceString ".${FIND_STRING}();" "${REPLACEMENT_STRING}"
     replaceString ".${FIND_STRING};" "${REPLACEMENT_STRING}"
-    replaceString ".${FIND_STRING}() !important;" "${REPLACEMENT_STRING}"
-    replaceString ".${FIND_STRING} !important;" "${REPLACEMENT_STRING}"
   else
     # Parse line from migration map
     FIND_STRING="$(cut -d':' -f1 <<< "$line")"
