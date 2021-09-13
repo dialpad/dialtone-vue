@@ -50,7 +50,7 @@ echo "Starting migration in 10 seconds"
 echo "Migrating Old Mixins..."
 # Old utility classes used as mixins that don't have !important, need to be migrated
 # before these utility classes are migrated below.
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/old_mixins.txt  -d ${MIGRATION_DIR} -a -r
+sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/old_mixins.txt -d ${MIGRATION_PATH} -a -r
 echo "Old Mixins Migrated!"
 
 echo "Migrating Component Classes..."
