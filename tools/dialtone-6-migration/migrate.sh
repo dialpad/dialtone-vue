@@ -44,8 +44,8 @@ replaceString() {
 #    $1 <string>: The find string parsed from the file
 #    $2 <string>: The replacement string parsed from the file
 replaceMixins() {
-  LOCAL_FIND_MIXIN_STRING_1=".${1}();"
-  LOCAL_FIND_MIXIN_STRING_2=".${1};"
+  LOCAL_FIND_MIXIN_STRING_1="\.${1}();"
+  LOCAL_FIND_MIXIN_STRING_2="\.${1};"
   LOCAL_REPLACEMENT_MIXIN_STRING=''
 
   # Get replacement classes
