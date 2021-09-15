@@ -25,41 +25,15 @@ The following script is used to run a set of migrations against a specified file
 ./run_migrations.sh -m ./maps -d ../../firespotter/ubervoice/static/js
 ```
 
-#### `migrate_uc.sh`
-
-The following script is used to apply migrations to Dialpad Meetings (formerly UC).
-
-##### Usage
+##### Individual File Example
 
 ```bash
-./migrate_uc.sh -m <PATH_TO_MIGRATION_MAPS_DIRECTORY> -d <PATH_TO_UC_DIRECTORY>
-```
-
-##### Example
-
-```bash
-./migrate_uc.sh -m ./maps -d ../../firespotter/uc_client
-```
-
-#### `migrate_uv.sh`
-
-The following script is used to apply migrations to Dialpad (UV).
-
-##### Usage
-
-```bash
-./migrate_uv.sh -m <PATH_TO_MIGRATION_MAPS_DIRECTORY> -d <PATH_TO_UV_DIRECTORY>
-```
-
-##### Example
-
-```bash
-./migrate_uv.sh -m ./maps -d ../../firespotter/ubervoice
+./run_migrations.sh -m ./maps -d ../../firespotter/ubervoice/static/js/setup/components/signup.vue
 ```
 
 #### `migrate.sh`
 
-The following script is used to run a migration map against a specified file or directory.
+The following script is used to run a single migration map against a specified file or directory.
 
 ##### Usage
 
