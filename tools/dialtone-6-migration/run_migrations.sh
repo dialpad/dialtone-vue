@@ -8,22 +8,29 @@
 # Args:                                                                                                                            #
 #  -m <string>: A relative path to the class / var maps directory                                                                  #
 #  -d <string>: A relative path to a directory or file to migrate                                                                  #
+#  -c: Enables component class migrations                                                                                          #
 ####################################################################################################################################
 
 # Usage method
 usage() {
-  echo "Usage: $0 [-m <string>] [-d <string>]";
+  echo "Usage: $0 [-m <string>] [-d <string>] -c";
   exit 1;
 }
 
+# Constants
+MIGRATE_COMPONENT_CLASSES=false
+
 # Get arguments
-while getopts "m:d:" option; do
+while getopts "m:d:c" option; do
   case "${option}" in
     m)
       MIGRATION_MAP_DIR=$OPTARG
       ;;
     d)
       MIGRATION_PATH=$OPTARG
+      ;;
+    c)
+      MIGRATE_COMPONENT_CLASSES=true
       ;;
     *)
       usage
@@ -53,9 +60,12 @@ echo "Migrating Old Mixins..."
 sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/old_mixins.txt -d ${MIGRATION_PATH} -a -r
 echo "Old Mixins Migrated!"
 
-echo "Migrating Component Classes..."
-sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/component_class.txt -d ${MIGRATION_PATH} -r
-echo "Component Classes Migrated!"
+if [ ${MIGRATE_COMPONENT_CLASSES} = true ]
+then
+  echo "Migrating Component Classes..."
+  sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/component_class.txt -d ${MIGRATION_PATH} -r
+  echo "Component Classes Migrated!"
+fi
 
 echo "Migrating Utility Classes..."
 sh ./migrate.sh -m ${MIGRATION_MAP_DIR}/utility_class.txt -d ${MIGRATION_PATH} -r
