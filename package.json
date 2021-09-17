@@ -16,7 +16,7 @@
     "lint:code": "esplint ./",
     "lint-staged:code": "eslint --fix",
     "lint:docs": "markdownlint '**/*.mdx'",
-    "lint-staged:docs": "markdownlint",
+    "lint-staged:docs": "markdownlint --fix",
     "lint": "run-s lint:code lint:docs",
     "storybook": "npm run --prefix storybook storybook",
     "storybook:install": "npm install --prefix storybook",

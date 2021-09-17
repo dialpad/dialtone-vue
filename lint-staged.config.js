@@ -3,7 +3,7 @@ module.exports = {
     'npm run lint-staged:code',
     'esplint --stage-record-file',
   ],
-  '*.markdown': [
+  '*.mdx': [
     'npm run lint-staged:docs',
   ],
 };
