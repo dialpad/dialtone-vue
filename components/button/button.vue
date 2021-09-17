@@ -27,7 +27,7 @@
     </span>
     <span
       data-qa="dt-button-label"
-      :class="['base-button__label', 'd-btn__label']"
+      :class="['base-button__label', 'd-btn__label', 'd-w100p']"
     >
       <slot />
     </span>
