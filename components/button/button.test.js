@@ -296,13 +296,6 @@ describe('Dialtone Vue Button tests', function () {
   describe('Extendability Tests', function () {
     const customClass = 'my-custom-class';
 
-    // Shared Examples
-    const itBehavesLikeAppliesClassToChildLocal = () => {
-      it('should apply custom class to child', function () {
-        itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', label);
-      });
-    };
-
     describe('When an label class is provided', function () {
       beforeEach(function () {
         propsData = {
@@ -313,7 +306,7 @@ describe('Dialtone Vue Button tests', function () {
       });
 
       it('should apply custom class to child', function () {
-        itBehavesLikeAppliesClassToChildLocal();
+        itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', label);
       });
     });
   });
