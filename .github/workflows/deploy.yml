@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ release ]
+    branches: [ token-stuff ]
 
 jobs:
   deploy:
@@ -33,5 +33,5 @@ jobs:
       - name: Run Linters
         run: npm run lint
 
-      - name: Deploy package
-        run: npm run deploy
+      # - name: Deploy package
+      #   run: npm run deploy
