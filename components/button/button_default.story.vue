@@ -6,6 +6,7 @@
     :kind="kind"
     :circle="circle"
     :loading="loading"
+    :label-class="labelClass"
     :assertive-on-focus="assertiveOnFocus"
     :link="link"
     :link-kind="linkKind"
@@ -16,7 +17,10 @@
     @focusout="onFocusOut"
     @focusin="onFocusIn"
   >
-    <span v-html="defaultSlot" />
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
     <template
       v-if="icon"
       #icon
