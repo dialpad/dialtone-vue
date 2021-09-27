@@ -1,6 +1,6 @@
 const path = require('path');
 const less = require('less');
-var package = require('../storybook/package.json');
+var package = require('../package.json');
 const generate = require('generate-file-webpack-plugin');
 
 const cssLoaders = [
