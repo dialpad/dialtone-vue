@@ -1,5 +1,7 @@
 const path = require('path');
 const less = require('less');
+var package = require('../storybook/package.json');
+const generate = require('generate-file-webpack-plugin');
 
 const cssLoaders = [
   'style-loader',
@@ -22,6 +24,11 @@ const lessLoaders = [
 
 module.exports = {
   webpackFinal: async (config) => {
+    config.plugins.push(generate({
+      file: 'version.txt',
+      content: package.version
+    }));
+
     config.module.rules.push({
       test: /\.less$/,
       use: lessLoaders,
