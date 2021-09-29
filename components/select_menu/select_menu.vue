@@ -2,7 +2,7 @@
   <div>
     <label>
       <div
-        v-if="label"
+        v-if="$slots.label || label"
         :aria-details="labelAriaDetails"
         :class="[
           'd-label',
