@@ -65,7 +65,8 @@
         >
           <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
           <slot name="footer" />
-        </footer><dt-button
+        </footer>
+        <dt-button
           v-if="!hideClose"
           class="d-modal__close"
           circle
