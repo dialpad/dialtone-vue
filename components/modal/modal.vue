@@ -242,7 +242,6 @@ export default {
     },
 
     setFocusAfterTransition () {
-      console.log(`EXECUTED`);
       this.focusFirstElement();
     },
 
