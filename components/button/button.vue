@@ -26,8 +26,9 @@
       />
     </span>
     <span
+      v-if="$slots.default"
       data-qa="dt-button-label"
-      :class="['base-button__label', 'd-btn__label']"
+      :class="['d-w100p', 'd-btn__label', 'base-button__label', labelClass]"
     >
       <slot />
     </span>
@@ -129,6 +130,14 @@ export default {
       type: String,
       default: 'md',
       validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(s),
+    },
+
+    /**
+     * Used to customize the label container
+     */
+    labelClass: {
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**

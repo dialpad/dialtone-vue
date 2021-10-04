@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "1.0.0-beta.6",
+  "version": "1.1.1",
   "description": "Vue component library for Dialtone components",
   "repository": "https://github.com/dialpad/dialtone-vue",
   "files": [
@@ -14,7 +14,9 @@
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
     "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
     "lint:code": "esplint ./",
+    "lint-staged:code": "eslint --fix",
     "lint:docs": "markdownlint '**/*.mdx'",
+    "lint-staged:docs": "markdownlint --fix",
     "lint": "run-s lint:code lint:docs",
     "storybook": "npm run --prefix storybook storybook",
     "storybook:install": "npm install --prefix storybook",
@@ -24,8 +26,7 @@
     "v-click-outside": "^3.1.2"
   },
   "devDependencies": {
-    "@dialpad/dialtone": "6.0.0-beta.12",
-    "@dialpad/generator-dp": "^1.0.0",
+    "@dialpad/dialtone": "^6.2.1",
     "@vue/cli-plugin-babel": "~4.4.6",
     "@vue/cli-plugin-eslint": "~4.4.6",
     "@vue/cli-plugin-unit-mocha": "~4.4.6",
@@ -51,6 +52,7 @@
     "jsdom-global": "3.0.2",
     "less": "3.9.0",
     "less-loader": "^6.2.0",
+    "lint-staged": "^11.1.2",
     "markdownlint": "^0.22.0",
     "markdownlint-cli": "^0.26.0",
     "mocha": "^6.2.3",
@@ -64,11 +66,11 @@
     "yo": "^3.1.1"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": "6.0.0-beta.12",
+    "@dialpad/dialtone": ">=6.2",
     "vue": "^2.6.11"
   },
   "gitHooks": {
-    "pre-commit": "npm run lint"
+    "pre-commit": "lint-staged"
   },
   "engineStrict": true,
   "engines": {

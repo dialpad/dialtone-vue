@@ -12,6 +12,7 @@
       <!-- @slot slot for label, defaults to label prop -->
       <slot name="labelSlot">
         <div
+          v-if="label"
           data-qa="dt-input-label"
           :class="[
             'base-input__label-text',
@@ -35,7 +36,7 @@
         <!-- @slot slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
       </div>
-      <div class="d-ps-relative">
+      <div class="d-input__wrapper">
         <span
           v-if="$slots.leftIcon"
           :class="inputIconClasses('left')"
@@ -43,17 +44,6 @@
           @focusout="onBlur"
         >
           <slot name="leftIcon" />
-        </span>
-        <!--
-          Right Icon must come before input / textarea as there is no such thing as a previous sibling css selector
-        -->
-        <span
-          v-if="$slots.rightIcon"
-          :class="inputIconClasses('right')"
-          data-qa="dt-input-right-icon-wrapper"
-          @focusout="onBlur"
-        >
-          <slot name="rightIcon" />
         </span>
         <textarea
           v-if="isTextarea"
@@ -78,6 +68,14 @@
           data-qa="dt-input-input"
           v-on="inputListeners"
         >
+        <span
+          v-if="$slots.rightIcon"
+          :class="inputIconClasses('right')"
+          data-qa="dt-input-right-icon-wrapper"
+          @focusout="onBlur"
+        >
+          <slot name="rightIcon" />
+        </span>
       </div>
     </label>
     <dt-validation-messages
@@ -236,7 +234,11 @@ export default {
       return [
         'base-input__input',
         `d-${this.inputComponent}`,
-        { [`d-${this.inputComponent}--${this.inputState} base-input__input--${this.inputState}`]: this.showInputState },
+        {
+          [`d-${this.inputComponent}--${this.inputState} base-input__input--${this.inputState}`]: this.showInputState,
+          'd-input-icon--left': this.$slots.leftIcon,
+          'd-input-icon--right': this.$slots.rightIcon,
+        },
         this.sizeModifierClass,
       ];
     },

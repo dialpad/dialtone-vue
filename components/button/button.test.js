@@ -3,11 +3,13 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import DtButton from './button.vue';
 import EmptyComponentFixture from '../../tests/fixtures/component.vue';
+import { itBehavesLikeAppliesClassToChild } from '../../tests/shared_examples/extendability';
 
 describe('Dialtone Vue Button tests', function () {
   let wrapper;
   let button;
   let icon;
+  let label;
 
   let buttonStub;
   let listeners;
@@ -16,6 +18,7 @@ describe('Dialtone Vue Button tests', function () {
   const _setElements = function () {
     button = wrapper.find('[data-qa="dt-button"]');
     icon = wrapper.find('[data-qa="dt-button-icon"]');
+    label = wrapper.find('[data-qa="dt-button-label"]');
   };
 
   const _assertButtonDefaultClasses = function () {
@@ -43,6 +46,10 @@ describe('Dialtone Vue Button tests', function () {
       it('Should render primary by default', async function () {
         // Default (no props) button should be d-btn--primary
         assert.isTrue(button.classes().includes('d-btn--primary'));
+      });
+
+      it('Should not render label', async function () {
+        assert.isFalse(label.exists());
       });
 
       describe('When button is a circle', function () {
@@ -286,6 +293,28 @@ describe('Dialtone Vue Button tests', function () {
 
       it('Should emit click event', function () {
         assert.equal(wrapper.emitted().click);
+      });
+    });
+  });
+
+  describe('Extendability Tests', function () {
+    const customClass = 'my-custom-class';
+
+    describe('When an label class is provided', function () {
+      beforeEach(function () {
+        propsData = {
+          labelClass: customClass,
+        };
+        wrapper = shallowMount(DtButton, {
+          propsData,
+          slots: { default: 'My Button Label' },
+          localVue: this.localVue,
+        });
+        _setElements();
+      });
+
+      it('should apply custom class to child', function () {
+        itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', label);
       });
     });
   });

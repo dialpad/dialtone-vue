@@ -4,8 +4,8 @@
     role="group"
     :aria-labelledby="`${id}-list-section-header`"
     tabindex="-1"
-    :class="['dt-list-section', 'd-fs14', 'd-lh6', 'd-py6', 'd-border-color--ash-darker',
-             { 'd-border-bottom': separator }]"
+    :class="['dt-list-section', 'd-fs14', 'd-lh6', 'd-py6', 'd-bc-black-200',
+             { 'd-bb': separator }]"
   >
     <h3
       v-if="header"
@@ -61,6 +61,7 @@ export default {
       functional: true,
       render: (h, ctx) => ctx.props.vnodes,
     },
+
     DtButton,
   },
 
@@ -115,16 +116,20 @@ export default {
       }
       return true;
     },
+
     showMoreLessText () {
       return this.showAll ? this.textLess : this.textMore;
     },
+
     hiddenCount () {
       return this.itemCount - this.displayedItems.length;
     },
+
     itemCount () {
       // eslint-disable-next-line vue/require-slots-as-functions
       return this.$slots.default.length;
     },
+
     displayedItems () {
       // filtering the slot v-nodes to only display up to maxDisplayed items
       // eslint-disable-next-line vue/require-slots-as-functions
