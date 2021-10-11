@@ -4,7 +4,6 @@
       <slot
         name="anchor"
         :attrs="{
-          tabIndex: tabIndex,
           'aria-describedby': id,
         }"
       />
@@ -51,11 +50,6 @@ export default {
       default () { return getUniqueString(); },
     },
 
-    visible: {
-      type: Boolean,
-      default: false,
-    },
-
     /**
      * This property is needed for define fallback placements
      * by providing a list of placements to try.
@@ -71,14 +65,6 @@ export default {
     inverted: {
       type: Boolean,
       default: false,
-    },
-
-    /**
-     * This property is needed for focus event
-     */
-    tabIndex: {
-      type: [String, Number],
-      default: '0',
     },
 
     /**
@@ -121,6 +107,8 @@ export default {
     /**
      * This describes the area that the element
      * will be checked for overflow relative to.
+     * Flip modifier - https://popper.js.org/docs/v2/modifiers/flip/
+     * Boundary option - https://popper.js.org/docs/v2/utils/detect-overflow/#boundary
      */
     flipBoundary: {
       type: [String, HTMLElement],
@@ -129,7 +117,8 @@ export default {
 
     /**
      * Determines the size of the invisible border around the
-     * tippy that will prevent it from hiding if the cursor left it.
+     * tippy in px that will prevent it from hiding if the cursor left it.
+     * https://atomiks.github.io/tippyjs/v6/all-props/#interactiveborder
      * */
     interactiveBorder: {
       type: Number,
@@ -150,7 +139,12 @@ export default {
      * **/
     trigger: {
       type: String,
-      default: 'mouseenter focus click',
+      default: 'mouseenter focus',
+    },
+
+    hideOnClick: {
+      type: Boolean,
+      default: true,
     },
   },
 
@@ -170,23 +164,31 @@ export default {
     convertedFlip () {
       return this.flip.map(arrowDialtone => TOOLTIP_DIALTONE_DIRECTIONS[arrowDialtone]);
     },
+
+    tippyProps () {
+      return {
+        offset: this.offset,
+        interactiveBorder: this.interactiveBorder,
+        appendTo: this.appendTo,
+        interactive: this.interactive,
+        trigger: this.trigger,
+        popperOptions: this.getPopperOptions(),
+        hideOnClick: this.hideOnClick,
+      };
+    },
   },
 
   watch: {
-    arrowDirection: {
-      handler () {
-        this.placement = this.arrowDirection;
-        this.tip?.setProps({
-          placement: this.tippyPlacement,
-        });
-      },
+    tippyProps: {
+      handler: 'setProps',
+      deep: true,
     },
   },
 
   mounted () {
     const anchor = this.$refs.anchor.children[0];
     this.placement = this.arrowDirection;
-    this.tip = tippy(anchor, this.getOptions());
+    this.tip = tippy(anchor, this.initOptions());
   },
 
   beforeDestroy () {
@@ -194,6 +196,14 @@ export default {
   },
 
   methods: {
+    setProps () {
+      this.placement = this.arrowDirection;
+      this.tip?.setProps({
+        ...this.tippyProps,
+        placement: this.tippyPlacement,
+      });
+    },
+
     getPopperOptions () {
       return {
         modifiers: [
@@ -218,17 +228,11 @@ export default {
       };
     },
 
-    getOptions () {
+    initOptions () {
       return {
-        hideOnClick: false,
-        offset: this.offset,
-        interactiveBorder: this.interactiveBorder,
-        placement: this.tippyPlacement,
-        appendTo: this.appendTo,
-        interactive: this.interactive,
         allowHTML: true,
-        trigger: this.trigger,
-        popperOptions: this.getPopperOptions(),
+        placement: this.tippyPlacement,
+        ...this.tippyProps,
         render: () => {
           // The recommended structure is to use the popper as an outer wrapper
           const popper = document.createElement('div');

@@ -12,6 +12,15 @@
         :arrow-direction="arrowDirection"
         :inverted="inverted"
         :message="message"
+        :id="id"
+        :flip="flip"
+        :offset="offset"
+        :append-to="appendTo"
+        :interactive="interactive"
+        :flip-boundary="flipBoundary"
+        :interactive-border="interactiveBorder"
+        :trigger="trigger"
+        :hide-on-click="hideOnClick"
       >
         <template #anchor="{ attrs }">
           <dt-button
@@ -36,6 +45,7 @@ import { DtButton } from '../button';
 
 export default {
   name: 'TooltipTippyDefaultStory',
+  inheritAttrs: false,
   components: {
     TooltipTippy,
     DtButton,

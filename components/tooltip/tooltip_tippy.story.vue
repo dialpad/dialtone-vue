@@ -11,6 +11,14 @@
           arrow-direction="bottom-center"
           class="tooltip"
           :flip-boundary="parentNode"
+          :id="id"
+          :flip="flip"
+          :offset="offset"
+          :append-to="appendTo"
+          :interactive="interactive"
+          :interactive-border="interactiveBorder"
+          :trigger="trigger"
+          :hide-on-click="hideOnClick"
         >
           <template #anchor="{ attrs }">
             <dt-button
