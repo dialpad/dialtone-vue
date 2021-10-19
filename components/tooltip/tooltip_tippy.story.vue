@@ -6,11 +6,19 @@
     >
       <div class="some-text"/>
       <div class="some-text">
-        <dt-tooltip
+        <tooltip-tippy
           v-if="parentNode"
           arrow-direction="bottom-center"
           class="tooltip"
           :flip-boundary="parentNode"
+          :id="id"
+          :flip="flip"
+          :offset="offset"
+          :append-to="appendTo"
+          :interactive="interactive"
+          :interactive-border="interactiveBorder"
+          :trigger="trigger"
+          :hide-on-click="hideOnClick"
         >
           <template #anchor="{ attrs }">
             <dt-button
@@ -26,7 +34,7 @@
               {{ defaultSlot }}
             </div>
           </template>
-        </dt-tooltip>
+        </tooltip-tippy>
       </div>
       <div class="some-text" />
     </div>
@@ -34,13 +42,13 @@
 </template>
 
 <script>
-import DtTooltip from './tooltip';
+import TooltipTippy from './tooltip-tippy-headless';
 import { DtButton } from '../button';
 
 export default {
-  name: 'TooltipOverflow',
+  name: 'TooltipTippyStory',
   components: {
-    DtTooltip,
+    TooltipTippy,
     DtButton,
   },
 

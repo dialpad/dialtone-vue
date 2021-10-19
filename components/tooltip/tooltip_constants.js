@@ -5,6 +5,11 @@ export const TOOLTIP_DIRECTION_MODIFIERS = [
   'left-top', 'left-center', 'left-bottom',
 ];
 
+/*
+* Mapping object for Tippy and Dialtone tooltip directions
+* Tippy directions - https://atomiks.github.io/tippyjs/v6/all-props/#placement
+* Dialtone tooltip directions - https://dialtone.netlify.app/components/tooltip/#arrow-directions
+* */
 export const TOOLTIP_TIPPY_DIRECTIONS = {
   bottom: 'top-center',
   'bottom-start': 'top-left',
@@ -20,6 +25,9 @@ export const TOOLTIP_TIPPY_DIRECTIONS = {
   'top-end': 'bottom-right',
 };
 
+/*
+* String-keyed object which contains Dialton and Tippy tooltip directions mapping
+*/
 export const TOOLTIP_DIALTONE_DIRECTIONS = Object.entries(TOOLTIP_TIPPY_DIRECTIONS).reduce((acc, [key, value]) => ({
   ...acc,
   [value]: key,

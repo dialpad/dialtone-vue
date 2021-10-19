@@ -1,8 +1,7 @@
 import { createTemplateFromVueFile } from '../storybook_utils';
-import DtTooltip from './tooltip';
-import DtTooltipMdx from './tooltip.mdx';
-import DtTooltipDefaultTemplate from './tooltip_default.story.vue';
-import DtTooltipVariantsTemplate from './tooltip_variants.story';
+import DtTooltipTippy from './tooltip-tippy-headless';
+import DtTooltipTippyTemplate from './tooltip_tippy.story.vue';
+import DtTooltipTippyDefault from './tooltip_tippy_default.story';
 
 import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
 
@@ -11,27 +10,22 @@ export const argsData = {
   message: 'This is a Tooltip',
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
-  show: true,
 };
 
 export const argTypesData = {
-  // Props
-  show: {
-    description: 'Used to show tooltip',
-    control: 'boolean',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'boolean',
-      },
-    },
-  },
-
   arrowDirection: {
     control: {
       type: 'select',
       options: TOOLTIP_DIRECTION_MODIFIERS,
     },
+  },
+
+  flip: {
+    defaultValue: ['left-center', 'top-center'],
+  },
+
+  offset: {
+    defaultValue: [0, 0],
   },
 
   // Slots
@@ -58,24 +52,20 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Elements/Tooltip',
-  component: DtTooltip,
+  title: 'Elements/Tooltip-Tippy',
+  component: DtTooltipTippy,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtTooltipMdx,
-    },
-  },
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipVariantsTemplate);
+const TippyBodyTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipTippyTemplate);
+const TooltipTippyDefault = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipTippyDefault);
 // Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
+export const TippyHeadlessDefault = TooltipTippyDefault.bind({});
+TippyHeadlessDefault.args = {};
+
+export const TippyHeadlessBody = TippyBodyTemplate.bind({});
+TippyHeadlessBody.args = {};
