@@ -80,11 +80,11 @@ export default {
     },
 
     hasLabel () {
-      return Boolean(this.$slots.default || this.label);
+      return !!(this.$slots.default || this.label);
     },
 
     hasDescription () {
-      return Boolean(this.$slots.description || this.description);
+      return !!(this.$slots.description || this.description);
     },
 
     hasLabelOrDescription () {
