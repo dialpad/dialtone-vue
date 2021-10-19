@@ -19,14 +19,6 @@ export const InputMixin = {
     },
 
     /**
-     * A provided aria-label for the input
-     */
-    ariaLabel: {
-      type: String,
-      default: '',
-    },
-
-    /**
      * The name of the input
      */
     name: {

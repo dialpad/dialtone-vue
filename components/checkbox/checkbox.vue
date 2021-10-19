@@ -8,7 +8,6 @@
           :name="internalName"
           :value="value"
           :disabled="internalDisabled"
-          :aria-label="ariaLabel"
           :class="['d-checkbox', inputValidationClass, inputClass]"
           v-bind="$attrs"
           :indeterminate.prop="indeterminate"
