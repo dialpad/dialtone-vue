@@ -22,7 +22,7 @@
         'd-bs-md',
         'd-wmx-unset',
         'd-bar4',
-        `dt-popover__content--pad-${padding}`,
+         POPOVER_PADDING_CLASSES[padding],
         `dt-popover__content--align-${alignment}`,
         `dt-popover__content--valign-${verticalAlignment}`,
         'd-m0',
@@ -34,7 +34,7 @@
       </slot>
       <div
         v-if="hasCaret"
-        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret"
+        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret d-ps-absolute d-w6 d-h6"
       />
     </div>
   </div>
@@ -42,17 +42,18 @@
 
 <script>
 import tippy from 'tippy.js/headless';
-import tippyMixin from '../mixins/tippy.js';
+import { hideOnEsc, getArrowDetected } from '../tooltip/modifiers';
 import {
   POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_PADDING_CLASSES,
   POPOVER_ROLES,
   POPOVER_VERTICAL_ALIGNMENT,
 } from './popover_constants';
+import { getUniqueString } from '../utils';
+import { TOOLTIP_DIRECTION_MODIFIERS } from '../tooltip';
 
 export default {
   name: 'Popover',
-  mixins: [tippyMixin],
 
   props: {
     /**
@@ -74,7 +75,7 @@ export default {
       type: String,
       default: 'large',
       validator: (padding) => {
-        return POPOVER_PADDING_CLASSES.includes(padding);
+        return !!POPOVER_PADDING_CLASSES[padding];
       },
     },
 
@@ -128,9 +129,125 @@ export default {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * The id of the tooltip
+     */
+    id: {
+      type: String,
+      default () { return getUniqueString(); },
+    },
+
+    /**
+     * This property is needed for define fallback placements
+     * by providing a list of placements to try.
+     * */
+    flip: {
+      type: Array,
+      default: () => ['left-center', 'top-center'],
+    },
+
+    /**
+     * Add inverted class
+     */
+    inverted: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * This property is needed for focus event
+     */
+    tabIndex: {
+      type: [String, Number],
+      default: '0',
+    },
+
+    /**
+     *  Displaces the tippy from its reference element
+     *  in pixels (skidding and distance).
+     */
+    offset: {
+      type: Array,
+      default: () => [0, 10],
+    },
+
+    /**
+     * Describes the preferred placement of the tooltip
+     */
+    arrowDirection: {
+      type: String,
+      default: 'bottom-center',
+      validator (direction) {
+        return TOOLTIP_DIRECTION_MODIFIERS.includes(direction);
+      },
+    },
+
+    /**
+     * The element to append the tippy to.
+     */
+    appendTo: {
+      type: [String, HTMLElement],
+      default: () => document.body,
+    },
+
+    /**
+     * Determines if the tippy has interactive content inside of it,
+     * so that it can be hovered over and clicked inside without hiding.
+     */
+    interactive: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * This describes the area that the element
+     * will be checked for overflow relative to.
+     */
+    flipBoundary: {
+      type: [String, HTMLElement],
+      default: 'popper',
+    },
+
+    /**
+     * Determines the size of the invisible border around the
+     * tippy that will prevent it from hiding if the cursor left it.
+     * */
+    interactiveBorder: {
+      type: Number,
+      default: 2,
+    },
+
+    /**
+     * A provided message for the tooltip content
+     */
+    message: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Determines the events that cause the tippy to show.
+     * Multiple event names are separated by spaces.
+     * **/
+    trigger: {
+      type: String,
+      default: 'click',
+    },
+
+    /***
+     * Determines if the tippy hides upon clicking the
+     * reference or outside of the tippy.
+     * The behavior can depend upon the trigger events used.
+     * */
+    hideOnClick: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data: () => ({
+    POPOVER_PADDING_CLASSES,
     verticalAlignment: '',
     show: false,
   }),
@@ -161,10 +278,16 @@ export default {
     this.tip = tippy(anchor, this.getOptions({
       popperOptions: this.getPopperOptions(),
       tippyOptions: {
-        trigger: 'click',
-        interactive: true,
         placement: this.placement,
-        hideOnClick: 'toggle',
+        hideOnClick: this.hideOnClick,
+        offset: this.offset,
+        interactiveBorder: this.interactiveBorder,
+        appendTo: this.appendTo,
+        interactive: this.interactive,
+        allowHTML: true,
+        trigger: this.trigger,
+        animation: true,
+        delay: [180, 180],
         onHide: (instance) => {
           const box = instance.popper.firstElementChild;
           this.$emit('update:open', false);
@@ -182,6 +305,10 @@ export default {
     }));
   },
 
+  beforeDestroy () {
+    this.tip?.destroy();
+  },
+
   methods: {
     convertTippyToPopperVerticalPlacement (tippyPlacement) {
       return tippyPlacement.includes('top') ? 'top' : 'bottom';
@@ -196,17 +323,45 @@ export default {
               boundary: this.flipBoundary,
             },
           },
-          {
-            name: 'arrowDetected',
-            enabled: true,
-            phase: 'main',
-            fn: ({ state }) => {
-              this.verticalAlignment = this.convertTippyToPopperVerticalPlacement(state.placement);
-            },
-
-            requiresIfExists: ['offset'],
-          },
+          getArrowDetected(({ state }) => {
+            this.verticalAlignment = this.convertTippyToPopperVerticalPlacement(state.placement);
+          }),
         ],
+      };
+    },
+
+    animateShow (box) {
+      requestAnimationFrame(() => {
+        box.classList.add('fade-in');
+        box.classList.remove('fade-out');
+      });
+    },
+
+    animateHide (box, instance) {
+      box.classList.remove('fade-in');
+      box.classList.add('fade-out');
+
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          instance.unmount();
+        });
+      }, 150);
+    },
+
+    getOptions ({ popperOptions, tippyOptions } = {}) {
+      return {
+        popperOptions,
+        ...tippyOptions,
+        plugins: [hideOnEsc],
+        render: () => {
+          // The recommended structure is to use the popper as an outer wrapper
+          const popper = document.createElement('div');
+          popper.className = 'tippy-box d-ps-absolute';
+          popper.appendChild(this.$refs.content);
+          return {
+            popper,
+          };
+        },
       };
     },
   },
@@ -231,35 +386,22 @@ export default {
     margin-bottom: @su4;
 
     .dt-popover__caret {
-      top: auto;
       bottom: -@su4;
       transform: rotate(225deg);
     }
   }
 
-  &--pad-none {
-    padding: @su0;
-  }
-
-  &--pad-small {
-    padding: @su8;
-  }
-
-  &--pad-medium {
-    padding: @su16;
-  }
-
-  &--pad-large {
-    padding: @su24;
+  &--valign-bottom {
+    .dt-popover__caret {
+      bottom: 100%;
+      top: 0;
+      transform: rotate(45deg);
+    }
   }
 }
 
 .dt-popover__caret {
-  top: @su0;
-  height: @su6;
-  width: @su6;
   transform: rotate(45deg);
-  position: absolute;
 }
 
 .tippy-box[data-popper-reference-hidden],

@@ -20,7 +20,7 @@ const argTypesData = {
   padding: {
     control: {
       type: 'select',
-      options: POPOVER_PADDING_CLASSES,
+      options: Object.keys(POPOVER_PADDING_CLASSES),
     },
   },
   role: {
