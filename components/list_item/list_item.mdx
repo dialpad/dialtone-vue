@@ -1,0 +1,132 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import DtListItem from './list_item';
+
+# List Item
+
+<Subtitle>
+  A list item is an element that can be used to represent individual items in a list.
+</Subtitle>
+
+## Base Style
+
+A list item provides accessibility controls and common functionality. I has 3 slots
+that can be used for the most common use cases, **iconLeft**, **iconRight** and **default** slot.
+
+The **iconLeft** slot can contain content, such as an icon, that will be positioned to the left
+of the default content.
+
+The **iconRight** slot works the same way, but its contents are placed to the right of the default slot.
+
+The **default** slot contains the main content of the list item. It does not apply any styling
+or restrictions on the content as this component can be used to display varying types of content.
+
+<Canvas>
+  <Story id="elements-list-item--default" />
+</Canvas>
+
+### Usage
+
+```js
+import { DtListItem } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-list-item>
+  Example List Item
+</dt-list-item>
+```
+
+## Accessibility
+
+The list item should be provided an approriate role as the prop `role` or the role defaults to "listitem"
+when not provided.
+
+The boolean prop `clickable` will determine whether the list item will have a set tabindex and hover/focus styles.
+
+The props `absoluteIndex`, `highlightIndex`, `setHighlightIndex` and `parentElement` should be passed
+when the list item is used within a list component that supports keyboard navigation. When these props
+are passed the prop `clickable` should be set to "false" so that the item is not focusable since it
+uses a custom highlighting instead. When the list item receives the highlight either by hovering
+over it with a mouse or via keyboard navigation the ARIA attribute `aria-selected` is set to "true".
+
+## Variants
+
+### With Left Icon
+
+Provides left icon within the list item.
+
+<Canvas>
+  <Story id="elements-list-item--with-left-icon" />
+</Canvas>
+
+### Usage
+
+```js
+import { DtListItem } from '@dialpad/dialtone-vue';
+import IconWarning from '@dialpad/dialtone/lib/dist/vue/icons/IconWarning.vue';
+```
+
+```html
+<dt-list-item>
+  <template #iconLeft>
+    <icon-warning />
+  </template>
+  Example List Item
+</dt-list-item>
+```
+
+### With Right Icon
+
+Provides right icon within the list item.
+
+<Canvas>
+  <Story id="elements-list-item--with-right-icon" />
+</Canvas>
+
+### Usage
+
+```js
+import { DtListItem } from '@dialpad/dialtone-vue';
+import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch.vue';
+```
+
+```html
+<dt-list-item>
+  Example List Item
+  <template #iconRight>
+    <icon-launch />
+  </template>
+</dt-list-item>
+```
+
+### With Both Icons
+
+Provides both icons within the list item.
+
+<Canvas>
+  <Story id="elements-list-item--with-both-icon" />
+</Canvas>
+
+### Usage
+
+```js
+import { DtListItem } from '@dialpad/dialtone-vue';
+import IconWarning from '@dialpad/dialtone/lib/dist/vue/icons/IconWarning.vue';
+import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch.vue';
+```
+
+```html
+<dt-list-item>
+  <template #iconLeft>
+    <icon-warning />
+  </template>
+  Example List Item
+  <template #iconRight>
+    <icon-launch />
+  </template>
+</dt-list-item>
+```
+
+## Props, Slots and Events
+
+<ArgsTable of={DtListItem} />
