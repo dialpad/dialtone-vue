@@ -150,6 +150,7 @@ describe('Dialtone Vue Tab Group tests', function () {
     describe('When selected is updated', function () {
       beforeEach(async function () {
         _mountWrapper();
+        // Simulating the third tab being set programmatically after the second tab was selected by a user.
         tabs.at(1).vm.$el.click();
         propsData.selected = optionTabs[2].panelId;
         await wrapper.setProps(propsData);
