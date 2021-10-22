@@ -125,6 +125,7 @@ export default {
 
     selected () {
       this.provideObj.selected = this.selected;
+      this.onChange();
     },
   },
 
