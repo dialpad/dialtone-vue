@@ -106,6 +106,7 @@ export default {
         selected: '', // the currently displayed tab id
         disabled: false, // disable group
       },
+
       focusId: null,
       tabs: [],
       TAB_LIST_SIZE_MODIFIERS,
@@ -120,6 +121,10 @@ export default {
       handler () {
         this.provideObj.disabled = this.disabled;
       },
+    },
+
+    selected () {
+      this.provideObj.selected = this.selected;
     },
   },
 

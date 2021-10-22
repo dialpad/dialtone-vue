@@ -148,6 +148,18 @@ describe('Dialtone Vue Tab Group tests', function () {
         assert.strictEqual(tabPanels.at(1).attributes('aria-hidden'), 'true');
       });
     });
+
+    describe('Correct tab group selected state', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ selected: '6' });
+      });
+
+      it('selected element should be correct', function () {
+        assert.strictEqual(tabs.at(2).attributes('aria-selected'), 'true');
+        assert.strictEqual(tabPanels.at(2).attributes('aria-hidden'), 'false');
+      });
+    });
+
     describe('Correct change event', function () {
       beforeEach(function () {
         tabs.at(1).vm.$el.click();

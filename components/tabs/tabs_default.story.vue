@@ -9,6 +9,7 @@
       :inverted="inverted"
       :borderless="borderless"
       :disabled="disabled"
+      :selected="selected"
       @change="onChange"
     >
       <template #tabs>
