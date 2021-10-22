@@ -180,7 +180,7 @@ describe('Dialtone Vue ListItem tests', function () {
     describe('When mousemove is detected but item is not highlightable', function () {
       // Test Setup
       beforeEach(async function () {
-        await wrapper.setProps({ absoluteIndex: null });
+        await wrapper.setProps({ absoluteIndex: null, highlightIndex: null, setHighlightIndex: setHighlightIndexSpy });
         await wrapper.trigger('mousemove');
       });
 
