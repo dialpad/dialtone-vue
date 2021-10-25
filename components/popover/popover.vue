@@ -10,7 +10,7 @@
         }"
       />
     </div>
-    <lazy-show
+    <dt-lazy-show
       :id="id"
       ref="content"
       :show="open"
@@ -42,7 +42,7 @@
         v-if="hasCaret"
         class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret d-ps-absolute d-w6 d-h6"
       />
-    </lazy-show>
+    </dt-lazy-show>
   </div>
 </template>
 
@@ -53,13 +53,13 @@ import {
   POPOVER_PADDING_CLASSES,
 } from './popover_constants';
 import { getUniqueString } from '../utils';
-import LazyShow from '../lazy_show/lazy_show';
+import DtLazyShow from '../lazy_show/lazy_show';
 import popoverMixin from './popover_mixin.js';
 
 export default {
   name: 'Popover',
   components: {
-    LazyShow,
+    DtLazyShow,
   },
 
   mixins: [popoverMixin],
