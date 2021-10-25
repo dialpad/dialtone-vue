@@ -7,6 +7,8 @@
         :content-class="contentClass"
         :has-caret="hasCaret"
         :padding="padding"
+        :open="isOpen"
+        @update:open="isOpen = $event"
       >
         <template #anchor="{ attrs }">
           <dt-button
@@ -35,6 +37,25 @@ export default {
   components: {
     PopoverTippy,
     DtButton,
+  },
+
+  props: {
+    open: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  data () {
+    return {
+      isOpen: this.open || false,
+    };
+  },
+
+  watch: {
+    open (isOpen) {
+      this.isOpen = isOpen;
+    },
   },
 };
 </script>
