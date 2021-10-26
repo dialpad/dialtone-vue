@@ -126,6 +126,10 @@ export const InputMixin = {
   },
 
   methods: {
+    /**
+     * @param {Boolean | String} hasLabelOrLabel either a boolean indicating the label exists or the label itself
+     * @param {String} ariaLabel the aria-label passed (null/undefined if it's not passed)
+     */
     validateInputLabels (hasLabelOrLabel, ariaLabel) {
       if (!hasLabelOrLabel && !ariaLabel) {
         Vue.util.warn(
