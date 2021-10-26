@@ -124,6 +124,17 @@ export const InputMixin = {
       this.internalValidationState = newValidationState;
     },
   },
+
+  methods: {
+    validateInputLabels (hasLabelOrLabel, ariaLabel) {
+      if (!hasLabelOrLabel && !ariaLabel) {
+        Vue.util.warn(
+          'You must provide an aria-label when there is no label passed',
+          this,
+        );
+      }
+    },
+  },
 };
 
 /**

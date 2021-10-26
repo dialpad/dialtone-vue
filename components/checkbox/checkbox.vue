@@ -59,7 +59,6 @@ import {
 } from '../mixins/input.js';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
-import Vue from 'vue';
 
 export default {
   name: 'DtCheckbox',
@@ -69,6 +68,8 @@ export default {
   mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 
   inheritAttrs: false,
+
+  emits: ['input'],
 
   computed: {
     inputValidationClass () {
@@ -136,12 +137,7 @@ export default {
     },
 
     runValidations () {
-      if (!this.hasLabel && !this.ariaLabel) {
-        Vue.util.warn(
-          'DtCheckbox: You must provide an aria-label when there is no label passed',
-          this,
-        );
-      }
+      this.validateInputLabels(this.hasLabel, this.$attrs['aria-label']);
     },
   },
 };
