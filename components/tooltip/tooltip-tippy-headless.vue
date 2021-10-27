@@ -198,6 +198,12 @@ export default {
       handler: 'setProps',
       deep: true,
     },
+
+    show () {
+      if (this.tip) {
+        this.show ? this.tip.show() : this.tip.hide();
+      }
+    },
   },
 
   mounted () {
