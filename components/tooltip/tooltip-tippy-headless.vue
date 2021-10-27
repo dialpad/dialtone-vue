@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <div ref="anchor">
+  <div data-qa="dt-tooltip-container">
+    <div
+      ref="anchor"
+      data-qa="dt-tooltip-anchor"
+    >
       <slot
         name="anchor"
         :attrs="{
@@ -183,6 +186,8 @@ export default {
       handler: 'setProps',
       deep: true,
     },
+
+    arrowDirection: 'setProps',
   },
 
   mounted () {
@@ -198,10 +203,12 @@ export default {
   methods: {
     setProps () {
       this.placement = this.arrowDirection;
-      this.tip?.setProps({
-        ...this.tippyProps,
-        placement: this.tippyPlacement,
-      });
+      if (this.tip && this.tip.setProps) {
+        this.tip.setProps({
+          ...this.tippyProps,
+          placement: this.tippyPlacement,
+        });
+      }
     },
 
     getPopperOptions () {
