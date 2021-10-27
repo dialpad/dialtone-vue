@@ -1,9 +1,11 @@
 import { createTemplateFromVueFile } from '../storybook_utils';
 import DtTooltipTippy from './tooltip-tippy-headless';
-import DtTooltipTippyTemplate from './tooltip_tippy.story.vue';
+import DtTooltipTippyFlipTemplate from './tooltip_tippy_flip.story.vue';
 import DtTooltipTippyDefault from './tooltip_tippy_default.story';
+import DtTooltipTippyVariantsTemplate from './tooltip_tippy_variants';
 
 import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
+import DtTooltipMdx from './tooltip_tippy.mdx';
 
 // Default Prop Values
 export const argsData = {
@@ -25,7 +27,7 @@ export const argTypesData = {
   },
 
   offset: {
-    defaultValue: [0, 0],
+    defaultValue: [0, 10],
   },
 
   // Slots
@@ -57,15 +59,26 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
+  parameters: {
+    docs: {
+      page: DtTooltipMdx,
+    },
+  },
 };
 
 // Templates
-const TippyBodyTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipTippyTemplate);
+const TooltipTippyFlipTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTooltipTippyFlipTemplate);
 const TooltipTippyDefault = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipTippyDefault);
+const TooltipTippyVariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTooltipTippyVariantsTemplate);
 // Stories
 
 export const TippyHeadlessDefault = TooltipTippyDefault.bind({});
 TippyHeadlessDefault.args = {};
 
-export const TippyHeadlessBody = TippyBodyTemplate.bind({});
-TippyHeadlessBody.args = {};
+export const TooltipTippyFlip = TooltipTippyFlipTemplate.bind({});
+TooltipTippyFlip.args = {};
+
+export const TippyHeadlessVariants = TooltipTippyVariantsTemplate.bind({});
+TippyHeadlessVariants.args = {};
