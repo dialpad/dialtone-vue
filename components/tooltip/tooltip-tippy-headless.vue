@@ -15,7 +15,7 @@
       :id="id"
       ref="content"
       role="tooltip"
-      aria-hidden="false"
+      :aria-hidden="`${!localShow}`"
       data-qa="dt-tooltip"
       :class="[
         'd-tooltip',
@@ -171,6 +171,7 @@ export default {
       TOOLTIP_KIND_MODIFIERS,
       tip: null,
       placement: '',
+      localShow: false,
     };
   },
 
@@ -205,6 +206,7 @@ export default {
     arrowDirection: 'setProps',
 
     show () {
+      this.localShow = this.show;
       if (this.tip) {
         this.show ? this.tip.show() : this.tip.hide();
       }
@@ -216,13 +218,16 @@ export default {
     const anchor = anchorElement || this.createAnchor();
     this.placement = this.arrowDirection;
     this.tip = tippy(anchor, this.initOptions());
+    this.localShow = this.show;
     if (this.show) {
       this.tip.show();
     }
   },
 
   beforeDestroy () {
-    this.tip?.destroy();
+    if (this.tip) {
+      this.tip.destroy();
+    }
   },
 
   methods: {
@@ -269,10 +274,22 @@ export default {
       };
     },
 
+    onMount () {
+      this.localShow = true;
+      this.$emit('update:show', this.localShow);
+    },
+
+    onHide () {
+      this.localShow = false;
+      this.$emit('update:show', this.localShow);
+    },
+
     initOptions () {
       return {
         allowHTML: true,
         placement: this.tippyPlacement,
+        onMount: this.onMount,
+        onHide: this.onHide,
         ...this.tippyProps,
         render: () => {
           // The recommended structure is to use the popper as an outer wrapper
