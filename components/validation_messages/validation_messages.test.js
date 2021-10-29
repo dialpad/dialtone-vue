@@ -166,6 +166,30 @@ describe('Validation Messages Tests', function () {
         itBehavesLikeHasNoVisibleValidationMessages();
       });
 
+      describe('When there is also a correct success validation message', function () {
+        // Test Environment
+        const successValidationMessage = 'Success';
+
+        // Test Setup
+        beforeEach(function () {
+          validationMessages = addFormattedValidationMessage(
+            validationMessages,
+            VALIDATION_MESSAGE_TYPES.SUCCESS,
+            successValidationMessage,
+          );
+        });
+
+        describe('When the validation message renders', function () {
+          // Test Setup
+          beforeEach(function () {
+            propsData = { ...basePropsData, validationMessages };
+            _setWrappers();
+          });
+
+          itBehavesLikeHasNoVisibleValidationMessages();
+        });
+      });
+
       describe('When there is also a correct warning validation message', function () {
         // Test Environment
         const warningValidationMessage = 'Warning';
