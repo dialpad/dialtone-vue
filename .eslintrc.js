@@ -25,6 +25,7 @@ module.exports = {
       allowEmptyReject: true,
     }],
     'vue/comma-dangle': ['error', 'always-multiline'],
+    'vuejs-accessibility/iframe-has-title': 1,
     'vue/component-name-in-template-casing': ['error', 'kebab-case', {
       registeredComponentsOnly: true,
     }],
