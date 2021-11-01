@@ -25,6 +25,9 @@ export default {
   title: 'Elements/Banner',
   component: DtBanner,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: BaseBannerMdx,
     },

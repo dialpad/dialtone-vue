@@ -86,6 +86,9 @@ export default {
   title: 'Elements/Modal',
   component: DtModal,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: ModalMdx,
     },

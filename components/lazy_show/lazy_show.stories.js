@@ -17,6 +17,9 @@ export default {
   component: DtLazyShow,
   argTypes: argTypesData,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: LazyShowMdx,
     },

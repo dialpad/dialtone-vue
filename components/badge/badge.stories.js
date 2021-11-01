@@ -33,6 +33,9 @@ export default {
   excludeStories: /.*Data$/,
   argTypes: argTypesData,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtBadgeMdx,
     },

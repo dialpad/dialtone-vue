@@ -26,6 +26,9 @@ export default {
   title: 'Forms/Validation Messages',
   component: DtValidationMessages,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: BaseValidationMessagesMdx,
     },

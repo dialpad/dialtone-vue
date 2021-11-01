@@ -49,6 +49,9 @@ export default {
   component: DtPopover,
   argTypes: argTypesData,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: PopoverMdx,
     },

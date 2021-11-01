@@ -124,6 +124,9 @@ export default {
   title: 'Forms/Input',
   component: DtInput,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: InputMdx,
     },

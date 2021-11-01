@@ -166,6 +166,9 @@ export default {
   title: 'Elements/Button',
   component: DtButton,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: BaseButtonMdx,
     },
