@@ -4,6 +4,11 @@ import BannerDefault from './banner_default.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import { argsData, argTypesData } from '../notice/notice.stories.js';
 
+argTypesData.role = {
+  table: {
+    disable: true,
+  },
+};
 argTypesData.titleId = {
   defaultValue: '',
   table: {

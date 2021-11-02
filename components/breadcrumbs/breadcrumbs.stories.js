@@ -49,14 +49,6 @@ export const argTypesData = {
       },
     },
   },
-  id: {
-    control: 'text',
-    table: {
-      defaultValue: {
-        summary: 'uniq id',
-      },
-    },
-  },
 };
 
 // Story Collection
