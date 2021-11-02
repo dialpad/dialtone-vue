@@ -22,15 +22,15 @@ export const argTypesData = {
     },
   },
 
-  // Native Props
+  // HTML attributes
   href: {
-    description: 'native "href" prop',
+    description: 'HTML a href attribute',
     defaultValue: undefined,
     type: {
       summary: 'string',
     },
     table: {
-      category: 'native props',
+      category: 'html attributes',
       defaultValue: {
         summary: 'undefined',
       },
@@ -38,14 +38,14 @@ export const argTypesData = {
     control: 'text',
   },
   rel: {
-    description: `native "rel" prop. Relationship between the location in the document containing the hyperlink
+    description: `HTML a rel attribute. Relationship between the location in the document containing the hyperlink
         and the destination resource.`,
     defaultValue: undefined,
     type: {
       summary: 'string',
     },
     table: {
-      category: 'native props',
+      category: 'html attributes',
       defaultValue: {
         summary: 'undefined',
       },

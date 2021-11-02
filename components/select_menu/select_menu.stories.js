@@ -87,63 +87,11 @@ export const argTypesData = {
       },
     },
   },
-
-  // Native Props
   'v-model': {
     description: 'Supported by this component',
     control: null,
     table: {
-      category: 'native props',
-    },
-  },
-  value: {
-    description: 'Provides a value for the select',
-    control: {
-      type: 'select',
-      options: SELECT_OPTIONS.map(option => option.value),
-    },
-    defaultValue: SELECT_OPTIONS[0].value,
-    table: {
-      category: 'native props',
-      type: {
-        summary: 'string',
-      },
-      defaultValue: {
-        summary: '',
-      },
-    },
-  },
-  name: {
-    description: 'Provides a name for the select',
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-    table: {
-      category: 'native props',
-      type: {
-        summary: 'string',
-      },
-      defaultValue: {
-        summary: '',
-      },
-    },
-  },
-
-  disabled: {
-    description: 'Disables the select',
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-    table: {
-      category: 'native props',
-      type: {
-        summary: 'boolean',
-      },
-      defaultValue: {
-        summary: false,
-      },
+      category: 'props',
     },
   },
 
@@ -227,6 +175,57 @@ export const argTypesData = {
       category: 'slots',
       type: {
         summary: 'text/html',
+      },
+    },
+  },
+
+  // HTML attributes
+  value: {
+    description: 'HTML select value attribute. Provides a value for the select',
+    control: {
+      type: 'select',
+      options: SELECT_OPTIONS.map(option => option.value),
+    },
+    defaultValue: SELECT_OPTIONS[0].value,
+    table: {
+      category: 'html attributes',
+      type: {
+        summary: 'string',
+      },
+      defaultValue: {
+        summary: '',
+      },
+    },
+  },
+  name: {
+    description: 'HTML select name attribute. Provides a name for the select',
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+    table: {
+      category: 'html attributes',
+      type: {
+        summary: 'string',
+      },
+      defaultValue: {
+        summary: '',
+      },
+    },
+  },
+  disabled: {
+    description: 'HTML select disabled attribute. Disables the select',
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+    table: {
+      category: 'html attributes',
+      type: {
+        summary: 'boolean',
+      },
+      defaultValue: {
+        summary: false,
       },
     },
   },

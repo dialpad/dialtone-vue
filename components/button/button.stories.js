@@ -15,33 +15,6 @@ import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 
 export const argTypesData = {
   // Props
-  disabled: {
-    description: 'native "disabled" prop',
-    defaultValue: false,
-    type: {
-      summary: 'boolean',
-    },
-    table: {
-      category: 'native props',
-      defaultValue: {
-        summary: 'false',
-      },
-    },
-    control: 'boolean',
-  },
-  width: {
-    table: {
-      category: 'native props',
-      defaultValue: {
-        summary: 'auto',
-      },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
-  // Buttons
   importance: {
     control: {
       type: 'select',
@@ -124,6 +97,34 @@ export const argTypesData = {
   labelClass: {
     table: {
       category: 'pass through classes',
+    },
+  },
+
+  // HTML attributes
+  disabled: {
+    description: 'HTML button disabled attribute',
+    defaultValue: false,
+    type: {
+      summary: 'boolean',
+    },
+    table: {
+      category: 'html attributes',
+      defaultValue: {
+        summary: 'false',
+      },
+    },
+    control: 'boolean',
+  },
+  width: {
+    description: 'HTML button width attribute',
+    table: {
+      category: 'html attributes',
+      defaultValue: {
+        summary: 'auto',
+      },
+    },
+    control: {
+      type: 'text',
     },
   },
 

@@ -28,34 +28,6 @@ export const argTypesData = {
     },
   },
 
-  // Native Props
-  src: {
-    description: 'Native image src. Required for image avatars. Overridden by the default slot',
-    table: {
-      category: 'native props',
-      defaultValue: {
-        summary: 'undefined',
-      },
-    },
-    type: {
-      summary: 'string',
-    },
-    control: 'text',
-  },
-  alt: {
-    description: 'Native image alt. Required for image avatars. Overridden by the default slot',
-    table: {
-      category: 'native props',
-      defaultValue: {
-        summary: 'undefined',
-      },
-    },
-    type: {
-      summary: 'string',
-    },
-    control: 'text',
-  },
-
   // Pass Through Class Controls
   avatarClass: {
     table: {
@@ -71,6 +43,34 @@ export const argTypesData = {
         summary: 'text/html',
       },
     },
+  },
+
+  // HTML attributes
+  src: {
+    description: 'HTML image src attribute. Required for image avatars. Overridden by the default slot',
+    table: {
+      category: 'html attributes',
+      defaultValue: {
+        summary: 'undefined',
+      },
+    },
+    type: {
+      summary: 'string',
+    },
+    control: 'text',
+  },
+  alt: {
+    description: 'HTML image alt attribute. Required for image avatars. Overridden by the default slot',
+    table: {
+      category: 'html attributes',
+      defaultValue: {
+        summary: 'undefined',
+      },
+    },
+    type: {
+      summary: 'string',
+    },
+    control: 'text',
   },
 };
 

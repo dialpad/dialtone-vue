@@ -43,18 +43,6 @@ export const argTypesData = {
   },
   messagesChildProps: { control: null },
 
-  // Native Props
-  placeholder: {
-    description: 'native input placeholder',
-    table: {
-      category: 'native props',
-      defaultValue: {
-        summary: '\'\'',
-      },
-    },
-    control: 'text',
-  },
-
   // Slots
   label: {
     table: {
@@ -93,6 +81,18 @@ export const argTypesData = {
       type: 'select',
       options: getIconNames(),
     },
+  },
+
+  // HTML attributes
+  placeholder: {
+    description: 'HTML input placeholder attribute',
+    table: {
+      category: 'html attributes',
+      defaultValue: {
+        summary: '\'\'',
+      },
+    },
+    control: 'text',
   },
 
   // Action Event Handlers
