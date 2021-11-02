@@ -58,15 +58,12 @@ export const argTypesData = {
       options: Object.keys(BUTTON_KIND_MODIFIERS),
     },
   },
-
-  // Links
   link: {
     defaultValue: false,
     type: {
       summary: 'boolean',
     },
     table: {
-      category: 'Link props',
       defaultValue: {
         summary: 'false',
       },
@@ -74,31 +71,19 @@ export const argTypesData = {
     control: 'boolean',
   },
   linkKind: {
-    table: {
-      category: 'Link props',
-    },
     control: {
       type: 'select',
       options: Object.keys(LINK_KIND_MODIFIERS),
     },
   },
-
-  // Args related to icons.
   iconPosition: {
-    table: {
-      category: 'Icon props',
-    },
     control: {
       type: 'select',
       options: Object.keys(ICON_POSITION_MODIFIERS),
     },
   },
-
-  // Pass Through Class Controls
   labelClass: {
-    table: {
-      category: 'pass through classes',
-    },
+    description: 'Pass through classes. Used to customize the label container',
   },
 
   // HTML attributes

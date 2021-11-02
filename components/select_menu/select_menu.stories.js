@@ -86,7 +86,6 @@ export const argTypesData = {
       type: 'text',
     },
   },
-
   options: {
     control: {
       type: 'object',
@@ -102,7 +101,6 @@ export const argTypesData = {
       },
     },
   },
-
   size: {
     description: 'Controls the size of the select',
     control: {
@@ -120,54 +118,33 @@ export const argTypesData = {
       },
     },
   },
-
-  // Pass Through Class Controls
   labelClass: {
-    table: {
-      category: 'pass through classes',
-    },
+    description: 'Pass through classes. Used to customize the label container',
   },
   descriptionClass: {
-    table: {
-      category: 'pass through classes',
-    },
+    description: 'Pass through classes. Used to customize the description container',
   },
   selectClass: {
-    table: {
-      category: 'pass through classes',
-    },
+    description: 'Pass through classes. Used to customize the select',
   },
   optionClass: {
-    table: {
-      category: 'pass through classes',
-    },
+    description: 'Pass through classes. Used to customize each option, should options be provided via prop',
   },
   messagesClass: {
-    table: {
-      category: 'pass through classes',
-    },
+    description: 'Pass through classes. Used to customize the the validation messages component',
   },
-
-  // Pass Through Prop Controls
   labelChildProps: {
-    table: {
-      category: 'pass through props',
-    },
+    description: 'Pass through props. A set of props that are passed into the label container',
   },
   descriptionChildProps: {
-    table: {
-      category: 'pass through props',
-    },
+    description: 'Pass through props. A set of props that are passed into the description container',
   },
   optionChildProps: {
-    table: {
-      category: 'pass through props',
-    },
+    description: `Pass through props. A set of props that are passed into each option,
+     should options be provided via prop`,
   },
   messagesChildProps: {
-    table: {
-      category: 'pass through props',
-    },
+    description: 'Pass through props. A set of props that are passed into the validation messages component',
   },
 
   // HTML attributes

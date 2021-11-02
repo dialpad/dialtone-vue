@@ -37,12 +37,8 @@ export const argTypesData = {
       options: Object.keys(AVATAR_COLOR_MODIFIERS),
     },
   },
-
-  // Pass Through Class Controls
   avatarClass: {
-    table: {
-      category: 'Pass through classes',
-    },
+    description: 'Pass through classes. Used to customize the avatar container',
   },
 
   // HTML attributes
