@@ -28,6 +28,27 @@ export const argTypesData = {
     },
   },
 
+  // Props
+  size: {
+    defaultValue: 'default',
+    control: {
+      type: 'select',
+      options: Object.keys(MODAL_SIZE_MODIFIERS),
+    },
+  },
+  kind: {
+    defaultValue: 'default',
+    control: {
+      type: 'select',
+      options: Object.keys(MODAL_KIND_MODIFIERS),
+    },
+  },
+  showFooter: {
+    table: {
+      disable: true,
+    },
+  },
+
   // Events
   'update:show': {
     description: `The modal will emit a "false" boolean value for this event when the \
@@ -37,29 +58,6 @@ a 2-way binding to control modal visibility.`,
       type: {
         summary: 'boolean',
       },
-    },
-  },
-
-  // Props
-  size: {
-    defaultValue: 'default',
-    control: {
-      type: 'select',
-      options: Object.keys(MODAL_SIZE_MODIFIERS),
-    },
-  },
-
-  kind: {
-    defaultValue: 'default',
-    control: {
-      type: 'select',
-      options: Object.keys(MODAL_KIND_MODIFIERS),
-    },
-  },
-
-  showFooter: {
-    table: {
-      disable: true,
     },
   },
 };
