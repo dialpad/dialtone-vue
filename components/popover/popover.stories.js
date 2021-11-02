@@ -10,6 +10,23 @@ import { createTemplateFromVueFile } from '../storybook_utils';
 import PopoverMdx from './popover.mdx';
 
 const argTypesData = {
+  // Slots
+  anchor: {
+    table: {
+      type: {
+        summary: 'node',
+      },
+    },
+  },
+  content: {
+    table: {
+      type: {
+        summary: 'node',
+      },
+    },
+  },
+
+  // Props
   id: {
     defaultValue: 'DtPopover__content0',
     table: {

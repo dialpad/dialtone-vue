@@ -23,27 +23,6 @@ export const argsData = {
 
 // Controls
 export const argTypesData = {
-  // Props
-  legend: {
-    description: 'The legend of the radio group',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-  value: {
-    description: 'A provided value for the radio group',
-    control: 'text',
-    table: {
-      category: 'props',
-    },
-  },
-
   // Slots
   default: {
     control: 'text',
@@ -62,6 +41,27 @@ export const argTypesData = {
       type: {
         summary: 'text/html',
       },
+    },
+  },
+
+  // Props
+  legend: {
+    description: 'The legend of the radio group',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'string',
+      },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  value: {
+    description: 'A provided value for the radio group',
+    control: 'text',
+    table: {
+      category: 'props',
     },
   },
 

@@ -23,6 +23,27 @@ export const argsData = {
 
 // Controls
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+  legendSlot: {
+    name: 'legend',
+    description: 'Slot for legend',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+
   // Props
   legend: {
     description: 'The legend of the checkbox group',
@@ -43,27 +64,6 @@ export const argTypesData = {
       category: 'props',
       type: {
         summary: 'array',
-      },
-    },
-  },
-
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-  legendSlot: {
-    name: 'legend',
-    description: 'Slot for legend',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
       },
     },
   },

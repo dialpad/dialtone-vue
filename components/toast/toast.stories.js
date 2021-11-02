@@ -11,30 +11,6 @@ export const argsData = {
 };
 
 export const argTypesData = {
-  // Props
-  titleId: {
-    defaultValue: '',
-    table: {
-      defaultValue: {
-        summary: 'generated unique ID',
-      },
-    },
-  },
-  contentId: {
-    defaultValue: '',
-    table: {
-      defaultValue: {
-        summary: 'generated unique ID',
-      },
-    },
-  },
-  kind: {
-    control: {
-      type: 'select',
-      options: NOTICE_KINDS,
-    },
-  },
-
   // Slots
   titleOverride: {
     table: {
@@ -59,6 +35,30 @@ export const argTypesData = {
     },
     control: {
       type: 'text',
+    },
+  },
+
+  // Props
+  titleId: {
+    defaultValue: '',
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  contentId: {
+    defaultValue: '',
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  kind: {
+    control: {
+      type: 'select',
+      options: NOTICE_KINDS,
     },
   },
 

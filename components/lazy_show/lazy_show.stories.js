@@ -4,6 +4,18 @@ import { createTemplateFromVueFile } from '../storybook_utils';
 import LazyShowMdx from './lazy_show.mdx';
 
 const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+
+  // Props
   transition: {
     control: {
       type: 'select',

@@ -22,6 +22,39 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  // Slots
+  labelSlot: {
+    name: 'label',
+    description: 'Slot for label, defaults to label prop',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+  descriptionSlot: {
+    name: 'description',
+    description: 'Slot for description, defaults to description prop',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+  default: {
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+
   // Props
   label: {
     description: 'Label for the select',
@@ -134,41 +167,6 @@ export const argTypesData = {
   messagesChildProps: {
     table: {
       category: 'pass through props',
-    },
-  },
-
-  // Slots
-  labelSlot: {
-    name: 'label',
-    description: 'Slot for label, defaults to label prop',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-
-  descriptionSlot: {
-    name: 'description',
-    description: 'Slot for description, defaults to description prop',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-
-  default: {
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
     },
   },
 

@@ -6,15 +6,6 @@ import { BADGE_COLOR_MODIFIERS } from './badge_constants';
 import DtBadgeMdx from './badge.mdx';
 
 export const argTypesData = {
-  // Props
-  color: {
-    defaultValue: 'base',
-    control: {
-      type: 'select',
-      options: Object.keys(BADGE_COLOR_MODIFIERS),
-    },
-  },
-
   // Slots
   default: {
     control: 'text',
@@ -22,6 +13,15 @@ export const argTypesData = {
       type: {
         summary: 'text/html',
       },
+    },
+  },
+
+  // Props
+  color: {
+    defaultValue: 'base',
+    control: {
+      type: 'select',
+      options: Object.keys(BADGE_COLOR_MODIFIERS),
     },
   },
 };

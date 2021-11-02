@@ -8,25 +8,20 @@ export const argTypesData = {
   // Slots
   default: {
     table: {
-      category: 'slot data',
       type: {
         summary: 'node',
       },
     },
   },
-
   footer: {
     table: {
-      category: 'slot data',
       type: {
         summary: 'node',
       },
     },
   },
-
   header: {
     table: {
-      category: 'slot data',
       type: {
         summary: 'node',
       },

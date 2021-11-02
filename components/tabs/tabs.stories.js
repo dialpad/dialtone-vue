@@ -12,7 +12,23 @@ export const argsData = {
 };
 
 export const argTypesData = {
-  // Action Event Handlers
+  // Slots
+  default: {
+    table: {
+      type: {
+        summary: 'node',
+      },
+    },
+  },
+  tabs: {
+    table: {
+      type: {
+        summary: 'node',
+      },
+    },
+  },
+
+  // Props
   size: {
     defaultValue: '',
     control: {

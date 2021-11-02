@@ -5,6 +5,16 @@ import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } 
 import DtAvatarMdx from './avatar.mdx';
 
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+
   // Props
   kind: {
     defaultValue: 'default',
@@ -32,16 +42,6 @@ export const argTypesData = {
   avatarClass: {
     table: {
       category: 'Pass through classes',
-    },
-  },
-
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
-      },
     },
   },
 

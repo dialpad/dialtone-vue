@@ -17,6 +17,27 @@ export const argsData = {
 
 // Prop Controls
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+  descriptionSlot: {
+    name: 'description',
+    description: 'slot for Checkbox Description',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+
   // Props
   description: {
     description: 'Describes the checkbox option',
@@ -56,27 +77,6 @@ export const argTypesData = {
   },
   descriptionChildProps: {
     control: null,
-  },
-
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-  descriptionSlot: {
-    name: 'description',
-    description: 'slot for Checkbox Description',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
-    },
   },
 
   // Directives

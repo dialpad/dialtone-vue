@@ -14,6 +14,25 @@ import ButtonVariants from './button_variants.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 
 export const argTypesData = {
+  // Slots
+  default: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  icon: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      options: getIconNames(),
+    },
+  },
+
   // Props
   importance: {
     control: {
@@ -65,15 +84,6 @@ export const argTypesData = {
   },
 
   // Args related to icons.
-  icon: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'select',
-      options: getIconNames(),
-    },
-  },
   iconPosition: {
     table: {
       category: 'Icon props',
@@ -81,15 +91,6 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: Object.keys(ICON_POSITION_MODIFIERS),
-    },
-  },
-
-  default: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
     },
   },
 

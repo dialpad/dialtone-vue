@@ -11,18 +11,7 @@ export const argsData = {
 };
 
 export const argTypesData = {
-  kind: {
-    control: {
-      type: 'select',
-      options: NOTICE_KINDS,
-    },
-  },
-  role: {
-    control: {
-      type: 'select',
-      options: NOTICE_ROLES,
-    },
-  },
+  // Slots
   titleOverride: {
     table: {
       type: { summary: 'text/html' },
@@ -46,6 +35,20 @@ export const argTypesData = {
     },
     control: {
       type: 'text',
+    },
+  },
+
+  // Props
+  kind: {
+    control: {
+      type: 'select',
+      options: NOTICE_KINDS,
+    },
+  },
+  role: {
+    control: {
+      type: 'select',
+      options: NOTICE_ROLES,
     },
   },
 

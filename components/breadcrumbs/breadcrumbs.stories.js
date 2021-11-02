@@ -30,6 +30,17 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+
+  // Props
   breadcrumbs: {
     control: 'object',
     table: {
@@ -43,15 +54,6 @@ export const argTypesData = {
     table: {
       defaultValue: {
         summary: 'uniq id',
-      },
-    },
-  },
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
       },
     },
   },

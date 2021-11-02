@@ -7,6 +7,35 @@ import InputDefault from './input_default.story.vue';
 
 // Controls
 export const argTypesData = {
+  // Slots
+  description: {
+    description: 'slot for description, defaults to description prop',
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  leftIcon: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      options: getIconNames(),
+    },
+  },
+  rightIcon: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      options: getIconNames(),
+    },
+  },
+
   // Props
   value: {
     control: 'text',
@@ -42,44 +71,12 @@ export const argTypesData = {
     control: 'text',
   },
   messagesChildProps: { control: null },
-
-  // Slots
   label: {
     table: {
       type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
-    },
-  },
-
-  description: {
-    description: 'slot for description, defaults to description prop',
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
-  leftIcon: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'select',
-      options: getIconNames(),
-    },
-  },
-
-  rightIcon: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'select',
-      options: getIconNames(),
     },
   },
 

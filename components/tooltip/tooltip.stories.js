@@ -14,6 +14,26 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+  anchor: {
+    name: 'anchor',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+
   // Props
   show: {
     description: 'Used to show tooltip',
@@ -30,27 +50,6 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: TOOLTIP_DIRECTION_MODIFIERS,
-    },
-  },
-
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-
-  anchor: {
-    name: 'anchor',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
     },
   },
 };

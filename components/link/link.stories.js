@@ -13,6 +13,16 @@ export const argsData = {
 
 // Controls
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+
   // Props
   kind: {
     defaultValue: '',
@@ -51,16 +61,6 @@ export const argTypesData = {
       },
     },
     control: 'text',
-  },
-
-  // Slots
-  default: {
-    control: 'text',
-    table: {
-      type: {
-        summary: 'text/html',
-      },
-    },
   },
 };
 
