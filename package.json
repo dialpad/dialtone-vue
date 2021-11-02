@@ -18,6 +18,7 @@
     "lint:docs": "markdownlint '**/*.mdx'",
     "lint-staged:docs": "markdownlint --fix",
     "lint": "run-s lint:code lint:docs",
+    "release": "semantic-release --no-ci --extends ./release-local.config.js",
     "storybook": "npm run --prefix storybook storybook",
     "storybook:install": "npm install --prefix storybook",
     "storybook:build": "npm run --prefix storybook build"
