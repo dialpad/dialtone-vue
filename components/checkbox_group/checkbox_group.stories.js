@@ -24,11 +24,6 @@ export const argsData = {
 // Controls
 export const argTypesData = {
   // Props
-  'v-model': {
-    description: 'Supported by this component',
-    // remove control
-    control: null,
-  },
   legend: {
     description: 'The legend of the checkbox group',
     table: {
@@ -70,6 +65,15 @@ export const argTypesData = {
       type: {
         summary: 'text/html',
       },
+    },
+  },
+
+  // Directives
+  'v-model': {
+    description: 'Supported by this component',
+    control: null,
+    table: {
+      category: 'directives',
     },
   },
 

@@ -95,6 +95,15 @@ export const argTypesData = {
     control: 'text',
   },
 
+  // Directives
+  'v-model': {
+    description: 'Supported by this component',
+    control: null,
+    table: {
+      category: 'directives',
+    },
+  },
+
   // Action Event Handlers
   onInput: {
     table: {

@@ -87,13 +87,6 @@ export const argTypesData = {
       },
     },
   },
-  'v-model': {
-    description: 'Supported by this component',
-    control: null,
-    table: {
-      category: 'props',
-    },
-  },
 
   // Pass Through Class Controls
   labelClass: {
@@ -227,6 +220,15 @@ export const argTypesData = {
       defaultValue: {
         summary: false,
       },
+    },
+  },
+
+  // Directives
+  'v-model': {
+    description: 'Supported by this component',
+    control: null,
+    table: {
+      category: 'directives',
     },
   },
 

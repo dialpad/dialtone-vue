@@ -18,10 +18,6 @@ export const argsData = {
 // Prop Controls
 export const argTypesData = {
   // Props
-  'v-model': {
-    description: 'Supported by this component',
-    control: null,
-  },
   description: {
     description: 'Describes the checkbox option',
     table: {
@@ -80,6 +76,15 @@ export const argTypesData = {
       type: {
         summary: 'text/html',
       },
+    },
+  },
+
+  // Directives
+  'v-model': {
+    description: 'Supported by this component',
+    control: null,
+    table: {
+      category: 'directives',
     },
   },
 
