@@ -17,12 +17,7 @@
           :class="[
             'base-input__label-text',
             'd-label',
-            {
-              'd-label--xs': size === 'xs',
-              'd-label--sm': size === 'sm',
-              'd-label--lg': size === 'lg',
-              'd-label--xl': size === 'xl',
-            },
+            labelSizeClasses[size],
           ]"
         >
           {{ label }}
@@ -34,10 +29,7 @@
         :class="[
           'base-input__description',
           'd-description',
-          {
-            'd-description--lg': size === 'lg',
-            'd-description--xl': size === 'xl',
-          },
+          descriptionSizeClasses[size],
         ]"
         data-qa="dt-input-description"
       >
@@ -188,6 +180,23 @@ export default {
 
   emits: ['blur', 'input', 'clear'],
 
+  data () {
+    return {
+      descriptionSizeClasses: {
+        lg: 'd-description--lg',
+        xl: 'd-description--xl',
+      },
+
+      labelSizeClasses: {
+        xs: 'd-label--xs',
+        sm: 'd-label--sm',
+        md: 'd-label--md',
+        lg: 'd-label--lg',
+        xl: 'd-label--xl',
+      },
+    };
+  },
+
   computed: {
 
     isTextarea () {
@@ -243,63 +252,68 @@ export default {
         return '';
       }
 
-      if (this.inputComponent === 'input') {
-        return [
-          { 'd-input--xs': this.size === 'xs' },
-          { 'd-input--sm': this.size === 'sm' },
-          { 'd-input--lg': this.size === 'lg' },
-          { 'd-input--xl': this.size === 'xl' },
-        ];
-      } else {
-        return [
-          { 'd-textarea--xs': this.size === 'xs' },
-          { 'd-textarea--sm': this.size === 'sm' },
-          { 'd-textarea--lg': this.size === 'lg' },
-          { 'd-textarea--xl': this.size === 'xl' },
-        ];
-      }
+      const sizeClasses = {
+        input: {
+          xs: 'd-input--xs',
+          sm: 'd-input--sm',
+          lg: 'd-input--lg',
+          xl: 'd-input--xl',
+        },
+
+        textarea: {
+          xs: 'd-textarea--xs',
+          sm: 'd-textarea--sm',
+          lg: 'd-textarea--lg',
+          xl: 'd-textarea--xl',
+        },
+      };
+
+      return sizeClasses[this.inputComponent][this.size];
     },
   },
 
   methods: {
     inputClasses () {
-      const classes = [
+      const inputStateClasses = {
+        input: {
+          error: 'd-input--error',
+          warning: 'd-input--warning',
+          success: 'd-input--success',
+        },
+
+        textarea: {
+          error: 'd-textarea--error',
+          warning: 'd-textarea--warning',
+          success: 'd-textarea--success',
+        },
+      };
+
+      return [
         'base-input__input',
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
         { 'd-input-icon--left': this.$slots.leftIcon, 'd-input-icon--right': this.$slots.rightIcon },
         this.sizeModifierClass,
         this.inputClass,
+        inputStateClasses[this.inputComponent][this.inputState],
       ];
-      if (this.showInputState) {
-        if (this.inputComponent === 'input') {
-          classes.push([
-            { 'd-input--error': this.inputState === 'error' },
-            { 'd-input--warning': this.inputState === 'warning' },
-            { 'd-input--success': this.inputState === 'success' },
-          ]);
-        } else {
-          classes.push([
-            { 'd-textarea--error': this.inputState === 'error' },
-            { 'd-textarea--warning': this.inputState === 'warning' },
-            { 'd-textarea--success': this.inputState === 'success' },
-          ]);
-        }
-      }
-
-      return classes;
     },
 
     inputIconClasses (side) {
+      const iconSizeClasses = {
+        xs: 'd-input-icon--xs',
+        sm: 'd-input-icon--sm',
+        lg: 'd-input-icon--lg',
+        xl: 'd-input-icon--xl',
+      };
+      const iconOrientationClasses = {
+        left: 'base-input__icon--left d-input-icon--left',
+        right: 'base-input__icon--right d-input-icon--right',
+      };
+
       return [
         'd-input-icon',
-        {
-          'base-input__icon--left d-input-icon--left': side === 'left',
-          'base-input__icon--right d-input-icon--right': side === 'right',
-          'd-input-icon--xs': this.size === 'xs',
-          'd-input-icon--sm': this.size === 'sm',
-          'd-input-icon--lg': this.size === 'lg',
-          'd-input-icon--xl': this.size === 'xl',
-        },
+        iconOrientationClasses[side],
+        iconSizeClasses[this.size],
       ];
     },
 

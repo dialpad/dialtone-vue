@@ -82,14 +82,13 @@ export default {
     },
 
     messageTypeClass (type) {
-      switch (type) {
-        case 'error':
-          return 'base-input__message--error d-validation-message--error';
-        case 'warning':
-          return 'base-input__message--warning d-validation-message--warning';
-        case 'success':
-          return 'base-input__message--success d-validation-message--success';
-      }
+      const messageTypesClasses = {
+        error: 'base-input__message--error d-validation-message--error',
+        warning: 'base-input__message--warning d-validation-message--warning',
+        success: 'base-input__message--success d-validation-message--success',
+      };
+
+      return messageTypesClasses[type];
     },
   },
 };

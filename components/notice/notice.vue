@@ -131,16 +131,17 @@ export default {
 
   computed: {
     noticeClass () {
+      const noticeKinds = {
+        error: 'd-notice--error',
+        info: 'd-notice--info',
+        success: 'd-notice--success',
+        warning: 'd-notice--warning',
+        base: 'd-notice--base',
+      };
       return [
         'd-notice',
-        {
-          'd-notice--important': this.important,
-          'd-notice--error': this.kind === 'error',
-          'd-notice--info': this.kind === 'info',
-          'd-notice--success': this.kind === 'success',
-          'd-notice--warning': this.kind === 'warning',
-          'd-notice--base': this.kind === 'base',
-        },
+        noticeKinds[this.kind],
+        { 'd-notice--important': this.important },
       ];
     },
   },

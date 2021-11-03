@@ -140,16 +140,20 @@ export default {
     },
 
     bannerClass () {
+      const kindClasses = {
+        error: 'd-banner--error',
+        info: 'd-banner--info',
+        success: 'd-banner--success',
+        warning: 'd-banner--warning',
+        base: 'd-banner--base',
+      };
+
       return [
         'd-banner',
+        kindClasses[this.kind],
         {
           'd-banner--important': this.important,
           'd-banner--pinned': this.pinned,
-          'd-banner--error': this.kind === 'error',
-          'd-banner--info': this.kind === 'info',
-          'd-banner--success': this.kind === 'success',
-          'd-banner--warning': this.kind === 'warning',
-          'd-banner--base': this.kind === 'base',
         },
       ];
     },

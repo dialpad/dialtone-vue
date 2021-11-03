@@ -168,18 +168,15 @@ export default {
 
   computed: {
     kindClass () {
-      switch (this.kind) {
-        case 'error':
-          return 'd-toast--error';
-        case 'info':
-          return 'd-toast--info';
-        case 'success':
-          return 'd-toast--success';
-        case 'warning':
-          return 'd-toast--warning';
-        default:
-          return 'd-toast--base';
-      }
+      const kindClasses = {
+        error: 'd-toast--error',
+        info: 'd-toast--info',
+        success: 'd-toast--success',
+        warning: 'd-toast--warning',
+        base: 'd-toast--base',
+      };
+
+      return kindClasses[this.kind];
     },
   },
 

@@ -150,32 +150,22 @@ export default {
     },
 
     arrowDirectionClass () {
-      switch (this.arrowDirection) {
-        case 'top-left':
-          return 'd-tooltip__arrow--top-left';
-        case 'top-center':
-          return 'd-tooltip__arrow--top-center';
-        case 'top-right':
-          return 'd-tooltip__arrow--top-right';
-        case 'right-top':
-          return 'd-tooltip__arrow--right-top';
-        case 'right-center':
-          return 'd-tooltip__arrow--right-center';
-        case 'right-bottom':
-          return 'd-tooltip__arrow--right-bottom';
-        case 'bottom-left':
-          return 'd-tooltip__arrow--bottom-left';
-        case 'bottom-right':
-          return 'd-tooltip__arrow--bottom-right';
-        case 'left-top':
-          return 'd-tooltip__arrow--left-top';
-        case 'left-center':
-          return 'd-tooltip__arrow--left-center';
-        case 'left-bottom':
-          return 'd-tooltip__arrow--left-bottom';
-        default:
-          return 'd-tooltip__arrow--bottom-center';
-      }
+      const arrowDirections = {
+        'top-left': 'd-tooltip__arrow--top-left',
+        'top-center': 'd-tooltip__arrow--top-center',
+        'top-right': 'd-tooltip__arrow--top-right',
+        'right-top': 'd-tooltip__arrow--right-top',
+        'right-center': 'd-tooltip__arrow--right-center',
+        'right-bottom': 'd-tooltip__arrow--right-bottom',
+        'bottom-left': 'd-tooltip__arrow--bottom-left',
+        'bottom-center': 'd-tooltip__arrow--bottom-center',
+        'bottom-right': 'd-tooltip__arrow--bottom-right',
+        'left-top': 'd-tooltip__arrow--left-top',
+        'left-center': 'd-tooltip__arrow--left-center',
+        'left-bottom': 'd-tooltip__arrow--left-bottom',
+      };
+
+      return arrowDirections[this.arrowDirection];
     },
   },
 
