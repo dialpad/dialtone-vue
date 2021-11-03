@@ -102,7 +102,7 @@ export default {
     },
 
     /**
-     * Used to customize the tab list
+     * Pass through classes, used to customize the tab list
      */
     tabListClass: {
       type: [String, Array, Object],
@@ -110,7 +110,7 @@ export default {
     },
 
     /**
-     * A set of props that are passed into the tab list
+     * Pass through props, used to customize the tab list
      */
     tabListChildProps: {
       type: Object,
