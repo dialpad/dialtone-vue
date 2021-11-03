@@ -10,7 +10,9 @@
           [TAB_LIST_KIND_MODIFIERS.inverted]: inverted,
           [TAB_LIST_IMPORTANCE_MODIFIERS.borderless]: borderless,
         },
+        tabGroupClass,
       ]"
+      v-bind="tabGroupChildProps"
       role="tablist"
       :aria-label="label"
       @keyup.left="tabLeft"
@@ -97,6 +99,22 @@ export default {
       validate (size) {
         return TAB_LIST_SIZES.includes(size);
       },
+    },
+
+    /**
+     * Used to customize the tab group
+     */
+    tabGroupClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * A set of props that are passed into the tab group
+     */
+    tabGroupChildProps: {
+      type: Object,
+      default: () => ({}),
     },
   },
 

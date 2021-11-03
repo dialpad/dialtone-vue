@@ -12,6 +12,20 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  // Pass Through Class Controls
+  tabGroupClass: {
+    table: {
+      category: 'pass through classes',
+    },
+  },
+
+  // Pass Through Prop Controls
+  tabGroupChildProps: {
+    table: {
+      category: 'pass through props',
+    },
+  },
+
   // Action Event Handlers
   size: {
     defaultValue: '',

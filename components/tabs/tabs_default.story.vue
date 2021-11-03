@@ -9,6 +9,8 @@
       :inverted="inverted"
       :borderless="borderless"
       :disabled="disabled"
+      :tab-group-class="tabGroupClass"
+      :tab-group-child-props="tabGroupChildProps"
       @change="onChange"
     >
       <template #tabs>
