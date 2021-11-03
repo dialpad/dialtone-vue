@@ -2,7 +2,9 @@ import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 import DtListItem from './list_item';
 import DtListItemMdx from './list_item.mdx';
+import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './list_item_constants.js';
 import DtListItemDefaultTemplate from './list_item_default.story.vue';
+import DtListItemCustomTemplate from './list_item_custom.story.vue';
 
 // Default Prop Values
 export const argsData = {
@@ -13,13 +15,8 @@ export const argTypesData = {
   // Props
   id: {
     table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-      defaultValue: {
-        summary: 'generated unique ID',
-      },
+      type: { summary: 'string' },
+      defaultValue: { summary: 'generated unique ID' },
     },
     control: {
       type: 'text',
@@ -28,101 +25,83 @@ export const argTypesData = {
 
   role: {
     table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-      defaultValue: {
-        summary: 'listitem',
-      },
+      type: { summary: 'string' },
+      defaultValue: { summary: 'listitem' },
     },
     control: {
       type: 'text',
     },
   },
 
-  clickable: {
+  elementType: {
     table: {
-      category: 'props',
-      type: {
-        summary: 'boolean',
-      },
-      defaultValue: {
-        summary: 'true',
-      },
+      type: { summary: 'string' },
+      defaultValue: { summary: 'li' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
+  type: {
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: LIST_ITEM_TYPES.DEFAULT },
+    },
+    control: {
+      type: 'select',
+      options: Object.values(LIST_ITEM_TYPES),
+    },
+  },
+
+  navigationType: {
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: 'none' },
+    },
+    control: {
+      type: 'select',
+      options: Object.values(LIST_ITEM_NAVIGATION_TYPES),
+    },
+  },
+
+  index: {
+    table: {
+      type: { summary: 'number' },
+      defaultValue: { summary: 'null' },
+    },
+    control: {
+      type: 'number',
+    },
+  },
+
+  isHighlighted: {
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: false },
     },
     control: {
       type: 'boolean',
     },
   },
 
-  absoluteIndex: {
-    table: {
-      category: 'props',
-      type: {
-        summary: 'number',
-      },
-      defaultValue: {
-        summary: 'null',
-      },
-    },
-    control: {
-      type: 'number',
-    },
-  },
-
-  highlightIndex: {
-    table: {
-      category: 'props',
-      type: {
-        summary: 'number',
-      },
-      defaultValue: {
-        summary: 'null',
-      },
-    },
-    control: {
-      type: 'number',
-    },
-  },
-
-  setHighlightIndex: {
-    table: {
-      category: 'props',
-      type: {
-        summary: 'function',
-      },
-      defaultValue: {
-        summary: 'null',
-      },
-    },
-    control: {
-      type: 'number',
-    },
-  },
-
-  parentElement: {
-    table: {
-      category: 'props',
-      type: {
-        summary: 'object, htmlelement',
-      },
-      defaultValue: {
-        summary: 'null',
-      },
-    },
-    control: {
-      type: 'number',
-    },
-  },
-
   // Slots
-  iconLeft: {
+  default: {
+    description: 'Slot for the main content',
     table: {
-      type: {
-        category: 'slot data',
-        summary: 'VNode',
-      },
+      category: 'slots',
+      type: { summary: 'string' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
+  left: {
+    description: 'Slot for the left content',
+    table: {
+      category: 'slots',
+      type: { summary: 'component' },
     },
     control: {
       type: 'select',
@@ -130,16 +109,37 @@ export const argTypesData = {
     },
   },
 
-  iconRight: {
+  right: {
+    description: 'Slot for the right content',
     table: {
-      type: {
-        category: 'slot data',
-        summary: 'VNode',
-      },
+      category: 'slots',
+      type: { summary: 'component' },
     },
     control: {
       type: 'select',
       options: getIconNames(),
+    },
+  },
+
+  subtitle: {
+    description: 'Slot for the content below the main content',
+    table: {
+      category: 'slots',
+      type: { summary: 'string' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
+  bottom: {
+    description: 'Slot for the content below the subtitle',
+    table: {
+      category: 'slots',
+      type: { summary: 'string' },
+    },
+    control: {
+      type: 'text',
     },
   },
 
@@ -152,7 +152,7 @@ export const argTypesData = {
 };
 
 const decorator = () => ({
-  template: '<ol class="d-p0 d-w512"><story /></ol>',
+  template: '<div class="d-w628"><story /></div>',
 });
 
 // Story Collection
@@ -171,28 +171,18 @@ export default {
 };
 
 // Templates
-const Template = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtListItemDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtListItemDefaultTemplate);
+const CustomTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtListItemCustomTemplate);
 
 // Stories
-export const Default = Template.bind({});
-Default.args = {};
-
-export const WithLeftIcon = Template.bind({});
-WithLeftIcon.args = {
-  iconLeft: 'IconWarning',
+export const Default = DefaultTemplate.bind({});
+Default.args = {
+  left: 'IconWorldwide',
+  right: 'IconLaunch',
+  default: 'Default List Item',
+  subtitle: 'Description',
+  bottom: '<span class="d-badge d-badge--purple-100">Label</span>',
 };
 
-export const WithRightIcon = Template.bind({});
-WithRightIcon.args = {
-  iconRight: 'IconLaunch',
-};
-
-export const WithBothIcons = Template.bind({});
-WithBothIcons.args = {
-  iconLeft: 'IconWarning',
-  iconRight: 'IconLaunch',
-};
+export const Custom = CustomTemplate.bind({});
+Custom.args = {};

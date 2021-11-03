@@ -1,24 +1,35 @@
 <template>
-  <dt-list-item @click="onClick">
-    <template
-      v-if="iconLeft"
-      #iconLeft
-    >
-      <component :is="iconLeft" />
+  <dt-list-item
+    :id="id"
+    :role="role"
+    :element-type="elementType"
+    :type="type"
+    :is-highlighted="isHighlighted"
+    :navigation-type="navigationType"
+    @click="onClick"
+  >
+    <template #left>
+      <component :is="left" />
     </template>
-    Example List Item
-    <template
-      v-if="iconRight"
-      #iconRight
-    >
-      <component :is="iconRight" />
+    <span v-html="defaultSlot" />
+    <template #subtitle>
+      <span v-html="subtitle" />
+    </template>
+    <template #bottom>
+      <span v-html="bottom" />
+    </template>
+    <template #right>
+      <component :is="right" />
     </template>
   </dt-list-item>
 </template>
 
 <script>
 import DtAvatar from '../avatar/avatar';
+import DtBadge from '../badge/badge';
+import DtButton from '../button/button';
 import DtListItem from './list_item';
+import IconPhone from '@dialpad/dialtone/lib/dist/vue/icons/IconPhone';
 import icon from '../mixins/icon';
 
 export default {
@@ -26,7 +37,10 @@ export default {
 
   components: {
     DtAvatar,
+    DtBadge,
+    DtButton,
     DtListItem,
+    IconPhone,
   },
 
   mixins: [icon],

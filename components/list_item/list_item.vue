@@ -1,10 +1,12 @@
 <template>
-  <!-- slot with list item content goes here -->
-  <li
+  <component
+    :is="elementType"
     :id="id"
-    :class="['dt-list-item', 'd-fs14', 'd-lh6', 'd-py6', 'd-px16', 'd-d-flex', 'd-ai-center',
-             { 'dt-list-item--clickable': clickable, 'dt-list-item--highlighted': isHighlighted }]"
-    :tabindex="clickable ? 0 : -1"
+    :class="['dt-list-item d-ls-none', {
+      'dt-list-item--focusable': isFocusable,
+      'dt-list-item--highlighted': isHighlighted,
+    }]"
+    :tabindex="isFocusable ? 0 : -1"
     :role="role"
     :aria-selected="isHighlighted"
     @keydown.enter="onClick"
@@ -12,37 +14,41 @@
     @click="onClick"
     @[maybeMouseMove]="onMouseMove"
   >
-    <span
-      v-if="$slots.iconLeft"
-      class="d-d-inline-flex d-pr8"
-      data-qa="dt-list-item-left-icon-wrapper"
+    <component
+      :is="listItemType"
+      v-if="listItemType"
     >
-      <slot name="iconLeft" />
-    </span>
-    <div
-      class="d-fl-grow1"
-      data-qa="dt-list-item-content-wrapper"
-    >
-      <slot />
-    </div>
-    <span
-      v-if="$slots.iconRight"
-      class="d-d-inline-flex d-pl8"
-      data-qa="dt-list-item-right-icon-wrapper"
-    >
-      <slot name="iconRight" />
-    </span>
-  </li>
+      <template
+        v-for="(_, slotName) in $slots"
+        #[slotName]
+      >
+        <slot :name="slotName" />
+      </template>
+    </component>
+    <slot v-else />
+  </component>
 </template>
 
 <script>
+import {
+  LIST_ITEM_TYPES,
+  LIST_ITEM_NAVIGATION_TYPES,
+} from './list_item_constants.js';
+import DtDefaultListItem from './default_list_item';
 import utils from '../utils';
-import Dom from '../mixins/dom';
 
 export default {
   name: 'ListItem',
 
-  mixins: [Dom],
+  components: {
+    DtDefaultListItem,
+  },
+
+  inject: {
+    setHighlight: {
+      default: null,
+    },
+  },
 
   props: {
     /**
@@ -62,69 +68,83 @@ export default {
     },
 
     /**
-     * Sets the tabindex and hover/focus styles for the item. Does not prevent
-     * emitting click events.
+     * The type of element to use for the wrapper.
      */
-    clickable: {
-      type: Boolean,
-      default: true,
+    elementType: {
+      type: String,
+      default: 'li',
+    },
+
+    /**
+     * The type of child list item to use.
+     */
+    type: {
+      type: String,
+      default: LIST_ITEM_TYPES.DEFAULT,
+      validator: (t) => Object.values(LIST_ITEM_TYPES).includes(t),
+    },
+
+    /**
+     * The type of navigation that this component should support.
+     * - "arrow-keys" for items that are navigated with UP/DOWN keys.
+     * - "tab" for items that are navigated using the TAB key.
+     * - "none" for static items that are not interactive.
+     */
+    navigationType: {
+      type: String,
+      default: LIST_ITEM_NAVIGATION_TYPES.NONE,
+      validator: (t) => Object.values(LIST_ITEM_NAVIGATION_TYPES).includes(t),
     },
 
     /**
      * For keyboard navigation, the index of this item within it's parent list.
      */
-    absoluteIndex: {
+    index: {
       type: Number,
       default: null,
     },
 
     /**
-     * For keyboard navigation, the index of the currently highlighted item.
+     * For keyboard navigation, whether or not this item is currently highlighted.
      */
-    highlightIndex: {
-      type: Number,
-      default: null,
-    },
-
-    /**
-     * For keyboard navigation, method to update the highlight index on the parent.
-     */
-    setHighlightIndex: {
-      type: Function,
-      default: null,
-    },
-
-    /**
-     * For keyboard navigation, the immediate parent component/element a.k.a the common
-     * wrapper for this item and its siblings. Used in the calculations when checking
-     * whether we should scroll this item into view when it receives highlight.
-     */
-    parentElement: {
-      type: [Object, HTMLElement],
-      default: null,
+    isHighlighted: {
+      type: Boolean,
+      default: false,
     },
   },
 
   emits: ['click'],
 
-  data () {
-    return {
-      // Keep track of when the highlight came from mouse events.
-      highlightedByMouse: false,
-    };
-  },
-
   computed: {
-    /**
-     * These props are required for the highlighting to work properly, so use them
-     * to determine if this item is highlightable or not.
-     */
-    isHighlightable () {
-      return Number.isInteger(this.absoluteIndex) && Number.isInteger(this.highlightIndex) && this.setHighlightIndex;
+    listItemType () {
+      switch (this.type) {
+        case LIST_ITEM_TYPES.DEFAULT:
+          return DtDefaultListItem;
+        default:
+          return null;
+      }
     },
 
-    isHighlighted () {
-      return this.isHighlightable && this.highlightIndex === this.absoluteIndex;
+    isFocusable () {
+      // Navigation type has to be set to "tab".
+      return this.navigationType === LIST_ITEM_NAVIGATION_TYPES.TAB;
+    },
+
+    /**
+     * When using "arrow-keys" navigation the item shouldn't receive actual focus, so
+     * we use custom highlighting to indicate which item has the "focus".
+     */
+    isHighlightable () {
+      // Navigation type has to be set to "arrow-keys".
+      if (this.navigationType !== LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+        return false;
+      }
+      // An index has to be passed.
+      if (!this.index && this.index !== 0) {
+        return false;
+      }
+      // setHighlight method has to be provided.
+      return this.setHighlight;
     },
 
     /**
@@ -136,52 +156,18 @@ export default {
     },
   },
 
-  watch: {
-    highlightIndex (newIndex, oldIndex) {
-      // If the index didn't change, do nothing.
-      if (newIndex !== this.absoluteIndex) {
-        return;
-      }
-
-      // Scroll the item into view only if the highlight wasn't triggered by mouse events.
-      if (!this.highlightedByMouse) {
-        this.$nextTick().then(() => {
-          // this.parentElement can be a Vue component, in which case we need to target
-          // the $el property, or it can simply be an html element. When it's not
-          // passed scrollElementIntoViewIfNeeded will default to this.$el.parentElement.
-          const parentElement = this.parentElement?.$el || this.parentElement;
-          this.scrollElementIntoViewIfNeeded(this.$el, null, null, parentElement);
-        });
-      } else {
-        this.highlightedByMouse = false;
-      }
-    },
-  },
-
   methods: {
     onClick () {
       this.$emit('click');
-
-      // Reset the highlight when the item is clicked.
-      if (this.isHighlightable) {
-        this.highlight(-1);
-      }
     },
 
     /**
-     * While you hover over an item, always set the highlight index to that item.
+     * While you hover over an item, always highlight it.
      */
     onMouseMove () {
-      this.highlight(this.absoluteIndex, true);
-    },
-
-    /**
-     * Update the highlight index.
-     */
-    highlight (i, highlightedByMouse = false) {
-      if (this.isHighlightable && this.highlightIndex !== i) {
-        this.highlightedByMouse = highlightedByMouse;
-        this.setHighlightIndex(i);
+      if (this.isHighlightable && !this.isHighlighted) {
+        // Call the injected method to update the highlight.
+        this.setHighlight(this.index);
       }
     },
   },
@@ -189,14 +175,15 @@ export default {
 </script>
 
 <style lang="less">
-.dt-list-item[tabindex="-1"]:focus {
-  outline: none;
-}
+  .dt-list-item--focusable:hover,
+  .dt-list-item--focusable:focus,
+  .dt-list-item--focusable:focus-within,
+  .dt-list-item--highlighted {
+    background-color: hsla(var(--black-050-h), var(--black-050-s), var(--black-050-l), 0.65);
+    cursor: pointer;
+  }
 
-.dt-list-item--clickable:hover,
-.dt-list-item--clickable:focus,
-.dt-list-item--highlighted {
-  background-color: hsla(var(--primary-color-h), var(--primary-color-s), var(--primary-color-l), 0.1);
-  cursor: pointer;
-}
+  .dt-list-item--focusable:focus {
+    outline-color: var(--primary-color);
+  }
 </style>
