@@ -371,24 +371,24 @@ describe('Dialtone Vue Tab Group tests', function () {
   });
 
   describe('Extendability Tests', function () {
-    describe('When tab group class is provided', function () {
+    describe('When tab list class is provided', function () {
       beforeEach(function () {
-        propsData.tabGroupClass = 'my-custom-class';
+        propsData.tabListClass = 'my-custom-class';
         _mountWrapper();
       });
 
-      it('should apply custom class to tab group', function () {
+      it('should apply custom class to tab list', function () {
         itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', tabList);
       });
     });
 
-    describe('When description child props are provided', function () {
+    describe('When tab list child props are provided', function () {
       beforeEach(function () {
-        propsData.tabGroupChildProps = { some: 'prop' };
+        propsData.tabListChildProps = { some: 'prop' };
         _mountWrapper();
       });
 
-      it('tab group should have provided child prop', function () {
+      it('tab list should have provided child prop', function () {
         itBehavesLikeAppliesChildProp(tabList, 'some', 'prop');
       });
     });

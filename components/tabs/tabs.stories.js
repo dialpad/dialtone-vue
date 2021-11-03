@@ -13,14 +13,14 @@ export const argsData = {
 
 export const argTypesData = {
   // Pass Through Class Controls
-  tabGroupClass: {
+  tabListClass: {
     table: {
       category: 'pass through classes',
     },
   },
 
   // Pass Through Prop Controls
-  tabGroupChildProps: {
+  tabListChildProps: {
     table: {
       category: 'pass through props',
     },
