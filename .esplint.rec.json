@@ -31,6 +31,9 @@
     },
     "components/toast/toast.vue": {
       "vue/no-deprecated-dollar-listeners-api": 3
+    },
+    "components/tooltip/tooltip.vue": {
+      "complexity": 1
     }
   }
 }

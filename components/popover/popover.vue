@@ -38,9 +38,9 @@
         'd-ps-absolute',
         'd-zi-popover',
         'dt-popover__content',
-        `dt-popover__content--align-${alignment}`,
-        `dt-popover__content--valign-${verticalAlignment}`,
-        `dt-popover__content--pad-${padding}`,
+        alignment,
+        verticalAlignment,
+        paddingClass,
         contentClass,
       ]"
       tabindex="-1"
@@ -238,11 +238,18 @@ export default {
 
   computed: {
     alignment () {
-      return this.fixedAlignment || this.autoAlignment;
+      if (!this.fixedAlignment || this.fixedAlignment === this.autoAlignment) {
+        return 'dt-popover__content--align-left';
+      }
+
+      return 'dt-popover__content--align-right';
     },
 
     verticalAlignment () {
-      return this.fixedVerticalAlignment || this.autoVerticalAlignment;
+      if (!this.fixedVerticalAlignment || this.fixedVerticalAlignment === this.autoVerticalAlignment) {
+        return 'dt-popover__content--valign-bottom';
+      }
+      return 'dt-popover__content--valign-top';
     },
 
     labelledBy () {
@@ -269,6 +276,19 @@ export default {
         };
       }
       return null;
+    },
+
+    paddingClass () {
+      switch (this.padding) {
+        case 'none':
+          return 'dt-popover__content--pad-none';
+        case 'small':
+          return 'dt-popover__content--pad-small';
+        case 'medium':
+          return 'dt-popover__content--pad-medium';
+        default:
+          return 'dt-popover__content--pad-large';
+      }
     },
   },
 

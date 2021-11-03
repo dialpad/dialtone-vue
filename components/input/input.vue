@@ -17,7 +17,12 @@
           :class="[
             'base-input__label-text',
             'd-label',
-            { [`d-label--${size}`]: (!isDefaultSize && isValidSize) },
+            {
+              'd-label--xs': size === 'xs',
+              'd-label--sm': size === 'sm',
+              'd-label--lg': size === 'lg',
+              'd-label--xl': size === 'xl',
+            },
           ]"
         >
           {{ label }}
@@ -29,7 +34,10 @@
         :class="[
           'base-input__description',
           'd-description',
-          { [`d-description--${size}`]: (!isDefaultSize && isValidDescriptionSize) },
+          {
+            'd-description--lg': size === 'lg',
+            'd-description--xl': size === 'xl',
+          },
         ]"
         data-qa="dt-input-description"
       >
@@ -235,31 +243,63 @@ export default {
         return '';
       }
 
-      return `d-${this.inputComponent}--${this.size}`;
+      if (this.inputComponent === 'input') {
+        return [
+          { 'd-input--xs': this.size === 'xs' },
+          { 'd-input--sm': this.size === 'sm' },
+          { 'd-input--lg': this.size === 'lg' },
+          { 'd-input--xl': this.size === 'xl' },
+        ];
+      } else {
+        return [
+          { 'd-textarea--xs': this.size === 'xs' },
+          { 'd-textarea--sm': this.size === 'sm' },
+          { 'd-textarea--lg': this.size === 'lg' },
+          { 'd-textarea--xl': this.size === 'xl' },
+        ];
+      }
     },
   },
 
   methods: {
     inputClasses () {
-      return [
+      const classes = [
         'base-input__input',
-        `d-${this.inputComponent}`,
-        {
-          [`d-${this.inputComponent}--${this.inputState} base-input__input--${this.inputState}`]: this.showInputState,
-          'd-input-icon--left': this.$slots.leftIcon,
-          'd-input-icon--right': this.$slots.rightIcon,
-        },
+        this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
+        { 'd-input-icon--left': this.$slots.leftIcon, 'd-input-icon--right': this.$slots.rightIcon },
         this.sizeModifierClass,
         this.inputClass,
       ];
+      if (this.showInputState) {
+        if (this.inputComponent === 'input') {
+          classes.push([
+            { 'd-input--error': this.inputState === 'error' },
+            { 'd-input--warning': this.inputState === 'warning' },
+            { 'd-input--success': this.inputState === 'success' },
+          ]);
+        } else {
+          classes.push([
+            { 'd-textarea--error': this.inputState === 'error' },
+            { 'd-textarea--warning': this.inputState === 'warning' },
+            { 'd-textarea--success': this.inputState === 'success' },
+          ]);
+        }
+      }
+
+      return classes;
     },
 
     inputIconClasses (side) {
       return [
-        `base-input__icon--${side}`,
         'd-input-icon',
-        `d-input-icon--${side}`,
-        { [`d-input-icon--${this.size}`]: !this.isDefaultSize },
+        {
+          'base-input__icon--left d-input-icon--left': side === 'left',
+          'base-input__icon--right d-input-icon--right': side === 'right',
+          'd-input-icon--xs': this.size === 'xs',
+          'd-input-icon--sm': this.size === 'sm',
+          'd-input-icon--lg': this.size === 'lg',
+          'd-input-icon--xl': this.size === 'xl',
+        },
       ];
     },
 

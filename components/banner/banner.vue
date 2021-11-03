@@ -140,11 +140,16 @@ export default {
     },
 
     bannerClass () {
-      return ['d-banner',
+      return [
+        'd-banner',
         {
-          [`d-banner--${this.kind}`]: this.kind.length > 1,
           'd-banner--important': this.important,
           'd-banner--pinned': this.pinned,
+          'd-banner--error': this.kind === 'error',
+          'd-banner--info': this.kind === 'info',
+          'd-banner--success': this.kind === 'success',
+          'd-banner--warning': this.kind === 'warning',
+          'd-banner--base': this.kind === 'base',
         },
       ];
     },
