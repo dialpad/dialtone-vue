@@ -9,21 +9,21 @@ export const argTypesData = {
   default: {
     table: {
       type: {
-        summary: 'node',
+        summary: 'VNode',
       },
     },
   },
   footer: {
     table: {
       type: {
-        summary: 'node',
+        summary: 'VNode',
       },
     },
   },
   header: {
     table: {
       type: {
-        summary: 'node',
+        summary: 'VNode',
       },
     },
   },

@@ -16,14 +16,14 @@ export const argTypesData = {
   default: {
     table: {
       type: {
-        summary: 'node',
+        summary: 'VNode',
       },
     },
   },
   tabs: {
     table: {
       type: {
-        summary: 'node',
+        summary: 'VNode',
       },
     },
   },

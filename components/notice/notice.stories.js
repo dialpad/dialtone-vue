@@ -14,7 +14,7 @@ export const argTypesData = {
   // Slots
   titleOverride: {
     table: {
-      type: { summary: 'text/html' },
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
@@ -31,7 +31,7 @@ export const argTypesData = {
   },
   default: {
     table: {
-      type: { summary: 'text/html' },
+      type: { summary: 'VNode' },
     },
     control: {
       type: 'text',

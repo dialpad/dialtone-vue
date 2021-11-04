@@ -14,14 +14,14 @@ const argTypesData = {
   anchor: {
     table: {
       type: {
-        summary: 'node',
+        summary: 'VNode',
       },
     },
   },
   content: {
     table: {
       type: {
-        summary: 'node',
+        summary: 'VNode',
       },
     },
   },

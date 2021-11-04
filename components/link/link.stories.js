@@ -18,7 +18,7 @@ export const argTypesData = {
     control: 'text',
     table: {
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },

@@ -10,7 +10,7 @@ const argTypesData = {
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },

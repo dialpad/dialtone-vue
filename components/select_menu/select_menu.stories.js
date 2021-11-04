@@ -30,7 +30,7 @@ export const argTypesData = {
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },
@@ -41,7 +41,7 @@ export const argTypesData = {
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },
@@ -50,7 +50,7 @@ export const argTypesData = {
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },
