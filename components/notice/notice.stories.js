@@ -37,6 +37,14 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  action: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
 
   // Props
   kind: {
