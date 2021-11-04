@@ -42,6 +42,19 @@ describe('Dialtone Vue DefaultListItem tests', function () {
   });
 
   describe('Presentation Tests', function () {
+    describe('When none of the slot contents are provided', function () {
+      // Test Setup
+      beforeEach(async function () {
+        _mountWrapper();
+        _setChildWrappers();
+      });
+
+      it('should not render the left slot wrapper', function () { assert.isFalse(leftWrapper.exists()); });
+      it('should not render the right slot wrapper', function () { assert.isFalse(rightWrapper.exists()); });
+      it('should not render the subtitle slot wrapper', function () { assert.isFalse(subtitleWrapper.exists()); });
+      it('should not render the bottom slot wrapper', function () { assert.isFalse(bottomWrapper.exists()); });
+    });
+
     describe('When left content is provided', function () {
       // Test Setup
       beforeEach(async function () {

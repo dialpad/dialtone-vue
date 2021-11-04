@@ -182,6 +182,7 @@ Default.args = {
   default: 'Default List Item',
   subtitle: 'Description',
   bottom: '<span class="d-badge d-badge--purple-100">Label</span>',
+  navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB,
 };
 
 export const Custom = CustomTemplate.bind({});
