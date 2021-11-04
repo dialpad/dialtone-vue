@@ -16,10 +16,10 @@
     @clear="onClear"
   >
     <template
-      v-if="label"
-      #label
+      v-if="labelSlot"
+      #labelSlot
     >
-      <span v-html="label" />
+      <span v-html="labelSlot" />
     </template>
     <template
       v-if="description"

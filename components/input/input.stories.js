@@ -35,6 +35,14 @@ export const argTypesData = {
       options: getIconNames(),
     },
   },
+  labelSlot: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
 
   // Props
   value: {
@@ -72,9 +80,6 @@ export const argTypesData = {
   },
   messagesChildProps: { control: null },
   label: {
-    table: {
-      type: { summary: 'VNode' },
-    },
     control: {
       type: 'text',
     },
