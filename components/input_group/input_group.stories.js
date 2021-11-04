@@ -64,6 +64,13 @@ export const argTypesData = {
       category: 'props',
     },
   },
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
 
   // Directives
   'v-model': {

@@ -40,6 +40,13 @@ export const argTypesData = {
   avatarClass: {
     description: 'Pass through classes. Used to customize the avatar container',
   },
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
 
   // HTML attributes
   src: {

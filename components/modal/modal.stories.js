@@ -48,6 +48,13 @@ export const argTypesData = {
       disable: true,
     },
   },
+  labelledById: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
 
   // Events
   'update:show': {

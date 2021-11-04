@@ -9,6 +9,7 @@
   >
     <div class="d-pt16">
       <dt-tooltip
+        :id="id"
         :message="message"
         :arrow-direction="arrowDirection"
         :show="show"

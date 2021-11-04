@@ -10,7 +10,6 @@ argTypesData.role = {
   },
 };
 argTypesData.titleId = {
-  defaultValue: '',
   table: {
     defaultValue: {
       summary: 'generated unique ID',
@@ -18,7 +17,6 @@ argTypesData.titleId = {
   },
 };
 argTypesData.contentId = {
-  defaultValue: '',
   table: {
     defaultValue: {
       summary: 'generated unique ID',

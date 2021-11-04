@@ -28,10 +28,9 @@ const argTypesData = {
 
   // Props
   id: {
-    defaultValue: 'DtPopover__content0',
     table: {
       defaultValue: {
-        summary: 'Automatically generated unique ID',
+        summary: 'generated unique ID',
       },
     },
   },

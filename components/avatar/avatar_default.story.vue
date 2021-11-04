@@ -1,5 +1,6 @@
 <template>
   <dt-avatar
+    :id="id"
     :kind="kind"
     :size="size"
     :color="color"

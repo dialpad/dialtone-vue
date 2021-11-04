@@ -45,11 +45,17 @@ export const argTypesData = {
       },
     },
   },
-
   arrowDirection: {
     control: {
       type: 'select',
       options: TOOLTIP_DIRECTION_MODIFIERS,
+    },
+  },
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
     },
   },
 };

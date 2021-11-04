@@ -48,7 +48,6 @@ export const argTypesData = {
 
   // Props
   titleId: {
-    defaultValue: '',
     table: {
       defaultValue: {
         summary: 'generated unique ID',
@@ -56,7 +55,6 @@ export const argTypesData = {
     },
   },
   contentId: {
-    defaultValue: '',
     table: {
       defaultValue: {
         summary: 'generated unique ID',

@@ -17,7 +17,11 @@ export const argsData = {
 // Manual Prop Controls
 export const argTypesData = {
   id: {
-    defaultValue: 'default-id',
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
   },
 };
 

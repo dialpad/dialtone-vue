@@ -8,6 +8,7 @@
       :size="size"
       :copy="copy"
       :hide-close="hideClose"
+      :labelled-by-id="labelledById"
       @update:show="close"
     >
       <template
