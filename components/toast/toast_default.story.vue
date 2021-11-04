@@ -31,7 +31,12 @@
       </span>
 
       <template #action>
+        <span
+          v-if="action"
+          v-html="action"
+        />
         <dt-button
+          v-else
           size="sm"
           importance="outlined"
           :kind="buttonKind"
