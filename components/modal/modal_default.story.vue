@@ -84,8 +84,9 @@ export default {
   },
 
   methods: {
-    close () {
+    close (event) {
       this.isOpen = !this.isOpen;
+      this.onClose(event);
     },
   },
 

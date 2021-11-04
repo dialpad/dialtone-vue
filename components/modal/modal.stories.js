@@ -3,6 +3,7 @@ import ModalMdx from './modal.mdx';
 import DtModalDefaultTemplate from './modal_default.story.vue';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { createTemplateFromVueFile } from '../storybook_utils';
+import { action } from '@storybook/addon-actions';
 
 export const argTypesData = {
   // Slots
@@ -67,6 +68,11 @@ a 2-way binding to control modal visibility.`,
       },
     },
   },
+  onClose: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Default Props for all variations
@@ -80,6 +86,7 @@ maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat
 Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
 orci ipsum et velit.`,
   title: 'Example Title',
+  onClose: action('update:show'),
 };
 
 export default {
