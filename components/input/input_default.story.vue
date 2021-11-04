@@ -12,6 +12,7 @@
     :messages-class="messagesClass"
     :placeholder="placeholder"
     :input-class="inputClass"
+    @blur="onBlur"
     @input="onInput"
     @clear="onClear"
   >

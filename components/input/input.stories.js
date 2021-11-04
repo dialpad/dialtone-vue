@@ -104,12 +104,16 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
+  onBlur: {
+    table: {
+      disable: true,
+    },
+  },
   onInput: {
     table: {
       disable: true,
     },
   },
-
   onClear: {
     table: {
       disable: true,
@@ -120,6 +124,7 @@ export const argTypesData = {
 export const argsData = {
   placeholder: 'placeholder',
   label: 'Label',
+  onBlur: action('blur'),
   onInput: action('input'),
   onClear: action('clear'),
 };
