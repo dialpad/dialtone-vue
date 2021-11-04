@@ -90,9 +90,6 @@ export const argTypesData = {
     description: 'HTML input placeholder attribute',
     table: {
       category: 'html attributes',
-      defaultValue: {
-        summary: '\'\'',
-      },
     },
     control: 'text',
   },

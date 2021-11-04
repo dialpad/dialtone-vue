@@ -41,9 +41,6 @@ export const argTypesData = {
     },
     table: {
       category: 'html attributes',
-      defaultValue: {
-        summary: 'undefined',
-      },
     },
     control: 'text',
   },
@@ -56,9 +53,6 @@ export const argTypesData = {
     },
     table: {
       category: 'html attributes',
-      defaultValue: {
-        summary: 'undefined',
-      },
     },
     control: 'text',
   },

@@ -46,9 +46,6 @@ export const argTypesData = {
     description: 'HTML image src attribute. Required for image avatars. Overridden by the default slot',
     table: {
       category: 'html attributes',
-      defaultValue: {
-        summary: 'undefined',
-      },
     },
     type: {
       summary: 'string',
@@ -59,9 +56,6 @@ export const argTypesData = {
     description: 'HTML image alt attribute. Required for image avatars. Overridden by the default slot',
     table: {
       category: 'html attributes',
-      defaultValue: {
-        summary: 'undefined',
-      },
     },
     type: {
       summary: 'string',
