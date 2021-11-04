@@ -30,7 +30,7 @@ export const argTypesData = {
 
   // Props
   size: {
-    defaultValue: '',
+    defaultValue: 'default',
     control: {
       type: 'select',
       options: TAB_LIST_SIZES,
