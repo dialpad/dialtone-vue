@@ -26,16 +26,47 @@
     >
       <vnodes :vnodes="displayedItems" />
     </ol>
-
-    <dt-button
-      v-if="isCollapsible"
-      :id="`${id}-list-section-show-more-less`"
-      link
-      class="d-ml16 d-py6"
-      @click="showMoreLessClicked"
+    <div
+      v-if="isCollapsible && dynamicCalller"
+      class="d-fl-center"
     >
-      {{ showMoreLessText }}
-    </dt-button>
+      <dt-button
+        :id="`${id}-list-section-show-more-less`"
+        link
+        class="d-ml16 d-py6"
+        @click="showMoreLessClicked"
+      >
+        {{ showMoreLessText }}
+      </dt-button>
+      <dt-button
+        :id="`${id}-list-section-dynamic-caller`"
+        link
+        class="d-mr16 d-py6 d-ml-auto"
+        @click="dynamicCallerClick"
+      >
+        {{ textDynamicCaller }}
+      </dt-button>
+    </div>
+    <div v-else-if="isCollapsible || dynamicCalller">
+      <dt-button
+        v-if="isCollapsible"
+        :id="`${id}-list-section-show-more-less`"
+        link
+        class="d-ml16 d-py6"
+        @click="showMoreLessClicked"
+      >
+        {{ showMoreLessText }}
+      </dt-button>
+      <dt-button
+        v-if="dynamicCalller"
+        :id="`${id}-list-section-dynamic-caller`"
+        link
+        class="d-ml16 d-py6"
+        @click="dynamicCallerClick"
+      >
+        {{ textDynamicCaller }}
+      </dt-button>
+    </div>
   </div>
 </template>
 
@@ -61,6 +92,7 @@ export default {
       functional: true,
       render: (h, ctx) => ctx.props.vnodes,
     },
+
     DtButton,
   },
 
@@ -100,7 +132,21 @@ export default {
       // TODO needs to be translated, but Dialtone Vue can't do it.
       default: 'Show less',
     },
+
+    // display dynamicCalller click or not
+    dynamicCalller: {
+      type: Boolean,
+      default: false,
+    },
+
+    textDynamicCaller: {
+      type: String,
+      // TODO needs to be translated, but Dialtone Vue can't do it.
+      default: 'Local Presence',
+    },
   },
+
+  emits: ['dynamic-caller-click'],
 
   data () {
     return {
@@ -115,16 +161,24 @@ export default {
       }
       return true;
     },
+
     showMoreLessText () {
       return this.showAll ? this.textLess : this.textMore;
     },
+
+    dynamicCallerText () {
+      return this.textDynamicCaller;
+    },
+
     hiddenCount () {
       return this.itemCount - this.displayedItems.length;
     },
+
     itemCount () {
       // eslint-disable-next-line vue/require-slots-as-functions
       return this.$slots.default.length;
     },
+
     displayedItems () {
       // filtering the slot v-nodes to only display up to maxDisplayed items
       // eslint-disable-next-line vue/require-slots-as-functions
@@ -136,12 +190,20 @@ export default {
     showMoreLessClicked () {
       this.showAll = !this.showAll;
     },
+
+    dynamicCallerClick () {
+      this.$emit('dynamic-caller-click');
+    },
+
   },
 };
 </script>
 
 <style lang="less">
-.dt-list-section[tabindex="-1"]:focus {
-  outline: none;
-}
+  .dt-list-section[tabindex="-1"]:focus {
+    outline: none;
+  }
+  .d-ml-auto {
+    margin-left: auto
+  }
 </style>
