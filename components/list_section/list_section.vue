@@ -27,7 +27,7 @@
       <vnodes :vnodes="displayedItems" />
     </ol>
     <div
-      v-if="isCollapsible && dynamicCalller"
+      v-if="isCollapsible && secondLink"
       class="d-fl-center"
     >
       <dt-button
@@ -39,15 +39,15 @@
         {{ showMoreLessText }}
       </dt-button>
       <dt-button
-        :id="`${id}-list-section-dynamic-caller`"
+        :id="`${id}-list-section-second-link`"
         link
         class="d-mr16 d-py6 d-ml-auto"
-        @click="dynamicCallerClick"
+        @click="secondLinkClick"
       >
-        {{ textDynamicCaller }}
+        {{ textSecondLink }}
       </dt-button>
     </div>
-    <div v-else-if="isCollapsible || dynamicCalller">
+    <div v-else-if="isCollapsible || secondLink">
       <dt-button
         v-if="isCollapsible"
         :id="`${id}-list-section-show-more-less`"
@@ -58,13 +58,13 @@
         {{ showMoreLessText }}
       </dt-button>
       <dt-button
-        v-if="dynamicCalller"
-        :id="`${id}-list-section-dynamic-caller`"
+        v-if="secondLink"
+        :id="`${id}-list-section-second-link`"
         link
         class="d-ml16 d-py6"
-        @click="dynamicCallerClick"
+        @click="secondLinkClick"
       >
-        {{ textDynamicCaller }}
+        {{ textSecondLink }}
       </dt-button>
     </div>
   </div>
@@ -78,6 +78,8 @@
    - Can add border lines to visually separate the section
    - Allows a list to have a max number of visible items, and any items
      above the max you'd press "show more" to display.
+   - Allows second link on the right of "show more" if needed only on the left
+     this link click emits event to handle
 */
 import utils from '../utils';
 import { DtButton } from '../button';
@@ -133,20 +135,20 @@ export default {
       default: 'Show less',
     },
 
-    // display dynamicCalller link or not
-    dynamicCalller: {
+    // display SecondLink or not
+    secondLink: {
       type: Boolean,
       default: false,
     },
 
-    textDynamicCaller: {
+    textSecondLink: {
       type: String,
       // TODO needs to be translated, but Dialtone Vue can't do it.
-      default: 'Local Presence',
+      default: 'Second',
     },
   },
 
-  emits: ['dynamic-caller-click'],
+  emits: ['second-link-click'],
 
   data () {
     return {
@@ -187,8 +189,8 @@ export default {
       this.showAll = !this.showAll;
     },
 
-    dynamicCallerClick () {
-      this.$emit('dynamic-caller-click');
+    secondLinkClick () {
+      this.$emit('second-link-click');
     },
 
   },
