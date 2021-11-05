@@ -133,7 +133,7 @@ export default {
       default: 'Show less',
     },
 
-    // display dynamicCalller click or not
+    // display dynamicCalller link or not
     dynamicCalller: {
       type: Boolean,
       default: false,
@@ -164,10 +164,6 @@ export default {
 
     showMoreLessText () {
       return this.showAll ? this.textLess : this.textMore;
-    },
-
-    dynamicCallerText () {
-      return this.textDynamicCaller;
     },
 
     hiddenCount () {
