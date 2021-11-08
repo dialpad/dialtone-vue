@@ -351,7 +351,7 @@ export default {
     }));
   },
 
-  beforeUnmount () {
+  beforeDestroy () {
     this.tip?.destroy();
   },
 
