@@ -27,7 +27,7 @@
       <vnodes :vnodes="displayedItems" />
     </ol>
     <div
-      class="d-fl-center"
+      class="d-d-flex"
     >
       <dt-button
         v-if="isCollapsible"
