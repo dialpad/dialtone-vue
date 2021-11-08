@@ -51,6 +51,7 @@
    - Can add border lines to visually separate the section
    - Allows a list to have a max number of visible items, and any items
      above the max you'd press "show more" to display.
+  -  Can add additional content to list footer
 */
 import utils from '../utils';
 import { DtButton } from '../button';
