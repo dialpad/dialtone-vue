@@ -1,4 +1,5 @@
 import { assert } from 'chai';
+import sinon from 'sinon';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtTooltip from './tooltip-tippy-headless.vue';
 import { DtButton } from '../button';
@@ -7,13 +8,12 @@ import {
   TOOLTIP_DIRECTION_MODIFIERS,
 } from './tooltip_constants';
 
-global.cancelAnimationFrame = function () {
-  return setTimeout(() => {}, 0);
-};
+// RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+// Need to mock them to avoid error
+global.requestAnimationFrame = sinon.spy();
+global.cancelAnimationFrame = sinon.spy();
 
-global.requestAnimationFrame = function () {
-  return setTimeout(() => {}, 0);
-};
+const flushPromise = () => new Promise(setImmediate);
 
 describe('Dialtone Vue Tooltip tests', function () {
   // Wrappers
@@ -22,14 +22,6 @@ describe('Dialtone Vue Tooltip tests', function () {
   let tooltip;
   let anchor;
   let button;
-  let slots = {
-    anchor: {
-      functional: true,
-      render (h) {
-        return h(DtButton, 'Anchor Slot');
-      },
-    },
-  };
 
   // Helpers
   const _setWrappers = () => {
@@ -39,10 +31,32 @@ describe('Dialtone Vue Tooltip tests', function () {
     button = wrapper.find('[data-qa="dt-button"]');
   };
 
+  const tooltipWrapper = {
+    data: () => ({
+      show: false,
+    }),
+    render (h) {
+      const that = this;
+      return h(
+        DtTooltip, {
+          props: {
+            ...that.$attrs,
+            show: that.show,
+          },
+          on: {
+            'update:show' (isShow) {
+              that.show = isShow;
+            },
+          },
+        },
+        [h(DtButton, { slot: 'anchor' }, 'Anchor Slot')],
+      );
+    },
+  };
+
   const _mountWrapper = () => {
-    wrapper = mount(DtTooltip, {
+    wrapper = mount(tooltipWrapper, {
       localVue: createLocalVue(),
-      slots,
       propsData: {
         appendTo: 'parent',
       },
@@ -54,19 +68,14 @@ describe('Dialtone Vue Tooltip tests', function () {
     this.localVue = createLocalVue();
   });
 
-  const waiteForTippyUpdate = async () => {
-    await wrapper.vm.$nextTick();
-    await wrapper.vm.$nextTick();
-  };
-
   const click = async () => {
     await button.trigger('click.native');
-    await waiteForTippyUpdate();
+    await flushPromise();
   };
 
   const focus = async () => {
     await button.trigger('focus');
-    await waiteForTippyUpdate();
+    await flushPromise();
   };
 
   const escape = () => {
@@ -76,7 +85,7 @@ describe('Dialtone Vue Tooltip tests', function () {
 
   const mouseover = async () => {
     await button.trigger('mouseover');
-    await waiteForTippyUpdate();
+    await flushPromise();
   };
 
   describe('Presentation Tests', function () {
@@ -112,7 +121,6 @@ describe('Dialtone Vue Tooltip tests', function () {
 
   describe('Message provided via slot', function () {
     before(function () {
-      slots = { ...slots, default: 'Message Slot' };
       _mountWrapper();
     });
     it('should render the message', async function () {
@@ -137,16 +145,12 @@ describe('Dialtone Vue Tooltip tests', function () {
   describe('Interactivity Tests', function () {
     describe('Show state', function () {
       it('should be visible', async function () {
-        await wrapper.setProps({ show: true });
-        wrapper.vm.$nextTick(() => {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
-        });
+        await wrapper.setData({ show: true });
+        assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
       it('should be closed', async function () {
-        await wrapper.setProps({ show: false });
-        wrapper.vm.$nextTick(() => {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-        });
+        await wrapper.setData({ show: false });
+        assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
       });
     });
 
@@ -155,7 +159,7 @@ describe('Dialtone Vue Tooltip tests', function () {
         await wrapper.setProps({ trigger: 'click' });
         await click();
       });
-      it('shows tooltip', function () {
+      it('shows tooltip', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
     });

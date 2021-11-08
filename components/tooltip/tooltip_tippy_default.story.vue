@@ -21,7 +21,7 @@
         :interactive-border="interactiveBorder"
         :trigger="trigger"
         :hide-on-click="hideOnClick"
-        :show="show"
+        :show.sync="show"
       >
         <template #anchor="{ attrs }">
           <dt-button

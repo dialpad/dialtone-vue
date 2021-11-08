@@ -15,7 +15,7 @@
       :id="id"
       ref="content"
       role="tooltip"
-      :aria-hidden="`${!localShow}`"
+      :aria-hidden="`${!show}`"
       data-qa="dt-tooltip"
       :class="[
         'd-tooltip',
@@ -162,7 +162,7 @@ export default {
      */
     show: {
       type: Boolean,
-      default: false,
+      required: true,
     },
   },
 
@@ -171,7 +171,6 @@ export default {
       TOOLTIP_KIND_MODIFIERS,
       tip: null,
       placement: '',
-      localShow: false,
     };
   },
 
@@ -205,12 +204,7 @@ export default {
 
     arrowDirection: 'setProps',
 
-    show () {
-      this.localShow = this.show;
-      if (this.tip) {
-        this.show ? this.tip.show() : this.tip.hide();
-      }
-    },
+    show: 'toggleTooltip',
   },
 
   mounted () {
@@ -218,10 +212,7 @@ export default {
     const anchor = anchorElement || this.createAnchor();
     this.placement = this.arrowDirection;
     this.tip = tippy(anchor, this.initOptions());
-    this.localShow = this.show;
-    if (this.show) {
-      this.tip.show();
-    }
+    this.toggleTooltip();
   },
 
   beforeDestroy () {
@@ -231,6 +222,12 @@ export default {
   },
 
   methods: {
+    toggleTooltip () {
+      if (this.tip) {
+        this.show ? this.tip.show() : this.tip.hide();
+      }
+    },
+
     createAnchor () {
       const span = document.createElement('span');
       span.setAttribute('tabindex', '0');
@@ -275,13 +272,11 @@ export default {
     },
 
     onMount () {
-      this.localShow = true;
-      this.$emit('update:show', this.localShow);
+      this.$emit('update:show', true);
     },
 
     onHide () {
-      this.localShow = false;
-      this.$emit('update:show', this.localShow);
+      this.$emit('update:show', false);
     },
 
     initOptions () {
