@@ -54,8 +54,8 @@ See also [wai aria practices 1.1](https://www.w3.org/TR/wai-aria-practices-1.1/#
 ### Anchor
 
 The anchor element that activates the tooltip should be fully accessible by keyboard. The easiest way to do this is by
-using an element like an `DtButton` that is already accessible. The user should also be able to close the tooltip
-content using the `ESC` key for most ARIA roles.
+using an element like an `DtButton` that is already accessible. When pressing the 'ESC' key in a focused tooltip,
+tooltip will be closed.
 
 There are some required ARIA attributes for the anchor element (such as `aria-hidden` set based on `open`).
 To make this as straightforward as possible, these ARIA attributes are passed

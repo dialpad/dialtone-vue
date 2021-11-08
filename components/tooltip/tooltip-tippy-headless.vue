@@ -39,9 +39,11 @@ import {
   TOOLTIP_TIPPY_DIRECTIONS,
   TOOLTIP_DIALTONE_DIRECTIONS,
   TOOLTIP_DIRECTION_MODIFIERS,
+  TOOLTIP_HIDE_ON_CLICK_VARIANTS,
 } from './tooltip_constants';
 import { getUniqueString } from '../utils';
 import { hideOnEsc } from './modifiers';
+
 export default {
   name: 'Tooltip',
   props: {
@@ -155,6 +157,9 @@ export default {
     hideOnClick: {
       type: [Boolean, String],
       default: true,
+      validator (value) {
+        return TOOLTIP_HIDE_ON_CLICK_VARIANTS.some(variant => variant === value);
+      },
     },
 
     /**

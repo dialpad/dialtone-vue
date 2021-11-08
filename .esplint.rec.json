@@ -1,6 +1,6 @@
 {
   "recordVersion": 1,
-  "configHash": "bc9f0e28a9c7a5e937370e9f2f5ea2a8a86295b3",
+  "configHash": "779c09fa4fd72fa1e2cf5b3c7b3fcce0dcad4943",
   "files": {
     "components/banner/banner.vue": {
       "vue/no-deprecated-dollar-listeners-api": 3
@@ -13,6 +13,9 @@
     },
     "components/lazy_show/lazy_show.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
+    },
+    "components/lazy_show/lazy_show_default.story.vue": {
+      "vuejs-accessibility/iframe-has-title": 1
     },
     "components/mixins/modal.js": {
       "complexity": 1
