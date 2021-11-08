@@ -27,27 +27,8 @@
       <vnodes :vnodes="displayedItems" />
     </ol>
     <div
-      v-if="isCollapsible && secondLink"
       class="d-fl-center"
     >
-      <dt-button
-        :id="`${id}-list-section-show-more-less`"
-        link
-        class="d-ml16 d-py6"
-        @click="showMoreLessClicked"
-      >
-        {{ showMoreLessText }}
-      </dt-button>
-      <dt-button
-        :id="`${id}-list-section-second-link`"
-        link
-        class="d-mr16 d-py6 d-ml-auto"
-        @click="secondLinkClick"
-      >
-        {{ textSecondLink }}
-      </dt-button>
-    </div>
-    <div v-else-if="isCollapsible || secondLink">
       <dt-button
         v-if="isCollapsible"
         :id="`${id}-list-section-show-more-less`"
@@ -57,15 +38,7 @@
       >
         {{ showMoreLessText }}
       </dt-button>
-      <dt-button
-        v-if="secondLink"
-        :id="`${id}-list-section-second-link`"
-        link
-        class="d-ml16 d-py6"
-        @click="secondLinkClick"
-      >
-        {{ textSecondLink }}
-      </dt-button>
+      <slot name="footerAdditionalContent" />
     </div>
   </div>
 </template>
@@ -78,8 +51,6 @@
    - Can add border lines to visually separate the section
    - Allows a list to have a max number of visible items, and any items
      above the max you'd press "show more" to display.
-   - Allows second link on the right of "show more" if needed only on the left
-     this link click emits event to handle
 */
 import utils from '../utils';
 import { DtButton } from '../button';
@@ -134,21 +105,7 @@ export default {
       // TODO needs to be translated, but Dialtone Vue can't do it.
       default: 'Show less',
     },
-
-    // display SecondLink or not
-    secondLink: {
-      type: Boolean,
-      default: false,
-    },
-
-    textSecondLink: {
-      type: String,
-      // TODO needs to be translated, but Dialtone Vue can't do it.
-      default: 'Second',
-    },
   },
-
-  emits: ['second-link-click'],
 
   data () {
     return {
@@ -188,20 +145,12 @@ export default {
     showMoreLessClicked () {
       this.showAll = !this.showAll;
     },
-
-    secondLinkClick () {
-      this.$emit('second-link-click');
-    },
-
   },
 };
 </script>
 
 <style lang="less">
-  .dt-list-section[tabindex="-1"]:focus {
-    outline: none;
-  }
-  .d-ml-auto {
-    margin-left: auto
-  }
+.dt-list-section[tabindex="-1"]:focus {
+  outline: none;
+}
 </style>
