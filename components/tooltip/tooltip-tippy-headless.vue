@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <div ref="anchor">
+  <div data-qa="dt-tooltip-container">
+    <div
+      ref="anchor"
+      data-qa="dt-tooltip-anchor"
+    >
       <slot
         name="anchor"
         :attrs="{
@@ -204,11 +207,9 @@ export default {
       deep: true,
     },
 
-    show () {
-      if (this.tip) {
-        this.show ? this.tip.show() : this.tip.hide();
-      }
-    },
+    arrowDirection: 'setProps',
+
+    show: 'toggleTooltip',
   },
 
   mounted () {
@@ -216,16 +217,22 @@ export default {
     const anchor = anchorElement || this.createAnchor();
     this.placement = this.arrowDirection;
     this.tip = tippy(anchor, this.initOptions());
-    if (this.show) {
-      this.tip.show();
-    }
+    this.toggleTooltip();
   },
 
   beforeDestroy () {
-    this.tip?.destroy();
+    if (this.tip) {
+      this.tip.destroy();
+    }
   },
 
   methods: {
+    toggleTooltip () {
+      if (this.tip) {
+        this.show ? this.tip.show() : this.tip.hide();
+      }
+    },
+
     createAnchor () {
       const span = document.createElement('span');
       span.setAttribute('tabindex', '0');
@@ -237,10 +244,12 @@ export default {
 
     setProps () {
       this.placement = this.arrowDirection;
-      this.tip?.setProps({
-        ...this.tippyProps,
-        placement: this.tippyPlacement,
-      });
+      if (this.tip && this.tip.setProps) {
+        this.tip.setProps({
+          ...this.tippyProps,
+          placement: this.tippyPlacement,
+        });
+      }
     },
 
     getPopperOptions () {
@@ -267,10 +276,20 @@ export default {
       };
     },
 
+    onMount () {
+      this.$emit('update:show', true);
+    },
+
+    onHide () {
+      this.$emit('update:show', false);
+    },
+
     initOptions () {
       return {
         allowHTML: true,
         placement: this.tippyPlacement,
+        onMount: this.onMount,
+        onHide: this.onHide,
         ...this.tippyProps,
         render: () => {
           // The recommended structure is to use the popper as an outer wrapper
