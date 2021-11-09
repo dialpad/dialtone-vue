@@ -26,16 +26,20 @@
     >
       <vnodes :vnodes="displayedItems" />
     </ol>
-
-    <dt-button
-      v-if="isCollapsible"
-      :id="`${id}-list-section-show-more-less`"
-      link
-      class="d-ml16 d-py6"
-      @click="showMoreLessClicked"
+    <div
+      class="d-d-flex"
     >
-      {{ showMoreLessText }}
-    </dt-button>
+      <dt-button
+        v-if="isCollapsible"
+        :id="`${id}-list-section-show-more-less`"
+        link
+        class="d-ml16 d-py6"
+        @click="showMoreLessClicked"
+      >
+        {{ showMoreLessText }}
+      </dt-button>
+      <slot name="footerAdditionalContent" />
+    </div>
   </div>
 </template>
 
