@@ -26,20 +26,16 @@
     >
       <vnodes :vnodes="displayedItems" />
     </ol>
-    <div
-      class="d-d-flex"
+
+    <dt-button
+      v-if="isCollapsible"
+      :id="`${id}-list-section-show-more-less`"
+      link
+      class="d-ml16 d-py6"
+      @click="showMoreLessClicked"
     >
-      <dt-button
-        v-if="isCollapsible"
-        :id="`${id}-list-section-show-more-less`"
-        link
-        class="d-ml16 d-py6"
-        @click="showMoreLessClicked"
-      >
-        {{ showMoreLessText }}
-      </dt-button>
-      <slot name="footerAdditionalContent" />
-    </div>
+      {{ showMoreLessText }}
+    </dt-button>
   </div>
 </template>
 
@@ -51,7 +47,6 @@
    - Can add border lines to visually separate the section
    - Allows a list to have a max number of visible items, and any items
      above the max you'd press "show more" to display.
-  -  Allows to add additional content to list footer
 */
 import utils from '../utils';
 import { DtButton } from '../button';
