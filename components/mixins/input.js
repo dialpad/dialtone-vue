@@ -161,7 +161,7 @@ export const CheckableMixin = {
       default: false,
     },
     /**
-     * Indeterminate State
+     * Indeterminate State, toggling indeterminate checkbox will uncheck
      */
     indeterminate: {
       type: Boolean,

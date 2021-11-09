@@ -3,6 +3,7 @@
     <div :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
       <div class="d-checkbox__input">
         <input
+          ref="checkboxInput"
           type="checkbox"
           :checked="internalChecked"
           :name="internalName"
@@ -106,7 +107,7 @@ export default {
          * input event by the change listener).
         */
         input: () => {},
-        change: event => this.emitValue(event.target.value, event.target.checked),
+        change: event => this.emitValue(event.target.value, event.target.checked, event.target.indeterminate),
       };
     },
   },
@@ -128,7 +129,16 @@ export default {
   },
 
   methods: {
-    emitValue (value, checked) {
+    // indeterminate: the DOM property of input element.
+    // Different from this.indeterminate, which is a Checkbox Vue prop.
+    emitValue (value, checked, indeterminate) {
+      // Expected: Indeterminate -> unchecked. We need to manually set DOM property `checked` to false
+      // and update this.indeterminate.
+      if (this.indeterminate && !indeterminate) {
+        checked = false;
+        this.indeterminate = false;
+        this.$refs.checkboxInput.checked = false;
+      }
       // update provided value if injected
       this.setGroupValue(value, checked);
 
