@@ -14,9 +14,6 @@
     "components/lazy_show/lazy_show.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
     },
-    "components/lazy_show/lazy_show_default.story.vue": {
-      "vuejs-accessibility/iframe-has-title": 1
-    },
     "components/mixins/modal.js": {
       "complexity": 1
     },
