@@ -19,7 +19,7 @@
           :interactive-border="interactiveBorder"
           trigger="click"
           hide-on-click="toggle"
-          :show.sync="show"
+          :show="show"
         >
           <template #anchor="{ attrs }">
             <dt-button

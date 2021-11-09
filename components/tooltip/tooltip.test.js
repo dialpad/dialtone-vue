@@ -23,6 +23,13 @@ describe('Dialtone Vue Tooltip tests', function () {
   let anchor;
   let button;
 
+  const getValueUpdateShow = () => {
+    const values = wrapper.emitted()['update:show'];
+    const lastIndex = values.length - 1;
+
+    return values[lastIndex][0];
+  };
+
   // Helpers
   const _setWrappers = () => {
     tooltipContainer = wrapper.find('[data-qa="dt-tooltip-container"]');
@@ -46,6 +53,7 @@ describe('Dialtone Vue Tooltip tests', function () {
           on: {
             'update:show' (isShow) {
               that.show = isShow;
+              that.$emit('update:show', isShow);
             },
           },
         },
@@ -150,7 +158,7 @@ describe('Dialtone Vue Tooltip tests', function () {
       });
       it('should be closed', async function () {
         await wrapper.setData({ show: false });
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+        assert.isFalse(getValueUpdateShow());
       });
     });
 
@@ -183,7 +191,7 @@ describe('Dialtone Vue Tooltip tests', function () {
         });
 
         it('hide tooltip', function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+          assert.isFalse(getValueUpdateShow());
         });
       });
     });
@@ -197,7 +205,7 @@ describe('Dialtone Vue Tooltip tests', function () {
       });
 
       it('hide tooltip', async function () {
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+        assert.isFalse(getValueUpdateShow());
       });
     });
   });
@@ -215,21 +223,13 @@ describe('Dialtone Vue Tooltip tests', function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
 
-      describe('When anchor has blur', function () {
-        beforeEach(function () {
-          _mountWrapper();
-        });
-        it('hide tooltip', function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-        });
-      });
-
       describe('When escape pressed', function () {
         beforeEach(async function () {
+          await focus();
           await escape();
         });
         it('hide tooltip', function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+          assert.isFalse(getValueUpdateShow());
         });
       });
     });
@@ -244,21 +244,12 @@ describe('Dialtone Vue Tooltip tests', function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
 
-      describe('When anchor has blur', function () {
-        beforeEach(function () {
-          _mountWrapper();
-        });
-        it('hide tooltip', function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-        });
-      });
-
       describe('When escape was pressed', function () {
         beforeEach(async function () {
           await escape();
         });
         it('hide tooltip', function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+          assert.isFalse(getValueUpdateShow());
         });
       });
     });

@@ -15,7 +15,7 @@
       :id="id"
       ref="content"
       role="tooltip"
-      :aria-hidden="`${!show}`"
+      aria-hidden="false"
       data-qa="dt-tooltip"
       :class="[
         'd-tooltip',
@@ -167,7 +167,7 @@ export default {
      */
     show: {
       type: Boolean,
-      required: true,
+      default: false,
     },
   },
 
