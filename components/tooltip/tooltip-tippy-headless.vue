@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <div ref="anchor">
+  <div data-qa="dt-tooltip-container">
+    <div
+      ref="anchor"
+      data-qa="dt-tooltip-anchor"
+    >
       <slot
         name="anchor"
         :attrs="{
@@ -36,6 +39,7 @@ import {
   TOOLTIP_TIPPY_DIRECTIONS,
   TOOLTIP_DIALTONE_DIRECTIONS,
   TOOLTIP_DIRECTION_MODIFIERS,
+  TOOLTIP_HIDE_ON_CLICK_VARIANTS,
 } from './tooltip_constants';
 import { getUniqueString } from '../utils';
 import { hideOnEsc, getArrowDetected } from './modifiers';
@@ -70,6 +74,7 @@ export default {
     /**
      *  Displaces the tippy from its reference element
      *  in pixels (skidding and distance).
+     *  https://atomiks.github.io/tippyjs/v6/all-props/#offset
      */
     offset: {
       type: Array,
@@ -89,6 +94,7 @@ export default {
 
     /**
      * The element to append the tippy to.
+     * https://atomiks.github.io/tippyjs/v6/all-props/#appendto
      */
     appendTo: {
       type: [String, HTMLElement],
@@ -98,6 +104,7 @@ export default {
     /**
      * Determines if the tippy has interactive content inside of it,
      * so that it can be hovered over and clicked inside without hiding.
+     * https://atomiks.github.io/tippyjs/v6/all-props/#interactive
      */
     interactive: {
       type: Boolean,
@@ -136,15 +143,30 @@ export default {
     /**
      * Determines the events that cause the tippy to show.
      * Multiple event names are separated by spaces.
+     * https://atomiks.github.io/tippyjs/v6/all-props/#trigger
      * **/
     trigger: {
       type: String,
       default: 'mouseenter focus',
     },
 
+    /**
+     * https://atomiks.github.io/tippyjs/v6/all-props/#hideonclick
+     * */
     hideOnClick: {
-      type: Boolean,
+      type: [Boolean, String],
       default: true,
+      validator (value) {
+        return TOOLTIP_HIDE_ON_CLICK_VARIANTS.some(variant => variant === value);
+      },
+    },
+
+    /**
+     * Whether the tooltip should be shown.
+     */
+    show: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -183,25 +205,50 @@ export default {
       handler: 'setProps',
       deep: true,
     },
+
+    arrowDirection: 'setProps',
+
+    show: 'toggleTooltip',
   },
 
   mounted () {
-    const anchor = this.$refs.anchor.children[0];
+    const anchorElement = this.$refs.anchor.children[0];
+    const anchor = anchorElement || this.createAnchor();
     this.placement = this.arrowDirection;
     this.tip = tippy(anchor, this.initOptions());
+    this.toggleTooltip();
   },
 
   beforeDestroy () {
-    this.tip?.destroy();
+    if (this.tip) {
+      this.tip.destroy();
+    }
   },
 
   methods: {
+    toggleTooltip () {
+      if (this.tip) {
+        this.show ? this.tip.show() : this.tip.hide();
+      }
+    },
+
+    createAnchor () {
+      const span = document.createElement('span');
+      span.setAttribute('tabindex', '0');
+      span.innerText = this.$refs.anchor.innerText || '';
+      this.$refs.anchor.innerText = '';
+      this.$refs.anchor.appendChild(span);
+      return span;
+    },
+
     setProps () {
       this.placement = this.arrowDirection;
-      this.tip?.setProps({
-        ...this.tippyProps,
-        placement: this.tippyPlacement,
-      });
+      if (this.tip && this.tip.setProps) {
+        this.tip.setProps({
+          ...this.tippyProps,
+          placement: this.tippyPlacement,
+        });
+      }
     },
 
     getPopperOptions () {
@@ -221,10 +268,20 @@ export default {
       };
     },
 
+    onMount () {
+      this.$emit('update:show', true);
+    },
+
+    onHide () {
+      this.$emit('update:show', false);
+    },
+
     initOptions () {
       return {
         allowHTML: true,
         placement: this.tippyPlacement,
+        onMount: this.onMount,
+        onHide: this.onHide,
         ...this.tippyProps,
         render: () => {
           // The recommended structure is to use the popper as an outer wrapper

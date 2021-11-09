@@ -17,8 +17,9 @@
           :append-to="appendTo"
           :interactive="interactive"
           :interactive-border="interactiveBorder"
-          :trigger="trigger"
-          :hide-on-click="hideOnClick"
+          trigger="click"
+          hide-on-click="toggle"
+          :show="show"
         >
           <template #anchor="{ attrs }">
             <dt-button
@@ -26,7 +27,7 @@
               :kind="buttonKind"
               v-bind="attrs"
             >
-              {{ anchor }}
+              Click me to see a tooltip
             </dt-button>
           </template>
           <template #default>
@@ -77,8 +78,8 @@ export default {
   position: relative;
   width: 800px;
   height: 300px;
+  background-color: var(--black-025);
   padding: 10px;
-  background-color: pink;
   border-radius: 10px;
   overflow-y: scroll;
   overscroll-behavior: contain;
@@ -88,7 +89,6 @@ export default {
 .some-text {
   height: 400px;
   cursor: pointer;
-  background-color: cyan;
   padding: 100px 10px 0;
 
 }

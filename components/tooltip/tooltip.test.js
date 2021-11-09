@@ -1,10 +1,19 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import DtTooltip from './tooltip.vue';
+import sinon from 'sinon';
+import { createLocalVue, mount } from '@vue/test-utils';
+import DtTooltip from './tooltip-tippy-headless.vue';
+import { DtButton } from '../button';
 import {
   TOOLTIP_KIND_MODIFIERS,
   TOOLTIP_DIRECTION_MODIFIERS,
 } from './tooltip_constants';
+
+// RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+// Need to mock them to avoid error
+global.requestAnimationFrame = sinon.spy();
+global.cancelAnimationFrame = sinon.spy();
+
+const flushPromise = () => new Promise(setImmediate);
 
 describe('Dialtone Vue Tooltip tests', function () {
   // Wrappers
@@ -12,27 +21,80 @@ describe('Dialtone Vue Tooltip tests', function () {
   let tooltipContainer;
   let tooltip;
   let anchor;
-  let slots = { anchor: 'Anchor Slot' };
+  let button;
+
+  const getValueUpdateShow = () => {
+    const values = wrapper.emitted()['update:show'];
+    const lastIndex = values.length - 1;
+
+    return values[lastIndex][0];
+  };
 
   // Helpers
   const _setWrappers = () => {
     tooltipContainer = wrapper.find('[data-qa="dt-tooltip-container"]');
     tooltip = wrapper.find('[data-qa="dt-tooltip"]');
     anchor = wrapper.find('[data-qa="dt-tooltip-anchor"]');
+    button = wrapper.find('[data-qa="dt-button"]');
+  };
+
+  const tooltipWrapper = {
+    data: () => ({
+      show: false,
+    }),
+    render (h) {
+      const that = this;
+      return h(
+        DtTooltip, {
+          props: {
+            ...that.$attrs,
+            show: that.show,
+          },
+          on: {
+            'update:show' (isShow) {
+              that.show = isShow;
+              that.$emit('update:show', isShow);
+            },
+          },
+        },
+        [h(DtButton, { slot: 'anchor' }, 'Anchor Slot')],
+      );
+    },
   };
 
   const _mountWrapper = () => {
-    wrapper = shallowMount(DtTooltip, {
+    wrapper = mount(tooltipWrapper, {
       localVue: createLocalVue(),
-      slots,
+      propsData: {
+        appendTo: 'parent',
+      },
     });
     _setWrappers();
   };
 
-  const mouseover = () => wrapper.trigger('mouseover');
-  const focus = () => wrapper.trigger('focus.capture');
-  const blur = () => wrapper.trigger('blur.capture');
-  const escape = () => wrapper.trigger('keyup.esc');
+  before(function () {
+    this.localVue = createLocalVue();
+  });
+
+  const click = async () => {
+    await button.trigger('click.native');
+    await flushPromise();
+  };
+
+  const focus = async () => {
+    await button.trigger('focus');
+    await flushPromise();
+  };
+
+  const escape = () => {
+    const keyboardEvent = new KeyboardEvent('keydown', { key: 'Escape' });
+    document.dispatchEvent(keyboardEvent);
+  };
+
+  const mouseover = async () => {
+    await button.trigger('mouseover');
+    await flushPromise();
+  };
 
   describe('Presentation Tests', function () {
     // Setup
@@ -41,10 +103,8 @@ describe('Dialtone Vue Tooltip tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
     it('should render the container', function () { assert.isTrue(tooltipContainer.exists()); });
     it('should render the tooltip', function () { assert.isTrue(tooltip.exists()); });
-    it('should be set default classes', function () {
+    it('should set default classes', function () {
       assert.isTrue(tooltip.classes('d-tooltip__arrow--bottom-center'));
-      assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hide));
-      assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hover));
     });
   });
 
@@ -69,7 +129,6 @@ describe('Dialtone Vue Tooltip tests', function () {
 
   describe('Message provided via slot', function () {
     before(function () {
-      slots = { ...slots, default: 'Message Slot' };
       _mountWrapper();
     });
     it('should render the message', async function () {
@@ -94,83 +153,66 @@ describe('Dialtone Vue Tooltip tests', function () {
   describe('Interactivity Tests', function () {
     describe('Show state', function () {
       it('should be visible', async function () {
-        await wrapper.setProps({ show: true, hover: false });
-        wrapper.vm.$nextTick(() => {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
-          assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.show));
-        });
+        await wrapper.setData({ show: true });
+        assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
       it('should be closed', async function () {
-        await wrapper.setProps({ show: false, hover: false });
-        wrapper.vm.$nextTick(() => {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-          assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hide));
-        });
-      });
-      it('should be invisible', async function () {
-        await wrapper.setProps({ show: true, hover: true });
-        wrapper.vm.$nextTick(() => {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-          assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hide));
-        });
+        await wrapper.setData({ show: false });
+        assert.isFalse(getValueUpdateShow());
       });
     });
+
     describe('on mouseover', function () {
       before(async function () {
-        await blur();
-        await mouseover();
+        await wrapper.setProps({ trigger: 'click' });
+        await click();
       });
-
       it('shows tooltip', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
-        assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.show));
       });
     });
 
     describe('on focus', function () {
-      before(async function () { await focus(); });
+      before(async function () {
+        _mountWrapper();
+        await wrapper.setProps({ trigger: 'focus' });
+        await focus();
+      });
 
       it('shows tooltip', async function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
-        assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.show));
-      });
-    });
-
-    describe('on blur', function () {
-      before(async function () { await blur(); });
-
-      it('hide tooltip', async function () {
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-        assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hide));
       });
     });
 
     describe('on escape', function () {
-      before(async function () { await blur(); });
-
       describe('escape on focus', function () {
-        before(async function () { await focus(); await escape(); });
-
-        it('hide tooltip', async function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-          assert.isTrue(tooltip.classes(TOOLTIP_KIND_MODIFIERS.hide));
+        before(async function () {
+          await escape();
         });
-      });
 
-      describe('escape on mouseover', function () {
-        before(async function () { await mouseover(); await escape(); });
-
-        it('hide tooltip', async function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-          assert.isTrue(tooltip.classes().includes(TOOLTIP_KIND_MODIFIERS.hide));
+        it('hide tooltip', function () {
+          assert.isFalse(getValueUpdateShow());
         });
       });
     });
-  });
 
+    describe('escape on mouseover', function () {
+      before(async function () {
+        _mountWrapper();
+        await wrapper.setProps({ trigger: 'mouseover' });
+        await mouseover();
+        await escape();
+      });
+
+      it('hide tooltip', async function () {
+        assert.isFalse(getValueUpdateShow());
+      });
+    });
+  });
+  //
   describe('Accessibility Tests', function () {
-    beforeEach(async function () {
-      await blur();
+    beforeEach(function () {
+      _mountWrapper();
     });
     describe('When anchor has focus', function () {
       beforeEach(async function () {
@@ -181,27 +223,20 @@ describe('Dialtone Vue Tooltip tests', function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
 
-      describe('When anchor has blur', function () {
-        beforeEach(async function () {
-          await blur();
-        });
-        it('hide tooltip', function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-        });
-      });
-
       describe('When escape pressed', function () {
         beforeEach(async function () {
+          await focus();
           await escape();
         });
         it('hide tooltip', function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+          assert.isFalse(getValueUpdateShow());
         });
       });
     });
 
     describe('When anchor has mouseover', function () {
       beforeEach(async function () {
+        await wrapper.setProps({ trigger: 'mouseover' });
         await mouseover();
       });
 
@@ -209,21 +244,12 @@ describe('Dialtone Vue Tooltip tests', function () {
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
 
-      describe('When anchor has blur', function () {
-        beforeEach(async function () {
-          await blur();
-        });
-        it('hide tooltip', function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
-        });
-      });
-
       describe('When escape was pressed', function () {
         beforeEach(async function () {
           await escape();
         });
         it('hide tooltip', function () {
-          assert.isTrue(tooltip.attributes('aria-hidden') === 'true');
+          assert.isFalse(getValueUpdateShow());
         });
       });
     });

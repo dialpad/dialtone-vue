@@ -39,3 +39,5 @@ export const TOOLTIP_KIND_MODIFIERS = {
   inverted: `d-tooltip--inverted`,
   hide: `d-tooltip--hide`,
 };
+
+export const TOOLTIP_HIDE_ON_CLICK_VARIANTS = [true, false, 'toggle'];
