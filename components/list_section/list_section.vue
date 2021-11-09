@@ -38,7 +38,7 @@
       >
         {{ showMoreLessText }}
       </dt-button>
-      <slot name="footerAdditionalContent" />
+      <slot name="footer" />
     </div>
   </div>
 </template>
