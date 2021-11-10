@@ -11,7 +11,7 @@ import {
 } from '../../tests/shared_examples/extendability';
 import {
   itBehavesLikeChecked,
-  itBehavesLikeHasValidationClasses,
+  itBehavesLikeHasValidationClasses, itBehavesLikeIndeterminate,
   itBehavesLikeNotChecked,
 } from '../../tests/shared_examples/input';
 import { VALIDATION_MESSAGE_TYPES } from '../constants';
@@ -282,6 +282,15 @@ describe('Checkbox Tests', function () {
           });
         });
       });
+    });
+
+    describe('When clicking on an indeterminate checkbox', function () {
+      propsData = { ...basePropsData, indeterminate: true };
+      _setWrappers();
+      it('is indeterminate', function () { itBehavesLikeIndeterminate(input); });
+      input.trigger('click');
+
+      it('should uncheck', function () { itBehavesLikeNotChecked(input); });
     });
 
     describe('Listener Tests', function () {

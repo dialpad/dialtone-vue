@@ -11,7 +11,7 @@
           :disabled="internalDisabled"
           :class="['d-checkbox', inputValidationClass, inputClass]"
           v-bind="$attrs"
-          :indeterminate.prop="indeterminate"
+          :indeterminate.prop="partiallyChecked"
           v-on="inputListeners"
         >
       </div>
@@ -130,13 +130,14 @@ export default {
 
   methods: {
     // indeterminate: the DOM property of input element.
-    // Different from this.indeterminate, which is a Checkbox Vue prop.
     emitValue (value, checked, indeterminate) {
+      console.log(`indeterminate: ${indeterminate}`);
       // Expected: Indeterminate -> unchecked. We need to manually set DOM property `checked` to false
-      // and update this.indeterminate.
-      if (this.indeterminate && !indeterminate) {
+      // and update this.partiallyChecked.
+      console.log(`this.partiallyChecked: ${this.partiallyChecked}`);
+      if (this.partiallyChecked && !indeterminate) {
         checked = false;
-        this.indeterminate = false;
+        this.partiallyChecked = false;
         this.$refs.checkboxInput.checked = false;
       }
       // update provided value if injected

@@ -179,6 +179,7 @@ export const CheckableMixin = {
   data () {
     return {
       internalChecked: this.checked,
+      partiallyChecked: this.indeterminate,
     };
   },
 
@@ -186,6 +187,10 @@ export const CheckableMixin = {
     checked (newChecked) {
       // update internal checked when the prop changes
       this.internalChecked = newChecked;
+    },
+
+    indeterminate (newValue) {
+      this.partiallyChecked = newValue;
     },
   },
 };
