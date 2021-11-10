@@ -21,7 +21,7 @@ export function itBehavesLikeNotChecked (input) {
 }
 
 export function itBehavesLikeIndeterminate (input) {
-  assert.strictEqual(input.element.indeterminate, true, 'should not be checked or unchecked');
+  assert.strictEqual(input.element.indeterminate, true, 'visually should be indeterminate');
 }
 
 export default {
