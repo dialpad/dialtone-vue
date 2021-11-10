@@ -107,7 +107,7 @@ export default {
          * input event by the change listener).
         */
         input: () => {},
-        change: event => this.emitValue(event.target.value, event.target.checked, event.target.indeterminate),
+        change: event => this.emitValue(event.target.value, event.target.checked),
       };
     },
   },
@@ -129,13 +129,10 @@ export default {
   },
 
   methods: {
-    // indeterminate: the DOM property of input element.
-    emitValue (value, checked, indeterminate) {
-      console.log(`indeterminate: ${indeterminate}`);
+    emitValue (value, checked) {
       // Expected: Indeterminate -> unchecked. We need to manually set DOM property `checked` to false
       // and update this.partiallyChecked.
-      console.log(`this.partiallyChecked: ${this.partiallyChecked}`);
-      if (this.partiallyChecked && !indeterminate) {
+      if (this.partiallyChecked) {
         checked = false;
         this.partiallyChecked = false;
         this.$refs.checkboxInput.checked = false;

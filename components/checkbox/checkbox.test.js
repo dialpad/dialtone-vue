@@ -284,13 +284,19 @@ describe('Checkbox Tests', function () {
       });
     });
 
-    describe('When clicking on an indeterminate checkbox', function () {
-      propsData = { ...basePropsData, indeterminate: true };
-      _setWrappers();
+    describe('When indeterminate checkbox', function () {
+      before(function () {
+        propsData = { ...basePropsData, indeterminate: true };
+        _setWrappers();
+      });
       it('is indeterminate', function () { itBehavesLikeIndeterminate(input); });
-      input.trigger('click');
 
-      it('should uncheck', function () { itBehavesLikeNotChecked(input); });
+      describe('When clicking on an indeterminate checkbox', function () {
+        beforeEach(async function () {
+          input.trigger('click');
+        });
+        it('should uncheck', function () { itBehavesLikeNotChecked(input); });
+      });
     });
 
     describe('Listener Tests', function () {
