@@ -119,6 +119,47 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onFocusIn: {
+    table: {
+      disable: true,
+    },
+  },
+  onFocusOut: {
+    table: {
+      disable: true,
+    },
+  },
+
+  blur: {
+    description: 'Native input blur event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  input: {
+    description: 'Native input event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  clear: {
+    description: 'Native input clear event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusin: {
+    description: 'Native input focusin event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusout: {
+    description: 'Native input focusout event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
 };
 
 export const argsData = {
@@ -127,6 +168,8 @@ export const argsData = {
   onBlur: action('blur'),
   onInput: action('input'),
   onClear: action('clear'),
+  onFocusIn: action('focusin'),
+  onFocusOut: action('focusout'),
 };
 
 const decorator = () => ({

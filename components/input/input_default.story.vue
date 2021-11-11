@@ -15,6 +15,8 @@
     @blur="onBlur"
     @input="onInput"
     @clear="onClear"
+    @focusin="onFocusIn"
+    @focusout="onFocusOut"
   >
     <template
       v-if="labelSlot"

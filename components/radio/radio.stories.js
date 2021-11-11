@@ -14,6 +14,8 @@ export const argsData = {
   description: '',
   validationState: '',
   onInput: action('input'),
+  onFocusIn: action('focusin'),
+  onFocusOut: action('focusout'),
 };
 
 // Prop Controls
@@ -93,6 +95,35 @@ export const argTypesData = {
   onInput: {
     table: {
       disable: true,
+    },
+  },
+  onFocusIn: {
+    table: {
+      disable: true,
+    },
+  },
+  onFocusOut: {
+    table: {
+      disable: true,
+    },
+  },
+
+  input: {
+    description: 'Native input event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusin: {
+    description: 'Native input focusin event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusout: {
+    description: 'Native input focusout event',
+    table: {
+      type: { summary: 'event' },
     },
   },
 };
