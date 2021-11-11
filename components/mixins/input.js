@@ -179,7 +179,7 @@ export const CheckableMixin = {
   data () {
     return {
       internalChecked: this.checked,
-      partiallyChecked: this.indeterminate,
+      internalIndeterminate: this.indeterminate,
     };
   },
 
@@ -190,7 +190,7 @@ export const CheckableMixin = {
     },
 
     indeterminate (newValue) {
-      this.partiallyChecked = newValue;
+      this.internalIndeterminate = newValue;
     },
   },
 };

@@ -3,7 +3,6 @@
     <div :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
       <div class="d-checkbox__input">
         <input
-          ref="checkboxInput"
           type="checkbox"
           :checked="internalChecked"
           :name="internalName"
@@ -11,7 +10,7 @@
           :disabled="internalDisabled"
           :class="['d-checkbox', inputValidationClass, inputClass]"
           v-bind="$attrs"
-          :indeterminate.prop="partiallyChecked"
+          :indeterminate.prop="internalIndeterminate"
           v-on="inputListeners"
         >
       </div>
@@ -107,7 +106,7 @@ export default {
          * input event by the change listener).
         */
         input: () => {},
-        change: event => this.emitValue(event.target.value, event.target.checked),
+        change: event => this.emitValue(event.target),
       };
     },
   },
@@ -129,13 +128,14 @@ export default {
   },
 
   methods: {
-    emitValue (value, checked) {
+    emitValue (target) {
+      let { value, checked } = target;
       // Expected: Indeterminate -> unchecked. We need to manually set DOM property `checked` to false
-      // and update this.partiallyChecked.
-      if (this.partiallyChecked) {
+      // and update this.internalIndeterminate.
+      if (this.internalIndeterminate) {
         checked = false;
-        this.partiallyChecked = false;
-        this.$refs.checkboxInput.checked = false;
+        this.internalIndeterminate = false;
+        target.checked = false;
       }
       // update provided value if injected
       this.setGroupValue(value, checked);
