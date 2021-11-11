@@ -193,6 +193,8 @@ export default {
     },
   },
 
+  emits: ['update:show'],
+
   data () {
     return {
       MODAL_KIND_MODIFIERS,
