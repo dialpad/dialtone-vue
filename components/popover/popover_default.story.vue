@@ -12,6 +12,7 @@
     :transition="transition"
     :fixed-alignment="fixedAlignment"
     :fixed-vertical-alignment="fixedVerticalAlignment"
+    @update:open="onClose"
   >
     <template #anchor="{ attrs }">
       <dt-button

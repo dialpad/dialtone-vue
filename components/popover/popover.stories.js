@@ -8,6 +8,7 @@ import {
 import PopoverDefault from './popover_default.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import PopoverMdx from './popover.mdx';
+import { action } from '@storybook/addon-actions';
 
 const argTypesData = {
   // Slots
@@ -58,11 +59,34 @@ const argTypesData = {
       options: POPOVER_VERTICAL_ALIGNMENT,
     },
   },
+
+  // Events
+  onClose: {
+    table: {
+      disable: true,
+    },
+  },
+
+  'update:open': {
+    description: `The popover will emit a "false" boolean value for this event when the \
+user performs a popover-closing action.`,
+    table: {
+      type: {
+        summary: 'boolean',
+      },
+    },
+  },
+};
+
+// Default Props for all variations
+export const argsData = {
+  onClose: action('update:show'),
 };
 
 export default {
   title: 'Elements/Popovers',
   component: DtPopover,
+  args: argsData,
   argTypes: argTypesData,
   parameters: {
     controls: {
