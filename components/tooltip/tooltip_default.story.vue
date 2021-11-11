@@ -7,7 +7,7 @@
       },
     ]"
   >
-    <div class="d-pt16">
+    <div class="d-pt32">
       <dt-tooltip
         :id="id"
         :message="message"
