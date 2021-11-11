@@ -130,7 +130,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Forms/Radio',
+  title: 'Components/Radio',
   component: DtRadio,
   args: argsData,
   argTypes: argTypesData,

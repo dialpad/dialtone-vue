@@ -90,7 +90,7 @@ orci ipsum et velit.`,
 };
 
 export default {
-  title: 'Elements/Modal',
+  title: 'Components/Modal',
   component: DtModal,
   parameters: {
     controls: {

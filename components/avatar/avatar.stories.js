@@ -73,7 +73,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Elements/Avatar',
+  title: 'Components/Avatar',
   component: DtAvatar,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,

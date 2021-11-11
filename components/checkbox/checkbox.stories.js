@@ -129,7 +129,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Forms/Checkbox',
+  title: 'Components/Checkbox',
   component: DtCheckbox,
   args: argsData,
   argTypes: argTypesData,

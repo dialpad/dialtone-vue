@@ -28,7 +28,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Elements/Badge',
+  title: 'Components/Badge',
   component: DtBadge,
   excludeStories: /.*Data$/,
   argTypes: argTypesData,

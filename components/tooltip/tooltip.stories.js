@@ -62,7 +62,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Elements/Tooltip',
+  title: 'Components/Tooltip',
   component: DtTooltip,
   args: argsData,
   argTypes: argTypesData,

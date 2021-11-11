@@ -27,7 +27,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Forms/Validation Messages',
+  title: 'Components/Validation Messages',
   component: DtValidationMessages,
   parameters: {
     controls: {

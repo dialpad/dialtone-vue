@@ -115,7 +115,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Forms/Radio Group',
+  title: 'Components/Radio Group',
   component: DtRadioGroup,
   args: argsData,
   argTypes: argTypesData,

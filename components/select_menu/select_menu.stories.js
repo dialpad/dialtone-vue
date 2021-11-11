@@ -223,7 +223,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Forms/Select Menu',
+  title: 'Components/Select Menu',
   component: DtSelectMenu,
   args: argsData,
   argTypes: argTypesData,

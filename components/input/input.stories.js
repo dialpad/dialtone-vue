@@ -177,7 +177,7 @@ const decorator = () => ({
 });
 
 export default {
-  title: 'Forms/Input',
+  title: 'Components/Input',
   component: DtInput,
   parameters: {
     controls: {

@@ -25,7 +25,7 @@ argTypesData.contentId = {
 };
 
 export default {
-  title: 'Elements/Banner',
+  title: 'Components/Banner',
   component: DtBanner,
   parameters: {
     controls: {

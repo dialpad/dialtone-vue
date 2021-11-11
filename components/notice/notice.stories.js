@@ -83,7 +83,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Elements/Notice',
+  title: 'Components/Notice',
   component: DtNotice,
   args: argsData,
   argTypes: argTypesData,

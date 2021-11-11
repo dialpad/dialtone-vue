@@ -53,7 +53,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Elements/Breadcrumbs',
+  title: 'Components/Breadcrumbs',
   component: DtBreadcrumbs,
   args: argsData,
   argTypes: argTypesData,

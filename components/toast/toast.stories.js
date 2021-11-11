@@ -91,7 +91,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Elements/Toast',
+  title: 'Components/Toast',
   component: DtToast,
   args: argsData,
   argTypes: argTypesData,

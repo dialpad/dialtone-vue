@@ -98,7 +98,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Forms/Input Group',
+  title: 'Components/Input Group',
   component: DtInputGroup,
   args: argsData,
   argTypes: argTypesData,

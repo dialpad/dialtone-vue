@@ -158,7 +158,7 @@ export const argsData = {
 };
 
 export default {
-  title: 'Elements/Button',
+  title: 'Components/Button',
   component: DtButton,
   parameters: {
     controls: {

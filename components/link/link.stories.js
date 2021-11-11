@@ -100,7 +100,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Elements/Link',
+  title: 'Components/Link',
   component: DtLink,
   args: argsData,
   argTypes: argTypesData,
