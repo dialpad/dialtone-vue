@@ -1,14 +1,9 @@
 <template>
-  <component
-    :is="elementType"
-    v-click-outside="() => close('click-outside')"
-    class="d-ps-relative dt-popover"
-  >
+  <component :is="elementType">
     <div
       :id="!ariaLabelledby && labelledBy"
       ref="anchor"
     >
-      <!-- @slot Anchor element that activates the popover. -->
       <slot
         name="anchor"
         :attrs="{
@@ -20,74 +15,60 @@
     </div>
     <dt-lazy-show
       :id="id"
-      ref="container"
+      ref="content"
+      :show="open"
       :role="role"
-      :aria-hidden="!open"
+      data-qa="dt-popover"
+      :aria-hidden="`${!open}`"
       :aria-labelledby="labelledBy"
       :aria-label="ariaLabel"
       :aria-modal="isDialog"
       :transition="transition"
-      :show="open"
       :class="[
-        'd-ba',
-        'd-bc-black-075',
-        'd-bar4',
+        'popover',
         'd-bgc-white',
+        'd-bc-black-075',
         'd-bs-md',
-        'd-mt4',
-        'd-ps-absolute',
-        'd-zi-popover',
-        'dt-popover__content',
+        'd-wmx-unset',
+        'd-bar4',
+        POPOVER_PADDING_CLASSES[padding],
         `dt-popover__content--align-${alignment}`,
         `dt-popover__content--valign-${verticalAlignment}`,
-        `dt-popover__content--pad-${padding}`,
+        'd-m0',
         contentClass,
       ]"
       tabindex="-1"
-      v-on="dialogListeners"
+      @transitionend="onLeave"
     >
-      <!-- @slot Content that is displayed in the popover when it is open. -->
-      <slot name="content" />
-
+      <!-- @slot that is displayed in the popover when it is open. -->
+      <slot />
       <div
         v-if="hasCaret"
-        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret"
+        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret d-ps-absolute d-w6 d-h6"
       />
     </dt-lazy-show>
   </component>
 </template>
 
 <script>
-import { DtLazyShow } from '../lazy_show';
+import tippy from 'tippy.js/headless';
+import { hideOnEsc, getArrowDetected } from '../tooltip/modifiers';
 import {
+  POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_PADDING_CLASSES,
   POPOVER_ROLES,
-  POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_VERTICAL_ALIGNMENT,
 } from './popover_constants';
-import util from '../utils';
-import clickOutside from 'v-click-outside';
-import Modal from '../mixins/modal.js';
+import { TOOLTIP_DIRECTION_MODIFIERS } from '../tooltip';
+import { getUniqueString } from '../utils';
+import DtLazyShow from '../lazy_show/lazy_show';
 
 export default {
-  name: 'DtPopover',
-
-  /********************
-   * CHILD COMPONENTS *
-   ********************/
+  name: 'Popover',
   components: {
     DtLazyShow,
   },
 
-  directives: {
-    clickOutside: clickOutside.directive,
-  },
-
-  mixins: [Modal],
-
-  /******************
-   *     PROPS      *
-   ******************/
   props: {
     /**
      * Element type (tag name) of the root element of the component.
@@ -98,89 +79,12 @@ export default {
     },
 
     /**
-     * Additional class name for the content wrapper element.
-     */
-    contentClass: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Whether or not the popover content is shown. Supports .sync modifier.
-     */
-    open: {
-      type: Boolean,
-      required: true,
-    },
-
-    /**
-     * Padding size class for the popover content.
-     */
-    padding: {
-      type: String,
-      default: 'large',
-      validator: (padding) => {
-        return POPOVER_PADDING_CLASSES.includes(padding);
-      },
-    },
-
-    /**
-     * Whether or not a carat (arrow) should be shown from the content pointing
-     * at the anchor.
-     */
-    hasCaret: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
      * Named transition when the content display is toggled.
      * @see DtLazyShow
      */
     transition: {
       type: String,
       default: 'fade',
-    },
-
-    /**
-     * Fixed horizontal alignment of the popover content. If passed, the
-     * popover will always display anchored to the left or right of the
-     * anchor element. If null, the content will be positioned on whichever
-     * side has the most available space relative to the root Vue element.
-     * String values must be one of `left` or `right`.
-     */
-    fixedAlignment: {
-      type: String,
-      default: null,
-      validator: (align) => {
-        return POPOVER_HORIZONTAL_ALIGNMENT.includes(align);
-      },
-    },
-
-    /**
-     * Fixed vertical alignment of the popover content. If passed, the popover
-     * will always display anchored to the top or bottom of the anchor element.
-     * If null, the content will be positioned on whichever side has the most
-     * available space relative to the root Vue element. String values must be
-     * one of `top` or `bottom`.
-     */
-    fixedVerticalAlignment: {
-      type: String,
-      default: null,
-      validator: (align) => {
-        return POPOVER_VERTICAL_ALIGNMENT.includes(align);
-      },
-    },
-
-    /**
-     * `id` of the popover content wrapper element.
-     * @default [String] automatically generated unique string.
-     */
-    id: {
-      type: String,
-      default () {
-        return util.getUniqueString('DtPopover__content');
-      },
     },
 
     /**
@@ -216,182 +120,338 @@ export default {
       default: null,
     },
 
+    /**
+     * Whether or not the popover content is shown. Supports .sync modifier.
+     */
+    open: {
+      type: Boolean,
+      required: true,
+    },
+
+    /**
+     * Padding size class for the popover content.
+     */
+    padding: {
+      type: String,
+      default: 'large',
+      validator: (padding) => {
+        return !!POPOVER_PADDING_CLASSES[padding];
+      },
+    },
+
+    /**
+     * Fixed vertical alignment of the popover content. If passed, the popover
+     * will always display anchored to the top or bottom of the anchor element.
+     * If null, the content will be positioned on whichever side has the most
+     * available space relative to the root Vue element. String values must be
+     * one of `top` or `bottom`.
+     */
+    fixedVerticalAlignment: {
+      type: String,
+      validator: (align) => {
+        return POPOVER_VERTICAL_ALIGNMENT.includes(align);
+      },
+    },
+
+    /**
+     * Fixed horizontal alignment of the popover content. If passed, the
+     * popover will always display anchored to the left or right of the
+     * anchor element. If null, the content will be positioned on whichever
+     * side has the most available space relative to the root Vue element.
+     * String values must be one of `left` or `right`.
+     */
+    fixedAlignment: {
+      type: String,
+      default: 'right',
+      validator: (align) => {
+        return POPOVER_HORIZONTAL_ALIGNMENT.includes(align);
+      },
+    },
+
+    /**
+     * Additional class name for the content wrapper element.
+     */
+    contentClass: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Whether or not a carat (arrow) should be shown from the content pointing
+     * at the anchor.
+     */
+    hasCaret: {
+      type: Boolean,
+      default: true,
+    },
+
     focusAnchorOnClose: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * The id of the tooltip
+     */
+    id: {
+      type: String,
+      default () { return getUniqueString(); },
+    },
+
+    /**
+     * This property is needed for define fallback placements
+     * by providing a list of placements to try.
+     * */
+    flip: {
+      type: Array,
+      default: () => ['left-center', 'top-center'],
+    },
+
+    /**
+     * Add inverted class
+     */
+    inverted: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     *  Displaces the tippy from its reference element
+     *  in pixels (skidding and distance).
+     */
+    offset: {
+      type: Array,
+      default: () => [0, 10],
+    },
+
+    /**
+     * Describes the preferred placement of the tooltip
+     */
+    arrowDirection: {
+      type: String,
+      default: 'bottom-center',
+      validator (direction) {
+        return TOOLTIP_DIRECTION_MODIFIERS.includes(direction);
+      },
+    },
+
+    /**
+     * The element to append the tippy to.
+     */
+    appendTo: {
+      type: [String, HTMLElement],
+      default: () => document.body,
+    },
+
+    /**
+     * Determines if the tippy has interactive content inside of it,
+     * so that it can be hovered over and clicked inside without hiding.
+     */
+    interactive: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * This describes the area that the element
+     * will be checked for overflow relative to.
+     */
+    flipBoundary: {
+      type: [String, HTMLElement],
+      default: 'popper',
+    },
+
+    /**
+     * Determines the size of the invisible border around the
+     * tippy that will prevent it from hiding if the cursor left it.
+     * */
+    interactiveBorder: {
+      type: Number,
+      default: 2,
+    },
+
+    /**
+     * Determines the events that cause the tippy to show.
+     * Multiple event names are separated by spaces.
+     * **/
+    trigger: {
+      type: String,
+      default: 'click',
+    },
+
+    /***
+     * Determines if the tippy hides upon clicking the
+     * reference or outside of the tippy.
+     * The behavior can depend upon the trigger events used.
+     * */
+    hideOnClick: {
       type: Boolean,
       default: true,
     },
   },
 
-  emits: [
-    'update:open',
-  ],
-
-  /******************
-   *      DATA      *
-   ******************/
-  data () {
-    return {
-      autoAlignment: 'left',
-      autoVerticalAlignment: 'bottom',
-    };
-  },
+  data: () => ({
+    POPOVER_PADDING_CLASSES,
+    verticalAlignment: '',
+  }),
 
   computed: {
+    placement () {
+      const verticalAlignment = this.fixedVerticalAlignment || 'bottom';
+      const horizontalAlignment = this.fixedAlignment === 'left' ? 'start' : 'end';
+      return `${verticalAlignment}-${horizontalAlignment}`;
+    },
+
     alignment () {
-      return this.fixedAlignment || this.autoAlignment;
-    },
-
-    verticalAlignment () {
-      return this.fixedVerticalAlignment || this.autoVerticalAlignment;
-    },
-
-    labelledBy () {
-      // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
-      // there is no aria-label and the labelledby should point to the anchor.
-      return this.ariaLabelledby || (!this.ariaLabel && util.getUniqueString('DtPopover__anchor'));
+      return this.fixedAlignment;
     },
 
     isDialog () {
       return this.role === 'dialog';
     },
 
-    dialogListeners (e) {
-      if (this.isDialog) {
-        return {
-          keydown: (e) => {
-            if (e.key === 'Tab') {
-              this.trapFocus(e);
-            }
-            if (e.key === 'Escape') {
-              this.close('esc');
-            }
-          },
-        };
-      }
-      return null;
+    labelledBy () {
+      // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
+      // there is no aria-label and the labelledby should point to the anchor.
+      return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
     },
   },
 
   watch: {
-    open (isOpen, wasOpen) {
-      this.manageFocusOnOpenClose();
-      this.closedByClickOutside = false;
-      if (!isOpen || (this.fixedAlignment && this.fixedVerticalAlignment)) {
-        return;
-      }
-      this.updateAlignment();
+    placement (placement) {
+      this.tip?.setProps({
+        placement,
+      });
+    },
+
+    open (isOpen) {
+      isOpen ? this.tip.show() : this.tip.hide();
     },
   },
 
-  /******************
-   *     METHODS    *
-   ******************/
+  mounted () {
+    this.verticalAlignment = this.fixedVerticalAlignment;
+    const anchor = this.$refs.anchor.children[0];
+    this.tip = tippy(anchor, this.getOptions({
+      popperOptions: this.getPopperOptions(),
+      tippyOptions: {
+        placement: this.placement,
+        hideOnClick: this.hideOnClick,
+        offset: this.offset,
+        interactiveBorder: this.interactiveBorder,
+        appendTo: this.appendTo,
+        interactive: this.interactive,
+        allowHTML: true,
+        trigger: this.trigger,
+        animation: true,
+        delay: [180, 180],
+        onHide: this.onHide,
+        onMount: this.onMount,
+      },
+    }));
+  },
+
+  beforeDestroy () {
+    this.tip?.destroy();
+  },
+
   methods: {
-
-    manageFocusOnOpenClose () {
-      if (!this.isDialog) {
-        return;
-      }
-      if (this.open) {
-        return this.focusFirstElement(this.$refs.container.$el);
-      }
-      if (this.focusAnchorOnClose && !this.closedByClickOutside) {
-        this.focusFirstElement(this.$refs.anchor);
-      }
+    onLeave () {
+      if (!this.open) this.tip.unmount();
     },
 
-    trapFocus (e) {
-      this.focusTrappedTabPress(e, this.$refs.container.$el);
-    },
-
-    close (method) {
-      /**
-       * Emitted when the `open` property changes, such as when the user clicks
-       * outside the popover content.
-       * @type {Event}
-       */
-      if (method === 'click-outside') {
-        this.closedByClickOutside = true;
-      }
+    onHide () {
+      const anchor = this.$refs.anchor.children[0];
       this.$emit('update:open', false);
+      if (this.focusAnchorOnClose) {
+        anchor?.focus?.();
+      }
     },
 
-    async updateAlignment () {
-      // Reset autoAlignment to the default, let it render, then check if it's outside the page boundary.
-      this.autoAlignment = 'left';
-      this.autoVerticalAlignment = 'bottom';
-      await this.$nextTick();
-      const popoverBoundary = this.$refs.container.$el.getBoundingClientRect();
-      const pageBoundary = this.$root.$el.getBoundingClientRect();
+    onMount () {
+      this.$emit('update:open', true);
+      this.tip?.setProps({
+        placement: this.placement,
+      });
+    },
 
-      if (popoverBoundary.right > pageBoundary.right) {
-        // Dropdown is clipping off the page, so we want to align however it has the most space.
-        // Since the page x-scrolls at low widths, check with the scrollWidth rather than just page-right.
-        const pageScrollWidth = this.$root.$el.scrollWidth;
-        const anchorBoundary = this.$refs.anchor.getBoundingClientRect();
-        const spaceOnLeft = anchorBoundary.left - pageBoundary.left;
-        const spaceOnRight = (pageBoundary.left + pageScrollWidth) - anchorBoundary.right;
-        this.autoAlignment = spaceOnRight < spaceOnLeft ? 'right' : 'left';
-      }
+    getPopperOptions () {
+      return {
+        modifiers: [
+          {
+            name: 'flip',
+            options: {
+              boundary: this.flipBoundary,
+            },
+          },
+          getArrowDetected(({ state }) => {
+            this.verticalAlignment = state.placement.includes('top') ? 'top' : 'bottom';
+          }),
+        ],
+      };
+    },
 
-      if (popoverBoundary.bottom > pageBoundary.bottom) {
-        const pageScrollHeight = this.$root.$el.scrollHeight;
-        const anchorBoundary = this.$refs.anchor.getBoundingClientRect();
-        const spaceAbove = anchorBoundary.top - pageBoundary.top;
-        const spaceBelow = (pageBoundary.top + pageScrollHeight) - anchorBoundary.bottom;
-        this.autoVerticalAlignment = spaceAbove < spaceBelow ? 'bottom' : 'top';
-      }
+    getOptions ({ popperOptions, tippyOptions } = {}) {
+      return {
+        popperOptions,
+        ...tippyOptions,
+        plugins: [hideOnEsc],
+        render: () => {
+          // The recommended structure is to use the popper as an outer wrapper
+          const popper = document.createElement('div');
+          popper.className = 'tippy-box d-ps-absolute';
+          popper.appendChild(this.$refs.content.$el);
+          return {
+            popper,
+          };
+        },
+      };
     },
   },
 };
 </script>
 
 <style lang="less">
-  @import "../../css/dialtone.less";
+@import "../../css/dialtone.less";
 
-  .dt-popover__content {
-    &--align-right {
-      right: @su0;
+.dt-popover__content {
+  &--align-right {
+    right: @su0;
 
-      .dt-popover__caret {
-        right: @su24;
-      }
+    .dt-popover__caret {
+      right: @su24;
     }
+  }
 
-    &--valign-top {
+  &--valign-top {
+    bottom: 100%;
+    margin-top: @su0;
+    margin-bottom: @su4;
+
+    .dt-popover__caret {
+      bottom: -@su4;
+      transform: rotate(225deg);
+    }
+  }
+
+  &--valign-bottom {
+    .dt-popover__caret {
       bottom: 100%;
-      margin-top: @su0;
-      margin-bottom: @su4;
-
-      .dt-popover__caret {
-        top: auto;
-        bottom: -@su4;
-        transform: rotate(225deg);
-      }
-    }
-
-    &--pad-none {
-      padding: @su0;
-    }
-
-    &--pad-small {
-      padding: @su8;
-    }
-
-    &--pad-medium {
-      padding: @su16;
-    }
-
-    &--pad-large {
-      padding: @su24;
+      top: 0;
+      transform: rotate(45deg);
     }
   }
+}
 
-  .dt-popover__caret {
-    top: @su0;
-    height: @su6;
-    width: @su6;
-    transform: rotate(45deg);
-    position: absolute;
+.dt-popover__caret {
+  transform: rotate(45deg);
+}
+
+.tippy-box[data-popper-reference-hidden],
+.tippy-box[data-popper-escaped] {
+  .popover {
+    visibility: hidden;
+    pointer-events: none;
   }
+}
 </style>

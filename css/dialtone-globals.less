@@ -75,3 +75,37 @@
     transform: translate3d(16px, 0, 0);
   }
 }
+
+@keyframes fade-in {
+  0% {
+    opacity: 0
+  }
+  50% {
+    opacity: 0.5
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1
+  }
+  50% {
+    opacity: 0.5
+  }
+
+  100% {
+    opacity: 0
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.18s ease-in-out;
+}
+
+.fade-out {
+  animation: fade-out 0.18s ease-in-out;
+}

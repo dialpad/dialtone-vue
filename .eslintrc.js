@@ -25,7 +25,6 @@ module.exports = {
       allowEmptyReject: true,
     }],
     'vue/comma-dangle': ['error', 'always-multiline'],
-    'vuejs-accessibility/iframe-has-title': 1,
     'vue/component-name-in-template-casing': ['error', 'kebab-case', {
       registeredComponentsOnly: true,
     }],
@@ -62,8 +61,9 @@ module.exports = {
     'vue/v-on-event-hyphenation': ['error'],
     'vue/no-template-target-blank': ['error'],
     'vue/no-static-inline-styles': ['error'],
+    'vuejs-accessibility/iframe-has-title': 'warn',
 
-    'max-lines': ['error', { max: 300, skipBlankLines: true, skipComments: true }],
+    'max-lines': ['warn', { max: 300, skipBlankLines: true, skipComments: true }],
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
     complexity: ['warn', 5],
 

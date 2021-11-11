@@ -42,8 +42,7 @@ import {
   TOOLTIP_HIDE_ON_CLICK_VARIANTS,
 } from './tooltip_constants';
 import { getUniqueString } from '../utils';
-import { hideOnEsc } from './modifiers';
-
+import { hideOnEsc, getArrowDetected } from './modifiers';
 export default {
   name: 'Tooltip',
   props: {
@@ -262,16 +261,9 @@ export default {
               boundary: this.flipBoundary,
             },
           },
-          {
-            name: 'arrowDetected',
-            enabled: true,
-            phase: 'main',
-            fn: ({ state }) => {
-              this.placement = TOOLTIP_TIPPY_DIRECTIONS[state.placement];
-            },
-
-            requiresIfExists: ['offset'],
-          },
+          getArrowDetected(({ state }) => {
+            this.placement = TOOLTIP_TIPPY_DIRECTIONS[state.placement];
+          }),
         ],
       };
     },
