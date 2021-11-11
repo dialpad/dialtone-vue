@@ -118,6 +118,8 @@ export default {
     },
   },
 
+  emits: ['change'],
+
   data () {
     return {
       provideObj: {

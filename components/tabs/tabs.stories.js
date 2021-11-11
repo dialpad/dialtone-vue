@@ -43,6 +43,13 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  change: {
+    description: 'Change tab event with the arguments: `selected` id of the current tab and `disabled` value',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
 };
 
 // Story Collection
