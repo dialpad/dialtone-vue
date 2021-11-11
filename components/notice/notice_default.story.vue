@@ -31,6 +31,7 @@
         size="sm"
         importance="outlined"
         :kind="buttonKind"
+        @click="onClick"
       >
         Action
       </dt-button>

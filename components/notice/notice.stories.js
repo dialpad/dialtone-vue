@@ -8,6 +8,7 @@ import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 // Default Prop Values
 export const argsData = {
   onClose: action('close'),
+  onClick: action('click'),
 };
 
 export const argTypesData = {
@@ -61,9 +62,21 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
   onClose: {
     table: {
       disable: true,
+    },
+  },
+
+  close: {
+    description: 'Close button click event',
+    table: {
+      type: { summary: 'event' },
     },
   },
 };
