@@ -120,23 +120,31 @@ export const argTypesData = {
       disable: true,
     },
   },
-  onFocusOut: {
-    table: {
-      disable: true,
-    },
-  },
   onFocusIn: {
     table: {
       disable: true,
     },
   },
+  onFocusOut: {
+    table: {
+      disable: true,
+    },
+  },
 
-  focusout: {
+  click: {
+    description: 'Native button click event',
     table: {
       type: { summary: 'event' },
     },
   },
   focusin: {
+    description: 'Native button focusin event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusout: {
+    description: 'Native button focusout event',
     table: {
       type: { summary: 'event' },
     },
@@ -145,8 +153,8 @@ export const argTypesData = {
 
 export const argsData = {
   onClick: action('click'),
-  onFocusOut: action('focusout'),
   onFocusIn: action('focusin'),
+  onFocusOut: action('focusout'),
 };
 
 export default {

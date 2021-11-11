@@ -1,4 +1,5 @@
 import { createTemplateFromVueFile } from '../storybook_utils';
+import { action } from '@storybook/addon-actions';
 import DtLink from './link';
 import DtLinkMdx from './link.mdx';
 import DtLinkDefaultTemplate from './link_default.story.vue';
@@ -9,6 +10,9 @@ import { LINK_VARIANTS } from './link_constants';
 export const argsData = {
   default: 'Default link',
   href: '#',
+  onClick: action('click'),
+  onFocusIn: action('focusin'),
+  onFocusOut: action('focusout'),
 };
 
 // Controls
@@ -55,6 +59,42 @@ export const argTypesData = {
       category: 'html attributes',
     },
     control: 'text',
+  },
+
+  // Action Event Handlers
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
+  onFocusIn: {
+    table: {
+      disable: true,
+    },
+  },
+  onFocusOut: {
+    table: {
+      disable: true,
+    },
+  },
+
+  click: {
+    description: 'Native click event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusin: {
+    description: 'Native focusin event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focusout: {
+    description: 'Native focusout event',
+    table: {
+      type: { summary: 'event' },
+    },
   },
 };
 

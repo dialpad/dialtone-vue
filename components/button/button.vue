@@ -174,7 +174,7 @@ export default {
     },
   },
 
-  emits: ['focusout', 'focusin'],
+  emits: ['click', 'focusin', 'focusout'],
 
   data () {
     return {
