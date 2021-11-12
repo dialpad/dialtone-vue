@@ -28,7 +28,7 @@ export const argTypesData = {
   },
 
   offset: {
-    defaultValue: [0, 10],
+    defaultValue: [0, 0],
   },
 
   hideOnClick: {

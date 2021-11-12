@@ -24,6 +24,7 @@
       :aria-label="ariaLabel"
       :aria-modal="isDialog"
       :transition="transition"
+      :show="open"
       :class="[
         'popover',
         'd-bgc-white',

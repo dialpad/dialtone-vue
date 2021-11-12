@@ -14,7 +14,7 @@
         :key="direction"
         :arrow-direction="direction"
         :message="localMessage"
-        :offset="[0, 10]"
+        :offset="[0, 0]"
         class="d-mx64"
       >
         <template #anchor>
@@ -32,7 +32,7 @@
       <dt-tooltip
         class="d-mb64"
         :message="localMessage"
-        :offset="[0, 10]"
+        :offset="[0, 0]"
       >
         <template #anchor>
           <span>{{ localAnchor }}</span>
@@ -46,7 +46,7 @@
         :message="localMessage"
         trigger="click"
         hide-on-click="toggle"
-        :offset="[0, 10]"
+        :offset="[0, 0]"
         show
       >
         <template #anchor>
@@ -67,7 +67,7 @@
           trigger="click"
           :message="localMessage"
           hide-on-click="toggle"
-          :offset="[0, 10]"
+          :offset="[0, 0]"
         >
           <template #anchor>
             <dt-button

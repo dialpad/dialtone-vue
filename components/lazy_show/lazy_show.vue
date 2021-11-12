@@ -2,6 +2,7 @@
   <transition
     :name="transition"
     v-on="$listeners"
+    @after-leave="$emit('after-leave')"
   >
     <div
       v-show="show"
