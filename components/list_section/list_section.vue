@@ -4,8 +4,8 @@
     role="group"
     :aria-labelledby="`${id}-list-section-header`"
     tabindex="-1"
-    :class="['dt-list-section', 'd-fs14', 'd-lh6', 'd-py6', 'd-border-color--ash-darker',
-             { 'd-border-bottom': separator }]"
+    :class="['dt-list-section', 'd-fs14', 'd-lh6', 'd-py6', 'd-bc-black-200',
+             { 'd-bb': separator }]"
   >
     <h3
       v-if="header"
@@ -26,16 +26,20 @@
     >
       <vnodes :vnodes="displayedItems" />
     </ol>
-
-    <dt-button
-      v-if="isCollapsible"
-      :id="`${id}-list-section-show-more-less`"
-      link
-      class="d-ml16 d-py6"
-      @click="showMoreLessClicked"
+    <div
+      class="d-d-flex"
     >
-      {{ showMoreLessText }}
-    </dt-button>
+      <dt-button
+        v-if="isCollapsible"
+        :id="`${id}-list-section-show-more-less`"
+        link
+        class="d-ml16 d-py6"
+        @click="showMoreLessClicked"
+      >
+        {{ showMoreLessText }}
+      </dt-button>
+      <slot name="footer" />
+    </div>
   </div>
 </template>
 
@@ -47,6 +51,7 @@
    - Can add border lines to visually separate the section
    - Allows a list to have a max number of visible items, and any items
      above the max you'd press "show more" to display.
+  -  Allows to add additional content to list footer.
 */
 import utils from '../utils';
 import { DtButton } from '../button';
@@ -61,6 +66,7 @@ export default {
       functional: true,
       render: (h, ctx) => ctx.props.vnodes,
     },
+
     DtButton,
   },
 
@@ -115,16 +121,20 @@ export default {
       }
       return true;
     },
+
     showMoreLessText () {
       return this.showAll ? this.textLess : this.textMore;
     },
+
     hiddenCount () {
       return this.itemCount - this.displayedItems.length;
     },
+
     itemCount () {
       // eslint-disable-next-line vue/require-slots-as-functions
       return this.$slots.default.length;
     },
+
     displayedItems () {
       // filtering the slot v-nodes to only display up to maxDisplayed items
       // eslint-disable-next-line vue/require-slots-as-functions

@@ -1,7 +1,7 @@
 <template>
   <transition
     :name="transition"
-    @after-leave="$emit('after-leave')"
+    v-on="$listeners"
   >
     <div
       v-show="show"

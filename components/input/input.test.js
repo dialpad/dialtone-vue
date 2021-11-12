@@ -136,6 +136,13 @@ describe('Dialtone Vue Input tests', function () {
       });
     });
 
+    describe('When a label is not provided', function () {
+      // Test Setup
+      beforeEach(async function () { _setChildWrappers(); });
+
+      it('should not render a label', function () { assert.isFalse(label.exists()); });
+    });
+
     describe('When a description is not provided', function () {
       // Test Setup
       beforeEach(async function () { _setChildWrappers(); });
@@ -165,6 +172,18 @@ describe('Dialtone Vue Input tests', function () {
       });
 
       itBehavesLikeRendersDescription('Description');
+    });
+
+    describe('When an inputClass prop is provided', function () {
+      // Test Setup
+      beforeEach(async function () {
+        await wrapper.setProps({ inputClass: 'd-fc-green' });
+        _setChildWrappers();
+      });
+
+      it('Should apply the class to the input element.', function () {
+        assert.isTrue(nativeInput.classes('d-fc-green'));
+      });
     });
 
     describe('When a left icon is provided', function () {

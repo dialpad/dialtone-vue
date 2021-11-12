@@ -7,6 +7,7 @@ import {
 } from './';
 import PopoverDefault from './popover_default.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
+import PopoverMdx from './popover.mdx';
 
 const argTypesData = {
   id: {
@@ -47,6 +48,11 @@ export default {
   title: 'Elements/Popover',
   component: DtPopover,
   argTypes: argTypesData,
+  parameters: {
+    docs: {
+      page: PopoverMdx,
+    },
+  },
   excludeStories: /.Data$/,
 };
 

@@ -4,6 +4,7 @@
       :id="!ariaLabelledby && labelledBy"
       ref="anchor"
     >
+      <!-- @slot Anchor element that activates the popover. -->
       <slot
         name="anchor"
         :attrs="{
@@ -16,7 +17,6 @@
     <dt-lazy-show
       :id="id"
       ref="content"
-      :show="open"
       :role="role"
       data-qa="dt-popover"
       :aria-hidden="`${!open}`"
@@ -63,7 +63,11 @@ import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 
 export default {
-  name: 'Popover',
+  name: 'DtPopover',
+
+  /********************
+   * CHILD COMPONENTS *
+   ********************/
   components: {
     DtLazyShow,
   },
@@ -344,6 +348,9 @@ export default {
     this.tip?.destroy();
   },
 
+  /******************
+   *     METHODS    *
+   ******************/
   methods: {
     onLeave () {
       this.tip.unmount();

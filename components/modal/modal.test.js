@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import DtButton from '../button/button.vue';
 import DtModal from './modal.vue';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { createLocalVue, shallowMount, mount } from '@vue/test-utils';
 
 const basePropsData = {
   closeButtonProps: {
@@ -51,6 +51,15 @@ describe('Dialtone Vue Modal Tests', function () {
     assert.equal(title.text(), newTitle);
   });
 
+  it('Close button is visible by default', async function () {
+    assert.isTrue(closeBtn.exists());
+  });
+
+  it('Close button is hidden if hideClose prop is true', async function () {
+    await wrapper.setProps({ hideClose: true });
+    assert.isFalse(closeBtn.exists());
+  });
+
   it('Should display slotted header and content instead of title and copy', function () {
     const contentText = 'test content';
     const headerText = 'test header';
@@ -86,6 +95,19 @@ describe('Dialtone Vue Modal Tests', function () {
 
   it('Should emit a sync-able update event when overlay / close-icon are clicked' +
      ', or escape key is pressed', async function () {
+    wrapper = mount(DtModal, {
+      localVue: this.localVue,
+      propsData: {
+        ...basePropsData,
+        show: true,
+      },
+      stubs: {
+        DtButton,
+        transition: false,
+      },
+    });
+    _setElements();
+
     const syncEvent = 'update:show';
     assert.isEmpty(wrapper.emitted());
 

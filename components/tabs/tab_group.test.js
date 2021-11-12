@@ -1,9 +1,14 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
+import {
+  itBehavesLikeAppliesClassToChild,
+  itBehavesLikeAppliesChildProp,
+} from '../../tests/shared_examples/extendability';
 import DtTabGroup from './tab_group.vue';
 import DtTabPanel from './tab_panel.vue';
 import DtTab from './tab.vue';
 import { TAB_LIST_KIND_MODIFIERS, TAB_LIST_SIZE_MODIFIERS, TAB_LIST_IMPORTANCE_MODIFIERS } from './tabs_constants';
+
 const optionTabPanel = [
   {
     id: '2',
@@ -133,7 +138,35 @@ describe('Dialtone Vue Tab Group tests', function () {
       });
     });
   });
+
   describe('Interactivity Tests', function () {
+    describe('When selected is provided', function () {
+      beforeEach(function () {
+        propsData.selected = optionTabs[1].panelId;
+        _mountWrapper();
+      });
+
+      it('should set initially selected tab', function () {
+        assert.strictEqual(wrapper.vm.provideObj.selected, optionTabs[1].panelId);
+        assert.strictEqual(tabs.at(1).attributes('aria-selected'), 'true');
+      });
+    });
+
+    describe('When selected is updated', function () {
+      beforeEach(async function () {
+        _mountWrapper();
+        // Simulating the third tab being set programmatically after the second tab was selected by a user.
+        tabs.at(1).vm.$el.click();
+        propsData.selected = optionTabs[2].panelId;
+        await wrapper.setProps(propsData);
+      });
+
+      it('should override currently selected tab', async function () {
+        assert.strictEqual(wrapper.vm.provideObj.selected, optionTabs[2].panelId);
+        assert.strictEqual(tabs.at(2).attributes('aria-selected'), 'true');
+      });
+    });
+
     describe('Correct selected state', function () {
       beforeEach(async function () {
         optionTabs[0].selected = true;
@@ -148,6 +181,7 @@ describe('Dialtone Vue Tab Group tests', function () {
         assert.strictEqual(tabPanels.at(1).attributes('aria-hidden'), 'true');
       });
     });
+
     describe('Correct change event', function () {
       beforeEach(function () {
         tabs.at(1).vm.$el.click();
@@ -157,6 +191,7 @@ describe('Dialtone Vue Tab Group tests', function () {
         assert.strictEqual(wrapper.emitted('change').length, 1);
       });
     });
+
     describe('Correct key navigation', function () {
       describe('On keyup left', function () {
         beforeEach(async function () {
@@ -220,6 +255,7 @@ describe('Dialtone Vue Tab Group tests', function () {
           });
         });
       });
+
       describe('On keydown home and enter', function () {
         beforeEach(async function () {
           tabs.at(2).vm.$el.focus();
@@ -330,6 +366,30 @@ describe('Dialtone Vue Tab Group tests', function () {
           assert.strictEqual(tabAttrs.id, tabPanelAttrs['aria-labelledby']);
           assert.strictEqual(tabAttrs['aria-controls'], tabPanelAttrs.id);
         });
+      });
+    });
+  });
+
+  describe('Extendability Tests', function () {
+    describe('When tab list class is provided', function () {
+      beforeEach(function () {
+        propsData.tabListClass = 'my-custom-class';
+        _mountWrapper();
+      });
+
+      it('should apply custom class to tab list', function () {
+        itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', tabList);
+      });
+    });
+
+    describe('When tab list child props are provided', function () {
+      beforeEach(function () {
+        propsData.tabListChildProps = { some: 'prop' };
+        _mountWrapper();
+      });
+
+      it('tab list should have provided child prop', function () {
+        itBehavesLikeAppliesChildProp(tabList, 'some', 'prop');
       });
     });
   });

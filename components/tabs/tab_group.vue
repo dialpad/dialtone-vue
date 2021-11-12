@@ -10,7 +10,9 @@
           [TAB_LIST_KIND_MODIFIERS.inverted]: inverted,
           [TAB_LIST_IMPORTANCE_MODIFIERS.borderless]: borderless,
         },
+        tabListClass,
       ]"
+      v-bind="tabListChildProps"
       role="tablist"
       :aria-label="label"
       @keyup.left="tabLeft"
@@ -98,6 +100,22 @@ export default {
         return TAB_LIST_SIZES.includes(size);
       },
     },
+
+    /**
+     * Pass through classes, used to customize the tab list
+     */
+    tabListClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Pass through props, used to customize the tab list
+     */
+    tabListChildProps: {
+      type: Object,
+      default: () => ({}),
+    },
   },
 
   data () {
@@ -106,6 +124,7 @@ export default {
         selected: '', // the currently displayed tab id
         disabled: false, // disable group
       },
+
       focusId: null,
       tabs: [],
       TAB_LIST_SIZE_MODIFIERS,
@@ -119,6 +138,13 @@ export default {
       immediate: true,
       handler () {
         this.provideObj.disabled = this.disabled;
+      },
+    },
+
+    selected: {
+      immediate: true,
+      handler () {
+        this.provideObj.selected = this.selected;
       },
     },
   },
