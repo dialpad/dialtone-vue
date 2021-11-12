@@ -11,12 +11,14 @@
         }"
       />
     </div>
-    <div
+    <dt-lazy-show
       :id="id"
       ref="content"
+      :show="showTooltip"
       role="tooltip"
       aria-hidden="false"
       data-qa="dt-tooltip"
+      :transition="transition"
       :class="[
         'd-tooltip',
         `d-tooltip__arrow--${placement}`,
@@ -24,11 +26,12 @@
           [ TOOLTIP_KIND_MODIFIERS.inverted ]: inverted,
         },
       ]"
+      @after-leave="onLeave"
     >
       <slot>
         {{ message }}
       </slot>
-    </div>
+    </dt-lazy-show>
   </div>
 </template>
 
@@ -43,8 +46,13 @@ import {
 } from './tooltip_constants';
 import { getUniqueString } from '../utils';
 import { hideOnEsc, getArrowDetected } from './modifiers';
+import DtLazyShow from '../lazy_show/lazy_show';
 export default {
   name: 'Tooltip',
+  components: {
+    DtLazyShow,
+  },
+
   props: {
     /**
      * The id of the tooltip
@@ -168,6 +176,15 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Named transition when the content display is toggled.
+     * @see DtLazyShow
+     */
+    transition: {
+      type: String,
+      default: 'fade',
+    },
   },
 
   data () {
@@ -175,6 +192,7 @@ export default {
       TOOLTIP_KIND_MODIFIERS,
       tip: null,
       placement: '',
+      showTooltip: false,
     };
   },
 
@@ -208,7 +226,7 @@ export default {
 
     arrowDirection: 'setProps',
 
-    show: 'toggleTooltip',
+    show: 'updateShow',
   },
 
   mounted () {
@@ -216,7 +234,7 @@ export default {
     const anchor = anchorElement || this.createAnchor();
     this.placement = this.arrowDirection;
     this.tip = tippy(anchor, this.initOptions());
-    this.toggleTooltip();
+    this.updateShow();
   },
 
   beforeDestroy () {
@@ -226,9 +244,17 @@ export default {
   },
 
   methods: {
-    toggleTooltip () {
-      if (this.tip) {
-        this.show ? this.tip.show() : this.tip.hide();
+    async onLeave () {
+      this.tip.unmount();
+    },
+
+    updateShow () {
+      if (this.show) {
+        this.showTooltip = this.show;
+        this.setProps();
+        this.tip.show();
+      } else if (this.showTooltip) {
+        this.tip.hide();
       }
     },
 
@@ -269,11 +295,24 @@ export default {
     },
 
     onMount () {
-      this.$emit('update:show', true);
+      this.showTooltip = true;
+      this.setProps();
+      if (!this.show) {
+        this.$emit('update:show', this.showTooltip);
+      }
     },
 
     onHide () {
-      this.$emit('update:show', false);
+      const isPreventHideTooltip = !this.showTooltip;
+      this.showTooltip = false;
+      if (this.show) {
+        this.$emit('update:show', this.showTooltip);
+      }
+      /**
+       *  https://atomiks.github.io/tippyjs/v6/all-props/#onhide
+       *  return false from 'onHide' lifecycle to cancel a hide based on a condition.
+       **/
+      return isPreventHideTooltip;
     },
 
     initOptions () {
@@ -287,7 +326,7 @@ export default {
           // The recommended structure is to use the popper as an outer wrapper
           const popper = document.createElement('div');
           popper.className = 'tippy-box d-ps-absolute';
-          popper.appendChild(this.$refs.content);
+          popper.appendChild(this.$refs.content.$el);
           return {
             popper,
           };

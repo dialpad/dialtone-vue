@@ -38,7 +38,7 @@
         contentClass,
       ]"
       tabindex="-1"
-      @transitionend="onLeave"
+      @after-leave="onLeave"
     >
       <!-- @slot that is displayed in the popover when it is open. -->
       <slot />
@@ -59,7 +59,6 @@ import {
   POPOVER_ROLES,
   POPOVER_VERTICAL_ALIGNMENT,
 } from './popover_constants';
-import { TOOLTIP_DIRECTION_MODIFIERS } from '../tooltip';
 import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 
@@ -225,17 +224,6 @@ export default {
     },
 
     /**
-     * Describes the preferred placement of the tooltip
-     */
-    arrowDirection: {
-      type: String,
-      default: 'bottom-center',
-      validator (direction) {
-        return TOOLTIP_DIRECTION_MODIFIERS.includes(direction);
-      },
-    },
-
-    /**
      * The element to append the tippy to.
      */
     appendTo: {
@@ -343,12 +331,13 @@ export default {
         interactive: this.interactive,
         allowHTML: true,
         trigger: this.trigger,
-        animation: true,
-        delay: [180, 180],
         onHide: this.onHide,
         onMount: this.onMount,
       },
     }));
+    if (this.open) {
+      this.tip.show();
+    }
   },
 
   beforeDestroy () {
@@ -357,19 +346,28 @@ export default {
 
   methods: {
     onLeave () {
-      if (!this.open) this.tip.unmount();
+      this.tip.unmount();
     },
 
     onHide () {
       const anchor = this.$refs.anchor.children[0];
-      this.$emit('update:open', false);
+      if (this.open) {
+        this.$emit('update:open', false);
+      }
       if (this.focusAnchorOnClose) {
         anchor?.focus?.();
       }
+      /**
+       *  https://atomiks.github.io/tippyjs/v6/all-props/#onhide
+       *  return false from 'onHide' lifecycle to cancel a hide based on a condition.
+      **/
+      return !this.open;
     },
 
     onMount () {
-      this.$emit('update:open', true);
+      if (!this.open) {
+        this.$emit('update:open', true);
+      }
       this.tip?.setProps({
         placement: this.placement,
       });

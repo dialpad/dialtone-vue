@@ -44,7 +44,7 @@ const argTypesData = {
 };
 
 export default {
-  title: 'Elements/Popovers',
+  title: 'Elements/Popover',
   component: DtPopover,
   argTypes: argTypesData,
   excludeStories: /.Data$/,

@@ -4,11 +4,12 @@ import DtTooltipTippyFlipTemplate from './tooltip_tippy_flip.story.vue';
 import DtTooltipTippyDefault from './tooltip_tippy_default.story';
 import DtTooltipTippyVariantsTemplate from './tooltip_tippy_variants';
 
-import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
+import { TOOLTIP_DIRECTION_MODIFIERS, TOOLTIP_HIDE_ON_CLICK_VARIANTS } from './tooltip_constants';
 import DtTooltipMdx from './tooltip_tippy.mdx';
 
 // Default Prop Values
 export const argsData = {
+  show: false,
   message: 'This is a Tooltip',
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
@@ -30,6 +31,21 @@ export const argTypesData = {
     defaultValue: [0, 10],
   },
 
+  hideOnClick: {
+    defaultValue: true,
+    type: 'select',
+    options: TOOLTIP_HIDE_ON_CLICK_VARIANTS,
+  },
+
+  flipBoundary: {
+    defaultValue: 'popper',
+  },
+  transition: {
+    control: {
+      type: 'select',
+      options: ['', 'fade', 'slide-down', 'pop', 'shake'],
+    },
+  },
   // Slots
   default: {
     control: 'text',

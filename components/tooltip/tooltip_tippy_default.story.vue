@@ -9,10 +9,11 @@
   >
     <div class="d-pt16">
       <tooltip-tippy
+        :id="id"
         :arrow-direction="arrowDirection"
         :inverted="inverted"
+        :show="showSync"
         :message="message"
-        :id="id"
         :flip="flip"
         :offset="offset"
         :append-to="appendTo"
@@ -21,7 +22,8 @@
         :interactive-border="interactiveBorder"
         :trigger="trigger"
         :hide-on-click="hideOnClick"
-        :show="show"
+        :transition="transition"
+        @update:show="showSync = $event"
       >
         <template #anchor="{ attrs }">
           <dt-button
@@ -46,15 +48,29 @@ import { DtButton } from '../button';
 
 export default {
   name: 'TooltipTippyDefaultStory',
-  inheritAttrs: false,
   components: {
     TooltipTippy,
     DtButton,
   },
 
+  inheritAttrs: false,
+
+  data: () => ({
+    showSync: false,
+  }),
+
   computed: {
     buttonKind () {
       return this.inverted ? 'inverted' : 'default';
+    },
+  },
+
+  watch: {
+    show: {
+      immediate: true,
+      handler (show) {
+        this.showSync = show;
+      },
     },
   },
 };

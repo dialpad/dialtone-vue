@@ -20,14 +20,18 @@ describe('Dialtone Vue Tooltip tests', function () {
   let wrapper;
   let tooltipContainer;
   let tooltip;
+  let tooltipComponent;
   let anchor;
   let button;
+  let defaultSLotMessage = '';
 
   const getValueUpdateShow = () => {
-    const values = wrapper.emitted()['update:show'];
-    const lastIndex = values.length - 1;
+    const values = tooltipComponent.emitted()['update:show'];
+    if (values) {
+      const lastIndex = values.length - 1;
 
-    return values[lastIndex][0];
+      return values[lastIndex][0];
+    }
   };
 
   // Helpers
@@ -36,29 +40,44 @@ describe('Dialtone Vue Tooltip tests', function () {
     tooltip = wrapper.find('[data-qa="dt-tooltip"]');
     anchor = wrapper.find('[data-qa="dt-tooltip-anchor"]');
     button = wrapper.find('[data-qa="dt-button"]');
+    tooltipComponent = wrapper.findComponent({ name: 'Tooltip' });
   };
 
   const tooltipWrapper = {
-    data: () => ({
-      show: false,
-    }),
+    props: {
+      show: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    data () {
+      return {
+        syncShow: this.show,
+      };
+    },
+    watch: {
+      show (show) {
+        this.syncShow = show;
+      },
+    },
     render (h) {
-      const that = this;
-      return h(
-        DtTooltip, {
-          props: {
-            ...that.$attrs,
-            show: that.show,
-          },
-          on: {
-            'update:show' (isShow) {
-              that.show = isShow;
-              that.$emit('update:show', isShow);
+      const self = this;
+      return h('div', [
+        h(
+          DtTooltip, {
+            props: {
+              ...self.$attrs,
+              show: self.syncShow,
+            },
+            on: {
+              'update:show' (show) {
+                self.syncShow = show;
+              },
             },
           },
-        },
-        [h(DtButton, { slot: 'anchor' }, 'Anchor Slot')],
-      );
+          [h(DtButton, { slot: 'anchor' }, 'Anchor Slot'), defaultSLotMessage],
+        ),
+      ]);
     },
   };
 
@@ -121,23 +140,33 @@ describe('Dialtone Vue Tooltip tests', function () {
   });
 
   describe('Message provided via prop', function () {
+    before(function () {
+      _mountWrapper();
+    });
     it('should render the message', async function () {
-      await wrapper.setProps({ message: 'Message Prop' });
+      await wrapper.setProps({ message: 'Message Prop', show: true });
       assert.strictEqual(tooltip.text(), 'Message Prop');
     });
   });
 
   describe('Message provided via slot', function () {
-    before(function () {
+    before(async function () {
+      defaultSLotMessage = 'Message Slot';
       _mountWrapper();
+      await wrapper.setProps({ message: 'Message Prop', show: true });
+    });
+    after(function () {
+      defaultSLotMessage = '';
     });
     it('should render the message', async function () {
-      await wrapper.setProps({ message: 'Message Slot' });
-      assert.strictEqual(tooltip.text(), 'Message Slot');
+      assert.strictEqual(tooltip.text(), defaultSLotMessage);
     });
   });
 
   describe('Anchor slot', function () {
+    before(function () {
+      _mountWrapper();
+    });
     it('should render the anchor slot', async function () {
       assert.strictEqual(anchor.text(), 'Anchor Slot');
     });
@@ -153,12 +182,14 @@ describe('Dialtone Vue Tooltip tests', function () {
   describe('Interactivity Tests', function () {
     describe('Show state', function () {
       it('should be visible', async function () {
-        await wrapper.setData({ show: true });
+        _mountWrapper();
+        await wrapper.setProps({ show: true });
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
       it('should be closed', async function () {
-        await wrapper.setData({ show: false });
-        assert.isFalse(getValueUpdateShow());
+        _mountWrapper();
+        await wrapper.setProps({ show: false });
+        assert.strictEqual(tooltip.text(), '');
       });
     });
 
@@ -168,7 +199,7 @@ describe('Dialtone Vue Tooltip tests', function () {
         await click();
       });
       it('shows tooltip', async function () {
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
+        assert.isTrue(getValueUpdateShow());
       });
     });
 
@@ -180,13 +211,14 @@ describe('Dialtone Vue Tooltip tests', function () {
       });
 
       it('shows tooltip', async function () {
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
+        assert.isTrue(getValueUpdateShow());
       });
     });
 
     describe('on escape', function () {
       describe('escape on focus', function () {
         before(async function () {
+          await focus();
           await escape();
         });
 
@@ -197,9 +229,7 @@ describe('Dialtone Vue Tooltip tests', function () {
     });
 
     describe('escape on mouseover', function () {
-      before(async function () {
-        _mountWrapper();
-        await wrapper.setProps({ trigger: 'mouseover' });
+      beforeEach(async function () {
         await mouseover();
         await escape();
       });
@@ -220,7 +250,7 @@ describe('Dialtone Vue Tooltip tests', function () {
       });
 
       it('has focus', async function () {
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
+        assert.isTrue(getValueUpdateShow());
       });
 
       describe('When escape pressed', function () {
@@ -240,12 +270,14 @@ describe('Dialtone Vue Tooltip tests', function () {
         await mouseover();
       });
 
-      it('has mouseover', async function () {
-        assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
+      it('has mouseover', function () {
+        assert.isTrue(getValueUpdateShow());
       });
 
       describe('When escape was pressed', function () {
         beforeEach(async function () {
+          await wrapper.setProps({ trigger: 'focus' });
+          await focus();
           await escape();
         });
         it('hide tooltip', function () {

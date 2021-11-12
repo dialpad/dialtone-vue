@@ -1,5 +1,8 @@
 <template>
-  <transition :name="transition">
+  <transition
+    :name="transition"
+    @after-leave="$emit('after-leave')"
+  >
     <div
       v-show="show"
       v-on="$listeners"
