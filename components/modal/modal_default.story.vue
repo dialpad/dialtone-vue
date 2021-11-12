@@ -27,18 +27,24 @@
         v-if="showFooter"
         #footer
       >
-        <dt-button
-          :kind="kind"
-          importance="primary"
-        >
-          Confirm
-        </dt-button>
-        <dt-button
-          :kind="kind"
-          importance="clear"
-        >
-          Cancel
-        </dt-button>
+        <span
+          v-if="footer"
+          v-html="footer"
+        />
+        <div v-else>
+          <dt-button
+            :kind="kind"
+            importance="primary"
+          >
+            Confirm
+          </dt-button>
+          <dt-button
+            :kind="kind"
+            importance="clear"
+          >
+            Cancel
+          </dt-button>
+        </div>
       </template>
     </dt-modal>
     <dt-button

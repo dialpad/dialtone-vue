@@ -8,6 +8,7 @@ import { action } from '@storybook/addon-actions';
 export const argTypesData = {
   // Slots
   default: {
+    control: 'text',
     table: {
       type: {
         summary: 'VNode',
@@ -15,6 +16,7 @@ export const argTypesData = {
     },
   },
   footer: {
+    control: 'text',
     table: {
       type: {
         summary: 'VNode',
@@ -22,6 +24,7 @@ export const argTypesData = {
     },
   },
   header: {
+    control: 'text',
     table: {
       type: {
         summary: 'VNode',
