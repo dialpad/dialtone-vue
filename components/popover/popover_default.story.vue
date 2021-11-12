@@ -1,37 +1,33 @@
 <template>
-  <popover-tippy
+  <dt-popover
+    v-model:open="isOpen"
     :fixed-alignment="fixedAlignment"
     :fixed-vertical-alignment="fixedVerticalAlignment"
     :content-class="contentClass"
     :has-caret="hasCaret"
     :padding="padding"
-    :open="isOpen"
-    @update:open="isOpen = $event"
   >
     <template #anchor="{ attrs }">
-      <dt-button
-        importance="outlined"
-        v-bind="attrs"
-      >
+      <dt-button v-bind="attrs">
         Click to open
       </dt-button>
     </template>
     <template #content>
-      <p class="d-fs14 d-m0">
+      <p>
         I will be displayed in the popover!
       </p>
     </template>
-  </popover-tippy>
+  </dt-popover>
 </template>
 
 <script>
-import PopoverTippy from './popover';
+import DtPopover from './popover';
 import { DtButton } from '../button';
 
 export default {
-  name: 'PopoverTippyStory',
+  name: 'PopoverDefaultStory',
   components: {
-    PopoverTippy,
+    DtPopover,
     DtButton,
   },
 

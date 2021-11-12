@@ -152,6 +152,7 @@ export default {
      */
     fixedVerticalAlignment: {
       type: String,
+      default: 'bottom',
       validator: (align) => {
         return POPOVER_VERTICAL_ALIGNMENT.includes(align);
       },
@@ -166,7 +167,7 @@ export default {
      */
     fixedAlignment: {
       type: String,
-      default: 'right',
+      default: 'left',
       validator: (align) => {
         return POPOVER_HORIZONTAL_ALIGNMENT.includes(align);
       },
@@ -200,23 +201,6 @@ export default {
     id: {
       type: String,
       default () { return getUniqueString(); },
-    },
-
-    /**
-     * This property is needed for define fallback placements
-     * by providing a list of placements to try.
-     * */
-    flip: {
-      type: Array,
-      default: () => ['left-center', 'top-center'],
-    },
-
-    /**
-     * Add inverted class
-     */
-    inverted: {
-      type: Boolean,
-      default: false,
     },
 
     /**
@@ -282,6 +266,8 @@ export default {
       default: true,
     },
   },
+
+  emits: ['update:open'],
 
   data: () => ({
     POPOVER_PADDING_CLASSES,

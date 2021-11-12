@@ -38,6 +38,25 @@ import { DtPopover } from '@dialpad/dialtone-vue';
   <template #anchor="{ attrs }">
     <dt-button
       v-bind="attrs"
+    >
+      Click to open
+    </dt-button>
+  </template>
+  <template #content>
+    <p>I will be displayed in the popover!</p>
+  </template>
+</dt-popover>
+```
+
+or
+
+```jsx
+<dt-popover
+  :open="open"
+>
+  <template #anchor="{ attrs }">
+    <dt-button
+      v-bind="attrs"
       @click="open = !open"
     >
       Click to open
