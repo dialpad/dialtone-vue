@@ -20,6 +20,7 @@ const argTypesData = {
     },
   },
   content: {
+    control: 'text',
     table: {
       type: {
         summary: 'VNode',
