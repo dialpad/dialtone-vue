@@ -14,6 +14,7 @@ export const argsData = {
 export const argTypesData = {
   // Slots
   default: {
+    control: 'text',
     table: {
       type: {
         summary: 'VNode',
@@ -21,6 +22,7 @@ export const argTypesData = {
     },
   },
   tabs: {
+    control: 'text',
     table: {
       type: {
         summary: 'VNode',
