@@ -41,8 +41,8 @@
       tabindex="-1"
       @after-leave="onLeave"
     >
-      <!-- @slot that is displayed in the popover when it is open. -->
-      <slot />
+      <!-- @slot content that is displayed in the popover when it is open. -->
+      <slot name="content" />
       <div
         v-if="hasCaret"
         class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret d-ps-absolute d-w6 d-h6"
