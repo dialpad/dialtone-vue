@@ -1,11 +1,12 @@
 <template>
   <dt-popover
-    v-model:open="isOpen"
+    :open="isOpen"
     :fixed-alignment="fixedAlignment"
     :fixed-vertical-alignment="fixedVerticalAlignment"
     :content-class="contentClass"
     :has-caret="hasCaret"
     :padding="padding"
+    @update:open="isOpen = $event"
   >
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs">

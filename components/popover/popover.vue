@@ -33,7 +33,7 @@
         'd-wmx-unset',
         'd-bar4',
         POPOVER_PADDING_CLASSES[padding],
-        `dt-popover__content--align-${alignment}`,
+        `dt-popover__content--align-${horizontalAlignment}`,
         `dt-popover__content--valign-${verticalAlignment}`,
         'd-m0',
         contentClass,
@@ -59,9 +59,11 @@ import {
   POPOVER_PADDING_CLASSES,
   POPOVER_ROLES,
   POPOVER_VERTICAL_ALIGNMENT,
+  TIPPY_HORIZONTAL_ALIGNMENT,
 } from './popover_constants';
 import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
+import { TOOLTIP_TIPPY_DIRECTIONS } from '../tooltip';
 
 export default {
   name: 'DtPopover',
@@ -152,7 +154,7 @@ export default {
      */
     fixedVerticalAlignment: {
       type: String,
-      default: 'bottom',
+      default: null,
       validator: (align) => {
         return POPOVER_VERTICAL_ALIGNMENT.includes(align);
       },
@@ -167,7 +169,7 @@ export default {
      */
     fixedAlignment: {
       type: String,
-      default: 'left',
+      default: null,
       validator: (align) => {
         return POPOVER_HORIZONTAL_ALIGNMENT.includes(align);
       },
@@ -272,17 +274,38 @@ export default {
   data: () => ({
     POPOVER_PADDING_CLASSES,
     verticalAlignment: '',
+    horizontalAlignment: '',
   }),
 
   computed: {
+    fallbackPlacements () {
+      if (this.fixedAlignment === null && this.fixedVerticalAlignment === null) {
+        return POPOVER_VERTICAL_ALIGNMENT
+          .filter(verticalAlignment => verticalAlignment)
+          .map(verticalAlignment => TIPPY_HORIZONTAL_ALIGNMENT
+            .map(horizontalAlignment => `${verticalAlignment}-${horizontalAlignment}`))
+          .flat();
+      }
+
+      if (this.fixedAlignment === null) {
+        return TIPPY_HORIZONTAL_ALIGNMENT
+          .map(horizontalAlignment => `${this.fixedVerticalAlignment}-${horizontalAlignment}`);
+      }
+
+      if (this.fixedVerticalAlignment === null) {
+        const horizontalAlignment = this.fixedAlignment === 'left' ? 'start' : 'end';
+        return POPOVER_VERTICAL_ALIGNMENT
+          .filter(verticalAlignment => verticalAlignment)
+          .map(verticalAlignment => `${verticalAlignment}-${horizontalAlignment}`);
+      }
+
+      return [];
+    },
+
     placement () {
       const verticalAlignment = this.fixedVerticalAlignment || 'bottom';
       const horizontalAlignment = this.fixedAlignment === 'left' ? 'start' : 'end';
       return `${verticalAlignment}-${horizontalAlignment}`;
-    },
-
-    alignment () {
-      return this.fixedAlignment;
     },
 
     isDialog () {
@@ -298,9 +321,20 @@ export default {
 
   watch: {
     placement (placement) {
-      this.tip?.setProps({
-        placement,
-      });
+      if (TOOLTIP_TIPPY_DIRECTIONS[placement]) {
+        this.tip?.setProps({
+          placement,
+        });
+      }
+    },
+
+    fallbackPlacements: {
+      deep: true,
+      handler () {
+        this.tip?.setProps({
+          popperOptions: this.getPopperOptions(),
+        });
+      },
     },
 
     open (isOpen) {
@@ -311,10 +345,11 @@ export default {
   mounted () {
     this.verticalAlignment = this.fixedVerticalAlignment;
     const anchor = this.$refs.anchor.children[0];
+    const placement = TOOLTIP_TIPPY_DIRECTIONS[this.placement] ? this.placement : this.fallbackPlacements[0];
     this.tip = tippy(anchor, this.getOptions({
       popperOptions: this.getPopperOptions(),
       tippyOptions: {
-        placement: this.placement,
+        placement,
         hideOnClick: this.hideOnClick,
         offset: this.offset,
         interactiveBorder: this.interactiveBorder,
@@ -362,9 +397,11 @@ export default {
       if (!this.open) {
         this.$emit('update:open', true);
       }
-      this.tip?.setProps({
-        placement: this.placement,
-      });
+      if (TOOLTIP_TIPPY_DIRECTIONS[this.placement]) {
+        this.tip?.setProps({
+          placement: this.placement,
+        });
+      }
     },
 
     getPopperOptions () {
@@ -374,10 +411,12 @@ export default {
             name: 'flip',
             options: {
               boundary: this.flipBoundary,
+              fallbackPlacements: this.fallbackPlacements,
             },
           },
           getArrowDetected(({ state }) => {
             this.verticalAlignment = state.placement.includes('top') ? 'top' : 'bottom';
+            this.horizontalAlignment = state.placement.includes('start') ? 'left' : 'right';
           }),
         ],
       };
