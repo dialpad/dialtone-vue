@@ -8,6 +8,7 @@ import {
 import PopoverDefault from './popover_default.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import PopoverMdx from './popover.mdx';
+import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
 
 const argTypesData = {
   id: {
@@ -41,6 +42,10 @@ const argTypesData = {
       type: 'select',
       options: POPOVER_VERTICAL_ALIGNMENT,
     },
+  },
+  hideOnClick: {
+    type: 'select',
+    options: TOOLTIP_HIDE_ON_CLICK_VARIANTS,
   },
 };
 
@@ -104,6 +109,21 @@ FixedRight.parameters = {
 
 export const NoPadding = Template.bind({});
 NoPadding.args = { ...Default.args, padding: 'none', open: true };
+NoPadding.parameters = {
+  docs: {
+    source: {
+      code: `
+<dt-popover padding="none">
+  <template #anchor="{ attrs }"></template>
+  <template #content></template>
+</dt-popover>
+    `,
+    },
+  },
+};
+
+export const overlayModal = Template.bind({});
+NoPadding.args = { ...Default.args, open: true, modal: true };
 NoPadding.parameters = {
   docs: {
     source: {

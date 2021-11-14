@@ -1,6 +1,12 @@
 <template>
   <component :is="elementType">
     <div
+      v-if="open && modal"
+      class="d-modal"
+      aria-hidden="false"
+      @click="closePopover"
+    />
+    <div
       :id="!ariaLabelledby && labelledBy"
       ref="anchor"
     >
@@ -63,7 +69,7 @@ import {
 } from './popover_constants';
 import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
-import { TOOLTIP_TIPPY_DIRECTIONS } from '../tooltip';
+import { TOOLTIP_HIDE_ON_CLICK_VARIANTS, TOOLTIP_TIPPY_DIRECTIONS } from '../tooltip';
 
 export default {
   name: 'DtPopover',
@@ -264,8 +270,16 @@ export default {
      * The behavior can depend upon the trigger events used.
      * */
     hideOnClick: {
-      type: Boolean,
+      type: [Boolean, String],
       default: true,
+      validator (value) {
+        return TOOLTIP_HIDE_ON_CLICK_VARIANTS.some(variant => variant === value);
+      },
+    },
+
+    modal: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -340,12 +354,19 @@ export default {
     open (isOpen) {
       isOpen ? this.tip.show() : this.tip.hide();
     },
+
+    hideOnClick () {
+      this.tip?.setProps({
+        hideOnClick: this.hideOnClick,
+      });
+    },
   },
 
   mounted () {
     this.verticalAlignment = this.fixedVerticalAlignment;
     const anchor = this.$refs.anchor.children[0];
     const placement = TOOLTIP_TIPPY_DIRECTIONS[this.placement] ? this.placement : this.fallbackPlacements[0];
+    console.log(this.hideOnClick, 'this.hideOnClick');
     this.tip = tippy(anchor, this.getOptions({
       popperOptions: this.getPopperOptions(),
       tippyOptions: {
@@ -374,6 +395,12 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    closePopover () {
+      if (this.open && typeof this.hideOnClick === 'boolean' && this.hideOnClick) {
+        this.tip.hide();
+      }
+    },
+
     onLeave () {
       this.tip.unmount();
     },

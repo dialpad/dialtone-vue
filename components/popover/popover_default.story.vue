@@ -1,11 +1,26 @@
 <template>
   <dt-popover
+    :id="id"
     :open="isOpen"
     :fixed-alignment="fixedAlignment"
     :fixed-vertical-alignment="fixedVerticalAlignment"
     :content-class="contentClass"
     :has-caret="hasCaret"
     :padding="padding"
+    :hide-on-click="hideOnClick"
+    :role="role"
+    :element-type="elementType"
+    :transition="transition"
+    :aria-labelledby="ariaLabelledby"
+    :aria-label="ariaLabel"
+    :focus-anchor-on-close="focusAnchorOnClose"
+    :offset="offset"
+    :append-to="appendTo"
+    :interactive="interactive"
+    :flip-boundary="flipBoundary"
+    :interactive-border="interactiveBorder"
+    :trigger="trigger"
+    :modal="modal"
     @update:open="isOpen = $event"
   >
     <template #anchor="{ attrs }">
