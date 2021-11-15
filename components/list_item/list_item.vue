@@ -44,6 +44,9 @@ export default {
     DtDefaultListItem,
   },
 
+  /**
+   * This method should be injected from the list parent when using keyboard navigation.
+   */
   inject: {
     setHighlight: {
       default: null,
@@ -144,7 +147,7 @@ export default {
         return false;
       }
       // setHighlight method has to be provided.
-      return this.setHighlight;
+      return !!this.setHighlight;
     },
 
     /**
@@ -154,6 +157,10 @@ export default {
     maybeMouseMove () {
       return this.isHighlightable && !this.isHighlighted ? 'mousemove' : null;
     },
+  },
+
+  created () {
+    this.validateProps();
   },
 
   methods: {
@@ -168,6 +175,25 @@ export default {
       if (this.isHighlightable && !this.isHighlighted) {
         // Call the injected method to update the highlight.
         this.setHighlight(this.index);
+      }
+    },
+
+    /**
+     * Helper to make sure some dependent props are provided.
+     */
+    validateProps () {
+      // Keyboard navigation.
+      if (this.navigationType === LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+        // The prop index should be passed.
+        if (!this.index && this.index !== 0) {
+          console.error('DtListItem: prop "index" is required when navigationType is:',
+            LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS, 'but received index:', this.index);
+        }
+        // The method setHighlight should be provided.
+        if (typeof this.setHighlight !== 'function') {
+          console.error('DtListItem: provided method "setHighlight" is required when navigationType is:',
+            LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS, 'but received setHighlight:', this.setHighlight);
+        }
       }
     },
   },
