@@ -69,7 +69,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Elements/Tooltip-Tippy',
+  title: 'Components/Tooltip-Tippy',
   component: DtTooltipTippy,
   args: argsData,
   argTypes: argTypesData,
