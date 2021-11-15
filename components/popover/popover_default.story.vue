@@ -29,15 +29,19 @@
       </dt-button>
     </template>
     <template #content>
-      <p>
-        I will be displayed in the popover!
+      <p class="d-fs14 d-m0">
+        <span
+          v-if="content"
+          v-html="content"
+        />
+        <span v-else>I will be displayed in the popover!</span>
       </p>
     </template>
   </dt-popover>
 </template>
 
 <script>
-import DtPopover from './popover';
+import { DtPopover } from './';
 import { DtButton } from '../button';
 
 export default {

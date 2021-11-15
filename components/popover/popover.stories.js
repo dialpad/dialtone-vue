@@ -8,14 +8,32 @@ import {
 import PopoverDefault from './popover_default.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import PopoverMdx from './popover.mdx';
+import { action } from '@storybook/addon-actions';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
 
 const argTypesData = {
+  // Slots
+  anchor: {
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  content: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  // Props
   id: {
-    defaultValue: 'DtPopover__content0',
     table: {
       defaultValue: {
-        summary: 'Automatically generated unique ID',
+        summary: 'generated unique ID',
       },
     },
   },
@@ -43,6 +61,28 @@ const argTypesData = {
       options: POPOVER_VERTICAL_ALIGNMENT,
     },
   },
+
+  // Events
+  onClose: {
+    table: {
+      disable: true,
+    },
+  },
+
+  'update:open': {
+    description: `The popover will emit a "false" boolean value for this event when the \
+user performs a popover-closing action.`,
+    table: {
+      type: {
+        summary: 'boolean',
+      },
+    },
+  },
+};
+
+// Default Props for all variations
+export const argsData = {
+  onClose: action('update:show'),
   hideOnClick: {
     type: 'select',
     options: TOOLTIP_HIDE_ON_CLICK_VARIANTS,
@@ -50,10 +90,14 @@ const argTypesData = {
 };
 
 export default {
-  title: 'Elements/Popovers',
+  title: 'Components/Popovers',
   component: DtPopover,
+  args: argsData,
   argTypes: argTypesData,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: PopoverMdx,
     },
@@ -62,6 +106,7 @@ export default {
 };
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverDefault);
+
 export const Default = Template.bind({});
 Default.args = {};
 Default.decorators = [() => ({
