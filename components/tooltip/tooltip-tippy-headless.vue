@@ -163,7 +163,7 @@ export default {
      * */
     hideOnClick: {
       type: [Boolean, String],
-      default: true,
+      default: false,
       validator (value) {
         return TOOLTIP_HIDE_ON_CLICK_VARIANTS.some(variant => variant === value);
       },
@@ -245,7 +245,9 @@ export default {
 
   methods: {
     async onLeave () {
-      this.tip.unmount();
+      if (!this.showTooltip) {
+        this.tip.unmount();
+      }
     },
 
     updateShow () {
@@ -297,17 +299,13 @@ export default {
     onMount () {
       this.showTooltip = true;
       this.setProps();
-      if (!this.show) {
-        this.$emit('update:show', this.showTooltip);
-      }
+      this.$emit('update:show', this.showTooltip);
     },
 
     onHide () {
       const isPreventHideTooltip = !this.showTooltip;
       this.showTooltip = false;
-      if (this.show) {
-        this.$emit('update:show', this.showTooltip);
-      }
+      this.$emit('update:show', this.showTooltip);
       /**
        *  https://atomiks.github.io/tippyjs/v6/all-props/#onhide
        *  return false from 'onHide' lifecycle to cancel a hide based on a condition.
@@ -322,6 +320,12 @@ export default {
         onMount: this.onMount,
         onHide: this.onHide,
         ...this.tippyProps,
+        onTrigger: (instance, { type }) => {
+          if (!this.showTooltip && type !== 'click') {
+            this.showTooltip = true;
+          }
+        },
+
         render: () => {
           // The recommended structure is to use the popper as an outer wrapper
           const popper = document.createElement('div');

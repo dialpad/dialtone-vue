@@ -105,8 +105,8 @@ export default {
       TOOLTIP_DIRECTION_MODIFIERS: sliceIntoChunks(TOOLTIP_DIRECTION_MODIFIERS, 3),
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
       localAnchor: 'Hover over me to see a tooltip',
-      openDefaultState: 'Open default state',
-      openInvertedState: 'Open inverted state',
+      openDefaultState: 'Open default state on click',
+      openInvertedState: 'Open inverted state on click',
     };
   },
 };

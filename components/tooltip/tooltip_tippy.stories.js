@@ -32,7 +32,6 @@ export const argTypesData = {
   },
 
   hideOnClick: {
-    defaultValue: true,
     type: 'select',
     options: TOOLTIP_HIDE_ON_CLICK_VARIANTS,
   },
