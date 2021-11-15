@@ -223,7 +223,7 @@ export default {
       if (this.isTooltipVisible) {
         this.$emit('update:show', false);
       }
-    }
+    },
   },
 };
 </script>
