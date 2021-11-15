@@ -366,7 +366,6 @@ export default {
     this.verticalAlignment = this.fixedVerticalAlignment;
     const anchor = this.$refs.anchor.children[0];
     const placement = TOOLTIP_TIPPY_DIRECTIONS[this.placement] ? this.placement : this.fallbackPlacements[0];
-    console.log(this.hideOnClick, 'this.hideOnClick');
     this.tip = tippy(anchor, this.getOptions({
       popperOptions: this.getPopperOptions(),
       tippyOptions: {
