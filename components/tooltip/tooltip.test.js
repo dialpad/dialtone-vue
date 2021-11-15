@@ -174,7 +174,7 @@ describe('Dialtone Vue Tooltip tests', function () {
           localVue: createLocalVue(),
           propsData: {
             show: true,
-            hover: false
+            hover: false,
           },
           slots,
         });
