@@ -123,8 +123,8 @@ NoPadding.parameters = {
 };
 
 export const overlayModal = Template.bind({});
-NoPadding.args = { ...Default.args, open: true, modal: true };
-NoPadding.parameters = {
+overlayModal.args = { ...Default.args, open: true, modal: true };
+overlayModal.parameters = {
   docs: {
     source: {
       code: `
