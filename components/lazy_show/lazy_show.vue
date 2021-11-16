@@ -1,10 +1,7 @@
 <template>
-  <!-- In case when transitionend event doesn't work correct (for ex. tooltip component with custom trigger) -->
-  <!-- after-leave event can be used instead of transitionend -->
   <transition
     :name="transition"
     v-on="$listeners"
-    @after-leave="$emit('after-leave')"
   >
     <div
       v-show="show"

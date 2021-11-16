@@ -23,7 +23,7 @@
         :trigger="trigger"
         :hide-on-click="hideOnClick"
         :transition="transition"
-        @update:show="showSync = $event"
+        @update:show="updateShow"
       >
         <template #anchor="{ attrs }">
           <dt-button
@@ -71,6 +71,13 @@ export default {
       handler (show) {
         this.showSync = show;
       },
+    },
+  },
+
+  methods: {
+    updateShow (event) {
+      this.showSync = event;
+      this.onCLose(event);
     },
   },
 };

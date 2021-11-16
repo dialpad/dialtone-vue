@@ -28,6 +28,8 @@
       ]"
       @after-leave="onLeave"
     >
+      <!-- In case when transitionend event doesn't work correct (for ex. tooltip component with custom trigger) -->
+      <!-- after-leave event can be used instead of transitionend -->
       <slot>
         {{ message }}
       </slot>
@@ -44,7 +46,7 @@ import {
   TOOLTIP_DIRECTION_MODIFIERS,
   TOOLTIP_HIDE_ON_CLICK_VARIANTS,
 } from './tooltip_constants';
-import { getUniqueString } from '../utils';
+import { findFirstFocusableNode, getUniqueString } from '../utils';
 import { hideOnEsc, getArrowDetected } from './modifiers';
 import DtLazyShow from '../lazy_show/lazy_show';
 export default {
@@ -185,6 +187,14 @@ export default {
       type: String,
       default: 'fade',
     },
+
+    /**
+     * This property is needed for focus event
+     */
+    tabIndex: {
+      type: String,
+      default: '0',
+    },
   },
 
   data () {
@@ -231,9 +241,8 @@ export default {
 
   mounted () {
     const anchorElement = this.$refs.anchor.children[0];
-    const anchor = anchorElement || this.createAnchor();
     this.placement = this.arrowDirection;
-    this.tip = tippy(anchor, this.initOptions());
+    this.tip = tippy(this.getAnchor(anchorElement), this.initOptions());
     this.updateShow();
   },
 
@@ -245,9 +254,8 @@ export default {
 
   methods: {
     async onLeave () {
-      if (!this.showTooltip) {
-        this.tip.unmount();
-      }
+      this.tip.unmount();
+      this.$emit('update:show', false);
     },
 
     updateShow () {
@@ -262,7 +270,7 @@ export default {
 
     createAnchor () {
       const span = document.createElement('span');
-      span.setAttribute('tabindex', '0');
+      span.setAttribute('tabindex', this.tabIndex);
       span.innerText = this.$refs.anchor.innerText || '';
       this.$refs.anchor.innerText = '';
       this.$refs.anchor.appendChild(span);
@@ -299,18 +307,31 @@ export default {
     onMount () {
       this.showTooltip = true;
       this.setProps();
-      this.$emit('update:show', this.showTooltip);
     },
 
     onHide () {
       const isPreventHideTooltip = !this.showTooltip;
-      this.showTooltip = false;
-      this.$emit('update:show', this.showTooltip);
+      if (this.showTooltip) {
+        this.showTooltip = false;
+      }
       /**
        *  https://atomiks.github.io/tippyjs/v6/all-props/#onhide
        *  return false from 'onHide' lifecycle to cancel a hide based on a condition.
        **/
       return isPreventHideTooltip;
+    },
+
+    getAnchor (anchor) {
+      if (!anchor) return this.createAnchor();
+      if (!this.hasFocusableAnchorNode()) {
+        anchor.setAttribute('tabindex', this.tabIndex);
+      }
+
+      return anchor;
+    },
+
+    hasFocusableAnchorNode () {
+      return !!findFirstFocusableNode(this.$refs.anchor);
     },
 
     initOptions () {

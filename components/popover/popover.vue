@@ -402,13 +402,11 @@ export default {
 
     onLeave () {
       this.tip.unmount();
+      this.$emit('update:open', false);
     },
 
     onHide () {
       const anchor = this.$refs.anchor.children[0];
-      if (this.open) {
-        this.$emit('update:open', false);
-      }
       if (this.focusAnchorOnClose) {
         anchor?.focus?.();
       }
@@ -420,9 +418,6 @@ export default {
     },
 
     onMount () {
-      if (!this.open) {
-        this.$emit('update:open', true);
-      }
       if (TOOLTIP_TIPPY_DIRECTIONS[this.placement]) {
         this.tip?.setProps({
           placement: this.placement,

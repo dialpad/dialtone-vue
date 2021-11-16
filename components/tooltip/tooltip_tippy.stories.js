@@ -14,7 +14,7 @@ export const argsData = {
   message: 'This is a Tooltip',
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
-  onToggle: action('update:show'),
+  onCLose: action('update:show'),
 };
 
 export const argTypesData = {
@@ -76,8 +76,8 @@ export const argTypesData = {
   },
   // Events
   'update:show': {
-    description: `The tooltip will emit a "false" boolean value when it is closed and \
-    "true" boolean value when it is opened. Parent components can sync on this value to create \
+    description: `The tooltip will emit a "false" boolean value for this event when the \
+user performs a tooltip-closing action. Parent components can sync on this value to create \
 a 2-way binding to control tooltip visibility.`,
     table: {
       type: {
@@ -85,7 +85,7 @@ a 2-way binding to control tooltip visibility.`,
       },
     },
   },
-  onToggle: {
+  onCLose: {
     table: {
       disable: true,
     },

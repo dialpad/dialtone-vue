@@ -21,10 +21,13 @@
     :interactive-border="interactiveBorder"
     :trigger="trigger"
     :modal="modal"
-    @update:open="isOpen = $event"
+    @update:open="updateOpen"
   >
     <template #anchor="{ attrs }">
-      <dt-button v-bind="attrs">
+      <dt-button
+        v-bind="attrs"
+        @click="isOpen = !isOpen"
+      >
         Click to open
       </dt-button>
     </template>
@@ -67,6 +70,13 @@ export default {
   watch: {
     open (isOpen) {
       this.isOpen = isOpen;
+    },
+  },
+
+  methods: {
+    updateOpen (isOpen) {
+      this.isOpen = isOpen;
+      this.onClose(isOpen);
     },
   },
 };
