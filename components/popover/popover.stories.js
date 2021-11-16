@@ -70,23 +70,24 @@ const argTypesData = {
   },
 
   'update:open': {
-    description: `The popover will emit a "false" boolean value for this event when the \
-user performs a popover-closing action.`,
+    description: `The popover will emit a "false" boolean value when it is closed and \
+    "true" boolean value when it is opened. Parent components can sync on this value to create \
+a 2-way binding to control popover visibility.\`,`,
     table: {
       type: {
         summary: 'boolean',
       },
     },
   },
+  hideOnClick: {
+    type: 'select',
+    options: TOOLTIP_HIDE_ON_CLICK_VARIANTS,
+  },
 };
 
 // Default Props for all variations
 export const argsData = {
   onClose: action('update:show'),
-  hideOnClick: {
-    type: 'select',
-    options: TOOLTIP_HIDE_ON_CLICK_VARIANTS,
-  },
 };
 
 export default {

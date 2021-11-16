@@ -3,6 +3,7 @@ import DtTooltipTippy from './tooltip-tippy-headless';
 import DtTooltipTippyFlipTemplate from './tooltip_tippy_flip.story.vue';
 import DtTooltipTippyDefault from './tooltip_tippy_default.story';
 import DtTooltipTippyVariantsTemplate from './tooltip_tippy_variants';
+import { action } from '@storybook/addon-actions';
 
 import { TOOLTIP_DIRECTION_MODIFIERS, TOOLTIP_HIDE_ON_CLICK_VARIANTS } from './tooltip_constants';
 import DtTooltipMdx from './tooltip_tippy.mdx';
@@ -13,9 +14,17 @@ export const argsData = {
   message: 'This is a Tooltip',
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
+  onToggle: action('update:show'),
 };
 
 export const argTypesData = {
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
   arrowDirection: {
     control: {
       type: 'select',
@@ -50,7 +59,7 @@ export const argTypesData = {
     control: 'text',
     table: {
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },
@@ -61,8 +70,24 @@ export const argTypesData = {
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
+    },
+  },
+  // Events
+  'update:show': {
+    description: `The tooltip will emit a "false" boolean value when it is closed and \
+    "true" boolean value when it is opened. Parent components can sync on this value to create \
+a 2-way binding to control tooltip visibility.`,
+    table: {
+      type: {
+        summary: 'boolean',
+      },
+    },
+  },
+  onToggle: {
+    table: {
+      disable: true,
     },
   },
 };

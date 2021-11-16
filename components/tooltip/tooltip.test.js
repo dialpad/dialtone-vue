@@ -23,7 +23,7 @@ describe('Dialtone Vue Tooltip tests', function () {
   let tooltipComponent;
   let anchor;
   let button;
-  let defaultSLotMessage = '';
+  let defaultSlotMessage = '';
 
   const getValueUpdateShow = () => {
     const values = tooltipComponent.emitted()['update:show'];
@@ -75,7 +75,7 @@ describe('Dialtone Vue Tooltip tests', function () {
               },
             },
           },
-          [h(DtButton, { slot: 'anchor' }, 'Anchor Slot'), defaultSLotMessage],
+          [h(DtButton, { slot: 'anchor' }, 'Anchor Slot'), defaultSlotMessage],
         ),
       ]);
     },
@@ -151,15 +151,15 @@ describe('Dialtone Vue Tooltip tests', function () {
 
   describe('Message provided via slot', function () {
     before(async function () {
-      defaultSLotMessage = 'Message Slot';
+      defaultSlotMessage = 'Message Slot';
       _mountWrapper();
       await wrapper.setProps({ message: 'Message Prop', show: true });
     });
     after(function () {
-      defaultSLotMessage = '';
+      defaultSlotMessage = '';
     });
     it('should render the message', async function () {
-      assert.strictEqual(tooltip.text(), defaultSLotMessage);
+      assert.strictEqual(tooltip.text(), defaultSlotMessage);
     });
   });
 
