@@ -77,7 +77,7 @@ export default {
   methods: {
     updateShow (event) {
       this.showSync = event;
-      this.onCLose(event);
+      this.onClose(event);
     },
   },
 };

@@ -14,7 +14,7 @@ export const argsData = {
   message: 'This is a Tooltip',
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
-  onCLose: action('update:show'),
+  onClose: action('update:show'),
 };
 
 export const argTypesData = {
@@ -85,7 +85,7 @@ a 2-way binding to control tooltip visibility.`,
       },
     },
   },
-  onCLose: {
+  onClose: {
     table: {
       disable: true,
     },
