@@ -17,15 +17,22 @@ export const argsData = {
 // Manual Prop Controls
 export const argTypesData = {
   id: {
-    defaultValue: 'default-id',
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
   },
 };
 
 // Story Collection
 export default {
-  title: 'Forms/Validation Messages',
+  title: 'Components/Validation Messages',
   component: DtValidationMessages,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: BaseValidationMessagesMdx,
     },
@@ -53,7 +60,7 @@ const VariantsTemplate = () => {
   return {
     components: { DtValidationMessages },
     template: `
-      <div id="forms-validation-messages--variants-container">
+      <div id="components-validation-messages--variants-container">
         <dt-validation-messages
           :validationMessages="[{ message: 'With Success Validation Message', type: 'success' }]"
         />

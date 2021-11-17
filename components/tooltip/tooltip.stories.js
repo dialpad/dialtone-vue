@@ -4,6 +4,7 @@ import DtTooltipMdx from './tooltip.mdx';
 import DtTooltipDefaultTemplate from './tooltip_default.story.vue';
 import DtTooltipVariantsTemplate from './tooltip_variants.story';
 import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
+import { action } from '@storybook/addon-actions';
 
 // Default Prop Values
 export const argsData = {
@@ -11,9 +12,30 @@ export const argsData = {
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
   show: true,
+  onClose: action('update:show'),
 };
 
 export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  anchor: {
+    name: 'anchor',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
   // Props
   show: {
     description: 'Used to show tooltip',
@@ -25,44 +47,49 @@ export const argTypesData = {
       },
     },
   },
-
   arrowDirection: {
     control: {
       type: 'select',
       options: TOOLTIP_DIRECTION_MODIFIERS,
     },
   },
-
-  // Slots
-  default: {
-    control: 'text',
+  id: {
     table: {
-      type: {
-        summary: 'text/html',
+      defaultValue: {
+        summary: 'generated unique ID',
       },
     },
   },
 
-  anchor: {
-    name: 'anchor',
-    control: 'text',
+  // Events
+  'update:show': {
+    description: `The tooltip will emit a "false" boolean value for this event when the \
+    visibility of the tooltip will change to hidden`,
     table: {
-      category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'boolean',
       },
+    },
+  },
+
+  onClose: {
+    table: {
+      disable: true,
     },
   },
 };
 
 // Story Collection
 export default {
-  title: 'Elements/Tooltip',
+  title: 'Components/Tooltip',
   component: DtTooltip,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtTooltipMdx,
     },

@@ -10,7 +10,9 @@
           [TAB_LIST_KIND_MODIFIERS.inverted]: inverted,
           [TAB_LIST_IMPORTANCE_MODIFIERS.borderless]: borderless,
         },
+        tabListClass,
       ]"
+      v-bind="tabListChildProps"
       role="tablist"
       :aria-label="label"
       @keyup.left="tabLeft"
@@ -93,12 +95,30 @@ export default {
      */
     size: {
       type: String,
-      default: '',
+      default: 'default',
       validate (size) {
         return TAB_LIST_SIZES.includes(size);
       },
     },
+
+    /**
+     * Pass through classes, used to customize the tab list
+     */
+    tabListClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Pass through props, used to customize the tab list
+     */
+    tabListChildProps: {
+      type: Object,
+      default: () => ({}),
+    },
   },
+
+  emits: ['change'],
 
   data () {
     return {

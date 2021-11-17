@@ -4,7 +4,7 @@
       v-if="!hidden"
       :class="[
         'd-toast',
-        `d-toast--${kind}`,
+        kindClass,
         { 'd-toast--important': important },
       ]"
       data-qa="dt-toast"
@@ -160,10 +160,26 @@ export default {
     },
   },
 
+  emits: ['close'],
+
   data () {
     return {
       hidden: true,
     };
+  },
+
+  computed: {
+    kindClass () {
+      const kindClasses = {
+        error: 'd-toast--error',
+        info: 'd-toast--info',
+        success: 'd-toast--success',
+        warning: 'd-toast--warning',
+        base: 'd-toast--base',
+      };
+
+      return kindClasses[this.kind];
+    },
   },
 
   /* TODO Vue 3 Migration

@@ -7,13 +7,15 @@
       },
     ]"
   >
-    <div class="d-pt16">
+    <div class="d-pt32">
       <dt-tooltip
+        :id="id"
         :message="message"
         :arrow-direction="arrowDirection"
         :show="show"
         :inverted="inverted"
         :hover="hover"
+        @update:show="onClose"
       >
         <template v-if="defaultSlot">
           {{ defaultSlot }}

@@ -13,7 +13,7 @@
       :class="[
         'd-ps-absolute',
         'd-tooltip',
-        `d-tooltip__arrow--${arrowDirection}`,
+        arrowDirectionClass,
         TOOLTIP_KIND_MODIFIERS[shouldShowTooltip ? 'show' : 'hide'],
         {
           [ TOOLTIP_KIND_MODIFIERS.hover ]: shouldHasHoverModifier,
@@ -148,6 +148,25 @@ export default {
     ariaHidden () {
       return `${!this.isTooltipVisible}`;
     },
+
+    arrowDirectionClass () {
+      const arrowDirections = {
+        'top-left': 'd-tooltip__arrow--top-left',
+        'top-center': 'd-tooltip__arrow--top-center',
+        'top-right': 'd-tooltip__arrow--top-right',
+        'right-top': 'd-tooltip__arrow--right-top',
+        'right-center': 'd-tooltip__arrow--right-center',
+        'right-bottom': 'd-tooltip__arrow--right-bottom',
+        'bottom-left': 'd-tooltip__arrow--bottom-left',
+        'bottom-center': 'd-tooltip__arrow--bottom-center',
+        'bottom-right': 'd-tooltip__arrow--bottom-right',
+        'left-top': 'd-tooltip__arrow--left-top',
+        'left-center': 'd-tooltip__arrow--left-center',
+        'left-bottom': 'd-tooltip__arrow--left-bottom',
+      };
+
+      return arrowDirections[this.arrowDirection];
+    },
   },
 
   mounted () {
@@ -165,7 +184,7 @@ export default {
          * type.
          */
         // Add aria description to each anchored child
-        this.$refs.anchor?.children?.forEach(child => {
+        [...(this.$refs.anchor?.children || [])].forEach(child => {
           child.setAttribute('aria-describedby', this.id);
         });
       } else {
@@ -188,14 +207,22 @@ export default {
     },
 
     onBlur () {
+      this.triggerUpdateShowEvent();
       this.isHover = false;
       this.isDismissed = false;
       this.isChildFocused = false;
     },
 
     onEsc () {
+      this.triggerUpdateShowEvent();
       this.isDismissed = (this.hover && this.isHover) || !this.show;
       this.isChildFocused = false;
+    },
+
+    triggerUpdateShowEvent () {
+      if (this.isTooltipVisible) {
+        this.$emit('update:show', false);
+      }
     },
   },
 };
