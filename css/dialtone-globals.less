@@ -74,3 +74,21 @@
     transform: translate3d(16px, 0, 0);
   }
 }
+
+@keyframes placeholder-throb {
+  10% {
+    background: darken(#F2F2F6, 10%);
+  }
+  50% {
+    background: darken(#F2F2F6, 15%);
+  }
+  90% {
+    background: darken(#F2F2F6, 10%);
+  }
+}
+
+.placeholder {
+  background: darken(#F2F2F6, 10%);
+  animation-name: placeholder-throb;
+  animation-iteration-count: infinite;
+}
