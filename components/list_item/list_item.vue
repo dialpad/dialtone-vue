@@ -44,15 +44,6 @@ export default {
     DtDefaultListItem,
   },
 
-  /**
-   * This method should be injected from the list parent when using keyboard navigation.
-   */
-  inject: {
-    setHighlight: {
-      default: null,
-    },
-  },
-
   props: {
     /**
      * Id for the item.
@@ -100,10 +91,10 @@ export default {
     },
 
     /**
-     * For keyboard navigation, the index of this item within it's parent list.
+     * For keyboard navigation, the method to set the highlight to this item.
      */
-    index: {
-      type: Number,
+    setHighlight: {
+      type: [Function, Promise],
       default: null,
     },
 
@@ -142,10 +133,6 @@ export default {
       if (this.navigationType !== LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
         return false;
       }
-      // An index has to be passed.
-      if (!this.index && this.index !== 0) {
-        return false;
-      }
       // setHighlight method has to be provided.
       return !!this.setHighlight;
     },
@@ -173,8 +160,8 @@ export default {
      */
     onMouseMove () {
       if (this.isHighlightable && !this.isHighlighted) {
-        // Call the injected method to update the highlight.
-        this.setHighlight(this.index);
+        // Update the highlight.
+        this.setHighlight();
       }
     },
 
@@ -184,14 +171,9 @@ export default {
     validateProps () {
       // Keyboard navigation.
       if (this.navigationType === LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
-        // The prop index should be passed.
-        if (!this.index && this.index !== 0) {
-          console.error('DtListItem: prop "index" is required when navigationType is:',
-            LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS, 'but received index:', this.index);
-        }
         // The method setHighlight should be provided.
         if (typeof this.setHighlight !== 'function') {
-          console.error('DtListItem: provided method "setHighlight" is required when navigationType is:',
+          console.error('DtListItem: prop "setHighlight" is required when navigationType is:',
             LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS, 'but received setHighlight:', this.setHighlight);
         }
       }
@@ -205,7 +187,7 @@ export default {
   .dt-list-item--focusable:focus,
   .dt-list-item--focusable:focus-within,
   .dt-list-item--highlighted {
-    background-color: hsla(var(--black-050-h), var(--black-050-s), var(--black-050-l), 0.65);
+    background-color: hsla(var(--black-400-h), var(--black-400-s), var(--black-400-l), 0.15);
     cursor: pointer;
   }
 

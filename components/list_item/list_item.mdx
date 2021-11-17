@@ -44,7 +44,7 @@ import { DtListItem } from '@dialpad/dialtone-vue';
     v-for="(item, i) in items"
     navigation-type="arrow-keys"
     :id="getItemId(i)"
-    :index="i"
+    :set-highlight="() => setHighlight(i)"
     :is-highlighted="isHighlighted"
     @click="onClick"
   >
@@ -74,9 +74,9 @@ When `navigation-type` is set to "tab" the list item is set hover and focus styl
 that it can receive focus. This should be used for lists that contain mixed content, for example a list
 in which some items are clickable/focusable and some are static.
 
-When `navigation-type` is set to "arrow-keys" the props `index` and `isHighlighted` and an injected
-method `setHighlight` should also be provided. The list item is not focusable, but it can be highlighted
-using keyboard navigation. When the list item receives a highlight either by hovering over it with a
+When `navigation-type` is set to "arrow-keys" the props `setHighlight` and `isHighlighted` should
+also be provided. The list item is not focusable, but it can be highlighted using keyboard
+navigation. When the list item receives a highlight either by hovering over it with a
 mouse or via keyboard navigation the ARIA attribute `aria-selected` is set to "true".
 
 ## Variants

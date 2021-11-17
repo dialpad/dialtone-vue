@@ -14,7 +14,7 @@ describe('Dialtone Vue ListItem tests', function () {
   let listeners;
   let provide;
   let clickStub;
-  let setHighlightSpy;
+  let setHighlightStub;
 
   const _mountWrapper = () => {
     wrapper = mount(DtListItem, {
@@ -33,9 +33,8 @@ describe('Dialtone Vue ListItem tests', function () {
 
   beforeEach(function () {
     clickStub = sinon.stub();
-    setHighlightSpy = sinon.spy();
+    setHighlightStub = sinon.stub();
     listeners = { click: clickStub };
-    provide = { setHighlight: setHighlightSpy };
     _mountWrapper();
   });
 
@@ -162,24 +161,27 @@ describe('Dialtone Vue ListItem tests', function () {
     describe('When mousemove is detected but item is not highlightable', function () {
       // Test Setup
       beforeEach(async function () {
-        await wrapper.setProps({ index: null });
+        await wrapper.setProps({ setHighlight: null });
         await wrapper.trigger('mousemove');
       });
 
       it('should not call setHighlight', function () {
-        assert.equal(setHighlightSpy.callCount, 0);
+        assert.equal(setHighlightStub.callCount, 0);
       });
     });
 
     describe('When mousemove is detected and item is highlightable', function () {
       // Test Setup
       beforeEach(async function () {
-        await wrapper.setProps({ index: 1, navigationType: LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS });
+        await wrapper.setProps({
+          setHighlight: setHighlightStub,
+          navigationType: LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS,
+        });
         await wrapper.trigger('mousemove');
       });
 
       it('should call setHighlight once', function () {
-        assert.equal(setHighlightSpy.callCount, 1);
+        assert.equal(setHighlightStub.callCount, 1);
       });
     });
   });
