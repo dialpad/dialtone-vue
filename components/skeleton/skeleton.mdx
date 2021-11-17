@@ -1,0 +1,50 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import DtSkeleton from './skeleton';
+
+# DtSkeleton
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas>
+  <Story id="<GROUP>-dt-skeleton--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="<GROUP>-dt-skeleton--variants" />
+</Canvas>
+
+## Props, Slots & Events
+
+<ArgsTable of={DtSkeleton} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtSkeleton } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```vue
+<dt-skeleton
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-skeleton
+  some-other="variant"
+/>
+```
