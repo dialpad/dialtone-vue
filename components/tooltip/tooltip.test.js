@@ -12,7 +12,6 @@ import {
 // Need to mock them to avoid error
 global.requestAnimationFrame = sinon.spy();
 global.cancelAnimationFrame = sinon.spy();
-let originMethods = { ...DtTooltip.methods };
 
 const flushPromise = () => new Promise(setImmediate);
 
@@ -30,8 +29,7 @@ describe('Dialtone Vue Tooltip tests', function () {
   let onMount;
 
   const restoreSpy = function () {
-    DtTooltip.methods = originMethods;
-    originMethods = { ...DtTooltip.methods };
+    onMount.restore();
   };
 
   const setOnMount = function () {

@@ -1,4 +1,5 @@
 <template>
+  <!-- applies the transition on initial render -->
   <transition
     :name="transition"
     :appear="appear"
