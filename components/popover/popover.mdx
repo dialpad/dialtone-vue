@@ -22,35 +22,39 @@ The **content** slot will be rendered lazily when the popover is open. The popov
 when clicking outside the content (using the click-outside directive) so it is important to use `.sync` on the `show`
 prop (or `v-model:open` in Vue 3) so it can be updated if the popover closes itself.
 
-### Import
-
-```jsx
-import { DtPopover } from '@dialpad/dialtone-vue';
-```
-
-### Basic usage with named slots
-
-```jsx
-<dt-popover
-  :open.sync="open"
->
-  <template #anchor="{ attrs }">
-    <dt-button
-      v-bind="attrs"
-      @click="open = !open"
-    >
-      Click to open
-    </dt-button>
-  </template>
-  <template #content>
-    <p>I will be displayed in the popover!</p>
-  </template>
-</dt-popover>
-```
-
 <Canvas>
   <Story id="components-popovers--default" />
 </Canvas>
+
+## Variants
+
+### Dynamic alignment
+
+The popover content supports both fixed and dynamic horizontal and vertical alignment around the anchor element. If
+`fixedAlignment`/`fixedVerticalAlignment` are passed, the popover will always be positioned in that direction. If you
+omit either of them, the popover will dynamically adjust the corresponding position, trying not to clip the content
+relative to the `$root` element (**not** the viewport!). This calculation happens each time the popover is opened
+(not when the screen is resized).
+
+For example: with no `fixedAlignment`, a popover anchor positioned such that the content, when open, would overflow the
+`$root` element's right bounds will open to the left.
+
+<Canvas>
+  <Story id="components-popovers--fixed-right" />
+</Canvas>
+
+### Padding
+
+Padding options for the popover content are provided via size classes `small`/`medium`/`large` in order to standardize
+the look of the popover content between usages. To remove the padding from the content, you can pass `none`:
+
+<Canvas>
+  <Story id="components-popovers--no-padding" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
 
 ## Accessibility
 
@@ -84,32 +88,30 @@ Due to the different contexts in which a popover can be used, focus management a
 provided for you. You are encouraged to consult the ARIA documentation for the particular role you are implementing to
 see how keyboard focus & shortcuts should be implemented.
 
-## Variants
+## Usage
 
-### Dynamic alignment
+### Import
 
-The popover content supports both fixed and dynamic horizontal and vertical alignment around the anchor element. If
-`fixedAlignment`/`fixedVerticalAlignment` are passed, the popover will always be positioned in that direction. If you
-omit either of them, the popover will dynamically adjust the corresponding position, trying not to clip the content
-relative to the `$root` element (**not** the viewport!). This calculation happens each time the popover is opened
-(not when the screen is resized).
+```jsx
+import { DtPopover } from '@dialpad/dialtone-vue';
+```
 
-For example: with no `fixedAlignment`, a popover anchor positioned such that the content, when open, would overflow the
-`$root` element's right bounds will open to the left.
+### Basic usage with named slots
 
-<Canvas>
-  <Story id="components-popovers--fixed-right" />
-</Canvas>
-
-### Padding
-
-Padding options for the popover content are provided via size classes `small`/`medium`/`large` in order to standardize
-the look of the popover content between usages. To remove the padding from the content, you can pass `none`:
-
-<Canvas>
-  <Story id="components-popovers--no-padding" />
-</Canvas>
-
-## Slots, Props & Events
-
-<ArgsTable story={PRIMARY_STORY} />
+```jsx
+<dt-popover
+  :open.sync="open"
+>
+  <template #anchor="{ attrs }">
+    <dt-button
+      v-bind="attrs"
+      @click="open = !open"
+    >
+      Click to open
+    </dt-button>
+  </template>
+  <template #content>
+    <p>I will be displayed in the popover!</p>
+  </template>
+</dt-popover>
+```
