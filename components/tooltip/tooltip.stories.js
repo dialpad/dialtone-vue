@@ -5,6 +5,7 @@ import DtTooltipDefaultTemplate from './tooltip_default.story.vue';
 import DtTooltipVariantsTemplate from './tooltip_variants.story';
 
 import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
+import { action } from '@storybook/addon-actions';
 
 // Default Prop Values
 export const argsData = {
@@ -12,6 +13,7 @@ export const argsData = {
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
   show: true,
+  onClose: action('update:show'),
 };
 
 export const argTypesData = {
@@ -57,6 +59,23 @@ export const argTypesData = {
       defaultValue: {
         summary: 'generated unique ID',
       },
+    },
+  },
+
+  // Events
+  'update:show': {
+    description: `The tooltip will emit a "false" boolean value for this event when the \
+    visibility of the tooltip will change to hidden`,
+    table: {
+      type: {
+        summary: 'boolean',
+      },
+    },
+  },
+
+  onClose: {
+    table: {
+      disable: true,
     },
   },
 };
