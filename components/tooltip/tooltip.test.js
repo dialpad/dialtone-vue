@@ -15,7 +15,8 @@ global.cancelAnimationFrame = sinon.spy();
 
 const flushPromise = () => new Promise(setImmediate);
 
-const awaitLazyShowUpdated = () => new Promise(resolve => setTimeout(resolve, 350));
+// use 180ms as default duration for fade animation
+const awaitLazyShowUpdated = () => new Promise(resolve => setTimeout(resolve, 180));
 
 describe('Dialtone Vue Tooltip tests', function () {
   // Wrappers
