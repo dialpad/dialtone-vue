@@ -237,6 +237,10 @@ export default {
     arrowDirection: 'setProps',
 
     show: 'updateShow',
+
+    hideOnClick: 'setProps',
+
+    trigger: 'setProps',
   },
 
   mounted () {
@@ -283,6 +287,8 @@ export default {
         this.tip.setProps({
           ...this.tippyProps,
           placement: this.tippyPlacement,
+          hideOnClick: this.hideOnClick,
+          trigger: this.trigger,
         });
       }
     },

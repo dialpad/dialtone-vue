@@ -1,6 +1,7 @@
 <template>
   <transition
     :name="transition"
+    :appear="appear"
     v-on="$listeners"
   >
     <div
@@ -31,6 +32,11 @@ export default {
     transition: {
       type: String,
       default: null,
+    },
+
+    appear: {
+      type: Boolean,
+      default: false,
     },
   },
 

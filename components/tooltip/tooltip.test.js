@@ -12,8 +12,11 @@ import {
 // Need to mock them to avoid error
 global.requestAnimationFrame = sinon.spy();
 global.cancelAnimationFrame = sinon.spy();
+let originMethods = { ...DtTooltip.methods };
 
 const flushPromise = () => new Promise(setImmediate);
+
+const awaitLazyShowUpdated = () => new Promise(resolve => setTimeout(resolve, 350));
 
 describe('Dialtone Vue Tooltip tests', function () {
   // Wrappers
@@ -24,6 +27,16 @@ describe('Dialtone Vue Tooltip tests', function () {
   let anchor;
   let button;
   let defaultSlotMessage = '';
+  let onMount;
+
+  const restoreSpy = function () {
+    DtTooltip.methods = originMethods;
+    originMethods = { ...DtTooltip.methods };
+  };
+
+  const setOnMount = function () {
+    onMount = sinon.spy(DtTooltip.methods, 'onMount');
+  };
 
   const getValueUpdateShow = () => {
     const values = tooltipComponent.emitted()['update:show'];
@@ -87,6 +100,9 @@ describe('Dialtone Vue Tooltip tests', function () {
       propsData: {
         appendTo: 'parent',
       },
+      stubs: {
+        transition: false,
+      },
     });
     _setWrappers();
   };
@@ -94,11 +110,6 @@ describe('Dialtone Vue Tooltip tests', function () {
   before(function () {
     this.localVue = createLocalVue();
   });
-
-  const click = async () => {
-    await button.trigger('click.native');
-    await flushPromise();
-  };
 
   const focus = async () => {
     await button.trigger('focus');
@@ -140,7 +151,7 @@ describe('Dialtone Vue Tooltip tests', function () {
   });
 
   describe('Message provided via prop', function () {
-    before(function () {
+    beforeEach(function () {
       _mountWrapper();
     });
     it('should render the message', async function () {
@@ -150,12 +161,12 @@ describe('Dialtone Vue Tooltip tests', function () {
   });
 
   describe('Message provided via slot', function () {
-    before(async function () {
+    beforeEach(async function () {
       defaultSlotMessage = 'Message Slot';
       _mountWrapper();
       await wrapper.setProps({ message: 'Message Prop', show: true });
     });
-    after(function () {
+    afterEach(function () {
       defaultSlotMessage = '';
     });
     it('should render the message', async function () {
@@ -164,7 +175,7 @@ describe('Dialtone Vue Tooltip tests', function () {
   });
 
   describe('Anchor slot', function () {
-    before(function () {
+    beforeEach(function () {
       _mountWrapper();
     });
     it('should render the anchor slot', async function () {
@@ -180,61 +191,77 @@ describe('Dialtone Vue Tooltip tests', function () {
   });
 
   describe('Interactivity Tests', function () {
-    describe('Show state', function () {
-      it('should be visible', async function () {
+    beforeEach(setOnMount);
+    afterEach(restoreSpy);
+
+    describe('When tooltip show prop was set', function () {
+      beforeEach(async function () {
         _mountWrapper();
+      });
+
+      it('should show tooltip', async function () {
         await wrapper.setProps({ show: true });
         assert.isTrue(tooltip.attributes('aria-hidden') === 'false');
       });
-      it('should be closed', async function () {
+    });
+
+    describe('When tooltip show prop wasn\'t set', function () {
+      beforeEach(async function () {
         _mountWrapper();
+      });
+
+      it('should hide tooltip', async function () {
         await wrapper.setProps({ show: false });
+        await awaitLazyShowUpdated();
         assert.strictEqual(tooltip.text(), '');
       });
     });
 
-    describe('on mouseover', function () {
-      before(async function () {
-        await wrapper.setProps({ trigger: 'click' });
-        await click();
+    describe('When mouseover tooltip', function () {
+      beforeEach(async function () {
+        _mountWrapper();
+        await wrapper.setProps({ trigger: 'mouseover' });
+        await mouseover();
+        await wrapper.vm.$nextTick();
       });
-      it('shows tooltip', async function () {
-        assert.isTrue(getValueUpdateShow());
+
+      it('should show tooltip', async function () {
+        assert.isTrue(onMount.called);
       });
     });
 
-    describe('on focus', function () {
-      before(async function () {
+    describe('When focus tooltip', function () {
+      it('should show tooltip', async function () {
         _mountWrapper();
         await wrapper.setProps({ trigger: 'focus' });
         await focus();
-      });
-
-      it('shows tooltip', async function () {
-        assert.isTrue(getValueUpdateShow());
+        await wrapper.vm.$nextTick();
+        assert.isTrue(onMount.called);
       });
     });
 
-    describe('on escape', function () {
-      describe('escape on focus', function () {
-        before(async function () {
-          await focus();
-          await escape();
-        });
-
-        it('hide tooltip', function () {
-          assert.isFalse(getValueUpdateShow());
-        });
-      });
-    });
-
-    describe('escape on mouseover', function () {
+    describe('When trigger is focus and escape was pressed', function () {
       beforeEach(async function () {
+        await wrapper.setProps({ trigger: 'focus' });
+        await focus();
+        await escape();
+        await awaitLazyShowUpdated();
+      });
+
+      it('should hide tooltip', function () {
+        assert.isFalse(getValueUpdateShow());
+      });
+    });
+
+    describe('When trigger is mouseover and escape was pressed ', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ trigger: 'mouseover' });
         await mouseover();
         await escape();
+        await awaitLazyShowUpdated();
       });
 
-      it('hide tooltip', async function () {
+      it('should hide tooltip', async function () {
         assert.isFalse(getValueUpdateShow());
       });
     });
@@ -242,45 +269,53 @@ describe('Dialtone Vue Tooltip tests', function () {
   //
   describe('Accessibility Tests', function () {
     beforeEach(function () {
+      setOnMount();
       _mountWrapper();
     });
+
+    afterEach(restoreSpy);
+
     describe('When anchor has focus', function () {
       beforeEach(async function () {
         await focus();
+        await wrapper.vm.$nextTick();
       });
 
-      it('has focus', async function () {
-        assert.isTrue(getValueUpdateShow());
+      it('should show tooltip', async function () {
+        assert.isTrue(onMount.called);
       });
 
       describe('When escape pressed', function () {
         beforeEach(async function () {
           await focus();
           await escape();
+          await awaitLazyShowUpdated();
         });
-        it('hide tooltip', function () {
+
+        it('should hide tooltip', function () {
           assert.isFalse(getValueUpdateShow());
         });
       });
     });
 
     describe('When anchor has mouseover', function () {
-      beforeEach(async function () {
+      it('should show tooltip', async function () {
         await wrapper.setProps({ trigger: 'mouseover' });
         await mouseover();
+        await wrapper.vm.$nextTick();
+
+        assert.isTrue(onMount.called);
       });
 
-      it('has mouseover', function () {
-        assert.isTrue(getValueUpdateShow());
-      });
-
-      describe('When escape was pressed', function () {
+      describe('When escape pressed', function () {
         beforeEach(async function () {
           await wrapper.setProps({ trigger: 'focus' });
           await focus();
           await escape();
+          await awaitLazyShowUpdated();
         });
-        it('hide tooltip', function () {
+
+        it('should hide tooltip', function () {
           assert.isFalse(getValueUpdateShow());
         });
       });

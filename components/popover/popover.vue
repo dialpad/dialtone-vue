@@ -1,10 +1,20 @@
 <template>
   <component :is="elementType">
-    <div
-      v-if="open && modal"
-      class="d-modal"
-      aria-hidden="false"
-      @click="closePopover"
+    <dt-lazy-show
+      v-if="modal"
+      :show="isOpeningPopover"
+      transition="d-zoom"
+      class="
+        d-popover-overlay
+        d-ps-fixed
+        d-all0
+        d-fl-center
+        d-fd-column
+        d-vi-visible
+        d-zi-modal
+        d-o100
+        d-bgc-black-900"
+      @click.self="closePopover"
     />
     <div
       :id="!ariaLabelledby && labelledBy"
@@ -14,7 +24,7 @@
       <slot
         name="anchor"
         :attrs="{
-          'aria-expanded': open.toString(),
+          'aria-expanded': showPopover.toString(),
           'aria-controls': id,
           'aria-haspopup': role,
         }"
@@ -25,12 +35,12 @@
       ref="content"
       :role="role"
       data-qa="dt-popover"
-      :aria-hidden="`${!open}`"
+      :aria-hidden="`${!showPopover}`"
       :aria-labelledby="labelledBy"
       :aria-label="ariaLabel"
       :aria-modal="isDialog"
       :transition="transition"
-      :show="open"
+      :show="showPopover"
       :class="[
         'popover',
         'd-bgc-white',
@@ -45,7 +55,10 @@
         contentClass,
       ]"
       tabindex="-1"
+      appear
       @after-leave="onLeave"
+      @enter="isOpeningPopover = true;"
+      @leave="isOpeningPopover = false"
     >
       <!-- @slot content that is displayed in the popover when it is open. -->
       <slot name="content" />
@@ -285,11 +298,15 @@ export default {
 
   emits: ['update:open'],
 
-  data: () => ({
-    POPOVER_PADDING_CLASSES,
-    verticalAlignment: '',
-    horizontalAlignment: '',
-  }),
+  data () {
+    return {
+      POPOVER_PADDING_CLASSES,
+      verticalAlignment: '',
+      horizontalAlignment: '',
+      isOpeningPopover: false,
+      showPopover: this.open,
+    };
+  },
 
   computed: {
     fallbackPlacements () {
@@ -352,6 +369,7 @@ export default {
     },
 
     open (isOpen) {
+      this.showPopover = isOpen;
       isOpen ? this.tip.show() : this.tip.hide();
     },
 
@@ -365,6 +383,7 @@ export default {
   mounted () {
     this.verticalAlignment = this.fixedVerticalAlignment;
     const anchor = this.$refs.anchor.children[0];
+    anchor.classList.add('d-zi-notification');
     const placement = TOOLTIP_TIPPY_DIRECTIONS[this.placement] ? this.placement : this.fallbackPlacements[0];
     this.tip = tippy(anchor, this.getOptions({
       popperOptions: this.getPopperOptions(),
@@ -381,7 +400,7 @@ export default {
         onMount: this.onMount,
       },
     }));
-    if (this.open) {
+    if (this.showPopover) {
       this.tip.show();
     }
   },
@@ -395,7 +414,7 @@ export default {
    ******************/
   methods: {
     closePopover () {
-      if (this.open && typeof this.hideOnClick === 'boolean' && this.hideOnClick) {
+      if (typeof this.hideOnClick === 'boolean' && this.hideOnClick) {
         this.tip.hide();
       }
     },
@@ -406,6 +425,8 @@ export default {
     },
 
     onHide () {
+      const isPreventHidePopover = !this.showPopover;
+      this.showPopover = false;
       const anchor = this.$refs.anchor.children[0];
       if (this.focusAnchorOnClose) {
         anchor?.focus?.();
@@ -414,7 +435,7 @@ export default {
        *  https://atomiks.github.io/tippyjs/v6/all-props/#onhide
        *  return false from 'onHide' lifecycle to cancel a hide based on a condition.
       **/
-      return !this.open;
+      return isPreventHidePopover;
     },
 
     onMount () {
@@ -505,5 +526,9 @@ export default {
     visibility: hidden;
     pointer-events: none;
   }
+}
+
+.d-popover-overlay {
+  --bgo: 85% !important;
 }
 </style>
