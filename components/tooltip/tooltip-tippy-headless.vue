@@ -18,6 +18,7 @@
       role="tooltip"
       aria-hidden="false"
       data-qa="dt-tooltip"
+      appear
       :transition="transition"
       :class="[
         'd-tooltip',
@@ -197,12 +198,15 @@ export default {
     },
   },
 
+  emits: ['update:show'],
+
   data () {
     return {
       TOOLTIP_KIND_MODIFIERS,
       tip: null,
       placement: '',
       showTooltip: false,
+      isPreventHideTooltip: false,
     };
   },
 
@@ -258,6 +262,7 @@ export default {
 
   methods: {
     async onLeave () {
+      this.isPreventHideTooltip = true;
       this.tip.unmount();
       this.$emit('update:show', false);
     },
@@ -268,7 +273,7 @@ export default {
         this.setProps();
         this.tip.show();
       } else if (this.showTooltip) {
-        this.tip.hide();
+        this.showTooltip = false;
       }
     },
 
@@ -311,20 +316,18 @@ export default {
     },
 
     onMount () {
+      this.isPreventHideTooltip = false;
       this.showTooltip = true;
       this.setProps();
     },
 
     onHide () {
-      const isPreventHideTooltip = !this.showTooltip;
-      if (this.showTooltip) {
-        this.showTooltip = false;
-      }
+      this.showTooltip = false;
       /**
        *  https://atomiks.github.io/tippyjs/v6/all-props/#onhide
        *  return false from 'onHide' lifecycle to cancel a hide based on a condition.
        **/
-      return isPreventHideTooltip;
+      return this.isPreventHideTooltip;
     },
 
     getAnchor (anchor) {

@@ -233,8 +233,8 @@ export default {
      *  in pixels (skidding and distance).
      */
     offset: {
-      type: Array,
-      default: () => [0, 10],
+      type: [Number, Array],
+      default: 0,
     },
 
     /**
@@ -242,7 +242,7 @@ export default {
      */
     appendTo: {
       type: [String, HTMLElement],
-      default: () => document.body,
+      default: 'parent',
     },
 
     /**
@@ -297,6 +297,12 @@ export default {
     modal: {
       type: Boolean,
       default: false,
+    },
+
+    zIndex: {
+      type: [Number, String],
+      default: 300,
+      validator: zIndex => !!Number(zIndex),
     },
   },
 
@@ -404,6 +410,7 @@ export default {
         interactive: this.interactive,
         allowHTML: true,
         trigger: this.trigger,
+        zIndex: this.zIndex,
         onHide: this.onHide,
         onMount: this.onMount,
       },
