@@ -57,8 +57,9 @@
       tabindex="-1"
       appear
       @after-leave="onLeave"
-      @enter="isOpeningPopover = true;"
+      @enter="isOpeningPopover = true"
       @leave="isOpeningPopover = false"
+      @after-enter="focusFirstElement"
     >
       <!-- @slot content that is displayed in the popover when it is open. -->
       <slot name="content" />
@@ -83,6 +84,7 @@ import {
 import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS, TOOLTIP_TIPPY_DIRECTIONS } from '../tooltip';
+import ModalMixin from '../mixins/modal.js';
 
 export default {
   name: 'DtPopover',
@@ -93,6 +95,8 @@ export default {
   components: {
     DtLazyShow,
   },
+
+  mixins: [ModalMixin],
 
   props: {
     /**
@@ -274,7 +278,7 @@ export default {
      * **/
     trigger: {
       type: String,
-      default: 'click',
+      default: 'manual',
     },
 
     /***
@@ -305,6 +309,7 @@ export default {
       horizontalAlignment: '',
       isOpeningPopover: false,
       showPopover: this.open,
+      isPreventHidePopover: false,
     };
   },
 
@@ -368,9 +373,12 @@ export default {
       },
     },
 
-    open (isOpen) {
-      this.showPopover = isOpen;
-      isOpen ? this.tip.show() : this.tip.hide();
+    open (isOpen, isPrev) {
+      if (isOpen) {
+        this.tip.show();
+      } else if (!isOpen && isPrev !== isOpen) {
+        this.showPopover = false;
+      }
     },
 
     hideOnClick () {
@@ -420,25 +428,27 @@ export default {
     },
 
     onLeave () {
+      this.isPreventHidePopover = true;
+
+      if (this.focusAnchorOnClose) {
+        this.focusFirstElement(this.$refs.anchor);
+      }
       this.tip.unmount();
       this.$emit('update:open', false);
     },
 
     onHide () {
-      const isPreventHidePopover = !this.showPopover;
       this.showPopover = false;
-      const anchor = this.$refs.anchor.children[0];
-      if (this.focusAnchorOnClose) {
-        anchor?.focus?.();
-      }
       /**
        *  https://atomiks.github.io/tippyjs/v6/all-props/#onhide
        *  return false from 'onHide' lifecycle to cancel a hide based on a condition.
       **/
-      return isPreventHidePopover;
+      return this.isPreventHidePopover;
     },
 
     onMount () {
+      this.isPreventHidePopover = false;
+      this.showPopover = true;
       if (TOOLTIP_TIPPY_DIRECTIONS[this.placement]) {
         this.tip?.setProps({
           placement: this.placement,
