@@ -48,6 +48,7 @@ export default {
     KeyboardNavigation({
       itemsKey: 'items',
       indexKey: 'highlightIndex',
+      afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
       activeItemKey: 'activeItemEl',
@@ -89,7 +90,7 @@ export default {
     },
   },
 
-  emits: ['select', 'escape'],
+  emits: ['select', 'escape', 'highlight'],
 
   computed: {
     inputProps () {
@@ -166,6 +167,10 @@ export default {
 
     getItemId (i) {
       return `${this.listId}-item${i}`;
+    },
+
+    afterHighlight () {
+      this.$emit('highlight', this.highlightIndex);
     },
 
     onEnterKey () {

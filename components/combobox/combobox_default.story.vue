@@ -2,8 +2,9 @@
   <dt-combobox
     :items="displayItems"
     list-aria-label="Example list items"
-    @select="onComboboxSelect"
     @escape="onComboboxEscape"
+    @highlight="onHighlight"
+    @select="onComboboxSelect"
   >
     <template #input="{ inputProps }">
       <dt-input

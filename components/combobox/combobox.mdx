@@ -33,8 +33,9 @@ import { DtCombobox, DtInput, DtListItem } from '@dialpad/dialtone-vue';
 <dt-combobox
   :items="items"
   list-aria-label="Example list items"
-  @select="onSelect"
   @escape="onEscape"
+  @highlight="onHighlight"
+  @select="onSelect"
 >
   <template #input="{ inputProps }">
     <dt-input v-bind="inputProps" />
@@ -96,7 +97,8 @@ behavior you can pass `onBeginningOfList` and `onEndOfList` methods as props.
 
 Pressing `ESC` key while the input has focus will emit an **escape** event that has to be handled
 based on the use case. Commonly the `ESC` key might hide the list or empty the input. `ENTER` key will
-emit a **select** event with the index of the currently highlighted list item.
+emit a **select** event with the index of the currently highlighted list item. When the highlight
+selection changes, a **highlight** event is emitted with the index of the currently highlighted item.
 
 ## Slots, Props and Events
 

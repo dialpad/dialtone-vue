@@ -23,8 +23,9 @@ const LIST_ITEMS = [
 // Default Prop Values
 export const argsData = {
   items: LIST_ITEMS,
-  onSelect: action('select'),
   onEscape: action('escape'),
+  onHighlight: action('highlight'),
+  onSelect: action('select'),
 };
 
 export const argTypesData = {
@@ -98,25 +99,36 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
-  onSelect: {
-    table: {
-      disable: true,
-    },
-  },
   onEscape: {
     table: {
       disable: true,
     },
   },
+  onHighlight: {
+    table: {
+      disable: true,
+    },
+  },
+  onSelect: {
+    table: {
+      disable: true,
+    },
+  },
 
-  select: {
-    description: 'Select item event',
+  escape: {
+    description: 'Event fired when clicking on the item',
     table: {
       type: { summary: 'event' },
     },
   },
-  escape: {
-    description: 'Event fired when clicking on the item',
+  highlight: {
+    description: 'Event fired when the highlight changes',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  select: {
+    description: 'Select item event',
     table: {
       type: { summary: 'event' },
     },
