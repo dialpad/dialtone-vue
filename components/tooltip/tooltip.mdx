@@ -80,6 +80,13 @@ import { DtTooltip, TOOLTIP_DIRECTION_MODIFIERS } from '@dialpad/dialtone-vue';
 'bottom-center' is assigned by default.
 Twelve directions are offered: three on each face of the tooltip.
 
+### Flip
+
+The tooltip uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-tippy/) and
+[popper](https://popper.js.org/docs/v2/modifiers/flip/), which has flip modifier (which can change the placement of a
+tooltip when it's scheduled to overflow a given boundary). By default, boundary is `clippingParents`
+(corresponding popover prop is `flipBoundary`).
+
 ```html
 <dt-tooltip
   message="Message"

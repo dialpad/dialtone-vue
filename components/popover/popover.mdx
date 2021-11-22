@@ -74,10 +74,16 @@ or
 
 ## Accessibility
 
-There are a few important considerations to ensure popover controls are accessible. By default, the popover content will
-have a generic role of "dialog".
-When using popovers as interactive component, you should transfer focus into the popover if possible. When the popover
-is closed, you should return focus back to your triggering element (assuming focus is not used as a trigger method).
+Popover, in their current implementation, are accessible when used as interactive components.
+Content will be read to screen reader users, and the popover markup by default get appended to the `parent`
+(also it could be placed to the end of `<body>` or other DOM element)
+
+There are a few important considerations to ensure popover controls are accessible.
+The popover, by default:
+
+- the popover content will have a generic role of "dialog".
+- focus will be transferred into the popover to the first content focusable element, and after close, triggering
+element will be focused (like in the modal component)
 
 ### Anchor
 
@@ -100,18 +106,6 @@ By default, the dialog content will be labeled by the entire anchor element. To 
 1. Pass `aria-label`, which is the text label that will be applied to the dialog content.
 2. Pass `aria-labelledby`, which is an ID of the element that should be used as the descriptive label.
 
-### Focus
-
-Due to the different contexts in which a popover can be used, focus management is not provided for you. You are
-encouraged to consult the ARIA documentation for the particular role you are implementing to see how keyboard focus
-should be implemented.
-
-Additionally, If you want to include interactive controls (form elements, buttons, links) in your
-popover, keep in mind the popover does not manage keyboard focus order. When a keyboard user opens a popover, focus
-remains on the triggering element, and as the popover by default renders at the in the document's structure,
-there is no guarantee that moving forward / pressing `Tab` will move a keyboard user into the
-popover itself. In these cases, consider using a `DtModal` dialog instead.
-
 ### Keyboard
 
 The popover closes on `ESC` key press.
@@ -123,11 +117,14 @@ The popover closes on `ESC` key press.
 The popover content supports both fixed and dynamic horizontal and vertical alignment around the anchor element. If
 `fixedAlignment`/`fixedVerticalAlignment` are passed, the popover will always be positioned in that direction. If you
 omit either of them, the popover will dynamically adjust the corresponding position, trying not to clip the content
-relative to the `$root` element (**not** the viewport!). This calculation happens each time the popover is opened
-(not when the screen is resized).
+relative to the `$root` element. This calculation happens each time the popover is opened or window is resized.
 
-For example: with no `fixedAlignment`, a popover anchor positioned such that the content, when open, would overflow the
-`$root` element's right bounds will open to the left.
+### Flip
+
+The popover uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-tippy/) and
+[popper](https://popper.js.org/docs/v2/modifiers/flip/), which has flip modifier (which can change the placement of a
+popper when it's scheduled to overflow a given boundary). By default, boundary is `clippingParents`
+(corresponding popover prop is `flipBoundary`).
 
 <Canvas>
   <Story id="components-popovers--fixed-right" />

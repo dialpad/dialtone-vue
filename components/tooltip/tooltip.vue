@@ -129,8 +129,19 @@ export default {
      * Boundary option - https://popper.js.org/docs/v2/utils/detect-overflow/#boundary
      */
     flipBoundary: {
-      type: [String, HTMLElement],
-      default: 'popper',
+      type: [String, HTMLElement, Array],
+      default: 'clippingParents',
+      validator (boundary) {
+        if (typeof boundary === 'string') {
+          return boundary === 'clippingParents';
+        }
+
+        if (Array.isArray(boundary)) {
+          return boundary.every(el => el instanceof HTMLElement);
+        }
+
+        return boundary instanceof HTMLElement;
+      },
     },
 
     /**
@@ -195,6 +206,12 @@ export default {
     tabIndex: {
       type: String,
       default: '0',
+    },
+
+    zIndex: {
+      type: [Number, String],
+      default: 9999,
+      validator: zIndex => !!Number(zIndex),
     },
   },
 
@@ -347,6 +364,7 @@ export default {
       return {
         allowHTML: true,
         placement: this.tippyPlacement,
+        zIndex: this.zIndex,
         onMount: this.onMount,
         onHide: this.onHide,
         ...this.tippyProps,

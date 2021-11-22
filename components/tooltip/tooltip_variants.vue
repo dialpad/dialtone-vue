@@ -45,6 +45,25 @@
         class="d-mb64 d-mt16"
         :message="localMessage"
         trigger="click"
+        hide-on-click
+        :offset="[0, 0]"
+        show
+      >
+        <template #anchor>
+          <dt-button
+            importance="outlined"
+          >
+            {{ openDefaultState }}
+          </dt-button>
+        </template>
+      </dt-tooltip>
+    </div>
+    <div class="d-d-flex d-jc-center d-w100p">
+      <!-- Open state -->
+      <dt-tooltip
+        class="d-mb64 d-mt16"
+        :message="localMessage"
+        trigger="click"
         hide-on-click="toggle"
         :offset="[0, 0]"
         show

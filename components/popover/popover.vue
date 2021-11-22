@@ -234,7 +234,7 @@ export default {
      */
     offset: {
       type: [Number, Array],
-      default: 0,
+      default: () => [0, 4],
     },
 
     /**
@@ -259,8 +259,19 @@ export default {
      * will be checked for overflow relative to.
      */
     flipBoundary: {
-      type: [String, HTMLElement],
-      default: 'popper',
+      type: [String, HTMLElement, Array],
+      default: 'clippingParents',
+      validator (boundary) {
+        if (typeof boundary === 'string') {
+          return boundary === 'clippingParents';
+        }
+
+        if (Array.isArray(boundary)) {
+          return boundary.every(el => el instanceof HTMLElement);
+        }
+
+        return boundary instanceof HTMLElement;
+      },
     },
 
     /**
@@ -397,7 +408,11 @@ export default {
   mounted () {
     this.verticalAlignment = this.fixedVerticalAlignment;
     const anchor = this.$refs.anchor.children[0];
-    anchor.classList.add('d-zi-notification');
+    let zIndex = this.zIndex;
+    if (this.modal) {
+      anchor.classList.add('d-zi-notification');
+      zIndex = zIndex > 600 ? zIndex : 700;
+    }
     const placement = TOOLTIP_TIPPY_DIRECTIONS[this.placement] ? this.placement : this.fallbackPlacements[0];
     this.tip = tippy(anchor, this.getOptions({
       popperOptions: this.getPopperOptions(),
@@ -410,7 +425,7 @@ export default {
         interactive: this.interactive,
         allowHTML: true,
         trigger: this.trigger,
-        zIndex: this.zIndex,
+        zIndex,
         onHide: this.onHide,
         onMount: this.onMount,
       },
