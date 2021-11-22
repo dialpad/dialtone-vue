@@ -210,7 +210,7 @@ export default {
 
     zIndex: {
       type: [Number, String],
-      default: 9999,
+      default: 400,
       validator: zIndex => !!Number(zIndex),
     },
   },
