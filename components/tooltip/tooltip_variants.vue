@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import DtTooltip from './tooltip-tippy-headless';
+import DtTooltip from './tooltip';
 import { DtButton } from './../button';
 import { TOOLTIP_DIRECTION_MODIFIERS } from './tooltip_constants';
 
@@ -98,7 +98,7 @@ function sliceIntoChunks (arr, chunkSize) {
 }
 
 export default {
-  name: 'TooltipTippyVariants',
+  name: 'TooltipVariants',
   components: { DtTooltip, DtButton },
   data () {
     return {

@@ -4,14 +4,14 @@
       ref="container"
       class="container"
     >
-      <div class="some-text"/>
+      <div class="some-text" />
       <div class="some-text">
-        <tooltip-tippy
+        <dt-tooltip
           v-if="parentNode"
+          :id="id"
           arrow-direction="bottom-center"
           class="tooltip"
           :flip-boundary="parentNode"
-          :id="id"
           :flip="flip"
           :offset="offset"
           :append-to="appendTo"
@@ -35,7 +35,7 @@
               {{ defaultSlot }}
             </div>
           </template>
-        </tooltip-tippy>
+        </dt-tooltip>
       </div>
       <div class="some-text" />
     </div>
@@ -43,13 +43,13 @@
 </template>
 
 <script>
-import TooltipTippy from './tooltip-tippy-headless';
+import DtTooltip from './tooltip';
 import { DtButton } from '../button';
 
 export default {
-  name: 'TooltipTippyStory',
+  name: 'TooltipFlip',
   components: {
-    TooltipTippy,
+    DtTooltip,
     DtButton,
   },
 
