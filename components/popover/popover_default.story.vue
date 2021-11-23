@@ -21,6 +21,7 @@
     :interactive-border="interactiveBorder"
     :trigger="trigger"
     :modal="modal"
+    width-content="anchor"
     @update:open="updateOpen"
   >
     <template #anchor="{ attrs }">

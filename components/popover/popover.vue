@@ -57,10 +57,11 @@
       ]"
       tabindex="-1"
       appear
+      @keydown="onKeydown"
       @after-leave="onLeave"
       @enter="isOpeningPopover = true"
       @leave="isOpeningPopover = false"
-      @after-enter="focusFirstElement"
+      @after-enter="dialogFocusFirstElement"
     >
       <!-- @slot content that is displayed in the popover when it is open. -->
       <slot name="content" />
@@ -316,6 +317,11 @@ export default {
       default: 300,
       validator: zIndex => !!Number(zIndex),
     },
+
+    widthContent: {
+      type: String,
+      default: '', // anchor
+    },
   },
 
   emits: ['update:open'],
@@ -328,6 +334,8 @@ export default {
       isOpeningPopover: false,
       showPopover: this.open,
       isPreventHidePopover: false,
+      anchor: null,
+      closedByClickOutside: false,
     };
   },
 
@@ -408,14 +416,18 @@ export default {
 
   mounted () {
     this.verticalAlignment = this.fixedVerticalAlignment;
-    const anchor = this.$refs.anchor.children[0];
+    this.anchor = this.$refs.anchor.children[0];
     let zIndex = this.zIndex;
     if (this.modal) {
-      anchor.classList.add('d-zi-notification');
+      this.anchor.classList.add('d-zi-notification');
       zIndex = zIndex > 600 ? zIndex : 700;
     }
+    if (this.widthContent === 'anchor') {
+      this.onResize();
+      window.addEventListener('resize', this.onResize);
+    }
     const placement = TOOLTIP_TIPPY_DIRECTIONS[this.placement] ? this.placement : this.fallbackPlacements[0];
-    this.tip = tippy(anchor, this.getOptions({
+    this.tip = tippy(this.anchor, this.getOptions({
       popperOptions: this.getPopperOptions(),
       tippyOptions: {
         placement,
@@ -429,6 +441,7 @@ export default {
         zIndex,
         onHide: this.onHide,
         onMount: this.onMount,
+        onClickOutside: this.onClickOutside,
       },
     }));
     if (this.showPopover) {
@@ -437,6 +450,7 @@ export default {
   },
 
   beforeDestroy () {
+    window.removeEventListener('resize', this.onResize);
     this.tip?.destroy();
   },
 
@@ -452,10 +466,10 @@ export default {
 
     onLeave () {
       this.isPreventHidePopover = true;
-
-      if (this.focusAnchorOnClose) {
-        this.focusFirstElement(this.$refs.anchor);
+      if (this.focusAnchorOnClose && !this.closedByClickOutside) {
+        this.dialogFocusFirstElement(this.$refs.anchor);
       }
+      this.closedByClickOutside = false;
       this.tip.unmount();
       this.$emit('update:open', false);
     },
@@ -479,6 +493,14 @@ export default {
       }
     },
 
+    async onResize (popper) {
+      await this.$nextTick();
+      setTimeout(() => {
+        // console.log(this.anchor, this.anchor.clientWidth);
+        popper.style.width = `${this.anchor.clientWidth}px`;
+      }, 0);
+    },
+
     getPopperOptions () {
       return {
         modifiers: [
@@ -497,6 +519,10 @@ export default {
       };
     },
 
+    onClickOutside () {
+      this.closedByClickOutside = true;
+    },
+
     getOptions ({ popperOptions, tippyOptions } = {}) {
       return {
         popperOptions,
@@ -512,6 +538,18 @@ export default {
           };
         },
       };
+    },
+
+    onKeydown (e) {
+      if (this.isDialog && e.key === 'Tab') {
+        this.focusTrappedTabPress(e, this.$refs.content.$el);
+      }
+    },
+
+    dialogFocusFirstElement (e) {
+      if (this.isDialog) {
+        this.focusFirstElement(e);
+      }
     },
   },
 };
@@ -570,7 +608,7 @@ export default {
   *,
   *:before,
   *:after {
-    box-sizing: inherit;
+    box-sizing: border-box;
   }
 }
 </style>
