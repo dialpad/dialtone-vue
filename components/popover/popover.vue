@@ -13,7 +13,8 @@
         d-vi-visible
         d-zi-modal
         d-o100
-        d-bgc-black-900"
+        d-bgc-black-900
+      "
       @click.self="closePopover"
     />
     <div
@@ -42,7 +43,7 @@
       :transition="transition"
       :show="showPopover"
       :class="[
-        'popover',
+        'dt-popover-box',
         'd-bgc-white',
         'd-bc-black-075',
         'd-bs-md',
@@ -242,7 +243,7 @@ export default {
      */
     appendTo: {
       type: [String, HTMLElement],
-      default: 'parent',
+      default: () => document.body,
     },
 
     /**
@@ -554,7 +555,7 @@ export default {
 
 .tippy-box[data-popper-reference-hidden],
 .tippy-box[data-popper-escaped] {
-  .popover {
+  .dt-popover-box {
     visibility: hidden;
     pointer-events: none;
   }
@@ -562,5 +563,14 @@ export default {
 
 .d-popover-overlay {
   --bgo: 85% !important;
+}
+
+.dt-popover-box {
+  &,
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
 }
 </style>
