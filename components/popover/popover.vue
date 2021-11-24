@@ -214,7 +214,7 @@ export default {
      */
     contentWidth: {
       type: String,
-      default: 'anchor',
+      default: '',
     },
 
     /**
