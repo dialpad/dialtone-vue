@@ -209,6 +209,15 @@ export default {
     },
 
     /**
+     * Width configuration for the popover content. 'anchor' is one possible string value.
+     * If passed, the popover content will be set same width with anchor element onShow popover event
+     */
+    contentWidth: {
+      type: String,
+      default: 'anchor',
+    },
+
+    /**
      * Whether or not a carat (arrow) should be shown from the content pointing
      * at the anchor.
      */
@@ -317,11 +326,6 @@ export default {
       default: 300,
       validator: zIndex => !!Number(zIndex),
     },
-
-    widthContent: {
-      type: String,
-      default: '', // anchor
-    },
   },
 
   emits: ['update:open'],
@@ -334,8 +338,9 @@ export default {
       isOpeningPopover: false,
       showPopover: this.open,
       isPreventHidePopover: false,
-      anchor: null,
       closedByClickOutside: false,
+      anchorEl: null,
+      popoverContentEl: null,
     };
   },
 
@@ -415,22 +420,25 @@ export default {
   },
 
   mounted () {
+    // local verticalAlignment is needed for flipping
     this.verticalAlignment = this.fixedVerticalAlignment;
-    this.anchor = this.$refs.anchor.children[0];
+    // support single anchor for popover, not multi anchor
+    this.anchorEl = this.$refs.anchor.children[0];
+    this.popoverContentEl = this.$refs.content.$el;
     let zIndex = this.zIndex;
+    // align z-indexes when popover has modal prop
     if (this.modal) {
-      this.anchor.classList.add('d-zi-notification');
+      this.anchorEl.classList.add('d-zi-notification');
       zIndex = zIndex > 600 ? zIndex : 700;
     }
-    if (this.widthContent === 'anchor') {
-      this.onResize();
+    // align popover content width when
+    if (this.contentWidth === 'anchor') {
       window.addEventListener('resize', this.onResize);
     }
-    const placement = TOOLTIP_TIPPY_DIRECTIONS[this.placement] ? this.placement : this.fallbackPlacements[0];
-    this.tip = tippy(this.anchor, this.getOptions({
+    this.tip = tippy(this.anchorEl, this.getOptions({
       popperOptions: this.getPopperOptions(),
       tippyOptions: {
-        placement,
+        placement: this.getInitialPlacement(),
         hideOnClick: this.hideOnClick,
         offset: this.offset,
         interactiveBorder: this.interactiveBorder,
@@ -442,6 +450,7 @@ export default {
         onHide: this.onHide,
         onMount: this.onMount,
         onClickOutside: this.onClickOutside,
+        onShow: this.onShow,
       },
     }));
     if (this.showPopover) {
@@ -461,6 +470,12 @@ export default {
     closePopover () {
       if (typeof this.hideOnClick === 'boolean' && this.hideOnClick) {
         this.tip.hide();
+      }
+    },
+
+    onShow () {
+      if (this.contentWidth === 'anchor') {
+        this.setPopoverContentAnchorWidth();
       }
     },
 
@@ -493,12 +508,18 @@ export default {
       }
     },
 
-    async onResize (popper) {
-      await this.$nextTick();
-      setTimeout(() => {
-        // console.log(this.anchor, this.anchor.clientWidth);
-        popper.style.width = `${this.anchor.clientWidth}px`;
-      }, 0);
+    onResize () {
+      this.closePopover();
+    },
+
+    onClickOutside () {
+      this.closedByClickOutside = true;
+    },
+
+    onKeydown (e) {
+      if (this.isDialog && e.key === 'Tab') {
+        this.focusTrappedTabPress(e, this.popoverContentEl);
+      }
     },
 
     getPopperOptions () {
@@ -519,10 +540,6 @@ export default {
       };
     },
 
-    onClickOutside () {
-      this.closedByClickOutside = true;
-    },
-
     getOptions ({ popperOptions, tippyOptions } = {}) {
       return {
         popperOptions,
@@ -532,7 +549,7 @@ export default {
           // The recommended structure is to use the popper as an outer wrapper
           const popper = document.createElement('div');
           popper.className = 'tippy-box d-ps-absolute';
-          popper.appendChild(this.$refs.content.$el);
+          popper.appendChild(this.popoverContentEl);
           return {
             popper,
           };
@@ -540,10 +557,12 @@ export default {
       };
     },
 
-    onKeydown (e) {
-      if (this.isDialog && e.key === 'Tab') {
-        this.focusTrappedTabPress(e, this.$refs.content.$el);
-      }
+    getInitialPlacement () {
+      return TOOLTIP_TIPPY_DIRECTIONS[this.placement] ? this.placement : this.fallbackPlacements[0];
+    },
+
+    setPopoverContentAnchorWidth () {
+      this.popoverContentEl.style.width = `${this.anchorEl.clientWidth}px`;
     },
 
     dialogFocusFirstElement (e) {
