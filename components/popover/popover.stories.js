@@ -4,6 +4,7 @@ import {
   POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_VERTICAL_ALIGNMENT,
   POPOVER_ROLES,
+  POPOVER_CONTENT_WIDTHS,
 } from './';
 import PopoverDefault from './popover_default.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
@@ -59,6 +60,12 @@ const argTypesData = {
     control: {
       type: 'select',
       options: POPOVER_VERTICAL_ALIGNMENT,
+    },
+  },
+  contentWidth: {
+    control: {
+      type: 'select',
+      options: POPOVER_CONTENT_WIDTHS,
     },
   },
 

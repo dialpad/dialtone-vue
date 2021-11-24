@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
 import { createLocalVue, mount } from '@vue/test-utils';
-import DtTooltip from './tooltip-tippy-headless.vue';
+import DtTooltip from './tooltip.vue';
 import { DtButton } from '../button';
 import {
   TOOLTIP_KIND_MODIFIERS,
@@ -96,9 +96,6 @@ describe('Dialtone Vue Tooltip tests', function () {
   const _mountWrapper = () => {
     wrapper = mount(tooltipWrapper, {
       localVue: createLocalVue(),
-      propsData: {
-        appendTo: 'parent',
-      },
       stubs: {
         transition: false,
       },

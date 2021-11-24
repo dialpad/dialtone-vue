@@ -21,6 +21,7 @@
     :interactive-border="interactiveBorder"
     :trigger="trigger"
     :modal="modal"
+    :content-width="contentWidth"
     width-content="anchor"
     @update:open="updateOpen"
   >

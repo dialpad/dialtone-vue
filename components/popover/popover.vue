@@ -77,6 +77,7 @@
 import tippy from 'tippy.js/headless';
 import { hideOnEsc, getArrowDetected } from '../tooltip/modifiers';
 import {
+  POPOVER_CONTENT_WIDTHS,
   POPOVER_HORIZONTAL_ALIGNMENT,
   POPOVER_PADDING_CLASSES,
   POPOVER_ROLES,
@@ -214,7 +215,8 @@ export default {
      */
     contentWidth: {
       type: String,
-      default: '',
+      default: null,
+      validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
     },
 
     /**
@@ -476,6 +478,10 @@ export default {
     onShow () {
       if (this.contentWidth === 'anchor') {
         this.setPopoverContentAnchorWidth();
+      }
+
+      if (this.contentWidth === null) {
+        this.popoverContentEl.style.width = 'auto';
       }
     },
 
