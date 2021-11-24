@@ -7,13 +7,12 @@ import {
   TOOLTIP_KIND_MODIFIERS,
   TOOLTIP_DIRECTION_MODIFIERS,
 } from './tooltip_constants';
+import { flushPromises } from '../utils';
 
 // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
 // Need to mock them to avoid error
 global.requestAnimationFrame = sinon.spy();
 global.cancelAnimationFrame = sinon.spy();
-
-const flushPromise = () => new Promise(setImmediate);
 
 // use 180ms as default duration for fade animation
 const awaitLazyShowUpdated = () => new Promise(resolve => setTimeout(resolve, 180));
@@ -109,7 +108,7 @@ describe('Dialtone Vue Tooltip tests', function () {
 
   const focus = async () => {
     await button.trigger('focus');
-    await flushPromise();
+    await flushPromises();
   };
 
   const escape = () => {
@@ -119,7 +118,7 @@ describe('Dialtone Vue Tooltip tests', function () {
 
   const mouseover = async () => {
     await button.trigger('mouseover');
-    await flushPromise();
+    await flushPromises();
   };
 
   describe('Presentation Tests', function () {
