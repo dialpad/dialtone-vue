@@ -46,7 +46,7 @@ export const argTypesData = {
   },
 
   flipBoundary: {
-    defaultValue: 'popper',
+    defaultValue: 'clippingParents',
   },
   transition: {
     control: {
