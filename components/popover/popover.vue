@@ -475,9 +475,9 @@ export default {
       }
     },
 
-    onShow () {
+    async onShow () {
       if (this.contentWidth === 'anchor') {
-        this.setPopoverContentAnchorWidth();
+        await this.setPopoverContentAnchorWidth();
       }
 
       if (this.contentWidth === null) {
@@ -567,7 +567,8 @@ export default {
       return TOOLTIP_TIPPY_DIRECTIONS[this.placement] ? this.placement : this.fallbackPlacements[0];
     },
 
-    setPopoverContentAnchorWidth () {
+    async setPopoverContentAnchorWidth () {
+      await this.$nextTick();
       this.popoverContentEl.style.width = `${this.anchorEl.clientWidth}px`;
     },
 
