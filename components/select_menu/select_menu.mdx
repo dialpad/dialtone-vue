@@ -1,5 +1,4 @@
-import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import DtSelectMenu from './select_menu';
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 # Select Menu
 
@@ -13,18 +12,18 @@ A select is normally paired with a label, but there are times when it can be use
 placeholder text as a label.
 
 <Canvas>
-  <Story id="forms-select-menu--default" />
+  <Story id="components-select-menu--default" />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="forms-select-menu--variants" />
+  <Story id="components-select-menu--variants" />
 </Canvas>
 
-## Props, Slots & Events
+## Slots, Props & Events
 
-<ArgsTable of={DtSelectMenu} />
+<ArgsTable story={PRIMARY_STORY} />
 
 ## Usage
 
