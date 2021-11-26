@@ -284,12 +284,12 @@ describe('Checkbox Tests', function () {
       });
     });
 
-    describe('When indeterminate checkbox', function () {
+    describe('When indeterminate', function () {
       before(function () {
         propsData = { ...basePropsData, indeterminate: true };
         _setWrappers();
       });
-      it('is indeterminate', function () { itBehavesLikeIndeterminate(input); });
+      it('shows indeterminate visual state', function () { itBehavesLikeIndeterminate(input); });
 
       describe('When clicking on an indeterminate checkbox', function () {
         beforeEach(async function () {
