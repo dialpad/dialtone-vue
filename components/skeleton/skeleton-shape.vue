@@ -1,15 +1,32 @@
 <template>
   <div
-    :class="[
-      'placeholder',
-      SKELETON_SHAPES[shape],
-      SKELETON_HEIGHTS[size],
-      widthClass,
-    ]"
-    :style="{
-      'animation-duration': `${animationDuration}ms`,
-    }"
-  />
+    ref="skeleton-shape"
+  >
+    <div
+      aria-hidden="true"
+      :class="[
+        'placeholder',
+        SKELETON_SHAPES[shape],
+        SKELETON_HEIGHTS[size],
+        widthClass,
+      ]"
+      :style="{
+        'animation-duration': `${animationDuration}ms`,
+      }"
+    />
+    <dt-lazy-show
+      :show="!loading"
+      :transition="transitionContent"
+    >
+      <slot name="content" />
+    </dt-lazy-show>
+    <span
+      :id="uniqId"
+      class="d-d-none"
+    >
+      {{ ariaLoadingText }}
+    </span>
+  </div>
 </template>
 
 <script>
@@ -19,9 +36,15 @@ import {
   SKELETON_SHAPES,
   SKELETON_WIDTHS,
 } from './skeleton_constants';
+import { DtLazyShow } from '../lazy_show';
+import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtSkeletonShape',
+  components: {
+    DtLazyShow,
+  },
+
   props: {
     shape: {
       type: String,
@@ -38,6 +61,25 @@ export default {
     animationDuration: {
       type: Number,
       default: 1000,
+    },
+
+    loading: {
+      type: Boolean,
+      default: true,
+    },
+
+    transitionContent: {
+      type: String,
+    },
+
+    ariaLoadingText: {
+      type: String,
+      default: 'Loading',
+    },
+
+    hasAriaDescribedBy: {
+      type: Boolean,
+      default: true,
     },
   },
 
@@ -58,6 +100,26 @@ export default {
         ? SKELETON_WIDTHS[this.size]
         : SKELETON_RECTANGLE_WIDTH[this.size];
     },
+
+    uniqId () {
+      return getUniqueString('DtSkeletonShape');
+    },
+  },
+
+  watch: {
+    loading () {
+      if (!this.loading) {
+        this.$refs['skeleton-shape'].removeAttribute('tabindex');
+        this.$refs['skeleton-shape'].removeAttribute('aria-describedby');
+      }
+    },
+  },
+
+  mounted () {
+    if (this.hasAriaDescribedBy) {
+      this.$refs['skeleton-shape'].setAttribute('tabindex', '0');
+      this.$refs['skeleton-shape'].setAttribute('aria-describedby', this.uniqId);
+    }
   },
 };
 </script>

@@ -1,67 +1,92 @@
 <!-- Use this template story to allow the user control the component's props and slots -->
 <template>
   <div>
-    avatar (default state of component)
-    <dt-skeleton avatar />
+    Default empty a11y wrapper, without any props
+    <dt-skeleton />
+    <br>
 
-    icon
-    <dt-skeleton icon />
+    skeleton Prop(:list-option="{ avatar: true }")
+    <dt-skeleton :list-option="{ avatar: true }" />
 
-    avatar + text
+    skeleton Prop(:list-option="{ icon: true }")
+    <dt-skeleton :list-option="{ icon: true }" />
+
+    skeleton Prop(:list-option="{ icon: true, text: false })
+    <dt-skeleton :list-option="{ icon: true, text: false }" />
+
+    skeleton Prop(:list-option="{ avatar: true, text: false }")
+    <dt-skeleton :list-option="{ avatar: true, text: false }" />
+
+    skeleton Prop(:list-option="{ textList: 4 }")
+    <dt-skeleton :list-option="{ textList: 4 }" />
+
+    skeleton Prop(:list-option="{ textList: 4, icon: true  }")
+    <dt-skeleton :list-option="{ textList: 4, icon: true }" />
+
+    skeleton Prop(:list-option="{ textList: 4, avatar: true  }")
+    <dt-skeleton :list-option="{ textList: 4, avatar: true }" />
+
+    skeleton Prop(:list-option="{ textList: 4, avatar: true, paragraph: true, avatarSize: 'md' }")
+    <dt-skeleton :list-option="{ textList: 4, avatar: true, paragraph: true, avatarSize: 'md' }" />
+
+    skeleton Prop(:text-option="{ paragraph: true }")
+    <dt-skeleton :text-option="{ paragraph: true }" />
+
+    skeleton Prop(:list-option="{
+    textList: 4,
+    avatar: true,
+    paragraph: true,
+    avatarSize: 'md',
+    paragraphs: {
+    rows: 3,
+    randomWidth: true,
+    maxWidth: 40,
+    minWidth: 10,
+    },
+    }")
     <dt-skeleton
-      avatar
-      text
-    />
-
-    icon + text
-    <dt-skeleton
-      icon
-      text
-    />
-
-    text
-    <dt-skeleton text />
-
-    text-list
-    <dt-skeleton :text-list="4" />
-
-    text-list icon
-    <dt-skeleton
-      icon
-      :text-list="4"
-    />
-
-    text-list avatar
-    <dt-skeleton
-      avatar
-      :text-list="4"
-    />
-
-    text-list avatar paragraph
-    <dt-skeleton
-      avatar
-      paragraph
-      :text-list="4"
-      avatar-size="md"
-    />
-
-    paragraph
-    <dt-skeleton paragraph />
-
-    text-list avatar paragraph
-    <dt-skeleton
-      avatar
-      paragraph
-      :text-list="4"
-      :paragraphs="{
-        rows: 3,
-        randomWidth: true,
-        maxWidth: 40,
-        minWidth: 10,
+      :list-option="{
+        textList: 4,
+        avatar: true,
+        paragraph: true,
+        avatarSize: 'md',
+        paragraphs: {
+          rows: 3,
+          randomWidth: true,
+          maxWidth: 40,
+          minWidth: 10,
+        },
       }"
-      avatar-size="md"
+    />
+
+    skeleton Prop(:list-option="{
+    textList: 4,
+    avatar: true,
+    paragraph: true,
+    avatarSize: 'md',
+    paragraphs: {
+    rows: 3,
+    randomWidth: true,
+    maxWidth: 40,
+    minWidth: 10,
+    },
+    <br>
+    scoped slot <code> {{ `#list="{ item }"` }} </code>
+    <dt-skeleton
+      :list-option="{
+        textList: 4,
+        avatar: true,
+        paragraph: true,
+        avatarSize: 'md',
+        paragraphs: {
+          rows: 3,
+          randomWidth: true,
+          maxWidth: 40,
+          minWidth: 10,
+        },
+      }"
     >
-      <template #default="{ item }">
+      <template #list="{ item }">
         <dt-skeleton-shape
           v-if="item.row === item.list"
           size="2xl"
@@ -72,126 +97,215 @@
     </dt-skeleton>
 
     <div class="d-mb16" />
-    <dt-skeleton-shape
+    skeleton Prop(:shape-option="{size: {{ shapeWidths.join(' | ') }},  shape: 'circle' }
+    <dt-skeleton
       v-for="size in shapeWidths"
       :key="`${size}-circle`"
-      :size="size"
-      shape="circle"
+      :shape-option="{
+        size,
+        shape: 'circle',
+      }"
       class="d-mb4"
     />
-    <dt-skeleton-shape
+    skeleton Prop(:shape-option="{size: {{ shapeWidths.join(' | ') }},  shape: 'square' }
+    <dt-skeleton
       v-for="size in shapeWidths"
       :key="`${size}-square`"
-      :size="size"
-      shape="square"
+      :shape-option="{
+        size,
+        shape: 'square',
+      }"
       class="d-mb4"
     />
-    <dt-skeleton-shape
+    skeleton Prop(:shape-option="{size: {{ shapeWidths.join(' | ') }},  shape: 'rectangle' }
+    <dt-skeleton
       v-for="size in shapeWidths"
       :key="`${size}-rectangle`"
-      :size="size"
-      shape="rectangle"
+      :shape-option="{
+        size,
+        shape: 'rectangle',
+      }"
       class="d-mb4"
     />
-    <dt-skeleton-shape
+
+    skeleton Prop(:shape-option="{size: {{ shapeWidths.join(' | ') }},  shape: 'pill' }
+    <dt-skeleton
       v-for="size in shapeWidths"
       :key="`${size}-pill`"
-      :size="size"
-      shape="pill"
+      :shape-option="{
+        size,
+        shape: 'pill',
+      }"
       class="d-mb4"
     />
-    <div class="d-mb4">
-      Label
-    </div>
-    <dt-skeleton-text
-      type="label"
-      class="d-mb4"
-      width="80px"
-    />
+
     <div class="d-mb4">
       Heading
     </div>
-    <dt-skeleton-text
+
+    skeleton Prop(:text-option="{headingHeight: {{ headingSize.join(' | ') }},
+    type: 'heading',  textWidth: "300px" (default 100%) }
+
+    <dt-skeleton
       v-for="size in headingSize"
       :key="`${size}-heading`"
-      :heading-height="size"
-      type="heading"
+      :text-option="{
+        type: 'heading',
+        textWidth: '300px',
+        headingHeight: size,
+      }"
       class="d-mb4"
-      width="300px"
     />
-    <div class="d-mb4">
-      Paragraphs
-    </div>
-    <div class="d-mb4">
-      Paragraphs: Default
-    </div>
-    <dt-skeleton-text
-      type="paragraphs"
+    skeleton Prop(:text-option="{type: 'paragraphs'}
+    <dt-skeleton
+      :text-option="{ type: 'paragraphs' }"
       class="d-mb4"
     />
     <div class="d-mb4">
       Paragraphs: With width for all lines
     </div>
-    <dt-skeleton-text
-      type="paragraphs"
-      class="d-mb4"
-      :paragraphs="{
-        rows: 3,
-        width: ['50%', '18%', '90%'],
+    skeleton Prop(:text-option="{type: 'paragraphs', paragraphs: {
+    rows: 3,
+    width: ['50%', '18%', '90%'],
+    }}}
+    <dt-skeleton
+      :text-option="{
+        type: 'paragraphs',
+        paragraphs: {
+          rows: 3,
+          width: ['50%', '18%', '90%'],
+        },
       }"
+      class="d-mb4"
     />
     <div class="d-mb4">
       Paragraphs: With width for first and second lines
     </div>
-    <dt-skeleton-text
-      type="paragraphs"
-      class="d-mb4"
-      :paragraphs="{
-        rows: 3,
-        width: ['50%', '18%'],
+    skeleton Prop(:text-option="{type: 'paragraphs', paragraphs: {
+    rows: 3,
+    width: ['50%'],
+    }}}
+    default: 100%;
+    last row = '38%'
+
+    <dt-skeleton
+      :text-option="{
+        type: 'paragraphs',
+        paragraphs: {
+          rows: 3,
+          width: ['50%'],
+        },
       }"
+      class="d-mb4"
     />
     <div class="d-mb4">
       Paragraphs: With random-width
     </div>
-    <dt-skeleton-text
-      type="paragraphs"
-      class="d-mb4"
-      :paragraphs="{
-        rows: 7,
-        randomWidth: true,
+    skeleton Prop(:text-option="{type: 'paragraphs', paragraphs: {
+    rows: 7,
+    randomWidth: true,
+    }}}
+
+    <dt-skeleton
+      :text-option="{
+        type: 'paragraphs',
+        paragraphs: {
+          rows: 7,
+          randomWidth: true,
+        },
       }"
+      class="d-mb4"
     />
     <div class="d-mb4">
       Paragraphs: With random-width and max/min
     </div>
-    <dt-skeleton-text
-      type="paragraphs"
-      class="d-mb4"
-      :paragraphs="{
-        rows: 7,
-        randomWidth: true,
-        maxWidth: 90,
-        minWidth: 10,
+
+    skeleton Prop(:text-option="{type: 'paragraphs', rows: 7, paragraphs: {
+    rows: 7,
+    randomWidth: true,
+    maxWidth: 90,
+    minWidth: 10,
+    }}}
+    <dt-skeleton
+      :text-option="{
+        type: 'paragraphs',
+        paragraphs: {
+          rows: 7,
+          randomWidth: true,
+          maxWidth: 90,
+          minWidth: 10,
+        },
       }"
+      class="d-mb4"
     />
+
+    skeleton with slot="content"
+    :shape-option="{
+    shape: 'pill',
+    size: 'md',
+    }"
+    :loading="isLoadingButton"
+    <dt-button @click="isLoadingButton = !isLoadingButton">
+      Switch
+    </dt-button>
+    <dt-skeleton
+      :shape-option="{
+        shape: 'pill',
+        size: 'md',
+      }"
+      :loading="isLoadingButton"
+      :show="isLoadingButton"
+    >
+      <template #content>
+        <dt-button>
+          Button
+        </dt-button>
+      </template>
+    </dt-skeleton>
+
+    <dt-skeleton
+      class="d-w100p"
+      :loading="isLoadingButton"
+    >
+      <div class="d-d-flex d-ai-center d-jc-space-between d-w100p">
+        <dt-skeleton
+          :shape-option="{ shape: 'circle', size: 'md' }"
+          :has-aria-described-by="false"
+        />
+        <dt-skeleton
+          class="d-w100p"
+          :text-option="{ type: 'label' }"
+          :has-aria-described-by="false"
+        />
+        <dt-skeleton
+          :shape-option="{ shape: 'pill', size: 'md' }"
+          :has-aria-described-by="false"
+        />
+        <dt-skeleton
+          class="d-w100p"
+          :text-option="{ type: 'label' }"
+          :has-aria-described-by="false"
+        />
+      </div>
+    </dt-skeleton>
   </div>
 </template>
 
 <script>
 import DtSkeletonShape from './skeleton-shape';
-import DtSkeletonText from './skeleton-text';
 import DtSkeleton from './skeleton';
 
 import { SKELETON_WIDTHS, SKELETON_HEADING_HEIGHTS } from './skeleton_constants';
+import DtButton from '../button/button';
 
 export default {
   name: 'DtSkeletonVariants',
-  components: { DtSkeletonText, DtSkeletonShape, DtSkeleton },
+  components: { DtButton, DtSkeleton, DtSkeletonShape },
   data () {
     return {
       shapeWidths: Object.keys(SKELETON_WIDTHS),
       headingSize: Object.keys(SKELETON_HEADING_HEIGHTS),
+      isLoadingButton: true,
     };
   },
 };
