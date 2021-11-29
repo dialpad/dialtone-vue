@@ -3,13 +3,12 @@
     ref="skeleton"
   >
     <div
-      v-if="loading"
+      v-if="hasLoading"
       aria-hidden="true"
     >
       <dt-skeleton-list
         v-if="listOption"
         v-bind="listOption"
-        :has-aria-described-by="false"
         :animation-duration="animationDuration"
       >
         <template #default="{ item }">
@@ -22,26 +21,29 @@
       <dt-skeleton-shape
         v-else-if="shapeOption"
         v-bind="shapeOption"
-        :has-aria-described-by="false"
         :animation-duration="animationDuration"
       />
       <dt-skeleton-text
         v-else-if="textOption"
         v-bind="textOption"
-        :has-aria-described-by="false"
         :animation-duration="animationDuration"
       />
-      <slot />
+      <template v-if="!skeletonPageOption">
+        <slot />
+      </template>
     </div>
+    <template v-if="skeletonPageOption">
+      <slot />
+    </template>
     <dt-lazy-show
-      :show="!loading"
+      :show="!hasLoading"
       :transition="transitionContent"
     >
       <slot name="content" />
     </dt-lazy-show>
     <span
       :id="uniqId"
-      class="d-d-none"
+      class="d-d-none described-text"
     >
       {{ ariaLoadingText }}
     </span>
@@ -58,6 +60,20 @@ import { getUniqueString } from '../utils';
 export default {
   name: 'DtSkeleton',
   components: { DtSkeletonText, DtSkeletonShape, DtSkeletonList, DtLazyShow },
+  provide: {
+    hasParentSkeleton: true,
+  },
+
+  inject: {
+    hasParentSkeleton: {
+      default: false,
+    },
+
+    skeletonPageOption: {
+      default: null,
+    },
+  },
+
   props: {
     listOption: {
       type: Object,
@@ -92,16 +108,15 @@ export default {
       type: String,
       default: 'Loading',
     },
-
-    hasAriaDescribedBy: {
-      type: Boolean,
-      default: true,
-    },
   },
 
   computed: {
     uniqId () {
       return getUniqueString('DtSkeleton');
+    },
+
+    hasLoading () {
+      return this.skeletonPageOption ? this.skeletonPageOption.loading : this.loading;
     },
   },
 
@@ -115,10 +130,22 @@ export default {
   },
 
   mounted () {
-    if (this.hasAriaDescribedBy) {
+    if (!this.hasParentSkeleton) {
       this.$refs.skeleton.setAttribute('tabindex', '0');
       this.$refs.skeleton.setAttribute('aria-describedby', this.uniqId);
     }
   },
 };
 </script>
+
+<style>
+.described-text {
+  position: absolute;
+  top: auto;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+}
+</style>

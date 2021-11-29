@@ -3,6 +3,7 @@
     ref="skeleton-shape"
   >
     <div
+      v-if="hasLoading"
       aria-hidden="true"
       :class="[
         'placeholder',
@@ -15,7 +16,7 @@
       }"
     />
     <dt-lazy-show
-      :show="!loading"
+      :show="!hasLoading"
       :transition="transitionContent"
     >
       <slot name="content" />
@@ -43,6 +44,16 @@ export default {
   name: 'DtSkeletonShape',
   components: {
     DtLazyShow,
+  },
+
+  inject: {
+    hasParentSkeleton: {
+      default: false,
+    },
+
+    skeletonPageOption: {
+      default: null,
+    },
   },
 
   props: {
@@ -76,11 +87,6 @@ export default {
       type: String,
       default: 'Loading',
     },
-
-    hasAriaDescribedBy: {
-      type: Boolean,
-      default: true,
-    },
   },
 
   data () {
@@ -104,6 +110,10 @@ export default {
     uniqId () {
       return getUniqueString('DtSkeletonShape');
     },
+
+    hasLoading () {
+      return this.skeletonPageOption ? this.skeletonPageOption.loading : this.loading;
+    },
   },
 
   watch: {
@@ -116,7 +126,7 @@ export default {
   },
 
   mounted () {
-    if (this.hasAriaDescribedBy) {
+    if (!this.hasParentSkeleton) {
       this.$refs['skeleton-shape'].setAttribute('tabindex', '0');
       this.$refs['skeleton-shape'].setAttribute('aria-describedby', this.uniqId);
     }

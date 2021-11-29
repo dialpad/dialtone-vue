@@ -1,50 +1,52 @@
 <template>
   <div ref="skeleton-text">
-    <div
-      v-if="type === 'label'"
-      aria-hidden="true"
-      class="d-h8 placeholder"
-      :style="{
-        width: textWidth,
-        'animation-duration': `${animationDuration}ms`,
-      }"
-    />
-    <div
-      v-else-if="type === 'heading'"
-      aria-hidden="true"
-      :class="[
-        'placeholder',
-        SKELETON_HEADING_HEIGHTS[headingHeight],
-      ]"
-      :style="{
-        width: textWidth,
-        'animation-duration': `${animationDuration}ms`,
-      }"
-    />
-
-    <div
-      v-else-if="type === 'paragraphs'"
-      aria-hidden="true"
-      class="d-w100p"
-    >
+    <template v-if="hasLoading">
       <div
-        v-for="row in paragraphs.rows"
-        :key="row"
-        :class="[
-          'd-h12',
-          'placeholder',
-          {
-            'd-mb12': row !== paragraphs.rows,
-          },
-        ]"
+        v-if="type === 'label'"
+        aria-hidden="true"
+        class="d-h8 placeholder"
         :style="{
-          width: getSizeParagraphRow(row),
+          width: textWidth,
           'animation-duration': `${animationDuration}ms`,
         }"
       />
-    </div>
+      <div
+        v-else-if="type === 'heading'"
+        aria-hidden="true"
+        :class="[
+          'placeholder',
+          SKELETON_HEADING_HEIGHTS[headingHeight],
+        ]"
+        :style="{
+          width: textWidth,
+          'animation-duration': `${animationDuration}ms`,
+        }"
+      />
+
+      <div
+        v-else-if="type === 'paragraphs'"
+        aria-hidden="true"
+        class="d-w100p"
+      >
+        <div
+          v-for="row in paragraphs.rows"
+          :key="row"
+          :class="[
+            'd-h12',
+            'placeholder',
+            {
+              'd-mb12': row !== paragraphs.rows,
+            },
+          ]"
+          :style="{
+            width: getSizeParagraphRow(row),
+            'animation-duration': `${animationDuration}ms`,
+          }"
+        />
+      </div>
+    </template>
     <dt-lazy-show
-      :show="!loading"
+      :show="!hasLoading"
       :transition="transitionContent"
     >
       <slot name="content" />
@@ -66,6 +68,16 @@ export default {
   name: 'SkeletonText',
   components: {
     DtLazyShow,
+  },
+
+  inject: {
+    hasParentSkeleton: {
+      default: false,
+    },
+
+    skeletonPageOption: {
+      default: null,
+    },
   },
 
   props: {
@@ -109,11 +121,6 @@ export default {
       type: String,
       default: 'Loading',
     },
-
-    hasAriaDescribedBy: {
-      type: Boolean,
-      default: true,
-    },
   },
 
   data () {
@@ -125,6 +132,10 @@ export default {
   computed: {
     uniqId () {
       return getUniqueString('DtSkeleton');
+    },
+
+    hasLoading () {
+      return this.skeletonPageOption ? this.skeletonPageOption.loading : this.loading;
     },
   },
 
@@ -138,7 +149,7 @@ export default {
   },
 
   mounted () {
-    if (this.hasAriaDescribedBy) {
+    if (!this.hasParentSkeleton) {
       this.$refs['skeleton-text'].setAttribute('tabindex', '0');
       this.$refs['skeleton-text'].setAttribute('aria-describedby', this.uniqId);
     }

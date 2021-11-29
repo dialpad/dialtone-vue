@@ -1,6 +1,6 @@
 <template>
   <div ref="skeleton-list">
-    <template v-if="loading && (hasAvatar || hasText)">
+    <template v-if="hasLoading && (hasAvatar || hasText)">
       <div
         v-for="row in list"
         :key="`avatar-list-${row}`"
@@ -14,7 +14,6 @@
         <dt-skeleton-shape
           v-if="hasAvatar"
           :size="avatarSize"
-          :has-aria-described-by="hasAriaDescribedBy"
           :shape="icon ? 'square' : 'circle'"
           :class="{
             'd-mr8': hasText && hasAvatar,
@@ -27,7 +26,6 @@
             :class="{
               'd-mb16': textList && row !== list && !hasAvatar && !paragraph,
             }"
-            :has-aria-described-by="hasAriaDescribedBy"
             :paragraphs="paragraphOption"
             :type="paragraph ? 'paragraphs' : 'label'"
             :animation-duration="animationDuration"
@@ -43,7 +41,7 @@
       {{ ariaLoadingText }}
     </span>
     <dt-lazy-show
-      :show="!loading"
+      :show="!hasLoading"
       :transition="transitionContent"
     >
       <slot name="content" />
@@ -65,6 +63,20 @@ export default {
     DtSkeletonShape,
     DtSkeletonText,
     DtLazyShow,
+  },
+
+  provide: {
+    hasParentSkeleton: true,
+  },
+
+  inject: {
+    hasParentSkeleton: {
+      default: false,
+    },
+
+    skeletonPageOption: {
+      default: null,
+    },
   },
 
   props: {
@@ -122,12 +134,6 @@ export default {
     transitionContent: {
       type: String,
     },
-
-    hasAriaDescribedBy: {
-      type: Boolean,
-      default: true,
-    },
-
   },
 
   computed: {
@@ -158,6 +164,10 @@ export default {
           randomWidth: true,
         };
     },
+
+    hasLoading () {
+      return this.skeletonPageOption ? this.skeletonPageOption.loading : this.loading;
+    },
   },
 
   watch: {
@@ -170,7 +180,7 @@ export default {
   },
 
   mounted () {
-    if (this.hasAriaDescribedBy) {
+    if (!this.hasParentSkeleton) {
       this.$refs['skeleton-list'].setAttribute('tabindex', '0');
       this.$refs['skeleton-list'].setAttribute('aria-describedby', this.uniqId);
     }
