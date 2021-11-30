@@ -129,54 +129,12 @@
 .d-zoom__dialog-leave-active {
   .d-modal__dialog--animate-out();
 }
-//
-////
-//.placeholder {
-//  // Set the placeholder animation colors based on the pill background.
-//  //--placeholder-from-color: darken(@black-025, 10%);
-//  //--placeholder-to-color: darken(@black-025, 15%);
-//
-//  stroke: none;
-//  //fill: @black-075;
-//  //fill: var(--placeholder-from-color, @black-075);
-//  fill: #000;
-//  //background: @black-075;
-//  background: #000;
-//  //background: var(--placeholder-from-color, @black-075);
-//  &--animate {
-//    animation-name: placeholder-throb;
-//    animation-iteration-count: infinite;
-//  }
-//}
-//
-//// The --placeholder-from-color and --placeholder-to-color
-//// custom properties can be set on the parent class of the
-//// placeholder to control the animation colors.
-//@keyframes placeholder-throb {
-//  10% {
-//    fill: @black-075;
-//    fill: var(--placeholder-from-color, @black-075);
-//    background: @black-075;
-//    background: var(--placeholder-from-color, @black-075);
-//  }
-//  50% {
-//    fill: @black-025;
-//    fill: var(--placeholder-to-color, @black-025);
-//    background: @black-025;
-//    background: var(--placeholder-to-color, @black-025);
-//  }
-//  90% {
-//    fill: @black-075;
-//    fill: var(--placeholder-from-color, @black-075);
-//    background: @black-075;
-//    background: var(--placeholder-from-color, @black-075);
-//  }
-//}
 
-
+// the animation is used by the skeleton component
 // The --placeholder-from-color and --placeholder-to-color
 // custom properties can be set on the parent class of the
 // placeholder to control the animation colors.
+// TODO import less variables from dialtone
 @keyframes placeholder-throb {
   10% {
     fill: darken(#DFDEE5, 10%);
