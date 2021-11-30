@@ -1,9 +1,5 @@
 <template>
-  <div
-    ref="skeleton-text"
-    :tabindex="isFocusable ? 0 : -1"
-    :aria-describedby="ariaDescribedBy"
-  >
+  <div ref="skeleton-shape">
     <div
       aria-hidden="true"
       :class="[
@@ -18,11 +14,10 @@
       :style="placeholderStyle"
     />
     <span
-      v-if="ariaLoadingText"
-      :id="uniqId"
+      v-if="screenReaderText"
       class="d-d-none"
     >
-      {{ ariaLoadingText }}
+      {{ screenReaderText }}
     </span>
   </div>
 </template>
@@ -35,7 +30,6 @@ import {
   SKELETON_WIDTHS,
   SKELETON_RIPPLE_DURATION,
 } from './skeleton_constants';
-import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtSkeletonShape',
@@ -58,19 +52,14 @@ export default {
       default: -1,
     },
 
-    ariaLoadingText: {
+    screenReaderText: {
       type: String,
       default: '',
     },
 
-    isFocusable: {
-      type: Boolean,
-      default: false,
-    },
-
     animate: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     offset: {
@@ -95,14 +84,6 @@ export default {
       return this.isEqualSided
         ? SKELETON_WIDTHS[this.size]
         : SKELETON_RECTANGLE_WIDTH[this.size];
-    },
-
-    uniqId () {
-      return getUniqueString('DtSkeletonShape');
-    },
-
-    ariaDescribedBy () {
-      return this.isFocusable ? this.uniqId : '';
     },
 
     placeholderOffset () {

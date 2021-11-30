@@ -1,38 +1,36 @@
 <template>
   <div
-    :tabindex="isFocusable ? 0 : -1"
-    :aria-describedby="ariaDescribedBy"
+    :class="[
+      'd-d-flex',
+      {
+        'd-ai-center': textType !== 'paragraphs',
+      },
+    ]"
   >
-    <div
-      aria-hidden="true"
-      :class="[
-        'd-d-flex',
-        {
-          'd-ai-center': textType !== 'paragraphs',
-        },
-      ]"
-    >
-      <dt-skeleton-shape
-        :size="shapeSize"
-        :shape="shape"
-        class="d-mr8"
+    <dt-skeleton-shape
+      class="d-mr8"
+      :size="shapeSize"
+      :shape="shape"
+      :animation-duration="animationDuration"
+      :animate="animate"
+      :offset="offset"
+    />
+    <div class="d-d-flex d-fd-column d-w100p">
+      <dt-skeleton-text
+        :paragraphs="paragraphsOptions"
+        :type="textType"
         :animation-duration="animationDuration"
         :animate="animate"
-        :aria-loading-text="ariaLoadingText"
         :offset="offset"
       />
-      <div class="d-d-flex d-fd-column d-w100p">
-        <dt-skeleton-text
-          :paragraphs="paragraphOption"
-          :type="textType"
-          :animation-duration="animationDuration"
-          :animate="animate"
-          :aria-loading-text="ariaLoadingText"
-          :offset="offset"
-        />
-        <slot />
-      </div>
+      <slot />
     </div>
+    <span
+      v-if="screenReaderText"
+      class="d-d-none"
+    >
+      {{ screenReaderText }}
+    </span>
   </div>
 </template>
 
@@ -40,7 +38,6 @@
 import { SKELETON_SHAPES, SKELETON_TEXT_TYPES, SKELETON_WIDTHS } from './skeleton_constants.js';
 import DtSkeletonShape from './skeleton-shape';
 import DtSkeletonText from './skeleton-text';
-import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtSkeletonListItem',
@@ -57,20 +54,15 @@ export default {
       validator: shape => Object.keys(SKELETON_SHAPES).includes(shape),
     },
 
-    isFocusable: {
-      type: Boolean,
-      default: false,
-    },
-
     shapeSize: {
       type: String,
-      default: 'sm',
+      default: 'md',
       validator: size => Object.keys(SKELETON_WIDTHS).includes(size),
     },
 
     textType: {
       type: String,
-      default: 'label',
+      default: 'paragraphs',
       validator: type => SKELETON_TEXT_TYPES.includes(type),
     },
 
@@ -84,14 +76,14 @@ export default {
       default: -1,
     },
 
-    ariaLoadingText: {
+    screenReaderText: {
       type: String,
-      required: true,
+      required: '',
     },
 
     animate: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     offset: {
@@ -101,21 +93,8 @@ export default {
   },
 
   computed: {
-    uniqId () {
-      return getUniqueString('DtSkeletonListItem');
-    },
-
-    paragraphOption () {
-      return this.paragraphs
-        ? this.paragraphs
-        : {
-          rows: 4,
-          randomWidth: true,
-        };
-    },
-
-    ariaDescribedBy () {
-      return this.isFocusable ? this.uniqId : '';
+    paragraphsOptions () {
+      return this.paragraphs || { rows: 4, randomWidth: true };
     },
   },
 };

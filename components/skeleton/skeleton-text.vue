@@ -1,9 +1,5 @@
 <template>
-  <div
-    ref="skeleton-text"
-    :tabindex="isFocusable ? 0 : -1"
-    :aria-describedby="ariaDescribedBy"
-  >
+  <div ref="skeleton-text">
     <div
       v-if="type === 'label'"
       aria-hidden="true"
@@ -58,11 +54,11 @@
       />
     </div>
     <span
-      v-if="ariaLoadingText"
+      v-if="screenReaderText"
       :id="uniqId"
       class="d-d-none"
     >
-      {{ ariaLoadingText }}
+      {{ screenReaderText }}
     </span>
   </div>
 </template>
@@ -102,7 +98,7 @@ export default {
       default: -1,
     },
 
-    ariaLoadingText: {
+    screenReaderText: {
       type: String,
       default: '',
     },

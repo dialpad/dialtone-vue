@@ -1,41 +1,34 @@
 <template>
-  <div
-    :tabindex="isFocusable ? 0 : -1"
-    :aria-describedby="ariaDescribedBy"
-  >
-    <div
-      aria-hidden="true"
+  <div>
+    <dt-skeleton-list-item
+      v-if="listItemOption"
+      v-bind="listItemOption"
+      :screen-reader-text="screenReaderText"
+      :animation-duration="animationDuration"
+      :animate="animate"
+      :offset="offset"
     >
-      <dt-skeleton-list-item
-        v-if="listItemOption"
-        v-bind="listItemOption"
-        :aria-loading-text="ariaLoadingText"
-        :animation-duration="animationDuration"
-        :animate="animate"
-        :offset="offset"
-      >
-        <template #default>
-          <slot name="list-item" />
-        </template>
-      </dt-skeleton-list-item>
-      <dt-skeleton-shape
-        v-else-if="shapeOption"
-        v-bind="shapeOption"
-        :aria-loading-text="ariaLoadingText"
-        :animation-duration="animationDuration"
-        :animate="animate"
-        :offset="offset"
-      />
-      <dt-skeleton-text
-        v-else
-        v-bind="textOption"
-        :aria-loading-text="ariaLoadingText"
-        :animation-duration="animationDuration"
-        :animate="animate"
-        :offset="offset"
-      />
-      <slot />
-    </div>
+      <template #default>
+        <slot name="list-item" />
+      </template>
+    </dt-skeleton-list-item>
+    <dt-skeleton-shape
+      v-else-if="shapeOption"
+      v-bind="shapeOption"
+      :screen-reader-text="screenReaderText"
+      :animation-duration="animationDuration"
+      :animate="animate"
+      :offset="offset"
+    />
+    <dt-skeleton-text
+      v-else
+      v-bind="textOption"
+      :screen-reader-text="screenReaderText"
+      :animation-duration="animationDuration"
+      :animate="animate"
+      :offset="offset"
+    />
+    <slot />
   </div>
 </template>
 
@@ -43,7 +36,6 @@
 import DtSkeletonShape from './skeleton-shape';
 import DtSkeletonText from './skeleton-text';
 import DtSkeletonListItem from './skeleton-list-item';
-import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtSkeleton',
@@ -70,34 +62,19 @@ export default {
       default: -1,
     },
 
-    ariaLoadingText: {
+    screenReaderText: {
       type: String,
       default: '',
     },
 
-    isFocusable: {
-      type: Boolean,
-      default: false,
-    },
-
     animate: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     offset: {
       type: Number,
       default: 1,
-    },
-  },
-
-  computed: {
-    uniqId () {
-      return getUniqueString('DtSkeleton');
-    },
-
-    ariaDescribedBy () {
-      return this.isFocusable ? this.uniqId : '';
     },
   },
 };
