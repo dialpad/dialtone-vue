@@ -18,6 +18,7 @@
         class="d-mr8"
         :animation-duration="animationDuration"
         :animate="animate"
+        :aria-loading-text="ariaLoadingText"
       />
       <div class="d-d-flex d-fd-column d-w100p">
         <dt-skeleton-text
@@ -25,6 +26,7 @@
           :type="textType"
           :animation-duration="animationDuration"
           :animate="animate"
+          :aria-loading-text="ariaLoadingText"
         />
         <slot />
       </div>

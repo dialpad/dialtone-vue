@@ -9,6 +9,7 @@ import DtSkeletonVariantsTemplate from './skeleton_variants.story.vue';
 export const argsData = {
   some: 'prop',
   onEvent: action('event'),
+  ariaLoadingText: 'Loading',
 };
 
 /**

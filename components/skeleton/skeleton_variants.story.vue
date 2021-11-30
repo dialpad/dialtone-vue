@@ -1,197 +1,215 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
   <div>
-    Default empty a11y wrapper, without any props
-    <dt-skeleton aria-loading-text="ariaLoadingText" />
-    <br>
+    <section class="d-mb64">
+      <p class="d-mb8">
+        Default and empty skeleton variant
+      </p>
+      <dt-skeleton :aria-loading-text="ariaLoadingText" />
+    </section>
 
-    <dt-skeleton
-      :list-item-option="{
-        textList: 4,
-        textType: 'paragraphs',
-        shapeSize: 'md',
-        paragraphs: {
-          rows: 3,
-          randomWidth: true,
-          maxWidth: 40,
-          minWidth: 10,
-        },
-      }"
-      aria-loading-text="ariaLoadingText"
-    >
-      <template #list-item>
-        <dt-skeleton-shape
-          size="2xl"
-          shape="rectangle"
-          class="d-mt12"
-          aria-loading-text="ariaLoadingText"
+    <section class="d-mb64">
+      <p class="d-mb8">
+        Configurable skeleton with props and slot variant (paragraphs with randomWidth, maxWidth, minWidth)
+      </p>
+      <dt-skeleton
+        :list-item-option="{
+          textList: 4,
+          textType: 'paragraphs',
+          shapeSize: 'md',
+          paragraphs: {
+            rows: 3,
+            randomWidth: true,
+            maxWidth: 40,
+            minWidth: 10,
+          },
+        }"
+        :aria-loading-text="ariaLoadingText"
+      >
+        <template #list-item>
+          <dt-skeleton-shape
+            size="2xl"
+            shape="rectangle"
+            class="d-mt12"
+            :aria-loading-text="ariaLoadingText"
+          />
+        </template>
+      </dt-skeleton>
+    </section>
+
+    <section class="d-mb64">
+      <p class="d-mb8">
+        Skeleton shape circle variants
+      </p>
+      <div class="d-d-flex">
+        <dt-skeleton
+          v-for="size in shapeWidths"
+          :key="`${size}-circle`"
+          :shape-option="{
+            size,
+            shape: 'circle',
+          }"
+          class="d-mx4"
+          :aria-loading-text="ariaLoadingText"
         />
-      </template>
-    </dt-skeleton>
+      </div>
+    </section>
 
-    <div class="d-mb16" />
-    skeleton Prop(:shape-option="{size: {{ shapeWidths.join(' | ') }},  shape: 'circle' }
-    <dt-skeleton
-      v-for="size in shapeWidths"
-      :key="`${size}-circle`"
-      :shape-option="{
-        size,
-        shape: 'circle',
-      }"
-      class="d-mb4"
-      aria-loading-text="ariaLoadingText"
-    />
-    skeleton Prop(:shape-option="{size: {{ shapeWidths.join(' | ') }},  shape: 'square' }
-    <dt-skeleton
-      v-for="size in shapeWidths"
-      :key="`${size}-square`"
-      :shape-option="{
-        size,
-        shape: 'square',
-      }"
-      class="d-mb4"
-      aria-loading-text="ariaLoadingText"
-    />
-    skeleton Prop(:shape-option="{size: {{ shapeWidths.join(' | ') }},  shape: 'rectangle' }
-    <dt-skeleton
-      v-for="size in shapeWidths"
-      :key="`${size}-rectangle`"
-      :shape-option="{
-        size,
-        shape: 'rectangle',
-      }"
-      class="d-mb4"
-      aria-loading-text="ariaLoadingText"
-    />
+    <section class="d-mb64">
+      <p class="d-mb-2">
+        Skeleton square circle variants
+      </p>
+      <div class="d-d-flex">
+        <dt-skeleton
+          v-for="size in shapeWidths"
+          :key="`${size}-square`"
+          :shape-option="{
+            size,
+            shape: 'square',
+          }"
+          class="d-mx4"
+          :aria-loading-text="ariaLoadingText"
+        />
+      </div>
+    </section>
 
-    skeleton Prop(:shape-option="{size: {{ shapeWidths.join(' | ') }},  shape: 'pill' }
-    <dt-skeleton
-      v-for="size in shapeWidths"
-      :key="`${size}-pill`"
-      :shape-option="{
-        size,
-        shape: 'pill',
-      }"
-      class="d-mb4"
-      aria-loading-text="ariaLoadingText"
-    />
+    <section class="d-mb64">
+      <p class="d-mb-2">
+        Skeleton rectangle circle variants
+      </p>
+      <div class="d-d-flex">
+        <dt-skeleton
+          v-for="size in shapeWidths"
+          :key="`${size}-rectangle`"
+          :shape-option="{
+            size,
+            shape: 'rectangle',
+          }"
+          class="d-mx4"
+          :aria-loading-text="ariaLoadingText"
+        />
+      </div>
+    </section>
 
-    <div class="d-mb4">
-      Heading
-    </div>
+    <section class="d-mb64">
+      <p class="d-mb-2">
+        Skeleton pill variants
+      </p>
+      <div class="d-d-flex">
+        <dt-skeleton
+          v-for="size in shapeWidths"
+          :key="`${size}-pill`"
+          :shape-option="{
+            size,
+            shape: 'pill',
+          }"
+          class="d-mx4"
+          :aria-loading-text="ariaLoadingText"
+        />
+      </div>
+    </section>
 
-    skeleton Prop(:text-option="{headingHeight: {{ headingSize.join(' | ') }},
-    type: 'heading'
+    <section class="d-mb64">
+      <p class="d-mb-2">
+        Skeleton heading variants
+      </p>
+      <dt-skeleton
+        v-for="size in headingSize"
+        :key="`${size}-heading`"
+        :text-option="{
+          type: 'heading',
+          headingHeight: size,
+        }"
+        class="d-mb4"
+        :aria-loading-text="ariaLoadingText"
+      />
+    </section>
 
-    <dt-skeleton
-      v-for="size in headingSize"
-      :key="`${size}-heading`"
-      :text-option="{
-        type: 'heading',
-        headingHeight: size,
-      }"
-      class="d-mb4"
-      aria-loading-text="ariaLoadingText"
-    />
-    <br>
-    Label
-    <dt-skeleton
-      :text-option="{
-        type: 'label',
-      }"
-      class="d-mb4"
-      aria-loading-text="ariaLoadingText"
-    />
+    <section class="d-mb64">
+      <p class="d-mb-2">
+        Skeleton label variants
+      </p>
+      <dt-skeleton
+        :text-option="{
+          type: 'label',
+        }"
+        :aria-loading-text="ariaLoadingText"
+      />
+    </section>
 
-    skeleton Prop(:text-option="{type: 'paragraphs'}
-    <dt-skeleton
-      :text-option="{ type: 'paragraphs' }"
-      class="d-mb4"
-      aria-loading-text="ariaLoadingText"
-    />
-    <div class="d-mb4">
-      Paragraphs: With width for all lines
-    </div>
-    skeleton Prop(:text-option="{type: 'paragraphs', paragraphs: {
-    rows: 3,
-    width: ['50%', '18%', '90%'],
-    }}}
-    <dt-skeleton
-      :text-option="{
-        type: 'paragraphs',
-        paragraphs: {
-          rows: 3,
-          width: ['50%', '18%', '90%'],
-        },
-      }"
-      class="d-mb4"
-      aria-loading-text="ariaLoadingText"
-    />
-    <div class="d-mb4">
-      Paragraphs: With width for first and second lines
-    </div>
-    skeleton Prop(:text-option="{type: 'paragraphs', paragraphs: {
-    rows: 3,
-    width: ['50%'],
-    }}}
-    default: 100%;
-    last row = '38%'
-
-    <dt-skeleton
-      :text-option="{
-        type: 'paragraphs',
-        paragraphs: {
-          rows: 3,
-          width: ['50%'],
-        },
-      }"
-      class="d-mb4"
-      aria-loading-text="ariaLoadingText"
-    />
-    <div class="d-mb4">
-      Paragraphs: With random-width
-    </div>
-    skeleton Prop(:text-option="{type: 'paragraphs', paragraphs: {
-    rows: 7,
-    randomWidth: true,
-    }}}
-
-    <dt-skeleton
-      :text-option="{
-        type: 'paragraphs',
-        paragraphs: {
-          rows: 7,
-          randomWidth: true,
-        },
-      }"
-      aria-loading-text="ariaLoadingText"
-      class="d-mb4"
-    />
-    <div class="d-mb4">
-      Paragraphs: With random-width and max/min
-    </div>
-
-    skeleton Prop(:text-option="{type: 'paragraphs', rows: 7, paragraphs: {
-    rows: 7,
-    randomWidth: true,
-    maxWidth: 90,
-    minWidth: 10,
-    }}}
-    <dt-skeleton
-      :text-option="{
-        type: 'paragraphs',
-        paragraphs: {
-          rows: 7,
-          randomWidth: true,
-          maxWidth: 90,
-          minWidth: 10,
-        },
-      }"
-      aria-loading-text="ariaLoadingText"
-      class="d-mb4"
-      animate
-    />
-    <br>
+    <section class="d-mb64">
+      <p class="d-mb8">
+        Skeleton paragraphs variants
+      </p>
+      <section class="d-pl12">
+        <p class="d-mb8">
+          Default configuration
+        </p>
+        <dt-skeleton
+          :text-option="{ type: 'paragraphs' }"
+          class="d-mb8"
+          :aria-loading-text="ariaLoadingText"
+        />
+        <p class="d-mb8">
+          Define width for all lines
+        </p>
+        <dt-skeleton
+          :text-option="{
+            type: 'paragraphs',
+            paragraphs: {
+              rows: 3,
+              width: ['50%', '18%', '90%'],
+            },
+          }"
+          class="d-mb8"
+          :aria-loading-text="ariaLoadingText"
+        />
+        <p class="d-mb8">
+          Define width for first and second lines
+        </p>
+        <dt-skeleton
+          :text-option="{
+            type: 'paragraphs',
+            paragraphs: {
+              rows: 3,
+              width: ['50%'],
+            },
+          }"
+          class="d-mb8"
+          :aria-loading-text="ariaLoadingText"
+        />
+        <p>
+          Use random-width
+        </p>
+        <dt-skeleton
+          :text-option="{
+            type: 'paragraphs',
+            paragraphs: {
+              rows: 7,
+              randomWidth: true,
+            },
+          }"
+          :aria-loading-text="ariaLoadingText"
+          class="d-mb8"
+        />
+        <p>
+          Focusable skeleton
+        </p>
+        <dt-skeleton
+          is-focusable
+          :text-option="{
+            type: 'paragraphs',
+            paragraphs: {
+              rows: 7,
+              randomWidth: true,
+              maxWidth: 90,
+              minWidth: 10,
+            },
+          }"
+          :aria-loading-text="ariaLoadingText"
+          animate
+        />
+      </section>
+    </section>
   </div>
 </template>
 

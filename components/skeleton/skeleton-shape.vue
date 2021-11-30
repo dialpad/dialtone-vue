@@ -59,7 +59,7 @@ export default {
 
     ariaLoadingText: {
       type: String,
-      required: true,
+      required: true, // or default '' and if it's no ariaLoadingText do not render span
     },
 
     isFocusable: {
