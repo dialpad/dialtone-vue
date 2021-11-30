@@ -3,7 +3,6 @@
     ref="skeleton-shape"
   >
     <div
-      v-if="hasLoading"
       aria-hidden="true"
       :class="[
         'placeholder',
@@ -15,12 +14,6 @@
         'animation-duration': `${animationDuration}ms`,
       }"
     />
-    <dt-lazy-show
-      :show="!hasLoading"
-      :transition="transitionContent"
-    >
-      <slot name="content" />
-    </dt-lazy-show>
     <span
       :id="uniqId"
       class="d-d-none"
@@ -37,14 +30,10 @@ import {
   SKELETON_SHAPES,
   SKELETON_WIDTHS,
 } from './skeleton_constants';
-import { DtLazyShow } from '../lazy_show';
 import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtSkeletonShape',
-  components: {
-    DtLazyShow,
-  },
 
   inject: {
     hasParentSkeleton: {
@@ -72,11 +61,6 @@ export default {
     animationDuration: {
       type: Number,
       default: 1000,
-    },
-
-    loading: {
-      type: Boolean,
-      default: true,
     },
 
     transitionContent: {
@@ -109,19 +93,6 @@ export default {
 
     uniqId () {
       return getUniqueString('DtSkeletonShape');
-    },
-
-    hasLoading () {
-      return this.skeletonPageOption ? this.skeletonPageOption.loading : this.loading;
-    },
-  },
-
-  watch: {
-    loading () {
-      if (!this.loading) {
-        this.$refs['skeleton-shape'].removeAttribute('tabindex');
-        this.$refs['skeleton-shape'].removeAttribute('aria-describedby');
-      }
     },
   },
 

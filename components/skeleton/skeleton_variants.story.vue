@@ -244,17 +244,11 @@
     shape: 'pill',
     size: 'md',
     }"
-    :loading="isLoadingButton"
-    <dt-button @click="isLoadingButton = !isLoadingButton">
-      Switch
-    </dt-button>
     <dt-skeleton
       :shape-option="{
         shape: 'pill',
         size: 'md',
       }"
-      :loading="isLoadingButton"
-      :show="isLoadingButton"
     >
       <template #content>
         <dt-button>
@@ -265,125 +259,25 @@
 
     <dt-skeleton
       class="d-w100p"
-      :loading="isLoadingButton"
-    >
-      <div class="d-d-flex d-ai-center d-jc-space-between d-w100p">
-        <dt-skeleton
-          :shape-option="{ shape: 'circle', size: 'md' }"
-        />
-        <dt-skeleton
-          class="d-w100p"
-          :text-option="{ type: 'label' }"
-        />
-        <dt-skeleton
-          :shape-option="{ shape: 'pill', size: 'md' }"
-        />
-        <dt-skeleton
-          class="d-w100p"
-          :text-option="{ type: 'label' }"
-        />
-      </div>
-      <template #content>
-        <dt-button>
-          Button
-        </dt-button>
-      </template>
-    </dt-skeleton>
+    />
     <br>
-    <dt-button
-      class="d-my8"
-      @click="skeletonPageLoaded = !skeletonPageLoaded"
-    >
-      Toggle skeleton page
-    </dt-button>
-    <dt-skeleton-page :loading="skeletonPageLoaded">
-      <dt-skeleton
-        :shape-option="{
-          shape: 'pill',
-          size: 'md',
-        }"
-        :loading="isLoadingButton"
-        :show="isLoadingButton"
-      >
-        <template #content>
-          <dt-button>
-            Button
-          </dt-button>
-        </template>
-      </dt-skeleton>
-
-      <dt-skeleton
-        class="d-w100p"
-      >
-        <div class="d-d-flex d-ai-center d-jc-space-between d-w100p">
-          <dt-skeleton
-            :shape-option="{ shape: 'circle', size: 'md' }"
-          />
-          <dt-skeleton
-            class="d-w100p"
-            :text-option="{ type: 'label' }"
-          />
-          <dt-skeleton
-            :shape-option="{ shape: 'pill', size: 'md' }"
-          >
-            <dt-skeleton
-              class="d-w100p"
-              :text-option="{ type: 'label' }"
-            >
-              <dt-skeleton
-                class="d-w100p"
-                :shape-option="{ shape: 'circle', size: 'md' }"
-              >
-                <template #content>
-                  <dt-button>
-                    dt-skeleton-child
-                  </dt-button>
-                </template>
-              </dt-skeleton>
-              <template #content>
-                <dt-button>
-                  dt-skeleton-child
-                </dt-button>
-              </template>
-            </dt-skeleton>
-          </dt-skeleton>
-          <dt-skeleton
-            class="d-w100p"
-            :text-option="{ type: 'label' }"
-          >
-            <template #content>
-              <dt-button>
-                dt-skeleton-child
-              </dt-button>
-            </template>
-          </dt-skeleton>
-        </div>
-        <template #content>
-          <dt-button>
-            Button
-          </dt-button>
-        </template>
-      </dt-skeleton>
-    </dt-skeleton-page>
   </div>
 </template>
 
 <script>
 import DtSkeletonShape from './skeleton-shape';
 import DtSkeleton from './skeleton';
-import DtSkeletonPage from './skeleton-page';
 
 import { SKELETON_WIDTHS, SKELETON_HEADING_HEIGHTS } from './skeleton_constants';
 import DtButton from '../button/button';
 
 export default {
   name: 'DtSkeletonVariants',
-  components: { DtButton, DtSkeleton, DtSkeletonShape, DtSkeletonPage },
+  components: { DtButton, DtSkeleton, DtSkeletonShape },
   data () {
     return {
       shapeWidths: Object.keys(SKELETON_WIDTHS),
       headingSize: Object.keys(SKELETON_HEADING_HEIGHTS),
-      isLoadingButton: true,
       skeletonPageLoaded: false,
     };
   },

@@ -3,7 +3,6 @@
     ref="skeleton"
   >
     <div
-      v-if="hasLoading"
       aria-hidden="true"
     >
       <dt-skeleton-list
@@ -28,19 +27,8 @@
         v-bind="textOption"
         :animation-duration="animationDuration"
       />
-      <template v-if="!skeletonPageOption">
-        <slot />
-      </template>
-    </div>
-    <template v-if="skeletonPageOption">
       <slot />
-    </template>
-    <dt-lazy-show
-      :show="!hasLoading"
-      :transition="transitionContent"
-    >
-      <slot name="content" />
-    </dt-lazy-show>
+    </div>
     <span
       :id="uniqId"
       class="d-d-none described-text"
@@ -54,24 +42,13 @@
 import DtSkeletonShape from './skeleton-shape';
 import DtSkeletonText from './skeleton-text';
 import DtSkeletonList from './skeleton-list';
-import { DtLazyShow } from '../lazy_show';
 import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtSkeleton',
-  components: { DtSkeletonText, DtSkeletonShape, DtSkeletonList, DtLazyShow },
+  components: { DtSkeletonText, DtSkeletonShape, DtSkeletonList },
   provide: {
     hasParentSkeleton: true,
-  },
-
-  inject: {
-    hasParentSkeleton: {
-      default: false,
-    },
-
-    skeletonPageOption: {
-      default: null,
-    },
   },
 
   props: {
@@ -88,11 +65,6 @@ export default {
     shapeOption: {
       type: Object,
       default: null,
-    },
-
-    loading: {
-      type: Boolean,
-      default: true,
     },
 
     animationDuration: {
@@ -113,19 +85,6 @@ export default {
   computed: {
     uniqId () {
       return getUniqueString('DtSkeleton');
-    },
-
-    hasLoading () {
-      return this.skeletonPageOption ? this.skeletonPageOption.loading : this.loading;
-    },
-  },
-
-  watch: {
-    loading () {
-      if (!this.loading) {
-        this.$refs.skeleton.removeAttribute('tabindex');
-        this.$refs.skeleton.removeAttribute('aria-describedby');
-      }
     },
   },
 

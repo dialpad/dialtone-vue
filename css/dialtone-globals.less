@@ -131,18 +131,46 @@
 
 @keyframes placeholder-throb {
   10% {
-    background: darken(#F2F2F6, 10%);
+    background: darken(#DFDEE5, 10%);
   }
   50% {
-    background: darken(#F2F2F6, 15%);
+    background: darken(#DFDEE5, 10%);
   }
   90% {
+    background: darken(#DFDEE5, 10%);
+  }
+}
+
+// The --placeholder-from-color and --placeholder-to-color
+// custom properties can be set on the parent class of the
+// placeholder to control the animation colors.
+@keyframes placeholder-throb {
+  10% {
+    fill: darken(#DFDEE5, 10%);
+    fill: var(--placeholder-from-color, darken(#DFDEE5, 10%));
+    background: darken(#DFDEE5, 10%);
+    background: var(--placeholder-from-color, darken(#DFDEE5, 10%));
+  }
+  50% {
+    fill: darken(#F2F2F6, 10%);
+    fill: var(--placeholder-to-color, darken(#F2F2F6, 10%));
     background: darken(#F2F2F6, 10%);
+    background: var(--placeholder-to-color, darken(#F2F2F6, 10%));
+  }
+  90% {
+    fill: darken(#DFDEE5, 10%);
+    fill: var(--placeholder-from-color, darken(#DFDEE5, 10%));
+    background: darken(#DFDEE5, 10%);
+    background: var(--placeholder-from-color,darken(#DFDEE5, 10%));
   }
 }
 
 .placeholder {
-  background: darken(#F2F2F6, 10%);
+  stroke: none;
+  fill: darken(#DFDEE5, 10%);
+  fill: var(--placeholder-from-color, darken(#DFDEE5, 10%));
+  background: darken(#DFDEE5, 10%);
+  background: var(--placeholder-from-color, darken(#DFDEE5, 10%));
   animation-name: placeholder-throb;
   animation-iteration-count: infinite;
 }
