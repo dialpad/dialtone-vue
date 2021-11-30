@@ -1,5 +1,9 @@
 <template>
-  <div ref="skeleton-text">
+  <div
+    ref="skeleton-text"
+    :tabindex="isFocusable ? 0 : -1"
+    :aria-describedby="ariaDescribedBy"
+  >
     <div
       v-if="type === 'label'"
       aria-hidden="true"
@@ -58,16 +62,6 @@ import { getUniqueString } from '../utils';
 export default {
   name: 'SkeletonText',
 
-  inject: {
-    hasParentSkeleton: {
-      default: false,
-    },
-
-    skeletonPageOption: {
-      default: null,
-    },
-  },
-
   props: {
     type: {
       type: String,
@@ -96,13 +90,14 @@ export default {
       default: 1000,
     },
 
-    transitionContent: {
-      type: String,
-    },
-
     ariaLoadingText: {
       type: String,
       default: 'Loading',
+    },
+
+    isFocusable: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -116,13 +111,10 @@ export default {
     uniqId () {
       return getUniqueString('DtSkeleton');
     },
-  },
 
-  mounted () {
-    if (!this.hasParentSkeleton) {
-      this.$refs['skeleton-text'].setAttribute('tabindex', '0');
-      this.$refs['skeleton-text'].setAttribute('aria-describedby', this.uniqId);
-    }
+    ariaDescribedBy () {
+      return this.isFocusable ? this.uniqId : '';
+    },
   },
 
   methods: {

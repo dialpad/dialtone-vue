@@ -1,39 +1,33 @@
 <template>
-  <div ref="skeleton-list">
-    <template v-if="(hasAvatar || hasText)">
-      <div
-        v-for="row in list"
-        :key="`avatar-list-${row}`"
-        aria-hidden="true"
-        :class="{
-          'd-d-flex': hasText && hasAvatar,
-          'd-ai-center': hasText && hasAvatar && !paragraph,
-          'd-mb12': textList && row !== list && hasAvatar,
-        }"
-      >
-        <dt-skeleton-shape
-          v-if="hasAvatar"
-          :size="avatarSize"
-          :shape="icon ? 'square' : 'circle'"
-          :class="{
-            'd-mr8': hasText && hasAvatar,
-          }"
+  <div
+    ref="skeleton-list"
+    :tabindex="isFocusable ? 0 : -1"
+    :aria-describedby="ariaDescribedBy"
+  >
+    <div
+      aria-hidden="true"
+      :class="[
+        'd-d-flex',
+        {
+          'd-ai-center': textType !== 'paragraph',
+        },
+      ]"
+    >
+      <dt-skeleton-shape
+        :size="shapeSize"
+        :shape="shape"
+        class="d-mr8"
+        :animation-duration="animationDuration"
+      />
+      <div class="d-d-flex d-fd-column d-w100p">
+        <dt-skeleton-text
+          :paragraphs="paragraphOption"
+          :type="textType"
           :animation-duration="animationDuration"
         />
-        <div class="d-d-flex d-fd-column d-w100p">
-          <dt-skeleton-text
-            v-if="hasText"
-            :class="{
-              'd-mb16': textList && row !== list && !hasAvatar && !paragraph,
-            }"
-            :paragraphs="paragraphOption"
-            :type="paragraph ? 'paragraphs' : 'label'"
-            :animation-duration="animationDuration"
-          />
-          <slot :item="{ row, list }" />
-        </div>
+        <slot />
       </div>
-    </template>
+    </div>
     <span
       :id="uniqId"
       class="d-d-none"
@@ -44,7 +38,7 @@
 </template>
 
 <script>
-import { SKELETON_WIDTHS } from './skeleton_constants.js';
+import { SKELETON_SHAPES, SKELETON_TEXT_TYPES, SKELETON_WIDTHS } from './skeleton_constants.js';
 import DtSkeletonShape from './skeleton-shape';
 import DtSkeletonText from './skeleton-text';
 import { getUniqueString } from '../utils';
@@ -57,50 +51,28 @@ export default {
     DtSkeletonText,
   },
 
-  provide: {
-    hasParentSkeleton: true,
-  },
-
-  inject: {
-    hasParentSkeleton: {
-      default: false,
-    },
-
-    skeletonPageOption: {
-      default: null,
-    },
-  },
-
   props: {
-    avatar: {
+    shape: {
+      type: String,
+      default: 'circle',
+      validator: shape => Object.keys(SKELETON_SHAPES).includes(shape),
+    },
+
+    isFocusable: {
       type: Boolean,
       default: false,
     },
 
-    icon: {
-      type: Boolean,
-      default: false,
-    },
-
-    avatarSize: {
+    shapeSize: {
       type: String,
       default: 'sm',
       validator: size => Object.keys(SKELETON_WIDTHS).includes(size),
     },
 
-    text: {
-      type: Boolean,
-      default: true,
-    },
-
-    textList: {
-      type: Number,
-      default: null,
-    },
-
-    paragraph: {
-      type: Boolean,
-      default: false,
+    textType: {
+      type: String,
+      default: 'label',
+      validator: type => SKELETON_TEXT_TYPES.includes(type),
     },
 
     paragraphs: {
@@ -117,30 +89,11 @@ export default {
       type: String,
       default: 'Loading',
     },
-
-    transitionContent: {
-      type: String,
-    },
   },
 
   computed: {
     uniqId () {
-      return getUniqueString('DtSkeletonList');
-    },
-
-    hasAvatar () {
-      return this.avatar || this.icon;
-    },
-
-    hasText () {
-      return this.text || this.paragraph;
-    },
-
-    list () {
-      if (this.textList) return this.textList;
-      if (this.hasAvatar || this.text || this.paragraph) return 1;
-
-      return 0;
+      return getUniqueString('DtSkeletonListItem');
     },
 
     paragraphOption () {
@@ -151,13 +104,10 @@ export default {
           randomWidth: true,
         };
     },
-  },
 
-  mounted () {
-    if (!this.hasParentSkeleton) {
-      this.$refs['skeleton-list'].setAttribute('tabindex', '0');
-      this.$refs['skeleton-list'].setAttribute('aria-describedby', this.uniqId);
-    }
+    ariaDescribedBy () {
+      return this.isFocusable ? this.uniqId : '';
+    },
   },
 };
 </script>

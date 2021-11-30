@@ -1,6 +1,8 @@
 <template>
   <div
     ref="skeleton-shape"
+    :tabindex="isFocusable ? 0 : -1"
+    :aria-describedby="ariaDescribedBy"
   >
     <div
       aria-hidden="true"
@@ -35,16 +37,6 @@ import { getUniqueString } from '../utils';
 export default {
   name: 'DtSkeletonShape',
 
-  inject: {
-    hasParentSkeleton: {
-      default: false,
-    },
-
-    skeletonPageOption: {
-      default: null,
-    },
-  },
-
   props: {
     shape: {
       type: String,
@@ -63,13 +55,14 @@ export default {
       default: 1000,
     },
 
-    transitionContent: {
-      type: String,
-    },
-
     ariaLoadingText: {
       type: String,
       default: 'Loading',
+    },
+
+    isFocusable: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -81,12 +74,12 @@ export default {
   },
 
   computed: {
-    isSquareShape () {
+    isEqualSided () {
       return this.shape === 'circle' || this.shape === 'square';
     },
 
     widthClass () {
-      return this.isSquareShape
+      return this.isEqualSided
         ? SKELETON_WIDTHS[this.size]
         : SKELETON_RECTANGLE_WIDTH[this.size];
     },
@@ -94,13 +87,10 @@ export default {
     uniqId () {
       return getUniqueString('DtSkeletonShape');
     },
-  },
 
-  mounted () {
-    if (!this.hasParentSkeleton) {
-      this.$refs['skeleton-shape'].setAttribute('tabindex', '0');
-      this.$refs['skeleton-shape'].setAttribute('aria-describedby', this.uniqId);
-    }
+    ariaDescribedBy () {
+      return this.isFocusable ? this.uniqId : '';
+    },
   },
 };
 </script>

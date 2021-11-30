@@ -1,29 +1,27 @@
 <template>
   <div
     ref="skeleton"
+    :tabindex="isFocusable ? 0 : -1"
+    :aria-describedby="ariaDescribedBy"
   >
     <div
       aria-hidden="true"
     >
-      <dt-skeleton-list
-        v-if="listOption"
-        v-bind="listOption"
+      <dt-skeleton-list-item
+        v-if="listItemOption"
+        v-bind="listItemOption"
         :animation-duration="animationDuration"
       >
-        <template #default="{ item }">
-          <slot
-            name="list"
-            :item="{ row: item.row, list: item.list }"
-          />
+        <template #default>
+          <slot name="list-item" />
         </template>
-      </dt-skeleton-list>
+      </dt-skeleton-list-item>
       <dt-skeleton-shape
         v-else-if="shapeOption"
         v-bind="shapeOption"
         :animation-duration="animationDuration"
       />
       <dt-skeleton-text
-        v-else-if="textOption"
         v-bind="textOption"
         :animation-duration="animationDuration"
       />
@@ -41,18 +39,15 @@
 <script>
 import DtSkeletonShape from './skeleton-shape';
 import DtSkeletonText from './skeleton-text';
-import DtSkeletonList from './skeleton-list';
+import DtSkeletonListItem from './skeleton-list-item';
 import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtSkeleton',
-  components: { DtSkeletonText, DtSkeletonShape, DtSkeletonList },
-  provide: {
-    hasParentSkeleton: true,
-  },
+  components: { DtSkeletonText, DtSkeletonShape, DtSkeletonListItem },
 
   props: {
-    listOption: {
+    listItemOption: {
       type: Object,
       default: null,
     },
@@ -72,13 +67,14 @@ export default {
       default: 1000,
     },
 
-    transitionContent: {
-      type: String,
-    },
-
     ariaLoadingText: {
       type: String,
       default: 'Loading',
+    },
+
+    isFocusable: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -86,13 +82,10 @@ export default {
     uniqId () {
       return getUniqueString('DtSkeleton');
     },
-  },
 
-  mounted () {
-    if (!this.hasParentSkeleton) {
-      this.$refs.skeleton.setAttribute('tabindex', '0');
-      this.$refs.skeleton.setAttribute('aria-describedby', this.uniqId);
-    }
+    ariaDescribedBy () {
+      return this.isFocusable ? this.uniqId : '';
+    },
   },
 };
 </script>
