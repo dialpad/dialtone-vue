@@ -109,7 +109,6 @@
   animation: fade-out 0.18s ease-in-out;
 }
 
-// the animation is used by the popover component
 .d-zoom-enter, .d-zoom-leave-to {
   .d-modal--animate();
 }
@@ -149,9 +148,7 @@
   }
 }
 
-// The --placeholder-from-color and --placeholder-to-color
-// custom properties can be set on the parent class of the
-// placeholder to control the animation colors.
+// the animation is used by the skeleton component
 @keyframes placeholder-throb {
   10% {
     fill: @black-075;
