@@ -1,9 +1,8 @@
-import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import DtButtonGroup from './button_group';
 import DtButtonGroupMdx from './button_group.mdx';
 import DtButtonGroupDefaultTemplate from './button_group_default.story.vue';
-import {BUTTON_GROUP_ALIGNMENT, BUTTON_GROUP_SPACING} from './button_group_constants';
+import { BUTTON_GROUP_ALIGNMENT, BUTTON_GROUP_SPACING } from './button_group_constants';
 
 export const argTypesData = {
   // Slots

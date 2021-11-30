@@ -16,7 +16,7 @@
         importance="outlined"
       >
         Cancel
-      </dt-button> 
+      </dt-button>
     </template>
   </dt-button-group>
 </template>

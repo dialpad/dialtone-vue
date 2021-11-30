@@ -1,12 +1,12 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtButtonGroup from './button_group.vue';
-import { DtButton } from "../button";
+import { DtButton } from '../button';
 import ButtonsFixture from './buttons_decorator.vue';
 import {
   itBehavesLikeFailsCustomPropValidation,
-  itBehavesLikePassesCustomPropValidation
-} from "../../tests/shared_examples/validation";
+  itBehavesLikePassesCustomPropValidation,
+} from '../../tests/shared_examples/validation';
 
 // Constants
 const basePropsData = {};
@@ -38,11 +38,6 @@ describe('DtButtonGroup Tests', function () {
     _setChildWrappers();
   };
 
-  // Shared Examples
-  const itBehavesLikeSomeExpectation = () => {
-    it('should be equal', function () { assert.strictEqual(1, 1); });
-  };
-
   // Setup
   before(function () {
     this.localVue = createLocalVue();
@@ -72,7 +67,7 @@ describe('DtButtonGroup Tests', function () {
     describe('When buttons are provided', function () {
       // Test Setup
       beforeEach(function () {
-        slots = { default: ButtonsFixture};
+        slots = { default: ButtonsFixture };
       });
 
       describe('When the button group renders', function () {
