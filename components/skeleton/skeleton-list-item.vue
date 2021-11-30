@@ -8,7 +8,7 @@
       :class="[
         'd-d-flex',
         {
-          'd-ai-center': textType !== 'paragraph',
+          'd-ai-center': textType !== 'paragraphs',
         },
       ]"
     >

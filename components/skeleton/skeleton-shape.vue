@@ -6,11 +6,12 @@
     <div
       aria-hidden="true"
       :class="[
+        'skeleton-placeholder',
         SKELETON_SHAPES[shape],
         SKELETON_HEIGHTS[size],
         widthClass,
         {
-          placeholder: animate,
+          'skeleton-placeholder--animate': animate,
         },
       ]"
       :style="{

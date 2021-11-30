@@ -40,6 +40,9 @@
     "components/skeleton/skeleton.vue": {
       "vuejs-accessibility/aria-props": 3
     },
+    "components/skeleton/skeleton_variants.story.vue": {
+      "vuejs-accessibility/aria-props": 14
+    },
     "components/toast/toast.vue": {
       "vue/no-deprecated-dollar-listeners-api": 3
     },

@@ -25,6 +25,7 @@
         :animate="animate"
       />
       <dt-skeleton-text
+        v-else
         v-bind="textOption"
         :aria-loading-text="ariaLoadingText"
         :animation-duration="animationDuration"

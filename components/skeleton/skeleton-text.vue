@@ -8,8 +8,9 @@
       aria-hidden="true"
       :class="[
         'd-h8',
+        'skeleton-placeholder',
         {
-          placeholder: animate,
+          'skeleton-placeholder--animate': animate,
         },
       ]"
       :style="{
@@ -22,8 +23,9 @@
       aria-hidden="true"
       :class="[
         SKELETON_HEADING_HEIGHTS[headingHeight],
+        'skeleton-placeholder',
         {
-          placeholder: animate,
+          'skeleton-placeholder--animate': animate,
         },
       ]"
       :style="{
@@ -42,9 +44,10 @@
         :key="row"
         :class="[
           'd-h12',
+          'skeleton-placeholder',
           {
             'd-mb12': row !== paragraphs.rows,
-            placeholder: animate,
+            'skeleton-placeholder--animate': animate,
           },
         ]"
         :style="{
