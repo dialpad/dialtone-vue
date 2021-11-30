@@ -92,7 +92,7 @@ export default {
 
     ariaLoadingText: {
       type: String,
-      default: 'Loading',
+      required: true,
     },
 
     isFocusable: {

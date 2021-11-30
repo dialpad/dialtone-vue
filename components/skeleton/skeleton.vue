@@ -10,6 +10,7 @@
       <dt-skeleton-list-item
         v-if="listItemOption"
         v-bind="listItemOption"
+        :aria-loading-text="ariaLoadingText"
         :animation-duration="animationDuration"
       >
         <template #default>
@@ -19,10 +20,12 @@
       <dt-skeleton-shape
         v-else-if="shapeOption"
         v-bind="shapeOption"
+        :aria-loading-text="ariaLoadingText"
         :animation-duration="animationDuration"
       />
       <dt-skeleton-text
         v-bind="textOption"
+        :aria-loading-text="ariaLoadingText"
         :animation-duration="animationDuration"
       />
       <slot />
@@ -69,7 +72,7 @@ export default {
 
     ariaLoadingText: {
       type: String,
-      default: 'Loading',
+      required: true,
     },
 
     isFocusable: {
