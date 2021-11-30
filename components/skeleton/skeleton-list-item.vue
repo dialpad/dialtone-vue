@@ -19,6 +19,7 @@
         :animation-duration="animationDuration"
         :animate="animate"
         :aria-loading-text="ariaLoadingText"
+        :offset="offset"
       />
       <div class="d-d-flex d-fd-column d-w100p">
         <dt-skeleton-text
@@ -27,6 +28,7 @@
           :animation-duration="animationDuration"
           :animate="animate"
           :aria-loading-text="ariaLoadingText"
+          :offset="offset"
         />
         <slot />
       </div>
@@ -85,7 +87,7 @@ export default {
 
     animationDuration: {
       type: Number,
-      default: 1000,
+      default: -1,
     },
 
     ariaLoadingText: {
@@ -96,6 +98,11 @@ export default {
     animate: {
       type: Boolean,
       default: false,
+    },
+
+    offset: {
+      type: Number,
+      default: 1,
     },
   },
 

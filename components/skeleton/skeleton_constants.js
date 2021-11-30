@@ -1,4 +1,10 @@
-export const DEFAULT_CONSTANTS = null;
+// NOTE: RippleDuration controls how long the delay is for the animation
+// of a skeleton 1000 pixels from the top of the page. Each skeleton
+// from the top down will have a delay duration from 0 to this offset.
+// The delay of each skeleton animation is based on how far down the page
+// the skeleton is rendered. This is a linear relationship. The unit
+// is miliseconds.
+export const SKELETON_RIPPLE_DURATION = 3000;
 
 export const SKELETON_SHAPES = {
   circle: 'd-bar-circle',
@@ -47,5 +53,11 @@ export const SKELETON_HEADING_HEIGHTS = {
 };
 
 export default {
-  DEFAULT_CONSTANTS,
+  SKELETON_RIPPLE_DURATION,
+  SKELETON_SHAPES,
+  SKELETON_TEXT_TYPES,
+  SKELETON_WIDTHS,
+  SKELETON_HEIGHTS,
+  SKELETON_RECTANGLE_WIDTH,
+  SKELETON_HEADING_HEIGHTS,
 };

@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="skeleton-text"
     :tabindex="isFocusable ? 0 : -1"
     :aria-describedby="ariaDescribedBy"
   >
@@ -14,9 +15,7 @@
           'skeleton-placeholder--animate': animate,
         },
       ]"
-      :style="{
-        'animation-duration': `${animationDuration}ms`,
-      }"
+      :style="placeholderStyle"
     />
     <span
       :id="uniqId"
@@ -33,6 +32,7 @@ import {
   SKELETON_RECTANGLE_WIDTH,
   SKELETON_SHAPES,
   SKELETON_WIDTHS,
+  SKELETON_RIPPLE_DURATION,
 } from './skeleton_constants';
 import { getUniqueString } from '../utils';
 
@@ -54,7 +54,7 @@ export default {
 
     animationDuration: {
       type: Number,
-      default: 1000,
+      default: -1,
     },
 
     ariaLoadingText: {
@@ -70,6 +70,11 @@ export default {
     animate: {
       type: Boolean,
       default: false,
+    },
+
+    offset: {
+      type: Number,
+      default: 1,
     },
   },
 
@@ -97,6 +102,25 @@ export default {
 
     ariaDescribedBy () {
       return this.isFocusable ? this.uniqId : '';
+    },
+
+    placeholderOffset () {
+      const skeletonText = this.$refs['skeleton-shape'];
+      if (!skeletonText) { return this.offset; }
+      const { top, height } = skeletonText.getBoundingClientRect();
+      return top + (height / 2);
+    },
+
+    placeholderStyle () {
+      const style = {};
+      if (this.placeholderOffset === -1 || (!this.animate && this.animationDuration === -1)) {
+        return style;
+      }
+      const animationDelay = this.placeholderOffset * SKELETON_RIPPLE_DURATION / 1000;
+      const animationDuration = this.animationDuration === -1 ? 1000 : this.animationDuration;
+      style.animationDelay = `${animationDelay}ms`;
+      style.animationDuration = `${animationDuration}ms`;
+      return style;
     },
   },
 };

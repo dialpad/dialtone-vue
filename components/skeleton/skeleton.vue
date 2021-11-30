@@ -12,6 +12,7 @@
         :aria-loading-text="ariaLoadingText"
         :animation-duration="animationDuration"
         :animate="animate"
+        :offset="offset"
       >
         <template #default>
           <slot name="list-item" />
@@ -23,6 +24,7 @@
         :aria-loading-text="ariaLoadingText"
         :animation-duration="animationDuration"
         :animate="animate"
+        :offset="offset"
       />
       <dt-skeleton-text
         v-else
@@ -30,6 +32,7 @@
         :aria-loading-text="ariaLoadingText"
         :animation-duration="animationDuration"
         :animate="animate"
+        :offset="offset"
       />
       <slot />
     </div>
@@ -70,7 +73,7 @@ export default {
 
     animationDuration: {
       type: Number,
-      default: 1000,
+      default: -1,
     },
 
     ariaLoadingText: {
@@ -86,6 +89,11 @@ export default {
     animate: {
       type: Boolean,
       default: false,
+    },
+
+    offset: {
+      type: Number,
+      default: 1,
     },
   },
 
