@@ -14,6 +14,7 @@
       :animation-duration="animationDuration"
       :animate="animate"
       :offset="offset"
+      :screen-reader-text="screenReaderText"
     />
     <div class="d-d-flex d-fd-column d-w100p">
       <dt-skeleton-text
@@ -25,12 +26,6 @@
       />
       <slot />
     </div>
-    <span
-      v-if="screenReaderText"
-      class="d-d-none"
-    >
-      {{ screenReaderText }}
-    </span>
   </div>
 </template>
 
