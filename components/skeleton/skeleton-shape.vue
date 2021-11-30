@@ -6,10 +6,12 @@
     <div
       aria-hidden="true"
       :class="[
-        'placeholder',
         SKELETON_SHAPES[shape],
         SKELETON_HEIGHTS[size],
         widthClass,
+        {
+          placeholder: animate,
+        },
       ]"
       :style="{
         'animation-duration': `${animationDuration}ms`,
@@ -60,6 +62,11 @@ export default {
     },
 
     isFocusable: {
+      type: Boolean,
+      default: false,
+    },
+
+    animate: {
       type: Boolean,
       default: false,
     },

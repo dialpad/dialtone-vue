@@ -17,12 +17,14 @@
         :shape="shape"
         class="d-mr8"
         :animation-duration="animationDuration"
+        :animate="animate"
       />
       <div class="d-d-flex d-fd-column d-w100p">
         <dt-skeleton-text
           :paragraphs="paragraphOption"
           :type="textType"
           :animation-duration="animationDuration"
+          :animate="animate"
         />
         <slot />
       </div>
@@ -87,6 +89,11 @@ export default {
     ariaLoadingText: {
       type: String,
       required: true,
+    },
+
+    animate: {
+      type: Boolean,
+      default: false,
     },
   },
 

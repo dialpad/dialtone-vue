@@ -11,6 +11,7 @@
         v-bind="listItemOption"
         :aria-loading-text="ariaLoadingText"
         :animation-duration="animationDuration"
+        :animate="animate"
       >
         <template #default>
           <slot name="list-item" />
@@ -21,11 +22,13 @@
         v-bind="shapeOption"
         :aria-loading-text="ariaLoadingText"
         :animation-duration="animationDuration"
+        :animate="animate"
       />
       <dt-skeleton-text
         v-bind="textOption"
         :aria-loading-text="ariaLoadingText"
         :animation-duration="animationDuration"
+        :animate="animate"
       />
       <slot />
     </div>
@@ -75,6 +78,11 @@ export default {
     },
 
     isFocusable: {
+      type: Boolean,
+      default: false,
+    },
+
+    animate: {
       type: Boolean,
       default: false,
     },

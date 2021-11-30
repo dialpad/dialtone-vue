@@ -6,7 +6,12 @@
     <div
       v-if="type === 'label'"
       aria-hidden="true"
-      class="d-h8 placeholder"
+      :class="[
+        'd-h8',
+        {
+          placeholder: animate,
+        },
+      ]"
       :style="{
         width: textWidth,
         'animation-duration': `${animationDuration}ms`,
@@ -16,8 +21,10 @@
       v-else-if="type === 'heading'"
       aria-hidden="true"
       :class="[
-        'placeholder',
         SKELETON_HEADING_HEIGHTS[headingHeight],
+        {
+          placeholder: animate,
+        },
       ]"
       :style="{
         width: textWidth,
@@ -35,9 +42,9 @@
         :key="row"
         :class="[
           'd-h12',
-          'placeholder',
           {
             'd-mb12': row !== paragraphs.rows,
+            placeholder: animate,
           },
         ]"
         :style="{
@@ -95,6 +102,11 @@ export default {
     },
 
     isFocusable: {
+      type: Boolean,
+      default: false,
+    },
+
+    animate: {
       type: Boolean,
       default: false,
     },
