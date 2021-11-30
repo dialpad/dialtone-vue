@@ -1,6 +1,5 @@
 <template>
   <div
-    ref="skeleton"
     :tabindex="isFocusable ? 0 : -1"
     :aria-describedby="ariaDescribedBy"
   >
@@ -32,7 +31,7 @@
     </div>
     <span
       :id="uniqId"
-      class="d-d-none described-text"
+      class="d-d-none"
     >
       {{ ariaLoadingText }}
     </span>
@@ -92,15 +91,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.described-text {
-  position: absolute;
-  top: auto;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  width: 1px;
-  height: 1px;
-  white-space: nowrap;
-}
-</style>

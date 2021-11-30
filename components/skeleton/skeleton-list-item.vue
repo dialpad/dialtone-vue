@@ -1,6 +1,5 @@
 <template>
   <div
-    ref="skeleton-list"
     :tabindex="isFocusable ? 0 : -1"
     :aria-describedby="ariaDescribedBy"
   >
@@ -44,7 +43,7 @@ import DtSkeletonText from './skeleton-text';
 import { getUniqueString } from '../utils';
 
 export default {
-  name: 'DtSkeletonList',
+  name: 'DtSkeletonListItem',
 
   components: {
     DtSkeletonShape,

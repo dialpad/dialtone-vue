@@ -1,6 +1,5 @@
 <template>
   <div
-    ref="skeleton-shape"
     :tabindex="isFocusable ? 0 : -1"
     :aria-describedby="ariaDescribedBy"
   >
