@@ -110,7 +110,7 @@ export default {
 
     animate: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     offset: {
@@ -147,8 +147,8 @@ export default {
       if (this.placeholderOffset === -1 || (!this.animate && this.animationDuration === -1)) {
         return style;
       }
-      const animationDelay = this.placeholderOffset * SKELETON_RIPPLE_DURATION / 1000;
-      const animationDuration = this.animationDuration === -1 ? 1000 : this.animationDuration;
+      const animationDelay = this.placeholderOffset * SKELETON_RIPPLE_DURATION / 2000;
+      const animationDuration = this.animationDuration === -1 ? 2000 : this.animationDuration;
       style.animationDelay = `${animationDelay}ms`;
       style.animationDuration = `${animationDuration}ms`;
       return style;

@@ -4,7 +4,7 @@
       <p class="d-mb8">
         Default and empty skeleton variant
       </p>
-      <dt-skeleton :aria-loading-text="ariaLoadingText" />
+      <dt-skeleton :screen-reader-text="screenReaderText" />
     </section>
 
     <section class="d-mb64">
@@ -23,14 +23,14 @@
             minWidth: 10,
           },
         }"
-        :aria-loading-text="ariaLoadingText"
+        :screen-reader-text="screenReaderText"
       >
         <template #list-item>
           <dt-skeleton-shape
             size="2xl"
             shape="rectangle"
             class="d-mt12"
-            :aria-loading-text="ariaLoadingText"
+            :screen-reader-text="screenReaderText"
           />
         </template>
       </dt-skeleton>
@@ -49,7 +49,7 @@
             shape: 'circle',
           }"
           class="d-mx4"
-          :aria-loading-text="ariaLoadingText"
+          :screen-reader-text="screenReaderText"
         />
       </div>
     </section>
@@ -67,7 +67,7 @@
             shape: 'square',
           }"
           class="d-mx4"
-          :aria-loading-text="ariaLoadingText"
+          :screen-reader-text="screenReaderText"
         />
       </div>
     </section>
@@ -85,7 +85,7 @@
             shape: 'rectangle',
           }"
           class="d-mx4"
-          :aria-loading-text="ariaLoadingText"
+          :screen-reader-text="screenReaderText"
         />
       </div>
     </section>
@@ -103,7 +103,7 @@
             shape: 'pill',
           }"
           class="d-mx4"
-          :aria-loading-text="ariaLoadingText"
+          :screen-reader-text="screenReaderText"
         />
       </div>
     </section>
@@ -120,7 +120,7 @@
           headingHeight: size,
         }"
         class="d-mb4"
-        :aria-loading-text="ariaLoadingText"
+        :screen-reader-text="screenReaderText"
       />
     </section>
 
@@ -132,7 +132,7 @@
         :text-option="{
           type: 'label',
         }"
-        :aria-loading-text="ariaLoadingText"
+        :screen-reader-text="screenReaderText"
       />
     </section>
 
@@ -147,7 +147,7 @@
         <dt-skeleton
           :text-option="{ type: 'paragraphs' }"
           class="d-mb8"
-          :aria-loading-text="ariaLoadingText"
+          :screen-reader-text="screenReaderText"
         />
         <p class="d-mb8">
           Define width for all lines
@@ -161,7 +161,7 @@
             },
           }"
           class="d-mb8"
-          :aria-loading-text="ariaLoadingText"
+          :screen-reader-text="screenReaderText"
         />
         <p class="d-mb8">
           Define width for first and second lines
@@ -175,7 +175,7 @@
             },
           }"
           class="d-mb8"
-          :aria-loading-text="ariaLoadingText"
+          :screen-reader-text="screenReaderText"
         />
         <p>
           Use random-width
@@ -188,25 +188,8 @@
               randomWidth: true,
             },
           }"
-          :aria-loading-text="ariaLoadingText"
+          :screen-reader-text="screenReaderText"
           class="d-mb8"
-        />
-        <p>
-          Focusable skeleton
-        </p>
-        <dt-skeleton
-          is-focusable
-          :text-option="{
-            type: 'paragraphs',
-            paragraphs: {
-              rows: 7,
-              randomWidth: true,
-              maxWidth: 90,
-              minWidth: 10,
-            },
-          }"
-          :aria-loading-text="ariaLoadingText"
-          animate
         />
       </section>
     </section>

@@ -4,7 +4,7 @@
 // The delay of each skeleton animation is based on how far down the page
 // the skeleton is rendered. This is a linear relationship. The unit
 // is miliseconds.
-export const SKELETON_RIPPLE_DURATION = 3000;
+export const SKELETON_RIPPLE_DURATION = 3000000;
 
 export const SKELETON_SHAPES = {
   circle: 'd-bar-circle',

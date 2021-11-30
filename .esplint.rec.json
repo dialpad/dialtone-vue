@@ -37,9 +37,6 @@
     "components/skeleton/skeleton-text.vue": {
       "complexity": 1
     },
-    "components/skeleton/skeleton_variants.story.vue": {
-      "vuejs-accessibility/aria-props": 14
-    },
     "components/toast/toast.vue": {
       "vue/no-deprecated-dollar-listeners-api": 3
     },
