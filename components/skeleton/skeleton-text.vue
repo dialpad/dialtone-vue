@@ -58,6 +58,7 @@
       />
     </div>
     <span
+      v-if="ariaLoadingText"
       :id="uniqId"
       class="d-d-none"
     >
@@ -69,6 +70,7 @@
 <script>
 import { SKELETON_HEADING_HEIGHTS, SKELETON_TEXT_TYPES, SKELETON_RIPPLE_DURATION } from './skeleton_constants';
 import { getUniqueString } from '../utils';
+
 export default {
   name: 'SkeletonText',
 
@@ -102,7 +104,7 @@ export default {
 
     ariaLoadingText: {
       type: String,
-      required: true,
+      default: '',
     },
 
     isFocusable: {

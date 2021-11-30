@@ -33,12 +33,6 @@
         <slot />
       </div>
     </div>
-    <span
-      :id="uniqId"
-      class="d-d-none"
-    >
-      {{ ariaLoadingText }}
-    </span>
   </div>
 </template>
 

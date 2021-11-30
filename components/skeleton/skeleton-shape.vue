@@ -18,6 +18,7 @@
       :style="placeholderStyle"
     />
     <span
+      v-if="ariaLoadingText"
       :id="uniqId"
       class="d-d-none"
     >
@@ -59,7 +60,7 @@ export default {
 
     ariaLoadingText: {
       type: String,
-      required: true, // or default '' and if it's no ariaLoadingText do not render span
+      default: '',
     },
 
     isFocusable: {

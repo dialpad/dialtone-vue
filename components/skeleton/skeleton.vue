@@ -36,12 +36,6 @@
       />
       <slot />
     </div>
-    <span
-      :id="uniqId"
-      class="d-d-none"
-    >
-      {{ ariaLoadingText }}
-    </span>
   </div>
 </template>
 
@@ -78,7 +72,7 @@ export default {
 
     ariaLoadingText: {
       type: String,
-      required: true,
+      default: '',
     },
 
     isFocusable: {
