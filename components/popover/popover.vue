@@ -1,7 +1,8 @@
 <template>
   <component :is="elementType">
     <dt-lazy-show
-      v-if="modal"
+      v-show="modal"
+      ref="overlay"
       :show="isOpeningPopover"
       transition="d-zoom"
       class="
@@ -327,6 +328,11 @@ export default {
       default: 300,
       validator: zIndex => !!Number(zIndex),
     },
+
+    overlayAppendTo: {
+      type: HTMLElement,
+      default: () => document.body,
+    },
   },
 
   emits: ['update:open'],
@@ -425,6 +431,7 @@ export default {
     // align z-indexes when popover has modal prop
     if (this.modal) {
       this.anchorEl.classList.add('d-zi-notification');
+      this.appendOverlay();
       zIndex = zIndex > 600 ? zIndex : 700;
     }
     // align popover content width when
@@ -463,6 +470,16 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    appendOverlay () {
+      const overlay = this.$refs.overlay.$el;
+      const { lastChild } = this.overlayAppendTo;
+      if (lastChild) {
+        this.overlayAppendTo.insertBefore(overlay, lastChild);
+      } else {
+        this.overlayAppendTo.append(overlay);
+      }
+    },
+
     getPlacement (vertical = 'bottom', horizontal = 'end') {
       const verticalAlignment = vertical || 'bottom';
       const horizontalAlignment = horizontal || 'end';
