@@ -15,7 +15,6 @@ export const SKELETON_SHAPES = {
 
 export const SKELETON_TEXT_TYPES = [
   'label',
-  'paragraphs',
   'heading',
 ];
 

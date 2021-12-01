@@ -9,6 +9,7 @@
         {
           'skeleton-placeholder--animate': animate,
         },
+        contentClass,
       ]"
       :style="{
         width: textWidth,
@@ -24,35 +25,13 @@
         {
           'skeleton-placeholder--animate': animate,
         },
+        contentClass,
       ]"
       :style="{
         width: textWidth,
         ...placeholderStyle,
       }"
     />
-
-    <div
-      v-else-if="type === 'paragraphs'"
-      aria-hidden="true"
-      class="d-w100p"
-    >
-      <div
-        v-for="row in paragraphs.rows"
-        :key="row"
-        :class="[
-          'd-h12',
-          'skeleton-placeholder',
-          {
-            'd-mb12': row !== paragraphs.rows,
-            'skeleton-placeholder--animate': animate,
-          },
-        ]"
-        :style="{
-          width: getSizeParagraphRow(row),
-          ...placeholderStyle,
-        }"
-      />
-    </div>
     <span
       v-if="screenReaderText"
       :id="uniqId"
@@ -88,11 +67,6 @@ export default {
       default: '100%',
     },
 
-    paragraphs: {
-      type: Object,
-      default: () => ({ rows: 3 }),
-    },
-
     animationDuration: {
       type: Number,
       default: -1,
@@ -103,11 +77,6 @@ export default {
       default: '',
     },
 
-    isFocusable: {
-      type: Boolean,
-      default: false,
-    },
-
     animate: {
       type: Boolean,
       default: true,
@@ -116,6 +85,11 @@ export default {
     offset: {
       type: Number,
       default: 1,
+    },
+
+    contentClass: {
+      type: String,
+      default: '',
     },
   },
 
@@ -128,10 +102,6 @@ export default {
   computed: {
     uniqId () {
       return getUniqueString('DtSkeleton');
-    },
-
-    ariaDescribedBy () {
-      return this.isFocusable ? this.uniqId : '';
     },
 
     placeholderOffset () {
@@ -152,37 +122,6 @@ export default {
       style.animationDelay = `${animationDelay}ms`;
       style.animationDuration = `${animationDuration}ms`;
       return style;
-    },
-  },
-
-  methods: {
-    randomWidthPercentage () {
-      const minWidth = this.paragraphs.minWidth || 30;
-      const maxWidth = this.paragraphs.maxWidth || 100;
-      const min = Math.min(minWidth, maxWidth);
-      const max = Math.max(minWidth, maxWidth);
-      return `${Math.round(Math.random() * (max - min)) + min}%`;
-    },
-
-    getSizeParagraphRow (row) {
-      const paragraphWidth = this.paragraphs.width;
-      const isArrayWidth = Array.isArray(paragraphWidth);
-      const currentWidth = paragraphWidth?.[row - 1];
-      const isLastRow = row === this.paragraphs.rows;
-
-      if (this.paragraphs.randomWidth) {
-        return this.randomWidthPercentage();
-      }
-
-      if (paragraphWidth && !isArrayWidth) {
-        return paragraphWidth;
-      }
-
-      if (paragraphWidth && isArrayWidth && currentWidth) {
-        return currentWidth;
-      }
-
-      return isLastRow ? '38%' : '100%';
     },
   },
 };

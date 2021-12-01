@@ -20,9 +20,17 @@
       :animate="animate"
       :offset="offset"
     />
+    <dt-skeleton-paragraph
+      v-else-if="paragraphOption"
+      v-bind="paragraphOption === true ? {} : paragraphOption"
+      :screen-reader-text="screenReaderText"
+      :animation-duration="animationDuration"
+      :animate="animate"
+      :offset="offset"
+    />
     <dt-skeleton-text
       v-else
-      v-bind="textOption"
+      v-bind="textOption || {}"
       :screen-reader-text="screenReaderText"
       :animation-duration="animationDuration"
       :animate="animate"
@@ -36,12 +44,23 @@
 import DtSkeletonShape from './skeleton-shape';
 import DtSkeletonText from './skeleton-text';
 import DtSkeletonListItem from './skeleton-list-item';
+import DtSkeletonParagraph from './skeleton-paragraph';
 
 export default {
   name: 'DtSkeleton',
-  components: { DtSkeletonText, DtSkeletonShape, DtSkeletonListItem },
+  components: {
+    DtSkeletonText,
+    DtSkeletonShape,
+    DtSkeletonListItem,
+    DtSkeletonParagraph,
+  },
 
   props: {
+    paragraphOption: {
+      type: [Object, Boolean],
+      default: null,
+    },
+
     listItemOption: {
       type: Object,
       default: null,

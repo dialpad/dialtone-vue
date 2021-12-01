@@ -13,8 +13,6 @@
       </p>
       <dt-skeleton
         :list-item-option="{
-          textList: 4,
-          textType: 'paragraphs',
           shapeSize: 'md',
           paragraphs: {
             rows: 3,
@@ -145,7 +143,7 @@
           Default configuration
         </p>
         <dt-skeleton
-          :text-option="{ type: 'paragraphs' }"
+          paragraph-option
           class="d-mb8"
           :screen-reader-text="screenReaderText"
         />
@@ -153,12 +151,9 @@
           Define width for all lines
         </p>
         <dt-skeleton
-          :text-option="{
-            type: 'paragraphs',
-            paragraphs: {
-              rows: 3,
-              width: ['50%', '18%', '90%'],
-            },
+          :paragraph-option="{
+            rows: 3,
+            width: ['50%', '18%', '90%'],
           }"
           class="d-mb8"
           :screen-reader-text="screenReaderText"
@@ -167,12 +162,9 @@
           Define width for first and second lines
         </p>
         <dt-skeleton
-          :text-option="{
-            type: 'paragraphs',
-            paragraphs: {
-              rows: 3,
-              width: ['50%'],
-            },
+          :paragraph-option="{
+            rows: 3,
+            width: ['50%'],
           }"
           class="d-mb8"
           :screen-reader-text="screenReaderText"
@@ -181,12 +173,9 @@
           Use random-width
         </p>
         <dt-skeleton
-          :text-option="{
-            type: 'paragraphs',
-            paragraphs: {
-              rows: 7,
-              randomWidth: true,
-            },
+          :paragraph-option="{
+            rows: 7,
+            randomWidth: true,
           }"
           :screen-reader-text="screenReaderText"
           class="d-mb8"

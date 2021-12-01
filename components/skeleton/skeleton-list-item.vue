@@ -17,9 +17,8 @@
       :screen-reader-text="screenReaderText"
     />
     <div class="d-d-flex d-fd-column d-w100p">
-      <dt-skeleton-text
-        :paragraphs="paragraphsOptions"
-        :type="textType"
+      <dt-skeleton-paragraph
+        v-bind="paragraphsOptions"
         :animation-duration="animationDuration"
         :animate="animate"
         :offset="offset"
@@ -32,14 +31,14 @@
 <script>
 import { SKELETON_SHAPES, SKELETON_TEXT_TYPES, SKELETON_WIDTHS } from './skeleton_constants.js';
 import DtSkeletonShape from './skeleton-shape';
-import DtSkeletonText from './skeleton-text';
+import DtSkeletonParagraph from './skeleton-paragraph';
 
 export default {
   name: 'DtSkeletonListItem',
 
   components: {
     DtSkeletonShape,
-    DtSkeletonText,
+    DtSkeletonParagraph,
   },
 
   props: {
@@ -58,7 +57,7 @@ export default {
     textType: {
       type: String,
       default: 'paragraphs',
-      validator: type => SKELETON_TEXT_TYPES.includes(type),
+      validator: type => SKELETON_TEXT_TYPES.includes(type) || type === 'paragraphs',
     },
 
     paragraphs: {
@@ -89,7 +88,7 @@ export default {
 
   computed: {
     paragraphsOptions () {
-      return this.paragraphs || { rows: 4, randomWidth: true };
+      return this.paragraphs || { rows: 3, randomWidth: true };
     },
   },
 };
