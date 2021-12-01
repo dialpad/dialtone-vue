@@ -3,7 +3,7 @@
     <dt-lazy-show
       v-show="modal"
       ref="overlay"
-      :show="isOpeningPopover"
+      :show="modal && isOpeningPopover"
       transition="d-zoom"
       class="
         d-popover-overlay
@@ -431,9 +431,9 @@ export default {
     // align z-indexes when popover has modal prop
     if (this.modal) {
       this.anchorEl.classList.add('d-zi-notification');
-      this.appendOverlay();
       zIndex = zIndex > 600 ? zIndex : 700;
     }
+    this.appendOverlay();
     // align popover content width when
     if (this.contentWidth === 'anchor') {
       window.addEventListener('resize', this.onResize);
