@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    role="status"
+    :aria-label="screenReaderText"
+  >
     <dt-skeleton-list-item
       v-if="listItemOption"
       v-bind="listItemOption"

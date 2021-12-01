@@ -4,6 +4,27 @@
       <p class="d-mb8">
         Default and empty skeleton variant
       </p>
+      <dt-button
+        class="d-mb16"
+        @click="loading = !loading"
+      >
+        Toggle loading
+      </dt-button>
+
+      <dt-skeleton
+        v-if="loading"
+        :screen-reader-text="screenReaderText"
+        :offset="0.5"
+      />
+      <p v-else>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi ea, eligendi explicabo
+      </p>
+    </section>
+
+    <section class="d-mb64">
+      <p class="d-mb8">
+        Default and empty skeleton variant
+      </p>
       <dt-skeleton
         :screen-reader-text="screenReaderText"
         :offset="0.5"
@@ -193,17 +214,19 @@
 <script>
 import DtSkeletonShape from './skeleton-shape';
 import DtSkeleton from './skeleton';
+import { DtButton } from '../button';
 
 import { SKELETON_WIDTHS, SKELETON_HEADING_HEIGHTS } from './skeleton_constants';
 
 export default {
   name: 'DtSkeletonVariants',
-  components: { DtSkeleton, DtSkeletonShape },
+  components: { DtSkeleton, DtSkeletonShape, DtButton },
   data () {
     return {
       shapeWidths: Object.keys(SKELETON_WIDTHS),
       headingSize: Object.keys(SKELETON_HEADING_HEIGHTS),
       skeletonPageLoaded: false,
+      loading: true,
     };
   },
 };

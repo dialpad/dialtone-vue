@@ -2,7 +2,6 @@
   <div ref="skeleton">
     <div
       v-if="type === 'label'"
-      aria-hidden="true"
       :class="[
         'd-h8',
         'skeleton-placeholder',
@@ -18,7 +17,6 @@
     />
     <div
       v-else-if="type === 'heading'"
-      aria-hidden="true"
       :class="[
         SKELETON_HEADING_HEIGHTS[headingHeight],
         'skeleton-placeholder',

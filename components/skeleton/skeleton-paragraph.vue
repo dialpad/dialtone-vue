@@ -1,8 +1,5 @@
 <template>
-  <div
-    aria-hidden="true"
-    class="d-w100p"
-  >
+  <div class="d-w100p">
     <dt-skeleton-text
       v-for="row in integerRows"
       :key="row"

@@ -1,7 +1,6 @@
 <template>
   <div ref="skeleton">
     <div
-      aria-hidden="true"
       :class="[
         'skeleton-placeholder',
         SKELETON_SHAPES[shape],
