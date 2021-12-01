@@ -82,11 +82,10 @@ import {
   POPOVER_PADDING_CLASSES,
   POPOVER_ROLES,
   POPOVER_VERTICAL_ALIGNMENT,
-  TIPPY_HORIZONTAL_ALIGNMENT,
 } from './popover_constants';
 import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
-import { TOOLTIP_HIDE_ON_CLICK_VARIANTS, TOOLTIP_TIPPY_DIRECTIONS } from '../tooltip';
+import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
 import ModalMixin from '../mixins/modal.js';
 
 export default {
@@ -348,33 +347,30 @@ export default {
 
   computed: {
     fallbackPlacements () {
+      const verticalVariants = POPOVER_VERTICAL_ALIGNMENT.filter(alignment => alignment);
+      const horizontalVariants = POPOVER_HORIZONTAL_ALIGNMENT.filter(alignment => alignment);
       if (this.fixedAlignment === null && this.fixedVerticalAlignment === null) {
-        return POPOVER_VERTICAL_ALIGNMENT
-          .filter(verticalAlignment => verticalAlignment)
-          .map(verticalAlignment => TIPPY_HORIZONTAL_ALIGNMENT
-            .map(horizontalAlignment => `${verticalAlignment}-${horizontalAlignment}`))
-          .flat();
+        return verticalVariants.map(vertical =>
+          horizontalVariants.map(horizontal =>
+            this.getPlacement(vertical, horizontal)),
+        ).flat();
       }
 
       if (this.fixedAlignment === null) {
-        return TIPPY_HORIZONTAL_ALIGNMENT
-          .map(horizontalAlignment => `${this.fixedVerticalAlignment}-${horizontalAlignment}`);
+        return horizontalVariants
+          .map(horizontal => this.getPlacement(this.fixedVerticalAlignment, horizontal));
       }
 
       if (this.fixedVerticalAlignment === null) {
-        const horizontalAlignment = this.fixedAlignment === 'left' ? 'start' : 'end';
-        return POPOVER_VERTICAL_ALIGNMENT
-          .filter(verticalAlignment => verticalAlignment)
-          .map(verticalAlignment => `${verticalAlignment}-${horizontalAlignment}`);
+        return verticalVariants
+          .map(vertical => this.getPlacement(vertical, this.fixedAlignment));
       }
 
       return [];
     },
 
     placement () {
-      const verticalAlignment = this.fixedVerticalAlignment || 'bottom';
-      const horizontalAlignment = this.fixedAlignment === 'left' ? 'start' : 'end';
-      return `${verticalAlignment}-${horizontalAlignment}`;
+      return this.getPlacement(this.fixedVerticalAlignment, this.fixedAlignment);
     },
 
     isDialog () {
@@ -390,11 +386,9 @@ export default {
 
   watch: {
     placement (placement) {
-      if (TOOLTIP_TIPPY_DIRECTIONS[placement]) {
-        this.tip?.setProps({
-          placement,
-        });
-      }
+      this.tip?.setProps({
+        placement,
+      });
     },
 
     fallbackPlacements: {
@@ -440,7 +434,7 @@ export default {
     this.tip = tippy(this.anchorEl, this.getOptions({
       popperOptions: this.getPopperOptions(),
       tippyOptions: {
-        placement: this.getInitialPlacement(),
+        placement: this.placement,
         hideOnClick: this.hideOnClick,
         offset: this.offset,
         interactiveBorder: this.interactiveBorder,
@@ -469,6 +463,16 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    getPlacement (vertical = 'bottom', horizontal = 'end') {
+      const verticalAlignment = vertical || 'bottom';
+      const horizontalAlignment = horizontal || 'end';
+      if (horizontalAlignment === 'center') return verticalAlignment;
+      if (horizontalAlignment === 'left' || horizontalAlignment === 'right') {
+        return `${verticalAlignment}-${horizontalAlignment === 'left' ? 'start' : 'end'}`;
+      }
+      return `${verticalAlignment}-${horizontalAlignment}`;
+    },
+
     closePopover () {
       if (typeof this.hideOnClick === 'boolean' && this.hideOnClick) {
         this.tip.hide();
@@ -507,11 +511,9 @@ export default {
     onMount () {
       this.isPreventHidePopover = false;
       this.showPopover = true;
-      if (TOOLTIP_TIPPY_DIRECTIONS[this.placement]) {
-        this.tip?.setProps({
-          placement: this.placement,
-        });
-      }
+      this.tip?.setProps({
+        placement: this.placement,
+      });
     },
 
     onResize () {
@@ -540,7 +542,11 @@ export default {
           },
           getArrowDetected(({ state }) => {
             this.verticalAlignment = state.placement.includes('top') ? 'top' : 'bottom';
-            this.horizontalAlignment = state.placement.includes('start') ? 'left' : 'right';
+            if (state.placement === 'top' || state.placement === 'bottom') {
+              this.horizontalAlignment = 'center';
+            } else {
+              this.horizontalAlignment = state.placement.includes('start') ? 'left' : 'right';
+            }
           }),
         ],
       };
@@ -563,10 +569,6 @@ export default {
       };
     },
 
-    getInitialPlacement () {
-      return TOOLTIP_TIPPY_DIRECTIONS[this.placement] ? this.placement : this.fallbackPlacements[0];
-    },
-
     async setPopoverContentAnchorWidth () {
       await this.$nextTick();
       this.popoverContentEl.style.width = `${this.anchorEl.clientWidth}px`;
@@ -586,10 +588,14 @@ export default {
 
 .dt-popover__content {
   &--align-right {
-    right: @su0;
-
     .dt-popover__caret {
       right: @su24;
+    }
+  }
+
+  &--align-center {
+    .dt-popover__caret {
+      left: 50%;
     }
   }
 
