@@ -1,5 +1,5 @@
 <template>
-  <div ref="skeleton-text">
+  <div ref="skeleton">
     <div
       v-if="type === 'label'"
       aria-hidden="true"
@@ -12,8 +12,8 @@
         contentClass,
       ]"
       :style="{
-        width: textWidth,
-        ...placeholderStyle,
+        width,
+        ...skeletonStyle,
       }"
     />
     <div
@@ -28,13 +28,12 @@
         contentClass,
       ]"
       :style="{
-        width: textWidth,
-        ...placeholderStyle,
+        width,
+        ...skeletonStyle,
       }"
     />
     <span
       v-if="screenReaderText"
-      :id="uniqId"
       class="d-d-none"
     >
       {{ screenReaderText }}
@@ -43,11 +42,13 @@
 </template>
 
 <script>
-import { SKELETON_HEADING_HEIGHTS, SKELETON_TEXT_TYPES, SKELETON_RIPPLE_DURATION } from './skeleton_constants';
-import { getUniqueString } from '../utils';
+import { SKELETON_HEADING_HEIGHTS, SKELETON_TEXT_TYPES } from './skeleton_constants';
+import SkeletonAnimation from '../mixins/skeleton.js';
 
 export default {
-  name: 'SkeletonText',
+  name: 'DtSkeletonText',
+
+  mixins: [SkeletonAnimation],
 
   props: {
     type: {
@@ -62,7 +63,7 @@ export default {
       validator: headingHeight => Object.keys(SKELETON_HEADING_HEIGHTS).includes(headingHeight),
     },
 
-    textWidth: {
+    width: {
       type: String,
       default: '100%',
     },
@@ -97,32 +98,6 @@ export default {
     return {
       SKELETON_HEADING_HEIGHTS,
     };
-  },
-
-  computed: {
-    uniqId () {
-      return getUniqueString('DtSkeleton');
-    },
-
-    placeholderOffset () {
-      const skeletonText = this.$refs['skeleton-text'];
-      if (!skeletonText) { return this.offset; }
-      const { top, height } = skeletonText.getBoundingClientRect();
-      return top + (height / 2);
-    },
-
-    placeholderStyle () {
-      const style = {};
-
-      if (this.placeholderOffset === -1 || (!this.animate && this.animationDuration === -1)) {
-        return style;
-      }
-      const animationDelay = this.placeholderOffset * SKELETON_RIPPLE_DURATION / 2000;
-      const animationDuration = this.animationDuration === -1 ? 2000 : this.animationDuration;
-      style.animationDelay = `${animationDelay}ms`;
-      style.animationDuration = `${animationDuration}ms`;
-      return style;
-    },
   },
 };
 </script>

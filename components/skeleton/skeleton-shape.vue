@@ -1,5 +1,5 @@
 <template>
-  <div ref="skeleton-shape">
+  <div ref="skeleton">
     <div
       aria-hidden="true"
       :class="[
@@ -11,7 +11,7 @@
           'skeleton-placeholder--animate': animate,
         },
       ]"
-      :style="placeholderStyle"
+      :style="skeletonStyle"
     />
     <span
       v-if="screenReaderText"
@@ -23,16 +23,18 @@
 </template>
 
 <script>
+import SkeletonAnimation from '../mixins/skeleton.js';
 import {
   SKELETON_HEIGHTS,
   SKELETON_RECTANGLE_WIDTH,
   SKELETON_SHAPES,
   SKELETON_WIDTHS,
-  SKELETON_RIPPLE_DURATION,
 } from './skeleton_constants';
 
 export default {
   name: 'DtSkeletonShape',
+
+  mixins: [SkeletonAnimation],
 
   props: {
     shape: {
@@ -84,25 +86,6 @@ export default {
       return this.isEqualSided
         ? SKELETON_WIDTHS[this.size]
         : SKELETON_RECTANGLE_WIDTH[this.size];
-    },
-
-    placeholderOffset () {
-      const skeletonText = this.$refs['skeleton-shape'];
-      if (!skeletonText) { return this.offset; }
-      const { top, height } = skeletonText.getBoundingClientRect();
-      return top + (height / 2);
-    },
-
-    placeholderStyle () {
-      const style = {};
-      if (this.placeholderOffset === -1 || (!this.animate && this.animationDuration === -1)) {
-        return style;
-      }
-      const animationDelay = this.placeholderOffset * SKELETON_RIPPLE_DURATION / 2000;
-      const animationDuration = this.animationDuration === -1 ? 2000 : this.animationDuration;
-      style.animationDelay = `${animationDelay}ms`;
-      style.animationDuration = `${animationDuration}ms`;
-      return style;
     },
   },
 };

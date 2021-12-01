@@ -4,7 +4,10 @@
       <p class="d-mb8">
         Default and empty skeleton variant
       </p>
-      <dt-skeleton :screen-reader-text="screenReaderText" />
+      <dt-skeleton
+        :screen-reader-text="screenReaderText"
+        :offset="0.5"
+      />
     </section>
 
     <section class="d-mb64">
@@ -12,6 +15,7 @@
         Configurable skeleton with props and slot variant (paragraphs with randomWidth, maxWidth, minWidth)
       </p>
       <dt-skeleton
+        :offset="0.6"
         :list-item-option="{
           shapeSize: 'md',
           paragraphs: {
@@ -25,6 +29,7 @@
       >
         <template #list-item>
           <dt-skeleton-shape
+            :offset="0.7"
             size="2xl"
             shape="rectangle"
             class="d-mt12"

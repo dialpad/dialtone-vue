@@ -1,36 +1,27 @@
 <template>
-  <div>
-    <div
-      aria-hidden="true"
-      class="d-w100p"
-    >
-      <dt-skeleton-text
-        v-for="row in integerRows"
-        :key="row"
-        :class="[
-          {
-            'd-mb12': row !== integerRows,
-          },
-        ]"
-        content-class="d-h12"
-        :animate="animate"
-        :offset="offset"
-        :animation-duration="animationDuration"
-        :text-width="getSizeParagraphRow(row)"
-      />
-    </div>
-    <span
-      v-if="screenReaderText"
-      :id="uniqId"
-      class="d-d-none"
-    >
-      {{ screenReaderText }}
-    </span>
+  <div
+    aria-hidden="true"
+    class="d-w100p"
+  >
+    <dt-skeleton-text
+      v-for="row in integerRows"
+      :key="row"
+      :class="[
+        {
+          'd-mb12': row !== integerRows,
+        },
+      ]"
+      content-class="d-h12"
+      :animate="animate"
+      :screen-reader-text="row === 1 ? screenReaderText : ''"
+      :offset="offset"
+      :animation-duration="animationDuration"
+      :text-width="getSizeParagraphRow(row)"
+    />
   </div>
 </template>
 
 <script>
-import { getUniqueString } from '../utils';
 import { DtSkeletonText } from './index';
 
 const validator = number => number !== '' && !Number.isNaN(Number(number));
@@ -93,10 +84,6 @@ export default {
   computed: {
     integerRows () {
       return Number(this.rows);
-    },
-
-    uniqId () {
-      return getUniqueString('DtSkeletonParagraph');
     },
   },
 

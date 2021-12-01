@@ -42,9 +42,9 @@
 
 <script>
 import DtSkeletonShape from './skeleton-shape';
-import DtSkeletonText from './skeleton-text';
 import DtSkeletonListItem from './skeleton-list-item';
 import DtSkeletonParagraph from './skeleton-paragraph';
+import DtSkeletonText from './skeleton-text';
 
 export default {
   name: 'DtSkeleton',
