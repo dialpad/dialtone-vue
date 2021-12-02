@@ -26,6 +26,7 @@ export const SKELETON_WIDTHS = {
   xl: 'd-w64',
   '2xl': 'd-w96',
 };
+
 export const SKELETON_HEIGHTS = {
   xs: 'd-h16',
   sm: 'd-h24',

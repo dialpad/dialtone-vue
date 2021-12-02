@@ -66,7 +66,7 @@
 
     <section class="d-mb64">
       <p class="d-mb8">
-        Skeleton shape circle variants
+        Skeleton shape variants
       </p>
       <div class="d-d-flex">
         <dt-skeleton
@@ -84,7 +84,7 @@
 
     <section class="d-mb64">
       <p class="d-mb-2">
-        Skeleton square circle variants
+        Skeleton square variants
       </p>
       <div class="d-d-flex">
         <dt-skeleton
@@ -102,7 +102,7 @@
 
     <section class="d-mb64">
       <p class="d-mb-2">
-        Skeleton rectangle circle variants
+        Skeleton rectangle variants
       </p>
       <div class="d-d-flex">
         <dt-skeleton
@@ -154,7 +154,7 @@
 
     <section class="d-mb64">
       <p class="d-mb-2">
-        Skeleton label variants
+        Skeleton label variant
       </p>
       <dt-skeleton
         :text-option="{

@@ -1,15 +1,19 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
 import DtSkeleton from './skeleton';
 
-# DtSkeleton
+# Skeleton
 
 <Subtitle>
-    Skeleton is used to provide a low fidelity representation of the user interface (UI) before content appears on the page.
+    Skeleton loader is a non-interactive placeholder that displays a preview of the UI to visually communicate that
+    content is in the process of loading. Skeleton is used to provide a low fidelity representation of the user
+    interface (UI) before content appears on the page.
 </Subtitle>
 
 ## Base Style
 
-Skeleton renders "Skeleton text label" by default
+Skeleton loader are grey animated shapes that visually mimics the content. They use a pulsing wave effect motion to
+indicate they are loading. Use 2px rounded corners apart from circles. For text, use height that matches multiple of
+8px. For images, match the actual image size. Skeleton's default variant is `label`.
 
 <Canvas>
   <Story id="components-skeleton--default" />
@@ -27,6 +31,26 @@ Skeleton renders "Skeleton text label" by default
 
 ## Usage
 
+Do:
+
+- Use to represent a general layout of what is being loaded.
+- For a repeating list, show 6 items maximum, since it’s enough to give an idea of a layout.
+For conversations, limit to 3.
+- Use when data takes more than 300ms to load on an average connection for our user base.
+- Use skeleton loading for dynamic content, and use actual content for static content that doesn’t change e.g. page
+title, headings, action components (button, toggles, checkboxes etc.).
+- Dynamic content: Content that would change after loading, usually data-based text.
+- Static content: Content that can be loaded quickly and wouldn’t change, usually non-data-based text.
+- Always match the size of content that will load.
+- Always allow content to load gradually. Real content should replace skeleton objects immediately when the data
+is available.
+
+Don’t:
+
+- Be super detailed trying to represent everything in an interface.
+- Use for fast loading less than 300ms.
+- Use for user action feedback e.g. saving form.
+
 ### Import
 
 ```jsx
@@ -42,9 +66,12 @@ import { DtSkeleton } from '@dialpad/dialtone-vue';
 ### Skeleton text heading
 
 ```html
-<dt-skeleton arial-label="loading"  :textOption="{
-  type: 'heading'
-}"/>
+<dt-skeleton
+  arial-label="Loading"
+  :textOption="{
+    type: 'heading'
+  }"
+/>
 ```
 
 ### Skeleton paragraph
@@ -52,59 +79,84 @@ import { DtSkeleton } from '@dialpad/dialtone-vue';
 Random widths
 
 ```html
-<dt-skeleton arial-label="loading"  :paragraphOption="{
-          rows: 5,
-          minWidth: 50,
-          maxWidth: 80,
-          randomWidth: true,
-          offset: 0.7,
-}"/>
+<dt-skeleton
+  arial-label="Loading"
+  :paragraphOption="{
+    rows: 5,
+    minWidth: 50,
+    maxWidth: 80,
+    randomWidth: true,
+    offset: 0.7,
+  }
+"/>
 ```
 
 Fixed widths
 
 ```html
-<dt-skeleton arial-label="loading"  :paragraphOption="{
-          rows: 5,
-          offset: 0.7,
-          width: ['50%', '40%']
-}"/>
+<dt-skeleton
+  arial-label="Loading"
+  :paragraphOption="{
+    rows: 5,
+    offset: 0.7,
+    width: ['50%', '40%']
+  }"
+/>
 ```
 
 ### Skeleton list item
 
 ```html
-<dt-skeleton arial-label="loading"  :listItemOption="{
-  paragraphs: {
-          rows: 5,
-          minWidth: 50,
-          maxWidth: 80,
-          randomWidth: true,
-          offset: 0.7,
-  },
-  shape: 'rectangle'
-}"/>
+<dt-skeleton
+  arial-label="Loading"
+  :listItemOption="{
+    paragraphs: {
+      rows: 5,
+      minWidth: 50,
+      maxWidth: 80,
+      randomWidth: true,
+      offset: 0.7,
+    },
+    shape: 'rectangle'
+  }"
+/>
 ```
 
 ### Skeleton shape
 
 ```html
-<dt-skeleton arial-label="loading" :shapeOption="{
-  shape: 'square',
-  size: 'lg'
-}"/>
+<dt-skeleton
+  arial-label="Loading"
+  :shapeOption="{
+    shape: 'square',
+    size: 'lg'
+  }"
+/>
 ```
 
-## Accessibility
+### Accessibility
 
-If you need fully accessible skeleton (for a reason to load article for example)
-(it's not grid loading case), probably you will want to add aria-live="polite" aria-busy="false" to content html parent element
-to make it visible for screenreader content is loaded.
+For sighted users, they are able to see that there is loading content and no other action is needed until loading completes.
+Likewise, there is nothing that needs to be added for keyboard users.
+For users who rely on assistive technology, skeleton’s visual representation of a loading state won’t be accessible
+without additional labeling.
 
-Resources
+It's `role="status"` on the skeleton component, keep in mind, that:
+The aria live region role of status has an implicit `aria-live` value of `polite`, which allows a user to be notified
+via AT (such as a screen reader) when status messages are added. The `role` of `status` also has a default `aria-atomic`
+value of `true`, so that updates to the container marked with a role of status will result in the AT presenting the
+entire contents of the container to the user, including any author-defined labels (or additional nested elements).
 
-[Aria-busy](https://accessibilityresources.org/aria-busy)
+If you need fully accessible skeleton and loading content, probably you will want to add `aria-live="polite"`
+and `aria-busy="false"` to corresponding loaded content html element.
 
-[ARIA22](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA22)
+### References
 
-[Status role](https://www.digitala11y.com/status-role/)
+- [Aria-busy](https://accessibilityresources.org/aria-busy),
+[Status role](https://www.digitala11y.com/status-role/),
+[ARIA22](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA22),
+[a11y support status_role](https://a11ysupport.io/tech/aria/status_role#support-table-1)
+- [Carbon DS Loading pattern](https://www.carbondesignsystem.com/patterns/loading-pattern/),
+[Skeleton screens](https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a)
+- [Short note on being busy](https://www.tpgi.com/short-note-on-being-busy/),
+[More Accessible Skeletons](https://adrianroselli.com/2020/11/more-accessible-skeletons.html),
