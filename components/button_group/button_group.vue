@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      'btn-group',
+      'd-btn-group',
       BUTTON_GROUP_ALIGNMENT[this.alignment],
       BUTTON_GROUP_SPACING[this.spacing],
     ]"
@@ -55,43 +55,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.btn-group {
-  display: flex;
-
-  &.d-btn-group--start {
-    justify-content: start;
-  }
-
-  &.d-btn-group--end {
-    justify-content: end;
-  }
-
-  &.d-btn-group--space-between {
-    justify-content: space-between;
-  }
-
-  .d-btn:not(:last-child) {
-    margin-right: var(--su16);
-  }
-
-  &.d-btn-group--extra-tight {
-    .d-btn:not(:last-child) {
-      margin-right: var(--su8);
-    }
-  }
-
-  &.d-btn-group--tight {
-    .d-btn:not(:last-child) {
-      margin-right: var(--su12);
-    }
-  }
-
-  &.d-btn-group--loose {
-    .d-btn:not(:last-child) {
-      margin-right: var(--su24);
-    }
-  }
-}
-</style>
