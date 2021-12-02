@@ -3,9 +3,7 @@
     data-qa="skeleton-list-item"
     :class="[
       'd-d-flex',
-      {
-        'd-ai-center': textType !== 'paragraphs',
-      },
+      contentClass,
     ]"
   >
     <dt-skeleton-shape
@@ -15,10 +13,11 @@
       :animation-duration="animationDuration"
       :animate="animate"
       :offset="offset"
+      :content-class="shapeClass"
     />
     <div class="d-d-flex d-fd-column d-w100p">
       <dt-skeleton-paragraph
-        v-bind="paragraphsOptions"
+        v-bind="paragraphs"
         :animation-duration="animationDuration"
         :animate="animate"
         :offset="offset"
@@ -29,7 +28,7 @@
 </template>
 
 <script>
-import { SKELETON_SHAPES, SKELETON_TEXT_TYPES, SKELETON_WIDTHS } from './skeleton_constants.js';
+import { SKELETON_SHAPES, SKELETON_WIDTHS } from './skeleton_constants.js';
 import DtSkeletonShape from './skeleton-shape';
 import DtSkeletonParagraph from './skeleton-paragraph';
 
@@ -54,15 +53,9 @@ export default {
       validator: size => Object.keys(SKELETON_WIDTHS).includes(size),
     },
 
-    textType: {
-      type: String,
-      default: 'paragraphs',
-      validator: type => SKELETON_TEXT_TYPES.includes(type) || type === 'paragraphs',
-    },
-
     paragraphs: {
       type: Object,
-      default: null,
+      default: () => ({ rows: 3, randomWidth: true }),
     },
 
     animationDuration: {
@@ -79,11 +72,15 @@ export default {
       type: Number,
       default: 1,
     },
-  },
 
-  computed: {
-    paragraphsOptions () {
-      return this.paragraphs || { rows: 3, randomWidth: true };
+    shapeClass: {
+      type: String,
+      default: '',
+    },
+
+    contentClass: {
+      type: String,
+      default: '',
     },
   },
 };

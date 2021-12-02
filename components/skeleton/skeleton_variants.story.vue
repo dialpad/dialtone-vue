@@ -212,6 +212,20 @@
         />
       </section>
     </section>
+    <section class="d-mb64">
+      <p class="d-mb8">
+        Skeleton paragraph with custom class
+      </p>
+      <section class="d-pl12">
+        <dt-skeleton
+          :paragraph-option="{
+            rows: 6,
+            rowClass: 'd-h32',
+            randomWidth: true,
+          }"
+        />
+      </section>
+    </section>
   </div>
 </template>
 

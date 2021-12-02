@@ -1,6 +1,10 @@
 <template>
   <div
-    class="d-w100p"
+    :class="[
+      'd-w100p',
+      contentClass,
+    ]"
+    contentClass
     data-qa="skeleton-paragraph"
   >
     <dt-skeleton-text
@@ -12,11 +16,11 @@
           'd-mb12': row !== integerRows,
         },
       ]"
-      content-class="d-h12"
+      :content-class="`d-h12 ${rowClass}`"
       :animate="animate"
       :offset="offset"
       :animation-duration="animationDuration"
-      :text-width="getSizeParagraphRow(row)"
+      :width="getSizeParagraphRow(row)"
     />
   </div>
 </template>
@@ -73,6 +77,16 @@ export default {
     animationDuration: {
       type: Number,
       default: -1,
+    },
+
+    contentClass: {
+      type: String,
+      default: '',
+    },
+
+    rowClass: {
+      type: String,
+      default: '',
     },
   },
 

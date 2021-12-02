@@ -10,6 +10,7 @@
       {
         'skeleton-placeholder--animate': animate,
       },
+      contentClass,
     ]"
     :style="skeletonStyle"
   />
@@ -55,6 +56,11 @@ export default {
     offset: {
       type: Number,
       default: 1,
+    },
+
+    contentClass: {
+      type: String,
+      default: '',
     },
   },
 

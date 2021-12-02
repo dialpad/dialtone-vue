@@ -17,7 +17,9 @@ export const argTypesData = {
           width?: string, Array<string> | null,
           randomWidth?: boolean | false,
           offset?: number | 1,
-          animationDuration?: number| -1
+          animationDuration?: number| -1,
+          contentClass?: string | '',
+          rowClass?: string | '',
         }`,
       },
     },
@@ -29,11 +31,12 @@ export const argTypesData = {
         detail: `{
           shape?: string<circle | square | rectangle | pill> | 'circle',
           shapeSize?: string<xs | sm | md | lg | xl | 2xl> | 'md'
-          textType?: string <label | heading> | 'label',
+          shapeClass?: string | '',
           animate?: boolean | false,
           paragraphs?: paragraphOption | { rows: 3, randomWidth: true }
           offset?: number | 1,
-          animationDuration?: number| -1
+          animationDuration?: number| -1,
+          contentClass?: string | '',
         }`,
       },
     },
@@ -64,7 +67,8 @@ export const argTypesData = {
           size?: string<xs | sm | md | lg | xl | 2xl> | 'md'
           animate?: boolean | false,
           offset?: number | 1,
-          animationDuration?: number| -1
+          animationDuration?: number| -1,
+          contentClass?: string | '',
         }`,
       },
     },
