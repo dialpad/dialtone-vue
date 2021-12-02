@@ -4,21 +4,21 @@ import DtSkeleton from './skeleton';
 # DtSkeleton
 
 <Subtitle>
-  Some description of the component functionality.
+    Skeleton is used to provide a low fidelity representation of the user interface (UI) before content appears on the page.
 </Subtitle>
 
 ## Base Style
 
-Some description of how to use the base component, potential gotchas and limitations.
+Skeleton renders "Skeleton text label" by default
 
 <Canvas>
-  <Story id="<GROUP>-dt-skeleton--default" />
+  <Story id="components-skeleton--default" />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="<GROUP>-dt-skeleton--variants" />
+  <Story id="components-skeleton--variants" />
 </Canvas>
 
 ## Props, Slots & Events
@@ -33,18 +33,78 @@ Some description of how to use the base component, potential gotchas and limitat
 import { DtSkeleton } from '@dialpad/dialtone-vue';
 ```
 
-### With Some Variant
+### Skeleton text label
 
-```vue
-<dt-skeleton
-  some="variant"
-/>
+```html
+<dt-skeleton />
 ```
 
-### With Some Other Variant
+### Skeleton text heading
 
-```vue
-<dt-skeleton
-  some-other="variant"
-/>
+```html
+<dt-skeleton arial-label="loading"  :textOption="{
+  type: 'heading'
+}"/>
 ```
+
+### Skeleton paragraph
+
+Random widths
+
+```html
+<dt-skeleton arial-label="loading"  :paragraphOption="{
+          rows: 5,
+          minWidth: 50,
+          maxWidth: 80,
+          randomWidth: true,
+          offset: 0.7,
+}"/>
+```
+
+Fixed widths
+
+```html
+<dt-skeleton arial-label="loading"  :paragraphOption="{
+          rows: 5,
+          offset: 0.7,
+          width: ['50%', '40%']
+}"/>
+```
+
+### Skeleton list item
+
+```html
+<dt-skeleton arial-label="loading"  :listItemOption="{
+  paragraphs: {
+          rows: 5,
+          minWidth: 50,
+          maxWidth: 80,
+          randomWidth: true,
+          offset: 0.7,
+  },
+  shape: 'rectangle'
+}"/>
+```
+
+### Skeleton shape
+
+```html
+<dt-skeleton arial-label="loading" :shapeOption="{
+  shape: 'square',
+  size: 'lg'
+}"/>
+```
+
+## Accessibility
+
+If you need fully accessible skeleton (for a reason to load article for example)
+(it's not grid loading case), probably you will want to add aria-live="polite" aria-busy="false" to content html parent element
+to make it visible for screenreader content is loaded.
+
+Resources
+
+[Aria-busy](https://accessibilityresources.org/aria-busy)
+
+[ARIA22](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA22)
+
+[Status role](https://www.digitala11y.com/status-role/)
