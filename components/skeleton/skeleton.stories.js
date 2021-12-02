@@ -1,89 +1,102 @@
-import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import DtSkeleton from './skeleton';
 import DtSkeletonMdx from './skeleton.mdx';
 import DtSkeletonDefaultTemplate from './skeleton_default.story.vue';
 import DtSkeletonVariantsTemplate from './skeleton_variants.story.vue';
 
-// Default Prop Values
-export const argsData = {
-  some: 'prop',
-  onEvent: action('event'),
-  ariaLabel: 'Loading',
-};
-
-/**
- * example prop description decorator
- */
-
-/*
-  Controls
-  ========
-
-  Here we define any custom controls or control overrides for our components.
-
-  By default storybook will attempt to provide an appropriate control of the same name for each property in the
-  component as well as include any description provided using a prop decorator within your component (see above).
-
-  Storybook will also attempt to provide an appropriate control for each slot in the component as well as include any
-  description provided using a slot decorator within your component (see below).
-
-  <!-- @slot example slot decorator -->
-*/
 export const argTypesData = {
-  // Props
-  some: {
-    description: 'Describes the some prop',
+  paragraphOption: {
+    description: 'Interface for skeleton paragraph',
     table: {
-      category: 'props',
       type: {
-        summary: 'string',
+        detail: `{
+          rows?: number | string | 3,
+          animate?: boolean | false,
+          minWidth?: number | string | 30,
+          maxWidth?: number | string | 100,
+          width?: string, Array<string> | null,
+          randomWidth?: boolean | false,
+          offset?: number | 1,
+          animationDuration?: number| -1
+        }`,
       },
     },
-    control: {
-      type: 'text',
+  },
+  listItemOption: {
+    description: 'Interface for skeleton list item',
+    table: {
+      type: {
+        detail: `{
+          shape?: string<circle | square | rectangle | pill> | 'circle',
+          shapeSize?: string<xs | sm | md | lg | xl | 2xl> | 'md'
+          textType?: string <label | heading> | 'label',
+          animate?: boolean | false,
+          paragraphs?: paragraphOption | { rows: 3, randomWidth: true }
+          offset?: number | 1,
+          animationDuration?: number| -1
+        }`,
+      },
     },
   },
 
+  textOption: {
+    description: 'Interface for skeleton text',
+    table: {
+      type: {
+        detail: `null | {
+          type?: string <label | heading> | 'label',
+          headingHeight?: string<sm | md | lg | xl> | 'md',
+          width?: string | '100%',
+          contentClass?: string | '',
+          paragraphs?: paragraphOption | { rows: 3, randomWidth: true }
+          offset?: number | 1,
+          animationDuration?: number| -1
+        }`,
+      },
+    },
+  },
+
+  shapeOption: {
+    description: 'Interface for skeleton shape',
+    table: {
+      type: {
+        detail: `{
+          shape?: string<circle | square | rectangle | pill> | 'circle',
+          size?: string<xs | sm | md | lg | xl | 2xl> | 'md'
+          animate?: boolean | false,
+          offset?: number | 1,
+          animationDuration?: number| -1
+        }`,
+      },
+    },
+  },
+  ariaLabel: {
+    defaultValue: 'Loading',
+  },
   // Slots
-  default: {
-    control: 'text',
+  'list-item': {
+    description: `Slot for default slot skeleton-list-item`,
     table: {
       type: {
-        summary: 'text/html',
-      },
-    },
-  },
-  /*
-    We use the following naming scheme `<SLOT_NAME>Slot` for slot controls to prevent conflicts with props that share
-    the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
-    table and description within the controls accurately reflects the correct names of our component's props and slots.
-  */
-  someSlot: {
-    name: 'some',
-    description: 'Slot for some',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },
 
-  // Action Event Handlers
-  onEvent: {
+  default: {
+    description: `Slot for default slot skeleton`,
     table: {
-      disable: true,
+      type: {
+        summary: 'VNode',
+      },
     },
   },
 };
 
 // Story Collection
 export default {
-  title: 'Group/DtSkeleton',
+  title: 'Components/Skeleton',
   component: DtSkeleton,
-  args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {

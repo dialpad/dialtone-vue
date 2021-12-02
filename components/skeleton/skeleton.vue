@@ -6,7 +6,7 @@
   >
     <dt-skeleton-list-item
       v-if="listItemOption"
-      v-bind="listItemOption"
+      v-bind="listItemOption === true ? {} : listItemOption"
       :animation-duration="animationDuration"
       :animate="animate"
       :offset="offset"
@@ -17,7 +17,7 @@
     </dt-skeleton-list-item>
     <dt-skeleton-shape
       v-else-if="shapeOption"
-      v-bind="shapeOption"
+      v-bind="shapeOption === true ? {} : shapeOption"
       :animation-duration="animationDuration"
       :animate="animate"
       :offset="offset"
@@ -62,7 +62,7 @@ export default {
     },
 
     listItemOption: {
-      type: Object,
+      type: [Object, Boolean],
       default: null,
     },
 
@@ -72,7 +72,7 @@ export default {
     },
 
     shapeOption: {
-      type: Object,
+      type: [Object, Boolean],
       default: null,
     },
 
