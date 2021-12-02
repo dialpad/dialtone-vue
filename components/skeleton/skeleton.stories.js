@@ -48,7 +48,6 @@ export const argTypesData = {
           headingHeight?: string<sm | md | lg | xl> | 'md',
           width?: string | '100%',
           contentClass?: string | '',
-          paragraphs?: paragraphOption | { rows: 3, randomWidth: true }
           offset?: number | 1,
           animationDuration?: number| -1
         }`,

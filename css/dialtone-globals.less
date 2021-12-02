@@ -135,12 +135,8 @@
 .skeleton-placeholder {
   display: flex;
   stroke: none;
-  fill: @black-075;
   fill: var(--placeholder-from-color, @black-075);
-  background: @black-075;
   background: var(--placeholder-from-color, @black-075);
-  height: 12px;
-  border-radius: 6px;
 
   &--animate {
     animation-name: placeholder-throb;
@@ -151,21 +147,15 @@
 // the animation is used by the skeleton component
 @keyframes placeholder-throb {
   10% {
-    fill: @black-075;
     fill: var(--placeholder-from-color, @black-075);
-    background: @black-075;
     background: var(--placeholder-from-color, @black-075);
   }
   50% {
-    fill: @black-025;
     fill: var(--placeholder-to-color, @black-025);
-    background: @black-025;
     background: var(--placeholder-to-color, @black-025);
   }
   90% {
-    fill: @black-075;
     fill: var(--placeholder-from-color, @black-075);
-    background: @black-075;
     background: var(--placeholder-from-color, @black-075);
   }
 }

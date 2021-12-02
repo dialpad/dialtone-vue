@@ -1,6 +1,7 @@
 <template>
   <div
     ref="skeleton"
+    data-qa="skeleton-shape"
     :class="[
       'skeleton-placeholder',
       SKELETON_SHAPES[shape],

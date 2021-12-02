@@ -1,8 +1,12 @@
 <template>
-  <div class="d-w100p">
+  <div
+    class="d-w100p"
+    data-qa="skeleton-paragraph"
+  >
     <dt-skeleton-text
       v-for="row in integerRows"
       :key="row"
+      data-qa="skeleton-paragraph-row"
       :class="[
         {
           'd-mb12': row !== integerRows,

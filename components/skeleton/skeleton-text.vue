@@ -2,6 +2,7 @@
   <div
     v-if="type === 'label'"
     ref="skeleton"
+    data-qa="skeleton-text-label"
     :class="[
       'd-h8',
       'skeleton-placeholder',
@@ -18,6 +19,7 @@
   <div
     v-else-if="type === 'heading'"
     ref="skeleton"
+    data-qa="skeleton-text-heading"
     :class="[
       SKELETON_HEADING_HEIGHTS[headingHeight],
       'skeleton-placeholder',

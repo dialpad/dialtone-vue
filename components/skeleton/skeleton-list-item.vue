@@ -1,5 +1,6 @@
 <template>
   <div
+    data-qa="skeleton-list-item"
     :class="[
       'd-d-flex',
       {
