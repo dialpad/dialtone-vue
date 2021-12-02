@@ -1,14 +1,12 @@
 <template>
   <div
     aria-busy="true"
-    aria-live="polite"
     role="status"
-    :aria-label="screenReaderText"
+    :aria-label="ariaLabel"
   >
     <dt-skeleton-list-item
       v-if="listItemOption"
       v-bind="listItemOption"
-      :screen-reader-text="screenReaderText"
       :animation-duration="animationDuration"
       :animate="animate"
       :offset="offset"
@@ -20,7 +18,6 @@
     <dt-skeleton-shape
       v-else-if="shapeOption"
       v-bind="shapeOption"
-      :screen-reader-text="screenReaderText"
       :animation-duration="animationDuration"
       :animate="animate"
       :offset="offset"
@@ -28,7 +25,6 @@
     <dt-skeleton-paragraph
       v-else-if="paragraphOption"
       v-bind="paragraphOption === true ? {} : paragraphOption"
-      :screen-reader-text="screenReaderText"
       :animation-duration="animationDuration"
       :animate="animate"
       :offset="offset"
@@ -36,7 +32,6 @@
     <dt-skeleton-text
       v-else
       v-bind="textOption || {}"
-      :screen-reader-text="screenReaderText"
       :animation-duration="animationDuration"
       :animate="animate"
       :offset="offset"
@@ -86,7 +81,7 @@ export default {
       default: -1,
     },
 
-    screenReaderText: {
+    ariaLabel: {
       type: String,
       default: '',
     },

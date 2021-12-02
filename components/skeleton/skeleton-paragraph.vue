@@ -10,7 +10,6 @@
       ]"
       content-class="d-h12"
       :animate="animate"
-      :screen-reader-text="row === 1 ? screenReaderText : ''"
       :offset="offset"
       :animation-duration="animationDuration"
       :text-width="getSizeParagraphRow(row)"
@@ -70,11 +69,6 @@ export default {
     animationDuration: {
       type: Number,
       default: -1,
-    },
-
-    screenReaderText: {
-      type: String,
-      default: '',
     },
   },
 

@@ -14,7 +14,6 @@
       :animation-duration="animationDuration"
       :animate="animate"
       :offset="offset"
-      :screen-reader-text="screenReaderText"
     />
     <div class="d-d-flex d-fd-column d-w100p">
       <dt-skeleton-paragraph
@@ -68,11 +67,6 @@ export default {
     animationDuration: {
       type: Number,
       default: -1,
-    },
-
-    screenReaderText: {
-      type: String,
-      required: '',
     },
 
     animate: {

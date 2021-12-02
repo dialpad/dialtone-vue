@@ -13,10 +13,14 @@
 
       <dt-skeleton
         v-if="loading"
-        :screen-reader-text="screenReaderText"
+        :aria-label="ariaLabel"
         :offset="0.5"
       />
-      <p v-else>
+      <p
+        v-else
+        aria-live="polite"
+        aria-busy="false"
+      >
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi ea, eligendi explicabo
       </p>
     </section>
@@ -26,7 +30,7 @@
         Default and empty skeleton variant
       </p>
       <dt-skeleton
-        :screen-reader-text="screenReaderText"
+        :aria-label="ariaLabel"
         :offset="0.5"
       />
     </section>
@@ -46,7 +50,7 @@
             minWidth: 10,
           },
         }"
-        :screen-reader-text="screenReaderText"
+        :aria-label="ariaLabel"
       >
         <template #list-item>
           <dt-skeleton-shape
@@ -54,7 +58,7 @@
             size="2xl"
             shape="rectangle"
             class="d-mt12"
-            :screen-reader-text="screenReaderText"
+            :aria-label="ariaLabel"
           />
         </template>
       </dt-skeleton>
@@ -73,7 +77,7 @@
             shape: 'circle',
           }"
           class="d-mx4"
-          :screen-reader-text="screenReaderText"
+          :aria-label="ariaLabel"
         />
       </div>
     </section>
@@ -91,7 +95,7 @@
             shape: 'square',
           }"
           class="d-mx4"
-          :screen-reader-text="screenReaderText"
+          :aria-label="ariaLabel"
         />
       </div>
     </section>
@@ -109,7 +113,7 @@
             shape: 'rectangle',
           }"
           class="d-mx4"
-          :screen-reader-text="screenReaderText"
+          :aria-label="ariaLabel"
         />
       </div>
     </section>
@@ -127,7 +131,7 @@
             shape: 'pill',
           }"
           class="d-mx4"
-          :screen-reader-text="screenReaderText"
+          :aria-label="ariaLabel"
         />
       </div>
     </section>
@@ -144,7 +148,7 @@
           headingHeight: size,
         }"
         class="d-mb4"
-        :screen-reader-text="screenReaderText"
+        :aria-label="ariaLabel"
       />
     </section>
 
@@ -156,7 +160,7 @@
         :text-option="{
           type: 'label',
         }"
-        :screen-reader-text="screenReaderText"
+        :aria-label="ariaLabel"
       />
     </section>
 
@@ -171,7 +175,7 @@
         <dt-skeleton
           paragraph-option
           class="d-mb8"
-          :screen-reader-text="screenReaderText"
+          :aria-label="ariaLabel"
         />
         <p class="d-mb8">
           Define width for all lines
@@ -182,7 +186,7 @@
             width: ['50%', '18%', '90%'],
           }"
           class="d-mb8"
-          :screen-reader-text="screenReaderText"
+          :aria-label="ariaLabel"
         />
         <p class="d-mb8">
           Define width for first and second lines
@@ -193,7 +197,7 @@
             width: ['50%'],
           }"
           class="d-mb8"
-          :screen-reader-text="screenReaderText"
+          :aria-label="ariaLabel"
         />
         <p>
           Use random-width
@@ -203,7 +207,7 @@
             rows: 7,
             randomWidth: true,
           }"
-          :screen-reader-text="screenReaderText"
+          :aria-label="ariaLabel"
           class="d-mb8"
         />
       </section>
@@ -225,7 +229,6 @@ export default {
     return {
       shapeWidths: Object.keys(SKELETON_WIDTHS),
       headingSize: Object.keys(SKELETON_HEADING_HEIGHTS),
-      skeletonPageLoaded: false,
       loading: true,
     };
   },

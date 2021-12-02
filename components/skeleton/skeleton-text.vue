@@ -1,42 +1,36 @@
 <template>
-  <div ref="skeleton">
-    <div
-      v-if="type === 'label'"
-      :class="[
-        'd-h8',
-        'skeleton-placeholder',
-        {
-          'skeleton-placeholder--animate': animate,
-        },
-        contentClass,
-      ]"
-      :style="{
-        width,
-        ...skeletonStyle,
-      }"
-    />
-    <div
-      v-else-if="type === 'heading'"
-      :class="[
-        SKELETON_HEADING_HEIGHTS[headingHeight],
-        'skeleton-placeholder',
-        {
-          'skeleton-placeholder--animate': animate,
-        },
-        contentClass,
-      ]"
-      :style="{
-        width,
-        ...skeletonStyle,
-      }"
-    />
-    <span
-      v-if="screenReaderText"
-      class="d-d-none"
-    >
-      {{ screenReaderText }}
-    </span>
-  </div>
+  <div
+    v-if="type === 'label'"
+    ref="skeleton"
+    :class="[
+      'd-h8',
+      'skeleton-placeholder',
+      {
+        'skeleton-placeholder--animate': animate,
+      },
+      contentClass,
+    ]"
+    :style="{
+      width,
+      ...skeletonStyle,
+    }"
+  />
+  <div
+    v-else-if="type === 'heading'"
+    ref="skeleton"
+    :class="[
+      SKELETON_HEADING_HEIGHTS[headingHeight],
+      'skeleton-placeholder',
+      {
+        'skeleton-placeholder--animate': animate,
+      },
+      contentClass,
+    ]"
+    :style="{
+      width,
+      ...skeletonStyle,
+    }"
+  />
 </template>
 
 <script>
@@ -69,11 +63,6 @@ export default {
     animationDuration: {
       type: Number,
       default: -1,
-    },
-
-    screenReaderText: {
-      type: String,
-      default: '',
     },
 
     animate: {

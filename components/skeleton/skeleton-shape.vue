@@ -1,24 +1,17 @@
 <template>
-  <div ref="skeleton">
-    <div
-      :class="[
-        'skeleton-placeholder',
-        SKELETON_SHAPES[shape],
-        SKELETON_HEIGHTS[size],
-        widthClass,
-        {
-          'skeleton-placeholder--animate': animate,
-        },
-      ]"
-      :style="skeletonStyle"
-    />
-    <span
-      v-if="screenReaderText"
-      class="d-d-none"
-    >
-      {{ screenReaderText }}
-    </span>
-  </div>
+  <div
+    ref="skeleton"
+    :class="[
+      'skeleton-placeholder',
+      SKELETON_SHAPES[shape],
+      SKELETON_HEIGHTS[size],
+      widthClass,
+      {
+        'skeleton-placeholder--animate': animate,
+      },
+    ]"
+    :style="skeletonStyle"
+  />
 </template>
 
 <script>
@@ -51,11 +44,6 @@ export default {
     animationDuration: {
       type: Number,
       default: -1,
-    },
-
-    screenReaderText: {
-      type: String,
-      default: '',
     },
 
     animate: {
