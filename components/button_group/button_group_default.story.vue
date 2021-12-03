@@ -7,6 +7,7 @@
       :html="defaultSlot" />
     <template v-else>
       <dt-button
+        class="d-mr6"
         importance="primary"
       >
         Confirm
