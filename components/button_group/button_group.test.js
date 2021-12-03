@@ -89,16 +89,6 @@ describe('DtButtonGroup Tests', function () {
         assert.isTrue(buttonGroup.classes().includes('d-btn-group--end'));
       });
     });
-
-    describe('When spacing is set to loose', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({ spacing: 'loose' });
-      });
-
-      it('should have correct class', async function () {
-        assert.isTrue(buttonGroup.classes().includes('d-btn-group--loose'));
-      });
-    });
   });
 
   describe('Accessibility Tests', function () {
@@ -120,19 +110,6 @@ describe('DtButtonGroup Tests', function () {
 
       describe('When provided alignment is not in BUTTON_GROUP_ALIGNMENT', function () {
         itBehavesLikeFailsCustomPropValidation(prop, `INVALID_ALIGNMENT`);
-      });
-    });
-
-    describe('Spacing Validator', function () {
-      // Test Environment
-      const prop = DtButtonGroup.props.spacing;
-
-      describe('When provided spacing is in BUTTON_GROUP_SPACING', function () {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
-      });
-
-      describe('When provided spacing is not in BUTTON_GROUP_SPACING', function () {
-        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_SPACING`);
       });
     });
   });
