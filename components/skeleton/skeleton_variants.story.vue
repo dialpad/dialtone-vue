@@ -21,7 +21,7 @@
         aria-live="polite"
         aria-busy="false"
       >
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi ea, eligendi explicabo
+        Loaded content.
       </p>
     </section>
 
