@@ -222,17 +222,17 @@ Dialtone Vue is a dependency of other projects so you must always be aware of ma
 
 ### Folder Structure
 
-- `components` - everything related to a specific component is stored here in a folder with the component name. This includes the component itself, tests, documentation and storybook files.
-- `tests` - is just for utility/helper files to be used in multiple tests and test configuration. Actual tests are stored in the component folder.
-- `css` - we store any global less/css in here. Right now it is only used for Dialtone overrides.
-- `.github` - contains github documentation and github actions workflows.
-- `.storybook` - build time configuration files for storybook. If you need to edit the storybook webpack config for example, you would do so here.
-- `dist` - the Dialtone Vue library is output here upon `npm run build`.
-- `docs` - any storybook documentation not directly related to a component.
-- `generator-dialtone-vue` - yeoman generator config
-- `scripts` - contains shell scripts
-- `storybook` - contains the storybook dependencies and package.json. When storybook is built it is output to `storybook/compiled`
-- `tools` - any additional tooling related to Dialtone Vue. Right now contains files related to the migration from Dialtone 5 to Dialtone 6.
+- **`components`:** Everything related to a specific component is stored here in a folder with the component name. This includes the component itself, tests, documentation and storybook files.
+- **`tests`:** For utility/helper files to be used in multiple tests and test configuration. Actual tests are stored in the component folder.
+- **`css`:** We store any global less/css in here. Right now it is only used for Dialtone overrides.
+- **`.github`:** Contains github documentation and github actions workflows.
+- **`.storybook`:** Build time configuration files for storybook. If you need to edit the storybook webpack config for example, you would do so here.
+- **`dist`:** The Dialtone Vue library is output here upon `npm run build`.
+- **`docs`:** Any storybook documentation not directly related to a component.
+- **`generator-dialtone-vue`:** - Yeoman generator config.
+- **`scripts`:** - Contains shell scripts.
+- **`storybook`:** - Contains the storybook dependencies and package.json. When storybook is built it is output to `storybook/compiled`.
+- **`tools`:** - Any additional tooling related to Dialtone Vue. Right now contains files related to the migration from Dialtone 5 to Dialtone 6.
 
 ## Commit Message Convention
 
@@ -273,7 +273,7 @@ We use Yeoman as our generator to scaffold new components. This means if you are
 
 [Github Actions](https://docs.github.com/en/actions) is what we use for our CI/CD solution. All GHA workflows are in the `.github/workflows` directory. Currently we use Github Actions for the following:
 
-- Deploying to production `.github/workflows/deploy.yml`, See [RELEASING](RELEASING.md) for instructions on how to do this
-- Linting our files on pull request `.github/workflows/lint-pr.yml`
-- Validating commit messages `.github/workflows/lint-commit-message.yml`, see [COMMIT_CONVENTION](COMMIT_CONVENTION.md) for our commit message conventions
-- Running unit tests on pull requests and pushes to staging `.github/workflows/unit_tests.yml`
+- Deploying to production `.github/workflows/deploy.yml`, See [RELEASING](RELEASING.md) for instructions on how to do this.
+- Linting our files on pull request `.github/workflows/lint-pr.yml`.
+- Validating commit messages `.github/workflows/lint-commit-message.yml`, see [COMMIT_CONVENTION](COMMIT_CONVENTION.md) for our commit message conventions.
+- Running unit tests on pull requests and pushes to staging `.github/workflows/unit_tests.yml`.
