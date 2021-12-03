@@ -52,6 +52,7 @@ export const argTypesData = {
           width?: string | '100%',
           contentClass?: string | '',
           offset?: number | 1,
+          animate?: boolean | false,
           animationDuration?: number| -1
         }`,
       },
@@ -73,8 +74,11 @@ export const argTypesData = {
       },
     },
   },
+  animate: {
+    description: 'This property has higher priority than "option.animate"',
+  },
   ariaLabel: {
-    defaultValue: 'Loading',
+    defaultValue: '',
   },
   // Slots
   'list-item': {
