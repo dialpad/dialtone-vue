@@ -1,7 +1,7 @@
 <template>
   <div
     role="combobox"
-    :aria-expanded="isExpanded.toString()"
+    :aria-expanded="showList.toString()"
     :aria-controls="listId"
     :aria-owns="listId"
     aria-haspopup="listbox"
@@ -68,9 +68,20 @@ export default {
      * An array of items to be shown in the list. This should include only items
      * that are selectable, i.e. not dividers or subheaders.
      */
+    /* eslint-disable vue/no-unused-properties */
     items: {
       type: Array,
       default: () => [],
+    },
+    /* eslint-enable vue/no-unused-properties */
+
+    /**
+     * Sets an ID on the list element of the component. Used by several aria attributes
+     * as well as when deriving the IDs for each item.
+     */
+    listId: {
+      type: String,
+      default () { return getUniqueString(); },
     },
 
     /**
@@ -88,6 +99,14 @@ export default {
       type: Function,
       default: null,
     },
+
+    /**
+     * Determines when to show the list element and also controls the aria-expanded attribute.
+     */
+    showList: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['select', 'escape', 'highlight'],
@@ -97,7 +116,6 @@ export default {
       return {
         'aria-activedescendant': this.activeItemId,
         'aria-controls': this.listId,
-        'aria-autocomplete': 'list',
       };
     },
 
@@ -131,12 +149,8 @@ export default {
       return this.onEndOfList || this.jumpToBeginning;
     },
 
-    isExpanded () {
-      return !!this.items.length;
-    },
-
     activeItemId () {
-      if (!this.isExpanded || this.highlightIndex < 0) {
+      if (!this.showList || this.highlightIndex < 0) {
         return;
       }
       return this.getItemId(this.highlightIndex);
@@ -148,16 +162,10 @@ export default {
   },
 
   watch: {
-    isExpanded (isExpanded, wasExpanded) {
-      // When the list is expanded set the highlight onto the first item.
-      if (isExpanded && !wasExpanded) {
-        this.setHighlightIndex(0);
-      }
+    showList () {
+      // When the list's visibility changes reset the highlight index.
+      this.setHighlightIndex(0);
     },
-  },
-
-  created () {
-    this.listId = `${getUniqueString('dt-combobox-list')}`;
   },
 
   methods: {
@@ -174,7 +182,7 @@ export default {
     },
 
     onEnterKey () {
-      if (this.isExpanded && this.highlightIndex >= 0) {
+      if (this.showList && this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
       }
     },

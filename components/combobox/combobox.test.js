@@ -8,6 +8,7 @@ import DtInput from '../input/input.vue';
 const basePropsData = {
   items: [1, 2, 3],
   listAriaLabel: '',
+  showList: true,
 };
 
 describe('Dialtone Vue Combobox tests', function () {
@@ -93,7 +94,7 @@ describe('Dialtone Vue Combobox tests', function () {
   describe('Accessibility Tests', function () {
     describe('When list is not expanded', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ items: [] });
+        await wrapper.setProps({ showList: false });
       });
 
       it('aria-expanded should be "false"', function () {
@@ -103,7 +104,7 @@ describe('Dialtone Vue Combobox tests', function () {
 
     describe('When list is expanded', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ items: [1, 2, 3] });
+        await wrapper.setProps({ showList: true });
       });
 
       it('aria-expanded should be "true"', function () {
