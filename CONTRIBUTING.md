@@ -4,13 +4,13 @@ Before contributing a new component to Dialtone Vue, please check the [Jira boar
 
 ## Overview
 
-### What is Dialtone Vue?
+### What Is Dialtone Vue?
 
 Dialtone is a design system by Dialpad comprised of CSS components, Vue components, utility classes, visual assets, documentation. Dialtone-Vue is the Vue component portion of Dialtone and is distributed as a separate package. It is recommended that you are familiar with [Dialtone](https://github.com/dialpad/dialtone/tree/staging) as well as it's [contribution guide](https://github.com/dialpad/dialtone/blob/staging/.github/CONTRIBUTING.md) before you contribute to Dialtone Vue.
 
 Dialtone is a dependency of Dialtone Vue.
 
-### What is a contribution?
+### What Is a Contribution?
 
 A contribution is any proposal, design, code, or documentation completed by someone not on the core Dialtone team, and released through Dialtone Vue for other people to use. It can be created by anyone who'd like to help make Dialtone Vue better.
 
@@ -180,7 +180,7 @@ export default {
 </script>
 ```
 
-### Accessibility In Mind
+### Accessibility in Mind
 
 Keep accessibility in mind for every new component, improvement or bug fix you make. Always test your change with a screen reader and keyboard navigation if applicable.
 
@@ -234,7 +234,7 @@ Dialtone Vue is a dependency of other projects so you must always be aware of ma
 - `storybook` - contains the storybook dependencies and package.json. When storybook is built it is output to `storybook/compiled`
 - `tools` - any additional tooling related to Dialtone Vue. Right now contains files related to the migration from Dialtone 5 to Dialtone 6.
 
-## Commit message convention
+## Commit Message Convention
 
 Dialtone Vue uses [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) to have commit messages that can be used as part of the [semantic release process](RELEASING.md). For more information, see [COMMIT_CONVENTION.md](.github/COMMIT_CONVENTION.md).
 
