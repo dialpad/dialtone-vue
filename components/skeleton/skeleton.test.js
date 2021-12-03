@@ -108,14 +108,14 @@ describe('DtSkeleton Tests', function () {
   });
 
   describe('Accessibility Tests', function () {
-    describe('When an area-label is provided', function () {
+    describe('When an aria-label is provided', function () {
       before(function () {
         _mountWrapper({
           ariaLabel: 'ariaLabel',
         });
       });
 
-      it('should be set area-label value', function () {
+      it('should be set aria-label value', function () {
         assert.strictEqual(wrapper.attributes('aria-label'), 'ariaLabel');
       });
     });
