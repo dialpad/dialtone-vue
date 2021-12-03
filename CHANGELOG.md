@@ -1,3 +1,38 @@
+## [1.6.1](https://github.com/dialpad/dialtone-vue/compare/v1.6.0...v1.6.1) (2021-12-03)
+
+
+### Bug Fixes
+
+* disable hide when append to is parent ([#207](https://github.com/dialpad/dialtone-vue/issues/207)) ([f478b3e](https://github.com/dialpad/dialtone-vue/commit/f478b3edc4ee4e306759b8e0d42ebbb4340aa733))
+* popover (props alignment between dt-popover and dt-tooltip) ([#205](https://github.com/dialpad/dialtone-vue/issues/205)) ([f935aad](https://github.com/dialpad/dialtone-vue/commit/f935aada1a5c23fc540c3479aab7cb605e47fcee))
+
+# [1.6.0](https://github.com/dialpad/dialtone-vue/compare/v1.5.0...v1.6.0) (2021-11-25)
+
+
+### Bug Fixes
+
+* add our alpha sort to list-item. Change slot types to VNode for consistiency ([#202](https://github.com/dialpad/dialtone-vue/issues/202)) ([686b2b9](https://github.com/dialpad/dialtone-vue/commit/686b2b919f8882588f8374729538242071e0abcf))
+
+
+### Features
+
+* components tooltip and popover. absolute positioning (dt 40) ([#194](https://github.com/dialpad/dialtone-vue/issues/194)) ([dd9e44d](https://github.com/dialpad/dialtone-vue/commit/dd9e44dbc1ea0a5439652e8b0597e5d3e254f68a)), closes [#131](https://github.com/dialpad/dialtone-vue/issues/131) [#177](https://github.com/dialpad/dialtone-vue/issues/177) [#178](https://github.com/dialpad/dialtone-vue/issues/178) [#135](https://github.com/dialpad/dialtone-vue/issues/135)
+
+# [1.5.0](https://github.com/dialpad/dialtone-vue/compare/v1.4.0...v1.5.0) (2021-11-19)
+
+
+### Bug Fixes
+
+* list-item story prefix ([#196](https://github.com/dialpad/dialtone-vue/issues/196)) ([7129a5c](https://github.com/dialpad/dialtone-vue/commit/7129a5cb84a4a1de8512ffb30d188bb6de980cdb))
+* missing class ([#197](https://github.com/dialpad/dialtone-vue/issues/197)) ([f7c80cc](https://github.com/dialpad/dialtone-vue/commit/f7c80cc6dd23ef7dd3603581b61a211a702f06e6))
+* stories prefix name in the documentation ([#195](https://github.com/dialpad/dialtone-vue/issues/195)) ([fa59c03](https://github.com/dialpad/dialtone-vue/commit/fa59c03d3259c15dcc80611855912ed13721c499))
+* update list-section padding to match new default list item ([dca215e](https://github.com/dialpad/dialtone-vue/commit/dca215e8fc630fcc74036a62fa84267c4853e91b))
+
+
+### Features
+
+* add `update:show` event in tooltip component ([#193](https://github.com/dialpad/dialtone-vue/issues/193)) ([3350659](https://github.com/dialpad/dialtone-vue/commit/3350659be2c8fec4993e27bcd4c56b42ca462b7c))
+
 # [1.4.0](https://github.com/dialpad/dialtone-vue/compare/v1.3.0...v1.4.0) (2021-11-12)
 
 
