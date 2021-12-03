@@ -224,15 +224,15 @@ Dialtone Vue is a dependency of other projects so you must always be aware of ma
 
 - `components` - everything related to a specific component is stored here in a folder with the component name. This includes the component itself, tests, documentation and storybook files.
 - `tests` - is just for utility/helper files to be used in multiple tests and test configuration. Actual tests are stored in the component folder.
-- `css` - we store any global less/css in here. Right now it is only used for dialtone overrides.
+- `css` - we store any global less/css in here. Right now it is only used for Dialtone overrides.
 - `.github` - contains github documentation and github actions workflows.
 - `.storybook` - build time configuration files for storybook. If you need to edit the storybook webpack config for example, you would do so here.
-- `dist` - the dialtone-vue library is output here upon `npm run build`.
+- `dist` - the Dialtone Vue library is output here upon `npm run build`.
 - `docs` - any storybook documentation not directly related to a component.
 - `generator-dialtone-vue` - yeoman generator config
 - `scripts` - contains shell scripts
 - `storybook` - contains the storybook dependencies and package.json. When storybook is built it is output to `storybook/compiled`
-- `tools` - any additional tooling related to dialtone-vue. Right now contains files related to the migration from dialtone 5 to dialtone 6.
+- `tools` - any additional tooling related to Dialtone Vue. Right now contains files related to the migration from Dialtone 5 to Dialtone 6.
 
 ## Commit message convention
 
@@ -253,11 +253,11 @@ Dialtone Vue follows [SemVer](https://semver.org/) for versioning and the commit
 
 ### Vue-CLI
 
-We use [Vue CLI](https://cli.vuejs.org/) for standard tooling within dialtone-vue. The configuration for Vue CLI is in [vue.config.js](../vue.config.js). All common Vue CLI commands we use are encapsulated in npm scripts ex: `npm run build`, `npm test`, `npm start`.
+We use [Vue CLI](https://cli.vuejs.org/) for standard tooling within Dialtone Vue. The configuration for Vue CLI is in [vue.config.js](../vue.config.js). All common Vue CLI commands we use are encapsulated in npm scripts ex: `npm run build`, `npm test`, `npm start`.
 
 ### Storybook
 
-We use [Storybook](https://storybook.js.org/) for our dialtone-vue component documentation. Storybook allows you to render each component in isolation and change any available properties. Our storybook is hosted at https://vue.dialpad.design, and can also be run locally via `npm start`. For more detailed info on how to use storybook in dialtone-vue, refer to our [storybook documentation](https://vue.dialpad.design/?path=/story/docs-storybook-getting-started--page).
+We use [Storybook](https://storybook.js.org/) for our Dialtone Vue component documentation. Storybook allows you to render each component in isolation and change any available properties. Our storybook is hosted at https://vue.dialpad.design, and can also be run locally via `npm start`. For more detailed info on how to use storybook in Dialtone Vue, refer to our [storybook documentation](https://vue.dialpad.design/?path=/story/docs-storybook-getting-started--page).
 
 Storybook has it's own build process and dependencies separate from our project. See the [storybook](../storybook) folder within our repo.
 
