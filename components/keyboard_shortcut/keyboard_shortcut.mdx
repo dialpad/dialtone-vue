@@ -1,0 +1,57 @@
+import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
+import DtKeyboardShortcut from './keyboard_shortcut.stories';
+
+# KeyboardShortcut
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas>
+  <Story id="components-keyboardshortcut--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="components-keyboardshortcut--variants" />
+</Canvas>
+
+## Props, Slots & Events
+
+<ArgsTable of={DtKeyboardShortcut} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtKeyboardShortcut } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```vue
+<dt-keyboard-shortcut
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-keyboard-shortcut
+  some-other="variant"
+/>
+```
+
+<!-- markdownlint-disable -->
+https://www.acrobatfaq.com/atbref5/index/KeyboardShortcuts/UnicodeCodesforKeyboards.html
+https://www.online-toolz.com/tools/unicode-html-entities-convertor.php
+https://mothereff.in/js-escapes#1ma%C3%B1ana%20man%CC%83ana
+https://superuser.com/questions/1247382/is-there-a-unicode-character-for-the-windows-key
+http://xahlee.info/comp/unicode_computing_symbols.html
