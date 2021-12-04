@@ -33,6 +33,28 @@
       </dt-button>
     </div>
     <div class="d-mb16">
+      <!-- Muted primary -->
+      <dt-button
+        kind="muted"
+      >
+        Muted primary
+      </dt-button>
+      <!-- Muted clear -->
+      <dt-button
+        kind="muted"
+        importance="clear"
+      >
+        Muted clear
+      </dt-button>
+      <!-- Muted outline -->
+      <dt-button
+        kind="muted"
+        importance="outlined"
+      >
+        Muted Outlined
+      </dt-button>
+    </div>
+    <div class="d-mb16">
       <!-- Extra Small -->
       <dt-button size="xs">
         Extra Small
