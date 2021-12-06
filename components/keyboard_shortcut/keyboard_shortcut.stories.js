@@ -7,8 +7,7 @@ import DtKeyboardShortcutVariantsTemplate from './keyboard_shortcut_variants.sto
 
 export const argTypesData = {
   shortcut: {
-    description: `shortcut string, which supports aliases between curly brackets, possible options are:  
-      ${SHORTCUTS_ALIASES_LIST.join(' ')}`,
+    description: SHORTCUTS_ALIASES_LIST.join(' '),
     defaultValue: SHORTCUTS_ALIASES_LIST[0],
     control: 'text',
   },
