@@ -13,6 +13,8 @@
 
 Since Dialtone-vue is a private repository, and semantic-release will push the release commit to the remote server when releasing,
 it's recommended to set up SSH authentication in Github to authenticate to the remote server. See the [Github docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh) to set up SSH credentials.
+If you have correctly set up the SSH credentials, you can verify that semantic-release can push to the remote server by running on the `staging` branch: `npm run release -- --dry-run`.
+With the `--dry-run` flag, you can get a preview of the pending release and if everything is okay, you can see in the output: `[semantic-release] › ✔  Allowed to push to the Git repository`. 
 
 ## Steps
 
