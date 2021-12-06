@@ -12,4 +12,8 @@ export const SHORTCUTS_ALIASES = {
   pageDown: '&#8671;', // ⇟ Page down
 };
 
+export const SHORTCUTS_ICON_ALIASES = {
+  '{win}': 'IconGrid',
+};
+
 export const SHORTCUTS_ALIASES_LIST = Object.keys(SHORTCUTS_ALIASES).map(key => `{${key}}`);
