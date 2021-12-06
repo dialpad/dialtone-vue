@@ -4,7 +4,6 @@
       'd-btn-group',
       BUTTON_GROUP_ALIGNMENT[this.alignment],
     ]"
-    :data-qa="dataQaGroup"
     role="group"
   >
     <!-- @slot Default slot for button items -->
@@ -19,14 +18,6 @@ export default {
   name: 'DtButtonGroup',
 
   props: {
-    /**
-     * A data qa tag for the button group
-     */
-    dataQaGroup: {
-      type: String,
-      default: 'button-group',
-    },
-
     /**
      * Alignment of the buttons inside the container
      */

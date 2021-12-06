@@ -24,7 +24,7 @@ describe('DtButtonGroup Tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    buttonGroup = wrapper.find('[data-qa="button-group"]');
+    buttonGroup = wrapper.find('.d-btn-group');
   };
 
   const _setWrappers = () => {
