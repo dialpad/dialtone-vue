@@ -6,7 +6,8 @@ import DtSkeletonVariantsTemplate from './skeleton_variants.story.vue';
 
 export const argTypesData = {
   paragraphOption: {
-    description: 'Interface for skeleton paragraph',
+    description: `Set this prop to have the skeleton render as multiple lines of text.
+    Set only one option prop at a time.`,
     table: {
       type: {
         detail: `{
@@ -25,7 +26,8 @@ export const argTypesData = {
     },
   },
   listItemOption: {
-    description: 'Interface for skeleton list item',
+    description: `Set this prop to have the skeleton render as a list item with an avatar and wrapping text.
+    Set only one option prop at a time.`,
     table: {
       type: {
         detail: `{
@@ -43,7 +45,8 @@ export const argTypesData = {
   },
 
   textOption: {
-    description: 'Interface for skeleton text',
+    description: `Set this prop to have the skeleton render as a single line of text.
+    Set only one option prop at a time.`,
     table: {
       type: {
         detail: `null | {
@@ -60,7 +63,8 @@ export const argTypesData = {
   },
 
   shapeOption: {
-    description: 'Interface for skeleton shape',
+    description: `Set this prop to have the skeleton render as a specific shape.
+    Set only one option prop at a time.`,
     table: {
       type: {
         detail: `{
