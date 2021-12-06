@@ -21,11 +21,10 @@ describe('DtSkeleton Tests', function () {
     skeletonShape = wrapper.findAll('[data-qa="skeleton-shape"]');
   };
 
-  const _mountWrapper = (propsData, slots) => {
+  const _mountWrapper = (propsData) => {
     wrapper = mount(DtSkeleton, {
       localVue: createLocalVue(),
       propsData,
-      slots,
     });
     _setWrappers();
   };
@@ -71,8 +70,6 @@ describe('DtSkeleton Tests', function () {
       before(function () {
         _mountWrapper({
           listItemOption: true,
-        }, {
-          'list-item': 'list-item-slot',
         });
       });
 
@@ -82,15 +79,6 @@ describe('DtSkeleton Tests', function () {
 
       it('should render skeleton paragraph', async function () {
         assert.isTrue(skeletonParagraph.exists());
-      });
-
-      it('should render skeleton shape', async function () {
-        assert.isTrue(skeletonShape.exists());
-        assert.strictEqual(wrapper.text(), 'list-item-slot');
-      });
-
-      it('should render list item slot', async function () {
-        assert.strictEqual(wrapper.text(), 'list-item-slot');
       });
     });
 

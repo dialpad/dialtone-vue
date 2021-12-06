@@ -80,24 +80,6 @@ export const argTypesData = {
   ariaLabel: {
     defaultValue: '',
   },
-  // Slots
-  'list-item': {
-    description: `Slot for default slot skeleton-list-item`,
-    table: {
-      type: {
-        summary: 'VNode',
-      },
-    },
-  },
-
-  default: {
-    description: `Slot for default slot skeleton`,
-    table: {
-      type: {
-        summary: 'VNode',
-      },
-    },
-  },
 };
 
 // Story Collection

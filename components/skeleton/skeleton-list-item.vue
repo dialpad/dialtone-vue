@@ -22,7 +22,6 @@
         :animate="animate"
         :offset="offset"
       />
-      <slot />
     </div>
   </div>
 </template>

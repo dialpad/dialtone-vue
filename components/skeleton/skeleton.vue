@@ -10,11 +10,7 @@
       :animation-duration="animationDuration"
       :animate="animate"
       :offset="offset"
-    >
-      <template #default>
-        <slot name="list-item" />
-      </template>
-    </dt-skeleton-list-item>
+    />
     <dt-skeleton-shape
       v-else-if="shapeOption"
       v-bind="shapeOption === true ? {} : shapeOption"
@@ -36,7 +32,6 @@
       :animate="animate"
       :offset="offset"
     />
-    <slot />
   </div>
 </template>
 
@@ -94,6 +89,35 @@ export default {
     offset: {
       type: Number,
       default: 1,
+    },
+  },
+
+  computed: {
+    validationOptions () {
+      return {
+        paragraphOption: this.paragraphOption,
+        listItemOption: this.listItemOption,
+        textOption: this.textOption,
+        shapeOption: this.shapeOption,
+      };
+    },
+  },
+
+  watch: {
+    $props: {
+      immediate: true,
+      handler: 'validator',
+    },
+  },
+
+  methods: {
+    validator () {
+      const filtered = Object.entries(this.validationOptions)
+        .filter(([_, option]) => option);
+      if (filtered.length >= 2) {
+        const errorMessage = `Use only one of ${filtered.map(([key]) => key).join(' | ')} options at the same time`;
+        console.error(errorMessage);
+      }
     },
   },
 };

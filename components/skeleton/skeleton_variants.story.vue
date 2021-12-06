@@ -37,7 +37,7 @@
 
     <section class="d-mb64">
       <p class="d-mb8">
-        Configurable skeleton with props and slot variant (paragraphs with randomWidth, maxWidth, minWidth)
+        Skeleton list item
       </p>
       <dt-skeleton
         :offset="0.6"
@@ -51,17 +51,7 @@
           },
         }"
         :aria-label="ariaLabel"
-      >
-        <template #list-item>
-          <dt-skeleton-shape
-            :offset="0.7"
-            size="2xl"
-            shape="rectangle"
-            class="d-mt12"
-            :aria-label="ariaLabel"
-          />
-        </template>
-      </dt-skeleton>
+      />
     </section>
 
     <section class="d-mb64">
@@ -230,7 +220,6 @@
 </template>
 
 <script>
-import DtSkeletonShape from './skeleton-shape';
 import DtSkeleton from './skeleton';
 import { DtButton } from '../button';
 
@@ -238,7 +227,7 @@ import { SKELETON_WIDTHS, SKELETON_HEADING_HEIGHTS } from './skeleton_constants'
 
 export default {
   name: 'DtSkeletonVariants',
-  components: { DtSkeleton, DtSkeletonShape, DtButton },
+  components: { DtSkeleton, DtButton },
   data () {
     return {
       shapeWidths: Object.keys(SKELETON_WIDTHS),
