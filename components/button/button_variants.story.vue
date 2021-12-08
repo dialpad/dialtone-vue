@@ -33,12 +33,6 @@
       </dt-button>
     </div>
     <div class="d-mb16">
-      <!-- Muted primary -->
-      <dt-button
-        kind="muted"
-      >
-        Muted primary
-      </dt-button>
       <!-- Muted clear -->
       <dt-button
         kind="muted"
