@@ -1,0 +1,50 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtDropdown from './dropdown';
+
+# DtDropdown
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas>
+  <Story id="<GROUP>-dt-dropdown--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="<GROUP>-dt-dropdown--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtDropdown } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```vue
+<dt-dropdown
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-dropdown
+  some-other="variant"
+/>
+```
