@@ -4,10 +4,19 @@ import DtDropdown from './dropdown';
 import DtDropdownMdx from './dropdown.mdx';
 import DtDropdownDefaultTemplate from './dropdown_default.story.vue';
 import DtDropdownVariantsTemplate from './dropdown_variants.story.vue';
+import {LIST_ITEM_NAVIGATION_TYPES} from "../list_item/list_item_constants";
+import {POPOVER_HORIZONTAL_ALIGNMENT} from "../popover";
+
+// Constants
+const LIST_ITEMS = [
+  { name: '1st menu item', id: 1 },
+  { name: '2nd menu item', id: 2 },
+  { name: '3rd menu item', id: 3 },
+];
 
 // Default Prop Values
 export const argsData = {
-  some: 'prop',
+  items: LIST_ITEMS,
   onEvent: action('event'),
 };
 
@@ -30,20 +39,6 @@ export const argsData = {
   <!-- @slot example slot decorator -->
 */
 export const argTypesData = {
-  // Props
-  some: {
-    description: 'Describes the some prop',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
   // Slots
   default: {
     control: 'text',
@@ -53,20 +48,22 @@ export const argTypesData = {
       },
     },
   },
-  /*
-    We use the following naming scheme `<SLOT_NAME>Slot` for slot controls to prevent conflicts with props that share
-    the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
-    table and description within the controls accurately reflects the correct names of our component's props and slots.
-  */
-  someSlot: {
-    name: 'some',
-    description: 'Slot for some',
-    control: 'text',
+
+  // Props
+  navigationType: {
     table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
+      type: { summary: 'string' },
+      defaultValue: { summary: 'none' },
+    },
+    control: {
+      type: 'select',
+      options: Object.values(LIST_ITEM_NAVIGATION_TYPES),
+    },
+  },
+  fixedAlignment: {
+    control: {
+      type: 'select',
+      options: POPOVER_HORIZONTAL_ALIGNMENT,
     },
   },
 
@@ -80,7 +77,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Group/DtDropdown',
+  title: 'Components/Dropdown',
   component: DtDropdown,
   args: argsData,
   argTypes: argTypesData,
@@ -107,6 +104,9 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
+Default.decorators = [() => ({
+  template: `<div class="d-h100vh d-d-flex d-ai-center d-jc-center"><story /></div>`,
+})];
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};

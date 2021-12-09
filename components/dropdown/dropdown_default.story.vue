@@ -1,6 +1,7 @@
 <template>
   <dt-dropdown
     :open="isOpen"
+    :fixed-alignment="fixedAlignment"
     @update:open="updateOpen"
   >
     <template #anchor>
@@ -10,18 +11,21 @@
         Click to open
       </dt-link>
     </template>
-    <ul class="d-m0 d-p0">
-      <dt-list-item
-          navigation-type="tab"
+    <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
+      <ul
+        v-bind="listProps"
+        class="d-p0"
       >
-        Item 1
-      </dt-list-item>
-      <dt-list-item
-          navigation-type="tab"
-      >
-        Item 2
-      </dt-list-item>
-    </ul>
+        <dt-list-item
+          v-for="(item, i) in items"
+          v-bind="getItemProps(i)"
+          :key="item.id"
+          :navigation-type="navigationType"
+        >
+          {{ item.name }}
+        </dt-list-item>
+      </ul>
+    </template>
   </dt-dropdown>
 </template>
 
