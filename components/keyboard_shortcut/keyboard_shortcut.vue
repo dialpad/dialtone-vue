@@ -50,6 +50,7 @@ import IconWindows from '@dialpad/dialtone/lib/dist/vue/icons/IconWindows';
 import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd';
 import IconArrowRightAlt from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowRightAlt';
 import { SHORTCUTS_ALIASES, SHORTCUTS_ICON_ALIASES, ARROW_DIRECTIONS } from './keyboard_shortcut_constants';
+
 export default {
   name: 'DtKeyboardShortcut',
 
