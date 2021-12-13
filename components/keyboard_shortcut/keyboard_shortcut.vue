@@ -122,8 +122,8 @@ export default {
 
 <style lang="less">
 .dt-keyboard-shortcut__svg-size10 {
-  width: 1rem !important;
-  height: 1rem !important;
+  width: 1em !important;
+  height: 1em !important;
 
   path {
     fill: currentColor;
