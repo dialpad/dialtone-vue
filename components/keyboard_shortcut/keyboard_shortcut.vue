@@ -21,7 +21,7 @@
         v-if="SHORTCUTS_ICON_ALIASES[item]"
         :key="`${i}-${item}`"
         :class="[
-          'dt-keyboard-shortcut__svg-size12',
+          'dt-keyboard-shortcut__svg-size10',
           inverted ? 'd-fc-black-075' : 'd-fc-black-500',
           'd-mr2',
         ]"
@@ -39,7 +39,7 @@
       <icon-add
         v-if="separator && item.trim()"
         :key="`add-${i}-${item}`"
-        class="d-svg--size12"
+        class="dt-keyboard-shortcut__svg-size10"
       />
     </template>
   </div>
@@ -47,7 +47,7 @@
 
 <script>
 import IconWindows from '@dialpad/dialtone/lib/dist/vue/icons/IconWindows';
-import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowBackwards';
+import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd';
 import IconArrowRightAlt from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowRightAlt';
 import { SHORTCUTS_ALIASES, SHORTCUTS_ICON_ALIASES, ARROW_DIRECTIONS } from './keyboard_shortcut_constants';
 
@@ -121,9 +121,9 @@ export default {
 </script>
 
 <style lang="less">
-.dt-keyboard-shortcut__svg-size12 {
-  width: 1.2rem !important;
-  height: 1.2rem !important;
+.dt-keyboard-shortcut__svg-size10 {
+  width: 1rem !important;
+  height: 1rem !important;
 
   path {
     fill: currentColor;
