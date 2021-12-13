@@ -1,233 +1,221 @@
 <template>
   <div>
-    <section class="d-mb64">
-      <p class="d-mb8">
-        Default and empty skeleton variant
-      </p>
-      <dt-button
-        class="d-mb16"
-        @click="loading = !loading"
-      >
-        Toggle loading
-      </dt-button>
-
-      <dt-skeleton
-        v-if="loading"
-        :aria-label="ariaLabel"
-        :offset="0.5"
-      />
-      <p
-        v-else
-        aria-live="polite"
-        aria-busy="false"
-      >
-        Loaded content.
-      </p>
-    </section>
-
-    <section class="d-mb64">
-      <p class="d-mb8">
-        Default and empty skeleton variant
-      </p>
-      <dt-skeleton
-        :aria-label="ariaLabel"
-        :offset="0.5"
-      />
-    </section>
-
-    <section class="d-mb64">
-      <p class="d-mb8">
-        Skeleton list item
-      </p>
-      <dt-skeleton
-        :offset="0.6"
-        :list-item-option="{
-          shapeSize: 'md',
-          paragraphs: {
-            rows: 3,
-            randomWidth: true,
-            maxWidth: 40,
-            minWidth: 10,
-          },
-        }"
-        :aria-label="ariaLabel"
-      />
-    </section>
-
-    <section class="d-mb64">
-      <p class="d-mb8">
-        Skeleton shape variants
-      </p>
-      <div class="d-d-flex">
+    <h2 class="d-mb32">
+      Prefabricated shapes
+    </h2>
+    <section class="d-mb64 d-d-flex">
+      <div class="d-p4 d-fl1 d-w25p">
+        <h3>Avatars</h3>
+        <p class="d-mb24">
+          Default sizes matches avatar.
+          Size is customizable when needed.
+        </p>
+        <p>S (24x24px)</p>
         <dt-skeleton
-          v-for="size in shapeWidths"
-          :key="`${size}-circle`"
           :shape-option="{
-            size,
+            size: 'sm',
             shape: 'circle',
           }"
-          class="d-mx4"
+          class="d-mb24"
+          :aria-label="ariaLabel"
+        />
+        <p>M (32x32px)</p>
+        <dt-skeleton
+          :shape-option="{
+            size: 'md',
+            shape: 'circle',
+          }"
+          class="d-mb24"
+          :aria-label="ariaLabel"
+        />
+        <p>L (48x48px)</p>
+        <dt-skeleton
+          :shape-option="{
+            size: 'lg',
+            shape: 'circle',
+          }"
           :aria-label="ariaLabel"
         />
       </div>
-    </section>
-
-    <section class="d-mb64">
-      <p class="d-mb-2">
-        Skeleton square variants
-      </p>
-      <div class="d-d-flex">
+      <div class="d-p4 d-fl1 d-w25p">
+        <h3>Image / Icon</h3>
+        <p class="d-mb24">
+          Size is customizable.
+        </p>
         <dt-skeleton
-          v-for="size in shapeWidths"
-          :key="`${size}-square`"
           :shape-option="{
-            size,
+            contentClass: 'd-w42 d-h42',
             shape: 'square',
           }"
-          class="d-mx4"
+          class="d-mb24"
+          :aria-label="ariaLabel"
+        />
+      </div>
+      <div class="d-p4 d-fl1 d-w25p">
+        <h3>Text: Body</h3>
+        <p class="d-mb24" />
+        <dt-skeleton
+          :aria-label="ariaLabel"
+          :text-option="{
+            width: '120px',
+          }"
+          :offset="0.5"
+        />
+      </div>
+      <div class="d-p4 d-fl1 d-w25p">
+        <h3>Text: Headings</h3>
+        <p class="d-mb24">
+          Line-lengths is customizable.
+        </p>
+        <p>S (height: 16px)</p>
+        <dt-skeleton
+          :text-option="{
+            type: 'heading',
+            headingHeight: 'sm',
+          }"
+          class="d-mb24"
+          :aria-label="ariaLabel"
+        />
+        <p>M (height: 24px)</p>
+        <dt-skeleton
+          :text-option="{
+            type: 'heading',
+            headingHeight: 'md',
+            width: '75%',
+          }"
+          class="d-mb24"
+          :aria-label="ariaLabel"
+        />
+        <p>L (height: 32px)</p>
+        <dt-skeleton
+          :text-option="{
+            type: 'heading',
+            headingHeight: 'lg',
+            width: '90%',
+          }"
           :aria-label="ariaLabel"
         />
       </div>
     </section>
-
-    <section class="d-mb64">
-      <p class="d-mb-2">
-        Skeleton rectangle variants
-      </p>
-      <div class="d-d-flex">
+    <h2 class="d-mb32">
+      Prefabricated combinations
+    </h2>
+    <section class="d-mb64 d-d-flex">
+      <div class="d-p4 d-fl1 d-w50p">
+        <h3>Text List</h3>
+        <p class="d-mb24" />
         <dt-skeleton
-          v-for="size in shapeWidths"
-          :key="`${size}-rectangle`"
-          :shape-option="{
-            size,
-            shape: 'rectangle',
+          :aria-label="ariaLabel"
+          :text-option="{
+            width: '120px',
           }"
-          class="d-mx4"
+          :offset="0.5"
+          class="d-mb16"
+        />
+        <dt-skeleton
+          :aria-label="ariaLabel"
+          :text-option="{
+            width: '120px',
+          }"
+          :offset="0.5"
+          class="d-mb16"
+        />
+        <dt-skeleton
+          :aria-label="ariaLabel"
+          :text-option="{
+            width: '120px',
+          }"
+          :offset="0.5"
+          class="d-mb16"
+        />
+        <dt-skeleton
+          :aria-label="ariaLabel"
+          :text-option="{
+            width: '120px',
+          }"
+          :offset="0.5"
+          class="d-mb16"
+        />
+
+        <h3 class="d-pt16">
+          Avatar + Name
+        </h3>
+        <p class="d-mb24" />
+
+        <dt-skeleton
+          :offset="0.6"
+          :list-item-option="{
+            shapeSize: 'md',
+            paragraphs: {
+              rows: 1,
+            },
+          }"
+          :aria-label="ariaLabel"
+        />
+
+        <h3 class="d-pt16">
+          Icon + Text
+        </h3>
+        <p class="d-mb24" />
+
+        <dt-skeleton
+          :offset="0.6"
+          :list-item-option="{
+            customShapeSize: '32px',
+            shape: 'square',
+            paragraphs: {
+              rows: 1,
+            },
+          }"
+          :aria-label="ariaLabel"
+        />
+        <h3 class="d-pt16">
+          Messages / Transcript / Comment
+        </h3>
+        <p class="d-mb24" />
+        <dt-skeleton
+          :offset="0.6"
+          :list-item-option="{
+            shapeSize: 'md',
+            customShapeSize: '36px',
+            paragraphs: {
+              rows: 4,
+              width: [
+                '120px', '311px', '371px', '279px',
+              ],
+            },
+          }"
           :aria-label="ariaLabel"
         />
       </div>
-    </section>
-
-    <section class="d-mb64">
-      <p class="d-mb-2">
-        Skeleton pill variants
-      </p>
-      <div class="d-d-flex">
-        <dt-skeleton
-          v-for="size in shapeWidths"
-          :key="`${size}-pill`"
-          :shape-option="{
-            size,
-            shape: 'pill',
-          }"
-          class="d-mx4"
-          :aria-label="ariaLabel"
-        />
-      </div>
-    </section>
-
-    <section class="d-mb64">
-      <p class="d-mb-2">
-        Skeleton heading variants
-      </p>
-      <dt-skeleton
-        v-for="size in headingSize"
-        :key="`${size}-heading`"
-        :text-option="{
-          type: 'heading',
-          headingHeight: size,
-        }"
-        class="d-mb4"
-        :aria-label="ariaLabel"
-      />
-    </section>
-
-    <section class="d-mb64">
-      <p class="d-mb-2">
-        Skeleton label variant
-      </p>
-      <dt-skeleton
-        :text-option="{
-          type: 'label',
-        }"
-        :aria-label="ariaLabel"
-      />
-    </section>
-
-    <section class="d-mb64">
-      <p class="d-mb8">
-        Skeleton paragraphs variants
-      </p>
-      <section class="d-pl12">
-        <p class="d-mb8">
-          Default configuration
-        </p>
-        <dt-skeleton
-          paragraph-option
-          class="d-mb8"
-          :aria-label="ariaLabel"
-        />
-        <p class="d-mb8">
-          Define width for all lines
+      <div class="d-p4 d-fl1 d-w50p">
+        <h3>Text: Paragraphs</h3>
+        <p class="d-mb24">
+          Line-lengths and amount of lines are customizable.
         </p>
         <dt-skeleton
           :paragraph-option="{
-            rows: 3,
-            width: ['50%', '18%', '90%'],
-          }"
-          class="d-mb8"
-          :aria-label="ariaLabel"
-        />
-        <p class="d-mb8">
-          Define width for first and second lines
-        </p>
-        <dt-skeleton
-          :paragraph-option="{
-            rows: 3,
-            width: ['50%'],
-          }"
-          class="d-mb8"
-          :aria-label="ariaLabel"
-        />
-        <p>
-          Use random-width
-        </p>
-        <dt-skeleton
-          :paragraph-option="{
-            rows: 7,
+            rows: 5,
             randomWidth: true,
+            maxWidth: 100,
+            minWidth: 80,
           }"
           :aria-label="ariaLabel"
-          class="d-mb8"
+          :offset="0.5"
         />
-      </section>
-    </section>
-    <section class="d-mb64">
-      <p class="d-mb8">
-        Skeleton paragraph with custom class
-      </p>
-      <section class="d-pl12">
-        <dt-skeleton
-          :paragraph-option="{
-            rows: 6,
-            rowClass: 'd-h32',
-            randomWidth: true,
-          }"
-        />
-      </section>
+      </div>
     </section>
   </div>
 </template>
 
 <script>
 import DtSkeleton from './skeleton';
-import { DtButton } from '../button';
 
 import { SKELETON_WIDTHS, SKELETON_HEADING_HEIGHTS } from './skeleton_constants';
 
 export default {
   name: 'DtSkeletonVariants',
-  components: { DtSkeleton, DtButton },
+  components: { DtSkeleton },
   data () {
     return {
       shapeWidths: Object.keys(SKELETON_WIDTHS),

@@ -3,6 +3,9 @@
     data-qa="skeleton-list-item"
     :class="[
       'd-d-flex',
+      {
+        'd-ai-center': paragraphs.rows === 1,
+      },
       contentClass,
     ]"
   >

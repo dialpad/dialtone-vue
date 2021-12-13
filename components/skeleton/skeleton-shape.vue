@@ -6,7 +6,7 @@
       'skeleton-placeholder',
       SKELETON_SHAPES[shape],
       SKELETON_HEIGHTS[size],
-      widthClass,
+      SKELETON_WIDTHS[size],
       {
         'skeleton-placeholder--animate': animate,
       },
@@ -20,7 +20,6 @@
 import SkeletonAnimation from '../mixins/skeleton.js';
 import {
   SKELETON_HEIGHTS,
-  SKELETON_RECTANGLE_WIDTH,
   SKELETON_SHAPES,
   SKELETON_WIDTHS,
 } from './skeleton_constants';
@@ -68,19 +67,8 @@ export default {
     return {
       SKELETON_SHAPES,
       SKELETON_HEIGHTS,
+      SKELETON_WIDTHS,
     };
-  },
-
-  computed: {
-    isEqualSided () {
-      return this.shape === 'circle' || this.shape === 'square';
-    },
-
-    widthClass () {
-      return this.isEqualSided
-        ? SKELETON_WIDTHS[this.size]
-        : SKELETON_RECTANGLE_WIDTH[this.size];
-    },
   },
 };
 </script>
