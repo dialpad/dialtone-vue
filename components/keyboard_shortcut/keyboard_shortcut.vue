@@ -9,7 +9,7 @@
       'd-px6',
       'd-ba',
       'd-bar4',
-      'd-fs12',
+      'd-fs24',
       inverted ? 'd-bc-black-400' : 'd-bc-black-100',
     ]"
   >
@@ -21,7 +21,7 @@
         v-if="SHORTCUTS_ICON_ALIASES[item]"
         :key="`${i}-${item}`"
         :class="[
-          'dt-keyboard-shortcut__svg-size10',
+          'dt-keyboard-shortcut__svg',
           inverted ? 'd-fc-black-075' : 'd-fc-black-500',
           'd-mr2',
         ]"
@@ -39,7 +39,7 @@
       <icon-add
         v-if="separator && item.trim()"
         :key="`add-${i}-${item}`"
-        class="dt-keyboard-shortcut__svg-size10"
+        class="dt-keyboard-shortcut__svg"
       />
     </template>
   </div>
@@ -71,7 +71,7 @@ export default {
       required: true,
     },
 
-    separator: {
+    separator: { // this is needed for testing and demo
       type: String,
       default: '',
     },
@@ -121,9 +121,11 @@ export default {
 </script>
 
 <style lang="less">
-.dt-keyboard-shortcut__svg-size10 {
-  width: 1em !important;
-  height: 1em !important;
+.dt-keyboard-shortcut__svg {
+  top: 0.0833em;
+  position: relative;
+  width: 1em;
+  height: 1em;
 
   path {
     fill: currentColor;
