@@ -47,7 +47,7 @@
 
 <script>
 import IconWindows from '@dialpad/dialtone/lib/dist/vue/icons/IconWindows';
-import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd';
+import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowBackwards';
 import IconArrowRightAlt from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowRightAlt';
 import { SHORTCUTS_ALIASES, SHORTCUTS_ICON_ALIASES, ARROW_DIRECTIONS } from './keyboard_shortcut_constants';
 
@@ -125,5 +125,9 @@ export default {
 .d-svg--size12 {
   width: 1.2rem !important;
   height: 1.2rem !important;
+}
+
+.d-svg.d-svg--system path {
+  fill: currentColor;
 }
 </style>
