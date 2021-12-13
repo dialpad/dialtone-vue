@@ -38,7 +38,7 @@ export default {
 
     size: {
       type: String,
-      default: 'sm',
+      default: 'md',
       validator: size => Object.keys(SKELETON_WIDTHS).includes(size),
     },
 

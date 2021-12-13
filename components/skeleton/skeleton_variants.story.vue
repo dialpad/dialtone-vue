@@ -44,7 +44,6 @@
         </p>
         <dt-skeleton
           :shape-option="{
-            contentClass: 'd-w42 d-h42',
             shape: 'square',
           }"
           class="d-mb24"
@@ -71,6 +70,7 @@
         <dt-skeleton
           :text-option="{
             type: 'heading',
+            width: '160px',
             headingHeight: 'sm',
           }"
           class="d-mb24"
@@ -81,7 +81,7 @@
           :text-option="{
             type: 'heading',
             headingHeight: 'md',
-            width: '75%',
+            width: '240px',
           }"
           class="d-mb24"
           :aria-label="ariaLabel"
@@ -91,7 +91,7 @@
           :text-option="{
             type: 'heading',
             headingHeight: 'lg',
-            width: '90%',
+            width: '320px',
           }"
           :aria-label="ariaLabel"
         />
@@ -145,7 +145,7 @@
         <dt-skeleton
           :offset="0.6"
           :list-item-option="{
-            shapeSize: 'md',
+            shapeSize: 'sm',
             paragraphs: {
               rows: 1,
             },
@@ -161,7 +161,6 @@
         <dt-skeleton
           :offset="0.6"
           :list-item-option="{
-            customShapeSize: '32px',
             shape: 'square',
             paragraphs: {
               rows: 1,
