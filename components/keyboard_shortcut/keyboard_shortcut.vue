@@ -6,10 +6,10 @@
       'd-ai-center',
       'd-jc-center',
       'd-box-border',
-      'd-py2',
       'd-px6',
       'd-ba',
       'd-bar4',
+      'd-fs12',
       inverted ? 'd-bc-black-400' : 'd-bc-black-100',
     ]"
   >
@@ -23,7 +23,7 @@
         :class="[
           inverted ? 'd-fc-black-075' : 'd-fc-black-500',
           'd-mr2',
-          'd-svg--size24',
+          'd-svg--size12',
         ]"
         :style="customizeIcon(item)"
       />
@@ -36,7 +36,11 @@
         ]"
         v-html="item"
       />
-      <!--      <IconAdd class="d-svg&#45;&#45;size14" /> -->
+      <icon-add
+        v-if="separator && item.trim()"
+        :key="`add-${i}-${item}`"
+        class="d-svg--size12"
+      />
     </template>
   </div>
 </template>
@@ -64,6 +68,11 @@ export default {
     shortcut: {
       type: String,
       required: true,
+    },
+
+    separator: {
+      type: String,
+      default: '',
     },
   },
 
@@ -109,3 +118,11 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+// it's need for demo, pls don't write any comments about that css, tnx
+.d-svg--size12 {
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+}
+</style>

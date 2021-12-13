@@ -1,8 +1,12 @@
 export const SHORTCUTS_ALIASES = {
   cmd: '&#8984;', // ⌘ Command
   opt: 'Option',
-  ctrl: 'Control',
+  alt: 'Alt',
+  shift: 'Shift',
+  ctrl: 'Ctrl',
   del: 'Delete',
+  pageUp: 'Page up',
+  pageDown: 'Page down',
 };
 
 export const SHORTCUTS_ICON_ALIASES = {
