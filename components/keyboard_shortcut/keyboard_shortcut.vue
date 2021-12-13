@@ -17,48 +17,42 @@
       v-for="(item, i) in formattedShortcutSplit"
     >
       <component
-        :is="SHORTCUTS_ICON_ALIASES[item.shortcut]"
-        v-if="SHORTCUTS_ICON_ALIASES[item.shortcut]"
-        :key="`${i}-${item.shortcut}`"
+        :is="SHORTCUTS_ICON_ALIASES[item]"
+        v-if="SHORTCUTS_ICON_ALIASES[item]"
+        :key="`${i}-${item}`"
         :class="[
           inverted ? 'd-fc-black-075' : 'd-fc-black-500',
-          'd-mx1',
-          'd-svg--size16',
+          'd-mr2',
+          'd-svg--size24',
         ]"
         :style="customizeIcon(item)"
       />
       <span
         v-else
-        :key="`${i}-${item.shortcut}`"
+        :key="`${i}-${item}`"
         :class="[
           inverted ? 'd-fc-black-075' : 'd-fc-black-500',
-          'd-lh0',
-          'd-mx2',
+          'd-mr2',
         ]"
-        v-html="item.shortcut"
+        v-html="item"
       />
-      <span
-        v-if="i !== formattedShortcutSplit.length - 1"
-        :key="`${i}-${item.shortcut}+`"
-        :class="[
-          inverted ? 'd-fc-black-075' : 'd-fc-black-500',
-          'd-lh0',
-        ]"
-      > + </span>
+      <!--      <IconAdd class="d-svg&#45;&#45;size14" /> -->
     </template>
   </div>
 </template>
 
 <script>
-import IconGrid from '@dialpad/dialtone/lib/dist/vue/icons/IconGrid';
+import IconWindows from '@dialpad/dialtone/lib/dist/vue/icons/IconWindows';
+import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd';
 import IconArrowRightAlt from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowRightAlt';
 import { SHORTCUTS_ALIASES, SHORTCUTS_ICON_ALIASES, ARROW_DIRECTIONS } from './keyboard_shortcut_constants';
 export default {
   name: 'DtKeyboardShortcut',
 
   components: {
-    IconGrid,
+    IconWindows,
     IconArrowRightAlt,
+    IconAdd,
   },
 
   props: {
@@ -88,7 +82,8 @@ export default {
 
     // Splits any icon based aliases into their own array items.
     formattedShortcutSplit () {
-      // const iconAliasString = Object.keys(SHORTCUTS_ICON_ALIASES).join('|');
+      const iconAliasString = Object.keys(SHORTCUTS_ICON_ALIASES).join('|');
+
       /* any SHORTCUTS_ICON_ALIASES will go into the lookaround separated by or's
          example: split(/(?={icon1|icon2})|(?<={icon1|icon2})/g);
 
@@ -96,20 +91,15 @@ export default {
 
          if {win} is our delimiter AKA shortcut icon alias
          '{win} + D + {win}' would split like [{win}, ' + D + ', {win}] */
-      // const regex = new RegExp(`(?=${iconAliasString})|(?<=${iconAliasString})`, 'gi');
-      return this.formattedShortcut.split(' ').map(shortcut => {
-        return {
-          shortcut,
-          type: shortcut.includes('arrow') ? 'arrow' : null,
-        };
-      });
+      const regex = new RegExp(`(?=${iconAliasString})|(?<=${iconAliasString})`, 'gi');
+      return this.formattedShortcut.split(regex);
     },
   },
 
   methods: {
     customizeIcon (item) {
-      if (item.type === 'arrow') {
-        const direction = item.shortcut.match(/right|left|up|down/)?.[0];
+      if (item.includes('arrow')) {
+        const direction = item.match(/right|left|up|down/)?.[0];
         return {
           transform: `rotate(${ARROW_DIRECTIONS[direction]}deg)`,
         };

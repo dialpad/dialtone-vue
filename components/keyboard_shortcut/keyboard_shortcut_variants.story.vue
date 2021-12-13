@@ -2,20 +2,20 @@
   <div>
     <div class="d-p8 d-bgc-black-900">
       <dt-keyboard-shortcut
-        shortcut="{win} {arrow-right} {arrow-left} {arrow-up} {arrow-down} E B"
+        shortcut="{win} + {arrow-right} + {arrow-left} + {arrow-up} + {arrow-down} + E + B"
         inverted
       />
     </div>
     <div class="d-p8">
       <dt-keyboard-shortcut
-        shortcut="{opt} {cmd} {win} {ctrl} Shift {arrow-up}"
+        shortcut="{opt} + {cmd} + {win} + {ctrl} + Shift + {arrow-up}"
       />
     </div>
     <div class="d-p8">
-      <dt-keyboard-shortcut shortcut="{opt} U E B" />
+      <dt-keyboard-shortcut shortcut="{opt} + U + E + B" />
     </div>
     <div class="d-p8">
-      <dt-keyboard-shortcut shortcut="{cmd} 1 2 {del}" />
+      <dt-keyboard-shortcut shortcut="{cmd} + 1 + 2 + {del}" />
     </div>
     <div class="d-p8">
       <dt-keyboard-shortcut shortcut="{del}" />
@@ -36,7 +36,7 @@ export default {
   name: 'DtKeyboardShortcutVariants',
   components: { DtKeyboardShortcut },
   data: () => ({
-    availableVariants: SHORTCUTS_ALIASES_LIST.join(' '),
+    availableVariants: SHORTCUTS_ALIASES_LIST.join(' + '),
   }),
 };
 </script>
