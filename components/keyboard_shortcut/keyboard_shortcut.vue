@@ -21,9 +21,9 @@
         v-if="SHORTCUTS_ICON_ALIASES[item]"
         :key="`${i}-${item}`"
         :class="[
+          'dt-keyboard-shortcut__svg-size12',
           inverted ? 'd-fc-black-075' : 'd-fc-black-500',
           'd-mr2',
-          'd-svg--size12',
         ]"
         :style="customizeIcon(item)"
       />
@@ -121,13 +121,12 @@ export default {
 </script>
 
 <style lang="less">
-// it's need for demo, pls don't write any comments about that css, tnx
-.d-svg--size12 {
+.dt-keyboard-shortcut__svg-size12 {
   width: 1.2rem !important;
   height: 1.2rem !important;
-}
 
-.d-svg.d-svg--system path {
-  fill: currentColor;
+  path {
+    fill: currentColor;
+  }
 }
 </style>
