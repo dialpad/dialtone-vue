@@ -15,10 +15,27 @@
       <dt-keyboard-shortcut shortcut="{opt} U E B" />
     </div>
     <div class="d-p8">
-      <dt-keyboard-shortcut shortcut="{cmd} 1 2 {del}" />
+      <dt-keyboard-shortcut shortcut="{cmd} U E B {del}" />
     </div>
     <div class="d-p8">
       <dt-keyboard-shortcut shortcut="{del}" />
+    </div>
+
+    <div class="d-p8">
+      <dt-keyboard-shortcut
+        class="d-fs16"
+        shortcut="{cmd} Y"
+      />
+    </div>
+
+    <div class="d-p8">
+      <p>Accessible shortcut</p>
+
+      <dt-keyboard-shortcut
+        aria-label="Press Meta-Right Arrow-Left Arrow-Y"
+        tabindex="0"
+        shortcut="{cmd} {arrow-right} {arrow-left} Y"
+      />
     </div>
 
     <div class="d-p8">
