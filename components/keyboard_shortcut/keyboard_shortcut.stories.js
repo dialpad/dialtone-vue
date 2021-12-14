@@ -19,7 +19,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Components/KeyboardShortcut',
+  title: 'Components/Keyboard Shortcut',
   component: DtKeyboardShortcut,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,

@@ -17,15 +17,14 @@
       v-for="(item, i) in formattedShortcutSplit"
     >
       <component
-        :is="SHORTCUTS_ICON_ALIASES[item]"
-        v-if="SHORTCUTS_ICON_ALIASES[item]"
+        :is="icons[item]"
+        v-if="icons[item]"
         :key="`${i}-${item}`"
         :class="[
           'dt-keyboard-shortcut__svg',
           inverted ? 'd-fc-black-075' : 'd-fc-black-500',
           'd-mr2',
         ]"
-        :style="customizeIcon(item)"
       />
       <span
         v-else
@@ -36,11 +35,6 @@
         ]"
         v-html="item"
       />
-      <icon-add
-        v-if="separator && item.trim()"
-        :key="`add-${i}-${item}`"
-        class="dt-keyboard-shortcut__svg"
-      />
     </template>
   </div>
 </template>
@@ -48,15 +42,25 @@
 <script>
 import IconWindows from '@dialpad/dialtone/lib/dist/vue/icons/IconWindows';
 import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd';
-import IconArrowRightAlt from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowRightAlt';
-import { SHORTCUTS_ALIASES, SHORTCUTS_ICON_ALIASES, ARROW_DIRECTIONS } from './keyboard_shortcut_constants';
+import IconArrowDownward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowDownward';
+import IconArrowUpward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowUpward';
+import IconArrowForward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowForward';
+import IconArrowBackward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowBackwards';
+import {
+  SHORTCUTS_ALIASES,
+  SHORTCUTS_ICON_ALIASES,
+  SHORTCUTS_ICON_SEPARATOR,
+} from './keyboard_shortcut_constants';
 
 export default {
   name: 'DtKeyboardShortcut',
 
   components: {
     IconWindows,
-    IconArrowRightAlt,
+    IconArrowBackward,
+    IconArrowDownward,
+    IconArrowForward,
+    IconArrowUpward,
     IconAdd,
   },
 
@@ -70,29 +74,33 @@ export default {
       type: String,
       required: true,
     },
-
-    separator: { // this is needed for testing and demo
-      type: String,
-      default: '',
-    },
   },
 
   data () {
     return {
       SHORTCUTS_ICON_ALIASES,
+      separator: ' ',
     };
   },
 
   computed: {
+    icons () {
+      return { ...SHORTCUTS_ICON_ALIASES, ...SHORTCUTS_ICON_SEPARATOR };
+    },
+
+    shortcutWithSeparator () {
+      return this.shortcut.replace(new RegExp(this.separator, 'gi'), '{plus}');
+    },
+
     formattedShortcut () {
       return Object.keys(SHORTCUTS_ALIASES).reduce((result, key) => {
         return result.replace(new RegExp('{' + key + '}', 'gi'), SHORTCUTS_ALIASES[key]);
-      }, this.shortcut);
+      }, this.shortcutWithSeparator);
     },
 
     // Splits any icon based aliases into their own array items.
     formattedShortcutSplit () {
-      const iconAliasString = Object.keys(SHORTCUTS_ICON_ALIASES).join('|');
+      const iconAliasString = Object.keys(this.icons).join('|');
 
       /* any SHORTCUTS_ICON_ALIASES will go into the lookaround separated by or's
          example: split(/(?={icon1|icon2})|(?<={icon1|icon2})/g);
@@ -105,25 +113,11 @@ export default {
       return this.formattedShortcut.split(regex);
     },
   },
-
-  methods: {
-    customizeIcon (item) {
-      if (item.includes('arrow')) {
-        const direction = item.match(/right|left|up|down/)?.[0];
-        return {
-          transform: `rotate(${ARROW_DIRECTIONS[direction]}deg)`,
-        };
-      }
-      return {};
-    },
-  },
 };
 </script>
 
 <style lang="less">
 .dt-keyboard-shortcut__svg {
-  top: 0.0833em;
-  position: relative;
   width: 1em;
   height: 1em;
 

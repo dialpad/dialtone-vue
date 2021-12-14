@@ -11,17 +11,14 @@ export const SHORTCUTS_ALIASES = {
 
 export const SHORTCUTS_ICON_ALIASES = {
   '{win}': 'IconWindows',
-  '{arrow-right}': 'IconArrowRightAlt',
-  '{arrow-left}': 'IconArrowRightAlt',
-  '{arrow-up}': 'IconArrowRightAlt',
-  '{arrow-down}': 'IconArrowRightAlt',
+  '{arrow-right}': 'IconArrowForward',
+  '{arrow-left}': 'IconArrowBackward',
+  '{arrow-up}': 'IconArrowUpward',
+  '{arrow-down}': 'IconArrowDownward',
 };
 
-export const ARROW_DIRECTIONS = {
-  right: 0,
-  down: 90,
-  left: 180,
-  up: 270,
+export const SHORTCUTS_ICON_SEPARATOR = {
+  '{plus}': 'IconAdd',
 };
 
 export const SHORTCUTS_ALIASES_LIST = Object
