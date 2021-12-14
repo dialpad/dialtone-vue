@@ -1,6 +1,7 @@
 <template>
   <dt-popover
     :id="id"
+    :key="`popover-key-${modal}`"
     :open="isOpen"
     :fixed-alignment="fixedAlignment"
     :fixed-vertical-alignment="fixedVerticalAlignment"
