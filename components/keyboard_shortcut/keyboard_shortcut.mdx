@@ -4,21 +4,23 @@ import DtKeyboardShortcut from './keyboard_shortcut.stories';
 # KeyboardShortcut
 
 <Subtitle>
-  Some description of the component functionality.
+    Keyboard shortcut displays the combinations of keys that provide an quicker way to do something that you'd typically
+    do with a mouse.
 </Subtitle>
 
 ## Base Style
 
-Some description of how to use the base component, potential gotchas and limitations.
+Keyboard shortcut is made from an outline border with text and or keyboard symbols inside to represent the key
+combination. If there are more than 1 key, it is connected with a “+” in between.
 
 <Canvas>
-  <Story id="components-keyboardshortcut--default" />
+  <Story id="components-keyboard-shortcut--default" />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="components-keyboardshortcut--variants" />
+  <Story id="components-keyboard-shortcut--variants" />
 </Canvas>
 
 ## Props, Slots & Events
@@ -26,6 +28,10 @@ Some description of how to use the base component, potential gotchas and limitat
 <ArgsTable of={DtKeyboardShortcut} />
 
 ## Usage
+
+- Commands shown should always be device specific (different systems may require a different shortcut combination).
+- Commonly used in list item, tooltips.
+- Don’t use actual “+” key as a shortcut.
 
 ### Import
 

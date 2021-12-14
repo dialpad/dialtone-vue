@@ -8,7 +8,7 @@ import DtKeyboardShortcutVariantsTemplate from './keyboard_shortcut_variants.sto
 export const argTypesData = {
   shortcut: {
     description: SHORTCUTS_ALIASES_LIST.join(' '),
-    defaultValue: SHORTCUTS_ALIASES_LIST[0],
+    defaultValue: `${SHORTCUTS_ALIASES_LIST[0]} key key key`,
     control: 'text',
   },
 
