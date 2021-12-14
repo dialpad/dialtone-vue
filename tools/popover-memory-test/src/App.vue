@@ -1,7 +1,7 @@
 /* eslint-disable vue/no-use-v-if-with-v-for */
 <template>
   <div id="app">
-    <div class="test">
+    <div class="buttons-holder">
       <dt-button
         style="z-index: 99999;"
         @click="start"
@@ -103,13 +103,11 @@ export default {
   margin-top: 60px;
 }
 
-.test {
+.buttons-holder {
   position: fixed;
   top: 0;
   right: 0;
   z-index: 999999;
   background: red;
 }
-
-
 </style>
