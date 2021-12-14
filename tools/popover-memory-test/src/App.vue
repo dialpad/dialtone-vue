@@ -29,11 +29,11 @@
     </div>
 
     <dt-popover
-      v-for="(popover, index) in popovers"
+      v-for="popover in popovers"
       :open="popover.open"
       :hide-on-click="false"
       modal
-      :key="index"
+      :key="popover.key"
     >
       <template #anchor="{ attrs }">
         <dt-button
@@ -63,14 +63,23 @@ export default {
     return {
       popovers: [],
       uniq: [],
-      interval: 0
+      interval: 0,
+      counter: 1,
     }
   },
 
   methods: {
+    getKey() {
+      this.counter = this.counter + 1
+      return this.counter
+    },
+
     start() {
       this.interval = setInterval(() => {
-        this.popovers.push(...this.uniq.slice(0, 10))
+        const shuffled = this.popovers.sort(() => 0.5 - Math.random()).slice(0,10)
+        shuffled.forEach( (popover) => {
+          popover.key = this.getKey()
+        })
       }, 1000)
     },
 
@@ -83,9 +92,12 @@ export default {
     },
 
     mount() {
-      this.uniq = Array.from({ length: 200 }, () => ({
+      this.uniq = Array.from({ length: 100 }, () => ({
+       key: this.getKey(),
        open: true
       }))
+
+      this.popovers = this.popovers.concat(this.uniq)
     }
   }
 }
@@ -104,10 +116,14 @@ export default {
 }
 
 .buttons-holder {
+  display: flex;
+  align-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   right: 0;
   z-index: 999999;
+  width: 100%;
   background: red;
 }
 </style>
