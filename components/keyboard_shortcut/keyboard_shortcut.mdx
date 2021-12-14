@@ -1,5 +1,5 @@
 import { Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs/blocks';
-import DtKeyboardShortcut from './keyboard_shortcut.stories';
+import DtKeyboardShortcut from './keyboard_shortcut.vue';
 
 # KeyboardShortcut
 
@@ -39,25 +39,32 @@ combination. If there are more than 1 key, it is connected with a “+” in bet
 import { DtKeyboardShortcut } from '@dialpad/dialtone-vue';
 ```
 
-### With Some Variant
+### Shortcut size variation
 
-```vue
+```html
 <dt-keyboard-shortcut
-  some="variant"
+  class="d-fs16"
+  shortcut="{cmd} Y"
 />
 ```
 
-### With Some Other Variant
+### Accessible shortcut
 
-```vue
+```html
 <dt-keyboard-shortcut
-  some-other="variant"
+  :aria-label="$i18n('Press Meta-Right Arrow-Left Arrow-Y')"
+  tabindex="0"
+  shortcut="{cmd} {arrow-right} {arrow-left} Y"
 />
 ```
 
-<!-- markdownlint-disable -->
-https://www.acrobatfaq.com/atbref5/index/KeyboardShortcuts/UnicodeCodesforKeyboards.html
-https://www.online-toolz.com/tools/unicode-html-entities-convertor.php
-https://mothereff.in/js-escapes#1ma%C3%B1ana%20man%CC%83ana
-https://superuser.com/questions/1247382/is-there-a-unicode-character-for-the-windows-key
-http://xahlee.info/comp/unicode_computing_symbols.html
+### Accessibility
+
+You can use `aria-label` and `tab-index` to make this component accessible. Also it's
+[`aria-keyshortcuts`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts)
+attribute, which indicates keyboard shortcuts that an author has implemented to activate or give focus to an element.
+
+### References
+
+- [Keyboard Symbols](http://xahlee.info/comp/unicode_computing_symbols.html)
+- [aria-keyshortcuts](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts)
