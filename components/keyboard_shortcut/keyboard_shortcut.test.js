@@ -1,94 +1,66 @@
-// import { assert } from 'chai';
-// import { createLocalVue, shallowMount } from '@vue/test-utils';
-// import DtKeyboardShortcut from './keyboard_shortcut.vue';
-//
-// // Constants
-// const basePropsData = {};
-//
-// describe('DtKeyboardShortcut Tests', function () {
-//   // Wrappers
-//   let wrapper;
-//   let childContainer;
-//
-//   // Environment
-//   let propsData = basePropsData;
-//   let attrs = {};
-//   let slots = {};
-//   let provide = {};
-//
-//   // Helpers
-//   const _setChildWrappers = () => {
-//     childContainer = wrapper.find('[data-qa="child-container"]');
-//   };
-//
-//   const _setWrappers = () => {
-//     wrapper = shallowMount(DtKeyboardShortcut, {
-//       propsData,
-//       attrs,
-//       slots,
-//       provide,
-//       localVue: this.localVue,
-//     });
-//     _setChildWrappers();
-//   };
-//
-//   // Shared Examples
-//   const itBehavesLikeSomeExpectation = () => {
-//     it('should be equal', function () { assert.strictEqual(1, 1); });
-//   };
-//
-//   // Setup
-//   before(function () {
-//     this.localVue = createLocalVue();
-//   });
-//   beforeEach(function () {});
-//
-//   // Teardown
-//   afterEach(function () {
-//     propsData = basePropsData;
-//     attrs = {};
-//     slots = {};
-//     provide = {};
-//   });
-//   after(function () {});
-//
-//   describe('Presentation Tests', function () {
-//     /*
-//      * Test(s) to ensure that the component is correctly rendering
-//      */
-//
-//     describe('When some description of the current environment', function () {});
-//   });
-//
-//   describe('Accessibility Tests', function () {
-//     /*
-//      * Test(s) to ensure that the component is accessible
-//      */
-//
-//     describe('When some description of the current environment', function () {});
-//   });
-//
-//   describe('Interactivity Tests', function () {
-//     /*
-//      * Test(s) to ensure that the component correctly handles user input
-//      */
-//
-//     describe('When some description of the current environment', function () {});
-//   });
-//
-//   describe('Validation Tests', function () {
-//     /*
-//      * Test(s) to ensure that custom validators are working as expected
-//      */
-//
-//     describe('When some description of the current environment', function () {});
-//   });
-//
-//   describe('Extendability Tests', function () {
-//     /*
-//      * Test(s) to ensure that the component can be correctly extended
-//      */
-//
-//     describe('When some description of the current environment', function () {});
-//   });
-// });
+import { assert } from 'chai';
+import { createLocalVue, mount } from '@vue/test-utils';
+import DtKeyboardShortcut from './keyboard_shortcut.vue';
+import { SHORTCUTS_ALIASES_LIST } from './keyboard_shortcut_constants';
+
+import IconWindows from '@dialpad/dialtone/lib/dist/vue/icons/IconWindows';
+import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd';
+import IconArrowDownward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowDownward';
+import IconArrowUpward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowUpward';
+import IconArrowForward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowForward';
+import IconArrowBackward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowBackwards';
+
+// Constants
+const basePropsData = {
+  shortcut: SHORTCUTS_ALIASES_LIST.join(' ').trim(),
+};
+
+describe('DtKeyboardShortcut Tests', function () {
+  // Wrappers
+  let wrapper;
+  let mountedIcons = {};
+
+  // Environment
+  const propsData = basePropsData;
+
+  // Helpers
+  const _setChildWrappers = () => {
+    mountedIcons = {
+      IconWindows: wrapper.findComponent(IconWindows),
+      IconAdd: wrapper.findComponent(IconAdd),
+      IconArrowDownward: wrapper.findComponent(IconArrowDownward),
+      IconArrowUpward: wrapper.findComponent(IconArrowUpward),
+      IconArrowForward: wrapper.findComponent(IconArrowForward),
+      IconArrowBackward: wrapper.findComponent(IconArrowBackward),
+    };
+  };
+
+  const _mountWrapper = () => {
+    wrapper = mount(DtKeyboardShortcut, {
+      propsData,
+      localVue: this.localVue,
+    });
+    _setChildWrappers();
+  };
+
+  function itBehavesLikeIconWasRendered (iconName, mountedIcon) {
+    it(`should render component with ${iconName}`, function () {
+      assert.isTrue(mountedIcon.exists());
+    });
+  }
+
+  // Setup
+  before(function () {
+    this.localVue = createLocalVue();
+  });
+
+  describe('Presentation Tests', function () {
+    // Setup
+    _mountWrapper();
+
+    it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
+    Object.entries(mountedIcons)
+      .forEach(([iconName, mountedIcon]) =>
+        itBehavesLikeIconWasRendered(iconName, mountedIcon));
+  });
+});
