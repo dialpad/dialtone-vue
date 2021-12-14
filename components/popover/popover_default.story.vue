@@ -1,7 +1,6 @@
 <template>
   <dt-popover
     :id="id"
-    :key="popoverKey"
     :open="isOpen"
     :fixed-alignment="fixedAlignment"
     :fixed-vertical-alignment="fixedVerticalAlignment"
@@ -68,12 +67,6 @@ export default {
     return {
       isOpen: this.open || false,
     };
-  },
-
-  computed: {
-    popoverKey () {
-      return `popover-key-${this.modal}`;
-    },
   },
 
   watch: {
