@@ -1,10 +1,11 @@
 <template>
   <div
-    v-if="type === 'label'"
+    v-if="type === 'body'"
     ref="skeleton"
-    data-qa="skeleton-text-label"
+    data-qa="skeleton-text-body"
     :class="[
       'd-h8',
+      'd-bar2',
       'skeleton-placeholder',
       {
         'skeleton-placeholder--animate': animate,
@@ -47,7 +48,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'label',
+      default: 'body',
       validator: type => SKELETON_TEXT_TYPES.includes(type),
     },
 

@@ -22,7 +22,6 @@
         <p>M (32x32px)</p>
         <dt-skeleton
           :shape-option="{
-            size: 'md',
             shape: 'circle',
           }"
           class="d-mb24"
@@ -161,6 +160,7 @@
         <dt-skeleton
           :offset="0.6"
           :list-item-option="{
+            shapeSize: '2rem',
             shape: 'square',
             paragraphs: {
               rows: 1,
@@ -175,8 +175,7 @@
         <dt-skeleton
           :offset="0.6"
           :list-item-option="{
-            shapeSize: 'md',
-            customShapeSize: '36px',
+            shapeSize: '3.6rem',
             paragraphs: {
               rows: 4,
               width: [
@@ -210,14 +209,13 @@
 <script>
 import DtSkeleton from './skeleton';
 
-import { SKELETON_WIDTHS, SKELETON_HEADING_HEIGHTS } from './skeleton_constants';
+import { SKELETON_HEADING_HEIGHTS } from './skeleton_constants';
 
 export default {
   name: 'DtSkeletonVariants',
   components: { DtSkeleton },
   data () {
     return {
-      shapeWidths: Object.keys(SKELETON_WIDTHS),
       headingSize: Object.keys(SKELETON_HEADING_HEIGHTS),
       loading: true,
     };

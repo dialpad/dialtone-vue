@@ -5,23 +5,20 @@
     :class="[
       'skeleton-placeholder',
       SKELETON_SHAPES[shape],
-      SKELETON_HEIGHTS[size],
-      SKELETON_WIDTHS[size],
       {
         'skeleton-placeholder--animate': animate,
       },
       contentClass,
     ]"
-    :style="skeletonStyle"
+    :style="shapeStyles"
   />
 </template>
 
 <script>
 import SkeletonAnimation from '../mixins/skeleton.js';
 import {
-  SKELETON_HEIGHTS,
   SKELETON_SHAPES,
-  SKELETON_WIDTHS,
+  SKELETON_SHAPE_SIZES,
 } from './skeleton_constants';
 
 export default {
@@ -39,7 +36,6 @@ export default {
     size: {
       type: String,
       default: 'md',
-      validator: size => Object.keys(SKELETON_WIDTHS).includes(size),
     },
 
     animationDuration: {
@@ -66,9 +62,20 @@ export default {
   data () {
     return {
       SKELETON_SHAPES,
-      SKELETON_HEIGHTS,
-      SKELETON_WIDTHS,
     };
+  },
+
+  computed: {
+    shapeStyles () {
+      const size = SKELETON_SHAPE_SIZES[this.size] || this.size;
+      return {
+        ...this.skeletonStyle,
+        'min-width': size,
+        'max-width': size,
+        'min-height': size,
+        'max-height': size,
+      };
+    },
   },
 };
 </script>

@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { SKELETON_SHAPES, SKELETON_WIDTHS } from './skeleton_constants.js';
+import { SKELETON_SHAPES } from './skeleton_constants.js';
 import DtSkeletonShape from './skeleton-shape';
 import DtSkeletonParagraph from './skeleton-paragraph';
 
@@ -52,7 +52,6 @@ export default {
     shapeSize: {
       type: String,
       default: 'md',
-      validator: size => Object.keys(SKELETON_WIDTHS).includes(size),
     },
 
     paragraphs: {

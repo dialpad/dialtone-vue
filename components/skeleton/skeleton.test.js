@@ -5,7 +5,7 @@ import DtSkeleton from './skeleton.vue';
 describe('DtSkeleton Tests', function () {
   // Wrappers
   let wrapper;
-  let skeletonTextLabel;
+  let skeletonTextBody;
   let skeletonTextHeading;
   let skeletonParagraph;
   let skeletonParagraphRows;
@@ -13,7 +13,7 @@ describe('DtSkeleton Tests', function () {
   let skeletonShape;
 
   const _setWrappers = () => {
-    skeletonTextLabel = wrapper.find('[data-qa="skeleton-text-label"]');
+    skeletonTextBody = wrapper.find('[data-qa="skeleton-text-body"]');
     skeletonTextHeading = wrapper.find('[data-qa="skeleton-text-heading"]');
     skeletonParagraph = wrapper.find('[data-qa="skeleton-paragraph"]');
     skeletonParagraphRows = wrapper.findAll('[data-qa="skeleton-paragraph-row"]');
@@ -36,8 +36,8 @@ describe('DtSkeleton Tests', function () {
     });
 
     describe('Skeleton text', function () {
-      it('should render the skeleton label', function () {
-        assert.isTrue(skeletonTextLabel.exists());
+      it('should render the skeleton body', function () {
+        assert.isTrue(skeletonTextBody.exists());
       });
 
       it('should render the skeleton heading', async function () {

@@ -8,24 +8,18 @@ export const SKELETON_RIPPLE_DURATION = 3000000;
 
 export const SKELETON_SHAPES = {
   circle: 'd-bar-circle',
-  square: 'd-bar4',
+  square: 'd-bar2',
 };
 
 export const SKELETON_TEXT_TYPES = [
-  'label',
+  'body',
   'heading',
 ];
 
-export const SKELETON_WIDTHS = {
-  sm: 'd-w24',
-  md: 'd-w32',
-  lg: 'd-w48',
-};
-
-export const SKELETON_HEIGHTS = {
-  sm: 'd-h24',
-  md: 'd-h32',
-  lg: 'd-h48',
+export const SKELETON_SHAPE_SIZES = {
+  sm: '24px',
+  md: '32px',
+  lg: '48px',
 };
 
 export const SKELETON_HEADING_HEIGHTS = {
@@ -38,7 +32,5 @@ export default {
   SKELETON_RIPPLE_DURATION,
   SKELETON_SHAPES,
   SKELETON_TEXT_TYPES,
-  SKELETON_WIDTHS,
-  SKELETON_HEIGHTS,
   SKELETON_HEADING_HEIGHTS,
 };

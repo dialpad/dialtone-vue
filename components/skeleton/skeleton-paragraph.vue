@@ -16,7 +16,7 @@
           'd-mb12': row !== integerRows,
         },
       ]"
-      :content-class="`d-h12 ${rowClass}`"
+      :content-class="rowClass"
       :animate="animate"
       :offset="offset"
       :animation-duration="animationDuration"

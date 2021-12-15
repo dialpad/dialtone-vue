@@ -31,8 +31,8 @@ export const argTypesData = {
     table: {
       type: {
         detail: `{
-          shape?: string<circle | square | rectangle | pill> | 'circle',
-          shapeSize?: string<xs | sm | md | lg | xl | 2xl> | 'md'
+          shape?: string<circle | square> | 'circle',
+          shapeSize?: string<sm | md | lg> | string <'{n}px|%|rem'>,
           shapeClass?: string | '',
           animate?: boolean | false,
           paragraphs?: paragraphOption | { rows: 3, randomWidth: true }
@@ -50,7 +50,7 @@ export const argTypesData = {
     table: {
       type: {
         detail: `null | {
-          type?: string <label | heading> | 'label',
+          type?: string <body | heading> | 'body',
           headingHeight?: string<sm | md | lg | xl> | 'md',
           width?: string | '100%',
           contentClass?: string | '',
@@ -68,8 +68,8 @@ export const argTypesData = {
     table: {
       type: {
         detail: `{
-          shape?: string<circle | square | rectangle | pill> | 'circle',
-          size?: string<xs | sm | md | lg | xl | 2xl> | 'md'
+          shape?: string<circle | square> | 'circle',
+          size?: string<sm | md | lg> | string <'{n}px|%|rem'>,
           animate?: boolean | false,
           offset?: number | 1,
           animationDuration?: number| -1,
