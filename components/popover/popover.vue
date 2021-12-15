@@ -469,7 +469,6 @@ export default {
     window.removeEventListener('resize', this.onResize);
     this.removeOverlay();
     this.tip?.destroy();
-    this.tip = null;
     this.removeReferences();
   },
 
@@ -480,6 +479,7 @@ export default {
     removeReferences () {
       this.anchorEl = null;
       this.popoverContentEl = null;
+      this.tip = null;
     },
 
     appendOverlay () {
