@@ -1,5 +1,8 @@
 <template>
-  <component :is="elementType">
+  <component
+    :is="elementType"
+    ref="popover"
+  >
     <dt-lazy-show
       v-if="modal"
       ref="overlay"
@@ -466,12 +469,19 @@ export default {
     window.removeEventListener('resize', this.onResize);
     this.removeOverlay();
     this.tip?.destroy();
+    this.tip = null;
+    this.removeReferences();
   },
 
   /******************
    *     METHODS    *
    ******************/
   methods: {
+    removeReferences () {
+      this.anchorEl = null;
+      this.popoverContentEl = null;
+    },
+
     appendOverlay () {
       const overlay = this.$refs.overlay.$el;
       const { lastChild } = this.overlayAppendTo;
@@ -484,7 +494,7 @@ export default {
 
     removeOverlay () {
       if (this.$refs.overlay && this.$refs.overlay.$el) {
-        this.$refs.overlay.$el.remove();
+        this.$refs.popover.append(this.$refs.overlay.$el);
       }
     },
 
