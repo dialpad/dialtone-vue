@@ -18,10 +18,14 @@
     <template
       v-for="(item, i) in formattedShortcutSplit"
     >
+      <!-- set aria-label to plus as this should be read to the
+      screenreader as 'plus' rather then 'add' in this context -->
       <component
         :is="icons[item]"
         v-if="icons[item]"
         :key="`${i}-${item}`"
+        aria-hidden="false"
+        :aria-label="icons[item] === 'IconAdd' ? 'Plus' : undefined"
         :class="[
           'dt-keyboard-shortcut__svg',
           inverted ? 'd-fc-black-075' : 'd-fc-black-500',
