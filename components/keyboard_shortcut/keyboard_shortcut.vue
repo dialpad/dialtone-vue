@@ -1,8 +1,9 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div
+  <kbd
     :class="[
       'd-d-inline-flex',
+      'd-ff-custom',
       'd-ai-center',
       'd-jc-center',
       'd-box-border',
@@ -37,7 +38,7 @@
         v-html="item"
       />
     </template>
-  </div>
+  </kbd>
 </template>
 
 <script>

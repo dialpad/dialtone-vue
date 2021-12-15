@@ -1,23 +1,28 @@
 <template>
   <div>
+    <div class="d-p8">
+      <h1 class="d-fs14">
+        Default shortcut
+      </h1>
+      <dt-keyboard-shortcut
+        shortcut="Option+{cmd}+{win}+Shift+{arrow-up}"
+      />
+    </div>
+
     <div class="d-p8 d-bgc-black-900">
-      <p class="d-fc-black-075">
+      <h1 class="d-fc-black-075 d-fs14">
         Inverted style
-      </p>
+      </h1>
       <dt-keyboard-shortcut
         shortcut="{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}+E+B"
         inverted
       />
     </div>
-    <div class="d-p8">
-      <p>Default shortcut</p>
-      <dt-keyboard-shortcut
-        shortcut="{opt}+{cmd}+{win}+{ctrl}+Shift+{arrow-up}"
-      />
-    </div>
 
     <div class="d-p8">
-      <p>Shortcut size variation</p>
+      <h1 class="d-fs14">
+        Shortcut size variation
+      </h1>
       <dt-keyboard-shortcut
         class="d-fs16"
         shortcut="{cmd}+Y"
@@ -25,8 +30,17 @@
     </div>
 
     <div class="d-p8">
-      <p>All available shortcut aliases</p>
+      <h1 class="d-fs14">
+        All available shortcut aliases
+      </h1>
       <dt-keyboard-shortcut :shortcut="availableVariants" />
+    </div>
+
+    <div class="d-p8">
+      <h1 class="d-fs14">
+        Inline with text
+      </h1>
+      Press <dt-keyboard-shortcut shortcut="Ctrl + F5" /> to hard refresh the page.
     </div>
   </div>
 </template>
