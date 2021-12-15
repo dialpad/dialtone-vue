@@ -80,7 +80,7 @@ export default {
   data () {
     return {
       SHORTCUTS_ICON_ALIASES,
-      separator: ' ',
+      separator: /\+/gi,
     };
   },
 
@@ -90,7 +90,7 @@ export default {
     },
 
     shortcutWithSeparator () {
-      return this.shortcut.replace(new RegExp(this.separator, 'gi'), '{plus}');
+      return this.shortcut.replace(this.separator, '{plus}');
     },
 
     formattedShortcut () {

@@ -11,7 +11,7 @@ import DtKeyboardShortcut from './keyboard_shortcut.vue';
 ## Base Style
 
 Keyboard shortcut is made from an outline border with text and or keyboard symbols inside to represent the key
-combination. If there are more than 1 key, it is connected with a “+” in between.
+combination. If you put "+" as string, plus icon will be rendered instead of the string.
 
 <Canvas>
   <Story id="components-keyboard-shortcut--default" />
@@ -45,7 +45,7 @@ import { DtKeyboardShortcut } from '@dialpad/dialtone-vue';
 ```html
 <dt-keyboard-shortcut
   class="d-fs16"
-  shortcut="{cmd} Y"
+  shortcut="{cmd}+Y"
 />
 ```
 
@@ -55,7 +55,7 @@ import { DtKeyboardShortcut } from '@dialpad/dialtone-vue';
 <dt-keyboard-shortcut
   :aria-label="$i18n('Press Meta-Right Arrow-Left Arrow-Y')"
   tabindex="0"
-  shortcut="{cmd} {arrow-right} {arrow-left} Y"
+  shortcut="{cmd}+{arrow-right}+{arrow-left}+Y"
 />
 ```
 

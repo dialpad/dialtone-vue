@@ -5,14 +5,14 @@
         Inverted style
       </p>
       <dt-keyboard-shortcut
-        shortcut="{win} {arrow-right} {arrow-left} {arrow-up} {arrow-down} E B"
+        shortcut="{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}+E+B"
         inverted
       />
     </div>
     <div class="d-p8">
       <p>Default shortcut</p>
       <dt-keyboard-shortcut
-        shortcut="{opt} {cmd} {win} {ctrl} Shift {arrow-up}"
+        shortcut="{opt}+{cmd}+{win}+{ctrl}+Shift+{arrow-up}"
       />
     </div>
 
@@ -20,7 +20,7 @@
       <p>Shortcut size variation</p>
       <dt-keyboard-shortcut
         class="d-fs16"
-        shortcut="{cmd} Y"
+        shortcut="{cmd}+Y"
       />
     </div>
 
@@ -30,7 +30,7 @@
       <dt-keyboard-shortcut
         aria-label="Press Meta-Right Arrow-Left Arrow-Y"
         tabindex="0"
-        shortcut="{cmd} {arrow-right} {arrow-left} Y"
+        shortcut="{cmd}+{arrow-right}+{arrow-left}+Y"
       />
     </div>
 
@@ -49,7 +49,7 @@ export default {
   name: 'DtKeyboardShortcutVariants',
   components: { DtKeyboardShortcut },
   data: () => ({
-    availableVariants: SHORTCUTS_ALIASES_LIST.join(' ').trim(),
+    availableVariants: SHORTCUTS_ALIASES_LIST.join('+').trim(),
   }),
 };
 </script>
