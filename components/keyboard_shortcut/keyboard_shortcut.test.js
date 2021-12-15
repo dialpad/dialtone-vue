@@ -12,7 +12,7 @@ import IconArrowBackward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowBac
 
 // Constants
 const basePropsData = {
-  shortcut: SHORTCUTS_ALIASES_LIST.join(' ').trim(),
+  shortcut: SHORTCUTS_ALIASES_LIST.join('+').trim(),
 };
 
 describe('DtKeyboardShortcut Tests', function () {
