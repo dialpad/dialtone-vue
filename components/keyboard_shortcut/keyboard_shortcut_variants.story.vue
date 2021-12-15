@@ -25,16 +25,6 @@
     </div>
 
     <div class="d-p8">
-      <p>Accessible shortcut</p>
-
-      <dt-keyboard-shortcut
-        aria-label="Press Meta-Right Arrow-Left Arrow-Y"
-        tabindex="0"
-        shortcut="{cmd}+{arrow-right}+{arrow-left}+Y"
-      />
-    </div>
-
-    <div class="d-p8">
       <p>All available shortcut aliases</p>
       <dt-keyboard-shortcut :shortcut="availableVariants" />
     </div>
