@@ -16,6 +16,10 @@ export const argTypesData = {
   inverted: {
     description: 'Applies the inverted styles',
   },
+
+  screenReaderText: {
+    description: 'Screen reader specific text',
+  },
 };
 
 // Story Collection

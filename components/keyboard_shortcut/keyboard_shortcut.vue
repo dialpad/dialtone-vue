@@ -15,17 +15,20 @@
       inverted ? 'd-bc-black-400' : 'd-bc-black-100',
     ]"
   >
+    <span
+      v-if="screenReaderText"
+      class="sr-only"
+    >
+      {{ screenReaderText }}
+    </span>
     <template
       v-for="(item, i) in formattedShortcutSplit"
     >
-      <!-- set aria-label to plus as this should be read to the
-      screenreader as 'plus' rather then 'add' in this context -->
       <component
         :is="icons[item]"
         v-if="icons[item]"
         :key="`${i}-${item}`"
-        aria-hidden="false"
-        :aria-label="icons[item] === 'IconAdd' ? 'Plus' : undefined"
+        aria-hidden="true"
         :class="[
           'dt-keyboard-shortcut__svg',
           inverted ? 'd-fc-black-075' : 'd-fc-black-500',
@@ -80,6 +83,11 @@ export default {
       type: String,
       required: true,
     },
+
+    screenReaderText: {
+      type: String,
+      default: null,
+    },
   },
 
   data () {
@@ -128,5 +136,15 @@ export default {
   path {
     fill: currentColor;
   }
+}
+
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 </style>

@@ -38,9 +38,16 @@
 
     <div class="d-p8">
       <h1 class="d-fs14">
-        Inline with text
+        Inline with text and screen reader text
       </h1>
-      Press <dt-keyboard-shortcut shortcut="Ctrl + F5" /> to hard refresh the page.
+      <p>
+        Press
+        <dt-keyboard-shortcut
+          :screen-reader-text="'Press Ctrl and F5'"
+          shortcut="Ctrl + F5"
+        />
+        to hard refresh the page.
+      </p>
     </div>
   </div>
 </template>

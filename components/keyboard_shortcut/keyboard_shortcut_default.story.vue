@@ -3,6 +3,7 @@
     <dt-keyboard-shortcut
       :inverted="inverted"
       :shortcut="shortcut"
+      :screen-reader-text="screenReaderText"
     />
   </div>
 </template>
