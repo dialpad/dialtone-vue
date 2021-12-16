@@ -113,7 +113,7 @@ export default {
          if {win} is our delimiter AKA shortcut icon alias
          '{win} + D K + {win}' would split like [{win}, '{plus}', 'D K', '{plus}', {win}] */
       const regex = new RegExp(`(${iconAliasString})`, 'gi');
-      return this.formattedShortcut.split(regex);
+      return this.formattedShortcut.split(regex).filter(Boolean);
     },
   },
 };
