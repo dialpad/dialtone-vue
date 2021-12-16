@@ -7,7 +7,7 @@ import DtKeyboardShortcutVariantsTemplate from './keyboard_shortcut_variants.sto
 
 export const argTypesData = {
   shortcut: {
-    description: `Include any of these tokens in your string to render the corresponding symbol:
+    description: `Include any of these tokens in your string to render the corresponding symbol:<br>
       ${SHORTCUTS_ALIASES_LIST.join(' ')}`,
     defaultValue: `{cmd}+Ctrl+X`,
     control: 'text',
