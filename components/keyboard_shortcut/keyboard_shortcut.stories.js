@@ -18,7 +18,8 @@ export const argTypesData = {
   },
 
   screenReaderText: {
-    description: 'Screen reader specific text',
+    description: `Text entered here will be read by assistive technology. If null this component
+    will be ignored by AT.`,
   },
 };
 

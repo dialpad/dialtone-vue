@@ -79,7 +79,7 @@ import { DtKeyboardShortcut } from '@dialpad/dialtone-vue';
 ```html
 Press
 <dt-keyboard-shortcut
-  :screen-reader-text="'Press Ctrl and F5'"
+  screen-reader-text="Ctrl and F5"
   shortcut="Ctrl + F5"
 />
 to hard refresh the page.
@@ -88,10 +88,14 @@ to hard refresh the page.
 ### Accessibility
 
 Keyboard shortcuts should be visible to sighted users and made available to assistive technology.
-This keyboard shortcut component itself, is purely visual.
+This keyboard shortcut component is purely visual by default, and will not read out to a screen reader.
+
 [aria-keyshortcuts](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts)
 should be used on the anchor element of the keyboard shortcut to indicate the existence of it to assistive
 technology.
+
+If your keyboard shortcut is [inline with text](#variants), you can set the screenReaderText prop so it is
+read by AT.
 
 Example:
 

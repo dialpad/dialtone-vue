@@ -43,7 +43,7 @@
       <p>
         Press
         <dt-keyboard-shortcut
-          :screen-reader-text="'Ctrl and F5'"
+          screen-reader-text="Ctrl and F5"
           shortcut="Ctrl + F5"
         />
         to hard refresh the page.
