@@ -38,6 +38,7 @@
       <span
         v-else
         :key="`${i}-${item}`"
+        aria-hidden="true"
         :class="[
           inverted ? 'd-fc-black-075' : 'd-fc-black-500',
           'd-mr2',
