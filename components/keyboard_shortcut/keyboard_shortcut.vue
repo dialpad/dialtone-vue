@@ -108,14 +108,11 @@ export default {
     formattedShortcutSplit () {
       const iconAliasString = Object.keys(this.icons).join('|');
 
-      /* any SHORTCUTS_ICON_ALIASES will go into the lookaround separated by or's
-         example: split(/(?={icon1|icon2})|(?<={icon1|icon2})/g);
-
-         splits a string while retaining the delimiters in their own array item:
-
+      /*
+         The regexp splits a given string with icon alias:
          if {win} is our delimiter AKA shortcut icon alias
-         '{win} + D + {win}' would split like [{win}, ' + D + ', {win}] */
-      const regex = new RegExp(`(?=${iconAliasString})|(?<=${iconAliasString})`, 'gi');
+         '{win} + D K + {win}' would split like [{win}, '{plus}', 'D K', '{plus}', {win}] */
+      const regex = new RegExp(`(${iconAliasString})`, 'gi');
       return this.formattedShortcut.split(regex);
     },
   },
