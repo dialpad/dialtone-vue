@@ -109,9 +109,10 @@ export default {
       const iconAliasString = Object.keys(this.icons).join('|');
 
       /*
-         The regexp splits a given string with icon alias:
+         The regexp splits a given string with icon alias and is filtered by empty strings after:
          if {win} is our delimiter AKA shortcut icon alias
-         '{win} + D K + {win}' would split like [{win}, '{plus}', 'D K', '{plus}', {win}] */
+         '{win} + D K + {win}' returned value will be [{win}, ' ', '{plus}', ' D K ', '{plus}', ' ', {win}]
+      */
       const regex = new RegExp(`(${iconAliasString})`, 'gi');
       return this.formattedShortcut.split(regex).filter(Boolean);
     },
