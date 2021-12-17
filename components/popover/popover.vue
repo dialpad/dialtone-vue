@@ -1,5 +1,8 @@
 <template>
-  <component :is="elementType">
+  <component
+    :is="elementType"
+    v-on="$listeners"
+  >
     <dt-lazy-show
       v-show="modal"
       ref="overlay"
