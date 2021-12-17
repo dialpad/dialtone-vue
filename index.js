@@ -4,6 +4,7 @@ export * from './components/badge';
 export * from './components/banner';
 export * from './components/breadcrumbs';
 export * from './components/button';
+export * from './components/button_group';
 export * from './components/combobox';
 export * from './components/input';
 export * from './components/input_group';
@@ -23,6 +24,7 @@ export * from './components/checkbox_group';
 export * from './components/select_menu';
 export * from './components/toast';
 export * from './components/tooltip';
+export * from './components/keyboard_shortcut';
 
 // Mixins
 export * from './components/mixins';
