@@ -47,10 +47,10 @@ describe('Dialtone Vue ListItem tests', function () {
   describe('Presentation Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
 
-    describe('When navigation type is set to tab', function () {
+    describe('When focusable is set to true', function () {
       // Test Setup
       beforeEach(async function () {
-        await wrapper.setProps({ navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB });
+        await wrapper.setProps({ focusable: true });
       });
 
       it('should apply the focusable class to the wrapper.', function () {
