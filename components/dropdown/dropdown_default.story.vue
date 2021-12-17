@@ -1,12 +1,23 @@
 <template>
   <dt-dropdown
+    :items="items"
     :open="isOpen"
     :fixed-alignment="fixedAlignment"
+    :content-width="contentWidth"
+    :padding="padding"
+    @highlight="onHighlight"
+    @select="onDropdownSelect"
+    @escape="onDropdownEscape"
+    :navigation-type="navigationType"
     @update:open="updateOpen"
   >
-    <template #anchor>
+    <template #anchor="{ attrs }">
       <dt-link
-        @click="isOpen = !isOpen"
+        v-bind="attrs"
+        class="d-link"
+        href="#"
+        @click.prevent="isOpen = !isOpen"
+        @keydown.space="isOpen = !isOpen"
       >
         Click to open
       </dt-link>
@@ -20,7 +31,11 @@
           v-for="(item, i) in items"
           v-bind="getItemProps(i)"
           :key="item.id"
+          :is-highlighted="activeItemIndex === i"
+          :set-highlight="() => setHighlightIndex(i)"
           :navigation-type="navigationType"
+          :focusable="true"
+          @click="onDropdownSelect(i)"
         >
           {{ item.name }}
         </dt-list-item>
@@ -40,11 +55,21 @@ export default {
   data () {
     return {
       isOpen: false,
-    } 
+    };
   },
   methods: {
     updateOpen (isOpen) {
       this.isOpen = isOpen;
+    },
+
+    onDropdownSelect (i) {
+      this.isOpen = false;
+      this.onSelect(i);
+    },
+
+    onDropdownEscape () {
+      this.isOpen = false;
+      this.onEscape();
     },
   },
 };

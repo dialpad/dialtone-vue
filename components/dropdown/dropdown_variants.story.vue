@@ -1,38 +1,84 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
-  <!--
-    We can bind the data that the user entered into the storybook controls to props by using a property of the same name
-    as the storybook control defined in the corresponding `.story.js` file.
-  -->
-  <dt-dropdown
-    :some="some"
-  >
-    <!--
-      We can also bind any slot data that the user has entered into the storybook controls. In this example we
-      conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
-
-      The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-
-      We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-      same name.
-    -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
-    </template>
-    <template
-      #some
-      v-if="someSlot"
+  <div class="d-d-flex">
+    <dt-dropdown
+      class="d-mr8"
+      v-for="(variant, i) in variants.fixedAlignment"
+      :key="i"
+      :items="items"
+      :open="isOpen[variant]"
+      :fixed-alignment="variant"
+      :content-width="contentWidth"
+      :padding="padding"
+      @highlight="onHighlight"
+      @select="onSelect"
+      @escape="onDropdownEscape($event, variant)"
+      :navigation-type="navigationType"
+      @update:open="updateOpen($event, variant)"
     >
-      <span v-html="someSlot" />
-    </template>
-  </dt-dropdown>
+      <template #anchor>
+        <dt-button
+          @click.prevent="isOpen[variant] = !isOpen[variant]"
+        >
+          {{ variant }} aligned dropdown
+        </dt-button>
+      </template>
+      <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
+        <ul
+          v-bind="listProps"
+          class="d-p0 d-w100p"
+        >
+          <dt-list-item
+            v-for="(item, i) in items"
+            v-bind="getItemProps(i)"
+            :key="item.id"
+            :is-highlighted="activeItemIndex === i"
+            :set-highlight="() => setHighlightIndex(i)"
+            :navigation-type="navigationType"
+            @click="onDropdownSelect($event, variant, i)"
+            :focusable="true"
+          >
+            {{ item.name }}
+          </dt-list-item>
+        </ul>
+      </template>
+    </dt-dropdown>
+  </div>
 </template>
 
 <script>
 import DtDropdown from './dropdown';
+import { DtListItem } from '../list_item';
+import { DtButton } from '../button';
 
 export default {
   name: 'DtDropdownVariants',
-  components: { DtDropdown },
+  components: { DtDropdown, DtListItem, DtButton },
+  data () {
+    return {
+      isOpen: {
+        left: false,
+        center: false,
+        right: false,
+      },
+      variants: {
+        fixedAlignment: ['left', 'center', 'right'],
+      },
+    };
+  },
+  methods: {
+    updateOpen (isOpen, key) {
+      this.isOpen[key] = isOpen;
+    },
+
+    onDropdownSelect (event, key, item) {
+      this.isOpen[key] = false;
+      this.onSelect(item);
+    },
+
+    onDropdownEscape (event, key) {
+      this.isOpen[key] = false;
+      this.onEscape();
+    },
+  },
 };
 </script>

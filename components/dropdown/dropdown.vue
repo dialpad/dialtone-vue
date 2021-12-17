@@ -1,51 +1,100 @@
 <template>
   <dt-popover
-    width-content="anchor"
+    :content-width="contentWidth"
     :open="open"
     :has-caret="false"
     :fixed-alignment="fixedAlignment"
+    :padding="padding"
     fixed-vertical-alignment="bottom"
-    padding="small"
-    v-bind="$attrs"
+    append-to="parent"
+    ref="popover"
     v-on="$listeners"
+    @keydown.esc.stop="onEscapeKey"
+    @keydown.enter="onEnterKey"
+    @keydown.up.stop.prevent="onUpKeyPress"
+    @keydown.down.prevent="onDownKeyPress"
+    @keydown.home.stop.prevent="onHomeKey"
+    @keydown.end.stop.prevent="onEndKey"
   >
     <template #anchor="{ attrs }">
-      <!-- @slot Anchor element that activates the dropdown. -->
-      <slot name="anchor"></slot>
+      <!-- @slot Anchor element that activates the dropdown -->
+      <slot
+        name="anchor"
+        :attrs="attrs"
+      ></slot>
     </template>
     <template #content>
-      <!-- @slot default content -->
-      <slot
-        name="list"
-        :list-props="listProps"
-        :get-item-props="getItemProps"
-      />
+      <div
+        ref="listWrapper"
+        data-qa="dt-dropdown-list-wrapper"
+        @mouseleave="clearHighlightIndex"
+      >
+        <!-- @slot Slot for the list component -->
+        <slot
+          name="list"
+          :list-props="listProps"
+          :get-item-props="getItemProps"
+          :active-item-index="highlightIndex"
+          :set-highlight-index="setHighlightIndex"
+        />
+      </div>
     </template>
   </dt-popover>
 </template>
 
 <script>
-import {} from './dropdown_constants.js';
-import {DtPopover, POPOVER_HORIZONTAL_ALIGNMENT} from '../popover';
-import { DtLink } from '../link';
-import { DtListItem } from '../list_item';
-import {LIST_ITEM_NAVIGATION_TYPES} from "../list_item/list_item_constants";
+import KeyboardNavigation from '../mixins/keyboard_list_navigation';
+import { DtPopover, POPOVER_CONTENT_WIDTHS, POPOVER_HORIZONTAL_ALIGNMENT, POPOVER_PADDING_CLASSES } from '../popover';
+import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
 import { getUniqueString } from '../utils';
 
 export default {
   name: 'DtDropdown',
 
-  components: { DtPopover, DtLink, DtListItem },
+  components: {
+    DtPopover,
+  },
 
-  mixins: [],
+  mixins: [
+    KeyboardNavigation({
+      itemsKey: 'items',
+      indexKey: 'highlightIndex',
+      afterHighlightMethod: 'afterHighlight',
+      beginningOfListMethod: 'beginningOfListMethod',
+      endOfListMethod: 'endOfListMethod',
+      activeItemKey: 'activeItemEl',
+      focusOnKeyboardNavigation: true,
+    }),
+  ],
 
   props: {
     /**
-     * Whether or not the popover content is shown. Supports .sync modifier.
+     * Whether the dropdown should be shown. Supports .sync modifier.
      */
     open: {
       type: Boolean,
       required: true,
+    },
+
+    /**
+     * Padding size class for the dropdown.
+     */
+    padding: {
+      type: String,
+      default: 'none',
+      validator: (padding) => {
+        return !!POPOVER_PADDING_CLASSES[padding];
+      },
+    },
+
+    /**
+     * Width configuration for the dropdown. 'anchor' is one possible string value.
+     * If passed, the dropdown will be set same width with anchor element
+     */
+    contentWidth: {
+      type: String,
+      default: null,
+      validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
     },
 
     /**
@@ -65,16 +114,15 @@ export default {
      */
     navigationType: {
       type: String,
-      default: LIST_ITEM_NAVIGATION_TYPES.TAB,
+      default: LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS,
       validator: (t) => Object.values(LIST_ITEM_NAVIGATION_TYPES).includes(t),
     },
 
     /**
-     * Fixed horizontal alignment of the popover content. If passed, the
-     * popover will always display anchored to the left or right of the
+     * Fixed horizontal alignment of the dropdown content. If passed, the
+     * dropdown will always display anchored to the left, center or right of the
      * anchor element. If null, the content will be positioned on whichever
      * side has the most available space relative to the root Vue element.
-     * String values must be one of `left` or `right`.
      */
     fixedAlignment: {
       type: String,
@@ -94,22 +142,40 @@ export default {
       default: () => [],
     },
     /* eslint-enable vue/no-unused-properties */
+
+    /**
+     * A method that will be called when the selection goes past the beginning of the list.
+     */
+    onBeginningOfList: {
+      type: Function,
+      default: null,
+    },
+
+    /**
+     * A method that will be called when the selection goes past the end of the list.
+     */
+    onEndOfList: {
+      type: Function,
+      default: null,
+    },
   },
+
+  emits: ['select', 'escape', 'highlight'],
 
   data () {
     return {
+      LIST_ITEM_NAVIGATION_TYPES,
     };
   },
 
   computed: {
     listProps () {
       return {
-        role: 'listbox',
+        role: 'menu',
         id: this.listId,
         // The list has to be positioned relatively so that the auto-scroll can
         // calculate the correct offset for the list items.
         class: 'd-ps-relative',
-        'aria-label': this.listAriaLabel,
       };
     },
 
@@ -118,18 +184,74 @@ export default {
      */
     getItemProps () {
       return (i) => ({
-        role: 'option',
+        role: 'menuitem',
         // The ids have to be generated here since we use them for activeItemId.
         id: this.getItemId(i),
       });
-    }
+    },
+
+    beginningOfListMethod () {
+      return this.onBeginningOfList || this.jumpToEnd;
+    },
+
+    endOfListMethod () {
+      return this.onEndOfList || this.jumpToBeginning;
+    },
+
+    activeItemId () {
+      if (!this.open || this.highlightIndex < 0) {
+        return;
+      }
+      return this.getItemId(this.highlightIndex);
+    },
+
+    activeItemEl () {
+      return this.$refs.listWrapper.querySelector(`#${this.activeItemId}`);
+    },
   },
 
-  watch: {},
+  watch: {
+    open () {
+      if (this.open && this.navigationType !== this.LIST_ITEM_NAVIGATION_TYPES.NONE) {
+        // When the list's is shown, reset the highlight index.
+        this.setHighlightIndex(0);
+      }
+    },
+  },
 
   methods: {
+    clearHighlightIndex () {
+      this.setHighlightIndex(-1);
+    },
+
     getItemId (i) {
       return `${this.listId}-item${i}`;
+    },
+
+    afterHighlight () {
+      this.$emit('highlight', this.highlightIndex);
+    },
+
+    onEnterKey () {
+      if (this.open && this.highlightIndex >= 0) {
+        this.$emit('select', this.highlightIndex);
+      }
+    },
+
+    onUpKeyPress () {
+      if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+        return this.onUpKey();
+      }
+    },
+
+    onDownKeyPress () {
+      if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+        return this.onDownKey();
+      }
+    },
+
+    onEscapeKey () {
+      this.$emit('escape');
     },
   },
 };
