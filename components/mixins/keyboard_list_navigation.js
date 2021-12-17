@@ -31,6 +31,8 @@ export default ({
   endOfListMethod = null,
   // Scroll the active element into view when highlighted by a keyboard event.
   scrollToOnHighlight = true,
+  // Focus the active element on keyboard navigation
+  focusOnKeyboardNavigation = false,
 } = {}) => ({
   mixins: [Dom],
 
@@ -38,6 +40,7 @@ export default ({
     return {
       [indexKey]: 0,
       scrollToOnHighlight: scrollToOnHighlight,
+      focusOnKeyboardNavigation: focusOnKeyboardNavigation,
     };
   },
 
@@ -52,6 +55,7 @@ export default ({
         this[beginningOfListMethod]();
       }
       this.scrollActiveItemIntoViewIfNeeded();
+      this.focusActiveItemIfNeeded();
     },
 
     onDownKey () {
@@ -64,16 +68,19 @@ export default ({
         this[endOfListMethod]();
       }
       this.scrollActiveItemIntoViewIfNeeded();
+      this.focusActiveItemIfNeeded();
     },
 
     onHomeKey () {
       this.jumpToBeginning();
       this.scrollActiveItemIntoViewIfNeeded();
+      this.focusActiveItemIfNeeded();
     },
 
     onEndKey () {
       this.jumpToEnd();
       this.scrollActiveItemIntoViewIfNeeded();
+      this.focusActiveItemIfNeeded();
     },
 
     jumpToBeginning () {
@@ -103,6 +110,16 @@ export default ({
         // scrollElementIntoViewIfNeeded will default to the immediate wrapper of the item.
         const listElement = this[listElementKey]?.$el || this[listElementKey];
         this.scrollElementIntoViewIfNeeded(activeItemEl, null, null, listElement);
+      }
+    },
+
+    focusActiveItemIfNeeded () {
+      if (!this.focusOnKeyboardNavigation) {
+        return;
+      }
+      const activeItemEl = this[activeItemKey];
+      if (activeItemEl) {
+        activeItemEl.focus();
       }
     },
   },
