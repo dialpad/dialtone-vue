@@ -51,21 +51,39 @@ const argTypesData = {
     },
   },
   fixedAlignment: {
+    defaultValue: null,
     control: {
       type: 'select',
       options: POPOVER_HORIZONTAL_ALIGNMENT,
     },
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
   },
   fixedVerticalAlignment: {
+    defaultValue: null,
     control: {
       type: 'select',
       options: POPOVER_VERTICAL_ALIGNMENT,
     },
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
   },
   contentWidth: {
+    defaultValue: null,
     control: {
       type: 'select',
       options: POPOVER_CONTENT_WIDTHS,
+    },
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
     },
   },
 
