@@ -23,6 +23,7 @@
     data-qa="skeleton-text-heading"
     :class="[
       SKELETON_HEADING_HEIGHTS[headingHeight],
+      'd-bar2',
       'skeleton-placeholder',
       {
         'skeleton-placeholder--animate': animate,

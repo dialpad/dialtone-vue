@@ -84,6 +84,14 @@ export const argTypesData = {
   ariaLabel: {
     defaultValue: '',
   },
+  offset: {
+    description: `RippleDuration controls how long the delay is for the animation of a 
+    placeholder 1000 pixels from the top of the page. Each placeholder
+    from the top down will have a delay duration from 0 to this offset.
+    The delay of each placeholder animation is based on how far down the page
+    the placeholder is rendered. This is a linear relationship. The unit
+    is milliseconds.`,
+  },
 };
 
 // Story Collection
@@ -113,6 +121,9 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 
 // Stories
 export const Default = DefaultTemplate.bind({});
+Default.decorators = [() => ({
+  template: '<div style="width: 500px"><story /></div>',
+})];
 Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
