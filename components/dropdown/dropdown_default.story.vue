@@ -12,15 +12,12 @@
     @update:open="updateOpen"
   >
     <template #anchor="{ attrs }">
-      <dt-link
+      <dt-button
         v-bind="attrs"
-        class="d-link"
-        href="#"
         @click.prevent="isOpen = !isOpen"
-        @keydown.space="isOpen = !isOpen"
       >
         Click to open
-      </dt-link>
+      </dt-button>
     </template>
     <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
       <ul
@@ -47,11 +44,11 @@
 <script>
 import DtDropdown from './dropdown';
 import { DtListItem } from '../list_item';
-import { DtLink } from '../link';
+import { DtButton } from '../button';
 
 export default {
   name: 'DtDropdownDefault',
-  components: { DtDropdown, DtListItem, DtLink },
+  components: { DtDropdown, DtListItem, DtButton },
   data () {
     return {
       isOpen: false,
