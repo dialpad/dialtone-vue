@@ -30,17 +30,64 @@
         v-bind="attrs"
         @click="isOpen = !isOpen"
       >
-        Click to open
+        Click to open and see width adjusted popover Lorem ipsum dolor sit
       </dt-button>
     </template>
     <template #content>
-      <p class="d-fs14 d-m0">
-        <span
+      <div class="d-fs14 d-m0">
+        <p
           v-if="content"
           v-html="content"
         />
-        <span v-else>I will be displayed in the popover!</span>
+        <div v-else>
+          <dt-button
+            @click="isOpen = !isOpen"
+          >
+            Click to close
+          </dt-button>
+          <p>I will be displayed in the popover!</p>
+          <dt-button
+            @click="isOpen = !isOpen"
+          >
+            Click to close
+          </dt-button>
+          <p>I will be displayed in the popover!</p>
+          <dt-button
+            @click="isOpen = !isOpen"
+          >
+            Click to close
+          </dt-button>
+          <p>I will be displayed in the popover!</p>
+        </div>
+      </div>
+    </template>
+    <template #header>
+      <p class="d-fw-bold">
+        Potential longer
       </p>
+    </template>
+
+    <template #header-actions>
+      <dt-button
+        circle
+        icon="IconLaunch"
+        kind="inverted"
+        class="d-mx2"
+      >
+        <template #icon>
+          <icon-menu-vertical />
+        </template>
+      </dt-button>
+      <dt-button
+        circle
+        icon="IconLaunch"
+        kind="inverted"
+        class="d-mx2"
+      >
+        <template #icon>
+          <icon-launch />
+        </template>
+      </dt-button>
     </template>
   </dt-popover>
 </template>
@@ -48,12 +95,16 @@
 <script>
 import { DtPopover } from './';
 import { DtButton } from '../button';
+import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
+import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch';
 
 export default {
   name: 'PopoverDefaultStory',
   components: {
     DtPopover,
     DtButton,
+    IconMenuVertical,
+    IconLaunch,
   },
 
   props: {

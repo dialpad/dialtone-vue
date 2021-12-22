@@ -53,12 +53,14 @@
         'd-bs-md',
         'd-wmx-unset',
         'd-bar4',
-        POPOVER_PADDING_CLASSES[padding],
+        'd-of-auto',
         `dt-popover__content--align-${horizontalAlignment}`,
         `dt-popover__content--valign-${verticalAlignment}`,
-        'd-m0',
-        contentClass,
+        {
+          'd-d-grid d-of-hidden dt-popover-box__grid': fixedHeader,
+        },
       ]"
+      :style="maxHeight ? `max-height:${maxHeight}` : ''"
       tabindex="-1"
       appear
       @keydown="onKeydown"
@@ -67,8 +69,59 @@
       @leave="isOpeningPopover = false"
       @after-enter="dialogFocusFirstElement"
     >
+      <!-- @slot header that is displayed in the popover when it is provided. -->
+      <div
+        v-if="$slots.header"
+        data-qa="dt-popover-header"
+        :class="[
+          'd-w100p',
+          'd-py4',
+          'd-pl12',
+          'd-pr4',
+          'd-bb',
+          'd-bc-black-075',
+          'd-baw1',
+          'd-d-flex',
+          'd-jc-space-between',
+          popoverHeaderClasses,
+          headerClass,
+        ]"
+      >
+        <div class="d-fs16 d-d-flex d-as-center">
+          <slot name="header" />
+        </div>
+        <div
+          v-if="$slots.header && showHeaderButtons"
+          class="d-d-flex d-ai-baseline d-jc-space-between"
+        >
+          <slot name="header-actions" />
+          <dt-button
+            v-if="showCloseButton"
+            circle
+            icon="IconClose"
+            kind="inverted"
+            @click="closePopover"
+          >
+            <template #icon>
+              <icon-close />
+            </template>
+          </dt-button>
+        </div>
+      </div>
       <!-- @slot content that is displayed in the popover when it is open. -->
-      <slot name="content" />
+      <div
+        :class="[
+          'dt-popover__content',
+          $slots.header ? POPOVER_PADDING_CLASSES[padding] : 'd-pl12 d-pr16',
+          {
+            'd-of-auto': fixedHeader,
+          },
+          contentClass,
+        ]"
+        @scroll="onScrollContent"
+      >
+        <slot name="content" />
+      </div>
       <div
         v-if="hasCaret"
         class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret d-ps-absolute d-w6 d-h6"
@@ -91,6 +144,8 @@ import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
 import ModalMixin from '../mixins/modal.js';
+import DtButton from '../button/button';
+import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 
 export default {
   name: 'DtPopover',
@@ -99,7 +154,9 @@ export default {
    * CHILD COMPONENTS *
    ********************/
   components: {
+    DtButton,
     DtLazyShow,
+    IconClose,
   },
 
   mixins: [ModalMixin],
@@ -336,6 +393,47 @@ export default {
       type: HTMLElement,
       default: () => document.body,
     },
+
+    /**
+     * Determines maximum height for popover content before overflow.
+     * Possible units rem|px|%|em
+     * **/
+    maxHeight: {
+      type: String,
+      default: '20rem',
+    },
+
+    /**
+     * Determines fixed / sticky styles for popover header
+     * **/
+    fixedHeader: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Determines visibility for close button
+     * **/
+    showCloseButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Determines visibility for secondary and tertiary buttons
+     * **/
+    showHeaderButtons: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Additional class name for the content wrapper element.
+     */
+    headerClass: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: ['update:open'],
@@ -351,6 +449,7 @@ export default {
       closedByClickOutside: false,
       anchorEl: null,
       popoverContentEl: null,
+      contentScrollTop: 0,
     };
   },
 
@@ -390,6 +489,12 @@ export default {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
+    },
+
+    popoverHeaderClasses () {
+      return {
+        'd-bs-card': this.contentScrollTop !== 0 && this.fixedHeader,
+      };
     },
   },
 
@@ -476,6 +581,10 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    onScrollContent ({ target }) {
+      this.contentScrollTop = target.scrollTop;
+    },
+
     removeReferences () {
       this.anchorEl = null;
       this.popoverContentEl = null;
@@ -626,6 +735,7 @@ export default {
 @import "../../css/dialtone.less";
 
 .dt-popover__content {
+  overflow: auto;
   &--align-right {
     .dt-popover__caret {
       right: @su24;
@@ -680,6 +790,10 @@ export default {
   *:before,
   *:after {
     box-sizing: border-box;
+  }
+
+  &__grid {
+    grid-template-rows: auto 1fr;
   }
 }
 </style>
