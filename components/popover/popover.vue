@@ -73,7 +73,7 @@
     >
       <div
         v-if="hasCaret"
-        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret d-ps-absolute d-w6 d-h6"
+        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-transparent dt-popover__caret d-ps-absolute d-w8 d-h8"
       />
       <!-- @slot header that is displayed in the popover when it is provided. -->
       <div
@@ -81,54 +81,33 @@
         data-qa="dt-popover-header"
         :class="[
           'd-w100p',
-          'd-py4',
           'd-pl12',
           'd-pr4',
           'd-bb',
           'd-bc-black-075',
           'd-baw1',
           'd-d-flex',
-          isTitleVisible ? 'd-jc-space-between' : 'd-jc-flex-end',
+          'd-fs16',
+          'd-ai-center',
+          'd-fw-bold',
+          'd-hmn48',
           popoverHeaderClasses,
           headerClass,
         ]"
       >
         <div
           v-if="isTitleVisible"
-          class="d-fs16 d-py6 d-d-flex d-as-center"
           data-qa="dt-popover-title"
         >
-          <slot name="title" />
+          <slot name="title">
+            {{ title }}
+          </slot>
         </div>
         <div
           v-if="areHeaderButtonsVisible"
-          class="d-d-flex d-ai-baseline d-jc-space-between"
+          class="d-pl6"
         >
-          <slot name="header-actions">
-            <dt-button
-              circle
-              class="d-p6 d-bc-transparent"
-              importance="outlined"
-            >
-              <template #icon>
-                <icon-close
-                  class="d-svg--size20"
-                />
-              </template>
-            </dt-button>
-
-            <dt-button
-              circle
-              class="d-p6 d-bc-transparent"
-              importance="outlined"
-            >
-              <template #icon>
-                <icon-close
-                  class="d-svg--size20"
-                />
-              </template>
-            </dt-button>
-          </slot>
+          <slot name="header-actions" />
           <dt-button
             v-if="showCloseButton"
             circle
@@ -299,7 +278,7 @@ export default {
      * Additional class name for the content wrapper element.
      */
     contentClass: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
 
@@ -424,6 +403,15 @@ export default {
     },
 
     /**
+     * Determines title for popover header.
+     * If provided prop is not null, corresponding holder div will be rendered
+     */
+    title: {
+      type: String,
+      default: null,
+    },
+
+    /**
      * Determines the popover's z-index
      */
     zIndex: {
@@ -463,14 +451,14 @@ export default {
      */
     showCloseButton: {
       type: Boolean,
-      default: true,
+      default: false, // TODO do we need showCloseButton by default in true state?
     },
 
     /**
      * Additional class name for the content wrapper element.
      */
     headerClass: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
   },
@@ -533,19 +521,21 @@ export default {
     popoverHeaderClasses () {
       return {
         'd-bs-card': this.contentScrollTop !== 0 && this.fixedHeader,
+        'd-jc-space-between': this.isTitleVisible,
+        'd-jc-flex-end': !this.isTitleVisible,
       };
     },
 
     isHeaderVisible () {
-      return this.$slots.title || this.areHeaderButtonsVisible;
+      return this.isTitleVisible || this.areHeaderButtonsVisible;
     },
 
     isTitleVisible () {
-      return this.$slots.title;
+      return this.$slots.title || this.title !== null;
     },
 
     areHeaderButtonsVisible () {
-      return this.$slots['header-actions'] || this.showCloseButton;
+      return this.$slots['header-actions'];
     },
   },
 
@@ -797,6 +787,12 @@ export default {
     }
   }
 
+  &--align-left {
+    .dt-popover__caret {
+      left: @su24;
+    }
+  }
+
   &--align-center {
     .dt-popover__caret {
       left: 50%;
@@ -850,9 +846,5 @@ export default {
   &__grid {
     grid-template-rows: auto 1fr;
   }
-}
-
-.header-actions {
-  gap: 5px;
 }
 </style>

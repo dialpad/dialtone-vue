@@ -7,6 +7,7 @@ import {
   POPOVER_CONTENT_WIDTHS,
 } from './';
 import PopoverDefault from './popover_default.story.vue';
+import PopoverVariants from './popover_variants.story.vue';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import PopoverMdx from './popover.mdx';
 import { action } from '@storybook/addon-actions';
@@ -122,12 +123,10 @@ export default {
 };
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverDefault);
+const TemplateVariants = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverVariants);
 
 export const Default = Template.bind({});
 Default.args = {};
-Default.decorators = [() => ({
-  template: `<div class="d-h100vh d-d-flex d-ai-center d-jc-center"><story /></div>`,
-})];
 Default.parameters = {
   docs: {
     source: {
@@ -150,6 +149,7 @@ Default.parameters = {
   },
 };
 
+// TODO do we need those stories? can variants story used instead of?
 export const FixedRight = Template.bind({});
 FixedRight.args = { ...Default.args, fixedAlignment: 'right' };
 FixedRight.decorators = [() => ({
@@ -204,7 +204,6 @@ WithHeader.args = {
   title: 'Potential Title',
   maxHeight: '20rem',
   fixedHeader: true,
-  contentWidth: 'anchor',
   showCloseButton: true,
   contentClass: 'd-pl12 d-pr16',
 };
@@ -220,3 +219,5 @@ WithHeader.parameters = {
     },
   },
 };
+
+export const Variants = TemplateVariants.bind({});

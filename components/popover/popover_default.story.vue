@@ -1,6 +1,7 @@
 <template>
   <dt-popover
     :id="id"
+    :key="uniqueKey"
     :open="isOpen"
     :fixed-alignment="fixedAlignment"
     :fixed-vertical-alignment="fixedVerticalAlignment"
@@ -32,32 +33,31 @@
         v-bind="attrs"
         @click="isOpen = !isOpen"
       >
-        Click to open and see width adjusted popover Lorem ipsum dolor sit
+        Click to open
       </dt-button>
     </template>
     <template #content>
       <div class="d-fs14 d-m0">
-        <p
+        <span
           v-if="content"
           v-html="content"
         />
-        <div v-else>
+        <template v-else>
+          <p class="d-mb4">
+            I will be displayed in the popover!
+          </p>
           <dt-button
             @click="isOpen = !isOpen"
           >
             Click to close
           </dt-button>
-        </div>
+        </template>
       </div>
     </template>
     <template
-      v-if="title"
       #title
     >
-      <p
-        v-if="title"
-        v-html="title"
-      />
+      <slot name="title" />
     </template>
   </dt-popover>
 </template>
@@ -65,8 +65,7 @@
 <script>
 import { DtPopover } from './';
 import { DtButton } from '../button';
-// import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
-// import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch';
+import { getUniqueString } from '../utils';
 
 export default {
   name: 'PopoverDefaultStory',
@@ -88,6 +87,12 @@ export default {
     return {
       isOpen: this.open || false,
     };
+  },
+
+  computed: {
+    uniqueKey () {
+      return getUniqueString(this.title);
+    },
   },
 
   watch: {

@@ -41,6 +41,12 @@ the look of the popover content between usages. To remove the padding from the c
   <Story id="components-popovers--no-padding" />
 </Canvas>
 
+### Variants
+
+<Canvas>
+  <Story id="components-popovers--variants" />
+</Canvas>
+
 ## Slots, Props & Events
 
 <ArgsTable story={PRIMARY_STORY} />
@@ -79,9 +85,20 @@ By default, the dialog content will be labeled by the entire anchor element. To 
 1. Pass `aria-label`, which is the text label that will be applied to the dialog content.
 2. Pass `aria-labelledby`, which is an ID of the element that should be used as the descriptive label.
 
-### Keyboard
+### Keyboard support
 
-The popover closes on `ESC` key press.
+- when popover opens the focus will be moved to the first focusable element inside the content's container
+- the user can dismiss the popover pressing the `ESC` key after that the focus will be returned to the element
+that launched it
+- the user can go thought focusable elements using the `TAB` key, if the popover has defined header, the focus will be
+moved to the header buttons after the last focusable element inside content's container.
+
+### Attaching elements to the DOM
+
+> To ensure the best possible performance, it's recommended to not attach elements directly to the `body` element,
+but instead create a `div` element right within the `body` and use it as container of your poppers.
+
+You can find the recommended way to use the popover in the [documentation](https://popper.js.org/docs/v2/performance/#attaching-elements-to-the-dom)
 
 ## Basic Usage
 
