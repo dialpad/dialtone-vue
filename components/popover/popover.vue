@@ -2,6 +2,7 @@
   <component
     :is="elementType"
     ref="popover"
+    data-qa="dt-popover-container"
   >
     <dt-lazy-show
       v-if="modal"
@@ -24,6 +25,7 @@
     <div
       :id="!ariaLabelledby && labelledBy"
       ref="anchor"
+      data-qa="dt-popover-anchor"
     >
       <!-- @slot Anchor element that activates the popover. -->
       <slot
@@ -67,11 +69,15 @@
       @after-leave="onLeave"
       @enter="isOpeningPopover = true"
       @leave="isOpeningPopover = false"
-      @after-enter="dialogFocusFirstElement"
+      @after-enter="afterEnter"
     >
+      <div
+        v-if="hasCaret"
+        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret d-ps-absolute d-w6 d-h6"
+      />
       <!-- @slot header that is displayed in the popover when it is provided. -->
       <div
-        v-if="$slots.header"
+        v-if="isPopoverHeaderVisible"
         data-qa="dt-popover-header"
         :class="[
           'd-w100p',
@@ -82,37 +88,69 @@
           'd-bc-black-075',
           'd-baw1',
           'd-d-flex',
-          'd-jc-space-between',
+          isTitleVisible ? 'd-jc-space-between' : 'd-jc-flex-end',
           popoverHeaderClasses,
           headerClass,
         ]"
       >
-        <div class="d-fs16 d-d-flex d-as-center">
-          <slot name="header" />
+        <div
+          v-if="isTitleVisible"
+          class="d-fs16 d-py6 d-d-flex d-as-center"
+          data-qa="dt-popover-title"
+        >
+          <slot name="title" />
         </div>
         <div
-          v-if="$slots.header && showHeaderButtons"
+          v-if="areHeaderButtonsVisible"
           class="d-d-flex d-ai-baseline d-jc-space-between"
         >
-          <slot name="header-actions" />
+          <slot name="header-actions">
+            <dt-button
+              circle
+              class="d-p6 d-bc-transparent"
+              importance="outlined"
+            >
+              <template #icon>
+                <icon-close
+                  class="d-svg--size20"
+                />
+              </template>
+            </dt-button>
+
+            <dt-button
+              circle
+              class="d-p6 d-bc-transparent"
+              importance="outlined"
+            >
+              <template #icon>
+                <icon-close
+                  class="d-svg--size20"
+                />
+              </template>
+            </dt-button>
+          </slot>
           <dt-button
             v-if="showCloseButton"
             circle
-            icon="IconClose"
-            kind="inverted"
+            class="d-p6 d-bc-transparent"
+            importance="outlined"
             @click="closePopover"
           >
             <template #icon>
-              <icon-close />
+              <icon-close
+                class="d-svg--size20"
+              />
             </template>
           </dt-button>
         </div>
       </div>
       <!-- @slot content that is displayed in the popover when it is open. -->
       <div
+        ref="popover__content"
+        data-qa="dt-popover-content"
         :class="[
           'dt-popover__content',
-          $slots.header ? POPOVER_PADDING_CLASSES[padding] : 'd-pl12 d-pr16',
+          POPOVER_PADDING_CLASSES[padding],
           {
             'd-of-auto': fixedHeader,
           },
@@ -122,10 +160,6 @@
       >
         <slot name="content" />
       </div>
-      <div
-        v-if="hasCaret"
-        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-black-075 dt-popover__caret d-ps-absolute d-w6 d-h6"
-      />
     </dt-lazy-show>
   </component>
 </template>
@@ -288,6 +322,9 @@ export default {
       default: true,
     },
 
+    /**
+     * Determines should the anchor be focused after closing the popover
+     */
     focusAnchorOnClose: {
       type: Boolean,
       default: true,
@@ -350,7 +387,7 @@ export default {
     /**
      * Determines the size of the invisible border around the
      * tippy that will prevent it from hiding if the cursor left it.
-     * */
+     */
     interactiveBorder: {
       type: Number,
       default: 2,
@@ -359,7 +396,7 @@ export default {
     /**
      * Determines the events that cause the tippy to show.
      * Multiple event names are separated by spaces.
-     * **/
+     */
     trigger: {
       type: String,
       default: 'manual',
@@ -369,7 +406,7 @@ export default {
      * Determines if the tippy hides upon clicking the
      * reference or outside of the tippy.
      * The behavior can depend upon the trigger events used.
-     * */
+     */
     hideOnClick: {
       type: [Boolean, String],
       default: true,
@@ -378,17 +415,27 @@ export default {
       },
     },
 
+    /**
+     * Determines modal state, when the popover's overlay is rendered
+     */
     modal: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Determines the popover's z-index
+     */
     zIndex: {
       type: [Number, String],
       default: 300,
       validator: zIndex => !!Number(zIndex),
     },
 
+    /**
+     * Determines html element container for popover's overlay,
+     * which will be rendered when 'modal' property is 'true'.
+     */
     overlayAppendTo: {
       type: HTMLElement,
       default: () => document.body,
@@ -397,32 +444,24 @@ export default {
     /**
      * Determines maximum height for popover content before overflow.
      * Possible units rem|px|%|em
-     * **/
+     */
     maxHeight: {
       type: String,
-      default: '20rem',
+      default: '',
     },
 
     /**
      * Determines fixed / sticky styles for popover header
-     * **/
+     */
     fixedHeader: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     /**
      * Determines visibility for close button
-     * **/
+     */
     showCloseButton: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Determines visibility for secondary and tertiary buttons
-     * **/
-    showHeaderButtons: {
       type: Boolean,
       default: true,
     },
@@ -495,6 +534,18 @@ export default {
       return {
         'd-bs-card': this.contentScrollTop !== 0 && this.fixedHeader,
       };
+    },
+
+    isHeaderVisible () {
+      return this.$slots.title || this.areHeaderButtonsVisible;
+    },
+
+    isTitleVisible () {
+      return this.$slots.title;
+    },
+
+    areHeaderButtonsVisible () {
+      return this.$slots['header-actions'] || this.showCloseButton;
     },
   },
 
@@ -581,6 +632,10 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    afterEnter () {
+      this.dialogFocusFirstElement(this.$refs.popover__content);
+    },
+
     onScrollContent ({ target }) {
       this.contentScrollTop = target.scrollTop;
     },
@@ -722,9 +777,9 @@ export default {
       this.popoverContentEl.style.width = `${this.anchorEl.clientWidth}px`;
     },
 
-    dialogFocusFirstElement (e) {
+    dialogFocusFirstElement (domEl) {
       if (this.isDialog) {
-        this.focusFirstElement(e);
+        this.focusFirstElement(domEl);
       }
     },
   },
@@ -795,5 +850,9 @@ export default {
   &__grid {
     grid-template-rows: auto 1fr;
   }
+}
+
+.header-actions {
+  gap: 5px;
 }
 </style>

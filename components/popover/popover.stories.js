@@ -29,6 +29,14 @@ const argTypesData = {
       },
     },
   },
+  title: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
 
   // Props
   id: {
@@ -175,13 +183,36 @@ NoPadding.parameters = {
   },
 };
 
-export const overlayModal = Template.bind({});
-overlayModal.args = { ...Default.args, open: true, modal: true };
-overlayModal.parameters = {
+export const WithOverlay = Template.bind({});
+WithOverlay.args = { ...Default.args, open: true, modal: true };
+WithOverlay.parameters = {
   docs: {
     source: {
       code: `
-<dt-popover padding="none">
+<dt-popover>
+  <template #anchor="{ attrs }"></template>
+  <template #content></template>
+</dt-popover>
+    `,
+    },
+  },
+};
+
+export const WithHeader = Template.bind({});
+WithHeader.args = {
+  ...Default.args,
+  title: 'Potential Title',
+  maxHeight: '20rem',
+  fixedHeader: true,
+  contentWidth: 'anchor',
+  showCloseButton: true,
+  contentClass: 'd-pl12 d-pr16',
+};
+WithHeader.parameters = {
+  docs: {
+    source: {
+      code: `
+<dt-popover>
   <template #anchor="{ attrs }"></template>
   <template #content></template>
 </dt-popover>

@@ -22,6 +22,8 @@
     :trigger="trigger"
     :modal="modal"
     :content-width="contentWidth"
+    :show-close-button="showCloseButton"
+    :title="title"
     width-content="anchor"
     @update:open="updateOpen"
   >
@@ -45,49 +47,17 @@
           >
             Click to close
           </dt-button>
-          <p>I will be displayed in the popover!</p>
-          <dt-button
-            @click="isOpen = !isOpen"
-          >
-            Click to close
-          </dt-button>
-          <p>I will be displayed in the popover!</p>
-          <dt-button
-            @click="isOpen = !isOpen"
-          >
-            Click to close
-          </dt-button>
-          <p>I will be displayed in the popover!</p>
         </div>
       </div>
     </template>
-    <template #header>
-      <p class="d-fw-bold">
-        Potential longer
-      </p>
-    </template>
-
-    <template #header-actions>
-      <dt-button
-        circle
-        icon="IconLaunch"
-        kind="inverted"
-        class="d-mx2"
-      >
-        <template #icon>
-          <icon-menu-vertical />
-        </template>
-      </dt-button>
-      <dt-button
-        circle
-        icon="IconLaunch"
-        kind="inverted"
-        class="d-mx2"
-      >
-        <template #icon>
-          <icon-launch />
-        </template>
-      </dt-button>
+    <template
+      v-if="title"
+      #title
+    >
+      <p
+        v-if="title"
+        v-html="title"
+      />
     </template>
   </dt-popover>
 </template>
@@ -95,16 +65,16 @@
 <script>
 import { DtPopover } from './';
 import { DtButton } from '../button';
-import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
-import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch';
+// import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
+// import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch';
 
 export default {
   name: 'PopoverDefaultStory',
   components: {
     DtPopover,
     DtButton,
-    IconMenuVertical,
-    IconLaunch,
+    // IconMenuVertical,
+    // IconLaunch,
   },
 
   props: {
