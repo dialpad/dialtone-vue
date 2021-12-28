@@ -77,7 +77,7 @@
       />
       <!-- @slot header that is displayed in the popover when it is provided. -->
       <div
-        v-if="isPopoverHeaderVisible"
+        v-if="isHeaderVisible"
         data-qa="dt-popover-header"
         :class="[
           'd-w100p',
