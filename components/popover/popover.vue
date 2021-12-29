@@ -51,18 +51,21 @@
       :class="[
         'dt-popover-box',
         'd-bgc-white',
-        'd-bc-black-075',
-        'd-bs-md',
-        'd-wmx-unset',
-        'd-bar4',
+        'd-bc-black-100',
+        'd-bs-card',
+        'd-bar8',
         'd-of-auto',
         `dt-popover__content--align-${horizontalAlignment}`,
         `dt-popover__content--valign-${verticalAlignment}`,
         {
           'd-d-grid d-of-hidden dt-popover-box__grid': fixedHeader,
+          'd-wmx-unset': !maxWidth,
         },
       ]"
-      :style="maxHeight ? `max-height:${maxHeight}` : ''"
+      :style="{
+        'max-height': maxHeight,
+        'max-width': maxWidth,
+      }"
       tabindex="-1"
       appear
       @keydown="onKeydown"
@@ -75,7 +78,6 @@
         v-if="hasCaret"
         class="d-bgc-white d-mtn4 d-bt d-bl d-bc-transparent dt-popover__caret d-ps-absolute d-w8 d-h8"
       />
-      <!-- @slot header that is displayed in the popover when it is provided. -->
       <div
         v-if="isHeaderVisible"
         data-qa="dt-popover-header"
@@ -91,6 +93,7 @@
           'd-ai-center',
           'd-fw-bold',
           'd-hmn48',
+          'd-of-auto',
           popoverHeaderClasses,
           headerClass,
         ]"
@@ -98,21 +101,25 @@
         <div
           v-if="isTitleVisible"
           data-qa="dt-popover-title"
+          class="d-to-ellipsis"
         >
+          <!-- @slot Popover header title. -->
           <slot name="title">
             {{ title }}
           </slot>
         </div>
         <div
           v-if="areHeaderButtonsVisible"
-          class="d-pl6"
+          class="d-pl6 d-d-flex d-ws-nowrap"
         >
+          <!-- @slot Additional actions near close button. Should be limited to no more 2 actions. -->
           <slot name="header-actions" />
           <dt-button
             v-if="showCloseButton"
             circle
             class="d-p6 d-bc-transparent"
             importance="outlined"
+            kind="muted"
             @click="closePopover"
           >
             <template #icon>
@@ -137,6 +144,7 @@
         ]"
         @scroll="onScrollContent"
       >
+        <!-- @slot Content element to display inside the popover. -->
         <slot name="content" />
       </div>
     </dt-lazy-show>
@@ -430,10 +438,19 @@ export default {
     },
 
     /**
-     * Determines maximum height for popover content before overflow.
+     * Determines maximum height for the popover before overflow.
      * Possible units rem|px|%|em
      */
     maxHeight: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Determines maximum width for the popover before overflow.
+     * Possible units rem|px|%|em
+     */
+    maxWidth: {
       type: String,
       default: '',
     },
@@ -805,7 +822,7 @@ export default {
     margin-bottom: @su4;
 
     .dt-popover__caret {
-      bottom: -@su4;
+      bottom: 0;
       transform: rotate(225deg);
     }
   }

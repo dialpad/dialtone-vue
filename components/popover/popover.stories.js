@@ -169,7 +169,7 @@ FixedRight.parameters = {
 };
 
 export const NoPadding = Template.bind({});
-NoPadding.args = { ...Default.args, padding: 'none', open: true };
+NoPadding.args = { ...Default.args, padding: 'none' };
 NoPadding.parameters = {
   docs: {
     source: {

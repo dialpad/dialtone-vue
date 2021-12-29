@@ -8,6 +8,19 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 
 ## Base Style
 
+- Popover frame is created with a white rounded rectangle, with grey outline and box shadow. It may or may not have a header.
+- Popover can be used as base container to build other components such as: dropdown, filter, extra actions
+and selections, feature explanation, promotions etc.
+- Always display popover visually close to button or other components that triggers them
+- By default, popover has 4px distance with anchor.
+- Align left / right / center or top / bottom / center.
+- Width should only be as wide as it needs to be to properly display the information
+- Height should be considered based on interaction and placement within the interface.
+- Specific header usage
+  - Header is always placed at the top of the popover frame
+  - Header can optionally be set as fixed when the popover needs scroll behavior.
+  - Additional actions can be placed in the upper right portion of the header and should be limited to no more than 3 actions.
+
 <Canvas>
   <Story id="components-popovers--default" />
 </Canvas>
@@ -50,55 +63,6 @@ the look of the popover content between usages. To remove the padding from the c
 ## Slots, Props & Events
 
 <ArgsTable story={PRIMARY_STORY} />
-
-## Accessibility
-
-Popover, in their current implementation, are accessible when used as interactive components.
-Content will be read to screen reader users, and the popover markup by default get appended to the `parent`
-(also it could be placed to the end of `<body>` or other DOM element)
-
-There are a few important considerations to ensure popover controls are accessible.
-The popover, by default:
-
-- the popover content will have a generic role of "dialog".
-- focus will be transferred into the popover to the first content focusable element, and after close, triggering
-element will be focused (like in the modal component)
-
-### Anchor
-
-The anchor element that activates the popover should be fully accessible by keyboard. The easiest way to do this is by
-using an element like an `DtButton` that is already accessible. The user should also be able to close the popover
-content using the `ESC` key for most ARIA roles.
-
-There are some required ARIA attributes for the anchor element (such as `aria-expanded` set based on `open` and
-`aria-haspopup` that matches the `role`). To make this as straightforward as possible, these ARIA attributes are passed
-with the correct values as the `attrs` slot-scope to the anchor slot. Applying them is as simple as using `v-bind`:
-
-```jsx
-<template #anchor="{ attrs }">
-  <dt-button v-bind="attrs">I'm accessible now!</dt-button>
-</template>
-```
-
-By default, the dialog content will be labeled by the entire anchor element. To change this, you can do one of 2 things:
-
-1. Pass `aria-label`, which is the text label that will be applied to the dialog content.
-2. Pass `aria-labelledby`, which is an ID of the element that should be used as the descriptive label.
-
-### Keyboard support
-
-- when popover opens the focus will be moved to the first focusable element inside the content's container
-- the user can dismiss the popover pressing the `ESC` key after that the focus will be returned to the element
-that launched it
-- the user can go thought focusable elements using the `TAB` key, if the popover has defined header, the focus will be
-moved to the header buttons after the last focusable element inside content's container.
-
-### Attaching elements to the DOM
-
-> To ensure the best possible performance, it's recommended to not attach elements directly to the `body` element,
-but instead create a `div` element right within the `body` and use it as container of your poppers.
-
-You can find the recommended way to use the popover in the [documentation](https://popper.js.org/docs/v2/performance/#attaching-elements-to-the-dom)
 
 ## Basic Usage
 
@@ -161,3 +125,65 @@ or
   </template>
 </dt-popover>
 ```
+
+### Attaching elements to the DOM
+
+> To ensure the best possible performance, it's recommended to not attach elements directly to the `body` element,
+but instead create a `div` element right within the `body` and use it as container of your poppers.
+
+You can find the recommended way to use the popover in the [documentation](https://popper.js.org/docs/v2/performance/#attaching-elements-to-the-dom)
+
+## Accessibility
+
+Popover, in their current implementation, are accessible when used as interactive components.
+Content will be read to screen reader users, and the popover markup by default get appended to the `parent`
+(also it could be placed to the end of `<body>` or other DOM element)
+
+There are a few important considerations to ensure popover controls are accessible.
+The popover, by default:
+
+- the popover content will have a generic role of "dialog".
+- focus will be transferred into the popover to the first content focusable element, and after close, triggering
+element will be focused (like in the modal component)
+
+### Anchor
+
+The anchor element that activates the popover should be fully accessible by keyboard. The easiest way to do this is by
+using an element like an `DtButton` that is already accessible. The user should also be able to close the popover
+content using the `ESC` key for most ARIA roles.
+
+There are some required ARIA attributes for the anchor element (such as `aria-expanded` set based on `open` and
+`aria-haspopup` that matches the `role`). To make this as straightforward as possible, these ARIA attributes are passed
+with the correct values as the `attrs` slot-scope to the anchor slot. Applying them is as simple as using `v-bind`:
+
+```jsx
+<template #anchor="{ attrs }">
+  <dt-button v-bind="attrs">I'm accessible now!</dt-button>
+</template>
+```
+
+By default, the dialog content will be labeled by the entire anchor element. To change this, you can do one of 2 things:
+
+1. Pass `aria-label`, which is the text label that will be applied to the dialog content.
+2. Pass `aria-labelledby`, which is an ID of the element that should be used as the descriptive label.
+
+### Keyboard support
+
+- when popover opens the focus will be moved to the first focusable element inside the content's container
+- the user can dismiss the popover pressing the `ESC` key after that the focus will be returned to the element
+that launched it
+- the user can go thought focusable elements using the `TAB` key, if the popover has defined header, the focus will be
+moved to the header buttons after the last focusable element inside content's container.
+
+### References
+
+- [Apple. Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/views/popovers/)
+, [Spectrum. Accessibility overlay trigger](https://react-spectrum.adobe.com/react-aria/useOverlayTrigger.html),
+[Slack Design. Accessibility, a powerful design tool](https://slack.design/articles/accessibility-a-powerful-design-tool/)
+- [tippyjs](https://atomiks.github.io/tippyjs/), [popper.js](https://popper.js.org/)
+- Other popover examples: [Spectrum. Popover](https://spectrum.adobe.com/page/popover/),
+[Polaris. Popover](https://polaris.shopify.com/components/overlays/popover),
+[Atlassian Design System. Popover](https://atlassian.design/components/inline-dialog/examples),
+Carbon Components in Vue.js
+[overflowmenu](https://vue.carbondesignsystem.com/?path=/story/components-cvoverflowmenu--default),
+[dropdown](https://vue.carbondesignsystem.com/?path=/story/components-cvdropdown--default)

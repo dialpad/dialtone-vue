@@ -1,8 +1,38 @@
 <template>
   <div class="d-d-flex d-w100p">
     <dt-popover
+      :open="openAlignmentLeft"
+      fixed-alignment="left"
+      width-content="anchor"
+      class="d-mr12"
+      @update:open="openAlignmentLeft = $event"
+    >
+      <template #anchor="{ attrs }">
+        <dt-button
+          v-bind="attrs"
+          @click="openAlignmentLeft = !openAlignmentLeft"
+        >
+          Fixed alignment left
+        </dt-button>
+      </template>
+      <template #content>
+        <div class="d-fs14 d-m0">
+          <p
+            v-if="content"
+            v-html="content"
+          />
+          <div v-else>
+            <dt-button
+              @click="openAlignmentRight = !openAlignmentRight"
+            >
+              Click to close
+            </dt-button>
+          </div>
+        </div>
+      </template>
+    </dt-popover>
+    <dt-popover
       :open="openAlignmentRight"
-      :show-close-button="false"
       fixed-alignment="right"
       width-content="anchor"
       class="d-mr12"
@@ -34,7 +64,6 @@
     </dt-popover>
     <dt-popover
       :open="openPopoverWithNoPadding"
-      :show-close-button="false"
       padding="none"
       fixed-alignment="right"
       width-content="anchor"
@@ -78,7 +107,7 @@
           v-bind="attrs"
           @click="openWithOverlay = !openWithOverlay"
         >
-          With overlay (popover modal)
+          With overlay
         </dt-button>
       </template>
       <template #content>
@@ -99,12 +128,13 @@
     </dt-popover>
     <dt-popover
       :open="openPopoverWithHeader"
-      max-height="20rem"
-      :fixed-header="true"
       :show-close-button="true"
+      :fixed-header="isHeaderFixed"
+      title="Potential Title"
       content-class="d-pl12 d-pr16"
-      width-content="anchor"
       class="d-mr12"
+      max-height="20rem"
+      max-width="50rem"
       @update:open="openPopoverWithHeader = $event"
     >
       <template #anchor="{ attrs }">
@@ -112,18 +142,33 @@
           v-bind="attrs"
           @click="openPopoverWithHeader = !openPopoverWithHeader"
         >
-          With header
+          With header, width and height
         </dt-button>
       </template>
       <template #content>
         <div class="d-fs14 d-m0">
           <div>
             <dt-button
-              @click="openPopoverWithHeader = !openPopoverWithHeader"
+              @click="isHeaderFixed = !isHeaderFixed"
             >
-              Click to close
+              Click to make header {{ isHeaderFixed ? "not fixed" : "fixed" }}
             </dt-button>
           </div>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
+            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
+            obcaecati quibusdam repudiandae.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
+            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
+            obcaecati quibusdam repudiandae.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
+            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
+            obcaecati quibusdam repudiandae.
+          </p>
         </div>
       </template>
       <template #header-actions>
@@ -150,11 +195,6 @@
             />
           </template>
         </dt-button>
-      </template>
-      <template #title>
-        <p>
-          Potential Title
-        </p>
       </template>
     </dt-popover>
   </div>
@@ -185,9 +225,11 @@ export default {
   data () {
     return {
       openAlignmentRight: false,
+      openAlignmentLeft: false,
       openWithOverlay: false,
       openPopoverWithHeader: false,
       openPopoverWithNoPadding: false,
+      isHeaderFixed: false,
       isOpen: this.open || false,
     };
   },
