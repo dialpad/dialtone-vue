@@ -72,8 +72,6 @@ export default {
   components: {
     DtPopover,
     DtButton,
-    // IconMenuVertical,
-    // IconLaunch,
   },
 
   props: {

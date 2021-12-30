@@ -67,18 +67,18 @@ the look of the popover content between usages. To remove the padding from the c
 ## Basic Usage
 
 Popovers may be used standalone, or to create a dropdown menu or other complex control.
-If you want use popover as a component which takes over the whole screen, there's a prop modal for that, or you can use
-DtModal. Keep in mind accessibility for popover and modal components are different.
+If you want to use the popover as a component which takes over the whole screen, there's a prop `modal` for that,
+or you can use `DtModal` component. Keep in mind accessibility for popover and modal components are different.
 
 A popover has 2 major pieces that are provided as required named slots: the **anchor** and the **content**.
 
 The **anchor** is the control that the content will be positioned relative to and triggers the visibility of the
 content. Normally a button, the anchor can be any *interactive* element that could control the visibility of the popover
-content. For example, the anchor could be an input element with a conditionally displayed listbox content element to
+content. For example, the anchor could be an input element with a conditionally displayed `listbox` content element to
 implement an auto-suggest form component.
 
 The **content** slot will be rendered lazily when the popover is open. By default, the popover content will
-automatically be closed when clicking outside the content or on escape key press, so it is important to use `.sync` on
+automatically be closed when clicking outside the content or on `ESC` key press, so it is important to use `.sync` on
 the `open` prop (or `v-model:open` in Vue 3) so it can be updated if the popover closes itself.
 
 ### Import
@@ -131,7 +131,8 @@ or
 > To ensure the best possible performance, it's recommended to not attach elements directly to the `body` element,
 but instead create a `div` element right within the `body` and use it as container of your poppers.
 
-You can find the recommended way to use the popover in the [documentation](https://popper.js.org/docs/v2/performance/#attaching-elements-to-the-dom)
+You can find the recommended way to use the popover in the
+[documentation](https://popper.js.org/docs/v2/performance/#attaching-elements-to-the-dom)
 
 ## Accessibility
 
@@ -142,9 +143,9 @@ Content will be read to screen reader users, and the popover markup by default g
 There are a few important considerations to ensure popover controls are accessible.
 The popover, by default:
 
-- the popover content will have a generic role of "dialog".
+- the popover content will have a generic role of "dialog" ( `menu`, `listbox` also possible roles as well)
 - focus will be transferred into the popover to the first content focusable element, and after close, triggering
-element will be focused (like in the modal component)
+element will be focused (like it's in the modal component)
 
 ### Anchor
 

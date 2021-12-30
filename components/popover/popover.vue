@@ -45,7 +45,7 @@
       :aria-hidden="`${!showPopover}`"
       :aria-labelledby="labelledBy"
       :aria-label="ariaLabel"
-      :aria-modal="isDialog"
+      :aria-modal="modal"
       :transition="transition"
       :show="showPopover"
       :class="[
@@ -112,10 +112,12 @@
           v-if="areHeaderButtonsVisible"
           class="d-pl6 d-d-flex d-ws-nowrap"
         >
-          <!-- @slot Additional actions near close button. Should be limited to no more 2 actions. -->
+          <!-- @slot Additional actions near close button. Should be used only for secondary and tertiary buttons -->
           <slot name="header-actions" />
           <dt-button
             v-if="showCloseButton"
+            ref="popover__close-button"
+            :aria-label="closeButtonAriaLabel"
             circle
             class="d-p6 d-bc-transparent"
             importance="outlined"
@@ -234,6 +236,14 @@ export default {
     },
 
     /**
+     * Descriptive label for the popover close button in the header.
+     */
+    closeButtonAriaLabel: {
+      type: String,
+      default: null,
+    },
+
+    /**
      * Whether or not the popover content is shown. Supports .sync modifier.
      */
     open: {
@@ -291,8 +301,8 @@ export default {
     },
 
     /**
-     * Width configuration for the popover content. 'anchor' is one possible string value.
-     * If passed, the popover content will be set same width with anchor element onShow popover event
+     * Width configuration for the popover content.
+     * When it's value is 'anchor', the popover content will be set same width with anchor element onShow popover event
      */
     contentWidth: {
       type: String,
@@ -525,10 +535,6 @@ export default {
       return this.getPlacement(this.fixedVerticalAlignment, this.fixedAlignment);
     },
 
-    isDialog () {
-      return this.role === 'dialog';
-    },
-
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
@@ -731,7 +737,7 @@ export default {
     },
 
     onKeydown (e) {
-      if (this.isDialog && e.key === 'Tab') {
+      if (e.key === 'Tab') {
         this.focusTrappedTabPress(e, this.popoverContentEl);
       }
     },
@@ -785,8 +791,12 @@ export default {
     },
 
     dialogFocusFirstElement (domEl) {
-      if (this.isDialog) {
+      const focusableElements = this._getFocusableElements(domEl);
+      if (focusableElements.length !== 0) {
         this.focusFirstElement(domEl);
+      } else if (this.showCloseButton) {
+        const closeButton = this.$refs['popover__close-button'].$el;
+        closeButton?.focus();
       }
     },
   },
@@ -797,7 +807,6 @@ export default {
 @import "../../css/dialtone.less";
 
 .dt-popover__content {
-  overflow: auto;
   &--align-right {
     .dt-popover__caret {
       right: @su24;

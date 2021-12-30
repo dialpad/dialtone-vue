@@ -257,7 +257,6 @@ describe('Dialtone Vue Popover tests', function () {
         const attributes = popover.attributes();
 
         assert.isTrue(attributes['aria-labelledby'] === popoverComponent.vm.labelledBy);
-        assert.isTrue(attributes['aria-modal'] === 'true');
       });
     });
     describe('When popover open', function () {

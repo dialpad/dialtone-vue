@@ -135,6 +135,7 @@
       class="d-mr12"
       max-height="20rem"
       max-width="50rem"
+      close-button-aria-label="Close popover"
       @update:open="openPopoverWithHeader = $event"
     >
       <template #anchor="{ attrs }">
