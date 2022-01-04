@@ -76,62 +76,26 @@
     >
       <div
         v-if="hasCaret"
-        class="d-bgc-white d-mtn4 d-bt d-bl d-bc-transparent dt-popover__caret d-ps-absolute d-w8 d-h8"
+        class="d-bgc-white d-mtn2 d-bt d-bl d-bc-transparent dt-popover__caret d-ps-absolute d-w4 d-h4"
       />
-      <div
+      <popover-header
         v-if="isHeaderVisible"
-        data-qa="dt-popover-header"
-        :class="[
-          'd-w100p',
-          'd-pl12',
-          'd-pr4',
-          'd-bb',
-          'd-bc-black-075',
-          'd-baw1',
-          'd-d-flex',
-          'd-fs16',
-          'd-ai-center',
-          'd-fw-bold',
-          'd-hmn48',
-          'd-of-auto',
-          popoverHeaderClasses,
-          headerClass,
-        ]"
+        :header-class="headerClass"
+        :title="title"
+        :show-close-button="showCloseButton"
+        :close-button-aria-label="closeButtonAriaLabel"
+        :has-box-shadow="hasBoxShadow"
+        @close="closePopover"
       >
-        <div
-          v-if="isTitleVisible"
-          data-qa="dt-popover-title"
-          class="d-to-ellipsis"
-        >
+        <template #title>
           <!-- @slot Popover header title. -->
-          <slot name="title">
-            {{ title }}
-          </slot>
-        </div>
-        <div
-          v-if="areHeaderButtonsVisible"
-          class="d-pl6 d-d-flex d-ws-nowrap"
-        >
+          <slot name="title" />
+        </template>
+        <template #header-actions>
           <!-- @slot Additional actions near close button. Should be used only for secondary and tertiary buttons -->
           <slot name="header-actions" />
-          <dt-button
-            v-if="showCloseButton"
-            ref="popover__close-button"
-            :aria-label="closeButtonAriaLabel"
-            circle
-            class="d-p6 d-bc-transparent"
-            importance="outlined"
-            kind="muted"
-            @click="closePopover"
-          >
-            <template #icon>
-              <icon-close
-                class="d-svg--size20"
-              />
-            </template>
-          </dt-button>
-        </div>
-      </div>
+        </template>
+      </popover-header>
       <!-- @slot content that is displayed in the popover when it is open. -->
       <div
         ref="popover__content"
@@ -167,8 +131,7 @@ import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
 import ModalMixin from '../mixins/modal.js';
-import DtButton from '../button/button';
-import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
+import PopoverHeader from './popover_header';
 
 export default {
   name: 'DtPopover',
@@ -177,9 +140,8 @@ export default {
    * CHILD COMPONENTS *
    ********************/
   components: {
-    DtButton,
     DtLazyShow,
-    IconClose,
+    PopoverHeader,
   },
 
   mixins: [ModalMixin],
@@ -508,6 +470,10 @@ export default {
   },
 
   computed: {
+    hasBoxShadow () {
+      return this.contentScrollTop !== 0 && this.fixedHeader;
+    },
+
     fallbackPlacements () {
       const verticalVariants = POPOVER_VERTICAL_ALIGNMENT.filter(alignment => alignment);
       const horizontalVariants = POPOVER_HORIZONTAL_ALIGNMENT.filter(alignment => alignment);
@@ -539,14 +505,6 @@ export default {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
-    },
-
-    popoverHeaderClasses () {
-      return {
-        'd-bs-card': this.contentScrollTop !== 0 && this.fixedHeader,
-        'd-jc-space-between': this.isTitleVisible,
-        'd-jc-flex-end': !this.isTitleVisible,
-      };
     },
 
     isHeaderVisible () {

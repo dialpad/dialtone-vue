@@ -23,7 +23,7 @@
           />
           <div v-else>
             <dt-button
-              @click="openAlignmentRight = !openAlignmentRight"
+              @click="openAlignmentLeft = !openAlignmentLeft"
             >
               Click to close
             </dt-button>
