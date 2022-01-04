@@ -4,7 +4,7 @@
     :class="[
       'd-w100p',
       'd-pl12',
-      'd-pr4',
+      'd-pr8',
       'd-py6',
       'd-bb',
       'd-bc-black-075',
