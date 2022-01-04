@@ -5,12 +5,13 @@
       'd-w100p',
       'd-pl12',
       'd-pr4',
+      'd-py6',
       'd-bb',
       'd-bc-black-075',
       'd-baw1',
       'd-d-flex',
       'd-fs16',
-      'd-ai-center',
+      'd-ai-flex-start',
       'd-fw-bold',
       'd-hmn48',
       'd-of-auto',
@@ -21,7 +22,7 @@
     <div
       v-if="isTitleVisible"
       data-qa="dt-popover-title"
-      class="d-to-ellipsis"
+      class="d-to-ellipsis d-pt6"
     >
       <slot name="title">
         {{ title }}
