@@ -25,6 +25,9 @@
     :content-width="contentWidth"
     :show-close-button="showCloseButton"
     :title="title"
+    :fixed-header="fixedHeader"
+    :max-height="maxHeight"
+    :max-width="maxWidth"
     width-content="anchor"
     @update:open="updateOpen"
   >

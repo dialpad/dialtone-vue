@@ -604,7 +604,7 @@ export default {
    ******************/
   methods: {
     afterEnter () {
-      this.dialogFocusFirstElement(this.$refs.popover__content);
+      this.dialogFocusFirstElement(this.$refs.content.$el);
     },
 
     onScrollContent ({ target }) {
