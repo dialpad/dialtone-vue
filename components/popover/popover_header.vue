@@ -15,7 +15,11 @@
       'd-fw-bold',
       'd-hmn48',
       'd-of-auto',
-      popoverHeaderClasses,
+      {
+        'd-bs-card': hasBoxShadow,
+        'd-jc-space-between': isTitleVisible,
+        'd-jc-flex-end': !isTitleVisible,
+      },
       headerClass,
     ]"
   >
@@ -107,14 +111,6 @@ export default {
   },
 
   computed: {
-    popoverHeaderClasses () {
-      return {
-        'd-bs-card': this.hasBoxShadow,
-        'd-jc-space-between': this.isTitleVisible,
-        'd-jc-flex-end': !this.isTitleVisible,
-      };
-    },
-
     isTitleVisible () {
       return this.$slots.title || this.title !== null;
     },
