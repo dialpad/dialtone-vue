@@ -119,5 +119,12 @@ export default {
       return this.$slots['header-actions'] || this.showCloseButton;
     },
   },
+
+  methods: {
+    focusCloseButton () {
+      const closeButton = this.$refs['popover__close-button'].$el;
+      closeButton?.focus();
+    },
+  },
 };
 </script>

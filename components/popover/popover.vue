@@ -80,6 +80,7 @@
       />
       <popover-header
         v-if="isHeaderVisible"
+        ref="popover__header"
         :header-class="headerClass"
         :title="title"
         :show-close-button="showCloseButton"
@@ -463,6 +464,7 @@ export default {
       showPopover: this.open,
       isPreventHidePopover: false,
       closedByClickOutside: false,
+      focusCloseButton: false,
       anchorEl: null,
       popoverContentEl: null,
       contentScrollTop: 0,
@@ -604,7 +606,7 @@ export default {
    ******************/
   methods: {
     afterEnter () {
-      this.dialogFocusFirstElement(this.$refs.content.$el);
+      this.dialogFocusFirstElement(this.$refs.popover__content);
     },
 
     onScrollContent ({ target }) {
@@ -753,8 +755,7 @@ export default {
       if (focusableElements.length !== 0) {
         this.focusFirstElement(domEl);
       } else if (this.showCloseButton) {
-        const closeButton = this.$refs['popover__close-button'].$el;
-        closeButton?.focus();
+        this.$refs.popover__header?.focusCloseButton();
       }
     },
   },
