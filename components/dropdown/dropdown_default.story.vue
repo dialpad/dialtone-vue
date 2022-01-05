@@ -48,12 +48,23 @@ import { DtButton } from '../button';
 
 export default {
   name: 'DtDropdownDefault',
+
   components: { DtDropdown, DtListItem, DtButton },
+
   data () {
     return {
-      isOpen: false,
+      isOpen: this.open || false,
     };
   },
+
+  watch: {
+    open: {
+      handler () {
+        this.isOpen = this.open;
+      },
+    },
+  },
+
   methods: {
     updateOpen (isOpen) {
       this.isOpen = isOpen;
