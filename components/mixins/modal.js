@@ -14,18 +14,19 @@ const focusableElementsList = `button:${nonFocusableAttrs},
  * on things like important actionable alerts. Use focusFirstElement to
  * focus on the first tabbable element within your component, and call
  * focusTrappedTabPress every time tab is pressed to trap tab within this
- * component.
+ * component. Note that focusFirstElement WILL focus elements with tabindex="-1",
+ * however focusTrappedTabPress will not.
  */
 export default {
   methods: {
     /**
-     * set focus to the first focusable element in your component
+     * set focus to the first focusable element in your component, includes tabindex="-1".
      * @param {object} el - optional - ref of dom element to trap focus on.
      *  will default to the root node of the vue component
      */
     async focusFirstElement (el) {
       await this.$nextTick();
-      const focusableElements = this._getFocusableElements(el);
+      const focusableElements = this._getFocusableElements(el, true);
       const elToFocus = this._getFirstFocusElement(focusableElements);
       elToFocus?.focus();
     },
@@ -54,9 +55,14 @@ export default {
      *
      * gets all the focusable elements within the component
      * and sets the first and last of those elements.
+     *
+     * @param {object} el - the root dom element to find focusable elements in.
+     * @param {bool} includeNegativeTabIndex - will include tabindex="-1" in the list of focusable elements.
      */
-    _getFocusableElements (el = this.$el) {
-      const focusableContent = [...el.querySelectorAll(focusableElementsList)];
+    _getFocusableElements (el = this.$el, includeNegativeTabIndex = false) {
+      const finalFocusableElementsList = includeNegativeTabIndex
+        ? focusableElementsList.replaceAll(':not([tabindex="-1"])', '') : focusableElementsList;
+      const focusableContent = [...el.querySelectorAll(finalFocusableElementsList)];
       return focusableContent.filter((fc) => {
         const style = window.getComputedStyle(fc);
         return style.getPropertyValue('display') !== 'none' &&
@@ -65,7 +71,7 @@ export default {
     },
 
     /**
-     * tabs to the next element contained within your component
+     * tabs to the next element contained within your component, does not include tabindex="-1".
      * @param {object} e - keypress event
      * @param {object} el - optional - ref of dom element to trap focus on.
      *  will default to the root node of the vue component
