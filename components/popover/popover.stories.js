@@ -60,21 +60,39 @@ const argTypesData = {
     },
   },
   fixedAlignment: {
+    defaultValue: null,
     control: {
       type: 'select',
       options: POPOVER_HORIZONTAL_ALIGNMENT,
     },
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
   },
   fixedVerticalAlignment: {
+    defaultValue: null,
     control: {
       type: 'select',
       options: POPOVER_VERTICAL_ALIGNMENT,
     },
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
   },
   contentWidth: {
+    defaultValue: null,
     control: {
       type: 'select',
       options: POPOVER_CONTENT_WIDTHS,
+    },
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
     },
   },
 
@@ -127,6 +145,9 @@ const TemplateVariants = (args, { argTypes }) => createTemplateFromVueFile(args,
 
 export const Default = Template.bind({});
 Default.args = {};
+Default.decorators = [() => ({
+  template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
+})];
 Default.parameters = {
   docs: {
     source: {
@@ -153,7 +174,7 @@ Default.parameters = {
 export const FixedRight = Template.bind({});
 FixedRight.args = { ...Default.args, fixedAlignment: 'right' };
 FixedRight.decorators = [() => ({
-  template: '<div class="d-h102 d-ta-right"><story /></div>',
+  template: '<div class="d-h102 d-ai-center d-ta-right"><story /></div>',
 })];
 FixedRight.parameters = {
   docs: {
@@ -169,7 +190,10 @@ FixedRight.parameters = {
 };
 
 export const NoPadding = Template.bind({});
-NoPadding.args = { ...Default.args, padding: 'none' };
+NoPadding.args = { ...Default.args, padding: 'none', open: true };
+NoPadding.decorators = [() => ({
+  template: '<div class="d-d-flex d-jc-center d-ai-center d-h102"><story /></div>',
+})];
 NoPadding.parameters = {
   docs: {
     source: {
@@ -183,13 +207,16 @@ NoPadding.parameters = {
   },
 };
 
-export const WithOverlay = Template.bind({});
-WithOverlay.args = { ...Default.args, open: true, modal: true };
-WithOverlay.parameters = {
+export const overlayModal = Template.bind({});
+overlayModal.args = { ...Default.args, open: true, modal: true };
+overlayModal.decorators = [() => ({
+  template: '<div class="d-d-flex d-jc-center d-ai-center d-h102"><story /></div>',
+})];
+overlayModal.parameters = {
   docs: {
     source: {
       code: `
-<dt-popover>
+<dt-popover padding="none">
   <template #anchor="{ attrs }"></template>
   <template #content></template>
 </dt-popover>
