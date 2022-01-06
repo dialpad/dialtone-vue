@@ -70,14 +70,6 @@ export default {
     },
 
     /**
-     * If the item can receive focus
-     */
-    focusable: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
      * The type of child list item to use.
      */
     type: {
@@ -128,11 +120,13 @@ export default {
     },
 
     isFocusable () {
-      return this.focusable;
+      // Navigation type has to be set to "tab".
+      return this.navigationType === LIST_ITEM_NAVIGATION_TYPES.TAB;
     },
 
     /**
-     * When using "arrow-keys" navigation the item has custom highlighting.
+     * When using "arrow-keys" navigation the item shouldn't receive actual focus, so
+     * we use custom highlighting to indicate which item has the "focus".
      */
     isHighlightable () {
       // Navigation type has to be set to "arrow-keys".

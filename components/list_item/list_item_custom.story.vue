@@ -2,7 +2,6 @@
   <dt-list-item
     navigation-type="tab"
     type="custom"
-    :focusable="focusable"
     @click="onClick"
   >
     <span

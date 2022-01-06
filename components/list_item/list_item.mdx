@@ -51,14 +51,13 @@ used when the list item has to support content that does not work with the defau
 The list item should be provided an approriate role as the prop `role` or the role defaults to "listitem"
 when not provided.
 
-The item can receive focus using `focusable` prop.
-
-When `navigation-type` is set to "tab" you can set `focusable=true` so the list item is set hover and focus styles and
-a tabindex so that it can receive focus. This should be used for lists that contain mixed content, for example a list
+When `navigation-type` is set to "tab" the list item is set hover and focus styles and a tabindex so
+that it can receive focus. This should be used for lists that contain mixed content, for example a list
 in which some items are clickable/focusable and some are static.
 
 When `navigation-type` is set to "arrow-keys" the props `setHighlight` and `isHighlighted` should
-also be provided. When the list item receives a highlight either by hovering over it with a
+also be provided. The list item is not focusable, but it can be highlighted using keyboard
+navigation. When the list item receives a highlight either by hovering over it with a
 mouse or via keyboard navigation the ARIA attribute `aria-selected` is set to "true".
 
 ## Usage

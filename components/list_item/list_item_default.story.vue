@@ -6,7 +6,6 @@
     :type="type"
     :is-highlighted="isHighlighted"
     :navigation-type="navigationType"
-    :focusable="focusable"
     @click="onClick"
   >
     <template #left>
