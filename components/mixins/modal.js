@@ -1,11 +1,6 @@
-const nonFocusableAttrs = 'not(:disabled):not([aria-disabled="true"]):not([tabindex="-1"])';
-const focusableElementsList = `button:${nonFocusableAttrs},
-                           [href]:${nonFocusableAttrs},
-                           input:${nonFocusableAttrs},
-                           select:${nonFocusableAttrs},
-                           textarea:${nonFocusableAttrs},
-                           details:${nonFocusableAttrs},
-                           [tabindex]:not([tabindex="-1"])`;
+const nonFocusableAttrs = ':not(:disabled):not([aria-disabled="true"])';
+const nonTabbableAttrs = `${nonFocusableAttrs}:not([tabindex="-1"])`;
+const focusableElementsList = `button,[href],input,select,textarea,details,[tabindex]`;
 
 /**
  * this mixin provides the methods to automatically trap tab focus within
@@ -60,13 +55,12 @@ export default {
      * @param {bool} includeNegativeTabIndex - will include tabindex="-1" in the list of focusable elements.
      */
     _getFocusableElements (el = this.$el, includeNegativeTabIndex = false) {
-      const finalFocusableElementsList = includeNegativeTabIndex
-        ? focusableElementsList.replaceAll(':not([tabindex="-1"])', '') : focusableElementsList;
-      const focusableContent = [...el.querySelectorAll(finalFocusableElementsList)];
+      const focusableContent = [...el.querySelectorAll(focusableElementsList)];
       return focusableContent.filter((fc) => {
         const style = window.getComputedStyle(fc);
         return style.getPropertyValue('display') !== 'none' &&
-          style.getPropertyValue('visibility') !== 'hidden';
+          style.getPropertyValue('visibility') !== 'hidden' &&
+          fc.matches(includeNegativeTabIndex ? nonFocusableAttrs : nonTabbableAttrs);
       });
     },
 
