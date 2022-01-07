@@ -3,9 +3,9 @@
     :content-width="contentWidth"
     :open="open"
     :has-caret="false"
+    :fixed-vertical-alignment="fixedVerticalAlignment"
     :fixed-alignment="fixedAlignment"
     :padding="padding"
-    fixed-vertical-alignment="bottom"
     append-to="parent"
     ref="popover"
     v-on="$listeners"
@@ -44,7 +44,11 @@
 
 <script>
 import KeyboardNavigation from '../mixins/keyboard_list_navigation';
-import { DtPopover, POPOVER_CONTENT_WIDTHS, POPOVER_HORIZONTAL_ALIGNMENT, POPOVER_PADDING_CLASSES } from '../popover';
+import {
+  DtPopover,
+  POPOVER_CONTENT_WIDTHS,
+  POPOVER_PADDING_CLASSES,
+} from '../popover';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
 import { getUniqueString } from '../utils';
 
@@ -119,6 +123,18 @@ export default {
     },
 
     /**
+     * Fixed vertical alignment of the dropdown content. If passed, the dropdown
+     * will always display anchored to the top or bottom of the anchor element.
+     * If null, the content will be positioned on whichever side has the most
+     * available space relative to the root Vue element. String values must be
+     * one of `top` or `bottom`.
+     */
+    fixedVerticalAlignment: {
+      type: String,
+      default: null,
+    },
+
+    /**
      * Fixed horizontal alignment of the dropdown content. If passed, the
      * dropdown will always display anchored to the left, center or right of the
      * anchor element. If null, the content will be positioned on whichever
@@ -127,9 +143,6 @@ export default {
     fixedAlignment: {
       type: String,
       default: 'left',
-      validator: (align) => {
-        return POPOVER_HORIZONTAL_ALIGNMENT.includes(align);
-      },
     },
 
     /**

@@ -2,6 +2,7 @@
   <dt-dropdown
     :items="items"
     :open="isOpen"
+    :fixed-vertical-alignment="fixedVerticalAlignment"
     :fixed-alignment="fixedAlignment"
     :content-width="contentWidth"
     :padding="padding"

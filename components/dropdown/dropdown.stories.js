@@ -5,7 +5,12 @@ import DtDropdownMdx from './dropdown.mdx';
 import DtDropdownDefaultTemplate from './dropdown_default.story.vue';
 import DtDropdownVariantsTemplate from './dropdown_variants.story.vue';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
-import { POPOVER_CONTENT_WIDTHS, POPOVER_HORIZONTAL_ALIGNMENT, POPOVER_PADDING_CLASSES } from '../popover';
+import {
+  POPOVER_CONTENT_WIDTHS,
+  POPOVER_HORIZONTAL_ALIGNMENT,
+  POPOVER_PADDING_CLASSES,
+  POPOVER_VERTICAL_ALIGNMENT,
+} from '../popover';
 
 // Constants
 const LIST_ITEMS = [
@@ -70,6 +75,13 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: Object.keys(POPOVER_PADDING_CLASSES),
+    },
+  },
+  fixedVerticalAlignment: {
+    defaultValue: null,
+    control: {
+      type: 'select',
+      options: POPOVER_VERTICAL_ALIGNMENT,
     },
   },
   fixedAlignment: {
@@ -161,11 +173,11 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
 Default.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-hmn128"><story /></div>`,
+  template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
 })];
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
 Variants.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-hmn128"><story /></div>`,
+  template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
 })];
