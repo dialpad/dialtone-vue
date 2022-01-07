@@ -1,5 +1,5 @@
-const nonFocusableAttrs = ':not(:disabled):not([aria-disabled="true"])';
-const nonTabbableAttrs = `${nonFocusableAttrs}:not([tabindex="-1"])`;
+const focusableAttrs = ':not(:disabled):not([aria-disabled="true"])';
+const tabbableAttrs = `${focusableAttrs}:not([tabindex="-1"])`;
 const focusableElementsList = `button,[href],input,select,textarea,details,[tabindex]`;
 
 /**
@@ -60,7 +60,7 @@ export default {
         const style = window.getComputedStyle(fc);
         return style.getPropertyValue('display') !== 'none' &&
           style.getPropertyValue('visibility') !== 'hidden' &&
-          fc.matches(includeNegativeTabIndex ? nonFocusableAttrs : nonTabbableAttrs);
+          fc.matches(includeNegativeTabIndex ? focusableAttrs : tabbableAttrs);
       });
     },
 
