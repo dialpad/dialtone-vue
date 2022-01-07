@@ -40,6 +40,7 @@
       :id="id"
       ref="content"
       :role="role"
+      v-on="$listeners"
       data-qa="dt-popover"
       :aria-hidden="`${!showPopover}`"
       :aria-labelledby="labelledBy"

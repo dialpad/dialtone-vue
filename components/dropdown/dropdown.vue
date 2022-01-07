@@ -6,7 +6,6 @@
     :fixed-vertical-alignment="fixedVerticalAlignment"
     :fixed-alignment="fixedAlignment"
     :padding="padding"
-    append-to="parent"
     ref="popover"
     v-on="$listeners"
     @keydown.esc.stop="onEscapeKey"
