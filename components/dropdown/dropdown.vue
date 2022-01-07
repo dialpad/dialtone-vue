@@ -16,11 +16,11 @@
     @keydown.home.stop.prevent="onHomeKey"
     @keydown.end.stop.prevent="onEndKey"
   >
-    <template #anchor="{ attrs }">
+    <template #anchor="props">
       <!-- @slot Anchor element that activates the dropdown -->
       <slot
         name="anchor"
-        :attrs="attrs"
+        v-bind="props"
       ></slot>
     </template>
     <template #content>
