@@ -38,10 +38,9 @@
           v-for="(item, i) in items"
           v-bind="getItemProps(i)"
           :key="item.id"
-          :is-highlighted="activeItemIndex === i"
+          :is-highlighted="navigationType === LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS && activeItemIndex === i"
           :set-highlight="() => setHighlightIndex(i)"
           :navigation-type="navigationType"
-          :focusable="true"
           @click="onDropdownSelect(i)"
         >
           {{ item.name }}
@@ -55,6 +54,7 @@
 import DtDropdown from './dropdown';
 import { DtListItem } from '../list_item';
 import { DtButton } from '../button';
+import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
 
 export default {
   name: 'DtDropdownDefault',
@@ -64,6 +64,7 @@ export default {
   data () {
     return {
       isOpen: this.open || false,
+      LIST_ITEM_NAVIGATION_TYPES,
     };
   },
 
