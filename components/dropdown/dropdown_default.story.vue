@@ -12,7 +12,12 @@
     @update:open="updateOpen"
   >
     <template #anchor="{ attrs }">
+      <div
+        v-if="anchor"
+        v-html="anchor">
+      </div>
       <dt-button
+        v-else
         v-bind="attrs"
         @click.prevent="isOpen = !isOpen"
       >
@@ -20,7 +25,12 @@
       </dt-button>
     </template>
     <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
+      <div
+        v-if="list"
+        v-html="list"
+      ></div>
       <ul
+        v-else
         v-bind="listProps"
         class="d-p0"
       >

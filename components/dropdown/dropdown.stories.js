@@ -31,6 +31,9 @@ export const argTypesData = {
         summary: 'VNode',
       },
     },
+    control: {
+      type: 'text',
+    },
   },
   list: {
     table: {
@@ -38,6 +41,9 @@ export const argTypesData = {
       type: {
         summary: 'VNode',
       },
+    },
+    control: {
+      type: 'text',
     },
   },
 
