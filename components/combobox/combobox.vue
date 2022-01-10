@@ -46,7 +46,6 @@ export default {
 
   mixins: [
     KeyboardNavigation({
-      itemsKey: 'items',
       indexKey: 'highlightIndex',
       afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
@@ -64,17 +63,7 @@ export default {
       required: true,
     },
 
-    /**
-     * An array of items to be shown in the list. This should include only items
-     * that are selectable, i.e. not dividers or subheaders.
-     */
-    /* eslint-disable vue/no-unused-properties */
-    items: {
-      type: Array,
-      default: () => [],
-    },
     /* eslint-enable vue/no-unused-properties */
-
     /**
      * Sets an ID on the list element of the component. Used by several aria attributes
      * as well as when deriving the IDs for each item.

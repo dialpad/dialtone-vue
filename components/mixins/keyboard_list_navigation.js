@@ -12,8 +12,6 @@
 import Dom from '../mixins/dom';
 
 export default ({
-  // Key of the data/prop that holds the list of items that can be selected.
-  itemsKey = 'items',
   // Key of the data prop that will be added to the component.
   indexKey = 'highlightIndex',
   // Optional, Key of the computed prop that references the currently active item element.
@@ -42,6 +40,12 @@ export default ({
   },
 
   methods: {
+    // Gets the length of all the items in the list, uses role=option to determine
+    // whether an element is a list item.
+    _itemsLength () {
+      return this.$el.querySelectorAll('[role=\'option\']').length;
+    },
+
     onUpKey () {
       if (openMethod) {
         this[openMethod](true);
@@ -58,7 +62,7 @@ export default ({
       if (openMethod) {
         this[openMethod](true);
       }
-      if (this[indexKey] < this[itemsKey].length - 1) {
+      if (this[indexKey] < this._itemsLength() - 1) {
         this.setHighlightIndex(this[indexKey] + 1);
       } else if (endOfListMethod) {
         this[endOfListMethod]();
@@ -81,12 +85,12 @@ export default ({
     },
 
     jumpToEnd () {
-      this.setHighlightIndex(this[itemsKey].length - 1);
+      this.setHighlightIndex(this._itemsLength() - 1);
     },
 
     async setHighlightIndex (num) {
       this[indexKey] = num;
-      if (this[itemsKey] && this[itemsKey].length && afterHighlightMethod) {
+      if (this._itemsLength() && afterHighlightMethod) {
         await this.$nextTick();
         this[afterHighlightMethod](num);
       }
