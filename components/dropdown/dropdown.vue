@@ -7,6 +7,7 @@
     :fixed-alignment="fixedAlignment"
     :padding="padding"
     ref="popover"
+    role="menu"
     v-on="$listeners"
     @keydown.esc.stop="onEscapeKey"
     @keydown.enter="onEnterKey"
@@ -183,7 +184,6 @@ export default {
   computed: {
     listProps () {
       return {
-        role: 'menu',
         id: this.listId,
         // The list has to be positioned relatively so that the auto-scroll can
         // calculate the correct offset for the list items.
