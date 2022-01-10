@@ -3,9 +3,10 @@
 -->
 <template>
   <label>
-    <div>
+    <div class="d-radio-group">
       <input
         type="radio"
+        class="d-radio"
         :checked="internalChecked"
         :name="internalName"
         :value="value"
@@ -15,6 +16,7 @@
         v-on="inputListeners"
       >
       <span
+        class="d-radio__copy d-radio__label"
         :class="labelClass"
         v-bind="labelChildProps"
         data-qa="input-decorator-label"
@@ -51,7 +53,7 @@ export default {
 
     inputListeners () {
       return {
-        change: event => this.emitValue(event.target.value),
+        change: event => this.emitValue(event.target),
       };
     },
   },
@@ -69,7 +71,12 @@ export default {
   },
 
   methods: {
-    emitValue (value) {
+    emitValue (target) {
+      const { value } = target;
+
+      // Set the focus to radio - needed in safari
+      target.focus();
+
       if (value !== this.groupValue) {
         // update provided value if injected
         this.setGroupValue(value);

@@ -25,6 +25,7 @@
     "storybook:build": "npm run --prefix storybook build"
   },
   "dependencies": {
+    "focus-visible": "^5.2.0",
     "tippy.js": "^6.3.1"
   },
   "devDependencies": {

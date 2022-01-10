@@ -142,6 +142,9 @@ export default {
 
       // emit the state of the checkbox
       this.$emit('input', checked);
+
+      // Set the focus on checkbox - Needed for safari
+      target.focus();
     },
 
     runValidations () {

@@ -99,7 +99,7 @@ export default {
          * input event by the change listener).
         */
         input: () => {},
-        change: event => this.emitValue(event.target.value),
+        change: event => this.emitValue(event.target),
       };
     },
   },
@@ -117,7 +117,12 @@ export default {
   },
 
   methods: {
-    emitValue (value) {
+    emitValue (target) {
+      const { value } = target;
+
+      // Set the focus to radio - needed in safari
+      target.focus();
+
       if (value !== this.radioGroupValue) {
         // update provided value if injected
         this.setGroupValue(value);
