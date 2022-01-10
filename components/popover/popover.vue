@@ -67,7 +67,7 @@
       @after-leave="onLeave"
       @enter="isOpeningPopover = true"
       @leave="isOpeningPopover = false"
-      @after-enter="dialogFocusFirstElement"
+      @after-enter="focusFirstElementIfNeeded"
     >
       <!-- @slot content that is displayed in the popover when it is open. -->
       <slot name="content" />
@@ -388,6 +388,10 @@ export default {
       return this.role === 'dialog';
     },
 
+    isMenu () {
+      return this.role === 'menu';
+    },
+
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
@@ -529,7 +533,7 @@ export default {
     onLeave () {
       this.isPreventHidePopover = true;
       if (this.focusAnchorOnClose && !this.closedByClickOutside) {
-        this.dialogFocusFirstElement(this.$refs.anchor);
+        this.focusFirstElementIfNeeded(this.$refs.anchor);
       }
       this.closedByClickOutside = false;
       this.tip.unmount();
@@ -615,8 +619,8 @@ export default {
       this.popoverContentEl.style.width = `${this.anchorEl.clientWidth}px`;
     },
 
-    dialogFocusFirstElement (e) {
-      if (this.isDialog) {
+    focusFirstElementIfNeeded (e) {
+      if (this.isDialog || this.isMenu) {
         this.focusFirstElement(e);
       }
     },
