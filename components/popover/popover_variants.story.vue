@@ -107,7 +107,7 @@
           v-bind="attrs"
           @click="openWithOverlay = !openWithOverlay"
         >
-          With overlay
+          Overlay Modal
         </dt-button>
       </template>
       <template #content>
@@ -135,7 +135,9 @@
       class="d-mr12"
       max-height="20rem"
       max-width="50rem"
-      close-button-aria-label="Close popover"
+      :close-button-props="{
+        ariaLabel: 'Close popover',
+      }"
       @update:open="openPopoverWithHeader = $event"
     >
       <template #anchor="{ attrs }">
@@ -143,7 +145,7 @@
           v-bind="attrs"
           @click="openPopoverWithHeader = !openPopoverWithHeader"
         >
-          With header, width and height
+          Popover header, custom width and height
         </dt-button>
       </template>
       <template #content>

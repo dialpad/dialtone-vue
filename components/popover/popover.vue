@@ -84,7 +84,7 @@
         :header-class="headerClass"
         :title="title"
         :show-close-button="showCloseButton"
-        :close-button-aria-label="closeButtonAriaLabel"
+        :close-button-props="closeButtonProps"
         :has-box-shadow="hasBoxShadow"
         @close="closePopover"
       >
@@ -199,11 +199,12 @@ export default {
     },
 
     /**
-     * Descriptive label for the popover close button in the header.
+     * A set of props to be passed into the popover's header close button.
+     * Requires an 'ariaLabel' property, when the header popover is visible
      */
-    closeButtonAriaLabel: {
-      type: String,
-      default: null,
+    closeButtonProps: {
+      type: Object,
+      default: () => ({}),
     },
 
     /**
@@ -441,7 +442,7 @@ export default {
      */
     showCloseButton: {
       type: Boolean,
-      default: false, // TODO do we need showCloseButton by default in true state?
+      default: false,
     },
 
     /**
@@ -467,13 +468,13 @@ export default {
       focusCloseButton: false,
       anchorEl: null,
       popoverContentEl: null,
-      contentScrollTop: 0,
+      hasScrolled: false,
     };
   },
 
   computed: {
     hasBoxShadow () {
-      return this.contentScrollTop !== 0 && this.fixedHeader;
+      return this.hasScrolled && this.fixedHeader;
     },
 
     fallbackPlacements () {
@@ -610,7 +611,7 @@ export default {
     },
 
     onScrollContent ({ target }) {
-      this.contentScrollTop = target.scrollTop;
+      this.hasScrolled = target.scrollTop > 0;
     },
 
     removeReferences () {

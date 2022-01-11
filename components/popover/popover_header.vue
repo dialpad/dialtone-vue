@@ -40,11 +40,12 @@
       <dt-button
         v-if="showCloseButton"
         ref="popover__close-button"
-        :aria-label="closeButtonAriaLabel"
-        circle
         class="d-p6 d-bc-transparent"
         importance="outlined"
         kind="muted"
+        circle
+        :aria-label="closeButtonProps.ariaLabel"
+        v-bind="closeButtonProps"
         @click="$emit('close')"
       >
         <template #icon>
@@ -94,11 +95,15 @@ export default {
     },
 
     /**
-     * Descriptive label for the popover close button in the header.
+     * A set of props to be passed into the popover's header close button.
+     * Requires an 'ariaLabel' property.
      */
-    closeButtonAriaLabel: {
-      type: String,
-      default: null,
+    closeButtonProps: {
+      type: Object,
+      required: true,
+      validator: (closeButtonProps) => {
+        return !!closeButtonProps.ariaLabel;
+      },
     },
 
     /**
