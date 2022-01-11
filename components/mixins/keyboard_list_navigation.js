@@ -93,6 +93,7 @@ export default ({
 
     async setHighlightIndex (num) {
       this[indexKey] = num;
+      console.log(indexKey);
       if (this._itemsLength() && afterHighlightMethod) {
         await this.$nextTick();
         this[afterHighlightMethod](num);
