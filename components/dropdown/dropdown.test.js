@@ -5,13 +5,16 @@ import sinon from 'sinon';
 
 // Constants
 const basePropsData = {
-  items: [1, 2, 3],
   open: true,
 };
 
 const baseSlots = {
   anchor: '<a href="#" id="anchor">Link</a>',
-  list: '<ul id="list"></ul>',
+  list: `<ul id="list">
+    <li role="menuitem">1</li>
+    <li role="menuitem">2</li>
+    <li role="menuitem">3</li>
+  </ul>`,
 };
 
 describe('Dialtone Vue Dropdown Tests', function () {

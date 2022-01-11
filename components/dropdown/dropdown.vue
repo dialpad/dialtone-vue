@@ -9,6 +9,7 @@
     ref="popover"
     role="menu"
     v-on="$listeners"
+    @update:open="setInitialHighlightIndex"
     @keydown.esc.stop="onEscapeKey"
     @keydown.enter="onEnterKey"
     @keydown.up.stop.prevent="onUpKeyPress"
@@ -61,8 +62,9 @@ export default {
 
   mixins: [
     KeyboardNavigation({
-      itemsKey: 'items',
       indexKey: 'highlightIndex',
+      listElementKey: 'listRef',
+      listItemRole: 'menuitem',
       afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
@@ -190,6 +192,10 @@ export default {
         class: 'd-ps-relative',
       };
     },
+    
+    listRef () {
+      return this.$refs.listWrapper;
+    },
 
     /*
      * These props are wrapped in a function that expects that an index is passed.
@@ -222,16 +228,14 @@ export default {
     },
   },
 
-  watch: {
-    open () {
+  methods: {
+    setInitialHighlightIndex () {
       if (this.open && this.navigationType !== this.LIST_ITEM_NAVIGATION_TYPES.NONE) {
         // When the list's is shown, reset the highlight index.
         this.setHighlightIndex(0);
-      }
+      } 
     },
-  },
 
-  methods: {
     clearHighlightIndex () {
       this.setHighlightIndex(-1);
     },
