@@ -67,7 +67,7 @@
       @after-leave="onLeave"
       @enter="isOpeningPopover = true"
       @leave="isOpeningPopover = false"
-      @after-enter="focusFirstElementIfNeeded"
+      @after-enter="onOpen"
     >
       <!-- @slot content that is displayed in the popover when it is open. -->
       <slot name="content" />
@@ -538,6 +538,11 @@ export default {
       this.closedByClickOutside = false;
       this.tip.unmount();
       this.$emit('update:open', false);
+    },
+    
+    onOpen () {
+      this.$emit('update:open', true);
+      this.focusFirstElementIfNeeded();
     },
 
     onHide () {
