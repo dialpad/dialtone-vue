@@ -22,7 +22,7 @@
       :transition="transition"
       :class="[
         'd-tooltip',
-        `d-tooltip__arrow--${placement}`,
+        `d-tooltip__arrow-tippy--${placement}`,
         {
           [ TOOLTIP_KIND_MODIFIERS.inverted ]: inverted,
         },
@@ -39,17 +39,16 @@
 </template>
 
 <script>
-import tippy from 'tippy.js/headless';
 import {
   TOOLTIP_KIND_MODIFIERS,
-  TOOLTIP_TIPPY_DIRECTIONS,
-  TOOLTIP_DIALTONE_DIRECTIONS,
-  TOOLTIP_DIRECTION_MODIFIERS,
-  TOOLTIP_HIDE_ON_CLICK_VARIANTS,
+  TOOLTIP_HIDE_ON_CLICK_VARIANTS, TOOLTIP_TIPPY_DIRECTIONS,
 } from './tooltip_constants';
-import { findFirstFocusableNode, getUniqueString } from '../utils';
-import { hideOnEsc, getArrowDetected } from './modifiers';
+import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
+import {
+  createTippy,
+  getPopperOptions,
+} from '../popover/tippy_utils';
 export default {
   name: 'Tooltip',
   components: {
@@ -71,7 +70,7 @@ export default {
      * */
     flip: {
       type: Array,
-      default: () => ['left-center', 'top-center'],
+      default: () => ['right', 'bottom'],
     },
 
     /**
@@ -97,10 +96,11 @@ export default {
      */
     arrowDirection: {
       type: String,
-      default: 'bottom-center',
-      validator (direction) {
-        return TOOLTIP_DIRECTION_MODIFIERS.includes(direction);
+      default: 'top',
+      validator (arrowDirection) {
+        return TOOLTIP_TIPPY_DIRECTIONS.includes(arrowDirection);
       },
+
     },
 
     /**
@@ -221,21 +221,13 @@ export default {
     return {
       TOOLTIP_KIND_MODIFIERS,
       tip: null,
-      placement: '',
+      placement: 'auto',
       showTooltip: false,
       isPreventHideTooltip: false,
     };
   },
 
   computed: {
-    tippyPlacement () {
-      return TOOLTIP_DIALTONE_DIRECTIONS[this.placement];
-    },
-
-    convertedFlip () {
-      return this.flip.map(arrowDialtone => TOOLTIP_DIALTONE_DIRECTIONS[arrowDialtone]);
-    },
-
     tippyProps () {
       return {
         offset: this.offset,
@@ -243,7 +235,14 @@ export default {
         appendTo: this.appendTo,
         interactive: this.interactive,
         trigger: this.trigger,
-        popperOptions: this.getPopperOptions(),
+        popperOptions: getPopperOptions({
+          boundary: this.flipBoundary,
+          flip: this.flip,
+          onChangePlacement: (placement) => {
+            this.placement = placement;
+          },
+        }),
+
         hideOnClick: this.hideOnClick,
       };
     },
@@ -265,9 +264,8 @@ export default {
   },
 
   mounted () {
-    const anchorElement = this.$refs.anchor.children[0];
     this.placement = this.arrowDirection;
-    this.tip = tippy(this.getAnchor(anchorElement), this.initOptions());
+    this.tip = createTippy(this.$refs.anchor, this.initOptions());
     this.updateShow();
   },
 
@@ -294,42 +292,16 @@ export default {
       }
     },
 
-    createAnchor () {
-      const span = document.createElement('span');
-      span.setAttribute('tabindex', this.tabIndex);
-      span.innerText = this.$refs.anchor.innerText || '';
-      this.$refs.anchor.innerText = '';
-      this.$refs.anchor.appendChild(span);
-      return span;
-    },
-
     setProps () {
       this.placement = this.arrowDirection;
       if (this.tip && this.tip.setProps) {
         this.tip.setProps({
           ...this.tippyProps,
-          placement: this.tippyPlacement,
+          placement: this.placement,
           hideOnClick: this.hideOnClick,
           trigger: this.trigger,
         });
       }
-    },
-
-    getPopperOptions () {
-      return {
-        modifiers: [
-          {
-            name: 'flip',
-            options: {
-              fallbackPlacements: this.convertedFlip,
-              boundary: this.flipBoundary,
-            },
-          },
-          getArrowDetected(({ state }) => {
-            this.placement = TOOLTIP_TIPPY_DIRECTIONS[state.placement];
-          }),
-        ],
-      };
     },
 
     onMount () {
@@ -347,23 +319,12 @@ export default {
       return this.isPreventHideTooltip;
     },
 
-    getAnchor (anchor) {
-      if (!anchor) return this.createAnchor();
-      if (!this.hasFocusableAnchorNode()) {
-        anchor.setAttribute('tabindex', this.tabIndex);
-      }
-
-      return anchor;
-    },
-
-    hasFocusableAnchorNode () {
-      return !!findFirstFocusableNode(this.$refs.anchor);
-    },
-
     initOptions () {
       return {
+        contentElement: this.$refs.content.$el,
+        tabIndex: this.tabIndex,
         allowHTML: true,
-        placement: this.tippyPlacement,
+        placement: this.placement,
         zIndex: this.zIndex,
         onMount: this.onMount,
         onHide: this.onHide,
@@ -373,18 +334,6 @@ export default {
             this.showTooltip = true;
           }
         },
-
-        render: () => {
-          // The recommended structure is to use the popper as an outer wrapper
-          const popper = document.createElement('div');
-          popper.className = 'tippy-box d-ps-absolute';
-          popper.appendChild(this.$refs.content.$el);
-          return {
-            popper,
-          };
-        },
-
-        plugins: [hideOnEsc],
       };
     },
   },
