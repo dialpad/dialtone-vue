@@ -10,13 +10,13 @@
       :show="modal && isOpeningPopover"
       transition="d-zoom"
       class="
-        d-popover-overlay
         d-ps-fixed
         d-all0
+        d-zi-modal
         d-fl-center
         d-fd-column
+        d-popover-overlay
         d-vi-visible
-        d-zi-modal
         d-o100
         d-bgc-black-900
       "
@@ -49,12 +49,12 @@
       :transition="transition"
       :show="showPopover"
       :class="[
-        'dt-popover-box',
+        'd-of-auto',
         'd-bgc-white',
-        'd-bc-black-100',
         'd-bs-card',
         'd-bar8',
-        'd-of-auto',
+        'd-bc-black-100',
+        'dt-popover-box',
         `dt-popover__content--align-${horizontalAlignment}`,
         `dt-popover__content--valign-${verticalAlignment}`,
         {
@@ -76,7 +76,17 @@
     >
       <div
         v-if="hasCaret"
-        class="d-bgc-white d-mtn2 d-bt d-bl d-bc-transparent dt-popover__caret d-ps-absolute d-w4 d-h4"
+        class="
+          d-ps-absolute
+          dt-popover__caret
+          d-mtn2
+          d-bt
+          d-bl
+          d-w4
+          d-h4
+          d-bgc-white
+          d-bc-transparent
+        "
       />
       <popover-header
         v-if="isHeaderVisible"

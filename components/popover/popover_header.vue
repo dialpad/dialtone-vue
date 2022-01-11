@@ -2,19 +2,19 @@
   <div
     data-qa="dt-popover-header"
     :class="[
+      'd-d-flex',
+      'd-ai-flex-start',
+      'd-fs16',
+      'd-fw-bold',
+      'd-of-auto',
+      'd-hmn48',
       'd-w100p',
       'd-pl12',
       'd-pr8',
       'd-py6',
       'd-bb',
-      'd-bc-black-075',
       'd-baw1',
-      'd-d-flex',
-      'd-fs16',
-      'd-ai-flex-start',
-      'd-fw-bold',
-      'd-hmn48',
-      'd-of-auto',
+      'd-bc-black-075',
       {
         'd-bs-card': hasBoxShadow,
         'd-jc-space-between': isTitleVisible,

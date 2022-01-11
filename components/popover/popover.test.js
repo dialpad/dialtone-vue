@@ -250,16 +250,12 @@ describe('Dialtone Vue Popover tests', function () {
         _mountWrapper();
       });
       it('should have correct aria-labels on a anchor', async function () {
-        const attributes = button.attributes();
-
-        assert.strictEqual(attributes['aria-controls'], 'popover-id');
-        assert.strictEqual(attributes['aria-haspopup'], 'dialog');
+        assert.strictEqual(button.attributes('aria-controls'), 'popover-id');
+        assert.strictEqual(button.attributes('aria-haspopup'), 'dialog');
       });
 
       it('should have correct aria-labels on a content', async function () {
-        const attributes = popover.attributes();
-
-        assert.strictEqual(attributes['aria-labelledby'], popoverComponent.vm.labelledBy);
+        assert.strictEqual(popover.attributes('aria-labelledby'), popoverComponent.vm.labelledBy);
       });
     });
     describe('When popover open', function () {
@@ -268,15 +264,11 @@ describe('Dialtone Vue Popover tests', function () {
       });
 
       it('should have correct aria-labels on a anchor', async function () {
-        const attributes = button.attributes();
-
-        assert.strictEqual(attributes['aria-expanded'], 'true');
+        assert.strictEqual(button.attributes('aria-expanded'), 'true');
       });
 
       it('should have correct aria-labels on a content', async function () {
-        const attributes = popover.attributes();
-
-        assert.strictEqual(attributes['aria-hidden'], 'false');
+        assert.strictEqual(popover.attributes('aria-hidden'), 'false');
       });
     });
 
@@ -286,15 +278,11 @@ describe('Dialtone Vue Popover tests', function () {
       });
 
       it('should have correct aria-labels on a anchor', async function () {
-        const attributes = button.attributes();
-
-        assert.strictEqual(attributes['aria-expanded'], 'false');
+        assert.strictEqual(button.attributes('aria-expanded'), 'false');
       });
 
       it('should have correct aria-labels on a content', async function () {
-        const attributes = popover.attributes();
-
-        assert.strictEqual(attributes['aria-hidden'], 'true');
+        assert.strictEqual(popover.attributes('aria-hidden'), 'true');
       });
     });
   });
