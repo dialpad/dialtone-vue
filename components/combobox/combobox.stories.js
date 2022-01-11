@@ -4,25 +4,8 @@ import DtCombobox from './combobox';
 import DtComboboxMdx from './combobox.mdx';
 import DtComboboxDefaultTemplate from './combobox_default.story.vue';
 
-// Constants
-const LIST_ITEMS = [
-  { name: 'combobox item 1', id: 1 },
-  { name: 'combobox item 2', id: 2 },
-  { name: 'combobox item 3', id: 3 },
-  { name: 'combobox item 4', id: 4 },
-  { name: 'combobox item 5', id: 5 },
-  { name: 'combobox item 6', id: 6 },
-  { name: 'combobox item 7', id: 7 },
-  { name: 'combobox item 8', id: 8 },
-  { name: 'combobox item 9', id: 9 },
-  { name: 'combobox item 10', id: 10 },
-  { name: 'combobox item 11', id: 11 },
-  { name: 'combobox item 12', id: 12 },
-];
-
 // Default Prop Values
 export const argsData = {
-  items: LIST_ITEMS,
   onEscape: action('escape'),
   onHighlight: action('highlight'),
   onSelect: action('select'),
@@ -50,17 +33,6 @@ export const argTypesData = {
   },
 
   // Props
-  items: {
-    table: {
-      category: 'props',
-      type: {
-        summary: 'array',
-      },
-      defaultValue: {
-        summary: '[]',
-      },
-    },
-  },
   listAriaLabel: {
     table: {
       category: 'props',
