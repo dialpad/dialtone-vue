@@ -12,6 +12,9 @@
 import Dom from '../mixins/dom';
 
 export default ({
+  // Role of the list items in the component. This is used to identify the list items
+  // so you must update this if the role of your list items is anything other than 'option'
+  listItemRole = 'option',
   // Key of the data prop that will be added to the component.
   indexKey = 'highlightIndex',
   // Optional, Key of the computed prop that references the currently active item element.
@@ -43,10 +46,10 @@ export default ({
   },
 
   methods: {
-    // Gets the length of all the items in the list, uses role=option to determine
+    // Gets the length of all the items in the list, uses the listItemRole param to determine
     // whether an element is a list item.
     _itemsLength () {
-      return this.$el.querySelectorAll('[role=\'option\']').length;
+      return this.$el.querySelectorAll(`[role="${listItemRole}"]`).length;
     },
 
     onUpKey () {
