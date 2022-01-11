@@ -114,6 +114,13 @@ describe('Dialtone Vue Combobox tests', function () {
   });
 
   describe('Interactivity Tests', function () {
+    // Test Setup
+    beforeEach(async function () {
+      slots = { list: '<ol id="list"><li role="option">item1</li><li role="option">item2</li></ol>' };
+      _mountWrapper();
+      _setChildWrappers();
+    });
+
     describe('When "Enter" key is pressed but no item is highlighted', function () {
       beforeEach(async function () {
         await wrapper.setData({ highlightIndex: -1 });
