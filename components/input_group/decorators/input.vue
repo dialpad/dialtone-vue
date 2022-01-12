@@ -53,7 +53,7 @@ export default {
 
     inputListeners () {
       return {
-        change: event => this.emitValue(event.target),
+        change: event => this.emitValue(event.target.value),
       };
     },
   },
@@ -71,12 +71,7 @@ export default {
   },
 
   methods: {
-    emitValue (target) {
-      const { value } = target;
-
-      // Set the focus to radio - needed in safari
-      target.focus();
-
+    emitValue (value) {
       if (value !== this.groupValue) {
         // update provided value if injected
         this.setGroupValue(value);
