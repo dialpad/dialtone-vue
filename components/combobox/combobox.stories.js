@@ -48,6 +48,13 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  listId: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
   onBeginningOfList: {
     table: {
       category: 'props',
