@@ -423,7 +423,7 @@ export default {
 
     /**
      * Determines maximum height for the popover before overflow.
-     * Possible units rem|px|%|em
+     * Possible units rem|px|em
      */
     maxHeight: {
       type: String,
