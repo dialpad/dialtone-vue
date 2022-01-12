@@ -4,7 +4,6 @@
       class="d-mr8"
       v-for="(variant, i) in variants.fixedAlignment"
       :key="i"
-      :items="items"
       :open="isOpen[variant]"
       :fixed-alignment="variant"
       :content-width="contentWidth"

@@ -1,6 +1,5 @@
 <template>
   <dt-dropdown
-    :items="items"
     :open="isOpen"
     :fixed-vertical-alignment="fixedVerticalAlignment"
     :fixed-alignment="fixedAlignment"
