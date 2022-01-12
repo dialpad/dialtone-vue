@@ -101,9 +101,6 @@ export default {
     closeButtonProps: {
       type: Object,
       required: true,
-      validator: (closeButtonProps) => {
-        return !!closeButtonProps.ariaLabel;
-      },
     },
 
     /**
