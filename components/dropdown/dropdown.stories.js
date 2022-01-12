@@ -75,12 +75,22 @@ export const argTypesData = {
       type: 'select',
       options: POPOVER_VERTICAL_ALIGNMENT,
     },
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
   },
   fixedAlignment: {
     defaultValue: 'left',
     control: {
       type: 'select',
       options: POPOVER_HORIZONTAL_ALIGNMENT,
+    },
+    table: {
+      defaultValue: {
+        summary: 'left',
+      },
     },
   },
   contentWidth: {
