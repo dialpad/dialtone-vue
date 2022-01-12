@@ -12,16 +12,8 @@ import {
   POPOVER_VERTICAL_ALIGNMENT,
 } from '../popover';
 
-// Constants
-const LIST_ITEMS = [
-  { name: '1st menu item', id: 1 },
-  { name: '2nd menu item', id: 2 },
-  { name: '3rd menu item', id: 3 },
-];
-
 // Default Prop Values
 export const argsData = {
-  items: LIST_ITEMS,
   onHighlight: action('highlight'),
   onSelect: action('select'),
   onEscape: action('escape'),

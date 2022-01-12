@@ -148,17 +148,6 @@ export default {
     },
 
     /**
-     * An array of items to be shown in the list. This should include only items
-     * that are selectable, i.e. not dividers or subheaders.
-     */
-    /* eslint-disable vue/no-unused-properties */
-    items: {
-      type: Array,
-      default: () => [],
-    },
-    /* eslint-enable vue/no-unused-properties */
-
-    /**
      * A method that will be called when the selection goes past the beginning of the list.
      */
     onBeginningOfList: {
@@ -192,7 +181,7 @@ export default {
         class: 'd-ps-relative',
       };
     },
-    
+
     listRef () {
       return this.$refs.listWrapper;
     },
@@ -233,7 +222,7 @@ export default {
       if (this.open && this.navigationType !== this.LIST_ITEM_NAVIGATION_TYPES.NONE) {
         // When the list's is shown, reset the highlight index.
         this.setHighlightIndex(0);
-      } 
+      }
     },
 
     clearHighlightIndex () {

@@ -539,7 +539,7 @@ export default {
       this.tip.unmount();
       this.$emit('update:open', false);
     },
-    
+
     onOpen () {
       this.$emit('update:open', true);
       this.focusFirstElementIfNeeded();

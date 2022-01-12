@@ -46,11 +46,11 @@ export default ({
   },
 
   methods: {
-    // Returns the list element 
+    // Returns the list element
     // this[listElement] can be a Vue component, in which case we need to target
     // the $el property, or it can simply be an html element.
     _getListElement () {
-      return this[listElementKey]?.$el || this[listElementKey];      
+      return this[listElementKey]?.$el || this[listElementKey];
     },
 
     // Gets the length of all the items in the list, uses the listItemRole param to determine
@@ -61,10 +61,10 @@ export default ({
       if (!listElement) {
         console.error(`listElementKey is required or the referenced element doesn't exist. Received ',
           listElement: `, listElement);
-        
+
         return 0;
       }
-      
+
       return listElement.querySelectorAll(`[role="${listItemRole}"]`).length;
     },
 

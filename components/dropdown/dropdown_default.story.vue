@@ -68,6 +68,16 @@ export default {
     };
   },
 
+  computed: {
+    items () {
+      return [
+        { name: '1st menu item', id: 1 },
+        { name: '2nd menu item', id: 2 },
+        { name: '3rd menu item', id: 3 },
+      ];
+    },
+  },
+
   watch: {
     open: {
       handler () {
