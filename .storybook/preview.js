@@ -6,7 +6,6 @@ import theme from './theme';
 import Vue from 'vue';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import focusVisiblePolyfill from 'focus-visible';
-import focusSafariPolyfill from '../components/plugins/focusSafariPolyfill';
 
 Vue.use(fixDefaultSlot);
 
