@@ -6,7 +6,6 @@ import DtInput from '../input/input.vue';
 
 // Constants
 const basePropsData = {
-  items: [1, 2, 3],
   listAriaLabel: '',
   showList: true,
 };

@@ -20,6 +20,7 @@
       />
     </div>
     <div
+      v-if="showList"
       ref="listWrapper"
       data-qa="dt-combobox-list-wrapper"
       @mouseleave="clearHighlightIndex"
@@ -63,7 +64,6 @@ export default {
       required: true,
     },
 
-    /* eslint-enable vue/no-unused-properties */
     /**
      * Sets an ID on the list element of the component. Used by several aria attributes
      * as well as when deriving the IDs for each item.
