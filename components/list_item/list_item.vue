@@ -192,7 +192,7 @@ export default {
           cursor: pointer;
       }
 
-      &.focus-visible {
+      &:focus-visible {
         outline: var(--primary-color) solid 2px;
       }
   }
