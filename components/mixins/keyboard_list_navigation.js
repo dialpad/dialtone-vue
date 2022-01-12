@@ -17,10 +17,10 @@ export default ({
   listItemRole = 'option',
   // Key of the data prop that will be added to the component.
   indexKey = 'highlightIndex',
+  // Key of the computed prop that references the list element.
+  listElementKey = 'listRef',
   // Optional, Key of the computed prop that references the currently active item element.
   activeItemKey = '',
-  // Optional, Key of the computed prop that references the list element.
-  listElementKey = '',
   // Optional, name of the method that toggles the list visibility. Used for
   // opening the list when up or down is pressed.
   openMethod = null,
