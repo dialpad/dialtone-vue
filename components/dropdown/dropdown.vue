@@ -205,7 +205,7 @@ export default {
     },
 
     activeItemEl () {
-      return this.$refs.listWrapper.querySelector(`#${this.activeItemId}`);
+      return document.getElementById(this.activeItemId);
     },
   },
 
