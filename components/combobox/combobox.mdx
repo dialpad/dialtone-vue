@@ -15,9 +15,9 @@ functioning UI on it's own, but it depends on the elements passed to it via slot
 
 A combobox has 2 major pieces that are provided as required named slots: the **input** and the **list**.
 
-The **input** slot contains the input element that controls the items in the list.
+The **input** slot contains the input element that controls the items in the list. Almost always this will be a dt-input.
 
-The **list** contains a list of items to show in the context of the input's value.
+The **list** contains a list of items to show in the context of the input's value. Almost always this will be a list of dt-list-item.
 
 <Canvas>
   <Story id="components-combobox--default" />
@@ -31,7 +31,6 @@ import { DtCombobox, DtInput, DtListItem } from '@dialpad/dialtone-vue';
 
 ```html
 <dt-combobox
-  :items="items"
   list-aria-label="Example list items"
   @escape="onEscape"
   @highlight="onHighlight"

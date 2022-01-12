@@ -1,7 +1,6 @@
 <template>
   <dt-combobox
-    :items="displayItems"
-    :show-list="!!value"
+    :show-list="!!value && showList"
     list-aria-label="Example list items"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
@@ -33,7 +32,7 @@
               kind="initials"
               color="purple-500"
             >
-              {{ i + 1 }}
+              <span aria-hidden="true">{{ i + 1 }}</span>
             </dt-avatar>
           </template>
           {{ item.name }}
