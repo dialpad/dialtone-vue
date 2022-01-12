@@ -45,11 +45,7 @@
 
 <script>
 import KeyboardNavigation from '../mixins/keyboard_list_navigation';
-import {
-  DtPopover,
-  POPOVER_CONTENT_WIDTHS,
-  POPOVER_PADDING_CLASSES,
-} from '../popover';
+import { DtPopover } from '../popover';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
 import { getUniqueString } from '../utils';
 
@@ -88,9 +84,6 @@ export default {
     padding: {
       type: String,
       default: 'none',
-      validator: (padding) => {
-        return !!POPOVER_PADDING_CLASSES[padding];
-      },
     },
 
     /**
@@ -100,7 +93,6 @@ export default {
     contentWidth: {
       type: String,
       default: null,
-      validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
     },
 
     /**
