@@ -2,6 +2,7 @@
   <component
     :is="elementType"
     ref="popover"
+    data-qa="dt-popover-container"
     v-on="$listeners"
   >
     <dt-lazy-show
@@ -67,8 +68,8 @@
         'max-width': maxWidth,
       }"
       tabindex="-1"
-      v-on="$listeners"
       appear
+      v-on="$listeners"
       @keydown="onKeydown"
       @after-leave="onLeave"
       @enter="isOpeningPopover = true"
@@ -689,7 +690,7 @@ export default {
 
     onOpen () {
       this.$emit('update:open', true);
-      this.focusFirstElementIfNeeded();
+      this.focusFirstElementIfNeeded(this.$refs.popover__content);
     },
 
     onHide () {

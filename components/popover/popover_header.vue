@@ -124,7 +124,7 @@ export default {
 
   methods: {
     focusCloseButton () {
-      const closeButton = this.$refs['popover__close-button'].$el;
+      const closeButton = this.$refs['popover__close-button']?.$el;
       closeButton?.focus();
     },
   },
