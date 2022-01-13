@@ -103,6 +103,13 @@ const argTypesData = {
       },
     },
   },
+  title: {
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
+  },
 
   // Events
   onClose: {
