@@ -31,6 +31,7 @@ const argTypesData = {
     },
   },
   titleSlot: {
+    name: 'title',
     control: 'text',
     table: {
       type: {
