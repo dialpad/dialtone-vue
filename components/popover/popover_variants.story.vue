@@ -1,5 +1,5 @@
 <template>
-  <div class="d-d-flex d-w100p">
+  <div class="d-d-flex d-fw-wrap d-w100p d-flg12 d-fl-col4">
     <dt-popover
       :open="openAlignmentLeft"
       fixed-alignment="left"
