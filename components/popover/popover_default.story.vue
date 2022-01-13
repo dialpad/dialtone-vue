@@ -57,10 +57,17 @@
         </template>
       </div>
     </template>
-    <template
-      #titleSlot
-    >
-      <slot name="titleSlot" />
+    <template #titleSlot>
+      <span
+        v-if="titleSlot"
+        v-html="titleSlot"
+      />
+    </template>
+    <template #headerActions>
+      <span
+        v-if="headerActions"
+        v-html="headerActions"
+      />
     </template>
   </dt-popover>
 </template>

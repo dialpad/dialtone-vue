@@ -101,7 +101,7 @@
         @close="closePopover"
       >
         <template #titleSlot>
-          <!-- @slot slot for popover header title, defaults to title prop -->
+          <!-- @slot Slot for popover header title, defaults to title prop -->
           <slot name="titleSlot" />
         </template>
         <template #headerActions>

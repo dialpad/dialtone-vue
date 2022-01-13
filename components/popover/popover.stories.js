@@ -30,7 +30,15 @@ const argTypesData = {
       },
     },
   },
-  title: {
+  titleSlot: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  headerActions: {
     control: 'text',
     table: {
       type: {
