@@ -134,15 +134,11 @@ export default {
     content: " ";
     cursor: pointer;
     transform: scale(1);
-    transition: left @transition-speed @easing-function;
-    animation-timing-function: @easing-function;
-    animation-duration: @transition-speed;
-    animation-name: revertToNormalScale;
+    transition: left @transition-speed @easing-function, transform @transition-speed @easing-function;
   }
 
   &:hover:after {
     transform: scale(1.1);
-    animation-name: slowMagnify;
   }
 
   &:focus {
@@ -168,35 +164,14 @@ export default {
     opacity: 0.5;
 
     &:after{
-      animation-name: none;
+      transition-property: none;
       cursor: no-drop;
     }
 
     &:hover:after{
       transform: scale(1);
-      animation-name: none;
+      transition-property: none;
     }
-  }
-}
-
-@keyframes slowMagnify {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1.1);
-  }
-}
-
-@keyframes revertToNormalScale {
-  0% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
   }
 }
 </style>
