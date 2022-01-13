@@ -99,7 +99,7 @@ describe('Dialtone Vue Popover tests', function () {
           },
           [
             h('div', { slot: 'content' }, defaultSlotMessage),
-            h('div', { slot: 'titleSlot' }, 'Popover Title'),
+            h('div', { slot: 'title' }, 'Popover Title'),
             h(DtButton, {
               slot: 'headerActions',
               attrs: { 'data-qa': 'dt-popover-actions' },

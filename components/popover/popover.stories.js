@@ -32,10 +32,15 @@ const argTypesData = {
   },
   titleSlot: {
     name: 'title',
+    description: 'Slot for popover header title, defaults to title prop',
     control: 'text',
     table: {
+      category: 'slots',
       type: {
         summary: 'VNode',
+      },
+      defaultValue: {
+        summary: 'null',
       },
     },
   },
@@ -105,10 +110,19 @@ const argTypesData = {
     },
   },
   title: {
+    description: `Determines title for popover header. If provided prop is not null,
+     corresponding holder div will be rendered`,
     table: {
+      category: 'props',
+      type: {
+        summary: 'string',
+      },
       defaultValue: {
         summary: 'null',
       },
+    },
+    control: {
+      type: 'text',
     },
   },
 

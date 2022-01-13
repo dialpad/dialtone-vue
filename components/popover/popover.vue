@@ -100,9 +100,9 @@
         :has-box-shadow="hasBoxShadow"
         @close="closePopover"
       >
-        <template #titleSlot>
+        <template #title>
           <!-- @slot Slot for popover header title, defaults to title prop -->
-          <slot name="titleSlot" />
+          <slot name="title" />
         </template>
         <template #headerActions>
           <!-- @slot Additional actions near close button. Should be used only for secondary and tertiary buttons -->
@@ -535,7 +535,7 @@ export default {
     },
 
     isTitleVisible () {
-      return this.$slots.titleSlot || this.title !== null;
+      return this.$slots.title || this.title !== null;
     },
 
     areHeaderButtonsVisible () {

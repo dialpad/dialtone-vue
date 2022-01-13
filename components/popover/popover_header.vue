@@ -28,7 +28,7 @@
       data-qa="dt-popover-title"
       class="d-to-ellipsis d-pt6"
     >
-      <slot name="titleSlot">
+      <slot name="title">
         {{ title }}
       </slot>
     </div>
@@ -114,7 +114,7 @@ export default {
 
   computed: {
     isTitleVisible () {
-      return this.$slots.titleSlot || this.title !== null;
+      return this.$slots.title || this.title !== null;
     },
 
     areHeaderButtonsVisible () {
