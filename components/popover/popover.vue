@@ -278,7 +278,7 @@ export default {
 
     /**
      * Width configuration for the popover content.
-     * When it's value is 'anchor', the popover content will be set same width with anchor element onShow popover event
+     * When its value is 'anchor', the popover content will be set the same width with anchor element onShow popover event
      */
     contentWidth: {
       type: String,
