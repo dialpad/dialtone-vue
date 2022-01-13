@@ -5,7 +5,7 @@ import DtTooltip from './tooltip.vue';
 import { DtButton } from '../button';
 import {
   TOOLTIP_KIND_MODIFIERS,
-  TOOLTIP_TIPPY_DIRECTIONS,
+  TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
 import { flushPromises } from '../utils';
 
@@ -134,7 +134,7 @@ describe('Dialtone Vue Tooltip tests', function () {
   });
 
   describe('When an arrow direction is provided', function () {
-    TOOLTIP_TIPPY_DIRECTIONS.forEach(arrowDirection => describe(`When direction is ${arrowDirection}`, function () {
+    TOOLTIP_DIRECTIONS.forEach(arrowDirection => describe(`When direction is ${arrowDirection}`, function () {
       beforeEach(async function () {
         await wrapper.setProps({ arrowDirection });
       });

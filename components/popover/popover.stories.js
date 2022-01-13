@@ -1,8 +1,6 @@
 import {
   DtPopover,
   POPOVER_PADDING_CLASSES,
-  POPOVER_HORIZONTAL_ALIGNMENT,
-  POPOVER_VERTICAL_ALIGNMENT,
   POPOVER_ROLES,
   POPOVER_CONTENT_WIDTHS,
 } from './';
@@ -11,6 +9,7 @@ import { createTemplateFromVueFile } from '../storybook_utils';
 import PopoverMdx from './popover.mdx';
 import { action } from '@storybook/addon-actions';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
+import { POPOVER_DIRECTIONS } from './popover_constants';
 
 const argTypesData = {
   // Slots
@@ -50,23 +49,11 @@ const argTypesData = {
       options: POPOVER_ROLES,
     },
   },
-  fixedAlignment: {
-    defaultValue: null,
+  placement: {
+    defaultValue: 'bottom',
     control: {
       type: 'select',
-      options: POPOVER_HORIZONTAL_ALIGNMENT,
-    },
-    table: {
-      defaultValue: {
-        summary: 'null',
-      },
-    },
-  },
-  fixedVerticalAlignment: {
-    defaultValue: null,
-    control: {
-      type: 'select',
-      options: POPOVER_VERTICAL_ALIGNMENT,
+      options: POPOVER_DIRECTIONS,
     },
     table: {
       defaultValue: {
@@ -161,7 +148,7 @@ Default.parameters = {
 };
 
 export const FixedRight = Template.bind({});
-FixedRight.args = { ...Default.args, fixedAlignment: 'right' };
+FixedRight.args = { ...Default.args, placement: 'bottom-end' };
 FixedRight.decorators = [() => ({
   template: '<div class="d-h102 d-ai-center d-ta-right"><story /></div>',
 })];
@@ -169,7 +156,7 @@ FixedRight.parameters = {
   docs: {
     source: {
       code: `
-<dt-popover fixedAlignment="right">
+<dt-popover placement="bottom-end">
   <template #anchor="{ attrs }"></template>
   <template #content></template>
 </dt-popover>

@@ -1,11 +1,10 @@
 /*
 * Tippy directions - https://atomiks.github.io/tippyjs/v6/all-props/#placement
 * */
-export const TOOLTIP_TIPPY_DIRECTIONS = [
-  'bottom', 'bottom-start', 'bottom-end',
-  'right', 'right-start', 'right-end',
-  'left', 'left-start', 'left-end',
-  'top', 'top-start', 'top-end',
+import { BASE_TIPPY_DIRECTIONS } from '../popover/tippy_utils';
+
+export const TOOLTIP_DIRECTIONS = [
+  ...BASE_TIPPY_DIRECTIONS,
 ];
 
 export const TOOLTIP_KIND_MODIFIERS = {

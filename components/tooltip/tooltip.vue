@@ -41,12 +41,13 @@
 <script>
 import {
   TOOLTIP_KIND_MODIFIERS,
-  TOOLTIP_HIDE_ON_CLICK_VARIANTS, TOOLTIP_TIPPY_DIRECTIONS,
+  TOOLTIP_HIDE_ON_CLICK_VARIANTS, TOOLTIP_DIRECTIONS,
 } from './tooltip_constants';
 import { getUniqueString } from '../utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import {
   createTippy,
+  getAnchor,
   getPopperOptions,
 } from '../popover/tippy_utils';
 export default {
@@ -98,7 +99,7 @@ export default {
       type: String,
       default: 'top',
       validator (arrowDirection) {
-        return TOOLTIP_TIPPY_DIRECTIONS.includes(arrowDirection);
+        return TOOLTIP_DIRECTIONS.includes(arrowDirection);
       },
 
     },
@@ -238,6 +239,7 @@ export default {
         popperOptions: getPopperOptions({
           boundary: this.flipBoundary,
           flip: this.flip,
+          hasHideModifierEnabled: true,
           onChangePlacement: (placement) => {
             this.placement = placement;
           },
@@ -265,7 +267,7 @@ export default {
 
   mounted () {
     this.placement = this.arrowDirection;
-    this.tip = createTippy(this.$refs.anchor, this.initOptions());
+    this.tip = createTippy(getAnchor(this.$refs.anchor, this.tabIndex), this.initOptions());
     this.updateShow();
   },
 
@@ -322,7 +324,6 @@ export default {
     initOptions () {
       return {
         contentElement: this.$refs.content.$el,
-        tabIndex: this.tabIndex,
         allowHTML: true,
         placement: this.placement,
         zIndex: this.zIndex,

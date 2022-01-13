@@ -2,19 +2,28 @@ import tippy from 'tippy.js';
 import { getArrowDetected, hideOnEsc } from '../tooltip/modifiers';
 import { findFirstFocusableNode } from '../utils';
 
-export const createTippy = (anchorWrapper, options) => {
-  const anchorElement = getAnchor(anchorWrapper, options.tabIndex);
+export const BASE_TIPPY_DIRECTIONS = [
+  'bottom', 'bottom-start', 'bottom-end',
+  'right', 'right-start', 'right-end',
+  'left', 'left-start', 'left-end',
+  'top', 'top-start', 'top-end',
+];
+
+export const createTippy = (anchorElement, options) => {
+  const { contentElement } = { ...options };
+  delete options.contentElement;
   return tippy(anchorElement, {
     ...options,
-    render: () => getContentWrapper(options.contentElement),
+    render: () => getContentWrapper(contentElement),
     plugins: [hideOnEsc],
   });
 };
 
 export const getPopperOptions = ({
   boundary = 'clippingParents',
-  flip = ['right', 'bottom'],
+  flip = [],
   onChangePlacement = () => {},
+  hasHideModifierEnabled = false,
 } = {}) => {
   return {
     modifiers: [
@@ -24,6 +33,10 @@ export const getPopperOptions = ({
           fallbackPlacements: flip,
           boundary,
         },
+      },
+      {
+        name: 'hide',
+        enabled: hasHideModifierEnabled,
       },
       getArrowDetected(({ state }) => {
         onChangePlacement(state.placement);
@@ -41,7 +54,7 @@ const createAnchor = (anchorWrapper, tabIndex) => {
   return span;
 };
 
-const getAnchor = (anchorWrapper, tabIndex = '0') => {
+export const getAnchor = (anchorWrapper, tabIndex = '0') => {
   const anchor = anchorWrapper.children[0];
   if (!anchor) return createAnchor(anchorWrapper);
   if (!findFirstFocusableNode(anchor)) {

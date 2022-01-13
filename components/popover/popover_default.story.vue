@@ -2,10 +2,9 @@
   <dt-popover
     :id="id"
     :open="isOpen"
-    :fixed-alignment="fixedAlignment"
-    :fixed-vertical-alignment="fixedVerticalAlignment"
+    :placement="placement"
     :content-class="contentClass"
-    :has-caret="hasCaret"
+    :fallback-placements="fallbackPlacements"
     :padding="padding"
     :hide-on-click="hideOnClick"
     :role="role"
