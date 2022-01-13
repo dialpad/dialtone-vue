@@ -174,7 +174,7 @@
           </p>
         </div>
       </template>
-      <template #header-actions>
+      <template #headerActions>
         <dt-button
           circle
           class="d-p6 d-bc-transparent"

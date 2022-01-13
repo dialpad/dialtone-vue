@@ -60,7 +60,7 @@
     <template
       #title
     >
-      <slot name="title" />
+      <slot name="titleSlot" />
     </template>
   </dt-popover>
 </template>

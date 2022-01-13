@@ -28,7 +28,7 @@
       data-qa="dt-popover-title"
       class="d-to-ellipsis d-pt6"
     >
-      <slot name="title">
+      <slot name="titleSlot">
         {{ title }}
       </slot>
     </div>
@@ -36,7 +36,7 @@
       v-if="areHeaderButtonsVisible"
       class="d-pl6 d-d-flex d-ws-nowrap"
     >
-      <slot name="header-actions" />
+      <slot name="headerActions" />
       <dt-button
         v-if="showCloseButton"
         ref="popover__close-button"
@@ -114,11 +114,11 @@ export default {
 
   computed: {
     isTitleVisible () {
-      return this.$slots.title || this.title !== null;
+      return this.$slots.titleSlot || this.title !== null;
     },
 
     areHeaderButtonsVisible () {
-      return this.$slots['header-actions'] || this.showCloseButton;
+      return this.$slots.headerActions || this.showCloseButton;
     },
   },
 

@@ -50,7 +50,6 @@
       :transition="transition"
       :show="showPopover"
       :class="[
-        'd-of-auto',
         'd-bgc-white',
         'd-bs-card',
         'd-bar8',
@@ -60,7 +59,8 @@
         `dt-popover__content--valign-${verticalAlignment}`,
         {
           'd-d-grid d-of-hidden dt-popover-box__grid': fixedHeader,
-          'd-wmx-unset': !maxWidth,
+          'd-of-auto': Boolean(maxHeight),
+          'd-wmx-unset': !Boolean(maxWidth),
         },
       ]"
       :style="{
@@ -100,13 +100,13 @@
         :has-box-shadow="hasBoxShadow"
         @close="closePopover"
       >
-        <template #title>
-          <!-- @slot Popover header title. -->
-          <slot name="title" />
+        <template #titleSlot>
+          <!-- @slot slot for popover header title, defaults to title prop -->
+          <slot name="titleSlot" />
         </template>
-        <template #header-actions>
+        <template #headerActions>
           <!-- @slot Additional actions near close button. Should be used only for secondary and tertiary buttons -->
-          <slot name="header-actions" />
+          <slot name="headerActions" />
         </template>
       </popover-header>
       <!-- @slot content that is displayed in the popover when it is open. -->
@@ -277,8 +277,8 @@ export default {
     },
 
     /**
-     * Width configuration for the popover content.
-     * When its value is 'anchor', the popover content will be set the same width with anchor element onShow popover event
+     * Width configuration for the popover content. When its value is 'anchor',
+     * the popover content will be set the same width with anchor element onShow popover event
      */
     contentWidth: {
       type: String,
@@ -535,11 +535,11 @@ export default {
     },
 
     isTitleVisible () {
-      return this.$slots.title || this.title !== null;
+      return this.$slots.titleSlot || this.title !== null;
     },
 
     areHeaderButtonsVisible () {
-      return this.$slots['header-actions'];
+      return this.$slots.headerActions;
     },
   },
 
