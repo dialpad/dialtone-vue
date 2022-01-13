@@ -1,12 +1,12 @@
 <template>
   <dt-popover
+    ref="popover"
     :content-width="contentWidth"
     :open="open"
     :has-caret="false"
     :fixed-vertical-alignment="fixedVerticalAlignment"
     :fixed-alignment="fixedAlignment"
     :padding="padding"
-    ref="popover"
     role="menu"
     v-on="$listeners"
     @update:open="setInitialHighlightIndex"
@@ -22,7 +22,7 @@
       <slot
         name="anchor"
         v-bind="props"
-      ></slot>
+      />
     </template>
     <template #content>
       <div
@@ -59,6 +59,7 @@ export default {
   mixins: [
     KeyboardNavigation({
       indexKey: 'highlightIndex',
+      idKey: 'highlightId',
       listElementKey: 'listRef',
       listItemRole: 'menuitem',
       afterHighlightMethod: 'afterHighlight',
@@ -184,8 +185,6 @@ export default {
     getItemProps () {
       return (i) => ({
         role: 'menuitem',
-        // The ids have to be generated here since we use them for activeItemId.
-        id: this.getItemId(i),
       });
     },
 

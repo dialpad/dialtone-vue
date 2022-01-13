@@ -1,17 +1,17 @@
 <template>
   <div class="d-d-flex">
     <dt-dropdown
-      class="d-mr8"
       v-for="(variant, i) in variants.fixedAlignment"
       :key="i"
+      class="d-mr8"
       :open="isOpen[variant]"
       :fixed-alignment="variant"
       :content-width="contentWidth"
       :padding="padding"
+      :navigation-type="navigationType"
       @highlight="onHighlight"
       @select="onSelect"
       @escape="onDropdownEscape($event, variant)"
-      :navigation-type="navigationType"
       @update:open="updateOpen($event, variant)"
     >
       <template #anchor>
@@ -21,7 +21,7 @@
           {{ variant }} aligned dropdown
         </dt-button>
       </template>
-      <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
+      <template #list="{ listProps, getItemProps, setHighlightIndex }">
         <ul
           v-bind="listProps"
           class="d-p0 d-w100p"
@@ -30,11 +30,10 @@
             v-for="(item, i) in items"
             v-bind="getItemProps(i)"
             :key="item.id"
-            :is-highlighted="activeItemIndex === i"
             :set-highlight="() => setHighlightIndex(i)"
             :navigation-type="navigationType"
-            @click="onDropdownSelect($event, variant, i)"
             :focusable="true"
+            @click="onDropdownSelect($event, variant, i)"
           >
             {{ item.name }}
           </dt-list-item>
@@ -61,6 +60,7 @@ export default {
         center: false,
         right: false,
       },
+
       variants: {
         fixedAlignment: ['left', 'center', 'right'],
       },

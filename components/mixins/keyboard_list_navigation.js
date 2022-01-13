@@ -17,6 +17,7 @@ export default ({
   listItemRole = 'option',
   // Key of the data prop that will be added to the component.
   indexKey = 'highlightIndex',
+  idKey = 'highlightId',
   // Key of the computed prop that references the list element.
   listElementKey = 'listRef',
   // Optional, Key of the computed prop that references the currently active item element.
@@ -40,8 +41,15 @@ export default ({
   data () {
     return {
       [indexKey]: 0,
+      [idKey]: '',
       scrollToOnHighlight: scrollToOnHighlight,
       focusOnKeyboardNavigation: focusOnKeyboardNavigation,
+    };
+  },
+
+  provide () {
+    return {
+      highlightId: () => this[idKey],
     };
   },
 
@@ -116,10 +124,17 @@ export default ({
 
     async setHighlightIndex (num) {
       this[indexKey] = num;
+      this[idKey] = this._getItemId(num);
       if (this._itemsLength() && afterHighlightMethod) {
         await this.$nextTick();
         this[afterHighlightMethod](num);
       }
+    },
+
+    _getItemId (index) {
+      const listElement = this._getListElement();
+
+      return listElement.querySelectorAll(`[role="${listItemRole}"]`)[index].id;
     },
 
     scrollActiveItemIntoViewIfNeeded () {

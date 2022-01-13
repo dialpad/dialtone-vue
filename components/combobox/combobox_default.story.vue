@@ -13,7 +13,7 @@
         placeholder="Type to show the items"
       />
     </template>
-    <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
+    <template #list="{ listProps, getItemProps, setHighlightIndex }">
       <ol
         v-bind="listProps"
         class="d-p0 d-mt8 d-hmx332 d-of-y-auto"
@@ -22,7 +22,6 @@
           v-for="(item, i) in displayItems"
           v-bind="getItemProps(i)"
           :key="item.id"
-          :is-highlighted="activeItemIndex === i"
           :set-highlight="() => setHighlightIndex(i)"
           navigation-type="arrow-keys"
           @click="onComboboxSelect(i)"

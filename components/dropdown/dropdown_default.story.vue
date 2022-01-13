@@ -5,17 +5,17 @@
     :fixed-alignment="fixedAlignment"
     :content-width="contentWidth"
     :padding="padding"
+    :navigation-type="navigationType"
     @highlight="onHighlight"
     @select="onDropdownSelect"
     @escape="onDropdownEscape"
-    :navigation-type="navigationType"
     @update:open="updateOpen"
   >
     <template #anchor="{ attrs }">
       <div
         v-if="anchor"
-        v-html="anchor">
-      </div>
+        v-html="anchor"
+      />
       <dt-button
         v-else
         v-bind="attrs"
@@ -24,11 +24,11 @@
         Click to open
       </dt-button>
     </template>
-    <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
+    <template #list="{ listProps, getItemProps, setHighlightIndex }">
       <div
         v-if="list"
         v-html="list"
-      ></div>
+      />
       <ul
         v-else
         v-bind="listProps"
@@ -38,7 +38,6 @@
           v-for="(item, i) in items"
           v-bind="getItemProps(i)"
           :key="item.id"
-          :is-highlighted="navigationType === LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS && activeItemIndex === i"
           :set-highlight="() => setHighlightIndex(i)"
           :navigation-type="navigationType"
           @click="onDropdownSelect(i)"

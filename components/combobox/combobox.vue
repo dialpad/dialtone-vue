@@ -48,6 +48,7 @@ export default {
   mixins: [
     KeyboardNavigation({
       indexKey: 'highlightIndex',
+      idKey: 'highlightId',
       listElementKey: 'listRef',
       afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
@@ -130,8 +131,6 @@ export default {
     getItemProps () {
       return (i) => ({
         role: 'option',
-        // The ids have to be generated here since we use them for activeItemId.
-        id: this.getItemId(i),
       });
     },
 

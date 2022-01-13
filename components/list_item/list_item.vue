@@ -44,6 +44,8 @@ export default {
     DtDefaultListItem,
   },
 
+  inject: ['highlightId'],
+
   props: {
     /**
      * Id for the item.
@@ -98,13 +100,6 @@ export default {
       default: null,
     },
 
-    /**
-     * For keyboard navigation, whether or not this item is currently highlighted.
-     */
-    isHighlighted: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   emits: ['click'],
@@ -117,6 +112,13 @@ export default {
         default:
           return null;
       }
+    },
+
+    /**
+     * For keyboard navigation, whether or not this item is currently highlighted.
+     */
+    isHighlighted () {
+      return this.id === this.highlightId();
     },
 
     isFocusable () {
