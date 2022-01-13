@@ -2,7 +2,7 @@
   <component
     :is="elementType"
     ref="popover"
-    data-qa="dt-popover-container"
+    v-on="$listeners"
   >
     <dt-lazy-show
       v-if="modal"
@@ -67,12 +67,13 @@
         'max-width': maxWidth,
       }"
       tabindex="-1"
+      v-on="$listeners"
       appear
       @keydown="onKeydown"
       @after-leave="onLeave"
       @enter="isOpeningPopover = true"
       @leave="isOpeningPopover = false"
-      @after-enter="afterEnter"
+      @after-enter="onOpen"
     >
       <div
         v-if="hasCaret"
@@ -514,6 +515,14 @@ export default {
       return this.getPlacement(this.fixedVerticalAlignment, this.fixedAlignment);
     },
 
+    isDialog () {
+      return this.role === 'dialog';
+    },
+
+    isMenu () {
+      return this.role === 'menu';
+    },
+
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
@@ -616,10 +625,6 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
-    afterEnter () {
-      this.dialogFocusFirstElement(this.$refs.popover__content);
-    },
-
     onScrollContent ({ target }) {
       this.hasScrolled = target.scrollTop > 0;
     },
@@ -675,11 +680,16 @@ export default {
     onLeave () {
       this.isPreventHidePopover = true;
       if (this.focusAnchorOnClose && !this.closedByClickOutside) {
-        this.dialogFocusFirstElement(this.$refs.anchor);
+        this.focusFirstElementIfNeeded(this.$refs.anchor);
       }
       this.closedByClickOutside = false;
       this.tip.unmount();
       this.$emit('update:open', false);
+    },
+
+    onOpen () {
+      this.$emit('update:open', true);
+      this.focusFirstElementIfNeeded();
     },
 
     onHide () {
@@ -761,12 +771,14 @@ export default {
       this.popoverContentEl.style.width = `${this.anchorEl.clientWidth}px`;
     },
 
-    dialogFocusFirstElement (domEl) {
-      const focusableElements = this._getFocusableElements(domEl);
-      if (focusableElements.length !== 0) {
-        this.focusFirstElement(domEl);
-      } else if (this.showCloseButton) {
-        this.$refs.popover__header?.focusCloseButton();
+    focusFirstElementIfNeeded (domEl) {
+      if (this.isDialog || this.isMenu) {
+        const focusableElements = this._getFocusableElements(domEl);
+        if (focusableElements.length !== 0) {
+          this.focusFirstElement(domEl);
+        } else if (this.showCloseButton) {
+          this.$refs.popover__header?.focusCloseButton();
+        }
       }
     },
   },
