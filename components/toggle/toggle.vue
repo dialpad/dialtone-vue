@@ -98,6 +98,7 @@ export default {
 
 <style lang="less">
 @transition-speed: var(--td200);
+@easing-function: var(--ttf-in-out);
 
 .d-toggle {
   position: relative;
@@ -112,10 +113,10 @@ export default {
   border: 1px solid var(--black-200);
   background-color: var(--black-200);
   cursor: pointer;
-  transition: all @transition-speed cubic-bezier(0.35, 0, 0.25, 1);
+  transition: all @transition-speed @easing-function;
 
   &__inner {
-    color:#fff;
+    color: var(--white);
     font-size: 12px;
     position: absolute;
     left: 23px;
@@ -129,12 +130,12 @@ export default {
     left: 1px;
     top: 1px;
     border-radius: 50% 50%;
-    background-color: #fff;
+    background-color: var(--white);
     content: " ";
     cursor: pointer;
     transform: scale(1);
-    transition: left @transition-speed cubic-bezier(0.35, 0, 0.25, 1);
-    animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
+    transition: left @transition-speed @easing-function;
+    animation-timing-function: @easing-function;
     animation-duration: @transition-speed;
     animation-name: revertToNormalScale;
   }
