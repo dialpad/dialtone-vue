@@ -58,7 +58,7 @@
       </div>
     </template>
     <template
-      #title
+      #titleSlot
     >
       <slot name="titleSlot" />
     </template>
