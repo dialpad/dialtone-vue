@@ -76,20 +76,6 @@
       @leave="isOpeningPopover = false"
       @after-enter="onOpen"
     >
-      <!--      <div -->
-      <!--        v-if="hasCaret" -->
-      <!--        class=" -->
-      <!--          d-ps-absolute -->
-      <!--          dt-popover__caret -->
-      <!--          d-mtn2 -->
-      <!--          d-bt -->
-      <!--          d-bl -->
-      <!--          d-w4 -->
-      <!--          d-h4 -->
-      <!--          d-bgc-white -->
-      <!--          d-bc-transparent -->
-      <!--        " -->
-      <!--      /> -->
       <popover-header
         v-if="isHeaderVisible"
         ref="popover__header"
@@ -109,8 +95,6 @@
           <slot name="headerActions" />
         </template>
       </popover-header>
-      <!-- @slot content that is displayed in the popover when it is open. -->
-      <slot name="content" />
       <div
         ref="popover__content"
         data-qa="dt-popover-content"
@@ -256,15 +240,6 @@ export default {
       default: null,
       validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
     },
-
-    // /**
-    //  * Whether or not a carat (arrow) should be shown from the content pointing
-    //  * at the anchor.
-    //  */
-    // hasCaret: {
-    //   type: Boolean,
-    //   default: true,
-    // },
 
     /**
      * Determines should the anchor be focused after closing the popover
