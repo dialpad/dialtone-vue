@@ -6,14 +6,12 @@
       v-bind="labelChildProps"
       data-qa="d-toggle-label"
     >
-      <!-- @slot slot for Toggle Label -->
       <slot>{{ label }}</slot>
     </div>
     <button
       role="switch"
       type="button"
-      data-qa="d-toggle-button"
-      :aria-checked="internalChecked"
+      :aria-checked="internalChecked.toString()"
       :disabled="internalDisabled"
       :aria-disabled="internalDisabled"
       :class="['d-toggle', {
@@ -36,10 +34,7 @@
 </template>
 
 <script>
-import {
-  InputMixin,
-  CheckableMixin,
-} from '../mixins/input.js';
+import Vue from 'vue';
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import IconCheckMark from '@dialpad/dialtone/lib/dist/vue/icons/IconCheckmark';
 
@@ -52,11 +47,44 @@ export default {
     IconCheckMark,
   },
 
-  mixins: [InputMixin, CheckableMixin],
-
   inheritAttrs: false,
 
-  emits: ['click'],
+  props: {
+
+    label: {
+      type: String,
+      default: '',
+    },
+
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    checked: {
+      type: Boolean,
+      default: false,
+    },
+
+    labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    labelChildProps: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+
+  emits: ['change'],
+
+  data () {
+    return {
+      internalDisabled: this.disabled,
+      internalChecked: this.checked,
+    };
+  },
 
   computed: {
 
@@ -68,13 +96,18 @@ export default {
       return {
         // eslint-disable-next-line vue/no-deprecated-dollar-listeners-api
         ...this.$listeners,
-        /*
-         * Override input listener to as no-op. Prevents parent input listeners from being passed through onto the input
-         * element which will result in the hander being called twice (once on the input element and once by the emitted
-         * input event by the change listener).
-        */
-        click: event => this.updateToggleValue(event.target),
+        click: _ => this.toggleCheckedValue(),
       };
+    },
+  },
+
+  watch: {
+    disabled (newDisabled) {
+      this.internalDisabled = newDisabled;
+    },
+
+    checked (newChecked) {
+      this.internalChecked = newChecked;
     },
   },
 
@@ -83,13 +116,22 @@ export default {
   },
 
   methods: {
-    updateToggleValue () {
+    toggleCheckedValue () {
       this.internalChecked = !this.internalChecked;
-      this.$emit('click', this.internalChecked);
+      this.$emit('change', this.internalChecked);
     },
 
     runValidations () {
       this.validateInputLabels(this.hasLabel, this.$attrs['aria-label']);
+    },
+
+    validateInputLabels (hasLabelOrLabel, ariaLabel) {
+      if (!hasLabelOrLabel && !ariaLabel) {
+        Vue.util.warn(
+          'You must provide an aria-label when there is no label passed',
+          this,
+        );
+      }
     },
   },
 
@@ -131,6 +173,7 @@ export default {
     top: 1px;
     border-radius: 50% 50%;
     background-color: var(--white);
+    box-shadow: 0 1px 2px 0 rgb(34 36 38 / 15%), 0 0 0 1px rgb(34 36 38 / 15%) inset;
     content: " ";
     cursor: pointer;
     transform: scale(1);

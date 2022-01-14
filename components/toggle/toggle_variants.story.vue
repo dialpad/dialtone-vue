@@ -1,21 +1,21 @@
 <template>
   <div id="components-toggle--variants-container">
-    <!-- Default -->
+    <!-- Unchecked Initially -->
     <dt-toggle
       name="Value"
       class="d-mt6"
       label-class="d-mr6"
-      label="Default"
+      label="Unchecked Initial"
     />
-
+    <!-- Checked Initially -->
     <dt-toggle
       name="Value"
       class="d-mt6"
       label-class="d-mr6"
-      label="Checked"
+      label="Checked Initial"
       :checked="true"
     />
-
+    <!-- Checked Disabled -->
     <dt-toggle
       name="Value"
       class="d-mt6"
@@ -24,7 +24,7 @@
       :checked="true"
       :disabled="true"
     />
-
+    <!-- Unchecked Disabled -->
     <dt-toggle
       name="Value"
       class="d-mt6"
@@ -32,19 +32,14 @@
       label="Disabled Unchecked"
       :disabled="true"
     />
-    <!-- Default -->
   </div>
 </template>
 
 <script>
 import DtToggle from './toggle';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
 
 export default {
   name: 'ToggleVariants',
   components: { DtToggle },
-  created () {
-    this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
-  },
 };
 </script>
