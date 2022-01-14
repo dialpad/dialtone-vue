@@ -55,8 +55,6 @@
         'd-bar8',
         'd-bc-black-100',
         'dt-popover-box',
-        `dt-popover__content--align-${horizontalAlignment}`,
-        `dt-popover__content--valign-${verticalAlignment}`,
         {
           'd-d-grid d-of-hidden dt-popover-box__grid': fixedHeader,
           'd-of-auto': Boolean(maxHeight),
