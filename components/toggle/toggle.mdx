@@ -1,0 +1,78 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+
+# Toggle
+
+<Subtitle>
+  Toggles (aka "Switches") are control elements that allow the user to make a binary on/off selection.
+</Subtitle>
+
+## Base Style
+
+Toggles are typically paired with a label which identifies the option. In addition, there are times when they can be
+used with a description which describes the option.
+
+<Canvas>
+  <Story id="components-toggle--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="components-toggle--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtToggle } from '@dialpad/dialtone-vue';
+```
+
+### With Label Prop
+
+```jsx
+<dt-toggle
+  label="My Label"
+/>
+```
+
+### With Label and Checked set to true
+
+```jsx
+<dt-toggle
+  label="My Label"
+  :checked="false
+/>
+```
+
+### With Slotted Label
+
+```jsx
+<dt-toggle
+>
+  My Label
+</dt-toggle>
+```
+
+### Checked
+
+```jsx
+<dt-toggle
+  label="My Label"
+  checked
+/>
+```
+
+### Disabled
+
+```jsx
+<dt-toggle
+  label="My Label"
+  disabled
+/>
+```

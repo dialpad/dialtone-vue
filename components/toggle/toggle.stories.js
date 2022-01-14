@@ -1,21 +1,14 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
-import RadioDefault from './toggle_default.story.vue';
-import RadioVariants from './toggle_variants.story.vue';
-import RadioMdx from './toggle.mdx';
-import DtRadio from './toggle';
+import ToggleDefault from './toggle_default.story.vue';
+import ToggleVariants from './toggle_variants.story.vue';
+import ToggleMdx from './toggle.mdx';
+import DtToggle from './toggle';
 
 // Default Prop Values
 export const argsData = {
-  value: 'On',
-  name: 'Toggle Name',
   label: 'Toggle',
-  description: '',
-  validationState: '',
-  onInput: action('input'),
-  onFocusIn: action('focusin'),
-  onFocusOut: action('focusout'),
+  onChange: action('change'),
 };
 
 // Prop Controls
@@ -29,33 +22,10 @@ export const argTypesData = {
       },
     },
   },
-  descriptionSlot: {
-    name: 'description',
-    description: 'slot for Radio Description',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'VNode',
-      },
-    },
-  },
 
   // Props
-  description: {
-    description: 'Describes the radio option',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-    },
-    control: {
-      type: 'text',
-    },
-  },
   checked: {
-    description: 'Used to set the initial state of the radio',
+    description: 'Used to set the initial state of the toggle',
     control: 'boolean',
     table: {
       category: 'props',
@@ -64,64 +34,31 @@ export const argTypesData = {
       },
     },
   },
-  validationState: {
+
+  disabled: {
+    description: 'Used to disabled the toggle',
+    control: 'boolean',
     table: {
+      category: 'props',
       type: {
-        summary: 'string',
+        summary: 'boolean',
       },
     },
-    control: {
-      type: 'select',
-      options: ['', ...Object.values(VALIDATION_MESSAGE_TYPES)],
-    },
   },
+
   labelChildProps: {
     control: null,
   },
-  descriptionChildProps: {
-    control: null,
-  },
-
-  // Directives
-  'v-model': {
-    description: 'Supported by this component',
-    control: null,
-    table: {
-      category: 'directives',
-    },
-  },
 
   // Action Event Handlers
-  onInput: {
-    table: {
-      disable: true,
-    },
-  },
-  onFocusIn: {
-    table: {
-      disable: true,
-    },
-  },
-  onFocusOut: {
+  onChange: {
     table: {
       disable: true,
     },
   },
 
-  input: {
-    description: 'Native input event',
-    table: {
-      type: { summary: 'event' },
-    },
-  },
-  focusin: {
-    description: 'Native input focusin event',
-    table: {
-      type: { summary: 'event' },
-    },
-  },
-  focusout: {
-    description: 'Native input focusout event',
+  change: {
+    description: 'Toggle Change event',
     table: {
       type: { summary: 'event' },
     },
@@ -131,7 +68,7 @@ export const argTypesData = {
 // Story Collection
 export default {
   title: 'Components/Toggle',
-  component: DtRadio,
+  component: DtToggle,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
@@ -140,14 +77,14 @@ export default {
       sort: 'requiredFirst',
     },
     docs: {
-      page: RadioMdx,
+      page: ToggleMdx,
     },
   },
 };
 
 // Radio Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, RadioDefault);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, RadioVariants);
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ToggleDefault);
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ToggleVariants);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
