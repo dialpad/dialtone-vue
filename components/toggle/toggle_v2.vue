@@ -4,7 +4,7 @@
       v-if="hasLabel"
       :class="labelClass"
       v-bind="labelChildProps"
-      data-qa="d-toggle-label"
+      data-qa="d-toggle-2-label"
     >
       <slot>{{ label }}</slot>
     </div>
@@ -14,14 +14,14 @@
       :aria-checked="internalChecked.toString()"
       :disabled="internalDisabled"
       :aria-disabled="internalDisabled"
-      :class="['d-toggle', {
-        'd-toggle--checked': internalChecked,
-        'd-toggle--disabled': internalDisabled,
+      :class="['d-toggle-2', {
+        'd-toggle-2--checked': internalChecked,
+        'd-toggle-2--disabled': internalDisabled,
       }]"
       v-bind="$attrs"
       v-on="inputListeners"
     >
-      <span class="d-toggle__inner">
+      <span class="d-toggle-2__inner">
         <icon-close
           v-if="!internalChecked"
         />
@@ -40,7 +40,7 @@ import IconCheckMark from '@dialpad/dialtone/lib/dist/vue/icons/IconCheckmark';
 
 export default {
 
-  name: 'DtToggle',
+  name: 'DtToggleNew',
 
   components: {
     IconClose,
@@ -142,7 +142,7 @@ export default {
 @transition-speed: var(--td200);
 @easing-function: var(--ttf-in-out);
 
-.d-toggle {
+.d-toggle-2 {
   position: relative;
   display: inline-block;
   box-sizing: border-box;
@@ -179,6 +179,10 @@ export default {
     transition: left @transition-speed @easing-function, transform @transition-speed @easing-function;
   }
 
+  &:hover:after {
+    transform: scale(1.1);
+  }
+
   &:focus {
     box-shadow: var(--bs-focus-ring);
     outline: none;
@@ -188,7 +192,7 @@ export default {
     border: 1px solid var(--primary-color);
     background-color: var(--primary-color);
 
-    .d-toggle__inner {
+    .d-toggle-2__inner {
       left: 4px;
     }
 
