@@ -8,7 +8,6 @@ export const POPOVER_PADDING_CLASSES = {
 };
 export const POPOVER_ROLES = ['dialog', 'menu', 'listbox', 'tree', 'grid'];
 export const POPOVER_CONTENT_WIDTHS = [null, 'anchor'];
-
 export const POPOVER_DIRECTIONS = [
   ...BASE_TIPPY_DIRECTIONS,
 ];

@@ -1,6 +1,7 @@
 <template>
   <dt-popover
     :id="id"
+    :key="uniqueKey"
     :open="isOpen"
     :placement="placement"
     :content-class="contentClass"
@@ -21,6 +22,11 @@
     :trigger="trigger"
     :modal="modal"
     :content-width="contentWidth"
+    :show-close-button="showCloseButton"
+    :title="title"
+    :fixed-header="fixedHeader"
+    :max-height="maxHeight"
+    :max-width="maxWidth"
     width-content="anchor"
     @update:open="updateOpen"
   >
@@ -33,13 +39,34 @@
       </dt-button>
     </template>
     <template #content>
-      <p class="d-fs14 d-m0">
+      <div class="d-fs14 d-m0">
         <span
           v-if="content"
           v-html="content"
         />
-        <span v-else>I will be displayed in the popover!</span>
-      </p>
+        <template v-else>
+          <p class="d-mb4">
+            I will be displayed in the popover!
+          </p>
+          <dt-button
+            @click="isOpen = !isOpen"
+          >
+            Click to close
+          </dt-button>
+        </template>
+      </div>
+    </template>
+    <template
+      v-if="titleSlot"
+      #title
+    >
+      <span v-html="titleSlot" />
+    </template>
+    <template
+      v-if="headerActions"
+      #headerActions
+    >
+      <span v-html="headerActions" />
     </template>
   </dt-popover>
 </template>
@@ -47,6 +74,7 @@
 <script>
 import { DtPopover } from './';
 import { DtButton } from '../button';
+import { getUniqueString } from '../utils';
 
 export default {
   name: 'PopoverDefaultStory',
@@ -66,6 +94,12 @@ export default {
     return {
       isOpen: this.open || false,
     };
+  },
+
+  computed: {
+    uniqueKey () {
+      return getUniqueString(this.title);
+    },
   },
 
   watch: {
