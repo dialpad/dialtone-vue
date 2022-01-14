@@ -70,14 +70,14 @@ const argTypesData = {
     },
   },
   placement: {
-    defaultValue: 'bottom',
+    defaultValue: 'bottom-end',
     control: {
       type: 'select',
       options: POPOVER_DIRECTIONS,
     },
     table: {
       defaultValue: {
-        summary: 'null',
+        summary: 'bottom-end',
       },
     },
   },
@@ -160,7 +160,7 @@ const TemplateVariants = (args, { argTypes }) => createTemplateFromVueFile(args,
 export const Default = Template.bind({});
 Default.args = {};
 Default.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
+  template: `<div class="d-d-flex d-jc-center d-ai-center d-h332"><story /></div>`,
 })];
 Default.parameters = {
   docs: {

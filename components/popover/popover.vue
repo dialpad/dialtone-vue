@@ -373,7 +373,7 @@ export default {
      * */
     fallbackPlacements: {
       type: Array,
-      default: () => ['right', 'top'],
+      default: () => ['left-end', 'top-end'],
     },
 
     /**
@@ -381,7 +381,7 @@ export default {
      */
     placement: {
       type: String,
-      default: 'bottom',
+      default: 'bottom-end',
     },
 
     /**

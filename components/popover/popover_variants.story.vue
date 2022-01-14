@@ -2,8 +2,8 @@
   <div class="d-d-flex d-fw-wrap d-w100p d-flg12 d-fl-col4">
     <dt-popover
       :open="openAlignmentLeft"
-      fixed-alignment="left"
       width-content="anchor"
+      placement="bottom-start"
       class="d-mr12"
       @update:open="openAlignmentLeft = $event"
     >
@@ -22,6 +22,9 @@
             v-html="content"
           />
           <div v-else>
+            <p class="d-mb4">
+              I will be displayed in the popover!
+            </p>
             <dt-button
               @click="openAlignmentLeft = !openAlignmentLeft"
             >
@@ -33,7 +36,6 @@
     </dt-popover>
     <dt-popover
       :open="openAlignmentRight"
-      fixed-alignment="right"
       width-content="anchor"
       class="d-mr12"
       @update:open="openAlignmentRight = $event"
@@ -53,6 +55,9 @@
             v-html="content"
           />
           <div v-else>
+            <p class="d-mb4">
+              I will be displayed in the popover!
+            </p>
             <dt-button
               @click="openAlignmentRight = !openAlignmentRight"
             >
@@ -65,7 +70,6 @@
     <dt-popover
       :open="openPopoverWithNoPadding"
       padding="none"
-      fixed-alignment="right"
       width-content="anchor"
       class="d-mr12"
       @update:open="openPopoverWithNoPadding = $event"
@@ -97,7 +101,6 @@
     <dt-popover
       :open="openWithOverlay"
       :modal="true"
-      fixed-alignment="right"
       width-content="anchor"
       class="d-mr12"
       @update:open="openWithOverlay = $event"
@@ -117,6 +120,9 @@
             v-html="content"
           />
           <div v-else>
+            <p class="d-mb4">
+              I will be displayed in the popover!
+            </p>
             <dt-button
               @click="openWithOverlay = !openWithOverlay"
             >
@@ -130,6 +136,7 @@
       :open="openPopoverWithHeader"
       :show-close-button="true"
       :fixed-header="isHeaderFixed"
+      placement="bottom-start"
       title="Potential Title"
       content-class="d-pl12 d-pr16"
       class="d-mr12"
@@ -150,24 +157,18 @@
       </template>
       <template #content>
         <div class="d-fs14 d-m0">
-          <div>
+          <div class="d-mb4">
             <dt-button
               @click="isHeaderFixed = !isHeaderFixed"
             >
               Click to make header {{ isHeaderFixed ? "not fixed" : "fixed" }}
             </dt-button>
           </div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
-            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-            obcaecati quibusdam repudiandae.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
-            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-            obcaecati quibusdam repudiandae.
-          </p>
-          <p>
+          <p
+            v-for="index in 3"
+            :key="index"
+            class="d-mb4"
+          >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
             maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
             obcaecati quibusdam repudiandae.
