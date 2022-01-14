@@ -38,9 +38,6 @@ const argTypesData = {
       type: {
         summary: 'VNode',
       },
-      defaultValue: {
-        summary: 'null',
-      },
     },
   },
   headerActions: {
