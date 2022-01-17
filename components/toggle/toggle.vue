@@ -155,7 +155,6 @@ export default {
   border: 1px solid var(--black-200);
   background-color: var(--black-200);
   cursor: pointer;
-  transition: all @transition-speed @easing-function;
 
   &__inner {
     color: var(--white);
@@ -176,7 +175,8 @@ export default {
     content: " ";
     cursor: pointer;
     transform: scale(1);
-    transition: left @transition-speed @easing-function, transform @transition-speed @easing-function;
+    transition: all @transition-speed @easing-function;
+    transition-property: left, transform;
   }
 
   &:focus {
