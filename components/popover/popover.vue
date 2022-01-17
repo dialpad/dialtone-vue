@@ -542,7 +542,7 @@ export default {
 
     onOpen () {
       this.$emit('update:open', true);
-      this.focusFirstElementIfNeeded();
+      this.focusFirstElementIfNeeded(this.$refs.content.$el);
     },
 
     onHide () {
