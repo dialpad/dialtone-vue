@@ -188,6 +188,11 @@ export default {
     outline: none;
   }
 
+  &:focus:not(:focus-visible) {
+    outline: 0;
+    box-shadow: none;
+  }
+
   &--checked {
     border: 1px solid var(--primary-color);
     background-color: var(--primary-color);
