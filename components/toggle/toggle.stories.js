@@ -10,6 +10,7 @@ import DtToggle from './toggle';
 export const argsData = {
   label: 'Toggle',
   onChange: action('change'),
+  labelClass: 'd-mr6',
 };
 
 // Prop Controls
@@ -66,7 +67,7 @@ export const argTypesData = {
   },
 };
 
-// Story Collection
+// Default
 export default {
   title: 'Components/Toggle',
   component: DtToggle,
