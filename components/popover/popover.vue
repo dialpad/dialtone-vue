@@ -625,7 +625,7 @@ export default {
     },
 
     focusFirstElementIfNeeded (e) {
-      if (this.isDialog || this.isMenu) {
+      if (this.isDialog) {
         this.focusFirstElement(e);
       }
     },
