@@ -21,23 +21,16 @@
           {{ variant }} aligned dropdown
         </dt-button>
       </template>
-      <template #list="{ listProps, getItemProps, setHighlightIndex }">
-        <ul
-          v-bind="listProps"
-          class="d-p0 d-w100p"
+      <template #list>
+        <dt-list-item
+          v-for="(item, i) in items"
+          role="menuitem"
+          :key="item.id"
+          :navigation-type="navigationType"
+          @click="onDropdownSelect($event, variant, i)"
         >
-          <dt-list-item
-            v-for="(item, i) in items"
-            v-bind="getItemProps(i)"
-            :key="item.id"
-            :set-highlight="() => setHighlightIndex(i)"
-            :navigation-type="navigationType"
-            :focusable="true"
-            @click="onDropdownSelect($event, variant, i)"
-          >
-            {{ item.name }}
-          </dt-list-item>
-        </ul>
+          {{ item.name }}
+        </dt-list-item>
       </template>
     </dt-dropdown>
   </div>

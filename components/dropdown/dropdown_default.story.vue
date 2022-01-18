@@ -24,26 +24,21 @@
         Click to open
       </dt-button>
     </template>
-    <template #list="{ listProps, getItemProps }">
+    <template #list>
       <div
         v-if="list"
         v-html="list"
       />
-      <ul
+      <dt-list-item
         v-else
-        v-bind="listProps"
-        class="d-p0"
+        v-for="(item, i) in items"
+        role="menuitem"
+        :key="item.id"
+        :navigation-type="navigationType"
+        @click="onDropdownSelect(i)"
       >
-        <dt-list-item
-          v-for="(item, i) in items"
-          v-bind="getItemProps(i)"
-          :key="item.id"
-          :navigation-type="navigationType"
-          @click="onDropdownSelect(i)"
-        >
-          {{ item.name }}
-        </dt-list-item>
-      </ul>
+        {{ item.name }}
+      </dt-list-item>
     </template>
   </dt-dropdown>
 </template>

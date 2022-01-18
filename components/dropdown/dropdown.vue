@@ -27,18 +27,18 @@
       />
     </template>
     <template #content>
-      <div
+      <ul
+        :id="listId"
         ref="listWrapper"
+        class="d-p0 d-ps-relative"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
       >
         <!-- @slot Slot for the list component -->
         <slot
           name="list"
-          :list-props="listProps"
-          :get-item-props="getItemProps"
         />
-      </div>
+      </ul>
     </template>
   </dt-popover>
 </template>
@@ -167,24 +167,6 @@ export default {
   },
 
   computed: {
-    listProps () {
-      return {
-        id: this.listId,
-        // The list has to be positioned relatively so that the auto-scroll can
-        // calculate the correct offset for the list items.
-        class: 'd-ps-relative',
-      };
-    },
-
-    /*
-     * These props are wrapped in a function that expects that an index is passed.
-     */
-    getItemProps () {
-      return (i) => ({
-        role: 'menuitem',
-      });
-    },
-
     beginningOfListMethod () {
       return this.onBeginningOfList || this.jumpToEnd;
     },
