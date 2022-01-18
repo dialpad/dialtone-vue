@@ -8,7 +8,7 @@ import DtToggle from './toggle';
 
 // Default Prop Values
 export const argsData = {
-  label: 'Toggle',
+  label: 'Toggle Default',
   onChange: action('change'),
   labelClass: 'd-mr6',
 };

@@ -1,14 +1,16 @@
 <template>
   <div class="d-d-flex d-ai-center">
-    <div
+    <label
       v-if="hasLabel"
       :class="labelClass"
+      :for="id"
       v-bind="labelChildProps"
       data-qa="toggle-label"
     >
       <slot>{{ label }}</slot>
-    </div>
+    </label>
     <button
+      :id="id"
       role="switch"
       type="button"
       :aria-checked="internalChecked.toString()"
@@ -37,6 +39,7 @@
 import Vue from 'vue';
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import IconCheckMark from '@dialpad/dialtone/lib/dist/vue/icons/IconCheckmark';
+import utils from '../utils';
 
 export default {
 
@@ -50,6 +53,11 @@ export default {
   inheritAttrs: false,
 
   props: {
+
+    id: {
+      type: String,
+      default () { return utils.getUniqueString(); },
+    },
 
     label: {
       type: String,
