@@ -4,7 +4,7 @@
       v-if="hasLabel"
       :class="labelClass"
       v-bind="labelChildProps"
-      data-qa="d-toggle-label"
+      data-qa="toggle-label"
     >
       <slot>{{ label }}</slot>
     </div>
@@ -13,7 +13,7 @@
       type="button"
       :aria-checked="internalChecked.toString()"
       :disabled="internalDisabled"
-      :aria-disabled="internalDisabled"
+      :aria-disabled="internalDisabled.toString()"
       :class="['d-toggle', {
         'd-toggle--checked': internalChecked,
         'd-toggle--disabled': internalDisabled,
