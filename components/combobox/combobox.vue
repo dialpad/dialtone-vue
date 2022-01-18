@@ -144,7 +144,7 @@ export default {
     },
 
     activeItemEl () {
-      return document.getElementById(this.activeItemId);
+      return this.getListElement().querySelector('#' + this.highlightId);
     },
   },
 

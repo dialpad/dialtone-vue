@@ -176,7 +176,7 @@ export default {
     },
 
     activeItemEl () {
-      return document.getElementById(this.highlightId);
+      return this.getListElement().querySelector('#' + this.highlightId);
     },
   },
 
