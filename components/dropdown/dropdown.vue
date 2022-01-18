@@ -37,8 +37,6 @@
           name="list"
           :list-props="listProps"
           :get-item-props="getItemProps"
-          :active-item-index="highlightIndex"
-          :set-highlight-index="setHighlightIndex"
         />
       </div>
     </template>
