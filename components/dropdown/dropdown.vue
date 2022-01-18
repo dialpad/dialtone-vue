@@ -9,9 +9,10 @@
     :padding="padding"
     role="menu"
     v-on="$listeners"
-    @update:open="setInitialHighlightIndex"
+    @update:open="updateInitialHighlightIndex"
     @keydown.esc.stop="onEscapeKey"
     @keydown.enter="onEnterKey"
+    @keydown.space="onSpaceKey"
     @keydown.up.stop.prevent="onUpKeyPress"
     @keydown.down.prevent="onDownKeyPress"
     @keydown.home.stop.prevent="onHomeKey"
@@ -20,6 +21,7 @@
     <template #anchor="props">
       <!-- @slot Anchor element that activates the dropdown -->
       <slot
+        ref="anchor"
         name="anchor"
         v-bind="props"
       />
@@ -60,7 +62,7 @@ export default {
     KeyboardNavigation({
       indexKey: 'highlightIndex',
       idKey: 'highlightId',
-      listElementKey: 'listRef',
+      listElementKey: 'getListElement',
       listItemRole: 'menuitem',
       afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
@@ -162,6 +164,7 @@ export default {
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
+      shouldFocusFirstElement: false,
     };
   },
 
@@ -173,10 +176,6 @@ export default {
         // calculate the correct offset for the list items.
         class: 'd-ps-relative',
       };
-    },
-
-    listRef () {
-      return this.$refs.listWrapper;
     },
 
     /*
@@ -196,42 +195,56 @@ export default {
       return this.onEndOfList || this.jumpToBeginning;
     },
 
-    activeItemId () {
-      if (!this.open || this.highlightIndex < 0) {
-        return;
-      }
-      return this.getItemId(this.highlightIndex);
-    },
-
     activeItemEl () {
-      return document.getElementById(this.activeItemId);
+      return document.getElementById(this.highlightId);
     },
   },
 
   methods: {
-    setInitialHighlightIndex () {
-      if (this.open && this.navigationType !== this.LIST_ITEM_NAVIGATION_TYPES.NONE) {
-        // When the list's is shown, reset the highlight index.
-        this.setHighlightIndex(0);
-      }
+    getListElement () {
+      return this.$refs.listWrapper;
     },
 
     clearHighlightIndex () {
       this.setHighlightIndex(-1);
     },
 
-    getItemId (i) {
-      return `${this.listId}-item${i}`;
-    },
-
     afterHighlight () {
       this.$emit('highlight', this.highlightIndex);
+    },
+
+    updateInitialHighlightIndex (isOpen) {
+      if (isOpen) {
+        if (this.shouldFocusFirstElement) {
+          // Focus first item on keyboard navigation
+          this.$refs.popover.focusFirstElement(this.getListElement());
+
+          if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+            this.setHighlightIndex(0);
+          }
+        }
+      } else {
+        this.clearHighlightIndex();
+        if (this.shouldFocusFirstElement) {
+          this.setFocusFirstElement(false);
+          this.$refs.popover.focusFirstElement(this.$refs.anchor);
+        }
+      }
+    },
+
+    setFocusFirstElement (val) {
+      this.shouldFocusFirstElement = val;
+    },
+
+    onSpaceKey () {
+      this.setFocusFirstElement(true);
     },
 
     onEnterKey () {
       if (this.open && this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
       }
+      this.setFocusFirstElement(true);
     },
 
     onUpKeyPress () {

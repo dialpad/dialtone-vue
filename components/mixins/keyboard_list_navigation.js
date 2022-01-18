@@ -18,7 +18,7 @@ export default ({
   // Key of the data prop that will be added to the component.
   indexKey = 'highlightIndex',
   idKey = 'highlightId',
-  // Key of the computed prop that references the list element.
+  // Key of the method that references the list element.
   listElementKey = 'listRef',
   // Optional, Key of the computed prop that references the currently active item element.
   activeItemKey = '',
@@ -40,7 +40,7 @@ export default ({
 
   data () {
     return {
-      [indexKey]: 0,
+      [indexKey]: -1,
       [idKey]: '',
       scrollToOnHighlight: scrollToOnHighlight,
       focusOnKeyboardNavigation: focusOnKeyboardNavigation,
@@ -55,10 +55,10 @@ export default ({
 
   methods: {
     // Returns the list element
-    // this[listElement] can be a Vue component, in which case we need to target
+    // this[listElement]() can return a Vue component, in which case we need to target
     // the $el property, or it can simply be an html element.
     _getListElement () {
-      return this[listElementKey]?.$el || this[listElementKey];
+      return this[listElementKey]()?.$el || this[listElementKey]();
     },
 
     // Gets the length of all the items in the list, uses the listItemRole param to determine
@@ -67,7 +67,7 @@ export default ({
       const listElement = this._getListElement();
 
       if (!listElement) {
-        console.error(`listElementKey is required or the referenced element doesn't exist. Received ',
+        console.error(`listElementKey is required or the referenced element doesn't exist. Received 
           listElement: `, listElement);
 
         return 0;
@@ -133,8 +133,11 @@ export default ({
 
     _getItemId (index) {
       const listElement = this._getListElement();
+      if (!listElement) {
+        return;
+      }
 
-      return listElement.querySelectorAll(`[role="${listItemRole}"]`)[index].id;
+      return listElement.querySelectorAll(`[role="${listItemRole}"]`)[index]?.id;
     },
 
     scrollActiveItemIntoViewIfNeeded () {

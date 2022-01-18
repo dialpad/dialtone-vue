@@ -31,8 +31,6 @@
         name="list"
         :list-props="listProps"
         :get-item-props="getItemProps"
-        :active-item-index="highlightIndex"
-        :set-highlight-index="setHighlightIndex"
       />
     </div>
   </div>
@@ -49,7 +47,7 @@ export default {
     KeyboardNavigation({
       indexKey: 'highlightIndex',
       idKey: 'highlightId',
-      listElementKey: 'listRef',
+      listElementKey: 'getListElement',
       afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
@@ -121,10 +119,6 @@ export default {
       };
     },
 
-    listRef () {
-      return this.$refs.listWrapper;
-    },
-
     /*
      * These props are wrapped in a function that expects that an index is passed.
      */
@@ -146,7 +140,7 @@ export default {
       if (!this.showList || this.highlightIndex < 0) {
         return;
       }
-      return this.getItemId(this.highlightIndex);
+      return this.highlightId;
     },
 
     activeItemEl () {
@@ -157,17 +151,19 @@ export default {
   watch: {
     showList () {
       // When the list's visibility changes reset the highlight index.
-      this.setHighlightIndex(0);
+      this.$nextTick(function () {
+        this.setInitialHighlightIndex();
+      });
     },
   },
 
   methods: {
-    clearHighlightIndex () {
-      this.setHighlightIndex(-1);
+    getListElement () {
+      return this.$refs.listWrapper;
     },
 
-    getItemId (i) {
-      return `${this.listId}-item${i}`;
+    clearHighlightIndex () {
+      this.setHighlightIndex(-1);
     },
 
     afterHighlight () {
@@ -182,6 +178,13 @@ export default {
 
     onEscapeKey () {
       this.$emit('escape');
+    },
+
+    setInitialHighlightIndex () {
+      if (this.showList) {
+        // When the list's is shown, reset the highlight index.
+        this.setHighlightIndex(0);
+      }
     },
   },
 };

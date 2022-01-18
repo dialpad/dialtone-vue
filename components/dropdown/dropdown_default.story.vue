@@ -24,7 +24,7 @@
         Click to open
       </dt-button>
     </template>
-    <template #list="{ listProps, getItemProps, setHighlightIndex }">
+    <template #list="{ listProps, getItemProps }">
       <div
         v-if="list"
         v-html="list"
@@ -38,7 +38,6 @@
           v-for="(item, i) in items"
           v-bind="getItemProps(i)"
           :key="item.id"
-          :set-highlight="() => setHighlightIndex(i)"
           :navigation-type="navigationType"
           @click="onDropdownSelect(i)"
         >
