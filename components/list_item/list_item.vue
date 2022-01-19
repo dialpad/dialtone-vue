@@ -2,7 +2,7 @@
   <component
     :is="elementType"
     :id="id"
-    :class="['dt-list-item d-ls-none', {
+    :class="['dt-list-item d-ls-none focus-visible', {
       'dt-list-item--focusable': isFocusable,
       'dt-list-item--highlighted': isHighlighted,
     }]"
