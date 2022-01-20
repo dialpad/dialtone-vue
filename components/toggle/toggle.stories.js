@@ -17,6 +17,7 @@ export const argTypesData = {
   // Slots
   default: {
     control: 'text',
+    description: 'Used as a way to set either a label or a label element for the toggle',
     table: {
       type: {
         summary: 'VNode',
