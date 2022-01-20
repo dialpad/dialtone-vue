@@ -162,7 +162,7 @@ export default {
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
-      shouldFocusFirstElement: false,
+      openedWithKeyboard: false,
     };
   },
 
@@ -195,7 +195,8 @@ export default {
 
     updateInitialHighlightIndex (isOpen) {
       if (isOpen) {
-        if (this.shouldFocusFirstElement) {
+        // If the dropdown was opened with keyboard, focus first element
+        if (this.openedWithKeyboard) {
           // Focus first item on keyboard navigation
           this.$refs.popover.focusFirstElement(this.getListElement());
 
@@ -205,26 +206,24 @@ export default {
         }
       } else {
         this.clearHighlightIndex();
-        if (this.shouldFocusFirstElement) {
-          this.setFocusFirstElement(false);
+
+        if (this.openedWithKeyboard) {
+          // Return focus to anchor element since it had the focus
           this.$refs.popover.focusFirstElement(this.$refs.anchor);
+          this.openedWithKeyboard = false;
         }
       }
     },
 
-    setFocusFirstElement (val) {
-      this.shouldFocusFirstElement = val;
-    },
-
     onSpaceKey () {
-      this.setFocusFirstElement(true);
+      this.openedWithKeyboard = true;
     },
 
     onEnterKey () {
       if (this.open && this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
       }
-      this.setFocusFirstElement(true);
+      this.openedWithKeyboard = true;
     },
 
     onUpKeyPress () {
