@@ -6,6 +6,7 @@
       label-class="d-mr6"
       label="Unchecked Initial"
     />
+
     <!-- Checked Initially -->
     <dt-toggle
       class="d-mt6"
@@ -13,6 +14,7 @@
       label="Checked Initial"
       :checked="true"
     />
+
     <!-- Checked Disabled -->
     <dt-toggle
       class="d-mt6"
@@ -21,6 +23,7 @@
       :checked="true"
       :disabled="true"
     />
+
     <!-- Unchecked Disabled -->
     <dt-toggle
       class="d-mt6"
@@ -33,12 +36,11 @@
     <dt-toggle
       class="d-mt6"
       label-class="d-d-flex d-fl-grow1"
-      label="Separated"
+      label="With Flex Grow"
     />
 
     <!-- With Slots -->
     <dt-toggle
-      name="Value"
       class="d-mt6"
     >
       <div class="d-mr6">
@@ -46,12 +48,15 @@
       </div>
     </dt-toggle>
 
-    <!-- With out any labels/aria-label -->
+    <!-- With v-model -->
     <dt-toggle
-      name="Value"
+      v-model="vModelValue"
       class="d-mt6"
-      aria-label="Hello World"
-    />
+    >
+      <div class="d-mr6">
+        With V-Model
+      </div>
+    </dt-toggle>
   </div>
 </template>
 
@@ -61,5 +66,11 @@ import DtToggle from './toggle';
 export default {
   name: 'ToggleVariants',
   components: { DtToggle },
+
+  data () {
+    return {
+      vModelValue: false,
+    };
+  },
 };
 </script>

@@ -2,7 +2,6 @@ import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '../storybook_utils';
 import ToggleDefault from './toggle_default.story.vue';
 import ToggleVariants from './toggle_variants.story.vue';
-import ToggleNewTypes from './toggle_new_types.story.vue';
 import ToggleMdx from './toggle.mdx';
 import DtToggle from './toggle';
 
@@ -87,7 +86,6 @@ export default {
 // Toggle Templates
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ToggleDefault);
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ToggleVariants);
-const NewTypesTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ToggleNewTypes);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
@@ -95,6 +93,3 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-
-export const NewTypes = NewTypesTemplate.bind({});
-NewTypes.args = {};

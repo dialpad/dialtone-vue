@@ -11,11 +11,29 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 
 Toggles are typically paired with a label which identifies the option.
 
-In addition, there are times when they can be used with a description which describes the option.
-
 <Canvas>
   <Story id="components-toggle--default" />
 </Canvas>
+
+## Accessibility
+
+This component uses a native button element under the hood that has a role `switch` and type `button` to improve accessibility.
+
+[See W3C guidelines](https://www.w3.org/TR/2021/NOTE-wai-aria-practices-1.2-20211129/examples/switch/switch-button.html)
+for more information.
+
+### Button
+
+The button element should be fully accessible by keyboard. To accomplish this, the `DtToggle` component automatically
+populates several ARIA attributes to the underlying `button` element depending on the checked and
+disabled states. However, if a label prop or default slot is not
+used with `DtToggle`, a console warning error will be thrown indicating that this issue exists.
+
+### Focus & Keyboard
+
+The button element should capture keyboard focus as long as it is not disabled (`disabled` prop is `true`).
+`ENTER` key will
+emit a **change** event with the current value of the toggle and will change its internal `checked` state.
 
 ## Variants
 

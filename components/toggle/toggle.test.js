@@ -1,6 +1,12 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { assert } from 'chai';
 import DtToggle from './toggle.vue';
+import sinon from 'sinon';
+import Vue from 'vue';
+import {
+  itBehavesLikeDoesNotRaiseAnyVueWarnings,
+  itBehavesLikeRaisesSingleVueWarning,
+} from '../../tests/shared_examples/validation';
 
 // Constants
 const basePropsData = {
@@ -130,6 +136,53 @@ describe('Toggle Tests', function () {
       describe('label behaviour', function () {
         it('should exist', function () { assert.isTrue(label.exists()); });
         it('should match provided label prop', function () { assert.strictEqual(label.text(), propsData.label); });
+      });
+    });
+
+    describe('Accessibility Tests', function () {
+      describe('aria-label validations', function () {
+        const warningMessage = 'You must provide an aria-label when there is no label passed';
+
+        before(function () {
+          Vue.config.silent = true;
+          sinon.spy(Vue.util, 'warn');
+        });
+
+        after(function () {
+          Vue.util.warn.restore();
+          Vue.config.silent = false;
+        });
+
+        it('should not throw a Vue error if a label is provided', async function () {
+          await wrapper.setProps({ label: 'my label' });
+          itBehavesLikeDoesNotRaiseAnyVueWarnings();
+        });
+
+        it('should not throw a Vue error if a label is not provided, but an aria-label attr exists',
+          async function () {
+            await wrapper.setProps({ ariaLabel: 'my label', label: undefined });
+            itBehavesLikeDoesNotRaiseAnyVueWarnings();
+          });
+
+        describe('When a label/ariaLabel is not provided, but a default slot exists', function () {
+          // Test Setup
+          beforeEach(function () {
+            propsData = { ...basePropsData, label: undefined, ariaLabel: undefined };
+            slots = { default: '<div> Slot Label </div>' };
+            _setWrappers();
+          });
+          itBehavesLikeDoesNotRaiseAnyVueWarnings();
+        });
+
+        describe('When neither label/ariaLabel nor a default slot exists', function () {
+          beforeEach(function () {
+            propsData = { ...basePropsData, label: undefined, ariaLabel: undefined };
+            slots = { };
+            _setWrappers();
+          });
+
+          itBehavesLikeRaisesSingleVueWarning(warningMessage);
+        });
       });
     });
   });

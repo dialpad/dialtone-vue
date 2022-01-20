@@ -14,11 +14,11 @@
       role="switch"
       type="button"
       :aria-checked="internalChecked.toString()"
-      :disabled="internalDisabled"
-      :aria-disabled="internalDisabled.toString()"
+      :disabled="disabled"
+      :aria-disabled="disabled.toString()"
       :class="['d-toggle', {
         'd-toggle--checked': internalChecked,
-        'd-toggle--disabled': internalDisabled,
+        'd-toggle--disabled': disabled,
       }]"
       v-bind="$attrs"
       v-on="inputListeners"
@@ -51,6 +51,11 @@ export default {
   },
 
   inheritAttrs: false,
+
+  model: {
+    prop: 'checked',
+    event: 'change',
+  },
 
   props: {
 
@@ -89,7 +94,6 @@ export default {
 
   data () {
     return {
-      internalDisabled: this.disabled,
       internalChecked: this.checked,
     };
   },
@@ -110,10 +114,6 @@ export default {
   },
 
   watch: {
-    disabled (newDisabled) {
-      this.internalDisabled = newDisabled;
-    },
-
     checked (newChecked) {
       this.internalChecked = newChecked;
     },
@@ -133,8 +133,8 @@ export default {
       this.validateInputLabels(this.hasLabel, this.$attrs['aria-label']);
     },
 
-    validateInputLabels (hasLabelOrLabel, ariaLabel) {
-      if (!hasLabelOrLabel && !ariaLabel) {
+    validateInputLabels (hasLabelOrSlotLabel, ariaLabel) {
+      if (!hasLabelOrSlotLabel && !ariaLabel) {
         Vue.util.warn(
           'You must provide an aria-label when there is no label passed',
           this,
@@ -142,15 +142,18 @@ export default {
       }
     },
   },
-
 };
 </script>
 
 <style lang="less">
-@transition-speed: var(--td200);
-@easing-function: var(--ttf-in-out);
-
+// TODO: remove all this to Dialtone
 .d-toggle {
+  //  Component specific CSS Vars
+  //  ------------------------------------------------------------------------
+  --toggle--ta: var(--ttf-in-out);
+  --toggle-ts: var(--td200);
+  --toggle-bc: var(--black-200);
+
   position: relative;
   display: inline-block;
   box-sizing: border-box;
@@ -160,8 +163,8 @@ export default {
   padding: 0;
   vertical-align: middle;
   border-radius: 25px 25px;
-  border: 1px solid var(--black-200);
-  background-color: var(--black-200);
+  border: 1px solid var(--toggle-bc);
+  background-color: var(--toggle-bc);
   cursor: pointer;
 
   &__inner {
@@ -182,47 +185,40 @@ export default {
     background-color: var(--white);
     content: " ";
     cursor: pointer;
-    transform: scale(1);
-    transition: all @transition-speed @easing-function;
-    transition-property: left, transform;
+    transition: left var(--toggle-ts) var(--toggle--ta);
   }
 
-  &:focus {
-    box-shadow: var(--bs-focus-ring);
-    outline: none;
-  }
-
+  // TODO: to be removed in favour of .focus-visible
   &:focus:not(:focus-visible) {
-    outline: 0;
+    outline: none;
     box-shadow: none;
   }
 
-  &--checked {
-    border: 1px solid var(--primary-color);
-    background-color: var(--primary-color);
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--bs-focus-ring);
+  }
+}
 
-    .d-toggle__inner {
-      left: 4px;
-    }
+.d-toggle--checked {
+  --toggle-bc: var(--primary-color);
 
-    &:after{
-      left: 25px;
-    }
+  .d-toggle__inner {
+    left: 4px;
   }
 
-  &--disabled {
+  &:after{
+    left: 25px;
+  }
+}
+
+.d-toggle--disabled {
+  cursor: no-drop;
+  opacity: 0.5;
+
+  &:after {
+    transition-property: none;
     cursor: no-drop;
-    opacity: 0.5;
-
-    &:after{
-      transition-property: none;
-      cursor: no-drop;
-    }
-
-    &:hover:after{
-      transform: scale(1);
-      transition-property: none;
-    }
   }
 }
 </style>

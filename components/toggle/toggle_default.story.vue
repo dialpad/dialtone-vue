@@ -6,7 +6,12 @@
     :label-class="labelClass"
     :label-child-props="labelChildProps"
     @change="onChange"
-  />
+  >
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
+  </dt-toggle>
 </template>
 
 <script>
