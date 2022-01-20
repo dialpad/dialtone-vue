@@ -30,7 +30,6 @@
       <slot
         name="list"
         :list-props="listProps"
-        :get-item-props="getItemProps"
       />
     </div>
   </div>
@@ -117,15 +116,6 @@ export default {
         class: 'd-ps-relative',
         'aria-label': this.listAriaLabel,
       };
-    },
-
-    /*
-     * These props are wrapped in a function that expects that an index is passed.
-     */
-    getItemProps () {
-      return (i) => ({
-        role: 'option',
-      });
     },
 
     beginningOfListMethod () {
