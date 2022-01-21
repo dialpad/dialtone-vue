@@ -623,6 +623,7 @@ export default {
     this.removeOverlay();
     this.tip?.destroy();
     this.removeReferences();
+    this.removeClosePopoverEventLister();
   },
 
   /******************
