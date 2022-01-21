@@ -1,6 +1,5 @@
 <template>
   <dt-toggle
-    :label="label"
     :checked="checked"
     :disabled="disabled"
     :label-class="labelClass"

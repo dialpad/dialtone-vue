@@ -5,7 +5,9 @@
       class="d-mt6"
       label-class="d-mr6"
       label="Unchecked Initial"
-    />
+    >
+      Checked Initial
+    </dt-toggle>
 
     <!-- Checked Initially -->
     <dt-toggle
@@ -13,31 +15,36 @@
       label-class="d-mr6"
       label="Checked Initial"
       :checked="true"
-    />
+    >
+      Checked Initial
+    </dt-toggle>
 
     <!-- Checked Disabled -->
     <dt-toggle
       class="d-mt6"
       label-class="d-mr6"
-      label="Disabled Checked"
       :checked="true"
       :disabled="true"
-    />
+    >
+      Disabled Checked
+    </dt-toggle>
 
     <!-- Unchecked Disabled -->
     <dt-toggle
       class="d-mt6"
       label-class="d-mr6"
-      label="Disabled Unchecked"
       :disabled="true"
-    />
+    >
+      Disabled Unchecked
+    </dt-toggle>
 
     <!-- With Flex grow -->
     <dt-toggle
       class="d-mt6"
       label-class="d-d-flex d-fl-grow1"
-      label="With Flex Grow"
-    />
+    >
+      With Flex Grow
+    </dt-toggle>
 
     <!-- With Slots -->
     <dt-toggle

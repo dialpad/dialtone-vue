@@ -7,7 +7,6 @@ import DtToggle from './toggle';
 
 // Default Prop Values
 export const argsData = {
-  label: 'Toggle Default',
   onChange: action('change'),
   labelClass: 'd-mr6',
 };
@@ -18,6 +17,7 @@ export const argTypesData = {
   default: {
     control: 'text',
     description: 'Used as a way to set either a label or a label element for the toggle',
+    defaultValue: 'Toggle Default',
     table: {
       type: {
         summary: 'VNode',
