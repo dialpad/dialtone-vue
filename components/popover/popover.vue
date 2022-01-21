@@ -562,8 +562,10 @@ export default {
     open (isOpen, isPrev) {
       if (isOpen) {
         this.tip.show();
+        window.addEventListener('dt-popover-close', this.closePopover);
       } else if (!isOpen && isPrev !== isOpen) {
         this.showPopover = false;
+        window.removeEventListener('dt-popover-close', this.closePopover);
       }
     },
 
