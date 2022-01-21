@@ -21,7 +21,7 @@
         d-o100
         d-bgc-black-900
       "
-      @click.self="closePopover"
+      @click.self="closePopoverOnClick"
     />
     <div
       :id="!ariaLabelledby && labelledBy"
@@ -665,8 +665,12 @@ export default {
     },
 
     closePopover () {
+      this.tip.hide();
+    },
+
+    closePopoverOnClick () {
       if (typeof this.hideOnClick === 'boolean' && this.hideOnClick) {
-        this.tip.hide();
+        this.closePopover();
       }
     },
 
