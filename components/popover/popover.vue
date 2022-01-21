@@ -562,10 +562,10 @@ export default {
     open (isOpen, isPrev) {
       if (isOpen) {
         this.tip.show();
-        window.addEventListener('dt-popover-close', this.closePopover);
+        this.addClosePopoverEventLister();
       } else if (!isOpen && isPrev !== isOpen) {
         this.showPopover = false;
-        window.removeEventListener('dt-popover-close', this.closePopover);
+        this.removeClosePopoverEventLister();
       }
     },
 
@@ -614,6 +614,7 @@ export default {
     }));
     if (this.showPopover) {
       this.tip.show();
+      this.addClosePopoverEventLister();
     }
   },
 
@@ -628,6 +629,14 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    addClosePopoverEventLister () {
+      window.addEventListener('dt-popover-close', this.closePopover);
+    },
+
+    removeClosePopoverEventLister () {
+      window.removeEventListener('dt-popover-close', this.closePopover);
+    },
+
     onScrollContent ({ target }) {
       this.hasScrolled = target.scrollTop > 0;
     },
