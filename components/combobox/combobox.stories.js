@@ -3,6 +3,7 @@ import { createTemplateFromVueFile } from '../storybook_utils';
 import DtCombobox from './combobox';
 import DtComboboxMdx from './combobox.mdx';
 import DtComboboxDefaultTemplate from './combobox_default.story.vue';
+import DtComboboxExampleTemplate from './combobox_example.story.vue';
 
 // Default Prop Values
 export const argsData = {
@@ -139,6 +140,12 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtComboboxDefaultTemplate,
 );
 
+const ExampleTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtComboboxExampleTemplate);
+
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
+
+// Stories
+export const Example = ExampleTemplate.bind({});
+Example.args = {};
