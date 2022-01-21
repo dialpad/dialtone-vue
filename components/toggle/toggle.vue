@@ -1,7 +1,7 @@
 <template>
   <div class="d-d-flex d-ai-center">
     <label
-      v-if="hasLabel"
+      v-if="$slots.default"
       :class="labelClass"
       :for="id"
       v-bind="labelChildProps"
@@ -110,8 +110,12 @@ export default {
       this.$emit('change', this.internalChecked);
     },
 
+    hasSlotLabel () {
+      return !!(this.$slots.default);
+    },
+
     runValidations () {
-      this.validateInputLabels(this.hasLabel, this.$attrs['aria-label']);
+      this.validateInputLabels(this.hasSlotLabel(), this.$attrs['aria-label']);
     },
 
     validateInputLabels (hasLabel, ariaLabel) {

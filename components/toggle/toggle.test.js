@@ -9,9 +9,8 @@ import {
 } from '../../tests/shared_examples/validation';
 
 // Constants
-const basePropsData = {
-  label: 'My Toggle Label',
-};
+const basePropsData = {};
+const baseSlotData = { default: 'My Toggle Label' };
 
 describe('Toggle Tests', function () {
   // Wrappers
@@ -22,7 +21,7 @@ describe('Toggle Tests', function () {
   // Environment
   let propsData = basePropsData;
   let attrs = {};
-  let slots = {};
+  let slots = baseSlotData;
   let provide = {};
   let listeners = {};
 
@@ -54,7 +53,7 @@ describe('Toggle Tests', function () {
   afterEach(function () {
     propsData = basePropsData;
     attrs = {};
-    slots = {};
+    slots = baseSlotData;
     provide = {};
     listeners = {};
   });
@@ -109,7 +108,7 @@ describe('Toggle Tests', function () {
 
       describe('label behaviour', function () {
         it('should exist', function () { assert.isTrue(label.exists()); });
-        it('should match provided label prop', function () { assert.strictEqual(label.text(), propsData.label); });
+        it('should match provided label prop', function () { assert.strictEqual(label.text(), slots.default); });
       });
     });
 
@@ -135,7 +134,7 @@ describe('Toggle Tests', function () {
 
       describe('label behaviour', function () {
         it('should exist', function () { assert.isTrue(label.exists()); });
-        it('should match provided label prop', function () { assert.strictEqual(label.text(), propsData.label); });
+        it('should match provided label prop', function () { assert.strictEqual(label.text(), slots.default); });
       });
     });
 
@@ -153,34 +152,32 @@ describe('Toggle Tests', function () {
           Vue.config.silent = false;
         });
 
-        it('should not throw a Vue error if a label is provided', async function () {
-          await wrapper.setProps({ label: 'my label' });
-          itBehavesLikeDoesNotRaiseAnyVueWarnings();
-        });
-
-        it('should not throw a Vue error if a label is not provided, but an aria-label attr exists',
-          async function () {
-            await wrapper.setProps({ ariaLabel: 'my label', label: undefined });
-            itBehavesLikeDoesNotRaiseAnyVueWarnings();
-          });
-
-        describe('When a label/ariaLabel is not provided, but a default slot exists', function () {
-          // Test Setup
-          beforeEach(function () {
-            propsData = { ...basePropsData, label: undefined, ariaLabel: undefined };
-            slots = { default: '<div> Slot Label </div>' };
+        describe('should not throw a Vue error if a label is provided', function () {
+          before(function () {
+            propsData = basePropsData;
+            slots = { default: 'My Label' };
             _setWrappers();
           });
           itBehavesLikeDoesNotRaiseAnyVueWarnings();
         });
 
-        describe('When neither label/ariaLabel nor a default slot exists', function () {
-          beforeEach(function () {
-            propsData = { ...basePropsData, label: undefined, ariaLabel: undefined };
-            slots = { };
+        describe('should not throw a Vue error if a label is not provided, but an aria-label attr exists', function () {
+          before(function () {
+            propsData = { ...basePropsData };
+            attrs = { 'aria-label': 'my label' };
+            slots = {};
             _setWrappers();
           });
+          itBehavesLikeDoesNotRaiseAnyVueWarnings();
+        });
 
+        describe('When neither ariaLabel attr nor a default slot exists', function () {
+          before(function () {
+            propsData = { ...basePropsData };
+            attrs = {};
+            slots = {};
+            _setWrappers();
+          });
           itBehavesLikeRaisesSingleVueWarning(warningMessage);
         });
       });
