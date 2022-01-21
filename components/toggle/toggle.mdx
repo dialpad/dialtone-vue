@@ -26,8 +26,8 @@ for more information.
 
 The button element should be fully accessible by keyboard. To accomplish this, the `DtToggle` component automatically
 populates several ARIA attributes to the underlying `button` element depending on the checked and
-disabled states. However, if a label prop or default slot is not
-used with `DtToggle`, a console warning error will be thrown indicating that this issue exists.
+disabled states. However, if a label default slot is not used with `DtToggle`
+(without including an `aria-label`), a console warning error will be thrown indicating that this issue exists.
 
 ### Focus & Keyboard
 
@@ -53,15 +53,7 @@ emit a **change** event with the current value of the toggle and will change its
 import { DtToggle } from '@dialpad/dialtone-vue';
 ```
 
-### With Label Prop
-
-```jsx
-<dt-toggle
-  label="My Label"
-/>
-```
-
-### With Slotted Label
+### With Label
 
 ```jsx
 <dt-toggle
@@ -74,16 +66,18 @@ import { DtToggle } from '@dialpad/dialtone-vue';
 
 ```jsx
 <dt-toggle
-  label="My Label"
   checked
-/>
+>
+  My Label
+</dt-toggle>
 ```
 
 ### Disabled
 
 ```jsx
 <dt-toggle
-  label="My Label"
   disabled
-/>
+>
+  My Label
+</dt-toggle>
 ```
