@@ -37,6 +37,15 @@ export const argTypesData = {
     },
   },
 
+  // Directives
+  'v-model': {
+    description: 'Supported by this component',
+    control: null,
+    table: {
+      category: 'directives',
+    },
+  },
+
   disabled: {
     description: 'Used to disabled the toggle',
     control: 'boolean',
