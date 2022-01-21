@@ -81,10 +81,6 @@ export default {
 
   computed: {
 
-    hasLabel () {
-      return !!(this.$slots.default);
-    },
-
     inputListeners () {
       return {
         // eslint-disable-next-line vue/no-deprecated-dollar-listeners-api
