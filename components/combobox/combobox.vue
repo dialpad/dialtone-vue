@@ -33,6 +33,7 @@
         :get-item-props="getItemProps"
         :active-item-index="highlightIndex"
         :set-highlight-index="setHighlightIndex"
+        :opened="onOpen"
       />
     </div>
   </div>
@@ -121,7 +122,7 @@ export default {
     },
 
     listRef () {
-      return this.$refs.listWrapper;
+      return this.outsideRenderedListRef ?? this.$refs.listWrapper;
     },
 
     /*
@@ -183,6 +184,10 @@ export default {
 
     onEscapeKey () {
       this.$emit('escape');
+    },
+
+    onOpen (open, contentRef) {
+      this.outsideRenderedListRef = contentRef;
     },
   },
 };
