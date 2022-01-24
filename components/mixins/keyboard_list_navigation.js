@@ -2,12 +2,10 @@
  * Usage: `mixins: [keyboardNavigationMixin(options)]`
  *
  * This mixin provides some common data and methods to navigate a list of items
- * (such as a dropdown or select menu) by keyboard. The component should have
- * a computed prop of `items`, which is configurable.
+ * (such as a dropdown or select menu) by keyboard.
  *
  * To be effective, you must bind the onUpKey and onDownKey events, usually to
- * the root element of the component, and utilize the `highlightIndex` data
- * to focus the item at that index.
+ * the root element of the component.
  */
 import Dom from '../mixins/dom';
 

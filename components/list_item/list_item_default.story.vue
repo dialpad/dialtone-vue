@@ -1,5 +1,5 @@
 <template>
-  <div
+  <ul
     ref="listWrapper"
   >
     <dt-list-item
@@ -24,7 +24,7 @@
         <component :is="right"/>
       </template>
     </dt-list-item>
-  </div>
+  </ul>
 </template>
 
 <script>
