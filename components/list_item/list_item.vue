@@ -46,7 +46,9 @@ export default {
   /**
    * Value provided from keyboard_list_navigation.js using id prop.
    */
-  inject: ['highlightId'],
+  inject: {
+    highlightId: { default: null },
+  },
 
   props: {
     /**
@@ -111,7 +113,7 @@ export default {
      * For keyboard navigation, whether or not this item is currently highlighted.
      */
     isHighlighted () {
-      return this.id === this.highlightId();
+      return this.highlightId ? this.id === this.highlightId() : false;
     },
 
     isFocusable () {
