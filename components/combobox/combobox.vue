@@ -102,6 +102,15 @@ export default {
 
   emits: ['select', 'escape', 'highlight'],
 
+  data () {
+    return {
+      // If the list is rendered at the root, rather than as a child
+      // of this component, this is the ref to that dom element. Set
+      // by the onOpen method.
+      outsideRenderedListRef: null,
+    };
+  },
+
   computed: {
     inputProps () {
       return {
