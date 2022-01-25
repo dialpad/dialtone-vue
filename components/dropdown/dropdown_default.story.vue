@@ -7,7 +7,6 @@
     :padding="padding"
     :navigation-type="navigationType"
     @highlight="onHighlight"
-    @select="onDropdownSelect"
     @escape="onDropdownEscape"
     @update:open="updateOpen"
   >
@@ -35,7 +34,7 @@
         role="menuitem"
         :key="item.id"
         :navigation-type="navigationType"
-        @click="onDropdownSelect(i)"
+        @click="onClick(i)"
       >
         {{ item.name }}
       </dt-list-item>
@@ -84,9 +83,8 @@ export default {
       this.isOpen = isOpen;
     },
 
-    onDropdownSelect (i) {
+    onClick (i) {
       this.isOpen = false;
-      this.onSelect(i);
     },
 
     onDropdownEscape () {

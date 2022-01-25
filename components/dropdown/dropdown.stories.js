@@ -15,7 +15,6 @@ import {
 // Default Prop Values
 export const argsData = {
   onHighlight: action('highlight'),
-  onSelect: action('select'),
   onEscape: action('escape'),
 };
 

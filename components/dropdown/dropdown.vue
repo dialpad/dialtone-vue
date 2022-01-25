@@ -216,11 +216,15 @@ export default {
     },
 
     onSpaceKey () {
-      this.openedWithKeyboard = true;
+      if (!this.open) {
+        this.openedWithKeyboard = true;
+      }
     },
 
     onEnterKey () {
-      this.openedWithKeyboard = true;
+      if (!this.open) {
+        this.openedWithKeyboard = true;
+      }
     },
 
     onUpKeyPress () {
