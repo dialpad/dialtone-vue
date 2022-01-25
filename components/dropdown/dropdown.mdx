@@ -52,8 +52,7 @@ selection between the list items. `HOME` and `END` keys will jump straight to th
 Once the beginning or the end of the list is reached the selection will move to the opposite end of the list by default.
 If you want custom behavior you can pass `onBeginningOfList` and `onEndOfList` methods as props.
 
-Pressing `ESC` key while the dropdown has focus will emit an **escape** event and will close the menu. `ENTER` key will
-emit a **select** event with the index of the currently highlighted list item. When the highlight
+Pressing `ESC` key while the dropdown has focus will emit an **escape** event and will close the menu. When the highlight
 selection changes, a **highlight** event is emitted with the index of the currently highlighted item.
 `SPACE` key will open the dropdown if it's closed and select the item when it's pressed on a list item.
 

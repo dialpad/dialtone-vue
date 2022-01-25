@@ -128,12 +128,6 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
-  select: {
-    description: 'Select item event',
-    table: {
-      type: { summary: 'event' },
-    },
-  },
   escape: {
     description: 'Event fired when when pressing escape',
     table: {

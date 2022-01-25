@@ -157,7 +157,7 @@ export default {
     },
   },
 
-  emits: ['select', 'escape', 'highlight'],
+  emits: ['escape', 'highlight'],
 
   data () {
     return {
@@ -220,9 +220,6 @@ export default {
     },
 
     onEnterKey () {
-      if (this.open && this.highlightIndex >= 0) {
-        this.$emit('select', this.highlightIndex);
-      }
       this.openedWithKeyboard = true;
     },
 
