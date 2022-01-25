@@ -30,23 +30,23 @@ const argTypesData = {
       },
     },
   },
-  titleSlot: {
-    name: 'title',
-    description: 'Slot for popover header title, defaults to title prop',
+  headerContent: {
+    name: 'headerContent',
+    description: 'Slot for popover header content',
     control: 'text',
     table: {
       category: 'slots',
       type: {
         summary: 'VNode',
       },
-      defaultValue: {
-        summary: 'null',
-      },
     },
   },
-  headerActions: {
+  footerContent: {
+    name: 'footerContent',
+    description: 'Slot for popover footer content',
     control: 'text',
     table: {
+      category: 'slots',
       type: {
         summary: 'VNode',
       },
