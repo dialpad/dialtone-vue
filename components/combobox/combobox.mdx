@@ -22,39 +22,9 @@ The **list** contains a list of items to show in the context of the input's valu
   <Story id="components-combobox--default" />
 </Canvas>
 
-### Usage
+## Slots, Props and Events
 
-```js
-import { DtCombobox, DtInput, DtListItem } from '@dialpad/dialtone-vue';
-```
-
-```html
-<dt-combobox
-  list-aria-label="Example list items"
-  @escape="onEscape"
-  @highlight="onHighlight"
-  @select="onSelect"
->
-  <template #input="{ inputProps }">
-    <dt-input v-bind="inputProps" />
-  </template>
-  <template #list="{ listProps }">
-    <ol v-bind="listProps">
-      <dt-list-item
-        v-for="(item, i) in items"
-        :key="item.id"
-        navigation-type="arrow-keys"
-        role="option"
-        @click="onSelect(i)"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </ol>
-  </template>
-</dt-combobox>
-```
-
-`onSelect` is the method event handler that receives the index of each item.
+<ArgsTable story={PRIMARY_STORY} />
 
 ## Accessibility
 
@@ -98,6 +68,36 @@ based on the use case. Commonly the `ESC` key might hide the list or empty the i
 emit a **select** event with the index of the currently highlighted list item. When the highlight
 selection changes, a **highlight** event is emitted with the index of the currently highlighted item.
 
-## Slots, Props and Events
+### Usage
 
-<ArgsTable story={PRIMARY_STORY} />
+```js
+import { DtCombobox, DtInput, DtListItem } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-combobox
+  list-aria-label="Example list items"
+  @escape="onEscape"
+  @highlight="onHighlight"
+  @select="onSelect"
+>
+  <template #input="{ inputProps }">
+    <dt-input v-bind="inputProps" />
+  </template>
+  <template #list="{ listProps }">
+    <ol v-bind="listProps">
+      <dt-list-item
+        v-for="(item, i) in items"
+        :key="item.id"
+        navigation-type="arrow-keys"
+        role="option"
+        @click="onSelect(i)"
+      >
+        {{ item.name }}
+      </dt-list-item>
+    </ol>
+  </template>
+</dt-combobox>
+```
+
+`onSelect` is the method event handler that receives the index of each item.
