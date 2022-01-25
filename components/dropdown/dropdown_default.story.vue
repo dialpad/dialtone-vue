@@ -1,6 +1,6 @@
 <template>
   <dt-dropdown
-    :open="isOpen"
+    :open="open"
     :fixed-vertical-alignment="fixedVerticalAlignment"
     :fixed-alignment="fixedAlignment"
     :content-width="contentWidth"
@@ -8,9 +8,8 @@
     :navigation-type="navigationType"
     @highlight="onHighlight"
     @escape="onDropdownEscape"
-    @update:open="updateOpen"
   >
-    <template #anchor="{ attrs }">
+    <template #anchor="{ attrs, onClick }">
       <div
         v-if="anchor"
         v-html="anchor"
@@ -18,23 +17,23 @@
       <dt-button
         v-else
         v-bind="attrs"
-        @click.prevent="isOpen = !isOpen"
+        @click.prevent="onClick"
       >
         Click to open
       </dt-button>
     </template>
-    <template #list>
+    <template #list="{ onClick }">
       <div
         v-if="list"
         v-html="list"
       />
       <dt-list-item
         v-else
-        v-for="(item, i) in items"
+        v-for="(item) in items"
         role="menuitem"
         :key="item.id"
         :navigation-type="navigationType"
-        @click="onClick(i)"
+        @click="onClick"
       >
         {{ item.name }}
       </dt-list-item>
@@ -55,7 +54,6 @@ export default {
 
   data () {
     return {
-      isOpen: this.open || false,
       LIST_ITEM_NAVIGATION_TYPES,
     };
   },
@@ -70,25 +68,8 @@ export default {
     },
   },
 
-  watch: {
-    open: {
-      handler () {
-        this.isOpen = this.open;
-      },
-    },
-  },
-
   methods: {
-    updateOpen (isOpen) {
-      this.isOpen = isOpen;
-    },
-
-    onClick (i) {
-      this.isOpen = false;
-    },
-
     onDropdownEscape () {
-      this.isOpen = false;
       this.onEscape();
     },
   },

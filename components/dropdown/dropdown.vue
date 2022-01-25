@@ -2,7 +2,7 @@
   <dt-popover
     ref="popover"
     :content-width="contentWidth"
-    :open="open"
+    :open="isOpen"
     :has-caret="false"
     :fixed-vertical-alignment="fixedVerticalAlignment"
     :fixed-alignment="fixedAlignment"
@@ -23,6 +23,7 @@
       <slot
         ref="anchor"
         name="anchor"
+        :on-click="onClick"
         v-bind="props"
       />
     </template>
@@ -37,6 +38,7 @@
         <!-- @slot Slot for the list component -->
         <slot
           name="list"
+          :on-click="onClick"
         />
       </ul>
     </template>
@@ -72,11 +74,11 @@ export default {
 
   props: {
     /**
-     * Whether the dropdown should be shown. Supports .sync modifier.
+     * Optional prop to manage dropdown opening. Supports .sync modifier.
      */
     open: {
       type: Boolean,
-      required: true,
+      default: false,
     },
 
     /**
@@ -157,12 +159,13 @@ export default {
     },
   },
 
-  emits: ['escape', 'highlight'],
+  emits: ['escape', 'highlight', 'update:open'],
 
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
       openedWithKeyboard: false,
+      isOpen: this.open,
     };
   },
 
@@ -193,8 +196,8 @@ export default {
       this.$emit('highlight', this.highlightIndex);
     },
 
-    updateInitialHighlightIndex (isOpen) {
-      if (isOpen) {
+    updateInitialHighlightIndex (isPopoverOpen) {
+      if (isPopoverOpen) {
         // If the dropdown was opened with keyboard, focus first element
         if (this.openedWithKeyboard) {
           // Focus first item on keyboard navigation
@@ -203,6 +206,8 @@ export default {
           if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
             this.setHighlightIndex(0);
           }
+
+          this.$emit('update:open', true);
         }
       } else {
         this.clearHighlightIndex();
@@ -212,17 +217,24 @@ export default {
           this.$refs.popover.focusFirstElement(this.$refs.anchor);
           this.openedWithKeyboard = false;
         }
+
+        this.isOpen = false;
+        this.$emit('update:open', false);
       }
     },
 
+    onClick () {
+      this.isOpen = !this.isOpen;
+    },
+
     onSpaceKey () {
-      if (!this.open) {
+      if (!this.isOpen) {
         this.openedWithKeyboard = true;
       }
     },
 
     onEnterKey () {
-      if (!this.open) {
+      if (!this.isOpen) {
         this.openedWithKeyboard = true;
       }
     },
@@ -240,7 +252,14 @@ export default {
     },
 
     onEscapeKey () {
+      this.isOpen = false;
       this.$emit('escape');
+    },
+  },
+
+  watch: {
+    open (newValue) {
+      this.isOpen = newValue;
     },
   },
 };

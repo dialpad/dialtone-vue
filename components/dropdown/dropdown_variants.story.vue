@@ -4,29 +4,27 @@
       v-for="(variant, i) in variants.fixedAlignment"
       :key="i"
       class="d-mr8"
-      :open="isOpen[variant]"
       :fixed-alignment="variant"
       :content-width="contentWidth"
       :padding="padding"
       :navigation-type="navigationType"
       @highlight="onHighlight"
       @escape="onDropdownEscape($event, variant)"
-      @update:open="updateOpen($event, variant)"
     >
-      <template #anchor>
+      <template #anchor="{ onClick }">
         <dt-button
-          @click.prevent="isOpen[variant] = !isOpen[variant]"
+          @click.prevent="onClick"
         >
           {{ variant }} aligned dropdown
         </dt-button>
       </template>
-      <template #list>
+      <template #list="{ onClick }">
         <dt-list-item
-          v-for="(item, i) in items"
+          v-for="(item) in items"
           role="menuitem"
           :key="item.id"
           :navigation-type="navigationType"
-          @click="onClick($event, variant, i)"
+          @click="onClick"
         >
           {{ item.name }}
         </dt-list-item>
@@ -47,12 +45,6 @@ export default {
 
   data () {
     return {
-      isOpen: {
-        left: false,
-        center: false,
-        right: false,
-      },
-
       variants: {
         fixedAlignment: ['left', 'center', 'right'],
       },
@@ -70,16 +62,7 @@ export default {
   },
 
   methods: {
-    updateOpen (isOpen, key) {
-      this.isOpen[key] = isOpen;
-    },
-
-    onClick (event, key, item) {
-      this.isOpen[key] = false;
-    },
-
     onDropdownEscape (event, key) {
-      this.isOpen[key] = false;
       this.onEscape();
     },
   },

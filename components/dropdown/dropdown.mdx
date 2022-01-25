@@ -71,21 +71,21 @@ import { DtDropdown, DtButton } from '@dialpad/dialtone-vue';
   @escape="onEscape"
   @update:open="updateOpen"
 >
-  <template #anchor="{ attrs }">
+  <template #anchor="{ attrs, onClick }">
     <dt-button
       v-bind="attrs"
-      @click.prevent="isOpen = !isOpen"
+      @click.prevent="onClick"
     >
       Click to open
     </dt-button>
   </template>
-  <template #list>
+  <template #list="{ onClick }">
     <dt-list-item
       v-for="(item, i) in items"
       :key="item.id"
       :navigation-type="navigationType"
       role="menuitem"
-      @click="onSelect(i)"
+      @click="onClick"
     >
       {{ item.name }}
     </dt-list-item>
@@ -96,7 +96,8 @@ import { DtDropdown, DtButton } from '@dialpad/dialtone-vue';
 Note that the `anchor` slot that manages the list's visibility is using a similar pattern as in the
 [Popover component](?path=/docs/components-popovers--default#basic-usage).
 
-`onSelect` is the method event handler that performs different actions based on the `i` index of each item.
+`onClick` is the method event handler passed to the `anchor` and `list` slots that controls dropdown's visibility.
+
 It's possible to specify different event handlers per each list item in case you are not using `v-for` for
 rendering items:
 
@@ -107,24 +108,24 @@ rendering items:
   @escape="onEscape"
   @update:open="updateOpen"
 >
-  <template #anchor="{ attrs }">
+  <template #anchor="{ attrs, onClick }">
     <dt-button
       v-bind="attrs"
-      @click.prevent="isOpen = !isOpen"
+      @click.prevent="onClick"
     >
       Click to open
     </dt-button>
   </template>
-  <template #list>
+  <template #list="{ onClick }">
     <dt-list-item
       role="menuitem"
-      @click="handleFirstItem"
+      @click="onClick(); handleFirstItem();"
     >
       First item
     </dt-list-item>
     <dt-list-item
       role="menuitem"
-      @click="handleSecondItem"
+      @click="onClick(); handleSecondItem();"
     >
       Second item
     </dt-list-item>
