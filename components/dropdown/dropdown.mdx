@@ -71,21 +71,21 @@ import { DtDropdown, DtButton } from '@dialpad/dialtone-vue';
   @escape="onEscape"
   @update:open="updateOpen"
 >
-  <template #anchor="{ attrs, onClick }">
+  <template #anchor="{ attrs, toggleOpen }">
     <dt-button
       v-bind="attrs"
-      @click.prevent="onClick"
+      @click.prevent="toggleOpen"
     >
       Click to open
     </dt-button>
   </template>
-  <template #list="{ onClick }">
+  <template #list="{ close }">
     <dt-list-item
       v-for="(item, i) in items"
       :key="item.id"
       :navigation-type="navigationType"
       role="menuitem"
-      @click="onClick"
+      @click="close(); handleItem(i);"
     >
       {{ item.name }}
     </dt-list-item>
@@ -93,10 +93,8 @@ import { DtDropdown, DtButton } from '@dialpad/dialtone-vue';
 </dt-dropdown>
 ```
 
-Note that the `anchor` slot that manages the list's visibility is using a similar pattern as in the
-[Popover component](?path=/docs/components-popovers--default#basic-usage).
-
-`onClick` is the method event handler passed to the `anchor` and `list` slots that controls dropdown's visibility.
+`toggleOpen` is the method event handler passed to the `anchor` that controls the dropdown's visibility and
+`close` is the method event handler passed to the `list` slots that closes the dropdown when clicking on the item.
 
 It's possible to specify different event handlers per each list item in case you are not using `v-for` for
 rendering items:
@@ -108,15 +106,15 @@ rendering items:
   @escape="onEscape"
   @update:open="updateOpen"
 >
-  <template #anchor="{ attrs, onClick }">
+  <template #anchor="{ attrs, toggleOpen }">
     <dt-button
       v-bind="attrs"
-      @click.prevent="onClick"
+      @click.prevent="toggleOpen"
     >
       Click to open
     </dt-button>
   </template>
-  <template #list="{ onClick }">
+  <template #list="{ close }">
     <dt-list-item
       role="menuitem"
       @click="onClick(); handleFirstItem();"
@@ -125,7 +123,7 @@ rendering items:
     </dt-list-item>
     <dt-list-item
       role="menuitem"
-      @click="onClick(); handleSecondItem();"
+      @click="close(); handleSecondItem();"
     >
       Second item
     </dt-list-item>

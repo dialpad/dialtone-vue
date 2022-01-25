@@ -11,20 +11,20 @@
       @highlight="onHighlight"
       @escape="onDropdownEscape($event, variant)"
     >
-      <template #anchor="{ onClick }">
+      <template #anchor="{ toggleOpen }">
         <dt-button
-          @click.prevent="onClick"
+          @click.prevent="toggleOpen"
         >
           {{ variant }} aligned dropdown
         </dt-button>
       </template>
-      <template #list="{ onClick }">
+      <template #list="{ close }">
         <dt-list-item
           v-for="(item) in items"
           role="menuitem"
           :key="item.id"
           :navigation-type="navigationType"
-          @click="onClick"
+          @click="close"
         >
           {{ item.name }}
         </dt-list-item>

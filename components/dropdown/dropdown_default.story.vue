@@ -9,7 +9,7 @@
     @highlight="onHighlight"
     @escape="onDropdownEscape"
   >
-    <template #anchor="{ attrs, onClick }">
+    <template #anchor="{ attrs, toggleOpen }">
       <div
         v-if="anchor"
         v-html="anchor"
@@ -17,12 +17,12 @@
       <dt-button
         v-else
         v-bind="attrs"
-        @click.prevent="onClick"
+        @click.prevent="toggleOpen"
       >
         Click to open
       </dt-button>
     </template>
-    <template #list="{ onClick }">
+    <template #list="{ close }">
       <div
         v-if="list"
         v-html="list"
@@ -33,7 +33,7 @@
         role="menuitem"
         :key="item.id"
         :navigation-type="navigationType"
-        @click="onClick"
+        @click="close"
       >
         {{ item.name }}
       </dt-list-item>

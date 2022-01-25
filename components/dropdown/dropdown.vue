@@ -23,7 +23,7 @@
       <slot
         ref="anchor"
         name="anchor"
-        :on-click="onClick"
+        :toggle-open="toggle"
         v-bind="props"
       />
     </template>
@@ -38,7 +38,7 @@
         <!-- @slot Slot for the list component -->
         <slot
           name="list"
-          :on-click="onClick"
+          :close="close"
         />
       </ul>
     </template>
@@ -223,8 +223,12 @@ export default {
       }
     },
 
-    onClick () {
+    toggle () {
       this.isOpen = !this.isOpen;
+    },
+    
+    close () {
+      this.isOpen = false;
     },
 
     onSpaceKey () {
