@@ -1,5 +1,4 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
-import DtCombobox from './combobox';
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
 # Combobox
 
@@ -45,6 +44,7 @@ import { DtCombobox, DtInput, DtListItem } from '@dialpad/dialtone-vue';
         v-for="(item, i) in items"
         :key="item.id"
         navigation-type="arrow-keys"
+        role="option"
         @click="onSelect(i)"
       >
         {{ item.name }}
@@ -53,6 +53,8 @@ import { DtCombobox, DtInput, DtListItem } from '@dialpad/dialtone-vue';
   </template>
 </dt-combobox>
 ```
+
+`onSelect` is the method event handler that receives the index of each item.
 
 ## Accessibility
 
@@ -98,4 +100,4 @@ selection changes, a **highlight** event is emitted with the index of the curren
 
 ## Slots, Props and Events
 
-<ArgsTable of={PRIMARY_STORY} />
+<ArgsTable story={PRIMARY_STORY} />
