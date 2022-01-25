@@ -491,7 +491,7 @@ export default {
 
   computed: {
     hasBoxShadow () {
-      return this.hasScrolled && this.fixedHeadFoot;
+      return this.hasScrolled && this.fixedHeaderFooter;
     },
 
     fallbackPlacements () {
