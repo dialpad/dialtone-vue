@@ -100,7 +100,7 @@
         :has-box-shadow="hasBoxShadow"
       >
         <template #content>
-          <!-- @slot Slot for popover header title, defaults to title prop -->
+          <!-- @slot Slot for popover header content -->
           <slot name="headerContent" />
         </template>
       </popover-header-footer>

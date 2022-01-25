@@ -69,7 +69,7 @@ export default {
     type: {
       type: String,
       validator: function (value) {
-        return ['header', 'footer'].indexOf(value) !== -1;
+        return ['header', 'footer'].includes(value);
       },
     },
 
