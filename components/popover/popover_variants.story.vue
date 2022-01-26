@@ -186,19 +186,13 @@
             </dt-button>
           </div>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
-            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-            obcaecati quibusdam repudiandae.
+            {{ sampleText }}
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
-            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-            obcaecati quibusdam repudiandae.
+            {{ sampleText }}
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
-            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-            obcaecati quibusdam repudiandae.
+            {{ sampleText }}
           </p>
         </div>
       </template>
@@ -230,19 +224,13 @@
       <template #content>
         <div class="d-fs14 d-m0">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
-            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-            obcaecati quibusdam repudiandae.
+            {{ sampleText }}
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
-            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-            obcaecati quibusdam repudiandae.
+            {{ sampleText }}
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore,
-            maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-            obcaecati quibusdam repudiandae.
+            {{ sampleText }}
           </p>
         </div>
       </template>
@@ -282,6 +270,11 @@ export default {
       openPopoverWithNoPadding: false,
       isHeaderFixed: false,
       isOpen: this.open || false,
+      sampleText: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Consequuntur delectus distinctio id iure labore,
+            maiores mollitia reprehenderit sunt tempore veritatis.
+            Aliquam delectus earum ex, expedita ipsam nobis
+            obcaecati quibusdam repudiandae.`,
     };
   },
 
