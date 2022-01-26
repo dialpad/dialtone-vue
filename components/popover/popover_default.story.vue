@@ -24,7 +24,6 @@
     :modal="modal"
     :content-width="contentWidth"
     :show-close-button="showCloseButton"
-    :title="title"
     :header-class="headerClass"
     :footer-class="footerClass"
     :fixed-header-footer="fixedHeaderFooter"
