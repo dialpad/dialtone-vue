@@ -8,6 +8,7 @@
     :navigation-type="navigationType"
     @highlight="onHighlight"
     @escape="onDropdownEscape"
+    @update:open="onUpdateOpen"
   >
     <template #anchor="{ attrs, toggleOpen }">
       <div
