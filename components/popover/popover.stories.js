@@ -109,22 +109,6 @@ const argTypesData = {
       },
     },
   },
-  title: {
-    description: `Determines title for popover header. If provided prop is not null,
-     corresponding holder div will be rendered`,
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-      defaultValue: {
-        summary: 'null',
-      },
-    },
-    control: {
-      type: 'text',
-    },
-  },
 
   // Events
   onClose: {

@@ -3,7 +3,7 @@
     data-qa="dt-popover-header-footer"
     :class="[
       'd-d-flex',
-      'd-ai-flex-start',
+      'd-ai-center',
       'd-fs16',
       'd-fw-bold',
       'd-of-auto',
@@ -18,16 +18,14 @@
         'd-bb': type === 'header',
         'd-bt': type === 'footer',
         'd-bs-card': hasBoxShadow,
-        'd-jc-space-between': $slots.content,
         'd-jc-flex-end': !$slots.content,
       },
-      wrapperClass,
     ]"
   >
     <div
       v-if="$slots.content"
       data-qa="dt-popover-header-footer-content"
-      class="d-to-ellipsis d-pt6"
+      :class="['d-to-ellipsis', 'd-w100p', contentClass]"
     >
       <slot name="content" />
     </div>
@@ -76,7 +74,7 @@ export default {
     /**
      * Additional class name for the content wrapper element.
      */
-    wrapperClass: {
+    contentClass: {
       type: [String, Array, Object],
       default: '',
     },

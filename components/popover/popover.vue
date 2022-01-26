@@ -28,7 +28,7 @@
       ref="anchor"
       data-qa="dt-popover-anchor"
     >
-      <!-- @slot Anchor element that activates the popover. -->
+      <!-- @slot Anchor element that activates the popover. Usually a button. -->
       <slot
         name="anchor"
         :attrs="{
@@ -91,20 +91,20 @@
         "
       />
       <popover-header-footer
-        v-if="$slots.headerContent"
+        v-if="$slots.headerContent || showCloseButton"
         ref="popover__header"
-        :wrapper-class="headerClass"
+        :content-class="headerClass"
         type="header"
         :show-close-button="showCloseButton"
         :close-button-props="closeButtonProps"
         :has-box-shadow="hasBoxShadow"
+        @close="closePopover"
       >
         <template #content>
           <!-- @slot Slot for popover header content -->
           <slot name="headerContent" />
         </template>
       </popover-header-footer>
-      <!-- @slot content that is displayed in the popover when it is open. -->
       <div
         ref="popover__content"
         data-qa="dt-popover-content"
@@ -118,13 +118,13 @@
         ]"
         @scroll="onScrollContent"
       >
-        <!-- @slot Content element to display inside the popover. -->
+        <!-- @slot content that is displayed in the popover when it is open. -->
         <slot name="content" />
       </div>
       <popover-header-footer
         v-if="$slots.footerContent"
         type="footer"
-        :wrapper-class="footerClass"
+        :content-class="footerClass"
         :has-box-shadow="hasBoxShadow"
       >
         <template #content>
@@ -302,7 +302,7 @@ export default {
     },
 
     /**
-     * Determines should the anchor be focused after closing the popover
+     * Determines whether the anchor should be focused after closing the popover.
      */
     focusAnchorOnClose: {
       type: Boolean,
