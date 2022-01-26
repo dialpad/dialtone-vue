@@ -100,7 +100,7 @@ export default {
 
   computed: {
     uniqueKey () {
-      return getUniqueString(this.title);
+      return getUniqueString();
     },
   },
 
