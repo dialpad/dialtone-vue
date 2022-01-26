@@ -11,7 +11,7 @@
         placeholder="Type to show the items"
       />
     </template>
-    <template #list="{ listProps, getItemProps, activeItemIndex, setHighlightIndex }">
+    <template #list="{ opened, listProps, getItemProps, activeItemIndex, setHighlightIndex }">
       <dt-popover
         :open="true"
         fixed-alignment="left"
@@ -21,11 +21,12 @@
         content-class="d-w464"
         padding="small"
         max-height="300px"
+        @update:open="opened"
       >
         <template #anchor>
           <span />
         </template>
-        <template #title>
+        <template #footerContent>
           <div
             v-if="!isEmpty"
             class="d-d-flex d-ai-center"
