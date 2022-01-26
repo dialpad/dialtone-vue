@@ -181,6 +181,7 @@ export default {
     },
 
     onOpen (open, contentRef) {
+      console.log('onopen');
       this.outsideRenderedListRef = contentRef;
     },
 

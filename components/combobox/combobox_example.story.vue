@@ -2,7 +2,6 @@
   <dt-combobox
     :show-list="true"
     list-aria-label="Example list items"
-    @highlight="onHighlight"
   >
     <template #input="{ inputProps }">
       <dt-input
@@ -11,12 +10,12 @@
         placeholder="Type to show the items"
       />
     </template>
-    <template #list="{ opened, listProps, getItemProps, activeItemIndex, setHighlightIndex }">
+    <template #list="{ opened }">
       <dt-popover
         :open="true"
         fixed-alignment="left"
-        :fixed-header="true"
         :hide-on-click="false"
+        :fixed-header-footer="true"
         :has-caret="false"
         content-class="d-w464"
         padding="small"
@@ -41,19 +40,15 @@
           </div>
           <ol
             v-else
-            v-bind="listProps"
             class="d-p0"
           >
             <dt-list-item
-              v-for="(item, i) in items"
-              v-bind="getItemProps(i)"
+              v-for="item in items"
               :key="item.id"
-              :is-highlighted="activeItemIndex === i"
-              :set-highlight="() => setHighlightIndex(i)"
+              role="option"
               navigation-type="arrow-keys"
             >
               {{ item.number }}
-              {{ activeItemIndex }}
               <template #right>
                 {{ item.type }}
               </template>
@@ -86,7 +81,6 @@ export default {
   data () {
     return {
       value: 'example',
-      open: false,
       items: [
         { id: 'item1', number: '(732) 338-2720', type: 'MAINLINE' },
         { id: 'item2', number: '(732) 338-2722', type: 'MAINLINE' },
