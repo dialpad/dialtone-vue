@@ -123,7 +123,7 @@ export default {
     },
 
     /**
-     * Wheter or not apply hover styles.
+     * Whether or not to apply hover styles.
      */
     isHoverable () {
       return this.navigationType !== LIST_ITEM_NAVIGATION_TYPES.NONE;
