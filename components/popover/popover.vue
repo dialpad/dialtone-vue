@@ -28,7 +28,7 @@
       ref="anchor"
       data-qa="dt-popover-anchor"
     >
-      <!-- @slot Anchor element that activates the popover. -->
+      <!-- @slot Anchor element that activates the popover. Usually a button. -->
       <slot
         name="anchor"
         :attrs="{
@@ -56,7 +56,7 @@
         'd-bc-black-100',
         'dt-popover-box',
         {
-          'd-d-grid d-of-hidden dt-popover-box__grid': fixedHeader,
+          'd-d-grid d-of-hidden dt-popover-box__grid': fixedHeaderFooter,
           'd-of-auto': Boolean(maxHeight),
           'd-wmx-unset': !Boolean(maxWidth),
         },
@@ -74,25 +74,21 @@
       @leave="isOpeningPopover = false"
       @after-enter="onOpen"
     >
-      <popover-header
-        v-if="isHeaderVisible"
+      <popover-header-footer
+        v-if="$slots.headerContent || showCloseButton"
         ref="popover__header"
-        :header-class="headerClass"
-        :title="title"
+        :content-class="headerClass"
+        type="header"
         :show-close-button="showCloseButton"
         :close-button-props="closeButtonProps"
         :has-box-shadow="hasBoxShadow"
         @close="closePopover"
       >
-        <template #title>
-          <!-- @slot Slot for popover header title, defaults to title prop -->
-          <slot name="title" />
+        <template #content>
+          <!-- @slot Slot for popover header content -->
+          <slot name="headerContent" />
         </template>
-        <template #headerActions>
-          <!-- @slot Additional actions near close button. Should be used only for secondary and tertiary buttons -->
-          <slot name="headerActions" />
-        </template>
-      </popover-header>
+      </popover-header-footer>
       <div
         ref="popover__content"
         data-qa="dt-popover-content"
@@ -100,15 +96,25 @@
           'dt-popover__content',
           POPOVER_PADDING_CLASSES[padding],
           {
-            'd-of-auto': fixedHeader,
+            'd-of-auto': fixedHeaderFooter,
           },
           contentClass,
         ]"
         @scroll="onScrollContent"
       >
-        <!-- @slot Content element to display inside the popover. -->
+        <!-- @slot content that is displayed in the popover when it is open. -->
         <slot name="content" />
       </div>
+      <popover-header-footer
+        v-if="$slots.footerContent"
+        type="footer"
+        :content-class="footerClass"
+        :has-box-shadow="hasBoxShadow"
+      >
+        <template #content>
+          <slot name="footerContent" />
+        </template>
+      </popover-header-footer>
     </dt-lazy-show>
   </component>
 </template>
@@ -127,7 +133,7 @@ import {
   createTippy,
   getPopperOptions,
 } from './tippy_utils';
-import PopoverHeader from './popover_header';
+import PopoverHeaderFooter from './popover_header_footer';
 
 export default {
   name: 'DtPopover',
@@ -137,7 +143,7 @@ export default {
    ********************/
   components: {
     DtLazyShow,
-    PopoverHeader,
+    PopoverHeaderFooter,
   },
 
   mixins: [ModalMixin],
@@ -240,7 +246,7 @@ export default {
     },
 
     /**
-     * Determines should the anchor be focused after closing the popover
+     * Determines whether the anchor should be focused after closing the popover.
      */
     focusAnchorOnClose: {
       type: Boolean,
@@ -341,15 +347,6 @@ export default {
     },
 
     /**
-     * Determines title for popover header.
-     * If provided prop is not null, corresponding holder div will be rendered
-     */
-    title: {
-      type: String,
-      default: null,
-    },
-
-    /**
      * Determines the popover's z-index
      */
     zIndex: {
@@ -405,9 +402,9 @@ export default {
     /**
      * Determines fixed / sticky styles for popover header
      */
-    fixedHeader: {
+    fixedHeaderFooter: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -419,9 +416,17 @@ export default {
     },
 
     /**
-     * Additional class name for the content wrapper element.
+     * Additional class name for the header content wrapper element.
      */
     headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the footer content wrapper element.
+     */
+    footerClass: {
       type: [String, Array, Object],
       default: '',
     },
@@ -445,7 +450,7 @@ export default {
 
   computed: {
     hasBoxShadow () {
-      return this.hasScrolled && this.fixedHeader;
+      return this.hasScrolled && this.fixedHeaderFooter;
     },
 
     isDialog () {
@@ -460,18 +465,6 @@ export default {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
-    },
-
-    isHeaderVisible () {
-      return this.isTitleVisible || this.areHeaderButtonsVisible;
-    },
-
-    isTitleVisible () {
-      return this.$slots.title || this.title !== null;
-    },
-
-    areHeaderButtonsVisible () {
-      return this.$slots.headerActions;
     },
   },
 
@@ -613,12 +606,12 @@ export default {
         this.focusFirstElementIfNeeded(this.$refs.anchor);
       }
       this.closedByClickOutside = false;
-      this.tip.unmount();
+      this.tip?.unmount();
       this.$emit('update:open', false);
     },
 
     onOpen () {
-      this.$emit('update:open', true);
+      this.$emit('update:open', true, this.$refs.popover__content);
       this.focusFirstElementIfNeeded(this.$refs.popover__content);
     },
 
@@ -659,7 +652,7 @@ export default {
     },
 
     focusFirstElementIfNeeded (domEl) {
-      if (this.isDialog || this.isMenu) {
+      if (this.isDialog) {
         const focusableElements = this._getFocusableElements(domEl);
         if (focusableElements.length !== 0) {
           this.focusFirstElement(domEl);

@@ -26,6 +26,7 @@
         {
           [ TOOLTIP_KIND_MODIFIERS.inverted ]: inverted,
         },
+        contentClass,
       ]"
       @after-leave="onLeave"
     >
@@ -121,6 +122,16 @@ export default {
     interactive: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Additional css classes for the tooltip content element.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    contentClass: {
+      type: [String, Object, Array],
+      default: '',
     },
 
     /**
@@ -280,7 +291,7 @@ export default {
   methods: {
     async onLeave () {
       this.isPreventHideTooltip = true;
-      this.tip.unmount();
+      this.tip?.unmount();
       this.$emit('update:show', false);
     },
 

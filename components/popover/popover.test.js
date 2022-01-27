@@ -21,8 +21,7 @@ describe('Dialtone Vue Popover tests', function () {
   let anchor;
   let button;
   let content;
-  let title;
-  let actionButton;
+  let headerContent;
   const defaultSlotMessage = 'Message';
   const getValueUpdateShow = () => {
     const values = popoverComponent.emitted()['update:open'];
@@ -40,8 +39,7 @@ describe('Dialtone Vue Popover tests', function () {
     anchor = wrapper.find('[data-qa="dt-popover-anchor"]');
     content = wrapper.find('[data-qa="dt-popover-content"]');
     button = wrapper.find('[data-qa="dt-button"]');
-    title = wrapper.find('[data-qa="dt-popover-title"]');
-    actionButton = wrapper.find('[data-qa="dt-popover-actions"]');
+    headerContent = wrapper.find('[data-qa="dt-popover-header-footer-content"]');
     popoverComponent = wrapper.findComponent({ name: 'DtPopover' });
   };
 
@@ -95,11 +93,7 @@ describe('Dialtone Vue Popover tests', function () {
           },
           [
             h('div', { slot: 'content' }, defaultSlotMessage),
-            h('div', { slot: 'title' }, 'Popover Title'),
-            h(DtButton, {
-              slot: 'headerActions',
-              attrs: { 'data-qa': 'dt-popover-actions' },
-            }, 'Action Button'),
+            h('div', { slot: 'headerContent' }, 'Popover Title'),
           ],
         ),
       ]);
@@ -155,21 +149,12 @@ describe('Dialtone Vue Popover tests', function () {
     });
   });
 
-  describe('Title slot', function () {
+  describe('headerContent slot', function () {
     beforeEach(async function () {
       _mountWrapper(true);
     });
-    it('should render the title slot', function () {
-      assert.strictEqual(title.text(), 'Popover Title');
-    });
-  });
-
-  describe('Actions slot', function () {
-    beforeEach(function () {
-      _mountWrapper(true);
-    });
-    it('should render the action slot', function () {
-      assert.strictEqual(actionButton.text(), 'Action Button');
+    it('should render the header content slot', function () {
+      assert.strictEqual(headerContent.text(), 'Popover Title');
     });
   });
 

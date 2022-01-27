@@ -23,8 +23,9 @@
     :modal="modal"
     :content-width="contentWidth"
     :show-close-button="showCloseButton"
-    :title="title"
-    :fixed-header="fixedHeader"
+    :header-class="headerClass"
+    :footer-class="footerClass"
+    :fixed-header-footer="fixedHeaderFooter"
     :max-height="maxHeight"
     :max-width="maxWidth"
     width-content="anchor"
@@ -57,16 +58,16 @@
       </div>
     </template>
     <template
-      v-if="titleSlot"
-      #title
+      v-if="headerContent"
+      #headerContent
     >
-      <span v-html="titleSlot" />
+      <span v-html="headerContent" />
     </template>
     <template
-      v-if="headerActions"
-      #headerActions
+      v-if="footerContent"
+      #footerContent
     >
-      <span v-html="headerActions" />
+      <span v-html="footerContent" />
     </template>
   </dt-popover>
 </template>
@@ -98,7 +99,7 @@ export default {
 
   computed: {
     uniqueKey () {
-      return getUniqueString(this.title);
+      return getUniqueString();
     },
   },
 
@@ -111,7 +112,7 @@ export default {
   methods: {
     updateOpen (isOpen) {
       this.isOpen = isOpen;
-      this.onClose(isOpen);
+      this.onUpdateOpen(...arguments);
     },
   },
 };

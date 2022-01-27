@@ -29,9 +29,9 @@ const argTypesData = {
       },
     },
   },
-  titleSlot: {
-    name: 'title',
-    description: 'Slot for popover header title, defaults to title prop',
+  headerContent: {
+    name: 'headerContent',
+    description: 'Slot for popover header content',
     control: 'text',
     table: {
       category: 'slots',
@@ -40,9 +40,12 @@ const argTypesData = {
       },
     },
   },
-  headerActions: {
+  footerContent: {
+    name: 'footerContent',
+    description: 'Slot for popover footer content',
     control: 'text',
     table: {
+      category: 'slots',
       type: {
         summary: 'VNode',
       },
@@ -93,25 +96,9 @@ const argTypesData = {
       },
     },
   },
-  title: {
-    description: `Determines title for popover header. If provided prop is not null,
-     corresponding holder div will be rendered`,
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-      defaultValue: {
-        summary: 'null',
-      },
-    },
-    control: {
-      type: 'text',
-    },
-  },
 
   // Events
-  onClose: {
+  onUpdateOpen: {
     table: {
       disable: true,
     },
@@ -119,8 +106,8 @@ const argTypesData = {
 
   'update:open': {
     description: `The popover will emit a boolean value for this event when the \
-user performs a popover-closing or opening action. Parent components can sync on this value to create \
-a 2-way binding to control popover visibility.`,
+user performs a popover-closing or opening action and also the popover content reference when it was open. \
+Parent components can sync on this value to create a 2-way binding to control popover visibility.`,
     table: {
       type: {
         summary: 'boolean',
@@ -135,7 +122,7 @@ a 2-way binding to control popover visibility.`,
 
 // Default Props for all variations
 export const argsData = {
-  onClose: action('update:show'),
+  onUpdateOpen: action('update:show'),
 };
 
 export default {

@@ -1,3 +1,32 @@
+## [1.13.1](https://github.com/dialpad/dialtone-vue/compare/v1.13.0...v1.13.1) (2022-01-27)
+
+
+### Bug Fixes
+
+* update list item to apply hover when navigationType is set ([#234](https://github.com/dialpad/dialtone-vue/issues/234)) ([23c4dda](https://github.com/dialpad/dialtone-vue/commit/23c4ddace6d3b20a5a3b953e535091ca3750bb74))
+
+# [1.13.0](https://github.com/dialpad/dialtone-vue/compare/v1.12.0...v1.13.0) (2022-01-26)
+
+
+### Bug Fixes
+
+* add null check to tip.unmount() call ([#232](https://github.com/dialpad/dialtone-vue/issues/232)) ([964f114](https://github.com/dialpad/dialtone-vue/commit/964f114881ce5240584ecac25bf678b84d2d91f7))
+* render popover in combobox list ([#230](https://github.com/dialpad/dialtone-vue/issues/230)) ([a18c9ae](https://github.com/dialpad/dialtone-vue/commit/a18c9aeb8dba982d0db2ec9639317d6808518b3a))
+
+
+### Features
+
+* add class prop to tooltip content wrapper ([#233](https://github.com/dialpad/dialtone-vue/issues/233)) ([c3bf657](https://github.com/dialpad/dialtone-vue/commit/c3bf6574c0eeb0ae04486e61288f2d5376aeaaf3))
+* implement footer into popover ([#231](https://github.com/dialpad/dialtone-vue/issues/231)) ([6dd5ffe](https://github.com/dialpad/dialtone-vue/commit/6dd5ffe869db2b8852b06e931b9947866e31e020))
+
+# [1.12.0](https://github.com/dialpad/dialtone-vue/compare/v1.11.0...v1.12.0) (2022-01-24)
+
+
+### Features
+
+* add event `dt-popover-close` to close popover instances ([#228](https://github.com/dialpad/dialtone-vue/issues/228)) ([65da860](https://github.com/dialpad/dialtone-vue/commit/65da860deecacdc8c219313beda433b5baa38e74))
+* dt-toggle ([#226](https://github.com/dialpad/dialtone-vue/issues/226)) ([002c780](https://github.com/dialpad/dialtone-vue/commit/002c7804d7495eeecdaad1fcab27a29557681db6))
+
 # [1.11.0](https://github.com/dialpad/dialtone-vue/compare/v1.10.1...v1.11.0) (2022-01-20)
 
 
