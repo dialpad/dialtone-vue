@@ -25,6 +25,7 @@
       data-qa="dt-combobox-list-wrapper"
       @mouseleave="clearHighlightIndex"
       @focusout="clearHighlightIndex"
+      @mouseover.capture="onMouseHighlight"
     >
       <!-- @slot Slot for the combobox list element -->
       <slot
@@ -158,8 +159,12 @@ export default {
   },
 
   methods: {
+    onMouseHighlight (e) {
+      this.setHighlightId(e.target.parentNode.id);
+    },
+
     getListElement () {
-      return this.outsideRenderedListRef ?? this.$refs.listWrapper;
+      return this.outsideRenderedListRef ?? this.$refs.listWrapper.querySelector(`#${this.listId}`);
     },
 
     clearHighlightIndex () {

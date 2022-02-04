@@ -65,7 +65,7 @@ export default ({
       const listElement = this._getListElement();
 
       if (!listElement) {
-        console.error(`listElementKey is required or the referenced element doesn't exist. Received 
+        console.error(`listElementKey is required or the referenced element doesn't exist. Received
           listElement: `, listElement);
 
         return 0;
@@ -127,6 +127,27 @@ export default ({
         await this.$nextTick();
         this[afterHighlightMethod](num);
       }
+    },
+
+    async setHighlightId (id) {
+      this[idKey] = id;
+      this[indexKey] = this._getItemIndex(id);
+
+      if (this._itemsLength() && afterHighlightMethod) {
+        await this.$nextTick();
+        this[afterHighlightMethod](this._getItemIndex(id));
+      }
+    },
+
+    _getItemIndex (id) {
+      const listElement = this._getListElement();
+      if (!listElement) {
+        return;
+      }
+
+      const listItems = Array.from(listElement.querySelectorAll(`[role="${listItemRole}"]`));
+      const index = listItems.indexOf(listElement.querySelector(`#${id}`));
+      return index;
     },
 
     _getItemId (index) {

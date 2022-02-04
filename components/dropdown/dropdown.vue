@@ -31,9 +31,11 @@
       <ul
         :id="listId"
         ref="listWrapper"
+        tabindex="-1"
         class="d-p0 d-ps-relative"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
+        @mouseover.capture="onMouseHighlight"
       >
         <!-- @slot Slot for the list component -->
         <slot
@@ -68,7 +70,7 @@ export default {
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
       activeItemKey: 'activeItemEl',
-      focusOnKeyboardNavigation: true,
+      focusOnKeyboardNavigation: false,
     }),
   ],
 
@@ -164,7 +166,6 @@ export default {
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
-      openedWithKeyboard: false,
       isOpen: this.open,
     };
   },
@@ -183,7 +184,17 @@ export default {
     },
   },
 
+  watch: {
+    open (newValue) {
+      this.isOpen = newValue;
+    },
+  },
+
   methods: {
+    onMouseHighlight (e) {
+      this.setHighlightId(e.target.parentNode.id);
+    },
+
     getListElement () {
       return this.$refs.listWrapper;
     },
@@ -198,25 +209,12 @@ export default {
 
     updateInitialHighlightIndex (isPopoverOpen) {
       if (isPopoverOpen) {
-        // If the dropdown was opened with keyboard, focus first element
-        if (this.openedWithKeyboard) {
-          // Focus first item on keyboard navigation
-          this.$refs.popover.focusFirstElement(this.getListElement());
-
-          if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
-            this.setHighlightIndex(0);
-          }
-
-          this.$emit('update:open', true);
+        if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+          this.setHighlightIndex(0);
         }
+        this.$emit('update:open', true);
       } else {
         this.clearHighlightIndex();
-
-        if (this.openedWithKeyboard) {
-          // Return focus to anchor element since it had the focus
-          this.$refs.popover.focusFirstElement(this.$refs.anchor);
-          this.openedWithKeyboard = false;
-        }
 
         this.isOpen = false;
         this.$emit('update:open', false);
@@ -258,12 +256,6 @@ export default {
     onEscapeKey () {
       this.isOpen = false;
       this.$emit('escape');
-    },
-  },
-
-  watch: {
-    open (newValue) {
-      this.isOpen = newValue;
     },
   },
 };
