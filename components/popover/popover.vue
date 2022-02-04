@@ -493,6 +493,11 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    isFixedHeaderFooter () {
+      // don't apply fixed header/footer classes if there's nothing in the slots
+      return this.fixedHeaderFooter && (this.$slots.headerContent || this.$slots.footerContent);
+    },
+
     addClosePopoverEventLister () {
       window.addEventListener('dt-popover-close', this.closePopover);
     },
