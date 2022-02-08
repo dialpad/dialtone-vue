@@ -160,7 +160,11 @@ export default {
 
   methods: {
     onMouseHighlight (e) {
-      this.setHighlightId(e.target.parentNode.id);
+      const liElement = e.target.closest('li');
+
+      if (liElement && liElement.classList.contains('dt-list-item--hoverable')) {
+        this.setHighlightId(liElement.id);
+      }
     },
 
     getListElement () {
