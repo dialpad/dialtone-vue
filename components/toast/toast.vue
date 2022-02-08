@@ -1,6 +1,5 @@
 <template>
   <div
-    class="d-toast-wrapper"
     data-qa="dt-toast-container"
   >
     <div
@@ -31,7 +30,6 @@
       ]"
       v-on="$listeners"
       @after-leave="onLeave"
-      @after-enter="onOpen"
     >
       <div
         ref="toast__content"
@@ -271,7 +269,7 @@ export default {
     },
   },
 
-  emits: ['update:show', 'close'],
+  emits: ['close'],
 
   data () {
     return {
@@ -386,11 +384,7 @@ export default {
     */
 
     onLeave () {
-      this.$emit('update:show', false);
-    },
-
-    onOpen () {
-      this.$emit('update:show', true, this.$refs.toast__content);
+      this.$emit('close');
     },
 
     onHide () {

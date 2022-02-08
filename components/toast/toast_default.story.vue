@@ -18,13 +18,12 @@
     :hide-on-click="hideOnClick"
     :interactive="interactive"
     :show="isShown"
-    @update:show="updateShow"
     @close="isShown = false"
   >
     <template #anchor="{ attrs }">
       <dt-button
         v-bind="attrs"
-        @click="isShown = !isShown"
+        @click="isShown = true"
       >
         Click to show!
       </dt-button>
@@ -119,13 +118,6 @@ export default {
   watch: {
     show (isShown) {
       this.isShown = isShown;
-    },
-  },
-
-  methods: {
-    updateShow (isShown) {
-      this.isShown = isShown;
-      this.onUpdateShow(...arguments);
     },
   },
 };
