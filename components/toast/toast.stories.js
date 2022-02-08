@@ -3,13 +3,13 @@ import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
 import { DtToast } from './';
 import DtToastMdx from './toast.mdx';
 import DtToastDefaultTemplate from './toast_default.story.vue';
+import DtToastVariantsTemplate from './toast_variants.story.vue';
 import { NOTICE_KINDS } from '../notice';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
 import { BASE_TIPPY_ABSOLUTE_POSITIONING } from '../popover/tippy_utils';
 
 // Default Prop Values
 export const argsData = {
-  onUpdateShow: action('update:show'),
   onClick: action('click'),
   onClose: action('close'),
 };
@@ -108,22 +108,7 @@ export const argTypesData = {
       disable: true,
     },
   },
-  onUpdateShow: {
-    table: {
-      disable: true,
-    },
-  },
 
-  'update:show': {
-    description: `The popover will emit a boolean value for this event when the \
-user performs a popover-closing or opening action and also the popover content reference when it was open. \
-Parent components can sync on this value to create a 2-way binding to control popover visibility.`,
-    table: {
-      type: {
-        summary: 'boolean',
-      },
-    },
-  },
   hideOnClick: {
     type: 'select',
     options: TOOLTIP_HIDE_ON_CLICK_VARIANTS,
@@ -161,6 +146,12 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtToastDefaultTemplate,
 );
 
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtToastVariantsTemplate,
+);
+
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {
@@ -168,36 +159,5 @@ Default.args = {
   kind: 'base',
 };
 
-export const Error = DefaultTemplate.bind({});
-Error.args = {
-  ...Default.args,
-  title: 'Error title (optional)',
-  kind: 'error',
-};
-
-export const Info = DefaultTemplate.bind({});
-Info.args = {
-  ...Default.args,
-  title: 'Info title (optional)',
-  kind: 'info',
-};
-
-export const Success = DefaultTemplate.bind({});
-Success.args = {
-  ...Default.args,
-  title: 'Success title (optional)',
-  kind: 'success',
-};
-
-export const Warning = DefaultTemplate.bind({});
-Warning.args = {
-  ...Default.args,
-  title: 'Warning title (optional)',
-  kind: 'warning',
-};
-
-export const Important = DefaultTemplate.bind({});
-Important.args = {
-  ...Default.args,
-  important: true,
-};
+export const Variants = VariantsTemplate.bind({});
+Variants.args = {};
