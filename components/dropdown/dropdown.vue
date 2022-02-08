@@ -31,7 +31,6 @@
       <ul
         :id="listId"
         ref="listWrapper"
-        tabindex="-1"
         class="d-p0 d-ps-relative"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
@@ -70,7 +69,7 @@ export default {
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
       activeItemKey: 'activeItemEl',
-      focusOnKeyboardNavigation: false,
+      focusOnKeyboardNavigation: true,
     }),
   ],
 
@@ -192,7 +191,11 @@ export default {
 
   methods: {
     onMouseHighlight (e) {
-      this.setHighlightId(e.target.parentNode.id);
+      const liElement = e.target.closest('li');
+
+      if (liElement && liElement.classList.contains('dt-list-item--hoverable') && this.highlightId !== liElement.id) {
+        this.setHighlightId(liElement.id);
+      }
     },
 
     getListElement () {
@@ -209,7 +212,7 @@ export default {
 
     updateInitialHighlightIndex (isPopoverOpen) {
       if (isPopoverOpen) {
-        if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+        if (this.openedWithKeyboard) {
           this.setHighlightIndex(0);
         }
         this.$emit('update:open', true);

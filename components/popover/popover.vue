@@ -774,7 +774,7 @@ export default {
     },
 
     focusFirstElementIfNeeded (domEl) {
-      const focusableElements = this._getFocusableElements(domEl);
+      const focusableElements = this._getFocusableElements(domEl, true);
       if (focusableElements.length !== 0) {
         this.focusFirstElement(domEl);
       } else if (this.showCloseButton) {
