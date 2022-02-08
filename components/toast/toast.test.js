@@ -13,15 +13,25 @@ import { useFakeTimers } from 'sinon';
 import {
   itBehavesLikePassesChildProp,
 } from '../../tests/shared_examples/extendability';
+import { DtButton } from '../button';
 
 // Constants
-const basePropsData = {};
-const baseSlotsData = {};
+const basePropsData = {
+  show: false,
+  closeButtonProps: {
+    ariaLabel: 'close',
+  },
+};
+const baseSlotsData = {
+  anchor: '<dt-button @click="isShown = !isShown">Click to show!</dt-button>',
+};
 
 describe('DtToast Tests', function () {
   // Wrappers
   let wrapper;
   let toast;
+  let toastContainer;
+
   let actionChildStub;
   let contentChildStub;
   let iconChildStub;
@@ -32,33 +42,33 @@ describe('DtToast Tests', function () {
   let slots = baseSlotsData;
 
   // Helpers
+  const _mountWrapper = () => {
+    wrapper = shallowMount(DtToast, {
+      localVue: createLocalVue(),
+      components: { DtButton },
+      propsData,
+      attrs,
+      slots,
+    });
+  };
+
+  let clock;
+
   const _setChildWrappers = () => {
+    toastContainer = wrapper.find('[data-qa="dt-toast-container"]');
     toast = wrapper.find('[data-qa="dt-toast"]');
+
     actionChildStub = wrapper.find('dt-notice-action-stub');
     contentChildStub = wrapper.find('dt-notice-content-stub');
     iconChildStub = wrapper.find('dt-notice-icon-stub');
   };
-  let clock;
-
-  const _setWrappers = () => {
-    wrapper = shallowMount(DtToast, {
-      propsData,
-      attrs,
-      slots,
-      localVue: this.localVue,
-    });
-  };
 
   const _showToast = async () => {
-    wrapper.vm.show();
-    await wrapper.vm.$nextTick();
+    await wrapper.setProps({
+      show: true,
+    });
     _setChildWrappers();
   };
-
-  // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
 
   // Teardown
   afterEach(function () {
@@ -71,12 +81,13 @@ describe('DtToast Tests', function () {
     describe('When the toast renders', function () {
       // Test Setup
       beforeEach(async function () {
-        _setWrappers();
+        _mountWrapper();
         await _showToast();
       });
 
-      it('should exist', function () { assert.exists(wrapper); });
-      it('should render the toast', function () { assert.isTrue(toast.exists()); });
+      it('should render the component', function () { assert.exists(wrapper); });
+      it('should render the container', function () { assert.exists(toastContainer); });
+      it('should render the toast', function () { assert.exists(toast); });
     });
 
     describe('When the toast renders with slots', function () {
@@ -88,7 +99,7 @@ describe('DtToast Tests', function () {
           action: 'action slot content',
           icon: 'icon slot content',
         };
-        _setWrappers();
+        _mountWrapper();
         await _showToast();
       });
 
@@ -115,11 +126,22 @@ describe('DtToast Tests', function () {
           title: 'title prop content',
           message: 'message prop content',
           hideClose: true,
+          kind: 'info',
+          closeButtonProps: {
+            ariaLabel: 'custom label',
+          },
+          role: 'alert',
         };
-        _setWrappers();
+        _mountWrapper();
         await _showToast();
       });
 
+      /* dt-notice-icon props */
+      it('kind prop is passed down correctly', function () {
+        itBehavesLikePassesChildProp(iconChildStub, 'kind', propsData.kind);
+      });
+
+      /* dt-notice-content props */
       it('titleId prop is passed down correctly', function () {
         itBehavesLikePassesChildProp(contentChildStub, 'titleId', propsData.titleId);
       });
@@ -136,6 +158,7 @@ describe('DtToast Tests', function () {
         assert.strictEqual(contentChildStub.text(), propsData.message);
       });
 
+      /* dt-notice-action props */
       it('hideClose prop is passed down correctly', function () {
         itBehavesLikePassesChildProp(actionChildStub, 'hideClose', propsData.hideClose);
       });
@@ -144,7 +167,7 @@ describe('DtToast Tests', function () {
     describe('When kind is not specified', function () {
       // Test Setup
       beforeEach(async function () {
-        _setWrappers();
+        _mountWrapper();
         await _showToast();
       });
 
@@ -157,7 +180,7 @@ describe('DtToast Tests', function () {
       // Test Setup
       beforeEach(async function () {
         propsData = { ...basePropsData, kind: 'error' };
-        _setWrappers();
+        _mountWrapper();
         await _showToast();
       });
 
@@ -169,7 +192,7 @@ describe('DtToast Tests', function () {
     describe('When important is not provided', function () {
       // Test Setup
       beforeEach(async function () {
-        _setWrappers();
+        _mountWrapper();
         await _showToast();
       });
 
@@ -182,7 +205,7 @@ describe('DtToast Tests', function () {
       // Test Setup
       beforeEach(async function () {
         propsData = { ...basePropsData, important: true };
-        _setWrappers();
+        _mountWrapper();
         await _showToast();
       });
 
@@ -197,7 +220,7 @@ describe('DtToast Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        _setWrappers();
+        _mountWrapper();
         clock = useFakeTimers(global);
       });
 
@@ -207,14 +230,13 @@ describe('DtToast Tests', function () {
 
       it('should close the toast after default duration', async function () {
         await _showToast();
-
-        assert.isTrue(toast.exists());
+        assert.strictEqual(toast.attributes('aria-hidden'), 'false');
 
         clock.tick(duration);
         await wrapper.vm.$nextTick();
         _setChildWrappers();
 
-        assert.isFalse(toast.exists());
+        assert.strictEqual(toast.attributes('aria-hidden'), 'true');
       });
     });
 
@@ -225,7 +247,7 @@ describe('DtToast Tests', function () {
       // Test Setup
       beforeEach(function () {
         propsData = { ...basePropsData, duration };
-        _setWrappers();
+        _mountWrapper();
         clock = useFakeTimers(global);
       });
 
@@ -235,26 +257,54 @@ describe('DtToast Tests', function () {
 
       it('should close the toast after duration time is finished', async function () {
         await _showToast();
+        assert.strictEqual(toast.attributes('aria-hidden'), 'false');
 
-        assert.isTrue(toast.exists());
-
-        clock.tick(duration + 1);
+        clock.tick(duration);
         await wrapper.vm.$nextTick();
+
         _setChildWrappers();
 
-        assert.isFalse(toast.exists());
+        assert.strictEqual(toast.attributes('aria-hidden'), 'true');
       });
 
       it('should close the toast with close method', async function () {
         await _showToast();
-
-        assert.isTrue(toast.exists());
+        assert.strictEqual(toast.attributes('aria-hidden'), 'false');
 
         wrapper.vm.close();
         await wrapper.vm.$nextTick();
+
         _setChildWrappers();
 
-        assert.isFalse(toast.exists());
+        assert.strictEqual(toast.attributes('aria-hidden'), 'true');
+      });
+    });
+
+    describe('When placement is set to bottom-start', function () {
+      // Test Setup
+      beforeEach(async function () {
+        propsData = { ...basePropsData, placement: 'bottom-start' };
+        _mountWrapper();
+        await _showToast();
+      });
+
+      it('should use the bottom-start placement', function () {
+        assert.strictEqual(toast.attributes('data-placement'), propsData.placement);
+      });
+    });
+
+    describe('When placement is not provided', function () {
+      // Test environment
+      const placement = DtToast.props.placement.default;
+
+      // Test Setup
+      beforeEach(async function () {
+        _mountWrapper();
+        await _showToast();
+      });
+
+      it('should use the default placement', function () {
+        assert.strictEqual(toast.attributes('data-placement'), placement);
       });
     });
   });
@@ -266,7 +316,7 @@ describe('DtToast Tests', function () {
 
       // Test Setup
       beforeEach(async function () {
-        _setWrappers();
+        _mountWrapper();
         await _showToast();
       });
 
@@ -283,7 +333,7 @@ describe('DtToast Tests', function () {
       // Test Setup
       beforeEach(async function () {
         propsData = { ...basePropsData, role: 'alert' };
-        _setWrappers();
+        _mountWrapper();
         await _showToast();
       });
 
@@ -296,7 +346,7 @@ describe('DtToast Tests', function () {
   describe('Validation Tests', function () {
     // Test Setup
     beforeEach(function () {
-      _setWrappers();
+      _mountWrapper();
     });
 
     describe('Role Validator', function () {
@@ -351,7 +401,7 @@ describe('DtToast Tests', function () {
     // Helpers
     const _setupChildPropsTest = async (childPropName) => {
       propsData[childPropName] = propValue;
-      _setWrappers();
+      _mountWrapper();
       await _showToast();
     };
 

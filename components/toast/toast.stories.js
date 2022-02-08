@@ -1,18 +1,28 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
-import DtToast from './toast';
+import { DtToast } from './';
 import DtToastMdx from './toast.mdx';
 import DtToastDefaultTemplate from './toast_default.story.vue';
 import { NOTICE_KINDS } from '../notice';
+import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
+import { BASE_TIPPY_ABSOLUTE_POSITIONING } from '../popover/tippy_utils';
 
 // Default Prop Values
 export const argsData = {
-  onClose: action('close'),
+  onUpdateShow: action('update:show'),
   onClick: action('click'),
+  onClose: action('close'),
 };
 
 export const argTypesData = {
   // Slots
+  anchor: {
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
   titleOverride: {
     table: {
       type: { summary: 'VNode' },
@@ -48,6 +58,13 @@ export const argTypesData = {
   },
 
   // Props
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
   titleId: {
     table: {
       defaultValue: {
@@ -68,6 +85,17 @@ export const argTypesData = {
       options: NOTICE_KINDS,
     },
   },
+  placement: {
+    control: {
+      type: 'select',
+      options: BASE_TIPPY_ABSOLUTE_POSITIONING,
+    },
+    table: {
+      defaultValue: {
+        summary: 'top-center',
+      },
+    },
+  },
 
   // Action Event Handlers
   onClick: {
@@ -79,6 +107,26 @@ export const argTypesData = {
     table: {
       disable: true,
     },
+  },
+  onUpdateShow: {
+    table: {
+      disable: true,
+    },
+  },
+
+  'update:show': {
+    description: `The popover will emit a boolean value for this event when the \
+user performs a popover-closing or opening action and also the popover content reference when it was open. \
+Parent components can sync on this value to create a 2-way binding to control popover visibility.`,
+    table: {
+      type: {
+        summary: 'boolean',
+      },
+    },
+  },
+  hideOnClick: {
+    type: 'select',
+    options: TOOLTIP_HIDE_ON_CLICK_VARIANTS,
   },
 
   close: {

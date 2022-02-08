@@ -1,64 +1,75 @@
 <template>
-  <div>
-    <dt-button @click="buttonClicked">
-      Click to show!
-    </dt-button>
+  <dt-toast
+    :id="id"
+    :kind="kind"
+    :title="title"
+    :message="message"
+    :title-id="titleId"
+    :content-id="contentId"
+    :important="important"
+    :hide-close="hideClose"
+    :duration="duration"
+    :close-button-props="buttonCloseProps"
+    :placement="placement"
+    :append-to="appendTo"
+    :role="role"
+    :transition="transition"
+    :trigger="trigger"
+    :hide-on-click="hideOnClick"
+    :interactive="interactive"
+    :show="isShown"
+    @update:show="updateShow"
+    @close="isShown = false"
+  >
+    <template #anchor="{ attrs }">
+      <dt-button
+        v-bind="attrs"
+        @click="isShown = !isShown"
+      >
+        Click to show!
+      </dt-button>
+    </template>
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
+    <span v-else>
+      Message body with
+      <a
+        href="#"
+        class="d-link"
+        :class="linkClass"
+      >a link</a>.
+    </span>
 
-    <dt-toast
-      ref="toast"
-      :kind="kind"
-      :title="title"
-      :message="message"
-      :title-id="titleId"
-      :content-id="contentId"
-      :important="important"
-      :hide-close="hideClose"
-      :duration="duration"
-      :close-button-props="buttonCloseProps"
-      @close="closeToast(); onClose($event)"
-    >
+    <template #action>
       <span
-        v-if="defaultSlot"
-        v-html="defaultSlot"
+        v-if="action"
+        v-html="action"
       />
-      <span v-else>
-        Message body with
-        <a
-          href="#"
-          class="d-link"
-          :class="linkClass"
-        >a link</a>.
-      </span>
-
-      <template #action>
-        <span
-          v-if="action"
-          v-html="action"
-        />
-        <dt-button
-          v-else
-          size="sm"
-          importance="outlined"
-          :kind="buttonKind"
-          @click="onClick"
-        >
-          Action
-        </dt-button>
-      </template>
-      <template
-        v-if="icon"
-        #icon
+      <dt-button
+        v-else
+        size="sm"
+        importance="outlined"
+        :kind="buttonKind"
+        @click="onClick"
       >
-        <component :is="icon" />
-      </template>
-      <template
-        v-if="titleOverride"
-        #titleOverride
-      >
-        <span v-html="titleOverride" />
-      </template>
-    </dt-toast>
-  </div>
+        Action
+      </dt-button>
+    </template>
+    <template
+      v-if="icon"
+      #icon
+    >
+      <component :is="icon" />
+    </template>
+    <template
+      v-if="titleOverride"
+      #titleOverride
+    >
+      <span v-html="titleOverride" />
+    </template>
+  </dt-toast>
 </template>
 
 <script>
@@ -72,6 +83,12 @@ export default {
   components: { DtToast, DtButton },
 
   mixins: [icon],
+
+  data () {
+    return {
+      isShown: this.show || false,
+    };
+  },
 
   computed: {
     shouldInvertButton () {
@@ -99,13 +116,16 @@ export default {
     },
   },
 
-  methods: {
-    buttonClicked () {
-      this.$refs.toast.show();
+  watch: {
+    show (isShown) {
+      this.isShown = isShown;
     },
+  },
 
-    closeToast () {
-      this.$refs.toast.close();
+  methods: {
+    updateShow (isShown) {
+      this.isShown = isShown;
+      this.onUpdateShow(...arguments);
     },
   },
 };
