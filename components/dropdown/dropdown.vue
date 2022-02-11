@@ -47,10 +47,10 @@
 </template>
 
 <script>
-import KeyboardNavigation from '../mixins/keyboard_list_navigation';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { DtPopover } from '../popover';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
-import { getUniqueString } from '../utils';
+import { getUniqueString } from '@/common/utils';
 
 export default {
   name: 'DtDropdown',
