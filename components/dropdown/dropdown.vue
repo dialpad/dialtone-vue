@@ -212,7 +212,7 @@ export default {
 
     updateInitialHighlightIndex (isPopoverOpen) {
       if (isPopoverOpen) {
-        if (this.openedWithKeyboard) {
+        if (this.openedWithKeyboard && this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
           this.setHighlightIndex(0);
         }
         this.$emit('update:open', true);
