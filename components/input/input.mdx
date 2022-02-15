@@ -218,6 +218,41 @@ import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 />
 ```
 
+## With Length Validation
+
+Adds validation for the input lenght. Make sure to provide the following props:
+
+- `length` length of the input.
+- `maxLength` maximum length allowed to enter.
+- `lengthDescription` text describing the maximum length allowed.
+- `lengthValidationMessage` message to show in the validation message.
+- `warnLengthThreshold` length from which the validation message will be shown as a warning.
+When the maximum length is reached, the validation message will be shown as an error.
+
+<Canvas>
+  <Story id="components-input--with-length-validation" />
+</Canvas>
+
+### Usage
+
+```js
+import { DtInput } from '@dialpad/dialtone-vue';
+```
+
+```html
+<dt-input
+  v-model="text"
+  placeholder="placeholder"
+  max-length="25"
+  length="length"
+  warn-length-threshold="15"
+  length-description="Max 25 characters."
+  length-validation-message="lengthValidationMessage"
+/>
+```
+
+`length` and `lengthValidationMessage` should be provide in your component.
+
 ## Sizes
 
 |name           |prop value                     |size|Example                                |

@@ -399,6 +399,84 @@ describe('Dialtone Vue Input tests', function () {
         });
       });
     });
+
+    describe('When the length validation props are provided', function () {
+      // Test Environment
+      let length;
+      const lengthDescription = 'Max. 20 characters.';
+      const lengthValidationMessage = 'Validation message';
+
+      // Test Setup
+      beforeEach(async function () {
+        propsData = {
+          length,
+          maxLength: 20,
+          lengthDescription,
+          lengthValidationMessage,
+          warnLengthThreshold: 12,
+        };
+        _mountWrapper();
+        _setChildWrappers();
+      });
+
+      describe('When the input length is below warning threshold and the input is focused', function () {
+        // Test Setup
+        before(function () {
+          length = 8;
+          nativeInput.trigger('focus');
+        });
+
+        it('should not show the length validation message', function () {
+          assert.isFalse(wrapper.find('[data-qa="dt-input-length-validation-message"]').exists());
+        });
+
+        it('should show the length description', function () {
+          assert.strictEqual(wrapper.find('[data-qa="dt-input-length-description"]').text(), lengthDescription);
+        });
+      });
+
+      describe('When the input length is above warning threshold and the input is focused', function () {
+        // Test Setup
+        before(function () {
+          length = 12;
+        });
+
+        it('should show a warning validation message', async function () {
+          await nativeInput.trigger('focus');
+          assert.isTrue(wrapper.find('[data-qa="dt-input-length-validation-message"]').exists());
+          const inputWarningMessages = wrapper.findAll('.d-validation-message--warning');
+          assert.equal(inputWarningMessages.length, 1);
+          assert.strictEqual(wrapper.find('.d-validation-message--warning').text(), lengthValidationMessage);
+        });
+      });
+
+      describe('When the input length reaches the maximum length and the input is focused', function () {
+        // Test Setup
+        before(function () {
+          length = 20;
+        });
+
+        it('should show an error validation message', async function () {
+          await nativeInput.trigger('focus');
+          assert.isTrue(wrapper.find('[data-qa="dt-input-length-validation-message"]').exists());
+          const inputWarningMessages = wrapper.findAll('.d-validation-message--error');
+          assert.equal(inputWarningMessages.length, 1);
+        });
+      });
+
+      describe('When the input length reaches the maximum length and the input is not focused', function () {
+        // Test Setup
+        before(function () {
+          length = 20;
+        });
+
+        it('should not show an error validation message', function () {
+          assert.isFalse(wrapper.find('[data-qa="dt-input-length-validation-message"]').exists());
+          const inputWarningMessages = wrapper.findAll('.d-validation-message--error');
+          assert.equal(inputWarningMessages.length, 0);
+        });
+      });
+    });
   });
 
   describe('Reactivity Tests', function () {

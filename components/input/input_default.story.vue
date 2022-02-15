@@ -1,7 +1,9 @@
 <template>
   <dt-input
+    ref="input"
     :value="value"
     :type="type"
+    v-model="inputValue"
     :messages="messages"
     :size="size"
     :label="label"
@@ -12,6 +14,11 @@
     :messages-class="messagesClass"
     :placeholder="placeholder"
     :input-class="inputClass"
+    :max-length="maxLength"
+    :length="length ? length : lengthCounter"
+    :warn-length-threshold="warnLengthThreshold"
+    :length-description="lengthDescription"
+    :length-validation-message="lengthValidationMessage ? lengthValidationMessage : validationMessage"
     @blur="onBlur"
     @input="onInput"
     @clear="onClear"
@@ -51,7 +58,25 @@ import icon from '../mixins/icon';
 
 export default {
   name: 'InputDefault',
+
   components: { DtInput },
+
   mixins: [icon],
+
+  data () {
+    return {
+      inputValue: '',
+    };
+  },
+
+  computed: {
+    lengthCounter () {
+      return this.inputValue.length;
+    },
+
+    validationMessage () {
+      return `${(this.maxLength - this.lengthCounter)} characters left`;
+    },
+  },
 };
 </script>

@@ -24,17 +24,31 @@
         </div>
       </slot>
       <div
-        v-if="$slots.description || description"
+        v-if="$slots.description || description || showLengthLimit"
         :id="descriptionKey"
         :class="[
           'base-input__description',
           'd-description',
+          'd-fd-column',
           descriptionSizeClasses[size],
         ]"
         data-qa="dt-input-description"
       >
-        <!-- @slot slot for description, defaults to description prop -->
-        <slot name="description">{{ description }}</slot>
+        <div
+          v-if="$slots.description || description"
+        >
+          <!-- @slot slot for description, defaults to description prop -->
+          <slot name="description">{{ description }}</slot>
+        </div>
+        <div
+          v-if="showLengthLimit"
+          data-qa="dt-input-length-description"
+          :class="[
+            'd-mb2',
+          ]"
+        >
+          {{ lengthDescription }}
+        </div>
       </div>
       <div class="d-input__wrapper">
         <span
@@ -52,8 +66,11 @@
           :name="name"
           :disabled="disabled"
           :class="inputClasses()"
+          :maxlength="showLengthLimit ? maxLength : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
+          @focus="isInputFocused = true"
+          @blur="isInputFocused = false"
           v-on="inputListeners"
         />
         <input
@@ -64,8 +81,11 @@
           :type="type"
           :disabled="disabled"
           :class="inputClasses()"
+          :maxlength="showLengthLimit ? maxLength : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
+          @focus="isInputFocused = true"
+          @blur="isInputFocused = false"
           v-on="inputListeners"
         >
         <span
@@ -79,6 +99,11 @@
       </div>
     </label>
     <dt-validation-messages
+      :validation-messages="inputLengthErrorMessage"
+      :show-messages="showLengthLimitValidation"
+      data-qa="dt-input-length-validation-message"
+    />
+    <dt-validation-messages
       :validation-messages="formattedMessages"
       :show-messages="showMessages"
       :class="messagesClass"
@@ -89,7 +114,7 @@
 </template>
 
 <script>
-import { DESCRIPTION_SIZE_TYPES } from '../constants.js';
+import { DESCRIPTION_SIZE_TYPES, VALIDATION_MESSAGE_TYPES } from '../constants.js';
 import { INPUT_TYPES, INPUT_SIZES } from './input_constants.js';
 import {
   getUniqueString,
@@ -176,6 +201,46 @@ export default {
       type: [String, Object, Array],
       default: '',
     },
+
+    /**
+     * Maximum number of characters the user can enter.
+     */
+    maxLength: {
+      type: Number,
+      default: null,
+    },
+
+    /**
+     * Input length.
+     */
+    length: {
+      type: Number,
+      default: null,
+    },
+
+    /**
+     * Length where the warning message should be shown.
+     */
+    warnLengthThreshold: {
+      type: Number,
+      default: null,
+    },
+
+    /**
+     * Text to shown in the description describing the maximum length.
+     */
+    lengthDescription: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Text to shown in the length validation message.
+     */
+    lengthValidationMessage: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: ['blur', 'input', 'clear', 'focusin', 'focusout'],
@@ -194,6 +259,8 @@ export default {
         lg: 'd-label--lg',
         xl: 'd-label--xl',
       },
+
+      isInputFocused: false,
     };
   },
 
@@ -247,6 +314,37 @@ export default {
       return this.showMessages && this.inputState;
     },
 
+    inputLengthState () {
+      if (this.length < this.warnLengthThreshold) {
+        return null;
+      } else if (this.length < this.maxLength) {
+        return VALIDATION_MESSAGE_TYPES.WARNING;
+      } else {
+        return VALIDATION_MESSAGE_TYPES.ERROR;
+      }
+    },
+
+    showLengthLimit () {
+      return !!(
+        this.maxLength &&
+        this.length !== null &&
+        this.warnLengthThreshold &&
+        this.lengthDescription &&
+        this.lengthValidationMessage
+      );
+    },
+
+    showLengthLimitValidation () {
+      return this.showLengthLimit && this.inputLengthState !== null && this.isInputFocused;
+    },
+
+    inputLengthErrorMessage () {
+      return this.showLengthLimitValidation ? [{
+        message: this.lengthValidationMessage,
+        type: this.inputLengthState,
+      }] : [];
+    },
+
     sizeModifierClass () {
       if (this.isDefaultSize || !this.isValidSize) {
         return '';
@@ -293,6 +391,7 @@ export default {
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
         {
           [inputStateClasses[this.inputComponent][this.inputState]]: this.showInputState,
+          [inputStateClasses[this.inputComponent][this.inputLengthState]]: this.showLengthLimitValidation,
           'd-input-icon--left': this.$slots.leftIcon,
           'd-input-icon--right': this.$slots.rightIcon,
         },
