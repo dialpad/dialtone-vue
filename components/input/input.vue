@@ -69,8 +69,6 @@
           :maxlength="showLengthLimit ? maxLength : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
-          @focus="isInputFocused = true"
-          @blur="isInputFocused = false"
           v-on="inputListeners"
         />
         <input
@@ -84,8 +82,6 @@
           :maxlength="showLengthLimit ? maxLength : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
-          @focus="isInputFocused = true"
-          @blur="isInputFocused = false"
           v-on="inputListeners"
         >
         <span
@@ -298,7 +294,14 @@ export default {
         */
         ...this.$listeners,
         input: event => this.$emit('input', event.target.value),
-        blur: event => this.onBlur(event),
+        focus: event => {
+          this.isInputFocused = true;
+        },
+
+        blur: event => {
+          this.isInputFocused = false;
+          this.onBlur(event);
+        },
       };
     },
 
