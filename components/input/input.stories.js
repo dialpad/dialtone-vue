@@ -91,7 +91,7 @@ export const argTypesData = {
       },
     },
   },
-  length: {
+  currentLength: {
     table: {
       defaultValue: {
         summary: 'null',

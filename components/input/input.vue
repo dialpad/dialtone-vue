@@ -209,7 +209,7 @@ export default {
     /**
      * Input length.
      */
-    length: {
+    currentLength: {
       type: Number,
       default: null,
     },
@@ -318,9 +318,9 @@ export default {
     },
 
     inputLengthState () {
-      if (this.length < this.warnLengthThreshold) {
+      if (this.currentLength < this.warnLengthThreshold) {
         return null;
-      } else if (this.length < this.maxLength) {
+      } else if (this.currentLength < this.maxLength) {
         return VALIDATION_MESSAGE_TYPES.WARNING;
       } else {
         return VALIDATION_MESSAGE_TYPES.ERROR;
@@ -330,7 +330,7 @@ export default {
     showLengthLimit () {
       return !!(
         this.maxLength &&
-        this.length !== null &&
+        this.currentLength !== null &&
         this.warnLengthThreshold &&
         this.lengthDescription &&
         this.lengthValidationMessage

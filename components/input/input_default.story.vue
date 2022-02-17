@@ -1,9 +1,9 @@
 <template>
   <dt-input
     ref="input"
+    v-model="inputValue"
     :value="value"
     :type="type"
-    v-model="inputValue"
     :messages="messages"
     :size="size"
     :label="label"
@@ -15,7 +15,7 @@
     :placeholder="placeholder"
     :input-class="inputClass"
     :max-length="maxLength"
-    :length="length ? length : lengthCounter"
+    :current-length="currentLength ? currentLength : lengthCounter"
     :warn-length-threshold="warnLengthThreshold"
     :length-description="lengthDescription"
     :length-validation-message="lengthValidationMessage ? lengthValidationMessage : validationMessage"

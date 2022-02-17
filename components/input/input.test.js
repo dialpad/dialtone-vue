@@ -402,14 +402,14 @@ describe('Dialtone Vue Input tests', function () {
 
     describe('When the length validation props are provided', function () {
       // Test Environment
-      let length;
+      let currentLength;
       const lengthDescription = 'Max. 20 characters.';
       const lengthValidationMessage = 'Validation message';
 
       // Test Setup
       beforeEach(async function () {
         propsData = {
-          length,
+          currentLength,
           maxLength: 20,
           lengthDescription,
           lengthValidationMessage,
@@ -422,7 +422,7 @@ describe('Dialtone Vue Input tests', function () {
       describe('When the input length is below warning threshold and the input is focused', function () {
         // Test Setup
         before(function () {
-          length = 8;
+          currentLength = 8;
           nativeInput.trigger('focus');
         });
 
@@ -438,7 +438,7 @@ describe('Dialtone Vue Input tests', function () {
       describe('When the input length is above warning threshold and the input is focused', function () {
         // Test Setup
         before(function () {
-          length = 12;
+          currentLength = 12;
         });
 
         it('should show a warning validation message', async function () {
@@ -453,7 +453,7 @@ describe('Dialtone Vue Input tests', function () {
       describe('When the input length reaches the maximum length and the input is focused', function () {
         // Test Setup
         before(function () {
-          length = 20;
+          currentLength = 20;
         });
 
         it('should show an error validation message', async function () {
@@ -467,7 +467,7 @@ describe('Dialtone Vue Input tests', function () {
       describe('When the input length reaches the maximum length and the input is not focused', function () {
         // Test Setup
         before(function () {
-          length = 20;
+          currentLength = 20;
         });
 
         it('should not show an error validation message', function () {
