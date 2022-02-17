@@ -207,7 +207,9 @@ export default {
     },
 
     /**
-     * Input length.
+     * The current character length that the user has entered into the input.
+     * This must be input manually if you are using maxLength as sometimes characters do not count as 1 character.
+     * For example an emoji could take up many characters in the input, but should only count as 1 character.
      */
     currentLength: {
       type: Number,
