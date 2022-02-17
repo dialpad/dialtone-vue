@@ -223,7 +223,7 @@ export default {
     },
 
     /**
-     * Text to shown in the description describing the maximum length.
+     * Text to show in the description describing the maximum length.
      */
     lengthDescription: {
       type: String,
@@ -231,7 +231,7 @@ export default {
     },
 
     /**
-     * Text to shown in the length validation message.
+     * Text to show in the length validation message.
      */
     lengthValidationMessage: {
       type: String,
