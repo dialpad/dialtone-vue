@@ -32,7 +32,6 @@ export const getPopperOptions = ({
         options: {
           fallbackPlacements: fallbackPlacements,
           boundary,
-          altBoundary: true,
         },
       },
       {
