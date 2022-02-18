@@ -225,6 +225,16 @@ export default {
   },
 
   methods: {
+    calculateAnchorZindex () {
+      // get the zIndex of the anchor element
+      const styles = window.getComputedStyle(getAnchor(this.$refs.anchor), null);
+      const zIndex = parseInt(styles.getPropertyValue('z-index'));
+      // if less than 400 set to 400, otherwise use the z-index of the anchor
+      // so it does not appear behind the window it's within
+      if (!zIndex || zIndex < 400) return 400;
+      return zIndex;
+    },
+
     onEnterAnchor (e) {
       if (this.show === null) this.isShown = true;
     },
@@ -265,12 +275,10 @@ export default {
     },
 
     initOptions () {
-      const styles = window.getComputedStyle(getAnchor(this.$refs.anchor), null);
-      const zIndex = parseInt(styles.getPropertyValue('z-index'));
       return {
         contentElement: this.$refs.content.$el,
         allowHTML: true,
-        zIndex: zIndex || 400,
+        zIndex: this.calculateAnchorZindex(),
         onMount: this.onMount,
         ...this.tippyProps,
       };
