@@ -332,6 +332,42 @@
       class="d-mr12"
       max-height="20rem"
       max-width="50rem"
+    >
+      <template #anchor="{ attrs }">
+        <dt-button
+          v-bind="attrs"
+        >
+          Popover with tooltip
+        </dt-button>
+      </template>
+      <template #content>
+        <div class="d-fs14 d-m0">
+          <p>
+            {{ sampleText }}
+          </p>
+          <p>
+            {{ sampleText }}
+          </p>
+          <p>
+            {{ sampleText }}
+          </p>
+          <dt-tooltip>
+            <template #anchor>
+              <dt-button>
+                Hover me
+              </dt-button>
+            </template>
+            This is the tooltip content
+          </dt-tooltip>
+        </div>
+      </template>
+    </dt-popover>
+
+    <dt-popover
+      content-class="d-pl12 d-pr16"
+      class="d-mr12"
+      max-height="20rem"
+      max-width="50rem"
       :open.sync="openPopoverWithTriggerOverride"
     >
       <template #anchor="{ attrs }">
@@ -359,6 +395,7 @@ import { DtPopover } from './';
 import { DtButton } from '../button';
 import { DtDropdown } from '../dropdown';
 import { DtListItem } from '../list_item';
+import { DtTooltip } from '../tooltip';
 import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
 import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch';
 
@@ -368,6 +405,7 @@ export default {
     DtPopover,
     DtButton,
     DtDropdown,
+    DtTooltip,
     IconMenuVertical,
     IconLaunch,
     DtListItem,
