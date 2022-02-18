@@ -405,10 +405,6 @@ export default {
     this.anchorEl = this.$refs.anchor.children[0];
     this.popoverContentEl = this.$refs.content.$el;
 
-    // get the zIndex of the anchor element
-    const styles = window.getComputedStyle(this.anchorEl, null);
-    const zIndex = parseInt(styles.getPropertyValue('z-index'));
-
     // align popover content width when
     if (this.contentWidth === 'anchor') {
       window.addEventListener('resize', this.onResize);
@@ -427,7 +423,7 @@ export default {
       // We have to manage hideOnClick functionality manually to handle
       // popover within popover situations.
       hideOnClick: false,
-      zIndex: this.modal ? 650 : zIndex || 300,
+      zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
       onClickOutside: this.onClickOutside,
       onShow: this.onShow,
     });
@@ -450,6 +446,16 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    calculateAnchorZindex () {
+      // get the zIndex of the anchor element
+      const styles = window.getComputedStyle(this.anchorEl, null);
+      const zIndex = parseInt(styles.getPropertyValue('z-index'));
+      // if less than 300 set to 300, otherwise use the z-index of the anchor
+      // so it does not appear behind the window it's within
+      if (!zIndex || zIndex < 300) return 300;
+      return zIndex;
+    },
+
     defaultToggleOpen (e) {
       // Only use default toggle behaviour if the user has not set the open prop.
       // Check that the anchor element specifically was clicked.
