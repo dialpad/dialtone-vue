@@ -22,7 +22,6 @@
     :footer-class="footerClass"
     :max-height="maxHeight"
     :max-width="maxWidth"
-    width-content="anchor"
     @opened="onOpened"
   >
     <template #anchor="{ attrs }">
