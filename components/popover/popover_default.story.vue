@@ -1,8 +1,28 @@
 <!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <dt-popover
+    :id="id"
+    :key="uniqueKey"
     :open.sync="isOpen"
-    v-bind="propsWithoutSlot"
+    :placement="placement"
+    :content-class="contentClass"
+    :fallback-placements="fallbackPlacements"
+    :padding="padding"
+    :hide-on-click="hideOnClick"
+    :role="role"
+    :element-type="elementType"
+    :transition="transition"
+    :aria-labelledby="ariaLabelledby"
+    :aria-label="ariaLabel"
+    :offset="offset"
+    :modal="modal"
+    :content-width="contentWidth"
+    :show-close-button="showCloseButton"
+    :header-class="headerClass"
+    :footer-class="footerClass"
+    :max-height="maxHeight"
+    :max-width="maxWidth"
+    width-content="anchor"
     @opened="onOpened"
   >
     <template #anchor="{ attrs }">
