@@ -1,6 +1,6 @@
 import tippy from 'tippy.js';
 import { getArrowDetected, hideOnEsc } from '../tooltip/modifiers';
-import { findFirstFocusableNode } from '../utils';
+import { findFirstFocusableNode } from '@/common/utils';
 
 export const BASE_TIPPY_DIRECTIONS = [
   'bottom', 'bottom-start', 'bottom-end',
@@ -21,7 +21,7 @@ export const createTippy = (anchorElement, options) => {
 
 export const getPopperOptions = ({
   boundary = 'clippingParents',
-  flip = [],
+  fallbackPlacements = [],
   onChangePlacement = () => {},
   hasHideModifierEnabled = false,
 } = {}) => {
@@ -30,8 +30,9 @@ export const getPopperOptions = ({
       {
         name: 'flip',
         options: {
-          fallbackPlacements: flip,
+          fallbackPlacements: fallbackPlacements,
           boundary,
+          altBoundary: true,
         },
       },
       {

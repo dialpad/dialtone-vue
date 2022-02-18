@@ -118,11 +118,6 @@ describe('Dialtone Vue Popover tests', function () {
     _mountWrapper();
   });
 
-  const escape = () => {
-    const keyboardEvent = new KeyboardEvent('keydown', { key: 'Escape' });
-    document.dispatchEvent(keyboardEvent);
-  };
-
   describe('Presentation Tests', function () {
     // Setup
     beforeEach(async function () {
@@ -188,20 +183,6 @@ describe('Dialtone Vue Popover tests', function () {
 
       it('should hide popover', async function () {
         assert.strictEqual(popover.attributes('aria-hidden'), 'true');
-      });
-    });
-
-    describe('When trigger is mouseover and escape was pressed ', function () {
-      beforeEach(async function () {
-        _mountWrapper(true);
-        await button.trigger('focus');
-        await flushPromises();
-        await escape();
-        await awaitLazyShowUpdated();
-      });
-
-      it('should hide popover', async function () {
-        assert.isFalse(getValueUpdateShow());
       });
     });
 
