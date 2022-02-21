@@ -427,7 +427,7 @@ describe('Dialtone Vue Input tests', function () {
         });
 
         it('should not show the length validation message', function () {
-          assert.isFalse(wrapper.find('[data-qa="dt-input-length-validation-message"]').exists());
+          assert.equal(wrapper.findAll('.d-validation-message').length, 0);
         });
 
         it('should show the length description', function () {
@@ -443,10 +443,11 @@ describe('Dialtone Vue Input tests', function () {
 
         it('should show a warning validation message', async function () {
           await nativeInput.trigger('focus');
-          assert.isTrue(wrapper.find('[data-qa="dt-input-length-validation-message"]').exists());
+
+          const inputMessages = wrapper.findAll('.d-validation-message');
           const inputWarningMessages = wrapper.findAll('.d-validation-message--warning');
+          assert.equal(inputMessages.length, 1);
           assert.equal(inputWarningMessages.length, 1);
-          assert.strictEqual(wrapper.find('.d-validation-message--warning').text(), lengthValidationMessage);
         });
       });
 
@@ -458,9 +459,11 @@ describe('Dialtone Vue Input tests', function () {
 
         it('should show an error validation message', async function () {
           await nativeInput.trigger('focus');
-          assert.isTrue(wrapper.find('[data-qa="dt-input-length-validation-message"]').exists());
-          const inputWarningMessages = wrapper.findAll('.d-validation-message--error');
-          assert.equal(inputWarningMessages.length, 1);
+
+          const inputMessages = wrapper.findAll('.d-validation-message');
+          const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
+          assert.equal(inputMessages.length, 1);
+          assert.equal(inputErrorMessages.length, 1);
         });
       });
 

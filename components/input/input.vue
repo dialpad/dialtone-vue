@@ -95,12 +95,7 @@
       </div>
     </label>
     <dt-validation-messages
-      :validation-messages="inputLengthErrorMessage"
-      :show-messages="showLengthLimitValidation"
-      data-qa="dt-input-length-validation-message"
-    />
-    <dt-validation-messages
-      :validation-messages="formattedMessages"
+      :validation-messages="getValidationMessages"
       :show-messages="showMessages"
       :class="messagesClass"
       v-bind="messagesChildProps"
@@ -210,6 +205,7 @@ export default {
      * The current character length that the user has entered into the input.
      * This must be input manually if you are using maxLength as sometimes characters do not count as 1 character.
      * For example an emoji could take up many characters in the input, but should only count as 1 character.
+     * If no number is provided, a built-in length calculation will be used.
      */
     currentLength: {
       type: Number,
@@ -264,6 +260,10 @@ export default {
 
   computed: {
 
+    defaultLengthCalc () {
+      return [...this.value].length;
+    },
+
     isTextarea () {
       return this.type === INPUT_TYPES.TEXTAREA;
     },
@@ -286,6 +286,10 @@ export default {
       }
 
       return 'input';
+    },
+
+    inputLength () {
+      return this.currentLength ? this.currentLength : this.defaultLengthCalc;
     },
 
     inputListeners () {
@@ -315,14 +319,23 @@ export default {
       return getValidationState(this.formattedMessages);
     },
 
+    getValidationMessages () {
+      // Add length validation message if exists
+      if (this.showLengthLimitValidation) {
+        return this.formattedMessages.concat([this.inputLengthErrorMessage]);
+      }
+
+      return this.formattedMessages;
+    },
+
     showInputState () {
       return this.showMessages && this.inputState;
     },
 
     inputLengthState () {
-      if (this.currentLength < this.warnLengthThreshold) {
+      if (this.inputLength < this.warnLengthThreshold) {
         return null;
-      } else if (this.currentLength < this.maxLength) {
+      } else if (this.inputLength < this.maxLength) {
         return VALIDATION_MESSAGE_TYPES.WARNING;
       } else {
         return VALIDATION_MESSAGE_TYPES.ERROR;
@@ -332,7 +345,6 @@ export default {
     showLengthLimit () {
       return !!(
         this.maxLength &&
-        this.currentLength !== null &&
         this.warnLengthThreshold &&
         this.lengthDescription &&
         this.lengthValidationMessage
@@ -344,10 +356,10 @@ export default {
     },
 
     inputLengthErrorMessage () {
-      return this.showLengthLimitValidation ? [{
+      return {
         message: this.lengthValidationMessage,
         type: this.inputLengthState,
-      }] : [];
+      };
     },
 
     sizeModifierClass () {
