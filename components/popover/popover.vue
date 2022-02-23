@@ -39,8 +39,7 @@
         :aria-modal="modal"
         :transition="transition"
         :show="showPopover"
-        :class="['d-popover__dialog', {
-        }]"
+        :class="['d-popover__dialog']"
         :style="{
           'max-height': maxHeight,
           'max-width': maxWidth,
