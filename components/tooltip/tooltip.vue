@@ -73,7 +73,9 @@ export default {
 
     /**
      * If the popover does not fit in the direction described by "placement",
-     * it will attempt to change it's direction to the "fallbackPlacements".
+     * it will attempt to change it's direction to the "fallbackPlacements"
+     * if defined, otherwise it will automatically position to a new location
+     * as it sees best fit.
      * */
     fallbackPlacements: {
       type: Array,
@@ -202,7 +204,7 @@ export default {
       if (isShown) {
         this.setProps();
         this.tip.show();
-      } else if (!isShown && isPrev !== isShown) {
+      } else {
         this.tip.hide();
       }
     },
