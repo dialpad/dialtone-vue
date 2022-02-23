@@ -25,7 +25,7 @@
       data-qa="dt-combobox-list-wrapper"
       @mouseleave="clearHighlightIndex"
       @focusout="clearHighlightIndex"
-      @mouseover.capture="onMouseHighlight"
+      @mousemove.capture="onMouseMove"
     >
       <!-- @slot Slot for the combobox list element -->
       <slot
@@ -159,7 +159,7 @@ export default {
   },
 
   methods: {
-    onMouseHighlight (e) {
+    onMouseMove (e) {
       const liElement = e.target.closest('li');
 
       if (liElement && liElement.classList.contains('dt-list-item--hoverable') && this.highlightId !== liElement.id) {
