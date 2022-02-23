@@ -103,7 +103,6 @@ describe('Dialtone Vue Dropdown Tests', function () {
         };
         _setWrappers();
         wrapper.vm.$nextTick();
-        console.log(wrapper.html());
       });
 
       it('aria-expanded should be "true"', function () {
