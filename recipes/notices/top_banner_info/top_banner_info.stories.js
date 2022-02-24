@@ -34,12 +34,15 @@ export const argTypesData = {
   // Props
   colorCode: {
     description: 'Background color of the banner',
-    type: 'select',
-    options: COLOR_CODES,
+    control: {
+      type: 'select',
+      options: COLOR_CODES,
+    },
   },
 
   // Slots
   default: {
+    description: 'Display content in the center of the banner',
     table: {
       type: { summary: 'VNode' },
     },
@@ -82,14 +85,20 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/Notices/DtRecipeTopBannerInfo',
+  title: 'Recipes/Notices/Top Banner Info',
   component: DtRecipeTopBannerInfo,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtRecipeTopBannerInfoMdx,
+    },
+    options: {
+      showPanel: true,
     },
   },
 };
@@ -112,3 +121,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

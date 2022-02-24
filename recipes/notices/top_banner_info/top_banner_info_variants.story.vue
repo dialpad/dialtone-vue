@@ -93,7 +93,7 @@
 
 <script>
 import DtRecipeTopBannerInfo from './top_banner_info';
-import { DtButton } from '../../../components/button';
+import { DtButton } from '@/components/button';
 import IconCallEndArrow from '@dialpad/dialtone/lib/dist/vue/icons/IconCallEndArrow';
 import IconPhoneTransfer from '@dialpad/dialtone/lib/dist/vue/icons/IconPhoneTransfer';
 import IconArrowUpward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowUpward';

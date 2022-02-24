@@ -1,5 +1,6 @@
 <template>
   <div
+    class="d-fs11 d-d-flex d-top-banner-info d-jc-space-between d-ai-center"
     :class="bannerInfoClass"
     data-qa="banner-info"
   >
@@ -48,7 +49,7 @@ export default {
         black100: 'd-bgc-black-100',
         white: 'd-bgc-white',
       };
-      return ['d-fs11', 'd-d-flex', 'd-top-banner-info', 'd-jc-space-between', 'd-ai-center', bgColors[this.colorCode]];
+      return [bgColors[this.colorCode]];
     },
   },
 };
