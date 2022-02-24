@@ -84,13 +84,6 @@ export const argTypesData = {
       type: 'text',
     },
   },
-  maxLength: {
-    table: {
-      defaultValue: {
-        summary: 'null',
-      },
-    },
-  },
   currentLength: {
     table: {
       defaultValue: {
@@ -98,21 +91,7 @@ export const argTypesData = {
       },
     },
   },
-  warnLengthThreshold: {
-    table: {
-      defaultValue: {
-        summary: 'null',
-      },
-    },
-  },
-  lengthDescription: {
-    table: {
-      defaultValue: {
-        summary: 'null',
-      },
-    },
-  },
-  lengthValidationMessage: {
+  validate: {
     table: {
       defaultValue: {
         summary: 'null',
@@ -320,7 +299,11 @@ ExtraLarge.args = { size: 'xl' };
 
 export const WithLengthValidation = Template.bind({});
 WithLengthValidation.args = {
-  maxLength: 25,
-  warnLengthThreshold: 15,
-  lengthDescription: 'Max 25 characters.',
+  validate: {
+    length: {
+      description: 'Max 25 characters.',
+      max: 25,
+      warn: 15,
+    },
+  },
 };

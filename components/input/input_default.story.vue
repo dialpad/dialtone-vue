@@ -14,11 +14,8 @@
     :messages-class="messagesClass"
     :placeholder="placeholder"
     :input-class="inputClass"
-    :max-length="maxLength"
     :current-length="currentLength ? currentLength : lengthCounter"
-    :warn-length-threshold="warnLengthThreshold"
-    :length-description="lengthDescription"
-    :length-validation-message="lengthValidationMessage ? lengthValidationMessage : validationMessage"
+    :validate="validate"
     @blur="onBlur"
     @input="onInput"
     @clear="onClear"
@@ -72,10 +69,6 @@ export default {
   computed: {
     lengthCounter () {
       return this.inputValue.length;
-    },
-
-    validationMessage () {
-      return `${(this.maxLength - this.lengthCounter)} characters left`;
     },
   },
 };

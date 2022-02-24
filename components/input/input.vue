@@ -24,7 +24,7 @@
         </div>
       </slot>
       <div
-        v-if="$slots.description || description || showLengthLimit"
+        v-if="$slots.description || description || shouldValidateLength"
         :id="descriptionKey"
         :class="[
           'base-input__description',
@@ -41,13 +41,13 @@
           <slot name="description">{{ description }}</slot>
         </div>
         <div
-          v-if="showLengthLimit"
+          v-if="shouldValidateLength"
           data-qa="dt-input-length-description"
           :class="[
             'd-mb2',
           ]"
         >
-          {{ lengthDescription }}
+          {{ this.getValidationProps.length.description }}
         </div>
       </div>
       <div class="d-input__wrapper">
@@ -66,7 +66,7 @@
           :name="name"
           :disabled="disabled"
           :class="inputClasses()"
-          :maxlength="showLengthLimit ? maxLength : null"
+          :maxlength="shouldValidateLength ? getValidationProps.length.max : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
           v-on="inputListeners"
@@ -79,7 +79,7 @@
           :type="type"
           :disabled="disabled"
           :class="inputClasses()"
-          :maxlength="showLengthLimit ? maxLength : null"
+          :maxlength="shouldValidateLength ? getValidationProps.length.max : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
           v-on="inputListeners"
@@ -194,14 +194,6 @@ export default {
     },
 
     /**
-     * Maximum number of characters the user can enter.
-     */
-    maxLength: {
-      type: Number,
-      default: null,
-    },
-
-    /**
      * The current character length that the user has entered into the input.
      * This must be input manually if you are using maxLength as sometimes characters do not count as 1 character.
      * For example an emoji could take up many characters in the input, but should only count as 1 character.
@@ -213,27 +205,12 @@ export default {
     },
 
     /**
-     * Length where the warning message should be shown.
+     * Validation for the input. Supports maximum length validation with the structure:
+     * `{ length: { description: string, max: number, warn: number }}`
      */
-    warnLengthThreshold: {
-      type: Number,
+    validate: {
+      type: Object,
       default: null,
-    },
-
-    /**
-     * Text to show in the description describing the maximum length.
-     */
-    lengthDescription: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Text to show in the length validation message.
-     */
-    lengthValidationMessage: {
-      type: String,
-      default: '',
     },
   },
 
@@ -320,6 +297,20 @@ export default {
       return getValidationState(this.formattedMessages);
     },
 
+    lengthValidationMessage () {
+      return `${(this.getValidationProps.length.max - this.inputLength)} characters left`;
+    },
+
+    getValidationProps () {
+      return {
+        length: {
+          description: this?.validate?.length?.description,
+          max: this?.validate?.length?.max,
+          warn: this?.validate?.length?.warn,
+        },
+      };
+    },
+
     getValidationMessages () {
       // Add length validation message if exists
       if (this.showLengthLimitValidation) {
@@ -334,26 +325,25 @@ export default {
     },
 
     inputLengthState () {
-      if (this.inputLength < this.warnLengthThreshold) {
+      if (this.inputLength < this.getValidationProps.length.warn) {
         return null;
-      } else if (this.inputLength < this.maxLength) {
+      } else if (this.inputLength < this.getValidationProps.length.max) {
         return VALIDATION_MESSAGE_TYPES.WARNING;
       } else {
         return VALIDATION_MESSAGE_TYPES.ERROR;
       }
     },
 
-    showLengthLimit () {
+    shouldValidateLength () {
       return !!(
-        this.maxLength &&
-        this.warnLengthThreshold &&
-        this.lengthDescription &&
-        this.lengthValidationMessage
+        this.getValidationProps.length.description &&
+        this.getValidationProps.length.max &&
+        this.getValidationProps.length.warn
       );
     },
 
     showLengthLimitValidation () {
-      return this.showLengthLimit && this.inputLengthState !== null && this.isInputFocused;
+      return this.shouldValidateLength && this.inputLengthState !== null && this.isInputFocused;
     },
 
     inputLengthErrorMessage () {

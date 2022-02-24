@@ -218,18 +218,30 @@ import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 />
 ```
 
-## With Length Validation
+## With Validation
+
+### Maximum Length Validation
 
 Adds validation for the input length. Make sure to provide the following props:
 
 - `currentLength` the current character length that the user has entered into the input.
-This must be input manually if you are using maxLength as sometimes characters do not count as 1 character.
+This must be input manually as sometimes characters do not count as 1 character.
 For example an emoji could take up many characters in the input, but should only count as 1 character.
-- `maxLength` maximum length allowed to enter.
-- `lengthDescription` text describing the maximum length allowed.
-- `lengthValidationMessage` message to show in the validation message.
-- `warnLengthThreshold` length from which the validation message will be shown as a warning.
-When the maximum length is reached, the validation message will be shown as an error.
+If you don't pass `currentLength`, the component will use a built-in length calculation.
+- `validate` should be an object with the validation to apply to the input. Maximum length validation
+is supported with the following configuration:
+
+```js
+length: {
+  // describes the maximum length allowed and shown in the label
+  description: string,  // Required
+  // maximum length allowed to enter
+  max: number,          // Required
+  // length from which the validation message will be shown as a warning,
+  // when the maximum length is reached, the validation message will be shown as an error.
+  warn: number,         // Required
+},
+```
 
 <Canvas>
   <Story id="components-input--with-length-validation" />
@@ -239,22 +251,24 @@ When the maximum length is reached, the validation message will be shown as an e
 
 ```js
 import { DtInput } from '@dialpad/dialtone-vue';
+
+const validate = {
+  length: {
+    description: 'Max 25 characters.',
+    max: 25,
+    warn: 15,
+  },  
+};
 ```
 
 ```html
 <dt-input
   v-model="text"
   placeholder="placeholder"
-  max-length="25"
   currentLength="currentLength"
-  warn-length-threshold="15"
-  length-description="Max 25 characters."
-  length-validation-message="lengthValidationMessage"
+  :validate="validate"
 />
 ```
-
-`currentLength` and `lengthValidationMessage` should be provided in your component. If you don't pass `currentLength`,
-the component will use a built-in length calculation.
 
 ## Sizes
 

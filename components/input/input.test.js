@@ -403,17 +403,19 @@ describe('Dialtone Vue Input tests', function () {
     describe('When the length validation props are provided', function () {
       // Test Environment
       let currentLength;
-      const lengthDescription = 'Max. 20 characters.';
-      const lengthValidationMessage = 'Validation message';
+      const validate = {
+        length: {
+          description: 'Max. 20 characters.',
+          max: 20,
+          warn: 12,
+        },
+      };
 
       // Test Setup
       beforeEach(async function () {
         propsData = {
           currentLength,
-          maxLength: 20,
-          lengthDescription,
-          lengthValidationMessage,
-          warnLengthThreshold: 12,
+          validate,
         };
         _mountWrapper();
         _setChildWrappers();
@@ -431,7 +433,9 @@ describe('Dialtone Vue Input tests', function () {
         });
 
         it('should show the length description', function () {
-          assert.strictEqual(wrapper.find('[data-qa="dt-input-length-description"]').text(), lengthDescription);
+          assert.strictEqual(
+            wrapper.find('[data-qa="dt-input-length-description"]').text(), validate.length.description,
+          );
         });
       });
 
