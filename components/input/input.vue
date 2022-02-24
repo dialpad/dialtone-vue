@@ -302,6 +302,7 @@ export default {
         input: event => this.$emit('input', event.target.value),
         focus: event => {
           this.isInputFocused = true;
+          this.$emit('focus', event);
         },
 
         blur: event => {
