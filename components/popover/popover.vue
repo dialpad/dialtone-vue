@@ -87,6 +87,7 @@
         </div>
         <popover-header-footer
           v-if="$slots.footerContent"
+          ref="popover__footer"
           type="footer"
           :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
           :content-class="footerClass"

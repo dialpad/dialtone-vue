@@ -16,6 +16,7 @@
     <dt-button
       v-if="showCloseButton"
       ref="popover__close-button"
+      data-qa="dt-popover-close"
       class="d-p6 d-mr6 d-bc-transparent"
       importance="outlined"
       kind="muted"
