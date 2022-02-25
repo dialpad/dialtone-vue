@@ -14,7 +14,7 @@
     :messages-class="messagesClass"
     :placeholder="placeholder"
     :input-class="inputClass"
-    :current-length="currentLength ? currentLength : lengthCounter"
+    :current-length="currentLength"
     :validate="validate"
     @blur="onBlur"
     @input="onInput"
@@ -64,12 +64,6 @@ export default {
     return {
       inputValue: '',
     };
-  },
-
-  computed: {
-    lengthCounter () {
-      return this.inputValue.length;
-    },
   },
 };
 </script>
