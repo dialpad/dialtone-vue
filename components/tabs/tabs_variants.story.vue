@@ -5,7 +5,9 @@
       :key="i"
       class="d-mb64"
     >
-      <p class="d-fw-bold d-mb8">{{ variant.description }}</p>
+      <p class="d-fw-bold d-mb8">
+        {{ variant.description }}
+      </p>
       <dt-tab-group
         v-bind="variant.propsToBind"
         :class="[

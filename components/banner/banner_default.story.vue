@@ -5,7 +5,7 @@
     </dt-button>
 
     <dt-banner
-      v-if="displayBanner"
+      v-show="displayBanner"
       :kind="kind"
       :title="title"
       :title-id="titleId"
