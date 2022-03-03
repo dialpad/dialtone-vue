@@ -408,6 +408,7 @@ describe('Dialtone Vue Input tests', function () {
           description: 'Max. 20 characters.',
           max: 20,
           warn: 12,
+          message: 'Validation message',
         },
       };
 
@@ -490,7 +491,15 @@ describe('Dialtone Vue Input tests', function () {
     describe('User Input Tests', function () {
       // Test Environment
       const userTextInputVal = 'new user input';
-      const newValue = 'new value';
+      const newValue = 'new value with more than 20 characters';
+      const validate = {
+        length: {
+          description: 'Max. 20 characters.',
+          max: 20,
+          warn: 12,
+          message: 'Validation message',
+        },
+      };
 
       // Shared Examples
       const itBehavesLikeHandlesUserInput = () => {
@@ -502,7 +511,8 @@ describe('Dialtone Vue Input tests', function () {
 
       describe('When type is not a textarea', function () {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(async function () {
+          await wrapper.setProps({ currentLength: null, validate });
           _setChildWrappers();
           nativeInput.setValue(userTextInputVal);
         });
@@ -515,12 +525,27 @@ describe('Dialtone Vue Input tests', function () {
 
           it('should update input value', function () { assert.equal(nativeInput.element.value, newValue); });
         });
+
+        describe('When a new value exceeds the maximum length', function () {
+          it('should emit an "update:invalid" event with true', async function () {
+            await wrapper.setProps({ value: newValue });
+            assert.equal(wrapper.emitted()['update:invalid'][0][0], true);
+          });
+        });
+
+        describe('When a new value is within the maximum length after exceeding it', function () {
+          it('should emit an "update:invalid" event with false', async function () {
+            await wrapper.setProps({ value: newValue });
+            await wrapper.setProps({ value: userTextInputVal });
+            assert.equal(wrapper.emitted()['update:invalid'][1][0], false);
+          });
+        });
       });
 
       describe('When type is a textarea', function () {
         // Test Setup
         beforeEach(async function () {
-          await wrapper.setProps({ type: 'textarea' });
+          await wrapper.setProps({ type: 'textarea', currentLength: null, validate });
           _setChildWrappers();
           nativeTextarea.setValue(userTextInputVal);
         });
@@ -532,6 +557,21 @@ describe('Dialtone Vue Input tests', function () {
           beforeEach(async function () { await wrapper.setProps({ value: newValue }); });
 
           it('should update input value', function () { assert.equal(nativeTextarea.element.value, newValue); });
+        });
+
+        describe('When a new value exceeds the maximum length', function () {
+          it('should emit an "update:invalid" event with true', async function () {
+            await wrapper.setProps({ value: newValue });
+            assert.equal(wrapper.emitted()['update:invalid'][0][0], true);
+          });
+        });
+
+        describe('When a new value is within the maximum length after exceeding it', function () {
+          it('should emit an "update:invalid" event with false', async function () {
+            await wrapper.setProps({ value: newValue });
+            await wrapper.setProps({ value: userTextInputVal });
+            assert.equal(wrapper.emitted()['update:invalid'][1][0], false);
+          });
         });
       });
     });
