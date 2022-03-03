@@ -47,7 +47,7 @@
             'd-mb2',
           ]"
         >
-          {{ this.getValidationProps.length.description }}
+          {{ validationProps.length.description }}
         </div>
       </div>
       <div class="d-input__wrapper">
@@ -66,7 +66,7 @@
           :name="name"
           :disabled="disabled"
           :class="inputClasses()"
-          :maxlength="shouldValidateLength ? getValidationProps.length.max : null"
+          :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
           v-on="inputListeners"
@@ -79,7 +79,7 @@
           :type="type"
           :disabled="disabled"
           :class="inputClasses()"
-          :maxlength="shouldValidateLength ? getValidationProps.length.max : null"
+          :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
           v-on="inputListeners"
@@ -95,7 +95,7 @@
       </div>
     </label>
     <dt-validation-messages
-      :validation-messages="getValidationMessages"
+      :validation-messages="validationMessages"
       :show-messages="showMessages"
       :class="messagesClass"
       v-bind="messagesChildProps"
@@ -214,7 +214,7 @@ export default {
     },
   },
 
-  emits: ['blur', 'input', 'clear', 'focusin', 'focusout'],
+  emits: ['blur', 'input', 'clear', 'focus', 'focusin', 'focusout', 'update:length', 'update:invalid'],
 
   data () {
     return {
@@ -232,14 +232,14 @@ export default {
       },
 
       isInputFocused: false,
+
+      isInvalid: false,
+
+      defaultLength: 0,
     };
   },
 
   computed: {
-
-    defaultLengthCalc () {
-      return [...this.value].length;
-    },
 
     isTextarea () {
       return this.type === INPUT_TYPES.TEXTAREA;
@@ -263,10 +263,6 @@ export default {
       }
 
       return 'input';
-    },
-
-    inputLength () {
-      return this.currentLength ? this.currentLength : this.defaultLengthCalc;
     },
 
     inputListeners () {
@@ -297,24 +293,26 @@ export default {
       return getValidationState(this.formattedMessages);
     },
 
-    lengthValidationMessage () {
-      return `${(this.getValidationProps.length.max - this.inputLength)} characters left`;
+    defaultLengthCalculation () {
+      return this.calculateLength(this.value);
     },
 
-    getValidationProps () {
+    validationProps () {
       return {
         length: {
           description: this?.validate?.length?.description,
           max: this?.validate?.length?.max,
           warn: this?.validate?.length?.warn,
+          message: this?.validate?.length?.message,
+          limitMaxLength: this?.validate?.length?.limitMaxLength ? this.validate.length.limitMaxLength : false,
         },
       };
     },
 
-    getValidationMessages () {
+    validationMessages () {
       // Add length validation message if exists
       if (this.showLengthLimitValidation) {
-        return this.formattedMessages.concat([this.inputLengthErrorMessage]);
+        return this.formattedMessages.concat([this.inputLengthErrorMessage()]);
       }
 
       return this.formattedMessages;
@@ -324,11 +322,15 @@ export default {
       return this.showMessages && this.inputState;
     },
 
+    inputLength () {
+      return this.currentLength ? this.currentLength : this.defaultLengthCalculation;
+    },
+
     inputLengthState () {
-      if (this.inputLength < this.getValidationProps.length.warn) {
+      if (this.inputLength < this.validationProps.length.warn) {
         return null;
-      } else if (this.inputLength < this.getValidationProps.length.max) {
-        return VALIDATION_MESSAGE_TYPES.WARNING;
+      } else if (this.inputLength < this.validationProps.length.max) {
+        return this.validationProps.length.warn ? VALIDATION_MESSAGE_TYPES.WARNING : null;
       } else {
         return VALIDATION_MESSAGE_TYPES.ERROR;
       }
@@ -336,21 +338,22 @@ export default {
 
     shouldValidateLength () {
       return !!(
-        this.getValidationProps.length.description &&
-        this.getValidationProps.length.max &&
-        this.getValidationProps.length.warn
+        this.validationProps.length.description &&
+        this.validationProps.length.max
       );
     },
 
-    showLengthLimitValidation () {
-      return this.shouldValidateLength && this.inputLengthState !== null && this.isInputFocused;
+    shouldLimitMaxLength () {
+      return this.shouldValidateLength && this.validationProps.length.limitMaxLength;
     },
 
-    inputLengthErrorMessage () {
-      return {
-        message: this.lengthValidationMessage,
-        type: this.inputLengthState,
-      };
+    showLengthLimitValidation () {
+      return (
+        this.shouldValidateLength &&
+        this.inputLengthState !== null &&
+        this.validationProps.length.message &&
+        this.isInputFocused
+      );
     },
 
     sizeModifierClass () {
@@ -375,6 +378,22 @@ export default {
       };
 
       return sizeClasses[this.inputComponent][this.size];
+    },
+  },
+
+  watch: {
+    isInvalid (val) {
+      this.$emit('update:invalid', val);
+    },
+
+    value () {
+      if (this.shouldValidateLength) {
+        this.validateLength(this.calculateLength(this.value));
+      }
+
+      if (this.currentLength == null) {
+        this.$emit('update:length', this.calculateLength(this.value));
+      }
     },
   },
 
@@ -406,6 +425,17 @@ export default {
         this.sizeModifierClass,
         this.inputClass,
       ];
+    },
+
+    calculateLength (value) {
+      return [...value].length;
+    },
+
+    inputLengthErrorMessage () {
+      return {
+        message: this.validationProps.length.message,
+        type: this.inputLengthState,
+      };
     },
 
     inputIconClasses (side) {
@@ -453,6 +483,10 @@ export default {
 
     getMessageKey (type, index) {
       return `message-${type}-${index}`;
+    },
+
+    validateLength (length) {
+      this.isInvalid = (length > this.validationProps.length.max);
     },
   },
 };

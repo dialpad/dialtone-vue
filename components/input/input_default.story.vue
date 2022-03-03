@@ -2,7 +2,6 @@
   <dt-input
     ref="input"
     v-model="inputValue"
-    :value="value"
     :type="type"
     :messages="messages"
     :size="size"
@@ -15,12 +14,14 @@
     :placeholder="placeholder"
     :input-class="inputClass"
     :current-length="currentLength"
-    :validate="validate"
+    :validate="validationConfig"
     @blur="onBlur"
     @input="onInput"
     @clear="onClear"
     @focusin="onFocusIn"
     @focusout="onFocusOut"
+    @update:length="updateLength"
+    @update:invalid="onUpdateIsInvalid"
   >
     <template
       v-if="labelSlot"
@@ -63,7 +64,48 @@ export default {
   data () {
     return {
       inputValue: '',
+      inputLength: 0,
     };
+  },
+
+  computed: {
+    validationMessage () {
+      const remainingCharacters = this.validate?.length?.max - this.inputLength;
+
+      if (remainingCharacters < 0) {
+        return `${Math.abs(remainingCharacters)} characters over limit`;
+      } else {
+        return `${remainingCharacters} characters left`;
+      }
+    },
+
+    validationConfig () {
+      if (!this?.validate?.length) {
+        return null;
+      }
+
+      const validateConfigData = {
+        ...this.validate,
+      };
+
+      // Adds validation message
+      validateConfigData.length.message = this.validationMessage;
+
+      return validateConfigData;
+    },
+  },
+
+  watch: {
+    value (val) {
+      this.inputValue = val;
+    },
+  },
+
+  methods: {
+    updateLength ($event) {
+      this.inputLength = $event;
+      this.onUpdateLength($event);
+    },
   },
 };
 </script>

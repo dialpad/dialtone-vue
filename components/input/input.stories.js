@@ -143,6 +143,16 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onUpdateLength: {
+    table: {
+      disable: true,
+    },
+  },
+  onUpdateIsInvalid: {
+    table: {
+      disable: true,
+    },
+  },
 
   blur: {
     description: 'Native input blur event',
@@ -174,6 +184,18 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
+  'update:length': {
+    description: 'Length of the input when currentLength prop is not passed',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  'update:invalid': {
+    description: 'Result of the input validation',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
 };
 
 export const argsData = {
@@ -184,6 +206,8 @@ export const argsData = {
   onClear: action('clear'),
   onFocusIn: action('focusin'),
   onFocusOut: action('focusout'),
+  onUpdateLength: action('update:length'),
+  onUpdateIsInvalid: action('update:invalid'),
 };
 
 const decorator = () => ({
@@ -304,6 +328,7 @@ WithLengthValidation.args = {
       description: 'Max 25 characters.',
       max: 25,
       warn: 15,
+      limitMaxLength: false,
     },
   },
 };
