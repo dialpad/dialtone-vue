@@ -6,7 +6,7 @@
     :aria-owns="listId"
     aria-haspopup="listbox"
     @keydown.esc.stop="onEscapeKey"
-    @keydown.enter="onEnterKey"
+    @keydown.enter.exact="onEnterKey"
     @keydown.up.stop.prevent="onUpKey"
     @keydown.down.stop.prevent="onDownKey"
     @keydown.home.stop.prevent="onHomeKey"
@@ -25,7 +25,7 @@
       data-qa="dt-combobox-list-wrapper"
       @mouseleave="clearHighlightIndex"
       @focusout="clearHighlightIndex"
-      @mouseover.capture="onMouseHighlight"
+      @mousemove.capture="onMouseHighlight"
     >
       <!-- @slot Slot for the combobox list element -->
       <slot
