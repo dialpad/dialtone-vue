@@ -2,7 +2,7 @@
 <template>
   <div class="d-divide-y d-divide-purple-400">
     <div class="d-m32">
-      <p class="d-my16 d-ml48 d-fs14 d-fw-bold">
+      <p class="d-my16 d-fs14 d-fw-bold">
         Unknown contact (phone number only) with attestation
       </p>
       <dt-recipe-contact-info
@@ -16,7 +16,7 @@
       </dt-recipe-contact-info>
     </div>
     <div class="d-m32">
-      <p class="d-my16 d-ml48 d-fs14 d-fw-bold">
+      <p class="d-my16 d-fs14 d-fw-bold">
         Unknown contact with "marked as spam" button
       </p>
       <dt-recipe-contact-info
@@ -34,7 +34,7 @@
       </dt-recipe-contact-info>
     </div>
     <div class="d-m32">
-      <p class="d-my16 d-ml48 d-fs14 d-fw-bold">
+      <p class="d-my16 d-fs14 d-fw-bold">
         Group contact
       </p>
       <dt-recipe-contact-info
@@ -47,7 +47,7 @@
       />
     </div>
     <div class="d-m32">
-      <p class="d-my16 d-ml48 d-fs14 d-fw-bold">
+      <p class="d-my16 d-fs14 d-fw-bold">
         Group contact with transfer info
       </p>
       <dt-recipe-contact-info
@@ -66,7 +66,7 @@
       </dt-recipe-contact-info>
     </div>
     <div class="d-m32">
-      <p class="d-my16 d-ml48 d-fs14 d-fw-bold">
+      <p class="d-my16 d-fs14 d-fw-bold">
         Admin view / listening in
       </p>
       <dt-recipe-contact-info
@@ -88,7 +88,7 @@
       </dt-recipe-contact-info>
     </div>
     <div class="d-m32">
-      <p class="d-my16 d-ml48 d-fs14 d-fw-bold">
+      <p class="d-my16 d-fs14 d-fw-bold">
         Contact with items in right slot
       </p>
       <dt-recipe-contact-info

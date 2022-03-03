@@ -1,126 +1,126 @@
 <template>
-  <ul>
-    <dt-list-item
-      :id="id"
-      :role="role"
-      navigation-type="tab"
-      data-qa="contact-info"
-      @click="onClick"
-    >
-      <template #left>
-        <div
-          class="d-ps-relative"
-          data-qa="contact-info-left"
+  <dt-list-item
+    :id="id"
+    :role="role"
+    element-type="div"
+    data-qa="contact-info"
+    @click="onClick"
+  >
+    <template #left>
+      <div
+        class="d-ps-relative"
+        data-qa="contact-info-left"
+      >
+        <dt-avatar
+          v-if="avatarSrc"
+          kind="default"
+          size="lg"
+          :src="avatarSrc"
+          :alt="displayName"
+          avatar-class="d-bar2"
+        />
+        <dt-avatar
+          v-else-if="avatarInitials"
+          kind="initials"
+          size="lg"
+          :color="avatarColor"
+          :alt="avatarInitials"
         >
-          <dt-avatar
-            v-if="avatarSrc"
-            kind="default"
-            size="lg"
-            :src="avatarSrc"
-            :alt="displayName"
-            avatar-class="d-bar0"
-          />
-          <dt-avatar
-            v-else-if="avatarInitials"
-            kind="initials"
-            size="lg"
-            :color="avatarColor"
-            :alt="avatarInitials"
-          >
-            {{ avatarInitials }}
-          </dt-avatar>
-          <div
-            v-if="showUserStatus"
-            :class="[
-              'd-bc-white',
-              'd-baw2',
-              'd-ps-absolute',
-              'd-b0',
-              'd-r0',
-              'd-w20p',
-              'd-h20p',
-              USER_STATUS_COLOR_MODIFIERS[userStatusColor],
-            ]"
-            data-qa="contact-info-user-status"
-          >
+          {{ avatarInitials }}
+        </dt-avatar>
+        <div
+          v-if="showUserStatus"
+          :class="[
+            'd-ba',
+            'd-bc-white',
+            'd-baw2',
+            'd-bar2',
+            'd-ps-absolute',
+            'd-bn1',
+            'd-rn1',
+            'd-w20p',
+            'd-h20p',
+            USER_STATUS_COLOR_MODIFIERS[userStatusColor],
+          ]"
+          data-qa="contact-info-user-status"
+        >
+          &nbsp;
+        </div>
+      </div>
+    </template>
+    <template #default>
+      <div
+        class="d-d-flex d-ai-center d-mb2"
+        data-qa="contact-info-header"
+      >
+        <div
+          v-if="displayName"
+          class="d-fs16 d-fw-bold d-mr4"
+        >
+          {{ displayName }}
+        </div>
+        <div
+          v-else
+          class="d-fs16 d-fw-bold d-mr4"
+        >
+          {{ phoneNumber }}
+          <template v-if="showAttestation">
+            <icon-checkbox-filled
+              class="dt-contact-info__check-mark d-fc-black-400 d-svg--size14"
+            />
+          </template>
+        </div>
+        <!-- @slot Slot for extra header information -->
+        <slot name="header" />
+      </div>
+    </template>
+
+    <template #subtitle>
+      <div
+        class="d-d-flex d-ai-center"
+        data-qa="contact-info-subtitle"
+      >
+        <div
+          v-if="displayName"
+          class="d-fs12 d-mt2"
+        >
+          {{ phoneNumber }}
+          <template v-if="showAttestation">
+            <icon-checkbox-filled
+              class="dt-contact-info__check-mark d-fc-black-400 d-svg--size14 d-va-text-bottom"
+            />
+          </template>
+        </div>
+        <!-- @slot Slot for extra subtitle information -->
+        <slot name="subtitle" />
+      </div>
+    </template>
+
+    <template #bottom>
+      <div
+        class="d-d-flex d-ai-center d-mtn6"
+        data-qa="contact-info-bottom"
+      >
+        <template v-if="groupName">
+          <div :class="['d-w8', 'd-h8', 'd-mr4', groupColorClass]">
             &nbsp;
           </div>
-        </div>
-      </template>
-      <template #default>
-        <div
-          class="d-d-flex d-ai-center d-mb2"
-          data-qa="contact-info-header"
-        >
-          <div
-            v-if="displayName"
-            class="d-fs16 d-fw-bold d-mr4"
-          >
-            {{ displayName }}
+          <div class="d-fs11 d-mr4">
+            {{ groupName }}
           </div>
-          <div
-            v-else
-            class="d-fs16 d-fw-bold d-mr4"
-          >
-            {{ phoneNumber }}
-            <template v-if="showAttestation">
-              <icon-checkbox-filled
-                class="d-svg--size14 dt-contact-info__check-mark"
-              />
-            </template>
-          </div>
-          <!-- @slot Slot for extra header information -->
-          <slot name="header" />
+        </template>
+        <div>
+          <!-- @slot Slot for extra information at the bottom -->
+          <slot name="bottom" />
         </div>
-      </template>
+      </div>
+    </template>
 
-      <template #subtitle>
-        <div
-          class="d-d-flex d-ai-center"
-          data-qa="contact-info-subtitle"
-        >
-          <div
-            v-if="displayName"
-            class="d-fs12 d-mt2"
-          >
-            {{ phoneNumber }}
-            <template v-if="showAttestation">
-              <icon-checkbox-filled
-                class="d-svg--size14 d-va-text-bottom dt-contact-info__check-mark"
-              />
-            </template>
-          </div>
-          <!-- @slot Slot for extra subtitle information -->
-          <slot name="subtitle" />
-        </div>
-      </template>
-
-      <template #bottom>
-        <div
-          class="d-d-flex d-ai-center d-mtn6"
-          data-qa="contact-info-bottom"
-        >
-          <template v-if="groupName">
-            <div :class="['d-w8', 'd-h8', 'd-mr4', groupColorClass]">
-              &nbsp;
-            </div>
-            <div class="d-fs11 d-mr4">
-              {{ groupName }}
-            </div>
-          </template>
-          <div>
-            <!-- @slot Slot for extra information at the bottom -->
-            <slot name="bottom" />
-          </div>
-        </div>
-      </template>
-
-      <template #right>
-        <!-- @slot Slot for the right content -->
-        <slot name="right" />
-      </template>
-    </dt-list-item>
-  </ul>
+    <template #right>
+      <!-- @slot Slot for the right content -->
+      <slot name="right" />
+    </template>
+  </dt-list-item>
 </template>
 
 <script>
@@ -137,8 +137,6 @@ export default {
     DtListItem,
     IconCheckboxFilled,
   },
-
-  mixins: [],
 
   /* inheritAttrs: false is generally an option we want to set on library
     components. This allows any attributes passed in that are not recognized
@@ -160,53 +158,80 @@ export default {
      */
     role: {
       type: String,
-      default: 'listitem',
+      default: '',
     },
 
+    /**
+     * Contact display name.
+     */
     displayName: {
       type: String,
       default: '',
     },
 
+    /**
+     * Optional avatar image url.
+     */
     avatarSrc: {
       type: String,
       default: '',
     },
 
+    /**
+     * Initial letters to display in avatar if `avatarSrc` is empty.
+     */
     avatarInitials: {
       type: String,
       default: '',
     },
 
+    /**
+     * Background color of initials letters in avatar.
+     */
     avatarColor: {
       type: String,
       default: 'base',
       validator: (color) => Object.keys(AVATAR_COLOR_MODIFIERS).includes(color),
     },
 
+    /**
+     * Status color of user from contact.
+     */
     userStatusColor: {
       type: String,
       default: 'none',
       validator: (color) => Object.keys(USER_STATUS_COLOR_MODIFIERS).includes(color),
     },
 
+    /**
+     * Contact phone number.
+     */
     phoneNumber: {
       type: String,
       default: '',
     },
 
+    /**
+     * Show a check mark after phone number.
+     */
     showAttestation: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * The group name which this operator is in.
+     */
     groupName: {
       type: String,
       default: '',
     },
 
+    /**
+     * The group theme color class.
+     */
     groupColorClass: {
-      type: String,
+      type: [String, Object, Array],
       default: 'd-bgc-pink-400',
     },
   },
@@ -232,9 +257,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-contact-info__check-mark {
-  fill: var(--black-400) !important;
-}
-</style>

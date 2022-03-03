@@ -109,9 +109,13 @@ describe('DtRecipeContactInfo Tests', function () {
           avatarColor: 'orange-500',
         });
       });
-      it('Should display initials with background color', function () {
+      it('Avatar should display', function () {
         assert.isTrue(avatarElement.exists());
+      });
+      it('Should display correct initials', function () {
         assert.strictEqual(avatarElement.text(), 'JL');
+      });
+      it('Should have correct background color', function () {
         assert.include(avatarElement.classes(), 'd-avatar--orange-500');
       });
     });
@@ -158,7 +162,6 @@ describe('DtRecipeContactInfo Tests', function () {
         });
       });
       it('Should not display user status indicator', function () {
-        assert.isFalse(wrapper.vm.showUserStatus);
         assert.isFalse(wrapper.find('[data-qa="contact-info-user-status"]').exists());
       });
     });

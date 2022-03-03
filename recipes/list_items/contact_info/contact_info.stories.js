@@ -35,50 +35,26 @@ export const argTypesData = {
   },
 
   displayName: {
-    description: 'Contact display name',
-    type: {
-      summary: 'string',
-    },
     control: 'text',
   },
 
   phoneNumber: {
-    description: 'Contact phone number',
-    type: {
-      summary: 'string',
-    },
     control: 'text',
   },
 
   showAttestation: {
-    description: 'Show a check mark after phone number',
-    type: {
-      summary: 'boolean',
-    },
     control: 'boolean',
   },
 
   avatarSrc: {
-    description: 'Avatar image src attribute',
-    type: {
-      summary: 'string',
-    },
     control: 'text',
   },
 
   avatarInitials: {
-    description: 'Initial letters to display in avatar if `avatarSrc` is empty.',
-    type: {
-      summary: 'string',
-    },
     control: 'text',
   },
 
   avatarColor: {
-    description: 'Background color of initials letters.',
-    type: {
-      summary: 'string',
-    },
     control: {
       type: 'select',
     },
@@ -86,10 +62,6 @@ export const argTypesData = {
   },
 
   userStatusColor: {
-    description: 'Status color of user from contact',
-    type: {
-      summary: 'string',
-    },
     control: {
       type: 'select',
     },
@@ -97,18 +69,10 @@ export const argTypesData = {
   },
 
   groupName: {
-    description: 'The group name which this operator is in.',
-    type: {
-      summary: 'string',
-    },
     control: 'text',
   },
 
   groupColorClass: {
-    description: 'The group theme color class',
-    type: {
-      summary: 'string',
-    },
     control: 'text',
   },
 
@@ -119,7 +83,7 @@ export const argTypesData = {
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },
@@ -130,7 +94,7 @@ export const argTypesData = {
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },
@@ -141,7 +105,7 @@ export const argTypesData = {
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },
@@ -152,7 +116,7 @@ export const argTypesData = {
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },
@@ -174,7 +138,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/List Items/DtRecipeContactInfo',
+  title: 'Recipes/List Items/Contact Info',
   component: DtRecipeContactInfo,
   args: argsData,
   argTypes: argTypesData,
@@ -183,6 +147,10 @@ export default {
     docs: {
       page: DtRecipeContactInfoMdx,
     },
+    controls: {
+      sort: 'requiredFirst',
+    },
+    options: { showPanel: true },
   },
 };
 
@@ -227,6 +195,7 @@ Variants.args = {
   onMarkAsSpam: action('click: mark this contact as spam'),
   onConnectToARecord: action('click: connect to a record'),
 };
+
 Variants.parameters = {
   docs: {
     source: {
@@ -319,11 +288,25 @@ Variants.parameters = {
     </template>
     <template #bottom>
       2 matches found.
-      <dt-button link @click.stop="onConnectToARecord"> Connect to a record </dt-button>
+      <dt-button 
+        link 
+        @click.stop="onConnectToARecord"
+      >
+        Connect to a record 
+      </dt-button>
     </template>
   </dt-recipe-contact-info>
 </div>
 `,
     },
+  },
+  controls: {
+    disable: true,
+  },
+  actions: {
+    disable: true,
+  },
+  options: {
+    showPanel: false,
   },
 };
