@@ -1,2 +1,2 @@
 export { default as DtRecipeContactInfo } from './contact_info.vue';
-export {} from './contact_info_constants';
+export { USER_STATUS_COLOR_MODIFIERS } from './contact_info_constants';
