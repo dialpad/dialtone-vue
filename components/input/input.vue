@@ -195,9 +195,10 @@ export default {
 
     /**
      * The current character length that the user has entered into the input.
-     * This must be input manually if you are using maxLength as sometimes characters do not count as 1 character.
-     * For example an emoji could take up many characters in the input, but should only count as 1 character.
-     * If no number is provided, a built-in length calculation will be used.
+     * This will only need to be used if you are using validate.length and
+     * the string contains abnormal characters.
+     * For example, an emoji could take up many characters in the input, but should only count as 1 character.
+     * If no number is provided, a built-in length calculation will be used for the length validation.
      */
     currentLength: {
       type: Number,
