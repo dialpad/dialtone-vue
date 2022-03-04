@@ -207,7 +207,7 @@ export default {
 
     /**
      * Validation for the input. Supports maximum length validation with the structure:
-     * `{ length: { description: string, max: number, warn: number }}`
+     * `{ "length": { "description": string, "max": number, "warn": number }}`
      */
     validate: {
       type: Object,
