@@ -18,6 +18,7 @@
     @blur="onBlur"
     @input="onInput"
     @clear="onClear"
+    @focus="onFocus"
     @focusin="onFocusIn"
     @focusout="onFocusOut"
     @update:length="updateLength"

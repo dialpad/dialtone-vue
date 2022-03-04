@@ -133,6 +133,11 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onFocus: {
+    table: {
+      disable: true,
+    },
+  },
   onFocusIn: {
     table: {
       disable: true,
@@ -172,6 +177,12 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
+  focus: {
+    description: 'Native input focus event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
   focusin: {
     description: 'Native input focusin event',
     table: {
@@ -204,6 +215,7 @@ export const argsData = {
   onBlur: action('blur'),
   onInput: action('input'),
   onClear: action('clear'),
+  onFocus: action('focus'),
   onFocusIn: action('focusin'),
   onFocusOut: action('focusout'),
   onUpdateLength: action('update:length'),
