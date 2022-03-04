@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtTooltip from './tooltip';
 import DtTooltipFlipTemplate from './tooltip_flip.story.vue';
 import DtTooltipDefault from './tooltip_default.story';
@@ -103,6 +103,9 @@ export default {
     docs: {
       page: DtTooltipMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -119,6 +122,8 @@ Default.args = {};
 
 export const Variants = TooltipVariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 
 export const Flip = TooltipFlipTemplate.bind({});
 Flip.args = {};
+Flip.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

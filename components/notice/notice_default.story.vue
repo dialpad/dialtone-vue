@@ -21,7 +21,7 @@
         :class="linkClass"
       >a link</a>.
     </span>
-    <template #action>
+    <template slot="action">
       <span
         v-if="action"
         v-html="action"
@@ -38,13 +38,13 @@
     </template>
     <template
       v-if="icon"
-      #icon
+      slot="icon"
     >
       <component :is="icon" />
     </template>
     <template
       v-if="titleOverride"
-      #titleOverride
+      slot="titleOverride"
     >
       <span v-html="titleOverride" />
     </template>
@@ -54,7 +54,7 @@
 <script>
 import { DtButton } from '../button';
 import DtNotice from './notice';
-import icon from '../mixins/icon';
+import icon from '@/common/mixins/icon';
 
 export default {
   name: 'NoticeDefault',

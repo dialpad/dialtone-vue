@@ -23,7 +23,7 @@
     />
     <template
       v-if="icon"
-      #icon
+      slot="icon"
     >
       <component :is="icon" />
     </template>
@@ -32,7 +32,7 @@
 
 <script>
 import DtButton from './button';
-import icon from '../mixins/icon';
+import icon from '@/common/mixins/icon';
 
 export default {
   name: 'ButtonDefault',

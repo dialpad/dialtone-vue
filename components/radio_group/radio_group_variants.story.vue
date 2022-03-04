@@ -21,7 +21,7 @@
     <!-- With Slotted Legend -->
     <dt-radio-group name="radio-group-with-slotted-legend">
       <radios-decorator />
-      <template #legend>
+      <template slot="legend">
         With Slotted Legend
       </template>
     </dt-radio-group>
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import RadiosDecorator from './radios_decorator';
 import DtRadioGroup from './radio_group';
 

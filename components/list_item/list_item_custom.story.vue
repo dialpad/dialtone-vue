@@ -30,7 +30,7 @@
             importance="clear"
             @click.stop="() => {}"
           >
-            <template #icon>
+            <template slot="icon">
               <icon-social aria-hidden="false" />
             </template>
           </dt-button>
@@ -39,7 +39,7 @@
             importance="clear"
             @click.stop="() => {}"
           >
-            <template #icon>
+            <template slot="icon">
               <icon-star-outline aria-hidden="false" />
             </template>
           </dt-button>
@@ -48,7 +48,7 @@
             importance="clear"
             @click.stop="() => {}"
           >
-            <template #icon>
+            <template slot="icon">
               <icon-menu-vertical aria-hidden="false" />
             </template>
           </dt-button>
@@ -64,7 +64,7 @@ import DtListItem from './list_item';
 import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
 import IconSocial from '@dialpad/dialtone/lib/dist/vue/icons/IconSocial';
 import IconStarOutline from '@dialpad/dialtone/lib/dist/vue/icons/IconStarOutline';
-import KeyboardNavigation from '../mixins/keyboard_list_navigation';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 
 export default {
   name: 'DtListItemDefault',

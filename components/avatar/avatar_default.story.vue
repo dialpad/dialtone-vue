@@ -9,7 +9,7 @@
   >
     <template
       v-if="defaultSlot"
-      #default
+      slot="default"
     >
       <component
         :is="defaultSlot"
@@ -25,8 +25,8 @@
 
 <script>
 import DtAvatar from './avatar';
-import icon from '../mixins/icon';
-import { htmlFragment } from '../utils';
+import icon from '@/common/mixins/icon';
+import { htmlFragment } from '@/common/utils';
 
 export default {
   name: 'DtAvatarDefault',

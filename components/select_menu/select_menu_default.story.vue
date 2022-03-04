@@ -23,13 +23,13 @@
   >
     <template
       v-if="labelSlot"
-      #label
+      slot="label"
     >
       <span v-html="labelSlot" />
     </template>
     <template
       v-if="descriptionSlot"
-      #description
+      slot="description"
     >
       <span v-html="descriptionSlot" />
     </template>
@@ -42,7 +42,7 @@
 
 <script>
 import DtSelectMenu from './select_menu';
-import { htmlFragment } from '../utils';
+import { htmlFragment } from '@/common/utils';
 
 export default {
   name: 'DtSelectMenuDefault',

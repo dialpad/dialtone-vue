@@ -21,7 +21,7 @@
     <!-- With Slotted Legend -->
     <dt-checkbox-group name="checkbox-group-with-slotted-legend">
       <dt-checkboxes-decorator />
-      <template #legend>
+      <template slot="legend">
         With Slotted Legend
       </template>
     </dt-checkbox-group>
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtCheckboxesDecorator from './checkboxes_decorator';
 import DtCheckboxGroup from './checkbox_group';
 

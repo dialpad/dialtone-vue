@@ -1,3 +1,55 @@
+# [1.15.0](https://github.com/dialpad/dialtone-vue/compare/v1.14.0...v1.15.0) (2022-02-28)
+
+
+### Bug Fixes
+
+* multiple items being highlighted at the same time ([#245](https://github.com/dialpad/dialtone-vue/issues/245)) ([05d6c6d](https://github.com/dialpad/dialtone-vue/commit/05d6c6d911d9a67eb4975296072b40cc25c924be))
+
+
+### Features
+
+* add top banner info component for call info display ([#246](https://github.com/dialpad/dialtone-vue/issues/246)) ([8f47407](https://github.com/dialpad/dialtone-vue/commit/8f474073743c5123396252ec288a468affdaef4a))
+
+# [1.14.0](https://github.com/dialpad/dialtone-vue/compare/v1.13.2...v1.14.0) (2022-02-18)
+
+
+### Bug Fixes
+
+* keyboard nav bugs, combobox, dropdown ([#236](https://github.com/dialpad/dialtone-vue/issues/236)) ([a7cf63e](https://github.com/dialpad/dialtone-vue/commit/a7cf63ee44eee7559daaae47b8252e5cab4359b7))
+* storybook addon-docs define alias ([#240](https://github.com/dialpad/dialtone-vue/issues/240)) ([dd83bac](https://github.com/dialpad/dialtone-vue/commit/dd83bacdb35658cf45d92493a44949da64828516))
+
+
+### Features
+
+* add icon only variant with rectangular button ([#239](https://github.com/dialpad/dialtone-vue/issues/239)) ([dafd7cb](https://github.com/dialpad/dialtone-vue/commit/dafd7cbe1c64c32132487ae52fd9b42536c4e11c))
+
+# [1.14.0](https://github.com/dialpad/dialtone-vue/compare/v1.13.2...v1.14.0) (2022-02-18)
+
+
+### Bug Fixes
+
+* keyboard nav bugs, combobox, dropdown ([#236](https://github.com/dialpad/dialtone-vue/issues/236)) ([a7cf63e](https://github.com/dialpad/dialtone-vue/commit/a7cf63ee44eee7559daaae47b8252e5cab4359b7))
+* storybook addon-docs define alias ([#240](https://github.com/dialpad/dialtone-vue/issues/240)) ([dd83bac](https://github.com/dialpad/dialtone-vue/commit/dd83bacdb35658cf45d92493a44949da64828516))
+
+
+### Features
+
+* add icon only variant with rectangular button ([#239](https://github.com/dialpad/dialtone-vue/issues/239)) ([dafd7cb](https://github.com/dialpad/dialtone-vue/commit/dafd7cbe1c64c32132487ae52fd9b42536c4e11c))
+
+## [1.13.2](https://github.com/dialpad/dialtone-vue/compare/v1.13.1...v1.13.2) (2022-02-03)
+
+
+### Bug Fixes
+
+* apply fixed header classes only if slots not empty ([a0f58f1](https://github.com/dialpad/dialtone-vue/commit/a0f58f16db26293d6d2a2e779161f5f943e8d3a9))
+
+## [1.13.1](https://github.com/dialpad/dialtone-vue/compare/v1.13.0...v1.13.1) (2022-01-27)
+
+
+### Bug Fixes
+
+* update list item to apply hover when navigationType is set ([#234](https://github.com/dialpad/dialtone-vue/issues/234)) ([23c4dda](https://github.com/dialpad/dialtone-vue/commit/23c4ddace6d3b20a5a3b953e535091ca3750bb74))
+
 # [1.13.0](https://github.com/dialpad/dialtone-vue/compare/v1.12.0...v1.13.0) (2022-01-26)
 
 

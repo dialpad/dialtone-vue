@@ -5,6 +5,7 @@
     :class="['dt-list-item d-ls-none focus-visible', {
       'dt-list-item--focusable': isFocusable,
       'dt-list-item--highlighted': isHighlighted,
+      'dt-list-item--hoverable': isHoverable,
     }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
@@ -34,7 +35,7 @@ import {
   LIST_ITEM_NAVIGATION_TYPES,
 } from './list_item_constants.js';
 import DtDefaultListItem from './default_list_item';
-import utils from '../utils';
+import utils from '@/common/utils';
 
 export default {
   name: 'ListItem',
@@ -120,6 +121,13 @@ export default {
       // Navigation type has to be set to "tab".
       return this.navigationType === LIST_ITEM_NAVIGATION_TYPES.TAB;
     },
+
+    /**
+     * Whether or not to apply hover styles.
+     */
+    isHoverable () {
+      return this.navigationType !== LIST_ITEM_NAVIGATION_TYPES.NONE;
+    },
   },
 
   methods: {
@@ -131,7 +139,6 @@ export default {
 </script>
 
 <style lang="less">
-.dt-list-item:hover,
 .dt-list-item--focusable:focus,
 .dt-list-item--focusable:focus-within,
 .dt-list-item--highlighted {

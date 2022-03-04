@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile, getIconNames } from '../storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtInput from './input';
 import { INPUT_SIZES } from './input_constants';
 import InputMdx from './input.mdx';
@@ -186,6 +186,9 @@ export default {
     docs: {
       page: InputMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
   decorators: [decorator],
   excludeStories: /.*Data$/,
@@ -196,13 +199,7 @@ export default {
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, InputDefault);
 
 export const Default = Template.bind({});
-Default.parameters = {
-  docs: {
-    source: {
-      code: '<dt-input label="Label" />',
-    },
-  },
-};
+Default.parameters = {};
 
 export const WithDescription = Template.bind({});
 WithDescription.args = {
@@ -230,37 +227,19 @@ export const WithWarning = Template.bind({});
 WithWarning.args = {
   messages: [{ message: 'This is a warning message', type: 'warning' }],
 };
-WithWarning.parameters = {
-  docs: {
-    source: {
-      code: '<dt-input :messages="[{ message: \'This is a warning message\', type: \'warning\' }]" />',
-    },
-  },
-};
+WithWarning.parameters = {};
 
 export const WithError = Template.bind({});
 WithError.args = {
   messages: [{ message: 'This is an error message', type: 'error' }],
 };
-WithError.parameters = {
-  docs: {
-    source: {
-      code: '<dt-input :messages="[{ message: \'This is an error message\', type: \'error\' }]" />',
-    },
-  },
-};
+WithError.parameters = {};
 
 export const WithSuccess = Template.bind({});
 WithSuccess.args = {
   messages: [{ message: 'This is a success message', type: 'success' }],
 };
-WithSuccess.parameters = {
-  docs: {
-    source: {
-      code: '<dt-input :messages="[{ message: \'This is a success message\', type: \'success\' }]" />',
-    },
-  },
-};
+WithSuccess.parameters = {};
 
 export const WithMultipleMessages = Template.bind({});
 WithMultipleMessages.args = {

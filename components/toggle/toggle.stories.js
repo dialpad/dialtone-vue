@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import ToggleDefault from './toggle_default.story.vue';
 import ToggleVariants from './toggle_variants.story.vue';
 import ToggleMdx from './toggle.mdx';
@@ -90,6 +90,9 @@ export default {
     docs: {
       page: ToggleMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -103,3 +106,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

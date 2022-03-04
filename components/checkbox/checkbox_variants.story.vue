@@ -43,7 +43,7 @@
       label="With"
       value="Value"
     >
-      <template #description>
+      <template slot="description">
         Slotted Description
       </template>
     </dt-checkbox>
@@ -55,7 +55,7 @@
       value="Value"
     >
       With Slotted Label
-      <template #description>
+      <template slot="description">
         And Slotted Description
       </template>
     </dt-checkbox>
@@ -217,7 +217,7 @@
 
 <script>
 import DtCheckbox from './checkbox';
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 export default {
   name: 'CheckboxVariants',

@@ -21,7 +21,7 @@
     <!-- With Slotted Legend -->
     <dt-input-group name="input-group-with-slotted-legend">
       <inputs-decorator />
-      <template #legend>
+      <template slot="legend">
         With Slotted Legend
       </template>
     </dt-input-group>
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { VALIDATION_MESSAGE_TYPES } from '../constants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import InputsDecorator from './decorators/inputs';
 import DtInputGroup from './input_group';
 

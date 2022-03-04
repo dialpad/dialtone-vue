@@ -8,7 +8,7 @@ import {
 } from './';
 import PopoverDefault from './popover_default.story.vue';
 import PopoverVariants from './popover_variants.story.vue';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import PopoverMdx from './popover.mdx';
 import { action } from '@storybook/addon-actions';
 import { TOOLTIP_HIDE_ON_CLICK_VARIANTS } from '../tooltip';
@@ -150,6 +150,9 @@ export default {
     docs: {
       page: PopoverMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
   excludeStories: /.Data$/,
 };
@@ -162,26 +165,8 @@ Default.args = {};
 Default.decorators = [() => ({
   template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
 })];
-Default.parameters = {
-  docs: {
-    source: {
-      code: `
-<dt-popover :open.sync="open">
-  <template #anchor="{ attrs }">
-    <dt-button
-      v-bind="attrs"
-      @click="open = !open"
-    >
-      Click to open
-    </dt-button>
-  </template>
-  <template #content>
-    <p>I will be displayed in the popover!</p>
-  </template>
-</dt-popover>
-    `,
-    },
-  },
-};
+Default.parameters = {};
 
 export const Variants = TemplateVariants.bind({});
+Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

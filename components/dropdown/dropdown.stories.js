@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '../storybook_utils';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtDropdown from './dropdown';
 import DtDropdownMdx from './dropdown.mdx';
 import DtDropdownDefaultTemplate from './dropdown_default.story.vue';
@@ -160,6 +160,9 @@ export default {
     docs: {
       page: DtDropdownMdx,
     },
+    options: {
+      showPanel: true,
+    },
   },
 };
 
@@ -184,6 +187,7 @@ Default.decorators = [() => ({
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 Variants.decorators = [() => ({
   template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
 })];

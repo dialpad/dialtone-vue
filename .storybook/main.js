@@ -2,6 +2,7 @@ const path = require('path');
 const less = require('less');
 const package = require('../package.json');
 const generate = require('generate-file-webpack-plugin');
+const vueConf = require('../vue.config');
 
 const cssLoaders = [
   'style-loader',
@@ -50,6 +51,11 @@ module.exports = {
       filename: 'preview.[name].js',
     };
 
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, ".."),
+    };
+
     config.devtool = 'source-map'
 
     return config;
@@ -76,10 +82,20 @@ module.exports = {
 
   stories: [
     '../components/**/*.stories.@(js|mdx)',
+    '../recipes/**/*.stories.@(js|mdx)',
     '../docs/**/*.stories.@(js|mdx)',
   ],
   addons: [
-    '@storybook/addon-docs',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        vueDocgenOptions: {
+          alias: {
+            '@': path.resolve(__dirname, '../')
+          },
+        },
+      }
+    },
     '@storybook/addon-controls',
     '@storybook/addon-actions',
     '@storybook/addon-links',
