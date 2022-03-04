@@ -1,3 +1,46 @@
+# [2.0.0-beta.7](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2022-03-04)
+
+
+### Bug Fixes
+
+* popover open event, popover focus bug ([a8fe310](https://github.com/dialpad/dialtone-vue/commit/a8fe310fe3488cbcc0d9135cd5cea0d8119f29cb))
+
+# [2.0.0-beta.6](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2022-03-02)
+
+
+### Features
+
+* add dialogClass prop ([612094d](https://github.com/dialpad/dialtone-vue/commit/612094dab4da9eff64aca8bff840eba8afc0fab7))
+
+# [2.0.0-beta.5](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2022-03-02)
+
+
+### Bug Fixes
+
+* tests ([9a18f53](https://github.com/dialpad/dialtone-vue/commit/9a18f53255e96bca7a021414d4d4810f1b09d18c))
+
+# [2.0.0-beta.4](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2022-03-01)
+
+
+### Bug Fixes
+
+* z-index issue and focus on mouse click issue ([29f8da5](https://github.com/dialpad/dialtone-vue/commit/29f8da51e4c8b01857a1346daf6929f6179f7844))
+
+# [2.0.0-beta.3](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2022-02-26)
+
+
+### Bug Fixes
+
+* overlength mdx ([b4f64d8](https://github.com/dialpad/dialtone-vue/commit/b4f64d87f63eabbdcde69359f4904c8a141c7d41))
+
+# [2.0.0-beta.2](https://github.com/dialpad/dialtone-vue/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2022-02-26)
+
+
+### Bug Fixes
+
+* tooltip tests ([6358d36](https://github.com/dialpad/dialtone-vue/commit/6358d3653d084364637fb0ae6f2814604dfffc57))
+
+# [2.0.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v1.14.0...v2.0.0-beta.1) (2022-02-25)
 # [1.15.0](https://github.com/dialpad/dialtone-vue/compare/v1.14.0...v1.15.0) (2022-02-28)
 
 
@@ -6,9 +49,29 @@
 * multiple items being highlighted at the same time ([#245](https://github.com/dialpad/dialtone-vue/issues/245)) ([05d6c6d](https://github.com/dialpad/dialtone-vue/commit/05d6c6d911d9a67eb4975296072b40cc25c924be))
 
 
+### Code Refactoring
+
+* component popover, tooltip(update css,alignment,class-naming) ([#223](https://github.com/dialpad/dialtone-vue/issues/223)) ([45c48a4](https://github.com/dialpad/dialtone-vue/commit/45c48a473665f065020818be675f18f34d565179))
+
+
 ### Features
 
 * add top banner info component for call info display ([#246](https://github.com/dialpad/dialtone-vue/issues/246)) ([8f47407](https://github.com/dialpad/dialtone-vue/commit/8f474073743c5123396252ec288a468affdaef4a))
+
+
+### BREAKING CHANGES
+
+* removed fixedVerticalAlignment, fixedAlignment props for the popover component
+
+* fix merge
+
+* fix tests
+
+* fix story
+
+* clean up stories and documentation
+
+Co-authored-by: Brad Paugh <brad.paugh@dialpad.com>
 
 # [1.14.0](https://github.com/dialpad/dialtone-vue/compare/v1.13.2...v1.14.0) (2022-02-18)
 

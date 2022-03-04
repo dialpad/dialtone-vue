@@ -1,11 +1,11 @@
+<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
+<!-- eslint-disable max-lines -->
 <template>
   <div class="d-d-flex d-fw-wrap d-w100p d-flg12 d-fl-col4">
     <dt-popover
-      :open="openAlignmentLeft"
-      fixed-alignment="left"
       width-content="anchor"
+      placement="bottom-start"
       class="d-mr12"
-      @update:open="openAlignmentLeft = $event"
     >
       <template
         slot="anchor"
@@ -13,20 +13,25 @@
       >
         <dt-button
           v-bind="attrs"
-          @click="openAlignmentLeft = !openAlignmentLeft"
         >
-          Fixed alignment left
+          bottom-end placement
         </dt-button>
       </template>
-      <template slot="content">
+      <template
+        slot="content"
+        slot-scope="{ close }"
+      >
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
             v-html="content"
           />
           <div v-else>
+            <p class="d-mb4">
+              I will be displayed in the popover!
+            </p>
             <dt-button
-              @click="openAlignmentLeft = !openAlignmentLeft"
+              @click="close"
             >
               Click to close
             </dt-button>
@@ -35,11 +40,8 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="openAlignmentRight"
-      fixed-alignment="right"
       width-content="anchor"
       class="d-mr12"
-      @update:open="openAlignmentRight = $event"
     >
       <template
         slot="anchor"
@@ -47,20 +49,25 @@
       >
         <dt-button
           v-bind="attrs"
-          @click="openAlignmentRight = !openAlignmentRight"
         >
-          Fixed alignment right
+          bottom-start placement
         </dt-button>
       </template>
-      <template slot="content">
+      <template
+        slot="content"
+        slot-scope="{ close }"
+      >
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
             v-html="content"
           />
           <div v-else>
+            <p class="d-mb4">
+              I will be displayed in the popover!
+            </p>
             <dt-button
-              @click="openAlignmentRight = !openAlignmentRight"
+              @click="close"
             >
               Click to close
             </dt-button>
@@ -69,12 +76,9 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="openPopoverWithNoPadding"
       padding="none"
-      fixed-alignment="right"
       width-content="anchor"
       class="d-mr12"
-      @update:open="openPopoverWithNoPadding = $event"
     >
       <template
         slot="anchor"
@@ -82,12 +86,14 @@
       >
         <dt-button
           v-bind="attrs"
-          @click="openPopoverWithNoPadding = !openPopoverWithNoPadding"
         >
           No padding
         </dt-button>
       </template>
-      <template slot="content">
+      <template
+        slot="content"
+        slot-scope="{ close }"
+      >
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
@@ -95,7 +101,7 @@
           />
           <div v-else>
             <dt-button
-              @click="openPopoverWithNoPadding = !openPopoverWithNoPadding"
+              @click="close"
             >
               Click to close
             </dt-button>
@@ -104,12 +110,9 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="openWithOverlay"
-      :modal="true"
-      fixed-alignment="right"
+      :modal="false"
       width-content="anchor"
       class="d-mr12"
-      @update:open="openWithOverlay = $event"
     >
       <template
         slot="anchor"
@@ -117,20 +120,25 @@
       >
         <dt-button
           v-bind="attrs"
-          @click="openWithOverlay = !openWithOverlay"
         >
-          Overlay Modal
+          Non-Modal
         </dt-button>
       </template>
-      <template slot="content">
+      <template
+        slot="content"
+        slot-scope="{ close }"
+      >
         <div class="d-fs14 d-m0">
           <p
             v-if="content"
             v-html="content"
           />
           <div v-else>
+            <p class="d-mb4">
+              I will be displayed in the popover!
+            </p>
             <dt-button
-              @click="openWithOverlay = !openWithOverlay"
+              @click="close"
             >
               Click to close
             </dt-button>
@@ -139,18 +147,14 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="openPopoverWithHeader"
       :show-close-button="true"
-      :fixed-header-footer="isHeaderFixed"
-      content-class="d-pl12 d-pr16"
-      header-class="d-d-flex d-jc-space-between d-ai-center"
-      class="d-mr12"
+      placement="bottom-start"
+      header-class="d-d-flex d-ai-center d-jc-space-between"
       max-height="20rem"
       max-width="50rem"
       :close-button-props="{
         ariaLabel: 'Close popover',
       }"
-      @update:open="openPopoverWithHeader = $event"
     >
       <template
         slot="anchor"
@@ -158,14 +162,15 @@
       >
         <dt-button
           v-bind="attrs"
-          @click="openPopoverWithHeader = !openPopoverWithHeader"
         >
           Popover with header
         </dt-button>
       </template>
       <template slot="headerContent">
-        <div>Potential Title</div>
-        <div class="d-d-flex d-jc-flex-end">
+        <div>
+          Potential Title
+        </div>
+        <div>
           <dt-button
             circle
             class="d-p6 d-bc-transparent"
@@ -193,13 +198,6 @@
       </template>
       <template slot="content">
         <div class="d-fs14 d-m0">
-          <div>
-            <dt-button
-              @click="isHeaderFixed = !isHeaderFixed"
-            >
-              Click to make header {{ isHeaderFixed ? "not fixed" : "fixed" }}
-            </dt-button>
-          </div>
           <p>
             {{ sampleText }}
           </p>
@@ -214,16 +212,41 @@
     </dt-popover>
 
     <dt-popover
-      :open="openPopoverWithFooter"
-      :fixed-header-footer="true"
-      content-class="d-pl12 d-pr16"
-      class="d-mr12"
+      :show-close-button="true"
       max-height="20rem"
       max-width="50rem"
       :close-button-props="{
         ariaLabel: 'Close popover',
       }"
-      @update:open="openPopoverWithFooter = $event"
+    >
+      <template #anchor="{ attrs }">
+        <dt-button
+          v-bind="attrs"
+        >
+          Popover with close
+        </dt-button>
+      </template>
+      <template #content>
+        <div class="d-fs14 d-m0">
+          <p>
+            {{ sampleText }}
+          </p>
+          <p>
+            {{ sampleText }}
+          </p>
+          <p>
+            {{ sampleText }}
+          </p>
+        </div>
+      </template>
+    </dt-popover>
+
+    <dt-popover
+      max-height="20rem"
+      max-width="50rem"
+      :close-button-props="{
+        ariaLabel: 'Close popover',
+      }"
     >
       <template
         slot="anchor"
@@ -231,7 +254,6 @@
       >
         <dt-button
           v-bind="attrs"
-          @click="openPopoverWithFooter = !openPopoverWithFooter"
         >
           Popover with footer
         </dt-button>
@@ -253,41 +275,175 @@
         </div>
       </template>
     </dt-popover>
+
+    <dt-popover
+      content-class="d-pl12 d-pr16"
+      class="d-mr12"
+      max-height="20rem"
+      max-width="50rem"
+    >
+      <template #anchor="{ attrs }">
+        <dt-button
+          v-bind="attrs"
+        >
+          Popover with dropdown
+        </dt-button>
+      </template>
+      <template #content>
+        <div class="d-fs14 d-m0">
+          <p>
+            {{ sampleText }}
+          </p>
+          <dt-dropdown>
+            <template #anchor="{ attrs }">
+              <dt-button
+                v-bind="attrs"
+              >
+                Open dropdown
+              </dt-button>
+            </template>
+            <template #list="{ close }">
+              <dt-list-item
+                key="pd-1"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 1
+              </dt-list-item>
+              <dt-list-item
+                key="pd-2"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 2 Item 2 Item 2
+              </dt-list-item>
+              <dt-list-item
+                key="pd-3"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 3
+              </dt-list-item>
+              <dt-list-item
+                key="pd-4"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 4
+              </dt-list-item>
+              <dt-list-item
+                key="pd-5"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 5
+              </dt-list-item>
+              <dt-list-item
+                key="pd-6"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 6
+              </dt-list-item>
+            </template>
+          </dt-dropdown>
+        </div>
+      </template>
+    </dt-popover>
+
+    <dt-popover
+      content-class="d-pl12 d-pr16"
+      class="d-mr12"
+      max-height="20rem"
+      max-width="50rem"
+    >
+      <template #anchor="{ attrs }">
+        <dt-button
+          v-bind="attrs"
+        >
+          Popover with tooltip
+        </dt-button>
+      </template>
+      <template #content>
+        <div class="d-fs14 d-m0">
+          <p>
+            {{ sampleText }}
+          </p>
+          <p>
+            {{ sampleText }}
+          </p>
+          <p>
+            {{ sampleText }}
+          </p>
+          <dt-tooltip>
+            <template #anchor>
+              <dt-button>
+                Hover me
+              </dt-button>
+            </template>
+            This is the tooltip content
+          </dt-tooltip>
+        </div>
+      </template>
+    </dt-popover>
+
+    <dt-popover
+      content-class="d-pl12 d-pr16"
+      class="d-mr12"
+      max-height="20rem"
+      max-width="50rem"
+      :open.sync="openPopoverWithTriggerOverride"
+    >
+      <template #anchor="{ attrs }">
+        <dt-button
+          v-bind="attrs"
+          @mouseover="onMouseOver"
+          @mouseout="onMouseOut"
+        >
+          Popover with mouseover trigger
+        </dt-button>
+      </template>
+      <template #content>
+        <div class="d-fs14 d-m0">
+          <p>
+            {{ sampleText }}
+          </p>
+        </div>
+      </template>
+    </dt-popover>
   </div>
 </template>
 
 <script>
 import { DtPopover } from './';
 import { DtButton } from '../button';
+import { DtDropdown } from '../dropdown';
+import { DtListItem } from '../list_item';
+import { DtTooltip } from '../tooltip';
 import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
 import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch';
 
 export default {
-  name: 'PopoverDefaultStory',
+  name: 'PopoverVariantsStory',
   components: {
     DtPopover,
     DtButton,
+    DtDropdown,
+    DtTooltip,
     IconMenuVertical,
     IconLaunch,
-  },
-
-  props: {
-    open: {
-      type: Boolean,
-      default: false,
-    },
+    DtListItem,
   },
 
   data () {
     return {
-      openAlignmentRight: false,
-      openAlignmentLeft: false,
-      openWithOverlay: false,
-      openPopoverWithHeader: false,
-      openPopoverWithFooter: false,
-      openPopoverWithNoPadding: false,
-      isHeaderFixed: false,
-      isOpen: this.open || false,
+      openPopoverWithTriggerOverride: false,
       sampleText: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Consequuntur delectus distinctio id iure labore,
             maiores mollitia reprehenderit sunt tempore veritatis.
@@ -296,9 +452,13 @@ export default {
     };
   },
 
-  watch: {
-    open (isOpen) {
-      this.isOpen = isOpen;
+  methods: {
+    onMouseOver () {
+      this.openPopoverWithTriggerOverride = true;
+    },
+
+    onMouseOut () {
+      this.openPopoverWithTriggerOverride = false;
     },
   },
 };

@@ -1,12 +1,12 @@
+<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <dt-popover
     :id="id"
     :key="uniqueKey"
-    :open="isOpen"
-    :fixed-alignment="fixedAlignment"
-    :fixed-vertical-alignment="fixedVerticalAlignment"
+    :open.sync="isOpen"
+    :placement="placement"
     :content-class="contentClass"
-    :has-caret="hasCaret"
+    :fallback-placements="fallbackPlacements"
     :padding="padding"
     :hide-on-click="hideOnClick"
     :role="role"
@@ -14,23 +14,15 @@
     :transition="transition"
     :aria-labelledby="ariaLabelledby"
     :aria-label="ariaLabel"
-    :focus-anchor-on-close="focusAnchorOnClose"
     :offset="offset"
-    :append-to="appendTo"
-    :interactive="interactive"
-    :flip-boundary="flipBoundary"
-    :interactive-border="interactiveBorder"
-    :trigger="trigger"
     :modal="modal"
     :content-width="contentWidth"
     :show-close-button="showCloseButton"
     :header-class="headerClass"
     :footer-class="footerClass"
-    :fixed-header-footer="fixedHeaderFooter"
     :max-height="maxHeight"
     :max-width="maxWidth"
-    width-content="anchor"
-    @update:open="updateOpen"
+    @opened="onOpened"
   >
     <template
       slot="anchor"
@@ -38,12 +30,14 @@
     >
       <dt-button
         v-bind="attrs"
-        @click="isOpen = !isOpen"
       >
         Click to open
       </dt-button>
     </template>
-    <template slot="content">
+    <template
+      slot="content"
+      slot-scope="{ close }"
+    >
       <div class="d-fs14 d-m0">
         <span
           v-if="content"
@@ -53,9 +47,7 @@
           <p class="d-mb4">
             I will be displayed in the popover!
           </p>
-          <dt-button
-            @click="isOpen = !isOpen"
-          >
+          <dt-button @click="close">
             Click to close
           </dt-button>
         </template>
@@ -88,16 +80,9 @@ export default {
     DtButton,
   },
 
-  props: {
-    open: {
-      type: Boolean,
-      default: false,
-    },
-  },
-
-  data () {
+  data: function () {
     return {
-      isOpen: this.open || false,
+      isOpen: this.open,
     };
   },
 
@@ -108,15 +93,8 @@ export default {
   },
 
   watch: {
-    open (isOpen) {
-      this.isOpen = isOpen;
-    },
-  },
-
-  methods: {
-    updateOpen (isOpen) {
-      this.isOpen = isOpen;
-      this.onUpdateOpen(...arguments);
+    open: function (open) {
+      this.isOpen = open;
     },
   },
 };
