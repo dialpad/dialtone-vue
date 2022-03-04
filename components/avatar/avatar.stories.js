@@ -17,25 +17,25 @@ export const argTypesData = {
 
   // Props
   kind: {
-    defaultValue: 'default',
-    control: {
-      type: 'select',
-      options: Object.keys(AVATAR_KIND_MODIFIERS),
+    table: {
+      defaultValue: { summary: 'default' },
     },
+    options: Object.keys(AVATAR_KIND_MODIFIERS),
+    control: 'select',
   },
   size: {
-    defaultValue: 'md',
-    control: {
-      type: 'select',
-      options: Object.keys(AVATAR_SIZE_MODIFIERS),
+    table: {
+      defaultValue: { summary: 'md' },
     },
+    options: Object.keys(AVATAR_SIZE_MODIFIERS),
+    control: 'select',
   },
   color: {
-    defaultValue: 'base',
-    control: {
-      type: 'select',
-      options: Object.keys(AVATAR_COLOR_MODIFIERS),
+    table: {
+      defaultValue: { summary: 'base' },
     },
+    options: Object.keys(AVATAR_COLOR_MODIFIERS),
+    control: 'select',
   },
   avatarClass: {
     description: 'Pass through classes. Used to customize the avatar container',
