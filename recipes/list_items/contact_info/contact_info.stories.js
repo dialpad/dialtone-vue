@@ -9,7 +9,6 @@ import { AVATAR_COLOR_MODIFIERS } from '@';
 
 // Default Prop Values
 export const argsData = {
-  displayName: 'prop',
   onClick: action('click'),
 };
 
@@ -20,38 +19,11 @@ export const argTypesData = {
       type: { summary: 'string' },
       defaultValue: { summary: 'generated unique ID' },
     },
-    control: {
-      type: 'text',
-    },
   },
   role: {
     table: {
       type: { summary: 'string' },
-      defaultValue: { summary: 'listitem' },
     },
-    control: {
-      type: 'text',
-    },
-  },
-
-  displayName: {
-    control: 'text',
-  },
-
-  phoneNumber: {
-    control: 'text',
-  },
-
-  showAttestation: {
-    control: 'boolean',
-  },
-
-  avatarSrc: {
-    control: 'text',
-  },
-
-  avatarInitials: {
-    control: 'text',
   },
 
   avatarColor: {
@@ -68,17 +40,9 @@ export const argTypesData = {
     options: Object.keys(USER_STATUS_COLOR_MODIFIERS),
   },
 
-  groupName: {
-    control: 'text',
-  },
-
-  groupColorClass: {
-    control: 'text',
-  },
-
   // Slots
   header: {
-    description: 'Slot for extra header information',
+    description: 'Slot for header information',
     control: 'text',
     table: {
       category: 'slots',
@@ -89,7 +53,7 @@ export const argTypesData = {
   },
 
   subtitle: {
-    description: 'Slot for extra subtitle information',
+    description: 'Slot for subtitle information',
     control: 'text',
     table: {
       category: 'slots',
@@ -100,7 +64,7 @@ export const argTypesData = {
   },
 
   bottom: {
-    description: 'Slot for extra information at the bottom',
+    description: 'Slot for information at the bottom',
     control: 'text',
     table: {
       category: 'slots',
@@ -171,27 +135,61 @@ const avatarImage = require('./avatar.png');
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  displayName: 'Joseph Lumaban',
-  phoneNumber: '+1 (415) 123-4567',
   avatarSrc: avatarImage,
   avatarInitials: 'JL',
   avatarColor: 'base',
   userStatusColor: 'green',
-  showAttestation: true,
-  groupName: 'Aerolabs Support',
-  groupColorClass: 'd-bgc-pink-400',
+  header: `<div class="d-fs16 d-fw-bold">
+  Joseph Lumaban
+</div>`,
+  subtitle: `<div class="d-fs12 d-mt2">
+  +1 (415) 123-4567
+</div>`,
+  bottom: `<div class="d-d-flex d-ai-center d-mtn6">
+  <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">
+    &nbsp;
+  </div>
+  <div class="d-fs11 d-mr4">
+    Aerolabs Support
+  </div>
+</div>`,
+};
+
+Default.parameters = {
+  docs: {
+    source: {
+      code: `
+<dt-recipe-contact-info
+  :avatar-src="avatarSrc"
+  :user-status-color="userStatusColor"
+  @click="onClick"
+>
+  <template #header>
+    <div class="d-fs16 d-fw-bold d-mr4">Joseph Lumaban</div>
+  </template>
+  <template #subtitle>
+    <div class="d-d-flex d-ai-center">
+      <div class="d-fs12 d-mt2">+1 (415) 123-4567</div>
+      <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+    </div>
+  </template>
+  <template #bottom>
+    <div class="d-d-flex d-ai-center d-mtn6">
+      <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
+      <div class="d-fs11 d-mr4">Aerolabs Support</div>
+    </div>
+  </template>
+</dt-recipe-contact-info>
+      `,
+    },
+  },
 };
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {
-  displayName: 'Joseph Lumaban',
-  phoneNumber: '(415) 555-1234',
-  avatarInitials: 'JL',
+  avatarInitials: 'NW',
   avatarColor: 'orange-500',
   userStatusColor: 'yellow',
-  showAttestation: true,
-  groupName: 'Aerolabs Support',
-  groupColorClass: 'd-bgc-yellow-400',
   onMarkAsSpam: action('click: mark this contact as spam'),
   onConnectToARecord: action('click: connect to a record'),
 };
@@ -200,102 +198,116 @@ Variants.parameters = {
   docs: {
     source: {
       code: `
-<div class="d-m32">
-  <p class="d-my16 d-ml48 d-fs14 d-fw-bold">Unknown contact (phone number only) with attestation</p>
-  <dt-recipe-contact-info
-    :phone-number="phoneNumber"
-    show-attestation
-    @click="onClick"
-  >
-    <template #subtitle>
-      San Francisco, California
-    </template>
-  </dt-recipe-contact-info>
-</div>
-<div class="d-m32">
-  <p class="d-my16 d-ml48 d-fs14 d-fw-bold">Unknown contact with "marked as spam" button</p>
-  <dt-recipe-contact-info
-    :phone-number="phoneNumber"
-    @click="onClick"
-  >
-    <template #subtitle>
-      <div
-        class="d-fc-red-500"
-        @click.stop="onMarkAsSpam"
-      >
-        Mark as spam
-      </div>
-    </template>
-  </dt-recipe-contact-info>
-</div>
-<div class="d-m32">
-  <p class="d-my16 d-ml48 d-fs14 d-fw-bold">Group contact</p>
-  <dt-recipe-contact-info
-    :display-name="displayName"
-    :phone-number="phoneNumber"
-    :group-name="groupName"
-    :group-color-class="groupColorClass"
-    show-attestation
-    @click="onClick"
-  />
-</div>
-<div class="d-m32">
-  <p class="d-my16 d-ml48 d-fs14 d-fw-bold">Group contact with transfer info</p>
-  <dt-recipe-contact-info
-    :display-name="displayName"
-    :phone-number="phoneNumber"
-    :group-name="groupName"
-    :group-color-class="groupColorClass"
-    show-attestation
-    @click="onClick"
-  >
-    <template #bottom>
-      <div class="d-fw-bold d-fs11"> • Transfer from Billing Support</div>
-    </template>
-  </dt-recipe-contact-info>
-</div>
-<div class="d-m32">
-  <p class="d-my16 d-ml48 d-fs14 d-fw-bold">Admin view / listening in</p>
-  <dt-recipe-contact-info
-    :display-name="displayName"
-    :phone-number="phoneNumber"
-    :group-name="groupName"
-    :group-color-class="groupColorClass"
-    show-attestation
-    @click="onClick"
-  >
-    <template #header>
-      <div class="d-fw-bold d-fs16"> & Justin H. </div>
-      <div class="d-fs16"> (Agent) </div>
-    </template>
-  </dt-recipe-contact-info>
-</div>
-<div class="d-m32">
-  <p class="d-my16 d-ml48 d-fs14 d-fw-bold">Contact with items in right slot</p>
-  <dt-recipe-contact-info
-    :display-name="displayName"
-    :phone-number="phoneNumber"
-    :avatar-initials="avatarInitials"
-    :avatar-color="avatarColor"
-    @click="onClick"
-  >
-    <template #right>
-      <div class="d-d-flex d-ai-center d-m16">
-        <icon-chat class="d-m4" />
-        <icon-menu-horizontal class="d-m4" />
-        <div class="d-m4">0:32</div>
-      </div>
-    </template>
-    <template #bottom>
-      2 matches found.
-      <dt-button 
-        link 
-        @click.stop="onConnectToARecord"
-      >
-        Connect to a record 
-      </dt-button>
-    </template>
-  </dt-recipe-contact-info>
+<div class="d-divide-y d-divide-purple-400">
+  <div class="d-m32">
+    <p class="d-my16 d-fs14 d-fw-bold">Unknown contact (phone number only) with attestation</p>
+    <dt-recipe-contact-info @click="onClick">
+      <template #header>
+        <div class="d-d-flex d-ai-center d-mb2">
+          <div class="d-fs16 d-fw-bold d-mr4">+1 (415) 123-4567</div>
+          <icon-checkbox-filled class="d-fc-black-400 d-svg--size14" />
+        </div>
+      </template>
+      <template #subtitle>San Francisco, California</template>
+    </dt-recipe-contact-info>
+  </div>
+  <div class="d-m32">
+    <p class="d-my16 d-fs14 d-fw-bold">Unknown contact with "marked as spam" button</p>
+    <dt-recipe-contact-info @click="onClick">
+      <template #header>
+        <div class="d-d-flex d-ai-center d-mb2">
+          <div class="d-fs16 d-fw-bold d-mr4">+1 (415) 123-4567</div>
+        </div>
+      </template>
+      <template #subtitle>
+        <div class="d-fc-red-500" @click.stop="onMarkAsSpam">Mark as spam</div>
+      </template>
+    </dt-recipe-contact-info>
+  </div>
+  <div class="d-m32">
+    <p class="d-my16 d-fs14 d-fw-bold">Group contact</p>
+    <dt-recipe-contact-info @click="onClick">
+      <template #header>
+        <div class="d-fs16 d-fw-bold d-mr4">Joseph Lumaban</div>
+      </template>
+      <template #subtitle>
+        <div class="d-d-flex d-ai-center">
+          <div class="d-fs12 d-mt2">+1 (415) 123-4567</div>
+          <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+        </div>
+      </template>
+      <template #bottom>
+        <div class="d-d-flex d-ai-center d-mtn6">
+          <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
+          <div class="d-fs11 d-mr4">Aerolabs Support</div>
+        </div>
+      </template>
+    </dt-recipe-contact-info>
+  </div>
+  <div class="d-m32">
+    <p class="d-my16 d-fs14 d-fw-bold">Group contact with transfer info</p>
+    <dt-recipe-contact-info @click="onClick">
+      <template #header><div class="d-fs16 d-fw-bold d-mr4">Joseph Lumaban</div></template>
+      <template #subtitle>
+        <div class="d-d-flex d-ai-center">
+          <div class="d-fs12 d-mt2">+1 (415) 123-4567</div>
+          <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+        </div>
+      </template>
+      <template #bottom>
+        <div class="d-d-flex d-ai-center d-mtn6">
+          <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
+          <div class="d-fs11 d-mr4">Aerolabs Support</div>
+          <div class="d-fw-bold d-fs11">• Transfer from Billing Support</div>
+        </div>
+      </template>
+    </dt-recipe-contact-info>
+  </div>
+  <div class="d-m32">
+    <p class="d-my16 d-fs14 d-fw-bold">Admin view / listening in</p>
+    <dt-recipe-contact-info @click="onClick">
+      <template #header>
+        <div class="d-d-flex d-ai-center d-mb2">
+          <div class="d-fw-bold d-fs16">Joseph Lumaban & Justin H.</div>
+          <div class="d-fs16">(Agent)</div>
+        </div>
+      </template>
+      <template #subtitle>
+        <div class="d-d-flex d-ai-center">
+          <div class="d-fs12 d-mt2">+1 (415) 123-4567</div>
+          <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+        </div>
+      </template>
+      <template #bottom>
+        <div class="d-d-flex d-ai-center d-mtn6">
+          <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
+          <div class="d-fs11 d-mr4">Aerolabs Support</div>
+        </div>
+      </template>
+    </dt-recipe-contact-info>
+  </div>
+  <div class="d-m32">
+    <p class="d-my16 d-fs14 d-fw-bold">Contact with items in right slot</p>
+    <dt-recipe-contact-info
+      :avatar-initials="avatarInitials"
+      :avatar-color="avatarColor"
+      @click="onClick"
+    >
+      <template #header><div class="d-fw-bold d-fs16">Natalie Woods</div></template>
+      <template #subtitle>+1 (415) 123-4567</template>
+      <template #right>
+        <div class="d-d-flex d-ai-center d-m16">
+          <icon-chat class="d-m4" />
+          <icon-menu-horizontal class="d-m4" />
+          <div class="d-m4">0:32</div>
+        </div>
+      </template>
+      <template #bottom>
+        2 matches found.
+        <dt-button link @click.stop="onConnectToARecord">Connect to a record</dt-button>
+      </template>
+    </dt-recipe-contact-info>
+  </div>
 </div>
 `,
     },

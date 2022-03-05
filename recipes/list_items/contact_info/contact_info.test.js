@@ -8,13 +8,14 @@ import {
 
 // Constants
 const basePropsData = {
-  displayName: 'Joseph Lumaban',
-  phoneNumber: '+1 (415) 123-4567',
   avatarSrc: 'avatar.png',
   userStatusColor: 'green',
-  showAttestation: true,
-  groupName: 'Aerolabs Support',
-  groupColorClass: 'd-bgc-pink-400',
+};
+
+const baseSlotsData = {
+  header: 'Joseph Lumaban',
+  subtitle: '+1 (415) 123-4567',
+  bottom: 'Aerolabs Support',
 };
 
 describe('DtRecipeContactInfo Tests', function () {
@@ -30,7 +31,7 @@ describe('DtRecipeContactInfo Tests', function () {
   // Environment
   let propsData = basePropsData;
   let attrs = {};
-  let slots = {};
+  let slots = baseSlotsData;
   let provide = {};
 
   // Helpers
@@ -66,7 +67,7 @@ describe('DtRecipeContactInfo Tests', function () {
   afterEach(function () {
     propsData = basePropsData;
     attrs = {};
-    slots = {};
+    slots = baseSlotsData;
     provide = {};
   });
 
@@ -130,28 +131,6 @@ describe('DtRecipeContactInfo Tests', function () {
       });
       it('Should not display avatar', function () {
         assert.isFalse(avatarElement.exists());
-      });
-    });
-
-    describe('When display name is empty', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({
-          displayName: '',
-        });
-      });
-      it('Should not display phone number in header', function () {
-        assert.strictEqual(headerElement.text(), '+1 (415) 123-4567');
-      });
-    });
-
-    describe('Hide attestation check mark', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({
-          showAttestation: false,
-        });
-      });
-      it('Should not display attestation check mark', function () {
-        assert.isFalse(wrapper.find('.dt-contact-info__check-mark').exists());
       });
     });
 

@@ -1,14 +1,9 @@
 <template>
   <dt-recipe-contact-info
-    :display-name="displayName"
-    :phone-number="phoneNumber"
     :avatar-src="avatarSrc"
     :avatar-initials="avatarInitials"
     :avatar-color="avatarColor"
     :user-status-color="userStatusColor"
-    :show-attestation="showAttestation"
-    :group-name="groupName"
-    :group-color-class="groupColorClass"
     @click="onClick"
   >
     <template

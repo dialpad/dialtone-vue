@@ -16,7 +16,7 @@
           kind="default"
           size="lg"
           :src="avatarSrc"
-          :alt="displayName"
+          :alt="avatarInitials"
           avatar-class="d-bar2"
         />
         <dt-avatar
@@ -49,76 +49,31 @@
       </div>
     </template>
     <template #default>
-      <div
-        class="d-d-flex d-ai-center d-mb2"
-        data-qa="contact-info-header"
-      >
-        <div
-          v-if="displayName"
-          class="d-fs16 d-fw-bold d-mr4"
-        >
-          {{ displayName }}
-        </div>
-        <div
-          v-else
-          class="d-fs16 d-fw-bold d-mr4"
-        >
-          {{ phoneNumber }}
-          <template v-if="showAttestation">
-            <icon-checkbox-filled
-              class="dt-contact-info__check-mark d-fc-black-400 d-svg--size14"
-            />
-          </template>
-        </div>
-        <!-- @slot Slot for extra header information -->
+      <div data-qa="contact-info-header">
+        <!-- @slot Slot for header information -->
         <slot name="header" />
       </div>
     </template>
 
     <template #subtitle>
-      <div
-        class="d-d-flex d-ai-center"
-        data-qa="contact-info-subtitle"
-      >
-        <div
-          v-if="displayName"
-          class="d-fs12 d-mt2"
-        >
-          {{ phoneNumber }}
-          <template v-if="showAttestation">
-            <icon-checkbox-filled
-              class="dt-contact-info__check-mark d-fc-black-400 d-svg--size14 d-va-text-bottom"
-            />
-          </template>
-        </div>
-        <!-- @slot Slot for extra subtitle information -->
+      <div data-qa="contact-info-subtitle">
+        <!-- @slot Slot for subtitle information -->
         <slot name="subtitle" />
       </div>
     </template>
 
     <template #bottom>
-      <div
-        class="d-d-flex d-ai-center d-mtn6"
-        data-qa="contact-info-bottom"
-      >
-        <template v-if="groupName">
-          <div :class="['d-w8', 'd-h8', 'd-mr4', groupColorClass]">
-            &nbsp;
-          </div>
-          <div class="d-fs11 d-mr4">
-            {{ groupName }}
-          </div>
-        </template>
-        <div>
-          <!-- @slot Slot for extra information at the bottom -->
-          <slot name="bottom" />
-        </div>
+      <div data-qa="contact-info-bottom">
+        <!-- @slot Slot for information at the bottom -->
+        <slot name="bottom" />
       </div>
     </template>
 
     <template #right>
-      <!-- @slot Slot for the right content -->
-      <slot name="right" />
+      <div data-qa="contact-info-right">
+        <!-- @slot Slot for the right content -->
+        <slot name="right" />
+      </div>
     </template>
   </dt-list-item>
 </template>
@@ -126,7 +81,6 @@
 <script>
 import { DtListItem, DtAvatar, AVATAR_COLOR_MODIFIERS } from '@';
 import { USER_STATUS_COLOR_MODIFIERS } from './contact_info_constants.js';
-import IconCheckboxFilled from '@dialpad/dialtone/lib/dist/vue/icons/IconCheckboxFilled';
 import utils from '@/common/utils';
 
 export default {
@@ -135,7 +89,6 @@ export default {
   components: {
     DtAvatar,
     DtListItem,
-    IconCheckboxFilled,
   },
 
   /* inheritAttrs: false is generally an option we want to set on library
@@ -157,14 +110,6 @@ export default {
      * String to use for the item's role.
      */
     role: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Contact display name.
-     */
-    displayName: {
       type: String,
       default: '',
     },
@@ -201,38 +146,6 @@ export default {
       type: String,
       default: 'none',
       validator: (color) => Object.keys(USER_STATUS_COLOR_MODIFIERS).includes(color),
-    },
-
-    /**
-     * Contact phone number.
-     */
-    phoneNumber: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Show a check mark after phone number.
-     */
-    showAttestation: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * The group name which this operator is in.
-     */
-    groupName: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * The group theme color class.
-     */
-    groupColorClass: {
-      type: [String, Object, Array],
-      default: 'd-bgc-pink-400',
     },
   },
 
