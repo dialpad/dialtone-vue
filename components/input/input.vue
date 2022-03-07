@@ -353,7 +353,7 @@ export default {
         this.shouldValidateLength &&
         this.inputLengthState !== null &&
         this.validationProps.length.message &&
-        this.isInputFocused
+        (this.isInputFocused || this.isInvalid)
       );
     },
 
@@ -389,7 +389,7 @@ export default {
 
     value () {
       if (this.shouldValidateLength) {
-        this.validateLength(this.calculateLength(this.value));
+        this.validateLength(this.inputLength);
       }
 
       if (this.currentLength == null) {

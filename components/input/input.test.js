@@ -484,6 +484,22 @@ describe('Dialtone Vue Input tests', function () {
           assert.equal(inputWarningMessages.length, 0);
         });
       });
+
+      describe('When the input has a invalid state', function () {
+        // Test Setup
+        before(function () {
+          currentLength = 28;
+        });
+
+        it('should show an error validation message', async function () {
+          await wrapper.setProps({ value: 'new value with 28 characters' });
+
+          const inputMessages = wrapper.findAll('.d-validation-message');
+          const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
+          assert.equal(inputMessages.length, 1);
+          assert.equal(inputErrorMessages.length, 1);
+        });
+      });
     });
   });
 

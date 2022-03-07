@@ -85,12 +85,12 @@ export default {
         return null;
       }
 
-      const validateConfigData = {
-        ...this.validate,
-      };
+      // Deep clone validate object
+      const validateConfigData = JSON.parse(JSON.stringify(this.validate));
 
       // Adds validation message
-      validateConfigData.length.message = this.validationMessage;
+      validateConfigData.length.message = this?.validate?.length?.message
+        ? this.validate.length.message : this.validationMessage;
 
       return validateConfigData;
     },
