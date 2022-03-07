@@ -13,14 +13,13 @@
     <template #list="{ opened }">
       <dt-popover
         :open="true"
-        fixed-alignment="left"
         :hide-on-click="false"
-        :fixed-header-footer="true"
-        :has-caret="false"
         content-class="d-w464"
         padding="small"
+        :modal="false"
+        :auto-focus="false"
         max-height="300px"
-        @update:open="opened"
+        @opened="opened"
       >
         <template #anchor>
           <span />
