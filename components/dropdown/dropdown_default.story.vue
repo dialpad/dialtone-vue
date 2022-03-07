@@ -1,14 +1,14 @@
 <template>
   <dt-dropdown
-    :open="open"
-    :fixed-vertical-alignment="fixedVerticalAlignment"
-    :fixed-alignment="fixedAlignment"
-    :content-width="contentWidth"
-    :padding="padding"
-    :navigation-type="navigationType"
-    @highlight="onHighlight"
+    :open="$attrs.open"
+    :fixed-vertical-alignment="$attrs.fixedVerticalAlignment"
+    :fixed-alignment="$attrs.fixedAlignment"
+    :content-width="$attrs.contentWidth"
+    :padding="$attrs.padding"
+    :navigation-type="$attrs.navigationType"
+    @highlight="$attrs.onHighlight"
     @escape="onDropdownEscape"
-    @update:open="onUpdateOpen"
+    @update:open="$attrs.onUpdateOpen"
   >
     <template #anchor="{ attrs, toggleOpen }">
       <div
