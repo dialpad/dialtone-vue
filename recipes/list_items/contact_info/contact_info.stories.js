@@ -124,7 +124,6 @@ Default.args = {
   avatarInitials: 'JL',
   avatarColor: 'base',
   userStatusColor: 'green',
-  onClick: action('click'),
   header: `<div class="d-fs16 d-fw-bold">
   Joseph Lumaban
 </div>`,
@@ -145,32 +144,26 @@ Default.parameters = {
   docs: {
     source: {
       code: `
-<dt-button
-  importance="clear"
-  kind="muted"
-  @click="onClick"
+<dt-recipe-contact-info
+  :avatar-src="avatarSrc"
+  :user-status-color="userStatusColor"
 >
-  <dt-recipe-contact-info
-    :avatar-src="avatarSrc"
-    :user-status-color="userStatusColor"
-  >
-    <template #header>
-      <div class="d-fs16 d-fw-bold d-mr4">Joseph Lumaban</div>
-    </template>
-    <template #subtitle>
-      <div class="d-d-flex d-ai-center">
-        <div class="d-fs12 d-mt2">+1 (415) 123-4567</div>
-        <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
-      </div>
-    </template>
-    <template #bottom>
-      <div class="d-d-flex d-ai-center d-mtn6">
-        <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
-        <div class="d-fs11 d-mr4">Aerolabs Support</div>
-      </div>
-    </template>
-  </dt-recipe-contact-info>
-</dt-button>
+  <template #header>
+    <div class="d-fs16 d-fw-bold d-mr4">Joseph Lumaban</div>
+  </template>
+  <template #subtitle>
+    <div class="d-d-flex d-ai-center">
+      <div class="d-fs12 d-mt2">+1 (415) 123-4567</div>
+      <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+    </div>
+  </template>
+  <template #bottom>
+    <div class="d-d-flex d-ai-center d-mtn6">
+      <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
+      <div class="d-fs11 d-mr4">Aerolabs Support</div>
+    </div>
+  </template>
+</dt-recipe-contact-info>
       `,
     },
   },
@@ -181,6 +174,7 @@ Variants.args = {
   avatarInitials: 'NW',
   avatarColor: 'orange-500',
   userStatusColor: 'yellow',
+  onGoupContactClick: action('click: clickable group contact'),
   onMarkAsSpam: action('click: mark this contact as spam'),
   onConnectToARecord: action('click: connect to a record'),
 };
@@ -220,7 +214,7 @@ Variants.parameters = {
     <dt-button
       importance="clear"
       kind="muted"
-      @click="onClick"
+      @click="onGoupContactClick"
     >
       <dt-recipe-contact-info>
         <template #header>

@@ -48,7 +48,7 @@
       <dt-button
         importance="clear"
         kind="muted"
-        @click="onClick"
+        @click="onGoupContactClick"
       >
         <dt-recipe-contact-info>
           <template #header>
