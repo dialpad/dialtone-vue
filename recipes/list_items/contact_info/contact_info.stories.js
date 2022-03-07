@@ -9,7 +9,6 @@ import { AVATAR_COLOR_MODIFIERS } from '@';
 
 // Default Prop Values
 export const argsData = {
-  onClick: action('click'),
 };
 
 export const argTypesData = {
@@ -84,20 +83,6 @@ export const argTypesData = {
       },
     },
   },
-
-  // Action Event Handlers
-  onClick: {
-    table: {
-      disable: true,
-    },
-  },
-
-  click: {
-    description: 'Click event fired when clicking on the item',
-    table: {
-      type: { summary: 'event' },
-    },
-  },
 };
 
 // Story Collection
@@ -139,6 +124,7 @@ Default.args = {
   avatarInitials: 'JL',
   avatarColor: 'base',
   userStatusColor: 'green',
+  onClick: action('click'),
   header: `<div class="d-fs16 d-fw-bold">
   Joseph Lumaban
 </div>`,
@@ -159,27 +145,32 @@ Default.parameters = {
   docs: {
     source: {
       code: `
-<dt-recipe-contact-info
-  :avatar-src="avatarSrc"
-  :user-status-color="userStatusColor"
+<dt-button
+  importance="clear"
+  kind="muted"
   @click="onClick"
 >
-  <template #header>
-    <div class="d-fs16 d-fw-bold d-mr4">Joseph Lumaban</div>
-  </template>
-  <template #subtitle>
-    <div class="d-d-flex d-ai-center">
-      <div class="d-fs12 d-mt2">+1 (415) 123-4567</div>
-      <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
-    </div>
-  </template>
-  <template #bottom>
-    <div class="d-d-flex d-ai-center d-mtn6">
-      <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
-      <div class="d-fs11 d-mr4">Aerolabs Support</div>
-    </div>
-  </template>
-</dt-recipe-contact-info>
+  <dt-recipe-contact-info
+    :avatar-src="avatarSrc"
+    :user-status-color="userStatusColor"
+  >
+    <template #header>
+      <div class="d-fs16 d-fw-bold d-mr4">Joseph Lumaban</div>
+    </template>
+    <template #subtitle>
+      <div class="d-d-flex d-ai-center">
+        <div class="d-fs12 d-mt2">+1 (415) 123-4567</div>
+        <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+      </div>
+    </template>
+    <template #bottom>
+      <div class="d-d-flex d-ai-center d-mtn6">
+        <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
+        <div class="d-fs11 d-mr4">Aerolabs Support</div>
+      </div>
+    </template>
+  </dt-recipe-contact-info>
+</dt-button>
       `,
     },
   },
@@ -201,7 +192,7 @@ Variants.parameters = {
 <div class="d-divide-y d-divide-purple-400">
   <div class="d-m32">
     <p class="d-my16 d-fs14 d-fw-bold">Unknown contact (phone number only) with attestation</p>
-    <dt-recipe-contact-info @click="onClick">
+    <dt-recipe-contact-info>
       <template #header>
         <div class="d-d-flex d-ai-center d-mb2">
           <div class="d-fs16 d-fw-bold d-mr4">+1 (415) 123-4567</div>
@@ -213,7 +204,7 @@ Variants.parameters = {
   </div>
   <div class="d-m32">
     <p class="d-my16 d-fs14 d-fw-bold">Unknown contact with "marked as spam" button</p>
-    <dt-recipe-contact-info @click="onClick">
+    <dt-recipe-contact-info>
       <template #header>
         <div class="d-d-flex d-ai-center d-mb2">
           <div class="d-fs16 d-fw-bold d-mr4">+1 (415) 123-4567</div>
@@ -225,28 +216,34 @@ Variants.parameters = {
     </dt-recipe-contact-info>
   </div>
   <div class="d-m32">
-    <p class="d-my16 d-fs14 d-fw-bold">Group contact</p>
-    <dt-recipe-contact-info @click="onClick">
-      <template #header>
-        <div class="d-fs16 d-fw-bold d-mr4">Joseph Lumaban</div>
-      </template>
-      <template #subtitle>
-        <div class="d-d-flex d-ai-center">
-          <div class="d-fs12 d-mt2">+1 (415) 123-4567</div>
-          <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
-        </div>
-      </template>
-      <template #bottom>
-        <div class="d-d-flex d-ai-center d-mtn6">
-          <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
-          <div class="d-fs11 d-mr4">Aerolabs Support</div>
-        </div>
-      </template>
-    </dt-recipe-contact-info>
+    <p class="d-my16 d-fs14 d-fw-bold">Clickable Group contact</p>
+    <dt-button
+      importance="clear"
+      kind="muted"
+      @click="onClick"
+    >
+      <dt-recipe-contact-info>
+        <template #header>
+          <div class="d-fs16 d-fw-bold d-mr4">Joseph Lumaban</div>
+        </template>
+        <template #subtitle>
+          <div class="d-d-flex d-ai-center">
+            <div class="d-fs12 d-mt2">+1 (415) 123-4567</div>
+            <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+          </div>
+        </template>
+        <template #bottom>
+          <div class="d-d-flex d-ai-center d-mtn6">
+            <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
+            <div class="d-fs11 d-mr4">Aerolabs Support</div>
+          </div>
+        </template>
+      </dt-recipe-contact-info>
+    </dt-button>
   </div>
   <div class="d-m32">
     <p class="d-my16 d-fs14 d-fw-bold">Group contact with transfer info</p>
-    <dt-recipe-contact-info @click="onClick">
+    <dt-recipe-contact-info>
       <template #header><div class="d-fs16 d-fw-bold d-mr4">Joseph Lumaban</div></template>
       <template #subtitle>
         <div class="d-d-flex d-ai-center">
@@ -265,7 +262,7 @@ Variants.parameters = {
   </div>
   <div class="d-m32">
     <p class="d-my16 d-fs14 d-fw-bold">Admin view / listening in</p>
-    <dt-recipe-contact-info @click="onClick">
+    <dt-recipe-contact-info>
       <template #header>
         <div class="d-d-flex d-ai-center d-mb2">
           <div class="d-fw-bold d-fs16">Joseph Lumaban & Justin H.</div>
@@ -291,7 +288,6 @@ Variants.parameters = {
     <dt-recipe-contact-info
       :avatar-initials="avatarInitials"
       :avatar-color="avatarColor"
-      @click="onClick"
     >
       <template #header><div class="d-fw-bold d-fs16">Natalie Woods</div></template>
       <template #subtitle>+1 (415) 123-4567</template>

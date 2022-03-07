@@ -1,90 +1,84 @@
 <template>
-  <dt-button
-    importance="clear"
-    kind="muted"
-    @click="onClick"
+  <dt-list-item
+    :id="id"
+    :role="role"
+    element-type="div"
+    data-qa="contact-info"
   >
-    <dt-list-item
-      :id="id"
-      :role="role"
-      element-type="div"
-      data-qa="contact-info"
-    >
-      <template #left>
-        <div
-          class="d-ps-relative"
-          data-qa="contact-info-left"
+    <template #left>
+      <div
+        class="d-ps-relative"
+        data-qa="contact-info-left"
+      >
+        <dt-avatar
+          v-if="avatarSrc"
+          kind="default"
+          size="lg"
+          :src="avatarSrc"
+          :alt="avatarInitials"
+          avatar-class="d-bar2"
+        />
+        <dt-avatar
+          v-else-if="avatarInitials"
+          kind="initials"
+          size="lg"
+          :color="avatarColor"
+          :alt="avatarInitials"
         >
-          <dt-avatar
-            v-if="avatarSrc"
-            kind="default"
-            size="lg"
-            :src="avatarSrc"
-            :alt="avatarInitials"
-            avatar-class="d-bar2"
-          />
-          <dt-avatar
-            v-else-if="avatarInitials"
-            kind="initials"
-            size="lg"
-            :color="avatarColor"
-            :alt="avatarInitials"
-          >
-            {{ avatarInitials }}
-          </dt-avatar>
-          <div
-            v-if="showUserStatus"
-            :class="[
-              'd-ba',
-              'd-bc-white',
-              'd-baw2',
-              'd-bar2',
-              'd-ps-absolute',
-              'd-bn1',
-              'd-rn1',
-              'd-w20p',
-              'd-h20p',
-              USER_STATUS_COLOR_MODIFIERS[userStatusColor],
-            ]"
-            data-qa="contact-info-user-status"
-          >
-            &nbsp;
-          </div>
+          {{ avatarInitials }}
+        </dt-avatar>
+        <div
+          v-if="showUserStatus"
+          :class="[
+            'd-ba',
+            'd-bc-white',
+            'd-baw2',
+            'd-bar2',
+            'd-ps-absolute',
+            'd-bn1',
+            'd-rn1',
+            'd-w20p',
+            'd-h20p',
+            USER_STATUS_COLOR_MODIFIERS[userStatusColor],
+          ]"
+          data-qa="contact-info-user-status"
+        >
+          &nbsp;
         </div>
-      </template>
-      <template #default>
-        <div data-qa="contact-info-header">
-          <!-- @slot Slot for header information -->
-          <slot name="header" />
-        </div>
-      </template>
+      </div>
+    </template>
+    <template #default>
+      <div data-qa="contact-info-header">
+        <!-- @slot Slot for header information -->
+        <slot name="header" />
+      </div>
+    </template>
 
-      <template #subtitle>
-        <div data-qa="contact-info-subtitle">
-          <!-- @slot Slot for subtitle information -->
-          <slot name="subtitle" />
-        </div>
-      </template>
+    <template #subtitle>
+      <div data-qa="contact-info-subtitle">
+        <!-- @slot Slot for subtitle information -->
+        <slot name="subtitle" />
+      </div>
+    </template>
 
-      <template #bottom>
-        <div data-qa="contact-info-bottom">
-          <!-- @slot Slot for information at the bottom -->
-          <slot name="bottom" />
-        </div>
-      </template>
+    <template #bottom>
+      <div data-qa="contact-info-bottom">
+        <!-- @slot Slot for information at the bottom -->
+        <slot name="bottom" />
+      </div>
+    </template>
 
-      <template #right>
-        <div data-qa="contact-info-right">
-          <!-- @slot Slot for the right content -->
-          <slot name="right" />
-        </div>
-      </template>
-    </dt-list-item>
-  </dt-button>
+    <template #right>
+      <div data-qa="contact-info-right">
+        <!-- @slot Slot for the right content -->
+        <slot name="right" />
+      </div>
+    </template>
+  </dt-list-item>
 </template>
 
 <script>
-import { DtButton, DtListItem, DtAvatar, AVATAR_COLOR_MODIFIERS } from '@';
+import { DtListItem, DtAvatar, AVATAR_COLOR_MODIFIERS } from '@';
 import { USER_STATUS_COLOR_MODIFIERS } from './contact_info_constants.js';
 import utils from '@/common/utils';
 
@@ -92,7 +86,6 @@ export default {
   name: 'DtRecipeContactInfo',
 
   components: {
-    DtButton,
     DtAvatar,
     DtListItem,
   },
@@ -155,8 +148,6 @@ export default {
     },
   },
 
-  emits: ['click'],
-
   data () {
     return {
       USER_STATUS_COLOR_MODIFIERS,
@@ -166,12 +157,6 @@ export default {
   computed: {
     showUserStatus () {
       return this.userStatusColor !== 'none';
-    },
-  },
-
-  methods: {
-    onClick () {
-      this.$emit('click');
     },
   },
 };
