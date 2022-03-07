@@ -3,7 +3,7 @@ export default {
     Vue.mixin({
       computed: {
         defaultSlot () {
-          return this.default;
+          return this.$attrs.default;
         },
       },
     });

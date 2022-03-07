@@ -119,8 +119,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtLinkDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtLinkVariantsTemplate);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtLinkDefaultTemplate);
+const VariantsTemplate = (args) => createTemplateFromVueFile(args, DtLinkVariantsTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});

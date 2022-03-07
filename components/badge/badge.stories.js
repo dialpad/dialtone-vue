@@ -19,10 +19,7 @@ export const argTypesData = {
   // Props
   color: {
     defaultValue: 'base',
-    control: {
-      type: 'select',
-      options: Object.keys(BADGE_COLOR_MODIFIERS),
-    },
+    options: Object.keys(BADGE_COLOR_MODIFIERS),
   },
 };
 
@@ -46,8 +43,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBadgeDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBadgeVariantsTemplate);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtBadgeDefaultTemplate);
+const VariantsTemplate = (args) => createTemplateFromVueFile(args, DtBadgeVariantsTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});

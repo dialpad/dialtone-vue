@@ -3,7 +3,7 @@ import {
   DEFAULT_VALIDATION_MESSAGE_TYPE,
   VALIDATION_MESSAGE_TYPES,
 } from './constants';
-import Vue from 'vue';
+import { h } from 'vue';
 
 let UNIQUE_ID_COUNTER = 0;
 
@@ -88,17 +88,8 @@ export function findFirstFocusableNode (element) {
  * To render html without wrapping in another element as when using v-html.
  * props: html
  */
-export const htmlFragment = {
-  name: 'html-fragment',
-  functional: true,
-  props: ['html'],
-  render (h, ctx) {
-    return new Vue({
-      name: 'Inner',
-      beforeCreate () { this.$createElement = h; },
-      template: `<div>${ctx.props.html}</div>`,
-    }).$mount()._vnode.children;
-  },
+export const htmlFragment = (props) => {
+  return h('div', props.html);
 };
 
 export const flushPromises = () => {

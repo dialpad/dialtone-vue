@@ -42,7 +42,7 @@ export default {
   excludeStories: /.Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, LazyShowDefault);
+const Template = (args) => createTemplateFromVueFile(args, LazyShowDefault);
 
 export const Default = Template.bind({});
 Default.args = {};

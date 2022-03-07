@@ -196,7 +196,7 @@ export default {
   args: argsData,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, InputDefault);
+const Template = (args) => createTemplateFromVueFile(args, InputDefault);
 
 export const Default = Template.bind({});
 Default.parameters = {};

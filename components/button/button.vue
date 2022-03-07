@@ -8,7 +8,7 @@
     :type="type"
     :aria-live="computedAriaLive"
     :aria-label="loading ? 'loading' : $attrs['aria-label']"
-    v-on="buttonListeners"
+    v-bind="buttonListeners"
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
     <span
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import { warn } from 'vue';
 
 import {
   BUTTON_SIZE_MODIFIERS,
@@ -56,6 +56,8 @@ import { LINK_KIND_MODIFIERS } from '../link/link_constants';
  */
 export default {
   name: 'DtButton',
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -174,7 +176,7 @@ export default {
     },
   },
 
-  emits: ['click', 'focusin', 'focusout'],
+  emits: ['onClick', 'onFocusin', 'onFocusout'],
 
   data () {
     return {
@@ -188,10 +190,10 @@ export default {
 
     buttonListeners () {
       if (!this.assertiveOnFocus) {
-        return this.$listeners;
+        return this.$attrs;
       }
       return {
-        ...this.$listeners,
+        ...this.$attrs,
         focusin: (e) => {
           this.isInFocus = true;
         },
@@ -215,7 +217,7 @@ export default {
         if (process.env.NODE_ENV === 'production') return;
 
         if (this.circle && this.link) {
-          Vue.util.warn('You cannot enable circle and link at the same time', this);
+          warn('You cannot enable circle and link at the same time', this);
         }
 
         this.isInvalidPropCombination(this.circle, this.kind, this.importance);

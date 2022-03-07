@@ -176,14 +176,14 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ButtonDefault);
+const Template = (args) => createTemplateFromVueFile(args, ButtonDefault);
 
 export const Default = Template.bind({});
 Default.args = {
   default: 'Button',
 };
 
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ButtonVariants);
+const VariantsTemplate = (args) => createTemplateFromVueFile(args, ButtonVariants);
 
 export const Variants = VariantsTemplate.bind({});
 Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
