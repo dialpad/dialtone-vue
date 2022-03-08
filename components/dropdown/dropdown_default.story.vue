@@ -1,15 +1,15 @@
 <!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <dt-dropdown
-    :open.sync="isOpen"
-    :placement="placement"
-    :fallback-placements="fallbackPlacements"
-    :content-width="contentWidth"
-    :padding="padding"
-    :modal="modal"
-    :navigation-type="navigationType"
-    @highlight="onHighlight"
-    @opened="onOpened"
+    :open.sync="$attrs.isOpen"
+    :placement="$attrs.placement"
+    :fallback-placements="$attrs.fallbackPlacements"
+    :content-width="$attrs.contentWidth"
+    :padding="$attrs.padding"
+    :modal="$attrs.modal"
+    :navigation-type="$attrs.navigationType"
+    @highlight="$attrs.onHighlight"
+    @opened="$attrs.onOpened"
   >
     <template
       slot="anchor"
