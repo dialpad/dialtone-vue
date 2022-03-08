@@ -8,7 +8,7 @@
     :padding="padding"
     role="menu"
     :modal="modal"
-    v-on="$listeners"
+    v-bind="$attrs"
     @opened="updateInitialHighlightIndex"
     @keydown.enter="onEnterKey"
     @keydown.space="onSpaceKey"
@@ -56,6 +56,8 @@ export default {
   components: {
     DtPopover,
   },
+
+  inheritAttrs: false,
 
   mixins: [
     KeyboardNavigation({

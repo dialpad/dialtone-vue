@@ -3,11 +3,11 @@
   <transition
     :name="transition"
     :appear="appear"
-    v-on="$listeners"
+    v-bind="$attrs"
   >
     <div
       v-show="show"
-      v-on="$listeners"
+      v-bind="$attrs"
     >
       <slot v-if="initialized" />
     </div>
@@ -17,6 +17,8 @@
 <script>
 export default {
   name: 'DtLazyShow',
+
+  inheritAttrs: false,
 
   /******************
    *     PROPS      *

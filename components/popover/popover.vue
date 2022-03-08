@@ -11,7 +11,7 @@
       ref="popover"
       :class="['d-popover', { 'd-popover__anchor--modal-opened': modal && isOpen }]"
       data-qa="dt-popover-container"
-      v-on="$listeners"
+      v-bind="$attrs"
     >
       <div
         :id="!ariaLabelledby && labelledBy"
@@ -49,7 +49,7 @@
         }"
         tabindex="-1"
         appear
-        v-on="$listeners"
+        v-bind="$attrs"
         @keydown.capture="onKeydown"
         @after-leave="onLeaveTransitionComplete"
         @after-enter="onEnterTransitionComplete"
@@ -136,6 +136,8 @@ export default {
   },
 
   mixins: [ModalMixin],
+
+  inheritAttrs: false,
 
   props: {
     /**
