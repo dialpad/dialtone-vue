@@ -3,7 +3,7 @@
   <dt-popover
     :id="$attrs.id"
     :key="$attrs.uniqueKey"
-    :open.sync="$attrs.isOpen"
+    v-model:open="isOpen"
     :placement="$attrs.placement"
     :content-class="$attrs.contentClass"
     :fallback-placements="$attrs.fallbackPlacements"
@@ -25,24 +25,18 @@
     :max-width="$attrs.maxWidth"
     @opened="$attrs.onOpened"
   >
-    <template
-      slot="anchor"
-      slot-scope="{ attrs }"
-    >
+    <template #anchor="{ attrs }">
       <dt-button
         v-bind="attrs"
       >
         Click to open
       </dt-button>
     </template>
-    <template
-      slot="content"
-      slot-scope="{ close }"
-    >
+    <template #content="{ close }">
       <div class="d-fs14 d-m0">
         <span
-          v-if="content"
-          v-html="content"
+          v-if="$attrs.content"
+          v-html="$attrs.content"
         />
         <template v-else>
           <p class="d-mb4">
@@ -55,16 +49,16 @@
       </div>
     </template>
     <template
-      v-if="headerContent"
-      slot="headerContent"
+      v-if="$attrs.headerContent"
+      #headerContent
     >
-      <span v-html="headerContent" />
+      <span v-html="$attrs.headerContent" />
     </template>
     <template
-      v-if="footerContent"
-      slot="footerContent"
+      v-if="$attrs.footerContent"
+      #footerContent
     >
-      <span v-html="footerContent" />
+      <span v-html="$attrs.footerContent" />
     </template>
   </dt-popover>
 </template>
