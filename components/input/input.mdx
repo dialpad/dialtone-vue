@@ -237,11 +237,11 @@ length: {
   description: string,        // Required
   // maximum length allowed to enter
   max: number,                // Required
+  // message to show in the warning or error validation message
+  message: string,            // Required
   // length from which the validation message will be shown as a warning,
   // when the maximum length is reached, the validation message will be shown as an error
   warn: number,               // Optional
-  // message to show in the warning or error validation message
-  message: string,
   // set maxlength attribute, defaults to false
   limitMaxLength: boolean,    // Optional
 },
