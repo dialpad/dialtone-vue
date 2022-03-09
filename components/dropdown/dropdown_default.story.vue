@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <dt-dropdown
-    :open.sync="$attrs.isOpen"
+    v-model:open="isOpen"
     :placement="$attrs.placement"
     :fallback-placements="$attrs.fallbackPlacements"
     :content-width="$attrs.contentWidth"
@@ -11,13 +11,10 @@
     @highlight="$attrs.onHighlight"
     @opened="$attrs.onOpened"
   >
-    <template
-      slot="anchor"
-      slot-scope="{ attrs }"
-    >
+    <template #anchor="{ attrs }">
       <div
-        v-if="anchor"
-        v-html="anchor"
+        v-if="$attrs.anchor"
+        v-html="$attrs.anchor"
       />
       <dt-button
         v-else
@@ -26,20 +23,17 @@
         Click to open
       </dt-button>
     </template>
-    <template
-      slot="list"
-      slot-scope="{ close }"
-    >
+    <template #list="{ close }">
       <div
-        v-if="list"
-        v-html="list"
+        v-if="$attrs.list"
+        v-html="$attrs.list"
       />
       <dt-list-item
         v-for="(item) in items"
         v-else
         :key="item.id"
         role="menuitem"
-        :navigation-type="navigationType"
+        :navigation-type="$attrs.navigationType"
         @click="close"
       >
         {{ item.name }}
