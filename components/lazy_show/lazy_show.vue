@@ -1,6 +1,5 @@
 <template>
-  <!-- applies the transition on initial render -->
-  <transition
+  <Transition
     :name="transition"
     :appear="appear"
     v-bind="$attrs"
@@ -11,7 +10,7 @@
     >
       <slot v-if="initialized" />
     </div>
-  </transition>
+  </Transition>
 </template>
 
 <script>
