@@ -16,11 +16,7 @@
       </template>
       <template #content="{ close }">
         <div class="d-fs14 d-m0">
-          <p
-            v-if="$attrs.content"
-            v-html="$attrs.content"
-          />
-          <div v-else>
+          <div>
             <p class="d-mb4">
               I will be displayed in the popover!
             </p>
@@ -46,11 +42,7 @@
       </template>
       <template #content="{ close }">
         <div class="d-fs14 d-m0">
-          <p
-            v-if="$attrs.content"
-            v-html="$attrs.content"
-          />
-          <div v-else>
+          <div>
             <p class="d-mb4">
               I will be displayed in the popover!
             </p>
@@ -77,11 +69,7 @@
       </template>
       <template #content="{ close }">
         <div class="d-fs14 d-m0">
-          <p
-            v-if="$attrs.content"
-            v-html="$attrs.content"
-          />
-          <div v-else>
+          <div>
             <dt-button
               @click="close"
             >
@@ -105,11 +93,7 @@
       </template>
       <template #content="{ close }">
         <div class="d-fs14 d-m0">
-          <p
-            v-if="$attrs.content"
-            v-html="$attrs.content"
-          />
-          <div v-else>
+          <div>
             <p class="d-mb4">
               I will be displayed in the popover!
             </p>
@@ -345,6 +329,84 @@
           <p>
             {{ sampleText }}
           </p>
+          <dt-dropdown>
+            <template #anchor="{ attrs }">
+              <dt-button
+                v-bind="attrs"
+              >
+                Open dropdown
+              </dt-button>
+            </template>
+            <template #list="{ close }">
+              <dt-list-item
+                key="pd-1"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 1
+              </dt-list-item>
+              <dt-list-item
+                key="pd-2"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 2 Item 2 Item 2
+              </dt-list-item>
+              <dt-list-item
+                key="pd-3"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 3
+              </dt-list-item>
+              <dt-list-item
+                key="pd-4"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 4
+              </dt-list-item>
+              <dt-list-item
+                key="pd-5"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 5
+              </dt-list-item>
+              <dt-list-item
+                key="pd-6"
+                navigation-type="arrow-keys"
+                role="menuitem"
+                @click="close"
+              >
+                Item 6
+              </dt-list-item>
+            </template>
+          </dt-dropdown>
+        </div>
+      </template>
+    </dt-popover>
+
+    <dt-popover
+      content-class="d-pl12 d-pr16"
+      class="d-mr12"
+      max-height="20rem"
+      max-width="50rem"
+    >
+      <template #anchor="{ attrs }">
+        <dt-button
+          v-bind="attrs"
+        >
+          Popover with tooltip
+        </dt-button>
+      </template>
+      <template #content>
+        <div class="d-fs14 d-m0">
           <p>
             {{ sampleText }}
           </p>
