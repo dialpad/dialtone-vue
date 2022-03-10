@@ -49,7 +49,6 @@
           'max-width': maxWidth,
         }"
         tabindex="-1"
-        appear
         v-bind="$attrs"
         @keydown.capture="onKeydown"
         @after-leave="onLeaveTransitionComplete"
