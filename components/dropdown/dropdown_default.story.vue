@@ -56,7 +56,7 @@ export default {
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
-      isOpen: this.open,
+      isOpen: this.$attrs.open,
     };
   },
 
