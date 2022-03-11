@@ -447,7 +447,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('resize', this.onResize);
     this.tip?.destroy();
     this.removeReferences();
