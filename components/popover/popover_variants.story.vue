@@ -332,6 +332,36 @@
           <p>
             {{ sampleText }}
           </p>
+          <dt-tooltip>
+            <template #anchor>
+              <dt-button>
+                Hover me
+              </dt-button>
+            </template>
+            This is the tooltip content
+          </dt-tooltip>
+        </div>
+      </template>
+    </dt-popover>
+
+    <dt-popover
+      content-class="d-pl12 d-pr16"
+      class="d-mr12"
+      max-height="20rem"
+      max-width="50rem"
+      :open.sync="openPopoverWithTriggerOverride"
+    >
+      <template #anchor="{ attrs }">
+        <dt-button
+          v-bind="attrs"
+          @mouseover="onMouseOver"
+          @mouseout="onMouseOut"
+        >
+          Popover with mouseover trigger
+        </dt-button>
+      </template>
+      <template #content>
+        <div class="d-fs14 d-m0">
           <p>
             {{ sampleText }}
           </p>
@@ -353,6 +383,7 @@
       class="d-mr12"
       max-height="20rem"
       max-width="50rem"
+      :open.sync="openPopoverWithTriggerOverride"
     >
       <template #anchor="{ attrs }">
         <dt-button
