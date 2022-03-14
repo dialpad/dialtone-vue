@@ -1,0 +1,113 @@
+name: Generate Preview
+
+on:
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  repo:
+    name: Repo
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: create git
+      run: git init my-project && cd my-project
+
+    - name: create repo
+      run: gh repo create dialtone-vue/pr-${{ github.event.pull_request.number }} --public
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Check out branch
+      uses: actions/checkout@v2
+
+    - name: Deploy to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        personal_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./storybook/compiled
+        external_repository: dialtone-vue/pr-${{ github.event.pull_request.number }}
+
+  build:
+    name: Build
+    needs: repo
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      # Find the PR associated with this push, if there is one.
+      # This will echo "Your PR is 7", or be skipped if there is no current PR.
+    - run: echo "Your PR is ${PR_NUMBER}"
+      env:
+       PR_NUMBER: ${{ github.event.pull_request.number }}
+
+    - uses: actions/checkout@v2
+      with:
+        ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build storybook
+      run: npm run storybook:install && npm run storybook:build
+
+    - name: Upload production-ready build files
+      uses: actions/upload-artifact@v2
+      with:
+        name: production-files
+        path: ./storybook/compiled
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: production-files
+        path: ./storybook/compiled
+
+    - name: Deploy to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        personal_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./storybook/compiled
+        external_repository: dialtone-vue/pr-${{ github.event.pull_request.number }}
+
+    - name: Sleep for 120 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '120s'
+
+    - name: pr
+      uses: mshick/add-pr-comment@v1
+      env:
+          BUILD_URL: https://github.com/dialpad/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        message: |
+            ✔️ Deploy Preview for dialtone-vue ready!
+            😎 Browse the preview: https://dialpad.github.io/dialtone-vue/pr-${{ github.event.pull_request.number }}
+            🔨 If you experience an SSL issue then wait 2 minutes and try again.
+            🔍 Inspect the deploy log: ${{ env.BUILD_URL }}
+        allow-repeats: true
+
+  run-if-fail:
+    if: ${{ always() && (needs.repo.result=='failure' || needs.build.result=='failure'|| needs.deploy.result=='failure') }}
+    needs: [repo, build, deploy]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Comment PR
+      uses: unofficial-skills/actions-comment-pull-request@main
+      with:
+         message: |
+              ❌ DEPLOY PREVIEW BUILD HAS FAILED
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
