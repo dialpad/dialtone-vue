@@ -3,13 +3,11 @@ name: Deploy
 on:
   push:
     branches:
-      - production
-      - alpha
-      - beta
+      - setup-github-pages
 
 jobs:
   deploy:
-
+    concurrency: deploy-ci-${{ github.ref }}
     runs-on: ubuntu-latest
 
     env:
@@ -40,9 +38,19 @@ jobs:
       - name: Run Linters
         run: npm run lint
 
+      - name: Build storybook
+        run: npm run storybook:install && npm run storybook:build
+
       - name: Deploy production
         if: ${{ github.ref == 'refs/heads/production' }}
         run: npm publish
+
+      - name: Deploy to GitHub Pages
+        if: ${{ github.ref == 'refs/heads/setup-github-pages' }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: storybook/compiled
 
       - name: Deploy prerelease
         if: ${{ github.ref != 'refs/heads/production' }}
