@@ -51,6 +51,7 @@ jobs:
         with:
           branch: gh-pages
           folder: storybook/compiled
+          clean-exclude: deploy_previews
 
       - name: Deploy prerelease
         if: ${{ github.ref != 'refs/heads/production' }}
