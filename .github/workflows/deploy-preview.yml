@@ -15,9 +15,9 @@ jobs:
       run: git init my-project && cd my-project
 
     - name: create repo
-      run: gh repo create dialtone-vue/pr-${{ github.event.pull_request.number }} --public
+      run: gh repo create dialtone-vue-pr-${{ github.event.pull_request.number }} --private
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
 
     - name: Check out branch
       uses: actions/checkout@v2
@@ -25,9 +25,9 @@ jobs:
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        personal_token: ${{ secrets.GITHUB_TOKEN }}
+        personal_token: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
         publish_dir: ./storybook/compiled
-        external_repository: dialtone-vue/pr-${{ github.event.pull_request.number }}
+        external_repository: dialtone-vue-pr-${{ github.event.pull_request.number }}
 
   build:
     name: Build
@@ -78,9 +78,9 @@ jobs:
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        personal_token: ${{ secrets.GITHUB_TOKEN }}
+        personal_token: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
         publish_dir: ./storybook/compiled
-        external_repository: dialtone-vue/pr-${{ github.event.pull_request.number }}
+        external_repository: dialtone-vue-pr-${{ github.event.pull_request.number }}
 
     - name: Sleep for 120 seconds
       uses: jakejarvis/wait-action@master
@@ -91,11 +91,11 @@ jobs:
       uses: mshick/add-pr-comment@v1
       env:
           BUILD_URL: https://github.com/dialpad/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
       with:
         message: |
             ✔️ Deploy Preview for dialtone-vue ready!
-            😎 Browse the preview: https://dialpad.github.io/dialtone-vue/pr-${{ github.event.pull_request.number }}
+            😎 Browse the preview: https://dialpad.github.io/dialtone-vue-pr-${{ github.event.pull_request.number }}
             🔨 If you experience an SSL issue then wait 2 minutes and try again.
             🔍 Inspect the deploy log: ${{ env.BUILD_URL }}
         allow-repeats: true
@@ -110,4 +110,4 @@ jobs:
       with:
          message: |
               ❌ DEPLOY PREVIEW BUILD HAS FAILED
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         GITHUB_TOKEN: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
