@@ -1,8 +1,6 @@
 name: Generate Preview
 
-on:
-  pull_request_target:
-    types: [opened]
+on: pull_request
 
 jobs:
   repo:
