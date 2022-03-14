@@ -15,7 +15,7 @@ jobs:
       run: git init my-project && cd my-project
 
     - name: create repo
-      run: gh repo create dialtone-vue/pr-${{ github.event.pull_request.number }} --public
+      run: gh repo create dialpad/dialtone-vue-pr-${{ github.event.pull_request.number }} --private
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
