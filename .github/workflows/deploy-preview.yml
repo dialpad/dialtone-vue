@@ -90,7 +90,7 @@ jobs:
     - name: pr
       uses: mshick/add-pr-comment@v1
       env:
-          BUILD_URL: https://github.com/dialpad/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GITHUB_TOKEN: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
       with:
         message: |
