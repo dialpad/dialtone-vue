@@ -27,7 +27,7 @@ jobs:
       with:
         personal_token: ${{ secrets.GHA_FIRESPOTTER_DEPLOY_GITHUB_ACCESS_TOKEN }}
         publish_dir: ./storybook/compiled
-        external_repository: dialtone-vue/pr-${{ github.event.pull_request.number }}
+        external_repository: dialpad/dialtone-vue-pr-${{ github.event.pull_request.number }}
 
   build:
     name: Build
@@ -80,7 +80,7 @@ jobs:
       with:
         personal_token: ${{ secrets.GHA_FIRESPOTTER_DEPLOY_GITHUB_ACCESS_TOKEN }}
         publish_dir: ./storybook/compiled
-        external_repository: dialtone-vue/pr-${{ github.event.pull_request.number }}
+        external_repository: dialpad/dialtone-vue-pr-${{ github.event.pull_request.number }}
 
     - name: Sleep for 120 seconds
       uses: jakejarvis/wait-action@master
@@ -95,7 +95,7 @@ jobs:
       with:
         message: |
             ✔️ Deploy Preview for dialtone-vue ready!
-            😎 Browse the preview: https://dialpad.github.io/dialtone-vue/pr-${{ github.event.pull_request.number }}
+            😎 Browse the preview: https://dialpad.github.io/dialtone-vue-pr-${{ github.event.pull_request.number }}
             🔨 If you experience an SSL issue then wait 2 minutes and try again.
             🔍 Inspect the deploy log: ${{ env.BUILD_URL }}
         allow-repeats: true
