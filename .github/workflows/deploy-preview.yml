@@ -15,7 +15,7 @@ jobs:
       run: git init my-project && cd my-project
 
     - name: create repo
-      run: gh repo create dialpad/dialtone-vue-pr-${{ github.event.pull_request.number }} --private
+      run: gh repo create dialtone-vue-pr-${{ github.event.pull_request.number }} --private
       env:
         GITHUB_TOKEN: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
 
@@ -27,7 +27,7 @@ jobs:
       with:
         personal_token: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
         publish_dir: ./storybook/compiled
-        external_repository: dialpad/dialtone-vue-pr-${{ github.event.pull_request.number }}
+        external_repository: dialtone-vue-pr-${{ github.event.pull_request.number }}
 
   build:
     name: Build
@@ -80,7 +80,7 @@ jobs:
       with:
         personal_token: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
         publish_dir: ./storybook/compiled
-        external_repository: dialpad/dialtone-vue-pr-${{ github.event.pull_request.number }}
+        external_repository: dialtone-vue-pr-${{ github.event.pull_request.number }}
 
     - name: Sleep for 120 seconds
       uses: jakejarvis/wait-action@master
