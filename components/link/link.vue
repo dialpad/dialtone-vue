@@ -5,7 +5,7 @@
       LINK_KIND_MODIFIERS[kind],
     ]"
     data-qa="dt-link"
-    v-on="$listeners"
+    v-bind="$attrs"
   >
     <slot />
   </a>
@@ -16,6 +16,8 @@ import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants.js';
 
 export default {
   name: 'DtLink',
+
+  inheritAttrs: false,
 
   props: {
     /**
