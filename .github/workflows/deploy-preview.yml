@@ -35,11 +35,10 @@ jobs:
       uses: mshick/add-pr-comment@v1
       env:
         BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        GITHUB_TOKEN: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         message: |
           ✔️ Deploy Preview ready!
           😎 Browse the preview: https://dialpad.github.io/dialtone-vue/deploy-previews/pr-${{ github.event.pull_request.number }}
           🔨 If you experience an SSL issue then wait 2 minutes and try again.
-          🔍 Inspect the deploy log: ${{ env.BUILD_URL }}
         allow-repeats: true
