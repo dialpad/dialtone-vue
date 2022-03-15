@@ -248,7 +248,7 @@ export default {
     },
 
     /**
-     *  Displaces the content box from its reference element
+     *  Displaces the content box from its anchor element
      *  by the specified number of pixels.
      */
     offset: {
@@ -258,7 +258,7 @@ export default {
 
     /**
      * Determines if the popover hides upon clicking the
-     * reference or outside of the content box.
+     * anchor or outside of the content box.
      */
     hideOnClick: {
       type: Boolean,
@@ -538,9 +538,11 @@ export default {
       }
     },
 
-    onLeaveTransitionComplete () {
+    async onLeaveTransitionComplete () {
       if (this.modal) {
         this.focusFirstElement(this.$refs.anchor);
+        // await next tick in case the user wants to change focus themselves.
+        await this.$nextTick();
       }
       this.tip?.unmount();
       this.$emit('opened', false);
@@ -549,8 +551,10 @@ export default {
       }
     },
 
-    onEnterTransitionComplete () {
+    async onEnterTransitionComplete () {
       this.focusInitialElement();
+      // await next tick in case the user wants to change focus themselves.
+      await this.$nextTick();
       this.$emit('opened', true, this.$refs.popover__content);
       if (this.open !== null) {
         this.$emit('update:open', true);
