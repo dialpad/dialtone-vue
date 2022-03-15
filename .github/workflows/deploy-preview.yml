@@ -25,7 +25,6 @@ jobs:
       run: npm run storybook:install && npm run storybook:build
 
     - name: Deploy to GitHub Pages
-      # if: ${{ github.ref == 'refs/heads/setup-github-pages' }}
       uses: JamesIves/github-pages-deploy-action@v4.2.5
       with:
         branch: gh-pages
@@ -39,20 +38,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
       with:
         message: |
-          ✔️ Deploy Preview for dialtone-vue ready!
-          😎 Browse the preview: https://dialpad.github.io/pr-${{ github.event.pull_request.number }}
+          ✔️ Deploy Preview ready!
+          😎 Browse the preview: https://dialpad.github.io/dialtone-vue/pr-${{ github.event.pull_request.number }}
           🔨 If you experience an SSL issue then wait 2 minutes and try again.
           🔍 Inspect the deploy log: ${{ env.BUILD_URL }}
         allow-repeats: true
-
-  # run-if-fail:
-  #   if: ${{ always() && (needs.repo.result=='failure' || needs.build.result=='failure'|| needs.deploy.result=='failure') }}
-  #   needs: [repo, build, deploy]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Comment PR
-  #     uses: unofficial-skills/actions-comment-pull-request@main
-  #     with:
-  #        message: |
-  #             ❌ DEPLOY PREVIEW BUILD HAS FAILED
-  #        GITHUB_TOKEN: ${{ secrets.DIALTONE_DEPLOY_PREVIEW }}
