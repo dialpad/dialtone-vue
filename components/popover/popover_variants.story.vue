@@ -372,10 +372,10 @@
       <template #anchor="{ attrs }">
         <dt-button
           v-bind="attrs"
-          @mouseover="onMouseOver"
-          @mouseout="onMouseOut"
+          @mouseenter="onMouseEnter"
+          @mouseleave="onMouseLeave"
         >
-          Popover with mouseover trigger
+          Popover with mouseenter trigger
         </dt-button>
       </template>
       <template #content>
@@ -422,11 +422,11 @@ export default {
   },
 
   methods: {
-    onMouseOver () {
+    onMouseEnter () {
       this.openPopoverWithTriggerOverride = true;
     },
 
-    onMouseOut () {
+    onMouseLeave () {
       this.openPopoverWithTriggerOverride = false;
     },
   },
