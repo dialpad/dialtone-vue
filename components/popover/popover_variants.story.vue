@@ -367,7 +367,6 @@
       :modal="false"
       max-height="20rem"
       max-width="50rem"
-      :open.sync="openPopoverWithTriggerOverride"
     >
       <template #anchor="{ attrs }">
         <dt-button
