@@ -32,8 +32,6 @@ export default {
     },
   },
 
-  emits: ['click', 'focusin', 'focusout'],
-
   data () {
     return {
       LINK_KIND_MODIFIERS,
