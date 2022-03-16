@@ -3,6 +3,8 @@
   <!--
     We can bind the data that the user entered into the storybook controls to props by using a property of the same name
     as the storybook control defined in the corresponding `.story.js` file.
+
+    ARBITRARY CHANGE
   -->
   <dt-recipe-top-banner-info
     :color-code="colorCode"
