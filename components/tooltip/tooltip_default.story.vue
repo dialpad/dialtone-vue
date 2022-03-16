@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <div
     :class="[
@@ -10,27 +11,22 @@
     <div class="d-pt16">
       <dt-tooltip
         :id="id"
-        :arrow-direction="arrowDirection"
+        :placement="placement"
         :inverted="inverted"
-        :show="showSync"
         :message="message"
-        :flip="flip"
+        :fallback-placements="fallbackPlacements"
         :offset="offset"
-        :append-to="appendTo"
-        :interactive="interactive"
         :content-class="contentClass"
-        :flip-boundary="flipBoundary"
-        :interactive-border="interactiveBorder"
-        :trigger="trigger"
-        :hide-on-click="hideOnClick"
         :transition="transition"
-        @update:show="updateShow"
+        :show.sync="show"
+        @shown="onShown"
       >
-        <template #anchor="{ attrs }">
+        <template
+          slot="anchor"
+        >
           <dt-button
             importance="outlined"
             :kind="buttonKind"
-            v-bind="attrs"
           >
             {{ anchor }}
           </dt-button>
@@ -56,29 +52,9 @@ export default {
 
   inheritAttrs: false,
 
-  data: () => ({
-    showSync: false,
-  }),
-
   computed: {
     buttonKind () {
       return this.inverted ? 'inverted' : 'default';
-    },
-  },
-
-  watch: {
-    show: {
-      immediate: true,
-      handler (show) {
-        this.showSync = show;
-      },
-    },
-  },
-
-  methods: {
-    updateShow (event) {
-      this.showSync = event;
-      this.onClose(event);
     },
   },
 };
