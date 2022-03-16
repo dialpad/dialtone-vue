@@ -48,7 +48,7 @@
         <textarea
           v-if="isTextarea"
           ref="input"
-          :value="value"
+          :value="modelValue"
           :name="name"
           :disabled="disabled"
           :class="inputClasses()"
@@ -59,7 +59,7 @@
         <input
           v-else
           ref="input"
-          :value="value"
+          :value="modelValue"
           :name="name"
           :type="type"
           :disabled="disabled"
@@ -129,7 +129,7 @@ export default {
     /**
      * Value of the input
      */
-    value: {
+    modelValue: {
       type: [String, Number],
       default: '',
     },
@@ -178,7 +178,7 @@ export default {
     },
   },
 
-  emits: ['blur', 'input', 'clear', 'focusin', 'focusout'],
+  emits: ['blur', 'input', 'clear', 'focusin', 'focusout', 'focus'],
 
   data () {
     return {
@@ -225,13 +225,11 @@ export default {
 
     inputListeners () {
       return {
-        /* TODO
-            Check if any usages of this component leverage $listeners and either remove if unused or scope the removal
-            and migration prior to upgrading to Vue 3.x
-        */
-        ...this.$listeners,
         input: event => this.$emit('input', event.target.value),
         blur: event => this.onBlur(event),
+        focus: event => this.$emit('focus', event),
+        focusin: event => this.$emit('focusin', event),
+        focusout: event => this.$emit('focusout', event),
       };
     },
 

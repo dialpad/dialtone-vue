@@ -1,9 +1,9 @@
 <template>
   <dt-combobox
-    :show-list="!!value && showList"
+    :show-list="!!value && $attrs.showList"
     list-aria-label="Example list items"
     @escape="onComboboxEscape"
-    @highlight="onHighlight"
+    @highlight="$attrs.onHighlight"
     @select="onComboboxSelect"
   >
     <template #input="{ inputProps }">
@@ -84,12 +84,12 @@ export default {
   methods: {
     onComboboxSelect (i) {
       this.value = '';
-      this.onSelect(i);
+      this.$attrs.onSelect(i);
     },
 
     onComboboxEscape () {
       this.value = '';
-      this.onEscape();
+      this.$attrs.onEscape();
     },
   },
 };

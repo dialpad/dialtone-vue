@@ -1,46 +1,47 @@
 <template>
   <dt-input
-    :value="value"
-    :type="type"
-    :messages="messages"
-    :size="size"
-    :label="label"
-    :messages-child-props="messagesChildProps"
-    :name="name"
-    :disabled="disabled"
-    :show-messages="showMessages"
-    :messages-class="messagesClass"
-    :placeholder="placeholder"
-    :input-class="inputClass"
-    @blur="onBlur"
-    @input="onInput"
-    @clear="onClear"
-    @focusin="onFocusIn"
-    @focusout="onFocusOut"
+    :value="$attrs.value"
+    :type="$attrs.type"
+    :messages="$attrs.messages"
+    :size="$attrs.size"
+    :label="$attrs.label"
+    :messages-child-props="$attrs.messagesChildProps"
+    :name="$attrs.name"
+    :disabled="$attrs.disabled"
+    :show-messages="$attrs.showMessages"
+    :messages-class="$attrs.messagesClass"
+    :placeholder="$attrs.placeholder"
+    :input-class="$attrs.inputClass"
+    @blur="$attrs.onBlur"
+    @input="$attrs.onInput"
+    @clear="$attrs.onClear"
+    @focusin="$attrs.onFocusIn"
+    @focusout="$attrs.onFocusOut"
+    @focus="$attrs.onFocus"
   >
     <template
-      v-if="labelSlot"
+      v-if="$attrs.labelSlot"
       #labelSlot
     >
-      <span v-html="labelSlot" />
+      <span v-html="$attrs.labelSlot" />
     </template>
     <template
-      v-if="description"
+      v-if="$attrs.description"
       #description
     >
-      <span v-html="description" />
+      <span v-html="$attrs.description" />
     </template>
     <template
-      v-if="leftIcon"
+      v-if="$attrs.leftIcon"
       #leftIcon
     >
-      <component :is="leftIcon" />
+      <component :is="$attrs.leftIcon" />
     </template>
     <template
-      v-if="rightIcon"
+      v-if="$attrs.rightIcon"
       #rightIcon
     >
-      <component :is="rightIcon" />
+      <component :is="$attrs.rightIcon" />
     </template>
   </dt-input>
 </template>

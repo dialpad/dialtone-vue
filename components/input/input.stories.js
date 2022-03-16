@@ -21,10 +21,8 @@ export const argTypesData = {
     table: {
       type: { summary: 'VNode' },
     },
-    control: {
-      type: 'select',
-      options: getIconNames(),
-    },
+    control: 'select',
+    options: getIconNames(),
   },
   rightIcon: {
     table: {
@@ -50,10 +48,8 @@ export const argTypesData = {
   },
   type: {
     defaultValue: DtInput.props.type.default,
-    control: {
-      type: 'select',
-      options: ['text', 'textarea', 'password', 'email', 'number'],
-    },
+    control: 'select',
+    options: ['text', 'textarea', 'password', 'email', 'number'],
     table: {
       defaultValue: {
         summary: DtInput.props.type.default,
@@ -64,11 +60,8 @@ export const argTypesData = {
     control: 'object',
   },
   size: {
-    control: {
-      type: 'select',
-      options: Object.values(INPUT_SIZES),
-    },
-    defaultValue: INPUT_SIZES.DEFAULT,
+    control: 'select',
+    options: Object.values(INPUT_SIZES),
     table: {
       defaultValue: {
         summary: INPUT_SIZES.DEFAULT,
@@ -129,6 +122,11 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onFocus: {
+    table: {
+      disable: true,
+    },
+  },
 
   blur: {
     description: 'Native input blur event',
@@ -144,6 +142,12 @@ export const argTypesData = {
   },
   clear: {
     description: 'Native input clear event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  focus: {
+    description: 'Native input focus event',
     table: {
       type: { summary: 'event' },
     },
@@ -170,6 +174,7 @@ export const argsData = {
   onClear: action('clear'),
   onFocusIn: action('focusin'),
   onFocusOut: action('focusout'),
+  onFocus: action('focus'),
 };
 
 const decorator = () => ({
