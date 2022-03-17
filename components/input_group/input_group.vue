@@ -84,10 +84,6 @@ export default {
     },
   },
 
-  mounted () {
-    console.log(this.provideObj);
-  },
-
   methods: {
     getMessageKey (type, index) {
       return `input-group-message-${type}-${index}-${this.id}`;
