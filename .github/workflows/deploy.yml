@@ -3,7 +3,9 @@ name: Deploy
 on:
   push:
     branches:
-      - setup-github-pages
+      - production
+      - alpha
+      - beta
 
 jobs:
   deploy:
@@ -39,6 +41,7 @@ jobs:
         run: npm run lint
 
       - name: Build storybook
+        if: ${{ github.ref == 'refs/heads/production' }}
         run: npm run storybook:install && npm run storybook:build
 
       - name: Deploy production
@@ -46,7 +49,7 @@ jobs:
         run: npm publish
 
       - name: Deploy to GitHub Pages
-        if: ${{ github.ref == 'refs/heads/setup-github-pages' }}
+        if: ${{ github.ref == 'refs/heads/production' }}
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
