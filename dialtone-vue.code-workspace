@@ -48,7 +48,7 @@
     "yaml.format.enable": true,
     "yaml.format.singleQuote": true,
     "yaml.schemas": {
-      "https://json.schemastore.org/github-workflow.json": "file:///Users/bradpaugh/src/dialtone-vue/.github/workflows/deploy.yml"
+      "https://json.schemastore.org/github-workflow.json": "file:///.github/workflows/deploy.yml"
     },
   },
   "launch": {
