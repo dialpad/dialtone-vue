@@ -1,4 +1,4 @@
-name: Generate Preview
+name: Deploy Preview
 
 on: pull_request
 
@@ -10,8 +10,10 @@ env:
 
 jobs:
 
-  build:
-    name: Deploy
+  deploy:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
 
     steps:

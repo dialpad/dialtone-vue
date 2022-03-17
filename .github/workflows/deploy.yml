@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    concurrency: deploy-ci-${{ github.ref }}
+    concurrency: ${{ github.workflow }}-${{ github.ref }}
     runs-on: ubuntu-latest
 
     env:

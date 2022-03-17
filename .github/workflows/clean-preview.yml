@@ -7,7 +7,6 @@ on:
 jobs:
 
   clean:
-    name: Clean Deploy Previews
     runs-on: ubuntu-latest
 
     steps:
