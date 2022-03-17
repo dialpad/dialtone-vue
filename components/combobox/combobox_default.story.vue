@@ -7,8 +7,7 @@
     @select="onComboboxSelect"
   >
     <template
-      slot="input"
-      slot-scope="{ inputProps }"
+      #input="{ inputProps }"
     >
       <dt-input
         v-model="value"
@@ -17,8 +16,7 @@
       />
     </template>
     <template
-      slot="list"
-      slot-scope="{ listProps }"
+      #list="{ listProps }"
     >
       <ol
         v-bind="listProps"
@@ -31,7 +29,7 @@
           navigation-type="arrow-keys"
           @click="onComboboxSelect(i)"
         >
-          <template slot="left">
+          <template #left>
             <dt-avatar
               kind="initials"
               color="purple-500"

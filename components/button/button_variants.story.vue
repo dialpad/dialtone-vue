@@ -83,21 +83,21 @@
         importance="outlined"
         circle
       >
-        <template slot="icon">
+        <template #icon>
           <icon-dialpad-glyph />
         </template>
       </dt-button>
 
       <!-- Icon Only -->
       <dt-button>
-        <template slot="icon">
+        <template #icon>
           <icon-dialpad-glyph />
         </template>
       </dt-button>
 
       <!-- Icon Left -->
       <dt-button>
-        <template slot="icon">
+        <template #icon>
           <icon-dialpad-glyph />
         </template>
         Icon Left
@@ -105,7 +105,7 @@
 
       <!-- Icon Right -->
       <dt-button icon-position="right">
-        <template slot="icon">
+        <template #icon>
           <icon-dialpad-glyph />
         </template>
         Icon Right
