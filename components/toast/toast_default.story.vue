@@ -6,14 +6,14 @@
 
     <dt-toast
       ref="toast"
-      :kind="kind"
-      :title="title"
-      :message="message"
-      :title-id="titleId"
-      :content-id="contentId"
-      :important="important"
-      :hide-close="hideClose"
-      :duration="duration"
+      :kind="$attrs.kind"
+      :title="$attrs.title"
+      :message="$attrs.message"
+      :title-id="$attrs.titleId"
+      :content-id="$attrs.contentId"
+      :important="$attrs.important"
+      :hide-close="$attrs.hideClose"
+      :duration="$attrs.duration"
       :close-button-props="buttonCloseProps"
       @close="closeToast(); onClose($event)"
     >
@@ -30,32 +30,32 @@
         >a link</a>.
       </span>
 
-      <template slot="action">
+      <template #action>
         <span
-          v-if="action"
-          v-html="action"
+          v-if="$attrs.action"
+          v-html="$attrs.action"
         />
         <dt-button
           v-else
           size="sm"
           importance="outlined"
           :kind="buttonKind"
-          @click="onClick"
+          @click="$attrs.onClick"
         >
           Action
         </dt-button>
       </template>
       <template
-        v-if="icon"
-        slot="icon"
+        v-if="$attrs.icon"
+        #icon
       >
-        <component :is="icon" />
+        <component :is="$attrs.icon" />
       </template>
       <template
-        v-if="titleOverride"
-        slot="titleOverride"
+        v-if="$attrs.titleOverride"
+        #titleOverride
       >
-        <span v-html="titleOverride" />
+        <span v-html="$attrs.titleOverride" />
       </template>
     </dt-toast>
   </div>
@@ -79,7 +79,7 @@ export default {
     },
 
     isInverted () {
-      return this.important && this.shouldInvertButton;
+      return this.$attrs.important && this.shouldInvertButton;
     },
 
     buttonKind () {
