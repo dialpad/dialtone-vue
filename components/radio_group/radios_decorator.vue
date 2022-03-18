@@ -1,7 +1,7 @@
 <template>
   <div>
     <dt-radio
-      v-for="option in options"
+      v-for="option in $attrs.options"
       :key="option.value"
       :value="option.value"
     >

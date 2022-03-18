@@ -33,6 +33,8 @@ export default {
     DtButton,
   },
 
+  inheritAttrs: false,
+
   props: {
     closeButtonProps: {
       type: Object,
@@ -59,7 +61,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     this.lastFocusedElement?.focus();
   },
 

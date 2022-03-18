@@ -98,8 +98,10 @@ import DtRadioGroup from './radio_group';
 export default {
   name: 'RadioGroupVariants',
   components: { RadiosDecorator, DtRadioGroup },
-  created () {
-    this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
+  setup () {
+    return {
+      VALIDATION_MESSAGE_TYPES,
+    };
   },
 };
 </script>

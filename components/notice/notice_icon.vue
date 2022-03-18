@@ -39,6 +39,8 @@ export default {
     IconCheckCircle,
   },
 
+  inheritAttrs: false,
+
   props: {
     kind: {
       type: String,
