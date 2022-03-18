@@ -21,14 +21,12 @@
         :show.sync="$attrs.show"
         @shown="$attrs.onShown"
       >
-        <template
-          slot="anchor"
-        >
+        <template #anchor>
           <dt-button
             importance="outlined"
             :kind="buttonKind"
           >
-            {{ anchor }}
+            {{ $attrs.anchor }}
           </dt-button>
         </template>
         <template v-if="defaultSlot">
@@ -54,7 +52,7 @@ export default {
 
   computed: {
     buttonKind () {
-      return this.inverted ? 'inverted' : 'default';
+      return this.$attrs.inverted ? 'inverted' : 'default';
     },
   },
 };
