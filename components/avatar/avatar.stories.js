@@ -17,23 +17,17 @@ export const argTypesData = {
 
   // Props
   kind: {
-    table: {
-      defaultValue: { summary: 'default' },
-    },
+    defaultValue: 'default',
     options: Object.keys(AVATAR_KIND_MODIFIERS),
     control: 'select',
   },
   size: {
-    table: {
-      defaultValue: { summary: 'md' },
-    },
+    defaultValue: 'md',
     options: Object.keys(AVATAR_SIZE_MODIFIERS),
     control: 'select',
   },
   color: {
-    table: {
-      defaultValue: { summary: 'base' },
-    },
+    defaultValue: 'base',
     options: Object.keys(AVATAR_COLOR_MODIFIERS),
     control: 'select',
   },

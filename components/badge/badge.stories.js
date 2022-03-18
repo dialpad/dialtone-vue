@@ -18,9 +18,7 @@ export const argTypesData = {
 
   // Props
   color: {
-    table: {
-      defaultValue: { summary: 'base' },
-    },
+    defaultValue: 'base',
     options: Object.keys(BADGE_COLOR_MODIFIERS),
     control: 'select',
   },
