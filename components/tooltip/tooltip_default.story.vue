@@ -4,22 +4,22 @@
     :class="[
       'd-fl-center d-fd-column d-pt64',
       {
-        'd-bgc-purple-800 d-pb64': inverted,
+        'd-bgc-purple-800 d-pb64': $attrs.inverted,
       },
     ]"
   >
     <div class="d-pt16">
       <dt-tooltip
-        :id="id"
-        :placement="placement"
-        :inverted="inverted"
-        :message="message"
-        :fallback-placements="fallbackPlacements"
-        :offset="offset"
-        :content-class="contentClass"
-        :transition="transition"
-        :show.sync="show"
-        @shown="onShown"
+        :id="$attrs.id"
+        :placement="$attrs.placement"
+        :inverted="$attrs.inverted"
+        :message="$attrs.message"
+        :fallback-placements="$attrs.fallbackPlacements"
+        :offset="$attrs.offset"
+        :content-class="$attrs.contentClass"
+        :transition="$attrs.transition"
+        :show.sync="$attrs.show"
+        @shown="$attrs.onShown"
       >
         <template
           slot="anchor"
