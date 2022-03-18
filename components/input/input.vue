@@ -178,7 +178,7 @@ export default {
     },
   },
 
-  emits: ['blur', 'input', 'clear', 'focusin', 'focusout', 'focus'],
+  emits: ['blur', 'clear', 'focusin', 'focusout', 'focus', 'update:modelValue'],
 
   data () {
     return {
@@ -225,7 +225,7 @@ export default {
 
     inputListeners () {
       return {
-        input: event => this.$emit('input', event.target.value),
+        input: event => this.$emit('update:modelValue', event.target.value),
         blur: event => this.onBlur(event),
         focus: event => this.$emit('focus', event),
         focusin: event => this.$emit('focusin', event),

@@ -1,6 +1,6 @@
 <template>
   <dt-combobox
-    :show-list="!!value && $attrs.showList"
+    :show-list="!!value && $attrs.sbShowList"
     list-aria-label="Example list items"
     @escape="onComboboxEscape"
     @highlight="$attrs.onHighlight"
