@@ -21,10 +21,8 @@ export const argTypesData = {
     table: {
       type: { summary: 'VNode' },
     },
-    control: {
-      type: 'select',
-      options: getIconNames(),
-    },
+    control: 'select',
+    options: getIconNames(),
   },
   rightIcon: {
     table: {
@@ -45,15 +43,13 @@ export const argTypesData = {
   },
 
   // Props
-  value: {
+  modelValue: {
     control: 'text',
   },
   type: {
     defaultValue: DtInput.props.type.default,
-    control: {
-      type: 'select',
-      options: ['text', 'textarea', 'password', 'email', 'number'],
-    },
+    control: 'select',
+    options: ['text', 'textarea', 'password', 'email', 'number'],
     table: {
       defaultValue: {
         summary: DtInput.props.type.default,
@@ -64,11 +60,8 @@ export const argTypesData = {
     control: 'object',
   },
   size: {
-    control: {
-      type: 'select',
-      options: Object.values(INPUT_SIZES),
-    },
-    defaultValue: INPUT_SIZES.DEFAULT,
+    control: 'select',
+    options: Object.values(INPUT_SIZES),
     table: {
       defaultValue: {
         summary: INPUT_SIZES.DEFAULT,
@@ -82,6 +75,20 @@ export const argTypesData = {
   label: {
     control: {
       type: 'text',
+    },
+  },
+  currentLength: {
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
+  },
+  validate: {
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
     },
   },
 
@@ -119,12 +126,27 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onFocus: {
+    table: {
+      disable: true,
+    },
+  },
   onFocusIn: {
     table: {
       disable: true,
     },
   },
   onFocusOut: {
+    table: {
+      disable: true,
+    },
+  },
+  onUpdateLength: {
+    table: {
+      disable: true,
+    },
+  },
+  onUpdateIsInvalid: {
     table: {
       disable: true,
     },
@@ -148,6 +170,12 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
+  focus: {
+    description: 'Native input focus event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
   focusin: {
     description: 'Native input focusin event',
     table: {
@@ -160,6 +188,23 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
+  'update:length': {
+    description: 'Length of the input when currentLength prop is not passed',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  'update:invalid': {
+    description: 'Result of the input validation',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  'update:modelValue': {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 export const argsData = {
@@ -168,8 +213,11 @@ export const argsData = {
   onBlur: action('blur'),
   onInput: action('input'),
   onClear: action('clear'),
+  onFocus: action('focus'),
   onFocusIn: action('focusin'),
   onFocusOut: action('focusout'),
+  onUpdateLength: action('update:length'),
+  onUpdateIsInvalid: action('update:invalid'),
 };
 
 const decorator = () => ({
@@ -261,3 +309,15 @@ Large.args = { size: 'lg' };
 
 export const ExtraLarge = Template.bind({});
 ExtraLarge.args = { size: 'xl' };
+
+export const WithLengthValidation = Template.bind({});
+WithLengthValidation.args = {
+  validate: {
+    length: {
+      description: 'Max 25 characters.',
+      max: 25,
+      warn: 15,
+      limitMaxLength: false,
+    },
+  },
+};

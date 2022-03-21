@@ -1,46 +1,52 @@
 <template>
   <dt-input
-    :value="value"
-    :type="type"
-    :messages="messages"
-    :size="size"
-    :label="label"
-    :messages-child-props="messagesChildProps"
-    :name="name"
-    :disabled="disabled"
-    :show-messages="showMessages"
-    :messages-class="messagesClass"
-    :placeholder="placeholder"
-    :input-class="inputClass"
-    @blur="onBlur"
-    @input="onInput"
-    @clear="onClear"
-    @focusin="onFocusIn"
-    @focusout="onFocusOut"
+    ref="input"
+    v-model="inputValue"
+    :type="$attrs.type"
+    :messages="$attrs.messages"
+    :size="$attrs.size"
+    :label="$attrs.label"
+    :messages-child-props="$attrs.messagesChildProps"
+    :name="$attrs.name"
+    :disabled="$attrs.disabled"
+    :show-messages="$attrs.showMessages"
+    :messages-class="$attrs.messagesClass"
+    :placeholder="$attrs.placeholder"
+    :input-class="$attrs.inputClass"
+    :current-length="$attrs.currentLength"
+    :validate="validationConfig"
+    @blur="$attrs.onBlur"
+    @input="$attrs.onInput"
+    @clear="$attrs.onClear"
+    @focus="$attrs.onFocus"
+    @focusin="$attrs.onFocusIn"
+    @focusout="$attrs.onFocusOut"
+    @update:length="updateLength"
+    @update:invalid="$attrs.onUpdateIsInvalid"
   >
     <template
-      v-if="labelSlot"
-      slot="labelSlot"
+      v-if="$attrs.labelSlot"
+      #labelSlot
     >
-      <span v-html="labelSlot" />
+      <span v-html="$attrs.labelSlot" />
     </template>
     <template
-      v-if="description"
-      slot="description"
+      v-if="$attrs.description"
+      #description
     >
-      <span v-html="description" />
+      <span v-html="$attrs.description" />
     </template>
     <template
-      v-if="leftIcon"
-      slot="leftIcon"
+      v-if="$attrs.leftIcon"
+      #leftIcon
     >
-      <component :is="leftIcon" />
+      <component :is="$attrs.leftIcon" />
     </template>
     <template
-      v-if="rightIcon"
-      slot="rightIcon"
+      v-if="$attrs.rightIcon"
+      #rightIcon
     >
-      <component :is="rightIcon" />
+      <component :is="$attrs.rightIcon" />
     </template>
   </dt-input>
 </template>
@@ -51,7 +57,58 @@ import icon from '@/common/mixins/icon';
 
 export default {
   name: 'InputDefault',
+
   components: { DtInput },
+
   mixins: [icon],
+
+  inheritAttrs: false,
+
+  data () {
+    return {
+      inputValue: '',
+      inputLength: 0,
+    };
+  },
+
+  computed: {
+    validationMessage () {
+      const remainingCharacters = this.$attrs.validate?.length?.max - this.inputLength;
+
+      if (remainingCharacters < 0) {
+        return `${Math.abs(remainingCharacters)} characters over limit`;
+      } else {
+        return `${remainingCharacters} characters left`;
+      }
+    },
+
+    validationConfig () {
+      if (!this?.$attrs?.validate?.length) {
+        return null;
+      }
+
+      // Deep clone validate object
+      const validateConfigData = JSON.parse(JSON.stringify(this.$attrs.validate));
+
+      // Adds validation message
+      validateConfigData.length.message = this?.$attrs?.validate?.length?.message
+        ? this.$attrs.validate.length.message : this.validationMessage;
+
+      return validateConfigData;
+    },
+  },
+
+  watch: {
+    modelValue (val) {
+      this.inputValue = val;
+    },
+  },
+
+  methods: {
+    updateLength ($event) {
+      this.inputLength = $event;
+      this.$attrs.onUpdateLength($event);
+    },
+  },
 };
 </script>

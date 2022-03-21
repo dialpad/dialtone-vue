@@ -24,17 +24,31 @@
         </div>
       </slot>
       <div
-        v-if="$slots.description || description"
+        v-if="$slots.description || description || shouldValidateLength"
         :id="descriptionKey"
         :class="[
           'base-input__description',
           'd-description',
+          'd-fd-column',
           descriptionSizeClasses[size],
         ]"
         data-qa="dt-input-description"
       >
-        <!-- @slot slot for description, defaults to description prop -->
-        <slot name="description">{{ description }}</slot>
+        <div
+          v-if="$slots.description || description"
+        >
+          <!-- @slot slot for description, defaults to description prop -->
+          <slot name="description">{{ description }}</slot>
+        </div>
+        <div
+          v-if="shouldValidateLength"
+          data-qa="dt-input-length-description"
+          :class="[
+            'd-mb2',
+          ]"
+        >
+          {{ validationProps.length.description }}
+        </div>
       </div>
       <div class="d-input__wrapper">
         <span
@@ -48,10 +62,11 @@
         <textarea
           v-if="isTextarea"
           ref="input"
-          :value="value"
+          :value="modelValue"
           :name="name"
           :disabled="disabled"
           :class="inputClasses()"
+          :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
           v-on="inputListeners"
@@ -59,11 +74,12 @@
         <input
           v-else
           ref="input"
-          :value="value"
+          :value="modelValue"
           :name="name"
           :type="type"
           :disabled="disabled"
           :class="inputClasses()"
+          :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           v-bind="$attrs"
           data-qa="dt-input-input"
           v-on="inputListeners"
@@ -79,7 +95,7 @@
       </div>
     </label>
     <dt-validation-messages
-      :validation-messages="formattedMessages"
+      :validation-messages="validationMessages"
       :show-messages="showMessages"
       :class="messagesClass"
       v-bind="messagesChildProps"
@@ -89,7 +105,7 @@
 </template>
 
 <script>
-import { DESCRIPTION_SIZE_TYPES } from '@/common/constants.js';
+import { DESCRIPTION_SIZE_TYPES, VALIDATION_MESSAGE_TYPES } from '@/common/constants.js';
 import { INPUT_TYPES, INPUT_SIZES } from './input_constants.js';
 import {
   getUniqueString,
@@ -129,7 +145,7 @@ export default {
     /**
      * Value of the input
      */
-    value: {
+    modelValue: {
       type: [String, Number],
       default: '',
     },
@@ -176,9 +192,41 @@ export default {
       type: [String, Object, Array],
       default: '',
     },
+
+    /**
+     * The current character length that the user has entered into the input.
+     * This will only need to be used if you are using validate.length and
+     * the string contains abnormal characters.
+     * For example, an emoji could take up many characters in the input, but should only count as 1 character.
+     * If no number is provided, a built-in length calculation will be used for the length validation.
+     */
+    currentLength: {
+      type: Number,
+      default: null,
+    },
+
+    /**
+     * Validation for the input. Supports maximum length validation with the structure:
+     * `{ "length": {"description": string, "max": number, "warn": number, "message": string,
+     * "limitMaxLength": boolean }}`
+     */
+    validate: {
+      type: Object,
+      default: null,
+    },
   },
 
-  emits: ['blur', 'input', 'clear', 'focusin', 'focusout'],
+  emits: [
+    'input',
+    'blur',
+    'clear',
+    'focus',
+    'focusin',
+    'focusout',
+    'update:modelValue',
+    'update:length',
+    'update:invalid',
+  ],
 
   data () {
     return {
@@ -194,6 +242,12 @@ export default {
         lg: 'd-label--lg',
         xl: 'd-label--xl',
       },
+
+      isInputFocused: false,
+
+      isInvalid: false,
+
+      defaultLength: 0,
     };
   },
 
@@ -225,13 +279,23 @@ export default {
 
     inputListeners () {
       return {
-        /* TODO
-            Check if any usages of this component leverage $listeners and either remove if unused or scope the removal
-            and migration prior to upgrading to Vue 3.x
-        */
-        ...this.$listeners,
-        input: event => this.$emit('input', event.target.value),
-        blur: event => this.onBlur(event),
+        input: event => {
+          this.$emit('input', event.target.value);
+          this.$emit('update:modelValue', event.target.value);
+        },
+
+        blur: event => {
+          this.isInputFocused = false;
+          this.onBlur(event);
+        },
+
+        focus: event => {
+          this.isInputFocused = true;
+          this.$emit('focus', event);
+        },
+
+        focusin: event => this.$emit('focusin', event),
+        focusout: event => this.$emit('focusout', event),
       };
     },
 
@@ -240,11 +304,70 @@ export default {
     },
 
     inputState () {
-      return getValidationState(this.formattedMessages);
+      return getValidationState(this.validationMessages);
+    },
+
+    defaultLengthCalculation () {
+      return this.calculateLength(this.modelValue);
+    },
+
+    validationProps () {
+      return {
+        length: {
+          description: this?.validate?.length?.description,
+          max: this?.validate?.length?.max,
+          warn: this?.validate?.length?.warn,
+          message: this?.validate?.length?.message,
+          limitMaxLength: this?.validate?.length?.limitMaxLength ? this.validate.length.limitMaxLength : false,
+        },
+      };
+    },
+
+    validationMessages () {
+      // Add length validation message if exists
+      if (this.showLengthLimitValidation) {
+        return this.formattedMessages.concat([this.inputLengthErrorMessage()]);
+      }
+
+      return this.formattedMessages;
     },
 
     showInputState () {
       return this.showMessages && this.inputState;
+    },
+
+    inputLength () {
+      return this.currentLength ? this.currentLength : this.defaultLengthCalculation;
+    },
+
+    inputLengthState () {
+      if (this.inputLength < this.validationProps.length.warn) {
+        return null;
+      } else if (this.inputLength < this.validationProps.length.max) {
+        return this.validationProps.length.warn ? VALIDATION_MESSAGE_TYPES.WARNING : null;
+      } else {
+        return VALIDATION_MESSAGE_TYPES.ERROR;
+      }
+    },
+
+    shouldValidateLength () {
+      return !!(
+        this.validationProps.length.description &&
+        this.validationProps.length.max
+      );
+    },
+
+    shouldLimitMaxLength () {
+      return this.shouldValidateLength && this.validationProps.length.limitMaxLength;
+    },
+
+    showLengthLimitValidation () {
+      return (
+        this.shouldValidateLength &&
+        this.inputLengthState !== null &&
+        this.validationProps.length.message &&
+        (this.isInputFocused || this.isInvalid)
+      );
     },
 
     sizeModifierClass () {
@@ -269,6 +392,25 @@ export default {
       };
 
       return sizeClasses[this.inputComponent][this.size];
+    },
+  },
+
+  watch: {
+    isInvalid (val) {
+      this.$emit('update:invalid', val);
+    },
+
+    modelValue: {
+      immediate: true,
+      handler (newValue) {
+        if (this.shouldValidateLength) {
+          this.validateLength(this.inputLength);
+        }
+
+        if (this.currentLength == null) {
+          this.$emit('update:length', this.calculateLength(newValue));
+        }
+      },
     },
   },
 
@@ -299,6 +441,21 @@ export default {
         this.sizeModifierClass,
         this.inputClass,
       ];
+    },
+
+    calculateLength (value) {
+      if (value === null) {
+        return 0;
+      }
+
+      return [...value].length;
+    },
+
+    inputLengthErrorMessage () {
+      return {
+        message: this.validationProps.length.message,
+        type: this.inputLengthState,
+      };
     },
 
     inputIconClasses (side) {
@@ -346,6 +503,10 @@ export default {
 
     getMessageKey (type, index) {
       return `message-${type}-${index}`;
+    },
+
+    validateLength (length) {
+      this.isInvalid = (length > this.validationProps.length.max);
     },
   },
 };
