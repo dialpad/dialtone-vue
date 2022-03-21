@@ -43,7 +43,7 @@ export const argTypesData = {
   },
 
   // Props
-  value: {
+  modelValue: {
     control: 'text',
   },
   type: {
@@ -198,6 +198,11 @@ export const argTypesData = {
     description: 'Result of the input validation',
     table: {
       type: { summary: 'event' },
+    },
+  },
+  'update:modelValue': {
+    table: {
+      disable: true,
     },
   },
 };

@@ -216,7 +216,17 @@ export default {
     },
   },
 
-  emits: ['blur', 'clear', 'focus', 'focusin', 'focusout', 'update:modelValue', 'update:length', 'update:invalid'],
+  emits: [
+    'input',
+    'blur',
+    'clear',
+    'focus',
+    'focusin',
+    'focusout',
+    'update:modelValue',
+    'update:length',
+    'update:invalid',
+  ],
 
   data () {
     return {
@@ -269,7 +279,11 @@ export default {
 
     inputListeners () {
       return {
-        input: event => this.$emit('update:modelValue', event.target.value),
+        input: event => {
+          this.$emit('input', event.target.value);
+          this.$emit('update:modelValue', event.target.value);
+        },
+
         blur: event => {
           this.isInputFocused = false;
           this.onBlur(event);
@@ -294,7 +308,7 @@ export default {
     },
 
     defaultLengthCalculation () {
-      return this.calculateLength(this.value);
+      return this.calculateLength(this.modelValue);
     },
 
     validationProps () {
@@ -386,7 +400,7 @@ export default {
       this.$emit('update:invalid', val);
     },
 
-    value: {
+    modelValue: {
       immediate: true,
       handler (newValue) {
         if (this.shouldValidateLength) {

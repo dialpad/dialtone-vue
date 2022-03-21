@@ -13,7 +13,7 @@
     :messages-class="$attrs.messagesClass"
     :placeholder="$attrs.placeholder"
     :input-class="$attrs.inputClass"
-    :current-length="currentLength"
+    :current-length="$attrs.currentLength"
     :validate="validationConfig"
     @blur="$attrs.onBlur"
     @input="$attrs.onInput"
@@ -22,7 +22,7 @@
     @focusin="$attrs.onFocusIn"
     @focusout="$attrs.onFocusOut"
     @update:length="updateLength"
-    @update:invalid="onUpdateIsInvalid"
+    @update:invalid="$attrs.onUpdateIsInvalid"
   >
     <template
       v-if="$attrs.labelSlot"
@@ -62,6 +62,8 @@ export default {
 
   mixins: [icon],
 
+  inheritAttrs: false,
+
   data () {
     return {
       inputValue: '',
@@ -71,7 +73,7 @@ export default {
 
   computed: {
     validationMessage () {
-      const remainingCharacters = this.validate?.length?.max - this.inputLength;
+      const remainingCharacters = this.$attrs.validate?.length?.max - this.inputLength;
 
       if (remainingCharacters < 0) {
         return `${Math.abs(remainingCharacters)} characters over limit`;
@@ -81,23 +83,23 @@ export default {
     },
 
     validationConfig () {
-      if (!this?.validate?.length) {
+      if (!this?.$attrs?.validate?.length) {
         return null;
       }
 
       // Deep clone validate object
-      const validateConfigData = JSON.parse(JSON.stringify(this.validate));
+      const validateConfigData = JSON.parse(JSON.stringify(this.$attrs.validate));
 
       // Adds validation message
-      validateConfigData.length.message = this?.validate?.length?.message
-        ? this.validate.length.message : this.validationMessage;
+      validateConfigData.length.message = this?.$attrs?.validate?.length?.message
+        ? this.$attrs.validate.length.message : this.validationMessage;
 
       return validateConfigData;
     },
   },
 
   watch: {
-    value (val) {
+    modelValue (val) {
       this.inputValue = val;
     },
   },
@@ -105,7 +107,7 @@ export default {
   methods: {
     updateLength ($event) {
       this.inputLength = $event;
-      this.onUpdateLength($event);
+      this.$attrs.onUpdateLength($event);
     },
   },
 };
