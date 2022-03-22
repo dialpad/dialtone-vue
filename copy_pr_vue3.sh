@@ -17,9 +17,8 @@ if [ -n "$1" ]; then
   # user manually passed in range start commit
   RANGE_START=$1
 else
-  echo "in wrong thing"
   # gets the sha of the commit BEFORE the first commit we want to include (you need to pass this to rebase --onto)
-  RANGE_START=$(git log staging-vue3^.."$BRANCH" --oneline | tail -1 | awk '{print $1;}')
+  RANGE_START=$(git log staging^.."$BRANCH" --oneline | tail -1 | awk '{print $1;}')
 fi
 
 # gets the sha of the commit at the end of the range
