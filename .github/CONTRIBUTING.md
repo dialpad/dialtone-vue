@@ -67,7 +67,7 @@ After you have discussed your change with the Dialtone team, follow these steps 
 7. Run `./copy_pr_vue3.sh` in the root of the repository to copy your changes to a vue3 branch titled `my-change-branch-vue3`
 8. Create a pull request into the `staging-vue3` branch, reviewers will be automatically added and notified of your PR.
 9. Any subsequent changes that need to be copied to your Vue 3 branch can be done so with `./copy_pr_vue3.sh GIT_SHA` where GIT_SHA is the commit SHA before the first one you wish to copy.
-10. Once your changes have been approved, you may squash merge your branch into `staging`.
+10. Once your changes have been approved, you may squash merge your branch into `staging` and `staging-vue3`.
 
 Once your change is in `staging` it will go live with the next Dialtone Vue release. Releases are done on demand by the Dialtone team, and are done fairly regularly. If you need your change to be released promptly, please ask in the [#dialtone](https://dialpad.slack.com/messages/dialtone/) Slack channel.
 
