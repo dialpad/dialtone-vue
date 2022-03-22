@@ -1,0 +1,20 @@
+name: Vue 3 PR Exists
+
+on:
+  pull_request:
+    types: ['opened', 'edited', 'reopened', 'synchronize', 'labeled']
+    branches:
+      - staging
+
+jobs:
+  check_vue3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Check if -vue3 branch exists
+        if: "!contains( github.event.pull_request.labels.*.name, 'vue2-only')"
+        id: branch_exists
+        run: git show-ref refs/heads/${{ github.ref }}-vue3
