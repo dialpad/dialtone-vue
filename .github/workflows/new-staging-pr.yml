@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Add Message
         uses: mshick/add-pr-comment@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           message: |
             Thanks for contributing to Dialtone Vue! Please read below for some important info regarding Vue 3 compatibility.
