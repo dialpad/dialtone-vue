@@ -11,9 +11,6 @@
     "components/input/input.vue": {
       "max-lines": 1
     },
-    "components/radio/radio.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 1
-    },
     "components/skeleton/skeleton-paragraph.vue": {
       "complexity": 1
     },

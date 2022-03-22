@@ -21,7 +21,7 @@
     <!-- With Slotted Legend -->
     <dt-radio-group name="radio-group-with-slotted-legend">
       <radios-decorator />
-      <template slot="legend">
+      <template #legend>
         With Slotted Legend
       </template>
     </dt-radio-group>
