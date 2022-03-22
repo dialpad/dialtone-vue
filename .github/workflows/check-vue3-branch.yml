@@ -2,7 +2,7 @@ name: Vue 3 Branch Exists
 
 on:
   pull_request:
-    types: ['opened', 'edited', 'reopened', 'synchronize', 'labeled']
+    types: ['opened', 'edited', 'reopened', 'synchronize', 'labeled', 'unlabeled']
     branches:
       - staging
 
