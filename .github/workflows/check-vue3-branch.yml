@@ -11,13 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       - name: Check if -vue3 branch exists
         if: "!contains( github.event.pull_request.labels.*.name, 'vue2-only')"
         id: branch_exists
-        run: git show-ref refs/heads/${{ github.head_ref }}-vue3
+        run: git ls-remote --heads origin ${{ github.head_ref }}-vue3
 
       - name: Check if -vue3 branch exists
         if: failure()
