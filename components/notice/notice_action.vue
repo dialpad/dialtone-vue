@@ -33,8 +33,6 @@ export default {
     DtButton,
   },
 
-  inheritAttrs: false,
-
   props: {
     closeButtonProps: {
       type: Object,

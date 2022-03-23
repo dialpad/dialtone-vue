@@ -27,8 +27,6 @@
 export default {
   name: 'DtNoticeContent',
 
-  inheritAttrs: false,
-
   props: {
     title: {
       type: String,
