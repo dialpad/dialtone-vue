@@ -15,7 +15,7 @@
       :hide-close="$attrs.hideClose"
       :duration="$attrs.duration"
       :close-button-props="buttonCloseProps"
-      @close="closeToast(); onClose($event)"
+      @close="closeToast(); $attrs.onClose($event)"
     >
       <span
         v-if="defaultSlot"
@@ -92,7 +92,7 @@ export default {
 
     buttonCloseProps () {
       return {
-        ...this.closeButtonProps,
+        ...this.$attrs.closeButtonProps,
         kind: this.buttonKind,
         ariaLabel: 'Close',
       };
