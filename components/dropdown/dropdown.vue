@@ -30,7 +30,7 @@
       <ul
         :id="listId"
         ref="listWrapper"
-        class="d-p0 d-ps-relative"
+        class="d-px0 d-py6 d-ps-relative"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
         @mousemove.capture="onMouseHighlight"
