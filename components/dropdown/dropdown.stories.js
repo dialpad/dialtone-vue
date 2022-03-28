@@ -76,6 +76,7 @@ export const argTypesData = {
     },
   },
   padding: {
+    defaultValue: 'small',
     control: {
       type: 'select',
       options: Object.keys(DROPDOWN_PADDING_CLASSES),
