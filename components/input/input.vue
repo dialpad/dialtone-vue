@@ -432,7 +432,7 @@ export default {
     },
 
     calculateLength (value) {
-      if (value === null || typeof value !== 'string') {
+      if (typeof value !== 'string') {
         return 0;
       }
 
