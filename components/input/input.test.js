@@ -31,7 +31,6 @@ describe('Dialtone Vue Input tests', function () {
   let props;
   let attrs;
   let slots;
-  let listeners;
   let inputStub;
 
   // Helpers
@@ -50,7 +49,6 @@ describe('Dialtone Vue Input tests', function () {
       props,
       attrs,
       slots,
-      listeners,
     });
   };
 
