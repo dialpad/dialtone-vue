@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtBreadcrumb from './breadcrumbs.vue';
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 
@@ -36,7 +36,7 @@ describe('Dialtone Vue Breadcrumb tests', function () {
   let breadcrumbItems;
 
   // Environment
-  const propsData = basePropsData;
+  const props = basePropsData;
 
   // Helpers
   const _setWrappers = () => {
@@ -46,8 +46,7 @@ describe('Dialtone Vue Breadcrumb tests', function () {
 
   const _mountWrapper = () => {
     wrapper = mount(DtBreadcrumb, {
-      propsData,
-      localVue: createLocalVue(),
+      props,
     });
     _setWrappers();
   };
@@ -60,12 +59,12 @@ describe('Dialtone Vue Breadcrumb tests', function () {
   describe('Presentation Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
     it('should render the breadcrumbs', function () { assert.exists(breadcrumbs.exists(), 'breadcrumbs exist'); });
-    it('should render the item breadcrumb', function () { assert.exists(breadcrumbItems.exists(), 'items exist'); });
+    it('should render the item breadcrumb', function () { assert.isNotEmpty(breadcrumbItems); });
 
     describe('When the breadcrumb has default state', function () {
       it('should has correct aria-current', function () {
         const elementWithValidAria = breadcrumbItems.filter(item => {
-          return item.find('[aria-current="location"]').constructor.name === 'VueWrapper';
+          return item.find('[aria-current="location"]').exists();
         });
         assert.equal(elementWithValidAria.length, 1);
       });

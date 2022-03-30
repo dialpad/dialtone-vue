@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtAvatar from './avatar.vue';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
@@ -13,7 +13,6 @@ import {
   itBehavesLikeAppliesChildProp,
   itBehavesLikeAppliesClassToChild,
 } from '../../tests/shared_examples/extendability';
-import Vue from 'vue';
 import sinon from 'sinon';
 
 // Constants
@@ -32,7 +31,7 @@ describe('DtAvatar Tests', function () {
   let image;
 
   // Environment
-  let propsData = basePropsData;
+  let props = basePropsData;
   let attrs = baseAttrs;
   let slots = {};
 
@@ -43,24 +42,20 @@ describe('DtAvatar Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtAvatar, {
-      propsData,
+    wrapper = mount(DtAvatar, {
+      props,
       attrs,
       slots,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
   beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = basePropsData;
     attrs = {};
     slots = {};
   });
@@ -135,7 +130,7 @@ describe('DtAvatar Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, kind: 'icon' };
+        props = { ...basePropsData, kind: 'icon' };
         slots = { default: icon };
         _setWrappers();
       });
@@ -155,7 +150,7 @@ describe('DtAvatar Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = {
+        props = {
           ...basePropsData,
           kind: 'initials',
         };
@@ -178,7 +173,7 @@ describe('DtAvatar Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = {
+        props = {
           ...basePropsData,
           size,
         };
@@ -197,7 +192,7 @@ describe('DtAvatar Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = {
+        props = {
           ...basePropsData,
           color,
         };
@@ -253,22 +248,20 @@ describe('DtAvatar Tests', function () {
 
     describe('Image Attrs Validation', function () {
       // Test Environment
-      const warningMessage = 'src and alt attributes are required for image avatars';
+      const warningMessage = '[Vue warn]: src and alt attributes are required for image avatars';
 
       // Test Setup
       before(function () {
-        Vue.config.silent = true;
-        sinon.spy(Vue.util, 'warn');
+        sinon.spy(console, 'warn');
       });
 
       // Test Teardown
       afterEach(function () {
-        Vue.util.warn.resetHistory();
+        console.warn.resetHistory();
       });
 
       after(function () {
-        Vue.util.warn.restore();
-        Vue.config.silent = false;
+        console.warn.restore();
       });
 
       describe('When image src and alt attributes are provided', function () {
@@ -322,7 +315,7 @@ describe('DtAvatar Tests', function () {
 
     // Helpers
     const _setupChildClassTest = (childClassName, selector) => {
-      propsData[childClassName] = customClass;
+      props[childClassName] = customClass;
       slots = { default: DEFAULT_SLOT };
       _setWrappers();
       element = wrapper.find(selector);

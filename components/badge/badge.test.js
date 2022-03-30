@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import DtBadge from './badge.vue';
 import { BADGE_COLOR_MODIFIERS } from './badge_constants';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
@@ -12,7 +12,7 @@ describe('Dialtone Vue Badge tests', function () {
   let badge;
 
   // Environment
-  let propsData = basePropsData;
+  let props = basePropsData;
   let slots = {};
 
   // Helpers
@@ -22,21 +22,16 @@ describe('Dialtone Vue Badge tests', function () {
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtBadge, {
-      propsData,
+      props,
       slots,
       localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
-  // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = basePropsData;
     slots = {};
   });
 
@@ -80,7 +75,7 @@ describe('Dialtone Vue Badge tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = { ...basePropsData, text: propText };
+        props = { ...basePropsData, text: propText };
         _setWrappers();
       });
 
