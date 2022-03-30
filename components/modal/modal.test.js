@@ -1,9 +1,10 @@
 import { assert } from 'chai';
 import DtButton from '../button/button.vue';
 import DtModal from './modal.vue';
-import { config, shallowMount, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 
 const baseProps = {
+  show: true,
   closeButtonProps: {
     ariaLabel: 'test close aria label',
   },
@@ -20,20 +21,10 @@ describe('Dialtone Vue Modal Tests', function () {
   let _setElements;
 
   // Setup
-  before(function () {
-    config.renderStubDefaultSlot = true;
-  });
-
-  // Test Teardown
-  after(function () {
-    config.renderStubDefaultSlot = false;
-  });
-
   beforeEach(function () {
-    wrapper = shallowMount(DtModal, {
-      props: baseProps,
-      global: {
-        stubs: { DtButton },
+    wrapper = mount(DtModal, {
+      props: {
+        ...baseProps,
       },
     });
 
@@ -72,7 +63,7 @@ describe('Dialtone Vue Modal Tests', function () {
     const contentText = 'test content';
     const headerText = 'test header';
 
-    wrapper = shallowMount(DtModal, {
+    wrapper = mount(DtModal, {
       props: {
         ...baseProps,
         copy: 'non-slot copy',
@@ -81,9 +72,6 @@ describe('Dialtone Vue Modal Tests', function () {
       slots: {
         default: `<p>${contentText}</p>`,
         header: `<h1>${headerText}</h1>`,
-      },
-      global: {
-        stubs: { DtButton },
       },
     });
     _setElements();
@@ -107,7 +95,6 @@ describe('Dialtone Vue Modal Tests', function () {
     wrapper = mount(DtModal, {
       props: {
         ...baseProps,
-        show: true,
       },
     });
     _setElements();
@@ -134,6 +121,7 @@ describe('Dialtone Vue Modal Tests', function () {
     assert.isFalse(overlay.classes(modalClass));
 
     await wrapper.setProps({ modalClass });
+    _setElements();
     assert.isTrue(overlay.classes(modalClass));
   });
 });
