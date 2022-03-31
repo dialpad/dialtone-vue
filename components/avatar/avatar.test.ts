@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import DtAvatar from './avatar.vue';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
@@ -47,14 +47,12 @@ describe('DtAvatar Tests', function () {
       propsData,
       attrs,
       slots,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
   before(function () {
-    this.localVue = createLocalVue();
   });
   beforeEach(function () {});
 

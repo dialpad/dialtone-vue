@@ -1,5 +1,5 @@
 {
-  "include": ["index.ts", "components/link/*.ts", "common", "components/link/*.vue", "components/avatar/*.vue"],
+  "include": ["index.ts", "components/link/*.ts", "common/**/*.js", "common/**/*.ts", "components/link/*.vue", "components/avatar/*.vue"],
   "exclude": ["**/*.story.*", "**/*.stories.*", "**/*.test.js", "**/*.mdx", "node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
@@ -21,6 +21,7 @@
     "importsNotUsedAsValues": "error",
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "allowJs": true,
     "types": [
       "vite/client",
       "mocha"
