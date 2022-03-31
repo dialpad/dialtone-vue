@@ -10,10 +10,11 @@
   </a>
 </template>
 
-<script>
-import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants.js';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants';
 
-export default {
+export default defineComponent({
   name: 'DtLink',
 
   props: {
@@ -23,9 +24,7 @@ export default {
     kind: {
       type: String,
       default: '',
-      validator (kind) {
-        return LINK_VARIANTS.includes(kind);
-      },
+      validator: (kind: string) => LINK_VARIANTS.includes(kind),
     },
   },
 
@@ -34,5 +33,5 @@ export default {
       LINK_KIND_MODIFIERS,
     };
   },
-};
+});
 </script>

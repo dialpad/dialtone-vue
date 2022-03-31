@@ -6,11 +6,13 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'plugin:vuejs-accessibility/recommended',
   ],
+
   env: {
     browser: true,
     node: true,
     amd: true,
   },
+
   rules: {
     camelcase: ['error', {
       properties: 'never', // Ignore snake_case in JSON properties, which are often params.
@@ -103,6 +105,7 @@ module.exports = {
     'vue/space-unary-ops': ['error', { words: true, nonwords: false }],
     'vue/template-curly-spacing': ['error', 'never'],
   },
+
   overrides: [
     {
       files: ['**/*.test.js'],
@@ -132,4 +135,17 @@ module.exports = {
       },
     },
   ],
+
+  'extends': [
+    'standard',
+    'semistandard',
+    'plugin:vue/recommended',
+    'plugin:vue/vue3-recommended',
+    'plugin:vuejs-accessibility/recommended',
+    '@vue/typescript'
+  ],
+
+  parserOptions: {
+    parser: '@typescript-eslint/parser'
+  }
 };

@@ -5,10 +5,12 @@
   "scripts": {
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
     "lint": "run-s lint:code lint:docs",
+    "build:lib": "vite build && npm run build:types",
+    "build:types": "vue-tsc",
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
-    "lint:code": "esplint ./",
     "lint-staged:code": "eslint --fix",
     "lint-staged:docs": "markdownlint --fix",
+    "lint:code": "esplint ./",
     "lint:docs": "markdownlint '**/*.mdx'",
     "prepublishOnly": "npm run build",
     "release": "semantic-release --no-ci --extends ./release-local.config.js",
@@ -17,14 +19,14 @@
     "storybook:build": "npm run --prefix storybook build",
     "storybook:install": "npm install --prefix storybook",
     "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js recipes/**/**/*.test.js",
+    "test:ts": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.ts recipes/**/**/*.test.ts",
     "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js"
   },
-  "main": "./dist/dialtone-vue.common.js",
-  "files": [
-    "dist/*.js"
-  ],
+  "main": "./dist/dialtone-vue.umd.ts",
+  "module": "./dist/dialtone-vue.es.ts",
   "dependencies": {
-    "tippy.js": "^6.3.1"
+    "tippy.js": "^6.3.1",
+    "vue-class-component": "^8.0.0-0"
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
@@ -32,11 +34,18 @@
     "@dialpad/dialtone": "^6.20.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^9.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "@vitejs/plugin-vue": "^2.3.1",
     "@vue/cli-plugin-babel": "~4.5.15",
     "@vue/cli-plugin-eslint": "^5.0.0-rc.1",
+    "@vue/cli-plugin-typescript": "~4.5.15",
     "@vue/cli-plugin-unit-mocha": "~4.5.15",
     "@vue/cli-service": "~4.5.15",
     "@vue/compiler-sfc": "^3.1.0",
+    "@vue/eslint-config-typescript": "^9.1.0",
     "@vue/test-utils": "^2.0.0-rc.12",
     "babel-eslint": "^10.1.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
@@ -69,7 +78,11 @@
     "semantic-release": "^18.0.0",
     "sinon": "^7.3.1",
     "source-map-support": "^0.5.19",
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.7.0-dev.20220331",
+    "vite": "^2.9.1",
     "vue": "^3.1.0",
+    "vue-tsc": "^0.33.9",
     "yo": "^3.1.1"
   },
   "peerDependencies": {
@@ -77,13 +90,19 @@
     "vue": "^3.1.0",
     "yo": "^4.3.0"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged",
-    "commit-msg": "./scripts/commit-msg"
-  },
   "engineStrict": true,
   "engines": {
     "node": ">= 14.17"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/dialtone-vue.es.ts",
+      "require": "./dist/dialtone-vue.umd.ts"
+    }
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "./scripts/commit-msg"
   },
   "repository": "git@github.com:dialpad/dialtone-vue.git",
   "volta": {

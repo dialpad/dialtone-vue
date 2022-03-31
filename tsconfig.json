@@ -1,0 +1,29 @@
+{
+  "include": ["index.ts", "components/link/*.ts", "common/**/*.ts", "components/link/*.vue"],
+  "exclude": ["**/*.story.*", "**/*.stories.*", "**/*.test.*", "**/*.mdx", "node_modules"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./"]
+    },
+    "target": "ES2019",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "preserveValueImports": true,
+    "isolatedModules": true,
+    "importsNotUsedAsValues": "error",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "types": [
+      "vite/client",
+      "mocha"
+    ]
+  }
+}
