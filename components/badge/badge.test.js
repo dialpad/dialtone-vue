@@ -5,14 +5,14 @@ import { BADGE_COLOR_MODIFIERS } from './badge_constants';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 
 // Constants
-const basePropsData = {};
+const baseProps = {};
 
 describe('Dialtone Vue Badge tests', function () {
   let wrapper;
   let badge;
 
   // Environment
-  let props = basePropsData;
+  let props = baseProps;
   let slots = {};
 
   // Helpers
@@ -31,7 +31,7 @@ describe('Dialtone Vue Badge tests', function () {
 
   // Teardown
   afterEach(function () {
-    props = basePropsData;
+    props = baseProps;
     slots = {};
   });
 
@@ -75,7 +75,7 @@ describe('Dialtone Vue Badge tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        props = { ...basePropsData, text: propText };
+        props = { ...baseProps, text: propText };
         _setWrappers();
       });
 

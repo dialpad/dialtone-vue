@@ -5,7 +5,7 @@ import DtCombobox from './combobox.vue';
 import DtInput from '../input/input.vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   listAriaLabel: '',
   listId: 'list',
   showList: true,
@@ -41,7 +41,7 @@ describe('Dialtone Vue Combobox tests', function () {
 
   // Test Setup
   beforeEach(function () {
-    props = basePropsData;
+    props = baseProps;
     selectStub = sinon.stub();
     escapeStub = sinon.stub();
     highlightStub = sinon.stub();
@@ -52,7 +52,7 @@ describe('Dialtone Vue Combobox tests', function () {
 
   // Test Teardown
   afterEach(function () {
-    props = basePropsData;
+    props = baseProps;
     slots = {};
   });
 

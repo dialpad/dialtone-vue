@@ -20,7 +20,7 @@ import CheckboxesFixture from './checkboxes_decorator.vue';
 import DtCheckboxGroup from './checkbox_group.vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   name: 'test-checkbox-group',
 };
 const baseAttrs = { 'aria-label': 'Test Checkbox Group' };
@@ -33,7 +33,7 @@ describe('Checkbox Group Tests', function () {
   let checkboxGroupMessages;
 
   // Environment
-  let props = basePropsData;
+  let props = baseProps;
   let attrs = baseAttrs;
   let slots = {};
   let provide = {};
@@ -62,7 +62,7 @@ describe('Checkbox Group Tests', function () {
 
   // Teardown
   afterEach(function () {
-    props = basePropsData;
+    props = baseProps;
     attrs = baseAttrs;
     slots = {};
     provide = {};
@@ -114,7 +114,7 @@ describe('Checkbox Group Tests', function () {
     describe('When a legend is provided via prop', function () {
       // Test Setup
       beforeEach(function () {
-        props = { ...basePropsData, legend };
+        props = { ...baseProps, legend };
         _mountWrappers();
       });
 
@@ -138,7 +138,7 @@ describe('Checkbox Group Tests', function () {
         // Test Setup
         beforeEach(function () {
           props = {
-            ...basePropsData,
+            ...baseProps,
             legend: 'A legend which should not be displayed',
           };
           _mountWrappers();
@@ -158,7 +158,7 @@ describe('Checkbox Group Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        props = { ...basePropsData, messages: ['Error'] };
+        props = { ...baseProps, messages: ['Error'] };
       });
 
       describe('When the validation messages are shown', function () {
@@ -216,7 +216,7 @@ describe('Checkbox Group Tests', function () {
     describe('When initial selected values are provided', function () {
       // Test Setup
       beforeEach(function () {
-        props = { ...basePropsData, selectedValues: [selectedValue] };
+        props = { ...baseProps, selectedValues: [selectedValue] };
         _mountWrappers();
       });
 
@@ -260,7 +260,7 @@ describe('Checkbox Group Tests', function () {
     describe('When the checkbox group is disabled', function () {
       // Test Setup
       beforeEach(function () {
-        props = { ...basePropsData, disabled: true };
+        props = { ...baseProps, disabled: true };
         _mountWrappers();
       });
 
@@ -328,7 +328,7 @@ describe('Checkbox Group Tests', function () {
 
     beforeEach(function () {
       props = {
-        ...basePropsData,
+        ...baseProps,
         legend: 'My Legend',
         messages: ['Error'],
       };

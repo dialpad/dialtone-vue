@@ -9,7 +9,7 @@ import {
 } from '../../tests/shared_examples/validation';
 
 // Constants
-const basePropsData = {};
+const baseProps = {};
 
 describe('DtButtonGroup Tests', function () {
   // Wrappers
@@ -17,7 +17,7 @@ describe('DtButtonGroup Tests', function () {
   let buttonGroup;
 
   // Environment
-  let props = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -44,7 +44,7 @@ describe('DtButtonGroup Tests', function () {
 
   // Teardown
   afterEach(function () {
-    props = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};

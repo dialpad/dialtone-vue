@@ -21,7 +21,7 @@ const IMAGE_ATTRS = {
   SRC: 'image.png',
   ALT: 'Avatar image',
 };
-const basePropsData = {};
+const baseProps = {};
 const baseAttrs = {};
 
 describe('DtAvatar Tests', function () {
@@ -31,7 +31,7 @@ describe('DtAvatar Tests', function () {
   let image;
 
   // Environment
-  let props = basePropsData;
+  let props = baseProps;
   let attrs = baseAttrs;
   let slots = {};
 
@@ -55,7 +55,7 @@ describe('DtAvatar Tests', function () {
 
   // Teardown
   afterEach(function () {
-    props = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
   });
@@ -130,7 +130,7 @@ describe('DtAvatar Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        props = { ...basePropsData, kind: 'icon' };
+        props = { ...baseProps, kind: 'icon' };
         slots = { default: icon };
         _setWrappers();
       });
@@ -151,7 +151,7 @@ describe('DtAvatar Tests', function () {
       // Test Setup
       beforeEach(function () {
         props = {
-          ...basePropsData,
+          ...baseProps,
           kind: 'initials',
         };
         slots = { default: initials };
@@ -174,7 +174,7 @@ describe('DtAvatar Tests', function () {
       // Test Setup
       beforeEach(function () {
         props = {
-          ...basePropsData,
+          ...baseProps,
           size,
         };
         slots = { default: DEFAULT_SLOT };
@@ -193,7 +193,7 @@ describe('DtAvatar Tests', function () {
       // Test Setup
       beforeEach(function () {
         props = {
-          ...basePropsData,
+          ...baseProps,
           color,
         };
         slots = { default: DEFAULT_SLOT };

@@ -4,7 +4,7 @@ import DtBreadcrumb from './breadcrumbs.vue';
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   inverted: false,
   breadcrumbs: [{
     url: '#',
@@ -36,7 +36,7 @@ describe('Dialtone Vue Breadcrumb tests', function () {
   let breadcrumbItems;
 
   // Environment
-  const props = basePropsData;
+  const props = baseProps;
 
   // Helpers
   const _setWrappers = () => {
@@ -69,11 +69,11 @@ describe('Dialtone Vue Breadcrumb tests', function () {
         assert.equal(elementWithValidAria.length, 1);
       });
       it('should has correct rendered items', function () {
-        assert.equal(breadcrumbItems.length, basePropsData.breadcrumbs.length);
+        assert.equal(breadcrumbItems.length, baseProps.breadcrumbs.length);
       });
       it('should has correct sequence', function () {
-        assert.equal(breadcrumbItems.length, basePropsData.breadcrumbs.length);
-        basePropsData.breadcrumbs.forEach(({ label }, i) => {
+        assert.equal(breadcrumbItems.length, baseProps.breadcrumbs.length);
+        baseProps.breadcrumbs.forEach(({ label }, i) => {
           assert.equal(breadcrumbItems.at(i).text(), label);
         });
       });
@@ -81,7 +81,7 @@ describe('Dialtone Vue Breadcrumb tests', function () {
 
     describe('When a inverted is provided to breadcrumbs', function () {
       before(function () {
-        basePropsData.inverted = true;
+        baseProps.inverted = true;
       });
       it('should render label', function () {
         assert.isTrue(breadcrumbs.classes().includes(BREADCRUMBS_INVERTED_MODIFIER));
@@ -101,7 +101,7 @@ describe('Dialtone Vue Breadcrumb tests', function () {
   describe('Accessibility Tests', function () {
     describe('When a new area-label is provided', function () {
       before(function () {
-        basePropsData.ariaLabel = 'newAria';
+        baseProps.ariaLabel = 'newAria';
       });
 
       it('should update area-label value', function () {

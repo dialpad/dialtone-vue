@@ -20,7 +20,7 @@ import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 
 // Constants
 const baseValue = 'Value';
-const basePropsData = {
+const baseProps = {
   label: 'My Checkbox Label',
   value: baseValue,
 };
@@ -35,7 +35,7 @@ describe('Checkbox Tests', function () {
 
   // Environment
   const value = baseValue;
-  let props = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -76,7 +76,7 @@ describe('Checkbox Tests', function () {
 
   // Teardown
   afterEach(function () {
-    props = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
@@ -108,7 +108,7 @@ describe('Checkbox Tests', function () {
     describe('When a label prop is provided', function () {
       // Test Setup
       beforeEach(function () {
-        props = { ...basePropsData, label: 'My Label' };
+        props = { ...baseProps, label: 'My Label' };
         _setWrappers();
       });
 
@@ -118,7 +118,7 @@ describe('Checkbox Tests', function () {
     describe('When a description prop is provided', function () {
       // Test Setup
       beforeEach(function () {
-        props = { ...basePropsData, description: 'Description' };
+        props = { ...baseProps, description: 'Description' };
         _setWrappers();
       });
 
@@ -149,7 +149,7 @@ describe('Checkbox Tests', function () {
     describe('When a validation state is provided', function () {
       // Helpers
       const _setupValidationTest = (validationState) => {
-        props = { ...basePropsData, description: 'Description', validationState };
+        props = { ...baseProps, description: 'Description', validationState };
         _setWrappers();
       };
 
@@ -172,7 +172,7 @@ describe('Checkbox Tests', function () {
     describe('When checked', function () {
       // Test Setup
       beforeEach(function () {
-        props = { ...basePropsData, checked: true };
+        props = { ...baseProps, checked: true };
         _setWrappers();
       });
 
@@ -182,7 +182,7 @@ describe('Checkbox Tests', function () {
     describe('When disabled', function () {
       // Test Setup
       beforeEach(function () {
-        props = { ...basePropsData, disabled: true };
+        props = { ...baseProps, disabled: true };
         _setWrappers();
       });
 
@@ -247,7 +247,7 @@ describe('Checkbox Tests', function () {
       describe('When checked', function () {
         // Test Setup
         beforeEach(function () {
-          props = { ...basePropsData, checked: true };
+          props = { ...baseProps, checked: true };
           _setWrappers();
         });
 
@@ -264,7 +264,7 @@ describe('Checkbox Tests', function () {
       describe('When disabled', function () {
         // Test Setup
         beforeEach(function () {
-          props = { ...basePropsData, disabled: true };
+          props = { ...baseProps, disabled: true };
           _setWrappers();
         });
 
@@ -281,7 +281,7 @@ describe('Checkbox Tests', function () {
 
     describe('When indeterminate', function () {
       before(function () {
-        props = { ...basePropsData, indeterminate: true };
+        props = { ...baseProps, indeterminate: true };
         _setWrappers();
       });
       it('shows indeterminate visual state', function () { itBehavesLikeIndeterminate(input); });
@@ -330,7 +330,7 @@ describe('Checkbox Tests', function () {
             validationState: groupValidationState,
           },
         };
-        props = { ...basePropsData, description: 'Description' };
+        props = { ...baseProps, description: 'Description' };
         _setWrappers();
       };
 
@@ -419,7 +419,7 @@ describe('Checkbox Tests', function () {
       childProps[propName] = propValue;
     });
     beforeEach(function () {
-      props = { ...basePropsData, label: 'Label', description: 'Description' };
+      props = { ...baseProps, label: 'Label', description: 'Description' };
     });
 
     describe('When an input class is provided', function () {
