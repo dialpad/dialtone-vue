@@ -1,10 +1,10 @@
 {
-  "include": ["index.ts", "components/link/*.ts", "common/**/*.ts", "components/link/*.vue"],
-  "exclude": ["**/*.story.*", "**/*.stories.*", "**/*.test.*", "**/*.mdx", "node_modules"],
+  "include": ["index.ts", "components/link/*.ts", "common", "components/link/*.vue", "components/avatar/*.vue"],
+  "exclude": ["**/*.story.*", "**/*.stories.*", "**/*.test.js", "**/*.mdx", "node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./"]
+      "@/*": ["./*"]
     },
     "target": "ESNext",
     "module": "ESNext",
