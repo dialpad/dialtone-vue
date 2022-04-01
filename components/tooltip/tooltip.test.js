@@ -45,7 +45,6 @@ describe('Dialtone Vue Tooltip tests', function () {
     wrapper = mount(DtTooltip, {
       global: {
         stubs: {
-          // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
           transition: false,
         },
       },
