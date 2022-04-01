@@ -22,8 +22,8 @@
     "test:ts": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.ts recipes/**/**/*.test.ts",
     "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js"
   },
-  "main": "./dist/dialtone-vue.umd.ts",
-  "module": "./dist/dialtone-vue.es.ts",
+  "main": "./dist/dialtone-vue.umd.js",
+  "module": "./dist/dialtone-vue.es.js",
   "dependencies": {
     "tippy.js": "^6.3.1",
     "vue-class-component": "^8.0.0-0"
@@ -79,7 +79,7 @@
     "sinon": "^7.3.1",
     "source-map-support": "^0.5.19",
     "ts-loader": "^9.2.8",
-    "typescript": "^4.7.0-dev.20220331",
+    "typescript": "^4.7.0-dev.20220401",
     "vite": "^2.9.1",
     "vue": "^3.1.0",
     "vue-tsc": "^0.33.9",
@@ -96,8 +96,8 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/dialtone-vue.es.ts",
-      "require": "./dist/dialtone-vue.umd.ts"
+      "import": "./dist/dialtone-vue.es.js",
+      "require": "./dist/dialtone-vue.umd.js"
     }
   },
   "gitHooks": {

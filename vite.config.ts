@@ -14,7 +14,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'index.ts'),
       name: 'dialtone-vue',
-      fileName: (format) => `dialtone-vue.${format}.ts`
+      fileName: (format) => `dialtone-vue.${format}.js`,
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
@@ -24,9 +24,9 @@ export default defineConfig({
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
-          vue: 'Vue'
-        }
-      }
-    }
+          vue: 'Vue',
+        },
+      },
+    },
   },
 });
