@@ -1,10 +1,10 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { config, shallowMount } from '@vue/test-utils';
 
 import DtNotice from './notice';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   title: 'Notice Title',
   closeButtonProps: { ariaLabel: 'close' },
 };
@@ -25,26 +25,29 @@ describe('DtNotice tests', function () {
 
   const _setWrappers = () => {
     wrapper = shallowMount(DtNotice, {
-      propsData: basePropsData,
+      props: baseProps,
       slots: baseSlotsData,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   const _setChildWrappers = () => {
     rootElement = wrapper.find('aside');
-    actionChildStub = wrapper.find('dt-notice-action-stub');
-    contentChildStub = wrapper.find('dt-notice-content-stub');
-    iconChildStub = wrapper.find('dt-notice-icon-stub');
+    actionChildStub = wrapper.findComponent('dt-notice-action-stub');
+    contentChildStub = wrapper.findComponent('dt-notice-content-stub');
+    iconChildStub = wrapper.findComponent('dt-notice-icon-stub');
   };
 
   before(function () {
-    this.localVue = createLocalVue();
+    config.renderStubDefaultSlot = true;
   });
 
   beforeEach(function () {
     _setWrappers();
+  });
+
+  after(function () {
+    config.renderStubDefaultSlot = false;
   });
 
   describe('Presentation Tests', function () {
@@ -100,7 +103,7 @@ describe('DtNotice tests', function () {
 
     describe('When closeButtonProps is passed', function () {
       it('Has correct class', async function () {
-        assert.deepEqual(actionChildStub.props().closeButtonProps, { ariaLabel: 'close' });
+        assert.deepEqual(actionChildStub.vm.closeButtonProps, { ariaLabel: 'close' });
       });
     });
   });
