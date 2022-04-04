@@ -179,8 +179,18 @@ export default {
      */
     size: {
       type: String,
-      default: INPUT_SIZES.DEFAULT,
+      default: null,
       validator: (t) => Object.values(INPUT_SIZES).includes(t),
+    },
+
+    /**
+     * Size of the icon. One of `xs`, `sm`, `md`, `lg`, `xl`. If you leave this null/unset the icon will size relative
+     * to the input size
+     */
+    iconSize: {
+      type: String,
+      default: null,
+      validator: (t) => Object.values(INPUT_SIZES).includes(t) || t === null,
     },
 
     /**
@@ -259,6 +269,14 @@ export default {
 
     isDefaultSize () {
       return this.size === INPUT_SIZES.DEFAULT;
+    },
+
+    isDefaultIconSize () {
+      return this.iconSizeComputed === INPUT_SIZES.DEFAULT;
+    },
+
+    iconSizeComputed () {
+      return this.iconSize ? this.iconSize : this.size;
     },
 
     isValidSize () {
@@ -473,7 +491,8 @@ export default {
       return [
         iconOrientationClasses[side],
         'd-input-icon',
-        { [iconSizeClasses[this.size]]: !this.isDefaultSize },
+        { [iconSizeClasses[this.iconSizeComputed]]: true },
+        this.sizeModifierClass,
       ];
     },
 
