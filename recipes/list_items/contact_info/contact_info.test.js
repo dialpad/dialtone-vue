@@ -113,7 +113,6 @@ describe('DtRecipeContactInfo Tests', function () {
         assert.isTrue(avatarElement.exists());
       });
       it('Should display correct initials', function () {
-        console.log(avatarElement.html());
         assert.strictEqual(avatarElement.text(), 'JL');
       });
       it('Should have correct background color', function () {
