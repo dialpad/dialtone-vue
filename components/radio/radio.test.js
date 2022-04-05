@@ -148,7 +148,6 @@ describe('Dialtone Vue Radio Tests', function () {
       beforeEach(function () {
         props = { ...baseProps, disabled: true };
         _setWrappers();
-        console.log('disabled', wrapper.vm.internalDisabled);
       });
 
       it('should disable input', function () { assert.strictEqual(input.element.disabled, true); });
