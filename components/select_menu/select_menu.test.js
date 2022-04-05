@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { config, mount, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import sinon from 'sinon';
 import { itBehavesLikeEmitsExpectedEvent } from '../../tests/shared_examples/events';
 import {
@@ -62,15 +62,6 @@ describe('DtSelectMenu Tests', function () {
     messages = wrapper.find('[data-qa="dt-select-messages"]');
   };
 
-  const _setWrappers = () => {
-    wrapper = shallowMount(DtSelectMenu, {
-      props,
-      attrs,
-      slots,
-    });
-    _setChildWrappers();
-  };
-
   const _mountWrappers = () => {
     wrapper = mount(DtSelectMenu, {
       props,
@@ -80,8 +71,6 @@ describe('DtSelectMenu Tests', function () {
     _setChildWrappers();
   };
 
-  config.renderStubDefaultSlot = true;
-
   // Setup
   beforeEach(function () {});
 
@@ -90,10 +79,6 @@ describe('DtSelectMenu Tests', function () {
     props = baseProps;
     attrs = baseAttrs;
     slots = {};
-  });
-
-  after(function () {
-    config.renderStubDefaultSlot = false;
   });
 
   describe('Presentation Tests', function () {
@@ -127,7 +112,7 @@ describe('DtSelectMenu Tests', function () {
       // Test Setup
       beforeEach(function () {
         props = { options: OPTIONS };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('should not render a label', function () { assert.isFalse(label.exists()); });
@@ -142,7 +127,7 @@ describe('DtSelectMenu Tests', function () {
         slots = {
           label: slottedLabel,
         };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('should render the slotted label', function () { assert.strictEqual(label.text(), slottedLabel); });
@@ -155,7 +140,7 @@ describe('DtSelectMenu Tests', function () {
           ...baseProps,
           description: DESCRIPTION,
         };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('should render the provided description', function () {
@@ -175,7 +160,7 @@ describe('DtSelectMenu Tests', function () {
         slots = {
           description: slottedDescription,
         };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('should render the slotted description', function () {
@@ -192,7 +177,7 @@ describe('DtSelectMenu Tests', function () {
         slots = {
           default: slottedOptions,
         };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('should render the select menu options', function () {
@@ -211,7 +196,7 @@ describe('DtSelectMenu Tests', function () {
           description: DESCRIPTION,
           size,
         };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('should have size variant class on the label', function () {
@@ -276,7 +261,7 @@ describe('DtSelectMenu Tests', function () {
       // Test Setup
       beforeEach(function () {
         props = { ...baseProps, description: DESCRIPTION };
-        _setWrappers();
+        _mountWrappers();
       });
 
       it('label aria-details should match the id of the description', function () {
@@ -288,7 +273,7 @@ describe('DtSelectMenu Tests', function () {
       describe('When aria-details are not provided', function () {
         // Test Setup
         beforeEach(function () {
-          _setWrappers();
+          _mountWrappers();
         });
 
         it('label aria-details should not exist', function () {
@@ -303,7 +288,7 @@ describe('DtSelectMenu Tests', function () {
         // Test Setup
         beforeEach(function () {
           attrs = { ...baseAttrs, 'aria-details': ariaDetails };
-          _setWrappers();
+          _mountWrappers();
         });
 
         it('label aria-details should match those provided by attrs', function () {
@@ -320,7 +305,7 @@ describe('DtSelectMenu Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        _setWrappers();
+        _mountWrappers();
         select.element.value = selectedValue;
         select.trigger('change');
       });
@@ -420,13 +405,13 @@ describe('DtSelectMenu Tests', function () {
     // Helpers
     const _setupChildClassTest = (childClassName, selector) => {
       props[childClassName] = customClass;
-      _setWrappers();
+      _mountWrappers();
       element = wrapper.find(selector);
     };
 
     const _setupChildPropsTest = (childPropsName, selector) => {
       props[childPropsName] = childProps;
-      _setWrappers();
+      _mountWrappers();
       element = wrapper.find(selector);
     };
 
@@ -473,7 +458,7 @@ describe('DtSelectMenu Tests', function () {
       // Test Setup
       beforeEach(function () {
         props.optionClass = customClass;
-        _setWrappers();
+        _mountWrappers();
         options = select.findAll('option');
       });
 
@@ -501,7 +486,7 @@ describe('DtSelectMenu Tests', function () {
       // Test Setup
       beforeEach(function () {
         props.optionChildProps = childProps;
-        _setWrappers();
+        _mountWrappers();
         options = select.findAll('option');
       });
 
@@ -516,7 +501,7 @@ describe('DtSelectMenu Tests', function () {
       // Test Setup
       beforeEach(function () {
         attrs = { some: 'prop' };
-        _setWrappers();
+        _mountWrappers();
         element = select;
       });
 
