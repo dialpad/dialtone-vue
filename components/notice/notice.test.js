@@ -1,7 +1,9 @@
 import { assert } from 'chai';
-import { config, shallowMount } from '@vue/test-utils';
-
+import { mount } from '@vue/test-utils';
 import DtNotice from './notice';
+import DtNoticeAction from '../notice/notice_action';
+import DtNoticeContent from '../notice/notice_content';
+import DtNoticeIcon from '../notice/notice_icon';
 
 // Constants
 const baseProps = {
@@ -19,12 +21,13 @@ describe('DtNotice tests', function () {
   let wrapper;
 
   let rootElement;
-  let actionChildStub;
-  let contentChildStub;
-  let iconChildStub;
+  let actionChild;
+  let contentChild;
+  let iconChild;
+  let message;
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtNotice, {
+    wrapper = mount(DtNotice, {
       props: baseProps,
       slots: baseSlotsData,
     });
@@ -33,21 +36,14 @@ describe('DtNotice tests', function () {
 
   const _setChildWrappers = () => {
     rootElement = wrapper.find('aside');
-    actionChildStub = wrapper.findComponent('dt-notice-action-stub');
-    contentChildStub = wrapper.findComponent('dt-notice-content-stub');
-    iconChildStub = wrapper.findComponent('dt-notice-icon-stub');
+    actionChild = wrapper.findComponent(DtNoticeAction);
+    contentChild = wrapper.findComponent(DtNoticeContent);
+    iconChild = wrapper.findComponent(DtNoticeIcon);
+    message = wrapper.find('[data-qa="notice-content-message"]');
   };
-
-  before(function () {
-    config.renderStubDefaultSlot = true;
-  });
 
   beforeEach(function () {
     _setWrappers();
-  });
-
-  after(function () {
-    config.renderStubDefaultSlot = false;
   });
 
   describe('Presentation Tests', function () {
@@ -57,15 +53,15 @@ describe('DtNotice tests', function () {
       });
 
       it('action slot is passed down correctly', async function () {
-        assert.strictEqual(actionChildStub.text(), baseSlotsData.action);
+        assert.strictEqual(actionChild.text(), baseSlotsData.action);
       });
 
       it('default slot is passed down correctly', async function () {
-        assert.strictEqual(contentChildStub.text(), baseSlotsData.default);
+        assert.strictEqual(message.text(), baseSlotsData.default);
       });
 
       it('icon slot is passed down correctly', async function () {
-        assert.strictEqual(iconChildStub.text(), baseSlotsData.icon);
+        assert.strictEqual(iconChild.text(), baseSlotsData.icon);
       });
     });
 
@@ -103,7 +99,7 @@ describe('DtNotice tests', function () {
 
     describe('When closeButtonProps is passed', function () {
       it('Has correct class', async function () {
-        assert.deepEqual(actionChildStub.vm.closeButtonProps, { ariaLabel: 'close' });
+        assert.deepEqual(actionChild.vm.closeButtonProps, { ariaLabel: 'close' });
       });
     });
   });
@@ -111,7 +107,7 @@ describe('DtNotice tests', function () {
   describe('Accessibility Tests', function () {
     describe('When rendered with default content', function () {
       it('Shows correct role', function () {
-        assert.strictEqual(contentChildStub.attributes('role'), 'status');
+        assert.strictEqual(contentChild.attributes('role'), 'status');
       });
     });
 
@@ -121,7 +117,7 @@ describe('DtNotice tests', function () {
       });
 
       it('Shows correct role', async function () {
-        assert.strictEqual(contentChildStub.attributes('role'), 'alert');
+        assert.strictEqual(contentChild.attributes('role'), 'alert');
       });
     });
   });
