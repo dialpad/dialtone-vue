@@ -3,11 +3,6 @@ import sinon from 'sinon';
 import { mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
 
-// RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
-// Need to mock them to avoid error
-global.requestAnimationFrame = sinon.spy();
-global.cancelAnimationFrame = sinon.spy();
-
 describe('Dialtone Vue Popover tests', function () {
   // Wrappers
   let wrapper;
@@ -43,6 +38,9 @@ describe('Dialtone Vue Popover tests', function () {
 
   const _mountWrapper = () => {
     wrapper = mount(DtPopover, {
+      attrs: {
+        css: false, // Important attr to let test-utils fire the (after-enter and after-leave) events correctly
+      },
       props: {
         id: 'popover-id',
         showCloseButton: true,
@@ -168,7 +166,7 @@ describe('Dialtone Vue Popover tests', function () {
       });
 
       it('popover content is displayed', function () {
-        assert.isTrue(popoverWindow.vm.show);
+        assert.isTrue(popoverWindow.isVisible());
       });
 
       describe('When anchor is clicked', function () {
@@ -178,7 +176,7 @@ describe('Dialtone Vue Popover tests', function () {
         });
 
         it('should not close the popover', function () {
-          assert.isTrue(popoverWindow.vm.show);
+          assert.isTrue(popoverWindow.isVisible());
         });
       });
     });
@@ -190,7 +188,7 @@ describe('Dialtone Vue Popover tests', function () {
       });
 
       it('popover content should not be displayed', async function () {
-        assert.isFalse(popoverWindow.vm.show);
+        assert.isFalse(popoverWindow.isVisible());
       });
 
       describe('When anchor is clicked', function () {
@@ -200,7 +198,7 @@ describe('Dialtone Vue Popover tests', function () {
         });
 
         it('should not open the popover', function () {
-          assert.isFalse(popoverWindow.vm.show);
+          assert.isFalse(popoverWindow.isVisible());
         });
       });
     });
@@ -218,7 +216,7 @@ describe('Dialtone Vue Popover tests', function () {
         });
 
         it('should open the popover', function () {
-          assert.isTrue(popoverWindow.vm.show);
+          assert.isTrue(popoverWindow.isVisible());
         });
 
         describe('When a "dt-popover-close" event is emitted in the window object', function () {
@@ -227,7 +225,7 @@ describe('Dialtone Vue Popover tests', function () {
           });
 
           it('should close opened popover', async function () {
-            assert.isFalse(popoverWindow.vm.show);
+            assert.isFalse(popoverWindow.isVisible());
           });
         });
 
@@ -238,7 +236,7 @@ describe('Dialtone Vue Popover tests', function () {
           });
 
           it('should close the popover', function () {
-            assert.isFalse(popoverWindow.vm.show);
+            assert.isFalse(popoverWindow.isVisible());
           });
         });
 
@@ -249,7 +247,7 @@ describe('Dialtone Vue Popover tests', function () {
           });
 
           it('should close the popover', function () {
-            assert.isFalse(popoverWindow.vm.show);
+            assert.isFalse(popoverWindow.isVisible());
           });
         });
       });
