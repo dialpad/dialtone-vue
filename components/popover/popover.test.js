@@ -63,6 +63,13 @@ describe('Dialtone Vue Popover tests', function () {
     _setChildWrappers();
   };
 
+  before(function () {
+    // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+    // Need to mock them to avoid error
+    global.requestAnimationFrame = sinon.spy();
+    global.cancelAnimationFrame = sinon.spy();
+  });
+
   beforeEach(function () {
     _mountWrapper();
   });
@@ -72,6 +79,12 @@ describe('Dialtone Vue Popover tests', function () {
     await wrapper.setProps({ open: false });
     wrapper.unmount();
     _clearChildWrappers();
+  });
+
+  after(function () {
+    // Restore questAnimationFrame and cancelAnimationFrame
+    global.requestAnimationFrame = undefined;
+    global.cancelAnimationFrame = undefined;
   });
 
   describe('Presentation Tests', function () {
