@@ -82,7 +82,7 @@ describe('Dialtone Vue Popover tests', function () {
   });
 
   after(function () {
-    // Restore questAnimationFrame and cancelAnimationFrame
+    // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
     global.cancelAnimationFrame = undefined;
   });
