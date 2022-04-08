@@ -139,7 +139,7 @@
         Link Button
       </dt-button>
     </div>
-    <div class="d-mb16">
+    <div class="d-flow4">
       <!-- Active Button -->
       <dt-button active>
         Active button
