@@ -1,21 +1,23 @@
 <template>
   <dt-avatar
-    :id="$attrs.id"
-    :size="$attrs.size"
-    :color="$attrs.color"
+    :id="id"
+    :size="size"
+    :color="color"
   >
-    <html-fragment
-      :html="defaultSlot"
+    <component
+      :is="defaultSlot"
     />
   </dt-avatar>
 </template>
 
 <script>
 import DtAvatar from './avatar';
+import icon from '@/common/mixins/icon';
 import { htmlFragment } from '@/common/utils';
 
 export default {
   name: 'DtAvatarDefault',
   components: { DtAvatar, htmlFragment },
+  mixins: [icon],
 };
 </script>
