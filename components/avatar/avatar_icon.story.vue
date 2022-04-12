@@ -1,8 +1,8 @@
 <template>
   <dt-avatar
-    :id="id"
-    :size="size"
-    :color="color"
+    :id="$attrs.id"
+    :size="$attrs.size"
+    :color="$attrs.color"
   >
     <component
       :is="defaultSlot"
@@ -13,11 +13,10 @@
 <script>
 import DtAvatar from './avatar';
 import icon from '@/common/mixins/icon';
-import { htmlFragment } from '@/common/utils';
 
 export default {
   name: 'DtAvatarDefault',
-  components: { DtAvatar, htmlFragment },
+  components: { DtAvatar },
   mixins: [icon],
 };
 </script>

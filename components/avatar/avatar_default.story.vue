@@ -4,18 +4,16 @@
     :size="$attrs.size"
     :color="$attrs.color"
   >
-    <html-fragment
-      :html="defaultSlot"
-    />
+    <v-html :html="defaultSlot" />
   </dt-avatar>
 </template>
 
 <script>
 import DtAvatar from './avatar';
-import { htmlFragment } from '@/common/utils';
+import VHtml from '@/common/v_html';
 
 export default {
   name: 'DtAvatarDefault',
-  components: { DtAvatar, htmlFragment },
+  components: { DtAvatar, VHtml },
 };
 </script>
