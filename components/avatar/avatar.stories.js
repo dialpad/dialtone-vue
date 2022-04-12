@@ -64,17 +64,16 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   DtAvatarDefaultTemplate,
 );
 
-const IconTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const IconTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtAvatarIconTemplate,
 );
 
 const defaultImage = require('./person.png');
 
 // Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
+export const Image = DefaultTemplate.bind({});
+Image.args = {
   default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
 };
 export const Icon = IconTemplate.bind({});

@@ -85,7 +85,7 @@ export default {
 
   methods: {
     init () {
-      const firstChild = this.$el.firstChild;
+      const firstChild = this.$el.children[0];
       if (firstChild) {
         this.validateElementType(firstChild);
         this.setKind(firstChild);
@@ -107,7 +107,7 @@ export default {
     validateImageAttrsPresence () {
       if (this.kind === 'image') {
         // Check that default slot image required attributes are provided
-        if (!this.$el.firstChild.getAttribute('src') || !this.$el.firstChild.getAttribute('alt')) {
+        if (!this.$el.children[0].getAttribute('src') || !this.$el.children[0].getAttribute('alt')) {
           warn('src and alt attributes are required for image avatars', this);
         }
       }
