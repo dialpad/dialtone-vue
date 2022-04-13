@@ -11,11 +11,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      STORYBOOK_ROOT: ./storybook
-      NODE_MODULES_CACHE_VERSION: v1
-
     steps:
       - name: Check out branch
         uses: actions/checkout@v3
@@ -25,21 +20,8 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Use Documentation Cache
-        id: doc-cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ${{ env.STORYBOOK_ROOT }}/node_modules/
-          key: ${{ format('{0}-dialtone-vue-documentation-node-modules-{1}-{2}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles(format('{0}/package-lock.json', env.STORYBOOK_ROOT))) }}
-
       - name: Build storybook
-        if: steps.doc-cache.outputs.cache-hit != 'true'
         run: npm run storybook:install && npm run storybook:build
-
-      - name: Build storybook
-        if: steps.doc-cache.outputs.cache-hit == 'true'
-        run: npm run storybook:build
 
       - name: Run accessibility tests
         run: npm run storybook:a11y-test
