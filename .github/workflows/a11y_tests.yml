@@ -7,7 +7,7 @@ on:
     branches: [ staging, staging-vue3 ]
 
 jobs:
-  unit_tests:
+  a11y_tests:
 
     runs-on: ubuntu-latest
 
@@ -33,11 +33,12 @@ jobs:
             ${{ env.STORYBOOK_ROOT }}/node_modules/
           key: ${{ format('{0}-dialtone-vue-documentation-node-modules-{1}-{2}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles(format('{0}/package-lock.json', env.STORYBOOK_ROOT))) }}
 
-      - name: Install dependencies
+      - name: Build storybook
         if: steps.doc-cache.outputs.cache-hit != 'true'
-        run: npm run storybook:install
+        run: npm run storybook:install && npm run storybook:build
 
       - name: Build storybook
+        if: steps.doc-cache.outputs.cache-hit == 'true'
         run: npm run storybook:build
 
       - name: Run accessibility tests
