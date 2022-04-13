@@ -2,6 +2,8 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
+import axe from 'axe-core';
+import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
 describe('Dialtone Vue Popover tests', function () {
   // Wrappers
@@ -62,11 +64,16 @@ describe('Dialtone Vue Popover tests', function () {
         // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
         transition: transitionStub(),
       },
+      attachTo: document.body,
     });
     _setChildWrappers();
   };
 
   before(function () {
+    // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+    // Need to mock them to avoid error
+    global.requestAnimationFrame = sinon.spy();
+    global.cancelAnimationFrame = sinon.spy();
     this.localVue = createLocalVue();
   });
 
@@ -79,6 +86,12 @@ describe('Dialtone Vue Popover tests', function () {
     await wrapper.setProps({ open: false });
     wrapper.destroy();
     _clearChildWrappers();
+  });
+
+  after(function () {
+    // Restore questAnimationFrame and cancelAnimationFrame
+    global.requestAnimationFrame = undefined;
+    global.cancelAnimationFrame = undefined;
   });
 
   describe('Presentation Tests', function () {
@@ -283,6 +296,13 @@ describe('Dialtone Vue Popover tests', function () {
       });
       it('aria-labelledby should be set correctly on the content window', function () {
         assert.strictEqual(popoverWindow.attributes('aria-labelledby'), wrapper.vm.labelledBy);
+      });
+      it('should pass axe-core accessibility rules', function (done) {
+        axe.run(wrapper.element, configA11y, function (error, result) {
+          assert.isNull(error, 'there was no error');
+          assert.lengthOf(result.violations, 0);
+          done();
+        });
       });
     });
 
