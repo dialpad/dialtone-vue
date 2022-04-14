@@ -94,13 +94,25 @@ export default {
     },
 
     setKind (element) {
-      if (element?.tagName?.toUpperCase() === 'SVG') this.kind = 'icon';
-      if (element?.tagName?.toUpperCase() === 'IMG') this.kind = 'image';
-      if (element?.nodeType === Node.TEXT_NODE) this.kind = 'initials';
+      if (this.isSvgType(element)) this.kind = 'icon';
+      if (this.isImageType(element)) this.kind = 'image';
+      if (this.isInitialsType(element)) this.kind = 'initials';
+    },
+
+    isSvgType (element) {
+      return element?.tagName?.toUpperCase() === 'SVG';
+    },
+
+    isImageType (element) {
+      return element?.tagName?.toUpperCase() === 'IMG';
+    },
+
+    isInitialsType (element) {
+      return element?.nodeType === Node.TEXT_NODE;
     },
 
     validateElementType (element) {
-      if (element.nodeType === Node.TEXT_NODE || ['IMG', 'SVG'].includes(element?.tagName?.toUpperCase())) return;
+      if (this.isInitialsType(element) || this.isSvgType(element) || this.isImageType(element)) return;
       warn('img, svg, and raw text are the only valid elements to put inside the avatar', this);
     },
 
