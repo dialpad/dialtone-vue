@@ -1,0 +1,50 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeComboboxWithPopover from './combobox_with_popover';
+
+# DtRecipeComboboxWithPopover
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas>
+  <Story id="<GROUP>-dt-recipe-combobox-with-popover--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="<GROUP>-dt-recipe-combobox-with-popover--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeComboboxWithPopover } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```vue
+<dt-recipe-combobox-with-popover
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-recipe-combobox-with-popover
+  some-other="variant"
+/>
+```
