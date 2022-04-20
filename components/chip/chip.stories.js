@@ -31,10 +31,6 @@ export const argTypesData = {
     control: 'boolean',
   },
 
-  showAsset: {
-    control: 'boolean',
-  },
-
   // Action Event Handlers
   onClose: {
     table: {
@@ -83,8 +79,9 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  default: 'chip',
+  default: 'Chip',
 };
 
 export const Variants = VariantsTemplate.bind({});
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 Variants.args = {};

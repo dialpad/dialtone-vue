@@ -1,7 +1,6 @@
 <template>
   <dt-chip
     :show-remove-icon="showRemoveIcon"
-    :show-asset="showAsset"
     @close="onClose"
   >
     <template
