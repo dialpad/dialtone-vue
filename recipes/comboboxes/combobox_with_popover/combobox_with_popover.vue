@@ -1,11 +1,9 @@
 <template>
   <dt-combobox
     :show-list="showList"
-    :list-id="listId"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
     :list-aria-label="listAriaLabel"
-    @focusin="defaultToggleShow"
   >
     <template
       #input
@@ -33,7 +31,11 @@
         </template>
 
         <template #content>
-          <ul :class="['d-ps-relative', 'd-px0', DROPDOWN_PADDING_CLASSES[padding], listClass]">
+          <ul
+            :id="listId"
+            ref="listWrapper"
+            :class="['d-ps-relative', 'd-px0', DROPDOWN_PADDING_CLASSES[padding], listClass]"
+          >
             <slot name="list" />
           </ul>
         </template>
@@ -53,6 +55,7 @@ import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';
 import {} from './combobox_with_popover_constants.js';
+import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 
 export default {
   name: 'DtRecipeComboboxWithPopover',
@@ -61,6 +64,18 @@ export default {
     DtCombobox,
     DtPopover,
   },
+
+  mixins: [
+    KeyboardNavigation({
+      indexKey: 'highlightIndex',
+      idKey: 'highlightId',
+      listElementKey: 'getListElement',
+      afterHighlightMethod: 'afterHighlight',
+      beginningOfListMethod: 'beginningOfListMethod',
+      endOfListMethod: 'endOfListMethod',
+      activeItemKey: 'activeItemEl',
+    }),
+  ],
 
   /* inheritAttrs: false is generally an option we want to set on library
     components. This allows any attributes passed in that are not recognized
@@ -158,7 +173,11 @@ export default {
 
   watch: {},
 
-  methods: {},
+  methods: {
+    getListElement () {
+      return this.$refs.listWrapper;
+    },
+  },
 };
 </script>
 
