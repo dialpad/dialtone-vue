@@ -1,11 +1,11 @@
 <template>
-  <!-- temporarily use d-badge before d-chip is added to dialtone -->
+  <!-- temporarily use button classes before d-chip is added to dialtone -->
   <span
-    class="d-badge"
+    class="d-btn"
     data-qa="dt-chip"
   >
     <span
-      v-if="showAsset"
+      v-if="$slots.icon"
       class="base-button__icon d-btn__icon"
     >
       <!-- @slot Chip icon -->
@@ -46,27 +46,11 @@ export default {
 
   props: {
     /**
-     * Text for the chip content
-     */
-    // text: {
-    //   type: String,
-    //   default: '',
-    // },
-
-    /**
      * Whether the chip has a remove button
      */
     showRemoveIcon: {
       type: Boolean,
       default: true,
-    },
-
-    /**
-     * Whether the chip has an icon or avatar
-     */
-    showAsset: {
-      type: Boolean,
-      default: false,
     },
   },
 
