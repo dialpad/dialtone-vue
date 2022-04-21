@@ -1,0 +1,50 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtChip from './chip';
+
+# Chip
+
+<Subtitle>
+  TODO: description of chip
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas>
+  <Story id="components-chip--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="components-chip--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtChip } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```vue
+<dt-chip
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-chip
+  some-other="variant"
+/>
+```
