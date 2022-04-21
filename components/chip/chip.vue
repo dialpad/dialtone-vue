@@ -6,6 +6,7 @@
   >
     <span
       v-if="$slots.icon"
+      data-qa="dt-chip-icon"
       class="base-button__icon d-btn__icon"
     >
       <!-- @slot Chip icon -->
@@ -20,6 +21,7 @@
     </span>
     <dt-button
       v-if="showRemoveIcon"
+      data-qa="dt-chip-remove"
       circle
       importance="clear"
       size="xs"
