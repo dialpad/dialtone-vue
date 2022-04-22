@@ -1,20 +1,28 @@
 <template>
   <dt-recipe-combobox-with-popover
+    ref="comboboxWithPopover"
     list-aria-label="Example list items"
-    max-height="300px"
+    :max-height="maxHeight"
+    :max-width="maxWidth"
+    :content-width="contentWidth"
+    :show-list="showList"
+    @escape="onComboboxEscape"
+    @highlight="onHighlight"
+    @select="onComboboxSelect"
   >
     <template #input>
       <dt-input
         v-model="value"
-        placeholder="Start typing to show list"
+        placeholder="Select one or start typing"
       />
     </template>
     <template #list>
       <dt-list-item
-        v-for="item in items"
+        v-for="(item, i) in items"
         :key="item.id"
         role="option"
         navigation-type="arrow-keys"
+        @click="onComboboxSelect(i)"
       >
         {{ item.number }}
         <template #right>
@@ -22,12 +30,19 @@
         </template>
       </dt-list-item>
     </template>
+    <template #footer>
+      <div
+        class="d-d-flex d-ai-center"
+      >
+        <dt-checkbox class="d-pr8" /> Apply primary number to assigned Contact Centers
+      </div>
+    </template>
   </dt-recipe-combobox-with-popover>
 </template>
 
 <script>
 import DtRecipeComboboxWithPopover from './combobox_with_popover';
-import { DtInput, DtListItem } from '@';
+import { DtInput, DtListItem, DtCheckbox } from '@';
 
 export default {
   name: 'DtRecipeComboboxWithPopoverDefault',
@@ -35,6 +50,7 @@ export default {
     DtRecipeComboboxWithPopover,
     DtInput,
     DtListItem,
+    DtCheckbox,
   },
 
   data () {
@@ -55,6 +71,18 @@ export default {
         { id: 'item12', number: '(732) 338-2756', type: 'Other' },
       ],
     };
+  },
+
+  methods: {
+    onComboboxSelect (i) {
+      this.onSelect(i);
+      this.value = this.items[i].number;
+      this.$refs.comboboxWithPopover.closeComboboxList();
+    },
+
+    onComboboxEscape () {
+      this.onEscape();
+    },
   },
 };
 </script>

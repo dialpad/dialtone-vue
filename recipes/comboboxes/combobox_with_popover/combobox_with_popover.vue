@@ -1,26 +1,39 @@
 <template>
   <dt-combobox
-    :show-list="showList"
+    :show-list="true"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
     :list-aria-label="listAriaLabel"
+    @select="onSelect"
+    @escape="onEscape"
+    v-on="$listeners"
   >
     <template
       #input
     >
-      <slot name="input" />
+      <div
+        id="externalAnchor"
+        @keydown.tab="closeComboboxList"
+        @focusin="showComboboxList"
+      >
+        <slot name="input" />
+      </div>
     </template>
     <template #list="{ opened }">
       <dt-popover
-        :open="true"
-        :hide-on-click="false"
+        v-model:open="isListShown"
+        :hide-on-click="true"
         :max-height="maxHeight"
         :max-width="maxWidth"
         placement="bottom-start"
         padding="small"
+        role="listbox"
+        external-anchor="externalAnchor"
+        :content-width="contentWidth"
+        :content-tabindex="null"
         :modal="false"
         :auto-focus="false"
-        @opened="opened"
+        @opened="opened($event, arguments[1]);"
       >
         <template #anchor>
           <div class="d-h0 d-vi-hidden" />
@@ -49,13 +62,12 @@
 </template>
 
 <script>
-import { DtCombobox, DtPopover } from '@';
+import { DtCombobox, DtPopover, POPOVER_CONTENT_WIDTHS } from '@';
 import { getUniqueString } from '@/common/utils';
 import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';
 import {} from './combobox_with_popover_constants.js';
-import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 
 export default {
   name: 'DtRecipeComboboxWithPopover',
@@ -64,18 +76,6 @@ export default {
     DtCombobox,
     DtPopover,
   },
-
-  mixins: [
-    KeyboardNavigation({
-      indexKey: 'highlightIndex',
-      idKey: 'highlightId',
-      listElementKey: 'getListElement',
-      afterHighlightMethod: 'afterHighlight',
-      beginningOfListMethod: 'beginningOfListMethod',
-      endOfListMethod: 'endOfListMethod',
-      activeItemKey: 'activeItemEl',
-    }),
-  ],
 
   /* inheritAttrs: false is generally an option we want to set on library
     components. This allows any attributes passed in that are not recognized
@@ -97,7 +97,7 @@ export default {
      */
     showList: {
       type: Boolean,
-      default: false,
+      default: null,
     },
 
     /**
@@ -161,21 +161,60 @@ export default {
         return Object.keys(DROPDOWN_PADDING_CLASSES).some((item) => item === padding);
       },
     },
+
+    /**
+     * Width configuration for the popover content. When its value is 'anchor',
+     * the popover content will have the same width as the anchor.
+     */
+    contentWidth: {
+      type: String,
+      default: null,
+      validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
+    },
   },
+
+  emits: ['select', 'escape', 'highlight'],
 
   data () {
     return {
       DROPDOWN_PADDING_CLASSES,
+      isListShown: false,
+      isInputFocused: false,
+      isListFocused: false,
     };
   },
 
   computed: {},
 
-  watch: {},
+  watch: {
+    showList: {
+      handler: function (show) {
+        if (show !== null) {
+          this.isListShown = show;
+        }
+      },
+
+      immediate: true,
+    },
+  },
 
   methods: {
-    getListElement () {
-      return this.$refs.listWrapper;
+    showComboboxList () {
+      if (this.showList != null) { return; }
+      this.isListShown = true;
+    },
+
+    closeComboboxList () {
+      if (this.showList != null) { return; }
+      this.isListShown = false;
+    },
+
+    onSelect (highlightIndex) {
+      this.$emit('select', highlightIndex);
+    },
+
+    onEscape () {
+      this.closeComboboxList();
     },
   },
 };
