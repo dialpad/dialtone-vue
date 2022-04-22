@@ -4,7 +4,8 @@
   "description": "Storybook for Dialtone Vue",
   "scripts": {
     "storybook": "NODE_PATH=./node_modules start-storybook -c ../.storybook --no-version-updates --ci -p 9010",
-    "build": "NODE_PATH=./node_modules build-storybook -c ../.storybook -o compiled"
+    "build": "NODE_PATH=./node_modules build-storybook -c ../.storybook -o compiled",
+    "storybook-a11y-test": "NODE_PATH=./node_modules node ./scripts/storybook-a11y-test.js"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -14,6 +15,7 @@
     "@storybook/addon-controls": "^6.4.22",
     "@storybook/addon-docs": "^6.4.22",
     "@storybook/addon-links": "^6.4.22",
+    "@shopify/storybook-a11y-test": "^0.5.0",
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/addon-viewport": "^6.4.22",
     "@storybook/addons": "^6.4.22",

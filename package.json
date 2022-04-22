@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Vue component library for Dialtone components",
   "scripts": {
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
@@ -17,7 +17,9 @@
     "storybook:build": "npm run --prefix storybook build",
     "storybook:install": "npm install --prefix storybook",
     "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js recipes/**/**/*.test.js",
-    "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js"
+    "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js",
+    "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",
+    "install:all": "npm install && npm install --prefix storybook && npm install --prefix generator-dialtone-vue"
   },
   "main": "./dist/dialtone-vue.common.js",
   "files": [
@@ -38,6 +40,7 @@
     "@vue/cli-plugin-unit-mocha": "~5.0.4",
     "@vue/cli-service": "~5.0.4",
     "@vue/test-utils": "1.3",
+    "axe-core": "^4.4.1",
     "babel-eslint": "^10.1.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "chai": "^4.3.6",
