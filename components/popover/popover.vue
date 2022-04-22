@@ -48,7 +48,7 @@
           'max-height': maxHeight,
           'max-width': maxWidth,
         }"
-        :tabindex="contentTabIndex"
+        :tabindex="contentTabindex"
         appear
         v-on="$listeners"
         @keydown.capture="onKeydown"
