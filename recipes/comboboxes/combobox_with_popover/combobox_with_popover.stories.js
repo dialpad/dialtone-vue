@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeComboboxWithPopover from './combobox_with_popover';
-import DtRecipeComboboxWithPopoverMdx from './combobox_with_popover.mdx';
 import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story.vue';
 import DtRecipeComboboxWithPopoverVariantsTemplate from './combobox_with_popover_variants.story.vue';
 import { POPOVER_CONTENT_WIDTHS } from '@';
@@ -116,11 +115,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: DtRecipeComboboxWithPopoverMdx,
-    },
-  },
 };
 
 // Templates
