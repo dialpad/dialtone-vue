@@ -34,7 +34,7 @@
       <div
         class="d-d-flex d-ai-center"
       >
-        <dt-checkbox class="d-pr8" /> Apply primary number to assigned Contact Centers
+        <dt-checkbox label="Apply primary number to assigned Contact Centers" />
       </div>
     </template>
   </dt-recipe-combobox-with-popover>
