@@ -21,7 +21,7 @@
     </template>
     <template #list="{ opened }">
       <dt-popover
-        v-model:open="isListShown"
+        :open.sync="isListShown"
         :hide-on-click="true"
         :max-height="maxHeight"
         :max-width="maxWidth"
