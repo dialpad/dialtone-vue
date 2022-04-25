@@ -16,12 +16,15 @@
         @keydown.tab="closeComboboxList"
         @focusin="showComboboxList"
       >
-        <slot name="input" />
+        <slot
+          name="input"
+          :input-props="inputProps"
+        />
       </div>
     </template>
     <template #list="{ opened }">
       <dt-popover
-        :open.sync="isListShown"
+        v-model:open="isListShown"
         :hide-on-click="true"
         :max-height="maxHeight"
         :max-width="maxWidth"
@@ -44,13 +47,15 @@
         </template>
 
         <template #content>
-          <ul
-            :id="listId"
+          <div
             ref="listWrapper"
-            :class="['d-ps-relative', 'd-px0', DROPDOWN_PADDING_CLASSES[padding], listClass]"
+            :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
           >
-            <slot name="list" />
-          </ul>
+            <slot
+              name="list"
+              :list-props="listProps"
+            />
+          </div>
         </template>
 
         <template #footerContent>
@@ -67,7 +72,6 @@ import { getUniqueString } from '@/common/utils';
 import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';
-import {} from './combobox_with_popover_constants.js';
 
 export default {
   name: 'DtRecipeComboboxWithPopover',
@@ -76,12 +80,6 @@ export default {
     DtCombobox,
     DtPopover,
   },
-
-  /* inheritAttrs: false is generally an option we want to set on library
-    components. This allows any attributes passed in that are not recognized
-    as props to be passed down to another element or component using v-bind:$attrs
-    more info: https://vuejs.org/v2/api/#inheritAttrs */
-  // inheritAttrs: false,
 
   props: {
     /**
@@ -94,6 +92,9 @@ export default {
 
     /**
      * Determines when to show the list element and also controls the aria-expanded attribute.
+     * Leaving this null will have the combobox trigger on input focus by default.
+     * If you set this value, the default trigger behavior will be disabled and you can
+     * control it as you need.
      */
     showList: {
       type: Boolean,
@@ -184,7 +185,25 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    inputProps () {
+      return {
+        'aria-activedescendant': this.activeItemId,
+        'aria-controls': this.listId,
+      };
+    },
+
+    listProps () {
+      return {
+        role: 'listbox',
+        id: this.listId,
+        // The list has to be positioned relatively so that the auto-scroll can
+        // calculate the correct offset for the list items.
+        class: 'd-ps-relative',
+        'aria-label': this.listAriaLabel,
+      };
+    },
+  },
 
   watch: {
     showList: {

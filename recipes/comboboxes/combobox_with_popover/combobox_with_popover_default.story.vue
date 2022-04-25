@@ -6,6 +6,7 @@
     :max-width="maxWidth"
     :content-width="contentWidth"
     :show-list="showList"
+    :padding="padding"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"

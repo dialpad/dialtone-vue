@@ -1,9 +1,11 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeComboboxWithPopover from './combobox_with_popover';
+import DtRecipeComboboxWithPopoverMdx from './combobox_with_popover.mdx';
 import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story.vue';
 import DtRecipeComboboxWithPopoverVariantsTemplate from './combobox_with_popover_variants.story.vue';
 import { POPOVER_CONTENT_WIDTHS } from '@';
+import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -55,6 +57,20 @@ export const argTypesData = {
   },
 
   // Props
+  showList: {
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
+  },
+  listId: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
   contentWidth: {
     defaultValue: 'anchor',
     control: {
@@ -67,8 +83,37 @@ export const argTypesData = {
       },
     },
   },
+  padding: {
+    defaultValue: 'small',
+    control: {
+      type: 'select',
+      options: Object.keys(DROPDOWN_PADDING_CLASSES),
+    },
+  },
   maxHeight: {
     defaultValue: '300px',
+  },
+  onBeginningOfList: {
+    table: {
+      category: 'props',
+      type: {
+        summary: 'function',
+      },
+      defaultValue: {
+        summary: 'null',
+      },
+    },
+  },
+  onEndOfList: {
+    table: {
+      category: 'props',
+      type: {
+        summary: 'function',
+      },
+      defaultValue: {
+        summary: 'null',
+      },
+    },
   },
 
   // Action Event Handlers
@@ -115,6 +160,11 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
+  parameters: {
+    docs: {
+      page: DtRecipeComboboxWithPopoverMdx,
+    },
+  },
 };
 
 // Templates
