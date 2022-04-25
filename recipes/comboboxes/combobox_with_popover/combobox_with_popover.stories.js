@@ -3,7 +3,6 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeComboboxWithPopover from './combobox_with_popover';
 import DtRecipeComboboxWithPopoverMdx from './combobox_with_popover.mdx';
 import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story.vue';
-import DtRecipeComboboxWithPopoverVariantsTemplate from './combobox_with_popover_variants.story.vue';
 import { POPOVER_CONTENT_WIDTHS } from '@';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constants';
 
@@ -173,15 +172,7 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   argTypes,
   DtRecipeComboboxWithPopoverDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeComboboxWithPopoverVariantsTemplate,
-);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
-
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
