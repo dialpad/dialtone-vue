@@ -107,6 +107,7 @@ Default.parameters = {
   a11y: {
     config: {
       rules: [
+        // TODO: it's possible to pass a custom aria-label but adding a built-in label can cover most of cases
         {
           id: 'button-name',
           enabled: false,
