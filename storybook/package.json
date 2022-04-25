@@ -22,7 +22,6 @@
     "@storybook/source-loader": "^6.4.22",
     "@storybook/theming": "^6.4.22",
     "@storybook/vue3": "^6.4.22",
-    "@vue/compiler-sfc": "^3.2.31",
     "babel-loader": "^8.1.0",
     "babel-preset-vue": "^2.0.2",
     "generate-file-webpack-plugin": "^1.0.1",
@@ -31,7 +30,7 @@
   "dependencies": {
     "focus-visible": "^5.2.0",
     "postcss-focus-visible": "^6.0.3",
-    "vue": "^3.2.22"
+    "vue": "^3.2.33"
   },
   "engineStrict": true,
   "engines": {
