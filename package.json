@@ -52,16 +52,16 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-mocha": "^8.0.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-vue": "^7.9.0",
-    "eslint-plugin-vuejs-accessibility": "^0.6.0",
-    "esplint": "^0.9.1",
-    "jsdom": "14.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-vue": "^8.6.0",
+    "eslint-plugin-vuejs-accessibility": "^1.1.1",
+    "esplint": "^0.10.0",
+    "jsdom": "16.3",
     "jsdom-global": "3.0.2",
-    "less": "3.9.0",
-    "less-loader": "^6.2.0",
-    "lint-staged": "^11.1.2",
+    "less": "^4.1.2",
+    "less-loader": "^7.3.0",
+    "lint-staged": "^12.3.7",
     "macos-release": "^3.0.1",
     "markdownlint": "^0.22.0",
     "markdownlint-cli": "^0.26.0",
@@ -86,10 +86,10 @@
   },
   "engineStrict": true,
   "engines": {
-    "node": ">= 14.17"
+    "node": ">= 16"
   },
   "repository": "git@github.com:dialpad/dialtone-vue.git",
   "volta": {
-    "node": "14.18.1"
+    "node": "16"
   }
 }
