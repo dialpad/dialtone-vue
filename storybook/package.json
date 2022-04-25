@@ -17,11 +17,11 @@
     "@storybook/addon-docs": "^6.4.22",
     "@storybook/addon-links": "^6.4.22",
     "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/addon-viewport": "^6.4.19",
-    "@storybook/addons": "^6.4.19",
-    "@storybook/source-loader": "^6.4.19",
-    "@storybook/theming": "^6.4.19",
-    "@storybook/vue3": "^6.4.19",
+    "@storybook/addon-viewport": "^6.4.22",
+    "@storybook/addons": "^6.4.22",
+    "@storybook/source-loader": "^6.4.22",
+    "@storybook/theming": "^6.4.22",
+    "@storybook/vue3": "^6.4.22",
     "@vue/compiler-sfc": "^3.2.31",
     "babel-loader": "^8.1.0",
     "babel-preset-vue": "^2.0.2",
@@ -35,9 +35,9 @@
   },
   "engineStrict": true,
   "engines": {
-    "node": ">= 14.17"
+    "node": ">= 16"
   },
   "volta": {
-    "node": "14.18.1"
+    "node": "16"
   }
 }
