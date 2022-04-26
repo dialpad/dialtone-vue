@@ -176,3 +176,19 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
+Default.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'aria-allowed-attr',
+          enabled: false,
+        },
+        {
+          id: 'aria-valid-attr-value',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
