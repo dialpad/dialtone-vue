@@ -9,10 +9,10 @@
     v-on="$listeners"
   >
     <template
-      #input
+      #input="{ inputProps }"
     >
       <div
-        id="externalAnchor"
+        :id="externalAnchor"
         @keydown.tab="closeComboboxList"
         @focusin="showComboboxList"
       >
@@ -22,7 +22,7 @@
         />
       </div>
     </template>
-    <template #list="{ opened }">
+    <template #list="{ opened, listProps }">
       <!-- eslint-disable vue/no-deprecated-v-bind-sync -->
       <dt-popover
         :open.sync="isListShown"
@@ -32,7 +32,7 @@
         placement="bottom-start"
         padding="small"
         role="listbox"
-        external-anchor="externalAnchor"
+        :external-anchor="externalAnchor"
         :content-width="contentWidth"
         :content-tabindex="null"
         :modal="false"
@@ -183,27 +183,8 @@ export default {
       isListShown: false,
       isInputFocused: false,
       isListFocused: false,
+      externalAnchor: getUniqueString(),
     };
-  },
-
-  computed: {
-    inputProps () {
-      return {
-        'aria-activedescendant': this.activeItemId,
-        'aria-controls': this.listId,
-      };
-    },
-
-    listProps () {
-      return {
-        role: 'listbox',
-        id: this.listId,
-        // The list has to be positioned relatively so that the auto-scroll can
-        // calculate the correct offset for the list items.
-        class: 'd-ps-relative',
-        'aria-label': this.listAriaLabel,
-      };
-    },
   },
 
   watch: {
