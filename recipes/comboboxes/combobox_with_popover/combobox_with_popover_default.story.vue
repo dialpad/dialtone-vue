@@ -38,9 +38,7 @@
       </ul>
     </template>
     <template #footer>
-      <div
-        class="d-d-flex d-ai-center"
-      >
+      <div class="d-d-flex d-ai-center d-px12">
         <dt-checkbox label="Apply primary number to assigned Contact Centers" />
       </div>
     </template>

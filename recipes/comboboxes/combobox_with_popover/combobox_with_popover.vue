@@ -34,7 +34,7 @@
         :max-height="maxHeight"
         :max-width="maxWidth"
         placement="bottom-start"
-        padding="small"
+        padding="none"
         role="listbox"
         :external-anchor="externalAnchor"
         :content-width="contentWidth"
