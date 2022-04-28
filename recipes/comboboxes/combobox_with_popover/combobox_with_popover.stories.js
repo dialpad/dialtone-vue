@@ -181,10 +181,6 @@ Default.parameters = {
     config: {
       rules: [
         {
-          id: 'aria-allowed-attr',
-          enabled: false,
-        },
-        {
           id: 'aria-valid-attr-value',
           enabled: false,
         },
