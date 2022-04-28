@@ -11,25 +11,31 @@
     @highlight="onHighlight"
     @select="onComboboxSelect"
   >
-    <template #input>
+    <template #input="{ inputProps }">
       <dt-input
         v-model="value"
         placeholder="Select one or start typing"
+        v-bind="inputProps"
       />
     </template>
-    <template #list>
-      <dt-list-item
-        v-for="(item, i) in items"
-        :key="item.id"
-        role="option"
-        navigation-type="arrow-keys"
-        @click="onComboboxSelect(i)"
+    <template #list="{ listProps }">
+      <ul
+        v-bind="listProps"
+        class="d-p0"
       >
-        {{ item.number }}
-        <template #right>
-          {{ item.type }}
-        </template>
-      </dt-list-item>
+        <dt-list-item
+          v-for="(item, i) in items"
+          :key="item.id"
+          role="option"
+          navigation-type="arrow-keys"
+          @click="onComboboxSelect(i)"
+        >
+          {{ item.number }}
+          <template #right>
+            {{ item.type }}
+          </template>
+        </dt-list-item>
+      </ul>
     </template>
     <template #footer>
       <div

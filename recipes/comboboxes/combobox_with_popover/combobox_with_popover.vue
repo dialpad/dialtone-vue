@@ -1,11 +1,15 @@
 <template>
   <dt-combobox
-    :show-list="true"
+    ref="combobox"
+    :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
     :list-aria-label="listAriaLabel"
+    :list-rendered-outside="true"
+    data-qa="dt-combobox"
     @select="onSelect"
     @escape="onEscape"
+    @highlight="onHighlight"
     v-on="$listeners"
   >
     <template
@@ -22,7 +26,7 @@
         />
       </div>
     </template>
-    <template #list="{ opened, listProps }">
+    <template #list="{ opened, listProps, clearHighlightIndex }">
       <!-- eslint-disable vue/no-deprecated-v-bind-sync -->
       <dt-popover
         :open.sync="isListShown"
@@ -51,6 +55,8 @@
           <div
             ref="listWrapper"
             :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
+            @mouseleave="clearHighlightIndex"
+            @focusout="clearHighlightIndex"
           >
             <slot
               name="list"
@@ -215,7 +221,12 @@ export default {
     },
 
     onEscape () {
+      this.$emit('escape');
       this.closeComboboxList();
+    },
+
+    onHighlight (highlightIndex) {
+      this.$emit('highlight', highlightIndex);
     },
   },
 };
