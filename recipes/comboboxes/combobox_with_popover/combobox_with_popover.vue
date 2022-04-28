@@ -43,10 +43,6 @@
         :auto-focus="false"
         @opened="opened($event, arguments[1]);"
       >
-        <template #anchor>
-          <div class="d-h0 d-vi-hidden" />
-        </template>
-
         <template #headerContent>
           <slot name="header" />
         </template>

@@ -126,8 +126,8 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     // Test Setup
     beforeEach(async function () {
       scopedSlots = {
-        list: '<ol id="list" v-bind="props.listProps"><li role="option">item1</li><li role="option">item2</li></ol>',
         input: '<input id="input" v-bind="props.inputProps" />',
+        list: '<ol id="list" v-bind="props.listProps"><li role="option">item1</li><li role="option">item2</li></ol>',
       };
       _mountWrapper();
       _setChildWrappers();
