@@ -492,7 +492,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('resize', this.onResize);
     this.tip?.destroy();
     this.removeReferences();
@@ -622,7 +622,9 @@ export default {
 
     onKeydown (e) {
       if (e.key === 'Tab') {
-        this.focusTrappedTabPress(e, this.popoverContentEl);
+        if (this.modal) {
+          this.focusTrappedTabPress(e, this.popoverContentEl);
+        }
       }
       if (e.key === 'Escape') {
         this.closePopover();
