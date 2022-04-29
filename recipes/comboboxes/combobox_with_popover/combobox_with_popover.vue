@@ -18,7 +18,6 @@
     >
       <div
         :id="externalAnchor"
-        @keydown.tab="closeComboboxList"
         @focusin="showComboboxList"
       >
         <slot
