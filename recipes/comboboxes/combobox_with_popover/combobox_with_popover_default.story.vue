@@ -11,6 +11,13 @@
     @highlight="onHighlight"
     @select="onComboboxSelect"
   >
+    <template
+      v-if="header"
+      #header
+    >
+      <span v-html="header" />
+    </template>
+
     <template #input="{ inputProps }">
       <dt-input
         v-model="value"
@@ -37,7 +44,16 @@
         </dt-list-item>
       </ul>
     </template>
-    <template #footer>
+    <template
+      v-if="footer"
+      #footer
+    >
+      <span v-html="footer" />
+    </template>
+    <template
+      v-else
+      #footer
+    >
       <div class="d-d-flex d-ai-center d-px12">
         <dt-checkbox label="Apply primary number to assigned Contact Centers" />
       </div>
