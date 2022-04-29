@@ -18,7 +18,9 @@
     >
       <div
         :id="externalAnchor"
+        ref="input"
         @focusin="showComboboxList"
+        @focusout="onFocusOut"
       >
         <slot
           name="input"
@@ -44,7 +46,13 @@
         @opened="opened($event, arguments[1]);"
       >
         <template #headerContent>
-          <slot name="header" />
+          <div
+            v-if="$slots.header"
+            ref="header"
+            @focusout="onFocusOut"
+          >
+            <slot name="header" />
+          </div>
         </template>
 
         <template #content>
@@ -52,7 +60,7 @@
             ref="listWrapper"
             :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             @mouseleave="clearHighlightIndex"
-            @focusout="clearHighlightIndex"
+            @focusout="clearHighlightIndex; onFocusOut;"
           >
             <slot
               name="list"
@@ -62,7 +70,13 @@
         </template>
 
         <template #footerContent>
-          <slot name="footer" />
+          <div
+            v-if="$slots.footer"
+            ref="footer"
+            @focusout="onFocusOut"
+          >
+            <slot name="footer" />
+          </div>
         </template>
       </dt-popover>
     </template>
@@ -223,6 +237,17 @@ export default {
 
     onHighlight (highlightIndex) {
       this.$emit('highlight', highlightIndex);
+    },
+
+    onFocusOut (e) {
+      const comboboxRefs = ['input', 'header', 'footer', 'listWrapper'];
+      const isComboboxStillFocused = comboboxRefs.some((ref) => {
+        return this.$refs[ref]?.contains(e.relatedTarget);
+      });
+
+      if (!isComboboxStillFocused) {
+        this.closeComboboxList();
+      }
     },
   },
 };
