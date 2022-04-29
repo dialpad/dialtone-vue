@@ -18,6 +18,7 @@ export const argTypesData = {
   // Slots
   input: {
     description: 'Slot for the input component',
+    control: 'text',
     table: {
       category: 'slots',
       type: {
@@ -27,6 +28,7 @@ export const argTypesData = {
   },
   list: {
     description: 'Slot for the list',
+    control: 'text',
     table: {
       category: 'slots',
       type: {
