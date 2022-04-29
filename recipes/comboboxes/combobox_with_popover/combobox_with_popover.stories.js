@@ -116,6 +116,9 @@ export const argTypesData = {
       },
     },
   },
+  listAriaLabel: {
+    defaultValue: 'Example list items',
+  },
 
   // Action Event Handlers
   onEscape: {
