@@ -6,6 +6,7 @@
     :on-end-of-list="onEndOfList"
     :list-aria-label="listAriaLabel"
     :list-rendered-outside="true"
+    :list-id="listId"
     data-qa="dt-combobox"
     @select="onSelect"
     @escape="onEscape"

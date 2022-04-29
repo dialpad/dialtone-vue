@@ -7,6 +7,8 @@
     :content-width="contentWidth"
     :show-list="showList"
     :padding="padding"
+    :list-id="listId"
+    :list-class="listClass"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
