@@ -41,11 +41,16 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       scopedSlots,
       listeners,
       localVue: this.localVue,
+      attachTo: document.body,
     });
   };
 
   // Setup
   before(function () {
+    // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+    // Need to mock them to avoid error
+    global.requestAnimationFrame = sinon.spy();
+    global.cancelAnimationFrame = sinon.spy();
     this.localVue = createLocalVue();
   });
   beforeEach(function () {
@@ -63,8 +68,13 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     propsData = basePropsData;
     slots = {};
     scopedSlots = {};
+    wrapper.destroy();
   });
-  after(function () {});
+  after(function () {
+    // Restore RequestAnimationFrame and cancelAnimationFrame
+    global.requestAnimationFrame = undefined;
+    global.cancelAnimationFrame = undefined;
+  });
 
   describe('Presentation Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
