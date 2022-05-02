@@ -8,10 +8,7 @@
     :list-rendered-outside="true"
     :list-id="listId"
     data-qa="dt-combobox"
-    @select="onSelect"
-    @escape="onEscape"
-    @highlight="onHighlight"
-    v-on="$listeners"
+    v-on="comboboxListeners"
   >
     <template
       #input="{ inputProps }"
@@ -191,7 +188,7 @@ export default {
     },
   },
 
-  emits: ['select', 'escape', 'highlight'],
+  emits: ['select', 'escape', 'highlight', 'opened'],
 
   data () {
     return {
@@ -203,6 +200,20 @@ export default {
     };
   },
 
+  computed: {
+    comboboxListeners () {
+      return {
+        ...this.$listeners,
+
+        select: this.onSelect,
+
+        escape: this.onEscape,
+
+        highlight: this.onHighlight,
+      };
+    },
+  },
+
   watch: {
     showList: {
       handler: function (show) {
@@ -212,6 +223,10 @@ export default {
       },
 
       immediate: true,
+    },
+
+    isListShown (val) {
+      this.onOpened(val);
     },
   },
 
@@ -237,6 +252,10 @@ export default {
 
     onHighlight (highlightIndex) {
       this.$emit('highlight', highlightIndex);
+    },
+
+    onOpened (opened) {
+      this.$emit('opened', opened);
     },
 
     onFocusOut (e) {

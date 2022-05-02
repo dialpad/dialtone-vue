@@ -25,6 +25,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   let selectStub;
   let escapeStub;
   let highlightStub;
+  let openedStub;
 
   // Helpers
   const _setChildWrappers = () => {
@@ -51,7 +52,8 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     selectStub = sinon.stub();
     escapeStub = sinon.stub();
     highlightStub = sinon.stub();
-    listeners = { select: selectStub, escape: escapeStub, highlight: highlightStub };
+    openedStub = sinon.stub();
+    listeners = { select: selectStub, escape: escapeStub, highlight: highlightStub, opened: openedStub };
     _mountWrapper();
     _setChildWrappers();
   });
@@ -132,6 +134,26 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       _mountWrapper();
       _setChildWrappers();
     });
+
+    describe('When the list is shown', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ showList: true });
+      });
+
+      it('should call listener', function () { assert.isTrue(openedStub.called); });
+      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 1); });
+    });
+
+    describe('When the list is closed', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ showList: true });
+        await wrapper.setProps({ showList: false });
+      });
+
+      it('should call listener', function () { assert.isTrue(openedStub.called); });
+      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 2); });
+    });
+
     describe('When "Enter" key is pressed but the combobox is not open', function () {
       beforeEach(async function () {
         await wrapper.trigger('keydown.enter');
