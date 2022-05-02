@@ -10,6 +10,7 @@ export const argsData = {
   onEscape: action('escape'),
   onHighlight: action('highlight'),
   onSelect: action('select'),
+  onOpened: action('opened'),
 };
 
 export const argTypesData = {
@@ -96,6 +97,11 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onOpened: {
+    table: {
+      disable: true,
+    },
+  },
 
   escape: {
     description: 'Event fired when pressing escape',
@@ -113,6 +119,14 @@ export const argTypesData = {
     description: 'Select item event',
     table: {
       type: { summary: 'event' },
+    },
+  },
+  opened: {
+    description: `Event fired when list is shown or hidden.`,
+    table: {
+      type: {
+        summary: 'event',
+      },
     },
   },
 };

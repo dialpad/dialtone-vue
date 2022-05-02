@@ -103,7 +103,7 @@ export default {
     },
   },
 
-  emits: ['select', 'escape', 'highlight'],
+  emits: ['select', 'escape', 'highlight', 'opened'],
 
   data () {
     return {
@@ -163,6 +163,7 @@ export default {
       this.$nextTick(function () {
         if (!this.listRenderedOutside) {
           this.setInitialHighlightIndex();
+          this.$emit('opened', showList);
         }
       });
 
@@ -209,6 +210,7 @@ export default {
     onOpen (open, contentRef) {
       this.outsideRenderedListRef = contentRef;
       this.outsideRenderedListRef?.addEventListener('mousemove', this.onMouseHighlight);
+      this.$emit('opened', open);
 
       if (open) {
         this.setInitialHighlightIndex();
