@@ -38,6 +38,7 @@ export * from './common/mixins';
 
 // Emoji
 export { default as EmojiJson } from './node_modules/emoji-toolkit/emoji.json';
+export * from './common/emoji';
 
 // Constants
 export {
