@@ -51,7 +51,7 @@
           'max-height': maxHeight,
           'max-width': maxWidth,
         }"
-        tabindex="-1"
+        :tabindex="contentTabindex"
         v-bind="$attrs"
         @keydown.capture="onKeydown"
         @after-leave="onLeaveTransitionComplete"
@@ -240,6 +240,23 @@ export default {
       type: String,
       default: null,
       validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
+    },
+
+    /**
+     * Tabindex value for the content. Passing null, no tabindex attribute will be set.
+     */
+    contentTabindex: {
+      type: Number || null,
+      default: -1,
+    },
+
+    /**
+     * External anchor id to use in those cases the anchor can't be provided via the slot.
+     * For instance, using the combobox's input as the anchor for the popover.
+     */
+    externalAnchor: {
+      type: String,
+      default: '',
     },
 
     /**
@@ -443,7 +460,8 @@ export default {
 
   mounted () {
     // support single anchor for popover, not multi anchor
-    this.anchorEl = this.$refs.anchor.children[0];
+    const externalAnchorEl = document.getElementById(this.externalAnchor);
+    this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
     this.popoverContentEl = this.$refs.content.$el;
 
     // align popover content width when
@@ -609,7 +627,9 @@ export default {
 
     onKeydown (e) {
       if (e.key === 'Tab') {
-        this.focusTrappedTabPress(e, this.popoverContentEl);
+        if (this.modal) {
+          this.focusTrappedTabPress(e, this.popoverContentEl);
+        }
       }
       if (e.key === 'Escape') {
         this.closePopover();
