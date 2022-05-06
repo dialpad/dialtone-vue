@@ -46,6 +46,7 @@
         :aria-modal="`${!modal}`"
         :transition="transition"
         :show="isOpen"
+        appear
         :class="['d-popover__dialog', { 'd-popover__dialog--modal': modal }, dialogClass]"
         :style="{
           'max-height': maxHeight,
