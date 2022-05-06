@@ -8,7 +8,7 @@
     :list-rendered-outside="true"
     :list-id="listId"
     data-qa="dt-combobox"
-    v-on="comboboxListeners"
+    v-bind="comboboxListeners"
   >
     <template
       #input="{ inputProps }"
@@ -26,9 +26,8 @@
       </div>
     </template>
     <template #list="{ opened, listProps, clearHighlightIndex }">
-      <!-- eslint-disable vue/no-deprecated-v-bind-sync -->
       <dt-popover
-        :open.sync="isListShown"
+        v-model:open="isListShown"
         :hide-on-click="true"
         :max-height="maxHeight"
         :max-width="maxWidth"
@@ -40,7 +39,7 @@
         :content-tabindex="null"
         :modal="false"
         :auto-focus="false"
-        @opened="opened($event, arguments[1]);"
+        @opened="opened"
       >
         <template
           v-if="$slots.header"
@@ -59,7 +58,7 @@
             ref="listWrapper"
             :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             @mouseleave="clearHighlightIndex"
-            @focusout="clearHighlightIndex; onFocusOut;"
+            @focusout="clearHighlightIndex; onFocusOut"
           >
             <slot
               name="list"
@@ -209,11 +208,11 @@ export default {
       return {
         ...this.$attrs,
 
-        select: this.onSelect,
+        onSelect: this.onSelect,
 
-        escape: this.onEscape,
+        onEscape: this.onEscape,
 
-        highlight: this.onHighlight,
+        onHighlight: this.onHighlight,
       };
     },
   },
