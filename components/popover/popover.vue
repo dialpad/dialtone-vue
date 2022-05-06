@@ -45,7 +45,7 @@
         :aria-label="ariaLabel"
         :aria-modal="`${!modal}`"
         :transition="transition"
-        :show="isOpen"
+        :show="showContent"
         :class="['d-popover__dialog', { 'd-popover__dialog--modal': modal }, dialogClass]"
         :style="{
           'max-height': maxHeight,
@@ -390,6 +390,7 @@ export default {
       isOpen: false,
       anchorEl: null,
       popoverContentEl: null,
+      showContent: false,
     };
   },
 
@@ -491,6 +492,7 @@ export default {
     // show prop was initially set to true.
     if (this.isOpen) {
       this.tip.show();
+      this.showContent = true;
     }
   },
 
@@ -499,6 +501,7 @@ export default {
     this.tip?.destroy();
     this.removeReferences();
     this.removeClosePopoverEventListener();
+    this.showContent = false;
   },
 
   /******************
