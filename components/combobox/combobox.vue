@@ -1,11 +1,11 @@
 <template>
   <div
-    @keydown.esc.stop="onEscapeKey"
-    @keydown.enter.exact="onEnterKey"
-    @keydown.up.stop.prevent="onUpKey"
-    @keydown.down.stop.prevent="onDownKey"
-    @keydown.home.stop.prevent="onHomeKey"
-    @keydown.end.stop.prevent="onEndKey"
+    @keydown.esc.stop="onKeyValidation($event, 'onEscapeKey')"
+    @keydown.enter.exact="onKeyValidation($event, 'onEnterKey')"
+    @keydown.up.stop.prevent="onKeyValidation($event, 'onUpKey')"
+    @keydown.down.stop.prevent="onKeyValidation($event, 'onDownKey')"
+    @keydown.home.stop.prevent="onKeyValidation($event, 'onHomeKey')"
+    @keydown.end.stop.prevent="onKeyValidation($event, 'onEndKey')"
   >
     <div data-qa="dt-combobox-input-wrapper">
       <!-- @slot Slot for the combobox input element -->
@@ -198,7 +198,7 @@ export default {
     },
 
     onEnterKey () {
-      if (this.showList && this.highlightIndex >= 0) {
+      if (this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
       }
     },
@@ -215,6 +215,12 @@ export default {
       if (open) {
         this.setInitialHighlightIndex();
       }
+    },
+
+    onKeyValidation (e, eventHandler) {
+      if (!this.showList) { return; }
+
+      this[eventHandler](e);
     },
 
     setInitialHighlightIndex () {
