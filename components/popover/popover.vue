@@ -19,7 +19,7 @@
         ref="anchor"
         data-qa="dt-popover-anchor"
         @click.capture="defaultToggleOpen"
-        @keydown.up.stop.prevent="onArrowKeyPress"
+        @keydown.up.prevent="onArrowKeyPress"
         @keydown.down.prevent="onArrowKeyPress"
         @wheel="(e) => (isOpen && modal) && e.preventDefault()"
         @keydown.escape.capture="closePopover"
@@ -485,7 +485,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('resize', this.onResize);
     this.tip?.destroy();
     this.removeReferences();
