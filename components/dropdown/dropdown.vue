@@ -17,7 +17,7 @@
     @keydown.enter="onEnterKey"
     @keydown.space="onSpaceKey"
     @keydown.up.stop.prevent="onKeyValidation($event, 'onUpKeyPress')"
-    @keydown.down.prevent="onKeyValidation($event, 'onDownKeyPress')"
+    @keydown.down.stop.prevent="onKeyValidation($event, 'onDownKeyPress')"
     @keydown.home.stop.prevent="onKeyValidation($event, 'onHomeKeyPress')"
     @keydown.end.stop.prevent="onKeyValidation($event, 'onEndKeyPress')"
   >
@@ -278,12 +278,20 @@ export default {
     },
 
     onUpKeyPress () {
+      if (!this.isOpen) {
+        this.openedWithKeyboard = true;
+        return;
+      }
       if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
         return this.onUpKey();
       }
     },
 
     onDownKeyPress () {
+      if (!this.isOpen) {
+        this.openedWithKeyboard = true;
+        return;
+      }
       if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
         return this.onDownKey();
       }
