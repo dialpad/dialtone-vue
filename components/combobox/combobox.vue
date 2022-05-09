@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/interactive-supports-focus -->
 <template>
   <div
     role="combobox"
