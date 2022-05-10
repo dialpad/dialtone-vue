@@ -184,6 +184,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       beforeEach(async function () {
         await wrapper.setProps({ showList: true });
         await wrapper.vm.$refs.combobox.setInitialHighlightIndex();
+        wrapper.vm.$refs.combobox.outsideRenderedListRef = wrapper.vm.$refs.listWrapper;
         await wrapper.trigger('keydown.enter');
       });
 
@@ -192,6 +193,9 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When "Esc" key is pressed', function () {
       beforeEach(async function () {
+        await wrapper.setProps({ showList: true });
+        await wrapper.vm.$refs.combobox.setInitialHighlightIndex();
+        wrapper.vm.$refs.combobox.outsideRenderedListRef = wrapper.vm.$refs.listWrapper;
         await wrapper.trigger('keydown.esc');
       });
 

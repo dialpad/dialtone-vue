@@ -213,13 +213,15 @@ export default {
       this.outsideRenderedListRef = contentRef;
       this.outsideRenderedListRef?.addEventListener('mousemove', this.onMouseHighlight);
       this.$emit('opened', open);
+
       if (open) {
         this.setInitialHighlightIndex();
       }
     },
 
     onKeyValidation (e, eventHandler) {
-      if (!this.showList) { return; }
+      if (!this.showList || !this.getListElement()) { return; }
+
       this[eventHandler](e);
     },
 

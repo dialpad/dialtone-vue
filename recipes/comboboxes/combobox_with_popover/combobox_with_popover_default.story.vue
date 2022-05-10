@@ -9,6 +9,7 @@
     :padding="$attrs.padding"
     :list-id="$attrs.listId"
     :list-class="$attrs.listClass"
+    :open-with-arrow-keys="$attrs.openWithArrowKeys"
     @escape="onComboboxEscape"
     @highlight="$attrs.onHighlight"
     @select="onComboboxSelect"
