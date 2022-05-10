@@ -33,6 +33,7 @@ import { DtRecipeComboboxWithPopover } from '@dialpad/dialtone-vue';
 
 ```html
 <dt-recipe-combobox-with-popover
+  ref="comboboxWithPopover"
   list-aria-label="Example list items"
   @escape="onEscape"
   @highlight="onHighlight"
@@ -55,6 +56,18 @@ import { DtRecipeComboboxWithPopover } from '@dialpad/dialtone-vue';
     </ul>
   </template>
 </dt-recipe-combobox-with-popover>
+```
+
+When not passing `showList` and using the default combobox trigger on input focus,
+to close the list with the `select` event or with the `click` event in the list item,
+use the `closeComboboxList` method:
+
+```jsx
+methods: {
+  onSelect (i) {
+    this.$refs.comboboxWithPopover.closeComboboxList();
+  },
+}
 ```
 
 ### With header and footer
