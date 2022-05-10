@@ -503,7 +503,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('resize', this.onResize);
     this.tip?.destroy();
     this.removeReferences();
@@ -533,7 +533,7 @@ export default {
     defaultToggleOpen (e) {
       // Only use default toggle behaviour if the user has not set the open prop.
       // Check that the anchor element specifically was clicked.
-      this.open ?? (this.anchorEl.contains(e.target) && this.toggleOpen());
+      this.open ?? (this.anchorEl.contains(e.target) && !this.anchorEl?.disabled && this.toggleOpen());
     },
 
     toggleOpen () {
