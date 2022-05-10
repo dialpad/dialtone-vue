@@ -1,0 +1,50 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtEmoji from './emoji';
+
+# DtEmoji
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas>
+  <Story id="<GROUP>-dt-emoji--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="<GROUP>-dt-emoji--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtEmoji } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```vue
+<dt-emoji
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-emoji
+  some-other="variant"
+/>
+```
