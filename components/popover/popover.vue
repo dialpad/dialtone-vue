@@ -503,7 +503,7 @@ export default {
     }
   },
 
-  beforeUnmount () {
+  beforeDestroy () {
     window.removeEventListener('resize', this.onResize);
     this.tip?.destroy();
     this.removeReferences();
