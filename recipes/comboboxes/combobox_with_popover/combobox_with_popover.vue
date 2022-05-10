@@ -18,6 +18,8 @@
         ref="input"
         @focusin="showComboboxList"
         @focusout="onFocusOut"
+        @keydown.up="openOnArrowKeyPress($event)"
+        @keydown.down="openOnArrowKeyPress($event)"
       >
         <slot
           name="input"
@@ -186,6 +188,15 @@ export default {
       default: null,
       validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
     },
+
+    /**
+     * If the list should be shown by pressing up or down arrow key on the input element.
+     * This can be set when not passing showList prop.
+     */
+    openWithArrowKeys: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
@@ -267,6 +278,14 @@ export default {
       if (!isComboboxStillFocused) {
         this.closeComboboxList();
       }
+    },
+
+    openOnArrowKeyPress (e) {
+      if (this.showList !== null || this.isListShown || !this.openWithArrowKeys) {
+        return;
+      }
+
+      this.showComboboxList();
     },
   },
 };

@@ -218,7 +218,7 @@ export default {
     },
 
     onKeyValidation (e, eventHandler) {
-      if (!this.showList) { return; }
+      if (!this.showList || !this.getListElement()) { return; }
 
       this[eventHandler](e);
     },

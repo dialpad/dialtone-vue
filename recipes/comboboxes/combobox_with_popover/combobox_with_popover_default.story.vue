@@ -9,6 +9,7 @@
     :padding="padding"
     :list-id="listId"
     :list-class="listClass"
+    :open-with-arrow-keys="openWithArrowKeys"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
