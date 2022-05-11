@@ -7,12 +7,7 @@ export default {
   name: 'DtEmoji',
 
   props: {
-    shortcode: {
-      type: String,
-      default: null,
-    },
-
-    unicode: {
+    code: {
       type: String,
       default: null,
     },
@@ -25,15 +20,7 @@ export default {
   },
 
   watch: {
-    shortcode: {
-      handler: function () {
-        // run getEmojiHtml
-      },
-
-      immediate: true,
-    },
-
-    unicode: {
+    code: {
       handler: function () {
         // run getEmojiHtml
       },
