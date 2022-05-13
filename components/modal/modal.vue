@@ -21,7 +21,11 @@
     >
       <div
         v-show="show"
-        :class="['d-modal__dialog', dialogClass]"
+        :class="[
+          'd-modal__dialog',
+          { 'd-modal__dialog--scrollable': fixedHeaderFooter },
+          dialogClass,
+        ]"
         role="dialog"
         aria-modal="true"
         :aria-describedby="describedById"
@@ -208,6 +212,14 @@ export default {
      * Hides the close button on the modal
      */
     hideClose: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Scrollable modal that allows scroll the modal content keeping the header and footer fixed
+     */
+    fixedHeaderFooter: {
       type: Boolean,
       default: false,
     },
