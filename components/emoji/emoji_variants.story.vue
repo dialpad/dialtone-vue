@@ -1,38 +1,79 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
-  <!--
-    We can bind the data that the user entered into the storybook controls to props by using a property of the same name
-    as the storybook control defined in the corresponding `.story.js` file.
-  -->
-  <dt-emoji
-    :some="some"
-  >
-    <!--
-      We can also bind any slot data that the user has entered into the storybook controls. In this example we
-      conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
-
-      The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-
-      We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-      same name.
-    -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
-    </template>
-    <template
-      v-if="someSlot"
-      #some
-    >
-      <span v-html="someSlot" />
-    </template>
-  </dt-emoji>
+  <div>
+    <div>
+      <label for="emoji-size14">d-svg--size14:</label>
+      <dt-emoji
+        id="emoji-size14"
+        code=":smile:"
+        size="d-svg--size14"
+      />
+    </div>
+    <div>
+      <label for="emoji-size16">d-svg--size16:</label>
+      <dt-emoji
+        id="emoji-size16"
+        code=":smile:"
+        size="d-svg--size16"
+      />
+    </div>
+    <div>
+      <label for="emoji-size18">d-svg--size18:</label>
+      <dt-emoji
+        id="emoji-size18"
+        code=":smile:"
+        size="d-svg--size18"
+      />
+    </div>
+    <div>
+      <label for="emoji-size20">d-svg--size20:</label>
+      <dt-emoji
+        id="emoji-size20"
+        code=":smile:"
+        size="d-svg--size20"
+      />
+    </div>
+    <div>
+      <label for="emoji-size24">d-svg--size24:</label>
+      <dt-emoji
+        id="emoji-size24"
+        code=":smile:"
+        size="d-svg--size24"
+      />
+    </div>
+    <div>
+      <label for="emoji-size32">d-svg--size32:</label>
+      <dt-emoji
+        id="emoji-size32"
+        code=":smile:"
+        size="d-svg--size32"
+      />
+    </div>
+    <div>
+      <label for="emoji-size48">d-svg--size48:</label>
+      <dt-emoji
+        id="emoji-size48"
+        code=":smile:"
+        size="d-svg--size48"
+      />
+    </div>
+    <div>
+      <label for="emoji-size100p">d-svg--size100p will take the size of the container it's in:</label>
+      <div class="d-w264 d-h264 d-ba">
+        <dt-emoji
+          id="emoji-size100p"
+          code=":smile:"
+          size="d-svg--size100p"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import DtEmoji from './emoji';
 
 export default {
-  name: 'DtEmojiVariants',
+  name: 'DtEmojiDefault',
   components: { DtEmoji },
 };
 </script>

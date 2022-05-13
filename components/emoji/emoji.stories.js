@@ -1,5 +1,5 @@
-import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { EMOJI_SIZES } from './emoji_constants';
 import DtEmoji from './emoji';
 import DtEmojiMdx from './emoji.mdx';
 import DtEmojiDefaultTemplate from './emoji_default.story.vue';
@@ -7,8 +7,7 @@ import DtEmojiVariantsTemplate from './emoji_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  some: 'prop',
-  onEvent: action('event'),
+  code: ':smile:',
 };
 
 /**
@@ -30,64 +29,36 @@ export const argsData = {
   <!-- @slot example slot decorator -->
 */
 export const argTypesData = {
-  // Props
-  some: {
-    description: 'Describes the some prop',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-    },
+  size: {
     control: {
-      type: 'text',
+      type: 'select',
+      options: Object.values(EMOJI_SIZES),
     },
-  },
-
-  // Slots
-  default: {
-    control: 'text',
+    defaultValue: EMOJI_SIZES.SIZE_20,
     table: {
-      type: {
-        summary: 'text/html',
+      defaultValue: {
+        summary: EMOJI_SIZES.SIZE_20,
       },
-    },
-  },
-  /*
-    We use the following naming scheme `<SLOT_NAME>Slot` for slot controls to prevent conflicts with props that share
-    the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
-    table and description within the controls accurately reflects the correct names of our component's props and slots.
-  */
-  someSlot: {
-    name: 'some',
-    description: 'Slot for some',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'text/html',
-      },
-    },
-  },
-
-  // Action Event Handlers
-  onEvent: {
-    table: {
-      disable: true,
     },
   },
 };
 
 // Story Collection
 export default {
-  title: 'Components/DtEmoji',
+  title: 'Components/Emoji',
   component: DtEmoji,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtEmojiMdx,
+    },
+    options: {
+      showPanel: true,
     },
   },
 };
@@ -110,3 +81,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
