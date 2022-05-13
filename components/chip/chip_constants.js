@@ -1,5 +1,9 @@
-export const DEFAULT_CONSTANTS = null;
+export const CHIP_SIZE_MODIFIERS = {
+  xs: 'd-chip--xs',
+  sm: 'd-chip--sm',
+  md: '',
+};
 
 export default {
-  DEFAULT_CONSTANTS,
+  CHIP_SIZE_MODIFIERS,
 };
