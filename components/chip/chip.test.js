@@ -22,7 +22,7 @@ describe('DtChip Tests', function () {
     chip = wrapper.find('[data-qa="dt-chip"]');
     icon = wrapper.find('[data-qa="dt-chip-icon"]');
     label = wrapper.find('[data-qa="dt-chip-label"]');
-    remove = wrapper.find('[data-qa="dt-chip-remove"]');
+    remove = wrapper.find('[data-qa="dt-chip-close"]');
   };
 
   const _setWrappers = () => {
