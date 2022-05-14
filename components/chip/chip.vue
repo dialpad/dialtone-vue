@@ -1,5 +1,4 @@
 <template>
-  <!-- temporarily use button classes before d-chip is added to dialtone -->
   <span
     :class="chipClasses()"
     data-qa="dt-chip"
@@ -79,14 +78,6 @@ export default {
   },
 
   emits: ['click'],
-
-  data () {
-    return {};
-  },
-
-  computed: {},
-
-  watch: {},
 
   methods: {
     chipClasses () {
