@@ -84,7 +84,7 @@ Default.args = {
 };
 export const Icon = IconTemplate.bind({});
 Icon.args = {
-  color: 'purple-200',
+  color: 'pink-300',
   default: 'IconDialpadGlyph',
 };
 
@@ -99,6 +99,6 @@ Icon.argTypes = {
 
 export const Initials = DefaultTemplate.bind({});
 Initials.args = {
-  color: 'purple-200',
+  color: 'orange-200',
   default: 'DP',
 };
