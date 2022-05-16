@@ -38,7 +38,7 @@
         code=":smile:"
         size="d-svg--size24"
       />
-      <label for="emoji-size24">d-svg--size24:</label>
+      <label for="emoji-size24">d-svg--size24</label>
     </div>
     <div>
       <dt-emoji
