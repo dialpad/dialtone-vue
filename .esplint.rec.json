@@ -20,6 +20,9 @@
     "components/collapsible/collapsible.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
     },
+    "components/collapsible/collapsible_lazy_show.vue": {
+      "vue/no-deprecated-dollar-listeners-api": 2
+    },
     "components/dropdown/dropdown.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
     },
@@ -28,7 +31,7 @@
       "max-lines": 1
     },
     "components/lazy_show/lazy_show.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 4
+      "vue/no-deprecated-dollar-listeners-api": 2
     },
     "components/lazy_show/lazy_show_default.story.vue": {
       "vuejs-accessibility/iframe-has-title": 1

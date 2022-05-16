@@ -6,6 +6,7 @@ export * from './components/breadcrumbs';
 export * from './components/button';
 export * from './components/button_group';
 export * from './components/combobox';
+export * from './components/collapsible';
 export * from './components/dropdown';
 export * from './components/emoji';
 export * from './components/input';

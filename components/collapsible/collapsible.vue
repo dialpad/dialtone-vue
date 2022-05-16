@@ -4,65 +4,60 @@
     ref="collapsible"
     v-on="$listeners"
   >
-    <div>
-      <!-- @slot Slot for the header element that toggles the collapsible content -->
-      <slot
-        ref="anchor"
-        name="anchor"
-        v-bind="attrs"
+    <!-- @slot Slot for the header element that toggles the collapsible content -->
+    <slot
+      ref="anchor"
+      name="anchor"
+    >
+      <dt-button
+        importance="clear"
+        kind="muted"
+        :aria-expanded="String(isOpen)"
+        :style="{
+          'width': maxWidth,
+        }"
+        @click.stop="defaultToggleOpen"
       >
-        <dt-button
-          class="dt-collapsible__anchor"
-          :aria-expanded="String(isOpen)"
-          :style="{
-            'width': contentWidth,
-          }"
-          @click.stop="defaultToggleOpen"
+        <icon-arrow-accordion-open
+          v-if="isOpen"
+          class="d-svg--size18 d-mr8 d-fl-shrink0"
+        />
+        <icon-arrow-accordion-closed
+          v-else
+          class="d-svg--size18 d-mr8 d-fl-shrink0"
+        />
+        <span
+          class="d-mr-auto d-truncate"
+          :title="anchorText"
         >
-          <icon-arrow-accordion-open
-            v-if="open"
-            class="d-svg--size18 d-mr8 d-fl-shrink0"
-          />
-          <icon-arrow-accordion-closed
-            v-else
-            class="d-svg--size18 d-mr8 d-fl-shrink0"
-          />
-          <span
-            class="d-mr-auto d-truncate"
-            :title="anchorText"
-          >
-            {{ anchorText }}
-          </span>
-        </dt-button>
-      </slot>
-    </div>
-    <dt-lazy-show
-      :id="id"
+          {{ anchorText }}
+        </span>
+      </dt-button>
+    </slot>
+    <dt-collapsible-lazy-show
       ref="content"
-      :role="role"
       data-qa="dt-popover"
       :aria-expanded="`${!isOpen}`"
-      :aria-labelledby="ariaLabel"
+      :aria-labelledby="ariaLabelledBy"
       :aria-label="ariaLabel"
-      :transition="transition"
       :show="isOpen"
       class="dt-collapsible__content"
       :style="{
-        'max-height': contentHeight,
-        'max-width': contentWidth,
+        'max-height': maxHeight,
+        'max-width': maxWidth,
       }"
       tabindex="-1"
       appear
-      @keydown.capture="onKeydown"
       @after-leave="onLeaveTransitionComplete"
       @after-enter="onEnterTransitionComplete"
     >
-      <!-- @slot Slot for the collapsible element  -->
-      <slot
-        name="content"
-        :close="close"
-      />
-    </dt-lazy-show>
+      <template>
+        <!-- @slot Slot for the collapsible element  -->
+        <slot
+          name="content"
+        />
+      </template>
+    </dt-collapsible-lazy-show>
   </component>
 </template>
 
@@ -71,22 +66,26 @@ import {
   POPOVER_INITIAL_FOCUS_STRINGS,
 } from '../popover';
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
+import DtCollapsibleLazyShow from './collapsible_lazy_show';
+import { DtButton } from '../button';
 import { DtLazyShow } from '../lazy_show';
 import IconArrowAccordionOpen from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionOpen';
 import IconArrowAccordionClosed from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionClosed';
-import DtButton from '../button/button';
+import ModalMixin from '@/common/mixins/modal.js';
 
 export default {
   name: 'DtCollapsible',
 
   components: {
     DtButton,
+    DtCollapsibleLazyShow,
     DtLazyShow,
     IconArrowAccordionOpen,
     IconArrowAccordionClosed,
   },
 
   mixins: [
+    ModalMixin,
     KeyboardNavigation({
       indexKey: 'highlightIndex',
       idKey: 'highlightId',
@@ -111,8 +110,9 @@ export default {
     },
 
     /**
-     * Controls whether the dropdown is shown. Leaving this null will have the dropdown trigger on click by default.
-     * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
+     * Controls whether the collapsible is shown. Leaving this null will have the collapsible
+     * trigger on click by default. If you set this value, the default trigger behavior will be
+     * disabled and you can control it as you need.
      * Supports .sync modifier
      */
     open: {
@@ -128,17 +128,12 @@ export default {
       default: 'div',
     },
 
-    transition: {
-      type: String,
-      default: 'expand',
-    },
-
-    contentHeight: {
+    maxHeight: {
       type: String,
       default: null,
     },
 
-    contentWidth: {
+    maxWidth: {
       type: String,
       default: null,
     },
@@ -176,6 +171,7 @@ export default {
   data () {
     return {
       isOpen: true,
+      contentWidth: this.contentWidth,
     };
   },
 
