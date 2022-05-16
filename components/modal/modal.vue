@@ -221,7 +221,7 @@ export default {
      */
     fixedHeaderFooter: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
 
