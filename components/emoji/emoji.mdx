@@ -1,24 +1,20 @@
 import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 import DtEmoji from './emoji';
 
-# DtEmoji
+# Emoji
 
 <Subtitle>
-  Some description of the component functionality.
+  Renders an emoji from a shortcode such as :smile: or unicode character such as 😄.
 </Subtitle>
 
-## Base Style
-
-Some description of how to use the base component, potential gotchas and limitations.
-
 <Canvas>
-  <Story id="<GROUP>-dt-emoji--default" />
+  <Story id="components-emoji--default" />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="<GROUP>-dt-emoji--variants" />
+  <Story id="components-emoji--variants" />
 </Canvas>
 
 ## Slots, Props & Events
@@ -33,18 +29,69 @@ Some description of how to use the base component, potential gotchas and limitat
 import { DtEmoji } from '@dialpad/dialtone-vue';
 ```
 
-### With Some Variant
+### Smile
 
 ```vue
 <dt-emoji
-  some="variant"
+  code=":smile:"
 />
 ```
 
-### With Some Other Variant
+### With Unicode Smile
 
 ```vue
 <dt-emoji
-  some-other="variant"
+  code="😄"
 />
 ```
+
+### With Skin Tone
+
+```vue
+<dt-emoji
+  code=":raised_hand_medium_skin_tone:"
+/>
+```
+
+## Assets
+
+Dialtone Vue uses [JoyPixels](https://www.joypixels.com/) to render emojis. When using this component,
+Dialtone Vue will use the free joypixels assets hosted on jsdelivr CDN by default. You may wish to use self hosted
+joypixels assets such as the SVGs only available to premium license holders. The examples shown here use the premium
+SVGs. In order to do this set your custom asset URL with the following function during initialization of your app:
+
+```js
+import { setEmojiAssetUrl } from 'dialtone-vue'
+
+setEmojiAssetUrl('https://my.example.website.com/joypixels/svg/unicode/')
+```
+
+Please be aware of [JoyPixels licensing requirements](https://www.joypixels.com/licenses). You may not use JoyPixels
+assets for business use without a license.
+
+## Emoji Metadata
+
+You may access the master list of supported emojis and all emoji metadata by importing the following module:
+
+```js
+import { EmojiJson } from 'dialtone-vue'
+```
+
+You may retrieve the data for an emoji by using the unicode string as an object key
+
+```js
+EmojiJson['1f600'].name // returns "grinning face"
+
+// when skintone, the unicode strings for the emoji and skin tone are separated by a -
+EmojiJson['1f482-1f3fb'].shortname // returns ":guard_tone1:"
+```
+
+## Accessibility
+
+The emoji will be rendered with an aria-label attribute describing the emoji so it can be read by AT.
+
+### References
+
+- [JoyPixels](https://www.joypixels.com/) - Our emoji assets
+- [emoji-toolkit](https://github.com/joypixels/emoji-toolkit) - Helper library we use to render joypixels
+- [emojipedia](https://emojipedia.org/) - Good for looking up details about specific emojis.
