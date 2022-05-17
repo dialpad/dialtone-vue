@@ -4,6 +4,8 @@
   "description": "Vue component library for Dialtone components",
   "scripts": {
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
+    "clean": "rm -rf ./dist",
+    "pretest": "npm run clean",
     "lint": "run-s lint:code lint:docs",
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
     "lint:code": "esplint ./",
@@ -25,6 +27,7 @@
   "files": [
     "dist/*.js"
   ],
+  "main": "./dist/dialtone-vue.common.js",
   "dependencies": {
     "tippy.js": "^6.3.1"
   },
