@@ -23,7 +23,6 @@
     "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --require jsdom-global/register --colors components/**/*.test.js recipes/**/**/*.test.js",
     "install:all": "npm install && npm install --prefix storybook && npm install --prefix generator-dialtone-vue"
   },
-  "main": "./dist/dialtone-vue.common.js",
   "files": [
     "dist/*.js"
   ],
