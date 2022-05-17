@@ -71,12 +71,12 @@ export default {
     getEmojiHtml () {
       const emojiHtml = emojiToolkit.toImage(this.code);
       const imgElement = this.getImgFromEmojiHtml(emojiHtml);
-      if (!imgElement) { this.setInvalid(); return; }
+      if (!imgElement || !this.emojiSrc) { this.setInvalid(); return; }
       this.emojiClassInternal = imgElement.getAttribute('class');
       this.emojiAlt = imgElement.getAttribute('alt');
       this.emojiTitle = imgElement.getAttribute('title');
       const jsonKey = this.convertUnicodeToJsonKey(this.emojiAlt);
-      this.emojiAriaLabel = emojiJson[jsonKey].name;
+      this.emojiAriaLabel = emojiJson[jsonKey] ? emojiJson[jsonKey].name : '';
       this.emojiSrc = imgElement.getAttribute('src');
     },
 
