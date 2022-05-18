@@ -38,7 +38,6 @@ export * from './recipes/notices/top_banner_info';
 export * from './common/mixins';
 
 // Emoji
-export { default as emojiJson } from './node_modules/emoji-toolkit/emoji.json';
 export * from './common/emoji';
 
 // Constants
