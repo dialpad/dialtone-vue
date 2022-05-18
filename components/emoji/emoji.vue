@@ -11,7 +11,7 @@
 <script>
 import { EMOJI_SIZES } from './emoji_constants.js';
 import emojiToolkit from 'emoji-toolkit';
-import emojiJson from '@/node_modules/emoji-toolkit/emoji.json';
+import { emojiJson } from '@/common/emoji';
 
 export default {
   name: 'DtEmoji',
@@ -71,13 +71,13 @@ export default {
     getEmojiHtml () {
       const emojiHtml = emojiToolkit.toImage(this.code);
       const imgElement = this.getImgFromEmojiHtml(emojiHtml);
+      this.emojiSrc = imgElement.getAttribute('src');
       if (!imgElement || !this.emojiSrc) { this.setInvalid(); return; }
       this.emojiClassInternal = imgElement.getAttribute('class');
       this.emojiAlt = imgElement.getAttribute('alt');
       this.emojiTitle = imgElement.getAttribute('title');
       const jsonKey = this.convertUnicodeToJsonKey(this.emojiAlt);
       this.emojiAriaLabel = emojiJson[jsonKey] ? emojiJson[jsonKey].name : '';
-      this.emojiSrc = imgElement.getAttribute('src');
     },
 
     getImgFromEmojiHtml (emojiHtml) {
