@@ -2,6 +2,12 @@
   <span
     :class="chipClasses()"
     data-qa="dt-chip"
+    :tabindex="chipTabIndex"
+    :aria-labelledby="labelledById"
+    @click="onClick"
+    @close="onClose"
+    @keyup.enter="onClick"
+    @keyup.delete="onClose"
   >
     <span
       v-if="$slots.icon"
@@ -13,18 +19,21 @@
     </span>
     <span
       v-if="$slots.default"
+      :id="labelledById"
       data-qa="dt-chip-label"
       class="d-truncate"
     >
       <!-- @slot Content within chip -->
       <slot />
     </span>
+    {{ interactive }}
     <dt-button
-      v-if="showCloseIcon"
+      v-if="!hideClose"
       data-qa="dt-chip-close"
       circle
       importance="clear"
-      :aria-label="$i18n('Close')"
+      :aria-label="closeButtonProps.ariaLabel"
+      v-bind="closeButtonProps"
       @click="$emit('close')"
     >
       <icon-close />
@@ -36,6 +45,7 @@
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import { DtButton } from '../button';
 import { CHIP_SIZE_MODIFIERS } from './chip_constants';
+import { getUniqueString } from '@/common/utils';
 
 export default {
   name: 'DtChip',
@@ -45,15 +55,24 @@ export default {
     DtButton,
   },
 
-  inheritAttrs: false,
-
   props: {
     /**
-     * Whether the chip has a remove button
+     * A set of props to be passed into the modal's close button. Requires an 'ariaLabel' property.
      */
-    showCloseIcon: {
+    closeButtonProps: {
+      type: Object,
+      required: true,
+      validator: (props) => {
+        return !!props.ariaLabel;
+      },
+    },
+
+    /**
+     * Hides the close button on the chip
+     */
+    hideClose: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     /**
@@ -69,15 +88,30 @@ export default {
 
     /**
      * The interactivity of the chip.
+     * Makes chip clickable, apply hover/focus/active style, emit keyboard events etc.
      * @see https://dialpad.design/components/chip
      */
     interactive: {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * Id to use for the dialog's aria-labelledby.
+     */
+    labelledById: {
+      type: String,
+      default: function () { return getUniqueString(); },
+    },
   },
 
-  emits: ['click'],
+  emits: ['click', 'close'],
+
+  computed: {
+    chipTabIndex () {
+      return this.interactive ? 0 : -1;
+    },
+  },
 
   methods: {
     chipClasses () {
@@ -88,6 +122,18 @@ export default {
           'd-chip--interactive': this.interactive,
         },
       ];
+    },
+
+    onClick () {
+      if (this.interactive) {
+        this.$emit('click');
+      }
+    },
+
+    onClose () {
+      if (this.interactive) {
+        this.$emit('close');
+      }
     },
   },
 };

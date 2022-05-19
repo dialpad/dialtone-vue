@@ -1,7 +1,7 @@
 <template>
   <dt-chip
-    :show-remove-icon="showRemoveIcon"
-    @close="onClose"
+    :hide-close="hideClose"
+    :close-button-props="closeButtonProps"
   >
     <template
       v-if="icon"

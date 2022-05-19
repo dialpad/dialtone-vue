@@ -3,7 +3,7 @@ import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_util
 import DtChip from './chip';
 import DtChipMdx from './chip.mdx';
 import DtChipDefaultTemplate from './chip_default.story.vue';
-import DtChipVariantsTemplate from './chip_variants.story.vue';
+import { CHIP_SIZE_MODIFIERS } from './chip_constants';
 
 export const argTypesData = {
   // Slots
@@ -27,11 +27,32 @@ export const argTypesData = {
   },
 
   // Props
-  showRemoveIcon: {
+  hideClose: {
     control: 'boolean',
+  },
+  interactive: {
+    control: 'boolean',
+  },
+  labelledById: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  size: {
+    control: {
+      type: 'select',
+      options: Object.keys(CHIP_SIZE_MODIFIERS),
+    },
   },
 
   // Action Event Handlers
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
   onClose: {
     table: {
       disable: true,
@@ -39,15 +60,27 @@ export const argTypesData = {
   },
 
   close: {
-    description: 'Native close button click event',
+    description: 'Native chip close button event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+
+  click: {
+    description: 'Native chip click event',
     table: {
       type: { summary: 'event' },
     },
   },
 };
 
+// Default Props for all variations
 export const argsData = {
+  closeButtonProps: {
+    ariaLabel: 'Close',
+  },
   onClose: action('close'),
+  onClick: action('click'),
 };
 
 // Story Collection
@@ -65,23 +98,15 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtChipDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtChipVariantsTemplate,
-);
+const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtChipDefaultTemplate);
 
 // Stories
-export const Default = DefaultTemplate.bind({});
+export const Default = Template.bind({});
 Default.args = {
   default: 'Chip',
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
-Variants.args = {};
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  icon: 'IconLock',
+};
