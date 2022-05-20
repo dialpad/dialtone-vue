@@ -19,6 +19,8 @@
         ref="anchor"
         data-qa="dt-popover-anchor"
         @click.capture="defaultToggleOpen"
+        @keydown.up.prevent="onArrowKeyPress"
+        @keydown.down.prevent="onArrowKeyPress"
         @wheel="(e) => (isOpen && modal) && e.preventDefault()"
         @keydown.escape.capture="closePopover"
       >
@@ -48,7 +50,7 @@
           'max-height': maxHeight,
           'max-width': maxWidth,
         }"
-        tabindex="-1"
+        :tabindex="contentTabindex"
         appear
         v-on="$listeners"
         @keydown.capture="onKeydown"
@@ -241,6 +243,23 @@ export default {
     },
 
     /**
+     * Tabindex value for the content. Passing null, no tabindex attribute will be set.
+     */
+    contentTabindex: {
+      type: Number || null,
+      default: -1,
+    },
+
+    /**
+     * External anchor id to use in those cases the anchor can't be provided via the slot.
+     * For instance, using the combobox's input as the anchor for the popover.
+     */
+    externalAnchor: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * The id of the tooltip
      */
     id: {
@@ -360,6 +379,15 @@ export default {
           initialFocusElement.startsWith('#');
       },
     },
+
+    /**
+     * If the popover should open pressing up or down arrow key on the anchor element.
+     * This can be set when not passing open prop.
+     */
+    openWithArrowKeys: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['update:open', 'opened'],
@@ -441,7 +469,8 @@ export default {
 
   mounted () {
     // support single anchor for popover, not multi anchor
-    this.anchorEl = this.$refs.anchor.children[0];
+    const externalAnchorEl = document.getElementById(this.externalAnchor);
+    this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
     this.popoverContentEl = this.$refs.content.$el;
 
     // align popover content width when
@@ -504,11 +533,21 @@ export default {
     defaultToggleOpen (e) {
       // Only use default toggle behaviour if the user has not set the open prop.
       // Check that the anchor element specifically was clicked.
-      this.open ?? (this.anchorEl.contains(e.target) && this.toggleOpen());
+      this.open ?? (this.anchorEl.contains(e.target) && !this.anchorEl?.disabled && this.toggleOpen());
     },
 
     toggleOpen () {
       this.isOpen = !this.isOpen;
+    },
+
+    onArrowKeyPress (e) {
+      if (this.open !== null) { return; }
+
+      if (this.openWithArrowKeys && this.anchorEl.contains(e.target)) {
+        if (!this.isOpen) {
+          this.isOpen = true;
+        }
+      }
     },
 
     addClosePopoverEventListener () {
@@ -604,7 +643,9 @@ export default {
 
     onKeydown (e) {
       if (e.key === 'Tab') {
-        this.focusTrappedTabPress(e, this.popoverContentEl);
+        if (this.modal) {
+          this.focusTrappedTabPress(e, this.popoverContentEl);
+        }
       }
       if (e.key === 'Escape') {
         this.closePopover();

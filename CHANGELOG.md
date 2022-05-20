@@ -1,3 +1,52 @@
+## [2.6.2](https://github.com/dialpad/dialtone-vue/compare/v2.6.1...v2.6.2) (2022-05-19)
+
+
+### Bug Fixes
+
+* **input:** reorder v-bind ([#360](https://github.com/dialpad/dialtone-vue/issues/360)) ([a214c81](https://github.com/dialpad/dialtone-vue/commit/a214c8152a47ce019ab9b57d17071f41e48506ee))
+
+## [2.6.1](https://github.com/dialpad/dialtone-vue/compare/v2.6.0...v2.6.1) (2022-05-17)
+
+
+### Bug Fixes
+
+* add main back to package.json, clean before test ([#358](https://github.com/dialpad/dialtone-vue/issues/358)) ([4892e9a](https://github.com/dialpad/dialtone-vue/commit/4892e9a2af340171f7de9d10f0a87deeb1f77e67))
+
+# [2.6.0](https://github.com/dialpad/dialtone-vue/compare/v2.5.0...v2.6.0) (2022-05-16)
+
+
+### Bug Fixes
+
+* anchor disabled in popover ([#351](https://github.com/dialpad/dialtone-vue/issues/351)) ([05ce022](https://github.com/dialpad/dialtone-vue/commit/05ce022757715af46a9d5b040a889c62b7eb86ee))
+
+
+### Features
+
+* **modal:** add fixed header and footer variant ([#353](https://github.com/dialpad/dialtone-vue/issues/353)) ([14a613c](https://github.com/dialpad/dialtone-vue/commit/14a613cd97bbbdd5c724419fcfd60b083c64b5a3))
+
+# [2.5.0](https://github.com/dialpad/dialtone-vue/compare/v2.4.0...v2.5.0) (2022-05-10)
+
+
+### Bug Fixes
+
+* contact info avatar display blank image ([#347](https://github.com/dialpad/dialtone-vue/issues/347)) ([c6b9577](https://github.com/dialpad/dialtone-vue/commit/c6b957776fcbdb3a628f805a6baa2d9a821ab0d6))
+* usage of arrow-keys in the combobox and dropdown ([#346](https://github.com/dialpad/dialtone-vue/issues/346)) ([80515eb](https://github.com/dialpad/dialtone-vue/commit/80515eba10415260e497ce317ff1ff5af9bf833a))
+
+
+### Features
+
+* combobox with popover recipe ([#339](https://github.com/dialpad/dialtone-vue/issues/339)) ([79481d1](https://github.com/dialpad/dialtone-vue/commit/79481d1edc35e317e2114dcc7390ba28be0fff89))
+* dt-387 implement handling of emoji assets ([#343](https://github.com/dialpad/dialtone-vue/issues/343)) ([7f0fbac](https://github.com/dialpad/dialtone-vue/commit/7f0fbaca6e094b5ab9c653851c98270638e7b4d7))
+
+# [2.4.0](https://github.com/dialpad/dialtone-vue/compare/v2.3.0...v2.4.0) (2022-04-20)
+
+
+### Features
+
+* automated a11y testing using axe-core ([#332](https://github.com/dialpad/dialtone-vue/issues/332)) ([a948b64](https://github.com/dialpad/dialtone-vue/commit/a948b648fd8eea22a8f045aa6e98a5867a2e8117))
+* **avatar:** change to a pure slot based pattern ([#329](https://github.com/dialpad/dialtone-vue/issues/329)) ([926dc4a](https://github.com/dialpad/dialtone-vue/commit/926dc4aab9ff2168d2db217e645d9f3fb2fedb7f))
+* **button:** add active button styles ([#322](https://github.com/dialpad/dialtone-vue/issues/322)) ([9979047](https://github.com/dialpad/dialtone-vue/commit/99790472c5e9c5730d130851db8472b5f4cec8a7))
+
 # [2.3.0](https://github.com/dialpad/dialtone-vue/compare/v2.2.2...v2.3.0) (2022-04-08)
 
 

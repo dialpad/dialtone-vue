@@ -30,11 +30,16 @@ export * from './components/skeleton';
 export * from './components/keyboard_shortcut';
 
 /// Recipes
+export * from './recipes/comboboxes/combobox_with_popover';
 export * from './recipes/list_items/contact_info';
 export * from './recipes/notices/top_banner_info';
 
 // Mixins
 export * from './common/mixins';
+
+// Emoji
+export { default as emojiJson } from './node_modules/emoji-toolkit/emoji.json';
+export * from './common/emoji';
 
 // Constants
 export {
