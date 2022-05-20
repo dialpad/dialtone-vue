@@ -4,8 +4,12 @@
     data-qa="dt-chip"
     :tabindex="chipTabIndex"
     :aria-labelledby="labelledById"
-    @click="onClick"
+    @mousedown="onClick"
+    @mouseup="onClick"
+    @mouseleave="isActive = false"
+    @focusout="isActive = false"
     @close="onClose"
+    @keydown.enter.once="onClick"
     @keyup.enter="onClick"
     @keyup.delete="onClose"
   >
@@ -17,6 +21,13 @@
       <!-- @slot Chip icon -->
       <slot name="icon" />
     </span>
+    <dt-avatar
+      v-else-if="showAvatar"
+      data-qa="dt-chip-avatar"
+      :src="avatarProps.src"
+      :alt="avatarProps.alt"
+      :kind="avatarProps.kind"
+    />
     <span
       v-if="$slots.default"
       :id="labelledById"
@@ -26,24 +37,34 @@
       <!-- @slot Content within chip -->
       <slot />
     </span>
-    {{ interactive }}
-    <dt-button
+    <span
       v-if="!hideClose"
-      data-qa="dt-chip-close"
-      circle
-      importance="clear"
-      :aria-label="closeButtonProps.ariaLabel"
-      v-bind="closeButtonProps"
-      @click="$emit('close')"
+      class="d-chip-btn-holder"
+    />
+    <span
+      ref="chip-btn"
+      class="d-chip-btn-container"
     >
-      <icon-close />
-    </dt-button>
+      <dt-button
+        v-if="!hideClose"
+        v-bind="closeButtonProps"
+        ref="closeBtn"
+        data-qa="dt-chip-close"
+        circle
+        importance="clear"
+        :aria-label="closeButtonProps.ariaLabel"
+        @click="$emit('close')"
+      >
+        <icon-close />
+      </dt-button>
+    </span>
   </span>
 </template>
 
 <script>
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import { DtButton } from '../button';
+import { DtAvatar } from '../avatar';
 import { CHIP_SIZE_MODIFIERS } from './chip_constants';
 import { getUniqueString } from '@/common/utils';
 
@@ -52,6 +73,7 @@ export default {
 
   components: {
     IconClose,
+    DtAvatar,
     DtButton,
   },
 
@@ -103,13 +125,31 @@ export default {
       type: String,
       default: function () { return getUniqueString(); },
     },
+
+    /**
+     * Pass in avatarProps to show an avatar.
+     */
+    avatarProps: {
+      type: Object,
+      default: () => ({}),
+    },
   },
 
   emits: ['click', 'close'],
 
+  data () {
+    return {
+      isActive: false,
+    };
+  },
+
   computed: {
     chipTabIndex () {
       return this.interactive ? 0 : -1;
+    },
+
+    showAvatar () {
+      return Object.keys(this.avatarProps)?.length;
     },
   },
 
@@ -120,19 +160,28 @@ export default {
         CHIP_SIZE_MODIFIERS[this.size],
         {
           'd-chip--interactive': this.interactive,
+          'd-chip--active': this.isActive,
         },
       ];
-    },
-
-    onClick () {
-      if (this.interactive) {
-        this.$emit('click');
-      }
     },
 
     onClose () {
       if (this.interactive) {
         this.$emit('close');
+      }
+    },
+
+    onClick (event) {
+      // Clicking on the button should not update value of isActive.
+      const closeBtn = this.$refs.closeBtn;
+      if (!this.interactive || closeBtn.$el.parentNode.contains(event.target)) {
+        return;
+      }
+      if (event.type === 'mousedown' || event.type === 'keydown') {
+        this.isActive = true;
+      } else {
+        this.isActive = false;
+        this.$emit('click');
       }
     },
   },

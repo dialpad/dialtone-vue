@@ -2,6 +2,10 @@
   <dt-chip
     :hide-close="hideClose"
     :close-button-props="closeButtonProps"
+    :interactive="interactive"
+    :size="size"
+    :labelled-by-id="labelledById"
+    :avatar-props="avatarProps"
   >
     <template
       v-if="icon"
