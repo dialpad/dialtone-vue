@@ -6,6 +6,8 @@
     :size="size"
     :labelled-by-id="labelledById"
     :avatar-props="avatarProps"
+    @click="onClick"
+    @close="onClose"
   >
     <template
       v-if="icon"

@@ -9,7 +9,7 @@
     @mouseleave="isActive = false"
     @focusout="isActive = false"
     @close="onClose"
-    @keydown.enter.once="onClick"
+    @keydown.enter="onClick"
     @keyup.enter="onClick"
     @keyup.delete="onClose"
   >
@@ -24,10 +24,12 @@
     <dt-avatar
       v-else-if="showAvatar"
       data-qa="dt-chip-avatar"
-      :src="avatarProps.src"
-      :alt="avatarProps.alt"
-      :kind="avatarProps.kind"
-    />
+    >
+      <img
+        :src="avatarProps.src"
+        :alt="avatarProps.alt"
+      >
+    </dt-avatar>
     <span
       v-if="$slots.default"
       :id="labelledById"
@@ -42,13 +44,12 @@
       class="d-chip-btn-holder"
     />
     <span
-      ref="chip-btn"
+      ref="closeBtnContainer"
       class="d-chip-btn-container"
     >
       <dt-button
         v-if="!hideClose"
         v-bind="closeButtonProps"
-        ref="closeBtn"
         data-qa="dt-chip-close"
         circle
         importance="clear"
@@ -173,8 +174,7 @@ export default {
 
     onClick (event) {
       // Clicking on the button should not update value of isActive.
-      const closeBtn = this.$refs.closeBtn;
-      if (!this.interactive || closeBtn.$el.parentNode.contains(event.target)) {
+      if (!this.interactive || this.$refs.closeBtnContainer.contains(event.target)) {
         return;
       }
       if (event.type === 'mousedown' || event.type === 'keydown') {
