@@ -47,12 +47,12 @@
     >
       <dt-button
         v-if="!hideClose"
+        v-bind="closeButtonProps"
         ref="closeBtn"
         data-qa="dt-chip-close"
         circle
         importance="clear"
         :aria-label="closeButtonProps.ariaLabel"
-        v-bind="closeButtonProps"
         @click="$emit('close')"
       >
         <icon-close />

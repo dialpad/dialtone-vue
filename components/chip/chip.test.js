@@ -3,7 +3,11 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtChip from './chip.vue';
 
 // Constants
-const basePropsData = {};
+const basePropsData = {
+  closeButtonProps: {
+    ariaLabel: 'close',
+  },
+};
 
 describe('DtChip Tests', function () {
   // Wrappers

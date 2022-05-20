@@ -1,7 +1,7 @@
 <template>
   <dt-chip
     :hide-close="hideClose"
-    :close-button-props="buttonCloseProps"
+    :close-button-props="closeButtonProps"
     :interactive="interactive"
     :size="size"
     :labelled-by-id="labelledById"
@@ -28,14 +28,5 @@ export default {
   name: 'DtChipDefault',
   components: { DtChip },
   mixins: [icon],
-
-  computed: {
-    buttonCloseProps () {
-      return {
-        ...this.closeButtonProps,
-        ariaLabel: 'Close',
-      };
-    },
-  },
 };
 </script>
