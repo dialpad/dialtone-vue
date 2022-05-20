@@ -46,6 +46,14 @@ export const argTypesData = {
       options: Object.keys(CHIP_SIZE_MODIFIERS),
     },
   },
+  avatarProps: {
+    control: 'object',
+    table: {
+      defaultValue: {
+        summary: '{}',
+      },
+    },
+  },
 
   // Action Event Handlers
   onClick: {
@@ -99,6 +107,7 @@ export default {
 
 // Templates
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtChipDefaultTemplate);
+const defaultImage = require('../avatar/person.png');
 
 // Stories
 export const Default = Template.bind({});
@@ -108,5 +117,22 @@ Default.args = {
 
 export const WithIcon = Template.bind({});
 WithIcon.args = {
+  ...Default.args,
   icon: 'IconLock',
+};
+
+export const WithAvatar = Template.bind({});
+WithAvatar.args = {
+  ...Default.args,
+  avatarProps: {
+    src: defaultImage,
+    alt: 'Person Avatar',
+  },
+};
+
+export const NonInteractive = Template.bind({});
+NonInteractive.args = {
+  ...Default.args,
+  interactive: false,
+  hideClose: true,
 };
