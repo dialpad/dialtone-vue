@@ -1,9 +1,11 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "3.0.1",
+  "version": "3.1.2",
   "description": "Vue component library for Dialtone components",
   "scripts": {
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js",
+    "clean": "rm -rf ./dist",
+    "pretest": "npm run clean",
     "lint": "run-s lint:code lint:docs",
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
     "install:all": "npm install && npm install --prefix storybook && npm install --prefix generator-dialtone-vue",
@@ -24,13 +26,14 @@
   "files": [
     "dist/*.js"
   ],
+  "main": "./dist/dialtone-vue.common.js",
   "dependencies": {
     "tippy.js": "^6.3.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.2.4",
-    "@dialpad/dialtone": "^6.22.0",
+    "@dialpad/dialtone": "^6.27.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@vue/cli-plugin-babel": "~5.0.4",
@@ -47,6 +50,7 @@
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-mocha": "^10.0.4",
+    "emoji-toolkit": "^6.6.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-standard": "^5.0.0",
@@ -67,8 +71,8 @@
     "yo": "^4.3.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=6.22",
     "vue": "^3.2.33",
+    "@dialpad/dialtone": ">=6.27",
     "yo": "^4.3.0"
   },
   "engineStrict": true,

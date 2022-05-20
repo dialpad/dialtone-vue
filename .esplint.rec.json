@@ -1,0 +1,24 @@
+{
+  "recordVersion": 1,
+  "configHash": "24ac6beb718c1dbe558ced7e73ed2e67df60ba06",
+  "files": {
+    "common/mixins/dom.js": {
+      "complexity": 2
+    },
+    "common/mixins/modal.js": {
+      "complexity": 1
+    },
+    "components/input/input.vue": {
+      "max-lines": 1
+    },
+    "components/popover/popover.vue": {
+      "complexity": 1
+    },
+    "components/skeleton/skeleton-paragraph.vue": {
+      "complexity": 1
+    },
+    "recipes/list_items/contact_info/contact_info.stories.js": {
+      "max-lines": 1
+    }
+  }
+}
