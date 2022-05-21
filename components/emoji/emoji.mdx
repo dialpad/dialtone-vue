@@ -63,7 +63,7 @@ SVGs. In order to do this set your custom asset URL with the following function 
 ```js
 import { setEmojiAssetUrl } from 'dialtone-vue'
 
-setEmojiAssetUrl('https://my.example.website.com/joypixels/svg/unicode/')
+setEmojiAssetUrl('https://my.example.website.com/joypixels/svg/unicode/', '.svg')
 ```
 
 Please be aware of [JoyPixels licensing requirements](https://www.joypixels.com/licenses). You may not use JoyPixels
@@ -71,19 +71,21 @@ assets for business use without a license.
 
 ## Emoji Metadata
 
-You may access the master list of supported emojis and all emoji metadata by importing the following module:
+You may access the master list of supported emojis and all emoji metadata by importing the following function and
+executing it:
 
 ```js
-import { EmojiJson } from 'dialtone-vue'
+import { getEmojiJson } from 'dialtone-vue'
+const emojiData = await getEmojiJson();
 ```
 
 You may retrieve the data for an emoji by using the unicode string as an object key
 
 ```js
-EmojiJson['1f600'].name // returns "grinning face"
+emojiData['1f600'].name // returns "grinning face"
 
 // when skintone, the unicode strings for the emoji and skin tone are separated by a -
-EmojiJson['1f482-1f3fb'].shortname // returns ":guard_tone1:"
+emojiData['1f482-1f3fb'].shortname // returns ":guard_tone1:"
 ```
 
 ## Accessibility

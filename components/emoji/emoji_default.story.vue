@@ -2,7 +2,6 @@
   <dt-emoji
     :code="code"
     :size="size"
-    :emoji-class="emojiClass"
   />
 </template>
 

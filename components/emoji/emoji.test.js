@@ -1,12 +1,9 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtEmoji from './emoji.vue';
-import emojiToolkit from 'emoji-toolkit';
+import { setEmojiAssetUrl } from '@/common/emoji.js';
 
-emojiToolkit.imagePathPNG = 'https://mockstorage.com/emojis/';
-emojiToolkit.fileExtension = '.svg';
-
-global.DOMParser = window.DOMParser;
+setEmojiAssetUrl('https://mockstorage.com/emojis/', '.svg');
 
 // Constants
 const basePropsData = {};

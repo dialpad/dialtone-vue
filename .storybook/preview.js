@@ -8,7 +8,7 @@ import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrl } from '../common/emoji.js';
 import focusVisiblePolyfill from 'focus-visible';
 
-setEmojiAssetUrl('https://storage.cloud.google.com/switch_static/joypixels/svg/unicode/')
+setEmojiAssetUrl('https://storage.cloud.google.com/switch_static/joypixels/svg/unicode/', '.svg')
 Vue.use(fixDefaultSlot);
 
 addParameters({
