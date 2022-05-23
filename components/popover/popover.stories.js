@@ -162,7 +162,13 @@ Default.args = {};
 Default.decorators = [() => ({
   template: `<div class="d-d-flex d-jc-center d-ai-center d-h332"><story /></div>`,
 })];
-Default.parameters = {};
+Default.parameters = {
+  percy: {
+    args: {
+      open: true,
+    },
+  },
+};
 
 export const Variants = TemplateVariants.bind({});
 Variants.args = {};

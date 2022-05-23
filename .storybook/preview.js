@@ -70,6 +70,6 @@ export const parameters = {
     }
   },
   percy: {
-    include: ['Avatar'],
+    include: ['Components/Popover', 'Components/Dropdown'],
   },
 };
