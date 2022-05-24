@@ -2,6 +2,7 @@ import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtEmoji from './emoji.vue';
 import { setEmojiAssetUrl } from '@/common/emoji.js';
+import { flushPromises } from '@/common/utils.js';
 
 setEmojiAssetUrl('https://mockstorage.com/emojis/', '.svg');
 
@@ -25,11 +26,11 @@ describe('DtEmoji Tests', function () {
   const expectedPointUpLight = 'https://mockstorage.com/emojis/261d-1f3fb.svg';
 
   // Helpers
-  const _setChildWrappers = () => {
-    emoji = wrapper.find('img');
+  const _setChildWrappers = async () => {
+    emoji = await wrapper.find('img');
   };
 
-  const _setWrappers = () => {
+  const _setWrappers = async () => {
     wrapper = mount(DtEmoji, {
       propsData,
       attrs,
@@ -37,7 +38,8 @@ describe('DtEmoji Tests', function () {
       provide,
       localVue: this.localVue,
     });
-    _setChildWrappers();
+    await _setChildWrappers();
+    await flushPromises();
   };
 
   // Setup
@@ -61,19 +63,20 @@ describe('DtEmoji Tests', function () {
      */
 
     describe('When a code string is passed in', function () {
-      beforeEach(function () {
+      beforeEach(async function () {
         propsData = {
           code: ':smile:',
         };
-        _setWrappers();
+        await _setWrappers();
       });
 
-      it('renders the correct emoji', function () {
+      it('renders the correct emoji', async function () {
         assert.strictEqual(emoji.attributes('src'), expectedSmileSrc);
       });
       describe('When a prop changes to a new code', function () {
         beforeEach(async function () {
           await wrapper.setProps({ code: ':laughing:' });
+          await flushPromises();
         });
         it('should display the correct emoji with the new code', function () {
           assert.strictEqual(emoji.attributes('src'), expectedLaughingSrc);
@@ -83,6 +86,7 @@ describe('DtEmoji Tests', function () {
       describe('When a prop changes to an invalid code', function () {
         beforeEach(async function () {
           await wrapper.setProps({ code: ':invalidcode:' });
+          await flushPromises();
         });
         it('should display a "not found" image', function () {
           assert.strictEqual(emoji.attributes('title'), 'Invalid Emoji');
@@ -100,11 +104,11 @@ describe('DtEmoji Tests', function () {
     });
 
     describe('When a skin tone emoji is passed in', function () {
-      beforeEach(function () {
+      beforeEach(async function () {
         propsData = {
           code: ':point_up_tone1:',
         };
-        _setWrappers();
+        await _setWrappers();
       });
       it('renders the correct emoji', function () {
         assert.strictEqual(emoji.attributes('src'), expectedPointUpLight);
@@ -112,11 +116,11 @@ describe('DtEmoji Tests', function () {
     });
 
     describe('When an emoji unicode is passed in', function () {
-      beforeEach(function () {
+      beforeEach(async function () {
         propsData = {
           code: '☝🏻',
         };
-        _setWrappers();
+        await _setWrappers();
       });
       it('renders the correct emoji', function () {
         assert.strictEqual(emoji.attributes('src'), expectedPointUpLight);
@@ -130,11 +134,11 @@ describe('DtEmoji Tests', function () {
      */
 
     describe('When an emoji is rendered', function () {
-      beforeEach(function () {
+      beforeEach(async function () {
         propsData = {
           code: ':smile:',
         };
-        _setWrappers();
+        await _setWrappers();
       });
       it('should have aria-label describing the emoji', function () {
         assert.strictEqual(emoji.attributes('aria-label'), 'grinning face with smiling eyes');

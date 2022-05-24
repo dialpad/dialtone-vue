@@ -70,7 +70,7 @@ export default {
   watch: {
     code: {
       handler: function () {
-        this.getEmojiHtml();
+        this.getEmojiData();
       },
 
       immediate: true,
@@ -78,7 +78,7 @@ export default {
   },
 
   methods: {
-    async getEmojiHtml () {
+    async getEmojiData () {
       this.emojiData = await codeToEmojiData(this.code);
     },
   },
