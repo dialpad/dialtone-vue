@@ -1,5 +1,5 @@
 export const emojiVersion = '6.6';
-export let emojiImageUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/';
+export let emojiImageUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
 export let emojiFileExtension = '.png';
 
 export async function getEmojiJson () {
