@@ -7,6 +7,7 @@
       AVATAR_SIZE_MODIFIERS[size],
       AVATAR_COLOR_MODIFIERS[color],
       avatarClass,
+      'd-avatar--purple-200',
     ]"
     data-qa="dt-avatar"
   >
