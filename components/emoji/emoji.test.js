@@ -40,8 +40,8 @@ describe('DtEmoji Tests', function () {
       provide,
       localVue: this.localVue,
     });
-    await _setChildWrappers();
     await flushPromises();
+    await _setChildWrappers();
   };
 
   // Setup
@@ -79,6 +79,7 @@ describe('DtEmoji Tests', function () {
         beforeEach(async function () {
           await wrapper.setProps({ code: ':laughing:' });
           await flushPromises();
+          await _setChildWrappers();
         });
         it('should display the correct emoji with the new code', function () {
           assert.strictEqual(emoji.attributes('src'), expectedLaughingSrc);
@@ -89,6 +90,7 @@ describe('DtEmoji Tests', function () {
         beforeEach(async function () {
           await wrapper.setProps({ code: ':invalidcode:' });
           await flushPromises();
+          await _setChildWrappers();
         });
         it('should display a "not found" image', function () {
           assert.strictEqual(emoji.attributes('title'), 'Invalid Emoji');
