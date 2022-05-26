@@ -3,6 +3,7 @@
     :class="[
       'base-button__button',
       buttonClasses(),
+      'd-btn--danger',
     ]"
     data-qa="dt-button"
     :type="type"
