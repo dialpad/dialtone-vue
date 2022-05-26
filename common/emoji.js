@@ -1,18 +1,33 @@
 export const emojiVersion = '6.6';
-export let emojiImageUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
-export let emojiFileExtension = '.png';
+export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
+
+// Used for emoji 16px and smaller
+export let emojiImageUrlSmall = defaultEmojiAssetUrl;
+export let emojiFileExtensionSmall = '.png';
+
+// Used for emoji larger than 16px
+export let emojiImageUrlLarge = defaultEmojiAssetUrl;
+export let emojiFileExtensionLarge = '.png';
 
 export async function getEmojiJson () {
   const emojiToolkit = await import('emoji-toolkit/emoji_strategy.json');
   return emojiToolkit;
 }
 
-export function setEmojiAssetUrl (url, fileExtension = '.svg') {
+export function setEmojiAssetUrlSmall (url, fileExtension = '.png') {
   if (!url.endsWith('/')) {
     url = url + '/';
   }
-  emojiImageUrl = url;
-  emojiFileExtension = fileExtension;
+  emojiImageUrlSmall = url;
+  emojiFileExtensionSmall = fileExtension;
+}
+
+export function setEmojiAssetUrlLarge (url, fileExtension = '.svg') {
+  if (!url.endsWith('/')) {
+    url = url + '/';
+  }
+  emojiImageUrlLarge = url;
+  emojiFileExtensionLarge = fileExtension;
 }
 
 // recursively searches the emoji data object containing data for all emojis

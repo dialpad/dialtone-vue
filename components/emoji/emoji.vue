@@ -10,7 +10,14 @@
 
 <script>
 import { EMOJI_SIZES } from './emoji_constants.js';
-import { codeToEmojiData, stringToUnicode, emojiImageUrl, emojiFileExtension } from '@/common/emoji';
+import {
+  codeToEmojiData,
+  stringToUnicode,
+  emojiImageUrlSmall,
+  emojiFileExtensionSmall,
+  emojiImageUrlLarge,
+  emojiFileExtensionLarge,
+} from '@/common/emoji';
 
 export default {
   name: 'DtEmoji',
@@ -53,7 +60,11 @@ export default {
 
     emojiSrc () {
       if (!this.emojiDataValid) { return undefined; }
-      return emojiImageUrl + this.emojiData.key + emojiFileExtension;
+      if (['d-svg--size14', 'd-svg--size16'].includes(this.size)) {
+        return emojiImageUrlSmall + this.emojiData.key + emojiFileExtensionSmall;
+      } else {
+        return emojiImageUrlLarge + this.emojiData.key + emojiFileExtensionLarge;
+      }
     },
 
     emojiAlt () {
