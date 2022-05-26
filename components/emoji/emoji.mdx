@@ -94,7 +94,9 @@ emojiData['1f482-1f3fb'].shortname // returns ":guard_tone1:"
 
 ## Accessibility
 
-The emoji will be rendered with an aria-label attribute describing the emoji so it can be read by AT.
+By default the emoji will be rendered with an aria-label attribute describing the emoji so it can be read by AT. This
+component does not do any translation, so if you need it to be i18n compatible you must pass in your own text via the
+ariaLabel prop. You can access the descriptions using the `getEmojiJson` function as mentioned above.
 
 ### References
 
