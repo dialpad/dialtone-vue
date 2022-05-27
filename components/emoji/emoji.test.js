@@ -1,10 +1,11 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtEmoji from './emoji.vue';
-import { setEmojiAssetUrl } from '@/common/emoji.js';
+import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '@/common/emoji.js';
 import { flushPromises } from '@/common/utils.js';
 
-setEmojiAssetUrl('https://mockstorage.com/emojis/', '.svg');
+setEmojiAssetUrlSmall('https://mockstorage.com/emojis/', '.png');
+setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');
 
 // Constants
 const basePropsData = {};
@@ -22,6 +23,7 @@ describe('DtEmoji Tests', function () {
 
   // Expected
   const expectedSmileSrc = 'https://mockstorage.com/emojis/1f604.svg';
+  const expectedSmileSrcSmall = 'https://mockstorage.com/emojis/1f604.png';
   const expectedLaughingSrc = 'https://mockstorage.com/emojis/1f606.svg';
   const expectedPointUpLight = 'https://mockstorage.com/emojis/261d-1f3fb.svg';
 
@@ -93,12 +95,22 @@ describe('DtEmoji Tests', function () {
         });
       });
 
-      describe('When the size changes', function () {
+      describe('When the size changes to 48', function () {
         beforeEach(async function () {
           await wrapper.setProps({ size: 'd-svg--size48' });
         });
         it('the correct class is set on the element', function () {
           assert.isTrue(emoji.classes('d-svg--size48'));
+        });
+      });
+
+      describe('When the size changes to 16', function () {
+        beforeEach(async function () {
+          await wrapper.setProps({ size: 'd-svg--size16' });
+          await flushPromises();
+        });
+        it('the emoji is rendered using the "small emoji" url', function () {
+          assert.strictEqual(emoji.attributes('src'), expectedSmileSrcSmall);
         });
       });
     });

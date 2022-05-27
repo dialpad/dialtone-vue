@@ -4,11 +4,11 @@ import { addParameters, app } from '@storybook/vue3';
 import { version } from '../package.json';
 import theme from './theme';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
-import { setEmojiAssetUrl } from '../common/emoji.js';
+import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '../common/emoji.js';
 import focusVisiblePolyfill from 'focus-visible';
 
-setEmojiAssetUrl('https://storage.cloud.google.com/switch_static/joypixels/svg/unicode/')
-setEmojiAssetUrl('https://storage.cloud.google.com/switch_static/joypixels/svg/unicode/', '.svg')
+setEmojiAssetUrlSmall('https://storage.cloud.google.com/dialpad_static/joypixels/png/unicode/32/', '.png');
+setEmojiAssetUrlLarge('https://storage.cloud.google.com/dialpad_static/joypixels/svg/unicode/', '.svg');
 app.use(fixDefaultSlot);
 
 addParameters({
