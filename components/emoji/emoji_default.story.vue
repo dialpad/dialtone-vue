@@ -3,6 +3,8 @@
     <dt-emoji
       :code="code"
       :size="size"
+      :img-class="imgClass"
+      :aria-label="ariaLabel"
     />
   </div>
 </template>
