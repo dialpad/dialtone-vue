@@ -1,17 +1,16 @@
 <template>
   <img
-    :class="[emojiClass, size, emojiClassInternal]"
-    :aria-label="emojiAriaLabel"
+    :class="size"
+    :aria-label="emojiLabel"
     :alt="emojiAlt"
-    :title="emojiTitle"
+    :title="emojiLabel"
     :src="emojiSrc"
   >
 </template>
 
 <script>
 import { EMOJI_SIZES } from './emoji_constants.js';
-import emojiToolkit from 'emoji-toolkit';
-import { emojiJson } from '@/common/emoji';
+import { codeToEmojiData, stringToUnicode, emojiImageUrl, emojiFileExtension } from '@/common/emoji';
 
 export default {
   name: 'DtEmoji',
@@ -35,26 +34,37 @@ export default {
       default: EMOJI_SIZES.SIZE_20,
       validator: (t) => Object.values(EMOJI_SIZES).includes(t),
     },
-
-    /**
-     * Additional class for the emoji img element.
-     * Can accept all of String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
-     */
-    emojiClass: {
-      type: [String, Object, Array],
-      default: '',
-    },
   },
 
   data () {
     return {
-      emojiClassInternal: undefined,
-      emojiAlt: undefined,
-      emojiTitle: undefined,
-      emojiAriaLabel: undefined,
-      emojiSrc: undefined,
+      emojiData: null,
     };
+  },
+
+  computed: {
+    emojiDataValid () {
+      if (this.emojiData) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
+    emojiSrc () {
+      if (!this.emojiDataValid) { return undefined; }
+      return emojiImageUrl + this.emojiData.key + emojiFileExtension;
+    },
+
+    emojiAlt () {
+      if (!this.emojiDataValid) { return undefined; }
+      return stringToUnicode(this.emojiData.unicode_output);
+    },
+
+    emojiLabel () {
+      if (!this.emojiDataValid) { return 'Invalid Emoji'; }
+      return this.emojiData.name;
+    },
   },
 
   watch: {
@@ -68,47 +78,8 @@ export default {
   },
 
   methods: {
-    getEmojiHtml () {
-      const emojiHtml = emojiToolkit.toImage(this.code);
-      const imgElement = this.getImgFromEmojiHtml(emojiHtml);
-      this.emojiSrc = imgElement.getAttribute('src');
-      if (!imgElement || !this.emojiSrc) { this.setInvalid(); return; }
-      this.emojiClassInternal = imgElement.getAttribute('class');
-      this.emojiAlt = imgElement.getAttribute('alt');
-      this.emojiTitle = imgElement.getAttribute('title');
-      const jsonKey = this.convertUnicodeToJsonKey(this.emojiAlt);
-      this.emojiAriaLabel = emojiJson[jsonKey] ? emojiJson[jsonKey].name : '';
-    },
-
-    getImgFromEmojiHtml (emojiHtml) {
-      const parser = new DOMParser();
-      const htmlDoc = parser.parseFromString(emojiHtml, 'text/html');
-      const imgElement = htmlDoc.getElementsByTagName('img')[0];
-      return imgElement;
-    },
-
-    setInvalid () {
-      this.emojiClassInternal = undefined;
-      this.emojiAlt = undefined;
-      this.emojiTitle = 'Invalid Emoji';
-      this.emojiAriaLabel = 'Invalid Emoji';
-      this.emojiSrc = undefined;
-    },
-
-    // Takes in an emoji unicode character(s) and converts it to an emoji string in the format
-    // emoji.json expects as a key. There can be two unicode characters in an emoji if it contains a skin tone.
-    // The second unicode character denotes skin tone and is separated with a -
-    //
-    // Example:
-    // return value for smile emoji (no skin tone): 1f600
-    // return value for left facing fist (light skin tone): 1f91b-1f3fb
-    convertUnicodeToJsonKey (emoji) {
-      let key = '';
-      for (const codePoint of emoji) {
-        if (key !== '') { key = key + '-'; }
-        key = key + codePoint.codePointAt(0).toString(16);
-      }
-      return key;
+    async getEmojiHtml () {
+      this.emojiData = await codeToEmojiData(this.code);
     },
   },
 };

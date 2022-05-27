@@ -8,6 +8,7 @@ import { setEmojiAssetUrl } from '../common/emoji.js';
 import focusVisiblePolyfill from 'focus-visible';
 
 setEmojiAssetUrl('https://storage.cloud.google.com/switch_static/joypixels/svg/unicode/')
+setEmojiAssetUrl('https://storage.cloud.google.com/switch_static/joypixels/svg/unicode/', '.svg')
 app.use(fixDefaultSlot);
 
 addParameters({
