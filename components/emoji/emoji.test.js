@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtEmoji from './emoji.vue';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '@/common/emoji.js';
 import { flushPromises } from '@/common/utils.js';
@@ -8,7 +8,7 @@ setEmojiAssetUrlSmall('https://mockstorage.com/emojis/', '.png');
 setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');
 
 // Constants
-const basePropsData = {};
+const baseProps = {};
 
 describe('DtEmoji Tests', function () {
   // Wrappers
@@ -16,10 +16,9 @@ describe('DtEmoji Tests', function () {
   let emoji;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
-  let provide = {};
 
   // Expected
   const expectedSmileSrc = 'https://mockstorage.com/emojis/1f604.svg';
@@ -34,28 +33,23 @@ describe('DtEmoji Tests', function () {
 
   const _setWrappers = async () => {
     wrapper = mount(DtEmoji, {
-      propsData,
+      props,
       attrs,
       slots,
-      provide,
-      localVue: this.localVue,
     });
     await flushPromises();
     await _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
+  before(function () {});
   beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
-    provide = {};
   });
   after(function () {});
 
@@ -66,7 +60,7 @@ describe('DtEmoji Tests', function () {
 
     describe('When a code string is passed in', function () {
       beforeEach(async function () {
-        propsData = {
+        props = {
           code: ':smile:',
         };
         await _setWrappers();
@@ -119,7 +113,7 @@ describe('DtEmoji Tests', function () {
 
     describe('When a skin tone emoji is passed in', function () {
       beforeEach(async function () {
-        propsData = {
+        props = {
           code: ':point_up_tone1:',
         };
         await _setWrappers();
@@ -131,7 +125,7 @@ describe('DtEmoji Tests', function () {
 
     describe('When an emoji unicode is passed in', function () {
       beforeEach(async function () {
-        propsData = {
+        props = {
           code: '☝🏻',
         };
         await _setWrappers();
@@ -149,7 +143,7 @@ describe('DtEmoji Tests', function () {
 
     describe('When an emoji is rendered', function () {
       beforeEach(async function () {
-        propsData = {
+        props = {
           code: ':smile:',
         };
         await _setWrappers();
