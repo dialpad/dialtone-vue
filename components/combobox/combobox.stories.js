@@ -148,6 +148,8 @@ export default {
     options: {
       showPanel: true,
     },
+    // Set the viewports in Chromatic at a story level.
+    chromatic: { viewports: [320, 1200] },
   },
 };
 
