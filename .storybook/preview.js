@@ -7,8 +7,8 @@ import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '../common/emoji.js';
 import focusVisiblePolyfill from 'focus-visible';
 
-setEmojiAssetUrlSmall('https://storage.cloud.google.com/dialpad_static/joypixels/png/unicode/32/', '.png');
-setEmojiAssetUrlLarge('https://storage.cloud.google.com/dialpad_static/joypixels/svg/unicode/', '.svg');
+setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
+setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
 app.use(fixDefaultSlot);
 
 addParameters({
