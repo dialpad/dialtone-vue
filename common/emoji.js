@@ -87,7 +87,10 @@ export async function codeToEmojiData (code) {
   if (code.startsWith(':') && code.endsWith(':')) {
     return shortcodeToEmojiData(emojiJson, code);
   } else {
-    const key = unicodeToString(code);
-    return emojiJson[key];
+    const unicodeString = unicodeToString(code);
+
+    const result = emojiJson[unicodeString];
+    result.key = unicodeString;
+    return result;
   }
 }
