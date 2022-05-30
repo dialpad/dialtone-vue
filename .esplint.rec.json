@@ -17,9 +17,6 @@
     "components/dropdown/dropdown.vue": {
       "vue/no-deprecated-dollar-listeners-api": 1
     },
-    "components/emoji_text_wrapper/emoji_text_wrapper.vue": {
-      "vue/no-deprecated-dollar-listeners-api": 1
-    },
     "components/input/input.vue": {
       "max-lines": 1
     },
