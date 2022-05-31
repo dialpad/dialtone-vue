@@ -44,10 +44,6 @@ describe('DtChip Tests', function () {
     _setChildWrappers();
   };
 
-  // Setup
-  before(function () {
-  });
-
   // Teardown
   afterEach(function () {
     propsData = basePropsData;
