@@ -55,6 +55,10 @@ export function shortcodeToEmojiData (object, shortcode) {
   return reference;
 }
 
+export function unicodeToEmojiData (object, unicode) {
+  return object[unicode];
+}
+
 // Takes in an emoji unicode character(s) and converts it to an emoji string in the format the emoji data object expects
 // as a key. There can be multiple unicode characters in an emoji to denote the emoji itself, skin tone, gender
 // and such.
