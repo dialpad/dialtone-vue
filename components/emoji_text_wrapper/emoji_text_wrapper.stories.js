@@ -6,7 +6,18 @@ import DtEmojiTextWrapperVariantsTemplate from './emoji_text_wrapper_variants.st
 
 // Default Prop Values
 export const argsData = {
-  default: 'This is an example text with :smile: :invalid_emoji: :smile: and 😅 emojis',
+  default: `
+    <div>
+      <span>First example with :smile: emoji</span>
+      <span>Second example with 🤓 emoji</span>
+      <div>
+        <button>Elegant button :face_with_monocle:</button>
+      </div>
+      <div>
+        <input type="text" value="example input with :cry:">      
+      </div>
+    </div>
+  `,
 };
 
 /**

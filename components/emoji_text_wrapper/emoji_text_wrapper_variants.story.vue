@@ -1,38 +1,29 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
-  <!--
-    We can bind the data that the user entered into the storybook controls to props by using a property of the same name
-    as the storybook control defined in the corresponding `.story.js` file.
-  -->
-  <dt-emoji-text-wrapper
-    :some="some"
-  >
-    <!--
-      We can also bind any slot data that the user has entered into the storybook controls. In this example we
-      conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
+  <div>
+    <dt-emoji-text-wrapper>
+      <dt-button kind="danger">
+        Button with custom :smile: and invalid 🫡 emojis
+      </dt-button>
+    </dt-emoji-text-wrapper>
 
-      The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-
-      We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-      same name.
-    -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
-    </template>
-    <template
-      v-if="someSlot"
-      #some
-    >
-      <span v-html="someSlot" />
-    </template>
-  </dt-emoji-text-wrapper>
+    <dt-emoji-text-wrapper>
+      <dt-input placeholder="value with :smile: emoji inside">
+        Input with custom :smile: emoji
+      </dt-input>
+    </dt-emoji-text-wrapper>
+  </div>
 </template>
 
 <script>
 import DtEmojiTextWrapper from './emoji_text_wrapper';
+import { DtInput, DtButton } from '@';
 
 export default {
   name: 'DtEmojiTextWrapperVariants',
-  components: { DtEmojiTextWrapper },
+  components: {
+    DtButton,
+    DtInput,
+    DtEmojiTextWrapper,
+  },
 };
 </script>

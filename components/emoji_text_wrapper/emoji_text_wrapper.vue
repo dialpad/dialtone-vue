@@ -1,13 +1,16 @@
 <script>
 import {} from './emoji_text_wrapper_constants.js';
 import { DtEmoji } from '../emoji';
-import { getEmojiJson, shortcodeToEmojiData } from '@/common/emoji';
+import { getEmojiJson, shortcodeToEmojiData, unicodeToEmojiData, unicodeToString } from '@/common/emoji';
+import { DtButton } from '../button';
+const emojiRegex = require('emoji-regex');
 
 export default {
   name: 'DtEmojiTextWrapper',
 
   components: {
     DtEmoji,
+    DtButton,
   },
 
   props: {},
@@ -23,13 +26,6 @@ export default {
   },
 
   methods: {
-
-    updateList () {
-      this.textContent = this.$refs.text_wrapper.innerText;
-      this.findShortCodes();
-      this.findEmojis();
-    },
-
     /**
      * Finds every shortcode in slot text
      * filters only the existing codes in emojiJson and
@@ -37,8 +33,8 @@ export default {
      * @returns {string[]}
      */
     findShortCodes (textContent) {
-      const shortCodes = textContent.match(/:[^:]+:/g) || [];
-      return shortCodes.filter(code => shortcodeToEmojiData(this.emojiJson, code));
+      const shortCodes = textContent.match(/:[^:]+:/g);
+      return shortCodes ? shortCodes.filter(code => shortcodeToEmojiData(this.emojiJson, code)) : [];
     },
 
     /**
@@ -47,19 +43,26 @@ export default {
      * @returns {string[]}
      */
     findEmojis (textContent) {
-      return textContent.match(/\p{Emoji}+/gu) || textContent.match(/[\p{Emoji}\u200d]+/gu) || [];
+      const emojis = [...textContent.matchAll(emojiRegex())];
+      return emojis.length
+        ? emojis.filter(match => {
+          const emoji = match[0];
+          const unicode = unicodeToString(emoji);
+          return unicodeToEmojiData(this.emojiJson, unicode);
+        }).map(match => match[0])
+        : [];
     },
 
     /**
      * Replaces the valid shortcodes and emojis from the wrapper text content with the DtEmoji component.
      * @returns Object
      */
-    textToVnodes (h, replaceList, textContent) {
+    textToVNodes (replaceList, textContent) {
       const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
       const split = textContent.split(regexp);
-      const vNodes = split.map((item) => {
+      return split.map((item) => {
         if (replaceList.includes(item)) {
-          return h(DtEmoji, {
+          return this.$createElement(DtEmoji, {
             attrs: {
               class: 'd-d-inline-block',
             },
@@ -70,20 +73,35 @@ export default {
         }
         return item;
       });
-      return vNodes;
+    },
+
+    // TODO: Find emojis and shortcodes on input value?
+    // TODO: Find a way to crawl nodes and components
+    replaceTextContent (vNode) {
+      if (vNode.componentOptions) {
+        // return this.$createElement('span', this.replaceTextContent(vNode.componentInstance.$slots.default));
+      } else {
+        // This is a text vNode, replace the text inside it
+        if (!vNode.tag && vNode.text) {
+          const textContent = vNode.text.trim();
+          const shortcodes = this.findShortCodes(textContent);
+          const emojis = this.findEmojis(textContent);
+          const replaceList = Array.from(new Set(shortcodes)).concat(Array.from(new Set(emojis)));
+          if (replaceList.length === 0) return textContent;
+          return this.textToVNodes(replaceList, textContent);
+        }
+
+        return vNode.children.map(node => this.$createElement(vNode.tag, this.replaceTextContent(node)));
+      }
     },
   },
 
   render (h) {
     // eslint-disable-next-line vue/require-slots-as-functions
-    const textContent = this.$slots.default[0].text;
+    const vNodes = this.$slots.default.map(vNode => this.replaceTextContent(vNode));
+    // vNodes.children.map(vNode => this.replaceTextContent(vNode));
 
-    const shortcodes = this.findShortCodes(textContent);
-    const emojis = this.findEmojis(textContent);
-    const replaceList = Array.from(new Set(shortcodes)).concat(Array.from(new Set(emojis)));
-    const vNodes = this.textToVnodes(h, replaceList, textContent);
-
-    return h('span', vNodes);
+    return h('div', vNodes);
   },
 };
 </script>
