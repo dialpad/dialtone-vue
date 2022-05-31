@@ -112,7 +112,7 @@ export default {
 };
 
 // Templates
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtChipDefaultTemplate);
+const Template = (args) => createTemplateFromVueFile(args, DtChipDefaultTemplate);
 const defaultImage = require('../avatar/person.png');
 
 // Stories
