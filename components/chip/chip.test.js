@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 import DtChip from './chip.vue';
 
@@ -40,14 +40,12 @@ describe('DtChip Tests', function () {
       propsData,
       slots,
       listeners,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
   before(function () {
-    this.localVue = createLocalVue();
   });
 
   // Teardown

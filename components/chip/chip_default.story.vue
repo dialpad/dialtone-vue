@@ -1,34 +1,32 @@
 <template>
   <dt-chip
-    :hide-close="hideClose"
-    :close-button-props="closeButtonProps"
-    :interactive="interactive"
-    :size="size"
-    :labelled-by-id="labelledById"
-    :avatar-props="avatarProps"
-    @click="onClick"
-    @close="onClose"
+    :hide-close="$attrs.hideClose"
+    :close-button-props="$attrs.closeButtonProps"
+    :interactive="$attrs.interactive"
+    :size="$attrs.size"
+    :labelled-by-id="$attrs.labelledById"
+    :avatar-props="$attrs.avatarProps"
+    @click="$attrs.onClick"
+    @close="$attrs.onClose"
   >
     <template
-      v-if="icon"
-      slot="icon"
+      v-if="$attrs.icon"
+      #icon
     >
-      <component :is="icon" />
+      <component :is="$attrs.icon" />
     </template>
-    <span
-      v-if="defaultSlot"
-      v-html="defaultSlot"
-    />
+    <v-html :html="defaultSlot" />
   </dt-chip>
 </template>
 
 <script>
 import DtChip from './chip';
 import icon from '@/common/mixins/icon';
+import VHtml from '@/common/v_html';
 
 export default {
   name: 'DtChipDefault',
-  components: { DtChip },
+  components: { DtChip, VHtml },
   mixins: [icon],
 };
 </script>
