@@ -167,7 +167,7 @@ export default {
     },
 
     onClose () {
-      if (this.interactive) {
+      if (!this.hideClose) {
         this.$emit('close');
       }
     },
