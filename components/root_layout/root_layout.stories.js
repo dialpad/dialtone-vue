@@ -88,7 +88,7 @@ export const argTypesData = {
   },
 
   // Props
-  sidebarPositions: {
+  sidebarPosition: {
     defaultValue: 'left',
     control: {
       type: 'select',
