@@ -26,6 +26,15 @@ export const argTypesData = {
     },
   },
 
+  avatar: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
   // Props
   hideClose: {
     control: 'boolean',
@@ -33,7 +42,7 @@ export const argTypesData = {
   interactive: {
     control: 'boolean',
   },
-  labelledById: {
+  id: {
     table: {
       defaultValue: {
         summary: 'generated unique ID',
@@ -46,11 +55,11 @@ export const argTypesData = {
       options: Object.keys(CHIP_SIZE_MODIFIERS),
     },
   },
-  avatarProps: {
-    control: 'object',
+  ariaLabel: {
+    control: 'text',
     table: {
-      defaultValue: {
-        summary: '{}',
+      type: {
+        summary: 'VNode',
       },
     },
   },
@@ -84,9 +93,6 @@ export const argTypesData = {
 
 // Default Props for all variations
 export const argsData = {
-  closeButtonProps: {
-    ariaLabel: 'Close',
-  },
   onClose: action('close'),
   onClick: action('click'),
 };
@@ -113,12 +119,17 @@ export default {
 
 // Templates
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtChipDefaultTemplate);
-const defaultImage = require('../avatar/person.png');
 
 // Stories
 export const Default = Template.bind({});
 Default.args = {
   default: 'Chip',
+  ariaLabel: 'wtf',
+  id: 'id',
+  contentClass: 'test',
+  closeButtonProps: {
+    ariaLabel: 'qwerqwer',
+  },
 };
 
 export const WithIcon = Template.bind({});
@@ -130,10 +141,7 @@ WithIcon.args = {
 export const WithAvatar = Template.bind({});
 WithAvatar.args = {
   ...Default.args,
-  avatarProps: {
-    src: defaultImage,
-    alt: 'Person Avatar',
-  },
+  avatar: 'DP',
 };
 
 export const NonInteractive = Template.bind({});

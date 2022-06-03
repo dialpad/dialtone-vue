@@ -12,8 +12,6 @@ import DtChip from './chip';
 
 ## Base Style
 
-Some description of how to use the base component, potential gotchas and limitations.
-
 <Canvas>
   <Story id="components-chip--default" />
 </Canvas>
@@ -24,6 +22,10 @@ Some description of how to use the base component, potential gotchas and limitat
 
 ## Usage
 
+Default behaviour is interactive, has hover/focus/active states.
+
+Default content text is aria-label unless overridden by passed in aria-label.
+
 ```jsx
 import { DtChip } from '@dialpad/dialtone-vue';
 ```
@@ -31,6 +33,9 @@ import { DtChip } from '@dialpad/dialtone-vue';
 ```html
 <dt-chip
   :close-button-props="closeButtonProps"
+  :aria-label="aria-label"
+  :id="id"
+  :content-class="test"
 />
 ```
 
@@ -43,7 +48,7 @@ import { DtChip } from '@dialpad/dialtone-vue';
 ```jsx
 <dt-chip
   :close-button-props="closeButtonProps"
-  icon: 'IconLock',
+  icon: 'IconLock'
 />
 ```
 
@@ -56,14 +61,13 @@ import { DtChip } from '@dialpad/dialtone-vue';
 ```jsx
 <dt-chip
   :close-button-props="closeButtonProps"
-  avatarProps: {
-    src: defaultImage,
-    alt: 'Person Avatar',
-  },
+ avatar: "DC"
 />
 ```
 
 ## Non Interactive
+
+Can't focus on the chip, can not tab through.
 
 <Canvas>
   <Story id="components-chip--non-interactive" />
@@ -72,7 +76,7 @@ import { DtChip } from '@dialpad/dialtone-vue';
 ```jsx
 <dt-chip
   :close-button-props="closeButtonProps"
-  interactive: false,
-  hideClose: true,
+  interactive: false
+  hideClose: true
 />
 ```

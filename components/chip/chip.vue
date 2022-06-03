@@ -1,14 +1,14 @@
 <template>
   <span
+    :id="id"
     :class="chipClasses()"
     data-qa="dt-chip"
-    :tabindex="chipTabIndex"
-    :aria-labelledby="labelledById"
+    :tabindex="tabIndex"
+    :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
     @mousedown="onClick"
     @mouseup="onClick"
     @mouseleave="isActive = false"
     @focusout="isActive = false"
-    @close="onClose"
     @keydown.enter="onClick"
     @keyup.enter="onClick"
     @keyup.delete="onClose"
@@ -21,20 +21,19 @@
       <!-- @slot Chip icon -->
       <slot name="icon" />
     </span>
-    <dt-avatar
-      v-else-if="showAvatar"
+    <span
+      v-else-if="$slots.avatar"
       data-qa="dt-chip-avatar"
     >
-      <img
-        :src="avatarProps.src"
-        :alt="avatarProps.alt"
-      >
-    </dt-avatar>
+      <!-- @slot Chip avatar -->
+      <slot name="avatar" />
+    </span>
     <span
       v-if="$slots.default"
-      :id="labelledById"
+      :id="`${id}-content`"
+      :aria-label="ariaLabel"
       data-qa="dt-chip-label"
-      class="d-truncate"
+      :class="['d-truncate', contentClass]"
     >
       <!-- @slot Content within chip -->
       <slot />
@@ -53,7 +52,6 @@
         data-qa="dt-chip-close"
         circle
         importance="clear"
-        :aria-label="closeButtonProps.ariaLabel"
         @click="$emit('close')"
       >
         <icon-close />
@@ -65,7 +63,6 @@
 <script>
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import { DtButton } from '../button';
-import { DtAvatar } from '../avatar';
 import { CHIP_SIZE_MODIFIERS } from './chip_constants';
 import { getUniqueString } from '@/common/utils';
 
@@ -74,7 +71,6 @@ export default {
 
   components: {
     IconClose,
-    DtAvatar,
     DtButton,
   },
 
@@ -84,7 +80,6 @@ export default {
      */
     closeButtonProps: {
       type: Object,
-      required: true,
       validator: (props) => {
         return !!props.ariaLabel;
       },
@@ -122,17 +117,25 @@ export default {
     /**
      * Id to use for the dialog's aria-labelledby.
      */
-    labelledById: {
+    id: {
       type: String,
       default: function () { return getUniqueString(); },
     },
 
     /**
-     * Pass in avatarProps to show an avatar.
+     * Descriptive label for the chip content.
      */
-    avatarProps: {
-      type: Object,
-      default: () => ({}),
+    ariaLabel: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Additional class name for the chip element.
+     */
+    contentClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 
@@ -145,12 +148,8 @@ export default {
   },
 
   computed: {
-    chipTabIndex () {
+    tabIndex () {
       return this.interactive ? 0 : -1;
-    },
-
-    showAvatar () {
-      return Object.keys(this.avatarProps)?.length;
     },
   },
 

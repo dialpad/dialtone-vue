@@ -1,2 +1,2 @@
 export { default as DtChip } from './chip.vue';
-export {} from './chip_constants';
+export { CHIP_SIZE_MODIFIERS } from './chip_constants';

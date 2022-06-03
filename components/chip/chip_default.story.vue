@@ -1,11 +1,12 @@
 <template>
   <dt-chip
+    :id="id"
     :hide-close="hideClose"
     :close-button-props="closeButtonProps"
+    :aria-label="ariaLabel"
     :interactive="interactive"
     :size="size"
-    :labelled-by-id="labelledById"
-    :avatar-props="avatarProps"
+    :content-class="contentClass"
     @click="onClick"
     @close="onClose"
   >
@@ -14,6 +15,12 @@
       slot="icon"
     >
       <component :is="icon" />
+    </template>
+    <template
+      v-else-if="avatar"
+      slot="avatar"
+    >
+      <dt-avatar v-html="avatar" />
     </template>
     <span
       v-if="defaultSlot"
@@ -24,11 +31,12 @@
 
 <script>
 import DtChip from './chip';
+import DtAvatar from '../avatar/avatar';
 import icon from '@/common/mixins/icon';
 
 export default {
   name: 'DtChipDefault',
-  components: { DtChip },
+  components: { DtChip, DtAvatar },
   mixins: [icon],
 };
 </script>
