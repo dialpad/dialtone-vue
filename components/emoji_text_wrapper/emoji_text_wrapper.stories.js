@@ -1,4 +1,5 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { EMOJI_SIZES } from '../emoji/emoji_constants';
 import DtEmojiTextWrapper from './emoji_text_wrapper';
 import DtEmojiTextWrapperMdx from './emoji_text_wrapper.mdx';
 import DtEmojiTextWrapperDefaultTemplate from './emoji_text_wrapper_default.story.vue';
@@ -6,18 +7,7 @@ import DtEmojiTextWrapperVariantsTemplate from './emoji_text_wrapper_variants.st
 
 // Default Prop Values
 export const argsData = {
-  default: `
-    <div>
-      <span>First example with :smile: emoji</span>
-      <span>Second example with 🤓 emoji</span>
-      <div>
-        <button>Elegant button :face_with_monocle:</button>
-      </div>
-      <div>
-        <input type="text" value="example input with :cry:">      
-      </div>
-    </div>
-  `,
+  default: '',
 };
 
 /**
@@ -33,6 +23,20 @@ export const argTypesData = {
       },
     },
   },
+
+  // Props
+  size: {
+    control: {
+      type: 'select',
+      options: Object.values(EMOJI_SIZES),
+    },
+    defaultValue: EMOJI_SIZES.SIZE_20,
+    table: {
+      defaultValue: {
+        summary: EMOJI_SIZES.SIZE_20,
+      },
+    },
+  },
 };
 
 // Story Collection
@@ -43,8 +47,14 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtEmojiTextWrapperMdx,
+    },
+    options: {
+      showPanel: true,
     },
   },
 };
@@ -67,3 +77,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

@@ -1,29 +1,24 @@
 <template>
-  <div>
+  <div class="d-stack16">
     <dt-emoji-text-wrapper>
-      <dt-button kind="danger">
-        Button with custom :smile: and invalid 🫡 emojis
-      </dt-button>
+      <button class="d-btn d-btn--primary d-btn--danger">
+        Button with shortcode :cry: emoji
+      </button>
     </dt-emoji-text-wrapper>
-
     <dt-emoji-text-wrapper>
-      <dt-input placeholder="value with :smile: emoji inside">
-        Input with custom :smile: emoji
-      </dt-input>
+      Text only with unicode 😃 emoji
+    </dt-emoji-text-wrapper>
+    <dt-emoji-text-wrapper>
+      Text only with invalid unicode 🫡 emoji
     </dt-emoji-text-wrapper>
   </div>
 </template>
 
 <script>
 import DtEmojiTextWrapper from './emoji_text_wrapper';
-import { DtInput, DtButton } from '@';
 
 export default {
   name: 'DtEmojiTextWrapperVariants',
-  components: {
-    DtButton,
-    DtInput,
-    DtEmojiTextWrapper,
-  },
+  components: { DtEmojiTextWrapper },
 };
 </script>
