@@ -1,7 +1,6 @@
 <script>
 import { DtEmoji, EMOJI_SIZES } from '../emoji';
-import { getEmojiJson, shortcodeToEmojiData } from '@/common/emoji';
-const emojiRegex = require('emoji-regex');
+import { getEmojiJson, findEmojis, findShortCodes } from '@/common/emoji';
 
 export default {
   name: 'DtEmojiTextWrapper',
@@ -42,29 +41,6 @@ export default {
 
   methods: {
     /**
-     * Finds every shortcode in slot text
-     * filters only the existing codes in emojiJson and
-     * removes duplicates
-     * @returns {string[]}
-     */
-    findShortCodes (textContent) {
-      const shortCodes = textContent.match(/:[^:]+:/g);
-      return shortCodes ? shortCodes.filter(code => shortcodeToEmojiData(this.emojiJson, code)) : [];
-    },
-
-    /**
-     * Finds every emoji in slot text and
-     * removes duplicates
-     * @returns {string[]}
-     */
-    findEmojis (textContent) {
-      const emojis = [...textContent.matchAll(emojiRegex())];
-      return emojis.length
-        ? emojis.map(match => match[0])
-        : [];
-    },
-
-    /**
      * Replaces the valid shortcodes and emojis from the wrapper text content with the DtEmoji component.
      * @returns Object
      */
@@ -97,9 +73,10 @@ export default {
     },
 
     replaceTextVNodeContent (VNode) {
-      const textContent = VNode.text.trim();
-      const shortcodes = this.findShortCodes(textContent);
-      const emojis = this.findEmojis(textContent);
+      const textContent = VNode.text;
+      const shortcodes = findShortCodes(this.emojiJson, textContent);
+      const emojis = findEmojis(textContent);
+
       const replaceList = Array.from(new Set(shortcodes)).concat(Array.from(new Set(emojis)));
       if (replaceList.length === 0) return textContent;
       return this.textToVNodes(replaceList, textContent);
