@@ -26,6 +26,7 @@ import { EMOJI_SIZES } from './emoji_constants.js';
 import {
   codeToEmojiData,
   stringToUnicode,
+  getEmojiJson,
   emojiImageUrlSmall,
   emojiFileExtensionSmall,
   emojiImageUrlLarge,
@@ -92,11 +93,7 @@ export default {
 
   computed: {
     emojiDataValid () {
-      if (this.emojiData) {
-        return true;
-      } else {
-        return false;
-      }
+      return !!this.emojiData;
     },
 
     emojiSrc () {
@@ -141,9 +138,13 @@ export default {
     },
   },
 
+  async created () {
+    await getEmojiJson();
+  },
+
   methods: {
-    async getEmojiData () {
-      this.emojiData = await codeToEmojiData(this.code);
+    getEmojiData () {
+      this.emojiData = codeToEmojiData(this.code);
     },
 
     imageLoaded () {

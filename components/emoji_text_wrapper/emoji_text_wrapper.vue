@@ -36,7 +36,7 @@ export default {
   },
 
   async created () {
-    this.emojiJson = await getEmojiJson();
+    await getEmojiJson();
     this.VNodes = this.$slots.default;
   },
 
@@ -81,7 +81,7 @@ export default {
 
     replaceTextVNodeContent (VNode) {
       const textContent = VNode.text;
-      const shortcodes = findShortCodes(this.emojiJson, textContent);
+      const shortcodes = findShortCodes(textContent);
       const emojis = findEmojis(textContent);
 
       const replaceList = Array.from(new Set(shortcodes)).concat(Array.from(new Set(emojis)));
