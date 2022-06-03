@@ -1,24 +1,19 @@
 import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtEmojiTextWrapper from './emoji_text_wrapper';
 
 # DtEmojiTextWrapper
 
 <Subtitle>
-  Some description of the component functionality.
+  Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
 </Subtitle>
 
-## Base Style
-
-Some description of how to use the base component, potential gotchas and limitations.
-
 <Canvas>
-  <Story id="<GROUP>-dt-emoji-text-wrapper--default" />
+  <Story id="components-emoji-text-wrapper--default" />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="<GROUP>-dt-emoji-text-wrapper--variants" />
+  <Story id="components-emoji-text-wrapper--variants" />
 </Canvas>
 
 ## Slots, Props & Events
@@ -33,18 +28,39 @@ Some description of how to use the base component, potential gotchas and limitat
 import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue';
 ```
 
-### With Some Variant
+### With Shortcode
 
-```vue
-<dt-emoji-text-wrapper
-  some="variant"
-/>
+```html
+<dt-emoji-text-wrapper>
+  Example text with bigger :smile: emoji.
+</dt-emoji-text-wrapper>
 ```
 
-### With Some Other Variant
+### With Unicode Character
 
-```vue
-<dt-emoji-text-wrapper
-  some-other="variant"
-/>
+```html
+<dt-emoji-text-wrapper>
+  Example text with bigger 😄 emoji.
+</dt-emoji-text-wrapper>
+```
+
+### With Nested Structure
+
+```html
+<dt-emoji-text-wrapper>
+  <div>
+    <button class="d-btn d-btn--primary">Example button :cry:</button>
+    <div>
+      <span>Another example 🧐</span>
+    </div>
+  </div>
+</dt-emoji-text-wrapper>
+```
+
+### With Emoji Size
+
+```html
+<dt-emoji-text-wrapper size="d-svg--48">
+  ...
+</dt-emoji-text-wrapper>
 ```

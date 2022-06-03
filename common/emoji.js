@@ -94,7 +94,7 @@ export async function codeToEmojiData (code) {
     const unicodeString = unicodeToString(code);
 
     const result = emojiJson[unicodeString];
-    result.key = unicodeString;
+    if (result) result.key = unicodeString;
     return result;
   }
 }

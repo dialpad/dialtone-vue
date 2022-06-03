@@ -1,8 +1,6 @@
 <script>
-import {} from './emoji_text_wrapper_constants.js';
-import { DtEmoji } from '../emoji';
-import { getEmojiJson, shortcodeToEmojiData, unicodeToEmojiData, unicodeToString } from '@/common/emoji';
-import { DtButton } from '../button';
+import { DtEmoji, EMOJI_SIZES } from '../emoji';
+import { getEmojiJson, shortcodeToEmojiData } from '@/common/emoji';
 const emojiRegex = require('emoji-regex');
 
 export default {
@@ -10,19 +8,36 @@ export default {
 
   components: {
     DtEmoji,
-    DtButton,
   },
 
-  props: {},
+  props: {
+    /**
+     * The size of the emoji. Can be any of the svg size utility
+     * classes from https://dialpad.design/utilities/svg/size
+     */
+    size: {
+      type: String,
+      default: EMOJI_SIZES.SIZE_20,
+      validator: (t) => Object.values(EMOJI_SIZES).includes(t),
+    },
+  },
 
   data () {
     return {
       emojiJson: {},
+      VNodes: null,
     };
   },
 
   async created () {
     this.emojiJson = await getEmojiJson();
+    this.VNodes = this.$slots.default;
+  },
+
+  beforeUpdate () {
+    // eslint-disable-next-line vue/require-slots-as-functions
+    const defaultSlotContent = this.$slots.default || [];
+    this.VNodes = defaultSlotContent.map(VNode => this.replaceVNodeContent(VNode));
   },
 
   methods: {
@@ -45,11 +60,7 @@ export default {
     findEmojis (textContent) {
       const emojis = [...textContent.matchAll(emojiRegex())];
       return emojis.length
-        ? emojis.filter(match => {
-          const emoji = match[0];
-          const unicode = unicodeToString(emoji);
-          return unicodeToEmojiData(this.emojiJson, unicode);
-        }).map(match => match[0])
+        ? emojis.map(match => match[0])
         : [];
     },
 
@@ -63,45 +74,40 @@ export default {
       return split.map((item) => {
         if (replaceList.includes(item)) {
           return this.$createElement(DtEmoji, {
-            attrs: {
-              class: 'd-d-inline-block',
-            },
-            props: {
-              code: item,
-            },
+            attrs: { class: 'd-mx4 d-d-inline-block' },
+            props: { code: item, size: this.size },
           });
         }
         return item;
       });
     },
 
-    // TODO: Find emojis and shortcodes on input value?
-    // TODO: Find a way to crawl nodes and components
-    replaceTextContent (vNode) {
-      if (vNode.componentOptions) {
-        // return this.$createElement('span', this.replaceTextContent(vNode.componentInstance.$slots.default));
-      } else {
-        // This is a text vNode, replace the text inside it
-        if (!vNode.tag && vNode.text) {
-          const textContent = vNode.text.trim();
-          const shortcodes = this.findShortCodes(textContent);
-          const emojis = this.findEmojis(textContent);
-          const replaceList = Array.from(new Set(shortcodes)).concat(Array.from(new Set(emojis)));
-          if (replaceList.length === 0) return textContent;
-          return this.textToVNodes(replaceList, textContent);
-        }
-
-        return vNode.children.map(node => this.$createElement(vNode.tag, this.replaceTextContent(node)));
+    replaceVNodeContent (VNode) {
+      if (!VNode.tag && VNode.text) {
+        return this.replaceTextVNodeContent(VNode);
       }
+
+      const children = VNode.children ? VNode.children.map(VNodeChild => this.replaceVNodeContent(VNodeChild)) : [];
+      return this.$createElement(VNode.tag, VNode.data, children);
+    },
+
+    // TODO: Find a way to crawl vue components
+    replaceVueComponentVNodeContent (VNode) {
+      //
+    },
+
+    replaceTextVNodeContent (VNode) {
+      const textContent = VNode.text.trim();
+      const shortcodes = this.findShortCodes(textContent);
+      const emojis = this.findEmojis(textContent);
+      const replaceList = Array.from(new Set(shortcodes)).concat(Array.from(new Set(emojis)));
+      if (replaceList.length === 0) return textContent;
+      return this.textToVNodes(replaceList, textContent);
     },
   },
 
   render (h) {
-    // eslint-disable-next-line vue/require-slots-as-functions
-    const vNodes = this.$slots.default.map(vNode => this.replaceTextContent(vNode));
-    // vNodes.children.map(vNode => this.replaceTextContent(vNode));
-
-    return h('div', vNodes);
+    return h('div', this.VNodes || this.$slots.default);
   },
 };
 </script>
