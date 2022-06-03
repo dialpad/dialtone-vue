@@ -11,7 +11,7 @@ export default {
 
   props: {
     /**
-     * The size of the emoji. Can be any of the svg size utility
+     * The size of all the emojis rendered. Can be any of the svg size utility
      * classes from https://dialpad.design/utilities/svg/size
      */
     size: {
