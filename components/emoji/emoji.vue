@@ -26,7 +26,6 @@ import { EMOJI_SIZES } from './emoji_constants.js';
 import {
   codeToEmojiData,
   stringToUnicode,
-  getEmojiJson,
   emojiImageUrlSmall,
   emojiFileExtensionSmall,
   emojiImageUrlLarge,
@@ -138,13 +137,9 @@ export default {
     },
   },
 
-  async created () {
-    await getEmojiJson();
-  },
-
   methods: {
-    getEmojiData () {
-      this.emojiData = codeToEmojiData(this.code);
+    async getEmojiData () {
+      this.emojiData = await codeToEmojiData(this.code);
     },
 
     imageLoaded () {
