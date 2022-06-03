@@ -1,3 +1,5 @@
+import emojiRegex from 'emoji-regex';
+
 export const emojiVersion = '6.6';
 export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
 
@@ -93,4 +95,21 @@ export async function codeToEmojiData (code) {
     if (result) result.key = unicodeString;
     return result;
   }
+}
+
+// Finds every shortcode in slot text
+// filters only the existing codes in emojiJson
+// @returns {string[]}
+export function findShortCodes (emojiJson, textContent) {
+  const shortCodes = textContent.match(/:[^:]+:/g);
+  return shortCodes ? shortCodes.filter(code => shortcodeToEmojiData(emojiJson, code)) : [];
+}
+
+// Finds every emoji in slot text
+// @returns {string[]}
+export function findEmojis (textContent) {
+  const emojis = [...textContent.matchAll(emojiRegex())];
+  return emojis.length
+    ? emojis.map(match => match[0])
+    : [];
 }
