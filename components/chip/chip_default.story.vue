@@ -20,7 +20,10 @@
       v-else-if="avatar"
       slot="avatar"
     >
-      <dt-avatar v-html="avatar" />
+      <dt-avatar
+        class="d-bgc-purple-200"
+        v-html="avatar"
+      />
     </template>
     <span
       v-if="defaultSlot"
