@@ -1,5 +1,5 @@
 <script>
-import { DtEmoji, EMOJI_SIZES } from '../emoji';
+import { DtEmoji } from '../emoji';
 import { getEmojiJson, findEmojis, findShortCodes } from '@/common/emoji';
 
 export default {
@@ -9,17 +9,9 @@ export default {
     DtEmoji,
   },
 
-  props: {
-    /**
-     * The size of all the emojis rendered. Can be any of the svg size utility
-     * classes from https://dialpad.design/utilities/svg/size
-     */
-    size: {
-      type: String,
-      default: EMOJI_SIZES.SIZE_20,
-      validator: (t) => Object.values(EMOJI_SIZES).includes(t),
-    },
+  inheritAttrs: false,
 
+  props: {
     /**
      * The type of element to use for the wrapper.
      */
@@ -58,7 +50,7 @@ export default {
         if (replaceList.includes(item)) {
           return this.$createElement(DtEmoji, {
             attrs: { class: 'd-mx4 d-d-inline-block' },
-            props: { code: item, size: this.size },
+            props: { code: item, size: this.size, ...this.$attrs },
           });
         }
         return item;
