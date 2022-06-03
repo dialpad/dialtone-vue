@@ -52,6 +52,7 @@
         data-qa="dt-chip-close"
         circle
         importance="clear"
+        :aria-label="closeButtonProps.ariaLabel"
         @click="$emit('close')"
       >
         <icon-close />

@@ -124,11 +124,11 @@ const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argType
 export const Default = Template.bind({});
 Default.args = {
   default: 'Chip',
-  ariaLabel: 'wtf',
+  ariaLabel: 'default-text',
   id: 'id',
   contentClass: 'test',
   closeButtonProps: {
-    ariaLabel: 'qwerqwer',
+    ariaLabel: 'close',
   },
 };
 
