@@ -11,9 +11,12 @@ export let emojiFileExtensionSmall = '.png';
 export let emojiImageUrlLarge = defaultEmojiAssetUrl;
 export let emojiFileExtensionLarge = '.png';
 
+export let emojiToolkit = null;
+
 export async function getEmojiJson () {
-  const emojiToolkit = await import('emoji-toolkit/emoji_strategy.json');
-  return emojiToolkit;
+  if (emojiToolkit) return;
+
+  emojiToolkit = await import('emoji-toolkit/emoji_strategy.json');
 }
 
 export function setEmojiAssetUrlSmall (url, fileExtension = '.png') {
@@ -34,7 +37,7 @@ export function setEmojiAssetUrlLarge (url, fileExtension = '.svg') {
 
 // recursively searches the emoji data object containing data for all emojis
 // and returns the object with the specified shortcode.
-export function shortcodeToEmojiData (object, shortcode) {
+export function shortcodeToEmojiData (shortcode) {
   // eslint-disable-next-line complexity
   function f (o, key) {
     if (!o || typeof o !== 'object') {
@@ -53,7 +56,7 @@ export function shortcodeToEmojiData (object, shortcode) {
   }
 
   let reference;
-  f(object, null);
+  f(emojiToolkit, null);
   return reference;
 }
 
@@ -84,14 +87,13 @@ export function stringToUnicode (str) {
 }
 
 // Takes in a code (which could be unicode or shortcode) and returns the emoji data for it.
-export async function codeToEmojiData (code) {
-  const emojiJson = await getEmojiJson();
+export function codeToEmojiData (code) {
   if (code.startsWith(':') && code.endsWith(':')) {
-    return shortcodeToEmojiData(emojiJson, code);
+    return shortcodeToEmojiData(code);
   } else {
     const unicodeString = unicodeToString(code);
 
-    const result = emojiJson[unicodeString];
+    const result = emojiToolkit[unicodeString];
     if (result) result.key = unicodeString;
     return result;
   }
@@ -100,9 +102,9 @@ export async function codeToEmojiData (code) {
 // Finds every shortcode in slot text
 // filters only the existing codes in emojiJson
 // @returns {string[]}
-export function findShortCodes (emojiJson, textContent) {
+export function findShortCodes (textContent) {
   const shortCodes = textContent.match(/:[^:]+:/g);
-  return shortCodes ? shortCodes.filter(code => shortcodeToEmojiData(emojiJson, code)) : [];
+  return shortCodes ? shortCodes.filter(code => shortcodeToEmojiData(code)) : [];
 }
 
 // Finds every emoji in slot text
