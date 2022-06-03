@@ -37,6 +37,15 @@ export const argTypesData = {
       },
     },
   },
+  elementType: {
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: 'div' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
 };
 
 // Story Collection

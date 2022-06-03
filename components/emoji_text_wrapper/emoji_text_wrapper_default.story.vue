@@ -1,5 +1,8 @@
 <template>
-  <dt-emoji-text-wrapper :size="size">
+  <dt-emoji-text-wrapper
+    :size="size"
+    :element-type="elementType"
+  >
     <template v-if="defaultSlot">
       <html-fragment :html="defaultSlot" />
     </template>

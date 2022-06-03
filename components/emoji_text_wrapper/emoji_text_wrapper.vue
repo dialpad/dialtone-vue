@@ -19,6 +19,14 @@ export default {
       default: EMOJI_SIZES.SIZE_20,
       validator: (t) => Object.values(EMOJI_SIZES).includes(t),
     },
+
+    /**
+     * The type of element to use for the wrapper.
+     */
+    elementType: {
+      type: String,
+      default: 'div',
+    },
   },
 
   data () {
@@ -84,7 +92,7 @@ export default {
   },
 
   render (h) {
-    return h('div', this.VNodes || this.$slots.default);
+    return h(this.elementType, this.VNodes || this.$slots.default);
   },
 };
 </script>
