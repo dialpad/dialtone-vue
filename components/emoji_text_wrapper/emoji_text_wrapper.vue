@@ -33,7 +33,6 @@ export default {
   },
 
   beforeUpdate () {
-    // eslint-disable-next-line vue/require-slots-as-functions
     const defaultSlotContent = this.$slots.default || [];
     this.VNodes = defaultSlotContent.map(VNode => this.replaceVNodeContent(VNode));
   },
@@ -83,7 +82,7 @@ export default {
   },
 
   render (h) {
-    return h(this.elementType, this.VNodes || this.$slots.default);
+    return h(this.elementType, this.VNodes);
   },
 };
 </script>
