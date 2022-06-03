@@ -87,7 +87,8 @@ export function stringToUnicode (str) {
 }
 
 // Takes in a code (which could be unicode or shortcode) and returns the emoji data for it.
-export function codeToEmojiData (code) {
+export async function codeToEmojiData (code) {
+  await getEmojiJson();
   if (code.startsWith(':') && code.endsWith(':')) {
     return shortcodeToEmojiData(code);
   } else {
