@@ -6,9 +6,7 @@ import DtEmojiTextWrapperDefaultTemplate from './emoji_text_wrapper_default.stor
 import DtEmojiTextWrapperVariantsTemplate from './emoji_text_wrapper_variants.story.vue';
 
 // Default Prop Values
-export const argsData = {
-  default: '',
-};
+export const argsData = {};
 
 /**
  * example prop description decorator
@@ -82,7 +80,9 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 
 // Stories
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
+Default.args = {
+  default: 'Some text with :invalid-emoji: :smile: :cry: and 😄',
+};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
