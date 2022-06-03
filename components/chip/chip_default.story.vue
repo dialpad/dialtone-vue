@@ -20,7 +20,10 @@
       v-else-if="$attrs.avatar"
       #avatar
     >
-      <dt-avatar v-html="avatar" />
+      <dt-avatar
+        class="d-bgc-purple-200"
+        v-html="avatar"
+      />
     </template>
     <v-html :html="defaultSlot" />
   </dt-chip>

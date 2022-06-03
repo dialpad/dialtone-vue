@@ -5,6 +5,7 @@
     data-qa="dt-chip"
     :tabindex="tabIndex"
     :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
+    :aria-label="ariaLabel"
     @mousedown="onClick"
     @mouseup="onClick"
     @mouseleave="isActive = false"
@@ -31,7 +32,6 @@
     <span
       v-if="$slots.default"
       :id="`${id}-content`"
-      :aria-label="ariaLabel"
       data-qa="dt-chip-label"
       :class="['d-truncate', contentClass]"
     >
@@ -125,6 +125,7 @@ export default {
 
     /**
      * Descriptive label for the chip content.
+     * If this prop is unset the content in the default slot will be used as an aria-label.
      */
     ariaLabel: {
       type: String,
