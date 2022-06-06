@@ -1,8 +1,7 @@
 const path = require('path');
 const less = require('less');
-const package = require('../package.json');
+const mainPackage = require('../package.json');
 const generate = require('generate-file-webpack-plugin');
-const vueConf = require('../vue.config');
 
 const cssLoaders = [
   'style-loader',
@@ -31,7 +30,7 @@ module.exports = {
   webpackFinal: async (config) => {
     config.plugins.push(generate({
       file: 'version.txt',
-      content: package.version
+      content: mainPackage.version
     }));
 
     config.module.rules.push({
