@@ -31,12 +31,9 @@ import { DtChip } from '@dialpad/dialtone-vue';
 ```
 
 ```html
-<dt-chip
-  :close-button-props="closeButtonProps"
-  :aria-label="aria-label"
-  :id="id"
-  :content-class="test"
-/>
+<dt-chip :close-button-props="{ ariaLabel: $i18n('close') }">
+  Chip
+</dt-chip>
 ```
 
 ## With Icon
@@ -45,11 +42,14 @@ import { DtChip } from '@dialpad/dialtone-vue';
   <Story id="components-chip--with-icon" />
 </Canvas>
 
-```jsx
-<dt-chip
-  :close-button-props="closeButtonProps"
-  icon: 'IconLock'
-/>
+```html
+import IconLock from '@dialpad/dialtone/vue/icons/IconLock';
+
+<dt-chip :close-button-props="{ ariaLabel: $i18n('close') }">
+  <template #icon>
+    <icon-lock />
+  </template>
+</dt-chip>
 ```
 
 ## With Avatar
@@ -58,11 +58,14 @@ import { DtChip } from '@dialpad/dialtone-vue';
   <Story id="components-chip--with-avatar" />
 </Canvas>
 
-```jsx
-<dt-chip
-  :close-button-props="closeButtonProps"
- avatar: "DP"
-/>
+```html
+import { DtAvatar } from '@dialpad/dialtone';
+
+<dt-chip :close-button-props="{ ariaLabel: $i18n('close') }">
+  <template #avatar>
+    <dt-avatar>DP</dt-avatar>
+  </template>
+</dt-chip>
 ```
 
 ## Non Interactive
@@ -75,8 +78,7 @@ Can't focus on the chip, can not tab through.
 
 ```jsx
 <dt-chip
-  :close-button-props="closeButtonProps"
-  interactive: false
-  hideClose: true
+  :interactive="false"
+  :hide-close="true"
 />
 ```
