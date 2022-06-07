@@ -27,6 +27,14 @@ const lessLoaders = [
 ];
 
 module.exports = {
+  core: {
+    builder: {
+      name: 'webpack5',
+      options: {
+        lazyCompilation: true,
+      },
+    },
+  },
   webpackFinal: async (config) => {
     config.plugins.push(generate({
       file: 'version.txt',
