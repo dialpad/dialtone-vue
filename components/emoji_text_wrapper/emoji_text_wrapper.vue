@@ -1,6 +1,7 @@
 <script>
 import { DtEmoji } from '../emoji';
 import { getEmojiJson, findEmojis, findShortCodes } from '@/common/emoji';
+import { h } from 'vue';
 
 export default {
   name: 'DtEmojiTextWrapper',
@@ -36,10 +37,7 @@ export default {
       const split = textContent.split(regexp);
       return split.map((item) => {
         if (replaceList.includes(item)) {
-          return this.$createElement(DtEmoji, {
-            attrs: { class: 'd-mx4 d-d-inline-block' },
-            props: { code: item, ...this.$attrs },
-          });
+          return h(DtEmoji, { ...this.$attrs, class: 'd-mx4 d-d-inline-block', code: item });
         }
         return item;
       });
@@ -51,13 +49,12 @@ export default {
      * @returns {VNode|*}
      */
     searchVNodes (VNode) {
-      // If VNode has no tag, it is a text node
-      if (!VNode.tag && VNode.text) {
-        return this.searchCodes(VNode.text);
-      }
+      if (typeof VNode === 'string') return this.searchCodes(VNode);
+      if (typeof VNode.type === 'symbol') return this.searchCodes(VNode.children);
+      if (VNode.props && VNode.props.innerHTML) return this.searchVNodes(VNode.props.innerHTML);
 
-      const children = VNode.children ? VNode.children.map(VNodeChild => this.searchVNodes(VNodeChild)) : [];
-      return this.$createElement(VNode.tag, VNode.data, children);
+      const children = Array.isArray(VNode.children) ? [...VNode.children] : [VNode.children];
+      return h(VNode.type, VNode.props, children.map(VNodeChild => this.searchVNodes(VNodeChild)));
     },
 
     // TODO: Find a way to crawl vue components
@@ -80,8 +77,8 @@ export default {
     },
   },
 
-  render (h) {
-    const defaultSlotContent = this.$slots.default || [];
+  render () {
+    const defaultSlotContent = this.$slots.default() || [];
     return h(this.elementType, defaultSlotContent.map(VNode => this.searchVNodes(VNode)));
   },
 };

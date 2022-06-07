@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtEmojiTextWrapper from './emoji_text_wrapper.vue';
 import { setEmojiAssetUrlLarge } from '@/common/emoji.js';
 import { flushPromises } from '@/common/utils.js';
@@ -7,7 +7,7 @@ import { flushPromises } from '@/common/utils.js';
 setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');
 
 // Constants
-const basePropsData = {};
+const baseProps = {};
 
 describe('DtEmojiTextWrapper Tests', function () {
   // Wrappers
@@ -15,10 +15,9 @@ describe('DtEmojiTextWrapper Tests', function () {
   let emoji;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
-  let provide = {};
 
   // Expected
   const expectedSmileSrc = 'https://mockstorage.com/emojis/1f604.svg';
@@ -30,28 +29,23 @@ describe('DtEmojiTextWrapper Tests', function () {
 
   const _setWrappers = async () => {
     wrapper = mount(DtEmojiTextWrapper, {
-      propsData,
+      props,
       attrs,
       slots,
-      provide,
-      localVue: this.localVue,
     });
     await flushPromises();
     await _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
+  before(function () {});
   beforeEach(function () {});
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
-    provide = {};
   });
   after(function () {});
 
