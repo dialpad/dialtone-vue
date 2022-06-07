@@ -70,7 +70,7 @@ export default {
       const shortcodes = findShortCodes(textContent);
       const emojis = findEmojis(textContent);
 
-      const replaceList = Array.from(new Set(shortcodes)).concat(Array.from(new Set(emojis)));
+      const replaceList = [...shortcodes, ...emojis];
       if (replaceList.length === 0) return textContent;
       return this.textToVNodes(replaceList, textContent);
     },

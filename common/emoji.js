@@ -102,17 +102,19 @@ export async function codeToEmojiData (code) {
 
 // Finds every shortcode in slot text
 // filters only the existing codes in emojiJson
+// removes duplicates.
 // @returns {string[]}
 export function findShortCodes (textContent) {
   const shortCodes = textContent.match(/:[^:]+:/g);
-  return shortCodes ? shortCodes.filter(code => shortcodeToEmojiData(code)) : [];
+  const filtered = shortCodes ? shortCodes.filter(code => shortcodeToEmojiData(code)) : [];
+  return new Set(filtered);
 }
 
 // Finds every emoji in slot text
+// removes duplicates
 // @returns {string[]}
 export function findEmojis (textContent) {
-  const emojis = [...textContent.matchAll(emojiRegex())];
-  return emojis.length
-    ? emojis.map(match => match[0])
-    : [];
+  const matches = [...textContent.matchAll(emojiRegex())];
+  const emojis = matches.length ? matches.map(match => match[0]) : [];
+  return new Set(emojis);
 }
