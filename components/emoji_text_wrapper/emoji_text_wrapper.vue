@@ -21,12 +21,6 @@ export default {
     },
   },
 
-  data () {
-    return {
-      VNodes: null,
-    };
-  },
-
   async created () {
     await getEmojiJson();
     this.$forceUpdate();
@@ -34,10 +28,10 @@ export default {
 
   methods: {
     /**
-     * Replaces the valid shortcodes and emojis from the wrapper text content with the DtEmoji component.
-     * @returns Object
+     * Replaces the valid codes from the text content with a DtEmoji component.
+     * @returns {VNode|string}
      */
-    textToVNodes (replaceList, textContent) {
+    replaceDtEmojis (replaceList, textContent) {
       const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
       const split = textContent.split(regexp);
       return split.map((item) => {
@@ -51,12 +45,18 @@ export default {
       });
     },
 
-    replaceVNodeContent (VNode) {
+    /**
+     * Recursively search the Vue virtual DOM to find text
+     * @param VNode
+     * @returns {VNode|*}
+     */
+    searchVNodes (VNode) {
+      // If VNode has no tag, it is a text node
       if (!VNode.tag && VNode.text) {
-        return this.replaceTextVNodeContent(VNode);
+        return this.searchCodes(VNode.text);
       }
 
-      const children = VNode.children ? VNode.children.map(VNodeChild => this.replaceVNodeContent(VNodeChild)) : [];
+      const children = VNode.children ? VNode.children.map(VNodeChild => this.searchVNodes(VNodeChild)) : [];
       return this.$createElement(VNode.tag, VNode.data, children);
     },
 
@@ -65,20 +65,24 @@ export default {
       //
     },
 
-    replaceTextVNodeContent (VNode) {
-      const textContent = VNode.text;
+    /**
+     * Find codes in text.
+     * @param textContent string
+     * @returns {VNode|string|*}
+     */
+    searchCodes (textContent) {
       const shortcodes = findShortCodes(textContent);
       const emojis = findEmojis(textContent);
 
       const replaceList = [...shortcodes, ...emojis];
       if (replaceList.length === 0) return textContent;
-      return this.textToVNodes(replaceList, textContent);
+      return this.replaceDtEmojis(replaceList, textContent);
     },
   },
 
   render (h) {
     const defaultSlotContent = this.$slots.default || [];
-    return h(this.elementType, defaultSlotContent.map(VNode => this.replaceVNodeContent(VNode)));
+    return h(this.elementType, defaultSlotContent.map(VNode => this.searchVNodes(VNode)));
   },
 };
 </script>
