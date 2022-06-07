@@ -30,7 +30,7 @@ export default {
   methods: {
     /**
      * Replaces the valid codes from the text content with a DtEmoji component.
-     * @returns {VNode|string}
+     * @returns {Array<VNode|string>}
      */
     replaceDtEmojis (replaceList, textContent) {
       const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
@@ -65,7 +65,7 @@ export default {
     /**
      * Find codes in text.
      * @param textContent string
-     * @returns {VNode|string|*}
+     * @returns {Array<VNode|string>|string}
      */
     searchCodes (textContent) {
       const shortcodes = findShortCodes(textContent);
