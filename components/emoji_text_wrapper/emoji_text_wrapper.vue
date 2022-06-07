@@ -22,9 +22,15 @@ export default {
     },
   },
 
+  data () {
+    return {
+      loadingEmojiJson: true,
+    };
+  },
+
   async created () {
     await getEmojiJson();
-    this.$forceUpdate();
+    this.loadingEmojiJson = false;
   },
 
   methods: {
@@ -79,7 +85,12 @@ export default {
 
   render () {
     const defaultSlotContent = this.$slots.default() || [];
-    return h(this.elementType, defaultSlotContent.map(VNode => this.searchVNodes(VNode)));
+    return h(
+      this.elementType,
+      this.loadingEmojiJson
+        ? defaultSlotContent
+        : defaultSlotContent.map(VNode => this.searchVNodes(VNode)),
+    );
   },
 };
 </script>
