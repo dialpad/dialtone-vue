@@ -19,18 +19,24 @@
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/addon-viewport": "^6.5.7",
     "@storybook/addons": "^6.5.7",
+    "@storybook/builder-webpack5": "^6.5.7",
+    "@storybook/manager-webpack5": "^6.5.7",
     "@storybook/source-loader": "^6.5.7",
     "@storybook/theming": "^6.5.7",
     "@storybook/vue3": "^6.5.7",
     "@vue/compiler-sfc": "^3.2.37",
     "babel-loader": "^8.2.5",
     "babel-preset-vue": "^2.0.2",
-    "generate-file-webpack-plugin": "^1.0.1"
+    "generate-file-webpack-plugin": "^1.0.1",
+    "webpack": "^5.73.0"
   },
   "dependencies": {
     "focus-visible": "^5.2.0",
     "postcss-focus-visible": "^6.0.4",
     "vue": "^3.2.37"
+  },
+  "resolutions": {
+    "@storybook/vue3/webpack": "^5"
   },
   "engineStrict": true,
   "engines": {
