@@ -11,12 +11,12 @@ export let emojiFileExtensionSmall = '.png';
 export let emojiImageUrlLarge = defaultEmojiAssetUrl;
 export let emojiFileExtensionLarge = '.png';
 
-export let emojiToolkit = null;
+export let emojiJson = null;
 
 export async function getEmojiJson () {
-  if (emojiToolkit) return;
+  if (emojiJson) return;
 
-  emojiToolkit = await import('emoji-toolkit/emoji_strategy.json');
+  emojiJson = await import('emoji-toolkit/emoji_strategy.json');
 }
 
 export function setEmojiAssetUrlSmall (url, fileExtension = '.png') {
@@ -56,7 +56,7 @@ export function shortcodeToEmojiData (shortcode) {
   }
 
   let reference;
-  f(emojiToolkit, null);
+  f(emojiJson, null);
   return reference;
 }
 
@@ -94,7 +94,7 @@ export async function codeToEmojiData (code) {
   } else {
     const unicodeString = unicodeToString(code);
 
-    const result = emojiToolkit[unicodeString];
+    const result = emojiJson[unicodeString];
     if (result) result.key = unicodeString;
     return result;
   }
