@@ -44,7 +44,7 @@ export default {
         if (replaceList.includes(item)) {
           return this.$createElement(DtEmoji, {
             attrs: { class: 'd-mx4 d-d-inline-block' },
-            props: { code: item, size: this.size, ...this.$attrs },
+            props: { code: item, ...this.$attrs },
           });
         }
         return item;
@@ -77,9 +77,8 @@ export default {
   },
 
   render (h) {
-    let defaultSlotContent = this.$slots.default || [];
-    defaultSlotContent = defaultSlotContent.map(VNode => this.replaceVNodeContent(VNode));
-    return h(this.elementType, defaultSlotContent);
+    const defaultSlotContent = this.$slots.default || [];
+    return h(this.elementType, defaultSlotContent.map(VNode => this.replaceVNodeContent(VNode)));
   },
 };
 </script>
