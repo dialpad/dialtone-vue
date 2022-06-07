@@ -29,12 +29,7 @@ export default {
 
   async created () {
     await getEmojiJson();
-    this.VNodes = this.$slots.default;
-  },
-
-  beforeUpdate () {
-    const defaultSlotContent = this.$slots.default || [];
-    this.VNodes = defaultSlotContent.map(VNode => this.replaceVNodeContent(VNode));
+    this.$forceUpdate();
   },
 
   methods: {
@@ -82,7 +77,9 @@ export default {
   },
 
   render (h) {
-    return h(this.elementType, this.VNodes);
+    let defaultSlotContent = this.$slots.default || [];
+    defaultSlotContent = defaultSlotContent.map(VNode => this.replaceVNodeContent(VNode));
+    return h(this.elementType, defaultSlotContent);
   },
 };
 </script>
