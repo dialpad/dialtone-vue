@@ -57,9 +57,9 @@ export default {
     searchVNodes (VNode) {
       if (typeof VNode === 'string') return this.searchCodes(VNode);
       if (typeof VNode.type === 'symbol') return this.searchCodes(VNode.children);
-      if (VNode.props && VNode.props.innerHTML) return this.searchVNodes(VNode.props.innerHTML);
+      if (VNode.props?.innerHTML) return this.searchVNodes(VNode.props.innerHTML);
 
-      const children = Array.isArray(VNode.children) ? [...VNode.children] : [VNode.children];
+      const children = Array.isArray(VNode.children) ? VNode.children : [VNode.children];
       return h(VNode.type, VNode.props, children.map(VNodeChild => this.searchVNodes(VNodeChild)));
     },
 
