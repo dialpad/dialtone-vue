@@ -84,7 +84,7 @@ export default {
   },
 
   render () {
-    const defaultSlotContent = this.$slots.default() || [];
+    const defaultSlotContent = this.$slots.default ? this.$slots.default() : [];
     return h(
       this.elementType,
       this.loadingEmojiJson
