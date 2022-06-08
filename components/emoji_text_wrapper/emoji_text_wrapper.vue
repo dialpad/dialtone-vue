@@ -87,6 +87,10 @@ export default {
     const defaultSlotContent = this.$slots.default ? this.$slots.default() : [];
     return h(
       this.elementType,
+      {
+        'data-qa': 'emoji-text-wrapper',
+        class: this.$attrs.class,
+      },
       this.loadingEmojiJson
         ? defaultSlotContent
         : defaultSlotContent.map(VNode => this.searchVNodes(VNode)),
