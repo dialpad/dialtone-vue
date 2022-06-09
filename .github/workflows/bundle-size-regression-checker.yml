@@ -29,7 +29,9 @@ jobs:
 
       - name: Get bundle size
         id: base_bundle_size
-        run: npm run build && echo "::set-output name=size::$(gzip -c dist/*.js | wc -c)"
+        run: |
+          npm run build && echo "::set-output name=size::$(gzip -c dist/**/*.js | wc -c)"
+          echo "gzipped bundle size: $(gzip -c dist/**/*.js | wc -c)"
 
   pr_bundle_size:
     runs-on: ubuntu-latest
@@ -51,7 +53,9 @@ jobs:
 
       - name: Get bundle size
         id: pr_bundle_size
-        run: npm run build && echo "::set-output name=size::$(gzip -c dist/*.js | wc -c)"
+        run: |
+          npm run build && echo "::set-output name=size::$(gzip -c dist/**/*.js | wc -c)"
+          echo "gzipped bundle size: $(gzip -c dist/**/*.js | wc -c)"
 
   check_regression:
     runs-on: ubuntu-latest
@@ -59,7 +63,18 @@ jobs:
     needs: [base_bundle_size, pr_bundle_size]
     steps:
       - name: Check bundle size increase
-        if: ${{needs.pr_bundle_size.outputs.size}} > ${{needs.base_bundle_size.outputs.size}}
+        if: ${{ needs.pr_bundle_size.outputs.size }} > ${{ needs.base_bundle_size.outputs.size }}
         uses: actions/github-script@v3
         with:
           script: core.setFailed('Bundle size increase detected')
+
+      - name: Check bundle size increase
+        if: failure()
+        run: |
+          echo "${{ needs.pr_bundle_size.outputs.size }}"
+          echo "${{ needs.base_bundle_size.outputs.size }}"
+          echo "There is an increase in the gzipped bundle size"
+          echo "Please review the changes and make sure the additions are strictly needed"
+          echo "as they will impact the performance and load times."
+          echo "${{ github.base_ref }} gzipped bundle size (in kb) ${{ needs.base_bundle_size.outputs.size }}"
+          echo "new gzipped bundle size (in kb) ${{ needs.pr_bundle_size.outputs.size }}"
