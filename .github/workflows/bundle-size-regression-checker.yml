@@ -29,7 +29,7 @@ jobs:
 
       - name: Get bundle size
         id: base_bundle_size
-        run: npm run build && ls -la && echo "::set-output name=size::$(gzip -c ./dist/**/*.js | wc -c)"
+        run: npm run build && echo "::set-output name=size::$(gzip -c $GITHUB_WORKSPACE/dist/**/*.js | wc -c)"
 
   pr_bundle_size:
     runs-on: ubuntu-latest
@@ -51,7 +51,7 @@ jobs:
 
       - name: Get bundle size
         id: pr_bundle_size
-        run: npm run build && echo "::set-output name=SIZE::$(gzip -c ./dist/**/*.js | wc -c)"
+        run: npm run build && echo "::set-output name=SIZE::$(gzip -c $GITHUB_WORKSPACE/dist/**/*.js | wc -c)"
 
   check_regression:
     runs-on: ubuntu-latest
