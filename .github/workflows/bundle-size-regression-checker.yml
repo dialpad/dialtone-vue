@@ -29,7 +29,7 @@ jobs:
 
       - name: Get bundle size
         id: base_bundle_size
-        run: npm run build && echo "::set-output name=size::$(gzip -c ./dist/**/*.js | wc -c)"
+        run: npm run build && ls -la && echo "::set-output name=size::$(gzip -c ./dist/**/*.js | wc -c)"
 
   pr_bundle_size:
     runs-on: ubuntu-latest
