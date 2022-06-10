@@ -2,11 +2,6 @@
   <button
     :class="[
       'base-button__button',
-      'base-button__button1',
-      'base-button__button2',
-      'base-button__button3',
-      'base-button__button4',
-      'base-button__button5',
       buttonClasses(),
     ]"
     data-qa="dt-button"
