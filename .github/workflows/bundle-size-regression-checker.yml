@@ -58,7 +58,7 @@ jobs:
           echo "gzipped bundle size: $(gzip -c dist/*.js | wc -c)"
 
   check_increase:
-    needs: [ base_bundle_size, pr_bundle_size ]
+    needs: [base_bundle_size, pr_bundle_size]
 
     runs-on: ubuntu-latest
 
@@ -97,3 +97,4 @@ jobs:
           echo "${{ github.base_ref }} gzipped bundle size (in bytes) ${{ needs.base_bundle_size.outputs.SIZE }}"
           echo "new gzipped bundle size (in bytes) ${{ needs.pr_bundle_size.outputs.SIZE }}"
           echo "This is ~${{ steps.check_increase.outputs.PERCENTAGE }}% more!"
+          exit 1
