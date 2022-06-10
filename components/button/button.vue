@@ -49,7 +49,6 @@ import {
 } from './button_constants';
 
 import { LINK_KIND_MODIFIERS } from '../link/link_constants';
-import _ from 'lodash';
 
 /**
  * Base Vue component for Dialtone Buttons.
@@ -232,11 +231,6 @@ export default {
         this.isInvalidPropCombination(this.circle, this.kind, this.importance);
       },
     },
-  },
-
-  mounted () {
-    const positionClone = _.cloneDeep(ICON_POSITION_MODIFIERS);
-    console.log(positionClone);
   },
 
   methods: {
