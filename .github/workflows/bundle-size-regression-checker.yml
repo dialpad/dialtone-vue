@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      HAS_INCREASED: ${{ steps.check_regression.outputs.HAS_INCREASED }}
+      HAS_INCREASED: ${{ steps.check_increase.outputs.HAS_INCREASED }}
 
     steps:
       - name: Check out branch
