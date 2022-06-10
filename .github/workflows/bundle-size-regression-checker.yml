@@ -57,13 +57,37 @@ jobs:
           npm run build && echo "::set-output name=size::$(gzip -c dist/*.js | wc -c)"
           echo "gzipped bundle size: $(gzip -c dist/*.js | wc -c)"
 
+  check_increase:
+    needs: [base_bundle_size, pr_bundle_size]
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      HAS_INCREASED: ${{ steps.check_regression.outputs.HAS_INCREASED }}
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+
+      - name: Verify increase
+        id: check_increase
+        run: |
+          HAS_INCREASED="$(( ${{ needs.pr_bundle_size.outputs.size }} > ${{ needs.base_bundle_size.outputs.size }} ))"
+          echo ::set-output name=HAS_INCREASED::"$HAS_INCREASED"
+
   check_regression:
     runs-on: ubuntu-latest
 
-    needs: [base_bundle_size, pr_bundle_size]
+    needs: [base_bundle_size, pr_bundle_size, check_increase]
+
     steps:
       - name: Check bundle size increase
-        if: ${{ needs.pr_bundle_size.outputs.size }} > ${{ needs.base_bundle_size.outputs.size }}
+        if: needs.check_increase.outputs.HAS_INCREASED == '1'
         uses: actions/github-script@v3
         with:
           script: core.setFailed('Bundle size increase detected')
@@ -71,8 +95,6 @@ jobs:
       - name: Check bundle size increase
         if: failure()
         run: |
-          echo "${{ needs.pr_bundle_size.outputs.size }}"
-          echo "${{ needs.base_bundle_size.outputs.size }}"
           echo "There is an increase in the gzipped bundle size"
           echo "Please review the changes and make sure the additions are strictly needed"
           echo "as they will impact the performance and load times."
