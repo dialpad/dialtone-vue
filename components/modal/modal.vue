@@ -46,7 +46,7 @@
           class="d-modal__header"
           data-qa="dt-modal-title"
         >
-          <b>{{ title }}</b>
+          {{ title }}
         </h2>
         <div
           v-if="$slots.default"
@@ -258,10 +258,6 @@ export default {
         }
       },
     },
-  },
-
-  mounted () {
-    console.log('testing');
   },
 
   methods: {
