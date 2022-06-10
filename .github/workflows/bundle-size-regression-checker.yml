@@ -58,12 +58,9 @@ jobs:
           echo "gzipped bundle size: $(gzip -c dist/*.js | wc -c)"
 
   check_increase:
-    needs: [base_bundle_size, pr_bundle_size]
+    needs: [ base_bundle_size, pr_bundle_size ]
 
     runs-on: ubuntu-latest
-
-    outputs:
-      HAS_INCREASED: ${{ steps.check_increase.outputs.HAS_INCREASED }}
 
     steps:
       - name: Check out branch
@@ -74,20 +71,19 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Verify increase
+      - name: Get increase
         id: check_increase
         run: |
+          THRESHOLD_PERCENTAGE=5
           HAS_INCREASED="$(( ${{ needs.pr_bundle_size.outputs.SIZE }} > ${{ needs.base_bundle_size.outputs.SIZE }} ))"
+          PERCENTAGE="$(( (${{ needs.pr_bundle_size.outputs.SIZE }} - ${{ needs.base_bundle_size.outputs.SIZE }}) * 100 / ${{ needs.base_bundle_size.outputs.SIZE }} ))"
+          INCREASE_OVER_THRESHOLD="$(( ${PERCENTAGE} > ${THRESHOLD_PERCENTAGE} ))"
           echo ::set-output name=HAS_INCREASED::"$HAS_INCREASED"
+          echo ::set-output name=PERCENTAGE::"$PERCENTAGE"
+          echo ::set-output name=INCREASE_OVER_THRESHOLD::"$INCREASE_OVER_THRESHOLD"
 
-  check_regression:
-    runs-on: ubuntu-latest
-
-    needs: [base_bundle_size, pr_bundle_size, check_increase]
-
-    steps:
       - name: Check bundle size increase
-        if: needs.check_increase.outputs.HAS_INCREASED == '1'
+        if: steps.check_increase.outputs.HAS_INCREASED == '1' && steps.check_increase.outputs.INCREASE_OVER_THRESHOLD == '1'
         uses: actions/github-script@v3
         with:
           script: core.setFailed('Bundle size increase detected')
@@ -95,9 +91,9 @@ jobs:
       - name: Check bundle size increase
         if: failure()
         run: |
-          echo "There is an increase in the gzipped bundle size"
+          echo "There is a significant increase in the gzipped bundle size"
           echo "Please review the changes and make sure the additions are strictly needed"
           echo "as they will impact the performance and load times."
           echo "${{ github.base_ref }} gzipped bundle size (in bytes) ${{ needs.base_bundle_size.outputs.SIZE }}"
           echo "new gzipped bundle size (in bytes) ${{ needs.pr_bundle_size.outputs.SIZE }}"
-          echo "This is ~$(( (${{ needs.pr_bundle_size.outputs.SIZE }} - ${{ needs.base_bundle_size.outputs.SIZE }}) * 100 / ${{ needs.base_bundle_size.outputs.SIZE }} ))% more!"
+          echo "This is ~${{ steps.check_increase.outputs.PERCENTAGE }}% more!"
