@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      size: ${{ steps.base_bundle_size.outputs.size }}
+      SIZE: ${{ steps.base_bundle_size.outputs.size }}
 
     steps:
       - name: Check out branch
@@ -30,14 +30,14 @@ jobs:
       - name: Get bundle size
         id: base_bundle_size
         run: |
-          npm run build && echo "::set-output name=size::$(gzip -c dist/*.js | wc -c)"
+          npm run build && echo "::set-output name=SIZE::$(gzip -c dist/*.js | wc -c)"
           echo "gzipped bundle size: $(gzip -c dist/*.js | wc -c)"
 
   pr_bundle_size:
     runs-on: ubuntu-latest
 
     outputs:
-      size: ${{ steps.pr_bundle_size.outputs.size }}
+      SIZE: ${{ steps.pr_bundle_size.outputs.SIZE }}
 
     steps:
       - name: Check out branch
@@ -54,7 +54,7 @@ jobs:
       - name: Get bundle size
         id: pr_bundle_size
         run: |
-          npm run build && echo "::set-output name=size::$(gzip -c dist/*.js | wc -c)"
+          npm run build && echo "::set-output name=SIZE::$(gzip -c dist/*.js | wc -c)"
           echo "gzipped bundle size: $(gzip -c dist/*.js | wc -c)"
 
   check_increase:
@@ -77,7 +77,7 @@ jobs:
       - name: Verify increase
         id: check_increase
         run: |
-          HAS_INCREASED="$(( ${{ needs.pr_bundle_size.outputs.size }} > ${{ needs.base_bundle_size.outputs.size }} ))"
+          HAS_INCREASED="$(( ${{ needs.pr_bundle_size.outputs.SIZE }} > ${{ needs.base_bundle_size.outputs.SIZE }} ))"
           echo ::set-output name=HAS_INCREASED::"$HAS_INCREASED"
 
   check_regression:
@@ -98,5 +98,5 @@ jobs:
           echo "There is an increase in the gzipped bundle size"
           echo "Please review the changes and make sure the additions are strictly needed"
           echo "as they will impact the performance and load times."
-          echo "${{ github.base_ref }} gzipped bundle size (in kb) ${{ needs.base_bundle_size.outputs.size }}"
-          echo "new gzipped bundle size (in kb) ${{ needs.pr_bundle_size.outputs.size }}"
+          echo "${{ github.base_ref }} gzipped bundle size (in bytes) ${{ needs.base_bundle_size.outputs.SIZE }}"
+          echo "new gzipped bundle size (in bytes) ${{ needs.pr_bundle_size.outputs.SIZE }}"
