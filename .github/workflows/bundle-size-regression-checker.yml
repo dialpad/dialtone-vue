@@ -100,3 +100,4 @@ jobs:
           echo "as they will impact the performance and load times."
           echo "${{ github.base_ref }} gzipped bundle size (in bytes) ${{ needs.base_bundle_size.outputs.SIZE }}"
           echo "new gzipped bundle size (in bytes) ${{ needs.pr_bundle_size.outputs.SIZE }}"
+          echo "This is ~$(( (${{ needs.pr_bundle_size.outputs.SIZE }} - ${{ needs.base_bundle_size.outputs.SIZE }}) * 100 / ${{ needs.base_bundle_size.outputs.SIZE }} ))% more!"
