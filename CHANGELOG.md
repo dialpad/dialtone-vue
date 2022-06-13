@@ -1,3 +1,24 @@
+# [2.9.0](https://github.com/dialpad/dialtone-vue/compare/v2.8.1...v2.9.0) (2022-06-13)
+
+
+### Features
+
+* **toast:** remove wrapper (`d-toast-wrapper` class) ([#379](https://github.com/dialpad/dialtone-vue/issues/379)) ([f9234c6](https://github.com/dialpad/dialtone-vue/commit/f9234c64a8caaedfc072b9d58041e495164f1875))
+
+## [2.8.1](https://github.com/dialpad/dialtone-vue/compare/v2.8.0...v2.8.1) (2022-06-09)
+
+
+### Bug Fixes
+
+* **chip:** export chip ([#377](https://github.com/dialpad/dialtone-vue/issues/377)) ([4d09b58](https://github.com/dialpad/dialtone-vue/commit/4d09b58c6bbae1d28e362be0d33d0558e1c0f469))
+
+# [2.8.0](https://github.com/dialpad/dialtone-vue/compare/v2.7.0...v2.8.0) (2022-06-08)
+
+
+### Features
+
+* **emoji text wrapper:** add emoji text wrapper component ([#366](https://github.com/dialpad/dialtone-vue/issues/366)) ([2ba412d](https://github.com/dialpad/dialtone-vue/commit/2ba412ddaeb3144fed0cbaf4b43a6eb608d79514)), closes [#367](https://github.com/dialpad/dialtone-vue/issues/367)
+
 # [2.7.0](https://github.com/dialpad/dialtone-vue/compare/v2.6.3...v2.7.0) (2022-06-06)
 
 
