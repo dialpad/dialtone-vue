@@ -100,6 +100,10 @@ export default {
     },
   },
 
+  mounted () {
+    console.log('test');
+  },
+
   methods: {
     close (event) {
       this.isOpen = !this.isOpen;
