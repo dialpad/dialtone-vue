@@ -8,6 +8,8 @@ on:
 
 jobs:
   base_bundle_size:
+    if: "!contains( github.event.pull_request.labels.*.name, 'ignore-bundle-size-check')"
+
     runs-on: ubuntu-latest
 
     outputs:
@@ -34,6 +36,8 @@ jobs:
           echo "gzipped bundle size: $(gzip -c dist/*.js | wc -c)"
 
   pr_bundle_size:
+    if: "!contains( github.event.pull_request.labels.*.name, 'ignore-bundle-size-check')"
+
     runs-on: ubuntu-latest
 
     outputs:
