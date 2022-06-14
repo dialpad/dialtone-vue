@@ -52,7 +52,7 @@ import DtNoticeContent from '../notice/notice_content';
 import DtNoticeAction from '../notice/notice_action';
 import { NOTICE_KINDS } from '../notice/notice_constants';
 import util from '@/common/utils';
-import { TOAST_ROLES } from './toast_constants';
+import { TOAST_ROLES, TOAST_MIN_DURATION } from './toast_constants';
 
 export default {
   name: 'DtToast',
@@ -147,13 +147,14 @@ export default {
 
     /**
      * The duration in ms the toast will display before disappearing.
-     * Defaults to 6000 ms and the prop validation is that provided duration is equal to or greater than 6000.
+     * The toast won't disappear until the `close` method is executed if the duration is not provided.
+     * If it's provided, it should be equal to or greater than 6000.
      */
     duration: {
       type: Number,
-      default: 6000,
+      default: undefined,
       validator: (duration) => {
-        return duration >= 6000;
+        return duration >= TOAST_MIN_DURATION;
       },
     },
   },
@@ -163,6 +164,7 @@ export default {
   data () {
     return {
       hidden: true,
+      minDuration: TOAST_MIN_DURATION,
     };
   },
 
@@ -178,6 +180,10 @@ export default {
 
       return kindClasses[this.kind];
     },
+
+    shouldSetTimeout () {
+      return !!this.duration && this.duration >= this.minDuration;
+    },
   },
 
   /* TODO Vue 3 Migration
@@ -185,20 +191,28 @@ export default {
    */
   // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
   destroyed () {
-    clearTimeout(this.displayTimer);
+    if (this.shouldSetTimeout) {
+      clearTimeout(this.displayTimer);
+    }
   },
 
   methods: {
     show () {
       this.hidden = false;
-      this.displayTimer = setTimeout(() => {
-        this.hidden = true;
-      }, this.duration);
+
+      if (this.shouldSetTimeout) {
+        this.displayTimer = setTimeout(() => {
+          this.hidden = true;
+        }, this.duration);
+      }
     },
 
     close () {
       this.hidden = true;
-      clearTimeout(this.displayTimer);
+
+      if (this.shouldSetTimeout) {
+        clearTimeout(this.displayTimer);
+      }
     },
   },
 };

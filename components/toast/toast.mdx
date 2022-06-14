@@ -70,7 +70,8 @@ Instance methods can be executed assigning a reference ID to the component using
 
 #### show()
 
-Instance method that shows the toast element for the default or provided duration time.
+Instance method that shows the toast element for the provided duration time or indefinitely if the duration
+is not provided.
 
 #### close()
 
@@ -131,8 +132,9 @@ export default {
 
 ### With duration
 
-It's recommended to use a time of at least 6000 ms (minimum duration and default value) to give users enough time
-to read the toast. Take into account that the time necessary to read and comprehend the message could vary in users.
+It's recommended to use a time of at least 6000 ms (minimum duration validated in the component) to give users enough
+time to read the toast. Take into account that the time necessary to read and comprehend the message could vary in
+users.
 For instance, users using assistive technology, or users with language barriers could potentially need more time to
 read and understand the message.
 
