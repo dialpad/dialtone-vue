@@ -6,33 +6,18 @@
     >
       <slot name="header" />
     </header>
-    <div
-      :class="['root-layout__body', {
-        'with-sidebar-left': sidebarPosition === 'left',
-        'with-sidebar-right': sidebarPosition === 'right',
-      }]"
+    <dt-root-layout-body
+      :sidebar-width="sidebarWidth"
+      :sidebar-position="sidebarPosition"
+      :content-wrap-width-percent="contentWrapWidthPercent"
     >
-      <aside
-        v-if="sidebarPosition === 'left'"
-        :style="{ 'flex-basis': sidebarWidth }"
-        class="root-layout__sidebar"
-      >
+      <template #sidebar>
         <slot name="sidebar" />
-      </aside>
-      <main
-        class="root-layout__content"
-        :style="{ 'min-inline-size': contentWrapWidthPercent }"
-      >
-        <slot />
-      </main>
-      <aside
-        v-if="sidebarPosition === 'right'"
-        :style="{ 'flex-basis': sidebarWidth }"
-        class="root-layout__sidebar"
-      >
-        <slot name="sidebar" />
-      </aside>
-    </div>
+      </template>
+      <template #content>
+        <slot name="default" />
+      </template>
+    </dt-root-layout-body>
     <footer
       class="root-layout__footer"
       :style="{ 'height': footerHeight }"
@@ -43,12 +28,15 @@
 </template>
 
 <script>
-import { ROOT_LAYOUT_POSITIONS } from './root_layout_constants.js';
+import DtRootLayoutBody from './root_layout_body';
+import { ROOT_LAYOUT_POSITIONS } from './root_layout_constants';
 
 export default {
   name: 'DtRootLayout',
 
-  components: {},
+  components: {
+    DtRootLayoutBody,
+  },
 
   mixins: [],
 
@@ -87,7 +75,7 @@ export default {
     },
 
     /**
-     * Whether the side bar is on the left or right side
+     * Whether the sidebar is on the left or right side
      * Possible options: 'left', 'right'
      */
     sidebarPosition: {
@@ -127,21 +115,5 @@ export default {
 
 .root-layout__footer {
   background-color: var(--yellow-050);
-}
-
-.root-layout__body {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0;
-}
-
-.root-layout__sidebar {
-  flex-grow: 1;
-  background-color: var(--black-025);
-}
-
-.root-layout__content {
-  flex-basis: 0;
-  flex-grow: 999;
 }
 </style>
