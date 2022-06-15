@@ -1,13 +1,13 @@
 <template>
   <div
-    v-if="!hidden"
+    v-if="isShown"
     :class="[
       'd-toast',
       kindClass,
       { 'd-toast--important': important },
     ]"
     data-qa="dt-toast"
-    :aria-hidden="hidden.toString()"
+    :aria-hidden="(!isShown).toString()"
   >
     <div class="d-toast__dialog">
       <dt-notice-icon
@@ -37,7 +37,7 @@
       <dt-notice-action
         :hide-close="hideClose"
         :close-button-props="closeButtonProps"
-        v-on="$listeners"
+        v-on="noticeActionListeners"
       >
         <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
         <slot name="action" />
@@ -130,6 +130,15 @@ export default {
     },
 
     /**
+     * Controls whether the toast is shown.
+     * Supports .sync modifier
+     */
+    show: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Props for the toast close button.
      */
     closeButtonProps: {
@@ -147,12 +156,12 @@ export default {
 
     /**
      * The duration in ms the toast will display before disappearing.
-     * The toast won't disappear until the `close` method is executed if the duration is not provided.
+     * The toast won't disappear if the duration is not provided.
      * If it's provided, it should be equal to or greater than 6000.
      */
     duration: {
       type: Number,
-      default: undefined,
+      default: null,
       validator: (duration) => {
         return duration >= TOAST_MIN_DURATION;
       },
@@ -163,7 +172,7 @@ export default {
 
   data () {
     return {
-      hidden: true,
+      isShown: false,
       minDuration: TOAST_MIN_DURATION,
     };
   },
@@ -181,14 +190,39 @@ export default {
       return kindClasses[this.kind];
     },
 
+    noticeActionListeners () {
+      return {
+        // eslint-disable-next-line vue/no-deprecated-dollar-listeners-api
+        ...this.$listeners,
+
+        close: event => {
+          this.isShown = false;
+          this.$emit('update:show', false);
+          this.$emit('close', event);
+        },
+      };
+    },
+
     shouldSetTimeout () {
       return !!this.duration && this.duration >= this.minDuration;
     },
   },
 
-  /* TODO Vue 3 Migration
-   * destroyed() should be updated to unmounted() when migrating to Vue 3.
-   */
+  watch: {
+    show: {
+      handler: function (show) {
+        this.isShown = show;
+        if (show) {
+          this.setTimeout();
+        } else {
+          this.clearTimeout();
+        }
+      },
+
+      immediate: true,
+    },
+  },
+
   // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
   destroyed () {
     if (this.shouldSetTimeout) {
@@ -197,22 +231,17 @@ export default {
   },
 
   methods: {
-    show () {
-      this.hidden = false;
-
+    setTimeout () {
       if (this.shouldSetTimeout) {
         this.displayTimer = setTimeout(() => {
-          this.hidden = true;
+          this.isShown = false;
+          this.$emit('update:show', false);
         }, this.duration);
       }
     },
 
-    close () {
-      this.hidden = true;
-
-      if (this.shouldSetTimeout) {
-        clearTimeout(this.displayTimer);
-      }
+    clearTimeout () {
+      clearTimeout(this.displayTimer);
     },
   },
 };

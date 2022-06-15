@@ -90,7 +90,7 @@ Instance method that closes the toast and removes it from the DOM.
     ref="toast"
     :title="title"
     :message="message"
-    @close="closeToast"
+    :show.sync="isShown"
   ></dt-toast>
 </template>
 
@@ -103,15 +103,8 @@ export default {
     return {
       title: 'Title',
       message: 'Message body.'
+      isShown: false,
     }
-  },
-  methods: {
-    openToast () {
-      this.$refs.toast.open();
-    },
-    closeToast () {
-      this.$refs.toast.close();
-    },
   },
 }
 </script>
@@ -125,7 +118,7 @@ export default {
     ref="toast"
     :title="title"
     :message="message"
-    @close="closeToast"
+    :show.sync="isShown"
   ></dt-toast>
 </aside>
 ```
@@ -143,5 +136,6 @@ read and understand the message.
   title="Title"
   message="Message"
   :duration="7500"
+  :show.sync="isShown"
 />
 ```

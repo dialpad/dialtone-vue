@@ -68,6 +68,20 @@ export const argTypesData = {
       options: NOTICE_KINDS,
     },
   },
+  show: {
+    table: {
+      defaultValue: {
+        summary: 'false',
+      },
+    },
+  },
+  duration: {
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
+  },
 
   // Action Event Handlers
   onClick: {

@@ -51,7 +51,7 @@ describe('DtToast Tests', function () {
   };
 
   const _showToast = async () => {
-    wrapper.vm.show();
+    await wrapper.setProps({ show: true });
     await wrapper.vm.$nextTick();
     _setChildWrappers();
   };
@@ -251,7 +251,7 @@ describe('DtToast Tests', function () {
 
         assert.isTrue(toast.exists());
 
-        wrapper.vm.close();
+        await wrapper.setProps({ show: false });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
 
