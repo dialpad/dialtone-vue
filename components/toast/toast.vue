@@ -215,7 +215,7 @@ export default {
         if (show) {
           this.setTimeout();
         } else {
-          this.clearTimeout();
+          clearTimeout(this.displayTimer);
         }
       },
 
@@ -238,10 +238,6 @@ export default {
           this.$emit('update:show', false);
         }, this.duration);
       }
-    },
-
-    clearTimeout () {
-      clearTimeout(this.displayTimer);
     },
   },
 };
