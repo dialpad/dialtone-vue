@@ -76,6 +76,7 @@ export const argTypesData = {
     },
   },
   duration: {
+    defaultValue: 6000,
     table: {
       defaultValue: {
         summary: 'null',
