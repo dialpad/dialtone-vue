@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-deprecated-v-bind-sync -->
 <template>
   <div>
     <dt-button @click="buttonClicked">
@@ -7,7 +8,7 @@
     <aside class="d-toast-wrapper">
       <dt-toast
         ref="toast"
-        v-model:show="isShown"
+        :show.sync="isShown"
         :kind="kind"
         :title="title"
         :message="message"
