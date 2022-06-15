@@ -130,7 +130,9 @@ export default {
     },
 
     /**
-     * Controls whether the toast is shown.
+     * Controls whether the toast is shown. If a valid duration is provided, the toast will disappear
+     * after reaching the duration time, so it's convenient to use `.sync` modifier with this prop to update
+     * the data in your component.
      * Supports .sync modifier
      */
     show: {
