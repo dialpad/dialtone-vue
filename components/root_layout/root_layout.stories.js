@@ -66,7 +66,7 @@ export const argTypesData = {
   },
 
   sidebar: {
-    description: 'Slot for left sidebar content',
+    description: 'Slot for sidebar content',
     control: 'text',
     table: {
       category: 'slots',

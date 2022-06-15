@@ -7,7 +7,7 @@
       <slot name="header" />
     </header>
     <div
-      :class="['with-sidebar', {
+      :class="['root-layout__body', {
         'with-sidebar-left': sidebarPosition === 'left',
         'with-sidebar-right': sidebarPosition === 'right',
       }]"
@@ -19,7 +19,10 @@
       >
         <slot name="sidebar" />
       </aside>
-      <main :style="{ 'min-inline-size': contentWrapWidthPercent }">
+      <main
+        class="root-layout__content"
+        :style="{ 'min-inline-size': contentWrapWidthPercent }"
+      >
         <slot />
       </main>
       <aside
@@ -62,7 +65,25 @@ export default {
      */
     headerHeight: {
       type: String,
-      default: '',
+      default: '64px',
+    },
+
+    /**
+     * The height of the footer
+     * Possible units rem|px|%|em
+     */
+    footerHeight: {
+      type: String,
+      default: '64px',
+    },
+
+    /**
+     * The width of the sidebar
+     * Possible units rem|px|%|em
+     */
+    sidebarWidth: {
+      type: String,
+      default: '256px',
     },
 
     /**
@@ -76,24 +97,6 @@ export default {
     },
 
     /**
-     * The width of the sidebar
-     * Possible units rem|px|%|em
-     */
-    sidebarWidth: {
-      type: String,
-      default: '260px',
-    },
-
-    /**
-     * The height of the footer
-     * Possible units rem|px|%|em
-     */
-    footerHeight: {
-      type: String,
-      default: '',
-    },
-
-    /**
      * For responsive layouts. When the main content is at the specified width percentage,
      * the sidebar will display above the content rather than beside it. Please enter a percentage string value
      *
@@ -101,7 +104,7 @@ export default {
      */
     contentWrapWidthPercent: {
       type: String,
-      default: undefined,
+      default: '50%',
     },
   },
 
@@ -120,39 +123,25 @@ export default {
 <style lang="less">
 .root-layout__header {
   background-color: var(--purple-100);
-  height: 64px;
 }
 
 .root-layout__footer {
   background-color: var(--yellow-050);
-  height: 64px;
 }
 
-.root-layout__sidebar {
-  background-color: var(--black-025);
-}
-
-.with-sidebar {
+.root-layout__body {
   display: flex;
   flex-wrap: wrap;
   gap: 0;
 }
 
-.with-sidebar-left > :first-child {
+.root-layout__sidebar {
   flex-grow: 1;
+  background-color: var(--black-025);
 }
 
-.with-sidebar-left > :last-child {
+.root-layout__content {
   flex-basis: 0;
   flex-grow: 999;
-}
-
-.with-sidebar-right > :first-child {
-  flex-basis: 0;
-  flex-grow: 999;
-}
-
-.with-sidebar-right > :last-child {
-  flex-grow: 1;
 }
 </style>
