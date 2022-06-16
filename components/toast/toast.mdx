@@ -63,16 +63,6 @@ with `role="alert"`, screen readers could override its speech queue and causes t
 import { DtToast } from '@dialpad/dialtone-vue';
 ```
 
-### Methods
-
-Instance methods can be executed assigning a reference ID to the component using
-[ref](https://v3.vuejs.org/guide/component-template-refs.html) attribute.
-
-#### show()
-
-Instance method that shows the toast element for the provided duration time or indefinitely if the duration
-is not provided.
-
 #### close()
 
 Instance method that closes the toast and removes it from the DOM.
@@ -87,7 +77,6 @@ Instance method that closes the toast and removes it from the DOM.
 <template>
   <button type="button" @click="openToast">Click to show!</button>
   <dt-toast
-    ref="toast"
     :title="title"
     :message="message"
     :show.sync="isShown"
@@ -115,7 +104,6 @@ export default {
 ```html
 <aside class="d-toast-wrapper">
   <dt-toast
-    ref="toast"
     :title="title"
     :message="message"
     :show.sync="isShown"
