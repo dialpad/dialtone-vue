@@ -1,63 +1,53 @@
 <template>
-  <span
-    :id="id"
-    :class="chipClasses()"
-    data-qa="dt-chip"
-    :tabindex="tabIndex"
-    :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
-    :aria-label="ariaLabel"
-    @mousedown="onClick"
-    @mouseup="onClick"
-    @mouseleave="isActive = false"
-    @focusout="isActive = false"
-    @keydown.enter="onClick"
-    @keyup.enter="onClick"
-    @keyup.delete="onClose"
-  >
-    <span
-      v-if="$slots.icon"
-      data-qa="dt-chip-icon"
-      class="d-chip__icon"
+  <span class="d-chip">
+    <component
+      :is="interactive ? 'button' : 'span'"
+      :id="id"
+      type="button"
+      :class="chipClasses()"
+      data-qa="dt-chip"
+      :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
+      :aria-label="ariaLabel"
+      v-on="chipListeners"
     >
-      <!-- @slot Chip icon -->
-      <slot name="icon" />
-    </span>
-    <span
-      v-else-if="$slots.avatar"
-      data-qa="dt-chip-avatar"
-    >
-      <!-- @slot Chip avatar -->
-      <slot name="avatar" />
-    </span>
-    <span
-      v-if="$slots.default"
-      :id="`${id}-content`"
-      data-qa="dt-chip-label"
-      :class="['d-truncate', contentClass]"
-    >
-      <!-- @slot Content within chip -->
-      <slot />
-    </span>
-    <span
-      v-if="!hideClose"
-      class="d-chip-btn-holder"
-    />
-    <span
-      ref="closeBtnContainer"
-      class="d-chip-btn-container"
-    >
-      <dt-button
-        v-if="!hideClose"
-        v-bind="closeButtonProps"
-        data-qa="dt-chip-close"
-        circle
-        importance="clear"
-        :aria-label="closeButtonProps.ariaLabel"
-        @click="$emit('close')"
+      <span
+        v-if="$slots.icon"
+        data-qa="dt-chip-icon"
+        class="d-chip__icon"
       >
+        <!-- @slot Chip icon -->
+        <slot name="icon" />
+      </span>
+      <span
+        v-else-if="$slots.avatar"
+        data-qa="dt-chip-avatar"
+      >
+        <!-- @slot Chip avatar -->
+        <slot name="avatar" />
+      </span>
+      <span
+        v-if="$slots.default"
+        :id="`${id}-content`"
+        data-qa="dt-chip-label"
+        :class="['d-truncate', 'd-chip__text', contentClass]"
+      >
+        <!-- @slot Content within chip -->
+        <slot />
+      </span>
+    </component>
+    <button
+      v-if="!hideClose"
+      v-bind="closeButtonProps"
+      type="button"
+      class="d-chip__close"
+      data-qa="dt-chip-close"
+      :aria-label="closeButtonProps.ariaLabel"
+      @click="$emit('close')"
+    >
+      <span class="d-btn__icon">
         <icon-close />
-      </dt-button>
-    </span>
+      </span>
+    </button>
   </span>
 </template>
 
@@ -141,7 +131,7 @@ export default {
     },
   },
 
-  emits: ['click', 'close'],
+  emits: ['click', 'close', 'keyup'],
 
   data () {
     return {
@@ -150,39 +140,36 @@ export default {
   },
 
   computed: {
-    tabIndex () {
-      return this.interactive ? 0 : -1;
+    chipListeners () {
+      return {
+        ...this.$listeners,
+        click: event => {
+          if (this.interactive) this.$emit('click', event);
+        },
+
+        keyup: event => {
+          console.log(event);
+          if (event.code?.toLowerCase() === 'delete') {
+            this.onClose();
+          } else {
+            this.$emit('keyup', event);
+          }
+        },
+      };
     },
   },
 
   methods: {
     chipClasses () {
       return [
-        'd-chip',
+        'd-chip__label',
         CHIP_SIZE_MODIFIERS[this.size],
-        {
-          'd-chip--interactive': this.interactive,
-          'd-chip--active': this.isActive,
-        },
       ];
     },
 
     onClose () {
       if (!this.hideClose) {
         this.$emit('close');
-      }
-    },
-
-    onClick (event) {
-      // Clicking on the button should not update value of isActive.
-      if (!this.interactive || this.$refs.closeBtnContainer.contains(event.target)) {
-        return;
-      }
-      if (event.type === 'mousedown' || event.type === 'keydown') {
-        this.isActive = true;
-      } else {
-        this.isActive = false;
-        this.$emit('click');
       }
     },
   },
