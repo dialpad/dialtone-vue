@@ -4,21 +4,16 @@ import DtRootLayout from './root_layout';
 # DtRootLayout
 
 <Subtitle>
-  Some description of the component functionality.
+  A Root Layout provides a standardized group of containers to hold content.
 </Subtitle>
 
 ## Base Style
 
-Some description of how to use the base component, potential gotchas and limitations.
+A root layout is used by providing content to any of the provided slots.
+It is intended mainly for use at the root level of design.
 
 <Canvas>
   <Story id="<GROUP>-root-layout--default" />
-</Canvas>
-
-## Variants
-
-<Canvas>
-  <Story id="<GROUP>-root-layout--variants" />
 </Canvas>
 
 ## Slots, Props & Events
@@ -33,18 +28,27 @@ Some description of how to use the base component, potential gotchas and limitat
 import { DtRootLayout } from '@dialpad/dialtone-vue';
 ```
 
-### With Some Variant
+### Default
 
-```vue
-<dt-root-layout
-  some="variant"
-/>
-```
-
-### With Some Other Variant
-
-```vue
-<dt-root-layout
-  some-other="variant"
-/>
+```html
+<template>
+  <dt-root-layout>
+    <template #header>
+      <div>Header</div>
+    </template>
+    <template #sidebar>
+      <div>
+      <div>Sidebar item 1</div>
+      <div>Sidebar item 2</div>
+      <div>Sidebar item 3</div>
+      </div>
+    </template>
+    <template>
+      <div>Content</div>
+    </template>
+    <template #footer>
+      <div>Footer</div>
+    </template>
+  </dt-root-layout>
+</template>
 ```
