@@ -2,7 +2,8 @@
   <div>
     <header
       class="root-layout__header"
-      :style="headerStyle"
+      :class="{ 'root-layout__header_sticky': headerSticky }"
+      :style="{ 'height': headerHeight }"
     >
       <slot name="header" />
     </header>
@@ -40,10 +41,6 @@ export default {
 
   mixins: [],
 
-  /* inheritAttrs: false is generally an option we want to set on library
-    components. This allows any attributes passed in that are not recognized
-    as props to be passed down to another element or component using v-bind:$attrs
-    more info: https://vuejs.org/v2/api/#inheritAttrs */
   inheritAttrs: false,
 
   props: {
@@ -108,15 +105,7 @@ export default {
     return {};
   },
 
-  computed: {
-    headerStyle () {
-      return {
-        height: this.headerHeight,
-        position: this.headerSticky === true ? 'sticky' : 'initial',
-        top: 0,
-      };
-    },
-  },
+  computed: {},
 
   watch: {},
 
@@ -127,6 +116,11 @@ export default {
 <style lang="less">
 .root-layout__header {
   background-color: var(--purple-100);
+}
+
+.root-layout__header_sticky {
+  position: sticky;
+  top: 0;
 }
 
 .root-layout__footer {

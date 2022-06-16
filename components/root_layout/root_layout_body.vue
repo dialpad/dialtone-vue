@@ -1,10 +1,10 @@
 <template>
   <div
-    :style="bodyStyle"
     class="root-layout__body"
+    :class="bodyClass"
   >
     <aside
-      :style="sidebarStyle"
+      :style="{ 'flex-basis': sidebarWidth }"
       class="root-layout__sidebar"
     >
       <slot name="sidebar" />
@@ -55,25 +55,8 @@ export default {
   },
 
   computed: {
-    bodyStyle () {
-      switch (this.sidebarPosition) {
-        case ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT: {
-          return {
-            'flex-direction': 'row-reverse',
-          };
-        }
-        default: {
-          return {
-            'flex-direction': 'row',
-          };
-        }
-      }
-    },
-
-    sidebarStyle () {
-      return {
-        'flex-basis': this.sidebarWidth,
-      };
+    bodyClass () {
+      return { 'root-layout__body_invert': this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT };
     },
   },
 };
@@ -84,6 +67,10 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 0;
+}
+
+.root-layout__body_invert {
+  flex-direction: row-reverse;
 }
 
 .root-layout__sidebar {
