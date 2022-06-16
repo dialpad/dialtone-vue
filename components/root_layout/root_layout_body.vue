@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { ROOT_LAYOUT_POSITIONS } from '@/components/root_layout/root_layout_constants';
+import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
 
 export default {
   name: 'DtRootLayoutBody',
@@ -45,7 +45,7 @@ export default {
     sidebarPosition: {
       type: String,
       default: 'left',
-      validator: (s) => Object.values(ROOT_LAYOUT_POSITIONS).includes(s),
+      validator: (s) => Object.values(ROOT_LAYOUT_SIDEBAR_POSITIONS).includes(s),
     },
 
     /**

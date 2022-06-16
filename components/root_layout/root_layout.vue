@@ -2,7 +2,7 @@
   <div>
     <header
       class="root-layout__header"
-      :style="{ 'height': headerHeight }"
+      :style="headerStyle"
     >
       <slot name="header" />
     </header>
@@ -29,7 +29,7 @@
 
 <script>
 import DtRootLayoutBody from './root_layout_body';
-import { ROOT_LAYOUT_POSITIONS } from './root_layout_constants';
+import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from './root_layout_constants';
 
 export default {
   name: 'DtRootLayout',
@@ -44,7 +44,7 @@ export default {
     components. This allows any attributes passed in that are not recognized
     as props to be passed down to another element or component using v-bind:$attrs
     more info: https://vuejs.org/v2/api/#inheritAttrs */
-  // inheritAttrs: false,
+  inheritAttrs: false,
 
   props: {
     /**
@@ -57,12 +57,11 @@ export default {
     },
 
     /**
-     * The height of the footer
-     * Possible units rem|px|%|em
+     * Causes the header to scroll with the container
      */
-    footerHeight: {
-      type: String,
-      default: '64px',
+    headerSticky: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -81,7 +80,7 @@ export default {
     sidebarPosition: {
       type: String,
       default: 'left',
-      validator: (s) => Object.values(ROOT_LAYOUT_POSITIONS).includes(s),
+      validator: (s) => Object.values(ROOT_LAYOUT_SIDEBAR_POSITIONS).includes(s),
     },
 
     /**
@@ -94,13 +93,30 @@ export default {
       type: String,
       default: '50%',
     },
+
+    /**
+     * The height of the footer
+     * Possible units rem|px|%|em
+     */
+    footerHeight: {
+      type: String,
+      default: '64px',
+    },
   },
 
   data () {
     return {};
   },
 
-  computed: {},
+  computed: {
+    headerStyle () {
+      return {
+        height: this.headerHeight,
+        position: this.headerSticky === true ? 'sticky' : 'initial',
+        top: 0,
+      };
+    },
+  },
 
   watch: {},
 
