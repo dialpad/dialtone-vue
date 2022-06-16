@@ -1,8 +1,8 @@
-export const ROOT_LAYOUT_POSITIONS = {
+export const ROOT_LAYOUT_SIDEBAR_POSITIONS = {
   LEFT: 'left',
   RIGHT: 'right',
 };
 
 export default {
-  ROOT_LAYOUT_POSITIONS,
+  ROOT_LAYOUT_SIDEBAR_POSITIONS,
 };

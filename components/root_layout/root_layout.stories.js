@@ -1,11 +1,10 @@
 /* eslint-disable max-len */
 // import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { ROOT_LAYOUT_POSITIONS } from './root_layout_constants';
+import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from './root_layout_constants';
 import DtRootLayout from './root_layout';
 import DtRootLayoutMdx from './root_layout.mdx';
 import DtRootLayoutDefaultTemplate from './root_layout_default.story.vue';
-import DtRootLayoutVariantsTemplate from './root_layout_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
@@ -92,7 +91,7 @@ export const argTypesData = {
     defaultValue: 'left',
     control: {
       type: 'select',
-      options: Object.values(ROOT_LAYOUT_POSITIONS),
+      options: Object.values(ROOT_LAYOUT_SIDEBAR_POSITIONS),
     },
   },
 };
@@ -123,15 +122,7 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   argTypes,
   DtRootLayoutDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRootLayoutVariantsTemplate,
-);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
-
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};

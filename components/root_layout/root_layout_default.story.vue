@@ -1,10 +1,11 @@
 <template>
   <dt-root-layout
+    :header-sticky="headerSticky"
+    :header-height="headerHeight"
     :sidebar-position="sidebarPosition"
     :sidebar-width="sidebarWidth"
-    :header-height="headerHeight"
-    :footer-height="footerHeight"
     :content-wrap-width-percent="contentWrapWidthPercent"
+    :footer-height="footerHeight"
   >
     <template
       v-if="header"
