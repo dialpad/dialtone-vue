@@ -1,8 +1,10 @@
 <template>
-  <div class="root-layout__body">
+  <div
+    :style="bodyStyle"
+    class="root-layout__body"
+  >
     <aside
-      v-if="sidebarPosition === 'left'"
-      :style="{ 'flex-basis': sidebarWidth }"
+      :style="sidebarStyle"
       class="root-layout__sidebar"
     >
       <slot name="sidebar" />
@@ -13,13 +15,6 @@
     >
       <slot name="content" />
     </main>
-    <aside
-      v-if="sidebarPosition === 'right'"
-      :style="{ 'flex-basis': sidebarWidth }"
-      class="root-layout__sidebar"
-    >
-      <slot name="sidebar" />
-    </aside>
   </div>
 </template>
 
@@ -57,6 +52,29 @@ export default {
     contentWrapWidthPercent: {
       type: String,
       default: '50%',
+    },
+  },
+
+  computed: {
+    bodyStyle () {
+      switch (this.sidebarPosition) {
+        case 'right': {
+          return {
+            'flex-direction': 'row-reverse',
+          };
+        }
+        default: {
+          return {
+            'flex-direction': 'row',
+          };
+        }
+      }
+    },
+
+    sidebarStyle () {
+      return {
+        'flex-basis': this.sidebarWidth,
+      };
     },
   },
 };
