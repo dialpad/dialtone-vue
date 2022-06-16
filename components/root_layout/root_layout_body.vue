@@ -56,7 +56,7 @@ export default {
 
   computed: {
     bodyClass () {
-      return { 'root-layout__body_invert': this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT };
+      return { 'root-layout__body--invert': this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT };
     },
   },
 };
@@ -69,7 +69,7 @@ export default {
   gap: 0;
 }
 
-.root-layout__body_invert {
+.root-layout__body--invert {
   flex-direction: row-reverse;
 }
 
