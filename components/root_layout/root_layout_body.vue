@@ -30,7 +30,7 @@ export default {
      */
     sidebarWidth: {
       type: String,
-      default: '256px',
+      default: undefined,
     },
 
     /**
@@ -39,8 +39,7 @@ export default {
      */
     sidebarPosition: {
       type: String,
-      default: 'left',
-      validator: (s) => Object.values(ROOT_LAYOUT_SIDEBAR_POSITIONS).includes(s),
+      default: undefined,
     },
 
     /**
@@ -51,14 +50,14 @@ export default {
      */
     contentWrapWidthPercent: {
       type: String,
-      default: '50%',
+      default: undefined,
     },
   },
 
   computed: {
     bodyStyle () {
       switch (this.sidebarPosition) {
-        case 'right': {
+        case ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT: {
           return {
             'flex-direction': 'row-reverse',
           };

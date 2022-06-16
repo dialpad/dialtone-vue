@@ -4,13 +4,14 @@ import DtRootLayout from './root_layout';
 # DtRootLayout
 
 <Subtitle>
-  A Root Layout provides a standardized group of containers to hold content.
+  A root layout provides a standardized group of containers to display content at the root level.
 </Subtitle>
 
 ## Base Style
 
-A root layout is used by providing content to any of the provided slots.
-It is intended mainly for use at the root level of design.
+A root layout consists of a header, body, sidebar and footer. Content passed into the slots will be displayed in
+the respective area. The sidebar is designed to be responsive and will reposition above the body when the content
+reaches a relative breakpoint.
 
 <Canvas>
   <Story id="components-root-layout--default" />
@@ -28,8 +29,6 @@ It is intended mainly for use at the root level of design.
 import { DtRootLayout } from '@dialpad/dialtone-vue';
 ```
 
-### Default
-
 ```html
 <template>
   <dt-root-layout>
@@ -38,9 +37,39 @@ import { DtRootLayout } from '@dialpad/dialtone-vue';
     </template>
     <template #sidebar>
       <div>
-      <div>Sidebar item 1</div>
-      <div>Sidebar item 2</div>
-      <div>Sidebar item 3</div>
+        <div>Sidebar item 1</div>
+        <div>Sidebar item 2</div>
+        <div>Sidebar item 3</div>
+      </div>
+    </template>
+    <template>
+      <div>Content</div>
+    </template>
+    <template #footer>
+      <div>Footer</div>
+    </template>
+  </dt-root-layout>
+</template>
+```
+
+## Sticky
+
+Try scrolling
+<Canvas>
+  <Story id="components-root-layout--sticky" />
+</Canvas>
+
+```html
+<template>
+  <dt-root-layout headerSticky="true">
+    <template #header>
+      <div>Header</div>
+    </template>
+    <template #sidebar>
+      <div>
+        <div>Sidebar item 1</div>
+        <div>Sidebar item 2</div>
+        <div>Sidebar item 3</div>
       </div>
     </template>
     <template>
