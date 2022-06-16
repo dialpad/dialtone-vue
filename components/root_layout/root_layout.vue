@@ -2,7 +2,7 @@
   <div>
     <header
       class="root-layout__header"
-      :class="{ 'root-layout__header_sticky': headerSticky }"
+      :class="{ 'root-layout__header--sticky': headerSticky }"
       :style="{ 'height': headerHeight }"
     >
       <slot name="header" />
@@ -54,7 +54,7 @@ export default {
     },
 
     /**
-     * Causes the header to scroll with the container
+     * Scroll the header with the page
      */
     headerSticky: {
       type: Boolean,
@@ -118,7 +118,7 @@ export default {
   background-color: var(--purple-100);
 }
 
-.root-layout__header_sticky {
+.root-layout__header--sticky {
   position: sticky;
   top: 0;
 }
