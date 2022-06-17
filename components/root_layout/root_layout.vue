@@ -4,6 +4,7 @@
       class="root-layout__header"
       :class="{ 'root-layout__header--sticky': headerSticky }"
       :style="{ 'height': headerHeight }"
+      data-qa="root-layout-header"
     >
       <slot name="header" />
     </header>
@@ -22,6 +23,7 @@
     <footer
       class="root-layout__footer"
       :style="{ 'height': footerHeight }"
+      data-qa="root-layout-footer"
     >
       <slot name="footer" />
     </footer>
