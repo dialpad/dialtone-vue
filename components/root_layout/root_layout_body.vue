@@ -2,10 +2,11 @@
   <div
     class="root-layout__body"
     :class="bodyClass"
+    data-qa="root-layout-body"
   >
     <aside
-      :style="{ 'flex-basis': sidebarWidth }"
       class="root-layout__sidebar"
+      :style="{ 'flex-basis': sidebarWidth }"
       data-qa="root-layout-sidebar"
     >
       <slot name="sidebar" />

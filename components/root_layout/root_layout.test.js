@@ -13,7 +13,6 @@ describe('Dialtone Vue Root Layout Tests', function () {
   let wrapper;
 
   let header;
-  let body;
   let footer;
 
   // Environment
@@ -26,7 +25,6 @@ describe('Dialtone Vue Root Layout Tests', function () {
   const _setChildWrappers = () => {
     header = wrapper.find('[data-qa="root-layout-header"]');
     footer = wrapper.find('[data-qa="root-layout-footer"]');
-    body = wrapper.find('[data-qa="root-layout-body"]');
   };
 
   const _setWrappers = () => {
@@ -63,11 +61,10 @@ describe('Dialtone Vue Root Layout Tests', function () {
 
       it('root should exist', function () { assert.isTrue(wrapper.exists()); });
       it('header should exist', function () { assert.isTrue(header.exists()); });
-      it('body should exist', function () { assert.isTrue(body.exists()); });
       it('footer should exist', function () { assert.isTrue(footer.exists()); });
     });
 
-    describe('When props are set', function () {
+    describe('When dynamic inline styles are set', function () {
       beforeEach(function () { _setWrappers(); });
 
       it('should set the header height', function () {
@@ -76,6 +73,22 @@ describe('Dialtone Vue Root Layout Tests', function () {
 
       it('should set the footer height', function () {
         assert.strictEqual(footer.element.style.getPropertyValue('height'), propsData.footerHeight);
+      });
+    });
+
+    describe('When headerSticky is set to default', function () {
+      it('Has correct class', async function () {
+        assert.strictEqual(header.classes('root-layout__header--sticky'), false);
+      });
+    });
+
+    describe('When headerSticky is set to true', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ headerSticky: true });
+      });
+
+      it('Has correct class', async function () {
+        assert.strictEqual(header.classes('root-layout__header--sticky'), true);
       });
     });
   });
