@@ -3,7 +3,10 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtRootLayout from './root_layout.vue';
 
 // Constants
-const basePropsData = {};
+const basePropsData = {
+  headerHeight: '32px',
+  footerHeight: '64px',
+};
 
 describe('Dialtone Vue Root Layout Tests', function () {
   // Wrappers
@@ -68,7 +71,11 @@ describe('Dialtone Vue Root Layout Tests', function () {
       beforeEach(function () { _setWrappers(); });
 
       it('should set the header height', function () {
-        assert.strictEqual(header.attributes('height'), propsData.headerHeight);
+        assert.strictEqual(header.element.style.getPropertyValue('height'), propsData.headerHeight);
+      });
+
+      it('should set the footer height', function () {
+        assert.strictEqual(footer.element.style.getPropertyValue('height'), propsData.footerHeight);
       });
     });
   });
