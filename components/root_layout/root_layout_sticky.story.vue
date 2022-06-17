@@ -1,7 +1,7 @@
 <template>
   <div class="d-h332 d-of-scroll">
     <dt-root-layout
-      :header-sticky="true"
+      :header-sticky="headerSticky"
       :header-height="headerHeight"
       :sidebar-position="sidebarPosition"
       :sidebar-width="sidebarWidth"

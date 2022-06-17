@@ -127,4 +127,6 @@ export const Default = DefaultTemplate.bind({});
 Default.args = {};
 
 export const Sticky = StickyTemplate.bind({});
-Sticky.args = {};
+Sticky.args = {
+  headerSticky: 'true',
+};
