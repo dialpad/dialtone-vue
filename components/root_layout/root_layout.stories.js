@@ -9,10 +9,10 @@ import DtRootLayoutStickyTemplate from './root_layout_sticky.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  header: 'Header',
-  footer: 'Footer',
-  sidebar: '<div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div>',
-  default: 'Content',
+  header: '<div class="d-h100p d-bgc-purple-100">Header</div>',
+  footer: '<div class="d-h100p d-bgc-yellow-050">Footer</div>',
+  sidebar: '<div class="d-h100p d-bgc-black-025"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>',
+  default: '<div class="d-h100p">Content</div>',
 };
 
 /**

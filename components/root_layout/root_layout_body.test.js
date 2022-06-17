@@ -119,13 +119,13 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
 
   describe('Accessibility Tests', function () {
     describe('When sidebar is rendered', function () {
-      it('Uses a `aside` tag', async function () {
+      it('Uses `aside` tag', async function () {
         assert.strictEqual(sidebar.element.tagName, 'ASIDE');
       });
     });
 
     describe('When content is rendered', function () {
-      it('Uses a `main` tag', async function () {
+      it('Uses `main` tag', async function () {
         assert.strictEqual(content.element.tagName, 'MAIN');
       });
     });

@@ -98,13 +98,13 @@ describe('Dialtone Vue Root Layout Tests', function () {
 
   describe('Accessibility Tests', function () {
     describe('When header is rendered', function () {
-      it('Uses a `header` tag', async function () {
+      it('Uses `header` tag', async function () {
         assert.strictEqual(header.element.tagName, 'HEADER');
       });
     });
 
     describe('When footer is rendered', function () {
-      it('Uses a `footer` tag', async function () {
+      it('Uses `footer` tag', async function () {
         assert.strictEqual(footer.element.tagName, 'FOOTER');
       });
     });

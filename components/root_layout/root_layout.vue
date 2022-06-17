@@ -106,26 +106,12 @@ export default {
   data () {
     return {};
   },
-
-  computed: {},
-
-  watch: {},
-
-  methods: {},
 };
 </script>
 
 <style lang="less">
-.root-layout__header {
-  background-color: var(--purple-100);
-}
-
 .root-layout__header--sticky {
   position: sticky;
   top: 0;
-}
-
-.root-layout__footer {
-  background-color: var(--yellow-050);
 }
 </style>
