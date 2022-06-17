@@ -3,7 +3,10 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtRootLayoutBody from './root_layout_body.vue';
 
 // Constants
-const basePropsData = {};
+const basePropsData = {
+  sidebarWidth: '256px',
+  contentWrapWidthPercent: '50%',
+};
 
 describe('Dialtone Vue Root Layout Body Tests', function () {
   // Wrappers
@@ -59,6 +62,21 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
       it('root should exist', function () { assert.isTrue(wrapper.exists()); });
       it('sidebar should exist', function () { assert.isTrue(sidebar.exists()); });
       it('content should exist', function () { assert.isTrue(content.exists()); });
+    });
+
+    describe('When props are set', function () {
+      beforeEach(function () { _setWrappers(); });
+
+      it('should set the sidebar width', function () {
+        assert.strictEqual(sidebar.element.style.getPropertyValue('flex-basis'), propsData.sidebarWidth);
+      });
+
+      it('should set the body content wrap percent', function () {
+        assert.strictEqual(
+          content.element.style.getPropertyValue('min-inline-size'),
+          propsData.contentWrapWidthPercent,
+        );
+      });
     });
   });
 
