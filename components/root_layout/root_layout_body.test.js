@@ -1,6 +1,7 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtRootLayoutBody from './root_layout_body.vue';
+import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
 
 // Constants
 const basePropsData = {
@@ -12,6 +13,7 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
   // Wrappers
   let wrapper;
 
+  let body;
   let sidebar;
   let content;
 
@@ -23,6 +25,7 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
+    body = wrapper.find('[data-qa="root-layout-body"]');
     sidebar = wrapper.find('[data-qa="root-layout-sidebar"]');
     content = wrapper.find('[data-qa="root-layout-content"]');
   };
@@ -60,11 +63,12 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
       beforeEach(function () { _setWrappers(); });
 
       it('root should exist', function () { assert.isTrue(wrapper.exists()); });
+      it('body should exist', function () { assert.isTrue(body.exists()); });
       it('sidebar should exist', function () { assert.isTrue(sidebar.exists()); });
       it('content should exist', function () { assert.isTrue(content.exists()); });
     });
 
-    describe('When props are set', function () {
+    describe('When dynamic inline styles are set', function () {
       beforeEach(function () { _setWrappers(); });
 
       it('should set the sidebar width', function () {
@@ -76,6 +80,34 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
           content.element.style.getPropertyValue('min-inline-size'),
           propsData.contentWrapWidthPercent,
         );
+      });
+    });
+
+    const itBehavesLikeAppliesBodyInvertClass = () => {
+      it('Has correct class', async function () {
+        assert.strictEqual(body.classes('root-layout__body--invert'), false);
+      });
+    };
+
+    describe('When sidebarPosition is set to default', function () {
+      itBehavesLikeAppliesBodyInvertClass();
+    });
+
+    describe('When sidebarPosition is set to left', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.LEFT });
+      });
+
+      itBehavesLikeAppliesBodyInvertClass();
+    });
+
+    describe('When sidebarPosition is set to right', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT });
+      });
+
+      it('Has correct class', async function () {
+        assert.strictEqual(body.classes('root-layout__body--invert'), true);
       });
     });
   });
