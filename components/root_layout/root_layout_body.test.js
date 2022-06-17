@@ -24,9 +24,7 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
 
   // Environment
   let propsData = basePropsData;
-  let attrs = {};
   let slots = baseSlotsData;
-  let provide = {};
 
   // Helpers
   const _setChildWrappers = () => {
@@ -38,9 +36,7 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
   const _setWrappers = () => {
     wrapper = shallowMount(DtRootLayoutBody, {
       propsData,
-      attrs,
       slots,
-      provide,
       localVue: this.localVue,
     });
     _setChildWrappers();
@@ -54,17 +50,11 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
   // Teardown
   afterEach(function () {
     propsData = basePropsData;
-    attrs = {};
     slots = baseSlotsData;
-    provide = {};
   });
 
   describe('Presentation Tests', function () {
-    /*
-     * Test(s) to ensure that the component is correctly rendering
-     */
-
-    describe('When root layout is rendered', function () {
+    describe('When root layout body renders', function () {
       beforeEach(function () { _setWrappers(); });
 
       it('root should exist', function () { assert.isTrue(wrapper.exists()); });
@@ -128,34 +118,16 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
   });
 
   describe('Accessibility Tests', function () {
-    /*
-     * Test(s) to ensure that the component is accessible
-     */
+    describe('When sidebar is rendered', function () {
+      it('Uses a `aside` tag', async function () {
+        assert.strictEqual(sidebar.element.tagName, 'ASIDE');
+      });
+    });
 
-    describe('When some description of the current environment', function () {});
-  });
-
-  describe('Interactivity Tests', function () {
-    /*
-     * Test(s) to ensure that the component correctly handles user input
-     */
-
-    describe('When some description of the current environment', function () {});
-  });
-
-  describe('Validation Tests', function () {
-    /*
-     * Test(s) to ensure that custom validators are working as expected
-     */
-
-    describe('When some description of the current environment', function () {});
-  });
-
-  describe('Extendability Tests', function () {
-    /*
-     * Test(s) to ensure that the component can be correctly extended
-     */
-
-    describe('When some description of the current environment', function () {});
+    describe('When content is rendered', function () {
+      it('Uses a `main` tag', async function () {
+        assert.strictEqual(content.element.tagName, 'MAIN');
+      });
+    });
   });
 });
