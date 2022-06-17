@@ -78,7 +78,6 @@ export default {
 
 .root-layout__sidebar {
   flex-grow: 1;
-  background-color: var(--black-025);
 }
 
 .root-layout__content {
