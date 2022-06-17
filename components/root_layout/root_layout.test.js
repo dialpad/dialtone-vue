@@ -8,6 +8,11 @@ const basePropsData = {
   footerHeight: '64px',
 };
 
+const baseSlotsData = {
+  header: 'header slot content',
+  footer: 'footer slot content',
+};
+
 describe('Dialtone Vue Root Layout Tests', function () {
   // Wrappers
   let wrapper;
@@ -18,7 +23,7 @@ describe('Dialtone Vue Root Layout Tests', function () {
   // Environment
   let propsData = basePropsData;
   let attrs = {};
-  let slots = {};
+  let slots = baseSlotsData;
   let provide = {};
 
   // Helpers
@@ -47,9 +52,11 @@ describe('Dialtone Vue Root Layout Tests', function () {
   afterEach(function () {
     propsData = basePropsData;
     attrs = {};
-    slots = {};
+    slots = baseSlotsData;
     provide = {};
   });
+
+  beforeEach(function () { _setWrappers(); });
 
   describe('Presentation Tests', function () {
     /*
@@ -57,16 +64,22 @@ describe('Dialtone Vue Root Layout Tests', function () {
      */
 
     describe('When root layout renders', function () {
-      beforeEach(function () { _setWrappers(); });
-
       it('root should exist', function () { assert.isTrue(wrapper.exists()); });
       it('header should exist', function () { assert.isTrue(header.exists()); });
       it('footer should exist', function () { assert.isTrue(footer.exists()); });
     });
 
-    describe('When dynamic inline styles are set', function () {
-      beforeEach(function () { _setWrappers(); });
+    describe('When slot content renders', function () {
+      it('header slot is passed down correctly', async function () {
+        assert.strictEqual(header.text(), slots.header);
+      });
 
+      it('footer slot is passed down correctly', async function () {
+        assert.strictEqual(footer.text(), slots.footer);
+      });
+    });
+
+    describe('When dynamic inline styles are set', function () {
       it('should set the header height', function () {
         assert.strictEqual(header.element.style.getPropertyValue('height'), propsData.headerHeight);
       });

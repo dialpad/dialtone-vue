@@ -9,6 +9,11 @@ const basePropsData = {
   contentWrapWidthPercent: '50%',
 };
 
+const baseSlotsData = {
+  sidebar: 'sidebar slot content',
+  content: 'content slot content',
+};
+
 describe('Dialtone Vue Root Layout Body Tests', function () {
   // Wrappers
   let wrapper;
@@ -20,7 +25,7 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
   // Environment
   let propsData = basePropsData;
   let attrs = {};
-  let slots = {};
+  let slots = baseSlotsData;
   let provide = {};
 
   // Helpers
@@ -50,7 +55,7 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
   afterEach(function () {
     propsData = basePropsData;
     attrs = {};
-    slots = {};
+    slots = baseSlotsData;
     provide = {};
   });
 
@@ -59,13 +64,23 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
      * Test(s) to ensure that the component is correctly rendering
      */
 
-    describe('When root layout renders', function () {
+    describe('When root layout is rendered', function () {
       beforeEach(function () { _setWrappers(); });
 
       it('root should exist', function () { assert.isTrue(wrapper.exists()); });
       it('body should exist', function () { assert.isTrue(body.exists()); });
       it('sidebar should exist', function () { assert.isTrue(sidebar.exists()); });
       it('content should exist', function () { assert.isTrue(content.exists()); });
+    });
+
+    describe('When slot content renders', function () {
+      it('sidebar slot is passed down correctly', async function () {
+        assert.strictEqual(sidebar.text(), slots.sidebar);
+      });
+
+      it('content slot is passed down correctly', async function () {
+        assert.strictEqual(content.text(), slots.content);
+      });
     });
 
     describe('When dynamic inline styles are set', function () {
@@ -83,14 +98,14 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
       });
     });
 
-    const itBehavesLikeAppliesBodyInvertClass = () => {
+    const itBehavesLikeExcludesBodyInvertClass = () => {
       it('Has correct class', async function () {
         assert.strictEqual(body.classes('root-layout__body--invert'), false);
       });
     };
 
     describe('When sidebarPosition is set to default', function () {
-      itBehavesLikeAppliesBodyInvertClass();
+      itBehavesLikeExcludesBodyInvertClass();
     });
 
     describe('When sidebarPosition is set to left', function () {
@@ -98,7 +113,7 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
         await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.LEFT });
       });
 
-      itBehavesLikeAppliesBodyInvertClass();
+      itBehavesLikeExcludesBodyInvertClass();
     });
 
     describe('When sidebarPosition is set to right', function () {
