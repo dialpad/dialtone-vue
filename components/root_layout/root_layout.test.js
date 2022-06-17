@@ -22,9 +22,7 @@ describe('Dialtone Vue Root Layout Tests', function () {
 
   // Environment
   let propsData = basePropsData;
-  let attrs = {};
   let slots = baseSlotsData;
-  let provide = {};
 
   // Helpers
   const _setChildWrappers = () => {
@@ -35,9 +33,7 @@ describe('Dialtone Vue Root Layout Tests', function () {
   const _setWrappers = () => {
     wrapper = shallowMount(DtRootLayout, {
       propsData,
-      attrs,
       slots,
-      provide,
       localVue: this.localVue,
     });
     _setChildWrappers();
@@ -51,18 +47,12 @@ describe('Dialtone Vue Root Layout Tests', function () {
   // Teardown
   afterEach(function () {
     propsData = basePropsData;
-    attrs = {};
     slots = baseSlotsData;
-    provide = {};
   });
 
   beforeEach(function () { _setWrappers(); });
 
   describe('Presentation Tests', function () {
-    /*
-     * Test(s) to ensure that the component is correctly rendering
-     */
-
     describe('When root layout renders', function () {
       it('root should exist', function () { assert.isTrue(wrapper.exists()); });
       it('header should exist', function () { assert.isTrue(header.exists()); });
@@ -107,34 +97,16 @@ describe('Dialtone Vue Root Layout Tests', function () {
   });
 
   describe('Accessibility Tests', function () {
-    /*
-     * Test(s) to ensure that the component is accessible
-     */
+    describe('When header is rendered', function () {
+      it('Uses a `header` tag', async function () {
+        assert.strictEqual(header.element.tagName, 'HEADER');
+      });
+    });
 
-    describe('When some description of the current environment', function () {});
-  });
-
-  describe('Interactivity Tests', function () {
-    /*
-     * Test(s) to ensure that the component correctly handles user input
-     */
-
-    describe('When some description of the current environment', function () {});
-  });
-
-  describe('Validation Tests', function () {
-    /*
-     * Test(s) to ensure that custom validators are working as expected
-     */
-
-    describe('When some description of the current environment', function () {});
-  });
-
-  describe('Extendability Tests', function () {
-    /*
-     * Test(s) to ensure that the component can be correctly extended
-     */
-
-    describe('When some description of the current environment', function () {});
+    describe('When footer is rendered', function () {
+      it('Uses a `footer` tag', async function () {
+        assert.strictEqual(footer.element.tagName, 'FOOTER');
+      });
+    });
   });
 });
