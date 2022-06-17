@@ -2,16 +2,19 @@
   <div
     class="root-layout__body"
     :class="bodyClass"
+    data-qa="root-layout-body"
   >
     <aside
       :style="{ 'flex-basis': sidebarWidth }"
       class="root-layout__sidebar"
+      data-qa="root-layout-sidebar"
     >
       <slot name="sidebar" />
     </aside>
     <main
       class="root-layout__content"
       :style="{ 'min-inline-size': contentWrapWidthPercent }"
+      data-qa="root-layout-content"
     >
       <slot name="content" />
     </main>
