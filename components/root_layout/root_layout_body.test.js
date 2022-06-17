@@ -56,8 +56,9 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
     describe('When root layout renders', function () {
       beforeEach(function () { _setWrappers(); });
 
-      it('sidebar should exist', function () { assert.exists(sidebar.element); });
-      it('content should exist', function () { assert.exists(content.element); });
+      it('root should exist', function () { assert.isTrue(wrapper.exists()); });
+      it('sidebar should exist', function () { assert.isTrue(sidebar.exists()); });
+      it('content should exist', function () { assert.isTrue(content.exists()); });
     });
   });
 
