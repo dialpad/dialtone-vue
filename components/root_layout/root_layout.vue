@@ -12,6 +12,7 @@
       :sidebar-width="sidebarWidth"
       :sidebar-position="sidebarPosition"
       :content-wrap-width-percent="contentWrapWidthPercent"
+      data-qa="root-layout-body"
     >
       <template #sidebar>
         <slot name="sidebar" />

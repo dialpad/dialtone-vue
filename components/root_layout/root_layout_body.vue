@@ -2,7 +2,6 @@
   <div
     class="root-layout__body"
     :class="bodyClass"
-    data-qa="root-layout-body"
   >
     <aside
       :style="{ 'flex-basis': sidebarWidth }"

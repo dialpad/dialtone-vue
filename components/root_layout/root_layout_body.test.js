@@ -1,17 +1,16 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import DtRootLayout from './root_layout.vue';
+import DtRootLayoutBody from './root_layout_body.vue';
 
 // Constants
 const basePropsData = {};
 
-describe('Dialtone Vue Root Layout Tests', function () {
+describe('Dialtone Vue Root Layout Body Tests', function () {
   // Wrappers
   let wrapper;
 
-  let header;
-  let body;
-  let footer;
+  let sidebar;
+  let content;
 
   // Environment
   let propsData = basePropsData;
@@ -21,13 +20,12 @@ describe('Dialtone Vue Root Layout Tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    header = wrapper.find('[data-qa="root-layout-header"]');
-    footer = wrapper.find('[data-qa="root-layout-footer"]');
-    body = wrapper.find('[data-qa="root-layout-body"]');
+    sidebar = wrapper.find('[data-qa="root-layout-sidebar"]');
+    content = wrapper.find('[data-qa="root-layout-content"]');
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtRootLayout, {
+    wrapper = shallowMount(DtRootLayoutBody, {
       propsData,
       attrs,
       slots,
@@ -58,17 +56,8 @@ describe('Dialtone Vue Root Layout Tests', function () {
     describe('When root layout renders', function () {
       beforeEach(function () { _setWrappers(); });
 
-      it('header should exist', function () { assert.exists(header.element); });
-      it('footer should exist', function () { assert.exists(footer.element); });
-      it('body should exist', function () { assert.exists(body.element); });
-    });
-
-    describe('When props are set', function () {
-      beforeEach(function () { _setWrappers(); });
-
-      it('should set the header height', function () {
-        assert.strictEqual(header.attributes('height'), propsData.headerHeight);
-      });
+      it('sidebar should exist', function () { assert.exists(sidebar.element); });
+      it('content should exist', function () { assert.exists(content.element); });
     });
   });
 
