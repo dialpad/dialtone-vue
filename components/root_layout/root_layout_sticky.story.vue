@@ -21,8 +21,10 @@
         <span v-html="sidebar" />
       </template>
       <template v-if="defaultSlot">
-        <span v-html="defaultSlot" />
-        <div class="d-h512" />
+        <div
+          class="d-h512"
+          v-html="defaultSlot"
+        />
       </template>
       <template
         v-if="footer"
