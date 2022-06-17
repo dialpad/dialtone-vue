@@ -58,9 +58,10 @@ describe('Dialtone Vue Root Layout Tests', function () {
     describe('When root layout renders', function () {
       beforeEach(function () { _setWrappers(); });
 
-      it('header should exist', function () { assert.exists(header.element); });
-      it('footer should exist', function () { assert.exists(footer.element); });
-      it('body should exist', function () { assert.exists(body.element); });
+      it('root should exist', function () { assert.isTrue(wrapper.exists()); });
+      it('header should exist', function () { assert.isTrue(header.exists()); });
+      it('body should exist', function () { assert.isTrue(body.exists()); });
+      it('footer should exist', function () { assert.isTrue(footer.exists()); });
     });
 
     describe('When props are set', function () {
