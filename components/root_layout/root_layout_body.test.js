@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtRootLayoutBody from './root_layout_body.vue';
-import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
+import { SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
 
 // Constants
 const basePropsData = {
@@ -100,7 +100,7 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
 
     describe('When sidebarPosition is set to left', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.LEFT });
+        await wrapper.setProps({ sidebarPosition: SIDEBAR_POSITIONS.LEFT });
       });
 
       itBehavesLikeExcludesBodyInvertClass();
@@ -108,7 +108,7 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
 
     describe('When sidebarPosition is set to right', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT });
+        await wrapper.setProps({ sidebarPosition: SIDEBAR_POSITIONS.RIGHT });
       });
 
       it('Has correct class', async function () {
