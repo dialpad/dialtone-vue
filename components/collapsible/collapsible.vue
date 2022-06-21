@@ -53,7 +53,10 @@
       :aria-label="ariaLabel"
       :show="isOpen"
       class="dt-collapsible__content"
-      :style="contentStyle"
+      :style="{
+        'max-height': maxHeight,
+        'max-width': maxWidth,
+      }"
       tabindex="-1"
       appear
       v-on="$listeners"
@@ -182,7 +185,6 @@ export default {
   data () {
     return {
       isOpen: true,
-      contentWidth: this.contentWidth,
     };
   },
 
