@@ -1,8 +1,7 @@
 <template>
-  <div>
+  <div class="root-layout">
     <header
-      class="root-layout__header"
-      :class="{ 'root-layout__header--sticky': headerSticky }"
+      :class="['root-layout__header', { 'root-layout__header--sticky': headerSticky }]"
       :style="{ 'height': headerHeight }"
       data-qa="root-layout-header"
     >
@@ -40,10 +39,6 @@ export default {
   components: {
     DtRootLayoutBody,
   },
-
-  mixins: [],
-
-  inheritAttrs: false,
 
   props: {
     /**
@@ -101,10 +96,6 @@ export default {
       type: String,
       default: '64px',
     },
-  },
-
-  data () {
-    return {};
   },
 };
 </script>
