@@ -1,10 +1,14 @@
 <template>
   <dt-root-layout
+    :header-class="headerClass"
     :header-sticky="headerSticky"
     :header-height="headerHeight"
+    :content-class="contentClass"
+    :content-wrap-width-percent="contentWrapWidthPercent"
+    :sidebar-class="sidebarClass"
     :sidebar-position="sidebarPosition"
     :sidebar-width="sidebarWidth"
-    :content-wrap-width-percent="contentWrapWidthPercent"
+    :footer-class="footerClass"
     :footer-height="footerHeight"
   >
     <template

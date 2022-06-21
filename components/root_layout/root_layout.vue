@@ -1,16 +1,18 @@
 <template>
   <div class="root-layout">
     <header
-      :class="['root-layout__header', { 'root-layout__header--sticky': headerSticky }]"
+      :class="['root-layout__header', headerClass, { 'root-layout__header--sticky': headerSticky }]"
       :style="{ 'height': headerHeight }"
       data-qa="root-layout-header"
     >
       <slot name="header" />
     </header>
     <dt-root-layout-body
+      :content-class="contentClass"
+      :content-wrap-width-percent="contentWrapWidthPercent"
+      :sidebar-class="sidebarClass"
       :sidebar-width="sidebarWidth"
       :sidebar-position="sidebarPosition"
-      :content-wrap-width-percent="contentWrapWidthPercent"
     >
       <template #sidebar>
         <slot name="sidebar" />
@@ -20,7 +22,7 @@
       </template>
     </dt-root-layout-body>
     <footer
-      class="root-layout__footer"
+      :class="['root-layout__footer', footerClass]"
       :style="{ 'height': footerHeight }"
       data-qa="root-layout-footer"
     >
@@ -42,6 +44,14 @@ export default {
 
   props: {
     /**
+     * Additional class name for the header element
+     */
+    headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
      * The height of the header
      * Possible units rem|px|%|em
      */
@@ -56,6 +66,33 @@ export default {
     headerSticky: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Additional class name for the content element
+     */
+    contentClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * For responsive layouts. When the main content is at the specified width percentage,
+     * the sidebar will display above the content rather than beside it. Please enter a percentage string value
+     *
+     * ex: '50%', '30%'
+     */
+    contentWrapWidthPercent: {
+      type: String,
+      default: '50%',
+    },
+
+    /**
+     * Additional class name for the sidebar element
+     */
+    sidebarClass: {
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**
@@ -78,14 +115,11 @@ export default {
     },
 
     /**
-     * For responsive layouts. When the main content is at the specified width percentage,
-     * the sidebar will display above the content rather than beside it. Please enter a percentage string value
-     *
-     * ex: '50%', '30%'
+     * Additional class name for the footer element
      */
-    contentWrapWidthPercent: {
-      type: String,
-      default: '50%',
+    footerClass: {
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**
