@@ -1,7 +1,6 @@
 <template>
   <div
-    class="root-layout__body"
-    :class="bodyClass"
+    :class="['root-layout__body', bodyClass]"
     data-qa="root-layout-body"
   >
     <aside
