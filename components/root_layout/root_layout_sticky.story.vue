@@ -1,5 +1,8 @@
 <template>
-  <div class="d-h332 d-of-scroll">
+  <div
+    class="d-h332 d-of-scroll"
+    tabindex="0"
+  >
     <dt-root-layout
       :header-sticky="headerSticky"
       :header-height="headerHeight"
