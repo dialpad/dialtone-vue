@@ -4,14 +4,14 @@
     data-qa="root-layout-body"
   >
     <aside
-      class="root-layout__sidebar"
+      :class="['root-layout__sidebar', sidebarClass]"
       :style="{ 'flex-basis': sidebarWidth }"
       data-qa="root-layout-sidebar"
     >
       <slot name="sidebar" />
     </aside>
     <main
-      class="root-layout__content"
+      :class="['root-layout__content', contentClass]"
       :style="{ 'min-inline-size': contentWrapWidthPercent }"
       data-qa="root-layout-content"
     >
@@ -26,6 +26,22 @@ import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_lay
 export default {
   name: 'DtRootLayoutBody',
   props: {
+    /**
+     * Additional class name for the content element
+     */
+    contentClass: {
+      type: [String, Array, Object],
+      default: undefined,
+    },
+
+    /**
+     * Additional class name for the sidebar element
+     */
+    sidebarClass: {
+      type: [String, Array, Object],
+      default: undefined,
+    },
+
     /**
      * The width of the sidebar
      * Possible units rem|px|%|em
