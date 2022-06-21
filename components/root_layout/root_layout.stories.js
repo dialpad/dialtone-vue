@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 // import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from './root_layout_constants';
+import { SIDEBAR_POSITIONS } from './root_layout_constants';
 import DtRootLayout from './root_layout';
 import DtRootLayoutMdx from './root_layout.mdx';
 import DtRootLayoutDefaultTemplate from './root_layout_default.story.vue';
@@ -84,7 +84,7 @@ export const argTypesData = {
     defaultValue: 'left',
     control: {
       type: 'select',
-      options: Object.values(ROOT_LAYOUT_SIDEBAR_POSITIONS),
+      options: Object.values(SIDEBAR_POSITIONS),
     },
   },
 };
