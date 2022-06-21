@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
+import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
 
 export default {
   name: 'DtRootLayoutBody',
@@ -59,7 +59,7 @@ export default {
 
   computed: {
     bodyClass () {
-      return { 'root-layout__body--invert': this.sidebarPosition === SIDEBAR_POSITIONS.RIGHT };
+      return { 'root-layout__body--invert': this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT };
     },
   },
 };
