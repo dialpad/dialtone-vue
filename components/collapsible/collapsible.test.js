@@ -1,14 +1,12 @@
 import { assert } from 'chai';
-import { mount } from '@vue/test-utils';
+import { createLocalVue, mount } from '@vue/test-utils';
 import DtCollpasible from './collapsible.vue';
 import sinon from 'sinon';
 import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
-const baseSlots = {
-  anchor: '<button data-qa="anchor-element">click me</button>',
-  content: '<div data-qa="content-element"> Test Text </div>',
-};
+const content = '<div data-qa="content-element"> Test Text </div>';
+const anchor = '<button data-qa="anchor-element" v-bind="props.attrs">click me</button>';
 
 describe('Dialtone vue Collapsible Component Tests', function () {
   // Wrappers
@@ -16,12 +14,10 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   let contentElement;
   let contentWrapperElement;
   let anchorElement;
-  let anchorWrapperElement;
 
   // Environment
-  let listeners;
-  const slots = baseSlots;
-  const scopedSlots = {};
+  const slots = { content };
+  const scopedSlots = { anchor };
 
   const _clearChildWrappers = () => {
     contentElement = undefined;
@@ -32,16 +28,15 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   const _setChildWrappers = () => {
     anchorElement = wrapper.find('[data-qa="anchor-element"]');
     contentElement = wrapper.find('[data-qa="content-element"]');
-    anchorWrapperElement = wrapper.find({ ref: 'anchor' });
-    contentWrapperElement = wrapper.find({ ref: 'contentWrapper' });
+    contentWrapperElement = wrapper.findComponent({ ref: 'contentWrapper' });
   };
 
   const _mountWrapper = () => {
     wrapper = mount(DtCollpasible, {
-      slots: slots,
-      scopedSlots: scopedSlots,
-      listeners: listeners,
-      localVue: this.localVue,
+      slots,
+      scopedSlots,
+      localVue: createLocalVue(),
+      attachTo: document.body,
     });
     _setChildWrappers();
   };
@@ -141,16 +136,6 @@ describe('Dialtone vue Collapsible Component Tests', function () {
         await wrapper.setProps({ open: true, id: 'contentId' });
       });
 
-      it('aria-controls on anchor should be set to the id of the contentWrapper', function () {
-        assert.isTrue(anchorWrapperElement.attributes('aria-controls') === 'contentId');
-        assert.isTrue(contentWrapperElement.attributes('aria-controls') === 'contentId');
-      });
-
-      it('aria-expanded should be true', function () {
-        assert.isTrue(anchorElement.attributes('aria-expanded') === 'true');
-        assert.isTrue(contentWrapperElement.attributes('aria-expanded') === 'true');
-      });
-
       it('should pass axe-core accessibility rules', async function () {
         const a11yResults = await axe.run(wrapper.element, configA11y);
         const violations = a11yResults.violations;
@@ -158,6 +143,15 @@ describe('Dialtone vue Collapsible Component Tests', function () {
           console.log('axe-core accessibility violations:', violations);
         }
         assert.equal(violations.length, 0);
+      });
+
+      it('aria-controls on anchor should be set to the id of the contentWrapper', function () {
+        assert.equal(anchorElement.attributes('aria-controls'), 'contentId');
+        assert.equal(contentWrapperElement.attributes('id'), 'contentId');
+      });
+
+      it('aria-expanded should be true', function () {
+        assert.equal(anchorElement.attributes('aria-expanded'), 'true');
       });
     });
 
@@ -167,8 +161,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
       });
 
       it('aria-expanded should be "false"', function () {
-        assert.isTrue(anchorElement.attributes('aria-expanded') === 'false');
-        assert.isTrue(contentElement.attributes('aria-expanded') === 'false');
+        assert.equal(anchorElement.attributes('aria-expanded'), 'false');
       });
     });
   });
