@@ -9,6 +9,7 @@
     @before-leave="beforeLeave"
     @leave="leave"
     @after-leave="afterLeave"
+    v-on="$listeners"
   >
     <slot />
   </transition>
