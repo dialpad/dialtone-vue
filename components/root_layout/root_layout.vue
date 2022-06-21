@@ -32,7 +32,7 @@
 
 <script>
 import DtRootLayoutBody from './root_layout_body';
-import { SIDEBAR_POSITIONS } from './root_layout_constants';
+import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from './root_layout_constants';
 
 export default {
   name: 'DtRootLayout',
@@ -79,7 +79,7 @@ export default {
     sidebarPosition: {
       type: String,
       default: 'left',
-      validator: (s) => Object.values(SIDEBAR_POSITIONS).includes(s),
+      validator: (s) => Object.values(ROOT_LAYOUT_SIDEBAR_POSITIONS).includes(s),
     },
 
     /**
