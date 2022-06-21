@@ -1,6 +1,7 @@
 <template>
   <div class="root-layout">
     <header
+      v-if="$slots.header"
       :class="['root-layout__header', headerClass, { 'root-layout__header--sticky': headerSticky }]"
       :style="{ 'height': headerHeight }"
       data-qa="root-layout-header"
@@ -22,6 +23,7 @@
       </template>
     </dt-root-layout-body>
     <footer
+      v-if="$slots.footer"
       :class="['root-layout__footer', footerClass]"
       :style="{ 'height': footerHeight }"
       data-qa="root-layout-footer"
