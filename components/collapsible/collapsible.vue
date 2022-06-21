@@ -4,68 +4,78 @@
     ref="collapsible"
     v-on="$listeners"
   >
-    <!-- @slot Slot for the header element that toggles the collapsible content -->
-    <slot
+    <!-- Element for capturing keypresses -->
+    <div
+      :id="!ariaLabelledBy && labelledBy"
       ref="anchor"
-      name="anchor"
+      @click.capture="defaultToggleOpen"
+      @keydown.enter="defaultToggleOpen"
+      @keydown.space="defaultToggleOpen"
     >
-      <dt-button
-        importance="clear"
-        kind="muted"
-        :aria-expanded="String(isOpen)"
-        :style="{
-          'width': maxWidth,
+      <!-- @slot Slot for the anchor element that toggles the collapsible content -->
+      <slot
+        name="anchor"
+        :attrs="{
+          'aria-controls': id,
+          'aria-expanded': isOpen.toString(),
         }"
-        @click.stop="defaultToggleOpen"
       >
-        <icon-arrow-accordion-open
-          v-if="isOpen"
-          class="d-svg--size18 d-mr8 d-fl-shrink0"
-        />
-        <icon-arrow-accordion-closed
-          v-else
-          class="d-svg--size18 d-mr8 d-fl-shrink0"
-        />
-        <span
-          class="d-mr-auto d-truncate"
-          :title="anchorText"
+        <dt-button
+          importance="clear"
+          kind="muted"
+          :aria-controls="id"
+          :aria-expanded="`${isOpen}`"
+          :style="{
+            'width': maxWidth,
+          }"
         >
-          {{ anchorText }}
-        </span>
-      </dt-button>
-    </slot>
+          <icon-arrow-accordion-open
+            v-if="isOpen"
+            class="d-svg--size18 d-mr8 d-fl-shrink0"
+          />
+          <icon-arrow-accordion-closed
+            v-else
+            class="d-svg--size18 d-mr8 d-fl-shrink0"
+          />
+          <span
+            class="d-mr-auto d-truncate"
+            :title="anchorText"
+          >
+            {{ anchorText }}
+          </span>
+        </dt-button>
+      </slot>
+    </div>
     <dt-collapsible-lazy-show
       ref="content"
-      data-qa="dt-popover"
-      :aria-expanded="`${!isOpen}`"
-      :aria-labelledby="ariaLabelledBy"
+      :aria-hidden="`${!isOpen}`"
+      :aria-labelledby="labelledBy"
       :aria-label="ariaLabel"
       :show="isOpen"
       class="dt-collapsible__content"
-      :style="{
-        'max-height': maxHeight,
-        'max-width': maxWidth,
-      }"
+      :style="contentStyle"
       tabindex="-1"
       appear
+      v-on="$listeners"
       @after-leave="onLeaveTransitionComplete"
       @after-enter="onEnterTransitionComplete"
     >
-      <template>
-        <!-- @slot Slot for the collapsible element  -->
+      <component
+        :is="contentType"
+        :id="id"
+        ref="contentWrapper"
+      >
+        <!-- @slot Slot for the collapsible element that is expanded by the anchor -->
         <slot
           name="content"
         />
-      </template>
+      </component>
     </dt-collapsible-lazy-show>
   </component>
 </template>
 
 <script>
-import {
-  POPOVER_INITIAL_FOCUS_STRINGS,
-} from '../popover';
-import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
+import { getUniqueString } from '@/common/utils';
 import DtCollapsibleLazyShow from './collapsible_lazy_show';
 import { DtButton } from '../button';
 import { DtLazyShow } from '../lazy_show';
@@ -86,17 +96,6 @@ export default {
 
   mixins: [
     ModalMixin,
-    KeyboardNavigation({
-      indexKey: 'highlightIndex',
-      idKey: 'highlightId',
-      listElementKey: 'getListElement',
-      listItemRole: 'menuitem',
-      afterHighlightMethod: 'afterHighlight',
-      beginningOfListMethod: 'beginningOfListMethod',
-      endOfListMethod: 'endOfListMethod',
-      activeItemKey: 'activeItemEl',
-      focusOnKeyboardNavigation: true,
-    }),
   ],
 
   props: {
@@ -110,14 +109,22 @@ export default {
     },
 
     /**
-     * Controls whether the collapsible is shown. Leaving this null will have the collapsible
-     * trigger on click by default. If you set this value, the default trigger behavior will be
-     * disabled and you can control it as you need.
+     * Controls whether the collapsible is shown. Leaving this null will have the collapsible start
+     * expanded and trigger on click by default. If you set this value, the default trigger
+     * behavior will be disabled and you can control it as you need.
      * Supports .sync modifier
      */
     open: {
       type: Boolean,
       default: null,
+    },
+
+    /**
+     * The id of the content wrapper.
+     */
+    id: {
+      type: String,
+      default () { return getUniqueString(); },
     },
 
     /**
@@ -128,41 +135,45 @@ export default {
       default: 'div',
     },
 
-    maxHeight: {
+    /**
+     * Element type (tag name) of the content wrapper element.
+     */
+    contentType: {
       type: String,
-      default: null,
+      default: 'div',
     },
 
+    /**
+     * The maximum width of the anchor and collapsible element.
+     */
     maxWidth: {
       type: String,
       default: null,
     },
 
-    ariaLabel: {
-      type: String,
-      default: null,
-    },
-
-    ariaLabelledBy: {
+    /**
+     * The maximum height of the collapsible element.
+     */
+    maxHeight: {
       type: String,
       default: null,
     },
 
     /**
-     * The element that is focused when the popover is opened. This can be an
-     * HTMLElement within the popover, a string starting with '#' which will
-     * find the element by ID. 'first' which will automatically focus
-     * the first element, or 'dialog' which will focus the dialog window itself.
-     * If the dialog is modal this prop cannot be 'none'.
+     * Label on the collapsible content. Should provide this of ariaLabelledBy but not both.
      */
-    initialFocusElement: {
-      type: [String, HTMLElement],
-      default: 'none',
-      validator: initialFocusElement => {
-        return POPOVER_INITIAL_FOCUS_STRINGS.includes(initialFocusElement) ||
-          (initialFocusElement instanceof HTMLElement) ||
-          initialFocusElement.startsWith('#');
-      },
+    ariaLabel: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Id of the element that labels the collapsible content. Defaults to the anchor element.
+     * Should provide this or ariaLabel but not both.
+     */
+    ariaLabelledBy: {
+      type: String,
+      default: null,
     },
   },
 
@@ -176,6 +187,18 @@ export default {
   },
 
   computed: {
+    labelledBy () {
+      // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
+      // there is no aria-label and the labelledby should point to the anchor
+      return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtCollapsible__anchor'));
+    },
+
+    contentStyle () {
+      return {
+        'max-height': this.maxHeight,
+        'max-width': this.maxWidth,
+      };
+    },
   },
 
   watch: {
@@ -192,9 +215,6 @@ export default {
 
   methods: {
     async onLeaveTransitionComplete () {
-      this.focusFirstElement(this.$refs.anchor);
-      // await next tick in case the user wants to change focus themselves.
-      await this.$nextTick();
       this.$emit('opened', false);
       if (this.open !== null) {
         this.$emit('update:open', false);
@@ -202,9 +222,6 @@ export default {
     },
 
     async onEnterTransitionComplete () {
-      this.focusInitialElement();
-      // await next tick in case the user wants to change focus themselves.
-      await this.$nextTick();
       this.$emit('opened', true, this.$refs.content);
       if (this.open !== null) {
         this.$emit('update:open', true);
@@ -212,40 +229,13 @@ export default {
     },
 
     defaultToggleOpen () {
-      if (open !== null) {
+      if (this.open === null) {
         this.toggleOpen();
       }
     },
 
     toggleOpen () {
       this.isOpen = !this.isOpen;
-    },
-
-    focusInitialElement () {
-      if (this.initialFocusElement === 'dialog') {
-        this.$refs.content.$el.focus();
-      }
-      // find by ID
-      if (this.initialFocusElement.startsWith('#')) {
-        this.focusInitialElementById();
-      }
-      if (this.initialFocusElement === 'first') {
-        this.focusFirstElementIfNeeded(this.$refs.content);
-      }
-      if (this.initialFocusElement instanceof HTMLElement) {
-        this.initialFocusElement.focus();
-      }
-    },
-
-    focusInitialElementById () {
-      const result = this.$refs.content.$el.querySelector(this.initialFocusElement);
-      if (result) {
-        result.focus();
-      } else {
-        console.warn('Could not find the element specified in dt-collapsible prop ' +
-            '"initialFocusElement". Defaulting to focusing the dialog.');
-      }
-      result ? result.focus() : this.$refs.content.$el.focus();
     },
   },
 };

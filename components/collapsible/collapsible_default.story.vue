@@ -1,10 +1,14 @@
 <template>
   <dt-collapsible
-    v-model:open="isOpen"
     :max-height="maxHeight"
     :max-width="maxWidth"
+    :open="isOpen"
+    :initial-focus-element="'first'"
   >
-    <template slot="anchor">
+    <template
+      slot="anchor"
+      slot-scope="{ attrs }"
+    >
       <div
         v-if="anchor"
         v-html="anchor"
@@ -14,6 +18,7 @@
         importance="clear"
         kind="muted"
         class="d-w512"
+        v-bind="attrs"
         @click.stop="toggleOpen"
       >
         <icon-arrow-accordion-open

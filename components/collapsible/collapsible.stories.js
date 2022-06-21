@@ -33,6 +33,19 @@ const argsTypesData = {
       type: 'text',
     },
   },
+
+  // Action Event Handlers
+  opened: {
+    description: 'Emitted whenever the content is collapsed or expanded.',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  'update:open': {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 export default {
