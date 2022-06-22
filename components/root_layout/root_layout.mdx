@@ -1,0 +1,50 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRootLayout from './root_layout';
+
+# DtRootLayout
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas>
+  <Story id="<GROUP>-root-layout--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="<GROUP>-root-layout--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRootLayout } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```vue
+<dt-root-layout
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-root-layout
+  some-other="variant"
+/>
+```
