@@ -20,6 +20,7 @@
     @keydown.down.stop.prevent="onKeyValidation($event, 'onDownKeyPress')"
     @keydown.home.stop.prevent="onKeyValidation($event, 'onHomeKeyPress')"
     @keydown.end.stop.prevent="onKeyValidation($event, 'onEndKeyPress')"
+    @keydown="onKeyValidation($event, 'onLetterKeyPress')"
   >
     <template #anchor="{ attrs }">
       <!-- @slot Anchor element that activates the dropdown -->
@@ -314,6 +315,26 @@ export default {
       if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
         return this.onEndKey();
       }
+    },
+
+    onLetterKeyPress (e) {
+      if (!this.isOpen) {
+        return;
+      }
+
+      if (!this.isLetterKey(e)) {
+        return;
+      }
+
+      e.stopPropagation();
+      e.preventDefault();
+
+      console.log(e);
+    },
+
+    isLetterKey (e) {
+      const key = e.key;
+      return (key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z');
     },
 
     onKeyValidation (e, eventHandler) {
