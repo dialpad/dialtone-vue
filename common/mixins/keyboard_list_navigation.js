@@ -31,7 +31,7 @@ export default ({
   endOfListMethod = null,
   // Scroll the active element into view when highlighted by a keyboard event.
   scrollToOnHighlight = true,
-  // Focus the active element on keyboard navigation
+  // Focus the active element on keyboard navigation.
   focusOnKeyboardNavigation = false,
 } = {}) => ({
   mixins: [Dom],
@@ -110,6 +110,26 @@ export default ({
       this.jumpToEnd();
       this.scrollActiveItemIntoViewIfNeeded();
       this.focusActiveItemIfNeeded();
+    },
+
+    onNavigationKey (key) {
+      console.log(key);
+    },
+
+    validateNavigationKey (key, keyValidator = this.isValidLetter) {
+      if (key.length > 1) {
+        return false;
+      }
+
+      return keyValidator(key);
+    },
+
+    isValidLetter (key) {
+      return (key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z');
+    },
+
+    isValidNumber (key) {
+      return (key >= '0' && key <= '9');
     },
 
     jumpToBeginning () {
