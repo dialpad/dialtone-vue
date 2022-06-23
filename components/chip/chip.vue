@@ -148,7 +148,6 @@ export default {
         },
 
         keyup: event => {
-          console.log(event);
           if (event.code?.toLowerCase() === 'delete') {
             this.onClose();
           } else {
