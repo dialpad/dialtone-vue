@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import DtRootLayoutBody from './root_layout_body.vue';
 import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
 
@@ -37,14 +37,12 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
     wrapper = shallowMount(DtRootLayoutBody, {
       propsData,
       slots,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
   before(function () {
-    this.localVue = createLocalVue();
   });
 
   // Teardown
