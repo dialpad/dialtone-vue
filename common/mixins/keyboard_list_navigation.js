@@ -9,6 +9,11 @@
  */
 import Dom from './dom';
 
+const ERROR_INVALID_LIST_ELEMENT = (
+  'listElementKey is required or the referenced ' +
+  'element doesn\'t exist. Received listElement: '
+);
+
 export default ({
   // Role of the list items in the component. This is used to identify the list items
   // so you must update this if the role of your list items is anything other than 'option'
@@ -62,16 +67,26 @@ export default ({
     // Gets the length of all the items in the list, uses the listItemRole param to determine
     // whether an element is a list item.
     _itemsLength () {
-      const listElement = this._getListElement();
+      const listItems = this._getListItemNodes();
 
-      if (!listElement) {
-        console.error(`listElementKey is required or the referenced element doesn't exist. Received
-          listElement: `, listElement);
-
+      if (listItems === null) {
         return 0;
       }
 
-      return listElement.querySelectorAll(`[role="${listItemRole}"]`).length;
+      return listItems.length;
+    },
+
+    // Gets all the list items within the list element
+    _getListItemNodes () {
+      const listElement = this._getListElement();
+
+      if (!listElement) {
+        console.error(ERROR_INVALID_LIST_ELEMENT, listElement);
+
+        return null;
+      }
+
+      return listElement.querySelectorAll(`[role="${listItemRole}"]`);
     },
 
     onUpKey () {
@@ -113,15 +128,39 @@ export default ({
     },
 
     onNavigationKey (key) {
-      console.log(key);
+      const matchingItems = Array.from(this._getListItemNodes()).filter(item => {
+        const itemContent = item.textContent.trim().toLowerCase();
+        return itemContent.startsWith(key.toLowerCase());
+      });
+
+      if (matchingItems.length <= 0) {
+        return;
+      }
+
+      const highlightedMatchingItemIndex = matchingItems.findIndex(item => {
+        return item.id === this[idKey];
+      });
+
+      if (highlightedMatchingItemIndex < matchingItems.length - 1) {
+        this.setHighlightId(matchingItems[highlightedMatchingItemIndex + 1].id);
+      } else {
+        this.setHighlightId(matchingItems[0].id);
+      }
+
+      this.scrollActiveItemIntoViewIfNeeded();
+      this.focusActiveItemIfNeeded();
     },
 
-    validateNavigationKey (key, keyValidator = this.isValidLetter) {
+    validateNavigationKey (key, keyValidator = this.isValidAlphanumerical) {
       if (key.length > 1) {
         return false;
       }
 
       return keyValidator(key);
+    },
+
+    isValidAlphanumerical (key) {
+      return this.isValidLetter(key) || this.isValidNumber(key);
     },
 
     isValidLetter (key) {
