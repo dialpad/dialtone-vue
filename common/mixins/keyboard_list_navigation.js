@@ -129,8 +129,8 @@ export default ({
 
     onNavigationKey (key) {
       const matchingItems = Array.from(this._getListItemNodes()).filter(item => {
-        const itemContent = item.textContent.trim().toLowerCase();
-        return itemContent.startsWith(key.toLowerCase());
+        const content = item.textContent.trim().toLowerCase();
+        return content.startsWith(key.toLowerCase());
       });
 
       if (matchingItems.length <= 0) {
@@ -141,12 +141,13 @@ export default ({
         return item.id === this[idKey];
       });
 
-      if (highlightedMatchingItemIndex < matchingItems.length - 1) {
-        this.setHighlightId(matchingItems[highlightedMatchingItemIndex + 1].id);
-      } else {
-        this.setHighlightId(matchingItems[0].id);
-      }
+      const nextHighlightedItemId = (
+        highlightedMatchingItemIndex < matchingItems.length - 1
+          ? matchingItems[highlightedMatchingItemIndex + 1].id
+          : matchingItems[0].id
+      );
 
+      this.setHighlightId(nextHighlightedItemId);
       this.scrollActiveItemIntoViewIfNeeded();
       this.focusActiveItemIfNeeded();
     },
@@ -182,6 +183,7 @@ export default ({
     async setHighlightIndex (num) {
       this[indexKey] = num;
       this[idKey] = this._getItemId(num);
+
       if (this._itemsLength() && afterHighlightMethod) {
         await this.$nextTick();
         this[afterHighlightMethod](num);
@@ -205,8 +207,7 @@ export default ({
       }
 
       const listItems = Array.from(listElement.querySelectorAll(`[role="${listItemRole}"]`));
-      const index = listItems.indexOf(listElement.querySelector(`#${id}`));
-      return index;
+      return listItems.indexOf(listElement.querySelector(`#${id}`));
     },
 
     _getItemId (index) {
