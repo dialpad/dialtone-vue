@@ -1,3 +1,18 @@
+# [2.11.0](https://github.com/dialpad/dialtone-vue/compare/v2.10.0...v2.11.0) (2022-06-23)
+
+
+### Features
+
+* add json documentation generator ([#387](https://github.com/dialpad/dialtone-vue/issues/387)) ([6431326](https://github.com/dialpad/dialtone-vue/commit/6431326c3d824353f293016eb86af5163d689a76))
+* add root layout component ([#386](https://github.com/dialpad/dialtone-vue/issues/386)) ([ea28fc0](https://github.com/dialpad/dialtone-vue/commit/ea28fc03aae4b797a604c2a8b023e679ff40cd33))
+
+# [2.10.0](https://github.com/dialpad/dialtone-vue/compare/v2.9.1...v2.10.0) (2022-06-16)
+
+
+### Features
+
+* **toast:** make duration prop optional ([#382](https://github.com/dialpad/dialtone-vue/issues/382)) ([17622d4](https://github.com/dialpad/dialtone-vue/commit/17622d4271b9e772970d2705a36c9da227a8d342))
+
 ## [2.9.1](https://github.com/dialpad/dialtone-vue/compare/v2.9.0...v2.9.1) (2022-06-15)
 
 
