@@ -39,8 +39,6 @@ describe('Dialtone Vue Root Layout Tests', function () {
   };
 
   // Setup
-  before(function () {
-  });
 
   // Teardown
   afterEach(function () {

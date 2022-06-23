@@ -42,8 +42,6 @@ describe('Dialtone Vue Root Layout Body Tests', function () {
   };
 
   // Setup
-  before(function () {
-  });
 
   // Teardown
   afterEach(function () {

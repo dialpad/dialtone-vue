@@ -1,45 +1,46 @@
 <template>
   <dt-root-layout
-    :header-class="headerClass"
-    :header-sticky="headerSticky"
-    :header-height="headerHeight"
-    :content-class="contentClass"
-    :content-wrap-width-percent="contentWrapWidthPercent"
-    :sidebar-class="sidebarClass"
-    :sidebar-position="sidebarPosition"
-    :sidebar-width="sidebarWidth"
-    :footer-class="footerClass"
-    :footer-height="footerHeight"
+    :header-class="$attrs.headerClass"
+    :header-sticky="$attrs.headerSticky"
+    :header-height="$attrs.headerHeight"
+    :content-class="$attrs.contentClass"
+    :content-wrap-width-percent="$attrs.contentWrapWidthPercent"
+    :sidebar-class="$attrs.sidebarClass"
+    :sidebar-position="$attrs.sidebarPosition"
+    :sidebar-width="$attrs.sidebarWidth"
+    :footer-class="$attrs.footerClass"
+    :footer-height="$attrs.footerHeight"
   >
     <template
-      v-if="header"
+      v-if="$attrs.header"
       #header
     >
-      <span v-html="header" />
+      <v-html :html="$attrs.header" />
     </template>
     <template
-      v-if="sidebar"
+      v-if="$attrs.sidebar"
       #sidebar
     >
-      <span v-html="sidebar" />
+      <v-html :html="$attrs.sidebar" />
     </template>
     <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
+      <v-html :html="defaultSlot" />
     </template>
     <template
-      v-if="footer"
+      v-if="$attrs.footer"
       #footer
     >
-      <span v-html="footer" />
+      <v-html :html="$attrs.footer" />
     </template>
   </dt-root-layout>
 </template>
 
 <script>
 import DtRootLayout from './root_layout';
+import VHtml from '@/common/v_html';
 
 export default {
   name: 'DtRootLayoutDefault',
-  components: { DtRootLayout },
+  components: { DtRootLayout, VHtml },
 };
 </script>

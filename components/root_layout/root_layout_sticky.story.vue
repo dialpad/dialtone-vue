@@ -4,16 +4,16 @@
     tabindex="0"
   >
     <dt-root-layout
-      :header-class="headerClass"
-      :header-sticky="headerSticky"
-      :header-height="headerHeight"
-      :content-class="contentClass"
-      :content-wrap-width-percent="contentWrapWidthPercent"
-      :sidebar-class="sidebarClass"
-      :sidebar-position="sidebarPosition"
-      :sidebar-width="sidebarWidth"
-      :footer-class="footerClass"
-      :footer-height="footerHeight"
+      :header-class="$attrs.headerClass"
+      :header-sticky="$attrs.headerSticky"
+      :header-height="$attrs.headerHeight"
+      :content-class="$attrs.contentClass"
+      :content-wrap-width-percent="$attrs.contentWrapWidthPercent"
+      :sidebar-class="$attrs.sidebarClass"
+      :sidebar-position="$attrs.sidebarPosition"
+      :sidebar-width="$attrs.sidebarWidth"
+      :footer-class="$attrs.footerClass"
+      :footer-height="$attrs.footerHeight"
     >
       <template
         v-if="header"
