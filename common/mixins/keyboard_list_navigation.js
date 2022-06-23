@@ -76,7 +76,7 @@ export default ({
       return listItems.length;
     },
 
-    // Gets all the list items within the list element
+    // Gets all the list item nodes within the list element
     _getListItemNodes () {
       const listElement = this._getListElement();
 
@@ -128,7 +128,9 @@ export default ({
     },
 
     onNavigationKey (key) {
-      const matchingItems = Array.from(this._getListItemNodes()).filter(item => {
+      const listItems = Array.from(this._getListItemNodes());
+
+      const matchingItems = listItems.filter(item => {
         const content = item.textContent.trim().toLowerCase();
         return content.startsWith(key.toLowerCase());
       });
@@ -137,17 +139,18 @@ export default ({
         return;
       }
 
+      // Problem code for test
       const highlightedMatchingItemIndex = matchingItems.findIndex(item => {
-        return item.id === this[idKey];
+        return this[indexKey] === listItems.indexOf(item);
       });
 
-      const nextHighlightedItemId = (
+      const nextHighlightedItemIndex = listItems.indexOf(
         highlightedMatchingItemIndex < matchingItems.length - 1
-          ? matchingItems[highlightedMatchingItemIndex + 1].id
-          : matchingItems[0].id
+          ? matchingItems[highlightedMatchingItemIndex + 1]
+          : matchingItems[0],
       );
 
-      this.setHighlightId(nextHighlightedItemId);
+      this.setHighlightIndex(nextHighlightedItemIndex);
       this.scrollActiveItemIntoViewIfNeeded();
       this.focusActiveItemIfNeeded();
     },

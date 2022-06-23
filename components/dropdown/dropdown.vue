@@ -79,7 +79,6 @@ export default {
       endOfListMethod: 'endOfListMethod',
       activeItemKey: 'activeItemEl',
       focusOnKeyboardNavigation: true,
-      useLetterKeyNavigation: true,
     }),
   ],
 
