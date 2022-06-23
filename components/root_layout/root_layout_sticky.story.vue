@@ -16,16 +16,16 @@
       :footer-height="$attrs.footerHeight"
     >
       <template
-        v-if="header"
+        v-if="$attrs.header"
         #header
       >
-        <span v-html="header" />
+        <v-html :html="$attrs.header" />
       </template>
       <template
-        v-if="sidebar"
+        v-if="$attrs.sidebar"
         #sidebar
       >
-        <span v-html="sidebar" />
+        <v-html :html="$attrs.sidebar" />
       </template>
       <template v-if="defaultSlot">
         <div
@@ -34,10 +34,10 @@
         />
       </template>
       <template
-        v-if="footer"
+        v-if="$attrs.footer"
         #footer
       >
-        <span v-html="footer" />
+        <v-html :html="$attrs.footer" />
       </template>
     </dt-root-layout>
   </div>
@@ -45,9 +45,10 @@
 
 <script>
 import DtRootLayout from './root_layout';
+import VHtml from '@/common/v_html';
 
 export default {
   name: 'DtRootLayoutSticky',
-  components: { DtRootLayout },
+  components: { DtRootLayout, VHtml },
 };
 </script>
