@@ -30,6 +30,9 @@ jobs:
 
             It is a required check for every PR to have a corresponding branch called `yourbranch-vue3` so that we do not forget to do it. In the special case that you need to make a change to vue2 without making it in vue3, you can set the label `vue2-only` on this PR.
 
+            ### I got "commit SHA is a merge but no -m option was given."
+            This happens if there are merge commits in your branch. It's no problem, you can simply skip them with `git cherry-pick --skip`. We don't want to copy merge commits to the Vue 3 branch.
+
             ### What if I make more changes to my vue 2 branch after running ./copy_pr_vue3.sh?
             You can copy these to the existing -vue3 branch by running the script with a git SHA param like so:
 
@@ -40,4 +43,4 @@ jobs:
             If it's just one or two commits, you may prefer to just manually use `git cherry-pick` which will work fine as well.
 
             ### What if I get a conflict?
-            Its possible to get a conflict when running `copy_pr_vue3.sh`. If this happens you can manually fix the conflict, commit it and do `git rebase --continue` and then `git rebase HEAD yourbranch-vue3`. Your other option is to do `git rebase --abort` and make the change manually.
+            It's possible to get a conflict when running `copy_pr_vue3.sh` as there are differences in Vue 2 and Vue 3 code. If this happens you can manually fix the conflict, commit it and do `git cherry-pick --continue`.
