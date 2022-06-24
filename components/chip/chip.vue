@@ -3,7 +3,7 @@
     <component
       :is="interactive ? 'button' : 'span'"
       :id="id"
-      type="button"
+      :type="interactive && 'button'"
       :class="chipClasses()"
       data-qa="dt-chip"
       :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
