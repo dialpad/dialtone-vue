@@ -25,22 +25,22 @@ describe('DtChip Tests', function () {
   let listeners;
 
   // Helpers
-  const _setChildWrappers = async () => {
-    chip = await wrapper.find('[data-qa="dt-chip"]');
-    icon = await wrapper.find('[data-qa="dt-chip-icon"]');
-    avatar = await wrapper.find('[data-qa="dt-chip-avatar"]');
-    label = await wrapper.find('[data-qa="dt-chip-label"]');
-    remove = await wrapper.find('[data-qa="dt-chip-close"]');
+  const _setChildWrappers = () => {
+    chip = wrapper.find('[data-qa="dt-chip"]');
+    icon = wrapper.find('[data-qa="dt-chip-icon"]');
+    avatar = wrapper.find('[data-qa="dt-chip-avatar"]');
+    label = wrapper.find('[data-qa="dt-chip-label"]');
+    remove = wrapper.find('[data-qa="dt-chip-close"]');
   };
 
-  const _setWrappers = async () => {
+  const _setWrappers = () => {
     wrapper = mount(DtChip, {
       propsData,
       slots,
       listeners,
       localVue: this.localVue,
     });
-    await _setChildWrappers();
+    _setChildWrappers();
   };
 
   // Setup
