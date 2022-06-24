@@ -82,7 +82,6 @@ export default ({
 
       if (!listElement) {
         console.error(ERROR_INVALID_LIST_ELEMENT, listElement);
-
         return null;
       }
 
@@ -139,7 +138,6 @@ export default ({
         return;
       }
 
-      // Problem code for test
       const highlightedMatchingItemIndex = matchingItems.findIndex(item => {
         return this[indexKey] === listItems.indexOf(item);
       });
@@ -159,6 +157,7 @@ export default ({
       if (key.length > 1) {
         return false;
       }
+
       return (key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z');
     },
 
