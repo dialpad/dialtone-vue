@@ -38,7 +38,7 @@
     <dt-button
       v-if="!hideClose"
       v-bind="closeButtonProps"
-      class="d-chip__close"
+      :class="chipCloseButtonClasses()"
       data-qa="dt-chip-close"
       :aria-label="closeButtonProps.ariaLabel"
       @click="$emit('close')"
@@ -53,7 +53,7 @@
 <script>
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import { DtButton } from '../button';
-import { CHIP_SIZE_MODIFIERS } from './chip_constants';
+import { CHIP_CLOSE_BUTTON_SIZE_MODIFIERS, CHIP_SIZE_MODIFIERS } from './chip_constants';
 import { getUniqueString } from '@/common/utils';
 
 export default {
@@ -162,6 +162,13 @@ export default {
       return [
         'd-chip__label',
         CHIP_SIZE_MODIFIERS[this.size],
+      ];
+    },
+
+    chipCloseButtonClasses () {
+      return [
+        'd-chip__close',
+        CHIP_CLOSE_BUTTON_SIZE_MODIFIERS[this.size],
       ];
     },
 
