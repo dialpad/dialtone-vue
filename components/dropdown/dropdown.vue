@@ -150,7 +150,6 @@ export default {
     /**
      * The type of navigation that this component should support.
      * - "arrow-keys" for items that are navigated with UP/DOWN keys.
-     * - "letter-keys" for items that are navigated with A-Z keys.
      * - "tab" for items that are navigated using the TAB key.
      * - "none" for static items that are not interactive.
      */
@@ -320,10 +319,6 @@ export default {
 
     onKeyPress (e) {
       if (!this.isOpen) {
-        return;
-      }
-
-      if (this.navigationType !== this.LIST_ITEM_NAVIGATION_TYPES.LETTER_KEYS) {
         return;
       }
 
