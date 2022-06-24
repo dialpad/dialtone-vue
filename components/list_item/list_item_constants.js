@@ -5,6 +5,7 @@ export const LIST_ITEM_TYPES = {
 
 export const LIST_ITEM_NAVIGATION_TYPES = {
   ARROW_KEYS: 'arrow-keys',
+  LETTER_KEYS: 'letter-keys',
   TAB: 'tab',
   NONE: 'none',
 };
