@@ -32,11 +32,13 @@ jobs:
 
             <details>
               <summary>I got "commit SHA is a merge but no -m option was given."</summary>
+
               This happens if there are merge commits in your branch. It's no problem, you can simply skip them with `git cherry-pick --skip`. We don't want to copy merge commits to the Vue 3 branch.
             </details>
 
             <details>
               <summary>What if I make more changes to my vue 2 branch after running ./copy_pr_vue3.sh?</summary>
+
               You can copy these to the existing -vue3 branch by running the script with a git SHA param like so:
 
               `./copy_pr_vue3.sh 2a78db7`
@@ -48,5 +50,6 @@ jobs:
 
             <details>
               <summary>What if I get a conflict?</summary>
+
               It's possible to get a conflict when running `copy_pr_vue3.sh` as there are differences in Vue 2 and Vue 3 code. If this happens you can manually fix the conflict, commit it and do `git cherry-pick --continue`.
             </details>
