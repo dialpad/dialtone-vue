@@ -123,7 +123,7 @@ export default {
 };
 
 // Templates
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtChipDefaultTemplate);
+const Template = (args) => createTemplateFromVueFile(args, DtChipDefaultTemplate);
 
 // Stories
 export const Default = Template.bind({});
