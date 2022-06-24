@@ -141,7 +141,6 @@ export default {
   computed: {
     chipListeners () {
       return {
-        ...this.$listeners,
         click: event => {
           if (this.interactive) this.$emit('click', event);
         },
