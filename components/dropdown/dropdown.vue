@@ -322,6 +322,10 @@ export default {
         return;
       }
 
+      if (this.navigationType !== this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+        return;
+      }
+
       if (!this.isValidLetter(e.key)) {
         return;
       }
