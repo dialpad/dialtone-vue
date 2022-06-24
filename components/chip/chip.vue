@@ -35,19 +35,18 @@
         <slot />
       </span>
     </component>
-    <button
+    <dt-button
       v-if="!hideClose"
       v-bind="closeButtonProps"
-      type="button"
       class="d-chip__close"
       data-qa="dt-chip-close"
       :aria-label="closeButtonProps.ariaLabel"
       @click="$emit('close')"
     >
-      <span class="d-btn__icon">
+      <template #icon>
         <icon-close />
-      </span>
-    </button>
+      </template>
+    </dt-button>
   </span>
 </template>
 
