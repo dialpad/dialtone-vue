@@ -155,24 +155,11 @@ export default ({
       this.focusActiveItemIfNeeded();
     },
 
-    validateNavigationKey (key, keyValidator = this.isValidAlphanumerical) {
+    isValidLetter (key) {
       if (key.length > 1) {
         return false;
       }
-
-      return keyValidator(key);
-    },
-
-    isValidAlphanumerical (key) {
-      return this.isValidLetter(key) || this.isValidNumber(key);
-    },
-
-    isValidLetter (key) {
       return (key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z');
-    },
-
-    isValidNumber (key) {
-      return (key >= '0' && key <= '9');
     },
 
     jumpToBeginning () {

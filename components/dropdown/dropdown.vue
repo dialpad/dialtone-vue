@@ -322,7 +322,7 @@ export default {
         return;
       }
 
-      if (!this.validateNavigationKey(e.key, this.isValidLetter)) {
+      if (!this.isValidLetter(e.key)) {
         return;
       }
 
