@@ -110,7 +110,7 @@ const argTypesData = {
   transition: {
     control: {
       type: 'select',
-      options: ['', 'fade', 'pop', 'shake'],
+      options: ['', 'fade', 'pop', 'shake', 'slide-down', 'collapse', 'expand'],
     },
   },
 

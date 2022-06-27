@@ -1,6 +1,19 @@
 <template>
   <!-- applies the transition on initial render -->
+  <transition-collapse-height
+    v-if="useCollapse"
+    :appear="appear"
+    v-on="$listeners"
+  >
+    <div
+      v-show="show"
+      v-on="$listeners"
+    >
+      <slot v-if="initialized" />
+    </div>
+  </transition-collapse-height>
   <transition
+    v-else
     :name="transition"
     :appear="appear"
     v-on="$listeners"
@@ -15,8 +28,14 @@
 </template>
 
 <script>
+import TransitionCollapseHeight from '../collapsible/transition_collapse_height';
 export default {
   name: 'DtLazyShow',
+
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    TransitionCollapseHeight,
+  },
 
   /******************
    *     PROPS      *
@@ -47,6 +66,7 @@ export default {
   data () {
     return {
       initialized: !!this.show,
+      useCollapse: this.transition === 'collapse',
     };
   },
 
@@ -62,3 +82,38 @@ export default {
   },
 };
 </script>
+
+// https://codepen.io/kdydesign/pen/VrQZqx
+<style>
+  .expand-enter-active {
+    -moz-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -moz-transition-timing-function: ease-in;
+    -webkit-transition-timing-function: ease-in;
+    -o-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+  }
+
+  .expand-leave-active {
+    -moz-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  }
+
+  .expand-enter-to, .expand-leave {
+    max-height: 100px;
+    overflow: hidden;
+  }
+
+  .expand-enter, .expand-leave-to {
+    overflow: hidden;
+    max-height: 0;
+  }
+</style>
