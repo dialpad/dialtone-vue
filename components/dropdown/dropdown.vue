@@ -318,7 +318,7 @@ export default {
     },
 
     onKeyPress (e) {
-      if (!this.isOpen || !this.isArrowKeyNav || !this.isValidLetter(e.key)) {
+      if (!this.isOpen || !this.isArrowKeyNav || !this.isValidCharacter(e.key)) {
         return;
       }
 
