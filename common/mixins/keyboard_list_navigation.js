@@ -85,7 +85,7 @@ export default ({
         return null;
       }
 
-      return listElement.querySelectorAll(`[role="${listItemRole}"]`);
+      return Array.from(listElement.querySelectorAll(`[role="${listItemRole}"]`));
     },
 
     onUpKey () {
@@ -127,7 +127,7 @@ export default ({
     },
 
     onNavigationKey (key) {
-      const listItems = Array.from(this._getListItemNodes());
+      const listItems = this._getListItemNodes();
 
       const matchingItems = listItems.filter(item => {
         const content = item.textContent.trim().toLowerCase();

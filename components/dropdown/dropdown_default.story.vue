@@ -56,7 +56,7 @@ import DtDropdown from './dropdown';
 import { DtListItem } from '../list_item';
 import { DtButton } from '../button';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
-import { DROPDOWN_STORY_ITEMS } from './dropdown_constants';
+import { DROPDOWN_STORY_ITEMS } from './dropdown_story_constants';
 
 export default {
   name: 'DtDropdownDefault',

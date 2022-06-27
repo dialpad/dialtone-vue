@@ -37,7 +37,7 @@
 import DtDropdown from './dropdown';
 import { DtListItem } from '../list_item';
 import { DtButton } from '../button';
-import { DROPDOWN_STORY_ITEMS } from './dropdown_constants';
+import { DROPDOWN_STORY_ITEMS } from './dropdown_story_constants';
 
 export default {
   name: 'DtDropdownVariants',
