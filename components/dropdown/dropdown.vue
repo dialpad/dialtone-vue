@@ -66,8 +66,6 @@ export default {
     DtPopover,
   },
 
-  inheritAttrs: false,
-
   mixins: [
     KeyboardNavigation({
       indexKey: 'highlightIndex',
@@ -81,6 +79,8 @@ export default {
       focusOnKeyboardNavigation: true,
     }),
   ],
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -228,6 +228,10 @@ export default {
     activeItemEl () {
       return this.getListElement().querySelector('#' + this.highlightId);
     },
+
+    isArrowKeyNav () {
+      return this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS;
+    },
   },
 
   methods: {
@@ -284,7 +288,7 @@ export default {
         this.openedWithKeyboard = true;
         return;
       }
-      if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+      if (this.isArrowKeyNav) {
         return this.onUpKey();
       }
     },
@@ -294,39 +298,27 @@ export default {
         this.openedWithKeyboard = true;
         return;
       }
-      if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+      if (this.isArrowKeyNav) {
         return this.onDownKey();
       }
     },
 
     onHomeKeyPress () {
-      if (!this.isOpen) {
+      if (!this.isOpen || !this.isArrowKeyNav) {
         return;
       }
-      if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
-        return this.onHomeKey();
-      }
+      return this.onHomeKey();
     },
 
     onEndKeyPress () {
-      if (!this.isOpen) {
+      if (!this.isOpen || !this.isArrowKeyNav) {
         return;
       }
-      if (this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
-        return this.onEndKey();
-      }
+      return this.onEndKey();
     },
 
     onKeyPress (e) {
-      if (!this.isOpen) {
-        return;
-      }
-
-      if (this.navigationType !== this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
-        return;
-      }
-
-      if (!this.isValidLetter(e.key)) {
+      if (!this.isOpen || !this.isArrowKeyNav || !this.isValidLetter(e.key)) {
         return;
       }
 
