@@ -8,11 +8,14 @@
     :aria-label="ariaLabel"
     @mousedown="onClick"
     @mouseup="onClick"
-    @mouseleave="isActive = false"
-    @focusout="isActive = false"
+    @mouseleave="onFocusOut"
+    @focusin="onFocusIn"
+    @focusout="onFocusOut"
     @keydown.enter="onClick"
     @keyup.enter="onClick"
     @keyup.delete="onClose"
+    @keyDown.left="onLeftKey"
+    @keyDown.right="onRightKey"
   >
     <span
       v-if="$slots.icon"
@@ -81,6 +84,7 @@ export default {
      */
     closeButtonProps: {
       type: Object,
+      default: function () { return { ariaLabel: 'close' }; },
       validator: (props) => {
         return !!props.ariaLabel;
       },
@@ -141,11 +145,12 @@ export default {
     },
   },
 
-  emits: ['click', 'close'],
+  emits: ['click', 'close', 'leftKey', 'rightKey'],
 
   data () {
     return {
       isActive: false,
+      isFocused: false,
     };
   },
 
@@ -163,6 +168,7 @@ export default {
         {
           'd-chip--interactive': this.interactive,
           'd-chip--active': this.isActive,
+          'd-chip--focus': this.isFocused,
         },
       ];
     },
@@ -184,6 +190,32 @@ export default {
         this.isActive = false;
         this.$emit('click');
       }
+    },
+
+    onFocusIn () {
+      this.isActive = true;
+      this.isFocused = true;
+    },
+
+    onFocusOut () {
+      this.isActive = false;
+      this.isFocused = false;
+    },
+
+    onLeftKey () {
+      this.$emit('leftKey');
+    },
+
+    onRightKey () {
+      this.$emit('rightKey');
+    },
+
+    select () {
+      this.$el.focus();
+    },
+
+    blur () {
+      this.$el.blur();
     },
   },
 };

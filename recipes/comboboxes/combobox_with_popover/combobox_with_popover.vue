@@ -30,10 +30,12 @@
     <template #list="{ opened, listProps, clearHighlightIndex }">
       <!-- eslint-disable vue/no-deprecated-v-bind-sync -->
       <dt-popover
+        ref="popover"
         :open.sync="isListShown"
         :hide-on-click="true"
         :max-height="maxHeight"
         :max-width="maxWidth"
+        :offset="popoverOffset"
         placement="bottom-start"
         padding="none"
         role="listbox"
@@ -197,6 +199,16 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Displaces the popover content box from its anchor element
+     *  by the specified number of pixels.
+     */
+    popoverOffset: {
+      type: Array,
+      default: () => [0, 0],
+    },
+
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
