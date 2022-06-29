@@ -10,8 +10,8 @@
   >
     <template #input>
       <div
-        @keydown.left="onLeftKey"
-        @keydown.right="onRightKey"
+        @keyup.left="onLeftKey"
+        @keyup.right="onRightKey"
       >
         <span
           ref="chipsWrapper"
@@ -23,8 +23,8 @@
             :key="item.id"
             class="d-m4 d-d-inline-flex d-zi-base1"
             :close-button-props="{ ariaLabel: 'close' }"
-            @left-key="onLeftKey"
-            @right-key="onRightKey"
+            @keyup.left="onLeftKey"
+            @keyup.right="onRightKey"
             @close="onChipRemove(item)"
           >
             {{ item }}
@@ -255,8 +255,20 @@ export default {
       this.$emit('select', i);
     },
 
+    getChipButtons () {
+      return this.$refs.chips.map(chip => chip.$el.querySelector('button'));
+    },
+
+    getChips () {
+      return this.$refs.chips.map(chip => chip.$el);
+    },
+
+    getLastChipButton () {
+      return this.$refs.chips && this.getChipButtons()[this.getChipButtons().length - 1];
+    },
+
     getLastChip () {
-      return this.$refs.chips && this.$refs.chips[this.$refs.chips.length - 1];
+      return this.$refs.chips && this.getChips()[this.getChips().length - 1];
     },
 
     onLeftKey (event) {
@@ -277,7 +289,7 @@ export default {
         return;
       }
       // If the cursor is on the last chip, it would move into the input
-      if (event.target.id === this.getLastChip().$el.id) {
+      if (event.target.id === this.getLastChipButton().id) {
         this.moveFromChipToInput();
       } else if (event.target.type !== 'text') {
         // Move to the next chip
@@ -286,25 +298,25 @@ export default {
     },
 
     moveFromInputToChip () {
-      this.getLastChip().select();
+      this.getLastChipButton().focus();
       this.$refs.input.blur();
       this.$refs.comboboxWithPopover.closeComboboxList();
     },
 
     moveFromChipToInput () {
-      this.getLastChip().blur();
+      this.getLastChipButton().blur();
       this.$refs.input.focus();
       this.$refs.comboboxWithPopover.showComboboxList();
     },
 
     navigateBetweenChips (target, toLeft) {
-      const from = this.$refs.chips.map(chip => chip.$el).indexOf(target);
+      const from = this.getChipButtons().indexOf(target);
       const to = toLeft ? from - 1 : from + 1;
       if (to < 0 || to >= this.$refs.chips.length) {
         return;
       }
-      this.$refs.chips[from].blur();
-      this.$refs.chips[to].select();
+      this.getChipButtons()[from].blur();
+      this.getChipButtons()[to].focus();
       this.$refs.comboboxWithPopover.closeComboboxList();
     },
 
@@ -332,7 +344,7 @@ export default {
     },
 
     setInputPadding () {
-      const lastChip = this.getLastChip()?.$el;
+      const lastChip = this.getLastChip();
       const input = this.$refs.input.$refs.input;
       if (!lastChip) {
         // Revert padding if no chip
