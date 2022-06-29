@@ -2,6 +2,7 @@ import emojiRegex from 'emoji-regex';
 
 export const emojiVersion = '6.6';
 export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
+export let customEmojiAssetUrl = null;
 
 // Used for emoji 16px and smaller
 export let emojiImageUrlSmall = defaultEmojiAssetUrl;
@@ -12,11 +13,24 @@ export let emojiImageUrlLarge = defaultEmojiAssetUrl;
 export let emojiFileExtensionLarge = '.png';
 
 export let emojiJson = null;
+export let customEmojiJson = null;
 
 export async function getEmojiJson () {
   if (emojiJson) return;
 
   emojiJson = await import('emoji-toolkit/emoji_strategy.json');
+}
+
+/*
+export function getCustomEmojiJson () {
+  console.log(customEmojiJson);
+  return import(`./${customEmojiJson}.json`);
+  //return import(`./${customEmojiJson}`);
+}
+*/
+
+export function getCustomEmojiJson () {
+  return customEmojiJson;
 }
 
 export function setEmojiAssetUrlSmall (url, fileExtension = '.png') {
@@ -33,6 +47,14 @@ export function setEmojiAssetUrlLarge (url, fileExtension = '.svg') {
   }
   emojiImageUrlLarge = url;
   emojiFileExtensionLarge = fileExtension;
+}
+
+export function setCustomEmojiUrl (url) {
+  customEmojiAssetUrl = url;
+}
+
+export function setCustomEmojiJson (json) {
+  customEmojiJson = json;
 }
 
 // recursively searches the emoji data object containing data for all emojis
@@ -57,6 +79,9 @@ export function shortcodeToEmojiData (shortcode) {
 
   let reference;
   f(emojiJson, null);
+  if (reference === undefined && customEmojiJson !== null) {
+    f(customEmojiJson, null);
+  }
   return reference;
 }
 
@@ -105,8 +130,12 @@ export async function codeToEmojiData (code) {
 // removes duplicates.
 // @returns {string[]}
 export function findShortCodes (textContent) {
-  const shortCodes = textContent.match(/:[^:]+:/g);
-  const filtered = shortCodes ? shortCodes.filter(code => shortcodeToEmojiData(code)) : [];
+  const shortcodes = textContent.match(/:[^:]+:/g);
+  return filterValidShortCodes(shortcodes);
+}
+
+export function filterValidShortCodes (shortcodes) {
+  const filtered = shortcodes ? shortcodes.filter(code => shortcodeToEmojiData(code)) : [];
   return new Set(filtered);
 }
 
