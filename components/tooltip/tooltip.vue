@@ -94,7 +94,7 @@ export default {
      */
     offset: {
       type: Array,
-      default: () => [0, 0],
+      default: () => [0, -4],
     },
 
     /**
@@ -218,7 +218,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.tip) {
       this.tip?.destroy();
     }
