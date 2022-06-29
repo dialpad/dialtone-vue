@@ -388,7 +388,7 @@ export default {
       const top = lastChip.offsetTop + 4;
       input.style.paddingTop = top + 'px';
 
-      // This is to force re-render popover
+      // TODO: refresh the tippy.js instance in the popover
       // If the new chip goes to the next line and the input box expands,
       // move the popover down to the next line. Same when chips are removed
       this.popoverOffset = [0, 0];
