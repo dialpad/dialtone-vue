@@ -2,7 +2,7 @@
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
     list-aria-label="listAriaLabel"
-    :show-list="showList"
+    :show-list="showPopoverList"
     :max-height="listMaxHeight"
     :popover-offset="popoverOffset"
     content-width="anchor"
@@ -201,6 +201,7 @@ export default {
       showValidationMessages: false,
       initialInputPadding: {},
       resizeWindowObserver: null,
+      showListInterControl: null,
     };
   },
 
@@ -225,6 +226,10 @@ export default {
           this.onInputKeyup(event);
         },
       };
+    },
+
+    showPopoverList () {
+      return this.showListInterControl === null ? this.showList : this.showListInterControl;
     },
   },
 
@@ -259,10 +264,13 @@ export default {
       this.setChipsTopPosition();
       this.setInputPadding();
     }).observe(document.body);
+
+    window.addEventListener('focusin', this.onFocusin);
   },
 
-  unmounted () {
-    this.resizeWindowObserver.unobserve(document.body);
+  beforeUnmount () {
+    this.resizeWindowObserver?.unobserve(document.body);
+    window.removeEventListener('focusin', this.onFocusin);
   },
 
   methods: {
@@ -281,11 +289,11 @@ export default {
     },
 
     getChipButtons () {
-      return this.$refs.chips.map(chip => chip.$el.querySelector('button'));
+      return this.$refs.chips && this.$refs.chips.map(chip => chip.$el.querySelector('button'));
     },
 
     getChips () {
-      return this.$refs.chips.map(chip => chip.$el);
+      return this.$refs.chips && this.$refs.chips.map(chip => chip.$el);
     },
 
     getLastChipButton () {
@@ -302,6 +310,22 @@ export default {
 
     getInput () {
       return this.$refs.input?.$refs.input;
+    },
+
+    isChipFocused (target) {
+      const chips = this.getChipButtons();
+      return chips && chips.map(el => el.id).includes(target.id);
+    },
+
+    onFocusin (event) {
+      const target = event.target;
+      // This is to solve conflicts on 'Tab' behaviour between Chip and Popover list
+      // If the chip is focused, we don't open popover list when pressing 'Tab'
+      if (this.isChipFocused(target)) {
+        this.showListInterControl = false;
+      } else {
+        this.showListInterControl = null;
+      }
     },
 
     onChipKeyup (event) {
