@@ -53,10 +53,6 @@ export const argTypesData = {
     },
   },
 
-  offset: {
-    defaultValue: [0, -4],
-  },
-
   transition: {
     control: {
       type: 'select',
