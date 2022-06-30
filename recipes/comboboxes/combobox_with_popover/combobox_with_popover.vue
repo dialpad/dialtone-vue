@@ -261,9 +261,12 @@ export default {
   },
 
   methods: {
-    showComboboxList () {
+    showComboboxList (e) {
       if (this.showList != null) { return; }
-      this.isListShown = true;
+      // only trigger if it's the input specifically that was focused
+      if (e && this.$refs.input.querySelector('input') === e.target) {
+        this.isListShown = true;
+      }
     },
 
     closeComboboxList () {

@@ -2,7 +2,7 @@
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
     list-aria-label="listAriaLabel"
-    :show-list="showPopoverList"
+    :show-list="showList"
     :max-height="listMaxHeight"
     :popover-offset="popoverOffset"
     content-width="anchor"
@@ -201,7 +201,6 @@ export default {
       showValidationMessages: false,
       initialInputPadding: {},
       resizeWindowObserver: null,
-      showListInterControl: null,
     };
   },
 
@@ -226,10 +225,6 @@ export default {
           this.onInputKeyup(event);
         },
       };
-    },
-
-    showPopoverList () {
-      return this.showListInterControl === null ? this.showList : this.showListInterControl;
     },
   },
 
@@ -310,22 +305,6 @@ export default {
 
     getInput () {
       return this.$refs.input?.$refs.input;
-    },
-
-    isChipFocused (target) {
-      const chips = this.getChipButtons();
-      return chips && chips.map(el => el.id).includes(target.id);
-    },
-
-    onFocusin (event) {
-      const target = event.target;
-      // This is to solve conflicts on 'Tab' behaviour between Chip and Popover list
-      // If the chip is focused, we don't open popover list when pressing 'Tab'
-      if (this.isChipFocused(target)) {
-        this.showListInterControl = false;
-      } else {
-        this.showListInterControl = null;
-      }
     },
 
     onChipKeyup (event) {
