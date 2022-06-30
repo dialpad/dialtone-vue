@@ -259,13 +259,10 @@ export default {
       this.setChipsTopPosition();
       this.setInputPadding();
     }).observe(document.body);
-
-    window.addEventListener('focusin', this.onFocusin);
   },
 
   beforeUnmount () {
     this.resizeWindowObserver?.unobserve(document.body);
-    window.removeEventListener('focusin', this.onFocusin);
   },
 
   methods: {
