@@ -31,6 +31,7 @@ import {
   emojiImageUrlLarge,
   emojiFileExtensionLarge,
   customEmojiAssetUrl,
+  setCustomEmojiJson,
 } from '@/common/emoji';
 import { DtSkeleton } from '@/components/skeleton';
 
@@ -147,6 +148,12 @@ export default {
         this.imgLoading = true;
       },
     },
+  },
+
+  created () {
+    if (this.customEmoji) {
+      setCustomEmojiJson(this.customEmoji);
+    }
   },
 
   methods: {
