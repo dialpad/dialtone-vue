@@ -105,7 +105,7 @@ export async function codeToEmojiData (code) {
 // removes duplicates.
 // @returns {string[]}
 export function findShortCodes (textContent) {
-  const shortCodes = textContent.match(/:[^:]+:/g);
+  const shortCodes = textContent.match(/:[^:\s]*(?:::[^:\s]*)*:/g);
   const filtered = shortCodes ? shortCodes.filter(code => shortcodeToEmojiData(code)) : [];
   return new Set(filtered);
 }
