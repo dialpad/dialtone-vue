@@ -84,7 +84,6 @@ export default {
     },
 
     customEmoji: {
-      type: Boolean,
       default: false,
     },
   },

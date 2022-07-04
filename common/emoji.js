@@ -33,6 +33,10 @@ export function getCustomEmojiJson () {
   return customEmojiJson;
 }
 
+export function getEmojiData () {
+  return { ...emojiJson, ...customEmojiJson };
+}
+
 export function setEmojiAssetUrlSmall (url, fileExtension = '.png') {
   if (!url.endsWith('/')) {
     url = url + '/';
@@ -78,10 +82,7 @@ export function shortcodeToEmojiData (shortcode) {
   }
 
   let reference;
-  f(emojiJson, null);
-  if (reference === undefined && customEmojiJson !== null) {
-    f(customEmojiJson, null);
-  }
+  f(getEmojiData(), null);
   return reference;
 }
 
