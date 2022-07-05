@@ -1,7 +1,7 @@
 {
   "octocat": {
     "name": "octocat",
-    "category": "custom",
+    "category": "",
     "shortname": ":octocat:",
     "shortname_alternates": [],
     "keywords": [
@@ -14,7 +14,7 @@
   },
   "shipit": {
     "name": "ship it",
-    "category": "custom",
+    "category": "",
     "shortname": ":shipit:",
     "shortname_alternates": [],
     "keywords": [
