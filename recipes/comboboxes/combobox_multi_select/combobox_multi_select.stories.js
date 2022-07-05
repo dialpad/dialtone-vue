@@ -150,3 +150,19 @@ WithMaxSelectValidation.args = {
   selectedItems: ['(732) 338-6728', '(732) 338-7728'],
   maxSelectedMessage: [{ message: 'Max 2 selected', type: 'warning' }],
 };
+WithMaxSelectValidation.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'color-contrast',
+          enabled: false,
+        },
+        {
+          id: 'label',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
