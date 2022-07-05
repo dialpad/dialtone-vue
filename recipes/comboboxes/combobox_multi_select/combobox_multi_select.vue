@@ -21,7 +21,7 @@
             v-for="item in selectedItems"
             ref="chips"
             :key="item.id"
-            class="d-my4 d-mx2 d-zi-base1"
+            class="d-mt4 d-mx2 d-zi-base1"
             :close-button-props="{ ariaLabel: 'close' }"
             v-on="chipListeners"
             @keyup.backspace="onChipRemove(item)"
