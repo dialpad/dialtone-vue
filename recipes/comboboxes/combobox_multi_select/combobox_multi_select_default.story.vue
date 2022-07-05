@@ -10,6 +10,7 @@
     :max-selected="maxSelected"
     :list-max-height="listMaxHeight"
     :max-selected-message="maxSelectedMessage"
+    :close-on-select="closeOnSelect"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
@@ -68,16 +69,30 @@ export default {
 
   methods: {
     onComboboxInput (value) {
+      // Filter list
+      this.items = ITEMS_LIST_DATA.filter(item => item.value.includes(value));
       this.onInput(value);
     },
 
     onComboboxSelect (i) {
-      this.onSelect(i);
-      const item = this.items[i].value;
-      if (this.selectedItems.includes(item)) {
-        return;
+      if (this.items[i]) {
+        this.onSelect(i);
+        const item = this.items[i].value;
+        if (this.selectedItems.includes(item)) {
+          return;
+        }
+        this.selectedItems.push(item);
+
+        // Clear input box and unfilter list
+        this.$refs.comboboxMultiSelect.$data.value = '';
+        this.items = ITEMS_LIST_DATA;
+
+        // Close list
+        if (this.closeOnSelect) {
+          this.$refs.comboboxMultiSelect
+            .$refs.comboboxWithPopover.closeComboboxList();
+        }
       }
-      this.selectedItems.push(item);
     },
 
     onComboboxMaxSelected () {
