@@ -52,7 +52,7 @@ export const argTypesData = {
     defaultValue: false,
   },
   loadingMessage: {
-    defaultValue: '',
+    defaultValue: 'loading...',
   },
   selectedItems: {
     defaultValue: [],
@@ -68,6 +68,9 @@ export const argTypesData = {
   },
   maxSelectedMessage: {
     defaultValue: [],
+  },
+  closeOnSelect: {
+    defaultValue: true,
   },
 
   // Action Event Handlers
