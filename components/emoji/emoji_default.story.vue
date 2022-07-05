@@ -5,22 +5,16 @@
       :size="size"
       :img-class="imgClass"
       :aria-label="ariaLabel"
-      :custom-emoji="customEmojiProp"
+      :custom-emoji="customEmoji"
     />
   </div>
 </template>
 
 <script>
 import DtEmoji from './emoji';
-import * as customEmojiJson from '@/custom-emoji.json';
 
 export default {
   name: 'DtEmojiDefault',
   components: { DtEmoji },
-  data () {
-    return {
-      customEmojiProp: customEmojiJson,
-    };
-  },
 };
 </script>
