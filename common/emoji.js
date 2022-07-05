@@ -21,14 +21,6 @@ export async function getEmojiJson () {
   emojiJson = await import('emoji-toolkit/emoji_strategy.json');
 }
 
-/*
-export function getCustomEmojiJson () {
-  console.log(customEmojiJson);
-  return import(`./${customEmojiJson}.json`);
-  //return import(`./${customEmojiJson}`);
-}
-*/
-
 export function getCustomEmojiJson () {
   return customEmojiJson;
 }
