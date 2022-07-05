@@ -83,8 +83,11 @@ export default {
       default: null,
     },
 
+    /**
+     * Raw custom emoji JSON. Before passing a value, set the custom emoji URL with the `setCustomEmojiUrl` function.
+     */
     customEmoji: {
-      default: false,
+      default: null,
     },
   },
 

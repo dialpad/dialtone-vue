@@ -21,15 +21,10 @@ export default {
     },
 
     /**
-     * Custom emoji Json.
+     * Raw custom emoji JSON. Before passing a value, set the custom emoji URL with the `setCustomEmojiUrl` function.
      */
     customEmoji: {
       default: null,
-    },
-
-    customEmojiFile: {
-      type: String,
-      default: '',
     },
   },
 
@@ -41,7 +36,6 @@ export default {
 
   async created () {
     await getEmojiJson();
-    // this.customEmoji = await getCustomEmojiJson();
     this.loadingEmojiJson = false;
     if (this.customEmoji) {
       setCustomEmojiJson(this.customEmoji);
