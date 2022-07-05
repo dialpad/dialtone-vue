@@ -15,7 +15,7 @@
       >
         <span
           ref="chipsWrapper"
-          class="d-combobox-multi-select_chip-wrapper d-ps-absolute d-mx2"
+          class="d-ps-absolute d-mx2"
         >
           <dt-chip
             v-for="item in selectedItems"
@@ -72,7 +72,7 @@
         />
         <div
           v-else
-          class="d-m4"
+          class="d-ta-center d-py16"
         >
           {{ loadingMessage }}
         </div>
@@ -190,6 +190,15 @@ export default {
       type: Array,
       default: function () { return []; },
     },
+
+    /**
+     * Whether or not the list closes after making a selection.
+     * Defaults to true as most comboboxes in Dialpad want this behaviour
+     */
+    closeOnSelect: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   emits: ['input', 'select', 'remove', 'max-selected'],
@@ -261,8 +270,9 @@ export default {
     }).observe(document.body);
   },
 
-  beforeUnmount () {
+  beforeDestroy () {
     this.resizeWindowObserver?.unobserve(document.body);
+    console.log('Combobox Multi Select: Unobserve window resize before destory');
   },
 
   methods: {
@@ -278,6 +288,11 @@ export default {
     onComboboxSelect (i) {
       this.value = '';
       this.$emit('select', i);
+
+      // Close list
+      if (this.closeOnSelect) {
+        this.$refs.comboboxWithPopover.closeComboboxList();
+      }
     },
 
     getChipButtons () {
