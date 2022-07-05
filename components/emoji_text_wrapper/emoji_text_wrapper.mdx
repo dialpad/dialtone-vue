@@ -68,3 +68,31 @@ Currently, this wrapper component **can't handle Vue components**, make sure to 
   ...
 </dt-emoji-text-wrapper>
 ```
+
+## With Custom Emoji
+
+Alternative, the json data can be provided in the emoji-text-wrapper and emoji components.
+
+```html
+<template>
+  <dt-emoji-text-wrapper
+    :custom-emoji-json="customEmojiJson"
+  >
+    custom emojis :octocat: :shipit:
+  </dt-emoji-text-wrapper>
+</template>
+
+<script>
+import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue';
+import * as customEmojiJson from './data/custom-emoji.json'
+
+export default {
+  components: { DtEmojiTextWrapper },
+  data () {
+    return {
+      customEmojiJson,
+    }
+  },
+}
+</script>
+```
