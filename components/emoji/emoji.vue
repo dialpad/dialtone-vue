@@ -45,7 +45,8 @@ export default {
   props: {
     /**
       * Supports shortcode ex: :smile: or unicode ex: 😄. Will display the resulting emoji.
-      * See https://emojipedia.org/joypixels/ for all supported shortcode/unicode.
+      * See https://emojipedia.org/joypixels/ for all supported shortcode/unicode or the docs
+      * for setting up custom emojis.
       */
     code: {
       type: String,
