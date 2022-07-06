@@ -111,7 +111,6 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
     describe('Should navigate between chips', function () {
       describe('When second chip is focused', function () {
         beforeEach(async function () {
-          // Focus on the second chip
           await secondChip.trigger('focus');
         });
 
@@ -128,7 +127,6 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
 
       describe('When first chip is focused', function () {
         beforeEach(async function () {
-          // Focus on the first chip
           await firstChip.trigger('focus');
         });
 
@@ -153,7 +151,6 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
 
       describe('When input is focused', function () {
         beforeEach(async function () {
-          // Focus on the input
           input.trigger('focus');
         });
 
@@ -180,7 +177,6 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
 
       describe('When the last chip is focused', function () {
         beforeEach(async function () {
-          // Focus on the input
           lastChip.trigger('focus');
         });
 
