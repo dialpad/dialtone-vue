@@ -99,69 +99,100 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
   });
 
   describe('Accessibility Tests', function () {
+    let firstChip;
+    let secondChip;
     beforeEach(async function () {
       await wrapper.setProps({ selectedItems: ['1', '2'] });
       _setChildWrappers();
+      firstChip = chips.at(0);
+      secondChip = chips.at(1);
     });
 
     describe('Should navigate between chips', function () {
-      it('should move to the previous chip if press "LEFT" arrow', function () {
-        const firstChip = chips.at(0);
-        const secondChip = chips.at(1);
-        // Focus on the second chip
-        secondChip.trigger('focus');
-        assert.strictEqual(document.activeElement, secondChip.element);
+      describe('When second chip is focused', function () {
+        beforeEach(async function () {
+          // Focus on the second chip
+          await secondChip.trigger('focus');
+        });
 
-        // Press Key 'LEFT'
-        secondChip.trigger('keyup', { code: 'arrowleft' });
-        assert.strictEqual(document.activeElement, firstChip.element);
+        describe('When LEFT key is pressed', function () {
+          beforeEach(async function () {
+            await secondChip.trigger('keyup', { code: 'arrowleft' });
+          });
+
+          it('should focus the first chip', function () {
+            assert.strictEqual(document.activeElement, firstChip.element);
+          });
+        });
       });
 
-      it('should move to the next chip if press "RIGHT" arrow', function () {
-        const firstChip = chips.at(0);
-        const secondChip = chips.at(1);
-        // Focus on the first chip
-        firstChip.trigger('focus');
-        assert.strictEqual(document.activeElement, firstChip.element);
+      describe('When first chip is focused', function () {
+        beforeEach(async function () {
+          // Focus on the first chip
+          await firstChip.trigger('focus');
+        });
 
-        // Press Key 'RIGHT'
-        firstChip.trigger('keyup', { code: 'arrowright' });
-        assert.strictEqual(document.activeElement, secondChip.element);
+        describe('When RIGHT key is pressed', function () {
+          beforeEach(async function () {
+            await firstChip.trigger('keyup', { code: 'arrowright' });
+          });
+
+          it('should focus the second chip', function () {
+            assert.strictEqual(document.activeElement, secondChip.element);
+          });
+        });
       });
     });
 
     describe('Should navigate between last chip and input', function () {
-      it('should move to last chip if press "LEFT" arrow', function () {
-        const lastChip = chips.at(1);
-        // Focus on the input
-        input.trigger('focus');
-        assert.strictEqual(document.activeElement, input.element);
-
-        // Press Key 'LEFT'
-        input.trigger('keyup', { code: 'arrowleft' });
-        assert.strictEqual(document.activeElement, lastChip.element);
+      let lastChip;
+      beforeEach(async function () {
+        await wrapper.setProps({ selectedItems: ['1'] });
+        lastChip = chips.at(0);
       });
 
-      it('should move to last chip if press "Backspace" arrow', function () {
-        const lastChip = chips.at(1);
-        // Focus on the input
-        input.trigger('focus');
-        assert.strictEqual(document.activeElement, input.element);
+      describe('When input is focused', function () {
+        beforeEach(async function () {
+          // Focus on the input
+          input.trigger('focus');
+        });
 
-        // Press Key 'LEFT'
-        input.trigger('keyup', { code: 'backspace' });
-        assert.strictEqual(document.activeElement, lastChip.element);
+        describe('When LEFT key is pressed', function () {
+          beforeEach(async function () {
+            input.trigger('keyup', { code: 'arrowleft' });
+          });
+
+          it('should focus the last chip', function () {
+            assert.strictEqual(document.activeElement, lastChip.element);
+          });
+        });
+
+        describe('When BACKSPACE key is pressed', function () {
+          beforeEach(async function () {
+            input.trigger('keyup', { code: 'backspace' });
+          });
+
+          it('should focus the last chip', function () {
+            assert.strictEqual(document.activeElement, lastChip.element);
+          });
+        });
       });
 
-      it('should move to the input if press "RIGHT" arrow', function () {
-        const lastChip = chips.at(1);
-        // Focus on the last chip
-        lastChip.trigger('focus');
-        assert.strictEqual(document.activeElement, lastChip.element);
+      describe('When the last chip is focused', function () {
+        beforeEach(async function () {
+          // Focus on the input
+          lastChip.trigger('focus');
+        });
 
-        // Press Key 'RIGHT'
-        lastChip.trigger('keyup', { code: 'arrowright' });
-        assert.strictEqual(document.activeElement, input.element);
+        describe('When RIGHT key is pressed', function () {
+          beforeEach(async function () {
+            lastChip.trigger('keyup', { code: 'arrowright' });
+          });
+
+          it('should focus the input', function () {
+            assert.strictEqual(document.activeElement, input.element);
+          });
+        });
       });
     });
   });

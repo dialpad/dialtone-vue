@@ -262,12 +262,14 @@ export default {
   },
 
   mounted () {
-    this.setChipsTopPosition();
-    // Recalculate chip position and input padding when resizing window
-    this.resizeWindowObserver = new ResizeObserver(() => {
+    setTimeout(() => {
       this.setChipsTopPosition();
-      this.setInputPadding();
-    }).observe(document.body);
+      // Recalculate chip position and input padding when resizing window
+      this.resizeWindowObserver = new ResizeObserver(() => {
+        this.setChipsTopPosition();
+        this.setInputPadding();
+      }).observe(document.body);
+    }, 0);
   },
 
   beforeDestroy () {
