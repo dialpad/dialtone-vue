@@ -10,7 +10,7 @@
     :max-selected="maxSelected"
     :list-max-height="listMaxHeight"
     :max-selected-message="maxSelectedMessage"
-    :close-on-select="closeOnSelect"
+    :has-suggestion-list="hasSuggestionList"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
@@ -88,7 +88,7 @@ export default {
         this.items = ITEMS_LIST_DATA;
 
         // Close list
-        if (this.closeOnSelect) {
+        if (!this.hasSuggestionList) {
           this.$refs.comboboxMultiSelect
             .$refs.comboboxWithPopover.closeComboboxList();
         }

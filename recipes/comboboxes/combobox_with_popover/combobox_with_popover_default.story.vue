@@ -10,6 +10,7 @@
     :list-id="listId"
     :list-class="listClass"
     :open-with-arrow-keys="openWithArrowKeys"
+    :has-suggestion-list="hasSuggestionList"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
@@ -96,6 +97,15 @@ export default {
         { id: 'item12', number: '(732) 338-2756', type: 'Other' },
       ],
     };
+  },
+
+  watch: {
+    value (newValue, oldValue) {
+      if (!this.hasSuggestionList && !oldValue && newValue) {
+        // Displays the list after the user has typed anything
+        this.$refs.comboboxWithPopover.showComboboxList();
+      }
+    },
   },
 
   methods: {
