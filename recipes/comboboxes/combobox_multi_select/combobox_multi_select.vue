@@ -262,10 +262,10 @@ export default {
     },
 
     value (newValue, oldValue) {
-      if (!this.hasSuggestionList && !oldValue && newValue) {
-        // Displays the list after the user has typed anything
-        this.$refs.comboboxWithPopover.showComboboxList();
-      }
+      // if has suggestion list, the list is controlled automatically by input focusin or focusout.
+      // otherwise, we need to toggle the list based on the input value
+      if (this.hasSuggestionList) return;
+      this.toggleListDisplay(newValue, oldValue);
     },
   },
 
@@ -296,6 +296,16 @@ export default {
     onComboboxSelect (i) {
       this.value = '';
       this.$emit('select', i);
+    },
+
+    toggleListDisplay (newValue, oldValue) {
+      if (!oldValue && newValue) {
+        // Displays the list after the user has typed anything
+        this.$refs.comboboxWithPopover.showComboboxList();
+      } else if (oldValue && !newValue) {
+        // Not display the list after the input is deleted
+        this.$refs.comboboxWithPopover.closeComboboxList();
+      }
     },
 
     getChipButtons () {
@@ -402,8 +412,8 @@ export default {
       const left = lastChip.offsetLeft + this.getFullWidth(lastChip);
       input.style.paddingLeft = left + 'px';
 
-      // Chip has 4px vertical margin. We add 4px to top make the input text the same "top" with the chip
-      const top = lastChip.offsetTop + 4;
+      // Chip has vertical margin. We add buffer to top center the input text
+      const top = lastChip.offsetTop + 3;
       input.style.paddingTop = top + 'px';
 
       // TODO: refresh the tippy.js instance in the popover
