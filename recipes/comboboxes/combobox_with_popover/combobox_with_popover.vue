@@ -1,7 +1,6 @@
 <template>
   <dt-combobox
     ref="combobox"
-    :loading="isListLoading"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
@@ -57,7 +56,13 @@
         </template>
 
         <template #content>
+          <combobox-loading-list
+            v-if="loading"
+            v-bind="listProps"
+            :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
+          />
           <div
+            v-else
             ref="listWrapper"
             :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             @mouseleave="clearHighlightIndex"
@@ -87,6 +92,7 @@
 </template>
 
 <script>
+import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
 import { DtCombobox, DtPopover, POPOVER_CONTENT_WIDTHS } from '@';
 import { getUniqueString } from '@/common/utils';
 import {
@@ -99,6 +105,7 @@ export default {
   components: {
     DtCombobox,
     DtPopover,
+    ComboboxLoadingList,
   },
 
   props: {
@@ -216,7 +223,6 @@ export default {
   data () {
     return {
       DROPDOWN_PADDING_CLASSES,
-      isListLoading: false,
       isListShown: false,
       isInputFocused: false,
       isListFocused: false,
@@ -249,16 +255,6 @@ export default {
       immediate: true,
     },
 
-    loading: {
-      handler: function (value) {
-        if (value !== null) {
-          this.isListLoading = value;
-        }
-      },
-
-      immediate: true,
-    },
-
     isListShown (val) {
       this.onOpened(val);
     },
@@ -276,6 +272,8 @@ export default {
     },
 
     onSelect (highlightIndex) {
+      if (this.loading) return;
+
       this.$emit('select', highlightIndex);
     },
 
@@ -285,6 +283,8 @@ export default {
     },
 
     onHighlight (highlightIndex) {
+      if (this.loading) return;
+
       this.$emit('highlight', highlightIndex);
     },
 
@@ -313,7 +313,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-
-</style>
