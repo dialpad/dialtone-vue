@@ -22,15 +22,10 @@
       @focusout="clearHighlightIndex"
       @mousemove.capture="onMouseHighlight"
     >
-      <!-- TODO: Handle onOpen Event -->
-      <div v-if="loading">
-        <dt-skeleton
-          v-for="index in 7"
-          :key="index"
-          class="d-mt16"
-          :text-option="{ type: 'body' }"
-        />
-      </div>
+      <combobox-loading-list
+        v-if="loading"
+        v-bind="listProps"
+      />
       <!-- @slot Slot for the combobox list element -->
       <slot
         v-else
@@ -46,12 +41,12 @@
 <script>
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { getUniqueString } from '@/common/utils';
-import { DtSkeleton } from '../skeleton';
+import ComboboxLoadingList from './combobox_loading-list.vue';
 
 export default {
   name: 'DtCombobox',
 
-  components: { DtSkeleton },
+  components: { ComboboxLoadingList },
 
   mixins: [
     KeyboardNavigation({
@@ -167,7 +162,7 @@ export default {
     },
 
     activeItemId () {
-      if (!this.showList || this.highlightIndex < 0) {
+      if (!this.showList || this.highlightIndex < 0 || this.loading) {
         return;
       }
       return this.highlightId;
@@ -239,7 +234,7 @@ export default {
     },
 
     onKeyValidation (e, eventHandler) {
-      if ((!this.showList || !this.getListElement()) && (!this.showList || !this.loading)) { return; }
+      if (!this.showList || !this.getListElement() || this.loading) { return; }
 
       this[eventHandler](e);
     },
@@ -247,7 +242,8 @@ export default {
     setInitialHighlightIndex () {
       if (this.showList) {
         // When the list's is shown, reset the highlight index.
-        this.setHighlightIndex(0);
+        // If the list is in loading state, set to -1
+        this.setHighlightIndex(this.loading ? -1 : 0);
       }
     },
   },
