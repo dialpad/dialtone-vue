@@ -28,8 +28,18 @@
       @focusout="clearHighlightIndex"
       @mousemove.capture="onMouseHighlight"
     >
+      <!-- TODO: Handle onOpen Event -->
+      <div v-if="loading">
+        <dt-skeleton
+          v-for="index in 7"
+          :key="index"
+          class="d-mt16"
+          :text-option="{ type: 'body' }"
+        />
+      </div>
       <!-- @slot Slot for the combobox list element -->
       <slot
+        v-else
         name="list"
         :list-props="listProps"
         :opened="onOpen"
@@ -42,9 +52,12 @@
 <script>
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { getUniqueString } from '@/common/utils';
+import { DtSkeleton } from '../skeleton';
 
 export default {
   name: 'DtCombobox',
+
+  components: { DtSkeleton },
 
   mixins: [
     KeyboardNavigation({
@@ -104,6 +117,14 @@ export default {
      * If the list is rendered outside the component, like when using popover as the list wrapper.
      */
     listRenderedOutside: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Determines when to show the skeletons and also controls aria-busy attribute.
+     */
+    loading: {
       type: Boolean,
       default: false,
     },
@@ -224,7 +245,7 @@ export default {
     },
 
     onKeyValidation (e, eventHandler) {
-      if (!this.showList || !this.getListElement()) { return; }
+      if ((!this.showList || !this.getListElement()) && (!this.showList || !this.loading)) { return; }
 
       this[eventHandler](e);
     },
