@@ -24,6 +24,7 @@
         <slot
           name="input"
           :input-props="inputProps"
+          :on-input="handleDisplayList"
         />
       </div>
     </template>
@@ -269,6 +270,15 @@ export default {
   },
 
   methods: {
+    handleDisplayList (value) {
+      if (!this.hasSuggestionList && value) {
+        // Displays the list after the user has typed anything
+        this.showComboboxList();
+      } else {
+        this.closeComboboxList();
+      }
+    },
+
     showComboboxList () {
       if (this.showList != null) { return; }
       this.isListShown = true;
