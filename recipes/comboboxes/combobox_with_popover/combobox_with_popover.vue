@@ -24,6 +24,7 @@
         <slot
           name="input"
           :input-props="inputProps"
+          :on-input="handleDisplayList"
         />
       </div>
     </template>
@@ -261,6 +262,21 @@ export default {
   },
 
   methods: {
+    async handleDisplayList (value) {
+      if (!this.hasSuggestionList) {
+        if (value) {
+          // Displays the list after the user has typed anything
+          this.showComboboxList();
+        } else {
+          this.closeComboboxList();
+        }
+      }
+
+      // After the list is updated, hightlight the first item
+      await this.$nextTick();
+      this.$refs.combobox.setInitialHighlightIndex();
+    },
+
     showComboboxList () {
       if (this.showList != null) { return; }
       this.isListShown = true;
