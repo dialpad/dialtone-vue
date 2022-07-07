@@ -89,12 +89,6 @@ export default {
         // Clear input box and unfilter list
         this.$refs.comboboxMultiSelect.$data.value = '';
         this.items = ITEMS_LIST_DATA;
-
-        // Close list
-        if (!this.hasSuggestionList) {
-          this.$refs.comboboxMultiSelect
-            .$refs.comboboxWithPopover.closeComboboxList();
-        }
       }
     },
 

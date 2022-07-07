@@ -9,7 +9,7 @@
     content-width="anchor"
     @select="onComboboxSelect"
   >
-    <template #input>
+    <template #input="{ onInput }">
       <span
         ref="inputSlotWrapper"
         class="d-ps-relative"
@@ -41,8 +41,8 @@
           :placeholder="placeHolder"
           :show-messages="showInputMessages"
           :messages="inputMessages"
-          @input="onInput"
           v-on="inputListeners"
+          @input="onInput"
         />
 
         <dt-validation-messages
@@ -246,6 +246,7 @@ export default {
         ...this.$listeners,
         keyup: event => {
           this.onChipKeyup(event);
+          this.$emit('keyup', event);
         },
       };
     },
@@ -253,8 +254,13 @@ export default {
     inputListeners () {
       return {
         ...this.$listeners,
+        input: event => {
+          this.$emit('input', event);
+        },
+
         keyup: event => {
           this.onInputKeyup(event);
+          this.$emit('keyup', event);
         },
       };
     },
@@ -282,19 +288,6 @@ export default {
       // Adjust the chips position if description changed
       this.setChipsTopPosition();
     },
-
-    async value (newValue, oldValue) {
-      // if has suggestion list, the list is controlled automatically by input focusin or focusout.
-      // otherwise, we need to toggle the list based on the input value
-      if (!this.hasSuggestionList) {
-        this.toggleListDisplay(newValue, oldValue);
-      }
-
-      // After input value changes, hightlight the first list item
-      await this.$nextTick();
-      this.$refs.comboboxWithPopover
-        .$refs.combobox.setInitialHighlightIndex();
-    },
   },
 
   mounted () {
@@ -306,16 +299,12 @@ export default {
     }).observe(document.body);
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     this.resizeWindowObserver?.unobserve(document.body);
     console.log('Combobox Multi Select: Unobserve window resize before destory');
   },
 
   methods: {
-    onInput (value) {
-      this.$emit('input', value);
-    },
-
     onChipRemove (item) {
       this.$emit('remove', item);
       this.$refs.input.focus();
@@ -324,16 +313,6 @@ export default {
     onComboboxSelect (i) {
       this.value = '';
       this.$emit('select', i);
-    },
-
-    toggleListDisplay (newValue, oldValue) {
-      if (!oldValue && newValue) {
-        // Displays the list after the user has typed anything
-        this.$refs.comboboxWithPopover.showComboboxList();
-      } else if (oldValue && !newValue) {
-        // Not display the list after the input is deleted
-        this.$refs.comboboxWithPopover.closeComboboxList();
-      }
     },
 
     getChipButtons () {
