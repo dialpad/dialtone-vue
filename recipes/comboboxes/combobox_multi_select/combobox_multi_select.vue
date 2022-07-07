@@ -35,10 +35,12 @@
         <dt-input
           ref="input"
           v-model="value"
-          class="d-combobox-multi-select_input d-fl-grow1 d-mb4"
+          class="d-fl-grow1 d-mb4"
           :label="label"
           :description="description"
           :placeholder="placeHolder"
+          :show-messages="showInputMessages"
+          :messages="inputMessages"
           @input="onInput"
           v-on="inputListeners"
         />
@@ -96,6 +98,7 @@
 
 <script>
 import { DtRecipeComboboxWithPopover, DtInput, DtChip, DtValidationMessages } from '@';
+import { validationMessageValidator } from '@/common/validators';
 
 export default {
   name: 'DtRecipeComboboxMultiSelect',
@@ -122,6 +125,25 @@ export default {
     description: {
       type: String,
       default: null,
+    },
+
+    /**
+     * Input validation messages
+     */
+    inputMessages: {
+      type: Array,
+      default: () => [],
+      validator: inputMessages => {
+        return validationMessageValidator(inputMessages);
+      },
+    },
+
+    /**
+     * Show input validation message
+     */
+    showInputMessages: {
+      type: Boolean,
+      default: true,
     },
 
     // @TODO: https://dialpad.atlassian.net/browse/DP-52324
@@ -261,11 +283,17 @@ export default {
       this.setChipsTopPosition();
     },
 
-    value (newValue, oldValue) {
+    async value (newValue, oldValue) {
       // if has suggestion list, the list is controlled automatically by input focusin or focusout.
       // otherwise, we need to toggle the list based on the input value
-      if (this.hasSuggestionList) return;
-      this.toggleListDisplay(newValue, oldValue);
+      if (!this.hasSuggestionList) {
+        this.toggleListDisplay(newValue, oldValue);
+      }
+
+      // After input value changes, hightlight the first list item
+      await this.$nextTick();
+      this.$refs.comboboxWithPopover
+        .$refs.combobox.setInitialHighlightIndex();
     },
   },
 
