@@ -1,6 +1,7 @@
 <template>
   <dt-combobox
     ref="combobox"
+    :loading="isListLoading"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
@@ -244,6 +245,7 @@ export default {
   data () {
     return {
       DROPDOWN_PADDING_CLASSES,
+      isListLoading: false,
       isListShown: false,
       isInputFocused: false,
       isListFocused: false,
@@ -270,6 +272,16 @@ export default {
       handler: function (show) {
         if (show !== null) {
           this.isListShown = show;
+        }
+      },
+
+      immediate: true,
+    },
+
+    loading: {
+      handler: function (value) {
+        if (value !== null) {
+          this.isListLoading = value;
         }
       },
 
