@@ -79,8 +79,6 @@ export default {
     onComboboxSelect (i) {
       if (this.items[i]) {
         this.onSelect(i);
-        // Focus to input element
-        this.$refs.comboboxMultiSelect.$refs.input?.$refs.input?.focus();
 
         const item = this.items[i].value;
         if (this.selectedItems.includes(item)) {
