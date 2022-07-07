@@ -1,6 +1,7 @@
 <template>
   <dt-combobox
     ref="combobox"
+    :loading="isListLoading"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
@@ -196,6 +197,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Determines when to show the skeletons and also controls aria-busy attribute.
+     */
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
@@ -203,6 +212,7 @@ export default {
   data () {
     return {
       DROPDOWN_PADDING_CLASSES,
+      isListLoading: false,
       isListShown: false,
       isInputFocused: false,
       isListFocused: false,
@@ -229,6 +239,16 @@ export default {
       handler: function (show) {
         if (show !== null) {
           this.isListShown = show;
+        }
+      },
+
+      immediate: true,
+    },
+
+    loading: {
+      handler: function (value) {
+        if (value !== null) {
+          this.isListLoading = value;
         }
       },
 
