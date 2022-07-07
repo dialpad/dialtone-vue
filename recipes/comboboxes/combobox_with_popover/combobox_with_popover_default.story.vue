@@ -23,11 +23,12 @@
       <span v-html="$attrs.header" />
     </template>
 
-    <template #input="{ inputProps }">
+    <template #input="{ inputProps, onInput }">
       <dt-input
         v-model="value"
         placeholder="Select one or start typing"
         v-bind="inputProps"
+        @input="onInput"
       />
     </template>
     <template #list="{ listProps }">
@@ -97,15 +98,6 @@ export default {
         { id: 'item12', number: '(732) 338-2756', type: 'Other' },
       ],
     };
-  },
-
-  watch: {
-    value (newValue, oldValue) {
-      if (!this.hasSuggestionList && !oldValue && newValue) {
-        // Displays the list after the user has typed anything
-        this.$refs.comboboxWithPopover.showComboboxList();
-      }
-    },
   },
 
   methods: {
