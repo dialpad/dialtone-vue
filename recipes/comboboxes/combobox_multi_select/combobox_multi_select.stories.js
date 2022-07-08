@@ -147,7 +147,7 @@ export const Default = Template.bind({});
 export const WithMaxSelectValidation = Template.bind({});
 WithMaxSelectValidation.args = {
   maxSelected: 2,
-  selectedItems: ['(732) 338-6728', '(732) 338-7728'],
+  selectedItems: ['item12', 'item13'],
   maxSelectedMessage: [{ message: 'Max 2 selected', type: 'warning' }],
 };
 WithMaxSelectValidation.parameters = {
