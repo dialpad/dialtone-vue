@@ -266,20 +266,12 @@ export default {
   },
 
   methods: {
-    async handleDisplayList (value) {
-      if (this.isListShown) {
-        // After the list is updated, hightlight the first item
-        await this.$nextTick();
-        this.$refs.combobox.setInitialHighlightIndex();
-      }
-
-      if (!this.hasSuggestionList) {
-        if (value) {
-          // Displays the list after the user has typed anything
-          this.showComboboxList();
-        } else {
-          this.closeComboboxList();
-        }
+    handleDisplayList (value) {
+      if (!this.hasSuggestionList && value) {
+        // Displays the list after the user has typed anything
+        this.showComboboxList();
+      } else {
+        this.closeComboboxList();
       }
     },
 
