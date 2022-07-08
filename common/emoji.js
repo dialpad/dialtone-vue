@@ -13,7 +13,7 @@ export let emojiImageUrlLarge = defaultEmojiAssetUrl;
 export let emojiFileExtensionLarge = '.png';
 
 export let emojiJson = null;
-export let customEmojiJson = null;
+export const customEmojiJson = null;
 
 export async function getEmojiJson () {
   if (emojiJson) return;
@@ -26,7 +26,8 @@ export function getCustomEmojiJson () {
 }
 
 export function getEmojiData () {
-  return { ...emojiJson, ...customEmojiJson };
+  return emojiJson;
+  // return { ...emojiJson, ...customEmojiJson };
 }
 
 export function setEmojiAssetUrlSmall (url, fileExtension = '.png') {
@@ -50,7 +51,63 @@ export function setCustomEmojiUrl (url) {
 }
 
 export function setCustomEmojiJson (json) {
-  customEmojiJson = json;
+  validateCustomEmojiJson(json);
+  // customEmojiJson = json;
+}
+
+/**
+ * Validate custom emoji json
+ */
+export async function validateCustomEmojiJson (json) {
+  await getEmojiJson();
+
+  const customEmojiProps = ['extension', 'custom'];
+  const customEmojiRequiredProps = [
+    'name',
+    'category',
+    'shortname',
+    'extension',
+  ];
+
+  Object.entries(json).forEach((item) => {
+    const [emojiKey, emojiValue] = item;
+
+    // emoji exists in emoji json meaning update some data in native emoji
+    if (emojiKey in emojiJson) {
+      for (const emojiProperty in emojiValue) {
+        // property doesn't exist
+        if (emojiJson[emojiKey][emojiProperty] === undefined) {
+          if (!customEmojiProps.includes(emojiProperty)) {
+            return;
+          }
+          emojiJson[emojiKey][emojiProperty] = emojiValue[emojiProperty];
+        } else {
+          if (Array.isArray(emojiJson[emojiKey][emojiProperty])) {
+            emojiJson[emojiKey][emojiProperty] = emojiJson[emojiKey][
+              emojiProperty
+            ].concat(emojiValue[emojiProperty]);
+          } else {
+            emojiJson[emojiKey][emojiProperty] = emojiValue[emojiProperty];
+          }
+        }
+      }
+    } else {
+      // new custom emoji
+      const _validateRequiredProps = () =>
+        customEmojiRequiredProps.every((val) => {
+          return emojiValue[val] !== undefined;
+        });
+
+      if (_validateRequiredProps()) {
+        emojiJson[emojiKey] = emojiValue;
+      } else {
+        console.error(
+          'The following custom emoji doesn\'t contain the required properties:',
+          emojiValue,
+        );
+      }
+    }
+  });
 }
 
 // recursively searches the emoji data object containing data for all emojis
