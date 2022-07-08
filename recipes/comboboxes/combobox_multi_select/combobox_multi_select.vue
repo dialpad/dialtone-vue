@@ -4,27 +4,27 @@
     list-aria-label="listAriaLabel"
     :show-list="showList"
     :max-height="listMaxHeight"
-    :popover-offset="offset"
+    :popover-offset="popoverOffset"
     content-width="anchor"
     @select="onComboboxSelect"
   >
     <template #input>
-      <div
-        @keyup.left="onLeftKey"
-        @keyup.right="onRightKey"
+      <span
+        ref="inputSlotWrapper"
+        class="d-ps-relative"
       >
         <span
           ref="chipsWrapper"
-          class="d-combobox-multi-select_chip-wrapper d-ps-absolute"
+          class="d-combobox-multi-select_chip-wrapper d-ps-absolute d-mx2"
         >
           <dt-chip
             v-for="item in selectedItems"
             ref="chips"
             :key="item.id"
-            class="d-m4 d-d-inline-flex d-zi-base1"
+            class="d-my4 d-mx2 d-zi-base1"
             :close-button-props="{ ariaLabel: 'close' }"
-            @keyup.left="onLeftKey"
-            @keyup.right="onRightKey"
+            v-on="chipListeners"
+            @keyup.backspace="onChipRemove(item)"
             @close="onChipRemove(item)"
           >
             {{ item }}
@@ -39,14 +39,14 @@
           :description="description"
           :placeholder="placeHolder"
           @input="onInput"
-          @keyup.delete="onDeleteKey"
+          v-on="inputListeners"
         />
 
         <dt-validation-messages
           :validation-messages="maxSelectedMessage"
           :show-messages="showValidationMessages"
         />
-      </div>
+      </span>
     </template>
 
     <!-- @slot slot for popover header -->
@@ -197,9 +197,10 @@ export default {
   data () {
     return {
       value: '',
-      offset: [0, 0],
+      popoverOffset: [0, 0],
       showValidationMessages: false,
       initialInputPadding: {},
+      resizeWindowObserver: null,
     };
   },
 
@@ -207,37 +208,61 @@ export default {
     placeHolder () {
       return this.selectedItems?.length > 0 ? '' : 'Select one or start typing';
     },
+
+    chipListeners () {
+      return {
+        ...this.$listeners,
+        keyup: event => {
+          this.onChipKeyup(event);
+        },
+      };
+    },
+
+    inputListeners () {
+      return {
+        ...this.$listeners,
+        keyup: event => {
+          this.onInputKeyup(event);
+        },
+      };
+    },
   },
 
   watch: {
-    selectedItems () {
-      // Required to push handling of this to end of queue stack
-      // Otherwise we will get the width before chip changes
-      setTimeout(() => {
+    selectedItems: {
+      immediate: true,
+      async handler () {
+        await this.$nextTick();
         this.setInputPadding();
+        this.setInputMinWidth();
         this.checkMaxSelected();
-      }, 0);
+      },
     },
 
-    label () {
-      setTimeout(() => {
-        // Adjust the chips position if label changed
-        this.setChipsTopPosition();
-      }, 0);
+    async label () {
+      await this.$nextTick();
+      // Adjust the chips position if label changed
+      this.setChipsTopPosition();
     },
 
-    description () {
-      setTimeout(() => {
-        // Adjust the chips position if description changed
-        this.setChipsTopPosition();
-      }, 0);
+    async description () {
+      await this.$nextTick();
+      // Adjust the chips position if description changed
+      this.setChipsTopPosition();
     },
   },
 
   mounted () {
     this.setChipsTopPosition();
-    this.setInputPadding();
-    this.checkMaxSelected();
+    // Recalculate chip position and input padding when resizing window
+    this.resizeWindowObserver = new ResizeObserver(() => {
+      this.setChipsTopPosition();
+      this.setInputPadding();
+    }).observe(document.body);
+  },
+
+  unmounted () {
+    this.resizeWindowObserver.unobserve(document.body);
   },
 
   methods: {
@@ -271,29 +296,38 @@ export default {
       return this.$refs.chips && this.getChips()[this.getChips().length - 1];
     },
 
-    onLeftKey (event) {
-      if (this.selectedItems.length === 0) {
-        return;
-      }
-      // If the cursor is at the start of the text, it would select the last chip
-      if (event.target.selectionStart === 0) {
-        this.moveFromInputToChip();
-      } else if (event.target.type !== 'text') {
+    getFirstChip () {
+      return this.$refs.chips && this.getChips()[0];
+    },
+
+    getInput () {
+      return this.$refs.input?.$refs.input;
+    },
+
+    onChipKeyup (event) {
+      const key = event.code?.toLowerCase();
+      if (key === 'arrowleft') {
         // Move to the previous chip
         this.navigateBetweenChips(event.target, true);
+      } else if (key === 'arrowright') {
+        if (event.target.id === this.getLastChipButton().id) {
+          // Move to the input if it's the last chip
+          this.moveFromChipToInput();
+        } else {
+          // Move to the next chip
+          this.navigateBetweenChips(event.target, false);
+        }
       }
     },
 
-    onRightKey (event) {
-      if (this.selectedItems.length === 0) {
-        return;
-      }
-      // If the cursor is on the last chip, it would move into the input
-      if (event.target.id === this.getLastChipButton().id) {
-        this.moveFromChipToInput();
-      } else if (event.target.type !== 'text') {
-        // Move to the next chip
-        this.navigateBetweenChips(event.target, false);
+    onInputKeyup (event) {
+      const key = event.code?.toLowerCase();
+      // If the cursor is at the start of the text,
+      // press 'backspace' or 'left' focuses the last chip
+      if (this.selectedItems.length > 0 && event.target.selectionStart === 0) {
+        if (key === 'backspace' || key === 'arrowleft') {
+          this.moveFromInputToChip();
+        }
       }
     },
 
@@ -320,32 +354,25 @@ export default {
       this.$refs.comboboxWithPopover.closeComboboxList();
     },
 
-    onDeleteKey (event) {
-      if (event.key !== 'Backspace') {
-        return;
-      }
-      // If the cursor is at the start of the text, you press backspace,
-      // this focuses the last chip but not delete the item immediately
-      if (this.selectedItems.length > 0 && event.target.selectionStart === 0) {
-        this.moveFromInputToChip();
-      }
-    },
-
     setChipsTopPosition () {
       // To place the chips in the input box
       // The chip "top" position should be the same line as the input box
       if (!this.$refs.input) {
         return;
       }
-      const input = this.$refs.input.$refs.input;
-      const top = input.getBoundingClientRect().top + 2;
+      const input = this.getInput();
+      if (!input) return;
+      const inputSlotWrapper = this.$refs.inputSlotWrapper;
+      const top = input.getBoundingClientRect().top -
+                  inputSlotWrapper.getBoundingClientRect().top;
       const chipsWrapper = this.$refs.chipsWrapper;
       chipsWrapper.style.top = top + 'px';
     },
 
     setInputPadding () {
       const lastChip = this.getLastChip();
-      const input = this.$refs.input.$refs.input;
+      const input = this.getInput();
+      if (!input) return;
       if (!lastChip) {
         // Revert padding if no chip
         this.revertInputPadding(input);
@@ -364,7 +391,7 @@ export default {
       // This is to force re-render popover
       // If the new chip goes to the next line and the input box expands,
       // move the popover down to the next line. Same when chips are removed
-      this.offset = [0, 0];
+      this.popoverOffset = [0, 0];
     },
 
     getFullWidth (el) {
@@ -376,6 +403,19 @@ export default {
       input.style.paddingLeft = '';
       input.style.paddingTop = '';
       input.style.paddingBottom = '';
+    },
+
+    setInputMinWidth () {
+      // Ensure the width of the input is "slightly bigger" than the width of a single chip
+      const firstChip = this.getFirstChip();
+      const input = this.getInput();
+      if (!input) return;
+      if (firstChip) {
+        // Add 4px buffer for typing room
+        input.style.minWidth = (this.getFullWidth(firstChip) + 4) + 'px';
+      } else {
+        input.style.minWidth = '';
+      }
     },
 
     checkMaxSelected () {

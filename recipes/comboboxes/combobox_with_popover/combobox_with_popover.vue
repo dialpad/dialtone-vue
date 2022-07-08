@@ -213,7 +213,7 @@ export default {
      */
     popoverOffset: {
       type: Array,
-      default: () => [0, 0],
+      default: () => [0, 4],
     },
 
   },
