@@ -1,14 +1,26 @@
 <template>
-  <span class="d-chip">
-    <component
-      :is="interactive ? 'button' : 'span'"
-      :id="id"
-      :type="interactive && 'button'"
-      :class="chipClasses()"
-      data-qa="dt-chip"
-      :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
-      :aria-label="ariaLabel"
-      v-on="chipListeners"
+  <span
+    :id="id"
+    :class="chipClasses()"
+    data-qa="dt-chip"
+    :tabindex="tabIndex"
+    :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
+    :aria-label="ariaLabel"
+    @mousedown="onClick"
+    @mouseup="onClick"
+    @mouseleave="onFocusOut"
+    @focusin="onFocusIn"
+    @focusout="onFocusOut"
+    @keydown.enter="onClick"
+    @keyup.enter="onClick"
+    @keyup.delete="onClose"
+    @keyDown.left="onLeftKey"
+    @keyDown.right="onRightKey"
+  >
+    <span
+      v-if="$slots.icon"
+      data-qa="dt-chip-icon"
+      class="d-chip__icon"
     >
       <span
         v-if="$slots.icon"
@@ -34,19 +46,20 @@
         <!-- @slot Content within chip -->
         <slot />
       </span>
-    </component>
-    <dt-button
-      v-if="!hideClose"
-      v-bind="closeButtonProps"
-      :class="chipCloseButtonClasses()"
-      data-qa="dt-chip-close"
-      :aria-label="closeButtonProps.ariaLabel"
-      @click="$emit('close')"
-    >
-      <template #icon>
-        <icon-close />
-      </template>
-    </dt-button>
+      </component>
+      <dt-button
+        v-if="!hideClose"
+        v-bind="closeButtonProps"
+        :class="chipCloseButtonClasses()"
+        data-qa="dt-chip-close"
+        :aria-label="closeButtonProps.ariaLabel"
+        @click="$emit('close')"
+      >
+        <template #icon>
+          <icon-close />
+        </template>
+      </dt-button>
+    </span>
   </span>
 </template>
 
@@ -70,6 +83,7 @@ export default {
      */
     closeButtonProps: {
       type: Object,
+      default: function () { return { ariaLabel: 'close' }; },
       validator: (props) => {
         return !!props.ariaLabel;
       },
@@ -130,11 +144,12 @@ export default {
     },
   },
 
-  emits: ['click', 'close', 'keyup'],
+  emits: ['click', 'close', 'leftKey', 'rightKey'],
 
   data () {
     return {
       isActive: false,
+      isFocused: false,
     };
   },
 
@@ -161,13 +176,11 @@ export default {
       return [
         'd-chip__label',
         CHIP_SIZE_MODIFIERS[this.size],
-      ];
-    },
-
-    chipCloseButtonClasses () {
-      return [
-        'd-chip__close',
-        CHIP_CLOSE_BUTTON_SIZE_MODIFIERS[this.size],
+        {
+          'd-chip--interactive': this.interactive,
+          'd-chip--active': this.isActive,
+          'd-chip--focus': this.isFocused,
+        },
       ];
     },
 
@@ -175,6 +188,45 @@ export default {
       if (!this.hideClose) {
         this.$emit('close');
       }
+    },
+
+    onClick (event) {
+      // Clicking on the button should not update value of isActive.
+      if (!this.interactive || this.$refs.closeBtnContainer.contains(event.target)) {
+        return;
+      }
+      if (event.type === 'mousedown' || event.type === 'keydown') {
+        this.isActive = true;
+      } else {
+        this.isActive = false;
+        this.$emit('click');
+      }
+    },
+
+    onFocusIn () {
+      this.isActive = true;
+      this.isFocused = true;
+    },
+
+    onFocusOut () {
+      this.isActive = false;
+      this.isFocused = false;
+    },
+
+    onLeftKey () {
+      this.$emit('leftKey');
+    },
+
+    onRightKey () {
+      this.$emit('rightKey');
+    },
+
+    select () {
+      this.$el.focus();
+    },
+
+    blur () {
+      this.$el.blur();
     },
   },
 };

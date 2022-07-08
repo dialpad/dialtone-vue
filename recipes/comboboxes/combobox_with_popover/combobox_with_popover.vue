@@ -29,10 +29,12 @@
     </template>
     <template #list="{ opened, listProps, clearHighlightIndex }">
       <dt-popover
+        ref="popover"
         v-model:open="isListShown"
         :hide-on-click="true"
         :max-height="maxHeight"
         :max-width="maxWidth"
+        :offset="popoverOffset"
         placement="bottom-start"
         padding="none"
         role="listbox"
@@ -200,6 +202,16 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Displaces the popover content box from its anchor element
+     *  by the specified number of pixels.
+     */
+    popoverOffset: {
+      type: Array,
+      default: () => [0, 0],
+    },
+
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
