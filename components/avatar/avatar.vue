@@ -93,9 +93,9 @@ export default {
     },
 
     setKind (element) {
-      if (this.isSvgType(element)) this.kind = 'icon';
-      if (this.isImageType(element)) this.kind = 'image';
-      if (this.isInitialsType(element)) this.kind = 'initials';
+      if (this.isSvgType(element)) { this.kind = 'icon'; return; }
+      if (this.isImageType(element)) { this.kind = 'image'; return; }
+      this.kind = 'initials';
     },
 
     isSvgType (element) {
@@ -104,10 +104,6 @@ export default {
 
     isImageType (element) {
       return element?.tagName?.toUpperCase() === 'IMG';
-    },
-
-    isInitialsType (element) {
-      return element?.nodeType === Node.TEXT_NODE;
     },
 
     validateImageAttrsPresence () {
