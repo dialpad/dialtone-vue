@@ -87,7 +87,6 @@ export default {
     init () {
       const firstChild = this.$el.children[0];
       if (firstChild) {
-        this.validateElementType(firstChild);
         this.setKind(firstChild);
         this.validateImageAttrsPresence();
       }
@@ -109,11 +108,6 @@ export default {
 
     isInitialsType (element) {
       return element?.nodeType === Node.TEXT_NODE;
-    },
-
-    validateElementType (element) {
-      if (this.isInitialsType(element) || this.isSvgType(element) || this.isImageType(element)) return;
-      warn('img, svg, and raw text are the only valid elements to put inside the avatar', this);
     },
 
     validateImageAttrsPresence () {
