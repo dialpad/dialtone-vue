@@ -314,11 +314,12 @@ export default {
       if (!this.isOpen || !this.isArrowKeyNav) {
         return;
       }
+
       return this.onEndKey();
     },
 
     onKeyPress (e) {
-      if (!this.isOpen || !this.isArrowKeyNav || !this.isValidLetter(e.key)) {
+      if (!this.isOpen || !this.isArrowKeyNav || !this.isValidCharacter(e.key)) {
         return;
       }
 
