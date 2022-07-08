@@ -230,9 +230,10 @@ export default {
     },
 
     setInitialHighlightIndex () {
-      if (!this.showList || !this.getListElement()) { return; }
-      // When the list's is shown and not empty, reset the highlight index.
-      this.setHighlightIndex(0);
+      if (this.showList) {
+        // When the list's is shown, reset the highlight index.
+        this.setHighlightIndex(0);
+      }
     },
   },
 };
