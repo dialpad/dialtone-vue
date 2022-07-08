@@ -97,6 +97,7 @@
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import { DtRecipeComboboxWithPopover, DtInput, DtChip, DtValidationMessages } from '@';
 import { validationMessageValidator } from '@/common/validators';
 
@@ -224,7 +225,7 @@ export default {
     },
   },
 
-  emits: ['input', 'select', 'remove', 'max-selected'],
+  emits: ['input', 'select', 'remove', 'max-selected', 'keyup'],
 
   data () {
     return {
@@ -243,7 +244,6 @@ export default {
 
     chipListeners () {
       return {
-        ...this.$listeners,
         keyup: event => {
           this.onChipKeyup(event);
           this.$emit('keyup', event);
@@ -253,7 +253,6 @@ export default {
 
     inputListeners () {
       return {
-        ...this.$listeners,
         input: event => {
           this.$emit('input', event);
         },
@@ -301,7 +300,6 @@ export default {
 
   beforeUnmount () {
     this.resizeWindowObserver?.unobserve(document.body);
-    console.log('Combobox Multi Select: Unobserve window resize before destory');
   },
 
   methods: {

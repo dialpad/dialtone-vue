@@ -1,18 +1,18 @@
 <template>
   <dt-recipe-combobox-multi-select
     ref="comboboxMultiSelect"
-    :label="label"
-    :description="description"
-    :input-messages="inputMessages"
-    :show-input-messages="showInputMessages"
-    :loading="loading"
-    :loading-message="loadingMessage"
-    :show-list="showList"
-    :selected-items="selectedItems"
-    :max-selected="maxSelected"
-    :list-max-height="listMaxHeight"
-    :max-selected-message="maxSelectedMessage"
-    :has-suggestion-list="hasSuggestionList"
+    :label="$attrs.label"
+    :description="$attrs.description"
+    :input-messages="$attrs.inputMessages"
+    :show-input-messages="$attrs.showInputMessages"
+    :loading="$attrs.loading"
+    :loading-message="$attrs.loadingMessage"
+    :show-list="$attrs.showList"
+    :selected-items="$attrs.selectedItems"
+    :max-selected="$attrs.maxSelected"
+    :list-max-height="$attrs.listMaxHeight"
+    :max-selected-message="$attrs.maxSelectedMessage"
+    :has-suggestion-list="$attrs.hasSuggestionList"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
@@ -93,7 +93,7 @@ export default {
     },
 
     onComboboxMaxSelected () {
-      this.onMaxSelected();
+      this.$attrs.onMaxSelected();
     },
 
     onComboboxRemove (item) {

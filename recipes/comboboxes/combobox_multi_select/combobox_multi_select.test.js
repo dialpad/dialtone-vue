@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import sinon from 'sinon';
@@ -25,7 +25,7 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
   let validationMsg;
 
   // Environment
-  let propsData = basePropsData;
+  let props = basePropsData;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -39,11 +39,10 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtRecipeComboboxMultiSelect, {
-      propsData,
+      props,
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
       attachTo: document.body,
     });
     _setChildWrappers();
@@ -56,7 +55,6 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
     global.requestAnimationFrame = sinon.spy();
     global.cancelAnimationFrame = sinon.spy();
     global.ResizeObserver = ResizeObserverMock;
-    this.localVue = createLocalVue();
   });
   beforeEach(function () {
     _setWrappers();
@@ -64,11 +62,11 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = basePropsData;
     attrs = {};
     slots = {};
     provide = {};
-    wrapper.destroy();
+    wrapper.unmount();
   });
   after(function () {
     global.ResizeObserver = null;
@@ -78,7 +76,7 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
     it('should render the input', function () { assert.isTrue(input.exists()); });
     it('should not render the chip if no selection', function () {
-      assert.isFalse(chips.exists());
+      assert.isTrue(chips.length === 0);
     });
 
     describe('Should render the chips if any selection', function () {
@@ -89,7 +87,7 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
       });
 
       it('should render the chip component', function () {
-        assert.isTrue(chips.exists());
+        assert.isTrue(chips.length > 0);
       });
 
       it('should be two chip components', function () {
