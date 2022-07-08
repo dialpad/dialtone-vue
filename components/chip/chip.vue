@@ -149,7 +149,6 @@ export default {
   data () {
     return {
       isActive: false,
-      isFocused: false,
     };
   },
 
