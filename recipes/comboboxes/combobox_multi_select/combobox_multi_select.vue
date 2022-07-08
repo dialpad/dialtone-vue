@@ -5,6 +5,7 @@
     :show-list="showList"
     :max-height="listMaxHeight"
     :popover-offset="popoverOffset"
+    :has-suggestion-list="hasSuggestionList"
     content-width="anchor"
     @select="onComboboxSelect"
   >
@@ -192,10 +193,10 @@ export default {
     },
 
     /**
-     * Whether or not the list closes after making a selection.
-     * Defaults to true as most comboboxes in Dialpad want this behaviour
+     * Displays the list when the combobox is focused, before the user has typed anything.
+     * When this is enabled the list will not close after selection.
      */
-    closeOnSelect: {
+    hasSuggestionList: {
       type: Boolean,
       default: true,
     },
@@ -259,6 +260,13 @@ export default {
       // Adjust the chips position if description changed
       this.setChipsTopPosition();
     },
+
+    value (newValue, oldValue) {
+      if (!this.hasSuggestionList && !oldValue && newValue) {
+        // Displays the list after the user has typed anything
+        this.$refs.comboboxWithPopover.showComboboxList();
+      }
+    },
   },
 
   mounted () {
@@ -270,7 +278,7 @@ export default {
     }).observe(document.body);
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     this.resizeWindowObserver?.unobserve(document.body);
     console.log('Combobox Multi Select: Unobserve window resize before destory');
   },
@@ -288,11 +296,6 @@ export default {
     onComboboxSelect (i) {
       this.value = '';
       this.$emit('select', i);
-
-      // Close list
-      if (this.closeOnSelect) {
-        this.$refs.comboboxWithPopover.closeComboboxList();
-      }
     },
 
     getChipButtons () {

@@ -16,7 +16,7 @@
       <div
         :id="externalAnchor"
         ref="input"
-        @focusin="showComboboxList"
+        @focusin="onFocusIn"
         @focusout="onFocusOut"
         @keydown.up="openOnArrowKeyPress($event)"
         @keydown.down="openOnArrowKeyPress($event)"
@@ -212,6 +212,14 @@ export default {
       default: () => [0, 4],
     },
 
+    /**
+     * Displays the list when the combobox is focused, before the user has typed anything.
+     * When this is enabled the list will not close after selection.
+     */
+    hasSuggestionList: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
@@ -257,12 +265,9 @@ export default {
   },
 
   methods: {
-    showComboboxList (e) {
+    showComboboxList () {
       if (this.showList != null) { return; }
-      // only trigger if it's the input specifically that was focused
-      if (e && this.$refs.input.querySelector('input') === e.target) {
-        this.isListShown = true;
-      }
+      this.isListShown = true;
     },
 
     closeComboboxList () {
@@ -272,6 +277,10 @@ export default {
 
     onSelect (highlightIndex) {
       this.$emit('select', highlightIndex);
+      if (!this.hasSuggestionList) {
+        // we don't display the list before the user has typed anything
+        this.closeComboboxList();
+      }
     },
 
     onEscape () {
@@ -285,6 +294,15 @@ export default {
 
     onOpened (opened) {
       this.$emit('opened', opened);
+    },
+
+    onFocusIn (e) {
+      if (this.hasSuggestionList &&
+          e && this.$refs.input.querySelector('input') === e.target) {
+        // only trigger if we show suggestion list when focus and
+        // it's the input specifically that was focused
+        this.showComboboxList();
+      }
     },
 
     onFocusOut (e) {

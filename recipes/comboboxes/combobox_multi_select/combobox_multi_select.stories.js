@@ -69,7 +69,7 @@ export const argTypesData = {
   maxSelectedMessage: {
     defaultValue: [],
   },
-  closeOnSelect: {
+  hasSuggestionList: {
     defaultValue: true,
   },
 
