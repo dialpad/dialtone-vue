@@ -96,7 +96,7 @@ export default {
     },
   },
 
-  emits: ['click', 'keydown', 'mousemove', 'mouseleave'],
+  emits: ['keydown', 'mousemove', 'mouseleave', 'mousedown'],
 
   data () {
     return {
@@ -169,6 +169,8 @@ export default {
 
   methods: {
     onClick (e) {
+      // disabled as we do not want to override native click
+      // eslint-disable-next-line vue/require-explicit-emits
       this.$emit('click', e);
     },
 

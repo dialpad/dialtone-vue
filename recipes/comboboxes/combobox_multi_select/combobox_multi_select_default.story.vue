@@ -8,7 +8,7 @@
     :loading="$attrs.loading"
     :loading-message="$attrs.loadingMessage"
     :show-list="$attrs.showList"
-    :selected-items="$attrs.selectedItems"
+    :selected-items="selected"
     :max-selected="$attrs.maxSelected"
     :list-max-height="$attrs.listMaxHeight"
     :max-selected-message="$attrs.maxSelectedMessage"
@@ -19,10 +19,10 @@
     @max-selected="onComboboxMaxSelected"
   >
     <template
-      v-if="header"
+      v-if="$attrs.header"
       #header
     >
-      <span v-html="header" />
+      <span v-html="$attrs.header" />
     </template>
     <template #list>
       <ul
@@ -43,10 +43,10 @@
       </ul>
     </template>
     <template
-      v-if="footer"
+      v-if="$attrs.footer"
       #footer
     >
-      <span v-html="footer" />
+      <span v-html="$attrs.footer" />
     </template>
   </dt-recipe-combobox-multi-select>
 </template>
@@ -66,25 +66,30 @@ export default {
   data () {
     return {
       items: ITEMS_LIST_DATA,
+      selected: null,
     };
+  },
+
+  created () {
+    this.selected = [];
   },
 
   methods: {
     onComboboxInput (value) {
       // Filter list
       this.items = ITEMS_LIST_DATA.filter(item => item.value.includes(value));
-      this.onInput(value);
+      this.$attrs.onInput(value);
     },
 
     onComboboxSelect (i) {
       if (this.items[i]) {
-        this.onSelect(i);
+        this.$attrs.onSelect(i);
 
         const item = this.items[i].value;
-        if (this.selectedItems.includes(item)) {
+        if (this.selected.includes(item)) {
           return;
         }
-        this.selectedItems.push(item);
+        this.selected.push(item);
 
         // Clear input box and unfilter list
         this.$refs.comboboxMultiSelect.$data.value = '';
@@ -97,12 +102,12 @@ export default {
     },
 
     onComboboxRemove (item) {
-      this.onRemove(item);
-      const index = this.selectedItems.indexOf(item);
+      this.$attrs.onRemove(item);
+      const index = this.selected.indexOf(item);
       if (index < 0) {
         return;
       }
-      this.selectedItems.splice(index, 1);
+      this.selected.splice(index, 1);
     },
   },
 };

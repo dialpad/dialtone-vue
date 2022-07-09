@@ -7,7 +7,6 @@ import DtRecipeComboboxMultiSelectDefaultTemplate from './combobox_multi_select_
 // Default Prop Values
 export const argsData = {
   listMaxHeight: '300px',
-  selectedItems: [],
   onInput: action('input'),
   onSelect: action('select'),
   onRemove: action('remove'),
@@ -53,9 +52,6 @@ export const argTypesData = {
   },
   loadingMessage: {
     defaultValue: 'loading...',
-  },
-  selectedItems: {
-    defaultValue: [],
   },
   showList: {
     defaultValue: null,

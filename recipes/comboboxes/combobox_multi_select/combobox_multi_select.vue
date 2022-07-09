@@ -21,7 +21,7 @@
           <dt-chip
             v-for="item in selectedItems"
             ref="chips"
-            :key="item.id"
+            :key="item"
             class="d-mt4 d-mx2 d-zi-base1"
             :close-button-props="{ ariaLabel: 'close' }"
             v-on="chipListeners"
@@ -53,9 +53,12 @@
     </template>
 
     <!-- @slot slot for popover header -->
-    <template #header>
+    <template
+      v-if="$slots.header"
+      #header
+    >
       <div
-        v-if="$slots.header"
+
         ref="header"
       >
         <slot
@@ -83,9 +86,11 @@
     </template>
 
     <!-- @slot slot for popover footer -->
-    <template #footer>
+    <template
+      v-if="$slots.footer"
+      #footer
+    >
       <div
-        v-if="$slots.footer"
         ref="footer"
       >
         <slot
@@ -267,8 +272,9 @@ export default {
 
   watch: {
     selectedItems: {
+      deep: true,
       immediate: true,
-      async handler () {
+      handler: async function () {
         await this.$nextTick();
         this.setInputPadding();
         this.setInputMinWidth();
