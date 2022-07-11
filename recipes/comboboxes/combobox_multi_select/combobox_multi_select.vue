@@ -38,7 +38,7 @@
           class="d-fl-grow1 d-mb4"
           :label="label"
           :description="description"
-          :placeholder="placeHolder"
+          :placeholder="inputPlaceHolder"
           :show-messages="showInputMessages"
           :messages="inputMessages"
           v-on="inputListeners"
@@ -125,6 +125,14 @@ export default {
     description: {
       type: String,
       default: null,
+    },
+
+    /**
+     * Input placeholder
+     */
+    placeholder: {
+      type: String,
+      default: 'Select one or start typing',
     },
 
     /**
@@ -237,8 +245,8 @@ export default {
   },
 
   computed: {
-    placeHolder () {
-      return this.selectedItems?.length > 0 ? '' : 'Select one or start typing';
+    inputPlaceHolder () {
+      return this.selectedItems?.length > 0 ? '' : this.placeholder;
     },
 
     chipListeners () {

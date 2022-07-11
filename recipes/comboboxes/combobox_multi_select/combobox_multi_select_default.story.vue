@@ -3,6 +3,7 @@
     ref="comboboxMultiSelect"
     :label="label"
     :description="description"
+    :placeholder="placeholder"
     :input-messages="inputMessages"
     :show-input-messages="showInputMessages"
     :loading="loading"
