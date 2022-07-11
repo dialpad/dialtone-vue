@@ -60,6 +60,7 @@ export async function validateCustomEmojiJson (json) {
     'category',
     'shortname',
     'extension',
+    'custom',
   ];
 
   Object.entries(json).forEach((item) => {
