@@ -2,6 +2,7 @@ import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
+import { flushPromises } from '@/common/utils';
 import sinon from 'sinon';
 
 class ResizeObserverMock {
@@ -224,8 +225,8 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
       });
 
       it('should show warning if reach max', async function () {
-        await wrapper.setProps({ selectedItems: ['1', '2'] });
-        await wrapper.vm.$nextTick();
+        await wrapper.setProps({ selectedItems: ['item1', 'item2'] });
+        await flushPromises();
         _setChildWrappers();
         assert.strictEqual(validationMsg.text(), 'Max 2 selected');
       });
