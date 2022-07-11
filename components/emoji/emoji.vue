@@ -31,7 +31,6 @@ import {
   emojiImageUrlLarge,
   emojiFileExtensionLarge,
   customEmojiAssetUrl,
-  setCustomEmojiJson,
 } from '@/common/emoji';
 import { DtSkeleton } from '@/components/skeleton';
 
@@ -81,13 +80,6 @@ export default {
      */
     ariaLabel: {
       type: String,
-      default: null,
-    },
-
-    /**
-     * Raw custom emoji JSON. Before passing a value, set the custom emoji URL with the `setCustomEmojiUrl` function.
-     */
-    customEmoji: {
       default: null,
     },
   },
@@ -151,12 +143,6 @@ export default {
         this.imgLoading = true;
       },
     },
-  },
-
-  created () {
-    if (this.customEmoji) {
-      setCustomEmojiJson(this.customEmoji);
-    }
   },
 
   methods: {
