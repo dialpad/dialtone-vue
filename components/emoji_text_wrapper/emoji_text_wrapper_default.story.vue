@@ -2,7 +2,6 @@
   <dt-emoji-text-wrapper
     :size="size"
     :element-type="elementType"
-    :custom-emoji="customEmoji"
   >
     <template v-if="defaultSlot">
       <html-fragment :html="defaultSlot" />

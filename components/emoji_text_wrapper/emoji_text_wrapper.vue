@@ -1,6 +1,6 @@
 <script>
 import { DtEmoji } from '../emoji';
-import { getEmojiJson, findEmojis, findShortCodes, setCustomEmojiJson } from '@/common/emoji';
+import { getEmojiJson, findEmojis, findShortCodes } from '@/common/emoji';
 
 export default {
   name: 'DtEmojiTextWrapper',
@@ -19,13 +19,6 @@ export default {
       type: String,
       default: 'div',
     },
-
-    /**
-     * Raw custom emoji JSON. Before passing a value, set the custom emoji URL with the `setCustomEmojiUrl` function.
-     */
-    customEmoji: {
-      default: null,
-    },
   },
 
   data () {
@@ -37,9 +30,6 @@ export default {
   async created () {
     await getEmojiJson();
     this.loadingEmojiJson = false;
-    if (this.customEmoji) {
-      setCustomEmojiJson(this.customEmoji);
-    }
   },
 
   methods: {

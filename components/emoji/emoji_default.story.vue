@@ -5,7 +5,6 @@
       :size="size"
       :img-class="imgClass"
       :aria-label="ariaLabel"
-      :custom-emoji="customEmoji"
     />
   </div>
 </template>

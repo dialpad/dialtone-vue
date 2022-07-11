@@ -88,28 +88,18 @@ setCustomEmojiUrl('https://my.example.website.com/images/icons/emoji/');
 setCustomEmojiJson(customEmojiJson);
 ```
 
-Alternative, the json data can be provided in the emoji-text-wrapper and emoji components using the `customEmojiJson`
-prop.
-
 ```html
 <template>
   <dt-emoji
-    :custom-emoji-json="customEmojiJson"
     code=":octocat:"
   ></dt-emoji>
 </template>
 
 <script>
 import { DtEmoji } from '@dialpad/dialtone-vue';
-import * as customEmojiJson from './data/custom-emoji.json'
 
 export default {
   components: { DtEmoji },
-  data () {
-    return {
-      customEmojiJson,
-    }
-  },
 }
 </script>
 ```
