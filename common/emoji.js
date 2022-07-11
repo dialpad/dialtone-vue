@@ -13,7 +13,6 @@ export let emojiImageUrlLarge = defaultEmojiAssetUrl;
 export let emojiFileExtensionLarge = '.png';
 
 export let emojiJson = null;
-export const customEmojiJson = null;
 
 export async function getEmojiJson () {
   if (emojiJson) return;
@@ -21,13 +20,8 @@ export async function getEmojiJson () {
   emojiJson = await import('emoji-toolkit/emoji_strategy.json');
 }
 
-export function getCustomEmojiJson () {
-  return customEmojiJson;
-}
-
 export function getEmojiData () {
   return emojiJson;
-  // return { ...emojiJson, ...customEmojiJson };
 }
 
 export function setEmojiAssetUrlSmall (url, fileExtension = '.png') {
@@ -52,7 +46,6 @@ export function setCustomEmojiUrl (url) {
 
 export function setCustomEmojiJson (json) {
   validateCustomEmojiJson(json);
-  // customEmojiJson = json;
 }
 
 /**
