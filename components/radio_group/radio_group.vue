@@ -43,13 +43,20 @@ export default {
   emits: ['input'],
 
   watch: {
-    /*
-     * watching value to support 2 way binding for slotted radios.
-     * need this to pass value to slotted radios if modified outside
-     * radio group.
-     */
     value (newValue) {
-      this.provideObj.selectedValue = newValue;
+      this.internalValue = newValue;
+    },
+
+    /*
+    * watching value to support 2 way binding for slotted checkboxes.
+    * need this to pass value to slotted checkboxes if modified outside
+    * checkbox group.
+    */
+    internalValue: {
+      immediate: true,
+      handler (newInternalValue) {
+        this.provideObj.selectedValue = newInternalValue;
+      },
     },
   },
 
