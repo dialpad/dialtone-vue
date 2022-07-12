@@ -12,6 +12,7 @@
     :list-id="listId"
     :list-class="listClass"
     :open-with-arrow-keys="openWithArrowKeys"
+    :has-suggestion-list="hasSuggestionList"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
@@ -24,11 +25,12 @@
       <span v-html="header" />
     </template>
 
-    <template #input="{ inputProps }">
+    <template #input="{ inputProps, onInput }">
       <dt-input
         v-model="value"
         placeholder="Select one or start typing"
         v-bind="inputProps"
+        @input="onInput"
       />
     </template>
     <template #list="{ listProps }">
