@@ -42,6 +42,12 @@ export default {
 
   emits: ['input'],
 
+  data () {
+    return {
+      internalValue: this.value,
+    };
+  },
+
   watch: {
     value (newValue) {
       this.internalValue = newValue;
