@@ -66,16 +66,14 @@
             @mouseleave="clearHighlightIndex"
             @focusout="clearHighlightIndex; onFocusOut"
           >
+            <combobox-loading-list
+              v-if="isLoading"
+              v-bind="listProps"
+            />
             <combobox-empty-list
-              v-if="isListEmpty"
+              v-else-if="isListEmpty"
               v-bind="listProps"
               :message="emptyStateMessage"
-              :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
-            />
-            <combobox-loading-list
-              v-else-if="isLoading"
-              v-bind="listProps"
-              :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             />
             <slot
               v-else
@@ -265,6 +263,7 @@ export default {
       isInputFocused: false,
       isListFocused: false,
       externalAnchor: getUniqueString(),
+      isListEmpty: undefined,
     };
   },
 
@@ -293,9 +292,18 @@ export default {
       immediate: true,
     },
 
+    loading () {
+      this.verifyEmptyList();
+    },
+
     isListShown (val) {
+      this.verifyEmptyList();
       this.onOpened(val);
     },
+  },
+
+  mounted () {
+    this.verifyEmptyList();
   },
 
   methods: {
@@ -321,7 +329,7 @@ export default {
     },
 
     onSelect (highlightIndex) {
-      if (this.loading) return;
+      if (this.loading || this.isListEmpty) return;
 
       this.$emit('select', highlightIndex);
       if (!this.hasSuggestionList) {
@@ -336,7 +344,7 @@ export default {
     },
 
     onHighlight (highlightIndex) {
-      if (this.loading) return;
+      if (this.loading || this.isListEmpty) return;
 
       this.$emit('highlight', highlightIndex);
     },
@@ -371,6 +379,17 @@ export default {
       }
 
       this.showComboboxList();
+    },
+
+    verifyEmptyList () {
+      if (this.showList === false || !this.isListShown) {
+        this.isListEmpty = undefined;
+        return;
+      }
+      this.$nextTick(() => {
+        const list = this.$refs.listWrapper.querySelector(`#${this.listId}`);
+        this.isListEmpty = list.childElementCount === 0;
+      });
     },
   },
 };
