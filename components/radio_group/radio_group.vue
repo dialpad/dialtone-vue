@@ -54,9 +54,9 @@ export default {
     },
 
     /*
-    * watching value to support 2 way binding for slotted checkboxes.
+    * watching value to support 2 way binding for slotted radios.
     * need this to pass value to slotted checkboxes if modified outside
-    * checkbox group.
+    * radio group.
     */
     internalValue: {
       immediate: true,
