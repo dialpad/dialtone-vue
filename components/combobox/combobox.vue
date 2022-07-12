@@ -22,14 +22,14 @@
       @focusout="clearHighlightIndex"
       @mousemove.capture="onMouseHighlight"
     >
-      <combobox-loading-list
-        v-if="loading"
-        v-bind="listProps"
-      />
       <combobox-empty-list
-        v-else-if="!loading && isListEmpty"
+        v-if="isListEmpty"
         v-bind="listProps"
         :message="emptyStateMessage"
+      />
+      <combobox-loading-list
+        v-else-if="loading"
+        v-bind="listProps"
       />
       <!-- @slot Slot for the combobox list element -->
       <slot
@@ -196,7 +196,7 @@ export default {
       // When the list's visibility changes reset the highlight index.
       this.$nextTick(function () {
         if (!this.listRenderedOutside) {
-          this.verifyEmptyList();
+          // this.verifyEmptyList();
           this.setInitialHighlightIndex();
           this.$emit('opened', showList);
         }
@@ -215,7 +215,7 @@ export default {
 
   methods: {
     onMouseHighlight (e) {
-      if (this.loading || this.isListEmpty) return;
+      if (this.loading) return;
 
       const liElement = e.target.closest('li');
 
@@ -235,10 +235,14 @@ export default {
     },
 
     afterHighlight () {
+      if (this.loading) return;
+
       this.$emit('highlight', this.highlightIndex);
     },
 
     onEnterKey () {
+      if (this.loading || this.isListEmpty) return;
+
       if (this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
       }
@@ -259,7 +263,7 @@ export default {
     },
 
     onKeyValidation (e, eventHandler) {
-      if (!this.showList || !this.getListElement() || this.loading) { return; }
+      if (!this.showList || !this.getListElement()) return;
 
       this[eventHandler](e);
     },
@@ -267,7 +271,7 @@ export default {
     setInitialHighlightIndex () {
       if (this.showList) {
         // When the list's is shown, reset the highlight index.
-        // If the list is in loading state, set to -1
+        // If the list is loading, set to -1
         this.setHighlightIndex(this.loading ? -1 : 0);
       }
     },

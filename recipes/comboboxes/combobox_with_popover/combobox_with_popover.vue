@@ -63,15 +63,15 @@
             @mouseleave="clearHighlightIndex"
             @focusout="clearHighlightIndex; onFocusOut;"
           >
-            <combobox-loading-list
-              v-if="loading"
-              v-bind="listProps"
-              :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
-            />
             <combobox-empty-list
-              v-else-if="!loading && isListEmpty"
+              v-if="isListEmpty"
               v-bind="listProps"
               :message="emptyStateMessage"
+              :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
+            />
+            <combobox-loading-list
+              v-else-if="loading"
+              v-bind="listProps"
               :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             />
             <slot
@@ -347,7 +347,7 @@ export default {
     },
 
     onHighlight (highlightIndex) {
-      if (this.loading || this.isListEmpty) return;
+      if (this.loading) return;
 
       this.$emit('highlight', highlightIndex);
     },

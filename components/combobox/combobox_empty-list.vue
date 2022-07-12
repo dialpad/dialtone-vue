@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <ol class="d-p0">
     <dt-list-item
       class="d-d-flex d-jc-center"
       role="option"
-      navigation-type="none"
+      navigation-type="arrow-keys"
     >
       <span>{{ message }}</span>
     </dt-list-item>
-  </div>
+  </ol>
 </template>
 
 <script>
