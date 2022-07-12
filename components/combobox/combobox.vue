@@ -26,6 +26,11 @@
         v-if="loading"
         v-bind="listProps"
       />
+      <combobox-empty-list
+        v-else-if="!loading && isListEmpty"
+        v-bind="listProps"
+        :message="emptyStateMessage"
+      />
       <!-- @slot Slot for the combobox list element -->
       <slot
         v-else
@@ -42,11 +47,15 @@
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { getUniqueString } from '@/common/utils';
 import ComboboxLoadingList from './combobox_loading-list.vue';
+import ComboboxEmptyList from './combobox_empty-list.vue';
 
 export default {
   name: 'DtCombobox',
 
-  components: { ComboboxLoadingList },
+  components: {
+    ComboboxLoadingList,
+    ComboboxEmptyList,
+  },
 
   mixins: [
     KeyboardNavigation({
@@ -117,6 +126,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Message to show when the list is empty
+     */
+    emptyStateMessage: {
+      type: String,
+      default: 'No matches found.',
+    },
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
@@ -127,6 +144,7 @@ export default {
       // of this component, this is the ref to that dom element. Set
       // by the onOpen method.
       outsideRenderedListRef: null,
+      isListEmpty: undefined,
     };
   },
 
@@ -178,6 +196,7 @@ export default {
       // When the list's visibility changes reset the highlight index.
       this.$nextTick(function () {
         if (!this.listRenderedOutside) {
+          this.verifyEmptyList();
           this.setInitialHighlightIndex();
           this.$emit('opened', showList);
         }
@@ -190,8 +209,14 @@ export default {
     },
   },
 
+  mounted () {
+    if (!this.listRenderedOutside) this.verifyEmptyList();
+  },
+
   methods: {
     onMouseHighlight (e) {
+      if (this.loading || this.isListEmpty) return;
+
       const liElement = e.target.closest('li');
 
       if (liElement && this.highlightId !== liElement.id) {
@@ -245,6 +270,15 @@ export default {
         // If the list is in loading state, set to -1
         this.setHighlightIndex(this.loading ? -1 : 0);
       }
+    },
+
+    verifyEmptyList () {
+      if (!this.showList) {
+        this.isListEmpty = undefined;
+        return;
+      }
+
+      this.isListEmpty = this._itemsLength() === 0;
     },
   },
 };
