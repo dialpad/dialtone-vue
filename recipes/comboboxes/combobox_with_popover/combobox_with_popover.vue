@@ -54,19 +54,25 @@
         </template>
 
         <template #content>
-          <combobox-loading-list
-            v-if="loading"
-            v-bind="listProps"
-            :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
-          />
           <div
-            v-else
             ref="listWrapper"
             :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             @mouseleave="clearHighlightIndex"
             @focusout="clearHighlightIndex; onFocusOut;"
           >
+            <combobox-loading-list
+              v-if="loading"
+              v-bind="listProps"
+              :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
+            />
+            <combobox-empty-list
+              v-else-if="!loading && isListEmpty"
+              v-bind="listProps"
+              :message="emptyStateMessage"
+              :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
+            />
             <slot
+              v-else
               name="list"
               :list-props="listProps"
             />
@@ -89,6 +95,7 @@
 
 <script>
 import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
+import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
 import { DtCombobox, DtPopover, POPOVER_CONTENT_WIDTHS } from '@';
 import { getUniqueString } from '@/common/utils';
 import {
@@ -102,6 +109,7 @@ export default {
     DtCombobox,
     DtPopover,
     ComboboxLoadingList,
+    ComboboxEmptyList,
   },
 
   props: {
@@ -212,6 +220,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Message to show when the list is empty
+     */
+    emptyStateMessage: {
+      type: String,
+      default: 'No matches found.',
+    },
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
@@ -223,6 +239,7 @@ export default {
       isInputFocused: false,
       isListFocused: false,
       externalAnchor: getUniqueString(),
+      isListEmpty: undefined,
     };
   },
 
@@ -251,9 +268,18 @@ export default {
       immediate: true,
     },
 
+    loading () {
+      this.verifyEmptyList();
+    },
+
     isListShown (val) {
+      this.verifyEmptyList();
       this.onOpened(val);
     },
+  },
+
+  mounted () {
+    this.verifyEmptyList();
   },
 
   methods: {
@@ -268,7 +294,7 @@ export default {
     },
 
     onSelect (highlightIndex) {
-      if (this.loading) return;
+      if (this.loading || this.isListEmpty) return;
 
       this.$emit('select', highlightIndex);
     },
@@ -279,7 +305,7 @@ export default {
     },
 
     onHighlight (highlightIndex) {
-      if (this.loading) return;
+      if (this.loading || this.isListEmpty) return;
 
       this.$emit('highlight', highlightIndex);
     },
@@ -305,6 +331,17 @@ export default {
       }
 
       this.showComboboxList();
+    },
+
+    verifyEmptyList () {
+      if (this.showList === false || !this.isListShown) {
+        this.isListEmpty = undefined;
+        return;
+      }
+      this.$nextTick(() => {
+        const list = this.$refs.listWrapper.querySelector(`#${this.listId}`);
+        this.isListEmpty = list.childElementCount === 0;
+      });
     },
   },
 };
