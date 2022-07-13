@@ -24,6 +24,7 @@
       v-if="showList"
       ref="listWrapper"
       data-qa="dt-combobox-list-wrapper"
+      :aria-busy="loading.toString()"
       @mouseleave="clearHighlightIndex"
       @focusout="clearHighlightIndex"
       @mousemove.capture="onMouseHighlight"
