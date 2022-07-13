@@ -33,7 +33,7 @@ describe('Dialtone Vue Combobox tests', function () {
     inputWrapper = wrapper.find('[data-qa="dt-combobox-input-wrapper"]');
     input = wrapper.find('input');
     listWrapper = wrapper.find('[data-qa="dt-combobox-list-wrapper"]');
-    skeletons = listWrapper.find('[data-qa="skeleton-text-body"]');
+    skeletons = wrapper.find('[data-qa="skeleton-text-body"]');
   };
 
   const _mountWrapper = () => {
@@ -125,7 +125,7 @@ describe('Dialtone Vue Combobox tests', function () {
           });
 
           it('aria-busy should be "true"', function () {
-            assert.isTrue(listWrapper.attributes('aria-busy') === 'true');
+            assert.isTrue(listWrapper.find('ol').attributes('aria-busy') === 'true');
           });
         });
       });
