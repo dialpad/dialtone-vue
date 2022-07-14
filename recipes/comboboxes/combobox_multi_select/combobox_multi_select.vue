@@ -467,7 +467,7 @@ export default {
 
     checkMaxSelected () {
       if (this.maxSelected === 0) return;
-      if (this.selectedItems.length >= this.maxSelected) {
+      if (this.selectedItems.length > this.maxSelected) {
         this.showValidationMessages = true;
         this.$emit('max-selected');
       } else {
