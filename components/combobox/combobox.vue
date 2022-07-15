@@ -22,14 +22,14 @@
       @focusout="clearHighlightIndex"
       @mousemove.capture="onMouseHighlight"
     >
+      <combobox-loading-list
+        v-if="isLoading && !listRenderedOutside"
+        v-bind="listProps"
+      />
       <combobox-empty-list
-        v-if="isListEmpty"
+        v-else-if="isListEmpty && !listRenderedOutside"
         v-bind="listProps"
         :message="emptyStateMessage"
-      />
-      <combobox-loading-list
-        v-else-if="loading"
-        v-bind="listProps"
       />
       <!-- @slot Slot for the combobox list element -->
       <slot
@@ -38,6 +38,8 @@
         :list-props="listProps"
         :opened="onOpen"
         :clear-highlight-index="clearHighlightIndex"
+        :is-loading="isLoading"
+        :is-list-empty="isListEmpty"
       />
     </div>
   </div>
@@ -145,6 +147,7 @@ export default {
       // by the onOpen method.
       outsideRenderedListRef: null,
       isListEmpty: undefined,
+      isLoading: undefined,
     };
   },
 
@@ -194,23 +197,34 @@ export default {
   watch: {
     showList (showList) {
       // When the list's visibility changes reset the highlight index.
-      this.$nextTick(function () {
-        if (!this.listRenderedOutside) {
-          // this.verifyEmptyList();
-          this.setInitialHighlightIndex();
-          this.$emit('opened', showList);
-        }
-      });
+
+      if (showList && !this.listRenderedOutside) {
+        this.setInitialHighlightIndex();
+        this.$emit('opened', showList);
+      }
 
       if (!showList && this.outsideRenderedListRef) {
         this.outsideRenderedListRef.removeEventListener('mousemove', this.onMouseHighlight);
         this.outsideRenderedListRef = null;
+        this.isListEmpty = undefined;
       }
+    },
+
+    loading (isLoading) {
+      this.isListEmpty = undefined;
+      this.isLoading = isLoading;
+      this.$nextTick(() => {
+        this.isListEmpty = this.checkItemsLength();
+        this.setInitialHighlightIndex();
+      });
     },
   },
 
   mounted () {
-    if (!this.listRenderedOutside) this.verifyEmptyList();
+    this.isLoading = this.loading;
+    if (!this.listRenderedOutside) {
+      this.isListEmpty = this.checkItemsLength();
+    }
   },
 
   methods: {
@@ -236,7 +250,6 @@ export default {
 
     afterHighlight () {
       if (this.loading) return;
-
       this.$emit('highlight', this.highlightIndex);
     },
 
@@ -258,6 +271,7 @@ export default {
       this.$emit('opened', open);
 
       if (open) {
+        this.isListEmpty = this.checkItemsLength();
         this.setInitialHighlightIndex();
       }
     },
@@ -269,20 +283,19 @@ export default {
     },
 
     setInitialHighlightIndex () {
-      if (this.showList) {
-        // When the list's is shown, reset the highlight index.
-        // If the list is loading, set to -1
+      if (!this.showList) return;
+      this.$nextTick(() => {
+      // When the list's is shown, reset the highlight index.
+      // If the list is loading, set to -1
         this.setHighlightIndex(this.loading ? -1 : 0);
-      }
+      });
     },
 
-    verifyEmptyList () {
-      if (!this.showList) {
-        this.isListEmpty = undefined;
-        return;
-      }
-
-      this.isListEmpty = this._itemsLength() === 0;
+    checkItemsLength () {
+      if (!this.showList) return undefined;
+      const list = this.getListElement();
+      const options = list.querySelectorAll(`[role="option"]`);
+      return options.length === 0;
     },
   },
 };
