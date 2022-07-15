@@ -68,12 +68,10 @@
               v-if="isListEmpty"
               v-bind="listProps"
               :message="emptyStateMessage"
-              :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             />
             <combobox-loading-list
               v-else-if="isLoading"
               v-bind="listProps"
-              :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             />
             <slot
               v-else
