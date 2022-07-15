@@ -110,8 +110,9 @@ with it.
 
 ### JSON structure
 
-It follows a similar structure to the standard emoji json file, though there are some differences and specific properties
-to the custom emoji json.
+It follows a similar structure to the
+[standard emoji json file](https://raw.githubusercontent.com/joypixels/emoji-toolkit/master/emoji_strategy.json),
+though there are some specific properties used in the custom emoji json.
 
 ```js
 {
@@ -125,28 +126,41 @@ to the custom emoji json.
       "cat",
       "github"
     ],
-    "extension": ".png",
-    "custom": true
-  },
-  "shipit": {
-    "name": "ship it",
-    "category": "",
-    "shortname": ":shipit:",
-    "shortname_alternates": [],
-    "keywords": [
-      "ship",
-      "it",
-      "github"
-    ],
-    "extension": ".png",
-    "custom": true
+    "extension": ".png", // .png or .svg
+    "custom": true // Boolean
   }
+}
+```
+
+* Required properties: `name`, `category`, `shortname`, `extension`, `custom`
+
+#### Modify data in native emojis
+
+It's possible to modify or add data to a native emoji using the codepoint as the key of the object.
+
+In the following example, as the `keywords` property is an array, this will extend the keywords in the native emoji.
+
+```js
+{
+  '1f615': {
+    keywords: ['thinking', 'not sure', 'unknown'],
+  },
+}
+```
+
+In case the property is a string, it will overwrite the property of the native emoji.
+
+```js
+{
+  '1f913': {
+    shortname: ':nerdface:',
+  },
 }
 ```
 
 ## Emoji Metadata
 
-You may access the full list of supported emojis and all emoji metadata by importing the following function and
+You may access the full list of supported native emojis and all emoji metadata by importing the following function and
 executing it:
 
 ```js
@@ -163,6 +177,13 @@ emojiData['1f600'].name // returns "grinning face"
 emojiData['1f482-1f3fb'].shortname // returns ":guard_tone1:"
 ```
 
+If you have setup a custom emoji json, you can get the resulting json (from the native and custom emojis)
+with:
+
+```js
+import { getEmojiData } from 'dialtone-vue'
+```
+
 ## Accessibility
 
 By default the emoji will be rendered with an aria-label attribute describing the emoji so it can be read by AT. This
@@ -171,6 +192,6 @@ ariaLabel prop. You can access the descriptions using the `getEmojiJson` functio
 
 ### References
 
-- [JoyPixels](https://www.joypixels.com/) - Our emoji assets
-- [emoji-toolkit](https://github.com/joypixels/emoji-toolkit) - Helper library we use to render joypixels
-- [emojipedia](https://emojipedia.org/) - Good for looking up details about specific emojis.
+* [JoyPixels](https://www.joypixels.com/) - Our emoji assets
+* [emoji-toolkit](https://github.com/joypixels/emoji-toolkit) - Helper library we use to render joypixels
+* [emojipedia](https://emojipedia.org/) - Good for looking up details about specific emojis.

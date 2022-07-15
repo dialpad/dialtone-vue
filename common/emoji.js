@@ -13,7 +13,6 @@ export let emojiImageUrlLarge = defaultEmojiAssetUrl;
 export let emojiFileExtensionLarge = '.png';
 
 export let emojiJson = null;
-export let customEmojiJson = null;
 
 export async function getEmojiJson () {
   if (emojiJson) return;
@@ -21,12 +20,8 @@ export async function getEmojiJson () {
   emojiJson = await import('emoji-toolkit/emoji_strategy.json');
 }
 
-export function getCustomEmojiJson () {
-  return customEmojiJson;
-}
-
 export function getEmojiData () {
-  return { ...emojiJson, ...customEmojiJson };
+  return emojiJson;
 }
 
 export function setEmojiAssetUrlSmall (url, fileExtension = '.png') {
@@ -50,7 +45,75 @@ export function setCustomEmojiUrl (url) {
 }
 
 export function setCustomEmojiJson (json) {
-  customEmojiJson = json;
+  validateCustomEmojiJson(json);
+}
+
+/**
+ * Validate custom emoji json
+ */
+export async function validateCustomEmojiJson (json) {
+  await getEmojiJson();
+
+  const customEmojiProps = ['extension', 'custom'];
+  const customEmojiRequiredProps = [
+    'name',
+    'category',
+    'shortname',
+    'extension',
+    'custom',
+  ];
+
+  /**
+   * Update single emoji properties.
+   * If the property exists in emojiData, it'll add the values if the property is an array, otherwise will overwrite.
+   * If not exists, will add the property to the emojiData object.
+   */
+  const _updateNativeEmojiData = (emojiData, propName, propValue) => {
+    if (emojiData[propName] === undefined) {
+      if (!customEmojiProps.includes(propName)) {
+        return;
+      }
+
+      // new property to add
+      emojiData[propName] = propValue;
+    } else {
+      if (Array.isArray(emojiData[propName])) {
+        emojiData[propName] = emojiData[propName].concat(propValue);
+      } else {
+        emojiData[propName] = propValue;
+      }
+    }
+  };
+
+  Object.entries(json).forEach((item) => {
+    const [customEmojiKey, customEmojiValue] = item;
+
+    if (customEmojiKey in emojiJson) {
+      // custom emoji exists in emoji json which means to update some data in the native emoji
+      const emojiData = emojiJson[customEmojiKey];
+
+      for (const customEmojiPropertyName in customEmojiValue) {
+        const customEmojiPropertyValue = customEmojiValue[customEmojiPropertyName];
+
+        _updateNativeEmojiData(emojiData, customEmojiPropertyName, customEmojiPropertyValue);
+      }
+    } else {
+      // new custom emoji
+      const _validateRequiredProps = () =>
+        customEmojiRequiredProps.every((val) => {
+          return customEmojiValue[val] !== undefined;
+        });
+
+      if (_validateRequiredProps()) {
+        emojiJson[customEmojiKey] = customEmojiValue;
+      } else {
+        console.error(
+          'The following custom emoji doesn\'t contain the required properties:',
+          customEmojiValue,
+        );
+      }
+    }
+  });
 }
 
 // recursively searches the emoji data object containing data for all emojis
