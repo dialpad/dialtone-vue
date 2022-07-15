@@ -1,6 +1,7 @@
 <template>
   <dt-combobox
     ref="combobox"
+    :loading="loading"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
@@ -28,11 +29,11 @@
         />
       </div>
     </template>
-    <template #list="{ opened, listProps, clearHighlightIndex }">
+    <template #list="{ opened, listProps, clearHighlightIndex, isLoading, isListEmpty }">
       <dt-popover
         ref="popover"
         v-model:open="isListShown"
-        :hide-on-click="true"
+        :hide-on-click="showList === null"
         :max-height="maxHeight"
         :max-width="maxWidth"
         :offset="popoverOffset"
@@ -72,7 +73,7 @@
               :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             />
             <combobox-loading-list
-              v-else-if="loading"
+              v-else-if="isLoading"
               v-bind="listProps"
               :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
             />
@@ -264,7 +265,6 @@ export default {
       isInputFocused: false,
       isListFocused: false,
       externalAnchor: getUniqueString(),
-      isListEmpty: undefined,
     };
   },
 
@@ -293,26 +293,16 @@ export default {
       immediate: true,
     },
 
-    loading () {
-      this.verifyEmptyList();
-    },
-
     isListShown (val) {
-      this.verifyEmptyList();
       this.onOpened(val);
     },
   },
 
-  mounted () {
-    this.verifyEmptyList();
-  },
-
   methods: {
-    async handleDisplayList (value) {
+    handleDisplayList (value) {
+      this.isListEmpty = undefined;
       if (this.isListShown) {
-        // After the list is updated, hightlight the first item
-        await this.$nextTick();
-        this.$refs.combobox.setInitialHighlightIndex();
+        this.isListEmpty = this.$refs.combobox.checkItemsLength();
       }
 
       if (!this.hasSuggestionList) {
@@ -386,17 +376,6 @@ export default {
       }
 
       this.showComboboxList();
-    },
-
-    verifyEmptyList () {
-      if (this.showList === false || !this.isListShown) {
-        this.isListEmpty = undefined;
-        return;
-      }
-      this.$nextTick(() => {
-        const list = this.$refs.listWrapper.querySelector(`#${this.listId}`);
-        this.isListEmpty = list.childElementCount === 0;
-      });
     },
   },
 };
