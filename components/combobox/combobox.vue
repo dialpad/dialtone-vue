@@ -204,7 +204,7 @@ export default {
     showList (showList) {
       // When the list's visibility changes reset the highlight index.
 
-      if (!this.listRenderedOutside) {
+      if (showList && !this.listRenderedOutside) {
         this.setInitialHighlightIndex();
         this.$emit('opened', showList);
       }
