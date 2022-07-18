@@ -204,7 +204,7 @@ export default {
     showList (showList) {
       // When the list's visibility changes reset the highlight index.
 
-      if (showList && !this.listRenderedOutside) {
+      if (!this.listRenderedOutside) {
         this.setInitialHighlightIndex();
         this.$emit('opened', showList);
       }
@@ -229,7 +229,7 @@ export default {
   async mounted () {
     this.isLoading = this.loading;
     await this.$nextTick();
-    this.isListEmpty = this.checkItemsLength();
+    await this.$nextTick(); this.isListEmpty = this.checkItemsLength();
   },
 
   methods: {
