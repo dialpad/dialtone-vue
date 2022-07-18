@@ -220,7 +220,7 @@ export default {
     },
 
     /**
-     * Max select message when the max selections has been reached with the structure:
+     * Max select message when the max selections is exceeded with the structure:
      * `[{"message": string, "type": VALIDATION_MESSAGE_TYPES }]`
      */
     maxSelectedMessage: {
