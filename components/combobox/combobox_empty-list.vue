@@ -1,5 +1,8 @@
 <template>
-  <ol class="d-p0">
+  <ol
+    class="d-p0"
+    data-qa="dt-combobox-empty-list"
+  >
     <dt-list-item
       class="d-d-flex d-jc-center"
       role="option"
@@ -14,7 +17,7 @@
 import { DtListItem } from '../list_item';
 
 export default {
-  name: 'ComboboxLoadingList',
+  name: 'ComboboxEmptyList',
 
   components: { DtListItem },
 
