@@ -1,3 +1,38 @@
+# [2.14.0](https://github.com/dialpad/dialtone-vue/compare/v2.13.1...v2.14.0) (2022-07-13)
+
+
+### Features
+
+* **combobox multi-select:** add 'size' prop ([#413](https://github.com/dialpad/dialtone-vue/issues/413)) ([b914b06](https://github.com/dialpad/dialtone-vue/commit/b914b06e60a5a1e51af1844003b8bdeb40ff81c5))
+
+## [2.13.1](https://github.com/dialpad/dialtone-vue/compare/v2.13.0...v2.13.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* **dropdown:** dt-570 initial focus ([#410](https://github.com/dialpad/dialtone-vue/issues/410)) ([d96fa12](https://github.com/dialpad/dialtone-vue/commit/d96fa12cf9b4280d8a4a4e41cf10c57bb05e8b84))
+
+# [2.13.0](https://github.com/dialpad/dialtone-vue/compare/v2.12.1...v2.13.0) (2022-07-11)
+
+
+### Bug Fixes
+
+* **avatar:** default slot content ([#406](https://github.com/dialpad/dialtone-vue/issues/406)) ([60e727c](https://github.com/dialpad/dialtone-vue/commit/60e727cb79ce768b6fc523a81ec754f06dc5ac95))
+
+
+### Features
+
+* **Combobox Multi Select:** add Combobox Multi Select component  ([#396](https://github.com/dialpad/dialtone-vue/issues/396)) ([153a488](https://github.com/dialpad/dialtone-vue/commit/153a4889118fbbd79797374776b7f8b3f8dc6b90))
+* **combobox, combobox with popover:** add loading state ([#402](https://github.com/dialpad/dialtone-vue/issues/402)) ([7c9c822](https://github.com/dialpad/dialtone-vue/commit/7c9c822558477deff516ca55ae0ff18c81b9abb4))
+
+## [2.12.1](https://github.com/dialpad/dialtone-vue/compare/v2.12.0...v2.12.1) (2022-07-06)
+
+
+### Bug Fixes
+
+* **emoji-text-wrapper:** dt-559 update shortcode parsing regex ([#400](https://github.com/dialpad/dialtone-vue/issues/400)) ([6184158](https://github.com/dialpad/dialtone-vue/commit/61841584946aded901c820f324dc4e8df794c8de))
+* tooltip spacing inconsistent ([#397](https://github.com/dialpad/dialtone-vue/issues/397)) ([e5d0c21](https://github.com/dialpad/dialtone-vue/commit/e5d0c21f63c151d82e87832970eb90cc65f98d6d))
+
 # [2.12.0](https://github.com/dialpad/dialtone-vue/compare/v2.11.0...v2.12.0) (2022-06-29)
 
 

@@ -35,6 +35,7 @@ export * from './components/root_layout';
 
 /// Recipes
 export * from './recipes/comboboxes/combobox_with_popover';
+export * from './recipes/comboboxes/combobox_multi_select';
 export * from './recipes/list_items/contact_info';
 export * from './recipes/notices/top_banner_info';
 

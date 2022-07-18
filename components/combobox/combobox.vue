@@ -22,8 +22,13 @@
       @focusout="clearHighlightIndex"
       @mousemove.capture="onMouseHighlight"
     >
+      <combobox-loading-list
+        v-if="loading"
+        v-bind="listProps"
+      />
       <!-- @slot Slot for the combobox list element -->
       <slot
+        v-else
         name="list"
         :list-props="listProps"
         :opened="onOpen"
@@ -36,9 +41,12 @@
 <script>
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { getUniqueString } from '@/common/utils';
+import ComboboxLoadingList from './combobox_loading-list.vue';
 
 export default {
   name: 'DtCombobox',
+
+  components: { ComboboxLoadingList },
 
   mixins: [
     KeyboardNavigation({
@@ -101,6 +109,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Determines when to show the skeletons and also controls aria-busy attribute.
+     */
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
@@ -146,7 +162,7 @@ export default {
     },
 
     activeItemId () {
-      if (!this.showList || this.highlightIndex < 0) {
+      if (!this.showList || this.highlightIndex < 0 || this.loading) {
         return;
       }
       return this.highlightId;
@@ -176,6 +192,8 @@ export default {
 
   methods: {
     onMouseHighlight (e) {
+      if (this.loading) return;
+
       const liElement = e.target.closest('li');
 
       if (liElement && this.highlightId !== liElement.id) {
@@ -194,10 +212,14 @@ export default {
     },
 
     afterHighlight () {
+      if (this.loading) return;
+
       this.$emit('highlight', this.highlightIndex);
     },
 
     onEnterKey () {
+      if (this.loading) return;
+
       if (this.highlightIndex >= 0) {
         this.$emit('select', this.highlightIndex);
       }
@@ -226,7 +248,8 @@ export default {
     setInitialHighlightIndex () {
       if (this.showList) {
         // When the list's is shown, reset the highlight index.
-        this.setHighlightIndex(0);
+        // If the list is loading, set to -1
+        this.setHighlightIndex(this.loading ? -1 : 0);
       }
     },
   },
