@@ -1,6 +1,6 @@
 <template>
   <dt-combobox
-    :empty-state-message="emptyStateMessage"
+    :empty-state-message="$attrs.emptyStateMessage"
     :loading="$attrs.loading"
     :show-list="!!value && $attrs.sbShowList"
     list-aria-label="Example list items"
