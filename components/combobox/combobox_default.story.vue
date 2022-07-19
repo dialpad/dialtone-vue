@@ -71,7 +71,7 @@ export default {
 
   computed: {
     displayItems () {
-      return this.items;
+      return this.$attrs.items;
     },
   },
 

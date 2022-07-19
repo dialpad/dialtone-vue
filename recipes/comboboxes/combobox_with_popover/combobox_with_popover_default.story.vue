@@ -39,7 +39,7 @@
         class="d-p0"
       >
         <dt-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in $attrs.items"
           :key="item.id"
           role="option"
           navigation-type="arrow-keys"
