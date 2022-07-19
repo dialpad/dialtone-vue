@@ -334,7 +334,7 @@ export default {
     },
 
     onHighlight (highlightIndex) {
-      if (this.loading || this.isListEmpty) return;
+      if (this.loading) return;
 
       this.$emit('highlight', highlightIndex);
     },
