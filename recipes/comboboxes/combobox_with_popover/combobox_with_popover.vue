@@ -263,7 +263,6 @@ export default {
       isInputFocused: false,
       isListFocused: false,
       externalAnchor: getUniqueString(),
-      isListEmpty: undefined,
     };
   },
 
@@ -292,18 +291,9 @@ export default {
       immediate: true,
     },
 
-    loading () {
-      this.verifyEmptyList();
-    },
-
     isListShown (val) {
-      this.verifyEmptyList();
       this.onOpened(val);
     },
-  },
-
-  mounted () {
-    this.verifyEmptyList();
   },
 
   methods: {
@@ -379,17 +369,6 @@ export default {
       }
 
       this.showComboboxList();
-    },
-
-    verifyEmptyList () {
-      if (this.showList === false || !this.isListShown) {
-        this.isListEmpty = undefined;
-        return;
-      }
-      this.$nextTick(() => {
-        const list = this.$refs.listWrapper.querySelector(`#${this.listId}`);
-        this.isListEmpty = list.childElementCount === 0;
-      });
     },
   },
 };
