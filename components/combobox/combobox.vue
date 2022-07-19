@@ -222,10 +222,8 @@ export default {
 
   async mounted () {
     this.isLoading = this.loading;
-    if (!this.listRenderedOutside) {
-      await this.$nextTick();
-      this.isListEmpty = this.checkItemsLength();
-    }
+    await this.$nextTick();
+    this.isListEmpty = this.checkItemsLength();
   },
 
   methods: {

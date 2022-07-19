@@ -294,11 +294,6 @@ export default {
 
   methods: {
     handleDisplayList (value) {
-      this.isListEmpty = undefined;
-      if (this.isListShown) {
-        this.isListEmpty = this.$refs.combobox.checkItemsLength();
-      }
-
       if (!this.hasSuggestionList) {
         if (value) {
           // Displays the list after the user has typed anything
@@ -320,7 +315,7 @@ export default {
     },
 
     onSelect (highlightIndex) {
-      if (this.loading || this.isListEmpty) return;
+      if (this.loading) return;
 
       this.$emit('select', highlightIndex);
       if (!this.hasSuggestionList) {
