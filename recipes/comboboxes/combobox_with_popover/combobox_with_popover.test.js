@@ -69,7 +69,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   });
 
   // Teardown
-  afterEach(async function () {
+  afterEach(function () {
     props = baseProps;
     slots = {};
     wrapper.unmount();
