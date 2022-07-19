@@ -178,7 +178,7 @@ describe('Dialtone Vue Combobox tests', function () {
 
     describe('When the list is empty', function () {
       beforeEach(async function () {
-        slots = { list: '<ol id="list"><li role="option">item1</li><li role="option">item2</li></ol>' };
+        slots = { list: '<ol id="list"></ol>' };
         _setChildWrappers();
       });
 
