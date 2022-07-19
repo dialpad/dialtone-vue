@@ -263,7 +263,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When the list is empty', function () {
       beforeEach(async function () {
-        scopedSlots = {
+        slots = {
           input: '<input id="input" v-bind="props.inputProps" />',
           list: '<ol id="list" v-bind="props.listProps"></ol>',
         };
