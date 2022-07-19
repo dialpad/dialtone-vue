@@ -319,7 +319,7 @@ export default {
     },
 
     onSelect (highlightIndex) {
-      if (this.loading || this.isListEmpty) return;
+      if (this.loading) return;
 
       this.$emit('select', highlightIndex);
       if (!this.hasSuggestionList) {

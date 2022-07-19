@@ -229,7 +229,7 @@ export default {
   async mounted () {
     this.isLoading = this.loading;
     await this.$nextTick();
-    await this.$nextTick(); this.isListEmpty = this.checkItemsLength();
+    this.isListEmpty = this.checkItemsLength();
   },
 
   methods: {
