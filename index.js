@@ -7,6 +7,8 @@ export * from './components/button';
 export * from './components/button_group';
 export * from './components/combobox';
 export * from './components/dropdown';
+export * from './components/emoji';
+export * from './components/emoji_text_wrapper';
 export * from './components/input';
 export * from './components/input_group';
 export * from './components/modal';
@@ -22,15 +24,18 @@ export * from './components/tabs';
 export * from './components/validation_messages';
 export * from './components/checkbox';
 export * from './components/checkbox_group';
+export * from './components/chip';
 export * from './components/select_menu';
 export * from './components/toast';
 export * from './components/toggle';
 export * from './components/tooltip';
 export * from './components/skeleton';
 export * from './components/keyboard_shortcut';
+export * from './components/root_layout';
 
 /// Recipes
 export * from './recipes/comboboxes/combobox_with_popover';
+export * from './recipes/comboboxes/combobox_multi_select';
 export * from './recipes/list_items/contact_info';
 export * from './recipes/notices/top_banner_info';
 
@@ -38,7 +43,6 @@ export * from './recipes/notices/top_banner_info';
 export * from './common/mixins';
 
 // Emoji
-export { default as emojiJson } from './node_modules/emoji-toolkit/emoji.json';
 export * from './common/emoji';
 
 // Constants

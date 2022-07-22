@@ -5,10 +5,14 @@ import { version } from '../package.json';
 import theme from './theme';
 import Vue from 'vue';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
-import { setEmojiAssetUrl } from '../common/emoji.js';
+import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '../common/emoji.js';
+import * as customEmojiJson from '@/common/custom-emoji.json';
 import focusVisiblePolyfill from 'focus-visible';
 
-setEmojiAssetUrl('https://storage.cloud.google.com/switch_static/joypixels/svg/unicode/')
+setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
+setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
+setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
+setCustomEmojiJson(customEmojiJson);
 Vue.use(fixDefaultSlot);
 
 addParameters({

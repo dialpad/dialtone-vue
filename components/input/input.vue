@@ -13,6 +13,7 @@
       <slot name="labelSlot">
         <div
           v-if="label"
+          ref="label"
           data-qa="dt-input-label"
           :class="[
             'base-input__label-text',
@@ -26,6 +27,7 @@
       <div
         v-if="$slots.description || description || shouldValidateLength"
         :id="descriptionKey"
+        ref="description"
         :class="[
           'base-input__description',
           'd-description',
@@ -67,8 +69,8 @@
           :disabled="disabled"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
-          v-bind="$attrs"
           data-qa="dt-input-input"
+          v-bind="$attrs"
           v-on="inputListeners"
         />
         <input
@@ -80,8 +82,8 @@
           :disabled="disabled"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
-          v-bind="$attrs"
           data-qa="dt-input-input"
+          v-bind="$attrs"
           v-on="inputListeners"
         >
         <span

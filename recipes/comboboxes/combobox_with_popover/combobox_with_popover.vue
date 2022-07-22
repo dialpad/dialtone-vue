@@ -16,7 +16,7 @@
       <div
         :id="externalAnchor"
         ref="input"
-        @focusin="showComboboxList"
+        @focusin="onFocusIn"
         @focusout="onFocusOut"
         @keydown.up="openOnArrowKeyPress($event)"
         @keydown.down="openOnArrowKeyPress($event)"
@@ -24,16 +24,18 @@
         <slot
           name="input"
           :input-props="inputProps"
+          :on-input="handleDisplayList"
         />
       </div>
     </template>
     <template #list="{ opened, listProps, clearHighlightIndex }">
-      <!-- eslint-disable vue/no-deprecated-v-bind-sync -->
       <dt-popover
+        ref="popover"
         :open.sync="isListShown"
         :hide-on-click="true"
         :max-height="maxHeight"
         :max-width="maxWidth"
+        :offset="popoverOffset"
         placement="bottom-start"
         padding="none"
         role="listbox"
@@ -61,7 +63,13 @@
             @mouseleave="clearHighlightIndex"
             @focusout="clearHighlightIndex; onFocusOut;"
           >
+            <combobox-loading-list
+              v-if="loading"
+              v-bind="listProps"
+              :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
+            />
             <slot
+              v-else
               name="list"
               :list-props="listProps"
             />
@@ -83,6 +91,7 @@
 </template>
 
 <script>
+import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
 import { DtCombobox, DtPopover, POPOVER_CONTENT_WIDTHS } from '@';
 import { getUniqueString } from '@/common/utils';
 import {
@@ -95,6 +104,7 @@ export default {
   components: {
     DtCombobox,
     DtPopover,
+    ComboboxLoadingList,
   },
 
   props: {
@@ -197,6 +207,32 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Displaces the popover content box from its anchor element
+     *  by the specified number of pixels.
+     */
+    popoverOffset: {
+      type: Array,
+      default: () => [0, 4],
+    },
+
+    /**
+     * Displays the list when the combobox is focused, before the user has typed anything.
+     * When this is enabled the list will not close after selection.
+     */
+    hasSuggestionList: {
+      type: Boolean,
+      default: true,
+    },
+
+    /*
+     * Determines when to show the skeletons and also controls aria-busy attribute.
+     */
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
@@ -242,6 +278,23 @@ export default {
   },
 
   methods: {
+    async handleDisplayList (value) {
+      if (this.isListShown) {
+        // After the list is updated, hightlight the first item
+        await this.$nextTick();
+        this.$refs.combobox.setInitialHighlightIndex();
+      }
+
+      if (!this.hasSuggestionList) {
+        if (value) {
+          // Displays the list after the user has typed anything
+          this.showComboboxList();
+        } else {
+          this.closeComboboxList();
+        }
+      }
+    },
+
     showComboboxList () {
       if (this.showList != null) { return; }
       this.isListShown = true;
@@ -253,7 +306,13 @@ export default {
     },
 
     onSelect (highlightIndex) {
+      if (this.loading) return;
+
       this.$emit('select', highlightIndex);
+      if (!this.hasSuggestionList) {
+        // we don't display the list before the user has typed anything
+        this.closeComboboxList();
+      }
     },
 
     onEscape () {
@@ -262,11 +321,22 @@ export default {
     },
 
     onHighlight (highlightIndex) {
+      if (this.loading) return;
+
       this.$emit('highlight', highlightIndex);
     },
 
     onOpened (opened) {
       this.$emit('opened', opened);
+    },
+
+    onFocusIn (e) {
+      if (this.hasSuggestionList &&
+          e && this.$refs.input.querySelector('input') === e.target) {
+        // only trigger if we show suggestion list when focus and
+        // it's the input specifically that was focused
+        this.showComboboxList();
+      }
     },
 
     onFocusOut (e) {
@@ -290,7 +360,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-
-</style>
