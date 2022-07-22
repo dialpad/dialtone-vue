@@ -1,6 +1,9 @@
 <template>
   <div>
-    <dt-button @click="displayBanner = true">
+    <dt-button
+      v-show="!displayBanner"
+      @click="displayBanner = true"
+    >
       Click to show!
     </dt-button>
 
@@ -71,7 +74,7 @@ export default {
 
   data () {
     return {
-      displayBanner: false,
+      displayBanner: this.globalShow,
     };
   },
 
