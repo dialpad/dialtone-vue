@@ -1,0 +1,53 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
+
+# DtRecipeCallbarButtonWithPopover
+
+<Subtitle>
+  Callbar button with a small arrow that opens a popover.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas>
+  <Story id="recipes-buttons-dtrecipecallbarbuttonwithpopover--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="recipes-buttons-dtrecipecallbarbuttonwithpopover--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeCallbarButtonWithPopover } from '@dialpad/dialtone-vue';
+```
+
+<dt-recipe-callbar-button-with-popover>
+Felipe2</dt-recipe-callbar-button-with-popover>
+
+### With Some Variant
+
+```vue
+<dt-recipe-callbar-button-with-popover
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-recipe-callbar-button-with-popover
+  some-other="variant"
+/>
+```
