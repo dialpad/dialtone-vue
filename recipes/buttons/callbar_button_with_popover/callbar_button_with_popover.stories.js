@@ -1,15 +1,15 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeCallBarButton from './call_bar_button';
-import DtRecipeCallBarButtonMdx from './call_bar_button.mdx';
-import DtRecipeCallBarButtonDefaultTemplate from './call_bar_button_default.story.vue';
-import DtRecipeCallBarButtonVariantsTemplate from './call_bar_button_variants.story.vue';
-import DtRecipeCallBarButtonCallBarTemplate from './call_bar_button_callbar.story.vue';
+import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
+import DtRecipeCallbarButtonWithPopoverMdx from './callbar_button_with_popover.mdx';
+import DtRecipeCallbarButtonWithPopoverDefaultTemplate from './callbar_button_with_popover_default.story.vue';
+import DtRecipeCallbarButtonWithPopoverVariantsTemplate from './callbar_button_with_popover_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
   some: 'prop',
-  onEvent: action('event'),
+  arrowClick: action('event'),
+  click: action('event'),
 };
 
 /**
@@ -72,23 +72,30 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
-  onEvent: {
+  arrowClick: {
+    description: 'Triggered when the arrow is clicked',
     table: {
-      disable: true,
+      disable: false,
+    },
+  },
+  click: {
+    description: 'Triggered when the button is clicked',
+    table: {
+      disable: false,
     },
   },
 };
 
 // Story Collection
 export default {
-  title: 'Recipes/Buttons/DtRecipeCallBarButton',
-  component: DtRecipeCallBarButton,
+  title: 'Recipes/Buttons/DtRecipeCallbarButtonWithPopover',
+  component: DtRecipeCallbarButtonWithPopover,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
     docs: {
-      page: DtRecipeCallBarButtonMdx,
+      page: DtRecipeCallbarButtonWithPopoverMdx,
     },
   },
 };
@@ -97,17 +104,12 @@ export default {
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeCallBarButtonDefaultTemplate,
+  DtRecipeCallbarButtonWithPopoverDefaultTemplate,
 );
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeCallBarButtonVariantsTemplate,
-);
-const CallBarTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallBarButtonCallBarTemplate,
+  DtRecipeCallbarButtonWithPopoverVariantsTemplate,
 );
 // Stories
 export const Default = DefaultTemplate.bind({});
@@ -115,6 +117,3 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
-
-export const CallBar = CallBarTemplate.bind({});
-CallBar.args = {};

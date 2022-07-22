@@ -1,7 +1,7 @@
 import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeCallBarButton from './call_bar_button';
+import DtRecipeCallbarButton from './callbar_button';
 
-# DtRecipeCallBarButton
+# DtRecipeCallbarButton
 
 <Subtitle>
   Some description of the component functionality.
@@ -24,7 +24,7 @@ Some description of how to use the base component, potential gotchas and limitat
 ## All call bar buttons from the spec
 
 <Canvas>
-  <Story id="recipes-buttons-dtrecipecallbarbutton--call-bar" />
+  <Story id="recipes-buttons-dtrecipecallbarbutton--callbar" />
 </Canvas>
 
 ## Slots, Props & Events
@@ -36,24 +36,31 @@ Some description of how to use the base component, potential gotchas and limitat
 ### Import
 
 ```jsx
-import { DtRecipeCallBarButton } from '@dialpad/dialtone-vue';
+import { DtRecipeCallbarButton } from '@dialpad/dialtone-vue';
 ```
 
-<dt-recipe-call-bar-button>
-Felipe2</dt-recipe-call-bar-button>
-
-### With Some Variant
+### Simplest form
 
 ```vue
-<dt-recipe-call-bar-button
-  some="variant"
-/>
+<dt-recipe-callbar-button>
+  Button
+</dt-recipe-callbar-button>
 ```
 
-### With Some Other Variant
+### Complex
 
 ```vue
-<dt-recipe-call-bar-button
-  some-other="variant"
-/>
+<dt-recipe-callbar-button
+  :disabled="true"
+  :active="false"
+  :danger="true"
+>
+  Button
+  <template #tooltip>
+    This is the tooltip
+  </template>
+  <template #icon>
+    <icon-dialpad-glyph />
+  </template>
+</dt-recipe-callbar-button>
 ```

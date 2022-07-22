@@ -4,8 +4,7 @@
     We can bind the data that the user entered into the storybook controls to props by using a property of the same name
     as the storybook control defined in the corresponding `.story.js` file.
   -->
-  <dt-recipe-call-bar-button
-  >
+  <dt-recipe-callbar-button>
     Button
     <template #icon>
       <icon-dialpad-glyph />
@@ -26,20 +25,20 @@
       <span v-html="defaultSlot" />
     </template>
     <template
-      #some
       v-if="someSlot"
+      #some
     >
       <span v-html="someSlot" />
     </template>
-  </dt-recipe-call-bar-button>
+  </dt-recipe-callbar-button>
 </template>
 
 <script>
-import DtRecipeCallBarButton from './call_bar_button';
+import DtRecipeCallbarButton from './callbar_button';
 import IconDialpadGlyph from '@dialpad/dialtone/lib/dist/vue/icons/IconDialpadGlyph';
 
 export default {
-  name: 'DtRecipeCallBarButtonDefault',
-  components: { DtRecipeCallBarButton, IconDialpadGlyph },
+  name: 'DtRecipeCallbarButtonDefault',
+  components: { DtRecipeCallbarButton, IconDialpadGlyph },
 };
 </script>
