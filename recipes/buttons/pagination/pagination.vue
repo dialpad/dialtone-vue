@@ -117,19 +117,18 @@ export default {
 
       if (this.currentPage <= start) {
         return [...this.range(1, start), '...', this.totalPages];
-      } else if (this.currentPage > start && this.currentPage <= end) {
-        let total = this.maxVisible - 2;
-        if (this.maxVisible % 2 === 0) {
-          // rounding to the nearest odd according to the maxlength to always show the page number in the middle.
-          total = this.maxVisible - 3;
-        }
-        const centerIndex = Math.floor(total / 2);
-        const left = this.currentPage - centerIndex;
-        const right = this.currentPage + centerIndex;
-        return [1, '...', ...this.range(left, right), '...', this.totalPages];
-      } else {
+      }
+
+      if (this.currentPage > end) {
         return [1, '...', ...this.range(end + 1, this.totalPages)];
       }
+
+      // rounding to the nearest odd according to the maxlength to always show the page number in the middle.
+      const total = this.maxVisible - (3 - this.maxVisible % 2);
+      const centerIndex = Math.floor(total / 2);
+      const left = this.currentPage - centerIndex;
+      const right = this.currentPage + centerIndex;
+      return [1, '...', ...this.range(left, right), '...', this.totalPages];
     },
   },
 
