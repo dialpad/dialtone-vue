@@ -33,18 +33,28 @@ The default form of pagination.
 import { DtRecipePagination } from '@dialpad/dialtone-vue';
 ```
 
-### With Some Variant
+### Default Pagination
 
-```vue
+```html
 <dt-recipe-pagination
-  some="variant"
+  :total-pages="20"
 />
 ```
 
-### With Some Other Variant
+### Pagination with selected active page
 
-```vue
+```html
 <dt-recipe-pagination
-  some-other="variant"
+  :total-pages="10"
+  :active-page="5"
+/>
+```
+
+### Pagination with max visible more than default
+
+```html
+<dt-recipe-pagination
+  :total-pages="15"
+  :max-visible="7"
 />
 ```
