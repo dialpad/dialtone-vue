@@ -59,16 +59,7 @@ Variants.parameters = {
 <div class="d-divide-y d-divide-purple-400">
     <div class="d-m32">
       <p class="d-my16 d-fs14 d-fw-bold">
-        Pagination component when total pages is 10 and max visible is less than default(3)
-      </p>
-      <dt-recipe-pagination
-        :total-pages="10"
-        :max-visible="3"
-      />
-    </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs14 d-fw-bold">
-        Pagination component when total pages is 10 and max visible is 5(odd)
+        separator in the end
       </p>
       <dt-recipe-pagination
         :total-pages="10"
@@ -76,20 +67,20 @@ Variants.parameters = {
     </div>
     <div class="d-m32">
       <p class="d-my16 d-fs14 d-fw-bold">
-        Pagination component when total pages is 15 and max visible is 8(even)
+        separator in the beginning
       </p>
       <dt-recipe-pagination
         :total-pages="15"
-        :max-visible="8"
+        :active-page="13"
       />
     </div>
     <div class="d-m32">
       <p class="d-my16 d-fs14 d-fw-bold">
-        Pagination component when active page is not default
+        separator on both sides
       </p>
       <dt-recipe-pagination
-          :total-pages="10"
-          :active-page="5"
+        :total-pages="10"
+        :active-page="5"
       />
     </div>
   </div>
