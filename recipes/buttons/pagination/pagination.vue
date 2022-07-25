@@ -105,29 +105,23 @@ export default {
     },
 
     pages () {
-      const totalVisible = this.maxVisible;
-      if (totalVisible === 0) {
+      if (this.maxVisible === 0) {
         return [];
       }
-      if (this.totalPages <= totalVisible) {
+      if (this.totalPages <= this.maxVisible) {
         return this.range(1, this.totalPages);
       }
 
-      const maxLength = Math.min(
-        Math.max(0, totalVisible) || this.totalPages,
-        this.totalPages,
-      );
-
-      const start = maxLength - 1;
+      const start = this.maxVisible - 1;
       const end = this.totalPages - start;
 
       if (this.currentPage <= start) {
         return [...this.range(1, start), '...', this.totalPages];
       } else if (this.currentPage > start && this.currentPage <= end) {
-        let total = maxLength - 2;
-        if (maxLength % 2 === 0) {
+        let total = this.maxVisible - 2;
+        if (this.maxVisible % 2 === 0) {
           // rounding to the nearest odd according to the maxlength to always show the page number in the middle.
-          total = maxLength - 3;
+          total = this.maxVisible - 3;
         }
         const centerIndex = Math.floor(total / 2);
         const left = this.currentPage - centerIndex;
