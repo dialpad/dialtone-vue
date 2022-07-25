@@ -8,6 +8,7 @@ import DtCollapsibleDefaultStory from './collapsible_default.story';
 const argsTypesData = {
   // Slots
   anchor: {
+    control: 'text',
     table: {
       type: {
         summary: 'VNode',
@@ -22,15 +23,22 @@ const argsTypesData = {
       },
     },
   },
+
   // Props
   anchorText: {
     description: 'Text on the anchor if slot is unused.',
+    defaultValue: 'Click me to toggle Content',
     table: {
-      category: 'props',
       type: { summary: 'string' },
     },
     control: {
       type: 'text',
+    },
+  },
+
+  id: {
+    table: {
+      defaultValue: { summary: 'generated unique ID' },
     },
   },
 
@@ -77,4 +85,5 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   maxWidth: '512px',
+  // anchorText: 'Click me to toggle Content',
 };
