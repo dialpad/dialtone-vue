@@ -1,28 +1,44 @@
 <template>
-  <div class="d-d-flex d-fd-row d-gg2">
+  <div class="d-d-flex d-fd-row d-gg2 d-ai-center">
     <dt-button
       class="d-h32 d-w32"
-      :importance="activePage > 1 ? 'clear' : 'primary'"
-      :disabled="activePage === 1"
+      data-qa="dt-pagination-prev"
+      :aria-label="`pagination-prev`"
+      :importance="isFirstPage ? 'primary' : 'clear'"
+      :disabled="isFirstPage"
+      @click="prev"
     >
       <template slot="icon">
         <icon-chevron-left />
       </template>
     </dt-button>
-    <dt-button
-      v-for="(item, index) in pages"
-      id="list"
-      :key="index"
-      :importance="activePage === index + 1 ? 'primary' : 'clear'"
-      class="d-h32 d-w32"
-      label-class="d-fs14"
+    <div
+      v-for="(page, index) in pages"
+      :key="`page-number-${page}-${index}`"
     >
-      {{ item }}
-    </dt-button>
+      <span
+        v-if="isNaN(Number(page))"
+        data-qa="pagination-separator"
+        class="d-p16"
+      >...</span>
+      <dt-button
+        v-else
+        :aria-label="`page-number-${page}`"
+        :importance="currentPage === page ? 'primary' : 'clear'"
+        class="d-h32 d-w32"
+        label-class="d-fs14"
+        @click="changePage(page)"
+      >
+        {{ page }}
+      </dt-button>
+    </div>
     <dt-button
       class="d-h32 d-w32"
-      :disabled="activePage === totalPages"
-      :importance="activePage < totalPages ? 'clear' : 'primary'"
+      data-qa="dt-pagination-next"
+      :aria-label="`pagination-next`"
+      :disabled="isLastPage"
+      :importance="isLastPage ? 'primary' : 'clear'"
+      @click="next"
     >
       <template slot="icon">
         <icon-chevron-right />
@@ -45,48 +61,111 @@ export default {
     IconChevronRight,
   },
 
-  mixins: [],
-
-  /* inheritAttrs: false is generally an option we want to set on library
-    components. This allows any attributes passed in that are not recognized
-    as props to be passed down to another element or component using v-bind:$attrs
-    more info: https://vuejs.org/v2/api/#inheritAttrs */
-  // inheritAttrs: false,
-
   props: {
     /**
-     * Number of pages to be shown
+     * The total number of the pages
      */
     totalPages: {
       type: Number,
-      default: 5,
+      required: true,
     },
 
     /**
-     * Selected/Active page
+     * The active current page in the list of pages, defaults to the first page
      */
     activePage: {
       type: Number,
       default: 1,
     },
+
+    /**
+     * Determines the max pages to be shown in the list, defaults to 5 and expected to be odd.
+     */
+    maxVisible: {
+      type: Number,
+      default: 5,
+    },
   },
 
+  emits: ['update:page'],
+
   data () {
-    return {};
+    return {
+      currentPage: this.activePage,
+    };
   },
 
   computed: {
+    isFirstPage () {
+      return this.currentPage === 1;
+    },
+
+    isLastPage () {
+      return this.currentPage === this.totalPages;
+    },
+
     pages () {
-      return Array(this.totalPages).fill().map((_, i) => i + 1);
+      const totalVisible = this.maxVisible;
+      if (totalVisible === 0) {
+        return [];
+      }
+      if (this.totalPages <= totalVisible) {
+        return this.range(1, this.totalPages);
+      }
+
+      const maxLength = Math.min(
+        Math.max(0, totalVisible) || this.totalPages,
+        this.totalPages,
+      );
+
+      const start = maxLength - 1;
+      const end = this.totalPages - start;
+
+      if (this.currentPage <= start) {
+        return [...this.range(1, start), '...', this.totalPages];
+      } else if (this.currentPage > start && this.currentPage <= end) {
+        let total = maxLength - 2;
+        if (maxLength % 2 === 0) {
+          // rounding to the nearest odd according to the maxlength to always show the page number in the middle.
+          total = maxLength - 3;
+        }
+        const centerIndex = Math.floor(total / 2);
+        const left = this.currentPage - centerIndex;
+        const right = this.currentPage + centerIndex;
+        return [1, '...', ...this.range(left, right), '...', this.totalPages];
+      } else {
+        return [1, '...', ...this.range(end + 1, this.totalPages)];
+      }
     },
   },
 
   watch: {},
 
-  methods: {},
+  methods: {
+    range (from, to) {
+      const range = [];
+      from = from > 0 ? from : 1;
+      for (let i = from; i <= to; i++) {
+        range.push(i);
+      }
+      return range;
+    },
+
+    prev () {
+      this.currentPage -= 1;
+      this.$emit('update:page', this.currentPage);
+    },
+
+    next () {
+      this.currentPage += 1;
+      this.$emit('update:page', this.currentPage);
+    },
+
+    changePage (page) {
+      this.currentPage = page;
+      this.$emit('update:page', this.currentPage);
+    },
+
+  },
 };
 </script>
-
-<style lang="less">
-
-</style>
