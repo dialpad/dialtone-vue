@@ -16,11 +16,13 @@
       v-for="(page, index) in pages"
       :key="`page-number-${page}-${index}`"
     >
-      <span
+      <div
         v-if="isNaN(Number(page))"
         data-qa="pagination-separator"
-        class="d-p16"
-      >...</span>
+        class="d-h32 d-w32 d-d-flex d-ai-center d-jc-center"
+      >
+        ...
+      </div>
       <dt-button
         v-else
         :aria-label="`page-number-${page}`"
