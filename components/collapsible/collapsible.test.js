@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { config, mount } from '@vue/test-utils';
 import DtCollpasible from './collapsible.vue';
 import sinon from 'sinon';
 import axe from 'axe-core';
@@ -35,7 +35,6 @@ describe('Dialtone vue Collapsible Component Tests', function () {
     wrapper = mount(DtCollpasible, {
       slots,
       scopedSlots,
-      localVue: createLocalVue(),
       attachTo: document.body,
     });
     _setChildWrappers();
@@ -44,6 +43,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   before(function () {
     global.requestAnimationFrame = sinon.spy();
     global.cancelAnimationFrame = sinon.spy();
+    config.renderStubDefaultSlot = true;
   });
 
   beforeEach(function () {
@@ -54,6 +54,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
     // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
     global.cancelAnimationFrame = undefined;
+    config.renderStubDefaultSlot = false;
   });
 
   afterEach(async function () {

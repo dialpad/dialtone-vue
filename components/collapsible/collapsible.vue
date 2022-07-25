@@ -8,6 +8,10 @@
     <div
       :id="!ariaLabelledBy && labelledBy"
       ref="anchor"
+      :class="[
+        'd-dt-collapsibe__anchor',
+        anchorClass,
+      ]"
       @click.capture="defaultToggleOpen"
       @keydown.enter="defaultToggleOpen"
       @keydown.space="defaultToggleOpen"
@@ -18,6 +22,7 @@
         :attrs="{
           'aria-controls': id,
           'aria-expanded': isOpen.toString(),
+          'role': 'button',
         }"
       >
         <dt-button
@@ -47,12 +52,17 @@
       </slot>
     </div>
     <dt-collapsible-lazy-show
-      ref="content"
+      :id="id"
+      ref="contentWrapper"
       :aria-hidden="`${!isOpen}`"
       :aria-labelledby="labelledBy"
       :aria-label="ariaLabel"
       :show="isOpen"
-      class="dt-collapsible__content"
+      :element-type="contentElementType"
+      :class="[
+        'd-dt-collapsible__content',
+        contentClass,
+      ]"
       :style="{
         'max-height': maxHeight,
         'max-width': maxWidth,
@@ -63,16 +73,10 @@
       @after-leave="onLeaveTransitionComplete"
       @after-enter="onEnterTransitionComplete"
     >
-      <component
-        :is="contentType"
-        :id="id"
-        ref="contentWrapper"
-      >
-        <!-- @slot Slot for the collapsible element that is expanded by the anchor -->
-        <slot
-          name="content"
-        />
-      </component>
+      <!-- @slot Slot for the collapsible element that is expanded by the anchor -->
+      <slot
+        name="content"
+      />
     </dt-collapsible-lazy-show>
   </component>
 </template>
@@ -84,7 +88,6 @@ import { DtButton } from '../button';
 import { DtLazyShow } from '../lazy_show';
 import IconArrowAccordionOpen from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionOpen';
 import IconArrowAccordionClosed from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionClosed';
-import ModalMixin from '@/common/mixins/modal.js';
 
 export default {
   name: 'DtCollapsible',
@@ -96,10 +99,6 @@ export default {
     IconArrowAccordionOpen,
     IconArrowAccordionClosed,
   },
-
-  mixins: [
-    ModalMixin,
-  ],
 
   props: {
     /**
@@ -141,13 +140,30 @@ export default {
     /**
      * Element type (tag name) of the content wrapper element.
      */
-    contentType: {
+    contentElementType: {
       type: String,
       default: 'div',
     },
 
     /**
+     * Additional class name for the anchor wrapper element.
+     */
+    anchorClass: {
+      type: [String, Array, Object],
+      default: null,
+    },
+
+    /**
+     * Additional class name for the content wrapper element.
+     */
+    contentClass: {
+      type: [String, Array, Object],
+      default: null,
+    },
+
+    /**
      * The maximum width of the anchor and collapsible element.
+     * Possible units rem|px|%|em
      */
     maxWidth: {
       type: String,
@@ -156,6 +172,7 @@ export default {
 
     /**
      * The maximum height of the collapsible element.
+     * Possible units rem|px|%|em
      */
     maxHeight: {
       type: String,
@@ -163,7 +180,7 @@ export default {
     },
 
     /**
-     * Label on the collapsible content. Should provide this of ariaLabelledBy but not both.
+     * Label on the collapsible content. Should provide this or ariaLabelledBy but not both.
      */
     ariaLabel: {
       type: String,
@@ -216,14 +233,14 @@ export default {
   },
 
   methods: {
-    async onLeaveTransitionComplete () {
+    onLeaveTransitionComplete () {
       this.$emit('opened', false);
       if (this.open !== null) {
         this.$emit('update:open', false);
       }
     },
 
-    async onEnterTransitionComplete () {
+    onEnterTransitionComplete () {
       this.$emit('opened', true, this.$refs.content);
       if (this.open !== null) {
         this.$emit('update:open', true);

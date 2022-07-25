@@ -1,40 +1,35 @@
 <template>
   <dt-collapsible
+    :id="id"
+    :anchor-text="anchorText"
     :max-height="maxHeight"
     :max-width="maxWidth"
     :open="isOpen"
     :initial-focus-element="'first'"
+    :element-type="elementType"
+    :content-element-type="contentElementType"
+    :anchor-class="anchorClass"
+    :content-class="contentClass"
+    :aria-label="ariaLabel"
+    :aria-labelledby="ariaLabelledBy"
   >
     <template
       #anchor="{ attrs }"
     >
       <div
-        v-if="anchor"
+        v-bind="attrs"
         v-html="anchor"
       />
-      <dt-button
-        v-else
-        importance="clear"
-        kind="muted"
-        class="d-w512"
-        v-bind="attrs"
-        @click.stop="toggleOpen"
-      >
-        <icon-arrow-accordion-open
-          v-if="isOpen"
-          class="d-svg--size18 d-mr8 d-fl-shrink0"
-        />
-        <icon-arrow-accordion-closed
-          v-else
-          class="d-svg--size18 d-mr8 d-fl-shrink0"
-        />
-        <span class="d-mr-auto d-truncate">
-          Click me to toggle Content
-        </span>
-      </dt-button>
     </template>
     <template #content>
-      <div class="d-ai-center d-fs-16">
+      <div
+        v-if="content"
+        v-html="content"
+      />
+      <div
+        v-else
+        class="d-ai-center d-fs-16"
+      >
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et ex risus. In id
           pellentesque tellus. In hac habitasse platea dictumst. Suspendisse nec egestas nulla. Nam
@@ -64,35 +59,23 @@
 
 <script>
 import DtCollapsible from './collapsible';
-import DtButton from '../button/button';
-import IconArrowAccordionOpen from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionOpen';
-import IconArrowAccordionClosed from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionClosed';
 
 export default {
   name: 'DtCollapsibleDefaultStory',
 
   components: {
-    DtButton,
     DtCollapsible,
-    IconArrowAccordionOpen,
-    IconArrowAccordionClosed,
   },
 
   data () {
     return {
-      isOpen: this.open || true,
+      isOpen: this.open,
     };
   },
 
   watch: {
     open (open) {
       this.isOpen = open;
-    },
-  },
-
-  methods: {
-    toggleOpen () {
-      this.isOpen = !this.isOpen;
     },
   },
 };
