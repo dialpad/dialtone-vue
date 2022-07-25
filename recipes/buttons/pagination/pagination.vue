@@ -6,7 +6,7 @@
       :aria-label="`pagination-prev`"
       :importance="isFirstPage ? 'primary' : 'clear'"
       :disabled="isFirstPage"
-      @click="prev"
+      @click="changePage(currentPage - 1)"
     >
       <template slot="icon">
         <icon-chevron-left />
@@ -38,7 +38,7 @@
       :aria-label="`pagination-next`"
       :disabled="isLastPage"
       :importance="isLastPage ? 'primary' : 'clear'"
-      @click="next"
+      @click="changePage(currentPage + 1)"
     >
       <template slot="icon">
         <icon-chevron-right />
@@ -144,21 +144,10 @@ export default {
       return range;
     },
 
-    prev () {
-      this.currentPage -= 1;
-      this.$emit('update:page', this.currentPage);
-    },
-
-    next () {
-      this.currentPage += 1;
-      this.$emit('update:page', this.currentPage);
-    },
-
     changePage (page) {
       this.currentPage = page;
       this.$emit('update:page', this.currentPage);
     },
-
   },
 };
 </script>
