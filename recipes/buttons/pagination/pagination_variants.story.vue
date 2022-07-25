@@ -26,6 +26,15 @@
         :max-visible="8"
       />
     </div>
+    <div class="d-m32">
+      <p class="d-my16 d-fs14 d-fw-bold">
+        Pagination component when active page is not default
+      </p>
+      <dt-recipe-pagination
+        :total-pages="10"
+        :active-page="5"
+      />
+    </div>
   </div>
 </template>
 
