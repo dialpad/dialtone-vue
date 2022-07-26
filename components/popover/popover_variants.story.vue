@@ -37,7 +37,7 @@
       :open="open"
       width-content="anchor"
       initial-focus-element="first"
-      class="d-mb128 d-jc-center"
+      class="d-mb128 d-jc-flex-end"
     >
       <template
         #anchor="{ attrs }"
@@ -95,7 +95,7 @@
       :open="open"
       :modal="false"
       width-content="anchor"
-      class="d-jc-center"
+      class="d-jc-flex-end"
     >
       <template
         #anchor="{ attrs }"
@@ -193,7 +193,7 @@
 
     <dt-popover
       :open="open"
-      class="d-mb128 d-jc-center"
+      class="d-mb128 d-jc-flex-end"
       :show-close-button="true"
       max-height="20rem"
       max-width="50rem"
@@ -263,7 +263,7 @@
       :open="open"
       content-class="d-pl12 d-pr16"
       initial-focus-element="first"
-      class="d-my128 d-jc-center"
+      class="d-my128 d-jc-flex-end"
       max-height="20rem"
       max-width="50rem"
     >
@@ -383,7 +383,7 @@
     <dt-popover
       v-model:open="openPopoverWithTriggerOverride"
       content-class="d-pl12 d-pr16"
-      class="d-my128 d-jc-center"
+      class="d-my128 d-jc-flex-end"
       :modal="false"
       max-height="20rem"
       max-width="50rem"

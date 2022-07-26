@@ -5,6 +5,7 @@ import {
   Variants,
   Flip,
 } from '@/components/tooltip/tooltip.stories';
+import TooltipMdx from '@/visual_testing/tooltip.mdx';
 
 export default {
   title: 'Visual Testing/Tooltip',
@@ -22,6 +23,14 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    percy: {
+      queryParams: {
+        viewMode: 'docs',
+      },
+    },
+    docs: {
+      page: TooltipMdx,
+    },
     options: { showPanel: false },
   },
 };

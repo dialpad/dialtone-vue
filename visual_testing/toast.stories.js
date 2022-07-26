@@ -8,13 +8,22 @@ import {
   Warning,
   Important,
 } from '@/components/toast/toast.stories';
+import ToastMdx from './toast.mdx';
 
 export default {
   title: 'Visual Testing/Toast',
   parameters: {
+    percy: {
+      queryParams: {
+        viewMode: 'docs',
+      },
+    },
+    docs: {
+      page: ToastMdx,
+    },
     options: { showPanel: false },
   },
-  args: { ...argsData, show: false },
+  args: { ...argsData, show: true },
   argTypes: argTypesData,
 };
 
