@@ -18,7 +18,7 @@
           v-if="direction !== null"
           :placement="direction"
           :message="localMessage"
-          :show="globalShow"
+          :show="show"
           class="d-mx64"
         >
           <template #anchor>
@@ -37,7 +37,7 @@
       <dt-tooltip
         class="d-mb64 d-mt64"
         :message="localMessage"
-        :show="globalShow"
+        :show="show"
       >
         <template #anchor>
           <dt-button link>
@@ -51,7 +51,7 @@
       <dt-tooltip
         class="d-mb64 d-mt32"
         :message="localMessage"
-        :show="show1 || globalShow"
+        :show="show1 || show"
       >
         <template #anchor>
           <dt-button
@@ -69,7 +69,7 @@
         <dt-tooltip
           :inverted="true"
           :message="localMessage"
-          :show="globalShow"
+          :show="show"
         >
           <template #anchor>
             <dt-button
@@ -88,6 +88,7 @@
 <script>
 import DtTooltip from './tooltip';
 import { DtButton } from './../button';
+import { TOOLTIP_DIRECTIONS } from './tooltip_constants';
 
 function sliceIntoChunks (arr, chunkSize) {
   const res = [];
@@ -103,13 +104,7 @@ export default {
   components: { DtTooltip, DtButton },
   data () {
     return {
-      TOOLTIP_DIRECTIONS: sliceIntoChunks([
-        'top-end', 'top', 'top-start',
-        'left-start', null, 'right-start',
-        'left', null, 'right',
-        'left-end', null, 'right-end',
-        'bottom-end', 'bottom', 'bottom-start',
-      ], 3),
+      TOOLTIP_DIRECTIONS: sliceIntoChunks(this.customDirections || TOOLTIP_DIRECTIONS, 3),
 
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
       show1: false,
