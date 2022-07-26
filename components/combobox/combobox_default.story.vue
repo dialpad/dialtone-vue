@@ -2,7 +2,7 @@
   <dt-combobox
     :empty-state-message="$attrs.emptyStateMessage"
     :loading="$attrs.loading"
-    :show-list="!!value && $attrs.sbShowList"
+    :show-list="!!value && $attrs.showList"
     list-aria-label="Example list items"
     @escape="onComboboxEscape"
     @highlight="$attrs.onHighlight"

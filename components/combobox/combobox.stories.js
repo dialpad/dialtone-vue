@@ -6,7 +6,7 @@ import DtComboboxDefaultTemplate from './combobox_default.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  sbShowList: true,
+  showList: true,
   onEscape: action('escape'),
   onHighlight: action('highlight'),
   onSelect: action('select'),
