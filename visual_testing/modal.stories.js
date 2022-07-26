@@ -13,8 +13,13 @@ export default {
   title: 'Visual Testing/Modal',
   parameters: {
     options: { showPanel: false },
+    percy: {
+      queryParams: {
+        viewMode: 'story',
+      },
+    },
   },
-  args: { ...argsData, show: false },
+  args: { ...argsData, show: true },
   argTypes: argTypesData,
 };
 
