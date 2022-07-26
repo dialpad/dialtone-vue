@@ -113,5 +113,3 @@ module.exports = {
     '@storybook/addon-postcss'
   ],
 };
-
-// TODO: Find a way to hide items from the sidebar but still generate them and access through the URL
