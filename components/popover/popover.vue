@@ -318,6 +318,8 @@ export default {
      * If the popover sticks to the anchor. This is usually not needed, but can be needed
      * if the reference element's position is animating, or to automatically update the popover
      * position in those cases the DOM layout changes the reference element's position.
+     * `true` enables it, `reference` only check the "reference" rect for changes and `popper` only
+     * check the "popper" rect for changes.
      */
     sticky: {
       type: [Boolean, String],
