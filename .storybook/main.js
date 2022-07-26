@@ -31,7 +31,7 @@ module.exports = {
     builder: {
       name: 'webpack5',
       options: {
-        lazyCompilation: true,
+        lazyCompilation: false,
       },
     },
   },
@@ -92,6 +92,7 @@ module.exports = {
     '../components/**/*.stories.@(js|mdx)',
     '../recipes/**/*.stories.@(js|mdx)',
     '../docs/**/*.stories.@(js|mdx)',
+    '../visual_testing/*.stories.@(js|mdx)',
   ],
   addons: [
     {
@@ -113,3 +114,5 @@ module.exports = {
     '@storybook/addon-postcss'
   ],
 };
+
+// TODO: Find a way to hide items from the sidebar but still generate them and access through the URL
