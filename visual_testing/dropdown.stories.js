@@ -4,6 +4,7 @@ import {
   Default,
   Variants,
 } from '@/components/dropdown/dropdown.stories';
+import DropdownMdx from './dropdown.mdx';
 
 export default {
   title: 'Visual Testing/Dropdown',
@@ -14,6 +15,14 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    percy: {
+      queryParams: {
+        viewMode: 'docs',
+      },
+    },
+    docs: {
+      page: DropdownMdx,
+    },
     options: { showPanel: false },
   },
 };

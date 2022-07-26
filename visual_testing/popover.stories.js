@@ -4,6 +4,7 @@ import {
   Default,
   Variants,
 } from '@/components/popover/popover.stories';
+import PopoverMdx from '@/visual_testing/popover.mdx';
 
 export default {
   title: 'Visual Testing/Popover',
@@ -14,6 +15,14 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    percy: {
+      queryParams: {
+        viewMode: 'docs',
+      },
+    },
+    docs: {
+      page: PopoverMdx,
+    },
     options: { showPanel: false },
   },
 };
