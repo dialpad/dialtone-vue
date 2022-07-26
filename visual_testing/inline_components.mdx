@@ -1,80 +1,76 @@
 import { Story, Meta } from '@storybook/addon-docs';
 
-<Meta title="Docs/Visual Testing/Inline Components"/>
+<Meta title="Components/Visual Testing/Inline Components"/>
 
-## Banners
+[//]: # (TODO: Find a better way to contain the stories)
+export const CustomContainer = ({ children }) => (
+  <div
+    data-qa="custom-container"
+    className="d-ps-relative d-stack16"
+  >
+    { children }
+  </div>
+);
 
-<iframe
-  src="https://vue.dialpad.design/iframe.html?id=components-banner--default&viewMode=story&shortcuts=false&singleStory=true"
-  width="100%"
-  height="56px"
-/>
+# Components
 
-<iframe
-  src="https://vue.dialpad.design/iframe.html?id=components-banner--error&viewMode=story&shortcuts=false&singleStory=true"
-  width="100%"
-  height="56px"
-/>
+## Avatar
 
-<iframe
-  src="https://vue.dialpad.design/iframe.html?id=components-banner--info&viewMode=story&shortcuts=false&singleStory=true"
-  width="100%"
-  height="56px"
-/>
+<CustomContainer>
+  <Story id="components-avatar--default"/>
+  <Story id="components-avatar--icon"/>
+  <Story id="components-avatar--initials"/>
+</CustomContainer>
 
-<iframe
-  src="https://vue.dialpad.design/iframe.html?id=components-banner--success&viewMode=story&shortcuts=false&singleStory=true"
-  width="100%"
-  height="56px"
-/>
-
-<iframe
-  src="https://vue.dialpad.design/iframe.html?id=components-banner--warning&viewMode=story&shortcuts=false&singleStory=true"
-  width="100%"
-  height="56px"
-/>
-
-<iframe
-  src="https://vue.dialpad.design/iframe.html?id=components-banner--pinned&viewMode=story&shortcuts=false&singleStory=true"
-  width="100%"
-  height="56px"
-/>
-
-## Components
-
-<Story id="components-dropdown--default"/>
-
-<Story id="recipes-comboboxes-combobox-multi-select--default"/>
-
-<Story id="recipes-comboboxes-combobox-with-popover--default"></Story>
-
-<Story id="components-avatar--default"/>
-
-<Story id="components-avatar--icon"/>
-
-<Story id="components-avatar--initials"/>
+## Badge
 
 <Story id="components-badge--default"/>
 
 <Story id="components-badge--variants"/>
 
+## Banner
+
+<Story id="visual-testing-banner--default" />
+
+<Story id="visual-testing-banner--info" />
+
+<Story id="visual-testing-banner--pinned" />
+
+<Story id="visual-testing-banner--warning" />
+
+<Story id="visual-testing-banner--success" />
+
+<Story id="visual-testing-banner--error" />
+
+## Breadcrumbs
+
 <Story id="components-breadcrumbs--default"/>
 
 <Story id="components-breadcrumbs--variants"/>
+
+## Button
 
 <Story id="components-button--default"/>
 
 <Story id="components-button--variants"/>
 
+## Button group
+
 <Story id="components-button-group--default"/>
+
+## Checkbox
 
 <Story id="components-checkbox--default"/>
 
 <Story id="components-checkbox--variants"/>
 
+## Checkbox group
+
 <Story id="components-checkbox-group--default"/>
 
 <Story id="components-checkbox-group--variants"/>
+
+## Chip
 
 <Story id="components-chip--default"/>
 
@@ -84,7 +80,19 @@ import { Story, Meta } from '@storybook/addon-docs';
 
 <Story id="components-chip--non-interactive"/>
 
+## Combobox
+
 <Story id="components-combobox--default"/>
+
+## Dropdown
+
+[//]: # (TODO: Add spacing to avoid overlapping)
+<CustomContainer>
+  <Story id="visual-testing-dropdown--default"/>
+  <Story id="visual-testing-dropdown--variants"/>
+</CustomContainer>
+
+## Emoji
 
 <Story id="components-emoji--default"/>
 
@@ -92,9 +100,13 @@ import { Story, Meta } from '@storybook/addon-docs';
 
 <Story id="components-emoji--variants"/>
 
+## Emoji text wrapper
+
 <Story id="components-emoji-text-wrapper--default"/>
 
 <Story id="components-emoji-text-wrapper--variants"/>
+
+## Input
 
 <Story id="components-input--default"/>
 
@@ -124,21 +136,45 @@ import { Story, Meta } from '@storybook/addon-docs';
 
 <Story id="components-input--with-length-validation"/>
 
+## Input group
+
 <Story id="components-input-group--default"/>
 
 <Story id="components-input-group--variants"/>
+
+## Keyboard shortcut
 
 <Story id="components-keyboard-shortcut--default"/>
 
 <Story id="components-keyboard-shortcut--variants"/>
 
+## Link
+
 <Story id="components-link--default"/>
 
 <Story id="components-link--variants"/>
 
+## List item
+
 <Story id="components-list-item--default"/>
 
 <Story id="components-list-item--custom"/>
+
+## Modal
+
+<Story id="visual-testing-modal--default"/>
+
+<Story id="visual-testing-modal--with-footer"/>
+
+<Story id="visual-testing-modal--with-fixed-header-footer"/>
+
+<Story id="visual-testing-modal--with-danger-style"/>
+
+<Story id="visual-testing-modal--with-full-size"/>
+
+<Story id="visual-testing-modal--with-custom-header-and-content"/>
+
+## Notice
 
 <Story id="components-notice--default"/>
 
@@ -152,40 +188,104 @@ import { Story, Meta } from '@storybook/addon-docs';
 
 <Story id="components-notice--important"/>
 
+## Popover
+
+<Story id="visual-testing-popover--default"/>
+
+<Story id="visual-testing-popover--variants"/>
+
+## Radio
+
 <Story id="components-radio--default"/>
 
 <Story id="components-radio--variants"/>
+
+## Radio group
 
 <Story id="components-radio-group--default"/>
 
 <Story id="components-radio-group--variants"/>
 
+## Root layout
+
 <Story id="components-root-layout--default"/>
 
 <Story id="components-root-layout--sticky"/>
+
+## Select Menu
 
 <Story id="components-select-menu--default"/>
 
 <Story id="components-select-menu--variants"/>
 
+## Skeleton
+
 <Story id="components-skeleton--default"/>
 
 <Story id="components-skeleton--variants"/>
+
+## Tabs
 
 <Story id="components-tabs--default"/>
 
 <Story id="components-tabs--variants"/>
 
+## Toast
+
+[//]: # (TODO: Contain toasts in another element to avoid overlapping)
+<Story id="visual-testing-toast--default"/>
+
+<Story id="visual-testing-toast--error"/>
+
+<Story id="visual-testing-toast--info"/>
+
+<Story id="visual-testing-toast--success"/>
+
+<Story id="visual-testing-toast--warning"/>
+
+<Story id="visual-testing-toast--important"/>
+
+## Toggle
+
 <Story id="components-toggle--default"/>
 
 <Story id="components-toggle--variants"/>
+
+## Tooltip
+
+<Story id="visual-testing-tooltip--default"/>
+
+<Story id="visual-testing-tooltip--variants" />
+
+<Story id="visual-testing-tooltip--flip" />
+
+## Validation Messages
 
 <Story id="components-validation-messages--default"/>
 
 <Story id="components-validation-messages--variants"/>
 
-<Story id="components-tooltip--default" />
+# Recipes
 
-<Story id="components-tooltip--variants" />
+## Combobox multi select
 
-<Story id="components-tooltip--flip" />
+[//]: # (TODO: Add spacing to avoid overlapping)
+<Story id="visual-testing-combobox-multi-select--default"/>
+
+<Story id="visual-testing-combobox-multi-select--with-max-select-validation"/>
+
+## Combobox with popover
+
+[//]: # (TODO: Add spacing to avoid overlapping)
+
+<Story id="visual-testing-combobox-with-popover--default"/>
+
+## List Items
+
+<Story id="recipes-list-items-contact-info--default"/>
+
+## Notices
+
+<Story id="recipes-notices-top-banner-info--default"/>
+
+<Story id="recipes-notices-top-banner-info--variants"/>

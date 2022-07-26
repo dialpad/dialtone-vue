@@ -17,6 +17,7 @@
       :pinned="pinned"
       :hide-close="hideClose"
       :close-button-props="buttonCloseProps"
+      :class="{ 'd-ps-sticky': show }"
       @close="displayBanner = false; onClose($event)"
     >
       <span
@@ -74,7 +75,7 @@ export default {
 
   data () {
     return {
-      displayBanner: this.globalShow,
+      displayBanner: this.show,
     };
   },
 

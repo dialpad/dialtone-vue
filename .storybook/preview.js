@@ -21,10 +21,6 @@ addParameters({
   },
 });
 
-export const args = {
-  globalShow: true,
-};
-
 export const parameters = {
   controls: {
     expanded: true,
@@ -65,10 +61,6 @@ export const parameters = {
             'Unit Tests',
             'Pull Request',
           ],
-          'Visual Testing',
-          [
-            'Inline components'
-          ]
         ],
       ],
     },
