@@ -20,7 +20,7 @@
     "storybook:build": "npm run --prefix storybook build",
     "storybook:install": "npm install --prefix storybook",
     "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/**/*.test.js",
-    "test:visual": "export PERCY_TOKEN=57a334480207832147d81c237b42f68d2c2879fd4fbb02f3bd243f7870c1fd0b && percy storybook -v http://localhost:9010",
+    "test:visual": "export PERCY_TOKEN=57a334480207832147d81c237b42f68d2c2879fd4fbb02f3bd243f7870c1fd0b && percy storybook --verbose storybook/compiled",
     "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/**/*.test.js",
     "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",
     "install:all": "npm install && npm install --prefix storybook && npm install --prefix generator-dialtone-vue"
@@ -39,7 +39,7 @@
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
     "@dialpad/dialtone": "^6.33.3",
-    "@percy/cli": "^1.6.3",
+    "@percy/cli": "1.6.1",
     "@percy/storybook": "^4.3.1",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
