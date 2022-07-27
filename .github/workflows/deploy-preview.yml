@@ -46,6 +46,11 @@ jobs:
         NODE_ENV: development
       run: npm run storybook:build
 
+    - name: Visual Tests
+      env:
+        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      run: npx percy storybook --verbose storybook/compiled
+
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4.2.5
       with:
@@ -64,12 +69,3 @@ jobs:
           😎 Browse the preview: https://vue.dialpad.design/deploy-previews/pr-${{ github.event.pull_request.number }}/
           🔨 If you experience an SSL issue then wait 2 minutes and try again.
         allow-repeats: true
-
-  visual_tests:
-    needs: [deploy]
-    runs-on: ubuntu-latest
-    env:
-      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-    steps:
-      - name: Run visual tests
-        run: npx percy storybook --verbose storybook/compiled
