@@ -1,5 +1,9 @@
 <template>
-  <dt-pagination :total-pages="5" />
+  <dt-pagination
+    :total-pages="totalPages"
+    :active-page="activePage"
+    :max-visible="maxVisible"
+  />
 </template>
 
 <script>
