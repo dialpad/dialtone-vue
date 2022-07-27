@@ -9,11 +9,6 @@ import ComboboxRecipes from './combobox_recipes.mdx';
 export default {
   title: 'Visual Testing/Combobox Multi-Select',
   parameters: {
-    percy: {
-      queryParams: {
-        viewMode: 'docs',
-      },
-    },
     docs: {
       page: ComboboxRecipes,
     },

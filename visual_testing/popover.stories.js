@@ -15,11 +15,6 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
-    percy: {
-      queryParams: {
-        viewMode: 'docs',
-      },
-    },
     docs: {
       page: PopoverMdx,
     },

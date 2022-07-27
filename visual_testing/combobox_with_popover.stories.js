@@ -8,11 +8,6 @@ import ComboboxRecipes from './combobox_recipes.mdx';
 export default {
   title: 'Visual Testing/Combobox With Popover',
   parameters: {
-    percy: {
-      queryParams: {
-        viewMode: 'docs',
-      },
-    },
     docs: {
       page: ComboboxRecipes,
     },

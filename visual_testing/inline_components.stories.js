@@ -6,11 +6,6 @@ export default {
     show: true,
   },
   parameters: {
-    percy: {
-      queryParams: {
-        viewMode: 'docs',
-      },
-    },
     docs: {
       page: InlineComponentsMdx,
     },
