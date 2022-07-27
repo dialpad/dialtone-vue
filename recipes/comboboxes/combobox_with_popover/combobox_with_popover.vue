@@ -246,7 +246,7 @@ export default {
      */
     emptyStateMessage: {
       type: String,
-      default: 'No matches found.',
+      default: '',
     },
   },
 
