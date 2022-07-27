@@ -64,3 +64,8 @@ jobs:
           😎 Browse the preview: https://vue.dialpad.design/deploy-previews/pr-${{ github.event.pull_request.number }}/
           🔨 If you experience an SSL issue then wait 2 minutes and try again.
         allow-repeats: true
+
+    - name: Run visual tests
+      env:
+        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      run: npm run test:visual
