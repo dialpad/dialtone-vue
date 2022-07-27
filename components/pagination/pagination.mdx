@@ -1,5 +1,4 @@
 import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipePagination from './pagination';
 
 # Pagination
 
@@ -10,13 +9,13 @@ import DtRecipePagination from './pagination';
 ## Base Style
 
 <Canvas>
-  <Story id="recipes-buttons-pagination--default" />
+  <Story id="components-pagination--default" />
 </Canvas>
 
 ## Variants
 
 <Canvas>
-  <Story id="recipes-buttons-pagination--variants" />
+  <Story id="components-pagination--variants" />
 </Canvas>
 
 ## Slots, Props & Events
@@ -28,13 +27,13 @@ import DtRecipePagination from './pagination';
 ### Import
 
 ```jsx
-import { DtRecipePagination } from '@dialpad/dialtone-vue';
+import { DtPagination } from '@dialpad/dialtone-vue';
 ```
 
 ### Basic
 
 ```html
-<dt-recipe-pagination
+<dt-pagination
   :total-pages="20"
 />
 ```
@@ -42,7 +41,7 @@ import { DtRecipePagination } from '@dialpad/dialtone-vue';
 ### With active-page
 
 ```html
-<dt-recipe-pagination
+<dt-pagination
   :total-pages="10"
   :active-page="5"
 />
@@ -51,7 +50,7 @@ import { DtRecipePagination } from '@dialpad/dialtone-vue';
 ### With max-visible
 
 ```html
-<dt-recipe-pagination
+<dt-pagination
   :total-pages="15"
   :max-visible="7"
 />
