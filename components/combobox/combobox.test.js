@@ -8,6 +8,7 @@ const baseProps = {
   listAriaLabel: '',
   listId: 'list',
   showList: true,
+  loading: false,
 };
 
 describe('Dialtone Vue Combobox tests', function () {
@@ -141,6 +142,17 @@ describe('Dialtone Vue Combobox tests', function () {
 
         it('aria-expanded should be "true"', function () {
           assert.isTrue(input.attributes('aria-expanded') === 'true');
+        });
+
+        describe('When list is loading', function () {
+          beforeEach(async function () {
+            await wrapper.setProps({ loading: true });
+            _setChildWrappers();
+          });
+
+          it('aria-busy should be "true"', function () {
+            assert.isTrue(listWrapper.find('ol').attributes('aria-busy') === 'true');
+          });
         });
       });
     });
