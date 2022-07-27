@@ -54,6 +54,14 @@ export default {
     buttonKind () {
       return this.$attrs.inverted ? 'inverted' : 'default';
     },
+
+    showTooltip () {
+      if (this.globalShow) {
+        return true;
+      }
+
+      return this.show;
+    },
   },
 };
 </script>
