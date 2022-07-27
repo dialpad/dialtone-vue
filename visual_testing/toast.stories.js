@@ -17,6 +17,9 @@ export default {
       page: ToastMdx,
     },
     options: { showPanel: false },
+    a11y: {
+      disable: true,
+    },
   },
   args: { ...argsData, show: true },
   argTypes: argTypesData,

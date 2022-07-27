@@ -12,6 +12,9 @@ export default {
       page: ComboboxRecipes,
     },
     options: { showPanel: false },
+    a11y: {
+      disable: true,
+    },
   },
   args: { ...argsData, showList: true },
   argTypes: argTypesData,
