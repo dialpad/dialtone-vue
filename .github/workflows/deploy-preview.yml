@@ -65,7 +65,11 @@ jobs:
           🔨 If you experience an SSL issue then wait 2 minutes and try again.
         allow-repeats: true
 
-    - name: Run visual tests
-      env:
-        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-      run: npm run test:visual
+  visual_tests:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    env:
+      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+    steps:
+      - name: Run visual tests
+        run: npx percy storybook --verbose storybook/compiled
