@@ -20,7 +20,7 @@ module.exports = {
     ],
   },
   snapshot: {
-    widths: [2048],
+    widths: [2000],
     minHeight: 2000,
   },
 };
