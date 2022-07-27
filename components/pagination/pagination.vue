@@ -3,7 +3,7 @@
     <dt-button
       class="d-h32 d-w32"
       data-qa="dt-pagination-prev"
-      :aria-label="`pagination-prev`"
+      :aria-label="ariaLabelPrev"
       :importance="isFirstPage ? 'primary' : 'clear'"
       :disabled="isFirstPage"
       @click="changePage(currentPage - 1)"
@@ -37,7 +37,7 @@
     <dt-button
       class="d-h32 d-w32"
       data-qa="dt-pagination-next"
-      :aria-label="`pagination-next`"
+      :aria-label="ariaLabelNext"
       :disabled="isLastPage"
       :importance="isLastPage ? 'primary' : 'clear'"
       @click="changePage(currentPage + 1)"
@@ -87,6 +87,25 @@ export default {
       type: Number,
       default: 5,
     },
+
+    /**
+     * Descriptive label for the previous button.
+     * If this prop is unset the content in the default slot will be used as an aria-label.
+     */
+    ariaLabelPrev: {
+      type: String,
+      default: 'previous',
+    },
+
+    /**
+     * Descriptive label for the next button.
+     *
+     */
+    ariaLabelNext: {
+      type: String,
+      default: 'next',
+    },
+
   },
 
   emits: ['change'],
