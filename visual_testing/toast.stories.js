@@ -13,11 +13,6 @@ import ToastMdx from './toast.mdx';
 export default {
   title: 'Visual Testing/Toast',
   parameters: {
-    percy: {
-      queryParams: {
-        viewMode: 'docs',
-      },
-    },
     docs: {
       page: ToastMdx,
     },
