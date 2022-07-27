@@ -4,7 +4,7 @@
       <p class="d-my16 d-fs14 d-fw-bold">
         separator in the end
       </p>
-      <dt-recipe-pagination
+      <dt-pagination
         :total-pages="10"
       />
     </div>
@@ -12,7 +12,7 @@
       <p class="d-my16 d-fs14 d-fw-bold">
         separator in the beginning
       </p>
-      <dt-recipe-pagination
+      <dt-pagination
         :total-pages="15"
         :active-page="13"
       />
@@ -21,7 +21,7 @@
       <p class="d-my16 d-fs14 d-fw-bold">
         separator on both sides
       </p>
-      <dt-recipe-pagination
+      <dt-pagination
         :total-pages="10"
         :active-page="5"
       />
@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import DtRecipePagination from './pagination';
+import DtPagination from './pagination';
 
 export default {
-  name: 'DtRecipePaginationVariants',
-  components: { DtRecipePagination },
+  name: 'DtPaginationVariants',
+  components: { DtPagination },
 };
 </script>

@@ -55,7 +55,7 @@ import IconChevronLeft from '@dialpad/dialtone/lib/dist/vue/icons/IconChevronLef
 import IconChevronRight from '@dialpad/dialtone/lib/dist/vue/icons/IconChevronRight';
 
 export default {
-  name: 'DtRecipePagination',
+  name: 'DtPagination',
 
   components: {
     DtButton,
@@ -89,7 +89,7 @@ export default {
     },
   },
 
-  emits: ['update:page'],
+  emits: ['change'],
 
   data () {
     return {
@@ -148,7 +148,7 @@ export default {
 
     changePage (page) {
       this.currentPage = page;
-      this.$emit('update:page', this.currentPage);
+      this.$emit('change', this.currentPage);
     },
   },
 };

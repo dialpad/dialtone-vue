@@ -1,24 +1,26 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipePagination from './pagination';
-import DtRecipePaginationMdx from './pagination.mdx';
-import DtRecipePaginationDefaultTemplate from './pagination_default.story.vue';
-import DtRecipePaginationVariantsTemplate from './pagination_variants.story.vue';
+import DtPagination from './pagination';
+import DtPaginationMdx from './pagination.mdx';
+import DtPaginationDefaultTemplate from './pagination_default.story.vue';
+import DtPaginationVariantsTemplate from './pagination_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {};
 
-export const argTypesData = {};
+export const argTypesData = {
+
+};
 
 // Story Collection
 export default {
-  title: 'Recipes/Buttons/Pagination',
-  component: DtRecipePagination,
+  title: 'Components/Pagination',
+  component: DtPagination,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
     docs: {
-      page: DtRecipePaginationMdx,
+      page: DtPaginationMdx,
     },
   },
 };
@@ -27,12 +29,12 @@ export default {
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipePaginationDefaultTemplate,
+  DtPaginationDefaultTemplate,
 );
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipePaginationVariantsTemplate,
+  DtPaginationVariantsTemplate,
 );
 
 // Stories
@@ -43,7 +45,7 @@ Default.parameters = {
   docs: {
     source: {
       code: `
-<dt-recipe-pagination :total-pages="5" />
+<dt-pagination :total-pages="5" />
       `,
     },
   },
@@ -61,7 +63,7 @@ Variants.parameters = {
       <p class="d-my16 d-fs14 d-fw-bold">
         separator in the end
       </p>
-      <dt-recipe-pagination
+      <dt-pagination
         :total-pages="10"
       />
     </div>
@@ -69,7 +71,7 @@ Variants.parameters = {
       <p class="d-my16 d-fs14 d-fw-bold">
         separator in the beginning
       </p>
-      <dt-recipe-pagination
+      <dt-pagination
         :total-pages="15"
         :active-page="13"
       />
@@ -78,7 +80,7 @@ Variants.parameters = {
       <p class="d-my16 d-fs14 d-fw-bold">
         separator on both sides
       </p>
-      <dt-recipe-pagination
+      <dt-pagination
         :total-pages="10"
         :active-page="5"
       />
