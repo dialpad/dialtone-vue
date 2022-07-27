@@ -8,7 +8,25 @@ import DtPaginationVariantsTemplate from './pagination_variants.story.vue';
 export const argsData = {};
 
 export const argTypesData = {
-
+// Props
+  totalPages: {
+    defaultValue: 5,
+    control: {
+      type: 'number',
+    },
+  },
+  activePage: {
+    defaultValue: 1,
+    control: {
+      type: 'number',
+    },
+  },
+  maxVisible: {
+    defaultValue: 5,
+    control: {
+      type: 'number',
+    },
+  },
 };
 
 // Story Collection
@@ -45,7 +63,7 @@ Default.parameters = {
   docs: {
     source: {
       code: `
-<dt-pagination :total-pages="5" />
+<dt-pagination :total-pages="totalPages" :active-page="activePage" :max-visible="maxVisible" />
       `,
     },
   },
