@@ -27,6 +27,9 @@ export default {
       page: TooltipMdx,
     },
     options: { showPanel: false },
+    a11y: {
+      disable: true,
+    },
   },
 };
 export { Default, Variants, Flip };

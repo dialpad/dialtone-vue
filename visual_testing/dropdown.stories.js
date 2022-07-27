@@ -19,6 +19,9 @@ export default {
       page: DropdownMdx,
     },
     options: { showPanel: false },
+    a11y: {
+      disable: true,
+    },
   },
 };
 export { Default, Variants };

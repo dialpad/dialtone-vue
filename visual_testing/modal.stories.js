@@ -18,6 +18,9 @@ export default {
         viewMode: 'story',
       },
     },
+    a11y: {
+      disable: true,
+    },
   },
   args: { ...argsData, show: true },
   argTypes: argTypesData,

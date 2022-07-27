@@ -10,6 +10,9 @@ export default {
       page: InlineComponentsMdx,
     },
     options: { showPanel: false },
+    a11y: {
+      disable: true,
+    },
   },
 };
 
