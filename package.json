@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "description": "Vue component library for Dialtone components",
   "scripts": {
     "build": "vue-cli-service build --target lib --name dialtone-vue index.js && npm run build:documentation",
@@ -46,7 +46,7 @@
     "@vue/cli-plugin-eslint": "~5.0.4",
     "@vue/cli-plugin-unit-mocha": "~5.0.4",
     "@vue/cli-service": "~5.0.4",
-    "@vue/test-utils": "^2.0.0",
+    "@vue/test-utils": "^2.0.2",
     "axe-core": "^4.4.2",
     "babel-eslint": "^10.1.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
