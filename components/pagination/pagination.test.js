@@ -6,6 +6,8 @@ import { DtButton } from '@';
 // Constants
 const basePropsData = {
   totalPages: 5,
+  prevAriaLabel: 'previous',
+  nextAriaLabel: 'next',
 };
 
 describe('DtPagination Tests', function () {
@@ -70,6 +72,7 @@ describe('DtPagination Tests', function () {
     describe('When rendered with active page', function () {
       beforeEach(async function () {
         propsData = {
+          ...basePropsData,
           totalPages: 10,
           activePage: 9,
         };
@@ -84,9 +87,11 @@ describe('DtPagination Tests', function () {
     describe('When rendered with more pages', function () {
       beforeEach(async function () {
         propsData = {
+          ...basePropsData,
           totalPages: 15,
           activePage: 7,
           maxVisible: 7,
+
         };
         await _setWrappers();
       });
@@ -101,6 +106,7 @@ describe('DtPagination Tests', function () {
     describe('When maxVisible is even', function () {
       beforeEach(async function () {
         propsData = {
+          ...basePropsData,
           totalPages: 15,
           activePage: 7,
           maxVisible: 6,

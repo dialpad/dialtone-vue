@@ -3,6 +3,9 @@
     :total-pages="totalPages"
     :active-page="activePage"
     :max-visible="maxVisible"
+    :prev-aria-label="'previous'"
+    :next-aria-label="'next'"
+    @change="onChange"
   />
 </template>
 

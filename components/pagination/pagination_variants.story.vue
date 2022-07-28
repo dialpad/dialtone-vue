@@ -2,28 +2,34 @@
   <div class="d-divide-y d-divide-purple-400">
     <div class="d-m32">
       <p class="d-my16 d-fs14 d-fw-bold">
-        separator in the end
+        Separator in the end
       </p>
       <dt-pagination
         :total-pages="10"
+        :prev-aria-label="'previous'"
+        :next-aria-label="'next'"
       />
     </div>
     <div class="d-m32">
       <p class="d-my16 d-fs14 d-fw-bold">
-        separator in the beginning
+        Separator in the beginning
       </p>
       <dt-pagination
         :total-pages="15"
         :active-page="13"
+        :prev-aria-label="'previous'"
+        :next-aria-label="'next'"
       />
     </div>
     <div class="d-m32">
       <p class="d-my16 d-fs14 d-fw-bold">
-        separator on both sides
+        Separator on both sides
       </p>
       <dt-pagination
         :total-pages="10"
         :active-page="5"
+        :prev-aria-label="'previous'"
+        :next-aria-label="'next'"
       />
     </div>
   </div>

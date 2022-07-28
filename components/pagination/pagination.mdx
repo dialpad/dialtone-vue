@@ -35,6 +35,8 @@ import { DtPagination } from '@dialpad/dialtone-vue';
 ```html
 <dt-pagination
   :total-pages="20"
+  :prev-aria-label="$i18n('previous')"
+  :next-aria-label="$i18n('next')"
 />
 ```
 
@@ -44,6 +46,8 @@ import { DtPagination } from '@dialpad/dialtone-vue';
 <dt-pagination
   :total-pages="10"
   :active-page="5"
+  :prev-aria-label="$i18n('previous')"
+  :next-aria-label="$i18n('next')"
 />
 ```
 
@@ -53,5 +57,7 @@ import { DtPagination } from '@dialpad/dialtone-vue';
 <dt-pagination
   :total-pages="15"
   :max-visible="7"
+  :prev-aria-label="$i18n('previous')"
+  :next-aria-label="$i18n('next')"
 />
 ```

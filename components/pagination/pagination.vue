@@ -3,7 +3,7 @@
     <dt-button
       class="d-h32 d-w32"
       data-qa="dt-pagination-prev"
-      :aria-label="ariaLabelPrev"
+      :aria-label="prevAriaLabel"
       :importance="isFirstPage ? 'primary' : 'clear'"
       :disabled="isFirstPage"
       @click="changePage(currentPage - 1)"
@@ -14,7 +14,7 @@
     </dt-button>
     <div
       v-for="(page, index) in pages"
-      :key="`page-number-${page}-${index}`"
+      :key="`page-${page}-${index}`"
     >
       <div
         v-if="isNaN(Number(page))"
@@ -25,7 +25,7 @@
       </div>
       <dt-button
         v-else
-        :aria-label="`page-number-${page}`"
+        :aria-label="`page ${page}`"
         :importance="currentPage === page ? 'primary' : 'clear'"
         class="d-h32 d-w32"
         label-class="d-fs14"
@@ -37,7 +37,7 @@
     <dt-button
       class="d-h32 d-w32"
       data-qa="dt-pagination-next"
-      :aria-label="ariaLabelNext"
+      :aria-label="nextAriaLabel"
       :disabled="isLastPage"
       :importance="isLastPage ? 'primary' : 'clear'"
       @click="changePage(currentPage + 1)"
@@ -73,6 +73,22 @@ export default {
     },
 
     /**
+     * Descriptive label for the previous button.
+     */
+    prevAriaLabel: {
+      type: String,
+      required: true,
+    },
+
+    /**
+     * Descriptive label for the next button.
+     */
+    nextAriaLabel: {
+      type: String,
+      required: true,
+    },
+
+    /**
      * The active current page in the list of pages, defaults to the first page
      */
     activePage: {
@@ -87,25 +103,6 @@ export default {
       type: Number,
       default: 5,
     },
-
-    /**
-     * Descriptive label for the previous button.
-     * If this prop is unset the content in the default slot will be used as an aria-label.
-     */
-    ariaLabelPrev: {
-      type: String,
-      default: 'previous',
-    },
-
-    /**
-     * Descriptive label for the next button.
-     *
-     */
-    ariaLabelNext: {
-      type: String,
-      default: 'next',
-    },
-
   },
 
   emits: ['change'],
