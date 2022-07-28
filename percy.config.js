@@ -18,6 +18,7 @@ module.exports = {
       'Visual Testing/Modal: With Full Size',
       'Visual Testing/Modal: With Custom Header And Content',
     ],
+    waitForTimeout: 250,
   },
   snapshot: {
     widths: [2000],
