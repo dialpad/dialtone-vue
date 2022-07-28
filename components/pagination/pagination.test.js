@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtPagination from './pagination.vue';
 import { DtButton } from '@';
 
@@ -24,7 +24,7 @@ describe('DtPagination Tests', function () {
   const _setChildWrappers = () => {
     prev = wrapper.find('[data-qa="dt-pagination-prev"]');
     next = wrapper.find('[data-qa="dt-pagination-next"]');
-    separators = wrapper.findAll('[data-qa="pagination-separator"]');
+    separators = wrapper.findAll('[data-qa="dt-pagination-separator"]');
   };
 
   const _setWrappers = () => {
@@ -37,11 +37,6 @@ describe('DtPagination Tests', function () {
     _setChildWrappers();
   };
 
-  // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
-
   // Teardown
   afterEach(function () {
     propsData = basePropsData;
@@ -53,7 +48,7 @@ describe('DtPagination Tests', function () {
       beforeEach(function () {
         _setWrappers();
       });
-      it('should not render separator', function () { assert.isFalse(separators.exists()); });
+      it('should not render separator', function () { assert.lengthOf(separators, 0); });
       it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
       it('should render prev button', function () { assert.exists(prev, 'previous button exists'); });
       it('should disable prev button', function () { assert.strictEqual(prev.element.disabled, true); });
