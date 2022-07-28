@@ -279,7 +279,7 @@
           <p>
             {{ sampleText }}
           </p>
-          <dt-dropdown :open="open">
+          <dt-dropdown :open="$attrs.open">
             <template #anchor="{ attrs }">
               <dt-button
                 v-bind="attrs"
@@ -362,7 +362,7 @@
           <p>
             {{ sampleText }}
           </p>
-          <dt-tooltip :show="open">
+          <dt-tooltip :show="$attrs.open">
             <template #anchor>
               <dt-button>
                 Hover me
