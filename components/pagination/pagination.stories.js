@@ -5,24 +5,25 @@ import DtPaginationDefaultTemplate from './pagination_default.story.vue';
 import DtPaginationVariantsTemplate from './pagination_variants.story.vue';
 
 // Default Prop Values
-export const argsData = {};
+export const argsData = {
+  totalPages: 5,
+  activePage: 1,
+  maxVisible: 5,
+};
 
 export const argTypesData = {
 // Props
   totalPages: {
-    defaultValue: 5,
     control: {
       type: 'number',
     },
   },
   activePage: {
-    defaultValue: 1,
     control: {
       type: 'number',
     },
   },
   maxVisible: {
-    defaultValue: 5,
     control: {
       type: 'number',
     },
@@ -44,14 +45,12 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtPaginationDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtPaginationVariantsTemplate,
 );
 

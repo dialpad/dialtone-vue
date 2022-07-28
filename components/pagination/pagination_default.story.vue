@@ -1,8 +1,8 @@
 <template>
   <dt-pagination
-    :total-pages="totalPages"
-    :active-page="activePage"
-    :max-visible="maxVisible"
+    :total-pages="$attrs.totalPages"
+    :active-page="$attrs.activePage"
+    :max-visible="$attrs.maxVisible"
   />
 </template>
 
@@ -10,7 +10,7 @@
 import DtPagination from './pagination';
 
 export default {
-  name: 'DtRecipePaginationDefault',
+  name: 'DtPaginationDefault',
   components: { DtPagination },
   methods: {},
 };
