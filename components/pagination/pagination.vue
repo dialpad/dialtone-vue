@@ -18,7 +18,7 @@
     >
       <div
         v-if="isNaN(Number(page))"
-        data-qa="pagination-separator"
+        data-qa="dt-pagination-separator"
         class="d-h32 d-w32 d-d-flex d-ai-center d-jc-center"
       >
         ...

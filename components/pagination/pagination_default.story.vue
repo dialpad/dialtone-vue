@@ -10,7 +10,7 @@
 import DtPagination from './pagination';
 
 export default {
-  name: 'DtRecipePaginationDefault',
+  name: 'DtPaginationDefault',
   components: { DtPagination },
   methods: {},
 };
