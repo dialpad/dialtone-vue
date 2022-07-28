@@ -4,10 +4,15 @@ import DtPagination from './pagination.vue';
 import { DtButton } from '@';
 
 // Constants
+const getPageNumberAriaLabel = (page) => {
+  return `Page number ${page}`;
+};
+
 const basePropsData = {
   totalPages: 5,
   prevAriaLabel: 'previous',
   nextAriaLabel: 'next',
+  pageNumberAriaLabel: getPageNumberAriaLabel,
 };
 
 describe('DtPagination Tests', function () {
@@ -16,6 +21,7 @@ describe('DtPagination Tests', function () {
   let prev;
   let next;
   let separators;
+  let pages;
 
   // Environment
   let propsData = basePropsData;
@@ -27,6 +33,7 @@ describe('DtPagination Tests', function () {
     prev = wrapper.find('[data-qa="dt-pagination-prev"]');
     next = wrapper.find('[data-qa="dt-pagination-next"]');
     separators = wrapper.findAll('[data-qa="dt-pagination-separator"]');
+    pages = wrapper.findAllComponents(DtButton);
   };
 
   const _setWrappers = () => {
@@ -67,6 +74,9 @@ describe('DtPagination Tests', function () {
       it('next button should have aria-label', function () {
         assert.equal(next.attributes('aria-label'), 'next');
       });
+      it('first page should have aria-label', function () {
+        assert.equal(pages.at(1).attributes('aria-label'), 'Page number 1');
+      });
     });
 
     describe('When rendered with active page', function () {
@@ -99,7 +109,7 @@ describe('DtPagination Tests', function () {
         assert.exists(separators, 'separators exists');
         assert.lengthOf(separators, 2);
         // case when maxVisible is even - we round to the nearest odd when active page is in the mid-range
-        assert.lengthOf(wrapper.findAllComponents(DtButton), 9);
+        assert.lengthOf(pages, 9);
       });
     });
 
@@ -114,7 +124,7 @@ describe('DtPagination Tests', function () {
         await _setWrappers();
       });
       it('should render less than maxVisible when active page is in mid range', function () {
-        assert.lengthOf(wrapper.findAllComponents(DtButton), 7);
+        assert.lengthOf(pages, 7);
       });
     });
   });

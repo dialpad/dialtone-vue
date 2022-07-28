@@ -25,7 +25,7 @@
       </div>
       <dt-button
         v-else
-        :aria-label="`page ${page}`"
+        :aria-label="pageNumberAriaLabel(page)"
         :importance="currentPage === page ? 'primary' : 'clear'"
         class="d-h32 d-w32"
         label-class="d-fs14"
@@ -85,6 +85,15 @@ export default {
      */
     nextAriaLabel: {
       type: String,
+      required: true,
+    },
+
+    /**
+     * A method that will be called to get the aria label of each page.
+     */
+
+    pageNumberAriaLabel: {
+      type: Function,
       required: true,
     },
 

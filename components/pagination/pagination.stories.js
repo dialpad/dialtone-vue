@@ -86,6 +86,7 @@ Default.parameters = {
     :max-visible="maxVisible"
     :prev-aria-label="'previous'"
     :next-aria-label="'next'"
+    :page-number-aria-label="getPageNumberAriaLabel"
     @change="onChange"
   />      `,
     },
@@ -99,7 +100,7 @@ Variants.parameters = {
   docs: {
     source: {
       code: `
-<div class="d-divide-y d-divide-purple-400">
+  <div class="d-divide-y d-divide-purple-400">
     <div class="d-m32">
       <p class="d-my16 d-fs14 d-fw-bold">
         Separator in the end
@@ -108,6 +109,7 @@ Variants.parameters = {
         :total-pages="10"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
+        :page-number-aria-label="getPageNumberAriaLabel"
       />
     </div>
     <div class="d-m32">
@@ -119,6 +121,7 @@ Variants.parameters = {
         :active-page="13"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
+        :page-number-aria-label="getPageNumberAriaLabel"
       />
     </div>
     <div class="d-m32">
@@ -130,6 +133,7 @@ Variants.parameters = {
         :active-page="5"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
+        :page-number-aria-label="getPageNumberAriaLabel"
       />
     </div>
   </div>

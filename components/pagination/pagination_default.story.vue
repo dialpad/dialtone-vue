@@ -5,6 +5,7 @@
     :max-visible="maxVisible"
     :prev-aria-label="'previous'"
     :next-aria-label="'next'"
+    :page-number-aria-label="getPageNumberAriaLabel"
     @change="onChange"
   />
 </template>
@@ -15,6 +16,10 @@ import DtPagination from './pagination';
 export default {
   name: 'DtPaginationDefault',
   components: { DtPagination },
-  methods: {},
+  methods: {
+    getPageNumberAriaLabel (page) {
+      return page === this.totalPages ? `Last page ${page}` : `Page ${page}`;
+    },
+  },
 };
 </script>

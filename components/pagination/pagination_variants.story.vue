@@ -8,6 +8,7 @@
         :total-pages="10"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
+        :page-number-aria-label="getPageNumberAriaLabel"
       />
     </div>
     <div class="d-m32">
@@ -19,6 +20,7 @@
         :active-page="13"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
+        :page-number-aria-label="getPageNumberAriaLabel"
       />
     </div>
     <div class="d-m32">
@@ -30,6 +32,7 @@
         :active-page="5"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
+        :page-number-aria-label="getPageNumberAriaLabel"
       />
     </div>
   </div>
@@ -41,5 +44,10 @@ import DtPagination from './pagination';
 export default {
   name: 'DtPaginationVariants',
   components: { DtPagination },
+  methods: {
+    getPageNumberAriaLabel (page) {
+      return `Page ${page}`;
+    },
+  },
 };
 </script>
