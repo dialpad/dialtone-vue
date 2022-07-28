@@ -8,7 +8,7 @@
       :content-width="$attrs.contentWidth"
       :padding="$attrs.padding"
       :navigation-type="$attrs.navigationType"
-      :open="open"
+      :open="$attrs.open"
       @highlight="$attrs.onHighlight"
     >
       <template #anchor>

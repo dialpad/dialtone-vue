@@ -80,7 +80,7 @@ export default {
 
   data: function () {
     return {
-      isOpen: this.open,
+      isOpen: this.$attrs.open,
     };
   },
 

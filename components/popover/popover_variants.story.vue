@@ -3,7 +3,7 @@
 <template>
   <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-flg12 d-fl-col2">
     <dt-popover
-      :open="open"
+      :open="$attrs.open"
       width-content="anchor"
       placement="bottom-start"
       initial-focus-element="first"
@@ -34,7 +34,7 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="open"
+      :open="$attrs.open"
       width-content="anchor"
       initial-focus-element="first"
       class="d-mb128 d-jc-flex-end"
@@ -64,7 +64,7 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="open"
+      :open="$attrs.open"
       padding="none"
       width-content="anchor"
       initial-focus-element="first"
@@ -92,7 +92,7 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="open"
+      :open="$attrs.open"
       :modal="false"
       width-content="anchor"
       class="d-jc-flex-end"
@@ -122,7 +122,7 @@
       </template>
     </dt-popover>
     <dt-popover
-      :open="open"
+      :open="$attrs.open"
       class="d-mb128"
       :show-close-button="true"
       placement="bottom-start"
@@ -192,7 +192,7 @@
     </dt-popover>
 
     <dt-popover
-      :open="open"
+      :open="$attrs.open"
       class="d-mb128 d-jc-flex-end"
       :show-close-button="true"
       max-height="20rem"
@@ -225,7 +225,7 @@
     </dt-popover>
 
     <dt-popover
-      :open="open"
+      :open="$attrs.open"
       class="d-my128"
       max-height="20rem"
       max-width="50rem"
@@ -260,7 +260,7 @@
     </dt-popover>
 
     <dt-popover
-      :open="open"
+      :open="$attrs.open"
       content-class="d-pl12 d-pr16"
       initial-focus-element="first"
       class="d-my128 d-jc-flex-end"
@@ -343,7 +343,7 @@
     </dt-popover>
 
     <dt-popover
-      :open="open"
+      :open="$attrs.open"
       content-class="d-pl12 d-pr16"
       class="d-my128"
       initial-focus-element="first"
@@ -432,7 +432,7 @@ export default {
 
   data () {
     return {
-      openPopoverWithTriggerOverride: open,
+      openPopoverWithTriggerOverride: this.$attrs.open,
       sampleText: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Consequuntur delectus distinctio id iure labore,
             maiores mollitia reprehenderit sunt tempore veritatis.
