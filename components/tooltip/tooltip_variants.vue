@@ -51,7 +51,7 @@
       <dt-tooltip
         class="d-mb64 d-mt32"
         :message="localMessage"
-        :show="show1 || $attrs.show"
+        :show="show1"
       >
         <template #anchor>
           <dt-button
@@ -107,7 +107,7 @@ export default {
       TOOLTIP_DIRECTIONS: sliceIntoChunks(this.$attrs.customDirections || TOOLTIP_DIRECTIONS, 3),
 
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
-      show1: false,
+      show1: this.$attrs.show ?? false,
     };
   },
 };
