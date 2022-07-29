@@ -29,7 +29,8 @@
 </template>
 
 <script>
-import { DtButton, DtTooltip } from '@';
+import DtButton from '@/components/button/button';
+import DtTooltip from '@/components/tooltip/tooltip';
 import utils from '@/common/utils';
 
 export default {
@@ -72,6 +73,7 @@ export default {
   },
 
   emits: ['click'],
+
   computed: {
     hasIcon () {
       return Boolean(this.$slots.icon);
