@@ -18,7 +18,7 @@
           v-if="direction !== null"
           :placement="direction"
           :message="localMessage"
-          :show="show"
+          :show="$attrs.show"
           class="d-mx64"
         >
           <template #anchor>
@@ -37,7 +37,7 @@
       <dt-tooltip
         class="d-mb64 d-mt64"
         :message="localMessage"
-        :show="show"
+        :show="$attrs.show"
       >
         <template #anchor>
           <dt-button link>
@@ -69,7 +69,7 @@
         <dt-tooltip
           :inverted="true"
           :message="localMessage"
-          :show="show"
+          :show="$attrs.show"
         >
           <template #anchor>
             <dt-button
@@ -104,10 +104,10 @@ export default {
   components: { DtTooltip, DtButton },
   data () {
     return {
-      TOOLTIP_DIRECTIONS: sliceIntoChunks(this.customDirections || TOOLTIP_DIRECTIONS, 3),
+      TOOLTIP_DIRECTIONS: sliceIntoChunks(this.$attrs.customDirections || TOOLTIP_DIRECTIONS, 3),
 
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
-      show1: this.show ?? false,
+      show1: this.$attrs.show ?? false,
     };
   },
 };

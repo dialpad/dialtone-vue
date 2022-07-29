@@ -37,7 +37,6 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   const _openComboboxPopover = async (_emptyList = undefined) => {
     await wrapper.setProps({ showList: true });
     wrapper.vm.$refs.combobox.isListEmpty = _emptyList;
-    wrapper.vm.$refs.combobox.isListEmpty = _emptyList;
     await wrapper.vm.$refs.combobox.setInitialHighlightIndex();
     wrapper.vm.$refs.combobox.outsideRenderedListRef = wrapper.vm.$refs.listWrapper;
   };
@@ -70,7 +69,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   });
 
   // Teardown
-  afterEach(async function () {
+  afterEach(function () {
     props = baseProps;
     slots = {};
     wrapper.unmount();

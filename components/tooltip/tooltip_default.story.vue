@@ -19,7 +19,7 @@
         :sticky="$attrs.sticky"
         :content-class="$attrs.contentClass"
         :transition="$attrs.transition"
-        :show.sync="showTooltip"
+        :show.sync="$attrs.show"
         @shown="$attrs.onShown"
       >
         <template #anchor>
@@ -54,14 +54,6 @@ export default {
   computed: {
     buttonKind () {
       return this.$attrs.inverted ? 'inverted' : 'default';
-    },
-
-    showTooltip () {
-      if (this.$attrs.globalShow) {
-        return true;
-      }
-
-      return this.$attrs.show;
     },
   },
 };
