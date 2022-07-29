@@ -447,7 +447,7 @@ export default {
 
   data () {
     return {
-      openPopoverWithTriggerOverride: open,
+      openPopoverWithTriggerOverride: this.open,
       sampleText: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Consequuntur delectus distinctio id iure labore,
             maiores mollitia reprehenderit sunt tempore veritatis.
