@@ -4,18 +4,21 @@
     :open="open"
     :placement="placement"
     :initial-focus-element="initialFocusElement"
+    :show-close-button="showCloseButton"
     padding="none"
-    dialog-class="d-h464 d-w512 callbar-popover"
+    class="dt-recipe--callbar-button-with-popover--popover-wrapper"
+    dialog-class="d-h464 d-w512 dt-recipe--callbar-button-with-popover--popover"
     header-class="d-d-flex d-ai-center d-fw-normal d-px12"
     v-bind="$attrs"
     @opened="onModalIsOpened"
   >
     <template #anchor>
-      <div class="button">
+      <div class="dt-recipe--callbar-button-with-popover--button">
         <dt-recipe-callbar-button
           :disabled="disabled"
           :active="active"
           :danger="danger"
+          class="dt-recipe--callbar-button-with-popover--main-button"
           @click="buttonClick"
         >
           <slot
@@ -26,10 +29,6 @@
             slot="tooltip"
             name="tooltip"
           />
-          <slot
-            slot="label"
-            name="label"
-          />
           <slot />
         </dt-recipe-callbar-button>
         <dt-button
@@ -37,7 +36,7 @@
           circle
           importance="clear"
           size="lg"
-          class="arrow"
+          class="dt-recipe--callbar-button-with-popover--arrow"
           :active="open"
           @click="arrowClick"
         >
@@ -48,15 +47,24 @@
       </div>
     </template>
     <slot
-      v-for="(_, name) in $slots"
-      :slot="name"
-      :name="name"
+      slot="content"
+      name="content"
+    />
+    <slot
+      slot="headerContent"
+      name="headerContent"
+    />
+    <slot
+      slot="footerContent"
+      name="footerContent"
     />
   </dt-popover>
 </template>
 
 <script>
-import { DtRecipeCallbarButton, DtPopover, DtButton } from '@';
+import DtButton from '@/components/button/button';
+import DtPopover from '@/components/popover/popover';
+import DtRecipeCallbarButton from '@/recipes/buttons/callbar_button/callbar_button';
 import IconArrowDropUp from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowDropUp.vue';
 import utils from '@/common/utils';
 
@@ -92,6 +100,11 @@ export default {
       default: 'first',
     },
 
+    showCloseButton: {
+      type: Boolean,
+      default: true,
+    },
+
     disabled: {
       type: Boolean,
       default: false,
@@ -114,16 +127,6 @@ export default {
     return {
       open: false,
     };
-  },
-
-  computed: {
-    hasTooltip () {
-      return Boolean(this.$slots.tooltip);
-    },
-
-    hasIcon () {
-      return Boolean(this.$slots.icon);
-    },
   },
 
   methods: {
@@ -149,13 +152,13 @@ export default {
 </script>
 
 <style lang="less">
-.button {
+.dt-recipe--callbar-button-with-popover--button {
   position: relative;
   display: inline-block;
 }
-.arrow.d-btn--circle {
+.dt-recipe--callbar-button-with-popover--arrow.d-btn--circle {
   position: absolute;
-  top: var(--su4);
+  top: 2rem;
   right: 0;
   width: var(--su16);
   height: var(--su16);
@@ -166,7 +169,7 @@ export default {
     background: var(--black-025);
   }
 }
-.callbar-popover {
+.dt-recipe--callbar-button-with-popover--popover {
   .d-popover__header {
     background: var(--black-900);
     color: var(--white);

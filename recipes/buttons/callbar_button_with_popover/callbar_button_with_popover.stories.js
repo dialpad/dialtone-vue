@@ -5,11 +5,18 @@ import DtRecipeCallbarButtonWithPopoverMdx from './callbar_button_with_popover.m
 import DtRecipeCallbarButtonWithPopoverDefaultTemplate from './callbar_button_with_popover_default.story.vue';
 import DtRecipeCallbarButtonWithPopoverVariantsTemplate from './callbar_button_with_popover_variants.story.vue';
 
+import { POPOVER_DIRECTIONS, POPOVER_INITIAL_FOCUS_STRINGS } from '../../../components/popover/popover_constants';
+
 // Default Prop Values
 export const argsData = {
-  some: 'prop',
-  arrowClick: action('event'),
-  click: action('event'),
+  default: 'slot',
+  icon: 'slot',
+  tooltip: 'slot',
+  content: 'slot',
+  headerContent: 'slot',
+  footerContent: 'slot',
+  onArrowClick: action('arrowClick'),
+  onClick: action('click'),
 };
 
 /**
@@ -31,22 +38,9 @@ export const argsData = {
   <!-- @slot example slot decorator -->
 */
 export const argTypesData = {
-  // Props
-  some: {
-    description: 'Describes the some prop',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
-  // Slots
+  // Button Slots
   default: {
+    description: 'Slot default content. This will be the button label',
     control: 'text',
     table: {
       type: {
@@ -54,19 +48,52 @@ export const argTypesData = {
       },
     },
   },
-  /*
-    We use the following naming scheme `<SLOT_NAME>Slot` for slot controls to prevent conflicts with props that share
-    the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
-    table and description within the controls accurately reflects the correct names of our component's props and slots.
-  */
-  someSlot: {
-    name: 'some',
-    description: 'Slot for some',
+  icon: {
+    description: 'Slot for button icon',
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  tooltip: {
+    description: 'Slot tooltip',
+    control: 'text',
+    table: {
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+
+  // Popover slots
+  content: {
+    description: 'Slot for popover content',
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  headerContent: {
+    description: 'Slot for popover header content',
     control: 'text',
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
+      },
+    },
+  },
+  footerContent: {
+    description: 'Slot for popover footer content',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
       },
     },
   },
@@ -76,14 +103,43 @@ export const argTypesData = {
     description: 'Triggered when the arrow is clicked',
     table: {
       disable: false,
+      type: {
+        summary: 'event',
+      },
     },
   },
   click: {
     description: 'Triggered when the button is clicked',
     table: {
       disable: false,
+      type: {
+        summary: 'event',
+      },
     },
   },
+
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'auto-generated',
+      },
+    },
+  },
+
+  // Popover props
+  initialFocusElement: {
+    control: {
+      type: 'select',
+      options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-close'],
+    },
+  },
+  placement: {
+    control: {
+      type: 'select',
+      options: POPOVER_DIRECTIONS,
+    },
+  },
+
 };
 
 // Story Collection

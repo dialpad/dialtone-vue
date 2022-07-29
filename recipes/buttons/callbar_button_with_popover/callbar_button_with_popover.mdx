@@ -1,4 +1,5 @@
 import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import LinkTo from '@storybook/addon-links/react';
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
 
 # DtRecipeCallbarButtonWithPopover
@@ -8,8 +9,6 @@ import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
 </Subtitle>
 
 ## Base Style
-
-Some description of how to use the base component, potential gotchas and limitations.
 
 <Canvas>
   <Story id="recipes-buttons-dtrecipecallbarbuttonwithpopover--default" />
@@ -23,6 +22,9 @@ Some description of how to use the base component, potential gotchas and limitat
 
 ## Slots, Props & Events
 
+This component also accepts all [Popover Component](?path=/docs/components-popover--default#slots-props--events) props.
+Those will be bind to the Popover instance.
+
 <ArgsTable story={PRIMARY_STORY} />
 
 ## Usage
@@ -33,21 +35,44 @@ Some description of how to use the base component, potential gotchas and limitat
 import { DtRecipeCallbarButtonWithPopover } from '@dialpad/dialtone-vue';
 ```
 
-<dt-recipe-callbar-button-with-popover>
-Felipe2</dt-recipe-callbar-button-with-popover>
-
-### With Some Variant
+### Default
 
 ```vue
 <dt-recipe-callbar-button-with-popover
-  some="variant"
-/>
+  @click="buttonClicked"
+>
+  ButtonLabel
+  <template #icon>
+    <icon-dialpad-ai />
+  </template>
+  <template #tooltip>
+    Tooltip text
+  </template>
+  <template #content>
+    Popover Body
+  </template>
+  <template #headerContent>
+    Popover Header
+  </template>
+</dt-recipe-callbar-button-with-popover>
 ```
 
-### With Some Other Variant
+### Icon-only, active, no tooltip, no close button
 
 ```vue
 <dt-recipe-callbar-button-with-popover
-  some-other="variant"
-/>
+  @click="buttonClicked"
+  :show-close-button="false"
+  active
+>
+  <template #icon>
+    <icon-dialpad-ai />
+  </template>
+  <template #content>
+    Popover Body
+  </template>
+  <template #headerContent>
+    Popover Header
+  </template>
+</dt-recipe-callbar-button-with-popover>
 ```

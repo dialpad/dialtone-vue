@@ -5,8 +5,6 @@
     as the storybook control defined in the corresponding `.story.js` file.
   -->
   <dt-recipe-callbar-button-with-popover
-    :disabled="false"
-    :show-close-button="true"
     @click="buttonClicked"
   >
     Button
@@ -21,9 +19,6 @@
     </template>
     <template #headerContent>
       Header Content
-    </template>
-    <template #footerContent>
-      Footer content
     </template>
   </dt-recipe-callbar-button-with-popover>
 </template>
