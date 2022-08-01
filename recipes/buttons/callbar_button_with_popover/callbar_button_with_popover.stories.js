@@ -9,12 +9,11 @@ import { POPOVER_DIRECTIONS, POPOVER_INITIAL_FOCUS_STRINGS } from '../../../comp
 
 // Default Prop Values
 export const argsData = {
-  default: 'slot',
-  icon: 'slot',
-  tooltip: 'slot',
-  content: 'slot',
-  headerContent: 'slot',
-  footerContent: 'slot',
+  default: 'Button',
+  icon: '',
+  tooltip: 'A tooltip',
+  content: 'Popover body content',
+  headerContent: 'Header content',
   onArrowClick: action('arrowClick'),
   onClick: action('click'),
 };
@@ -50,7 +49,7 @@ export const argTypesData = {
   },
   icon: {
     description: 'Slot for button icon',
-    control: 'text',
+    control: 'none',
     table: {
       type: {
         summary: 'VNode',
@@ -79,16 +78,6 @@ export const argTypesData = {
   },
   headerContent: {
     description: 'Slot for popover header content',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'VNode',
-      },
-    },
-  },
-  footerContent: {
-    description: 'Slot for popover footer content',
     control: 'text',
     table: {
       category: 'slots',
@@ -137,6 +126,19 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: POPOVER_DIRECTIONS,
+    },
+  },
+
+  // Action Event Handlers
+  onArrowClick: {
+    table: {
+      disable: true,
+    },
+  },
+  // Action Event Handlers
+  onClick: {
+    table: {
+      disable: true,
     },
   },
 

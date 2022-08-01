@@ -1,6 +1,8 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
-import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover.vue';
+import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
+import DtRecipeCallbarButton from '../callbar_button/callbar_button';
+import DtPopover from '@/components/popover/popover';
 import sinon from 'sinon';
 
 class ResizeObserverMock {
@@ -22,20 +24,19 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
   let arrow;
   let button;
   let popover;
-  let popoverWindow;
 
   // Environment
   let propsData = basePropsData;
   let attrs = {};
   let slots = {};
   let provide = {};
+  let listeners = {};
 
   // Helpers
   const _setChildWrappers = () => {
-    button = wrapper.findComponent('.dt-recipe--callbar-button-with-popover--main-button');
+    button = wrapper.findComponent(DtRecipeCallbarButton);
     arrow = wrapper.findComponent('.dt-recipe--callbar-button-with-popover--arrow');
-    popover = wrapper.findComponent('.dt-recipe--callbar-button-with-popover--popover-wrapper');
-    popoverWindow = wrapper.findComponent({ ref: 'content' });
+    popover = wrapper.findComponent(DtPopover);
   };
 
   const _setWrappers = () => {
@@ -44,6 +45,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
       attrs,
       slots,
       provide,
+      listeners,
       localVue: this.localVue,
     });
     _setChildWrappers();
@@ -68,6 +70,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
     attrs = {};
     slots = {};
     provide = {};
+    listeners = {};
     wrapper.destroy();
   });
   after(function () {
@@ -102,10 +105,9 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
       assert.isTrue(buttonProps.danger);
     });
 
-    it('should propagate disabled, placement, initialFocusElement and showCloseButton props to the popover component',
+    it('should propagate placement, initialFocusElement and showCloseButton props to the popover component',
       async function () {
         await wrapper.setProps({
-          disabled: true,
           placement: 'mock',
           initialFocusElement: '#mock',
           showCloseButton: true,
@@ -113,8 +115,8 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
         _setChildWrappers();
 
         const popoverProps = popover.props();
+        console.log(popoverProps);
 
-        assert.isTrue(popoverProps.disabled);
         assert.isTrue(popoverProps.showCloseButton);
         assert.equal(popoverProps.placement, 'mock');
         assert.equal(popoverProps.initialFocusElement, '#mock');
@@ -122,14 +124,39 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
   });
 
   describe('Interactivity Tests', function () {
-    describe('When clicking on the arrow', function () {
-      it('should pass the open prop to the popover, so it opens', async function () {
-        await arrow.trigger('click');
-        _setChildWrappers();
+    describe('When clicking on the button', function () {
+      it('should trigger the "arrowClick" event when no listener attached', async function () {
+        await button.find('button').trigger('click');
+        const arrowClickEvents = wrapper.emitted().arrowClick;
+        assert.equal(arrowClickEvents.length, 1);
+      });
 
-        const popoverProps = popover.props();
-        console.log(popoverWindow, popoverProps);
-        assert.isTrue(popoverProps.open);
+      it('should trigger the "click" event when at least one listener is attached', async function () {
+        const clickStub = sinon.stub();
+        listeners = { click: clickStub };
+        _setWrappers();
+
+        await button.find('button').trigger('click');
+        await wrapper.vm.$nextTick();
+
+        const clickEvents = wrapper.emitted().click;
+        assert.equal(clickEvents.length, 1);
+        assert.isTrue(clickStub.called);
+      });
+    });
+
+    describe('When clicking on the arrow', function () {
+      beforeEach(async function () {
+        await arrow.trigger('click');
+      });
+
+      it('should pass the open prop to the popover, so it opens', function () {
+        assert.isTrue(wrapper.vm.open);
+      });
+
+      it('should trigger the "arrowClick" event', function () {
+        const arrowClickEvents = wrapper.emitted().arrowClick;
+        assert.equal(arrowClickEvents.length, 1);
       });
     });
   });

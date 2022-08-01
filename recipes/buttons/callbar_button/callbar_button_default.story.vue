@@ -4,12 +4,22 @@
     We can bind the data that the user entered into the storybook controls to props by using a property of the same name
     as the storybook control defined in the corresponding `.story.js` file.
   -->
-  <dt-recipe-callbar-button>
-    Button
-    <template #icon>
-      <icon-dialpad-glyph />
+  <dt-recipe-callbar-button
+    :active="active"
+    :disabled="disabled"
+    :danger="danger"
+    :circle="circle"
+  >
+    <template
+      v-if="tooltip"
+      slot="tooltip"
+    >
+      <span v-html="tooltip" />
     </template>
-    <template #tooltip>
+    <template
+      v-else
+      slot="tooltip"
+    >
       Tooltip text
     </template>
     <!--
@@ -24,11 +34,21 @@
     <template v-if="defaultSlot">
       <span v-html="defaultSlot" />
     </template>
+    <template v-else>
+      Button
+    </template>
+
     <template
-      v-if="someSlot"
-      #some
+      v-if="icon"
+      slot="icon"
     >
-      <span v-html="someSlot" />
+      <span v-html="icon" />
+    </template>
+    <template
+      v-else
+      slot="icon"
+    >
+      <icon-dialpad-glyph />
     </template>
   </dt-recipe-callbar-button>
 </template>

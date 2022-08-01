@@ -1,5 +1,6 @@
 <template>
   <dt-popover
+    :id="id"
     :disabled="disabled"
     :open="open"
     :placement="placement"

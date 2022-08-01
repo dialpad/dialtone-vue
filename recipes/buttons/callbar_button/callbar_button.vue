@@ -1,5 +1,6 @@
 <template>
   <dt-tooltip
+    :id="id"
     :offset="[0, -12]"
   >
     <template #anchor>
@@ -8,9 +9,10 @@
         kind="muted"
         icon-position="top"
         :disabled="disabled"
-        class="dt-recipe-callbar-button d-stack4"
         label-class="d-fs11"
         :class="{
+          'dt-recipe-callbar-button': true,
+          'd-stack4': true,
           'dt-recipe-callbar-button--circle': circle,
           'dt-recipe-callbar-button--active': active,
           'dt-recipe-callbar-button--danger': danger,
@@ -73,12 +75,6 @@ export default {
   },
 
   emits: ['click'],
-
-  computed: {
-    hasIcon () {
-      return Boolean(this.$slots.icon);
-    },
-  },
 };
 </script>
 

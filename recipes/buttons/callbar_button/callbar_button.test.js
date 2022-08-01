@@ -1,94 +1,124 @@
-// import { assert } from 'chai';
-// import { createLocalVue, shallowMount } from '@vue/test-utils';
-// import DtRecipeCallbarButton from './callbar_button.vue';
+import { assert } from 'chai';
+import { createLocalVue, mount } from '@vue/test-utils';
+import DtRecipeCallbarButton from './callbar_button.vue';
+import DtTooltip from '@/components/tooltip/tooltip';
+import sinon from 'sinon';
 
-// // Constants
-// const basePropsData = {};
+class ResizeObserverMock {
+  observe () {
+    // do nothing
+  }
+
+  unobserve () {
+    // do nothing
+  }
+}
+
+// Constants
+const basePropsData = {};
 
 describe('DtRecipeCallbarButton Tests', function () {
   // Wrappers
-  // let wrapper;
-  // // let childContainer;
+  let wrapper;
+  let button;
+  let tooltip;
 
-  // // Environment
-  // let propsData = basePropsData;
-  // let attrs = {};
-  // let slots = {};
-  // let provide = {};
+  // Environment
+  let propsData = basePropsData;
+  let attrs = {};
+  let slots = {};
+  let provide = {};
 
-  // // Helpers
-  // const _setChildWrappers = () => {
-  //   childContainer = wrapper.find('[data-qa="child-container"]');
-  // };
+  // Helpers
+  const _setChildWrappers = () => {
+    button = wrapper.findComponent('.dt-recipe-callbar-button');
+    tooltip = wrapper.findComponent(DtTooltip);
+  };
 
-  // const _setWrappers = () => {
-  //   wrapper = shallowMount(DtRecipeCallbarButton, {
-  //     propsData,
-  //     attrs,
-  //     slots,
-  //     provide,
-  //     localVue: this.localVue,
-  //   });
-  //   _setChildWrappers();
-  // };
+  const _setWrappers = () => {
+    wrapper = mount(DtRecipeCallbarButton, {
+      propsData,
+      attrs,
+      slots,
+      provide,
+      localVue: this.localVue,
+    });
+    _setChildWrappers();
+  };
 
-  // Shared Examples
-  // const itBehavesLikeSomeExpectation = () => {
-  //   it('should be equal', function () { assert.strictEqual(1, 1); });
-  // };
+  // Setup
+  before(function () {
+    // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+    // Need to mock them to avoid error
+    global.requestAnimationFrame = sinon.spy();
+    global.cancelAnimationFrame = sinon.spy();
+    global.ResizeObserver = ResizeObserverMock;
+    this.localVue = createLocalVue();
+  });
+  beforeEach(function () {
+    _setWrappers();
+  });
 
-  // // Setup
-  // before(function () {
-  //   this.localVue = createLocalVue();
-  // });
-  // beforeEach(function () {});
+  // Teardown
+  afterEach(function () {
+    propsData = basePropsData;
+    attrs = {};
+    slots = {};
+    provide = {};
+    wrapper.destroy();
+  });
+  after(function () {
+    global.ResizeObserver = null;
+  });
 
-  // // Teardown
-  // afterEach(function () {
-  //   propsData = basePropsData;
-  //   attrs = {};
-  //   slots = {};
-  //   provide = {};
-  // });
-  // after(function () {});
+  describe('Presentation Tests', function () {
+    describe('Default render', function () {
+      it('should render the component', function () {
+        assert.exists(wrapper);
+      });
 
-  // describe('Presentation Tests', function () {
-  //   /*
-  //    * Test(s) to ensure that the component is correctly rendering
-  //    */
+      it('should render a tooltip component', function () {
+        assert.exists(tooltip);
+      });
 
-  //   describe('When some description of the current environment', function () {});
-  // });
+      it('should render a muted button', function () {
+        const buttonProps = button.props();
+        assert.exists(button);
+        assert.equal(buttonProps.kind, 'muted');
+      });
+    });
 
-  // describe('Accessibility Tests', function () {
-  //   /*
-  //    * Test(s) to ensure that the component is accessible
-  //    */
+    describe('Button variants', function () {
+      it('Should add appropriate class to icon when "active"', async function () {
+        await wrapper.setProps({ active: true });
+        assert.isTrue(button.classes().includes('dt-recipe-callbar-button--active'));
+      });
 
-  //   describe('When some description of the current environment', function () {});
-  // });
+      it('Should add appropriate class to icon when "circle"', async function () {
+        await wrapper.setProps({ circle: true });
+        assert.isTrue(button.classes().includes('dt-recipe-callbar-button--circle'));
+        assert.equal(button.props().importance, 'outlined');
+      });
 
-  // describe('Interactivity Tests', function () {
-  //   /*
-  //    * Test(s) to ensure that the component correctly handles user input
-  //    */
+      it('Should add appropriate class to icon when "danger"', async function () {
+        await wrapper.setProps({ danger: true });
+        assert.isTrue(button.classes().includes('dt-recipe-callbar-button--danger'));
+      });
 
-  //   describe('When some description of the current environment', function () {});
-  // });
+      it('Should display a disabled button when "disabled"', async function () {
+        await wrapper.setProps({ disabled: true });
+        assert.isTrue(button.element.disabled);
+      });
+    });
+  });
 
-  // describe('Validation Tests', function () {
-  //   /*
-  //    * Test(s) to ensure that custom validators are working as expected
-  //    */
-
-  //   describe('When some description of the current environment', function () {});
-  // });
-
-  // describe('Extendability Tests', function () {
-  //   /*
-  //    * Test(s) to ensure that the component can be correctly extended
-  //    */
-
-  //   describe('When some description of the current environment', function () {});
-  // });
+  describe('Interactivity Tests', function () {
+    describe('When clicking on the button', function () {
+      it('should emit a click event', async function () {
+        await button.trigger('click');
+        const clickEvents = wrapper.emitted().click;
+        assert.equal(clickEvents.length, 1);
+      });
+    });
+  });
 });

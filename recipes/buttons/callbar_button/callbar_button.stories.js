@@ -8,61 +8,69 @@ import DtRecipeCallbarButtonCallbarTemplate from './callbar_button_callbar.story
 
 // Default Prop Values
 export const argsData = {
-  some: 'prop',
-  onEvent: action('event'),
+  onClick: action('click'),
 };
 
-/**
- * example prop description decorator
- */
-
-/*
-  Controls
-  ========
-
-  Here we define any custom controls or control overrides for our components.
-
-  By default storybook will attempt to provide an appropriate control of the same name for each property in the
-  component as well as include any description provided using a prop decorator within your component (see above).
-
-  Storybook will also attempt to provide an appropriate control for each slot in the component as well as include any
-  description provided using a slot decorator within your component (see below).
-
-  <!-- @slot example slot decorator -->
-*/
 export const argTypesData = {
-  // // Props
-  // some: {
-  //   description: 'Describes the some prop',
-  //   table: {
-  //     category: 'props',
-  //     type: {
-  //       summary: 'string',
-  //     },
-  //   },
-  //   control: {
-  //     type: 'text',
-  //   },
-  // },
+  // Props
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'auto-generated',
+      },
+    },
+  },
 
-  // // Slots
-  // default: {
-  //   control: 'text',
-  //   name: 'Label',
-  //   description: 'Button label; can be empty',
-  //   table: {
-  //     type: {
-  //       summary: 'text/html',
-  //     },
-  //   },
-  // },
+  // Slots
+  default: {
+    name: 'default',
+    description: 'Slot default content. This will be the button label',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
+  icon: {
+    name: 'icon',
+    description: 'Slot for button icon',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  tooltip: {
+    name: 'tooltip',
+    description: 'Slot tooltip',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'text/html',
+      },
+    },
+  },
 
-  // // Action Event Handlers
-  // onEvent: {
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
+  // Action Event Handlers
+  click: {
+    description: 'Triggered when the button is clicked',
+    table: {
+      disable: false,
+      type: {
+        summary: 'event',
+      },
+    },
+  },
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Story Collection

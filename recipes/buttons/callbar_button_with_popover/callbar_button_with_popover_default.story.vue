@@ -7,18 +7,20 @@
   <dt-recipe-callbar-button-with-popover
     @click="buttonClicked"
   >
-    Button
+    <template v-if="defaultSlot">
+      <span v-html="defaultSlot" />
+    </template>
     <template #icon>
       <icon-dialpad-ai />
     </template>
     <template #tooltip>
-      Tooltip text
+      <span v-html="tooltip" />
     </template>
     <template #content>
-      Body
+      <span v-html="content" />
     </template>
     <template #headerContent>
-      Header Content
+      <span v-html="headerContent" />
     </template>
   </dt-recipe-callbar-button-with-popover>
 </template>
