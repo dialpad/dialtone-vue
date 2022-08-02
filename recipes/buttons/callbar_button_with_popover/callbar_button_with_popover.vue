@@ -1,39 +1,40 @@
 <template>
-  <dt-popover
-    :id="id"
-    :disabled="disabled"
-    :open="open"
-    :placement="placement"
-    :initial-focus-element="initialFocusElement"
-    :show-close-button="showCloseButton"
-    padding="none"
-    class="dt-recipe--callbar-button-with-popover--popover-wrapper"
-    dialog-class="d-h464 d-w512 dt-recipe--callbar-button-with-popover--popover"
-    header-class="d-d-flex d-ai-center d-fw-normal d-px12"
-    v-bind="$attrs"
-    @opened="onModalIsOpened"
+  <div
+    class="dt-recipe--callbar-button-with-popover--button"
   >
-    <template #anchor="anchorProps">
-      <div class="dt-recipe--callbar-button-with-popover--button">
-        <dt-recipe-callbar-button
-          :aria-label="ariaLabel"
-          :disabled="disabled"
-          :active="active"
-          :danger="danger"
-          v-bind="anchorProps"
-          class="dt-recipe--callbar-button-with-popover--main-button"
-          @click="buttonClick"
-        >
-          <slot
-            slot="icon"
-            name="icon"
-          />
-          <slot
-            slot="tooltip"
-            name="tooltip"
-          />
-          <slot />
-        </dt-recipe-callbar-button>
+    <dt-recipe-callbar-button
+      :aria-label="ariaLabel"
+      :disabled="disabled"
+      :active="active"
+      :danger="danger"
+      class="dt-recipe--callbar-button-with-popover--main-button"
+      @click="buttonClick"
+    >
+      <slot
+        slot="icon"
+        name="icon"
+      />
+      <slot
+        slot="tooltip"
+        name="tooltip"
+      />
+      <slot />
+    </dt-recipe-callbar-button>
+    <dt-popover
+      :id="id"
+      :disabled="disabled"
+      :open="open"
+      :placement="placement"
+      :initial-focus-element="initialFocusElement"
+      :show-close-button="showCloseButton"
+      padding="none"
+      class="dt-recipe--callbar-button-with-popover--popover-wrapper"
+      dialog-class="d-h464 d-w512 dt-recipe--callbar-button-with-popover--popover"
+      header-class="d-d-flex d-ai-center d-fw-normal d-px12"
+      v-bind="$attrs"
+      @opened="onModalIsOpened"
+    >
+      <template #anchor>
         <dt-button
           v-if="!disabled"
           circle
@@ -48,21 +49,21 @@
             <icon-arrow-drop-up class="d-svg--size-16" />
           </template>
         </dt-button>
-      </div>
-    </template>
-    <slot
-      slot="content"
-      name="content"
-    />
-    <slot
-      slot="headerContent"
-      name="headerContent"
-    />
-    <slot
-      slot="footerContent"
-      name="footerContent"
-    />
-  </dt-popover>
+      </template>
+      <slot
+        slot="content"
+        name="content"
+      />
+      <slot
+        slot="headerContent"
+        name="headerContent"
+      />
+      <slot
+        slot="footerContent"
+        name="footerContent"
+      />
+    </dt-popover>
+  </div>
 </template>
 
 <script>
