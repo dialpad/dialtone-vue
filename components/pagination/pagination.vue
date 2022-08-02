@@ -16,13 +16,15 @@
       v-for="(page, index) in pages"
       :key="`page-${page}-${index}`"
     >
+      <!-- eslint-disable vue/no-bare-strings-in-template -->
       <div
         v-if="isNaN(Number(page))"
         data-qa="dt-pagination-separator"
         class="d-h32 d-w32 d-d-flex d-ai-center d-jc-center"
       >
-        ...
+        …
       </div>
+      <!-- eslint-enable vue/no-bare-strings-in-template -->
       <dt-button
         v-else
         :aria-label="pageNumberAriaLabel(page)"
