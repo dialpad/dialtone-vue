@@ -42,7 +42,6 @@ describe('DtPagination Tests', function () {
       propsData,
       slots,
       listeners,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
