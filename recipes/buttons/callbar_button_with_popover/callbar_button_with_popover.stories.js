@@ -18,24 +18,6 @@ export const argsData = {
   onClick: action('click'),
 };
 
-/**
- * example prop description decorator
- */
-
-/*
-  Controls
-  ========
-
-  Here we define any custom controls or control overrides for our components.
-
-  By default storybook will attempt to provide an appropriate control of the same name for each property in the
-  component as well as include any description provided using a prop decorator within your component (see above).
-
-  Storybook will also attempt to provide an appropriate control for each slot in the component as well as include any
-  description provided using a slot decorator within your component (see below).
-
-  <!-- @slot example slot decorator -->
-*/
 export const argTypesData = {
   // Button Slots
   default: {
@@ -146,7 +128,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/Buttons/DtRecipeCallbarButtonWithPopover',
+  title: 'Recipes/Buttons/Callbar Button With Popover',
   component: DtRecipeCallbarButtonWithPopover,
   args: argsData,
   argTypes: argTypesData,
@@ -175,3 +157,4 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

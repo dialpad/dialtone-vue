@@ -9,6 +9,7 @@
         kind="muted"
         icon-position="top"
         :disabled="disabled"
+        :aria-label="ariaLabel"
         label-class="d-fs11"
         :class="{
           'dt-recipe-callbar-button': true,
@@ -17,7 +18,7 @@
           'dt-recipe-callbar-button--active': active,
           'dt-recipe-callbar-button--danger': danger,
         }"
-        @click="$emit('click')"
+        v-on="$listeners"
       >
         <slot />
         <slot
@@ -71,6 +72,14 @@ export default {
     circle: {
       type: Boolean,
       default: false,
+    },
+
+    ariaLabel: {
+      type: String,
+      default: null,
+      validator: (label) => {
+        return label || this.$slots.default;
+      },
     },
   },
 

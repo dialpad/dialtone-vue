@@ -1,4 +1,3 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
   <div class="d-stack16">
     <h3>
@@ -6,9 +5,7 @@
     </h3>
     <div class="d-d-flex d-flow16 d-fw-wrap">
       <dt-recipe-callbar-button>
-        <template #label>
-          Button
-        </template>
+        Button
         <template #icon>
           <icon-recording />
         </template>
@@ -18,10 +15,10 @@
       </dt-recipe-callbar-button>
 
       <dt-recipe-callbar-button>
+        No tooltip
         <template #icon>
           <icon-dialpad-glyph />
         </template>
-        No tooltip
       </dt-recipe-callbar-button>
 
       <dt-recipe-callbar-button>
@@ -31,7 +28,7 @@
         </template>
       </dt-recipe-callbar-button>
 
-      <dt-recipe-callbar-button>
+      <dt-recipe-callbar-button aria-label="mic on">
         <template #icon>
           <icon-mic-on />
         </template>
@@ -41,9 +38,7 @@
       </dt-recipe-callbar-button>
 
       <dt-recipe-callbar-button disabled>
-        <template #label>
-          Disabled
-        </template>
+        Disabled
         <template #icon>
           <icon-mic-on />
         </template>
@@ -58,9 +53,7 @@
     </h3>
     <div class="d-d-flex d-flow16 d-fw-wrap">
       <dt-recipe-callbar-button active>
-        <template #label>
-          Button
-        </template>
+        Button
         <template #icon>
           <icon-recording />
         </template>
@@ -70,10 +63,10 @@
       </dt-recipe-callbar-button>
 
       <dt-recipe-callbar-button active>
+        No tooltip
         <template #icon>
           <icon-dialpad-glyph />
         </template>
-        No tooltip
       </dt-recipe-callbar-button>
 
       <dt-recipe-callbar-button active>
@@ -83,7 +76,10 @@
         </template>
       </dt-recipe-callbar-button>
 
-      <dt-recipe-callbar-button active>
+      <dt-recipe-callbar-button
+        active
+        aria-label="mic on"
+      >
         <template #icon>
           <icon-mic-on />
         </template>
@@ -96,9 +92,7 @@
         active
         disabled
       >
-        <template #label>
-          Disabled
-        </template>
+        Disabled
         <template #icon>
           <icon-mic-on />
         </template>
@@ -116,9 +110,7 @@
     </div>
     <div class="d-d-flex d-flow16 d-fw-wrap">
       <dt-recipe-callbar-button danger>
-        <template #label>
-          Button
-        </template>
+        Button
         <template #icon>
           <icon-recording />
         </template>
@@ -128,10 +120,10 @@
       </dt-recipe-callbar-button>
 
       <dt-recipe-callbar-button danger>
+        No tooltip
         <template #icon>
           <icon-dialpad-glyph />
         </template>
-        No tooltip
       </dt-recipe-callbar-button>
 
       <dt-recipe-callbar-button danger>
@@ -141,7 +133,10 @@
         </template>
       </dt-recipe-callbar-button>
 
-      <dt-recipe-callbar-button danger>
+      <dt-recipe-callbar-button
+        danger
+        aria-label="mic on"
+      >
         <template #icon>
           <icon-mic-on />
         </template>
@@ -154,9 +149,7 @@
         disabled
         danger
       >
-        <template #label>
-          Disabled
-        </template>
+        Disabled
         <template #icon>
           <icon-mic-on />
         </template>
@@ -174,9 +167,7 @@
         active
         danger
       >
-        <template #label>
-          Button
-        </template>
+        Button
         <template #icon>
           <icon-recording />
         </template>
@@ -189,10 +180,10 @@
         active
         danger
       >
+        No tooltip
         <template #icon>
           <icon-dialpad-glyph />
         </template>
-        No tooltip
       </dt-recipe-callbar-button>
 
       <dt-recipe-callbar-button
@@ -208,6 +199,7 @@
       <dt-recipe-callbar-button
         active
         danger
+        aria-label="mic on"
       >
         <template #icon>
           <icon-mic-on />
@@ -222,9 +214,7 @@
         disabled
         danger
       >
-        <template #label>
-          Disabled
-        </template>
+        Disabled
         <template #icon>
           <icon-mic-on />
         </template>
@@ -238,7 +228,10 @@
       Rounded
     </h3>
     <div class="d-d-flex d-flow16 d-fw-wrap">
-      <dt-recipe-callbar-button circle>
+      <dt-recipe-callbar-button
+        circle
+        aria-label="recording"
+      >
         <template #icon>
           <icon-recording />
         </template>
@@ -250,6 +243,7 @@
       <dt-recipe-callbar-button
         circle
         active
+        aria-label="person"
       >
         <template #icon>
           <icon-person />
@@ -262,6 +256,7 @@
       <dt-recipe-callbar-button
         circle
         danger
+        aria-label="play"
       >
         <template #icon>
           <icon-play />
@@ -275,6 +270,7 @@
         circle
         active
         danger
+        aria-label="star"
       >
         <template #icon>
           <icon-star />
@@ -287,29 +283,13 @@
       <dt-recipe-callbar-button
         circle
         disabled
+        aria-label="dialpad"
       >
         <template #icon>
           <icon-dialpad-glyph />
         </template>
         <template #tooltip>
           Rounded button
-        </template>
-      </dt-recipe-callbar-button>
-    </div>
-
-    <h3>
-      Button with popover
-    </h3>
-    <div class="d-d-flex d-flow16 d-fw-wrap">
-      <dt-recipe-callbar-button popover>
-        <template #label>
-          Button
-        </template>
-        <template #icon>
-          <icon-ai />
-        </template>
-        <template #tooltip>
-          Tooltip
         </template>
       </dt-recipe-callbar-button>
     </div>

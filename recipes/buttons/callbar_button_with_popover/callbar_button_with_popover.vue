@@ -13,12 +13,14 @@
     v-bind="$attrs"
     @opened="onModalIsOpened"
   >
-    <template #anchor>
+    <template #anchor="anchorProps">
       <div class="dt-recipe--callbar-button-with-popover--button">
         <dt-recipe-callbar-button
+          :aria-label="ariaLabel"
           :disabled="disabled"
           :active="active"
           :danger="danger"
+          v-bind="anchorProps"
           class="dt-recipe--callbar-button-with-popover--main-button"
           @click="buttonClick"
         >
@@ -38,6 +40,7 @@
           importance="clear"
           size="lg"
           class="dt-recipe--callbar-button-with-popover--arrow"
+          :aria-label="arrowButtonLabel"
           :active="open"
           @click="arrowClick"
         >
@@ -88,6 +91,22 @@ export default {
       type: String,
       default () {
         return utils.getUniqueString();
+      },
+    },
+
+    ariaLabel: {
+      type: String,
+      default: null,
+      validator: (label) => {
+        return label || this.$slots.default;
+      },
+    },
+
+    arrowButtonLabel: {
+      type: Object,
+      required: true,
+      validator: (label) => {
+        return !!label;
       },
     },
 

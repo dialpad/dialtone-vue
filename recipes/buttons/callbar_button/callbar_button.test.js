@@ -28,6 +28,7 @@ describe('DtRecipeCallbarButton Tests', function () {
   let attrs = {};
   let slots = {};
   let provide = {};
+  let listeners = {};
 
   // Helpers
   const _setChildWrappers = () => {
@@ -41,6 +42,7 @@ describe('DtRecipeCallbarButton Tests', function () {
       attrs,
       slots,
       provide,
+      listeners,
       localVue: this.localVue,
     });
     _setChildWrappers();
@@ -65,6 +67,7 @@ describe('DtRecipeCallbarButton Tests', function () {
     attrs = {};
     slots = {};
     provide = {};
+    listeners = {};
     wrapper.destroy();
   });
   after(function () {
@@ -114,10 +117,15 @@ describe('DtRecipeCallbarButton Tests', function () {
 
   describe('Interactivity Tests', function () {
     describe('When clicking on the button', function () {
-      it('should emit a click event', async function () {
-        await button.trigger('click');
-        const clickEvents = wrapper.emitted().click;
-        assert.equal(clickEvents.length, 1);
+      it('should call the click event listener', async function () {
+        const clickStub = sinon.stub();
+        listeners = { click: clickStub };
+        _setWrappers();
+
+        await button.find('button').trigger('click');
+        await wrapper.vm.$nextTick();
+
+        assert.isTrue(clickStub.called);
       });
     });
   });

@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtRecipeCallbarButton from './callbar_button';
 import DtRecipeCallbarButtonMdx from './callbar_button.mdx';
 import DtRecipeCallbarButtonDefaultTemplate from './callbar_button_default.story.vue';
@@ -36,12 +36,15 @@ export const argTypesData = {
   icon: {
     name: 'icon',
     description: 'Slot for button icon',
-    control: 'text',
     table: {
       category: 'slots',
       type: {
         summary: 'VNode',
       },
+    },
+    control: {
+      type: 'select',
+      options: getIconNames(),
     },
   },
   tooltip: {
@@ -75,7 +78,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/Buttons/DtRecipeCallbarButton',
+  title: 'Recipes/Buttons/Callbar Button',
   component: DtRecipeCallbarButton,
   args: argsData,
   argTypes: argTypesData,
@@ -109,6 +112,8 @@ Default.args = {};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
+Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 
 export const Callbar = CallbarTemplate.bind({});
 Callbar.args = {};
+Callbar.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };

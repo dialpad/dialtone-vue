@@ -1,11 +1,10 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
   <div class="d-stack16">
     <h3>
       Call Bar Buttons
     </h3>
     <div class="d-d-flex d-flow16 d-fw-wrap">
-      <dt-recipe-callbar-button-with-popover>
+      <dt-recipe-callbar-button-with-popover arrow-button-label="Open popover">
         Button
         <template #icon>
           <icon-recording />
@@ -21,7 +20,10 @@
         </template>
       </dt-recipe-callbar-button-with-popover>
 
-      <dt-recipe-callbar-button-with-popover>
+      <dt-recipe-callbar-button-with-popover
+        arrow-button-label="Open popover"
+        aria-label="Icon only"
+      >
         <template #icon>
           <icon-mic-on />
         </template>
@@ -36,7 +38,10 @@
         </template>
       </dt-recipe-callbar-button-with-popover>
 
-      <dt-recipe-callbar-button-with-popover disabled>
+      <dt-recipe-callbar-button-with-popover
+        disabled
+        arrow-button-label="Open popover"
+      >
         Disabled
         <template #icon>
           <icon-mic-on />
@@ -57,7 +62,10 @@
       Active Call Bar Buttons
     </h3>
     <div class="d-d-flex d-flow16 d-fw-wrap">
-      <dt-recipe-callbar-button-with-popover active>
+      <dt-recipe-callbar-button-with-popover
+        active
+        arrow-button-label="Open popover"
+      >
         Button
         <template #icon>
           <icon-recording />
@@ -73,7 +81,11 @@
         </template>
       </dt-recipe-callbar-button-with-popover>
 
-      <dt-recipe-callbar-button-with-popover active>
+      <dt-recipe-callbar-button-with-popover
+        active
+        arrow-button-label="Open popover"
+        aria-label="Icon only"
+      >
         <template #icon>
           <icon-mic-on />
         </template>
@@ -91,6 +103,7 @@
       <dt-recipe-callbar-button-with-popover
         active
         disabled
+        arrow-button-label="Open popover"
       >
         Disabled
         <template #icon>
