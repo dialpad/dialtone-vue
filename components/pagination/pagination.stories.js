@@ -30,6 +30,24 @@ export const argTypesData = {
       type: 'number',
     },
   },
+  ariaLabel: {
+    defaultValue: 'pagination',
+    control: {
+      type: 'text',
+    },
+  },
+  prevAriaLabel: {
+    defaultValue: 'previous',
+    control: {
+      type: 'text',
+    },
+  },
+  nextAriaLabel: {
+    defaultValue: 'next',
+    control: {
+      type: 'text',
+    },
+  },
 
   // Action Event Handlers
   onChange: {
@@ -84,12 +102,12 @@ Default.parameters = {
     :total-pages="totalPages"
     :active-page="activePage"
     :max-visible="maxVisible"
-    :aria-label="'pagination'"
-    :prev-aria-label="'previous'"
-    :next-aria-label="'next'"
+    :aria-label="ariaLabel"
+    :prev-aria-label="prevAriaLabel"
+    :next-aria-label="nextAriaLabel"
     :page-number-aria-label="getPageNumberAriaLabel"
     @change="onChange"
-  />    `,
+  />   `,
     },
   },
 };

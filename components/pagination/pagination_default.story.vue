@@ -3,9 +3,9 @@
     :total-pages="totalPages"
     :active-page="activePage"
     :max-visible="maxVisible"
-    :aria-label="'pagination'"
-    :prev-aria-label="'previous'"
-    :next-aria-label="'next'"
+    :aria-label="ariaLabel"
+    :prev-aria-label="prevAriaLabel"
+    :next-aria-label="nextAriaLabel"
     :page-number-aria-label="getPageNumberAriaLabel"
     @change="onChange"
   />
