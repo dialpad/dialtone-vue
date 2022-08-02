@@ -140,14 +140,14 @@ export default {
       }
 
       const start = this.maxVisible - 1;
-      const end = this.totalPages - start;
+      const end = this.totalPages - start + 1;
 
-      if (this.currentPage <= start) {
+      if (this.currentPage < start) {
         return [...this.range(1, start), '...', this.totalPages];
       }
 
       if (this.currentPage > end) {
-        return [1, '...', ...this.range(end + 1, this.totalPages)];
+        return [1, '...', ...this.range(end, this.totalPages)];
       }
 
       // rounding to the nearest odd according to the maxlength to always show the page number in the middle.
