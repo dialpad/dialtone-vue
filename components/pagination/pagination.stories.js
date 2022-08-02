@@ -84,11 +84,12 @@ Default.parameters = {
     :total-pages="totalPages"
     :active-page="activePage"
     :max-visible="maxVisible"
+    :aria-label="'pagination'"
     :prev-aria-label="'previous'"
     :next-aria-label="'next'"
     :page-number-aria-label="getPageNumberAriaLabel"
     @change="onChange"
-  />      `,
+  />    `,
     },
   },
 };
@@ -100,13 +101,14 @@ Variants.parameters = {
   docs: {
     source: {
       code: `
-  <div class="d-divide-y d-divide-purple-400">
+ <div class="d-divide-y d-divide-purple-400">
     <div class="d-m32">
       <p class="d-my16 d-fs14 d-fw-bold">
         Separator in the end
       </p>
       <dt-pagination
         :total-pages="10"
+        :aria-label="'pagination'"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
         :page-number-aria-label="getPageNumberAriaLabel"
@@ -119,6 +121,7 @@ Variants.parameters = {
       <dt-pagination
         :total-pages="15"
         :active-page="13"
+        :aria-label="'pagination'"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
         :page-number-aria-label="getPageNumberAriaLabel"
@@ -131,6 +134,7 @@ Variants.parameters = {
       <dt-pagination
         :total-pages="10"
         :active-page="5"
+        :aria-label="'pagination'"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
         :page-number-aria-label="getPageNumberAriaLabel"

@@ -1,5 +1,8 @@
 <template>
-  <nav class="d-d-flex d-fd-row d-gg2 d-ai-center">
+  <nav
+    :aria-label="ariaLabel"
+    class="d-d-flex d-fd-row d-gg2 d-ai-center"
+  >
     <dt-button
       class="d-h32 d-w32"
       data-qa="dt-pagination-prev"
@@ -67,6 +70,14 @@ export default {
 
   props: {
     /**
+     * Descriptive label for the pagination content.
+     */
+    ariaLabel: {
+      type: String,
+      required: true,
+    },
+
+    /**
      * The total number of the pages
      */
     totalPages: {
@@ -108,7 +119,9 @@ export default {
     },
 
     /**
-     * Determines the max pages to be shown in the list, defaults to 5 and expected to be odd.
+     * Determines the max pages to be shown in the list. Using an odd number is recommended.
+     * If an even number is given, then it will be rounded down to the nearest odd number to always
+     * keep current page in the middle when current page is in the mid-range.
      */
     maxVisible: {
       type: Number,

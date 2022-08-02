@@ -6,6 +6,7 @@
       </p>
       <dt-pagination
         :total-pages="10"
+        :aria-label="'pagination'"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
         :page-number-aria-label="getPageNumberAriaLabel"
@@ -18,6 +19,7 @@
       <dt-pagination
         :total-pages="15"
         :active-page="13"
+        :aria-label="'pagination'"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
         :page-number-aria-label="getPageNumberAriaLabel"
@@ -30,6 +32,7 @@
       <dt-pagination
         :total-pages="10"
         :active-page="5"
+        :aria-label="'pagination'"
         :prev-aria-label="'previous'"
         :next-aria-label="'next'"
         :page-number-aria-label="getPageNumberAriaLabel"

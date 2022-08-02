@@ -3,6 +3,7 @@
     :total-pages="totalPages"
     :active-page="activePage"
     :max-visible="maxVisible"
+    :aria-label="'pagination'"
     :prev-aria-label="'previous'"
     :next-aria-label="'next'"
     :page-number-aria-label="getPageNumberAriaLabel"

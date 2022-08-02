@@ -12,6 +12,7 @@ const basePropsData = {
   totalPages: 5,
   prevAriaLabel: 'previous',
   nextAriaLabel: 'next',
+  ariaLabel: 'pagination',
   pageNumberAriaLabel: getPageNumberAriaLabel,
 };
 
