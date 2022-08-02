@@ -1,9 +1,12 @@
 <template>
-  <div class="d-d-flex d-fd-row d-gg2 d-ai-center">
+  <nav
+    :aria-label="ariaLabel"
+    class="d-d-flex d-fd-row d-gg2 d-ai-center"
+  >
     <dt-button
       class="d-h32 d-w32"
       data-qa="dt-pagination-prev"
-      :aria-label="ariaLabelPrev"
+      :aria-label="prevAriaLabel"
       :importance="isFirstPage ? 'primary' : 'clear'"
       :disabled="isFirstPage"
       @click="changePage(currentPage - 1)"
@@ -14,18 +17,20 @@
     </dt-button>
     <div
       v-for="(page, index) in pages"
-      :key="`page-number-${page}-${index}`"
+      :key="`page-${page}-${index}`"
     >
+      <!-- eslint-disable vue/no-bare-strings-in-template -->
       <div
         v-if="isNaN(Number(page))"
         data-qa="dt-pagination-separator"
         class="d-h32 d-w32 d-d-flex d-ai-center d-jc-center"
       >
-        ...
+        …
       </div>
+      <!-- eslint-enable vue/no-bare-strings-in-template -->
       <dt-button
         v-else
-        :aria-label="`page-number-${page}`"
+        :aria-label="pageNumberAriaLabel(page)"
         :importance="currentPage === page ? 'primary' : 'clear'"
         class="d-h32 d-w32"
         label-class="d-fs14"
@@ -37,7 +42,7 @@
     <dt-button
       class="d-h32 d-w32"
       data-qa="dt-pagination-next"
-      :aria-label="ariaLabelNext"
+      :aria-label="nextAriaLabel"
       :disabled="isLastPage"
       :importance="isLastPage ? 'primary' : 'clear'"
       @click="changePage(currentPage + 1)"
@@ -46,7 +51,7 @@
         <icon-chevron-right />
       </template>
     </dt-button>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -65,10 +70,43 @@ export default {
 
   props: {
     /**
+     * Descriptive label for the pagination content.
+     */
+    ariaLabel: {
+      type: String,
+      required: true,
+    },
+
+    /**
      * The total number of the pages
      */
     totalPages: {
       type: Number,
+      required: true,
+    },
+
+    /**
+     * Descriptive label for the previous button.
+     */
+    prevAriaLabel: {
+      type: String,
+      required: true,
+    },
+
+    /**
+     * Descriptive label for the next button.
+     */
+    nextAriaLabel: {
+      type: String,
+      required: true,
+    },
+
+    /**
+     * A method that will be called to get the aria label of each page.
+     */
+
+    pageNumberAriaLabel: {
+      type: Function,
       required: true,
     },
 
@@ -81,31 +119,14 @@ export default {
     },
 
     /**
-     * Determines the max pages to be shown in the list, defaults to 5 and expected to be odd.
+     * Determines the max pages to be shown in the list. Using an odd number is recommended.
+     * If an even number is given, then it will be rounded down to the nearest odd number to always
+     * keep current page in the middle when current page is in the mid-range.
      */
     maxVisible: {
       type: Number,
       default: 5,
     },
-
-    /**
-     * Descriptive label for the previous button.
-     * If this prop is unset the content in the default slot will be used as an aria-label.
-     */
-    ariaLabelPrev: {
-      type: String,
-      default: 'previous',
-    },
-
-    /**
-     * Descriptive label for the next button.
-     *
-     */
-    ariaLabelNext: {
-      type: String,
-      default: 'next',
-    },
-
   },
 
   emits: ['change'],
@@ -134,14 +155,14 @@ export default {
       }
 
       const start = this.maxVisible - 1;
-      const end = this.totalPages - start;
+      const end = this.totalPages - start + 1;
 
-      if (this.currentPage <= start) {
+      if (this.currentPage < start) {
         return [...this.range(1, start), '...', this.totalPages];
       }
 
       if (this.currentPage > end) {
-        return [1, '...', ...this.range(end + 1, this.totalPages)];
+        return [1, '...', ...this.range(end, this.totalPages)];
       }
 
       // rounding to the nearest odd according to the maxlength to always show the page number in the middle.
