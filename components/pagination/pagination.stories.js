@@ -10,6 +10,9 @@ export const argsData = {
   totalPages: 5,
   activePage: 1,
   maxVisible: 5,
+  ariaLabel: 'pagination',
+  prevAriaLabel: 'previous',
+  nextAriaLabel: 'next',
   onChange: action('change'),
 };
 
@@ -28,6 +31,21 @@ export const argTypesData = {
   maxVisible: {
     control: {
       type: 'number',
+    },
+  },
+  ariaLabel: {
+    control: {
+      type: 'text',
+    },
+  },
+  nextAriaLabel: {
+    control: {
+      type: 'text',
+    },
+  },
+  prevAriaLabel: {
+    control: {
+      type: 'text',
     },
   },
 
@@ -79,14 +97,14 @@ Default.parameters = {
     source: {
       code: `
 <dt-pagination
-    :total-pages="totalPages"
-    :active-page="activePage"
-    :max-visible="maxVisible"
-    :aria-label="'pagination'"
-    :prev-aria-label="'previous'"
-    :next-aria-label="'next'"
+    :aria-label="$attrs.ariaLabel"
+    :total-pages="$attrs.totalPages"
+    :active-page="$attrs.activePage"
+    :max-visible="$attrs.maxVisible"
+    :prev-aria-label="$attrs.prevAriaLabel"
+    :next-aria-label="$attrs.nextAriaLabel"
+    @change="$attrs.onChange"
     :page-number-aria-label="getPageNumberAriaLabel"
-    @change="onChange"
   />    `,
     },
   },

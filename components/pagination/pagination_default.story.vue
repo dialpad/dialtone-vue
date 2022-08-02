@@ -1,11 +1,11 @@
 <template>
   <dt-pagination
+    :aria-label="$attrs.ariaLabel"
     :total-pages="$attrs.totalPages"
     :active-page="$attrs.activePage"
     :max-visible="$attrs.maxVisible"
-    :aria-label="'pagination'"
-    :prev-aria-label="'previous'"
-    :next-aria-label="'next'"
+    :prev-aria-label="$attrs.prevAriaLabel"
+    :next-aria-label="$attrs.nextAriaLabel"
     :page-number-aria-label="getPageNumberAriaLabel"
     @change="$attrs.onChange"
   />
