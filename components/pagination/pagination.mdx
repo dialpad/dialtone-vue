@@ -33,12 +33,27 @@ import { DtPagination } from '@dialpad/dialtone-vue';
 ### Basic
 
 ```html
-<dt-pagination
-  :total-pages="20"
-  :prev-aria-label="$i18n('previous')"
-  :next-aria-label="$i18n('next')"
-  :page-number-aria-label="getPageNumberAriaLabel"
-/>
+<template>
+  <dt-pagination
+    :total-pages="10"
+    :prev-aria-label="$i18n('previous')"
+    :next-aria-label="$i18n('next')"
+    :page-number-aria-label="getPageNumberAriaLabel"
+  />
+</template>
+<script>
+import DtPagination from './pagination';
+
+export default {
+  name: 'DtPaginationDefault',
+  components: { DtPagination },
+  methods: {
+    getPageNumberAriaLabel (page) {
+      return page === this.totalPages ? `Last page ${page}` : `Page ${page}`;
+    },
+  },
+};
+</script>
 ```
 
 ### With active-page
