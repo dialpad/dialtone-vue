@@ -1,5 +1,5 @@
 <template>
-  <div class="d-d-flex d-fd-row d-gg2 d-ai-center">
+  <nav class="d-d-flex d-fd-row d-gg2 d-ai-center">
     <dt-button
       class="d-h32 d-w32"
       data-qa="dt-pagination-prev"
@@ -48,7 +48,7 @@
         <icon-chevron-right />
       </template>
     </dt-button>
-  </div>
+  </nav>
 </template>
 
 <script>
