@@ -1,19 +1,18 @@
 name: Visual Tests
+
 on:
-  pull_request:
-    branches:
-      - staging
-      - staging-vue3
   push:
-    branches:
-      - staging
-      - staging-vue3
+    branches: [ staging, staging-vue3 ]
+
 jobs:
-  deploy:
+  visual_tests:
+
     runs-on: ubuntu-latest
 
     env:
       NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      STORYBOOK_ROOT: ./storybook
+      NODE_MODULES_CACHE_VERSION: v1
 
     steps:
       - name: Check out branch
@@ -24,19 +23,35 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Set npm token
-        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
+      - name: Use Library Cache
+        id: library-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./node_modules/
+            ~/.npm
+          key: ${{ format('{0}-dialtone-vue-library-node-modules-{1}-{2}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles(format('package-lock.json'))) }}
 
-      - name: Install dependencies
+      - name: Use Documentation Cache
+        id: doc-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ env.STORYBOOK_ROOT }}/node_modules/
+          key: ${{ format('{0}-dialtone-vue-documentation-node-modules-{1}-{2}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles(format('{0}/package-lock.json', env.STORYBOOK_ROOT))) }}
+
+      - name: Install Library Dependencies
+        if: steps.library-cache.outputs.cache-hit != 'true'
         run: npm ci
 
-      - name: Install storybook dependencies
+      - name: Install Docs Dependencies
+        if: steps.doc-cache.outputs.cache-hit != 'true'
         run: npm run storybook:install
 
-      - name: Build storybook
+      - name: Build Storybook
         run: npm run storybook:build
 
-      - name: Visual Tests
+      - name: Run Visual Tests
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
         run: npx percy storybook --verbose storybook/compiled
