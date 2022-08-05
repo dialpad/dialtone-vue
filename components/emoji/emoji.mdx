@@ -62,7 +62,10 @@ PNGs for emojis 16px and under, and the premium SVGs for emoji's larger than 16p
 emojis and large emojis with the following functions during initialization of your app:
 
 ```js
-import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from 'dialtone-vue'
+// Note you must import from @dialpad/dialtone-vue/emoji. The emoji module is not included in the main
+// @dialpad/dialtone-vue package due to it's large size. You may wish to consider dynamically importing
+// the emoji module in your application.
+import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge } from '@dialpad/dialtone-vue/emoji'
 
 // 16px and smaller
 setEmojiAssetUrlSmall('https://my.example.website.com/joypixels/svg/unicode/32/', '.png')
@@ -79,7 +82,7 @@ It's possible to provide a custom emoji JSON file ([with this structure](#json-s
 that aren't part of the Unicode standard. To do so, first specify where the assets are and set the raw JSON:
 
 ```js
-import { setCustomEmojiUrl } from 'dialtone-vue'
+import { setCustomEmojiUrl } from '@dialpad/dialtone-vue/emoji'
 // Your local custom emoji JSON file
 import * as customEmojiJson from './data/custom-emoji.json'
 
@@ -96,7 +99,8 @@ setCustomEmojiJson(customEmojiJson);
 </template>
 
 <script>
-import { DtEmoji } from '@dialpad/dialtone-vue';
+import { DtEmoji } from '@dialpad/dialtone-vue/emoji';
+
 export default {
   components: { DtEmoji },
 }
@@ -163,7 +167,7 @@ You may access the full list of supported native emojis and all emoji metadata b
 executing it:
 
 ```js
-import { getEmojiJson } from 'dialtone-vue'
+import { getEmojiJson } from 'dialtone-vue/emoji'
 const emojiData = await getEmojiJson();
 ```
 
@@ -180,7 +184,7 @@ If you have setup a custom emoji json, you can get the resulting json (from the 
 with:
 
 ```js
-import { getEmojiData } from 'dialtone-vue'
+import { getEmojiData } from 'dialtone-vue/emoji'
 ```
 
 ## Accessibility
