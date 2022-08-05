@@ -55,6 +55,9 @@ export default {
       default: false,
     },
 
+    /**
+     * @model checked
+     */
     checked: {
       type: Boolean,
       default: false,
@@ -71,7 +74,16 @@ export default {
     },
   },
 
-  emits: ['change'],
+  emits: [
+    /**
+     * Triggers on state change
+     *
+     * @event change
+     * @type {boolean}
+     * @model change
+     */
+    'change',
+  ],
 
   data () {
     return {

@@ -9,6 +9,7 @@ export default {
   props: {
     /**
      * A provided value for the radio group
+     * @model value
      */
     value: {
       type: [String, Number],
