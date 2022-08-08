@@ -1,13 +1,12 @@
 <template>
   <span :class="skeletonSizeClass">
     <dt-skeleton
-      v-show="emojiDataLoading || imgLoading"
+      v-show="imgLoading"
       :offset="0"
       :class="skeletonSizeClass"
       :shape-option="{ shape: 'square', contentClass: skeletonSizeClass, size: 'auto' }"
     />
     <img
-      v-if="!emojiDataLoading"
       v-show="!imgLoading"
       ref="emojiImg"
       :class="[size, imgClass]"
@@ -88,7 +87,6 @@ export default {
     return {
       emojiData: null,
       imgLoading: false,
-      emojiDataLoading: false,
     };
   },
 
@@ -129,10 +127,8 @@ export default {
 
   watch: {
     code: {
-      handler: async function () {
-        this.emojiDataLoading = true;
-        await this.getEmojiData();
-        this.emojiDataLoading = false;
+      handler: function () {
+        this.getEmojiData();
       },
 
       immediate: true,
@@ -146,8 +142,8 @@ export default {
   },
 
   methods: {
-    async getEmojiData () {
-      this.emojiData = await codeToEmojiData(this.code);
+    getEmojiData () {
+      this.emojiData = codeToEmojiData(this.code);
     },
 
     imageLoaded () {
