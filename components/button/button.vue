@@ -54,8 +54,8 @@ import { LINK_KIND_MODIFIERS } from '../link/link_constants';
 /**
  * Base Vue component for Dialtone Buttons.
  * @displayName DtButton
- * @property {boolean} disabled attribute
- * @property {string} width attribute
+ * @property {Boolean} disabled attribute
+ * @property {String} width attribute
  */
 export default {
   name: 'DtButton',

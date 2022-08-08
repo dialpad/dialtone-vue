@@ -91,6 +91,11 @@ import { MessagesMixin } from '@/common/mixins/input.js';
 import { optionsValidator } from './select_menu_validators.js';
 import { DtValidationMessages } from '../validation_messages';
 
+/**
+ * @property {Boolean} disabled attribute
+ * @property {String} name attribute
+ * @property {String} value attribute
+ */
 export default {
   name: 'DtSelectMenu',
 
