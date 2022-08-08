@@ -41,7 +41,15 @@ export default {
     },
   },
 
-  emits: ['input'],
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'input',
+  ],
 
   data () {
     return {

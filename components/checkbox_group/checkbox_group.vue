@@ -68,7 +68,15 @@ export default {
     },
   },
 
-  emits: ['input'],
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {Array}
+     */
+    'input',
+  ],
 
   data () {
     return {

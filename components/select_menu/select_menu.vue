@@ -207,7 +207,23 @@ export default {
     },
   },
 
-  emits: ['change', 'input'],
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'input',
+
+    /**
+     * Native change event
+     *
+     * @event change
+     * @type {String | Number}
+     */
+    'change',
+  ],
 
   data () {
     return {

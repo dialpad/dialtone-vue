@@ -191,15 +191,15 @@ export default {
 
   emits: [
     /**
-     * Click event
+     * Native button click event
      *
      * @event click
-     * @type {PointerEvent}
+     * @type {PointerEvent | KeyboardEvent}
      */
     'click',
 
     /**
-     * Focus in event
+     * Native button focus in event
      *
      * @event focusin
      * @type {FocusEvent}
@@ -207,7 +207,7 @@ export default {
     'focusin',
 
     /**
-     * Focus out event
+     * Native button focus out event
      *
      * @event focusout
      * @type {FocusEvent}

@@ -96,7 +96,42 @@ export default {
     },
   },
 
-  emits: ['keydown', 'mousemove', 'mouseleave', 'mousedown'],
+  emits: [
+    /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+
+    /**
+     * Key down event
+     *
+     * @event keydown
+     */
+    'keydown',
+
+    /**
+     * Mouse move event
+     *
+     * @event mousemove
+     */
+    'mousemove',
+
+    /**
+     * Mouse leave event
+     *
+     * @event mouseleave
+     */
+    'mouseleave',
+
+    /**
+     * Mouse down event
+     *
+     * @event mousedown
+     */
+    'mousedown',
+  ],
 
   data () {
     return {
