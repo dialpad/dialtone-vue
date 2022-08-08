@@ -30,7 +30,31 @@ export default {
     },
   },
 
-  emits: ['click', 'focusin', 'focusout'],
+  emits: [
+  /**
+   * Native click event
+   *
+   * @event click
+   * @type {PointerEvent | KeyboardEvent}
+   */
+    'click',
+
+    /**
+     * Native focus in event
+     *
+     * @event focusin
+     * @type {FocusEvent}
+     */
+    'focusin',
+
+    /**
+     * Native focus out event
+     *
+     * @event focusout
+     * @type {FocusEvent}
+     */
+    'focusout',
+  ],
 
   data () {
     return {

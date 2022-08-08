@@ -41,6 +41,16 @@ export default {
     },
   },
 
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'input',
+  ],
+
   data () {
     return {
       // wrap values in object to make reactive

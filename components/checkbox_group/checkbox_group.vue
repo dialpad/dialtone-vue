@@ -68,6 +68,16 @@ export default {
     },
   },
 
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {Array}
+     */
+    'input',
+  ],
+
   data () {
     return {
       internalValue: this.selectedValues,

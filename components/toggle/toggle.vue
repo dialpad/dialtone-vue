@@ -76,10 +76,10 @@ export default {
 
   emits: [
     /**
-     * Triggers on state change
+     * Toggle change event
      *
      * @event change
-     * @type {boolean}
+     * @type {Boolean}
      * @model change
      */
     'change',

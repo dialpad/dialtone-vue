@@ -228,7 +228,71 @@ export default {
     },
   },
 
-  emits: ['blur', 'input', 'clear', 'focus', 'focusin', 'focusout', 'update:length', 'update:invalid'],
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {String}
+     */
+    'input',
+
+    /**
+     * Native input blur event
+     *
+     * @event blur
+     * @type {FocusEvent}
+     */
+    'blur',
+
+    /**
+     * Native input clear event
+     *
+     * @event clear
+     */
+    'clear',
+
+    /**
+     * Native input focus event
+     *
+     * @event focus
+     * @type {FocusEvent}
+     */
+    'focus',
+
+    /**
+     * Native input focusin event
+     *
+     * @event focusin
+     * @type {FocusEvent}
+     */
+    'focusin',
+
+    /**
+     *
+     * Native input focusout event
+     *
+     * @event focusout
+     * @type {FocusEvent}
+     */
+    'focusout',
+
+    /**
+     * Length of the input when currentLength prop is not passed
+     *
+     * @event update:length
+     * @type {Number}
+     */
+    'update:length',
+
+    /**
+     * Result of the input validation
+     *
+     * @event update:invalid
+     * @type {Boolean}
+     */
+    'update:invalid',
+  ],
 
   data () {
     return {
