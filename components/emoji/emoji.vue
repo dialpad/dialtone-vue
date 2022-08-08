@@ -76,7 +76,7 @@ export default {
      * Will be read out on a screenreader for this emoji. You must use this prop if you want your emoji to be i18n
      * Compatible as Dialtone Vue will not translate it by itself. If you do not set this prop the aria-label will
      * be set to the english description of the emoji. You can retrieve the description for an emoji yourself via the
-     * getEmojiJson() function
+     * getEmojiData() function
      */
     ariaLabel: {
       type: String,
