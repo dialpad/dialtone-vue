@@ -19,72 +19,87 @@
       appear
       name="d-modal__dialog"
     >
-      <div
-        v-show="show"
-        :class="[
-          'd-modal__dialog',
-          { 'd-modal__dialog--scrollable': fixedHeaderFooter },
-          dialogClass,
-        ]"
-        role="dialog"
-        aria-modal="true"
-        :aria-describedby="describedById"
-        :aria-labelledby="labelledById"
-      >
+      <div>
         <div
-          v-if="$slots.header"
-          :id="labelledById"
-          class="d-modal__header"
-          data-qa="dt-modal-title"
+          v-if="$slots.banner || bannerTitle"
+          data-qa="dt-modal-banner"
+          :class="[
+            'd-modal__banner',
+            bannerClass,
+          ]"
         >
-          <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
-          <slot name="header" />
+          <!-- @slot Slot for the banner, defaults to bannerTitle prop -->
+          <slot name="banner">
+            {{ bannerTitle }}
+          </slot>
         </div>
-        <h2
-          v-else
-          :id="labelledById"
-          class="d-modal__header"
-          data-qa="dt-modal-title"
-        >
-          {{ title }}
-        </h2>
         <div
-          v-if="$slots.default"
-          class="d-modal__content"
-          data-qa="dt-modal-copy"
+          v-show="show"
+          :class="[
+            'd-modal__dialog',
+            { 'd-modal__dialog--scrollable': fixedHeaderFooter },
+            dialogClass,
+          ]"
+          role="dialog"
+          aria-modal="true"
+          :aria-describedby="describedById"
+          :aria-labelledby="labelledById"
         >
-          <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
-          <slot />
+          <div
+            v-if="$slots.header"
+            :id="labelledById"
+            class="d-modal__header"
+            data-qa="dt-modal-title"
+          >
+            <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
+            <slot name="header" />
+          </div>
+          <h2
+            v-else
+            :id="labelledById"
+            class="d-modal__header"
+            data-qa="dt-modal-title"
+          >
+            {{ title }}
+          </h2>
+          <div
+            v-if="$slots.default"
+            class="d-modal__content"
+            data-qa="dt-modal-copy"
+          >
+            <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
+            <slot />
+          </div>
+          <p
+            v-else
+            class="d-modal__content"
+            data-qa="dt-modal-copy"
+          >
+            {{ copy }}
+          </p>
+          <footer
+            v-if="hasFooterSlot"
+            class="d-modal__footer"
+          >
+            <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
+            <slot name="footer" />
+          </footer>
+          <dt-button
+            v-if="!hideClose"
+            class="d-modal__close"
+            circle
+            size="lg"
+            importance="clear"
+            :aria-label="closeButtonProps.ariaLabel"
+            v-bind="closeButtonProps"
+            :kind="kind"
+            @click="close"
+          >
+            <template #icon>
+              <icon-close />
+            </template>
+          </dt-button>
         </div>
-        <p
-          v-else
-          class="d-modal__content"
-          data-qa="dt-modal-copy"
-        >
-          {{ copy }}
-        </p>
-        <footer
-          v-if="hasFooterSlot"
-          class="d-modal__footer"
-        >
-          <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
-          <slot name="footer" />
-        </footer>
-        <dt-button
-          v-if="!hideClose"
-          class="d-modal__close"
-          circle
-          size="lg"
-          importance="clear"
-          :aria-label="closeButtonProps.ariaLabel"
-          v-bind="closeButtonProps"
-          :kind="kind"
-          @click="close"
-        >
-          <template #icon>
-            <icon-close />
-          </template>
-        </dt-button>
       </div>
     </transition>
   </dt-lazy-show>
@@ -167,6 +182,14 @@ export default {
     },
 
     /**
+     * Title text to display in the modal banner.
+     */
+    bannerTitle: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * The theme of the modal.
      * @values default or danger
      * kind - default or danger (https://dialpad.design/components/modal/)
@@ -204,6 +227,16 @@ export default {
      * same api as Vue's built-in handling of the class attribute.
      */
     dialogClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the banner element within the modal.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    bannerClass: {
       type: [String, Object, Array],
       default: '',
     },
