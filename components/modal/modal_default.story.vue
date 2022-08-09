@@ -2,6 +2,7 @@
   <div>
     <dt-modal
       :title="$attrs.title"
+      :banner-title="$attrs.bannerTitle"
       :close-button-props="buttonCloseProps"
       :show="isOpen"
       :kind="$attrs.kind"
@@ -14,6 +15,12 @@
       :fixed-header-footer="$attrs.fixedHeaderFooter"
       @update:show="close"
     >
+      <template
+        v-if="$attrs.banner"
+        #banner
+      >
+        <span v-html="$attrs.banner" />
+      </template>
       <template
         v-if="$attrs.header"
         #header
