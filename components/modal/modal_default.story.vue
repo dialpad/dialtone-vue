@@ -9,6 +9,7 @@
       :size="size"
       :copy="copy"
       :modal-class="modalClass"
+      :banner-class="bannerClass"
       :dialog-class="dialogClass"
       :hide-close="hideClose"
       :labelled-by-id="labelledById"
