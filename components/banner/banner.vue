@@ -134,14 +134,7 @@ export default {
     },
   },
 
-  emits: [
-    /**
-     * Close button click event
-     *
-     * @event close
-     */
-    'close',
-  ],
+  emits: ['close'],
 
   computed: {
     role () {

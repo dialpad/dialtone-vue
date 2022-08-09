@@ -162,16 +162,7 @@ export default {
     },
   },
 
-  emits: [
-    /**
-     * Emitted when tooltip is shown or hidden
-     *
-     * @event shown
-     * @type {Boolean}
-     */
-    'shown',
-    'update:show',
-  ],
+  emits: ['update:show', 'shown'],
 
   data () {
     return {

@@ -69,31 +69,7 @@ export default {
 
   inheritAttrs: false,
 
-  emits: [
-    /**
-     * Native input event
-     *
-     * @event input
-     * @type {Boolean}
-     */
-    'input',
-
-    /**
-     * Native input focusin event
-     *
-     * @event focusin
-     * @property {FocusEvent}
-     */
-    'focusin',
-
-    /**
-     * Native input focusout event
-     *
-     * @event focusout
-     * @property {FocusEvent}
-     */
-    'focusout',
-  ],
+  emits: ['input', 'focusin', 'focusout'],
 
   computed: {
     inputValidationClass () {

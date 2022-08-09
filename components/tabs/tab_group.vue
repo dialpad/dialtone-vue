@@ -119,15 +119,7 @@ export default {
     },
   },
 
-  emits: [
-    /**
-     * Change tab event with the arguments: selected id of the current tab and disabled value
-     *
-     * @event change
-     * @type {Object}
-     */
-    'change',
-  ],
+  emits: ['change'],
 
   data () {
     return {

@@ -131,29 +131,7 @@ export default {
     },
   },
 
-  emits: [
-    /**
-     * Native chip click event
-     *
-     * @event click
-     * @type {PointerEvent | KeyboardEvent}
-     */
-    'click',
-
-    /**
-     * Native chip close event
-     *
-     * @event close
-     */
-    'close',
-
-    /**
-     * Native chip key up event
-     *
-     * @event keyup
-     */
-    'keyup',
-  ],
+  emits: ['click', 'close', 'keyup'],
 
   data () {
     return {

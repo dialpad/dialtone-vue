@@ -28,7 +28,6 @@ export const InputMixin = {
 
     /**
      * The value of the input
-     * @model value
      */
     value: {
       type: [String, Number, Boolean, Object],
@@ -156,7 +155,6 @@ export const CheckableMixin = {
   props: {
     /**
      * Used to set the state of the checkable input
-     * @model checked
      */
     checked: {
       type: Boolean,

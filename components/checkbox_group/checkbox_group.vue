@@ -34,7 +34,6 @@ export default {
 
     /**
      * A provided list of selected values(s) for the checkbox group
-     * @model selectedValues
      */
     selectedValues: {
       type: Array,
@@ -67,16 +66,6 @@ export default {
       default: 'checkbox-group-messages',
     },
   },
-
-  emits: [
-    /**
-     * Native input event
-     *
-     * @event input
-     * @type {Array}
-     */
-    'input',
-  ],
 
   data () {
     return {

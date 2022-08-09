@@ -203,24 +203,7 @@ export default {
     },
   },
 
-  emits: [
-    /**
-     * Event fired when the highlight changes
-     *
-     * @event highlight
-     * @type {Number}
-     */
-    'highlight',
-
-    /**
-     * Emitted when dropdown is shown or hidden
-     *
-     * @event opened
-     * @type {Boolean | Array}
-     */
-    'opened',
-    'update:open',
-  ],
+  emits: ['highlight', 'update:open', 'opened'],
 
   data () {
     return {

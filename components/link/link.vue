@@ -14,10 +14,6 @@
 <script>
 import { LINK_VARIANTS, LINK_KIND_MODIFIERS } from './link_constants.js';
 
-/**
- * @property {String} href attribute
- * @property {String} rel attribute
- */
 export default {
   name: 'DtLink',
 
@@ -34,31 +30,7 @@ export default {
     },
   },
 
-  emits: [
-  /**
-   * Native click event
-   *
-   * @event click
-   * @type {PointerEvent | KeyboardEvent}
-   */
-    'click',
-
-    /**
-     * Native focus in event
-     *
-     * @event focusin
-     * @type {FocusEvent}
-     */
-    'focusin',
-
-    /**
-     * Native focus out event
-     *
-     * @event focusout
-     * @type {FocusEvent}
-     */
-    'focusout',
-  ],
+  emits: ['click', 'focusin', 'focusout'],
 
   data () {
     return {

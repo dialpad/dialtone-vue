@@ -415,16 +415,7 @@ export default {
     },
   },
 
-  emits: [
-    /**
-     * Emitted when popover is shown or hidden
-     *
-     * @event opened
-     * @type {Boolean | Array}
-     */
-    'opened',
-    'update:open',
-  ],
+  emits: ['update:open', 'opened'],
 
   data () {
     return {

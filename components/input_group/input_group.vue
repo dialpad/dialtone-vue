@@ -60,15 +60,6 @@ export default {
     },
   },
 
-  emits: [
-    /**
-     * Native input event
-     *
-     * @event input
-     */
-    'input',
-  ],
-
   data () {
     return {
       internalValue: this.value,

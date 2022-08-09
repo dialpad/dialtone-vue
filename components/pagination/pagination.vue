@@ -129,15 +129,7 @@ export default {
     },
   },
 
-  emits: [
-    /**
-     * Page change event
-     *
-     * @event change
-     * @type {Number}
-     */
-    'change',
-  ],
+  emits: ['change'],
 
   data () {
     return {
