@@ -48,7 +48,7 @@ describe('Dialtone Vue Modal Tests', function () {
     const newCopy = 'test modal copy';
     const newTitle = 'test modal title';
     const newBanner = 'test modal banner';
-    await wrapper.setProps({ title: newTitle, bannerTitle: newBanner, copy: newCopy });
+    await wrapper.setProps({ show: true, title: newTitle, bannerTitle: newBanner, copy: newCopy });
     _setElements();
     assert.equal(copy.text(), newCopy);
     assert.equal(title.text(), newTitle);
@@ -73,6 +73,7 @@ describe('Dialtone Vue Modal Tests', function () {
       localVue: this.localVue,
       propsData: {
         ...basePropsData,
+        show: true,
         copy: 'non-slot copy',
         title: 'non-slot title',
         bannerTitle: 'non-slot banner',
@@ -145,7 +146,7 @@ describe('Dialtone Vue Modal Tests', function () {
     const bannerClass = 'banner-class';
     const bannerTitle = 'title';
 
-    await wrapper.setProps({ bannerTitle, bannerClass });
+    await wrapper.setProps({ show: true, bannerTitle, bannerClass });
 
     _setElements();
     assert.isTrue(banner.classes(bannerClass));
