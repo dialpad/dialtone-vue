@@ -130,7 +130,9 @@ export default {
     },
 
     defaultSlotItems () {
-      return this.$slots.default()[0].children || this.$slots.default();
+      return Array.isArray(this.$slots.default()[0].children)
+        ? this.$slots.default()[0].children
+        : this.$slots.default();
     },
 
     itemCount () {
@@ -139,7 +141,7 @@ export default {
 
     displayedItems () {
       // filtering the slot v-nodes to only display up to maxDisplayed items
-      return this.defaultSlotItems.filter((item, index) => index <= this.maxDisplayed - 1);
+      return this.defaultSlotItems?.filter((item, index) => index <= this.maxDisplayed - 1);
     },
   },
 
