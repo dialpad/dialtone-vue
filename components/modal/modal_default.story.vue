@@ -9,6 +9,7 @@
       :size="$attrs.size"
       :copy="$attrs.copy"
       :modal-class="$attrs.modalClass"
+      :banner-class="$attrs.bannerClass"
       :dialog-class="$attrs.dialogClass"
       :hide-close="$attrs.hideClose"
       :labelled-by-id="$attrs.labelledById"
