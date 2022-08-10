@@ -196,6 +196,7 @@ export default {
     },
 
     activeItemEl () {
+      if (!this.highlightId) return '';
       return this.getListElement().querySelector('#' + this.highlightId);
     },
   },

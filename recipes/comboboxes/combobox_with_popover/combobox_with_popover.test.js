@@ -34,11 +34,9 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     listWrapper = wrapper.find('[data-qa="dt-combobox-list-wrapper"]');
   };
 
-  const _openComboboxPopover = async (_emptyList = undefined) => {
+  const _openComboboxPopover = async () => {
     await wrapper.setProps({ showList: true });
-    wrapper.vm.$refs.combobox.isListEmpty = _emptyList;
-    await wrapper.vm.$refs.combobox.setInitialHighlightIndex();
-    wrapper.vm.$refs.combobox.outsideRenderedListRef = wrapper.vm.$refs.listWrapper;
+    wrapper.vm.$refs.combobox.onOpen(true, wrapper.vm.$refs.listWrapper);
   };
 
   const _mountWrapper = () => {
@@ -65,7 +63,6 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     openedStub = sinon.stub();
     attrs = { onSelect: selectStub, onEscape: escapeStub, onHighlight: highlightStub, onOpened: openedStub };
     _mountWrapper();
-    _setChildWrappers();
   });
 
   // Teardown
@@ -73,6 +70,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     props = baseProps;
     slots = {};
     wrapper.unmount();
+    document.body.innerHTML = '';
   });
 
   after(function () {
@@ -119,7 +117,11 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         props = { ...props, loading: true };
         slots = {
           input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
-          list: `<template #list="{ listProps }"><ol id="list" v-bind="listProps"><li>Item 1</li></ol></template>`,
+          list: `<template #list="{ listProps }">
+                  <ol id="list" v-bind="listProps">
+                    <li role="option">Item 1</li>
+                  </ol>
+                </template>`,
         };
         _mountWrapper();
         await _openComboboxPopover();
@@ -140,10 +142,10 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       beforeEach(async function () {
         slots = {
           input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
-          list: `<template #list="{ listProps }"><ol id="list" v-bind="listProps"></ol></template>`,
+          list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps"></ol></template>',
         };
         _mountWrapper();
-        await _openComboboxPopover(true);
+        await _openComboboxPopover();
         _setChildWrappers();
       });
 
@@ -157,14 +159,15 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     });
   });
 
-  // TODO: Fix accessibility tests once Vue test utils v2 is released with the scoped slots bug fixed
   describe('Accessibility Tests', function () {
     // Test Setup
     beforeEach(async function () {
       slots = {
         input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
         list: `<template #list="{ listProps }">
-                <ol id="list" v-bind="listProps"><li role="option">item1</li><li role="option">item2</li></ol>
+                <ol id="list" v-bind="listProps">
+                  <li role="option">Item 1</li>
+                </ol>
                </template>`,
       };
       _mountWrapper();
@@ -179,9 +182,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When list is expanded', function () {
       beforeEach(async function () {
-        _mountWrapper();
         await _openComboboxPopover();
-        _setChildWrappers();
       });
 
       it('aria-expanded should be "true"', function () {
@@ -209,7 +210,9 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       slots = {
         input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
         list: `<template #list="{ listProps }">
-                <ol id="list" v-bind="listProps"><li role="option">item1</li><li role="option">item2</li></ol>
+                <ol id="list" v-bind="listProps">
+                  <li role="option">Item 1</li>  
+                </ol>
                </template>`,
       };
       _mountWrapper();
@@ -283,7 +286,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       beforeEach(async function () {
         slots = {
           input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
-          list: `<template #list="{ listProps }"><ol id="list" v-bind="listProps" ></ol></template>`,
+          list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps" ></ol></template>',
         };
         _mountWrapper();
         await _openComboboxPopover(true);
@@ -347,7 +350,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When the list is shown', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ showList: true });
+        await _openComboboxPopover();
       });
 
       it('should call listener', function () { assert.isTrue(openedStub.called); });
@@ -356,7 +359,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When the list is closed', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ showList: true });
+        await _openComboboxPopover();
         await wrapper.setProps({ showList: false });
       });
 
