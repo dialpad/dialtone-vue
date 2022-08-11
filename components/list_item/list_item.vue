@@ -98,13 +98,6 @@ export default {
 
   emits: [
     /**
-     * Native click event
-     *
-     * @event click
-     * @type {PointerEvent | KeyboardEvent}
-     */
-
-    /**
      * Key down event
      *
      * @event keydown
