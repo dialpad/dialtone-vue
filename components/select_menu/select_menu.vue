@@ -214,20 +214,20 @@ export default {
 
   emits: [
     /**
-     * Native change event
-     *
-     * @event change
-     * @type {String | Number}
-     */
-    'change',
-
-    /**
-     * Native input event
+     * Input event
      *
      * @event input
      * @type {String | Number}
      */
     'input',
+
+    /**
+     * Change event
+     *
+     * @event change
+     * @type {String | Number}
+     */
+    'change',
   ],
 
   data () {

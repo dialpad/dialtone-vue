@@ -146,7 +146,7 @@ export default {
 
   emits: [
     /**
-     * Select item event
+     * Event fired when item selected
      *
      * @event select
      * @type {Number}
