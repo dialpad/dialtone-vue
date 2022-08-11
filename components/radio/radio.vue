@@ -101,6 +101,7 @@ export default {
      * @property {FocusEvent}
      */
     'focusout',
+
     'click',
   ],
 
