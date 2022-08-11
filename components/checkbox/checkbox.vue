@@ -82,7 +82,7 @@ export default {
      * Native input focusin event
      *
      * @event focusin
-     * @property {FocusEvent}
+     * @type {FocusEvent}
      */
     'focusin',
 
@@ -90,7 +90,7 @@ export default {
      * Native input focusout event
      *
      * @event focusout
-     * @property {FocusEvent}
+     * @type {FocusEvent}
      */
     'focusout',
   ],

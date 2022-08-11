@@ -141,7 +141,7 @@ export default {
     'click',
 
     /**
-     * Native chip close event
+     * Close button click event
      *
      * @event close
      */
@@ -151,6 +151,7 @@ export default {
      * Native chip key up event
      *
      * @event keyup
+     * @type {KeyboardEvent}
      */
     'keyup',
   ],
