@@ -214,6 +214,8 @@ export default {
      */
     'highlight',
 
+    'update:open',
+
     /**
      * Emitted when dropdown is shown or hidden
      *
@@ -221,7 +223,6 @@ export default {
      * @type {Boolean | Array}
      */
     'opened',
-    'update:open',
   ],
 
   data () {

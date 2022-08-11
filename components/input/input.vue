@@ -280,6 +280,8 @@ export default {
      */
     'focusout',
 
+    'update:modelValue',
+
     /**
      * Length of the input when currentLength prop is not passed
      *
@@ -295,7 +297,6 @@ export default {
      * @type {Boolean}
      */
     'update:invalid',
-    'update:modelValue',
   ],
 
   data () {

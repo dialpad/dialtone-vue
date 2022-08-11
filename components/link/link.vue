@@ -33,28 +33,6 @@ export default {
     },
   },
 
-  /**
-   * Emits
-   */
-  /**
-   * Native click event
-   *
-   * @event click
-   * @type {PointerEvent | KeyboardEvent}
-   */
-  /**
-   * Native focus in event
-   *
-   * @event focusin
-   * @type {FocusEvent}
-   */
-  /**
-   * Native focus out event
-   *
-   * @event focusout
-   * @type {FocusEvent}
-   */
-
   data () {
     return {
       LINK_KIND_MODIFIERS,

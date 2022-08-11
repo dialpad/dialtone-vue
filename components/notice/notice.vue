@@ -133,6 +133,7 @@ export default {
      * @event close
      */
     'close',
+    'click',
   ],
 
   computed: {
