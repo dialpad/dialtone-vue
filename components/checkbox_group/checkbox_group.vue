@@ -70,7 +70,7 @@ export default {
 
   emits: [
     /**
-     * Input event
+     * Native input event
      *
      * @event input
      * @type {Array}
