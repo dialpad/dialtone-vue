@@ -101,20 +101,23 @@ export default {
      * Key down event
      *
      * @event keydown
+     * @type {KeyboardEvent}
      */
     'keydown',
 
     /**
-     * Mouse move event
+     * Native mouse move event
      *
      * @event mousemove
+     * @type {MouseEvent}
      */
     'mousemove',
 
     /**
-     * Mouse leave event
+     * Native mouse leave event
      *
      * @event mouseleave
+     * @type {MouseEvent}
      */
     'mouseleave',
 
