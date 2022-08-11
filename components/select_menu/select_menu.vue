@@ -214,7 +214,7 @@ export default {
 
   emits: [
     /**
-     * Input event
+     * Native input event
      *
      * @event input
      * @type {String | Number}
@@ -222,7 +222,7 @@ export default {
     'input',
 
     /**
-     * Change event
+     * Native change event
      *
      * @event change
      * @type {String | Number}
