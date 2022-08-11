@@ -233,7 +233,7 @@ export default {
 
   emits: [
     /**
-     * Native input event
+     * Input event
      *
      * @event input
      * @type {String}
@@ -249,7 +249,7 @@ export default {
     'blur',
 
     /**
-     * Native input clear event
+     * Input clear event
      *
      * @event clear
      */
@@ -272,7 +272,6 @@ export default {
     'focusin',
 
     /**
-     *
      * Native input focusout event
      *
      * @event focusout

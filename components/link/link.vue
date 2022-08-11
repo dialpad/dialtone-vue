@@ -35,12 +35,12 @@ export default {
   },
 
   emits: [
-  /**
-   * Native click event
-   *
-   * @event click
-   * @type {PointerEvent | KeyboardEvent}
-   */
+    /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
     'click',
 
     /**

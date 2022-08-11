@@ -62,7 +62,7 @@ export default {
 
   emits: [
     /**
-     * Native input event
+     * Input event
      *
      * @event input
      */

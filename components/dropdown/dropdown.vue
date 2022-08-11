@@ -213,7 +213,7 @@ export default {
     'highlight',
 
     /**
-     * Emitted when dropdown is shown or hidden
+     * Event fired when dropdown is shown or hidden
      *
      * @event opened
      * @type {Boolean | Array}
