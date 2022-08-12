@@ -19,7 +19,9 @@ describe('Dialtone vue Collapsible Component Tests', function () {
 
   // Environment
   const props = {};
-  const attrs = {};
+  const attrs = {
+    css: false, // Important attr to let test-utils fire the (after-enter and after-leave) events correctly
+  };
   const slots = { anchor, content };
   // const scopedSlots = { anchor };
 
@@ -32,7 +34,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   const _setChildWrappers = () => {
     anchorElement = wrapper.find('[data-qa="anchor-element"]');
     contentElement = wrapper.find('[data-qa="content-element"]');
-    contentWrapperElement = wrapper.findComponent({ ref: 'contentWrapper' });
+    contentWrapperElement = wrapper.getComponent('.d-dt-collapsible__content');
   };
 
   const _mountWrapper = () => {
