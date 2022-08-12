@@ -75,9 +75,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtCollapsibleDefaultStory,
 );
 
@@ -85,5 +84,4 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   maxWidth: '512px',
-  // anchorText: 'Click me to toggle Content',
 };
