@@ -11,6 +11,7 @@ const baseProps = {
   listId: 'list',
   loading: false,
   showList: null,
+  emptyStateMessage: 'No matches found.',
 };
 
 describe('DtRecipeComboboxWithPopover Tests', function () {
@@ -37,6 +38,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   const _openComboboxPopover = async () => {
     await wrapper.setProps({ showList: true });
     wrapper.vm.$refs.combobox.onOpen(true, wrapper.vm.$refs.listWrapper);
+    await wrapper.vm.$nextTick();
   };
 
   const _mountWrapper = () => {
@@ -44,6 +46,11 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       props,
       slots,
       attrs,
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
       attachTo: document.body,
     });
   };
@@ -97,11 +104,11 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     describe('When a list is provided', function () {
       // Test Setup
       beforeEach(async function () {
-        props = { ...props, showList: true };
         slots = {
           list: '<ol id="list"></ol>',
         };
         _mountWrapper();
+        await _openComboboxPopover();
         _setChildWrappers();
       });
 
@@ -286,10 +293,10 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       beforeEach(async function () {
         slots = {
           input: '<template #input="{ inputProps }"><input id="input" v-bind="inputProps" /></template>',
-          list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps" ></ol></template>',
+          list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps" /></template>',
         };
         _mountWrapper();
-        await _openComboboxPopover(true);
+        await _openComboboxPopover();
         _setChildWrappers();
       });
 
@@ -382,6 +389,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         await wrapper.trigger('keydown.enter');
       });
 
+      it('should call listener', function () { assert.isTrue(selectStub.called); });
       it('should emit select event', function () { assert.equal(wrapper.emitted().select.length, 1); });
     });
 
