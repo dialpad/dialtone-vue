@@ -117,6 +117,7 @@ import {
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_ROLES,
   POPOVER_INITIAL_FOCUS_STRINGS,
+  POPOVER_STICKY_VALUES,
 } from './popover_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
@@ -314,6 +315,30 @@ export default {
     },
 
     /**
+     * If set to false the dialog will display over top of the anchor when there is insufficient space.
+     * If set to true it will never move from its position relative to the anchor and will clip instead.
+     */
+    tether: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * If the popover sticks to the anchor. This is usually not needed, but can be needed
+     * if the reference element's position is animating, or to automatically update the popover
+     * position in those cases the DOM layout changes the reference element's position.
+     * `true` enables it, `reference` only checks the "reference" rect for changes and `popper` only
+     * checks the "popper" rect for changes.
+     */
+    sticky: {
+      type: [Boolean, String],
+      default: false,
+      validator: (sticky) => {
+        return POPOVER_STICKY_VALUES.includes(sticky);
+      },
+    },
+
+    /**
      * Determines maximum height for the popover before overflow.
      * Possible units rem|px|em
      */
@@ -390,7 +415,16 @@ export default {
     },
   },
 
-  emits: ['update:open', 'opened'],
+  emits: [
+    /**
+     * Emitted when popover is shown or hidden
+     *
+     * @event opened
+     * @type {Boolean | Array}
+     */
+    'opened',
+    'update:open',
+  ],
 
   data () {
     return {
@@ -427,16 +461,25 @@ export default {
 
     offset (offset) {
       this.tip.setProps({
-        offset: offset,
+        offset,
       });
     },
 
-    fallbackPlacements (fallbackPlacements) {
+    sticky (sticky) {
       this.tip.setProps({
-        popperOptions: getPopperOptions({
-          fallbackPlacements: fallbackPlacements,
-          hasHideModifierEnabled: true,
-        }),
+        sticky,
+      });
+    },
+
+    fallbackPlacements () {
+      this.tip.setProps({
+        popperOptions: this.popperOptions(),
+      });
+    },
+
+    tether () {
+      this.tip.setProps({
+        popperOptions: this.popperOptions(),
       });
     },
 
@@ -478,13 +521,11 @@ export default {
       window.addEventListener('resize', this.onResize);
     }
     this.tip = createTippy(this.anchorEl, {
-      popperOptions: getPopperOptions({
-        fallbackPlacements: this.fallbackPlacements,
-        hasHideModifierEnabled: true,
-      }),
+      popperOptions: this.popperOptions(),
       contentElement: this.popoverContentEl,
       placement: this.placement,
       offset: this.offset,
+      sticky: this.sticky,
       appendTo: document.body,
       interactive: true,
       trigger: 'manual',
@@ -514,6 +555,14 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+    popperOptions () {
+      return getPopperOptions({
+        fallbackPlacements: this.fallbackPlacements,
+        tether: this.tether,
+        hasHideModifierEnabled: true,
+      });
+    },
+
     validateProps () {
       if (this.modal && this.initialFocusElement === 'none') {
         console.error('If the popover is modal you must set the ' +

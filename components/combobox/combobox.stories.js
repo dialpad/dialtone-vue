@@ -11,6 +11,7 @@ export const argsData = {
   onHighlight: action('highlight'),
   onSelect: action('select'),
   onOpened: action('opened'),
+  emptyStateMessage: 'No matches found.',
 };
 
 export const argTypesData = {
@@ -80,6 +81,13 @@ export const argTypesData = {
       },
     },
   },
+  loading: {
+    table: {
+      defaultValue: {
+        summary: false,
+      },
+    },
+  },
 
   // Action Event Handlers
   onEscape: {
@@ -129,6 +137,14 @@ export const argTypesData = {
       },
     },
   },
+
+  // Hide items because its used for storybook only
+  // not a real component prop.
+  items: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Story Collection
@@ -160,4 +176,24 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 
 // Stories
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
+Default.args = {
+  items: [
+    { name: 'combobox item 1', id: 1 },
+    { name: 'combobox item 2', id: 2 },
+    { name: 'combobox item 3', id: 3 },
+    { name: 'combobox item 4', id: 4 },
+    { name: 'combobox item 5', id: 5 },
+    { name: 'combobox item 6', id: 6 },
+    { name: 'combobox item 7', id: 7 },
+    { name: 'combobox item 8', id: 8 },
+    { name: 'combobox item 9', id: 9 },
+    { name: 'combobox item 10', id: 10 },
+    { name: 'combobox item 11', id: 11 },
+    { name: 'combobox item 12', id: 12 },
+  ],
+};
+
+export const Empty = DefaultTemplate.bind({});
+Empty.args = {
+  items: [],
+};

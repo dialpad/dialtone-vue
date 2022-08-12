@@ -70,6 +70,7 @@ export default {
      */
     closeButtonProps: {
       type: Object,
+      default: function () { return { ariaLabel: 'close' }; },
       validator: (props) => {
         return !!props.ariaLabel;
       },
@@ -130,7 +131,30 @@ export default {
     },
   },
 
-  emits: ['click', 'close', 'keyup'],
+  emits: [
+    /**
+     * Native chip click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+
+    /**
+     * Close button click event
+     *
+     * @event close
+     */
+    'close',
+
+    /**
+     * Native chip key up event
+     *
+     * @event keyup
+     * @type {KeyboardEvent}
+     */
+    'keyup',
+  ],
 
   data () {
     return {

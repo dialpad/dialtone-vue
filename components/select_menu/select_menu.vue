@@ -91,6 +91,11 @@ import { MessagesMixin } from '@/common/mixins/input.js';
 import { optionsValidator } from './select_menu_validators.js';
 import { DtValidationMessages } from '../validation_messages';
 
+/**
+ * @property {Boolean} disabled attribute
+ * @property {String} name attribute
+ * @property {String} value attribute
+ */
 export default {
   name: 'DtSelectMenu',
 
@@ -207,6 +212,24 @@ export default {
     },
   },
 
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'input',
+
+    /**
+     * Native change event
+     *
+     * @event change
+     * @type {String | Number}
+     */
+    'change',
+  ],
+
   data () {
     return {
       LABEL_SIZE_MODIFIERS,
@@ -223,7 +246,6 @@ export default {
             Check if any usages of this component leverage $listeners and either remove if unused or scope the removal
             and migration prior to upgrading to Vue 3.x
         */
-        // eslint-disable-next-line vue/no-deprecated-dollar-listeners-api
         ...this.$listeners,
         /*
          * Override input listener to as no-op. Prevents parent input listeners from being passed through onto the input

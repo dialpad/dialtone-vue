@@ -4,7 +4,7 @@
     :content-width="contentWidth"
     :open="open"
     :placement="placement"
-    initial-focus-element="first"
+    :initial-focus-element="openedWithKeyboard ? 'first' : 'dialog'"
     :fallback-placements="fallbackPlacements"
     padding="none"
     role="menu"
@@ -203,7 +203,24 @@ export default {
     },
   },
 
-  emits: ['highlight', 'update:open', 'opened'],
+  emits: [
+    /**
+     * Event fired when the highlight changes
+     *
+     * @event highlight
+     * @type {Number}
+     */
+    'highlight',
+
+    /**
+     * Event fired when dropdown is shown or hidden
+     *
+     * @event opened
+     * @type {Boolean | Array}
+     */
+    'opened',
+    'update:open',
+  ],
 
   data () {
     return {

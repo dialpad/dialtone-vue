@@ -1,13 +1,12 @@
 <template>
   <span :class="skeletonSizeClass">
     <dt-skeleton
-      v-show="emojiDataLoading || imgLoading"
+      v-show="imgLoading"
       :offset="0"
       :class="skeletonSizeClass"
       :shape-option="{ shape: 'square', contentClass: skeletonSizeClass, size: 'auto' }"
     />
     <img
-      v-if="!emojiDataLoading"
       v-show="!imgLoading"
       ref="emojiImg"
       :class="[size, imgClass]"
@@ -30,8 +29,9 @@ import {
   emojiFileExtensionSmall,
   emojiImageUrlLarge,
   emojiFileExtensionLarge,
+  customEmojiAssetUrl,
 } from '@/common/emoji';
-import { DtSkeleton } from '@/components/skeleton';
+import { DtSkeleton } from '../skeleton';
 
 export default {
   name: 'DtEmoji',
@@ -43,7 +43,8 @@ export default {
   props: {
     /**
       * Supports shortcode ex: :smile: or unicode ex: 😄. Will display the resulting emoji.
-      * See https://emojipedia.org/joypixels/ for all supported shortcode/unicode.
+      * See https://emojipedia.org/joypixels/ for all supported shortcode/unicode or the docs
+      * for setting up custom emojis.
       */
     code: {
       type: String,
@@ -74,7 +75,7 @@ export default {
      * Will be read out on a screenreader for this emoji. You must use this prop if you want your emoji to be i18n
      * Compatible as Dialtone Vue will not translate it by itself. If you do not set this prop the aria-label will
      * be set to the english description of the emoji. You can retrieve the description for an emoji yourself via the
-     * getEmojiJson() function
+     * getEmojiData() function
      */
     ariaLabel: {
       type: String,
@@ -86,7 +87,6 @@ export default {
     return {
       emojiData: null,
       imgLoading: false,
-      emojiDataLoading: false,
     };
   },
 
@@ -97,6 +97,12 @@ export default {
 
     emojiSrc () {
       if (!this.emojiDataValid) { return 'invalid'; }
+
+      // custom emoji
+      if (this.emojiData?.custom) {
+        return customEmojiAssetUrl + this.emojiData.key + this.emojiData.extension;
+      }
+
       if (['d-svg--size14', 'd-svg--size16'].includes(this.size)) {
         return emojiImageUrlSmall + this.emojiData.key + emojiFileExtensionSmall;
       } else {
@@ -106,7 +112,7 @@ export default {
 
     emojiAlt () {
       if (!this.emojiDataValid) { return undefined; }
-      return stringToUnicode(this.emojiData.unicode_output);
+      return this.emojiData.unicode_output ? stringToUnicode(this.emojiData.unicode_output) : this.emojiData.name;
     },
 
     emojiLabel () {
@@ -121,10 +127,8 @@ export default {
 
   watch: {
     code: {
-      handler: async function () {
-        this.emojiDataLoading = true;
-        await this.getEmojiData();
-        this.emojiDataLoading = false;
+      handler: function () {
+        this.getEmojiData();
       },
 
       immediate: true,
@@ -138,8 +142,8 @@ export default {
   },
 
   methods: {
-    async getEmojiData () {
-      this.emojiData = await codeToEmojiData(this.code);
+    getEmojiData () {
+      this.emojiData = codeToEmojiData(this.code);
     },
 
     imageLoaded () {

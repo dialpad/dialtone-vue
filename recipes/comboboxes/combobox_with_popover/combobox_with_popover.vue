@@ -1,6 +1,7 @@
 <template>
   <dt-combobox
     ref="combobox"
+    :loading="loading"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
@@ -16,7 +17,7 @@
       <div
         :id="externalAnchor"
         ref="input"
-        @focusin="showComboboxList"
+        @focusin="onFocusIn"
         @focusout="onFocusOut"
         @keydown.up="openOnArrowKeyPress($event)"
         @keydown.down="openOnArrowKeyPress($event)"
@@ -24,16 +25,19 @@
         <slot
           name="input"
           :input-props="inputProps"
+          :on-input="handleDisplayList"
         />
       </div>
     </template>
-    <template #list="{ opened, listProps, clearHighlightIndex }">
-      <!-- eslint-disable vue/no-deprecated-v-bind-sync -->
+    <template #list="{ opened, listProps, clearHighlightIndex, isLoading, isListEmpty }">
       <dt-popover
+        ref="popover"
         :open.sync="isListShown"
-        :hide-on-click="true"
+        :hide-on-click="showList === null"
         :max-height="maxHeight"
         :max-width="maxWidth"
+        :offset="popoverOffset"
+        :sticky="popoverSticky"
         placement="bottom-start"
         padding="none"
         role="listbox"
@@ -61,7 +65,17 @@
             @mouseleave="clearHighlightIndex"
             @focusout="clearHighlightIndex; onFocusOut;"
           >
+            <combobox-loading-list
+              v-if="isLoading"
+              v-bind="listProps"
+            />
+            <combobox-empty-list
+              v-else-if="isListEmpty"
+              v-bind="listProps"
+              :message="emptyStateMessage"
+            />
             <slot
+              v-else
               name="list"
               :list-props="listProps"
             />
@@ -83,7 +97,10 @@
 </template>
 
 <script>
-import { DtCombobox, DtPopover, POPOVER_CONTENT_WIDTHS } from '@';
+import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
+import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
+import { DtCombobox } from '@/components/combobox';
+import { DtPopover, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString } from '@/common/utils';
 import {
   DROPDOWN_PADDING_CLASSES,
@@ -95,6 +112,8 @@ export default {
   components: {
     DtCombobox,
     DtPopover,
+    ComboboxLoadingList,
+    ComboboxEmptyList,
   },
 
   props: {
@@ -197,6 +216,48 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Displaces the popover content box from its anchor element
+     *  by the specified number of pixels.
+     */
+    popoverOffset: {
+      type: Array,
+      default: () => [0, 4],
+    },
+
+    /**
+     * If the popover sticks to the input.
+     */
+    popoverSticky: {
+      type: [Boolean, String],
+      default: false,
+    },
+
+    /**
+     * Displays the list when the combobox is focused, before the user has typed anything.
+     * When this is enabled the list will not close after selection.
+     */
+    hasSuggestionList: {
+      type: Boolean,
+      default: true,
+    },
+
+    /*
+     * Determines when to show the skeletons and also controls aria-busy attribute.
+     */
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Message to show when the list is empty
+     */
+    emptyStateMessage: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: ['select', 'escape', 'highlight', 'opened'],
@@ -242,6 +303,17 @@ export default {
   },
 
   methods: {
+    handleDisplayList (value) {
+      if (!this.hasSuggestionList) {
+        if (value) {
+          // Displays the list after the user has typed anything
+          this.showComboboxList();
+        } else {
+          this.closeComboboxList();
+        }
+      }
+    },
+
     showComboboxList () {
       if (this.showList != null) { return; }
       this.isListShown = true;
@@ -253,7 +325,13 @@ export default {
     },
 
     onSelect (highlightIndex) {
+      if (this.loading) return;
+
       this.$emit('select', highlightIndex);
+      if (!this.hasSuggestionList) {
+        // we don't display the list before the user has typed anything
+        this.closeComboboxList();
+      }
     },
 
     onEscape () {
@@ -262,11 +340,22 @@ export default {
     },
 
     onHighlight (highlightIndex) {
+      if (this.loading) return;
+
       this.$emit('highlight', highlightIndex);
     },
 
     onOpened (opened) {
       this.$emit('opened', opened);
+    },
+
+    onFocusIn (e) {
+      if (this.hasSuggestionList &&
+          e && this.$refs.input.querySelector('input') === e.target) {
+        // only trigger if we show suggestion list when focus and
+        // it's the input specifically that was focused
+        this.showComboboxList();
+      }
     },
 
     onFocusOut (e) {
@@ -290,7 +379,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-
-</style>

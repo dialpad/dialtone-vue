@@ -1,4 +1,4 @@
-import tippy from 'tippy.js';
+import tippy, { sticky } from 'tippy.js';
 import { getArrowDetected } from '../tooltip/modifiers';
 import { findFirstFocusableNode } from '@/common/utils';
 
@@ -9,11 +9,14 @@ export const BASE_TIPPY_DIRECTIONS = [
   'top', 'top-start', 'top-end',
 ];
 
+export const TIPPY_STICKY_VALUES = [true, false, 'reference', 'popper'];
+
 export const createTippy = (anchorElement, options) => {
   const { contentElement } = { ...options };
   delete options.contentElement;
   return tippy(anchorElement, {
     ...options,
+    plugins: [sticky],
     render: () => getContentWrapper(contentElement),
   });
 };
@@ -23,19 +26,29 @@ export const getPopperOptions = ({
   fallbackPlacements = [],
   onChangePlacement = () => {},
   hasHideModifierEnabled = false,
+  // If set to false the dialog will display over top of the anchor when there is insufficient space.
+  // if set to true it will never move from its position relative to the anchor and will clip instead.
+  tether = true,
 } = {}) => {
   return {
     modifiers: [
       {
         name: 'flip',
         options: {
-          fallbackPlacements: fallbackPlacements,
+          fallbackPlacements,
           boundary,
         },
       },
       {
         name: 'hide',
         enabled: hasHideModifierEnabled,
+      },
+      {
+        name: 'preventOverflow',
+        options: {
+          altAxis: !tether,
+          tether,
+        },
       },
       getArrowDetected(({ state }) => {
         onChangePlacement(state.placement);

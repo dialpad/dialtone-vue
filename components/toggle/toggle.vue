@@ -55,6 +55,9 @@ export default {
       default: false,
     },
 
+    /**
+     * @model checked
+     */
     checked: {
       type: Boolean,
       default: false,
@@ -71,7 +74,16 @@ export default {
     },
   },
 
-  emits: ['change'],
+  emits: [
+    /**
+     * Toggle change event
+     *
+     * @event change
+     * @type {Boolean}
+     * @model change
+     */
+    'change',
+  ],
 
   data () {
     return {
@@ -83,7 +95,6 @@ export default {
 
     inputListeners () {
       return {
-        // eslint-disable-next-line vue/no-deprecated-dollar-listeners-api
         ...this.$listeners,
         click: _ => this.toggleCheckedValue(),
       };

@@ -1,3 +1,107 @@
+# [2.20.0](https://github.com/dialpad/dialtone-vue/compare/v2.19.1...v2.20.0) (2022-08-11)
+
+
+### Features
+
+* **modal:** add banner support ([#450](https://github.com/dialpad/dialtone-vue/issues/450)) ([2b4ecea](https://github.com/dialpad/dialtone-vue/commit/2b4eceae8512de68a96dd15eef3f4bce558a97f6))
+
+## [2.19.1](https://github.com/dialpad/dialtone-vue/compare/v2.19.0...v2.19.1) (2022-08-08)
+
+
+### Bug Fixes
+
+* **emoji:** dynamic import fix ([#443](https://github.com/dialpad/dialtone-vue/issues/443)) ([d92d147](https://github.com/dialpad/dialtone-vue/commit/d92d147b962830d8b7df2a214636be08f7604c34))
+
+# [2.19.0](https://github.com/dialpad/dialtone-vue/compare/v2.18.0...v2.19.0) (2022-08-03)
+
+
+### Features
+
+* dt-pagination ([#421](https://github.com/dialpad/dialtone-vue/issues/421)) ([dd6eaa2](https://github.com/dialpad/dialtone-vue/commit/dd6eaa2abfa62d95cf1e617be8f713e6cfcd2d28))
+
+# [2.18.0](https://github.com/dialpad/dialtone-vue/compare/v2.17.0...v2.18.0) (2022-08-02)
+
+
+### Bug Fixes
+
+* loading, empty state order and remove emptyStateMessage value ([#428](https://github.com/dialpad/dialtone-vue/issues/428)) ([7a2fe58](https://github.com/dialpad/dialtone-vue/commit/7a2fe58274d310e81c586552565a2bb863e23d49))
+
+
+### Features
+
+* **popover:** add tether option to popover ([#437](https://github.com/dialpad/dialtone-vue/issues/437)) ([a65720b](https://github.com/dialpad/dialtone-vue/commit/a65720bb824738b8cc950f6e2363b6f0071cd498))
+
+# [2.17.0](https://github.com/dialpad/dialtone-vue/compare/v2.16.0...v2.17.0) (2022-07-27)
+
+
+### Features
+
+* **combobox and combobox with popover:** add empty state ([#409](https://github.com/dialpad/dialtone-vue/issues/409)) ([34ea471](https://github.com/dialpad/dialtone-vue/commit/34ea471553e117a5974c86124b4d129470d5567a))
+* **popover, tooltip, combobox with popover:** add sticky tippy ([#425](https://github.com/dialpad/dialtone-vue/issues/425)) ([7d2f18f](https://github.com/dialpad/dialtone-vue/commit/7d2f18f8756526ff89eeacef2c3b1f389e7355a4))
+
+# [2.16.0](https://github.com/dialpad/dialtone-vue/compare/v2.15.0...v2.16.0) (2022-07-22)
+
+
+### Features
+
+* **combobox multi-select:** expose closeComboboxList method ([#422](https://github.com/dialpad/dialtone-vue/issues/422)) ([d8debbb](https://github.com/dialpad/dialtone-vue/commit/d8debbb96b5784d28d7c3dc4d8a89183543b999b))
+
+# [2.15.0](https://github.com/dialpad/dialtone-vue/compare/v2.14.0...v2.15.0) (2022-07-20)
+
+
+### Features
+
+* add custom emoji ([#398](https://github.com/dialpad/dialtone-vue/issues/398)) ([2cf9b76](https://github.com/dialpad/dialtone-vue/commit/2cf9b76f45aca8501bcc74b935a26577b3ce39be))
+* **combobox and combobox with popover:** add loading state ([#415](https://github.com/dialpad/dialtone-vue/issues/415)) ([1a549a5](https://github.com/dialpad/dialtone-vue/commit/1a549a5d720ed191892a5a4e211b357fd1053107))
+* **combobox multi-select:** show error when exceeds the max-selected ([#416](https://github.com/dialpad/dialtone-vue/issues/416)) ([68e035a](https://github.com/dialpad/dialtone-vue/commit/68e035a39ee99a0d7457c719739859c7e9c71461))
+
+# [2.14.0](https://github.com/dialpad/dialtone-vue/compare/v2.13.1...v2.14.0) (2022-07-13)
+
+
+### Features
+
+* **combobox multi-select:** add 'size' prop ([#413](https://github.com/dialpad/dialtone-vue/issues/413)) ([b914b06](https://github.com/dialpad/dialtone-vue/commit/b914b06e60a5a1e51af1844003b8bdeb40ff81c5))
+
+## [2.13.1](https://github.com/dialpad/dialtone-vue/compare/v2.13.0...v2.13.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* **dropdown:** dt-570 initial focus ([#410](https://github.com/dialpad/dialtone-vue/issues/410)) ([d96fa12](https://github.com/dialpad/dialtone-vue/commit/d96fa12cf9b4280d8a4a4e41cf10c57bb05e8b84))
+
+# [2.13.0](https://github.com/dialpad/dialtone-vue/compare/v2.12.1...v2.13.0) (2022-07-11)
+
+
+### Bug Fixes
+
+* **avatar:** default slot content ([#406](https://github.com/dialpad/dialtone-vue/issues/406)) ([60e727c](https://github.com/dialpad/dialtone-vue/commit/60e727cb79ce768b6fc523a81ec754f06dc5ac95))
+
+
+### Features
+
+* **Combobox Multi Select:** add Combobox Multi Select component  ([#396](https://github.com/dialpad/dialtone-vue/issues/396)) ([153a488](https://github.com/dialpad/dialtone-vue/commit/153a4889118fbbd79797374776b7f8b3f8dc6b90))
+* **combobox, combobox with popover:** add loading state ([#402](https://github.com/dialpad/dialtone-vue/issues/402)) ([7c9c822](https://github.com/dialpad/dialtone-vue/commit/7c9c822558477deff516ca55ae0ff18c81b9abb4))
+
+## [2.12.1](https://github.com/dialpad/dialtone-vue/compare/v2.12.0...v2.12.1) (2022-07-06)
+
+
+### Bug Fixes
+
+* **emoji-text-wrapper:** dt-559 update shortcode parsing regex ([#400](https://github.com/dialpad/dialtone-vue/issues/400)) ([6184158](https://github.com/dialpad/dialtone-vue/commit/61841584946aded901c820f324dc4e8df794c8de))
+* tooltip spacing inconsistent ([#397](https://github.com/dialpad/dialtone-vue/issues/397)) ([e5d0c21](https://github.com/dialpad/dialtone-vue/commit/e5d0c21f63c151d82e87832970eb90cc65f98d6d))
+
+# [2.12.0](https://github.com/dialpad/dialtone-vue/compare/v2.11.0...v2.12.0) (2022-06-29)
+
+
+### Bug Fixes
+
+* **Chip:** update to use semantic elements ([#391](https://github.com/dialpad/dialtone-vue/issues/391)) ([aea3b37](https://github.com/dialpad/dialtone-vue/commit/aea3b37da936780c41205504231688c74a9a94c3))
+
+
+### Features
+
+* **dropdown:** add letter key navigation ([#392](https://github.com/dialpad/dialtone-vue/issues/392)) ([4fc6791](https://github.com/dialpad/dialtone-vue/commit/4fc6791921263de04e9562aad343143acd98780b))
+
 # [2.11.0](https://github.com/dialpad/dialtone-vue/compare/v2.10.0...v2.11.0) (2022-06-23)
 
 
