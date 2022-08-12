@@ -42,7 +42,7 @@ export default {
 
     elementType: {
       type: String,
-      defaault: 'div',
+      default: 'div',
     },
   },
 
