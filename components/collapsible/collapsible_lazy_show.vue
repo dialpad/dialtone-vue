@@ -4,18 +4,18 @@
     :appear="appear"
     enter-active-class="enter-active"
     leave-active-class="leave-active"
+    v-bind="$attrs"
     @before-enter="beforeEnter"
     @enter="enter"
     @after-enter="afterEnter"
     @before-leave="beforeLeave"
     @leave="leave"
     @after-leave="afterLeave"
-    v-on="$listeners"
   >
     <component
       :is="elementType"
       v-show="show"
-      v-on="$listeners"
+      v-bind="$attrs"
     >
       <slot v-if="initialized" />
     </component>
@@ -25,6 +25,8 @@
 <script>
 export default {
   name: 'DtCollapsibleLazyShow',
+
+  inheritAttrs: false,
 
   /******************
    *     PROPS      *

@@ -2,7 +2,6 @@
   <component
     :is="elementType"
     ref="collapsible"
-    v-on="$listeners"
   >
     <!-- Element for capturing keypresses -->
     <div
@@ -69,7 +68,7 @@
       }"
       tabindex="-1"
       appear
-      v-on="$listeners"
+      v-bind="$attrs"
       @after-leave="onLeaveTransitionComplete"
       @after-enter="onEnterTransitionComplete"
     >
@@ -99,6 +98,8 @@ export default {
     IconArrowAccordionOpen,
     IconArrowAccordionClosed,
   },
+
+  inheritAttrs: false,
 
   props: {
     /**

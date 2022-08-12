@@ -6,7 +6,9 @@ import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
 const content = '<div data-qa="content-element"> Test Text </div>';
-const anchor = '<button data-qa="anchor-element" v-bind="props.attrs">click me</button>';
+const anchor = '<template #anchor="{ attrs }">' +
+                 '<button data-qa="anchor-element" v-bind="attrs">click me</button>' +
+               '</template>';
 
 describe('Dialtone vue Collapsible Component Tests', function () {
   // Wrappers
@@ -16,8 +18,10 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   let anchorElement;
 
   // Environment
-  const slots = { content };
-  const scopedSlots = { anchor };
+  const props = {};
+  const attrs = {};
+  const slots = { anchor, content };
+  // const scopedSlots = { anchor };
 
   const _clearChildWrappers = () => {
     contentElement = undefined;
@@ -33,8 +37,14 @@ describe('Dialtone vue Collapsible Component Tests', function () {
 
   const _mountWrapper = () => {
     wrapper = mount(DtCollpasible, {
+      props,
       slots,
-      scopedSlots,
+      attrs,
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
       attachTo: document.body,
     });
     _setChildWrappers();
@@ -59,6 +69,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
 
   afterEach(async function () {
     _clearChildWrappers();
+    wrapper.unmount();
   });
 
   describe('Test default rendering', function () {
