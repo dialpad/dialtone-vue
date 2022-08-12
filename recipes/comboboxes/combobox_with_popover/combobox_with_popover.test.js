@@ -11,6 +11,7 @@ const basePropsData = {
   listId: 'list',
   loading: false,
   showList: null,
+  emptyStateMessage: 'No matches found.',
 };
 
 describe('DtRecipeComboboxWithPopover Tests', function () {
@@ -38,6 +39,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
   const _openComboboxPopover = async () => {
     await wrapper.setProps({ showList: true });
     wrapper.vm.$refs.combobox.onOpen(true, wrapper.vm.$refs.listWrapper);
+    await wrapper.vm.$nextTick();
   };
 
   const _mountWrapper = () => {
@@ -47,6 +49,11 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       scopedSlots,
       listeners,
       localVue: this.localVue,
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
       attachTo: document.body,
     });
   };
@@ -101,12 +108,12 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
     describe('When a list is provided', function () {
       // Test Setup
-      beforeEach(function () {
-        propsData = { ...propsData, showList: true };
+      beforeEach(async function () {
         scopedSlots = {
           list: '<ol id="list"></ol>',
         };
         _mountWrapper();
+        await _openComboboxPopover();
         _setChildWrappers();
       });
 
@@ -279,10 +286,10 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       beforeEach(async function () {
         scopedSlots = {
           input: '<input id="input" v-bind="props.inputProps" />',
-          list: '<ol id="list" v-bind="props.listProps"></ol>',
+          list: '<ol id="list" v-bind="props.listProps"/>',
         };
         _mountWrapper();
-        await _openComboboxPopover(true);
+        await _openComboboxPopover();
         _setChildWrappers();
       });
 
@@ -375,6 +382,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         await wrapper.trigger('keydown.enter');
       });
 
+      it('should call listener', function () { assert.isTrue(selectStub.called); });
       it('should emit select event', function () { assert.equal(wrapper.emitted().select.length, 1); });
     });
 
