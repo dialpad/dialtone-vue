@@ -11,13 +11,7 @@
         :disabled="disabled"
         :aria-label="ariaLabel"
         label-class="d-fs11"
-        :class="{
-          'dt-recipe-callbar-button': true,
-          'd-stack4': true,
-          'dt-recipe-callbar-button--circle': circle,
-          'dt-recipe-callbar-button--active': active,
-          'dt-recipe-callbar-button--danger': danger,
-        }"
+        :class="callbarButtonClass"
         v-on="$listeners"
       >
         <slot />
@@ -84,6 +78,19 @@ export default {
   },
 
   emits: ['click'],
+
+  computed: {
+    callbarButtonClass () {
+      return [
+        'dt-recipe-callbar-button',
+        'd-stack4',
+        {
+          'dt-recipe-callbar-button--circle': this.circle,
+          'dt-recipe-callbar-button--active': this.active,
+          'dt-recipe-callbar-button--danger': this.danger,
+        }];
+    },
+  },
 };
 </script>
 

@@ -1,9 +1,11 @@
 <template>
   <dt-recipe-callbar-button
+    :id="id"
     :active="active"
+    :aria-label="ariaLabel"
+    :circle="circle"
     :disabled="disabled"
     :danger="danger"
-    :circle="circle"
     @click="onClick"
   >
     <template
@@ -12,31 +14,17 @@
     >
       <span v-html="tooltip" />
     </template>
-    <template
-      v-else
-      slot="tooltip"
-    >
-      Tooltip text
-    </template>
 
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
-    </template>
-    <template v-else>
-      Button
-    </template>
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
 
     <template
       v-if="icon"
       slot="icon"
     >
-      <span v-html="icon" />
-    </template>
-    <template
-      v-else
-      slot="icon"
-    >
-      <icon-dialpad-glyph />
+      <component :is="icon" />
     </template>
   </dt-recipe-callbar-button>
 </template>
@@ -44,14 +32,11 @@
 <script>
 import DtRecipeCallbarButton from './callbar_button';
 import IconDialpadGlyph from '@dialpad/dialtone/lib/dist/vue/icons/IconDialpadGlyph';
+import icon from '@/common/mixins/icon';
 
 export default {
   name: 'DtRecipeCallbarButtonDefault',
   components: { DtRecipeCallbarButton, IconDialpadGlyph },
-  methods: {
-    onClick () {
-      console.log('button clicked');
-    },
-  },
+  mixins: [icon],
 };
 </script>

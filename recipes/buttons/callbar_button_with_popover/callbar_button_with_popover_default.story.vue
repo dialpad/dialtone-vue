@@ -1,22 +1,46 @@
 <template>
   <dt-recipe-callbar-button-with-popover
-    arrow-button-label="Open popover"
-    @click="buttonClicked"
+    :id="id"
+    :aria-label="ariaLabel"
+    :arrow-button-label="arrowButtonLabel"
+    :placement="placement"
+    :initial-focus-element="initialFocusElement"
+    :show-close-button="showCloseButton"
+    :disabled="disabled"
+    :active="active"
+    :danger="danger"
+    @click="onClick"
   >
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
+    <template
+      v-if="icon"
+      slot="icon"
+    >
+      <component :is="icon" />
     </template>
-    <template #icon>
-      <icon-dialpad-ai />
-    </template>
-    <template #tooltip>
+    <template
+      v-if="tooltip"
+      slot="tooltip"
+    >
       <span v-html="tooltip" />
     </template>
     <template #content>
       <span v-html="content" />
     </template>
-    <template #headerContent>
+    <template
+      v-if="headerContent"
+      #headerContent
+    >
       <span v-html="headerContent" />
+    </template>
+    <template
+      v-if="footerContent"
+      #footerContent
+    >
+      <span v-html="footerContent" />
     </template>
   </dt-recipe-callbar-button-with-popover>
 </template>
@@ -24,14 +48,11 @@
 <script>
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
 import IconDialpadAi from '@dialpad/dialtone/lib/dist/vue/icons/IconDialpadAi';
+import icon from '@/common/mixins/icon';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopoverDefault',
   components: { DtRecipeCallbarButtonWithPopover, IconDialpadAi },
-  methods: {
-    buttonClicked () {
-      console.log('button clicked');
-    },
-  },
+  mixins: [icon],
 };
 </script>

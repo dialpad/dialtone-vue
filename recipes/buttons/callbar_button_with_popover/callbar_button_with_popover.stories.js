@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
 import DtRecipeCallbarButtonWithPopoverMdx from './callbar_button_with_popover.mdx';
 import DtRecipeCallbarButtonWithPopoverDefaultTemplate from './callbar_button_with_popover_default.story.vue';
@@ -9,11 +9,6 @@ import { POPOVER_DIRECTIONS, POPOVER_INITIAL_FOCUS_STRINGS } from '../../../comp
 
 // Default Prop Values
 export const argsData = {
-  default: 'Button',
-  icon: '',
-  tooltip: 'A tooltip',
-  content: 'Popover body content',
-  headerContent: 'Header content',
   onArrowClick: action('arrowClick'),
   onClick: action('click'),
 };
@@ -21,27 +16,36 @@ export const argsData = {
 export const argTypesData = {
   // Button Slots
   default: {
+    name: 'default',
     description: 'Slot default content. This will be the button label',
     control: 'text',
     table: {
+      category: 'slots',
       type: {
         summary: 'text/html',
       },
     },
   },
   icon: {
+    name: 'icon',
     description: 'Slot for button icon',
-    control: 'none',
     table: {
+      category: 'slots',
       type: {
         summary: 'VNode',
       },
     },
+    control: {
+      type: 'select',
+      options: getIconNames(),
+    },
   },
   tooltip: {
+    name: 'tooltip',
     description: 'Slot tooltip',
     control: 'text',
     table: {
+      category: 'slots',
       type: {
         summary: 'text/html',
       },
@@ -60,6 +64,16 @@ export const argTypesData = {
   },
   headerContent: {
     description: 'Slot for popover header content',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  footerContent: {
+    description: 'Slot for popover footer content',
     control: 'text',
     table: {
       category: 'slots',
@@ -92,7 +106,7 @@ export const argTypesData = {
   id: {
     table: {
       defaultValue: {
-        summary: 'auto-generated',
+        summary: 'generated unique ID',
       },
     },
   },
@@ -117,13 +131,11 @@ export const argTypesData = {
       disable: true,
     },
   },
-  // Action Event Handlers
   onClick: {
     table: {
       disable: true,
     },
   },
-
 };
 
 // Story Collection
@@ -134,8 +146,14 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtRecipeCallbarButtonWithPopoverMdx,
+    },
+    options: {
+      showPanel: true,
     },
   },
 };
@@ -153,7 +171,16 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 );
 // Stories
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
+Default.args = {
+  default: 'Button',
+  tooltip: 'Tooltip Text',
+  ariaLabel: 'Button',
+  arrowButtonLabel: 'Open popover',
+  content: 'Popover body content',
+  headerContent: 'Header content',
+  showCloseButton: true,
+  icon: 'IconDialpadAi',
+};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};

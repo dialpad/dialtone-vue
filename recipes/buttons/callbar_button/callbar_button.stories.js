@@ -16,7 +16,7 @@ export const argTypesData = {
   id: {
     table: {
       defaultValue: {
-        summary: 'auto-generated',
+        summary: 'generated unique ID',
       },
     },
   },
@@ -84,8 +84,14 @@ export default {
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
+    controls: {
+      sort: 'requiredFirst',
+    },
     docs: {
       page: DtRecipeCallbarButtonMdx,
+    },
+    options: {
+      showPanel: true,
     },
   },
 };
@@ -108,7 +114,12 @@ const CallbarTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 );
 // Stories
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
+Default.args = {
+  default: 'Button',
+  tooltip: 'Tooltip Text',
+  ariaLabel: 'Button',
+  icon: 'IconDialpadGlyph',
+};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {};

@@ -21,6 +21,7 @@
       <slot />
     </dt-recipe-callbar-button>
     <dt-popover
+      v-if="!disabled"
       :id="id"
       :disabled="disabled"
       :open="open"
@@ -36,7 +37,6 @@
     >
       <template #anchor>
         <dt-button
-          v-if="!disabled"
           circle
           importance="clear"
           size="lg"
@@ -104,7 +104,7 @@ export default {
     },
 
     arrowButtonLabel: {
-      type: Object,
+      type: String,
       required: true,
       validator: (label) => {
         return !!label;
