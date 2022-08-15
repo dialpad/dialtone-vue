@@ -3,9 +3,9 @@ import {
 } from './';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import CollapsibleMdx from './collapsible.mdx';
-import DtCollapsibleDefaultStory from './collapsible_default.story';
+import DtCollapsibleDefaultStory from './collapsible_default.story.vue';
 
-const argsTypesData = {
+const argTypesData = {
   // Slots
   anchor: {
     control: 'text',
@@ -59,7 +59,7 @@ const argsTypesData = {
 export default {
   title: 'Components/Collapsible',
   component: DtCollapsible,
-  argTypes: argsTypesData,
+  argTypes: argTypesData,
   excludeStories: /.Data$/,
   parameters: {
     controls: {
@@ -75,8 +75,9 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtCollapsibleDefaultStory,
 );
 
