@@ -18,6 +18,7 @@
         <dt-list-item
           role="menuitem"
           navigation-type="arrow-keys"
+          @click="close"
         >
           Option 1
         </dt-list-item>
@@ -68,12 +69,14 @@
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
+            @click="close"
           >
             Menu item 2
           </dt-list-item>
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
+            @click="close"
           >
             Menu Item 3
           </dt-list-item>
