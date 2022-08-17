@@ -18,11 +18,13 @@
       </div>
     </template>
     <template #list="{ close }">
-      <!-- @slot Slot for the list component -->
-      <slot
-        name="list"
-        :close="close"
-      />
+      <div class="d-context-menu-list">
+        <!-- @slot Slot for the list component -->
+        <slot
+          name="list"
+          :close="close"
+        />
+      </div>
     </template>
   </dt-dropdown>
 </template>
@@ -61,5 +63,7 @@ export default {
 </script>
 
 <style lang="less">
-
+.d-context-menu-list {
+  width: 24rem;
+}
 </style>
