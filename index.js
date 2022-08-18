@@ -7,6 +7,7 @@ export * from './components/button';
 export * from './components/button_group';
 export * from './components/combobox';
 export * from './components/context_menu';
+export * from './components/collapsible';
 export * from './components/dropdown';
 export * from './components/input';
 export * from './components/input_group';
