@@ -40,7 +40,12 @@ export default {
 
   components: { DtDropdown, DtButton, DtListItem },
 
-  props: {},
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
 
   data () {
     return {
@@ -56,7 +61,9 @@ export default {
 
   methods: {
     showMenu () {
-      this.isOpen = true;
+      if (!this.disabled) {
+        this.isOpen = true;
+      }
     },
   },
 };
