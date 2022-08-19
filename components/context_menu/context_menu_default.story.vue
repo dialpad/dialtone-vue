@@ -8,12 +8,14 @@
         v-if="anchor"
         v-html="anchor"
       />
-      <dt-button
+      <div
         v-else
+        ref="container"
+        class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-025"
         v-bind="attrs"
       >
-        Rigth Click to open
-      </dt-button>
+        Right click to open
+      </div>
     </template>
     <template
       slot="list"
