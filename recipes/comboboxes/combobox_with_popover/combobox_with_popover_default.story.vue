@@ -13,7 +13,7 @@
     :list-class="$attrs.listClass"
     :open-with-arrow-keys="$attrs.openWithArrowKeys"
     :has-suggestion-list="$attrs.hasSuggestionList"
-    :is-list-empty="$attrs.isListEmpty"
+    :empty-list="$attrs.emptyList"
     @escape="onComboboxEscape"
     @highlight="$attrs.onHighlight"
     @select="onComboboxSelect"

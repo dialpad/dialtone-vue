@@ -9,7 +9,7 @@ import DtPopover from '@/components/popover/popover';
 const baseProps = {
   listAriaLabel: '',
   listId: 'list',
-  isLoading: false,
+  loading: false,
   showList: null,
 };
 
@@ -151,7 +151,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
           list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps"></ol></template>',
         };
         _mountWrapper();
-        await wrapper.setProps({ showList: true, isListEmpty: true, emptyStateMessage: 'empty' });
+        await wrapper.setProps({ showList: true, emptyList: true, emptyStateMessage: 'empty' });
         await wrapper.vm.$nextTick();
         await _openComboboxPopover();
         _setChildWrappers();
@@ -199,7 +199,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
       describe('When list is loading', function () {
         beforeEach(async function () {
-          await wrapper.setProps({ isLoading: true });
+          await wrapper.setProps({ loading: true });
         });
 
         it('aria-busy should be "true"', function () {
@@ -297,7 +297,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
           list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps" /></template>',
         };
         _mountWrapper();
-        await wrapper.setProps({ showList: true, isListEmpty: true, emptyStateMessage: 'empty' });
+        await wrapper.setProps({ showList: true, emptyList: true, emptyStateMessage: 'empty' });
         await _openComboboxPopover();
         _setChildWrappers();
       });
