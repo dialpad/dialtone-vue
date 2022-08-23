@@ -9,9 +9,8 @@ import DtPopover from '@/components/popover/popover';
 const baseProps = {
   listAriaLabel: '',
   listId: 'list',
-  loading: false,
+  isLoading: false,
   showList: null,
-  emptyStateMessage: 'No matches found.',
 };
 
 describe('DtRecipeComboboxWithPopover Tests', function () {
@@ -152,6 +151,8 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
           list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps"></ol></template>',
         };
         _mountWrapper();
+        await wrapper.setProps({ showList: true, isListEmpty: true, emptyStateMessage: 'empty' });
+        await wrapper.vm.$nextTick();
         await _openComboboxPopover();
         _setChildWrappers();
       });
@@ -198,7 +199,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
       describe('When list is loading', function () {
         beforeEach(async function () {
-          await wrapper.setProps({ loading: true });
+          await wrapper.setProps({ isLoading: true });
         });
 
         it('aria-busy should be "true"', function () {
@@ -296,6 +297,7 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
           list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps" /></template>',
         };
         _mountWrapper();
+        await wrapper.setProps({ showList: true, isListEmpty: true, emptyStateMessage: 'empty' });
         await _openComboboxPopover();
         _setChildWrappers();
       });

@@ -8,7 +8,7 @@ const baseProps = {
   listAriaLabel: '',
   listId: 'list',
   showList: true,
-  loading: false,
+  isLoading: false,
 };
 
 describe('DtCombobox Tests', function () {
@@ -96,7 +96,7 @@ describe('DtCombobox Tests', function () {
       beforeEach(async function () {
         slots = { list: '<ol id="list"></ol>' };
         _mountWrapper();
-        await wrapper.setProps({ showList: true, isEmpty: true, emptyStateMessage: 'empty' });
+        await wrapper.setProps({ showList: true, isListEmpty: true, emptyStateMessage: 'empty' });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
       });
@@ -108,7 +108,7 @@ describe('DtCombobox Tests', function () {
       // Test Setup
       beforeEach(async function () {
         slots = { list: '<ol id="list"><li role="option">item1</li><li role="option">item2</li></ol>' };
-        await wrapper.setProps({ loading: true });
+        await wrapper.setProps({ isLoading: true });
         _setChildWrappers();
       });
 
@@ -146,7 +146,7 @@ describe('DtCombobox Tests', function () {
 
         describe('When list is loading', function () {
           beforeEach(async function () {
-            await wrapper.setProps({ loading: true });
+            await wrapper.setProps({ isLoading: true });
             _setChildWrappers();
           });
 
@@ -229,7 +229,7 @@ describe('DtCombobox Tests', function () {
 
     describe('When the list is loading', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ loading: true });
+        await wrapper.setProps({ isLoading: true });
         _setChildWrappers();
       });
 
