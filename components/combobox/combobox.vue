@@ -128,7 +128,7 @@ export default {
     },
 
     /**
-     * If the list has no options as result. If set to true, pass a message to the `emptyStateMessage` prop.
+     * Sets the list to an empty state, and displays the message from prop `emptyStateMessage`.
      */
     emptyList: {
       type: Boolean,
