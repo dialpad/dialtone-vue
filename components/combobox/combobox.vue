@@ -250,6 +250,18 @@ export default {
         this.setInitialHighlightIndex();
       });
     },
+
+    $props: {
+      deep: true,
+      immediate: true,
+      handler () {
+        this.validateEmptyListProps();
+      },
+    },
+  },
+
+  created () {
+    this.validateEmptyListProps();
   },
 
   methods: {
@@ -313,6 +325,13 @@ export default {
       // If the list is loading, set to -1
         this.setHighlightIndex(this.loading ? -1 : 0);
       });
+    },
+
+    validateEmptyListProps () {
+      if ((this.emptyList && !this.emptyStateMessage) || (!this.emptyList && this.emptyStateMessage)) {
+        console.error(`Invalid props: you must pass both props emptyList and emptyStateMessage to show the
+      empty message.`);
+      }
     },
   },
 };
