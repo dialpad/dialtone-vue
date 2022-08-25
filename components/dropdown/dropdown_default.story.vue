@@ -11,6 +11,7 @@
     :list-class="listClass"
     :navigation-type="navigationType"
     :follow-cursor="followCursor"
+    :open-on-context="openOnContext"
     @highlight="onHighlight"
     @opened="onOpened"
   >
