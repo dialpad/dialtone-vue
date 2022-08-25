@@ -95,6 +95,7 @@
     </dt-dropdown>
 
     <dt-dropdown
+      class="d-mr8"
       :open="open"
       :placement="placement"
       :fallback-placements="fallbackPlacements"
@@ -159,6 +160,39 @@
             Menu Item 3
           </dt-list-item>
         </dt-dropdown-list>
+      </template>
+    </dt-dropdown>
+
+    <dt-dropdown
+      class="d-mr8"
+      :placement="variant"
+      :content-width="contentWidth"
+      :padding="padding"
+      :navigation-type="navigationType"
+      :open="open"
+      :open-on-context="true"
+      @highlight="onHighlight"
+    >
+      <template slot="anchor">
+        <div
+          class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-025"
+        >
+          Right click to open
+        </div>
+      </template>
+      <template
+        slot="list"
+        slot-scope="{ close }"
+      >
+        <dt-list-item
+          v-for="(item) in items"
+          :key="item.id"
+          role="menuitem"
+          :navigation-type="navigationType"
+          @click="close"
+        >
+          {{ item.name }}
+        </dt-list-item>
       </template>
     </dt-dropdown>
   </div>
