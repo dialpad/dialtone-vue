@@ -94,7 +94,8 @@ export default {
     },
 
     /**
-     * Opens the dropdown on right click (context menu).
+     * Opens the dropdown on right click (context menu). If you set this value to `true`,
+     * the default trigger behavior will be disabled.
      */
     openOnContext: {
       type: Boolean,
