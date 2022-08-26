@@ -2,6 +2,8 @@
   <dt-combobox
     ref="combobox"
     :loading="loading"
+    :empty-list="emptyList"
+    :empty-state-message="emptyStateMessage"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
@@ -29,7 +31,7 @@
         />
       </div>
     </template>
-    <template #list="{ opened, listProps, clearHighlightIndex, isLoading, isListEmpty }">
+    <template #list="{ opened, listProps, clearHighlightIndex }">
       <dt-popover
         ref="popover"
         :open.sync="isListShown"
@@ -66,11 +68,11 @@
             @focusout="clearHighlightIndex; onFocusOut;"
           >
             <combobox-loading-list
-              v-if="isLoading"
+              v-if="loading"
               v-bind="listProps"
             />
             <combobox-empty-list
-              v-else-if="isListEmpty"
+              v-else-if="emptyList && emptyStateMessage"
               v-bind="listProps"
               :message="emptyStateMessage"
             />
@@ -252,6 +254,14 @@ export default {
     },
 
     /**
+     * Sets the list to an empty state, and displays the message from prop `emptyStateMessage`.
+     */
+    emptyList: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Message to show when the list is empty
      */
     emptyStateMessage: {
@@ -360,12 +370,18 @@ export default {
 
     onFocusOut (e) {
       const comboboxRefs = ['input', 'header', 'footer', 'listWrapper'];
+      // Check if the focus change was to another target within the combobox component
       const isComboboxStillFocused = comboboxRefs.some((ref) => {
         return this.$refs[ref]?.contains(e.relatedTarget);
       });
 
+      // If outside of the combobox then close
       if (!isComboboxStillFocused) {
         this.closeComboboxList();
+      } else {
+        // if focus is anywhere within the combobox input or list,
+        // keep the focus on the input, or keyboard nav will break.
+        e.target.focus();
       }
     },
 

@@ -1,3 +1,24 @@
+## [2.22.3](https://github.com/dialpad/dialtone-vue/compare/v2.22.2...v2.22.3) (2022-08-25)
+
+
+### Bug Fixes
+
+* **combobox-with-popover:** prevent focus of list-items by mouse ([#466](https://github.com/dialpad/dialtone-vue/issues/466)) ([d6c2d9f](https://github.com/dialpad/dialtone-vue/commit/d6c2d9f63a3f42ed00e783293aed98f3d941ca7b))
+
+## [2.22.2](https://github.com/dialpad/dialtone-vue/compare/v2.22.1...v2.22.2) (2022-08-24)
+
+
+### Bug Fixes
+
+* **combobox, combobox-with-popover:** fix empty variant ([#464](https://github.com/dialpad/dialtone-vue/issues/464)) ([70787c5](https://github.com/dialpad/dialtone-vue/commit/70787c5f69ac2b0d3a6a5a4a30e9d1ecf53abc94))
+
+## [2.22.1](https://github.com/dialpad/dialtone-vue/compare/v2.22.0...v2.22.1) (2022-08-22)
+
+
+### Bug Fixes
+
+* **emoji:** fixed incorrectly mapped unicode keys ([#462](https://github.com/dialpad/dialtone-vue/issues/462)) ([40d2409](https://github.com/dialpad/dialtone-vue/commit/40d24099ca73b16dad249396a34993df1438017e))
+
 # [2.22.0](https://github.com/dialpad/dialtone-vue/compare/v2.21.0...v2.22.0) (2022-08-17)
 
 
