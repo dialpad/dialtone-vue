@@ -168,7 +168,3 @@ Variants.parameters = { controls: { disable: true }, actions: { disable: true },
 Variants.decorators = [() => ({
   template: `<div class="d-d-flex d-jc-center d-ai-center"><story /></div>`,
 })];
-Variants.parameters = {
-  controls: { disabled: true },
-  options: { showPanel: false },
-};
