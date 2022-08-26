@@ -24,7 +24,6 @@
     :max-width="maxWidth"
     :tether="tether"
     :sticky="sticky"
-    :follow-cursor="followCursor"
     :open-with-arrow-keys="openWithArrowKeys"
     @opened="onOpened"
   >

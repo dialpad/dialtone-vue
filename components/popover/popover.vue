@@ -120,7 +120,6 @@ import {
   POPOVER_ROLES,
   POPOVER_INITIAL_FOCUS_STRINGS,
   POPOVER_STICKY_VALUES,
-  POPOVER_FOLLOW_CURSOR_VALUES,
 } from './popover_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
@@ -351,20 +350,6 @@ export default {
     },
 
     /**
-     * Determines if the popover follows the user's mouse cursor.
-     * `true` enables it, `vertical` or `horizontal` only follows the cursor on a single axis,
-     * `initial` will place the popover at the initial cursor position upon show, but prevent
-     * following it.
-     */
-    followCursor: {
-      type: [Boolean, String],
-      default: false,
-      validator: (followCursor) => {
-        return POPOVER_FOLLOW_CURSOR_VALUES.includes(followCursor);
-      },
-    },
-
-    /**
      * Determines maximum height for the popover before overflow.
      * Possible units rem|px|em
      */
@@ -497,12 +482,6 @@ export default {
       });
     },
 
-    followCursor (followCursor) {
-      this.tip.setProps({
-        followCursor,
-      });
-    },
-
     fallbackPlacements () {
       this.tip.setProps({
         popperOptions: this.popperOptions(),
@@ -558,7 +537,6 @@ export default {
       placement: this.placement,
       offset: this.offset,
       sticky: this.sticky,
-      followCursor: this.followCursor,
       appendTo: document.body,
       interactive: true,
       trigger: 'manual',

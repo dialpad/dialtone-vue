@@ -13,7 +13,6 @@
     :max-width="maxWidth"
     :open-with-arrow-keys="true"
     :open-on-context="openOnContext"
-    :follow-cursor="followCursor"
     v-on="$listeners"
     @opened="updateInitialHighlightIndex"
     @keydown.enter="onEnterKey"
@@ -179,17 +178,6 @@ export default {
       default: () => {
         return ['auto'];
       },
-    },
-
-    /**
-     * Determines if the dropdown follows the user's mouse cursor.
-     * `true` enables it, `vertical` or `horizontal` only follows the cursor on a single axis,
-     * `initial` will place the dropdown at the initial cursor position upon show, but prevent
-     * following it.
-     */
-    followCursor: {
-      type: [Boolean, String],
-      default: false,
     },
 
     /**
