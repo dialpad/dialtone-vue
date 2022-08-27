@@ -48,26 +48,51 @@ export default {
       },
     },
 
+    /**
+     * Determines whether the button should have active styling
+     * default is false.
+     * @values true, false
+     * @see https://dialpad.design/components/button/
+     */
     active: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Determines whether the button should have danger styling
+     * default is false.
+     * @values true, false
+     * @see https://dialpad.design/components/button/
+     */
     danger: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Determines whether the button should be disabled
+     * default is false.
+     * @values true, false
+     */
     disabled: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Whether the button is a circle or not.
+     * @values true, false
+     * @see https://dialpad.design/components/button/
+     */
     circle: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Aria label for the button. If empty, it takes its value from the default slot.
+     */
     ariaLabel: {
       type: String,
       default: null,

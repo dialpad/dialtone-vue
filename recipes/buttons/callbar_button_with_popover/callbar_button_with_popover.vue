@@ -95,6 +95,9 @@ export default {
       },
     },
 
+    /**
+     * Aria label for the button. If empty, it takes its value from the default slot.
+     */
     ariaLabel: {
       type: String,
       default: null,
@@ -103,6 +106,9 @@ export default {
       },
     },
 
+    /**
+     * Aria label for the arrow. Cannot be empty.
+     */
     arrowButtonLabel: {
       type: String,
       required: true,
@@ -111,38 +117,79 @@ export default {
       },
     },
 
+    /**
+     * The direction the popover displays relative to the anchor.
+     * @values 'bottom', 'bottom-start', 'bottom-end',
+     *         'right', 'right-start', 'right-end',
+     *         'left', 'left-start', 'left-end',
+     *         'top', 'top-start', 'top-end'
+     * @default 'top'
+     */
     placement: {
       type: String,
       default: 'top',
     },
 
+    /**
+     * The element that is focused when the popover is opened. This can be an
+     * HTMLElement within the popover, a string starting with '#' which will
+     * find the element by ID. 'first' which will automatically focus
+     * the first element, or 'dialog' which will focus the dialog window itself.
+     * If the dialog is modal this prop cannot be 'none'.
+     */
     initialFocusElement: {
       type: String,
       default: 'first',
     },
 
+    /**
+     * Determines visibility for close button
+     */
     showCloseButton: {
       type: Boolean,
       default: true,
     },
 
+    /**
+     * Determines whether the button should be disabled
+     * default is false.
+     * @values true, false
+     */
     disabled: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Determines whether the button should have active styling
+     * default is false.
+     * @values true, false
+     * @see https://dialpad.design/components/button/
+     */
     active: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Determines whether the button should have danger styling
+     * default is false.
+     * @values true, false
+     * @see https://dialpad.design/components/button/
+     */
     danger: {
       type: Boolean,
       default: false,
     },
   },
 
-  emits: ['arrowClick', 'click'],
+  emits: [
+    /**
+     * Emitted when the arrow is clicked
+     */
+    'arrowClick',
+    'click',
+  ],
 
   data () {
     return {
@@ -157,6 +204,8 @@ export default {
     },
 
     buttonClick (ev) {
+      // If no listener for the click event, the button click opens the popover
+      // the same as if the arrow was clicked.
       if (!this.$listeners.click) {
         this.arrowClick(ev);
       } else {

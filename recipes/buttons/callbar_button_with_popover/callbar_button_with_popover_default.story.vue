@@ -9,6 +9,7 @@
     :disabled="disabled"
     :active="active"
     :danger="danger"
+    @arrow-click="onClick"
     @click="onClick"
   >
     <span
