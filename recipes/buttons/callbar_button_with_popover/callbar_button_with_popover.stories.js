@@ -37,8 +37,8 @@ export const argTypesData = {
     },
     control: {
       type: 'select',
-      options: getIconNames(),
     },
+    options: getIconNames(),
   },
   tooltip: {
     name: 'tooltip',
@@ -115,14 +115,14 @@ export const argTypesData = {
   initialFocusElement: {
     control: {
       type: 'select',
-      options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-close'],
     },
+    options: [...Object.values(POPOVER_INITIAL_FOCUS_STRINGS), '#content-close'],
   },
   placement: {
     control: {
       type: 'select',
-      options: POPOVER_DIRECTIONS,
     },
+    options: POPOVER_DIRECTIONS,
   },
 
   // Action Event Handlers
@@ -159,14 +159,12 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeCallbarButtonWithPopoverDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeCallbarButtonWithPopoverVariantsTemplate,
 );
 // Stories

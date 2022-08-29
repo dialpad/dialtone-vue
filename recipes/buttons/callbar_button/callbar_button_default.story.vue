@@ -1,18 +1,18 @@
 <template>
   <dt-recipe-callbar-button
-    :id="id"
-    :active="active"
-    :aria-label="ariaLabel"
-    :circle="circle"
-    :disabled="disabled"
-    :danger="danger"
-    @click="onClick"
+    :id="$attrs.id"
+    :active="$attrs.active"
+    :aria-label="$attrs.ariaLabel"
+    :circle="$attrs.circle"
+    :disabled="$attrs.disabled"
+    :danger="$attrs.danger"
+    @click="$attrs.onClick"
   >
     <template
-      v-if="tooltip"
+      v-if="$attrs.tooltip"
       #tooltip
     >
-      <span v-html="tooltip" />
+      <span v-html="$attrs.tooltip" />
     </template>
 
     <span
@@ -21,10 +21,10 @@
     />
 
     <template
-      v-if="icon"
+      v-if="$attrs.icon"
       #icon
     >
-      <component :is="icon" />
+      <component :is="$attrs.icon" />
     </template>
   </dt-recipe-callbar-button>
 </template>

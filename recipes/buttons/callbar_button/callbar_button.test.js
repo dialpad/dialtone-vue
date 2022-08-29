@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtRecipeCallbarButton from './callbar_button.vue';
 import DtTooltip from '@/components/tooltip/tooltip';
 import sinon from 'sinon';
@@ -15,7 +15,7 @@ class ResizeObserverMock {
 }
 
 // Constants
-const basePropsData = {};
+const baseProps = {};
 
 describe('DtRecipeCallbarButton Tests', function () {
   // Wrappers
@@ -24,11 +24,10 @@ describe('DtRecipeCallbarButton Tests', function () {
   let tooltip;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
-  let listeners = {};
 
   // Helpers
   const _setChildWrappers = () => {
@@ -38,12 +37,11 @@ describe('DtRecipeCallbarButton Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtRecipeCallbarButton, {
-      propsData,
+      props,
       attrs,
       slots,
       provide,
-      listeners,
-      localVue: this.localVue,
+      attachTo: document.body,
     });
     _setChildWrappers();
   };
@@ -55,7 +53,6 @@ describe('DtRecipeCallbarButton Tests', function () {
     global.requestAnimationFrame = sinon.spy();
     global.cancelAnimationFrame = sinon.spy();
     global.ResizeObserver = ResizeObserverMock;
-    this.localVue = createLocalVue();
   });
   beforeEach(function () {
     _setWrappers();
@@ -63,12 +60,11 @@ describe('DtRecipeCallbarButton Tests', function () {
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
-    listeners = {};
-    wrapper.destroy();
+    wrapper.unmount();
   });
   after(function () {
     global.ResizeObserver = null;
@@ -119,7 +115,7 @@ describe('DtRecipeCallbarButton Tests', function () {
     describe('When clicking on the button', function () {
       it('should call the click event listener', async function () {
         const clickStub = sinon.stub();
-        listeners = { click: clickStub };
+        attrs = { click: clickStub };
         _setWrappers();
 
         await button.find('button').trigger('click');

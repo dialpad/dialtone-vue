@@ -194,11 +194,13 @@ export default {
 
   methods: {
     arrowClick (ev) {
+      console.log('arrow was clicked');
       this.$emit('arrowClick', ev);
       return (this.open = !this.open);
     },
 
     buttonClick (ev) {
+      console.log('hahahahahah');
       // If no listener for the click event, the button click opens the popover
       // the same as if the arrow was clicked.
       if (!this.$attrs.click) {

@@ -1,47 +1,47 @@
 <template>
   <dt-recipe-callbar-button-with-popover
-    :id="id"
-    :aria-label="ariaLabel"
-    :arrow-button-label="arrowButtonLabel"
-    :placement="placement"
-    :initial-focus-element="initialFocusElement"
-    :show-close-button="showCloseButton"
-    :disabled="disabled"
-    :active="active"
-    :danger="danger"
-    @arrow-click="onClick"
-    @click="onClick"
+    :id="$attrs.id"
+    :aria-label="$attrs.ariaLabel"
+    :arrow-button-label="$attrs.arrowButtonLabel"
+    :placement="$attrs.placement"
+    :initial-focus-element="$attrs.initialFocusElement"
+    :show-close-button="$attrs.showCloseButton"
+    :disabled="$attrs.disabled"
+    :active="$attrs.active"
+    :danger="$attrs.danger"
+    @arrow-click="$attrs.onClick"
+    @click="$attrs.onClick"
   >
     <span
       v-if="defaultSlot"
       v-html="defaultSlot"
     />
     <template
-      v-if="icon"
+      v-if="$attrs.icon"
       #icon
     >
-      <component :is="icon" />
+      <component :is="$attrs.icon" />
     </template>
     <template
-      v-if="tooltip"
+      v-if="$attrs.tooltip"
       #tooltip
     >
-      <span v-html="tooltip" />
+      <span v-html="$attrs.tooltip" />
     </template>
     <template #content>
-      <span v-html="content" />
+      <span v-html="$attrs.content" />
     </template>
     <template
-      v-if="headerContent"
+      v-if="$attrs.headerContent"
       #headerContent
     >
-      <span v-html="headerContent" />
+      <span v-html="$attrs.headerContent" />
     </template>
     <template
-      v-if="footerContent"
+      v-if="$attrs.footerContent"
       #footerContent
     >
-      <span v-html="footerContent" />
+      <span v-html="$attrs.footerContent" />
     </template>
   </dt-recipe-callbar-button-with-popover>
 </template>

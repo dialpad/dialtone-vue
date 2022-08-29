@@ -12,7 +12,7 @@
         :aria-label="ariaLabel"
         label-class="d-fs11"
         :class="callbarButtonClass"
-        v-on="$listeners"
+        v-on="$attrs"
       >
         <slot />
         <template #icon>

@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
 import DtRecipeCallbarButton from '../callbar_button/callbar_button';
 import DtPopover from '@/components/popover/popover';
@@ -16,7 +16,9 @@ class ResizeObserverMock {
 }
 
 // Constants
-const basePropsData = {};
+const baseProps = {
+  arrowButtonLabel: 'arrowButton',
+};
 
 describe('DtRecipeCallbarButtonWithPopover Tests', function () {
   // Wrappers
@@ -26,11 +28,10 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
   let popover;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
-  let listeners = {};
 
   // Helpers
   const _setChildWrappers = () => {
@@ -41,12 +42,11 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtRecipeCallbarButtonWithPopover, {
-      propsData,
+      props,
       attrs,
       slots,
       provide,
-      listeners,
-      localVue: this.localVue,
+      attachTo: document.body,
     });
     _setChildWrappers();
   };
@@ -58,7 +58,6 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
     global.requestAnimationFrame = sinon.spy();
     global.cancelAnimationFrame = sinon.spy();
     global.ResizeObserver = ResizeObserverMock;
-    this.localVue = createLocalVue();
   });
   beforeEach(function () {
     _setWrappers();
@@ -66,12 +65,11 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
-    listeners = {};
-    wrapper.destroy();
+    wrapper.unmount();
   });
   after(function () {
     global.ResizeObserver = null;
@@ -115,7 +113,6 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
         _setChildWrappers();
 
         const popoverProps = popover.props();
-        console.log(popoverProps);
 
         assert.isTrue(popoverProps.showCloseButton);
         assert.equal(popoverProps.placement, 'mock');
@@ -133,7 +130,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
 
       it('should trigger the "click" event when at least one listener is attached', async function () {
         const clickStub = sinon.stub();
-        listeners = { click: clickStub };
+        attrs = { onClick: clickStub };
         _setWrappers();
 
         await button.find('button').trigger('click');
@@ -146,7 +143,12 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
     });
 
     describe('When clicking on the arrow', function () {
+      let clickStub;
       beforeEach(async function () {
+        clickStub = sinon.stub();
+        attrs = { onArrowClick: clickStub };
+        _setWrappers();
+
         await arrow.trigger('click');
       });
 
@@ -157,6 +159,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
       it('should trigger the "arrowClick" event', function () {
         const arrowClickEvents = wrapper.emitted().arrowClick;
         assert.equal(arrowClickEvents.length, 1);
+        assert.isTrue(clickStub.called);
       });
     });
   });
