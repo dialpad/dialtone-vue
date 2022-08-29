@@ -164,9 +164,5 @@ export const Variants = VariantsTemplate.bind({});
 Variants.args = {};
 Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 Variants.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
+  template: `<div class="d-d-flex d-jc-center d-ai-center"><story /></div>`,
 })];
-Variants.parameters = {
-  controls: { disabled: true },
-  options: { showPanel: false },
-};
