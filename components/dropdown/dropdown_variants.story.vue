@@ -177,8 +177,12 @@
           :open="open"
           :open-on-context="true"
         >
-          <template slot="anchor">
+          <template
+            slot="anchor"
+            slot-scope="{ attrs }"
+          >
             <div
+              v-bind="attrs"
               class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-025"
             >
               Right click to open
