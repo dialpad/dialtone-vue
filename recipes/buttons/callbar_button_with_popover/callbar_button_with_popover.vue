@@ -176,6 +176,20 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * We need this declaration because of how Vue3 informs the component about a listener.
+     * Spoiler alert: it doesn't.
+     * Vue3 intends to work as a real pub-sub, meaning the publisher has not a clue of who the subscribers are.
+     * This makes it impossible from the regular declaration (emits: ['click']) to check whether
+     * we actually have a click handler or not.
+     * We're hacking it by adding an onClick prop: https://github.com/vuejs/core/issues/5220
+    */
+    /* eslint-disable-next-line vue/no-unused-properties */
+    onClick: {
+      type: Function,
+      default: null,
+    },
   },
 
   emits: [
@@ -194,16 +208,14 @@ export default {
 
   methods: {
     arrowClick (ev) {
-      console.log('arrow was clicked');
       this.$emit('arrowClick', ev);
       return (this.open = !this.open);
     },
 
     buttonClick (ev) {
-      console.log('hahahahahah');
       // If no listener for the click event, the button click opens the popover
       // the same as if the arrow was clicked.
-      if (!this.$attrs.click) {
+      if (!this.$props.onClick) {
         this.arrowClick(ev);
       } else {
         this.$emit('click', ev);

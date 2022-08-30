@@ -20,6 +20,18 @@ export const argTypesData = {
       },
     },
   },
+  active: {
+    control: 'boolean',
+  },
+  circle: {
+    control: 'boolean',
+  },
+  danger: {
+    control: 'boolean',
+  },
+  disabled: {
+    control: 'boolean',
+  },
 
   // Slots
   default: {

@@ -115,10 +115,10 @@ describe('DtRecipeCallbarButton Tests', function () {
     describe('When clicking on the button', function () {
       it('should call the click event listener', async function () {
         const clickStub = sinon.stub();
-        attrs = { click: clickStub };
+        attrs = { onClick: clickStub };
         _setWrappers();
 
-        await button.find('button').trigger('click');
+        await button.trigger('click');
         await wrapper.vm.$nextTick();
 
         assert.isTrue(clickStub.called);

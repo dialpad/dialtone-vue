@@ -51,6 +51,15 @@ export const argTypesData = {
       },
     },
   },
+  active: {
+    control: 'boolean',
+  },
+  danger: {
+    control: 'boolean',
+  },
+  disabled: {
+    control: 'boolean',
+  },
 
   // Popover slots
   content: {

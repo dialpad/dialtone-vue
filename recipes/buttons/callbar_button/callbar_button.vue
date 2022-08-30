@@ -12,7 +12,6 @@
         :aria-label="ariaLabel"
         label-class="d-fs11"
         :class="callbarButtonClass"
-        v-on="$attrs"
       >
         <slot />
         <template #icon>
@@ -100,8 +99,6 @@ export default {
       },
     },
   },
-
-  emits: ['click'],
 
   computed: {
     callbarButtonClass () {

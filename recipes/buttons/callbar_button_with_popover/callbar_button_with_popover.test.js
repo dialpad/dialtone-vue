@@ -123,7 +123,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
   describe('Interactivity Tests', function () {
     describe('When clicking on the button', function () {
       it('should trigger the "arrowClick" event when no listener attached', async function () {
-        await button.find('button').trigger('click');
+        await button.trigger('click');
         const arrowClickEvents = wrapper.emitted().arrowClick;
         assert.equal(arrowClickEvents.length, 1);
       });
@@ -133,8 +133,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
         attrs = { onClick: clickStub };
         _setWrappers();
 
-        await button.find('button').trigger('click');
-        await wrapper.vm.$nextTick();
+        await button.trigger('click');
 
         const clickEvents = wrapper.emitted().click;
         assert.equal(clickEvents.length, 1);
