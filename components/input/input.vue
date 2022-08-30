@@ -117,7 +117,7 @@ import { DtValidationMessages } from '../validation_messages';
 import { MessagesMixin } from '@/common/mixins/input.js';
 
 /**
- * @property {Boolean} placeholder attribute
+ * @property {String} placeholder attribute
  */
 export default {
   name: 'DtInput',
