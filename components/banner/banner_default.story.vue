@@ -18,6 +18,9 @@
       :hide-close="$attrs.hideClose"
       :close-button-props="buttonCloseProps"
       :class="{ 'd-ps-sticky': $attrs.show }"
+      :hide-icon="$attrs.hideIcon"
+      :background-image="$attrs.backgroundImage"
+      :dialog-class="$attrs.dialogClass"
       @close="displayBanner = false; $attrs.onClose($event)"
     >
       <span
@@ -72,8 +75,6 @@ export default {
   components: { DtBanner, DtButton },
 
   mixins: [icon],
-
-  inheritAttrs: false,
 
   data () {
     return {
