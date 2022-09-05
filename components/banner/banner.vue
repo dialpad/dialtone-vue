@@ -1,15 +1,18 @@
 <template>
   <aside
     :class="bannerClass"
+    :style="bannerBackgroundImage"
     :role="role"
     @keydown.tab="trapFocus"
   >
     <div
       class="d-banner__dialog"
+      :class="dialogClass"
       :aria-labelledby="titleId"
       :aria-describedby="contentId"
     >
       <dt-notice-icon
+        v-if="!hideIcon"
         :kind="kind"
       >
         <!-- @slot Use a custom icon -->
@@ -130,6 +133,30 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Hides the icon from the notice
+     */
+    hideIcon: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Inner dialog class
+     */
+    dialogClass: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Banner background image
+     */
+    backgroundImage: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: [
@@ -163,6 +190,13 @@ export default {
           'd-banner--pinned': this.pinned,
         },
       ];
+    },
+
+    bannerBackgroundImage () {
+      return 'background-image: url(' + this.backgroundImage + ');' +
+             'background-position: center;' +
+             'background-repeat: no-repeat;' +
+             'background-size: 120%';
     },
   },
 
