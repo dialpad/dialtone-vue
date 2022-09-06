@@ -193,10 +193,10 @@ export default {
     },
 
     bannerBackgroundImage () {
-      return 'background-image: url(' + this.backgroundImage + ');' +
-             'background-position: center;' +
-             'background-repeat: no-repeat;' +
-             'background-size: 120%';
+      return `background-image: url(${this.backgroundImage});
+             background-position: center;
+             background-repeat: no-repeat;
+             background-size: 120%`;
     },
   },
 
