@@ -157,6 +157,15 @@ export default {
       type: String,
       default: '',
     },
+
+    /**
+     * Background image size, follows the background-size CSS property values
+     * https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+     */
+    backgroundSize: {
+      type: String,
+      default: 'cover',
+    },
   },
 
   emits: [
@@ -193,10 +202,10 @@ export default {
     },
 
     bannerBackgroundImage () {
+      if (this.backgroundImage === '') return null;
+
       return `background-image: url(${this.backgroundImage});
-             background-position: center;
-             background-repeat: no-repeat;
-             background-size: 120%`;
+              background-size: ${this.backgroundSize};`;
     },
   },
 

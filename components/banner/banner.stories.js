@@ -71,10 +71,11 @@ Warning.args = { ...Default.args, kind: 'warning' };
 export const Pinned = Template.bind({});
 Pinned.args = { ...Default.args, pinned: true };
 
-export const Custom = Template.bind({});
-Custom.args = {
+export const CustomBackground = Template.bind({});
+CustomBackground.args = {
   ...Default.args,
   backgroundImage,
+  backgroundSize: 'contain',
   title: '',
   action: '',
   hideIcon: true,

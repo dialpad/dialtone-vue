@@ -20,6 +20,7 @@
       :class="{ 'd-ps-sticky': $attrs.show }"
       :hide-icon="$attrs.hideIcon"
       :background-image="$attrs.backgroundImage"
+      :background-size="$attrs.backgroundSize"
       :dialog-class="$attrs.dialogClass"
       @close="displayBanner = false; $attrs.onClose($event)"
     >
