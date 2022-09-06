@@ -20,6 +20,7 @@
       :class="{ 'd-ps-sticky': show }"
       :hide-icon="hideIcon"
       :background-image="backgroundImage"
+      :background-size="backgroundSize"
       :dialog-class="dialogClass"
       @close="displayBanner = false; onClose($event)"
     >
