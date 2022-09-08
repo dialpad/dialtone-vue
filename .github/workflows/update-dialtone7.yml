@@ -3,7 +3,7 @@ name: Update Dialtone 7 branch
 on:
   push:
     branches:
-      - staging
+      - staging-vue3
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -11,7 +11,7 @@ env:
 jobs:
   update_version_7:
     runs-on: ubuntu-latest
-    name: Cherry pick into dialtone7
+    name: Cherry pick into dialtone7-vue3
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -20,7 +20,7 @@ jobs:
       - name: Cherry pick
         uses: carloscastrojumo/github-cherry-pick-action@v1.0.1
         with:
-          branch: dialtone7
+          branch: dialtone7-vue3
           labels: |
             cherry-pick
           reviewers: |
