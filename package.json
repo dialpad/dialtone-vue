@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "3.15.1",
+  "version": "2.25.1",
   "description": "Vue component library for Dialtone components",
   "scripts": {
     "build": "npm run clean && npm run build-main && npm run build-emoji",
@@ -13,7 +13,7 @@
     "build:wc": "vue-cli-service build --target wc-async --name dialtone-vue 'components/**/*[!.story]*.vue'",
     "lint-staged:code": "eslint --fix",
     "lint-staged:docs": "markdownlint --fix",
-    "lint:code": "eslint ./",
+    "lint:code": "esplint ./",
     "lint:docs": "markdownlint '**/*.mdx'",
     "prepublishOnly": "npm run build",
     "release": "semantic-release --no-ci --extends ./release-local.config.js",
@@ -22,6 +22,7 @@
     "storybook:build": "npm run --prefix storybook build",
     "storybook:install": "npm install --prefix storybook",
     "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/**/*.test.js",
+    "test:one": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --colors",
     "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/**/*.test.js",
     "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",
     "install:all": "npm install && npm install --prefix storybook && npm install --prefix generator-dialtone-vue"
@@ -35,6 +36,7 @@
     "./emoji": "./dist/emoji.common.js"
   },
   "dependencies": {
+    "@linusborg/vue-simple-portal": "^0.1.5",
     "emoji-regex": "^10.1.0",
     "emoji-toolkit": "^6.6.0",
     "tippy.js": "^6.3.7"
@@ -42,7 +44,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
-    "@dialpad/dialtone": "^6.39.0",
+    "@dialpad/dialtone": "^6.38.0",
     "@percy/cli": "1.6.4",
     "@percy/storybook": "4.2.1",
     "@semantic-release/changelog": "^6.0.1",
@@ -51,7 +53,7 @@
     "@vue/cli-plugin-eslint": "~5.0.4",
     "@vue/cli-plugin-unit-mocha": "~5.0.4",
     "@vue/cli-service": "~5.0.4",
-    "@vue/test-utils": "^2.0.2",
+    "@vue/test-utils": "1.3",
     "axe-core": "^4.4.2",
     "babel-eslint": "^10.1.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
@@ -63,9 +65,9 @@
     "eslint-plugin-mocha": "^10.0.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-standard": "^5.0.0",
     "eslint-plugin-vue": "^9.1.0",
     "eslint-plugin-vuejs-accessibility": "^1.2.0",
+    "esplint": "^0.10.1",
     "less": "^4.1.2",
     "less-loader": "^7.3.0",
     "lint-staged": "^13.0.0",
@@ -77,13 +79,15 @@
     "semantic-release": "^19.0.2",
     "sinon": "^14.0.0",
     "source-map-support": "^0.5.21",
-    "vue": "^3.2.37",
+    "vue": "^2.6.14",
+    "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
     "vue-docgen-api": "^4.47.0",
+    "vue-template-compiler": "^2.6.14",
     "yo": "^4.3.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=6.39",
-    "vue": ">=3.2"
+    "@dialpad/dialtone": ">=6.34",
+    "vue": ">=2.6"
   },
   "engineStrict": true,
   "engines": {

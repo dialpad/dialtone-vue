@@ -21,12 +21,6 @@ export const argTypesData = {
     },
   },
 
-  variants: {
-    table: {
-      disable: true,
-    },
-  },
-
   // Slots
   content: {
     control: 'text',
@@ -69,8 +63,9 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtCardDefaultTemplate,
 );
 
@@ -96,20 +91,17 @@ Default.parameters = {
 export const WithHeader = DefaultTemplate.bind({});
 WithHeader.args = {
   showHeader: true,
-  variants: true,
 };
 
 export const WithFooter = DefaultTemplate.bind({});
 WithFooter.args = {
   showFooter: true,
-  variants: true,
 };
 
 export const WithHeaderAndFooter = DefaultTemplate.bind({});
 WithHeaderAndFooter.args = {
   showHeader: true,
   showFooter: true,
-  variants: true,
 };
 
 export const WithScrollableContent = DefaultTemplate.bind({});

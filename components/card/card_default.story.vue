@@ -1,66 +1,36 @@
 <template>
   <dt-card
     class="d-w264"
-    :container-class="$attrs.containerClass"
-    :header-class="$attrs.headerClass"
-    :content-class="$attrs.contentClass"
-    :footer-class="$attrs.footerClass"
     :max-height="maxHeight"
   >
     <template
-      v-if="showHeader && variants"
+      v-if="showHeader"
       #header
     >
       <p>Header</p>
-      <dt-button
-        size="xs"
-        importance="clear"
-        aria-label="Menu button"
-      >
-        <template #icon>
-          <icon-menu-vertical />
-        </template>
-      </dt-button>
-    </template>
-    <template
-      v-else-if="$attrs.header"
-      #header
-    >
-      <span v-html="$attrs.header" />
+      <button class="d-btn d-btn--xs d-fc-black-400">
+        <icon-menu-vertical />
+      </button>
     </template>
     <template #content>
-      <div v-if="$attrs.content">
-        <span v-html="$attrs.content" />
-      </div>
-      <div
-        v-else
-        tabindex="0"
-      >
-        <p class="d-fs14 d-fw-bold d-fc-black-800">
-          Lorem ipsum
-        </p>
-        <p class="d-fs12">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-        </p>
-      </div>
+      <p class="d-fs14 d-fw-bold d-fc-black-800">
+        Lorem ipsum
+      </p>
+      <p class="d-fs12">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+      </p>
     </template>
     <template
-      v-if="showFooter & variants"
+      v-if="showFooter"
       #footer
     >
-      <dt-button>
+      <button class="d-btn d-btn--sm d-fc-black-400">
         Button 1
-      </dt-button>
-      <dt-button class="d-ml8">
+      </button>
+      <button class="d-btn d-btn--sm d-fc-black-400">
         Button 2
-      </dt-button>
-    </template>
-    <template
-      v-else-if="$attrs.footer"
-      #footer
-    >
-      <span v-html="$attrs.footer" />
+      </button>
     </template>
   </dt-card>
 </template>
@@ -68,13 +38,11 @@
 <script>
 import DtCard from './card';
 import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
-import { DtButton } from '../button';
 
 export default {
   name: 'DtCardDefault',
   components: {
     DtCard,
-    DtButton,
     IconMenuVertical,
   },
 
@@ -85,11 +53,6 @@ export default {
     },
 
     showFooter: {
-      type: Boolean,
-      default: false,
-    },
-
-    variants: {
       type: Boolean,
       default: false,
     },

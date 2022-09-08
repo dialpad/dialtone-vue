@@ -1,26 +1,17 @@
 <template>
   <div
-    :class="[
-      'd-card',
-      containerClass,
-    ]"
+    class="d-card"
     data-qa="dt-card"
   >
     <div
       v-if="$slots.header"
-      :class="[
-        'd-card__header',
-        headerClass,
-      ]"
+      class="d-card__header"
     >
       <slot name="header" />
     </div>
 
     <div
-      :class="[
-        'd-card__content',
-        contentClass,
-      ]"
+      class="d-card__content"
       :style="{ 'max-height': maxHeight }"
     >
       <slot name="content" />
@@ -28,10 +19,7 @@
 
     <div
       v-if="$slots.footer"
-      :class="[
-        'd-card__footer',
-        footerClass,
-      ]"
+      class="d-card__footer"
     >
       <slot name="footer" />
     </div>
@@ -49,38 +37,6 @@ export default {
     maxHeight: {
       type: String,
       default: null,
-    },
-
-    /**
-     * class for card container.
-     */
-    containerClass: {
-      type: [String, Array, Object],
-      default: '',
-    },
-
-    /**
-     * class for card content.
-     */
-    contentClass: {
-      type: [String, Array, Object],
-      default: '',
-    },
-
-    /**
-     * class for card header.
-     */
-    headerClass: {
-      type: [String, Array, Object],
-      default: '',
-    },
-
-    /**
-     * class for card footer.
-     */
-    footerClass: {
-      type: [String, Array, Object],
-      default: '',
     },
   },
 };
