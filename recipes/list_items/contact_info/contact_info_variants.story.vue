@@ -186,18 +186,72 @@
         </template>
       </dt-recipe-contact-info>
     </div>
+    <div class="d-m32">
+      <p class="d-my16 d-fs14 d-fw-bold">
+        Contact with items in header with right qualifier info
+      </p>
+      <dt-recipe-contact-info
+        :avatar-initials="avatarInitials"
+        :avatar-color="avatarColor"
+      >
+        <template #header-right-qualifier>
+          <div class="d-d-flex d-ai-center">
+            <div class="d-fw-bold d-fs16">
+              Natalie Woods
+            </div>
+            <div class="d-d-flex d-jc-flex-end d-ml6">
+              <dt-avatar
+                size="sm"
+                class="d-bgc-transparent d-svg--size14 d-as-center d-mr6"
+              >
+                <icon-info />
+              </dt-avatar>
+              <dt-chip
+                :interactive="false"
+                :hide-close="true"
+                size="xs"
+              >
+                <template #icon>
+                  <icon-time />
+                </template>
+                <template>
+                  0.13
+                </template>
+              </dt-chip>
+            </div>
+          </div>
+        </template>
+        <template #subtitle>
+          +1 (415) 123-4567
+        </template>
+      </dt-recipe-contact-info>
+    </div>
   </div>
 </template>
 
 <script>
 import DtRecipeContactInfo from './contact_info';
+import DtAvatar from '@/components/avatar/avatar';
 import DtButton from '@/components/button/button';
+import DtChip from '@/components/chip/chip';
 import IconChat from '@dialpad/dialtone/lib/dist/vue/icons/IconChat.vue';
 import IconCheckboxFilled from '@dialpad/dialtone/lib/dist/vue/icons/IconCheckboxFilled';
+import IconInfo from '@dialpad/dialtone/lib/dist/vue/icons/IconInfo';
 import IconMenuHorizontal from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuHorizontal.vue';
+import IconTime from '@dialpad/dialtone/lib/dist/vue/icons/IconTime';
 
 export default {
   name: 'DtRecipeContactInfoVariants',
-  components: { IconChat, IconCheckboxFilled, IconMenuHorizontal, DtButton, DtRecipeContactInfo },
+  components: {
+    IconChat,
+    IconCheckboxFilled,
+    IconInfo,
+    IconMenuHorizontal,
+    IconTime,
+    DtAvatar,
+    DtButton,
+    DtChip,
+    DtRecipeContactInfo,
+  },
 };
 </script>

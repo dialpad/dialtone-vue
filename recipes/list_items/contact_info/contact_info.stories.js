@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeContactInfo from './contact_info';
@@ -42,6 +43,17 @@ export const argTypesData = {
   // Slots
   header: {
     description: 'Slot for header information',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  'header-right-qualifier': {
+    description: 'Slot for header with right hand side qualifier information. Alternate to header.',
     control: 'text',
     table: {
       category: 'slots',
@@ -136,6 +148,26 @@ Default.args = {
     Aerolabs Support
   </div>
 </div>`,
+  'header-right-qualifier': `<div class="d-d-flex d-ai-center">
+  <div class="d-fw-bold d-fs16">
+    Natalie Woods
+  </div>
+  <div class="d-d-flex d-jc-flex-end d-ml6">
+    <dt-chip
+      :interactive="false"
+      :hide-close="true"
+      size="xs"
+    >
+      <template #icon>
+        <icon-time />
+      </template>
+      <template>
+        0.13
+      </template>
+    </dt-chip>
+  </div>
+</div>
+ `,
 };
 
 Default.parameters = {
@@ -310,6 +342,44 @@ Variants.parameters = {
         <dt-button link @click.stop="onConnectToARecord">Connect to a record</dt-button>
       </template>
     </dt-recipe-contact-info>
+  </div>
+  <div class="d-m32">
+    <p class="d-my16 d-fs14 d-fw-bold">Contact with items in right header qualifier info</p>
+    <dt-recipe-contact-info
+      :avatar-initials="avatarInitials"
+      :avatar-color="avatarColor"
+     >
+    <template #header-right-qualifier>
+      <div class="d-d-flex d-ai-center">
+        <div class="d-fw-bold d-fs16">
+          Natalie Woods
+        </div>
+        <div class="d-d-flex d-jc-flex-end d-ml6">
+          <dt-avatar
+            size="sm"
+            class="d-bgc-transparent d-svg--size14 d-as-center d-mr6"
+          >
+            <icon-info />
+          </dt-avatar>
+          <dt-chip
+            :interactive="false"
+            :hide-close="true"
+            size="xs"
+          >
+            <template #icon>
+              <icon-time />
+            </template>
+            <template>
+              0.13
+            </template>
+          </dt-chip>
+        </div>
+      </div>
+    </template>
+    <template #subtitle>
+      +1 (222) 123-4567
+    </template>
+   </dt-recipe-contact-info>
   </div>
 </div>
 `,
