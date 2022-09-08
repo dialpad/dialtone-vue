@@ -70,7 +70,7 @@
     <template #list>
       <div
         ref="list"
-        @mousedown="onMouseDown"
+        @mousedown.prevent
       >
         <slot
           v-if="!loading"
@@ -395,10 +395,6 @@ export default {
           this.navigateBetweenChips(event.target, false);
         }
       }
-    },
-
-    onMouseDown (event) {
-      event.preventDefault();
     },
 
     onInputKeyup (event) {
