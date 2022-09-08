@@ -13,6 +13,13 @@
     </template>
 
     <template
+      v-if="headerRightQualifier"
+      #headerRightQualifier
+    >
+      <span v-html="header" />
+    </template>
+
+    <template
       v-if="subtitle"
       #subtitle
     >
