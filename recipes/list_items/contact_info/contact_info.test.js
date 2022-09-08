@@ -70,6 +70,7 @@ describe('DtRecipeContactInfo Tests', function () {
     attrs = {};
     slots = baseSlotsData;
     provide = {};
+    wrapper.destroy();
   });
 
   describe('Presentation Tests', function () {
@@ -143,6 +144,25 @@ describe('DtRecipeContactInfo Tests', function () {
       });
       it('Should not display user status indicator', function () {
         assert.isFalse(wrapper.find('[data-qa="contact-info-user-status"]').exists());
+      });
+    });
+
+    describe('When header right qualifier is used', function () {
+      beforeEach(async function () {
+        slots = {
+          headerRightQualifier: 'Natalie Woods',
+          subtitle: '+1 (222) 123-4567',
+        };
+        _setWrappers();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('Should display header with right qualifier info', function () {
+        assert.exists(wrapper.vm.$slots.headerRightQualifier);
+        assert.exists(wrapper.vm.$slots.subtitle);
+        assert.notExists(wrapper.vm.$slots.header);
+        assert.strictEqual(wrapper.vm.$slots.subtitle['0'].text, '+1 (222) 123-4567');
+        assert.strictEqual(wrapper.vm.$slots.headerRightQualifier['0'].text, 'Natalie Woods');
       });
     });
   });

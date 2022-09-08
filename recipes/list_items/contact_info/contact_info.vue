@@ -50,8 +50,16 @@
     </template>
     <template #default>
       <div data-qa="contact-info-header">
+        <!-- @slot Slot for header with right qualifier information -->
+        <slot
+          v-if="showHeaderRightQualifier"
+          name="header-right-qualifier"
+        />
         <!-- @slot Slot for header information -->
-        <slot name="header" />
+        <slot
+          v-else
+          name="header"
+        />
       </div>
     </template>
 
@@ -160,6 +168,10 @@ export default {
   computed: {
     showUserStatus () {
       return this.userStatusColor !== 'none';
+    },
+
+    showHeaderRightQualifier () {
+      return !!this.$scopedSlots['header-right-qualifier'];
     },
   },
 };
