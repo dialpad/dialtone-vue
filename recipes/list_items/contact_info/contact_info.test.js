@@ -68,7 +68,6 @@ describe('DtRecipeContactInfo Tests', function () {
     attrs = {};
     slots = baseSlots;
     provide = {};
-    wrapper.destroy();
   });
 
   describe('Presentation Tests', function () {
