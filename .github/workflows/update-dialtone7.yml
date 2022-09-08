@@ -3,7 +3,7 @@ name: Update Dialtone 7 branch
 on:
   pull_request:
     branches:
-      - staging
+      - staging-vue3
     types: ["closed"]
 
 env:
@@ -13,7 +13,7 @@ jobs:
   update_version_7:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    name: Cherry pick into dialtone7
+    name: Cherry pick into dialtone7-vue3
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,7 +22,7 @@ jobs:
       - name: Create PR
         uses: carloscastrojumo/github-cherry-pick-action@v1.0.1
         with:
-          branch: dialtone7
+          branch: dialtone7-vue3
           labels: |
             cherry-pick
           reviewers: |
