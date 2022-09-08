@@ -9,11 +9,11 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 ## Base Style
 
 The contact information component has 4 slots that can be used for the most common use cases,
-**header**, **header-right-qualifier**, **subtitle**, **right** and **bottom** slot.
+**header**, **headerRightQualifier**, **subtitle**, **right** and **bottom** slot.
 
 The **header** slot can be used to display html content or Vue component at header area.
 
-The **header-right-qualifier** slot is used as an alternate to the header slot to display qualifier (or additional)
+The **headerRightQualifier** slot is used as an alternate to the header slot to display qualifier (or additional)
 html content or Vue component. It's used to display the header with additional info. such as call info, call times etc.
 
 The **subtitle** slot can be used to display content below the header slot. The slot has smaller
@@ -283,7 +283,7 @@ import { DtRecipeContactInfo } from '@dialpad/dialtone-vue';
   :avatar-initials="avatarInitials"
   :avatar-color="avatarColor"
 >
-  <template #header-right-qualifier>
+  <template #headerRightQualifier>
     <div class="d-d-flex d-ai-center">
       <div class="d-fw-bold d-fs16">
         Natalie Woods
@@ -303,9 +303,7 @@ import { DtRecipeContactInfo } from '@dialpad/dialtone-vue';
           <template #icon>
             <icon-time />
           </template>
-          <template>
             0.13
-          </template>
         </dt-chip>
       </div>
     </div>

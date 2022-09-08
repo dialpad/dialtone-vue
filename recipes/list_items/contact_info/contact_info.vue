@@ -52,8 +52,8 @@
       <div data-qa="contact-info-header">
         <!-- @slot Slot for header with right qualifier information -->
         <slot
-          v-if="showHeaderRightQualifier"
-          name="header-right-qualifier"
+          v-if="$slots.headerRightQualifier"
+          name="headerRightQualifier"
         />
         <!-- @slot Slot for header information -->
         <slot
@@ -166,10 +166,6 @@ export default {
   computed: {
     showUserStatus () {
       return this.userStatusColor !== 'none';
-    },
-
-    showHeaderRightQualifier () {
-      return !!this.$scopedSlots['header-right-qualifier'];
     },
   },
 };

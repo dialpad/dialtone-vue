@@ -194,7 +194,7 @@
         :avatar-initials="avatarInitials"
         :avatar-color="avatarColor"
       >
-        <template #header-right-qualifier>
+        <template #headerRightQualifier>
           <div class="d-d-flex d-ai-center">
             <div class="d-fw-bold d-fs16">
               Natalie Woods
@@ -214,9 +214,7 @@
                 <template #icon>
                   <icon-time />
                 </template>
-                <template>
-                  0.13
-                </template>
+                0.13
               </dt-chip>
             </div>
           </div>

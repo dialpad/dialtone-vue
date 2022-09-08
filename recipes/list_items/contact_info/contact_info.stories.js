@@ -52,7 +52,7 @@ export const argTypesData = {
     },
   },
 
-  'header-right-qualifier': {
+  headerRightQualifier: {
     description: 'Slot for header with right hand side qualifier information. Alternate to header.',
     control: 'text',
     table: {
@@ -148,7 +148,7 @@ Default.args = {
     Aerolabs Support
   </div>
 </div>`,
-  'header-right-qualifier': `<div class="d-d-flex d-ai-center">
+  headerRightQualifier: `<div class="d-d-flex d-ai-center">
   <div class="d-fw-bold d-fs16">
     Natalie Woods
   </div>
@@ -161,9 +161,7 @@ Default.args = {
       <template #icon>
         <icon-time />
       </template>
-      <template>
         0.13
-      </template>
     </dt-chip>
   </div>
 </div>
@@ -349,7 +347,7 @@ Variants.parameters = {
       :avatar-initials="avatarInitials"
       :avatar-color="avatarColor"
      >
-    <template #header-right-qualifier>
+    <template #headerRightQualifier>
       <div class="d-d-flex d-ai-center">
         <div class="d-fw-bold d-fs16">
           Natalie Woods
@@ -369,9 +367,7 @@ Variants.parameters = {
             <template #icon>
               <icon-time />
             </template>
-            <template>
               0.13
-            </template>
           </dt-chip>
         </div>
       </div>
