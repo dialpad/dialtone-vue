@@ -12,12 +12,14 @@
       #header
     >
       <p>Header</p>
-      <button
-        class="d-btn d-btn--xs d-fc-black-400"
-        name="menu"
+      <dt-button
+        size="xs"
+        importance="clear"
       >
-        <icon-menu-vertical />
-      </button>
+        <template #icon>
+          <icon-menu-vertical />
+        </template>
+      </dt-button>
     </template>
     <template
       v-else
@@ -46,18 +48,12 @@
       v-if="showFooter & variants"
       #footer
     >
-      <button
-        class="d-btn d-btn--sm d-fc-black-400"
-        name="button1"
-      >
+      <dt-button>
         Button 1
-      </button>
-      <button
-        class="d-btn d-btn--sm d-fc-black-500"
-        name="button2"
-      >
+      </dt-button>
+      <dt-button class="d-ml8">
         Button 2
-      </button>
+      </dt-button>
     </template>
     <template
       v-else
@@ -71,11 +67,13 @@
 <script>
 import DtCard from './card';
 import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
+import { DtButton } from '../button';
 
 export default {
   name: 'DtCardDefault',
   components: {
     DtCard,
+    DtButton,
     IconMenuVertical,
   },
 
