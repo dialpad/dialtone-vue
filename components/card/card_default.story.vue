@@ -15,6 +15,7 @@
       <dt-button
         size="xs"
         importance="clear"
+        aria-label="Menu button"
       >
         <template #icon>
           <icon-menu-vertical />
