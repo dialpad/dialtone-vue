@@ -12,7 +12,10 @@
       #header
     >
       <p>Header</p>
-      <button class="d-btn d-btn--xs d-fc-black-400">
+      <button
+        class="d-btn d-btn--xs d-fc-black-400"
+        name="menu"
+      >
         <icon-menu-vertical />
       </button>
     </template>
@@ -50,7 +53,7 @@
         Button 1
       </button>
       <button
-        class="d-btn d-btn--sm d-fc-black-400"
+        class="d-btn d-btn--sm d-fc-black-500"
         name="button2"
       >
         Button 2
