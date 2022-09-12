@@ -23,7 +23,7 @@
       </dt-button>
     </template>
     <template
-      v-else
+      v-else-if="header"
       #header
     >
       <span v-html="header" />
@@ -57,7 +57,7 @@
       </dt-button>
     </template>
     <template
-      v-else
+      v-else-if="footer"
       #footer
     >
       <span v-html="footer" />
