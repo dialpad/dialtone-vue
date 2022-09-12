@@ -65,6 +65,10 @@ export default {
     docs: {
       page: DtCardMdx,
     },
+    controls: {
+      sort: 'requiredFirst',
+    },
+    options: { showPanel: true },
   },
 };
 
