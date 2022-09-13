@@ -107,6 +107,7 @@ export default {
         'd-stack4',
         {
           'dt-recipe-callbar-button--circle': this.circle,
+          'd-btn--icon-only': this.circle,
           'dt-recipe-callbar-button--active': this.active,
           'dt-recipe-callbar-button--danger': this.danger,
         }];
@@ -153,5 +154,9 @@ export default {
 .dt-recipe-callbar-button--danger.dt-recipe-callbar-button--active:hover {
   --button--bgc: hsla(var(--error-color-hsl)  ~' / ' 20%);
   --button--fc: var(--error-color-hover);
+}
+
+.dt-recipe-callbar-button--circle.d-btn--icon-only .d-btn__label {
+  display: none;
 }
 </style>
