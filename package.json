@@ -58,7 +58,7 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "chai": "^4.3.6",
-    "eslint": "^8.23.1",
+    "eslint": "8.22",
     "eslint-config-semistandard": "^17.0.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
