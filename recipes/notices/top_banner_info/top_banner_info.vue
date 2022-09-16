@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-fs11 d-d-flex d-top-banner-info d-jc-space-between d-ai-center"
+    class="d-fs-100 d-d-flex d-top-banner-info d-jc-space-between d-ai-center"
     :class="bannerInfoClass"
     data-qa="banner-info"
   >
