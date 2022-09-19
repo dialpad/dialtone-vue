@@ -10,7 +10,7 @@
     </div>
 
     <div class="d-p8 d-bgc-black-900">
-      <h1 class="d-fc-black-075 d-fs14">
+      <h1 class="d-fc-black-300 d-fs14">
         Inverted style
       </h1>
       <dt-keyboard-shortcut

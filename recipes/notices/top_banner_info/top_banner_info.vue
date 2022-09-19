@@ -40,13 +40,12 @@ export default {
   computed: {
     bannerInfoClass () {
       const bgColors = {
-        green400: 'd-bgc-green-400',
-        green200: 'd-bgc-green-200',
-        red200: 'd-bgc-red-200',
+        green300: 'd-bgc-green-300',
+        green100: 'd-bgc-green-100',
         red100: 'd-bgc-red-100',
-        yellow400: 'd-bgc-yellow-400',
-        yellow200: 'd-bgc-yellow-200',
-        black100: 'd-bgc-black-100',
+        gold200: 'd-bgc-gold-200',
+        gold100: 'd-bgc-gold-100',
+        black100: 'd-bgc-black-400',
         white: 'd-bgc-white',
       };
       return [bgColors[this.colorCode]];
