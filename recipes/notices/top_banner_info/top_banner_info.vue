@@ -30,7 +30,7 @@ export default {
      */
     colorCode: {
       type: String,
-      default: 'green400',
+      default: 'green300',
       validator: function (kind) {
         return COLOR_CODES.includes(kind);
       },
@@ -42,6 +42,7 @@ export default {
       const bgColors = {
         green300: 'd-bgc-green-300',
         green100: 'd-bgc-green-100',
+        red200: 'd-bgc-red-200',
         red100: 'd-bgc-red-100',
         gold200: 'd-bgc-gold-200',
         gold100: 'd-bgc-gold-100',
