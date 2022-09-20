@@ -38,5 +38,28 @@ export const IVR_NODE_LABELS = {
   [IVR_NODE_HANGUP]: 'Hangup',
 };
 
-export const PROMPT_NODES = [IVR_NODE_PROMPT_COLLECT, IVR_NODE_PROMPT_MENU, IVR_NODE_PROMPT_PLAY];
-export const LOGIC_NODES = [IVR_NODE_EXPERT, IVR_NODE_BRANCH, IVR_NODE_GO_TO];
+const IVR_NODE_COLORS = {
+  PROMPT: {
+    normal: 'prompt_node_border_color',
+    selected: 'prompt_node_border_color__selected',
+  },
+  LOGIC: {
+    normal: 'd-bc-purple-200',
+    selected: 'd-bc-purple-500',
+  },
+  TERMINAL: {
+    normal: 'd-bc-red-200',
+    selected: 'd-bc-red-400',
+  },
+};
+
+export const IVR_NODE_COLOR_MAPPING = {
+  [IVR_NODE_PROMPT_MENU]: IVR_NODE_COLORS.PROMPT,
+  [IVR_NODE_PROMPT_COLLECT]: IVR_NODE_COLORS.PROMPT,
+  [IVR_NODE_PROMPT_PLAY]: IVR_NODE_COLORS.PROMPT,
+  [IVR_NODE_EXPERT]: IVR_NODE_COLORS.LOGIC,
+  [IVR_NODE_BRANCH]: IVR_NODE_COLORS.LOGIC,
+  [IVR_NODE_GO_TO]: IVR_NODE_COLORS.LOGIC,
+  [IVR_NODE_TRANSFER]: IVR_NODE_COLORS.TERMINAL,
+  [IVR_NODE_HANGUP]: IVR_NODE_COLORS.TERMINAL,
+};

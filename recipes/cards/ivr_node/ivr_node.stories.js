@@ -7,6 +7,7 @@ import { IVR_NODE_ICON_TYPES } from './ivr_node_constants';
 // Default Prop Values
 export const argsData = {
   menuButtonLabel: 'Node menu',
+  selected: false,
 };
 
 export const argTypesData = {

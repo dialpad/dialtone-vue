@@ -51,9 +51,7 @@
 <script>
 import { DtCard, DtButton } from '@';
 import {
-  PROMPT_NODES,
-  LOGIC_NODES,
-  IVR_NODE_ICON_TYPES,
+  IVR_NODE_ICON_TYPES, IVR_NODE_COLOR_MAPPING,
 } from './ivr_node_constants.js';
 import IvrNodeTopConnector from './ivr_node_top_connector';
 import IvrNodeActions from './ivr_node_actions';
@@ -126,13 +124,8 @@ export default {
     },
 
     headerColor () {
-      if (PROMPT_NODES.includes(this.nodeType)) {
-        // TODO replace with Dialtone 7 blues
-        return this.selected ? 'prompt_node_border_color__selected' : 'prompt_node_border_color';
-      } else if (LOGIC_NODES.includes(this.nodeType)) {
-        return this.selected ? 'd-bc-purple-500' : 'd-bc-purple-200';
-      }
-      return this.selected ? 'd-bc-red-400' : 'd-bc-red-200';
+      const { normal, selected } = IVR_NODE_COLOR_MAPPING[this.nodeType];
+      return this.selected ? selected : normal;
     },
   },
 
