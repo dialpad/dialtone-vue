@@ -8,7 +8,7 @@ import {
 
 // Constants
 const baseProps = {
-  colorCode: 'green400',
+  colorCode: 'green300',
 };
 
 const baseSlots = {
