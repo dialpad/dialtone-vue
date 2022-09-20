@@ -8,7 +8,7 @@ import {
 
 // Constants
 const basePropsData = {
-  colorCode: 'green400',
+  colorCode: 'green300',
 };
 
 describe('DtRecipeTopBannerInfo Tests', function () {

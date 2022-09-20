@@ -39,7 +39,7 @@
     </dt-recipe-top-banner-info>
     <dt-recipe-top-banner-info
       class="d-mb6"
-      color-code="green200"
+      color-code="green100"
     >
       <template slot="left">
         <span class="d-fw-bold"> Ringing... </span>
