@@ -28,7 +28,7 @@
         <dt-avatar>
           <img
             data-qa="dt-avatar-image"
-            src="static/components/avatar/person.png"
+            :src="avatarSrc"
             alt="Person Avatar"
           >
         </dt-avatar>
@@ -72,6 +72,7 @@ import {
 import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch';
 import DtButton from '@/components/button/button';
 import DtAvatar from '@/components/avatar/avatar';
+import avatarImage from './avatar.png';
 
 export default {
   name: 'DtRecipeIvrNodeDefault',
@@ -84,6 +85,9 @@ export default {
   },
 
   computed: {
+    avatarSrc () {
+      return avatarImage;
+    },
 
     items () {
       return [
