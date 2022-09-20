@@ -12,7 +12,7 @@
       content-class="d-bt d-bc-black-075 d-px12 d-pt8 d-pb12"
       :container-class="[
         'd-w100p',
-        { 'd-ba d-bar4 d-baw4': isSelected },
+        { 'd-ba d-bar8 d-baw4': isSelected },
         headerColor,
       ]"
       :header-class="[
