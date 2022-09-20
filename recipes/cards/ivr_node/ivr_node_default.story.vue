@@ -3,7 +3,7 @@
     :node-label="label"
     :node-type="nodeType"
     :drop-down-menu-items="items"
-    :selected="selected"
+    :is-selected="isSelected"
     :menu-button-label="menuButtonLabel"
   >
     <template v-if="expert">

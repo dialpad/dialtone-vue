@@ -7,7 +7,7 @@ import { IVR_NODE_ICON_TYPES } from './ivr_node_constants';
 // Default Prop Values
 export const argsData = {
   menuButtonLabel: 'Node menu',
-  selected: false,
+  isSelected: false,
 };
 
 export const argTypesData = {
@@ -44,7 +44,7 @@ export const argTypesData = {
       options: Object.keys(IVR_NODE_ICON_TYPES),
     },
   },
-  selected: {
+  isSelected: {
     defaultValue: false,
     control: {
       type: 'boolean',
@@ -91,7 +91,7 @@ Default.parameters = {
   :node-label="Hangup"
   :node-type="hangup"
   :drop-down-menu-items="items"
-  :selected="false"
+  :is-selected="false"
   :menu-button-label="'Node menu'"
 >
   <p class="d-fs14 d-fw-bold">Hangup</p>
