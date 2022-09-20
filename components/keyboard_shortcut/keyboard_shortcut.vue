@@ -10,7 +10,7 @@
       'd-px4',
       'd-ba',
       'd-bar4',
-      'd-fs12',
+      'd-fs-100',
       inverted ? 'd-bc-black-500' : 'd-bc-black-400',
     ]"
   >
