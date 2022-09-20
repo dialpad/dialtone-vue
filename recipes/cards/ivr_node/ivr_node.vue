@@ -5,11 +5,23 @@
     <ivr-node-top-connector :is-selected="selected" />
     <dt-card
       content-class="d-bt d-bc-black-075 d-px12 d-pt8 d-pb12"
-      :container-class="containerClasses()"
-      :header-class="headerClasses()"
+      :container-class="[
+        'd-w100p',
+        { 'd-ba d-bar4 d-baw4': selected },
+        headerColor,
+      ]"
+      :header-class="[
+        'd-bt',
+        'd-btw4',
+        'd-p0',
+        headerColor,
+        { 'd-btr4': !selected },
+      ]"
+      data-qa="ivr-node-card"
       @click="clickNode"
     >
       <template #header>
+        <!-- node label and icon section on left of the header -->
         <div class="d-d-flex d-ai-center">
           <dt-button
             :aria-label="nodeType"
@@ -26,23 +38,8 @@
             {{ nodeLabel }}
           </p>
         </div>
-        <dt-dropdown
-          placement="bottom-end"
-        >
-          <template #anchor>
-            <dt-button
-              importance="clear"
-              :aria-label="menuButtonLabel"
-            >
-              <template #icon>
-                <icon-menu-vertical class="d-fc-black-900" />
-              </template>
-            </dt-button>
-          </template>
-          <template #list>
-            <slot name="menuItems" />
-          </template>
-        </dt-dropdown>
+        <!-- node menu for actions like edit, copy, delete -->
+        <ivr-node-actions :dropdown-button-label="menuButtonLabel" />
       </template>
       <template #content>
         <slot />
@@ -52,28 +49,23 @@
 </template>
 
 <script>
-import { DtCard, DtButton, DtDropdown, DtListItem } from '@';
-import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
+import { DtCard, DtButton } from '@';
 import {
-  IVR_NODE_BRANCH,
-  IVR_NODE_EXPERT, IVR_NODE_GO_TO, IVR_NODE_HANGUP,
+  PROMPT_NODES,
+  LOGIC_NODES,
   IVR_NODE_ICON_TYPES,
-  IVR_NODE_PROMPT_COLLECT,
-  IVR_NODE_PROMPT_MENU,
-  IVR_NODE_PROMPT_PLAY, IVR_NODE_TRANSFER,
 } from './ivr_node_constants.js';
 import IvrNodeTopConnector from './ivr_node_top_connector';
+import IvrNodeActions from './ivr_node_actions';
 
 export default {
   name: 'DtRecipeIvrNode',
 
   components: {
-    IconMenuVertical,
     DtCard,
     DtButton,
-    DtDropdown,
-    DtListItem,
     IvrNodeTopConnector,
+    IvrNodeActions,
   },
 
   mixins: [],
@@ -134,36 +126,19 @@ export default {
     },
 
     headerColor () {
-      return this.nodeColors();
+      if (PROMPT_NODES.includes(this.nodeType)) {
+        // TODO replace with Dialtone 7 blues
+        return this.selected ? 'prompt_node_border_color__selected' : 'prompt_node_border_color';
+      } else if (LOGIC_NODES.includes(this.nodeType)) {
+        return this.selected ? 'd-bc-purple-500' : 'd-bc-purple-200';
+      }
+      return this.selected ? 'd-bc-red-400' : 'd-bc-red-200';
     },
   },
 
   watch: {},
 
   methods: {
-    nodeColors () {
-      const promptNodes = [IVR_NODE_PROMPT_COLLECT, IVR_NODE_PROMPT_MENU, IVR_NODE_PROMPT_PLAY];
-      const logicNodes = [IVR_NODE_EXPERT, IVR_NODE_BRANCH, IVR_NODE_GO_TO];
-      const terminalNodes = [IVR_NODE_HANGUP, IVR_NODE_TRANSFER];
-      if (promptNodes.includes(this.nodeType)) {
-        // TODO replace with Dialtone 7 blues
-        return this.selected ? 'prompt_node_border_color__selected' : 'prompt_node_border_color';
-      } else if (logicNodes.includes(this.nodeType)) {
-        return this.selected ? 'd-bc-purple-500' : 'd-bc-purple-200';
-      } else if (terminalNodes.includes(this.nodeType)) {
-        return this.selected ? 'd-bc-red-400' : 'd-bc-red-200';
-      }
-    },
-
-    headerClasses () {
-      const common = ['d-bt d-btw4 d-p0', this.headerColor];
-      return this.selected ? common : [...common, 'd-btr4'];
-    },
-
-    containerClasses () {
-      return this.selected ? `d-w100p d-ba d-bar4 d-baw4 ${this.headerColor}` : 'd-w100p';
-    },
-
     clickNode (event) {
       this.$emit('click', event);
     },
