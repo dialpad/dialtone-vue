@@ -5,7 +5,7 @@
   >
     <div
       v-if="dtmfKey"
-      data-qa="dt-top-connector"
+      data-qa="dt-top-connector-dtmf"
       class="d-zi-base1 d-ai-center d-jc-center d-d-flex
           d-w24 d-h24 d-bar-circle d-bc-purple-800 d-bgc-purple-800
           d-mbn12 d-fc-white d-fs14"
@@ -34,7 +34,6 @@
         headerColor,
         { 'd-btr4': !isSelected },
       ]"
-      data-qa="ivr-node-card"
     >
       <template #header>
         <!-- node label and icon section on left of the header -->
@@ -42,7 +41,7 @@
           <dt-button
             :aria-label="nodeType"
             importance="clear"
-            data-qa="ivr-node-icon"
+            data-qa="dt-ivr-node-icon"
           >
             <template #icon>
               <component
