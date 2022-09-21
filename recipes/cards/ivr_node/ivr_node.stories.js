@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeIvrNode from './ivr_node';
 import DtRecipeIvrNodeMdx from './ivr_node.mdx';
@@ -6,13 +7,14 @@ import { IVR_NODE_ICON_TYPES } from './ivr_node_constants';
 
 // Default Prop Values
 export const argsData = {
-  menuButtonLabel: 'Node menu',
+  onClick: action('click'),
+  menuButtonAriaLabel: 'Node menu',
   isSelected: false,
 };
 
 export const argTypesData = {
   // Slots
-  default: {
+  content: {
     description: 'Slot for card content',
     control: 'text',
     table: {
@@ -38,6 +40,11 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  dtmfKey: {
+    control: {
+      type: 'text',
+    },
+  },
   nodeType: {
     control: {
       type: 'select',
@@ -48,6 +55,20 @@ export const argTypesData = {
     defaultValue: false,
     control: {
       type: 'boolean',
+    },
+  },
+
+  // Action Event Handlers
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
+
+  click: {
+    description: 'IVR node click event',
+    table: {
+      type: { summary: 'event' },
     },
   },
 };

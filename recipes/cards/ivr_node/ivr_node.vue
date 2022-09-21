@@ -1,12 +1,22 @@
 <template>
   <div
     class="d-d-flex d-fd-column d-ai-center ivr_node__width"
-    data-qa="ivr-node-container"
+    v-on="$listeners"
   >
     <div
-      data-qa="top-connector"
-      class="d-zi-base1 d-d-flex d-w8 d-h8 d-bar-circle d-bc-purple-800 d-bgc-purple-800"
-      :class="{ 'ivr-node-top-connector__selected': isSelected, 'ivr-node-top-connector__active': !isSelected }"
+      v-if="dtmfKey"
+      data-qa="dt-top-connector"
+      class="d-zi-base1 d-ai-center d-jc-center d-d-flex
+          d-w24 d-h24 d-bar-circle d-bc-purple-800 d-bgc-purple-800 d-mbn12"
+      :class="{ 'd-mbn16': isSelected }"
+    >
+      <span class="d-fc-white d-fs14">{{ dtmfKey }}</span>
+    </div>
+    <div
+      v-else
+      data-qa="dt-top-connector"
+      class="d-zi-base1 d-d-flex d-w8 d-h8 d-bar-circle d-bc-purple-800 d-bgc-purple-800 d-mbn4"
+      :class="{ 'd-mbn8': isSelected }"
     />
     <dt-card
       content-class="d-bt d-bc-black-075 d-px12 d-pt8 d-pb12"
@@ -16,6 +26,7 @@
         headerColor,
       ]"
       :header-class="[
+        'd-mtn1',
         'd-bt',
         'd-btw4',
         'd-p0',
@@ -23,7 +34,6 @@
         { 'd-btr4': !isSelected },
       ]"
       data-qa="ivr-node-card"
-      @click="clickNode"
     >
       <template #header>
         <!-- node label and icon section on left of the header -->
@@ -49,12 +59,14 @@
         </div>
         <!-- node menu for actions like edit, copy, delete -->
         <dt-dropdown
-          placement="bottom-end"
+          placement="bottom"
+          :open.sync="isOpen"
         >
           <template #anchor>
             <dt-button
               importance="clear"
-              :aria-label="menuButtonLabel"
+              :aria-label="menuButtonAriaLabel"
+              @click.stop.prevent="openMenu"
             >
               <template #icon>
                 <icon-menu-vertical class="d-fc-black-900" />
@@ -62,19 +74,23 @@
             </dt-button>
           </template>
           <template #list>
-            <slot name="menuItems" />
+            <div class="d-w164">
+              <slot name="menuItems" />
+            </div>
           </template>
         </dt-dropdown>
       </template>
       <template #content>
-        <slot />
+        <slot name="content" />
       </template>
     </dt-card>
   </div>
 </template>
 
 <script>
-import { DtCard, DtButton, DtDropdown } from '@';
+import DtCard from '@/components/card/card';
+import DtButton from '@/components/button/button';
+import DtDropdown from '@/components/dropdown/dropdown';
 import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
 import {
   IVR_NODE_ICON_TYPES, IVR_NODE_COLOR_MAPPING,
@@ -89,8 +105,6 @@ export default {
     DtDropdown,
     IconMenuVertical,
   },
-
-  mixins: [],
 
   props: {
 
@@ -120,11 +134,19 @@ export default {
     },
 
     /**
-     * Translated string for header menu button
+     * Translated aria-label for header menu button
      */
-    menuButtonLabel: {
+    menuButtonAriaLabel: {
       type: String,
       required: true,
+    },
+
+    /**
+     * DTMF input
+     */
+    dtmfKey: {
+      type: String,
+      default: null,
     },
   },
 
@@ -139,7 +161,9 @@ export default {
   ],
 
   data () {
-    return {};
+    return {
+      isOpen: false,
+    };
   },
 
   computed: {
@@ -153,11 +177,9 @@ export default {
     },
   },
 
-  watch: {},
-
   methods: {
-    clickNode (event) {
-      this.$emit('click', event);
+    openMenu () {
+      this.isOpen = true;
     },
   },
 };
@@ -166,13 +188,6 @@ export default {
 <style lang="less">
 .ivr_node__width {
   width: 280px;
-}
-.ivr-node-top-connector__active {
-  margin-bottom: -4px;
-}
-
-.ivr-node-top-connector__selected {
-  margin-bottom: -8px;
 }
 // TODO remove when Dialtone 7 releases.
 .prompt_node_border_color {

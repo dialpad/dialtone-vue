@@ -2,59 +2,103 @@
   <dt-recipe-ivr-node
     :node-label="label"
     :node-type="nodeType"
-    :drop-down-menu-items="items"
-    :is-selected="isSelected"
-    :menu-button-label="menuButtonLabel"
+    :is-selected="isNodeSelected"
+    :dtmf-key="dtmfKey"
+    :menu-button-aria-label="menuButtonAriaLabel"
+    @click="onClick($event)"
   >
-    <template v-if="expert">
-      <p class="d-fs14 d-fw-bold">
-        Account Issues
-      </p>
-      <p class="d-fs14">
-        19 Nodes
-      </p>
-      <dt-button
-        importance="clear"
-        icon-position="right"
-      >
-        Launch Expert
-        <template #icon>
-          <icon-launch />
-        </template>
-      </dt-button>
+    <template
+      v-if="content"
+      #content
+    >
+      <span v-html="content" />
     </template>
-    <template v-if="transfer">
-      <div class="d-d-flex d-ai-center d-gg8">
-        <dt-avatar>
-          <img
-            data-qa="dt-avatar-image"
-            :src="avatarSrc"
-            alt="Person Avatar"
-          >
-        </dt-avatar>
-        <p>Carolina Garcia Rodriguez</p>
+    <template
+      v-else
+      #content
+    >
+      <div v-if="expert">
+        <p class="d-fs14 d-fw-bold">
+          Account Issues
+        </p>
+        <p class="d-fs14">
+          19 Nodes
+        </p>
+        <dt-button
+          importance="clear"
+          icon-position="right"
+        >
+          Launch Expert
+          <template #icon>
+            <icon-launch />
+          </template>
+        </dt-button>
+      </div>
+      <div v-if="transfer">
+        <div class="d-d-flex d-ai-center d-gg8">
+          <dt-avatar>
+            <img
+              data-qa="dt-avatar-image"
+              :src="avatarSrc"
+              alt="Person Avatar"
+            >
+          </dt-avatar>
+          <p>Carolina Garcia Rodriguez</p>
+        </div>
+      </div>
+      <div v-if="hangup || branch || goTo">
+        <p class="d-fs14 d-fw-bold">
+          Name
+        </p>
+        <p class="d-fs14">
+          Description
+        </p>
+      </div>
+      <div v-if="play">
+        <p class="d-fs14 d-fc-purple-700">
+          2022-Greeting.mp3
+        </p>
+      </div>
+      <div v-if="collect || menu">
+        <p class="d-fs14 d-fw-bold">
+          {{ label }} prompt
+        </p>
+        <p class="d-fs14 d-fc-purple-700">
+          {{ fileName }}
+        </p>
       </div>
     </template>
-    <template v-if="hangup || branch || goTo">
-      <p class="d-fs14 d-fw-bold">
-        Name
-      </p>
-      <p class="d-fs14">
-        Description
-      </p>
+    <template
+      v-if="menuItems"
+      #menuItems
+    >
+      <span v-html="menuItems" />
     </template>
-    <template v-if="play">
-      <p class="d-fs14 d-fc-purple-700">
-        2022-Greeting.mp3
-      </p>
-    </template>
-    <template v-if="collect || menu">
-      <p class="d-fs14 d-fw-bold">
-        {{ label }} prompt
-      </p>
-      <p class="d-fs14 d-fc-purple-700">
-        {{ fileName }}
-      </p>
+    <template
+      v-else
+      #menuItems
+    >
+      <dt-list-item>
+        Edit
+      </dt-list-item>
+      <dt-list-item>
+        Copy
+        <template #right>
+          <dt-keyboard-shortcut
+            screen-reader-text="Ctrl and C"
+            shortcut="Ctrl + C"
+          />
+        </template>
+      </dt-list-item>
+      <dt-list-item>
+        Delete
+        <template #right>
+          <dt-keyboard-shortcut
+            screen-reader-text="Delete"
+            shortcut="Del"
+          />
+        </template>
+      </dt-list-item>
     </template>
   </dt-recipe-ivr-node>
 </template>
@@ -72,16 +116,24 @@ import {
 import IconLaunch from '@dialpad/dialtone/lib/dist/vue/icons/IconLaunch';
 import DtButton from '@/components/button/button';
 import DtAvatar from '@/components/avatar/avatar';
+import DtListItem from '@/components/list_item/list_item';
+import DtKeyboardShortcut from '@/components/keyboard_shortcut/keyboard_shortcut';
 import avatarImage from './avatar.png';
 
 export default {
   name: 'DtRecipeIvrNodeDefault',
-  components: { DtButton, DtRecipeIvrNode, IconLaunch, DtAvatar },
+  components: { DtButton, DtRecipeIvrNode, IconLaunch, DtAvatar, DtListItem, DtKeyboardShortcut },
   props: {
     nodeType: {
       type: String,
       default: null,
     },
+  },
+
+  data () {
+    return {
+      isNodeSelected: this.isSelected,
+    };
   },
 
   computed: {
@@ -130,7 +182,7 @@ export default {
     },
 
     label () {
-      return IVR_NODE_LABELS[this.nodeType];
+      return this.nodeLabel || IVR_NODE_LABELS[this.nodeType];
     },
 
     fileName () {
