@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-d-flex d-fd-column d-ai-center ivr_node__width"
+    class="d-d-flex d-fd-column d-ai-center ivr_node__width d-pe-auto d-c-pointer"
     v-on="$listeners"
   >
     <div
