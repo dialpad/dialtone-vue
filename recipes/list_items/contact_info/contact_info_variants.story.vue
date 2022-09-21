@@ -11,7 +11,7 @@
             <div class="d-fs-200 d-fw-bold d-mr4">
               +1 (415) 123-4567
             </div>
-            <icon-checkbox-filled class="d-fc-black-400 d-svg--size14" />
+            <icon-checkbox-filled class="d-fc-black-500 d-svg--size14" />
           </div>
         </template>
         <template #subtitle>
@@ -34,7 +34,7 @@
         <template #subtitle>
           <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
           <div
-            class="d-fc-red-500"
+            class="d-fc-red-300"
             @click.stop="onMarkAsSpam"
           >
             Mark as spam
@@ -64,12 +64,12 @@
               <div class="d-fs-100 d-mt2">
                 +1 (415) 123-4567
               </div>
-              <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+              <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
             </div>
           </template>
           <template #bottom>
             <div class="d-d-flex d-ai-center d-mtn6">
-              <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">
+              <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
                 &nbsp;
               </div>
               <div class="d-fs-100 d-mr4">
@@ -97,12 +97,12 @@
             <div class="d-fs-100 d-mt2">
               +1 (415) 123-4567
             </div>
-            <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+            <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
           </div>
         </template>
         <template #bottom>
           <div class="d-d-flex d-ai-center d-mtn6">
-            <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">
+            <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
               &nbsp;
             </div>
             <div class="d-fs-100 d-mr4">
@@ -135,12 +135,12 @@
             <div class="d-fs-100 d-mt2">
               +1 (415) 123-4567
             </div>
-            <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+            <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
           </div>
         </template>
         <template #bottom>
           <div class="d-d-flex d-ai-center d-mtn6">
-            <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">
+            <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
               &nbsp;
             </div>
             <div class="d-fs-100 d-mr4">
