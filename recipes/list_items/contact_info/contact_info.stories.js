@@ -129,7 +129,7 @@ Default.args = {
   +1 (415) 123-4567
 </div>`,
   bottom: `<div class="d-d-flex d-ai-center d-mtn6">
-  <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">
+  <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
     &nbsp;
   </div>
   <div class="d-fs-100 d-mr4">
@@ -152,12 +152,12 @@ Default.parameters = {
   <template #subtitle>
     <div class="d-d-flex d-ai-center">
       <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-      <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+      <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
     </div>
   </template>
   <template #bottom>
     <div class="d-d-flex d-ai-center d-mtn6">
-      <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
+      <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
       <div class="d-fs-100 d-mr4">Aerolabs Support</div>
     </div>
   </template>
@@ -186,7 +186,7 @@ export const Variants = VariantsTemplate.bind({});
 Variants.args = {
   avatarInitials: 'NW',
   avatarColor: 'orange-500',
-  userStatusColor: 'yellow',
+  userStatusColor: 'gold',
   onGroupContactClick: action('click: clickable group contact'),
   onMarkAsSpam: action('click: mark this contact as spam'),
   onConnectToARecord: action('click: connect to a record'),
@@ -203,7 +203,7 @@ Variants.parameters = {
       <template #header>
         <div class="d-d-flex d-ai-center d-mb2">
           <div class="d-fs-200 d-fw-bold d-mr4">+1 (415) 123-4567</div>
-          <icon-checkbox-filled class="d-fc-black-400 d-svg--size14" />
+          <icon-checkbox-filled class="d-fc-black-500 d-svg--size14" />
         </div>
       </template>
       <template #subtitle>San Francisco, California</template>
@@ -218,7 +218,7 @@ Variants.parameters = {
         </div>
       </template>
       <template #subtitle>
-        <div class="d-fc-red-500" @click.stop="onMarkAsSpam">Mark as spam</div>
+        <div class="d-fc-red-300" @click.stop="onMarkAsSpam">Mark as spam</div>
       </template>
     </dt-recipe-contact-info>
   </div>
@@ -236,12 +236,12 @@ Variants.parameters = {
         <template #subtitle>
           <div class="d-d-flex d-ai-center">
             <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-            <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+            <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
           </div>
         </template>
         <template #bottom>
           <div class="d-d-flex d-ai-center d-mtn6">
-            <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
+            <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
             <div class="d-fs-100 d-mr4">Aerolabs Support</div>
           </div>
         </template>
@@ -255,12 +255,12 @@ Variants.parameters = {
       <template #subtitle>
         <div class="d-d-flex d-ai-center">
           <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-          <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+          <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
         </div>
       </template>
       <template #bottom>
         <div class="d-d-flex d-ai-center d-mtn6">
-          <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
+          <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
           <div class="d-fs-100 d-mr4">Aerolabs Support</div>
           <div class="d-fw-bold d-fs-100">• Transfer from Billing Support</div>
         </div>
@@ -279,12 +279,12 @@ Variants.parameters = {
       <template #subtitle>
         <div class="d-d-flex d-ai-center">
           <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-          <icon-checkbox-filled class="d-fc-black-400 d-svg--size14 d-va-text-bottom" />
+          <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
         </div>
       </template>
       <template #bottom>
         <div class="d-d-flex d-ai-center d-mtn6">
-          <div class="d-w8 d-h8 d-mr4 d-bgc-pink-400">&nbsp;</div>
+          <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
           <div class="d-fs-100 d-mr4">Aerolabs Support</div>
         </div>
       </template>
