@@ -1,16 +1,17 @@
 <template>
   <div
-    class="d-d-flex d-fd-column d-ai-center ivr_node__width d-pe-auto d-c-pointer"
+    class="d-d-flex d-fd-column d-ai-center d-c-pointer ivr_node__width"
     v-on="$listeners"
   >
     <div
       v-if="dtmfKey"
       data-qa="dt-top-connector"
       class="d-zi-base1 d-ai-center d-jc-center d-d-flex
-          d-w24 d-h24 d-bar-circle d-bc-purple-800 d-bgc-purple-800 d-mbn12"
+          d-w24 d-h24 d-bar-circle d-bc-purple-800 d-bgc-purple-800
+          d-mbn12 d-fc-white d-fs14"
       :class="{ 'd-mbn16': isSelected }"
     >
-      <span class="d-fc-white d-fs14">{{ dtmfKey }}</span>
+      {{ dtmfKey }}
     </div>
     <div
       v-else
