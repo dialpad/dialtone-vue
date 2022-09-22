@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtRecipeIvrNode from './ivr_node.vue';
 import {
   IVR_NODE_COLOR_MAPPING, IVR_NODE_HANGUP, IVR_NODE_LABELS,
@@ -26,7 +26,6 @@ describe('DtPagination Tests', function () {
   // Environment
   let propsData = basePropsData;
   let slots = baseSlots;
-  let listeners;
 
   // Helpers
   const _setChildWrappers = () => {
@@ -38,16 +37,9 @@ describe('DtPagination Tests', function () {
     wrapper = mount(DtRecipeIvrNode, {
       propsData,
       slots,
-      listeners,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
-
-  // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
 
   // Teardown
   afterEach(function () {
