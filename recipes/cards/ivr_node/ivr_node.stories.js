@@ -162,3 +162,15 @@ export const Hangup = DefaultTemplate.bind({});
 Hangup.args = {
   nodeType: 'hangup',
 };
+
+export const SelectedNode = DefaultTemplate.bind({});
+SelectedNode.args = {
+  nodeType: 'promptmenu',
+  isSelected: true,
+};
+
+export const NodeWithDtmf = DefaultTemplate.bind({});
+NodeWithDtmf.args = {
+  nodeType: 'transfer',
+  dtmfKey: '1',
+};
