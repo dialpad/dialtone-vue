@@ -102,7 +102,7 @@ describe('DtPagination Tests', function () {
         await nodeIcon.trigger('click');
       });
       it('should emit click event', function () {
-        assert.equal(wrapper.emitted().click);
+        assert.property(wrapper.emitted(), 'click');
       });
     });
   });

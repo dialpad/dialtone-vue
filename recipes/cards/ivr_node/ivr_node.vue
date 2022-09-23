@@ -1,7 +1,7 @@
 <template>
   <div
     class="d-d-flex d-fd-column d-ai-center d-c-pointer ivr_node__width"
-    v-on="$listeners"
+    v-on="nodeListeners"
   >
     <div
       v-if="dtmfKey"
@@ -167,6 +167,12 @@ export default {
   },
 
   computed: {
+    nodeListeners () {
+      return {
+        click: (e) => this.$emit('click', e),
+      };
+    },
+
     nodeIcon () {
       return IVR_NODE_ICON_TYPES[this.nodeType];
     },
