@@ -1,3 +1,17 @@
+# [2.27.0](https://github.com/dialpad/dialtone-vue/compare/v2.26.1...v2.27.0) (2022-09-23)
+
+
+### Features
+
+* dt-recipe-ivr-node ([#512](https://github.com/dialpad/dialtone-vue/issues/512)) ([321715c](https://github.com/dialpad/dialtone-vue/commit/321715c26637dbf0ebe741efe7bead21a1d693b2))
+
+## [2.26.1](https://github.com/dialpad/dialtone-vue/compare/v2.26.0...v2.26.1) (2022-09-21)
+
+
+### Bug Fixes
+
+* css specificity in callbar button ([8c9f023](https://github.com/dialpad/dialtone-vue/commit/8c9f0233a6a7124836b6cf5b3f2790b4b760ae6e))
+
 # [2.26.0](https://github.com/dialpad/dialtone-vue/compare/v2.25.1...v2.26.0) (2022-09-13)
 
 
