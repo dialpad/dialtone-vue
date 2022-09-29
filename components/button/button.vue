@@ -103,7 +103,7 @@ export default {
 
     /**
      * The color of the link and button if the button is styled as a link.
-     * @values danger, dark, default, success, warning
+     * @values default, warning, danger, success, muted, inverted
      * @see https://dialpad.design/components/link.html
      */
     linkKind: {
@@ -178,7 +178,7 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, danger, inverted
+     * @values default, muted, danger, inverted
      */
     kind: {
       type: String,
