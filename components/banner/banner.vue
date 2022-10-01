@@ -16,7 +16,7 @@
         :kind="kind"
         v-on="$listeners"
       >
-        <!-- @slot Use a custom icon -->
+        <!-- @slot Slot for custom icon -->
         <slot name="icon" />
       </dt-notice-icon>
       <dt-notice-content
