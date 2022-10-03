@@ -5,11 +5,15 @@ const focusableElementsList = `button,[href],input,select,textarea,details,[tabi
 /**
  * This mixin provides the methods to automatically trap tab focus within
  * the component this mixin is on, meaning it is not possible to tab out
- * of the component without dismissing it. Useful for accessibility reasons
- * on things like important actionable alerts. Use focusFirstElement to
- * focus on the first tabbable element within your component, and call
+ * of the component without dismissing it.
+ *
+ * Useful for accessibility reasons on things like important actionable alerts.
+ *
+ * Use focusFirstElement to focus on the first tabbable element within your component, and call
  * focusTrappedTabPress every time tab is pressed to trap tab within this
- * component. Note that focusFirstElement WILL focus elements with tabindex="-1",
+ * component.
+ *
+ * Note that focusFirstElement WILL focus elements with tabindex="-1",
  * however focusTrappedTabPress will not.
  * @displayName Modal Mixin
  */

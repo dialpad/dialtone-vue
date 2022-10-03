@@ -70,7 +70,7 @@ export default {
     /**
      * Additional class name for the emoji img element.
      * Can accept String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
+     * same API as Vue's built-in handling of the class attribute.
      */
     imgClass: {
       type: [String, Object, Array],
@@ -171,5 +171,3 @@ export default {
   },
 };
 </script>
-
-<!-- TODO: Replace @values with values instead of keys -->
