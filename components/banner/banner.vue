@@ -15,7 +15,7 @@
         v-if="!hideIcon"
         :kind="kind"
       >
-        <!-- @slot Use a custom icon -->
+        <!-- @slot Slot for custom icon -->
         <slot name="icon" />
       </dt-notice-icon>
       <dt-notice-content
