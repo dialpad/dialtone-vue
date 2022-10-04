@@ -100,6 +100,16 @@ export default {
     },
   },
 
+  emits: [
+    /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+  ],
+
   computed: {
     callbarButtonClass () {
       return [

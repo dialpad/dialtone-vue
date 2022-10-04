@@ -203,7 +203,21 @@ export default {
     },
   },
 
-  emits: ['update:open', 'opened'],
+  emits: [
+    /**
+     * Event fired to sync the open prop with the parent component
+     * @event update:open
+     */
+    'update:open',
+
+    /**
+     * Event fired when the content is shown or hidden
+     *
+     * @event opened
+     * @type {Boolean}
+     */
+    'opened',
+  ],
 
   data () {
     return {
