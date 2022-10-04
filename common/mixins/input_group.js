@@ -123,7 +123,7 @@ export const InputGroupMixin = {
      * Native input event
      *
      * @event input
-     * @type {Boolean}
+     * @type {KeyboardEvent}
      */
     'input',
   ],
