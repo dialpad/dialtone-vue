@@ -7,7 +7,6 @@ export const BASE_TIPPY_DIRECTIONS = [
   'right', 'right-start', 'right-end',
   'left', 'left-start', 'left-end',
   'top', 'top-start', 'top-end',
-  'auto', 'auto-start', 'auto-end',
 ];
 
 export const TIPPY_STICKY_VALUES = [true, false, 'reference', 'popper'];
