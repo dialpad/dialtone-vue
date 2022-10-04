@@ -118,7 +118,15 @@ export const InputGroupMixin = {
     },
   },
 
-  emits: ['input'],
+  emits: [
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {Boolean}
+     */
+    'input',
+  ],
 
   data () {
     const formattedMessages = formatMessages(this.messages);

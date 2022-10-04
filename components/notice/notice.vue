@@ -141,6 +141,13 @@ export default {
      * @event close
      */
     'close',
+
+    /**
+     * Native button click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
     'click',
   ],
 

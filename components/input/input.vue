@@ -289,6 +289,10 @@ export default {
      */
     'focusout',
 
+    /**
+     * Event fired to sync the modelValue prop with the parent component
+     * @event update:modelValue
+     */
     'update:modelValue',
 
     /**

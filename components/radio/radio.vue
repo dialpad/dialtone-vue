@@ -89,6 +89,12 @@ export default {
      */
     'input',
 
+    /**
+     * Native input focus event
+     *
+     * @event focus
+     * @type {FocusEvent}
+     */
     'focus',
 
     /**
@@ -107,6 +113,12 @@ export default {
      */
     'focusout',
 
+    /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
     'click',
   ],
 

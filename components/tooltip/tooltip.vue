@@ -185,7 +185,10 @@ export default {
   },
 
   emits: [
-
+    /**
+     * Event fired to sync the show prop with the parent component
+     * @event update:show
+     */
     'update:show',
 
     /**
