@@ -1,13 +1,13 @@
 <template>
   <dt-recipe-callbar-button
-    :id="id"
-    :active="active"
-    :aria-label="ariaLabel"
-    :circle="circle"
-    :disabled="disabled"
-    :danger="danger"
-    :button-class="buttonClass"
-    @click="onClick"
+    :id="$attrs.id"
+    :active="$attrs.active"
+    :aria-label="$attrs.ariaLabel"
+    :circle="$attrs.circle"
+    :disabled="$attrs.disabled"
+    :danger="$attrs.danger"
+    :button-class="$attrs.buttonClass"
+    @click="$attrs.onClick"
   >
     <template
       v-if="$attrs.tooltip"
