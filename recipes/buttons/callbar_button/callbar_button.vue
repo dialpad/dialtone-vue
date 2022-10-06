@@ -106,19 +106,11 @@ export default {
     },
 
     /**
-     * The height of button when it is not circle styling. Possible units rem|px|em
+     * Additional class name for the button wrapper element.
      */
-    height: {
-      type: String,
-      default: '6.2rem',
-    },
-
-    /**
-     * The width of button when it is not circle styling. Possible units rem|px|em
-     */
-    width: {
-      type: String,
-      default: '8rem',
+    buttonClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 
@@ -135,6 +127,7 @@ export default {
   computed: {
     callbarButtonClass () {
       return [
+        this.buttonClass,
         'dt-recipe-callbar-button',
         'd-stack4',
         {

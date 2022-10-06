@@ -6,8 +6,7 @@
     :circle="circle"
     :disabled="disabled"
     :danger="danger"
-    :height="height"
-    :width="width"
+    :button-class="buttonClass"
     @click="onClick"
   >
     <template
