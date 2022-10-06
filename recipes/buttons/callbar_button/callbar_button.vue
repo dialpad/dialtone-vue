@@ -12,10 +12,6 @@
         :aria-label="ariaLabel"
         label-class="d-fs11"
         :class="callbarButtonClass"
-        :style="[circle ? {} : {
-          'height': height,
-          'width': width,
-        }]"
         v-on="$listeners"
       >
         <slot />
