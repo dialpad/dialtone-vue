@@ -11,6 +11,7 @@
         :disabled="disabled"
         :aria-label="ariaLabel"
         label-class="d-fs11"
+        width="8.4rem"
         :class="callbarButtonClass"
         v-on="$listeners"
       >
