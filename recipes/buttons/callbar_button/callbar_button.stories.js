@@ -32,6 +32,22 @@ export const argTypesData = {
   disabled: {
     control: 'boolean',
   },
+  width: {
+    table: {
+      type: {
+        summary: 'text',
+        defaultValue: { summary: '8rem' },
+      },
+    },
+  },
+  height: {
+    table: {
+      type: {
+        summary: 'text',
+        defaultValue: { summary: '6.2rem' },
+      },
+    },
+  },
 
   // Slots
   default: {
