@@ -32,19 +32,10 @@ export const argTypesData = {
   disabled: {
     control: 'boolean',
   },
-  width: {
+  buttonClass: {
     table: {
       type: {
-        summary: 'text',
-        defaultValue: { summary: '8rem' },
-      },
-    },
-  },
-  height: {
-    table: {
-      type: {
-        summary: 'text',
-        defaultValue: { summary: '6.2rem' },
+        summary: ['string', 'array', 'object'],
       },
     },
   },
