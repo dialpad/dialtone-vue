@@ -12,6 +12,10 @@
         :aria-label="ariaLabel"
         label-class="d-fs11"
         :class="callbarButtonClass"
+        :style="[circle ? {} : {
+          'height': height,
+          'width': width,
+        }]"
         v-on="$listeners"
       >
         <slot />
@@ -100,6 +104,22 @@ export default {
         return label || this.$slots.default;
       },
     },
+
+    /**
+     * The height of button when it is not circle styling. Possible units rem|px|em
+     */
+    height: {
+      type: String,
+      default: '6.2rem',
+    },
+
+    /**
+     * The width of button when it is not circle styling. Possible units rem|px|em
+     */
+    width: {
+      type: String,
+      default: '8rem',
+    },
   },
 
   emits: [
@@ -129,8 +149,6 @@ export default {
 
 <style lang="less">
 .dt-recipe-callbar-button:not(.dt-recipe-callbar-button--circle) {
-  width: 8rem;
-  height: 6.2rem;
   letter-spacing: -0.011rem;
   line-height: 1.6rem;
 }
