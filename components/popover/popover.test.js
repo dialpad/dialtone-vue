@@ -40,7 +40,7 @@ describe('DtPopover Tests', function () {
     headerContent = wrapper.findComponent({ ref: 'popover__header' });
     footerContent = wrapper.findComponent({ ref: 'popover__footer' });
     closeButton = popoverWindow.find('[data-qa="dt-popover-close"]');
-    srOnlyCloseButton = wrapper.find('[data-qa="dt-popover-sr-only-close"]');
+    srOnlyCloseButton = popoverWindow.find('[data-qa="dt-popover-sr-only-close"]');
   };
 
   const _mountWrapper = () => {
