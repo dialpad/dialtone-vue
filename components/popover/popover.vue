@@ -97,9 +97,7 @@
             v-if="visuallyHiddenClose"
             data-qa="dt-popover-sr-only-close"
             class="d-vi-visible-sr"
-            importance="outlined"
             :aria-label="visuallyHiddenCloseLabel"
-            :circle="true"
             @click="closePopover"
           >
             <icon-close />
@@ -142,7 +140,7 @@ import {
   createTippy,
   getPopperOptions,
 } from './tippy_utils';
-import { DtButton } from '../button/index.js';
+import { DtButton } from '../button';
 import PopoverHeaderFooter from './popover_header_footer';
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 
