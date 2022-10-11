@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtRecipeGroupedChip from './grouped_chip.vue';
 import IconTime from '@dialpad/dialtone/lib/dist/vue/icons/IconTime.vue';
 import IconPause from '@dialpad/dialtone/lib/dist/vue/icons/IconPause.vue';
@@ -45,14 +45,12 @@ describe('DtRecipeGroupedChip Tests', function () {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
   before(function () {
-    this.localVue = createLocalVue();
   });
 
   // Teardown
