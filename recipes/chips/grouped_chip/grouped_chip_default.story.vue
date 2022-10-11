@@ -3,7 +3,7 @@
     <!-- Left hand Chip -->
     <template
       v-if="leftIcon"
-      slot="leftIcon"
+      #leftIcon
     >
       <component :is="leftIcon" />
     </template>
@@ -13,7 +13,7 @@
     <!-- Right hand Chip -->
     <template
       v-if="rightIcon"
-      slot="rightIcon"
+      #rightIcon
     >
       <component :is="rightIcon" />
     </template>
