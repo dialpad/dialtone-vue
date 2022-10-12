@@ -1,3 +1,89 @@
+# [2.30.0](https://github.com/dialpad/dialtone-vue/compare/v2.29.2...v2.30.0) (2022-10-11)
+
+
+### Features
+
+* dp-57015 grouped chip recipe ([#527](https://github.com/dialpad/dialtone-vue/issues/527)) ([3d7b4c5](https://github.com/dialpad/dialtone-vue/commit/3d7b4c5311d9456bebdd2de82ab6b82c8e41c615))
+
+## [2.29.2](https://github.com/dialpad/dialtone-vue/compare/v2.29.1...v2.29.2) (2022-10-11)
+
+
+### Bug Fixes
+
+* input styling and wrapper classes ([#535](https://github.com/dialpad/dialtone-vue/issues/535)) ([2efe225](https://github.com/dialpad/dialtone-vue/commit/2efe2251bb14caaeca768e34e1ec38777eba5b86))
+* migrate ivr_node to dialtone7 ([#547](https://github.com/dialpad/dialtone-vue/issues/547)) ([69a046b](https://github.com/dialpad/dialtone-vue/commit/69a046b89df0504daf6421e6f1eeae790c6fb35f))
+
+## [2.29.1](https://github.com/dialpad/dialtone-vue/compare/v2.29.0...v2.29.1) (2022-10-11)
+
+
+### Bug Fixes
+
+* replace class with color prop ([1012f96](https://github.com/dialpad/dialtone-vue/commit/1012f9619e15b0f13df9e5a1eb320668b0776c8d))
+
+# [2.29.0](https://github.com/dialpad/dialtone-vue/compare/v2.28.0...v2.29.0) (2022-10-11)
+
+
+### Bug Fixes
+
+* dt-631 remove primary-color from dialtone vue ([#519](https://github.com/dialpad/dialtone-vue/issues/519)) ([5219b77](https://github.com/dialpad/dialtone-vue/commit/5219b779c18107b4e854519a02341d54eb525f86))
+* **emoji:** dynamic import fix ([#443](https://github.com/dialpad/dialtone-vue/issues/443)) ([157b315](https://github.com/dialpad/dialtone-vue/commit/157b3153a0c97196a8a79a57539e70a715477dc1))
+* **emoji:** dynamic import fix ([#443](https://github.com/dialpad/dialtone-vue/issues/443)) ([4e86e70](https://github.com/dialpad/dialtone-vue/commit/4e86e70945eec2d48054fa1619fb0f70bb334d74))
+* update dialtone peer dependency ([e21e0d5](https://github.com/dialpad/dialtone-vue/commit/e21e0d500d5e1af5043ae8ed2151d8875cb7208d))
+
+
+### Features
+
+* add `buttonClass` prop to Call Bar Button component ([#534](https://github.com/dialpad/dialtone-vue/issues/534)) ([#541](https://github.com/dialpad/dialtone-vue/issues/541)) ([3c131f3](https://github.com/dialpad/dialtone-vue/commit/3c131f32d4d6abe844d4f9962751fac14ab04ce7))
+* dt-card ([#499](https://github.com/dialpad/dialtone-vue/issues/499)) ([0c9acf0](https://github.com/dialpad/dialtone-vue/commit/0c9acf0b07d914fc834e14cd17a167c211256ec9))
+* dt-recipe-ivr-node ([#512](https://github.com/dialpad/dialtone-vue/issues/512)) ([#516](https://github.com/dialpad/dialtone-vue/issues/516)) ([2b18071](https://github.com/dialpad/dialtone-vue/commit/2b1807150148dba7117be1e3fc4e687bb84e2fbf))
+* migrate to dialtone 7 ([#506](https://github.com/dialpad/dialtone-vue/issues/506)) ([40a321a](https://github.com/dialpad/dialtone-vue/commit/40a321a206292ee149cbd1f081e8c471edadae6c)), closes [#503](https://github.com/dialpad/dialtone-vue/issues/503) [#510](https://github.com/dialpad/dialtone-vue/issues/510) [#508](https://github.com/dialpad/dialtone-vue/issues/508)
+* migration to dialtone 7 ([#439](https://github.com/dialpad/dialtone-vue/issues/439)) ([be86717](https://github.com/dialpad/dialtone-vue/commit/be86717ff7dafd54c4b2e790dbf92f75ba5d2128))
+* **popover:** add sr-only close button ([#539](https://github.com/dialpad/dialtone-vue/issues/539)) ([eb8e6ad](https://github.com/dialpad/dialtone-vue/commit/eb8e6ad9c8766061ec16325d065c8ed0ab6d62d4))
+* **popover:** add sr-only close button ([#539](https://github.com/dialpad/dialtone-vue/issues/539)) ([#543](https://github.com/dialpad/dialtone-vue/issues/543)) ([f6f4fe1](https://github.com/dialpad/dialtone-vue/commit/f6f4fe1ab12b5399e6f6b14770ab933426ef09e3))
+
+
+### Reverts
+
+* Revert fix(emoji): dynamic import fix (#443) ([2269ed8](https://github.com/dialpad/dialtone-vue/commit/2269ed87f89ca683a841446aff90595dbf55d26b)), closes [#443](https://github.com/dialpad/dialtone-vue/issues/443)
+
+# [2.28.0-beta.1](https://github.com/dialpad/dialtone-vue/compare/v2.27.0...v2.28.0-beta.1) (2022-10-03)
+
+
+### Bug Fixes
+
+* dt-631 remove primary-color from dialtone vue ([#513](https://github.com/dialpad/dialtone-vue/issues/513)) ([ef227b7](https://github.com/dialpad/dialtone-vue/commit/ef227b7a9a8d4d9a2f67c228bafe85fc558743d6))
+* dt-631 remove primary-color from dialtone vue ([#519](https://github.com/dialpad/dialtone-vue/issues/519)) ([5219b77](https://github.com/dialpad/dialtone-vue/commit/5219b779c18107b4e854519a02341d54eb525f86))
+* **emoji:** dynamic import fix ([#443](https://github.com/dialpad/dialtone-vue/issues/443)) ([157b315](https://github.com/dialpad/dialtone-vue/commit/157b3153a0c97196a8a79a57539e70a715477dc1))
+* **emoji:** dynamic import fix ([#443](https://github.com/dialpad/dialtone-vue/issues/443)) ([4e86e70](https://github.com/dialpad/dialtone-vue/commit/4e86e70945eec2d48054fa1619fb0f70bb334d74))
+* update dialtone peer dependency ([e21e0d5](https://github.com/dialpad/dialtone-vue/commit/e21e0d500d5e1af5043ae8ed2151d8875cb7208d))
+
+
+### Features
+
+* dp-57068 Adding independent control for showing the arrow ([#522](https://github.com/dialpad/dialtone-vue/issues/522)) ([5d9408e](https://github.com/dialpad/dialtone-vue/commit/5d9408e83efc2a058f884f10f51a1f01cae17ffb))
+* dt-card ([#499](https://github.com/dialpad/dialtone-vue/issues/499)) ([0c9acf0](https://github.com/dialpad/dialtone-vue/commit/0c9acf0b07d914fc834e14cd17a167c211256ec9))
+* dt-recipe-ivr-node ([#512](https://github.com/dialpad/dialtone-vue/issues/512)) ([#516](https://github.com/dialpad/dialtone-vue/issues/516)) ([2b18071](https://github.com/dialpad/dialtone-vue/commit/2b1807150148dba7117be1e3fc4e687bb84e2fbf))
+* migrate to dialtone 7 ([#506](https://github.com/dialpad/dialtone-vue/issues/506)) ([40a321a](https://github.com/dialpad/dialtone-vue/commit/40a321a206292ee149cbd1f081e8c471edadae6c)), closes [#503](https://github.com/dialpad/dialtone-vue/issues/503) [#510](https://github.com/dialpad/dialtone-vue/issues/510) [#508](https://github.com/dialpad/dialtone-vue/issues/508)
+* migration to dialtone 7 ([#439](https://github.com/dialpad/dialtone-vue/issues/439)) ([be86717](https://github.com/dialpad/dialtone-vue/commit/be86717ff7dafd54c4b2e790dbf92f75ba5d2128))
+
+
+### Reverts
+
+* Revert fix(emoji): dynamic import fix (#443) ([2269ed8](https://github.com/dialpad/dialtone-vue/commit/2269ed87f89ca683a841446aff90595dbf55d26b)), closes [#443](https://github.com/dialpad/dialtone-vue/issues/443)
+
+# [2.28.0](https://github.com/dialpad/dialtone-vue/compare/v2.27.0...v2.28.0) (2022-10-07)
+
+
+### Bug Fixes
+
+* dt-631 remove primary-color from dialtone vue ([#513](https://github.com/dialpad/dialtone-vue/issues/513)) ([ef227b7](https://github.com/dialpad/dialtone-vue/commit/ef227b7a9a8d4d9a2f67c228bafe85fc558743d6))
+
+
+### Features
+
+* add `buttonClass` prop to Call Bar Button component ([#534](https://github.com/dialpad/dialtone-vue/issues/534)) ([a9cd023](https://github.com/dialpad/dialtone-vue/commit/a9cd0239a2ede2a6f3ac95dde18317b9c635166f))
+* dp-57068 Adding independent control for showing the arrow ([#522](https://github.com/dialpad/dialtone-vue/issues/522)) ([5d9408e](https://github.com/dialpad/dialtone-vue/commit/5d9408e83efc2a058f884f10f51a1f01cae17ffb))
+
 # [2.27.0](https://github.com/dialpad/dialtone-vue/compare/v2.26.1...v2.27.0) (2022-09-23)
 
 
