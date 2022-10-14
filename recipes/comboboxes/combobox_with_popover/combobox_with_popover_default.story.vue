@@ -14,7 +14,6 @@
     :open-with-arrow-keys="openWithArrowKeys"
     :has-suggestion-list="hasSuggestionList"
     :empty-list="emptyList"
-    :modal="modal"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
@@ -96,7 +95,6 @@ export default {
     onComboboxSelect (i) {
       this.onSelect(i);
       this.value = this.items[i].number;
-      this.$refs.comboboxWithPopover.closeComboboxList();
     },
 
     onComboboxEscape () {

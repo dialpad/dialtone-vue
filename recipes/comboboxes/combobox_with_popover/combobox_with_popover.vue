@@ -41,12 +41,13 @@
         :offset="popoverOffset"
         :sticky="popoverSticky"
         placement="bottom-start"
+        initial-focus-element="none"
         padding="none"
         role="listbox"
         :external-anchor="externalAnchor"
         :content-width="contentWidth"
         :content-tabindex="null"
-        :modal="modal"
+        :modal="false"
         :auto-focus="false"
         @opened="opened($event, arguments[1]);"
       >
@@ -234,15 +235,6 @@ export default {
     popoverSticky: {
       type: [Boolean, String],
       default: false,
-    },
-
-    /**
-     * Determines modal state. If enabled popover has a modal overlay
-     * preventing interaction with elements below it, but it is invisible.
-     */
-    modal: {
-      type: Boolean,
-      default: true,
     },
 
     /**
