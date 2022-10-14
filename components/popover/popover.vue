@@ -93,15 +93,6 @@
             name="content"
             :close="closePopover"
           />
-          <dt-button
-            v-if="visuallyHiddenClose"
-            data-qa="dt-popover-sr-only-close"
-            class="d-vi-visible-sr"
-            :aria-label="visuallyHiddenCloseLabel"
-            @click="closePopover"
-          >
-            <icon-close />
-          </dt-button>
         </div>
         <popover-header-footer
           v-if="$slots.footerContent"
@@ -118,6 +109,15 @@
             />
           </template>
         </popover-header-footer>
+        <dt-button
+          v-if="visuallyHiddenClose"
+          data-qa="dt-popover-sr-only-close-button"
+          class="d-vi-visible-sr"
+          :aria-label="visuallyHiddenCloseLabel"
+          @click="closePopover"
+        >
+          <icon-close />
+        </dt-button>
       </dt-lazy-show>
     </component>
   </div>
@@ -136,6 +136,7 @@ import {
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import ModalMixin from '@/common/mixins/modal.js';
+import SROnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import {
   createTippy,
   getPopperOptions,
@@ -161,12 +162,12 @@ export default {
     IconClose,
   },
 
-  mixins: [ModalMixin],
+  mixins: [ModalMixin, SROnlyCloseButtonMixin],
 
   props: {
     /**
      * Controls whether the popover is shown. Leaving this null will have the popover trigger on click by default.
-     * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
+     * If you set this value, the default trigger behavior will be disabled, and you can control it as you need.
      * Supports v-model
      * @values null, true, false
      */
@@ -462,24 +463,6 @@ export default {
       type: Boolean,
       default: false,
     },
-
-    /**
-     * If true, a visually hidden close button its included in the popover.
-     * @values true, false
-     */
-    visuallyHiddenClose: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * Label for the visually hidden close button
-     * Required if visuallyHiddenClose is set to `true`
-     */
-    visuallyHiddenCloseLabel: {
-      type: String,
-      default: '',
-    },
   },
 
   emits: [
@@ -639,10 +622,6 @@ export default {
       if (this.modal && this.initialFocusElement === 'none') {
         console.error('If the popover is modal you must set the ' +
         'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement');
-      }
-      if (this.visuallyHiddenClose && !this.visuallyHiddenCloseLabel) {
-        console.error('If visuallyHiddenClose prop is true (default), the popover includes a visually hidden ' +
-        'close button and you must set the visuallyHiddenCloseLabel prop.');
       }
     },
 
