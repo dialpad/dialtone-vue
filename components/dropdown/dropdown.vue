@@ -46,6 +46,18 @@
           name="list"
           :close="close"
         />
+        <dt-button
+          v-if="visuallyHiddenClose"
+          id="sr-only-close-button"
+          data-qa="dt-dropdown-sr-only-close"
+          class="d-vi-visible-sr"
+          :tabindex="isArrowKeyNav ? -1 : 0"
+          :aria-label="visuallyHiddenCloseLabel"
+          @click="close"
+          @keydown.space.stop.prevent="close"
+        >
+          <icon-close />
+        </dt-button>
       </ul>
     </template>
   </dt-popover>
@@ -59,12 +71,17 @@ import {
   DROPDOWN_PADDING_CLASSES,
 } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
+import SROnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import { DtButton } from '../button';
+import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 
 export default {
   name: 'DtDropdown',
 
   components: {
     DtPopover,
+    DtButton,
+    IconClose,
   },
 
   mixins: [
@@ -79,6 +96,7 @@ export default {
       activeItemKey: 'activeItemEl',
       focusOnKeyboardNavigation: true,
     }),
+    SROnlyCloseButtonMixin,
   ],
 
   props: {
@@ -293,6 +311,10 @@ export default {
     },
 
     afterHighlight () {
+      if (this.visuallyHiddenClose && this.highlightIndex === this._itemsLength() - 1) {
+        return;
+      }
+
       this.$emit('highlight', this.highlightIndex);
     },
 
@@ -300,7 +322,7 @@ export default {
       this.isOpen = isPopoverOpen;
 
       if (isPopoverOpen) {
-        if (this.openedWithKeyboard && this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+        if (this.openedWithKeyboard && this.isArrowKeyNav) {
           this.setHighlightIndex(0);
         }
         this.$emit('opened', true);
