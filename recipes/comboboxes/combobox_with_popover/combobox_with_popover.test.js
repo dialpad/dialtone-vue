@@ -11,6 +11,7 @@ const basePropsData = {
   listId: 'list',
   loading: false,
   showList: null,
+  visuallyHiddenCloseLabel: 'Close combobox',
 };
 
 describe('DtRecipeComboboxWithPopover Tests', function () {
@@ -92,6 +93,16 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
   describe('Presentation Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
+    it('should not render the visually hidden close button', async function () {
+      await _openComboboxPopover();
+      _setChildWrappers();
+      assert.isFalse(wrapper
+        .findComponent(DtPopover)
+        .findComponent({ ref: 'content' })
+        .find('[data-qa="dt-popover-sr-only-close-button"]')
+        .exists(),
+      );
+    });
 
     describe('When a input is provided', function () {
       // Test Setup
@@ -164,6 +175,46 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
           .findComponent({ ref: 'content' })
           .find('[data-qa="dt-combobox-empty-list"]')
           .exists());
+      });
+    });
+
+    describe('When visuallyHiddenClose is true', function () {
+      beforeEach(async function () {
+        scopedSlots = {
+          input: '<input id="input" v-bind="props.inputProps" />',
+          list: '<ol id="list" v-bind="props.listProps"><li role="option">Item 1</li></ol>',
+        };
+        _mountWrapper();
+        await wrapper.setProps({ visuallyHiddenClose: true });
+        await _openComboboxPopover();
+        _setChildWrappers();
+      });
+
+      it('should contain a visually hidden close button', async function () {
+        assert.isTrue(wrapper
+          .findComponent(DtPopover)
+          .findComponent({ ref: 'content' })
+          .find('[data-qa="dt-popover-sr-only-close-button"]')
+          .exists())
+        ;
+      });
+
+      describe('When visuallyHiddenCloseLabel is null', function () {
+        let consoleErrorSpy;
+        beforeEach(async function () {
+          consoleErrorSpy = sinon.spy(console, 'error');
+          await wrapper.setProps({ visuallyHiddenCloseLabel: null });
+        });
+
+        afterEach(function () {
+          consoleErrorSpy = null;
+          console.error.restore();
+        });
+
+        it('should output error message', async function () {
+          assert.isTrue(consoleErrorSpy.calledWith('If visuallyHiddenClose prop is true, the component includes ' +
+          'a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.'));
+        });
       });
     });
   });
@@ -396,6 +447,21 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
       it('should call listener', function () { assert.isTrue(escapeStub.called); });
       it('should emit escape event', function () { assert.equal(wrapper.emitted().escape.length, 1); });
+    });
+
+    describe('When sr-only close button is enabled and activated', function () {
+      beforeEach(async function () {
+        await _openComboboxPopover();
+        await wrapper.setProps({ visuallyHiddenClose: true });
+        await wrapper
+          .findComponent(DtPopover)
+          .findComponent({ ref: 'content' })
+          .find('[data-qa="dt-popover-sr-only-close-button"]')
+          .trigger('click');
+      });
+
+      it('should call listener', function () { assert.isTrue(openedStub.called); });
+      it('should emit open event', function () { assert.equal(wrapper.emitted().opened.length, 1); });
     });
   });
 });

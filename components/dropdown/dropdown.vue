@@ -49,7 +49,7 @@
         <dt-button
           v-if="visuallyHiddenClose"
           id="sr-only-close-button"
-          data-qa="dt-dropdown-sr-only-close"
+          data-qa="dt-dropdown-sr-only-close-button"
           class="d-vi-visible-sr"
           :tabindex="isArrowKeyNav ? -1 : 0"
           :aria-label="visuallyHiddenCloseLabel"

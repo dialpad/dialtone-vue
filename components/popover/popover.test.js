@@ -186,33 +186,32 @@ describe('DtPopover Tests', function () {
       });
     });
 
-    describe('When visuallyHiddenCloseLabel is null and visuallyHiddenClose is true', function () {
-      let consoleErrorSpy;
+    describe('When visuallyHiddenClose is true', function () {
       beforeEach(async function () {
-        consoleErrorSpy = sinon.spy(console, 'error');
         await wrapper.setProps({ visuallyHiddenClose: true });
-        await wrapper.setProps({ visuallyHiddenCloseLabel: null });
-      });
-
-      afterEach(function () {
-        consoleErrorSpy = null;
-        console.error.restore();
-      });
-
-      it('should output error message', async function () {
-        assert.isTrue(consoleErrorSpy.calledWith('If visuallyHiddenClose prop is true, the component includes ' +
-          'a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.'));
-      });
-    });
-
-    describe('When visually hidden close is false', function () {
-      beforeEach(async function () {
-        await wrapper.setProps({ visuallyHiddenClose: false });
         _setChildWrappers();
       });
 
-      it('should NOT contain a visually hidden close button', async function () {
-        assert.isFalse(srOnlyCloseButton.exists());
+      it('should contain a visually hidden close button', async function () {
+        assert.isTrue(srOnlyCloseButton.exists());
+      });
+
+      describe('When visuallyHiddenCloseLabel is null', function () {
+        let consoleErrorSpy;
+        beforeEach(async function () {
+          consoleErrorSpy = sinon.spy(console, 'error');
+          await wrapper.setProps({ visuallyHiddenCloseLabel: null });
+        });
+
+        afterEach(function () {
+          consoleErrorSpy = null;
+          console.error.restore();
+        });
+
+        it('should output error message', async function () {
+          assert.isTrue(consoleErrorSpy.calledWith('If visuallyHiddenClose prop is true, the component includes ' +
+          'a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.'));
+        });
       });
     });
   });
@@ -362,7 +361,6 @@ describe('DtPopover Tests', function () {
         describe('When sr-only close button is enabled and activated', function () {
           beforeEach(async function () {
             await wrapper.setProps({ visuallyHiddenClose: true });
-            await wrapper.setProps({ visuallyHiddenCloseLabel: 'Close Menu' });
             _setChildWrappers();
             await srOnlyCloseButton.trigger('click');
           });

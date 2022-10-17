@@ -100,7 +100,7 @@
         </dt-button>
         <dt-button
           v-if="visuallyHiddenClose"
-          data-qa="dt-modal-sr-only-close"
+          data-qa="dt-modal-sr-only-close-button"
           class="d-vi-visible-sr"
           :aria-label="visuallyHiddenCloseLabel"
           @click="close"
