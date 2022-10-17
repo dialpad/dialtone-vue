@@ -2,12 +2,14 @@ import { assert } from 'chai';
 import DtButton from '../button/button.vue';
 import DtModal from './modal.vue';
 import { mount } from '@vue/test-utils';
+import sinon from 'sinon';
 
 const baseProps = {
   show: true,
   closeButtonProps: {
     ariaLabel: 'test close aria label',
   },
+  visuallyHiddenCloseLabel: 'Close modal',
 };
 
 describe('DtModal Tests', function () {
@@ -18,6 +20,7 @@ describe('DtModal Tests', function () {
   let overlay;
   let title;
   let banner;
+  let srOnlyCloseButton;
 
   let _setElements;
 
@@ -35,6 +38,7 @@ describe('DtModal Tests', function () {
       overlay = wrapper.find('[data-qa="dt-modal"]');
       title = wrapper.find('[data-qa="dt-modal-title"]');
       banner = wrapper.find('[data-qa="dt-modal-banner"]');
+      srOnlyCloseButton = wrapper.find('[data-qa="dt-modal-sr-only-close-button"]');
     };
     _setElements();
   });
@@ -57,10 +61,28 @@ describe('DtModal Tests', function () {
     assert.isTrue(closeBtn.exists());
   });
 
-  it('Close button is hidden if hideClose prop is true', async function () {
-    await wrapper.setProps({ hideClose: true });
-    _setElements();
-    assert.isFalse(closeBtn.exists());
+  describe('When hideClose prop is true', function () {
+    let consoleErrorSpy;
+
+    beforeEach(async function () {
+      consoleErrorSpy = sinon.spy(console, 'error');
+      await wrapper.setProps({ hideClose: true });
+    });
+
+    afterEach(function () {
+      consoleErrorSpy = null;
+      console.error.restore();
+    });
+
+    it('Should hide close button', function () {
+      _setElements();
+      assert.isFalse(closeBtn.exists());
+    });
+
+    it('should output error message', async function () {
+      assert.isTrue(consoleErrorSpy.calledWith('If hideClose prop is true, visuallyHiddenClose and ' +
+        'visuallyHiddenCloseLabel props need to be set so the component always includes a close button'));
+    });
   });
 
   it('Should display slotted header, banner and content instead of title, bannerTitle and copy', function () {
@@ -141,5 +163,38 @@ describe('DtModal Tests', function () {
 
     _setElements();
     assert.isTrue(banner.classes(bannerClass));
+  });
+
+  it('should not render the visually hidden close button', async function () {
+    assert.isFalse(srOnlyCloseButton.exists());
+  });
+
+  describe('When visuallyHiddenClose is true', function () {
+    beforeEach(async function () {
+      await wrapper.setProps({ visuallyHiddenClose: true });
+      _setElements();
+    });
+
+    it('should contain a visually hidden close button', async function () {
+      assert.isTrue(srOnlyCloseButton.exists());
+    });
+
+    describe('When visuallyHiddenCloseLabel is null', function () {
+      let consoleErrorSpy;
+      beforeEach(async function () {
+        consoleErrorSpy = sinon.spy(console, 'error');
+        await wrapper.setProps({ visuallyHiddenCloseLabel: null });
+      });
+
+      afterEach(function () {
+        consoleErrorSpy = null;
+        console.error.restore();
+      });
+
+      it('should output error message', async function () {
+        assert.isTrue(consoleErrorSpy.calledWith('If visuallyHiddenClose prop is true, the component includes ' +
+          'a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.'));
+      });
+    });
   });
 });
