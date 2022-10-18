@@ -41,7 +41,7 @@ describe('DtDropdown Tests', function () {
     popover = wrapper.findComponent({ ref: 'popover' });
     popoverContent = popover.findComponent({ ref: 'content' });
     listWrapper = popoverContent.find('[data-qa="dt-dropdown-list-wrapper"]');
-    srOnlyCloseButton = wrapper.find('[data-qa="dt-dropdown-sr-only-close-button"]');
+    srOnlyCloseButton = popoverContent.find('[data-qa="dt-dropdown-sr-only-close-button"]');
   };
 
   const _setWrappers = () => {
@@ -107,7 +107,7 @@ describe('DtDropdown Tests', function () {
         _setChildWrappers();
       });
 
-      it('should contain a visually hidden close button', async function () {
+      it('should contain a visually hidden close button', function () {
         assert.isTrue(srOnlyCloseButton.exists());
       });
 

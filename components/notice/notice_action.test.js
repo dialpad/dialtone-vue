@@ -78,12 +78,9 @@ describe('DtNoticeAction tests', function () {
       let consoleErrorSpy;
 
       beforeEach(async function () {
-        props = {
-          ...baseProps,
-          hideClose: true,
-        };
-        _setWrappers();
         consoleErrorSpy = sinon.spy(console, 'error');
+        _setWrappers();
+        await wrapper.setProps({ hideClose: true });
       });
 
       afterEach(function () {

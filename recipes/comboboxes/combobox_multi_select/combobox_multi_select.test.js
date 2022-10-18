@@ -19,6 +19,7 @@ class ResizeObserverMock {
 
 // Constants
 const basePropsData = {
+  showList: true,
   visuallyHiddenCloseLabel: 'Close combobox',
 };
 
@@ -84,7 +85,6 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
       assert.isTrue(chips.length === 0);
     });
     it('should not render the visually hidden close button', async function () {
-      await input.trigger('focus');
       assert.isFalse(wrapper
         .findComponent(DtPopover)
         .findComponent({ ref: 'content' })
