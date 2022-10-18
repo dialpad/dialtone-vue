@@ -10,7 +10,7 @@
         icon-position="top"
         :disabled="disabled"
         :aria-label="ariaLabel"
-        label-class="d-fs11"
+        label-class="d-fs-100"
         width="8.4rem"
         :class="callbarButtonClass"
         v-on="$listeners"
