@@ -285,6 +285,14 @@ export default {
      * @type {Object}
      */
     'max-selected',
+
+    /**
+     * Emitted when items are shown or hidden
+     *
+     * @event opened
+     * @type {Boolean | Array}
+     */
+    'opened',
   ],
 
   data () {

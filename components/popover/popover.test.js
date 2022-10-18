@@ -117,10 +117,10 @@ describe('DtPopover Tests', function () {
       it('should render the footer content', function () {
         assert.strictEqual(footerContent.text(), 'Popover Footer');
       });
-      it('should render the anchor slot', async function () {
+      it('should render the anchor slot', function () {
         assert.strictEqual(anchor.text(), 'Click me');
       });
-      it('should not render the visually hidden close button', async function () {
+      it('should not render the visually hidden close button', function () {
         assert.isFalse(srOnlyCloseButton.exists());
       });
       // these tests will not observe focus changes under any circumstances?? spent too many hours on this junk.
@@ -189,10 +189,11 @@ describe('DtPopover Tests', function () {
     describe('When visuallyHiddenClose is true', function () {
       beforeEach(async function () {
         await wrapper.setProps({ visuallyHiddenClose: true });
+        await button.trigger('click');
         _setChildWrappers();
       });
 
-      it('should contain a visually hidden close button', async function () {
+      it('should contain a visually hidden close button', function () {
         assert.isTrue(srOnlyCloseButton.exists());
       });
 

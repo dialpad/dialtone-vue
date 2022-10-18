@@ -95,7 +95,6 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
     it('should not render the visually hidden close button', async function () {
       await _openComboboxPopover();
-      _setChildWrappers();
       assert.isFalse(wrapper
         .findComponent(DtPopover)
         .findComponent({ ref: 'content' })
