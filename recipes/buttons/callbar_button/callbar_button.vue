@@ -115,6 +115,7 @@ export default {
         this.buttonClass,
         'dt-recipe-callbar-button',
         'd-stack4',
+        'd-px0',
         {
           'dt-recipe-callbar-button--circle': this.circle,
           'd-btn--icon-only': this.circle,
