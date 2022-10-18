@@ -1,7 +1,7 @@
 <template>
   <div
     data-qa="grouped-chip"
-    class="d-d-inline-block d-ws-nowrap d-bgc-unset"
+    class="d-d-inline-flex d-ws-nowrap d-bgc-unset"
   >
     <dt-chip
       :hide-close="true"
