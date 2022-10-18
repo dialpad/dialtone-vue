@@ -8,6 +8,7 @@
     <dt-button
       v-if="!hideClose"
       ref="closeButton"
+      data-qa="dt-notice-action-close-button"
       size="sm"
       importance="clear"
       circle
