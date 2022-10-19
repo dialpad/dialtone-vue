@@ -4,7 +4,7 @@
 export default {
   props: {
     /**
-     * If true, a visually hidden close button it's included.
+     * If true, a hidden close button is included for screen readers
      * @values true, false
      */
     visuallyHiddenClose: {
