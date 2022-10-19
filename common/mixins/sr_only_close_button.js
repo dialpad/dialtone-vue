@@ -35,8 +35,8 @@ export default {
   methods: {
     validateVisuallyHiddenCloseProps () {
       if (this.visuallyHiddenClose && !this.visuallyHiddenCloseLabel) {
-        console.error('If visuallyHiddenClose prop is true, the component includes a visually hidden ' +
-        'close button and you must set the visuallyHiddenCloseLabel prop.');
+        console.error(`If visuallyHiddenClose prop is true, the component includes a visually hidden
+        close button and you must set the visuallyHiddenCloseLabel prop.`);
       }
     },
   },
