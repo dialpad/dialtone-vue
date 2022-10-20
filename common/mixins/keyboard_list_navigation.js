@@ -239,5 +239,3 @@ export default ({
     },
   },
 });
-
-// TODO: close dropdown on space keydown when focusing sr-only close button

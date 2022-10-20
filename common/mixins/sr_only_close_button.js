@@ -18,7 +18,7 @@ export default {
      */
     visuallyHiddenCloseLabel: {
       type: String,
-      default: '',
+      default: null,
     },
   },
 
