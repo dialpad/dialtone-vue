@@ -211,8 +211,8 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
         });
 
         it('should output error message', async function () {
-          assert.isTrue(consoleErrorSpy.calledWith('If visuallyHiddenClose prop is true, the component includes ' +
-          'a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.'));
+          assert.isTrue(consoleErrorSpy.calledWith(`If visuallyHiddenClose prop is true, the component includes
+           a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.`));
         });
       });
     });
