@@ -13,7 +13,7 @@
       circle
       :aria-label="closeButtonProps.ariaLabel ? closeButtonProps.ariaLabel : 'Close'"
       v-bind="closeButtonProps"
-      @click="close"
+      v-on="noticeActionListeners"
     >
       <template #icon>
         <icon-close />
@@ -61,6 +61,19 @@ export default {
      */
     'close',
   ],
+
+  computed: {
+    noticeActionListeners () {
+      return {
+        ...this.$listeners,
+
+        click: event => {
+          this.close();
+          this.$emit('click', event);
+        },
+      };
+    },
+  },
 
   created () {
     if (!this.hideClose && !this.closeButtonProps.ariaLabel) {
