@@ -10,10 +10,7 @@
     ]"
     data-qa="dt-modal"
     :aria-hidden="open"
-    @click.self="close"
-    @keydown.esc="close"
-    @keydown.tab="trapFocus"
-    @after-enter.self="setFocusAfterTransition"
+    v-on="modalListeners"
   >
     <div
       v-if="show && ($slots.banner || bannerTitle)"
@@ -110,6 +107,7 @@ import Modal from '@/common/mixins/modal.js';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
+import { EVENT_KEYNAMES } from '@/common/constants';
 
 /**
  * Modals focus the user’s attention exclusively on one task or piece of information
@@ -276,10 +274,35 @@ export default {
     return {
       MODAL_KIND_MODIFIERS,
       MODAL_SIZE_MODIFIERS,
+      EVENT_KEYNAMES,
     };
   },
 
   computed: {
+    modalListeners () {
+      return {
+        ...this.$listeners,
+
+        click: event => {
+          (event.target === event.currentTarget) && this.close();
+          this.$emit('click', event);
+        },
+
+        keydown: event => {
+          if (EVENT_KEYNAMES.esc.includes(event.code)) {
+            this.close();
+          } else if (EVENT_KEYNAMES.tab === event.code) {
+            this.trapFocus(event);
+          }
+          this.$emit('keydown', event);
+        },
+
+        'after-enter': event => {
+          (event.target === event.currentTarget) && this.setFocusAfterTransition();
+        },
+      };
+    },
+
     open () {
       return `${!this.show}`;
     },
