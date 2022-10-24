@@ -20,22 +20,19 @@
         <icon-close />
       </template>
     </dt-button>
-    <dt-button
-      v-if="visuallyHiddenClose"
-      data-qa="dt-notice-action-sr-only-close-button"
-      class="d-vi-visible-sr"
-      :aria-label="visuallyHiddenCloseLabel"
-      @click="close"
-    >
-      <icon-close />
-    </dt-button>
+    <sr-only-close-button
+      v-if="showVisuallyHiddenClose"
+      :visually-hidden-close-label="visuallyHiddenCloseLabel"
+      @close="close"
+    />
   </div>
 </template>
 
 <script>
 import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import DtButton from '../button/button';
-import SROnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
 export default {
   name: 'DtNoticeAction',
@@ -43,9 +40,10 @@ export default {
   components: {
     IconClose,
     DtButton,
+    SrOnlyCloseButton,
   },
 
-  mixins: [SROnlyCloseButtonMixin],
+  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**

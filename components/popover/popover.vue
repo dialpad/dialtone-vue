@@ -107,15 +107,11 @@
             />
           </template>
         </popover-header-footer>
-        <dt-button
-          v-if="visuallyHiddenClose"
-          data-qa="dt-popover-sr-only-close-button"
-          class="d-vi-visible-sr"
-          :aria-label="visuallyHiddenCloseLabel"
-          @click="closePopover"
-        >
-          <icon-close />
-        </dt-button>
+        <sr-only-close-button
+          v-if="showVisuallyHiddenClose"
+          :visually-hidden-close-label="visuallyHiddenCloseLabel"
+          @close="closePopover"
+        />
       </dt-lazy-show>
     </component>
   </div>
@@ -125,24 +121,20 @@
 /* eslint-disable max-lines */
 import {
   POPOVER_CONTENT_WIDTHS,
-  POPOVER_PADDING_CLASSES,
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
-  POPOVER_ROLES,
   POPOVER_INITIAL_FOCUS_STRINGS,
+  POPOVER_PADDING_CLASSES,
+  POPOVER_ROLES,
   POPOVER_STICKY_VALUES,
 } from './popover_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import { Portal } from '@linusborg/vue-simple-portal';
 import ModalMixin from '@/common/mixins/modal.js';
-import SROnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
-import {
-  createTippy,
-  getPopperOptions,
-} from './tippy_utils';
-import { DtButton } from '../button';
+import { createTippy, getPopperOptions } from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer';
-import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
@@ -155,14 +147,13 @@ export default {
    * CHILD COMPONENTS *
    ********************/
   components: {
+    SrOnlyCloseButton,
     DtLazyShow,
     PopoverHeaderFooter,
     Portal,
-    DtButton,
-    IconClose,
   },
 
-  mixins: [ModalMixin, SROnlyCloseButtonMixin],
+  mixins: [ModalMixin, SrOnlyCloseButtonMixin],
 
   props: {
     /**

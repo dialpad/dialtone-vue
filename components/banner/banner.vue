@@ -54,7 +54,7 @@ import DtNoticeAction from '../notice/notice_action';
 import { NOTICE_KINDS } from '../notice/notice_constants';
 import Modal from '@/common/mixins/modal.js';
 import util from '@/common/utils';
-import SROnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 /**
  * Banners are a type of notice, delivering system and engagement messaging.
@@ -70,7 +70,7 @@ export default {
     DtNoticeAction,
   },
 
-  mixins: [Modal, SROnlyCloseButtonMixin],
+  mixins: [Modal, SrOnlyCloseButtonMixin],
 
   props: {
     /**

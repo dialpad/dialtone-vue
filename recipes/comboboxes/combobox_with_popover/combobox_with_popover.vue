@@ -109,7 +109,7 @@ import { getUniqueString } from '@/common/utils';
 import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';
-import SROnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
   name: 'DtRecipeComboboxWithPopover',
@@ -121,7 +121,7 @@ export default {
     ComboboxEmptyList,
   },
 
-  mixins: [SROnlyCloseButtonMixin],
+  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**

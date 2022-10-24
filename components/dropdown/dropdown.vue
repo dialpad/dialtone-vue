@@ -46,18 +46,12 @@
           name="list"
           :close="close"
         />
-        <dt-button
-          v-if="visuallyHiddenClose"
-          id="sr-only-close-button"
-          data-qa="dt-dropdown-sr-only-close-button"
-          class="d-vi-visible-sr"
+        <sr-only-close-button
+          v-if="showVisuallyHiddenClose"
+          :visually-hidden-close-label="visuallyHiddenCloseLabel"
           :tabindex="isArrowKeyNav ? -1 : 0"
-          :aria-label="visuallyHiddenCloseLabel"
-          @click="close"
-          @keydown.space.stop.prevent="close"
-        >
-          <icon-close />
-        </dt-button>
+          @close="close"
+        />
       </ul>
     </template>
   </dt-popover>
@@ -71,17 +65,15 @@ import {
   DROPDOWN_PADDING_CLASSES,
 } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
-import SROnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
-import { DtButton } from '../button';
-import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
 export default {
   name: 'DtDropdown',
 
   components: {
     DtPopover,
-    DtButton,
-    IconClose,
+    SrOnlyCloseButton,
   },
 
   mixins: [
@@ -96,7 +88,7 @@ export default {
       activeItemKey: 'activeItemEl',
       focusOnKeyboardNavigation: true,
     }),
-    SROnlyCloseButtonMixin,
+    SrOnlyCloseButtonMixin,
   ],
 
   props: {
