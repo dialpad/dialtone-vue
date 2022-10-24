@@ -98,15 +98,11 @@
             <icon-close />
           </template>
         </dt-button>
-        <dt-button
-          v-if="visuallyHiddenClose"
-          data-qa="dt-modal-sr-only-close-button"
-          class="d-vi-visible-sr"
-          :aria-label="visuallyHiddenCloseLabel"
-          @click="close"
-        >
-          <icon-close />
-        </dt-button>
+        <sr-only-close-button
+          v-if="showVisuallyHiddenClose"
+          :visually-hidden-close-label="visuallyHiddenCloseLabel"
+          @close="close"
+        />
       </div>
     </transition>
   </dt-lazy-show>
@@ -119,7 +115,8 @@ import Modal from '@/common/mixins/modal.js';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
-import SROnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
 /**
  * Modals focus the user’s attention exclusively on one task or piece of information
@@ -133,9 +130,10 @@ export default {
     DtLazyShow,
     DtButton,
     IconClose,
+    SrOnlyCloseButton,
   },
 
-  mixins: [Modal, SROnlyCloseButtonMixin],
+  mixins: [Modal, SrOnlyCloseButtonMixin],
 
   props: {
     /**

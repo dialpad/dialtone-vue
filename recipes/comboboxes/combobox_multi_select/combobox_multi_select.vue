@@ -114,7 +114,7 @@ import DtChip from '@/components/chip/chip';
 import DtValidationMessages from '@/components/validation_messages/validation_messages';
 import { validationMessageValidator } from '@/common/validators';
 import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
-import SROnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
   name: 'DtRecipeComboboxMultiSelect',
@@ -126,7 +126,7 @@ export default {
     DtValidationMessages,
   },
 
-  mixins: [SROnlyCloseButtonMixin],
+  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**

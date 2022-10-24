@@ -1,5 +1,5 @@
 /**
- * @displayName SR-Only close button mixin
+ * @displayName Sr-Only close button mixin
  */
 export default {
   props: {
@@ -29,6 +29,12 @@ export default {
       handler () {
         this.validateVisuallyHiddenCloseProps();
       },
+    },
+  },
+
+  computed: {
+    showVisuallyHiddenClose () {
+      return this.visuallyHiddenClose && this.visuallyHiddenCloseLabel != null;
     },
   },
 

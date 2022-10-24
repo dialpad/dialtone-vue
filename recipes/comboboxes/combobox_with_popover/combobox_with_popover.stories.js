@@ -13,7 +13,6 @@ export const argsData = {
   onSelect: action('select'),
   onOpened: action('opened'),
   visuallyHiddenCloseLabel: 'Close Combobox',
-  visuallyHiddenClose: true,
 };
 
 export const argTypesData = {
@@ -177,7 +176,7 @@ export const argTypesData = {
     },
   },
 
-  // Hide items because its used for storybook only
+  // Hide items because it's used for storybook only
   // not a real component prop.
   items: {
     table: {
