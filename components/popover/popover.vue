@@ -527,7 +527,7 @@ export default {
 
     modal (modal) {
       this.tip.setProps({
-        zIndex: modal ? 650 : 300,
+        zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
       });
     },
 
@@ -573,6 +573,9 @@ export default {
 
     isOpen (isOpen, isPrev) {
       if (isOpen) {
+        this.tip.setProps({
+          zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
+        });
         this.tip.show();
         this.addClosePopoverEventListener();
       } else if (!isOpen && isPrev !== isOpen) {
