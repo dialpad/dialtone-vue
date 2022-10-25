@@ -299,14 +299,12 @@ export default {
 
   methods: {
     calculateAnchorZindex () {
-      // If the tooltip is within a popover inherit the z-index from the one it is in.
-      const tippyBoxes = document.querySelectorAll('.tippy-box');
-      for (const tippyBox of tippyBoxes) {
-        if (tippyBox.contains(this.$refs.anchor)) {
-          return (parseInt(getComputedStyle(tippyBox).getPropertyValue('z-index')) + 1).toString();
-        }
+      // if a modal is currently active render at modal-element z-index, otherwise at tooltip z-index
+      if (document.querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]')) {
+        return 651;
+      } else {
+        return 400;
       }
-      return 400;
     },
 
     hasVisibleFocus () {

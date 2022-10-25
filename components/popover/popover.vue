@@ -647,14 +647,12 @@ export default {
     },
 
     calculateAnchorZindex () {
-      // If the popover is within another popover inherit the z-index from the one it is in.
-      const tippyBoxes = document.querySelectorAll('.tippy-box');
-      for (const tippyBox of tippyBoxes) {
-        if (tippyBox.contains(this.$refs.anchor)) {
-          return getComputedStyle(tippyBox).getPropertyValue('z-index');
-        }
+      // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
+      if (document.querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]')) {
+        return 650;
+      } else {
+        return 300;
       }
-      return 300;
     },
 
     defaultToggleOpen (e) {
