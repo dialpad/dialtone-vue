@@ -4,6 +4,12 @@ import DtDropdown from './dropdown.vue';
 import sinon from 'sinon';
 import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
+import {
+  itBehavesLikeVisuallyHiddenCloseButtonExists,
+  itBehavesLikeVisuallyHiddenCloseLabelIsNull,
+} from '@/tests/shared_examples/sr_only_close_button';
+import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
+import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
 // Constants
 const basePropsData = {
@@ -32,13 +38,11 @@ describe('DtDropdown Tests', function () {
   let scopedSlots = {};
   let listeners;
   let highlightStub;
-  let srOnlyCloseButton;
 
   // Helpers
   const _setChildWrappers = () => {
     anchorElement = wrapper.find('#anchor');
     listWrapper = wrapper.find('[data-qa="dt-dropdown-list-wrapper"]');
-    srOnlyCloseButton = wrapper.find('[data-qa="dt-dropdown-sr-only-close-button"]');
   };
 
   const transitionStub = () => ({
@@ -95,7 +99,7 @@ describe('DtDropdown Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
 
     it('should not render the visually hidden close button', async function () {
-      assert.isFalse(srOnlyCloseButton.exists());
+      itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper, false);
     });
 
     describe('When a list is provided', function () {
@@ -107,29 +111,23 @@ describe('DtDropdown Tests', function () {
     describe('When visuallyHiddenClose is true', function () {
       beforeEach(async function () {
         await wrapper.setProps({ visuallyHiddenClose: true });
-        _setChildWrappers();
       });
 
-      it('should contain a visually hidden close button', async function () {
-        assert.isTrue(srOnlyCloseButton.exists());
+      it('should contain a visually hidden close button', function () {
+        itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper);
       });
 
       describe('When visuallyHiddenCloseLabel is null', function () {
-        let consoleErrorSpy;
         beforeEach(async function () {
-          consoleErrorSpy = sinon.spy(console, 'error');
+          initializeSpy();
           await wrapper.setProps({ visuallyHiddenCloseLabel: null });
         });
 
         afterEach(function () {
-          consoleErrorSpy = null;
-          console.error.restore();
+          cleanSpy();
         });
 
-        it('should output error message', async function () {
-          assert.isTrue(consoleErrorSpy.calledWith(`If visuallyHiddenClose prop is true, the component includes
-           a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.`));
-        });
+        itBehavesLikeVisuallyHiddenCloseLabelIsNull();
       });
     });
   });
@@ -206,7 +204,7 @@ describe('DtDropdown Tests', function () {
       beforeEach(async function () {
         await wrapper.setProps({ visuallyHiddenClose: true });
         _setChildWrappers();
-        await srOnlyCloseButton.trigger('click');
+        await wrapper.findComponent(SrOnlyCloseButton).trigger('click');
       });
 
       it('should close the dropdown', function () {

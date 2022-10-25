@@ -3,7 +3,10 @@ import { createLocalVue, mount } from '@vue/test-utils';
 
 import DtNoticeAction from './notice_action';
 import DtButton from '../button/button';
+import SrOnlyCloseButton from '../../common/sr_only_close_button';
 import sinon from 'sinon';
+import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
+import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 
 // Constants
 const basePropsData = {
@@ -36,7 +39,7 @@ describe('DtNoticeAction tests', function () {
 
   const _setChildWrappers = () => {
     closeButton = wrapper.findComponent(DtButton);
-    srOnlyCloseButton = wrapper.find('[data-qa="dt-notice-action-sr-only-close-button"]');
+    srOnlyCloseButton = wrapper.findComponent(SrOnlyCloseButton);
   };
 
   before(function () {
@@ -112,21 +115,16 @@ describe('DtNoticeAction tests', function () {
       });
 
       describe('When visuallyHiddenCloseLabel is null', function () {
-        let consoleErrorSpy;
         beforeEach(async function () {
-          consoleErrorSpy = sinon.spy(console, 'error');
+          initializeSpy();
           await wrapper.setProps({ visuallyHiddenCloseLabel: null });
         });
 
         afterEach(function () {
-          consoleErrorSpy = null;
-          console.error.restore();
+          cleanSpy();
         });
 
-        it('should output error message', async function () {
-          assert.isTrue(consoleErrorSpy.calledWith(`If visuallyHiddenClose prop is true, the component includes
-           a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.`));
-        });
+        itBehavesLikeVisuallyHiddenCloseLabelIsNull();
       });
     });
   });

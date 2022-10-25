@@ -3,8 +3,14 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPopover from './popover.vue';
+import SrOnlyCloseButton from '../../common/sr_only_close_button';
 import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
+import {
+  itBehavesLikeVisuallyHiddenCloseButtonExists,
+  itBehavesLikeVisuallyHiddenCloseLabelIsNull,
+} from '@/tests/shared_examples/sr_only_close_button';
+import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 
 describe('DtPopover Tests', function () {
   // Wrappers
@@ -16,7 +22,6 @@ describe('DtPopover Tests', function () {
   let headerContent;
   let footerContent;
   let closeButton;
-  let srOnlyCloseButton;
   const defaultSrOnlyCloseButtonLabel = 'Close popover';
   const defaultSlotMessage = 'Message';
 
@@ -28,7 +33,6 @@ describe('DtPopover Tests', function () {
     headerContent = null;
     footerContent = null;
     closeButton = null;
-    srOnlyCloseButton = null;
   };
 
   // Helpers
@@ -40,7 +44,6 @@ describe('DtPopover Tests', function () {
     headerContent = wrapper.findComponent({ ref: 'popover__header' });
     footerContent = wrapper.findComponent({ ref: 'popover__footer' });
     closeButton = wrapper.find('[data-qa="dt-popover-close"]');
-    srOnlyCloseButton = wrapper.find('[data-qa="dt-popover-sr-only-close-button"]');
   };
 
   const transitionStub = () => ({
@@ -121,7 +124,7 @@ describe('DtPopover Tests', function () {
         assert.strictEqual(anchor.text(), 'Click me');
       });
       it('should not render the visually hidden close button', function () {
-        assert.isFalse(srOnlyCloseButton.exists());
+        itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper, false);
       });
       // these tests will not observe focus changes under any circumstances?? spent too many hours on this junk.
       // it('focus should be on the first focusable element in the dialog', async function () {
@@ -194,25 +197,20 @@ describe('DtPopover Tests', function () {
       });
 
       it('should contain a visually hidden close button', function () {
-        assert.isTrue(srOnlyCloseButton.exists());
+        itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper);
       });
 
       describe('When visuallyHiddenCloseLabel is null', function () {
-        let consoleErrorSpy;
         beforeEach(async function () {
-          consoleErrorSpy = sinon.spy(console, 'error');
+          initializeSpy();
           await wrapper.setProps({ visuallyHiddenCloseLabel: null });
         });
 
         afterEach(function () {
-          consoleErrorSpy = null;
-          console.error.restore();
+          cleanSpy();
         });
 
-        it('should output error message', async function () {
-          assert.isTrue(consoleErrorSpy.calledWith(`If visuallyHiddenClose prop is true, the component includes
-           a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.`));
-        });
+        itBehavesLikeVisuallyHiddenCloseLabelIsNull();
       });
     });
   });
@@ -363,7 +361,7 @@ describe('DtPopover Tests', function () {
           beforeEach(async function () {
             await wrapper.setProps({ visuallyHiddenClose: true });
             _setChildWrappers();
-            await srOnlyCloseButton.trigger('click');
+            await wrapper.findComponent(SrOnlyCloseButton).trigger('click');
           });
 
           it('should close the popover', function () {
