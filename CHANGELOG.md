@@ -1,3 +1,24 @@
+## [2.32.1](https://github.com/dialpad/dialtone-vue/compare/v2.32.0...v2.32.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* **button:** fix button width prop default value ([#564](https://github.com/dialpad/dialtone-vue/issues/564)) ([5284782](https://github.com/dialpad/dialtone-vue/commit/5284782b71cc64539e8cf3dbf2f04b694076fee8))
+
+# [2.32.0](https://github.com/dialpad/dialtone-vue/compare/v2.31.1...v2.32.0) (2022-10-20)
+
+
+### Features
+
+* dp-57693 remove button left and right paddings in callbar_button ([#558](https://github.com/dialpad/dialtone-vue/issues/558)) ([b20c866](https://github.com/dialpad/dialtone-vue/commit/b20c866b3871de42a26e833eda8c54e4424f097d))
+
+## [2.31.1](https://github.com/dialpad/dialtone-vue/compare/v2.31.0...v2.31.1) (2022-10-18)
+
+
+### Bug Fixes
+
+* **grouped-chips:** fix visual fixes ([#556](https://github.com/dialpad/dialtone-vue/issues/556)) ([437d33d](https://github.com/dialpad/dialtone-vue/commit/437d33d3a94bdde7224245ab23c18b72aa6cc8d7))
+
 # [2.31.0](https://github.com/dialpad/dialtone-vue/compare/v2.30.0...v2.31.0) (2022-10-12)
 
 
