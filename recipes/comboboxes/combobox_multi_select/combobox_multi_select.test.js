@@ -6,6 +6,8 @@ import { flushPromises } from '@/common/utils';
 import sinon from 'sinon';
 import DtPopover from '@/components/popover/popover';
 import { itBehavesLikeDoesNotHaveClass } from '@/tests/shared_examples/classes';
+import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
+import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 
 class ResizeObserverMock {
   observe () {
@@ -88,7 +90,7 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
       assert.isFalse(wrapper
         .findComponent(DtPopover)
         .findComponent({ ref: 'content' })
-        .find('[data-qa="dt-popover-sr-only-close-button"]')
+        .find('[data-qa="dt-sr-only-close-button"]')
         .exists(),
       );
     });
@@ -120,27 +122,22 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
         assert.isTrue(wrapper
           .findComponent(DtPopover)
           .findComponent({ ref: 'content' })
-          .find('[data-qa="dt-popover-sr-only-close-button"]')
+          .find('[data-qa="dt-sr-only-close-button"]')
           .exists())
         ;
       });
 
       describe('When visuallyHiddenCloseLabel is null', function () {
-        let consoleErrorSpy;
         beforeEach(async function () {
-          consoleErrorSpy = sinon.spy(console, 'error');
+          initializeSpy();
           await wrapper.setProps({ visuallyHiddenCloseLabel: null });
         });
 
         afterEach(function () {
-          consoleErrorSpy = null;
-          console.error.restore();
+          cleanSpy();
         });
 
-        it('should output error message', async function () {
-          assert.isTrue(consoleErrorSpy.calledWith(`If visuallyHiddenClose prop is true, the component includes
-           a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.`));
-        });
+        itBehavesLikeVisuallyHiddenCloseLabelIsNull();
       });
     });
   });
@@ -263,7 +260,7 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
         await wrapper
           .findComponent(DtPopover)
           .findComponent({ ref: 'content' })
-          .find('[data-qa="dt-popover-sr-only-close-button"]')
+          .find('[data-qa="dt-sr-only-close-button"]')
           .trigger('click');
       });
 
