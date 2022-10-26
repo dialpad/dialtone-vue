@@ -289,10 +289,14 @@ export default {
         },
 
         keydown: event => {
-          if (EVENT_KEYNAMES.esc.includes(event.code)) {
-            this.close();
-          } else if (EVENT_KEYNAMES.tab === event.code) {
-            this.trapFocus(event);
+          switch (event.code) {
+            case EVENT_KEYNAMES.esc:
+            case EVENT_KEYNAMES.escape:
+              this.close();
+              break;
+            case EVENT_KEYNAMES.tab:
+              this.trapFocus(event);
+              break;
           }
           this.$emit('keydown', event);
         },

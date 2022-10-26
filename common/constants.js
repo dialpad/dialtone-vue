@@ -39,14 +39,20 @@ export const LABEL_SIZE_MODIFIERS = {
 };
 
 export const EVENT_KEYNAMES = {
-  esc: ['Esc', 'Escape'],
+  esc: 'Esc',
+  escape: 'Escape',
   tab: 'Tab',
   enter: 'Enter',
-  space: ['Spacebar', 'Space'],
-  up: ['Up', 'ArrowUp'],
-  left: ['Left', 'ArrowLeft'],
-  right: ['Right', 'ArrowRight'],
-  down: ['Down', 'ArrowDown'],
+  space: 'Space',
+  spacebar: 'Spacebar',
+  up: 'Up',
+  arrowup: 'ArrowUp',
+  left: 'Left',
+  arrowleft: 'ArrowLeft',
+  right: 'Right',
+  arrowright: 'ArrowRight',
+  down: 'Down',
+  arrowdown: 'ArrowDown',
   home: 'Home',
   end: 'End',
 };

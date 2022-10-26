@@ -252,19 +252,23 @@ export default {
         keydown: event => {
           const eventCode = event.code;
 
-          if (EVENT_KEYNAMES.up.includes(eventCode)) {
-            this.onKeyValidation(event, 'onUpKeyPress');
-            event.stopPropagation();
-            event.preventDefault();
-          } else if (EVENT_KEYNAMES.down.includes(eventCode)) {
-            this.onKeyValidation(event, 'onDownKeyPress');
-            event.stopPropagation();
-            event.preventDefault();
-          } else if (EVENT_KEYNAMES.space.includes(eventCode)) {
-            this.onSpaceKey();
-          }
-
           switch (eventCode) {
+            case EVENT_KEYNAMES.up:
+            case EVENT_KEYNAMES.arrowup:
+              this.onKeyValidation(event, 'onUpKeyPress');
+              event.stopPropagation();
+              event.preventDefault();
+              break;
+            case EVENT_KEYNAMES.down:
+            case EVENT_KEYNAMES.arrowdown:
+              this.onKeyValidation(event, 'onDownKeyPress');
+              event.stopPropagation();
+              event.preventDefault();
+              break;
+            case EVENT_KEYNAMES.space:
+            case EVENT_KEYNAMES.spacebar:
+              this.onSpaceKey();
+              break;
             case EVENT_KEYNAMES.enter:
               this.onEnterKey();
               break;
