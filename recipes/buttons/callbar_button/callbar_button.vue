@@ -144,6 +144,10 @@ export default {
   line-height: 1.6rem;
 }
 
+.dt-recipe-callbar-button:hover {
+  --button--bgc: var(--black-200);
+}
+
 .dt-recipe-callbar-button--circle {
   border-radius: var(--br-circle);
 }
