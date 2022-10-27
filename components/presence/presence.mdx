@@ -1,0 +1,83 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import Presence from './presence.vue';
+
+# Presence
+
+<Subtitle>
+    This component displays a presence circle indicating the current status.
+</Subtitle>
+
+## Base Style
+
+Presence can be initialized by passing `presence` prop that can take one of 4 values: 'away', 'active', 'offline', and 'busy'.
+
+<Canvas>
+  <Story id="components-presence--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="components-presence--variants" />
+</Canvas>
+
+## Props, Slots & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtPresence } from '@dialpad/dialtone-vue';
+```
+
+### With Presence Prop
+
+```html
+<dt-presence
+  presence="active"
+/>
+```
+
+### With SR text prop
+
+```html
+<dt-presence
+  presence="active"
+  sr-text="User Presence"
+/>
+```
+
+### With Theme prop
+
+```html
+<dt-presence
+  theme="default"
+/>
+```
+
+### Accessibility
+
+Keyboard shortcuts should be visible to sighted users and made available to assistive technology.
+The Presence component is purely visual by default, and will not read out to a screen reader.
+
+If you'd like for a SR to read out any changes to Presence, you should pass the `srText` prop so it is
+read by AT.
+
+Example:
+
+```html
+<dt-presence
+  presence="active"
+  sr-text="User {{ user }} is active"
+/>
+```
+
+Abbreviations / symbols should be read out in full for voiceover / screen readers.
+
+### References
+
+- [Keyboard Symbols](http://xahlee.info/comp/unicode_computing_symbols.html)
+- [aria-keyshortcuts](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts)
