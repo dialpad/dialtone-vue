@@ -15,6 +15,7 @@
       ref="popover"
       :class="['d-popover', { 'd-popover__anchor--modal-opened': modal && isOpen }]"
       data-qa="dt-popover-container"
+      v-bind="$attrs"
     >
       <div
         :id="!ariaLabelledby && labelledBy"
@@ -57,9 +58,8 @@
         }"
         :css="$attrs.css"
         :tabindex="contentTabindex"
-        @keydown.capture="onKeydown"
-        @after-leave="onLeaveTransitionComplete"
-        @after-enter="onEnterTransitionComplete"
+        v-bind="$attrs"
+        v-on="popoverListeners"
       >
         <popover-header-footer
           v-if="$slots.headerContent || showCloseButton"
@@ -154,6 +154,8 @@ export default {
   },
 
   mixins: [ModalMixin, SrOnlyCloseButtonMixin],
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -458,6 +460,14 @@ export default {
 
   emits: [
     /**
+     * Native keydown event
+     *
+     * @event keydown
+     * @type {KeyboardEvent}
+     */
+    'keydown',
+
+    /**
      * Event fired to sync the open prop with the parent component
      * @event update:open
      */
@@ -483,6 +493,24 @@ export default {
   },
 
   computed: {
+    popoverListeners () {
+      return {
+        keydown: event => {
+          this.onKeydown(event);
+          this.$emit('keydown', event);
+        },
+
+        'after-leave': event => {
+          this.onLeaveTransitionComplete();
+        },
+
+        'after-enter': event => {
+          console.log('EXECUTED');
+          this.onEnterTransitionComplete();
+        },
+      };
+    },
+
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
