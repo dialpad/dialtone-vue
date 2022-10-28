@@ -505,7 +505,6 @@ export default {
         },
 
         'after-enter': event => {
-          console.log('EXECUTED');
           this.onEnterTransitionComplete();
         },
       };
