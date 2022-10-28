@@ -1,8 +1,8 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { assert } from 'chai';
 import DtIcon from './icon.vue';
 
-const basePropsData = {
+const baseProps = {
   name: 'accessibility',
 };
 
@@ -13,8 +13,7 @@ describe('DtIcon Tests', function () {
   const _setWrappers = () => {
     wrapper = mount(DtIcon,
       {
-        propsData: basePropsData,
-        localVue: this.localVue,
+        props: baseProps,
       });
     _setChildWrappers();
   };
@@ -22,10 +21,6 @@ describe('DtIcon Tests', function () {
   const _setChildWrappers = () => {
     icon = wrapper.findComponent(DtIcon);
   };
-
-  before(function () {
-    this.localVue = createLocalVue();
-  });
 
   beforeEach(function () {
     _setWrappers();

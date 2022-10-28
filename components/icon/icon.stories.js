@@ -42,7 +42,10 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, IconDefault);
+const Template = (args) => createTemplateFromVueFile(
+  args,
+  IconDefault,
+);
 
 export const Default = Template.bind({});
 Default.args = {

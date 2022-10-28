@@ -1,7 +1,7 @@
 <template>
   <dt-icon
-    :size="size"
-    :name="name"
+    :size="$attrs.size"
+    :name="$attrs.name"
   />
 </template>
 
