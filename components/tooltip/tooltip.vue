@@ -31,8 +31,8 @@
         },
         contentClass,
       ]"
-      @after-leave="onLeaveTransitionComplete"
-      @after-enter="onEnterTransitionComplete"
+      v-bind="$attrs"
+      v-on="tooltipListeners"
     >
       <!-- In case when transitionend event doesn't work correct (for ex. tooltip component with custom trigger) -->
       <!-- after-leave event can be used instead of transitionend -->
@@ -70,6 +70,8 @@ export default {
   components: {
     DtLazyShow,
   },
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -217,6 +219,18 @@ export default {
   },
 
   computed: {
+    tooltipListeners () {
+      return {
+        'after-leave': event => {
+          this.onLeaveTransitionComplete();
+        },
+
+        'after-enter': event => {
+          this.onEnterTransitionComplete();
+        },
+      };
+    },
+
     tippyProps () {
       return {
         offset: this.offset,
