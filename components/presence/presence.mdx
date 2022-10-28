@@ -60,11 +60,13 @@ import { DtPresence } from '@dialpad/dialtone-vue';
 
 ### Accessibility
 
-Keyboard shortcuts should be visible to sighted users and made available to assistive technology.
-The Presence component is purely visual by default, and will not read out to a screen reader.
+The Presence component is purely visual by default, and will not be read out to a screen reader.
 
 If you'd like for a SR to read out any changes to Presence, you should pass the `srText` prop so it is
-read by AT.
+read by AT. The component has a role of "status" to assist SR apps in reading out status changes.
+
+[See W3C guidelines](https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA22)
+for more information.
 
 Example:
 
@@ -76,8 +78,3 @@ Example:
 ```
 
 Abbreviations / symbols should be read out in full for voiceover / screen readers.
-
-### References
-
-- [Keyboard Symbols](http://xahlee.info/comp/unicode_computing_symbols.html)
-- [aria-keyshortcuts](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts)

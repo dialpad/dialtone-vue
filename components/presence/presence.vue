@@ -1,8 +1,8 @@
 <template>
   <div
-    v-if="presence"
     :class="['d-presence', BACKGROUND_COLOR_FOR_THEME[theme]]"
     data-qa="dt-presence"
+    role="status"
   >
     <span
       v-if="srText"
