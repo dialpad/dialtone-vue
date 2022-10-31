@@ -150,6 +150,10 @@ export default {
         },
       ];
     },
+
+    shouldShowIcon () {
+      return this.showIcon;
+    },
   },
 
   watch: {
