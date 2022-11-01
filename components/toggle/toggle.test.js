@@ -171,8 +171,6 @@ describe('DtToggle Tests', function () {
       });
 
       it('should set the correct checked attribute', function () {
-        console.log(button.html());
-        console.log(button.attributes('aria-checked'));
         assert.equal(button.attributes('aria-checked'), 'mixed');
       });
     });
