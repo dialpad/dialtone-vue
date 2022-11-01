@@ -2,6 +2,7 @@
   <dt-toggle
     :checked="checked"
     :disabled="disabled"
+    :indeterminate="indeterminate"
     :size="size"
     :show-icon="showIcon"
     :label-class="labelClass"

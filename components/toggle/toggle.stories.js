@@ -46,6 +46,17 @@ export const argTypesData = {
     },
   },
 
+  indeterminate: {
+    description: 'Used to set the indeterminate state',
+    control: 'boolean',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'boolean',
+      },
+    },
+  },
+
   // Directives
   'v-model': {
     description: 'Supported by this component',
