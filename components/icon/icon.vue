@@ -37,6 +37,12 @@ export default {
     },
   },
 
+  data () {
+    return {
+      icon: null,
+    };
+  },
+
   computed: {
     iconSize () {
       return ICON_SIZE_MODIFIERS[this.size];
@@ -45,9 +51,22 @@ export default {
     iconName () {
       return kebabCaseToPascalCase(this.name);
     },
+  },
 
-    icon () {
-      return require(`@dialpad/dialtone/lib/dist/vue/v7/${this.iconName}`).default;
+  watch: {
+    $props: {
+      immediate: true,
+      deep: true,
+      handler () {
+        this.getIcon();
+      },
+    },
+  },
+
+  methods: {
+    async getIcon () {
+      const icon = await import(`@dialpad/dialtone/lib/dist/vue/v7/${this.iconName}`);
+      this.icon = icon.default;
     },
   },
 };
