@@ -69,6 +69,7 @@
       class="d-mt6"
       label-class="d-mr6"
       label="Small size"
+      size="sm"
     >
       Small size
     </dt-toggle>
