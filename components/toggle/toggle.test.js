@@ -78,8 +78,8 @@ describe('DtToggle Tests', function () {
         assert.isTrue(icon.exists());
       });
 
-      it('should hide the icon when showIcons prop is false', async function () {
-        await wrapper.setProps({ showIcons: false });
+      it('should hide the icon when showIcon prop is false', async function () {
+        await wrapper.setProps({ showIcon: false });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
         assert.isFalse(icon.exists());
