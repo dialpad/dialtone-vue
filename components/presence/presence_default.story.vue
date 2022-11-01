@@ -1,7 +1,6 @@
 <template>
   <dt-presence
     :presence="presence"
-    :theme="theme"
     :sr-text="srText"
   />
 </template>

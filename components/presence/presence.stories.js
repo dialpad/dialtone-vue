@@ -17,6 +17,11 @@ export const argTypesData = {
       options: [...PRESENCE_STATES_LIST],
     },
   },
+  srText: {
+    control: {
+      type: 'text',
+    },
+  },
 };
 
 // Story Collection
