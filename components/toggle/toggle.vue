@@ -22,7 +22,7 @@
       v-on="inputListeners"
     >
       <span
-        v-if="shouldShowIcon"
+        v-if="showIcon"
         class="d-toggle__inner"
       />
     </button>
@@ -149,10 +149,6 @@ export default {
 
         },
       ];
-    },
-
-    shouldShowIcon () {
-      return this.showIcon;
     },
   },
 
