@@ -12,9 +12,9 @@
     </label>
     <button
       :id="id"
-      role="switch"
+      :role="toggleRole"
       type="button"
-      :aria-checked="internalChecked.toString()"
+      :aria-checked="toggleAriaChecked"
       :disabled="disabled"
       :aria-disabled="disabled.toString()"
       :class="toggleClasses"
@@ -31,7 +31,7 @@
 <script>
 import { warn } from 'vue';
 import utils from '@/common/utils';
-import { TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
+import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 /**
  * A toggle (or "switch") is a button control element that allows the user to make a binary (on/off) selection.
@@ -70,11 +70,21 @@ export default {
     /**
      * Value of the toggle
      * @model checked
-     * @values true, false
+     * @values true, false, 'mixed'
      */
     checked: {
-      type: Boolean,
+      type: Boolean || String,
       default: false,
+      validator: v => TOGGLE_CHECKED_VALUES,
+    },
+
+    /**
+     * Applies indeterminate state
+     * @values true, false
+     */
+    indeterminate: {
+      type: Boolean,
+      default: null,
     },
 
     /**
@@ -127,6 +137,7 @@ export default {
   data () {
     return {
       internalChecked: this.checked,
+      internalIndeterminate: this.indeterminate,
     };
   },
 
@@ -138,6 +149,14 @@ export default {
       };
     },
 
+    toggleRole () {
+      return this.internalIndeterminate ? 'checkbox' : 'switch';
+    },
+
+    toggleAriaChecked () {
+      return this.internalIndeterminate ? 'mixed' : this.internalChecked.toString();
+    },
+
     toggleClasses () {
       return [
         'd-toggle',
@@ -145,7 +164,7 @@ export default {
         {
           'd-toggle--checked': this.internalChecked,
           'd-toggle--disabled': this.disabled,
-
+          'd-toggle--indeterminate': this.internalIndeterminate,
         },
       ];
     },
@@ -158,6 +177,14 @@ export default {
   watch: {
     checked (newChecked) {
       this.internalChecked = newChecked;
+      this.internalIndeterminate = false;
+    },
+
+    indeterminate (newValue) {
+      this.internalIndeterminate = newValue;
+      if (newValue) {
+        this.internalChecked = false;
+      }
     },
   },
 
@@ -168,6 +195,7 @@ export default {
   methods: {
     toggleCheckedValue () {
       this.internalChecked = !this.internalChecked;
+      this.internalIndeterminate = false;
       this.$emit('change', this.internalChecked);
     },
 
