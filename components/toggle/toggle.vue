@@ -21,7 +21,7 @@
       v-bind="inputListeners"
     >
       <span
-        v-if="shouldShowIcon"
+        v-if="showIcon"
         class="d-toggle__inner"
       />
     </button>
@@ -167,10 +167,6 @@ export default {
           'd-toggle--indeterminate': this.internalIndeterminate,
         },
       ];
-    },
-
-    shouldShowIcon () {
-      return this.showIcon;
     },
   },
 
