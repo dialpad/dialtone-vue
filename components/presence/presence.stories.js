@@ -17,17 +17,6 @@ export const argTypesData = {
       options: [...PRESENCE_STATES_LIST],
     },
   },
-  theme: {
-    table: {
-      type: {
-        summary: 'string',
-      },
-    },
-    control: {
-      type: 'select',
-      options: ['none', 'default'],
-    },
-  },
 };
 
 // Story Collection

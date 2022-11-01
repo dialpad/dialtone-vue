@@ -41,14 +41,30 @@ describe('DtPresence Tests', function () {
   });
 
   describe('Presentation Tests', function () {
-    // Shared Examples
-
     describe('When presence renders', function () {
       // Test Setup
       beforeEach(function () { _setWrappers(); });
 
       it('should exist', function () {
         assert.isTrue(presence.exists());
+      });
+    });
+
+    describe('Presence attributes', function () {
+      // Test Setup
+      beforeEach(function () { _setWrappers(); });
+
+      it('should have role=status', function () {
+        assert.strictEqual(presence.attributes('role'), 'status');
+      });
+
+      it('should have aria-live=polite by default', function () {
+        assert.strictEqual(presence.attributes('aria-live'), 'polite');
+      });
+
+      it('should be able to set aria-live attribute', async function () {
+        await wrapper.setProps({ ariaLive: 'assertive' });
+        assert.strictEqual(presence.attributes('aria-live'), 'assertive');
       });
     });
 
@@ -73,20 +89,6 @@ describe('DtPresence Tests', function () {
       it('should contain the content of the srText prop', function () {
         const srSpan = presence.find('span');
         assert.strictEqual(srSpan.text(), srText);
-      });
-    });
-
-    describe('Theme prop', function () {
-      beforeEach(function () {
-        _setWrappers();
-      });
-
-      it('should append no additional classes when no `theme` prop is passed', function () {
-        assert.deepEqual(presence.classes(), ['d-presence']);
-      });
-      it('should append the `d-theme-sidebar-bgc` class when `theme` prop is `default`', async function () {
-        await wrapper.setProps({ theme: 'default' });
-        assert.deepEqual(presence.classes(), ['d-presence', 'd-theme-sidebar-bgc']);
       });
     });
 

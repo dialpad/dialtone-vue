@@ -1,8 +1,9 @@
 <template>
   <div
-    :class="['d-presence', BACKGROUND_COLOR_FOR_THEME[theme]]"
+    class="d-presence"
     data-qa="dt-presence"
     role="status"
+    :aria-live="$attrs.ariaLive || 'polite'"
   >
     <span
       v-if="srText"
@@ -22,7 +23,7 @@
 </template>
 
 <script>
-import { BACKGROUND_COLOR_FOR_THEME, PRESENCE_STATES, PRESENCE_STATES_LIST } from './presence_constants';
+import { PRESENCE_STATES, PRESENCE_STATES_LIST } from './presence_constants';
 /**
  * Presence is a user status visual indicator element.
  * @see https://dialpad.design/components/presence.html
@@ -44,17 +45,6 @@ export default {
     },
 
     /**
-     * A theme prop to customize the color of the outer border of presence
-     */
-    theme: {
-      type: String,
-      default: 'none',
-      validator: (theme) => {
-        return Object.keys(BACKGROUND_COLOR_FOR_THEME).includes(theme);
-      },
-    },
-
-    /**
      * Since Presence is a visual element, we need SRs to read out any state changes
      * that occur.
      * Text entered here will be read by assistive technology. If null this component will be ignored by AT.
@@ -63,13 +53,6 @@ export default {
       type: String,
       default: null,
     },
-
-  },
-
-  data () {
-    return {
-      BACKGROUND_COLOR_FOR_THEME,
-    };
   },
 };
 </script>
