@@ -17,13 +17,13 @@
       :aria-checked="internalChecked.toString()"
       :disabled="disabled"
       :aria-disabled="disabled.toString()"
-      :class="['d-toggle', {
-        'd-toggle--checked': internalChecked,
-        'd-toggle--disabled': disabled,
-      }]"
+      :class="toggleClasses"
       v-bind="inputListeners"
     >
-      <span class="d-toggle__inner" />
+      <span
+        v-if="showIcon"
+        class="d-toggle__inner"
+      />
     </button>
   </div>
 </template>
@@ -31,6 +31,7 @@
 <script>
 import { warn } from 'vue';
 import utils from '@/common/utils';
+import { TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 /**
  * A toggle (or "switch") is a button control element that allows the user to make a binary (on/off) selection.
@@ -77,6 +78,25 @@ export default {
     },
 
     /**
+     * The size of the toggle.
+     * @values sm, md
+     */
+    size: {
+      type: String,
+      default: 'md',
+      validator: (s) => Object.keys(TOGGLE_SIZE_MODIFIERS).includes(s),
+    },
+
+    /**
+     * Shows the icon
+     * @values true, false
+     */
+    showIcon: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Used to customize the label container
      */
     labelClass: {
@@ -111,12 +131,23 @@ export default {
   },
 
   computed: {
-
     inputListeners () {
       return {
         ...this.$attrs,
         onClick: _ => this.toggleCheckedValue(),
       };
+    },
+
+    toggleClasses () {
+      return [
+        'd-toggle',
+        TOGGLE_SIZE_MODIFIERS[this.size],
+        {
+          'd-toggle--checked': this.internalChecked,
+          'd-toggle--disabled': this.disabled,
+
+        },
+      ];
     },
   },
 

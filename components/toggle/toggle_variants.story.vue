@@ -64,6 +64,24 @@
         With V-Model
       </div>
     </dt-toggle>
+
+    <!-- Without icon -->
+    <dt-toggle
+      class="d-mt6"
+      label-class="d-mr6"
+      :show-icon="false"
+    >
+      Without icon
+    </dt-toggle>
+
+    <dt-toggle
+      class="d-mt6"
+      label-class="d-mr6"
+      label="Small size"
+      size="sm"
+    >
+      Small size
+    </dt-toggle>
   </div>
 </template>
 
