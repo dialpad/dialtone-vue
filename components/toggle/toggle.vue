@@ -73,9 +73,9 @@ export default {
      * @values true, false, 'mixed'
      */
     checked: {
-      type: Boolean || String,
+      type: [Boolean, String],
       default: false,
-      validator: v => TOGGLE_CHECKED_VALUES,
+      validator: (v) => TOGGLE_CHECKED_VALUES.includes(v),
     },
 
     /**
@@ -171,9 +171,17 @@ export default {
   },
 
   watch: {
-    checked (newChecked) {
-      this.internalChecked = newChecked;
-      this.internalIndeterminate = false;
+    checked: {
+      immediate: true,
+      handler (newChecked) {
+        if (newChecked === 'mixed') {
+          this.internalChecked = null;
+          this.internalIndeterminate = true;
+        } else {
+          this.internalChecked = newChecked;
+          this.internalIndeterminate = null;
+        }
+      },
     },
 
     indeterminate (newValue) {
