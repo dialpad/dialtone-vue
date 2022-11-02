@@ -32,12 +32,20 @@ export function getIconNames () {
 }
 
 /**
- * Gets the full list of version 7 SVG icon names from the dialtone package
- * @returns {string[]} SVG icon names
- */
+ * Gets the full list of dialtone SVG icon names from the dialtone package
+ * Also sets the context to use Dialtone Vue icons without bundling them.
+ * @returns {string[]} icon names
+*/
 export function getV7IconNames () {
   const requireContext = require.context(
-    '@dialpad/dialtone/lib/dist/svg/v7',
+    '../node_modules/@dialpad/dialtone/lib/dist/',
+    true,
+    /[A-Z]\w+\.svg$/i,
+  );
+
+  /* Important for WebPack enables weak dependency binding */
+  require.context(
+    '../node_modules/@dialpad/dialtone/lib/dist/vue/v7',
     false,
   );
 
@@ -48,7 +56,7 @@ export function getV7IconNames () {
  * Extracts filename and component name from all files in a directory.
  * @param {object} requireContext - a requireContext containing the path of the
  * directory you would like to read files from
- * @returns {{fileName: string, componentName: string}} object containing both the
+ * @returns {{fileName: string, componentName: string}[]} array of objects containing both the
  * filename and component name in PascalCase.
  */
 export const getComponentFilesFromDir = (requireContext) => {
