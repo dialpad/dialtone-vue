@@ -17,6 +17,7 @@ describe('DtToggle Tests', function () {
   let wrapper;
   let button;
   let label;
+  let icon;
 
   // Environment
   let propsData = basePropsData;
@@ -29,6 +30,7 @@ describe('DtToggle Tests', function () {
   const _setChildWrappers = () => {
     button = wrapper.find('button');
     label = wrapper.find('[data-qa="toggle-label"]');
+    icon = wrapper.find('.d-toggle__inner');
   };
 
   const _setWrappers = () => {
@@ -72,6 +74,17 @@ describe('DtToggle Tests', function () {
       it('should have type button', function () { assert.strictEqual(button.attributes('type'), 'button'); });
       it('should have role switch', function () { assert.strictEqual(button.attributes('role'), 'switch'); });
 
+      it('should show the icon', function () {
+        assert.isTrue(icon.exists());
+      });
+
+      it('should hide the icon when showIcon prop is false', async function () {
+        await wrapper.setProps({ showIcon: false });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+        assert.isFalse(icon.exists());
+      });
+
       describe('disabled behaviour', function () {
         it('should set correct disabled attributes when disabled prop is false', function () {
           assert.strictEqual(button.attributes('aria-disabled'), 'false');
@@ -84,6 +97,11 @@ describe('DtToggle Tests', function () {
           assert.strictEqual(button.attributes('aria-disabled'), 'true');
           assert.equal(button.attributes().disabled, 'disabled');
           assert.isTrue(button.classes().includes('d-toggle--disabled'));
+        });
+
+        it('should set correct size class', async function () {
+          await wrapper.setProps({ size: 'sm' });
+          assert.isTrue(button.classes().includes('d-toggle--small'));
         });
       });
     });
