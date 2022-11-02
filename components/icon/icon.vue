@@ -65,8 +65,12 @@ export default {
 
   methods: {
     async getIcon () {
-      const icon = await require(`@dialpad/dialtone/lib/dist/vue/v7/${this.iconName}.vue`);
-      this.icon = icon.default;
+      const { default: icon } = await import(
+          /* webpackChunkName: "dialtone-icons" */
+          /* webpackMode: "weak" */
+          `@dialpad/dialtone/lib/dist/vue/v7/${this.iconName}.vue`
+      );
+      this.icon = icon;
     },
   },
 };
