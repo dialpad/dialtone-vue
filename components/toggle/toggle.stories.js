@@ -63,6 +63,14 @@ export const argTypesData = {
     },
   },
 
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+
   // Directives
   'v-model': {
     description: 'Supported by this component',
