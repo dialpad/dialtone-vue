@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="icon"
+    :is="currentIcon"
     data-qa="dt-icon"
     :class="iconSize"
   />
@@ -9,6 +9,7 @@
 <script>
 import { ICON_SIZE_MODIFIERS } from './icon_constants';
 import { kebabCaseToPascalCase } from '@/common/utils';
+import * as dialtoneIcons from '@dialpad/dialtone-icons';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -39,7 +40,7 @@ export default {
 
   data () {
     return {
-      icon: null,
+      dialtoneIcons,
     };
   },
 
@@ -51,26 +52,9 @@ export default {
     iconName () {
       return kebabCaseToPascalCase(this.name);
     },
-  },
 
-  watch: {
-    $props: {
-      immediate: true,
-      deep: true,
-      handler () {
-        this.getIcon();
-      },
-    },
-  },
-
-  methods: {
-    async getIcon () {
-      const { default: icon } = await import(
-          /* webpackChunkName: "dialtone-icons" */
-          /* webpackMode: "weak" */
-          `@dialpad/dialtone/lib/dist/vue/v7/${this.iconName}.vue`
-      );
-      this.icon = icon;
+    currentIcon () {
+      return this.dialtoneIcons[this.iconName];
     },
   },
 };

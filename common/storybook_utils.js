@@ -38,15 +38,9 @@ export function getIconNames () {
 */
 export function getV7IconNames () {
   const requireContext = require.context(
-    '../node_modules/@dialpad/dialtone/lib/dist/',
-    true,
-    /[A-Z]\w+\.svg$/i,
-  );
-
-  /* Important for WebPack enables weak dependency binding */
-  require.context(
-    '../node_modules/@dialpad/dialtone/lib/dist/vue/v7',
+    '../node_modules/@dialpad/dialtone/lib/dist/svg/v7',
     false,
+    /[A-Z]\w+\.svg$/i,
   );
 
   return [...getComponentFilesFromDir(requireContext).map(item => item.componentName)];
