@@ -52,17 +52,6 @@ export const argTypesData = {
     },
   },
 
-  indeterminate: {
-    description: 'Used to set the indeterminate state',
-    control: 'boolean',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'boolean',
-      },
-    },
-  },
-
   id: {
     table: {
       defaultValue: {

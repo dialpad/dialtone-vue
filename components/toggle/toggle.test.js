@@ -150,16 +150,16 @@ describe('DtToggle Tests', function () {
       beforeEach(function () {
         props = {
           ...baseProps,
-          indeterminate: true,
+          checked: 'mixed',
         };
         _setWrappers();
       });
 
-      it('should set indeterminate state when indeterminate prop is true', function () {
+      it('should set indeterminate state when checked prop is mixed', function () {
         assert.isTrue(button.classes().includes('d-toggle--indeterminate'));
       });
 
-      it('should set the correct checked attribute', function () {
+      it('should set the correct aria-checked attribute', function () {
         assert.equal(button.attributes('aria-checked'), 'mixed');
       });
     });
