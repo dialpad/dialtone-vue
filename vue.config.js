@@ -1,8 +1,12 @@
 const path = require('path');
+const { defineConfig } = require('@vue/cli-service');
 
-module.exports = {
+module.exports = defineConfig({
   lintOnSave: false,
   css: { extract: false },
+  chainWebpack: (config) => {
+    config.externals(['@dialpad/dialtone', '@dialpad/dialtone-icons']);
+  },
   configureWebpack: {
     resolve: {
       alias: {
@@ -15,4 +19,4 @@ module.exports = {
       openAnalyzer: false,
     },
   },
-};
+});
