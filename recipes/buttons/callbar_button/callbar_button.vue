@@ -116,6 +116,8 @@ export default {
         'dt-recipe-callbar-button',
         'd-stack4',
         'd-px0',
+        'h:d-bgc-black-200',
+        'h:d-bgo50',
         {
           'dt-recipe-callbar-button--circle': this.circle,
           'd-btn--icon-only': this.circle,
@@ -131,10 +133,6 @@ export default {
 .dt-recipe-callbar-button:not(.dt-recipe-callbar-button--circle) {
   letter-spacing: -0.011rem;
   line-height: 1.6rem;
-}
-
-.dt-recipe-callbar-button:hover {
-  --button--bgc: var(--black-200);
 }
 
 .dt-recipe-callbar-button--circle {
