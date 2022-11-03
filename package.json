@@ -85,6 +85,7 @@
   },
   "peerDependencies": {
     "@dialpad/dialtone": ">=7.4",
+    "@dialpad/dialtone-icons": "^0.0.1-beta.1",
     "vue": ">=3.2"
   },
   "engineStrict": true,
