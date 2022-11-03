@@ -23,7 +23,7 @@
     <dt-toggle
       class="d-mt6"
       label-class="d-mr6"
-      :indeterminate="true"
+      checked="mixed"
     >
       Indeterminate
     </dt-toggle>
@@ -51,7 +51,7 @@
     <dt-toggle
       class="d-mt6"
       label-class="d-mr6"
-      :indeterminate="true"
+      checked="mixed"
       :disabled="true"
     >
       Indeterminate Disabled
