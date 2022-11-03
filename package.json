@@ -36,8 +36,8 @@
     "./emoji": "./dist/emoji.common.js"
   },
   "dependencies": {
+    "@dialpad/dialtone-icons": "^0.0.1",
     "@linusborg/vue-simple-portal": "^0.1.5",
-    "@dialpad/dialtone-icons": "^0.0.1-beta.1",
     "emoji-regex": "^10.1.0",
     "emoji-toolkit": "^6.6.0",
     "tippy.js": "^6.3.7"
@@ -80,15 +80,14 @@
     "semantic-release": "^19.0.5",
     "sinon": "^14.0.0",
     "source-map-support": "^0.5.21",
-    "vue": "^2.7.10",
+    "vue": "^2.7.13",
     "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
     "vue-docgen-api": "^4.52.0",
-    "vue-template-compiler": "^2.7.10",
+    "vue-template-compiler": "^2.7.13",
     "yo": "^4.3.0"
   },
   "peerDependencies": {
     "@dialpad/dialtone": ">=7.4",
-    "@dialpad/dialtone-icons": "^0.0.1-beta.1",
     "vue": ">=2.6"
   },
   "engineStrict": true,
