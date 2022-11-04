@@ -15,7 +15,6 @@
       ref="popover"
       :class="['d-popover', { 'd-popover__anchor--modal-opened': modal && isOpen }]"
       data-qa="dt-popover-container"
-      v-bind="$attrs"
     >
       <div
         :id="!ariaLabelledby && labelledBy"
@@ -28,6 +27,8 @@
         @keydown.down.prevent="onArrowKeyPress"
         @wheel="(e) => (isOpen && modal) && e.preventDefault()"
         @keydown.escape.capture="closePopover"
+        @keydown.enter="$emit('keydown', $event)"
+        @keydown.space="$emit('keydown', $event)"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
         <slot
@@ -58,7 +59,6 @@
         }"
         :css="$attrs.css"
         :tabindex="contentTabindex"
-        v-bind="$attrs"
         v-on="popoverListeners"
       >
         <popover-header-footer
@@ -154,8 +154,6 @@ export default {
   },
 
   mixins: [ModalMixin, SrOnlyCloseButtonMixin],
-
-  inheritAttrs: false,
 
   props: {
     /**
@@ -497,7 +495,6 @@ export default {
       return {
         keydown: event => {
           this.onKeydown(event);
-          this.$emit('keydown', event);
         },
 
         'after-leave': event => {
@@ -698,6 +695,8 @@ export default {
           this.isOpen = true;
         }
       }
+
+      this.$emit('keydown', e);
     },
 
     addClosePopoverEventListener () {
@@ -800,6 +799,8 @@ export default {
       if (e.key === 'Escape') {
         this.closePopover();
       }
+
+      this.$emit('keydown', e);
     },
 
     async setPopoverContentAnchorWidth () {
