@@ -64,7 +64,9 @@ import { DtPresence } from '@dialpad/dialtone-vue';
 The Presence component is purely visual by default, and will not be read out to a screen reader.
 
 If you'd like for a SR to read out any changes to Presence, you should pass the `srText` prop so it is
-read by AT. The component has a role of "status" to assist SR apps in reading out status changes.
+read by AT and set the `aria-live` attribute to either 'polite' or 'assertive'.
+Even though the component has a role of "status" to assist SR apps in reading out status changes, its default
+'aria-live' value is set to 'off'.
 
 [See W3C guidelines](https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA22)
 for more information.

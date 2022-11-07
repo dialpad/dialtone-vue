@@ -58,8 +58,8 @@ describe('DtPresence Tests', function () {
         assert.strictEqual(presence.attributes('role'), 'status');
       });
 
-      it('should have aria-live=polite by default', function () {
-        assert.strictEqual(presence.attributes('aria-live'), 'polite');
+      it('should have aria-live=off by default', function () {
+        assert.strictEqual(presence.attributes('aria-live'), 'off');
       });
 
       it('should be able to set aria-live attribute', async function () {

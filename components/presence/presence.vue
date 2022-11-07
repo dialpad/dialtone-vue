@@ -3,7 +3,7 @@
     class="d-presence"
     data-qa="dt-presence"
     role="status"
-    :aria-live="$attrs.ariaLive || 'polite'"
+    :aria-live="$attrs.ariaLive || 'off'"
   >
     <span
       v-if="srText"
