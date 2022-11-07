@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtListItemGroup from './list_item_group.vue';
 
 // Constants
@@ -30,14 +30,12 @@ describe('DtListItemGroup Tests', function () {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
   before(function () {
-    this.localVue = createLocalVue();
   });
   beforeEach(function () {
     _setWrappers();

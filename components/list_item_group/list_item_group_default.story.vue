@@ -25,7 +25,7 @@
       </dt-list-item>
       <template
         v-if="headingSlot"
-        slot="headingSlot"
+        #headingSlot
       >
         <span v-html="headingSlot" />
       </template>
