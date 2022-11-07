@@ -31,7 +31,6 @@
         },
         contentClass,
       ]"
-      v-bind="$attrs"
       v-on="tooltipListeners"
     >
       <!-- In case when transitionend event doesn't work correct (for ex. tooltip component with custom trigger) -->
@@ -70,8 +69,6 @@ export default {
   components: {
     DtLazyShow,
   },
-
-  inheritAttrs: false,
 
   props: {
     /**
