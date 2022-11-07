@@ -1,5 +1,8 @@
 <template>
-  <div role="listbox">
+  <div
+    role="listbox"
+    aria-label="list"
+  >
     <dt-list-item-group
       :heading="$attrs.heading"
       :heading-class="$attrs.headingClass"
@@ -7,18 +10,21 @@
     >
       <dt-list-item
         class="d-pl8"
+        role="option"
         navigation-type="tab"
       >
         item1
       </dt-list-item>
       <dt-list-item
         class="d-pl8"
+        role="option"
         navigation-type="tab"
       >
         item2
       </dt-list-item>
       <dt-list-item
         class="d-pl8"
+        role="option"
         navigation-type="tab"
       >
         item3
