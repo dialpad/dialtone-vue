@@ -10,7 +10,7 @@
     <component
       :is="elementType"
       ref="popover"
-      :class="['d-popover', { 'd-popover__anchor--modal-opened': modal && isOpen }]"
+      :class="['d-popover', { 'd-popover__anchor--opened': isOpen }]"
       data-qa="dt-popover-container"
       v-on="$listeners"
     >
@@ -54,10 +54,7 @@
         }"
         :tabindex="contentTabindex"
         appear
-        v-on="$listeners"
-        @keydown.capture="onKeydown"
-        @after-leave="onLeaveTransitionComplete"
-        @after-enter="onEnterTransitionComplete"
+        v-on="popoverListeners"
       >
         <popover-header-footer
           v-if="$slots.headerContent || showCloseButton"
@@ -91,15 +88,6 @@
             name="content"
             :close="closePopover"
           />
-          <dt-button
-            v-if="visuallyHiddenClose"
-            data-qa="dt-popover-sr-only-close"
-            class="d-vi-visible-sr"
-            :aria-label="visuallyHiddenCloseLabel"
-            @click="closePopover"
-          >
-            <icon-close />
-          </dt-button>
         </div>
         <popover-header-footer
           v-if="$slots.footerContent"
@@ -116,6 +104,11 @@
             />
           </template>
         </popover-header-footer>
+        <sr-only-close-button
+          v-if="showVisuallyHiddenClose"
+          :visually-hidden-close-label="visuallyHiddenCloseLabel"
+          @close="closePopover"
+        />
       </dt-lazy-show>
     </component>
   </div>
@@ -125,23 +118,20 @@
 /* eslint-disable max-lines */
 import {
   POPOVER_CONTENT_WIDTHS,
-  POPOVER_PADDING_CLASSES,
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
-  POPOVER_ROLES,
   POPOVER_INITIAL_FOCUS_STRINGS,
+  POPOVER_PADDING_CLASSES,
+  POPOVER_ROLES,
   POPOVER_STICKY_VALUES,
 } from './popover_constants';
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show';
 import { Portal } from '@linusborg/vue-simple-portal';
 import ModalMixin from '@/common/mixins/modal.js';
-import {
-  createTippy,
-  getPopperOptions,
-} from './tippy_utils';
-import { DtButton } from '../button';
+import { createTippy, getPopperOptions } from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer';
-import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
@@ -154,19 +144,18 @@ export default {
    * CHILD COMPONENTS *
    ********************/
   components: {
+    SrOnlyCloseButton,
     DtLazyShow,
     PopoverHeaderFooter,
     Portal,
-    DtButton,
-    IconClose,
   },
 
-  mixins: [ModalMixin],
+  mixins: [ModalMixin, SrOnlyCloseButtonMixin],
 
   props: {
     /**
      * Controls whether the popover is shown. Leaving this null will have the popover trigger on click by default.
-     * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
+     * If you set this value, the default trigger behavior will be disabled, and you can control it as you need.
      * Supports .sync modifier
      * @values null, true, false
      */
@@ -445,7 +434,7 @@ export default {
      */
     initialFocusElement: {
       type: [String, HTMLElement],
-      default: 'none',
+      default: 'first',
       validator: initialFocusElement => {
         return POPOVER_INITIAL_FOCUS_STRINGS.includes(initialFocusElement) ||
           (initialFocusElement instanceof HTMLElement) ||
@@ -461,24 +450,6 @@ export default {
     openWithArrowKeys: {
       type: Boolean,
       default: false,
-    },
-
-    /**
-     * If true, a visually hidden close button its included in the popover.
-     * @values true, false
-     */
-    visuallyHiddenClose: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Label for the visually hidden close button
-     * Required if visuallyHiddenClose is set to `true`
-     */
-    visuallyHiddenCloseLabel: {
-      type: String,
-      default: '',
     },
   },
 
@@ -511,6 +482,25 @@ export default {
   },
 
   computed: {
+    popoverListeners () {
+      return {
+        ...this.$listeners,
+
+        keydown: event => {
+          this.onKeydown(event);
+          this.$emit('keydown', event);
+        },
+
+        'after-leave': event => {
+          this.onLeaveTransitionComplete();
+        },
+
+        'after-enter': event => {
+          this.onEnterTransitionComplete();
+        },
+      };
+    },
+
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
@@ -529,7 +519,7 @@ export default {
 
     modal (modal) {
       this.tip.setProps({
-        zIndex: modal ? 650 : 300,
+        zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
       });
     },
 
@@ -575,6 +565,9 @@ export default {
 
     isOpen (isOpen, isPrev) {
       if (isOpen) {
+        this.tip.setProps({
+          zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
+        });
         this.tip.show();
         this.addClosePopoverEventListener();
       } else if (!isOpen && isPrev !== isOpen) {
@@ -641,10 +634,6 @@ export default {
       if (this.modal && this.initialFocusElement === 'none') {
         console.error('If the popover is modal you must set the ' +
         'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement');
-      }
-      if (this.visuallyHiddenClose && !this.visuallyHiddenCloseLabel) {
-        console.error('If visuallyHiddenClose prop is true (default), the popover includes a visually hidden ' +
-        'close button and you must set the visuallyHiddenCloseLabel prop.');
       }
     },
 
@@ -784,8 +773,8 @@ export default {
 
     onClickOutside () {
       if (!this.hideOnClick) return;
-      // If a modal popover is opened inside of this one, do not hide on click out
-      const innerModals = this.popoverContentEl.querySelector('.d-popover__anchor--modal-opened');
+      // If a popover is opened inside of this one, do not hide on click out
+      const innerModals = this.popoverContentEl.querySelector('.d-popover__anchor--opened');
       if (!innerModals) {
         this.closePopover();
       }

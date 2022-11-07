@@ -41,13 +41,16 @@
         :offset="popoverOffset"
         :sticky="popoverSticky"
         placement="bottom-start"
+        initial-focus-element="none"
         padding="none"
         role="listbox"
         :external-anchor="externalAnchor"
         :content-width="contentWidth"
         :content-tabindex="null"
-        :modal="modal"
+        :modal="false"
         :auto-focus="false"
+        :visually-hidden-close-label="visuallyHiddenCloseLabel"
+        :visually-hidden-close="visuallyHiddenClose"
         @opened="opened($event, arguments[1]);"
       >
         <template #headerContent>
@@ -107,6 +110,7 @@ import { getUniqueString } from '@/common/utils';
 import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
   name: 'DtRecipeComboboxWithPopover',
@@ -117,6 +121,8 @@ export default {
     ComboboxLoadingList,
     ComboboxEmptyList,
   },
+
+  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**
@@ -234,15 +240,6 @@ export default {
     popoverSticky: {
       type: [Boolean, String],
       default: false,
-    },
-
-    /**
-     * Determines modal state. If enabled popover has a modal overlay
-     * preventing interaction with elements below it, but it is invisible.
-     */
-    modal: {
-      type: Boolean,
-      default: true,
     },
 
     /**
@@ -402,7 +399,7 @@ export default {
     onFocusIn (e) {
       if (this.hasSuggestionList &&
           e && this.$refs.input.querySelector('input') === e.target) {
-        // only trigger if we show suggestion list when focus and
+        // only trigger if we show suggestion list when focused, and
         // it's the input specifically that was focused
         this.showComboboxList();
       }
@@ -413,9 +410,9 @@ export default {
       // Check if the focus change was to another target within the combobox component
       const isComboboxStillFocused = comboboxRefs.some((ref) => {
         return this.$refs[ref]?.contains(e.relatedTarget);
-      });
+      }) || this.visuallyHiddenClose;
 
-      // If outside of the combobox then close
+      // If outside the combobox then close
       if (!isComboboxStillFocused) {
         this.closeComboboxList();
       }

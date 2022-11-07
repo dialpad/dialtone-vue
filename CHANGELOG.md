@@ -1,3 +1,62 @@
+# [2.34.0](https://github.com/dialpad/dialtone-vue/compare/v2.33.0...v2.34.0) (2022-11-04)
+
+
+### Bug Fixes
+
+* dp-58864 update hover background color in Call Bar Button ([#576](https://github.com/dialpad/dialtone-vue/issues/576)) ([1b4231b](https://github.com/dialpad/dialtone-vue/commit/1b4231be4cc2a73e8d9f618b4680c9d27f2f9e31))
+
+
+### Features
+
+* **toggle:** add indeterminate state ([#579](https://github.com/dialpad/dialtone-vue/issues/579)) ([942e2ce](https://github.com/dialpad/dialtone-vue/commit/942e2cead6abf2b74e2b20c04196721ebd7dd738))
+* **toggle:** add showIcon prop ([#573](https://github.com/dialpad/dialtone-vue/issues/573)) ([62b9d35](https://github.com/dialpad/dialtone-vue/commit/62b9d3554082624678f7657a9ade7ee1722f91b3))
+* **toggle:** add size prop ([#571](https://github.com/dialpad/dialtone-vue/issues/571)) ([b7db3a8](https://github.com/dialpad/dialtone-vue/commit/b7db3a83cb1001c642eb0221cbc69e031394f66d))
+
+# [2.33.0](https://github.com/dialpad/dialtone-vue/compare/v2.32.1...v2.33.0) (2022-10-26)
+
+
+### Bug Fixes
+
+* **combobox-with-popover:** update "render within" zindex logic ([#555](https://github.com/dialpad/dialtone-vue/issues/555)) ([3e9bfcc](https://github.com/dialpad/dialtone-vue/commit/3e9bfcca4cbb76dfe3d27addb4388920683d7028))
+
+
+### Features
+
+* close button on dialogs pattern ([#560](https://github.com/dialpad/dialtone-vue/issues/560)) ([8f05c13](https://github.com/dialpad/dialtone-vue/commit/8f05c1321665746f06ccc77b9f772ffee40c1517))
+
+## [2.32.1](https://github.com/dialpad/dialtone-vue/compare/v2.32.0...v2.32.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* **button:** fix button width prop default value ([#564](https://github.com/dialpad/dialtone-vue/issues/564)) ([5284782](https://github.com/dialpad/dialtone-vue/commit/5284782b71cc64539e8cf3dbf2f04b694076fee8))
+
+# [2.32.0](https://github.com/dialpad/dialtone-vue/compare/v2.31.1...v2.32.0) (2022-10-20)
+
+
+### Features
+
+* dp-57693 remove button left and right paddings in callbar_button ([#558](https://github.com/dialpad/dialtone-vue/issues/558)) ([b20c866](https://github.com/dialpad/dialtone-vue/commit/b20c866b3871de42a26e833eda8c54e4424f097d))
+
+## [2.31.1](https://github.com/dialpad/dialtone-vue/compare/v2.31.0...v2.31.1) (2022-10-18)
+
+
+### Bug Fixes
+
+* **grouped-chips:** fix visual fixes ([#556](https://github.com/dialpad/dialtone-vue/issues/556)) ([437d33d](https://github.com/dialpad/dialtone-vue/commit/437d33d3a94bdde7224245ab23c18b72aa6cc8d7))
+
+# [2.31.0](https://github.com/dialpad/dialtone-vue/compare/v2.30.0...v2.31.0) (2022-10-12)
+
+
+### Bug Fixes
+
+* **popover:** default visually hidden to false ([#552](https://github.com/dialpad/dialtone-vue/issues/552)) ([fde03c9](https://github.com/dialpad/dialtone-vue/commit/fde03c9a1a7f81ad3be8749f231948afbc05d1e0))
+
+
+### Features
+
+* dp-57689 add `contentClass` to DtRecipeCallbarButtonWithPopover ([#550](https://github.com/dialpad/dialtone-vue/issues/550)) ([d2ca0b1](https://github.com/dialpad/dialtone-vue/commit/d2ca0b1ca9752e25c745a17d620f3aacf8b4b4d5))
+
 # [2.30.0](https://github.com/dialpad/dialtone-vue/compare/v2.29.2...v2.30.0) (2022-10-11)
 
 

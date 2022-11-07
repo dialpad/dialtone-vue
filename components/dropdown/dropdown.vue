@@ -13,15 +13,7 @@
     :max-width="maxWidth"
     :open-with-arrow-keys="true"
     :open-on-context="openOnContext"
-    v-on="$listeners"
-    @opened="updateInitialHighlightIndex"
-    @keydown.enter="onEnterKey"
-    @keydown.space="onSpaceKey"
-    @keydown.up.stop.prevent="onKeyValidation($event, 'onUpKeyPress')"
-    @keydown.down.stop.prevent="onKeyValidation($event, 'onDownKeyPress')"
-    @keydown.home.stop.prevent="onKeyValidation($event, 'onHomeKeyPress')"
-    @keydown.end.stop.prevent="onKeyValidation($event, 'onEndKeyPress')"
-    @keydown="onKeyValidation($event, 'onKeyPress')"
+    v-on="dropdownListeners"
   >
     <template #anchor="{ attrs }">
       <!-- @slot Anchor element that activates the dropdown -->
@@ -46,6 +38,12 @@
           name="list"
           :close="close"
         />
+        <sr-only-close-button
+          v-if="showVisuallyHiddenClose"
+          :visually-hidden-close-label="visuallyHiddenCloseLabel"
+          :tabindex="isArrowKeyNav ? -1 : 0"
+          @close="close"
+        />
       </ul>
     </template>
   </dt-popover>
@@ -59,12 +57,16 @@ import {
   DROPDOWN_PADDING_CLASSES,
 } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
+import { EVENT_KEYNAMES } from '@/common/constants';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button';
 
 export default {
   name: 'DtDropdown',
 
   components: {
     DtPopover,
+    SrOnlyCloseButton,
   },
 
   mixins: [
@@ -79,6 +81,7 @@ export default {
       activeItemKey: 'activeItemEl',
       focusOnKeyboardNavigation: true,
     }),
+    SrOnlyCloseButtonMixin,
   ],
 
   props: {
@@ -241,12 +244,64 @@ export default {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
       DROPDOWN_PADDING_CLASSES,
+      EVENT_KEYNAMES,
       openedWithKeyboard: false,
       isOpen: null,
     };
   },
 
   computed: {
+    dropdownListeners () {
+      return {
+        ...this.$listeners,
+
+        opened: isPopoverOpen => {
+          this.updateInitialHighlightIndex(isPopoverOpen);
+        },
+
+        keydown: event => {
+          const eventCode = event.code;
+
+          switch (eventCode) {
+            case EVENT_KEYNAMES.up:
+            case EVENT_KEYNAMES.arrowup:
+              this.onKeyValidation(event, 'onUpKeyPress');
+              event.stopPropagation();
+              event.preventDefault();
+              break;
+            case EVENT_KEYNAMES.down:
+            case EVENT_KEYNAMES.arrowdown:
+              this.onKeyValidation(event, 'onDownKeyPress');
+              event.stopPropagation();
+              event.preventDefault();
+              break;
+            case EVENT_KEYNAMES.space:
+            case EVENT_KEYNAMES.spacebar:
+              this.onSpaceKey();
+              break;
+            case EVENT_KEYNAMES.enter:
+              this.onEnterKey();
+              break;
+            case EVENT_KEYNAMES.home:
+              this.onKeyValidation(event, 'onHomeKeyPress');
+              event.stopPropagation();
+              event.preventDefault();
+              break;
+            case EVENT_KEYNAMES.end:
+              this.onKeyValidation(event, 'onEndKeyPress');
+              event.stopPropagation();
+              event.preventDefault();
+              break;
+            default:
+              this.onKeyValidation(event, 'onKeyPress');
+              break;
+          }
+
+          this.$emit('keydown', event);
+        },
+      };
+    },
+
     beginningOfListMethod () {
       return this.onBeginningOfList || this.jumpToEnd;
     },
@@ -293,6 +348,10 @@ export default {
     },
 
     afterHighlight () {
+      if (this.visuallyHiddenClose && this.highlightIndex === this._itemsLength() - 1) {
+        return;
+      }
+
       this.$emit('highlight', this.highlightIndex);
     },
 
@@ -300,7 +359,7 @@ export default {
       this.isOpen = isPopoverOpen;
 
       if (isPopoverOpen) {
-        if (this.openedWithKeyboard && this.navigationType === this.LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS) {
+        if (this.openedWithKeyboard && this.isArrowKeyNav) {
           this.setHighlightIndex(0);
         }
         this.$emit('opened', true);

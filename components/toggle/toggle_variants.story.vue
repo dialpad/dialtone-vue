@@ -19,6 +19,15 @@
       Checked Initial
     </dt-toggle>
 
+    <!-- Indeterminate -->
+    <dt-toggle
+      class="d-mt6"
+      label-class="d-mr6"
+      checked="mixed"
+    >
+      Indeterminate
+    </dt-toggle>
+
     <!-- Checked Disabled -->
     <dt-toggle
       class="d-mt6"
@@ -36,6 +45,16 @@
       :disabled="true"
     >
       Disabled Unchecked
+    </dt-toggle>
+
+    <!-- Indeterminate Disabled -->
+    <dt-toggle
+      class="d-mt6"
+      label-class="d-mr6"
+      checked="mixed"
+      :disabled="true"
+    >
+      Indeterminate Disabled
     </dt-toggle>
 
     <!-- With Flex grow -->
@@ -63,6 +82,24 @@
       <div class="d-mr6">
         With V-Model
       </div>
+    </dt-toggle>
+
+    <!-- Without icon -->
+    <dt-toggle
+      class="d-mt6"
+      label-class="d-mr6"
+      :show-icon="false"
+    >
+      Without icon
+    </dt-toggle>
+
+    <dt-toggle
+      class="d-mt6"
+      label-class="d-mr6"
+      label="Small size"
+      size="sm"
+    >
+      Small size
     </dt-toggle>
   </div>
 </template>

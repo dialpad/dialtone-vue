@@ -12,19 +12,19 @@
     </label>
     <button
       :id="id"
-      role="switch"
+      :role="toggleRole"
       type="button"
       :aria-checked="internalChecked.toString()"
       :disabled="disabled"
       :aria-disabled="disabled.toString()"
-      :class="['d-toggle', {
-        'd-toggle--checked': internalChecked,
-        'd-toggle--disabled': disabled,
-      }]"
+      :class="toggleClasses"
       v-bind="$attrs"
       v-on="inputListeners"
     >
-      <span class="d-toggle__inner" />
+      <span
+        v-if="showIcon"
+        class="d-toggle__inner"
+      />
     </button>
   </div>
 </template>
@@ -32,6 +32,7 @@
 <script>
 import Vue from 'vue';
 import utils from '@/common/utils';
+import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 /**
  * A toggle (or "switch") is a button control element that allows the user to make a binary (on/off) selection.
@@ -70,11 +71,31 @@ export default {
     /**
      * Value of the toggle
      * @model checked
-     * @values true, false
+     * @values true, false, 'mixed'
      */
     checked: {
-      type: Boolean,
+      type: [Boolean, String],
       default: false,
+      validator: (v) => TOGGLE_CHECKED_VALUES.includes(v),
+    },
+
+    /**
+     * The size of the toggle.
+     * @values sm, md
+     */
+    size: {
+      type: String,
+      default: 'md',
+      validator: (s) => Object.keys(TOGGLE_SIZE_MODIFIERS).includes(s),
+    },
+
+    /**
+     * Shows the icon
+     * @values true, false
+     */
+    showIcon: {
+      type: Boolean,
+      default: true,
     },
 
     /**
@@ -112,12 +133,31 @@ export default {
   },
 
   computed: {
-
     inputListeners () {
       return {
         ...this.$listeners,
         click: _ => this.toggleCheckedValue(),
       };
+    },
+
+    isIndeterminate () {
+      return this.internalChecked === 'mixed';
+    },
+
+    toggleRole () {
+      return this.isIndeterminate ? 'checkbox' : 'switch';
+    },
+
+    toggleClasses () {
+      return [
+        'd-toggle',
+        TOGGLE_SIZE_MODIFIERS[this.size],
+        {
+          'd-toggle--checked': this.internalChecked === true,
+          'd-toggle--disabled': this.disabled,
+          'd-toggle--indeterminate': this.isIndeterminate,
+        },
+      ];
     },
   },
 
