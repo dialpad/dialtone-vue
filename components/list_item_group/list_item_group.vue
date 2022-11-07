@@ -2,6 +2,7 @@
   <ul
     :id="id"
     :class="['d-ps-relative', 'd-px0', listClass]"
+    role="group"
     data-qa="dt-dropdown-list-wrapper"
     :aria-labelledby="`${id}-heading`"
   >
@@ -12,7 +13,10 @@
       data-qa="dt-dropdown-list-heading"
       :class="['dt-dropdown-list--header', headingClass]"
     >
-      {{ heading }}
+      <!-- @slot Slot for heading, will override heading prop. -->
+      <slot name="headingSlot">
+        {{ heading }}
+      </slot>
     </li>
     <!-- @slot Slot for the list component -->
     <slot />
