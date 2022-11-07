@@ -22,6 +22,12 @@
     >
       item3
     </dt-list-item>
+    <template
+      v-if="headingSlot"
+      slot="headingSlot"
+    >
+      <span v-html="headingSlot" />
+    </template>
   </dt-list-item-group>
 </template>
 

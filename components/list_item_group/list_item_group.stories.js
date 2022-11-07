@@ -17,6 +17,15 @@ export const argTypesData = {
       },
     },
   },
+  // Slots
+  headingSlot: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
 };
 
 // Story Collection
