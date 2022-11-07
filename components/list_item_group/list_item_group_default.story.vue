@@ -1,5 +1,5 @@
 <template>
-  <div role="list">
+  <div role="listbox">
     <dt-list-item-group
       :heading="$attrs.heading"
       :heading-class="$attrs.headingClass"
