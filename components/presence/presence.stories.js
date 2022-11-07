@@ -1,6 +1,6 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import PresenceMdx from './presence.mdx';
-import Presence from './presence.vue';
+import DtPresence from './presence.vue';
 import { PRESENCE_STATES_LIST } from './presence_constants';
 import PresenceDefaultTemplate from './presence_default.story.vue';
 import PresenceVariantsTemplate from './presence_variants.story.vue';
@@ -12,22 +12,19 @@ export const argTypesData = {
         summary: 'string',
       },
     },
-    control: {
-      type: 'select',
-      options: [...PRESENCE_STATES_LIST],
-    },
+    options: [...PRESENCE_STATES_LIST],
+    control: 'select',
   },
   srText: {
-    control: {
-      type: 'text',
-    },
+    description: 'Screen reader text read out whenver the presence changes',
+    control: 'text',
   },
 };
 
 // Story Collection
 export default {
   title: 'Components/Presence',
-  component: Presence,
+  component: DtPresence,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
@@ -44,14 +41,12 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   PresenceDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   PresenceVariantsTemplate,
 );
 

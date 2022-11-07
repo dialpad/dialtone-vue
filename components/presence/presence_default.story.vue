@@ -1,7 +1,7 @@
 <template>
   <dt-presence
-    :presence="presence"
-    :sr-text="srText"
+    :presence="$attrs.presence"
+    :sr-text="$attrs.srText"
   />
 </template>
 
@@ -9,7 +9,7 @@
 import DtPresence from './presence.vue';
 
 export default {
-  name: 'Presence',
+  name: 'DtPresenceDefaultStory',
   components: { DtPresence },
 };
 </script>

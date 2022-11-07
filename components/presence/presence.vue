@@ -29,7 +29,7 @@ import { PRESENCE_STATES, PRESENCE_STATES_LIST } from './presence_constants';
  * @see https://dialpad.design/components/presence.html
  */
 export default {
-  name: 'Presence',
+  name: 'DtPresence',
   props: {
 
     /**

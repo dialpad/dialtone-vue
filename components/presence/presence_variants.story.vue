@@ -42,7 +42,7 @@
 import DtPresence from './presence.vue';
 
 export default {
-  name: 'Presence',
+  name: 'DtPresenceVariantsStory',
   components: { DtPresence },
 };
 </script>

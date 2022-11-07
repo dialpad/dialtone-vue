@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { assert } from 'chai';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 import DtPresence from './presence.vue';
@@ -24,15 +24,9 @@ describe('DtPresence Tests', function () {
     wrapper = shallowMount(DtPresence, {
       propsData,
       slots,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
-
-  // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
 
   // Teardown
   afterEach(function () {
