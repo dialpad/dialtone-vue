@@ -47,15 +47,15 @@
         <div v-else>
           <dt-button
             :kind="kind"
-            importance="primary"
-          >
-            Confirm
-          </dt-button>
-          <dt-button
-            :kind="kind"
             importance="clear"
           >
             Cancel
+          </dt-button>
+          <dt-button
+            :kind="kind"
+            importance="primary"
+          >
+            Confirm
           </dt-button>
         </div>
       </template>
