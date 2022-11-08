@@ -46,16 +46,16 @@
         />
         <div v-else>
           <dt-button
-            :kind="$attrs.kind"
-            importance="primary"
-          >
-            Confirm
-          </dt-button>
-          <dt-button
-            :kind="$attrs.kind"
+            :kind="kind"
             importance="clear"
           >
             Cancel
+          </dt-button>
+          <dt-button
+            :kind="kind"
+            importance="primary"
+          >
+            Confirm
           </dt-button>
         </div>
       </template>
