@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.35.0",
+  "version": "2.36.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "keywords": [
     "Dialpad",
@@ -28,9 +28,9 @@
   ],
   "repository": "git@github.com:dialpad/dialtone-vue.git",
   "scripts": {
-    "build": "npm run clean && npm run build-main && npm run build-emoji",
-    "build-main": "vue-cli-service build --target lib --name dialtone-vue --no-clean index.js && npm run build:documentation",
-    "build-emoji": "vue-cli-service build --target lib --name emoji --no-clean emoji.js && npm run build:documentation",
+    "build": "npm run clean && npm run build-main && npm run build-emoji && npm run build:documentation",
+    "build-main": "vue-cli-service build --target lib --name dialtone-vue --no-clean index.js",
+    "build-emoji": "vue-cli-service build --target lib --name emoji --no-clean emoji.js",
     "build:documentation": "node scripts/build-docs.js",
     "clean": "rm -rf ./dist",
     "pretest": "npm run clean",
@@ -64,6 +64,7 @@
     "node": "16"
   },
   "dependencies": {
+    "@dialpad/dialtone-icons": "^0.0.2",
     "@linusborg/vue-simple-portal": "^0.1.5",
     "emoji-regex": "^10.1.0",
     "emoji-toolkit": "^6.6.0",
@@ -107,10 +108,10 @@
     "semantic-release": "^19.0.5",
     "sinon": "^14.0.0",
     "source-map-support": "^0.5.21",
-    "vue": "^2.7.10",
+    "vue": "^2.7.13",
     "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
     "vue-docgen-api": "^4.52.0",
-    "vue-template-compiler": "^2.7.10",
+    "vue-template-compiler": "^2.7.13",
     "yo": "^4.3.0"
   },
   "peerDependencies": {
