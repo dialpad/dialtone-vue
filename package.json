@@ -65,7 +65,6 @@
   },
   "dependencies": {
     "@dialpad/dialtone-icons": "0.0.8-vue3",
-    "@linusborg/vue-simple-portal": "^0.1.5",
     "emoji-regex": "^10.1.0",
     "emoji-toolkit": "^6.6.0",
     "tippy.js": "^6.3.7"
