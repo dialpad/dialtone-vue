@@ -46,7 +46,7 @@
         />
         <div v-else>
           <dt-button
-            :kind="kind"
+            kind="muted"
             importance="clear"
           >
             Cancel
@@ -54,6 +54,7 @@
           <dt-button
             :kind="kind"
             importance="primary"
+            class="d-ml6"
           >
             Confirm
           </dt-button>
