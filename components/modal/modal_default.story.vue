@@ -46,7 +46,6 @@
         />
         <div v-else>
           <dt-button
-            kind="muted"
             importance="clear"
           >
             Cancel
