@@ -51,7 +51,7 @@
       :aria-hidden="`${!isOpen}`"
       :aria-labelledby="labelledBy"
       :aria-label="ariaLabel"
-      :show="isOpen"
+      :is-expanded="isOpen"
       :element-type="contentElementType"
       :class="[
         'd-dt-collapsible__content',
@@ -249,6 +249,7 @@ export default {
 
   methods: {
     onLeaveTransitionComplete () {
+      console.log('onLeaveTransitionComplete');
       this.$emit('opened', false);
       if (this.open !== null) {
         this.$emit('update:open', false);
@@ -256,6 +257,7 @@ export default {
     },
 
     onEnterTransitionComplete () {
+      console.log('onEnterTransitionComplete');
       this.$emit('opened', true, this.$refs.content);
       if (this.open !== null) {
         this.$emit('update:open', true);

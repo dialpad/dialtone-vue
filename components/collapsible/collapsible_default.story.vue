@@ -23,7 +23,7 @@
         v-html="anchor"
       />
     </template>
-    <template slot="content">
+    <template #contentOnExpanded>
       <div
         v-if="content"
         v-html="content"
