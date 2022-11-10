@@ -71,9 +71,16 @@
       @after-enter="onEnterTransitionComplete"
     >
       <!-- @slot Slot for the collapsible element that is expanded by the anchor -->
-      <slot
-        name="content"
-      />
+      <template #contentOnExpanded>
+        <slot
+          name="contentOnExpanded"
+        />
+      </template>
+      <template #contentOnCollapsed>
+        <slot
+          name="contentOnCollapsed"
+        />
+      </template>
     </dt-collapsible-lazy-show>
   </component>
 </template>
