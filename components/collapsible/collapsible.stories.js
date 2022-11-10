@@ -1,9 +1,10 @@
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
   DtCollapsible,
 } from './';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import CollapsibleMdx from './collapsible.mdx';
-import DtCollapsibleDefaultStory from './collapsible_default.story';
+import DtCollapsibleDefaultStory from './collapsible_default.story.vue';
+import DtCollapsibleVariantsStory from './collapsible_variants.story.vue';
 
 const argsTypesData = {
   // Slots
@@ -79,6 +80,14 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
   DtCollapsibleDefaultStory,
 );
+
+const VariantTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtCollapsibleVariantsStory,
+);
+
+export const Variants = VariantTemplate.bind({});
 
 // Stories
 export const Default = DefaultTemplate.bind({});

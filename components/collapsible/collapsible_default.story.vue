@@ -22,7 +22,7 @@
         v-html="$attrs.anchor"
       />
     </template>
-    <template #content>
+    <template #contentOnExpanded>
       <div
         v-if="$attrs.content"
         v-html="$attrs.content"
