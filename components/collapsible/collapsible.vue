@@ -74,20 +74,27 @@
       @after-enter="onEnterTransitionComplete"
     >
       <!-- @slot Slot for the collapsible element that is expanded by the anchor -->
-      <slot
-        name="content"
-      />
+      <template #contentOnExpanded>
+        <slot
+          name="contentOnExpanded"
+        />
+      </template>
+      <template #contentOnCollapsed>
+        <slot
+          name="contentOnCollapsed"
+        />
+      </template>
     </dt-collapsible-lazy-show>
   </component>
 </template>
 
 <script>
 import { getUniqueString } from '@/common/utils';
-import DtCollapsibleLazyShow from './collapsible_lazy_show';
+import IconArrowAccordionClosed from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionClosed';
+import IconArrowAccordionOpen from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionOpen';
 import { DtButton } from '../button';
 import { DtLazyShow } from '../lazy_show';
-import IconArrowAccordionOpen from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionOpen';
-import IconArrowAccordionClosed from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionClosed';
+import DtCollapsibleLazyShow from './collapsible_lazy_show';
 
 /**
  * A collapsible is a component consisting of an interactive anchor that toggled the expandable/collapsible element.
