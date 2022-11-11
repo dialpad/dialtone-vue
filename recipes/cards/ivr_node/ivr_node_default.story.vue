@@ -76,9 +76,12 @@
     </template>
     <template
       v-else
-      #menuItems
+      #menuItems="{ close }"
     >
-      <dt-list-item>
+      <dt-list-item
+        role="menuitem"
+        @click="close"
+      >
         Edit
       </dt-list-item>
       <dt-list-item>
