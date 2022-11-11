@@ -12,7 +12,11 @@
         <span class="d-fw-bold"> Active Call </span> 3:21
       </template>
       <div class="d-d-flex d-c-pointer">
-        <span> Show 2 calls on hold </span> <icon-arrow-upward class="d-svg--size14" />
+        <span> Show 2 calls on hold </span>
+        <dt-icon
+          name="arrow-up"
+          class="d-svg--size14"
+        />
       </div>
     </dt-recipe-top-banner-info>
     <dt-recipe-top-banner-info
@@ -60,7 +64,10 @@
           kind="muted"
         >
           <template slot="icon">
-            <icon-park />
+            <dt-icon
+              name="park"
+              size="200"
+            />
           </template>
           Park
         </dt-button>
@@ -78,7 +85,10 @@
           kind="danger"
         >
           <template slot="icon">
-            <icon-call-end-arrow />
+            <dt-icon
+              name="phone-hang-up"
+              size="200"
+            />
           </template>
           End Call
         </dt-button>
@@ -93,20 +103,16 @@
 <script>
 import DtRecipeTopBannerInfo from './top_banner_info';
 import { DtButton } from '@/components/button';
-import IconCallEndArrow from '@dialpad/dialtone/lib/dist/vue/icons/IconCallEndArrow';
 import IconPhoneTransfer from '@dialpad/dialtone/lib/dist/vue/icons/IconPhoneTransfer';
-import IconArrowUpward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowUpward';
-import IconPark from '@dialpad/dialtone/lib/dist/vue/icons/IconPark';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'DtRecipeTopBannerInfoVariants',
   components: {
     DtButton,
     DtRecipeTopBannerInfo,
-    IconArrowUpward,
-    IconCallEndArrow,
     IconPhoneTransfer,
-    IconPark,
+    DtIcon,
   },
 };
 </script>
