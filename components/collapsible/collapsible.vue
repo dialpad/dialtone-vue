@@ -66,9 +66,8 @@
       }"
       tabindex="-1"
       appear
-      v-bind="$attrs"
-      @after-leave="onLeaveTransitionComplete"
-      @after-enter="onEnterTransitionComplete"
+      v-on="$listeners"
+      @transitionfinished="onTransitionFinished"
     >
       <!-- @slot Slot for the collapsible element that is expanded by the anchor -->
       <template #contentOnExpanded>
@@ -255,19 +254,11 @@ export default {
   },
 
   methods: {
-    onLeaveTransitionComplete () {
-      console.log('onLeaveTransitionComplete');
-      this.$emit('opened', false);
-      if (this.open !== null) {
-        this.$emit('update:open', false);
-      }
-    },
 
-    onEnterTransitionComplete () {
-      console.log('onEnterTransitionComplete');
-      this.$emit('opened', true, this.$refs.content);
+    onTransitionFinished () {
+      this.$emit('opened', this.isOpen);
       if (this.open !== null) {
-        this.$emit('update:open', true);
+        this.$emit('update:open', this.isOpen);
       }
     },
 
