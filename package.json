@@ -91,7 +91,6 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@dialpad/conventional-changelog-angular": "^1.0.0",
     "@dialpad/dialtone": "^7.4.1",
-    "@josedialpad/conventional-changelog-angular": "^5.0.13",
     "@percy/cli": "1.10.2",
     "@percy/storybook": "4.2.1",
     "@semantic-release/changelog": "^6.0.1",
