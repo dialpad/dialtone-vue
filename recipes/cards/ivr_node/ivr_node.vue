@@ -60,11 +60,13 @@
         <!-- node menu for actions like edit, copy, delete -->
         <dt-dropdown
           placement="bottom"
+          :open.sync="isOpen"
         >
           <template #anchor>
             <dt-button
               importance="clear"
               :aria-label="menuButtonAriaLabel"
+              @click.stop.prevent="openMenu"
             >
               <template #icon>
                 <icon-menu-vertical class="d-fc-black-900" />
@@ -161,6 +163,12 @@ export default {
     'click',
   ],
 
+  data () {
+    return {
+      isOpen: false,
+    };
+  },
+
   computed: {
     nodeIcon () {
       return IVR_NODE_ICON_TYPES[this.nodeType];
@@ -169,6 +177,12 @@ export default {
     headerColor () {
       const { normal, selected } = IVR_NODE_COLOR_MAPPING[this.nodeType];
       return this.isSelected ? selected : normal;
+    },
+  },
+
+  methods: {
+    openMenu () {
+      this.isOpen = true;
     },
   },
 };
