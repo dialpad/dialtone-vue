@@ -6,6 +6,12 @@
     enter-active-class="enter-active"
     leave-active-class="leave-active"
     v-on="$listeners"
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="afterEnter"
+    @before-leave="beforeLeave"
+    @leave="leave"
+    @after-leave="afterLeave"
   >
     <!-- IMPORTANT:
       Since both elements are the same type, the Vue VDOM cannot
@@ -71,23 +77,72 @@ export default {
       default: 'div',
     },
   },
+
+  methods: {
+
+    beforeEnter (element) {
+      requestAnimationFrame(() => {
+        if (!element.style.height) {
+          element.style.height = '0px';
+        }
+        element.style.display = null;
+      });
+    },
+
+    /**
+     * @param {HTMLElement} element
+     */
+    enter (element) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          element.style.height = `${element.scrollHeight}px`;
+        });
+      });
+    },
+
+    /**
+     * @param {HTMLElement} element
+     */
+    afterEnter (element) {
+      element.style.height = null;
+    },
+
+    /**
+     * @param {HTMLElement} element
+     */
+    beforeLeave (element) {
+      requestAnimationFrame(() => {
+        if (!element.style.height) {
+          element.style.height = `${element.offsetHeight}px`;
+        }
+      });
+    },
+
+    /**
+     * @param {HTMLElement} element
+     */
+    leave (element) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          element.style.height = '0px';
+        });
+      });
+    },
+
+    /**
+     * @param {HTMLElement} element
+     */
+    afterLeave (element) {
+      element.style.height = null;
+    },
+  },
 };
 </script>
 
 <style>
-.enter-active {
-  animation: fade-in 0.2s;
-}
-.leave-active {
-  animation: fade-in 0.2s reverse;
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
+  .enter-active,
+  .leave-active {
+    overflow: hidden;
+    transition: height .3s linear;
   }
-  100% {
-    opacity: 1;
-  }
-}
 </style>
