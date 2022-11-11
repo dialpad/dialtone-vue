@@ -1,40 +1,24 @@
 <template>
   <div>
     <dt-collapsible
-      anchor-text="With Unreads"
+      anchor-text="Favorites"
       content-element-type="ol"
       class="d-p0 d-w100p"
-      @opened="onOpenUpdate"
     >
       <template #contentOnExpanded>
         <li
           v-for="item in items"
-          :key="item"
+          :key="item.name"
         >
-          {{ item }}
+          {{ item.name }}
         </li>
       </template>
       <template #contentOnCollapsed>
         <li
           v-for="item in unreadItems"
-          :key="item"
+          :key="item.name"
         >
-          {{ item }}
-        </li>
-      </template>
-    </dt-collapsible>
-    <dt-collapsible
-      anchor-text="Without Unread Items"
-      content-element-type="ol"
-      class="d-p0 d-w100p"
-      @opened="onOpenUpdate"
-    >
-      <template #contentOnExpanded>
-        <li
-          v-for="datum in items"
-          :key="datum"
-        >
-          {{ datum }}
+          {{ item.name }}
         </li>
       </template>
     </dt-collapsible>
@@ -45,7 +29,7 @@
 import DtCollapsible from './collapsible';
 
 export default {
-  name: 'DtCollapsibleDefaultStory',
+  name: 'DtCollapsibleVariantsStory',
 
   components: {
     DtCollapsible,
@@ -53,24 +37,26 @@ export default {
 
   data () {
     return {
-      isOpen: true,
       items: [
-        'Hello',
-        'World',
-        'Item',
+        {
+          name: 'Item 1',
+          unread: false,
+        },
+        {
+          name: 'Item 2',
+          unread: false,
+        },
+        {
+          name: 'Unread Item 3',
+          unread: true,
+        },
       ],
     };
   },
 
   computed: {
     unreadItems () {
-      return ['Unread Item'];
-    },
-  },
-
-  methods: {
-    onOpenUpdate (shouldBeOpen) {
-      console.log('onOpenUpdate', shouldBeOpen);
+      return this.items.filter(item => item.unread);
     },
   },
 };

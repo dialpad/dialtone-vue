@@ -78,6 +78,8 @@ export default {
     },
   },
 
+  emits: ['transitionfinished'],
+
   methods: {
 
     beforeEnter (element) {
@@ -105,6 +107,11 @@ export default {
      */
     afterEnter (element) {
       element.style.height = null;
+      // Note: since the mode out transition is "out-in"
+      // the 'enter' event will be the one triggered last in this
+      // transition. It will mark the end of the transition, hence
+      // the trigger of the event below
+      this.$emit('transitionfinished');
     },
 
     /**
