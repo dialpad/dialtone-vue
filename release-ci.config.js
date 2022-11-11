@@ -16,7 +16,7 @@ module.exports = {
   plugins: [
     '@semantic-release/commit-analyzer',
     ['@semantic-release/release-notes-generator', {
-      config: '@josedialpad/conventional-changelog-angular',
+      config: '@dialpad/conventional-changelog-angular',
     }],
     '@semantic-release/github',
   ],
