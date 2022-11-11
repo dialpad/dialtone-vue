@@ -59,12 +59,14 @@
         </div>
         <!-- node menu for actions like edit, copy, delete -->
         <dt-dropdown
+          v-model:open="isOpen"
           placement="bottom"
         >
           <template #anchor>
             <dt-button
               importance="clear"
               :aria-label="menuButtonAriaLabel"
+              @click.stop.prevent="openMenu"
             >
               <template #icon>
                 <icon-menu-vertical class="d-fc-black-900" />
@@ -161,6 +163,12 @@ export default {
     'click',
   ],
 
+  data () {
+    return {
+      isOpen: false,
+    };
+  },
+
   computed: {
     nodeListeners () {
       return {
@@ -175,6 +183,12 @@ export default {
     headerColor () {
       const { normal, selected } = IVR_NODE_COLOR_MAPPING[this.nodeType];
       return this.isSelected ? selected : normal;
+    },
+  },
+
+  methods: {
+    openMenu () {
+      this.isOpen = true;
     },
   },
 };
