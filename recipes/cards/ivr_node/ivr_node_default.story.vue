@@ -80,11 +80,16 @@
     >
       <dt-list-item
         role="menuitem"
+        navigation-type="arrow-keys"
         @click="close"
       >
         Edit
       </dt-list-item>
-      <dt-list-item>
+      <dt-list-item
+        role="menuitem"
+        navigation-type="arrow-keys"
+        @click="close"
+      >
         Copy
         <template #right>
           <dt-keyboard-shortcut
@@ -93,7 +98,11 @@
           />
         </template>
       </dt-list-item>
-      <dt-list-item>
+      <dt-list-item
+        role="menuitem"
+        navigation-type="arrow-keys"
+        @click="close"
+      >
         Delete
         <template #right>
           <dt-keyboard-shortcut
