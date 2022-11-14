@@ -584,6 +584,7 @@ export default {
   },
 
   mounted () {
+    console.log('executed from POPOVER');
     // support single anchor for popover, not multi anchor
     const externalAnchorEl = document.getElementById(this.externalAnchor);
     this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
