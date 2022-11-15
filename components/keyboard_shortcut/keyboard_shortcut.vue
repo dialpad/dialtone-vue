@@ -23,10 +23,10 @@
     <template
       v-for="(item, i) in formattedShortcutSplit"
     >
-      <component
-        :is="icons[item]"
+      <dt-icon
         v-if="icons[item]"
         :key="`${i}-${item}`"
+        :name="icons[item]"
         aria-hidden="true"
         :class="[
           'dt-keyboard-shortcut__svg',
@@ -49,17 +49,8 @@
 </template>
 
 <script>
-import IconWindows from '@dialpad/dialtone/lib/dist/vue/icons/IconWindows';
-import IconAdd from '@dialpad/dialtone/lib/dist/vue/icons/IconAdd';
-import IconArrowDownward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowDownward';
-import IconArrowUpward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowUpward';
-import IconArrowForward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowForward';
-import IconArrowBackward from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowBackwards';
-import {
-  SHORTCUTS_ALIASES,
-  SHORTCUTS_ICON_ALIASES,
-  SHORTCUTS_ICON_SEPARATOR,
-} from './keyboard_shortcut_constants';
+import { DtIcon } from '@/components/icon';
+import { SHORTCUTS_ICON_ALIASES, SHORTCUTS_ICON_SEPARATOR } from './keyboard_shortcut_constants';
 
 /**
  * This component displays a visual representation of a keyboard shortcut to the user.
@@ -69,12 +60,7 @@ export default {
   name: 'DtKeyboardShortcut',
 
   components: {
-    IconWindows,
-    IconArrowBackward,
-    IconArrowDownward,
-    IconArrowForward,
-    IconArrowUpward,
-    IconAdd,
+    DtIcon,
   },
 
   props: {
@@ -122,8 +108,8 @@ export default {
     },
 
     formattedShortcut () {
-      return Object.keys(SHORTCUTS_ALIASES).reduce((result, key) => {
-        return result.replace(new RegExp('{' + key + '}', 'gi'), SHORTCUTS_ALIASES[key]);
+      return Object.keys(SHORTCUTS_ICON_ALIASES).reduce((result, key) => {
+        return result.replace(new RegExp('{' + key + '}', 'gi'), SHORTCUTS_ICON_ALIASES[key]);
       }, this.shortcutWithSeparator);
     },
 
