@@ -45,15 +45,18 @@
       @click="$emit('close')"
     >
       <template #icon>
-        <icon-close />
+        <dt-icon
+          name="close"
+          size="300"
+        />
       </template>
     </dt-button>
   </span>
 </template>
 
 <script>
-import IconClose from '@dialpad/dialtone/lib/dist/vue/icons/IconClose';
 import { DtButton } from '../button';
+import { DtIcon } from '../icon';
 import {
   CHIP_CLOSE_BUTTON_SIZE_MODIFIERS,
   CHIP_SIZE_MODIFIERS,
@@ -70,8 +73,8 @@ export default {
   name: 'DtChip',
 
   components: {
-    IconClose,
     DtButton,
+    DtIcon,
   },
 
   inheritAttrs: false,
