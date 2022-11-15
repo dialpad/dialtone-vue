@@ -4,19 +4,16 @@
     :size="$attrs.size"
     :color="$attrs.color"
   >
-    <component
-      :is="defaultSlot"
-    />
+    <dt-icon :name="defaultSlot" />
   </dt-avatar>
 </template>
 
 <script>
 import DtAvatar from './avatar';
-import icon from '@/common/mixins/icon';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'DtAvatarDefault',
-  components: { DtAvatar },
-  mixins: [icon],
+  components: { DtAvatar, DtIcon },
 };
 </script>
