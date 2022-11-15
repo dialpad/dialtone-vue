@@ -31,7 +31,11 @@
             @click.stop="() => {}"
           >
             <template #icon>
-              <icon-social aria-hidden="false" />
+              <dt-icon
+                name="share-2"
+                size="200"
+                aria-hidden="false"
+              />
             </template>
           </dt-button>
           <dt-button
@@ -40,7 +44,10 @@
             @click.stop="() => {}"
           >
             <template #icon>
-              <icon-star-outline aria-hidden="false" />
+              <dt-icon
+                name="star"
+                size="200"
+              />
             </template>
           </dt-button>
           <dt-button
@@ -49,7 +56,11 @@
             @click.stop="() => {}"
           >
             <template #icon>
-              <icon-menu-vertical aria-hidden="false" />
+              <dt-icon
+                name="more-vertical"
+                size="200"
+                aria-hidden="false"
+              />
             </template>
           </dt-button>
         </div>
@@ -59,11 +70,9 @@
 </template>
 
 <script>
-import DtButton from '../button/button';
+import { DtButton } from '@/components/button';
+import { DtIcon } from '@/components/icon';
 import DtListItem from './list_item';
-import IconMenuVertical from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuVertical';
-import IconSocial from '@dialpad/dialtone/lib/dist/vue/icons/IconSocial';
-import IconStarOutline from '@dialpad/dialtone/lib/dist/vue/icons/IconStarOutline';
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 
 export default {
@@ -72,9 +81,7 @@ export default {
   components: {
     DtButton,
     DtListItem,
-    IconMenuVertical,
-    IconSocial,
-    IconStarOutline,
+    DtIcon,
   },
 
   mixins: [
