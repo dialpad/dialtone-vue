@@ -47,8 +47,12 @@ describe('DtInput tests', function () {
 
   const _mountWrapper = () => {
     wrapper = mount(DtInput, {
+      global: {
+        components: {
+          'dt-icon': DtIcon,
+        },
+      },
       props,
-      components: { DtIcon },
       attrs,
       slots,
     });

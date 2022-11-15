@@ -41,7 +41,7 @@ describe('DtRecipeGroupedChip Tests', function () {
   const _setWrappers = () => {
     wrapper = mount(DtRecipeGroupedChip, {
       propsData,
-      components: { DtIcon },
+      global: { components: { 'dt-icon': DtIcon } },
       attrs,
       slots,
       provide,

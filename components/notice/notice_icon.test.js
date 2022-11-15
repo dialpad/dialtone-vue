@@ -18,7 +18,7 @@ describe('DtNoticeIcon tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtNoticeIcon, {
-      components: { DtIcon },
+      global: { components: { 'dt-icon': DtIcon } },
       props,
       slots: slotsData,
     });
