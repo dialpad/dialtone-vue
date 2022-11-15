@@ -134,7 +134,7 @@ Default.args = {
   default: 'Button',
   tooltip: 'Tooltip Text',
   ariaLabel: 'Button',
-  icon: 'IconDialpadGlyph',
+  icon: 'accessibility',
 };
 
 export const Variants = VariantsTemplate.bind({});
