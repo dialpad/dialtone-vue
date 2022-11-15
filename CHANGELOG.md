@@ -1,3 +1,25 @@
+## [2.37.1](https://github.com/dialpad/dialtone-vue/compare/v2.37.0...v2.37.1) (2022-11-14)
+
+
+### Bug Fixes
+
+* **Recipe Ivr Node:** fix close sync for menu dropdown ([#595](https://github.com/dialpad/dialtone-vue/issues/595)) ([89ffcf6](https://github.com/dialpad/dialtone-vue/commit/89ffcf613d20b249909cfbe29b06ff964e00bdbb))
+
+# [2.37.0](https://github.com/dialpad/dialtone-vue/compare/v2.36.1...v2.37.0) (2022-11-11)
+
+
+### Features
+
+* **Modal:** update danger style ([#582](https://github.com/dialpad/dialtone-vue/issues/582)) ([e7888b3](https://github.com/dialpad/dialtone-vue/commit/e7888b369b82a7d98f5a7bcff08c02dc2d67e5b8))
+
+## [2.36.1](https://github.com/dialpad/dialtone-vue/compare/v2.36.0...v2.36.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* **list-item:** fix focus ring color ([#592](https://github.com/dialpad/dialtone-vue/issues/592)) ([7c01b57](https://github.com/dialpad/dialtone-vue/commit/7c01b577a0a59b1ce7875e498256241ac3fb5d64))
+* **popover:** no default context menu when openOnContext is true ([#587](https://github.com/dialpad/dialtone-vue/issues/587)) ([654b215](https://github.com/dialpad/dialtone-vue/commit/654b215a8fbbbc1367bcab3489646b2425396233))
+
 # [2.36.0](https://github.com/dialpad/dialtone-vue/compare/v2.35.0...v2.36.0) (2022-11-08)
 
 
