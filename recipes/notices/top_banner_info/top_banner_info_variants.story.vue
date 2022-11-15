@@ -15,7 +15,7 @@
         <span> Show 2 calls on hold </span>
         <dt-icon
           name="arrow-up"
-          class="d-svg--size14"
+          size="200"
         />
       </div>
     </dt-recipe-top-banner-info>
@@ -76,7 +76,10 @@
           kind="muted"
         >
           <template slot="icon">
-            <icon-phone-transfer />
+            <dt-icon
+              name="transfer"
+              size="200"
+            />
           </template>
           Transfer
         </dt-button>
@@ -103,7 +106,6 @@
 <script>
 import DtRecipeTopBannerInfo from './top_banner_info';
 import { DtButton } from '@/components/button';
-import IconPhoneTransfer from '@dialpad/dialtone/lib/dist/vue/icons/IconPhoneTransfer';
 import { DtIcon } from '@/components/icon';
 
 export default {
@@ -111,7 +113,6 @@ export default {
   components: {
     DtButton,
     DtRecipeTopBannerInfo,
-    IconPhoneTransfer,
     DtIcon,
   },
 };
