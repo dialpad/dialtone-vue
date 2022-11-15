@@ -10,7 +10,10 @@
             <div class="d-fs-200 d-fw-bold d-mr4">
               +1 (415) 123-4567
             </div>
-            <icon-checkbox-filled class="d-fc-black-500 d-svg--size14" />
+            <dt-icon
+              name="check-circle"
+              size="100"
+            />
           </div>
         </template>
         <template #subtitle>
@@ -60,10 +63,14 @@
           </template>
           <template #subtitle>
             <div class="d-d-flex d-ai-center">
-              <div class="d-fs-100 d-mt2">
+              <div class="d-fs-100 d-mt2 d-mr4">
                 +1 (415) 123-4567
               </div>
-              <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
+              <dt-icon
+                name="check-circle"
+                size="100"
+                class="d-va-text-bottom"
+              />
             </div>
           </template>
           <template #bottom>
@@ -93,10 +100,14 @@
         </template>
         <template #subtitle>
           <div class="d-d-flex d-ai-center">
-            <div class="d-fs-100 d-mt2">
+            <div class="d-fs-100 d-mt2 d-mr4">
               +1 (415) 123-4567
             </div>
-            <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
+            <dt-icon
+              name="check-circle"
+              size="100"
+              class="d-va-text-bottom"
+            />
           </div>
         </template>
         <template #bottom>
@@ -131,10 +142,14 @@
         </template>
         <template #subtitle>
           <div class="d-d-flex d-ai-center">
-            <div class="d-fs-100 d-mt2">
+            <div class="d-fs-100 d-mt2 d-mr4">
               +1 (415) 123-4567
             </div>
-            <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
+            <dt-icon
+              name="check-circle"
+              size="100"
+              class="d-va-text-bottom"
+            />
           </div>
         </template>
         <template #bottom>
@@ -167,8 +182,14 @@
         </template>
         <template #right>
           <div class="d-d-flex d-ai-center d-m16">
-            <icon-chat class="d-m4" />
-            <icon-menu-horizontal class="d-m4" />
+            <dt-icon
+              name="webchat"
+              class="d-m4"
+            />
+            <dt-icon
+              name="more-horizontal"
+              class="d-m4"
+            />
             <div class="d-m4">
               0:32
             </div>
@@ -190,13 +211,11 @@
 
 <script>
 import DtRecipeContactInfo from './contact_info';
-import DtButton from '@/components/button/button';
-import IconChat from '@dialpad/dialtone/lib/dist/vue/icons/IconChat.vue';
-import IconCheckboxFilled from '@dialpad/dialtone/lib/dist/vue/icons/IconCheckboxFilled';
-import IconMenuHorizontal from '@dialpad/dialtone/lib/dist/vue/icons/IconMenuHorizontal.vue';
+import { DtButton } from '@/components/button';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'DtRecipeContactInfoVariants',
-  components: { IconChat, IconCheckboxFilled, IconMenuHorizontal, DtButton, DtRecipeContactInfo },
+  components: { DtButton, DtRecipeContactInfo, DtIcon },
 };
 </script>

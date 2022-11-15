@@ -154,7 +154,7 @@ Default.parameters = {
   <template #subtitle>
     <div class="d-d-flex d-ai-center">
       <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-      <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
+      <dt-icon name="check" size="100" class="d-fc-black-500 d-icon--size-100 d-va-text-bottom" />
     </div>
   </template>
   <template #bottom>
@@ -190,7 +190,7 @@ Variants.parameters = {
       <template #header>
         <div class="d-d-flex d-ai-center d-mb2">
           <div class="d-fs-200 d-fw-bold d-mr4">+1 (415) 123-4567</div>
-          <icon-checkbox-filled class="d-fc-black-500 d-svg--size14" />
+          <dt-icon name="check" size="100" class="d-fc-black-500 d-icon--size-100" />
         </div>
       </template>
       <template #subtitle>San Francisco, California</template>
@@ -223,7 +223,7 @@ Variants.parameters = {
         <template #subtitle>
           <div class="d-d-flex d-ai-center">
             <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-            <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
+            <dt-icon name="check" size="100" class="d-fc-black-500 d-icon--size-100 d-va-text-bottom" />
           </div>
         </template>
         <template #bottom>
@@ -242,7 +242,7 @@ Variants.parameters = {
       <template #subtitle>
         <div class="d-d-flex d-ai-center">
           <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-          <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
+          <dt-icon name="check" size="100" class="d-fc-black-500 d-icon--size-100 d-va-text-bottom" />
         </div>
       </template>
       <template #bottom>
@@ -266,7 +266,7 @@ Variants.parameters = {
       <template #subtitle>
         <div class="d-d-flex d-ai-center">
           <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-          <icon-checkbox-filled class="d-fc-black-500 d-svg--size14 d-va-text-bottom" />
+          <dt-icon name="check" size="100" class="d-fc-black-500 d-icon--size-100 d-va-text-bottom" />
         </div>
       </template>
       <template #bottom>
@@ -287,8 +287,8 @@ Variants.parameters = {
       <template #subtitle>+1 (415) 123-4567</template>
       <template #right>
         <div class="d-d-flex d-ai-center d-m16">
-          <icon-chat class="d-m4" />
-          <icon-menu-horizontal class="d-m4" />
+          <dt-icon name="webchat" class="d-m4" />
+          <dt-icon name="more-horizontal" class="d-m4" />
           <div class="d-m4">0:32</div>
         </div>
       </template>
