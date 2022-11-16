@@ -36,6 +36,7 @@
         v-else-if="emptyList && emptyStateMessage && !listRenderedOutside"
         v-bind="listProps"
         :message="emptyStateMessage"
+        :class="emptyStateClass"
       />
       <!-- @slot Slot for the combobox list element -->
       <slot
@@ -155,6 +156,16 @@ export default {
      */
     emptyStateMessage: {
       type: String,
+      default: '',
+    },
+
+    /**
+     * Additional class name for the empty list element.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    emptyStateClass: {
+      type: [String, Object, Array],
       default: '',
     },
   },
