@@ -168,7 +168,7 @@
             <template #icon>
               <dt-icon
                 name="external-link"
-                size="400"
+                size="300"
               />
             </template>
           </dt-button>
@@ -181,7 +181,7 @@
             <template #icon>
               <dt-icon
                 name="more-vertical"
-                size="400"
+                size="300"
               />
             </template>
           </dt-button>

@@ -28,7 +28,7 @@
       <template #icon>
         <dt-icon
           name="close"
-          size="400"
+          size="300"
         />
       </template>
     </dt-button>
