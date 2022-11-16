@@ -8,6 +8,7 @@
       role="option"
       navigation-type="none"
       type="custom"
+      :class="itemClass"
       v-bind="$attrs"
     >
       <span>{{ message }}</span>
@@ -32,6 +33,16 @@ export default {
     message: {
       type: String,
       required: true,
+    },
+
+    /**
+     * Additional class name for the empty list element.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    itemClass: {
+      type: [String, Object, Array],
+      default: '',
     },
   },
 };
