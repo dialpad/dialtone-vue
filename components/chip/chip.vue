@@ -47,7 +47,7 @@
       <template #icon>
         <dt-icon
           name="close"
-          size="300"
+          :size="closeButtonIconSize"
         />
       </template>
     </dt-button>
@@ -60,6 +60,7 @@ import { DtIcon } from '../icon';
 import {
   CHIP_CLOSE_BUTTON_SIZE_MODIFIERS,
   CHIP_SIZE_MODIFIERS,
+  CHIP_ICON_SIZES,
 } from './chip_constants';
 import { getUniqueString } from '@/common/utils';
 
@@ -192,6 +193,10 @@ export default {
           }
         },
       };
+    },
+
+    closeButtonIconSize () {
+      return CHIP_ICON_SIZES[this.size];
     },
   },
 
