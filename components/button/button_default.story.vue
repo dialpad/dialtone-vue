@@ -28,7 +28,7 @@
     >
       <dt-icon
         :name="$attrs.icon"
-        size="200"
+        :size="iconSize"
       />
     </template>
   </dt-button>
@@ -37,9 +37,15 @@
 <script>
 import DtButton from './button';
 import { DtIcon } from '@/components/icon';
+import { BUTTON_ICON_SIZES } from './button_constants';
 
 export default {
   name: 'ButtonDefault',
   components: { DtButton, DtIcon },
+  computed: {
+    iconSize () {
+      return BUTTON_ICON_SIZES[this.size];
+    },
+  },
 };
 </script>
