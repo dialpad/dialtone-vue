@@ -4,9 +4,11 @@
     data-qa="dt-combobox-empty-list"
   >
     <dt-list-item
-      class="d-d-flex d-jc-center"
+      class="dt-empty-list-item d-fs-200 d-lh4 d-py4 d-px12 d-d-flex d-jc-center d-ai-center"
       role="option"
       navigation-type="none"
+      type="custom"
+      v-bind="$attrs"
     >
       <span>{{ message }}</span>
     </dt-list-item>
@@ -20,6 +22,8 @@ export default {
   name: 'ComboboxEmptyList',
 
   components: { DtListItem },
+
+  inheritAttrs: false,
 
   props: {
     /**

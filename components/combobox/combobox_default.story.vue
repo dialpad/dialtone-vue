@@ -5,6 +5,7 @@
     :show-list="!!value && showList"
     list-aria-label="Example list items"
     :empty-list="emptyList"
+    :empty-state-class="emptyStateClass"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"
