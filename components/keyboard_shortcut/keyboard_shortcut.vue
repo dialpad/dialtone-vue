@@ -27,9 +27,9 @@
         v-if="icons[item]"
         :key="`${i}-${item}`"
         :name="icons[item]"
+        size="100"
         aria-hidden="true"
         :class="[
-          'dt-keyboard-shortcut__svg',
           inverted ? 'd-fc-black-300' : 'd-fc-black-600',
           'd-mr2',
         ]"
@@ -128,14 +128,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-keyboard-shortcut__svg {
-  width: 1em;
-  height: 1em;
-
-  path {
-    fill: currentColor;
-  }
-}
-</style>
