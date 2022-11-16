@@ -17,7 +17,7 @@
     >
       <dt-icon
         :name="icon"
-        size="300"
+        :size="iconSize"
       />
     </template>
     <template
@@ -38,11 +38,17 @@
 
 <script>
 import DtChip from './chip';
-import DtAvatar from '../avatar/avatar';
+import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
+import { CHIP_ICON_SIZES } from '@/components/chip/chip_constants';
 
 export default {
   name: 'DtChipDefault',
   components: { DtChip, DtAvatar, DtIcon },
+  computed: {
+    iconSize () {
+      return CHIP_ICON_SIZES[this.size];
+    },
+  },
 };
 </script>
