@@ -28,19 +28,20 @@
           <dt-button
             class="d-p4 d-py8"
             importance="clear"
+            title="share"
             @click.stop="() => {}"
           >
             <template slot="icon">
               <dt-icon
                 name="share-2"
                 size="200"
-                aria-hidden="false"
               />
             </template>
           </dt-button>
           <dt-button
             class="d-p4 d-py8 d-ml4"
             importance="clear"
+            title="star"
             @click.stop="() => {}"
           >
             <template slot="icon">
@@ -53,13 +54,13 @@
           <dt-button
             class="d-p4 d-py8 d-ml4"
             importance="clear"
+            title="more"
             @click.stop="() => {}"
           >
             <template slot="icon">
               <dt-icon
                 name="more-vertical"
                 size="200"
-                aria-hidden="false"
               />
             </template>
           </dt-button>
