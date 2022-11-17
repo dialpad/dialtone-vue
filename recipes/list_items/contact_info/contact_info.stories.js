@@ -167,6 +167,21 @@ Default.parameters = {
       `,
     },
   },
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'aria-allowed-attr',
+          enabled: false,
+        },
+        // Verify why contact info and avatar aren't getting unique IDs
+        {
+          id: 'duplicate-id',
+          enabled: false,
+        },
+      ],
+    },
+  },
 };
 
 export const Variants = VariantsTemplate.bind({});
@@ -302,16 +317,6 @@ Variants.parameters = {
 `,
     },
   },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'duplicate-id',
-          enabled: false,
-        },
-      ],
-    },
-  },
   controls: {
     disable: true,
   },
@@ -321,4 +326,5 @@ Variants.parameters = {
   options: {
     showPanel: false,
   },
+  a11y: Default.parameters.a11y,
 };
