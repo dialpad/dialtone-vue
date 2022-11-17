@@ -8,7 +8,6 @@
       role="option"
       navigation-type="none"
       type="custom"
-      v-bind="$attrs"
     >
       <span>{{ message }}</span>
     </dt-list-item>
@@ -22,8 +21,6 @@ export default {
   name: 'ComboboxEmptyList',
 
   components: { DtListItem },
-
-  inheritAttrs: false,
 
   props: {
     /**
