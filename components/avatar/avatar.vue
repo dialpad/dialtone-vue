@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: Remove d-ps-relative after DT upgrade -->
   <div
     :id="id"
     :class="[
@@ -16,7 +17,8 @@
     <dt-presence
       v-if="presence"
       :presence="presence"
-      class="d-ps-absolute d-b0 d-r0"
+      :style="presenceStyles"
+      class="d-ps-absolute"
     />
   </div>
 </template>
@@ -100,6 +102,35 @@ export default {
       AVATAR_COLOR_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
     };
+  },
+
+  computed: {
+    presenceStyles () {
+      // Adjust the position of presence
+      // based on the Avatar's size.
+      switch (this.size) {
+        case 'lg':
+          return {
+            bottom: '1px',
+            right: '1px',
+          };
+        case 'md':
+          return {
+            bottom: '-1px',
+            right: '-1px',
+          };
+        case 'sm':
+          return {
+            bottom: '-2px',
+            right: '-2px',
+          };
+        default:
+          return {
+            bottom: '0',
+            right: '0',
+          };
+      }
+    },
   },
 
   mounted () {

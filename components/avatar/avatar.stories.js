@@ -119,3 +119,9 @@ Initials.args = {
 };
 
 export const Presence = PresenceTemplate.bind({});
+Presence.args = {};
+Presence.parameters = {
+  controls: { disable: true },
+  actions: { disable: true },
+  options: { showPanel: false },
+};

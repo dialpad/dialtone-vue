@@ -1,18 +1,10 @@
 <template>
-  <div>
+  <div class="d-d-flex">
     <div class="d-p8 d-d-flex d-ai-center">
       <dt-avatar
         color="purple-200"
-        presence="active"
-      >
-        DP
-      </dt-avatar>
-    </div>
-
-    <div class="d-p8 d-d-flex d-ai-center">
-      <dt-avatar
-        color="purple-200"
-        presence="away"
+        presence="busy"
+        size="sm"
       >
         <img
           data-qa="dt-avatar-image"
@@ -27,16 +19,25 @@
         color="purple-200"
         presence="busy"
       >
-        CJ
+        <img
+          data-qa="dt-avatar-image"
+          src="./person.png"
+          alt="Person Avatar"
+        >
       </dt-avatar>
     </div>
 
     <div class="d-p8 d-d-flex d-ai-center">
       <dt-avatar
         color="purple-200"
-        presence="offline"
+        presence="busy"
+        size="lg"
       >
-        DS
+        <img
+          data-qa="dt-avatar-image"
+          src="./person.png"
+          alt="Person Avatar"
+        >
       </dt-avatar>
     </div>
   </div>
