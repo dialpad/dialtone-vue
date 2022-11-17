@@ -2,6 +2,7 @@ import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_util
 import DtAvatar from './avatar';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarIconTemplate from './avatar_icon.story.vue';
+import DtAvatarPresenceTemplate from './avatar_presence.story.vue';
 import { AVATAR_COLOR_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 import DtAvatarMdx from './avatar.mdx';
 
@@ -69,6 +70,11 @@ const IconTemplate = (args) => createTemplateFromVueFile(
   DtAvatarIconTemplate,
 );
 
+const PresenceTemplate = (args) => createTemplateFromVueFile(
+  args,
+  DtAvatarPresenceTemplate,
+);
+
 const defaultImage = require('./person.png');
 
 // Stories
@@ -95,4 +101,12 @@ export const Initials = DefaultTemplate.bind({});
 Initials.args = {
   color: 'purple-200',
   default: 'DP',
+};
+
+export const Presence = PresenceTemplate.bind({});
+Presence.args = {};
+Presence.parameters = {
+  controls: { disable: true },
+  actions: { disable: true },
+  options: { showPanel: false },
 };

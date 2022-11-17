@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: Remove d-ps-relative after DT upgrade -->
   <div
     :id="id"
     :class="[
@@ -7,11 +8,18 @@
       AVATAR_SIZE_MODIFIERS[size],
       AVATAR_COLOR_MODIFIERS[color],
       avatarClass,
+      'd-ps-relative',
     ]"
     data-qa="dt-avatar"
   >
     <!-- @slot Slot for avatar content -->
     <slot />
+    <dt-presence
+      v-if="presence"
+      :presence="presence"
+      :style="presenceStyles"
+      class="d-ps-absolute"
+    />
   </div>
 </template>
 
@@ -23,6 +31,7 @@ import {
   AVATAR_KIND_MODIFIERS,
 } from './avatar_constants.js';
 import { getUniqueString } from '@/common/utils';
+import { DtPresence } from '../presence';
 
 /**
  * An avatar is a visual representation of a user or object.
@@ -30,6 +39,10 @@ import { getUniqueString } from '@/common/utils';
  */
 export default {
   name: 'DtAvatar',
+
+  components: {
+    DtPresence,
+  },
 
   inheritAttrs: false,
 
@@ -73,6 +86,16 @@ export default {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * Determines the color of the inner presence circle, indicating status.
+     * Accepts one of 4 values: 'busy', 'away', 'active', 'offline'
+     * By default, it's null, which means presence is not shown
+     */
+    presence: {
+      type: String,
+      default: null,
+    },
   },
 
   data () {
@@ -83,6 +106,35 @@ export default {
       AVATAR_COLOR_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
     };
+  },
+
+  computed: {
+    presenceStyles () {
+      // Adjust the position of presence
+      // based on the Avatar's size.
+      switch (this.size) {
+        case 'lg':
+          return {
+            bottom: '1px',
+            right: '1px',
+          };
+        case 'md':
+          return {
+            bottom: '-1px',
+            right: '-1px',
+          };
+        case 'sm':
+          return {
+            bottom: '-2px',
+            right: '-2px',
+          };
+        default:
+          return {
+            bottom: '0',
+            right: '0',
+          };
+      }
+    },
   },
 
   mounted () {
