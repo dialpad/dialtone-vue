@@ -36,7 +36,7 @@
         v-else-if="emptyList && emptyStateMessage && !listRenderedOutside"
         v-bind="listProps"
         :message="emptyStateMessage"
-        :class="emptyStateClass"
+        :item-class="emptyStateClass"
       />
       <!-- @slot Slot for the combobox list element -->
       <slot
