@@ -284,7 +284,7 @@ WithBothIcons.parameters = {
     config: {
       rules: [
         {
-          id: 'duplicate-id-active',
+          id: 'duplicate-id',
           enabled: false,
         },
       ],
