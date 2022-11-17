@@ -279,6 +279,18 @@ WithRightIcon.args = {
 };
 
 export const WithBothIcons = Template.bind({});
+WithBothIcons.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'duplicate-id-active',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
 WithBothIcons.args = {
   leftIcon: 'send',
   rightIcon: 'lock-filled',

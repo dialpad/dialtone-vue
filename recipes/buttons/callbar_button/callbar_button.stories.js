@@ -143,4 +143,18 @@ Variants.parameters = { controls: { disable: true }, actions: { disable: true },
 
 export const Callbar = CallbarTemplate.bind({});
 Callbar.args = {};
-Callbar.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Callbar.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'duplicate-id',
+          enabled: false,
+        },
+      ],
+    },
+  },
+  controls: { disable: true },
+  actions: { disable: true },
+  options: { showPanel: false },
+};
