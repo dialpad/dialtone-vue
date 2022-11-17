@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO: Remove d-ps-relative after DT upgrade -->
   <div
     :id="id"
     :class="[
@@ -12,13 +11,14 @@
     ]"
     data-qa="dt-avatar"
   >
+    <!-- TODO: remove ^d-ps-relative when DT is updated -->
     <!-- @slot Slot for avatar content -->
     <slot />
     <dt-presence
       v-if="presence"
       :presence="presence"
-      :style="presenceStyles"
       class="d-ps-absolute"
+      :style="presenceStyles"
     />
   </div>
 </template>
@@ -32,7 +32,6 @@ import {
 } from './avatar_constants.js';
 import { getUniqueString } from '@/common/utils';
 import { DtPresence } from '../presence';
-
 /**
  * An avatar is a visual representation of a user or object.
  * @see https://dialpad.design/components/avatar.html
@@ -88,9 +87,9 @@ export default {
     },
 
     /**
-     * Determines the color of the inner presence circle, indicating status.
+     * Determines the presence state for the avatar.
      * Accepts one of 4 values: 'busy', 'away', 'active', 'offline'
-     * By default, it's null, which means presence is not shown
+     * By default, it's set to null and the presence circle is not shown
      */
     presence: {
       type: String,

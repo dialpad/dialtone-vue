@@ -5,6 +5,7 @@ import DtAvatarIconTemplate from './avatar_icon.story.vue';
 import DtAvatarPresenceTemplate from './avatar_presence.story.vue';
 import { AVATAR_COLOR_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 import DtAvatarMdx from './avatar.mdx';
+import { PRESENCE_STATES_LIST } from '../presence';
 
 export const argTypesData = {
   // Slots
@@ -21,6 +22,11 @@ export const argTypesData = {
   size: {
     defaultValue: 'md',
     options: Object.keys(AVATAR_SIZE_MODIFIERS),
+    control: 'select',
+  },
+  presence: {
+    defaultValue: null,
+    options: PRESENCE_STATES_LIST,
     control: 'select',
   },
   color: {
