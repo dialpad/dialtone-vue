@@ -177,7 +177,7 @@ Default.parameters = {
         },
         // Verify why contact info and avatar aren't getting unique IDs
         {
-          id: 'duplicate-id-active',
+          id: 'duplicate-id',
           enabled: false,
         },
       ],
@@ -316,16 +316,6 @@ Variants.parameters = {
   </div>
 </div>
 `,
-    },
-  },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'duplicate-id',
-          enabled: false,
-        },
-      ],
     },
   },
   controls: {
