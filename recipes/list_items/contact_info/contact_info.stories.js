@@ -302,6 +302,16 @@ Variants.parameters = {
 `,
     },
   },
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'duplicate-id',
+          enabled: false,
+        },
+      ],
+    },
+  },
   controls: {
     disable: true,
   },
