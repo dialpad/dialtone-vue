@@ -46,7 +46,7 @@ export default {
   components: { DtChip, VHtml, DtAvatar, DtIcon },
   computed: {
     iconSize () {
-      return CHIP_ICON_SIZES[this.size];
+      return CHIP_ICON_SIZES[this.$attrs.size];
     },
   },
 };

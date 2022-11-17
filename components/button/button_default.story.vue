@@ -44,7 +44,7 @@ export default {
   components: { DtButton, DtIcon },
   computed: {
     iconSize () {
-      return BUTTON_ICON_SIZES[this.size];
+      return BUTTON_ICON_SIZES[this.$attrs.size];
     },
   },
 };
