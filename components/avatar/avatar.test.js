@@ -208,6 +208,22 @@ describe('DtAvatar Tests', function () {
         assert.isTrue(presence.exists());
         assert.isTrue(presence.classes('d-ps-absolute'));
       });
+
+      it('should pass through data in presenceProps to the presence component ', async function () {
+        await wrapper.setProps({
+          presence: 'active',
+          presenceProps: {
+            'aria-live': 'assertive',
+            'random-attribute': 'value',
+            propValue: 2,
+          },
+        });
+        presence = wrapper.find('[data-qa="dt-presence"]');
+        assert.isTrue(presence.exists());
+        assert.equal(presence.attributes('aria-live'), 'assertive');
+        assert.equal(presence.attributes('random-attribute'), 'value');
+      });
+
       it('should update presence styles based on Avatar size', async function () {
         await wrapper.setProps({
           size: 'sm',

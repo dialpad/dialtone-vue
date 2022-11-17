@@ -40,6 +40,9 @@ export const argTypesData = {
       options: [...PRESENCE_STATES_LIST],
     },
   },
+  presenceProps: {
+    description: 'Pass through props. Used to customize the presence component',
+  },
   avatarClass: {
     description: 'Pass through classes. Used to customize the avatar container',
   },

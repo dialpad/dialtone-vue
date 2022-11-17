@@ -17,6 +17,7 @@
       :presence="presence"
       :style="presenceStyles"
       class="d-ps-absolute"
+      v-bind="presenceProps"
       data-qa="dt-presence"
     />
   </div>
@@ -90,6 +91,14 @@ export default {
     presence: {
       type: String,
       default: null,
+    },
+
+    /**
+     * A set of props to be passed into the presence component.
+     */
+    presenceProps: {
+      type: Object,
+      default: () => ({}),
     },
   },
 
