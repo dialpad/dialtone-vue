@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO: Remove d-ps-relative after DT upgrade -->
   <div
     :id="id"
     :class="[
@@ -8,7 +7,6 @@
       AVATAR_SIZE_MODIFIERS[size],
       AVATAR_COLOR_MODIFIERS[color],
       avatarClass,
-      'd-ps-relative',
     ]"
     data-qa="dt-avatar"
   >
@@ -19,6 +17,7 @@
       :presence="presence"
       :style="presenceStyles"
       class="d-ps-absolute"
+      data-qa="dt-presence"
     />
   </div>
 </template>

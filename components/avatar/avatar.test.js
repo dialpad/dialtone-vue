@@ -29,6 +29,7 @@ describe('DtAvatar Tests', function () {
   let wrapper;
   let avatar;
   let image;
+  let presence;
 
   // Environment
   let propsData = basePropsData;
@@ -39,6 +40,7 @@ describe('DtAvatar Tests', function () {
   const _setChildWrappers = () => {
     avatar = wrapper.find('[data-qa="dt-avatar"]');
     image = wrapper.find('[data-qa="dt-avatar-image"]');
+    presence = wrapper.find('[data-qa="dt-presence"]');
   };
 
   const _setWrappers = () => {
@@ -178,6 +180,56 @@ describe('DtAvatar Tests', function () {
 
       it('should have color variant class on the avatar', function () {
         assert.isTrue(avatar.classes(AVATAR_COLOR_MODIFIERS[color]));
+      });
+    });
+
+    describe('With Presence', function () {
+      const initials = 'DP';
+
+      // Test Setup
+      beforeEach(function () {
+        propsData = {
+          ...basePropsData,
+          kind: 'initials',
+        };
+        slots = { default: initials };
+        _setWrappers();
+      });
+
+      it('should not render presence if presence prop is not defined', async function () {
+        await wrapper.setProps({ presence: null });
+        presence = wrapper.find('[data-qa="dt-presence"]');
+        assert.isFalse(presence.exists());
+      });
+
+      it('should render presence when presence prop is defined', async function () {
+        await wrapper.setProps({ presence: 'active' });
+        presence = wrapper.find('[data-qa="dt-presence"]');
+        assert.isTrue(presence.exists());
+        assert.isTrue(presence.classes('d-ps-absolute'));
+      });
+      it('should update presence styles based on Avatar size', async function () {
+        await wrapper.setProps({
+          size: 'sm',
+          presence: 'active',
+        });
+        presence = wrapper.find('[data-qa="dt-presence"]');
+        assert.equal(presence.element.style.bottom, '-2px');
+        assert.equal(presence.element.style.right, '-2px');
+        await wrapper.setProps({
+          size: 'md',
+          presence: 'active',
+        });
+        presence = wrapper.find('[data-qa="dt-presence"]');
+        assert.equal(presence.element.style.bottom, '-1px');
+        assert.equal(presence.element.style.right, '-1px');
+        await wrapper.setProps({
+          size: 'lg',
+          presence: 'active',
+        });
+        presence = wrapper.find('[data-qa="dt-presence"]');
+        assert.equal(presence.element.style.bottom, '1px');
+        assert.equal(presence.element.style.right, '1px');
       });
     });
   });
