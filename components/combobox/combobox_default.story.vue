@@ -47,10 +47,10 @@
       </ol>
     </template>
     <template
-      v-if="emptyListItem"
-      slot="emptyListItem"
+      v-if="$attrs.emptyListItem"
+      #emptyListItem
     >
-      <span v-html="emptyListItem" />
+      <span v-html="$attrs.emptyListItem" />
     </template>
   </dt-combobox>
 </template>
