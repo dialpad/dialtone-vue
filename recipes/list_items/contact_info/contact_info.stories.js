@@ -147,16 +147,15 @@ Default.parameters = {
       code: `
 <dt-recipe-contact-info
   :avatar-src="avatarSrc"
+  :avatar-initials="avatarInitials"
+  :avatar-color="avatarColor"
   :user-status-color="userStatusColor"
 >
   <template #header>
     <div class="d-fs-200 d-fw-bold d-mr4">Joseph Lumaban</div>
   </template>
   <template #subtitle>
-    <div class="d-d-flex d-ai-center">
-      <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-      <dt-icon name="check" size="100" class="d-fc-black-500 d-icon--size-100 d-va-text-bottom" />
-    </div>
+    <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
   </template>
   <template #bottom>
     <div class="d-d-flex d-ai-center d-mtn6">
@@ -206,7 +205,7 @@ Variants.parameters = {
       <template #header>
         <div class="d-d-flex d-ai-center d-mb2">
           <div class="d-fs-200 d-fw-bold d-mr4">+1 (415) 123-4567</div>
-          <dt-icon name="check" size="100" class="d-fc-black-500 d-icon--size-100" />
+          <dt-icon name="check-circle" size="200" class="d-fc-black-500" />
         </div>
       </template>
       <template #subtitle>San Francisco, California</template>
@@ -239,7 +238,7 @@ Variants.parameters = {
         <template #subtitle>
           <div class="d-d-flex d-ai-center">
             <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-            <dt-icon name="check" size="100" class="d-fc-black-500 d-icon--size-100 d-va-text-bottom" />
+            <dt-icon name="check-circle" size="200" class="d-fc-black-500 d-va-text-bottom" />
           </div>
         </template>
         <template #bottom>
@@ -258,7 +257,7 @@ Variants.parameters = {
       <template #subtitle>
         <div class="d-d-flex d-ai-center">
           <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-          <dt-icon name="check" size="100" class="d-fc-black-500 d-icon--size-100 d-va-text-bottom" />
+          <dt-icon name="check-circle" size="200" class="d-fc-black-500 d-va-text-bottom" />
         </div>
       </template>
       <template #bottom>
@@ -282,7 +281,7 @@ Variants.parameters = {
       <template #subtitle>
         <div class="d-d-flex d-ai-center">
           <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
-          <dt-icon name="check" size="100" class="d-fc-black-500 d-icon--size-100 d-va-text-bottom" />
+          <dt-icon name="check-circle" size="200" class="d-fc-black-500 d-va-text-bottom" />
         </div>
       </template>
       <template #bottom>
@@ -303,8 +302,16 @@ Variants.parameters = {
       <template #subtitle>+1 (415) 123-4567</template>
       <template #right>
         <div class="d-d-flex d-ai-center d-m16">
-          <dt-icon name="webchat" class="d-m4" />
-          <dt-icon name="more-horizontal" class="d-m4" />
+          <dt-button importance="clear" aria-label="chat">
+            <template #icon>
+              <dt-icon name="webchat" class="d-m4" />
+            </template>
+          </dt-button>
+          <dt-button importance="clear" aria-label="more">
+            <template #icon>
+              <dt-icon name="more-horizontal" class="d-m4" />
+            </template>
+          </dt-button>
           <div class="d-m4">0:32</div>
         </div>
       </template>
