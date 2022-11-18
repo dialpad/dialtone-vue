@@ -4,11 +4,10 @@
     data-qa="dt-combobox-empty-list"
   >
     <dt-list-item
-      class="dt-empty-list-item d-fs-200 d-lh4 d-py4 d-px12 d-d-flex d-jc-center d-ai-center"
       role="option"
       navigation-type="none"
       type="custom"
-      :class="itemClass"
+      :class="['dt-empty-list-item', itemClass]"
     >
       <span>{{ message }}</span>
     </dt-list-item>
@@ -44,3 +43,14 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+.dt-empty-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-200);
+  line-height: var(--lh4);
+  padding: var(--su4) var(--su12);
+}
+</style>
