@@ -12,9 +12,6 @@
         'd-dt-collapsibe__anchor',
         anchorClass,
       ]"
-      @click.capture="defaultToggleOpen"
-      @keydown.enter="defaultToggleOpen"
-      @keydown.space="defaultToggleOpen"
     >
       <!-- @slot Slot for the anchor element that toggles the collapsible content -->
       <slot
@@ -33,6 +30,7 @@
           :style="{
             'width': maxWidth,
           }"
+          @click="defaultToggleOpen"
         >
           <dt-icon
             :name=" isOpen ? 'chevron-down' : 'chevron-right'"
@@ -105,7 +103,7 @@ export default {
      */
     anchorText: {
       type: String,
-      default: null,
+      default: 'Button',
     },
 
     /**
