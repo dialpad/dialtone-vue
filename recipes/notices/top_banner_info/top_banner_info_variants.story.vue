@@ -11,13 +11,21 @@
       <template #left>
         <span class="d-fw-bold"> Active Call </span> 3:21
       </template>
-      <div class="d-d-flex d-c-pointer">
-        <span> Show 2 calls on hold </span>
-        <dt-icon
-          name="arrow-up"
-          size="300"
-        />
-      </div>
+      <dt-button
+        importance="clear"
+        icon-position="right"
+        size="xs"
+        kind="muted"
+        class="d-fc-black-900 d-p0"
+      >
+        Show 2 calls on hold
+        <template #icon>
+          <dt-icon
+            name="arrow-up"
+            size="200"
+          />
+        </template>
+      </dt-button>
     </dt-recipe-top-banner-info>
     <dt-recipe-top-banner-info
       class="d-mb6"
@@ -97,7 +105,16 @@
         </dt-button>
       </div>
       <template #right>
-        <span class="d-fw-bold d-c-pointer">Click to answer</span> and put the active call on hold
+        <dt-button
+          importance="clear"
+          icon-position="right"
+          size="xs"
+          kind="muted"
+          class="d-fc-black-900 d-p0 d-fw-bold"
+        >
+          Click to answer
+        </dt-button>
+        and put the active call on hold
       </template>
     </dt-recipe-top-banner-info>
   </div>
