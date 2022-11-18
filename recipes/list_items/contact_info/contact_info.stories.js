@@ -301,15 +301,15 @@ Variants.parameters = {
       <template #header><div class="d-fw-bold d-fs-200">Natalie Woods</div></template>
       <template #subtitle>+1 (415) 123-4567</template>
       <template #right>
-        <div class="d-d-flex d-ai-center d-m16">
-          <dt-button importance="clear" aria-label="chat">
+        <div class="d-d-flex d-ai-center d-m8">
+          <dt-button size="xs" :circle="true" importance="clear" aria-label="chat">
             <template #icon>
-              <dt-icon name="webchat" class="d-m4" />
+              <dt-icon size="400" name="webchat" />
             </template>
           </dt-button>
-          <dt-button importance="clear" aria-label="more">
+          <dt-button size="xs" :circle="true" importance="clear" aria-label="more">
             <template #icon>
-              <dt-icon name="more-horizontal" class="d-m4" />
+              <dt-icon size="400" name="more-horizontal" />
             </template>
           </dt-button>
           <div class="d-m4">0:32</div>

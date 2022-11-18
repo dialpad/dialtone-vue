@@ -181,26 +181,30 @@
           +1 (415) 123-4567
         </template>
         <template #right>
-          <div class="d-d-flex d-ai-center d-m16">
+          <div class="d-d-flex d-ai-center d-m8">
             <dt-button
+              size="xs"
+              :circle="true"
               importance="clear"
               aria-label="chat"
             >
               <template #icon>
                 <dt-icon
+                  size="400"
                   name="webchat"
-                  class="d-m4"
                 />
               </template>
             </dt-button>
             <dt-button
+              size="xs"
+              :circle="true"
               importance="clear"
               aria-label="more"
             >
               <template #icon>
                 <dt-icon
+                  size="400"
                   name="more-horizontal"
-                  class="d-m4"
                 />
               </template>
             </dt-button>
