@@ -48,6 +48,12 @@
         </dt-list-item>
       </ol>
     </template>
+    <template
+      v-if="emptyListItem"
+      slot="emptyListItem"
+    >
+      <span v-html="emptyListItem" />
+    </template>
   </dt-combobox>
 </template>
 

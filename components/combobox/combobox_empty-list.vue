@@ -3,14 +3,16 @@
     class="d-p0"
     data-qa="dt-combobox-empty-list"
   >
-    <dt-list-item
-      role="option"
-      navigation-type="none"
-      type="custom"
-      :class="['dt-empty-list-item', itemClass]"
-    >
-      <span>{{ message }}</span>
-    </dt-list-item>
+    <slot>
+      <dt-list-item
+        role="option"
+        navigation-type="none"
+        type="custom"
+        :class="['dt-empty-list-item', itemClass]"
+      >
+        <span>{{ message }}</span>
+      </dt-list-item>
+    </slot>
   </ol>
 </template>
 
