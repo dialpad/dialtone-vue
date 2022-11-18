@@ -33,11 +33,13 @@
         v-bind="listProps"
       />
       <combobox-empty-list
-        v-else-if="emptyList && emptyStateMessage && !listRenderedOutside"
+        v-else-if="emptyList && (emptyStateMessage || $slots.emptyListItem) && !listRenderedOutside"
         v-bind="listProps"
         :message="emptyStateMessage"
         :item-class="emptyStateClass"
-      />
+      >
+        <slot name="emptyListItem" />
+      </combobox-empty-list>
       <!-- @slot Slot for the combobox list element -->
       <slot
         v-else
@@ -354,6 +356,8 @@ export default {
     },
 
     validateEmptyListProps () {
+      if (this.$slots.emptyListItem) { return; }
+
       if ((this.emptyList && !this.emptyStateMessage) || (!this.emptyList && this.emptyStateMessage)) {
         console.error(`Invalid props: you must pass both props emptyList and emptyStateMessage to show the
       empty message.`);
