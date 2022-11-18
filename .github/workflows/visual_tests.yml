@@ -65,4 +65,4 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_TARGET_BRANCH: ${{ github.base_ref }}
-        run: npx percy storybook --dry-run --verbose storybook/compiled
+        run: npx percy storybook --verbose storybook/compiled
