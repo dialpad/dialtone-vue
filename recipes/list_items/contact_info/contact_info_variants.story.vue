@@ -12,7 +12,7 @@
             </div>
             <dt-icon
               name="check-circle"
-              size="100"
+              size="200"
             />
           </div>
         </template>
@@ -68,7 +68,7 @@
               </div>
               <dt-icon
                 name="check-circle"
-                size="100"
+                size="200"
                 class="d-va-text-bottom"
               />
             </div>
@@ -105,7 +105,7 @@
             </div>
             <dt-icon
               name="check-circle"
-              size="100"
+              size="200"
               class="d-va-text-bottom"
             />
           </div>
@@ -147,7 +147,7 @@
             </div>
             <dt-icon
               name="check-circle"
-              size="100"
+              size="200"
               class="d-va-text-bottom"
             />
           </div>
@@ -182,14 +182,28 @@
         </template>
         <template #right>
           <div class="d-d-flex d-ai-center d-m16">
-            <dt-icon
-              name="webchat"
-              class="d-m4"
-            />
-            <dt-icon
-              name="more-horizontal"
-              class="d-m4"
-            />
+            <dt-button
+              importance="clear"
+              aria-label="chat"
+            >
+              <template #icon>
+                <dt-icon
+                  name="webchat"
+                  class="d-m4"
+                />
+              </template>
+            </dt-button>
+            <dt-button
+              importance="clear"
+              aria-label="more"
+            >
+              <template #icon>
+                <dt-icon
+                  name="more-horizontal"
+                  class="d-m4"
+                />
+              </template>
+            </dt-button>
             <div class="d-m4">
               0:32
             </div>

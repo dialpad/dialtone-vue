@@ -15,7 +15,7 @@
         <span> Show 2 calls on hold </span>
         <dt-icon
           name="arrow-up"
-          size="200"
+          size="300"
         />
       </div>
     </dt-recipe-top-banner-info>
@@ -78,7 +78,7 @@
           <template slot="icon">
             <dt-icon
               name="transfer"
-              size="200"
+              size="300"
             />
           </template>
           Transfer
@@ -90,7 +90,7 @@
           <template slot="icon">
             <dt-icon
               name="phone-hang-up"
-              size="200"
+              size="300"
             />
           </template>
           End Call

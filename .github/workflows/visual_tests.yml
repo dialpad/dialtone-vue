@@ -6,7 +6,7 @@ on:
 
 jobs:
   visual_tests:
-
+    if: "!contains( github.event.pull_request.labels.*.name, 'no-visual-test')"
     runs-on: ubuntu-latest
 
     env:
