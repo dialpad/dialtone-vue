@@ -15,8 +15,10 @@
     <dt-presence
       v-if="presence"
       :presence="presence"
-      :style="presenceStyles"
-      class="d-ps-absolute"
+      :class="[
+        'd-avatar__presence',
+        AVATAR_PRESENCE_SIZE_MODIFIERS[size],
+      ]"
       v-bind="presenceProps"
       data-qa="dt-presence"
     />
@@ -30,6 +32,7 @@ import { DtPresence } from '../presence';
 import {
   AVATAR_COLOR_MODIFIERS,
   AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS,
+  AVATAR_PRESENCE_SIZE_MODIFIERS,
 } from './avatar_constants.js';
 
 /**
@@ -109,36 +112,8 @@ export default {
       AVATAR_SIZE_MODIFIERS,
       AVATAR_COLOR_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
+      AVATAR_PRESENCE_SIZE_MODIFIERS,
     };
-  },
-
-  computed: {
-    presenceStyles () {
-      // Adjust the position of presence
-      // based on the Avatar's size.
-      switch (this.size) {
-        case 'lg':
-          return {
-            bottom: '1px',
-            right: '1px',
-          };
-        case 'md':
-          return {
-            bottom: '-1px',
-            right: '-1px',
-          };
-        case 'sm':
-          return {
-            bottom: '-2px',
-            right: '-2px',
-          };
-        default:
-          return {
-            bottom: '0',
-            right: '0',
-          };
-      }
-    },
   },
 
   mounted () {

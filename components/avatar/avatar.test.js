@@ -206,7 +206,7 @@ describe('DtAvatar Tests', function () {
         await wrapper.setProps({ presence: 'active' });
         presence = wrapper.find('[data-qa="dt-presence"]');
         assert.isTrue(presence.exists());
-        assert.isTrue(presence.classes('d-ps-absolute'));
+        assert.isTrue(presence.classes('d-avatar__presence'));
       });
 
       it('should pass through data in presenceProps to the presence component ', async function () {
@@ -225,27 +225,19 @@ describe('DtAvatar Tests', function () {
       });
 
       it('should update presence styles based on Avatar size', async function () {
-        await wrapper.setProps({
-          size: 'sm',
-          presence: 'active',
-        });
-        presence = wrapper.find('[data-qa="dt-presence"]');
-        assert.equal(presence.element.style.bottom, '-2px');
-        assert.equal(presence.element.style.right, '-2px');
+        // default styles are for 'sm'
         await wrapper.setProps({
           size: 'md',
           presence: 'active',
         });
         presence = wrapper.find('[data-qa="dt-presence"]');
-        assert.equal(presence.element.style.bottom, '-1px');
-        assert.equal(presence.element.style.right, '-1px');
+        assert.isTrue(presence.classes('d-avatar__presence--md'));
         await wrapper.setProps({
           size: 'lg',
           presence: 'active',
         });
         presence = wrapper.find('[data-qa="dt-presence"]');
-        assert.equal(presence.element.style.bottom, '1px');
-        assert.equal(presence.element.style.right, '1px');
+        assert.isTrue(presence.classes('d-avatar__presence--lg'));
       });
     });
   });
