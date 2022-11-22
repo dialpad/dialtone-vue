@@ -5,6 +5,7 @@ import sinon from 'sinon';
 import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
+const anchorText = 'anchor text';
 const content = '<div data-qa="content-element"> Test Text </div>';
 
 describe('Dialtone vue Collapsible Component Tests', function () {
@@ -17,6 +18,9 @@ describe('Dialtone vue Collapsible Component Tests', function () {
 
   // Environment
   const slots = { content };
+  const propsData = {
+    anchorText,
+  };
 
   const _clearChildWrappers = () => {
     contentElement = undefined;
@@ -33,6 +37,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
 
   const _mountWrapper = () => {
     wrapper = mount(DtCollapsible, {
+      propsData,
       scopedSlots,
       slots,
       attachTo: document.body,
@@ -76,15 +81,11 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   });
 
   describe('When scoped slot is provided', function () {
-    // Wrappers
-    let anchorSlotContainer;
-    const anchor = '<button data-qa="anchor-element" v-bind="props.attrs">click me</button>';
-
-    scopedSlots = { anchor };
-    _mountWrapper();
-
     it('should render the scoped slot', function () {
-      anchorSlotContainer = wrapper.find('[data-qa="anchor-element"]');
+      const anchor = '<button data-qa="anchor-element" v-bind="props.attrs">click me</button>';
+      scopedSlots = { anchor };
+      _mountWrapper();
+      const anchorSlotContainer = wrapper.find('[data-qa="anchor-element"]');
       assert.exists(anchorSlotContainer, 'anchor slot exists');
     });
   });
@@ -142,6 +143,16 @@ describe('Dialtone vue Collapsible Component Tests', function () {
         await wrapper.setProps({ open: true });
         assert.isTrue(contentElement.isVisible());
       });
+    });
+  });
+
+  describe('If anchor text and anchor slot content are falsy', function () {
+    it('should output error message', async function () {
+      const consoleErrorSpy = sinon.spy(console, 'error');
+      propsData.anchorText = undefined;
+      _mountWrapper();
+      assert.isTrue(consoleErrorSpy.calledWith('anchor text and anchor slot content cannot both be falsy'));
+      propsData.anchorText = anchorText;
     });
   });
 
