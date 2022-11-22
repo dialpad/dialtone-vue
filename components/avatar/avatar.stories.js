@@ -1,10 +1,10 @@
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtAvatar from './avatar';
+import DtAvatarMdx from './avatar.mdx';
+import { AVATAR_COLOR_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarIconTemplate from './avatar_icon.story.vue';
 import DtAvatarPresenceTemplate from './avatar_presence.story.vue';
-import { AVATAR_COLOR_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
-import DtAvatarMdx from './avatar.mdx';
 import { PRESENCE_STATES_LIST } from '../presence';
 
 export const argTypesData = {
@@ -33,6 +33,9 @@ export const argTypesData = {
     defaultValue: 'base',
     options: Object.keys(AVATAR_COLOR_MODIFIERS),
     control: 'select',
+  },
+  presenceProps: {
+    description: 'Pass through props. Used to customize the presence component',
   },
   avatarClass: {
     description: 'Pass through classes. Used to customize the avatar container',

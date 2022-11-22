@@ -7,41 +7,40 @@
       AVATAR_SIZE_MODIFIERS[size],
       AVATAR_COLOR_MODIFIERS[color],
       avatarClass,
-      'd-ps-relative',
     ]"
     data-qa="dt-avatar"
   >
-    <!-- TODO: remove ^d-ps-relative when DT is updated -->
     <!-- @slot Slot for avatar content -->
     <slot />
     <dt-presence
       v-if="presence"
       :presence="presence"
-      class="d-ps-absolute"
-      :style="presenceStyles"
+      :class="[
+        'd-avatar__presence',
+        AVATAR_PRESENCE_SIZE_MODIFIERS[size],
+      ]"
+      v-bind="presenceProps"
+      data-qa="dt-presence"
     />
   </div>
 </template>
 
 <script>
 import { warn } from 'vue';
-import {
-  AVATAR_SIZE_MODIFIERS,
-  AVATAR_COLOR_MODIFIERS,
-  AVATAR_KIND_MODIFIERS,
-} from './avatar_constants.js';
 import { getUniqueString } from '@/common/utils';
 import { DtPresence } from '../presence';
+import {
+  AVATAR_COLOR_MODIFIERS,
+  AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS,
+  AVATAR_PRESENCE_SIZE_MODIFIERS,
+} from './avatar_constants.js';
 /**
  * An avatar is a visual representation of a user or object.
  * @see https://dialpad.design/components/avatar.html
  */
 export default {
   name: 'DtAvatar',
-
-  components: {
-    DtPresence,
-  },
+  components: { DtPresence },
 
   inheritAttrs: false,
 
@@ -87,13 +86,21 @@ export default {
     },
 
     /**
-     * Determines the presence state for the avatar.
-     * Accepts one of 4 values: 'busy', 'away', 'active', 'offline'
-     * By default, it's set to null and the presence circle is not shown
+     * Determines whether to show the presence indicator for
+     * Avatar - accepts PRESENCE_STATES values: 'busy', 'away', 'offline',
+     * or 'active'. By default, it's null and nothing is shown.
      */
     presence: {
       type: String,
       default: null,
+    },
+
+    /**
+     * A set of props to be passed into the presence component.
+     */
+    presenceProps: {
+      type: Object,
+      default: () => ({}),
     },
   },
 
@@ -104,36 +111,8 @@ export default {
       AVATAR_SIZE_MODIFIERS,
       AVATAR_COLOR_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
+      AVATAR_PRESENCE_SIZE_MODIFIERS,
     };
-  },
-
-  computed: {
-    presenceStyles () {
-      // Adjust the position of presence
-      // based on the Avatar's size.
-      switch (this.size) {
-        case 'lg':
-          return {
-            bottom: '1px',
-            right: '1px',
-          };
-        case 'md':
-          return {
-            bottom: '-1px',
-            right: '-1px',
-          };
-        case 'sm':
-          return {
-            bottom: '-2px',
-            right: '-2px',
-          };
-        default:
-          return {
-            bottom: '0',
-            right: '0',
-          };
-      }
-    },
   },
 
   mounted () {
