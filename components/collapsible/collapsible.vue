@@ -103,7 +103,7 @@ export default {
      */
     anchorText: {
       type: String,
-      default: 'Button',
+      default: null,
     },
 
     /**
@@ -243,6 +243,10 @@ export default {
     },
   },
 
+  created () {
+    this.validateProperAnchor();
+  },
+
   methods: {
     onLeaveTransitionComplete () {
       this.$emit('opened', false);
@@ -266,6 +270,12 @@ export default {
 
     toggleOpen () {
       this.isOpen = !this.isOpen;
+    },
+
+    validateProperAnchor () {
+      if (!this.anchorText && !this.$scopedSlots.anchor) {
+        console.error('anchor text and anchor slot content cannot both be falsy');
+      }
     },
   },
 };
