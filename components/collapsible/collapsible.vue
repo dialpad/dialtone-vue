@@ -227,14 +227,7 @@ export default {
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor
-      return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtCollapsible__anchor'));
-    },
-
-    contentStyle () {
-      return {
-        'max-height': this.maxHeight,
-        'max-width': this.maxWidth,
-      };
+      return this.ariaLabelledBy || (!this.ariaLabel && getUniqueString('DtCollapsible__anchor'));
     },
   },
 
@@ -280,7 +273,7 @@ export default {
     },
 
     validateProperAnchor () {
-      if (!this.anchorText && !this.$scopedSlots.anchor) {
+      if (!this.anchorText && !this.$slots.$anchor) {
         console.error('anchor text and anchor slot content cannot both be falsy');
       }
     },

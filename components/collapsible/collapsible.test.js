@@ -14,11 +14,13 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   let contentElement;
   let contentWrapperElement;
   let anchorElement;
-  let scopedSlots = {};
+  let slots = { content };
 
   // Environment
-  const slots = { content };
-  const propsData = {
+  const attrs = {
+    css: false, // Important attr to let test-utils fire the (after-enter and after-leave) events correctly
+  };
+  const props = {
     anchorText,
   };
 
@@ -26,20 +28,25 @@ describe('Dialtone vue Collapsible Component Tests', function () {
     contentElement = undefined;
     contentWrapperElement = undefined;
     anchorElement = undefined;
-    scopedSlots = {};
+    slots = { content };
   };
 
   const _setChildWrappers = () => {
     anchorElement = wrapper.find('[data-qa="dt-button"]');
     contentElement = wrapper.find('[data-qa="content-element"]');
-    contentWrapperElement = wrapper.findComponent({ ref: 'contentWrapper' });
+    contentWrapperElement = wrapper.getComponent('.d-dt-collapsible__content');
   };
 
   const _mountWrapper = () => {
     wrapper = mount(DtCollapsible, {
-      propsData,
-      scopedSlots,
+      props,
       slots,
+      attrs,
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
       attachTo: document.body,
     });
     _setChildWrappers();
@@ -82,8 +89,8 @@ describe('Dialtone vue Collapsible Component Tests', function () {
 
   describe('When scoped slot is provided', function () {
     it('should render the scoped slot', function () {
-      const anchor = '<button data-qa="anchor-element" v-bind="props.attrs">click me</button>';
-      scopedSlots = { anchor };
+      const anchor = '<button data-qa="anchor-element">click me</button>';
+      slots = { anchor };
       _mountWrapper();
       const anchorSlotContainer = wrapper.find('[data-qa="anchor-element"]');
       assert.exists(anchorSlotContainer, 'anchor slot exists');
@@ -149,10 +156,10 @@ describe('Dialtone vue Collapsible Component Tests', function () {
   describe('If anchor text and anchor slot content are falsy', function () {
     it('should output error message', async function () {
       const consoleErrorSpy = sinon.spy(console, 'error');
-      propsData.anchorText = undefined;
+      props.anchorText = undefined;
       _mountWrapper();
       assert.isTrue(consoleErrorSpy.calledWith('anchor text and anchor slot content cannot both be falsy'));
-      propsData.anchorText = anchorText;
+      props.anchorText = anchorText;
     });
   });
 
