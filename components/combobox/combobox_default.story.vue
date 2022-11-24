@@ -6,6 +6,7 @@
     list-aria-label="Example list items"
     :empty-list="emptyList"
     :empty-state-class="emptyStateClass"
+    :click-on-select="clickOnSelect"
     @escape="onComboboxEscape"
     @highlight="onHighlight"
     @select="onComboboxSelect"

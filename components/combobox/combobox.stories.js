@@ -96,6 +96,9 @@ export const argTypesData = {
   loading: {
     defaultValue: false,
   },
+  clickOnSelect: {
+    defaultValue: false,
+  },
 
   // Action Event Handlers
   onEscape: {
