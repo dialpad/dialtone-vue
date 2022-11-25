@@ -92,7 +92,7 @@ export default {
 
     onListItemSelect (i) {
       this.value = '';
-      this.onItemClick(i);
+      this.$attrs.onItemClick(i);
     },
 
     onComboboxEscape () {
