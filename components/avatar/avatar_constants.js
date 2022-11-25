@@ -5,9 +5,11 @@ export const AVATAR_KIND_MODIFIERS = {
 };
 
 export const AVATAR_SIZE_MODIFIERS = {
+  xs: 'd-avatar--xs',
   sm: 'd-avatar--sm',
   md: 'd-avatar--md',
   lg: 'd-avatar--lg',
+  xl: 'd-avatar--xl',
 };
 
 export const AVATAR_PRESENCE_SIZE_MODIFIERS = {

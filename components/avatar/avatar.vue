@@ -11,7 +11,7 @@
     data-qa="dt-avatar"
   >
     <!-- @slot Slot for avatar content -->
-    <slot />
+    <slot v-if="shouldShowContent" />
     <dt-presence
       v-if="presence"
       :presence="presence"
@@ -56,7 +56,7 @@ export default {
 
     /**
      * The size of the avatar
-     * @values sm, md, lg
+     * @values xs, sm, md, lg, xl
      */
     size: {
       type: String,
@@ -116,6 +116,12 @@ export default {
     };
   },
 
+  computed: {
+    shouldShowContent () {
+      return !(this.kind === 'initials' && this.size === 'xs');
+    },
+  },
+
   mounted () {
     this.init();
   },
@@ -125,12 +131,20 @@ export default {
   },
 
   methods: {
-    init () {
-      const firstChild = this.$el.firstChild;
+    async init () {
+      const firstChild = this.$slots.default[0]?.elm;
       if (firstChild) {
         this.setKind(firstChild);
+        await this.$nextTick();
+        const childEl = this.$el;
+
         if (this.kind === 'image') {
-          firstChild.classList.add('d-avatar__image');
+          childEl.firstChild.classList.add('d-avatar__image');
+        }
+        if (this.kind === 'initials') {
+          if (this.size === 'sm') {
+            childEl.innerText = childEl.innerText[0];
+          }
         }
         this.validateImageAttrsPresence();
       }
