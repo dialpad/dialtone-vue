@@ -8,6 +8,7 @@
       AVATAR_COLOR_MODIFIERS[color],
       avatarClass,
     ]"
+    :style="initialKindStyle"
     data-qa="dt-avatar"
   >
     <!-- @slot Slot for avatar content -->
@@ -26,7 +27,7 @@
 </template>
 
 <script>
-import { getUniqueString } from '@/common/utils';
+import { getUniqueString, getRandomElement } from '@/common/utils';
 import Vue from 'vue';
 import { DtPresence } from '../presence';
 import {
@@ -120,6 +121,18 @@ export default {
     shouldShowContent () {
       return !(this.kind === 'initials' && this.size === 'xs');
     },
+
+    initialKindStyle () {
+      const randomGradientColorStops = this.randomizeGradientColorStops();
+      const styles = {
+        '--avatar-gradient-angle': `${this.randomizeGradientAngle()}deg`,
+        '--avatar-gradient-stop-1': `var(--${randomGradientColorStops[0]})`,
+        '--avatar-gradient-stop-2': `var(--${randomGradientColorStops[1]})`,
+        '--avatar-gradient-stop-3': `var(--${randomGradientColorStops[2]})`,
+      };
+
+      return (this.kind === 'initials' || this.kind === 'icon') ? styles : null;
+    },
   },
 
   mounted () {
@@ -162,6 +175,30 @@ export default {
 
     isImageType (element) {
       return element?.tagName?.toUpperCase() === 'IMG';
+    },
+
+    randomizeGradientAngle () {
+      const angles = [45, -45, 90, -90, 135, -135, 180, -180];
+      return getRandomElement(angles);
+    },
+
+    randomizeGradientColorStops () {
+      const colors = new Set();
+      const colorsWith100 = ['purple-100', 'magenta-100', 'gold-100', 'blue-100'];
+      const colorsWith200 = ['purple-200', 'magenta-200', 'gold-200', 'blue-200'];
+
+      // get 3 unique colors, 2 from colorsWith100 and one from colorsWith200
+      while (colors.size < 3) {
+        if (colors.size === 2) {
+          colors.add(getRandomElement(colorsWith200));
+        } else {
+          colors.add(getRandomElement(colorsWith100));
+        }
+      }
+
+      const shuffledColors = Array.from(colors).sort(() => 0.5 - Math.random());
+
+      return Array.from(shuffledColors);
     },
 
     validateImageAttrsPresence () {
