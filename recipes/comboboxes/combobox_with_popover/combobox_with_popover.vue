@@ -2,12 +2,15 @@
   <dt-combobox
     ref="combobox"
     :loading="loading"
+    :label="label"
+    :label-visible="labelVisible"
+    :label-size="labelSize"
+    :description="description"
     :empty-list="emptyList"
     :empty-state-message="emptyStateMessage"
     :show-list="isListShown"
     :on-beginning-of-list="onBeginningOfList"
     :on-end-of-list="onEndOfList"
-    :list-aria-label="listAriaLabel"
     :list-rendered-outside="true"
     :list-id="listId"
     data-qa="dt-combobox"
@@ -116,6 +119,7 @@ import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 
 export default {
   name: 'DtRecipeComboboxWithPopover',
@@ -131,11 +135,38 @@ export default {
 
   props: {
     /**
-     * String to use for the list's aria-label.
+     * String to use for the input label.
      */
-    listAriaLabel: {
+    label: {
       type: String,
       required: true,
+    },
+
+    /**
+     * Determines visibility of input label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
+     * @values null, xs, sm, md, lg, xl
+     */
+    labelSize: {
+      type: String,
+      default: null,
+      validator: (t) => Object.values(LABEL_SIZES).includes(t),
+    },
+
+    /**
+     * Description for the input
+     */
+    description: {
+      type: String,
+      default: '',
     },
 
     /**

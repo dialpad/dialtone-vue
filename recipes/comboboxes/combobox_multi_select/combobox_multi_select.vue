@@ -2,7 +2,6 @@
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
-    list-aria-label="listAriaLabel"
     :show-list="showList"
     :max-height="listMaxHeight"
     :popover-offset="popoverOffset"
@@ -40,8 +39,10 @@
           ref="input"
           v-model="value"
           class="d-fl-grow1 d-mb4"
-          :label="label"
+          :label="labelVisible ? label : ''"
+          :label-visible="labelVisible"
           :description="description"
+          :label-size="labelSize"
           :placeholder="inputPlaceHolder"
           :show-messages="showInputMessages"
           :messages="inputMessages"
@@ -115,6 +116,7 @@ import DtValidationMessages from '@/components/validation_messages/validation_me
 import { validationMessageValidator } from '@/common/validators';
 import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 
 export default {
   name: 'DtRecipeComboboxMultiSelect',
@@ -130,19 +132,38 @@ export default {
 
   props: {
     /**
-     * Label for the combobox
+     * String to use for the input label.
      */
     label: {
       type: String,
-      default: null,
+      required: true,
     },
 
     /**
-     * Description for the combobox
+     * Determines visibility of input label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
+     * @values null, xs, sm, md, lg, xl
+     */
+    labelSize: {
+      type: String,
+      default: null,
+      validator: (t) => Object.values(LABEL_SIZES).includes(t),
+    },
+
+    /**
+     * Description for the input
      */
     description: {
       type: String,
-      default: null,
+      default: '',
     },
 
     /**
@@ -250,7 +271,7 @@ export default {
     },
 
     /**
-     * Size of the input and chip, one of `xs`, `sm`, `md`
+     * Size of the chip, one of `xs`, `sm`, `md`
      */
     size: {
       type: String,
