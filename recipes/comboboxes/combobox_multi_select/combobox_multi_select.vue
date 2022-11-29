@@ -1,6 +1,7 @@
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
+    :label="label"
     :show-list="showList"
     :max-height="listMaxHeight"
     :popover-offset="popoverOffset"
