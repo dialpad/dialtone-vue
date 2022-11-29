@@ -93,6 +93,10 @@ export default {
       required: true,
     },
 
+    /**
+     * Determines visibility of input label.
+     * @values true, false
+     */
     labelVisible: {
       type: Boolean,
       default: true,
