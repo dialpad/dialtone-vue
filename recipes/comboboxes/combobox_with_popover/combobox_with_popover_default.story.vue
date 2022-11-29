@@ -1,9 +1,13 @@
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
+    :label="label"
+    :label-visible="labelVisible"
+    :label-size="labelSize"
+    :description="description"
+    :size="labelSize"
     :empty-state-message="emptyStateMessage"
     :loading="loading"
-    :list-aria-label="listAriaLabel"
     :max-height="maxHeight"
     :max-width="maxWidth"
     :content-width="contentWidth"
@@ -33,6 +37,7 @@
         v-model="value"
         placeholder="Select one or start typing"
         v-bind="inputProps"
+
         @input="onInput"
       />
     </template>

@@ -4,9 +4,12 @@ import DtRecipeComboboxMultiSelect from './combobox_multi_select';
 import DtRecipeComboboxMultiSelectMdx from './combobox_multi_select.mdx';
 import DtRecipeComboboxMultiSelectDefaultTemplate from './combobox_multi_select_default.story.vue';
 import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
+import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 
 // Default Prop Values
 export const argsData = {
+  label: 'Label Text',
+  labelVisible: true,
   listMaxHeight: '300px',
   selectedItems: [],
   onInput: action('input'),
@@ -50,6 +53,31 @@ export const argTypesData = {
   },
 
   // Props
+  label: {
+    control: {
+      type: 'text',
+    },
+  },
+  labelSize: {
+    control: {
+      type: 'select',
+      options: Object.values(LABEL_SIZES),
+    },
+    defaultValue: LABEL_SIZES.DEFAULT,
+    table: {
+      defaultValue: {
+        summary: LABEL_SIZES.DEFAULT,
+      },
+    },
+  },
+  labelVisible: {
+    defaultValue: true,
+  },
+  description: {
+    control: {
+      type: 'text',
+    },
+  },
   loading: {
     defaultValue: false,
   },
