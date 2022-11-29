@@ -12,6 +12,9 @@
   >
     <!-- @slot Slot for avatar content -->
     <slot v-if="shouldShowContent" />
+    <span v-else-if="showInitials">
+      {{ formattedInitials }}
+    </span>
     <dt-presence
       v-if="presence"
       :presence="presence"
@@ -88,6 +91,14 @@ export default {
       type: Object,
       default: () => ({}),
     },
+
+    /**
+     * Initials to be shown in the avatar. Used as fallback if image fails to load.
+     */
+    initials: {
+      type: String,
+      default: '',
+    },
   },
 
   data () {
@@ -97,12 +108,18 @@ export default {
       AVATAR_SIZE_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
+      imageLoadedSuccessfully: null,
+      formattedInitials: '',
     };
   },
 
   computed: {
     shouldShowContent () {
-      return !(this.kind === 'initials' && this.size === 'xs');
+      return this.kind !== 'initials' && this.imageLoadedSuccessfully !== false;
+    },
+
+    showInitials () {
+      return this.kind === 'initials' || this.initials;
     },
 
     initialKindStyle () {
@@ -135,14 +152,36 @@ export default {
         const childEl = this.$el;
 
         if (this.kind === 'image') {
-          childEl.firstChild.classList.add('d-avatar__image');
-        }
-        if (this.kind === 'initials') {
-          if (this.size === 'sm') {
-            childEl.innerText = childEl.innerText[0];
+          // TO DO: remove attached event listener
+          childEl.firstChild.addEventListener('error', () => {
+            this.kind = 'initials';
+            this.imageLoadedSuccessfully = false;
+          });
+          childEl.firstChild.addEventListener('load', () => {
+            childEl.firstChild.classList.add('d-avatar__image');
+            this.imageLoadedSuccessfully = true;
+          });
+
+          if (this.initials) {
+            this.formatInitials(this.initials);
           }
         }
+        if (this.kind === 'initials') {
+          this.formatInitials(firstChild.textContent);
+        }
         this.validateImageAttrsPresence();
+      }
+    },
+
+    formatInitials (initials) {
+      if (!initials) return;
+
+      if (this.size === 'xs') {
+        this.formattedInitials = '';
+      } else if (this.size === 'sm') {
+        this.formattedInitials = initials[0];
+      } else {
+        this.formattedInitials = initials.slice(0, 2);
       }
     },
 
@@ -185,7 +224,7 @@ export default {
     },
 
     validateImageAttrsPresence () {
-      if (this.kind === 'image') {
+      if (this.kind === 'image' && this.imageLoadedSuccessfully) {
         // Check that default slot image required attributes are provided
         if (!this.$el.firstChild.getAttribute('src') || !this.$el.firstChild.getAttribute('alt')) {
           Vue.util.warn('src and alt attributes are required for image avatars', this);

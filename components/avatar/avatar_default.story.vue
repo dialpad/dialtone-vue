@@ -3,6 +3,7 @@
     :id="id"
     :size="size"
     :presence="presence"
+    :initials="initials"
   >
     <html-fragment
       :html="defaultSlot"
