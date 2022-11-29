@@ -5,7 +5,6 @@
       'd-avatar',
       AVATAR_KIND_MODIFIERS[kind],
       AVATAR_SIZE_MODIFIERS[size],
-      AVATAR_COLOR_MODIFIERS[color],
       avatarClass,
     ]"
     :style="initialKindStyle"
@@ -31,7 +30,6 @@ import { getUniqueString, getRandomElement } from '@/common/utils';
 import Vue from 'vue';
 import { DtPresence } from '../presence';
 import {
-  AVATAR_COLOR_MODIFIERS,
   AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS,
   AVATAR_PRESENCE_SIZE_MODIFIERS,
 } from './avatar_constants.js';
@@ -66,20 +64,6 @@ export default {
     },
 
     /**
-     * The color of the avatar
-     * @values base
-     * orange-200, orange-300, orange-400, orange-500,
-     * pink-300, pink-400, pink-500, pink-600,
-     * purple-200, purple-300, purple-500, purple-600,
-     * yellow-200, yellow-300, yellow-400, yellow-500
-     */
-    color: {
-      type: String,
-      default: 'base',
-      validator: (color) => Object.keys(AVATAR_COLOR_MODIFIERS).includes(color),
-    },
-
-    /**
      * Used to customize the avatar container
      */
     avatarClass: {
@@ -111,7 +95,6 @@ export default {
       // initials, image or icon
       kind: 'initials',
       AVATAR_SIZE_MODIFIERS,
-      AVATAR_COLOR_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
     };

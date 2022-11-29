@@ -152,19 +152,6 @@ describe('DtRecipeContactInfo Tests', function () {
      * Test(s) to ensure that custom validators are working as expected
      */
 
-    describe('avatarColor Validator', function () {
-      // Test Environment
-      const prop = DtRecipeContactInfo.props.avatarColor;
-
-      describe('When provided color code is in AVATAR_COLOR_MODIFIERS', function () {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
-      });
-
-      describe('When provided color code is not in AVATAR_COLOR_MODIFIERS', function () {
-        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_CODE`);
-      });
-    });
-
     describe('userStatusColor Validator', function () {
       // Test Environment
       const prop = DtRecipeContactInfo.props.userStatusColor;

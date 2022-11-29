@@ -2,7 +2,6 @@
   <dt-avatar
     :id="id"
     :size="size"
-    :color="color"
     :presence="presence"
   >
     <html-fragment

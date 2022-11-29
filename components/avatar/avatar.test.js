@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import DtAvatar from './avatar.vue';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
-import { AVATAR_COLOR_MODIFIERS, AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
+import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
@@ -164,25 +164,6 @@ describe('DtAvatar Tests', function () {
       });
     });
 
-    describe('When a color is provided', function () {
-      // Test Environment
-      const color = 'orange-500';
-
-      // Test Setup
-      beforeEach(function () {
-        propsData = {
-          ...basePropsData,
-          color,
-        };
-        slots = { default: DEFAULT_SLOT };
-        _setWrappers();
-      });
-
-      it('should have color variant class on the avatar', function () {
-        assert.isTrue(avatar.classes(AVATAR_COLOR_MODIFIERS[color]));
-      });
-    });
-
     describe('With Presence', function () {
       const initials = 'DP';
 
@@ -253,19 +234,6 @@ describe('DtAvatar Tests', function () {
 
       describe('When provided size is not in AVATAR_SIZE_MODIFIERS', function () {
         itBehavesLikeFailsCustomPropValidation(prop, `INVALID_SIZE`);
-      });
-    });
-
-    describe('Color Validator', function () {
-      // Test Environment
-      const prop = DtAvatar.props.color;
-
-      describe('When provided color is in AVATAR_COLOR_MODIFIERS', function () {
-        itBehavesLikePassesCustomPropValidation(prop, prop.default);
-      });
-
-      describe('When provided color is not in AVATAR_COLOR_MODIFIERS', function () {
-        itBehavesLikeFailsCustomPropValidation(prop, `INVALID_COLOR`);
       });
     });
 
