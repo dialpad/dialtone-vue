@@ -2,6 +2,7 @@
   <div>
     <dt-collapsible
       anchor-text="Favorites"
+      aria-label="Favorites, click to expand or collapse"
       content-element-type="ol"
       class="d-p0 d-w100p"
     >

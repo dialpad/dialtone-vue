@@ -7,6 +7,7 @@
     <div
       :id="!ariaLabelledBy && labelledBy"
       ref="anchor"
+      :aria-label="ariaLabel"
       :class="[
         'd-dt-collapsibe__anchor',
         anchorClass,
@@ -51,9 +52,8 @@
     <dt-collapsible-lazy-show
       :id="id"
       ref="contentWrapper"
-      :aria-hidden="`${!isOpen}`"
+      :aria-hidden="`${!isOpen && !hasContentOnCollapse}`"
       :aria-labelledby="labelledBy"
-      :aria-label="ariaLabel"
       :is-expanded="isOpen"
       :element-type="contentElementType"
       :class="[
@@ -69,12 +69,13 @@
       v-on="$listeners"
       @transitionfinished="onTransitionFinished"
     >
-      <!-- @slot Slot for the collapsible element that is expanded by the anchor -->
+      <!-- @slot Slot for content that is shown when collapsible is expanded -->
       <template #contentOnExpanded>
         <slot
           name="contentOnExpanded"
         />
       </template>
+      <!-- @slot Slot for content that is shown when collapsible is collapsed -->
       <template #contentOnCollapsed>
         <slot
           name="contentOnCollapsed"
@@ -190,7 +191,7 @@ export default {
     },
 
     /**
-     * Label on the collapsible content. Should provide this or ariaLabelledBy but not both.
+     * Label on the anchor. Should provide this or ariaLabelledBy but not both.
      */
     ariaLabel: {
       type: String,
@@ -234,6 +235,10 @@ export default {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor
       return this.ariaLabelledBy || (!this.ariaLabel && getUniqueString('DtCollapsible__anchor'));
+    },
+
+    hasContentOnCollapse () {
+      return !!this.$slots.contentOnCollapsed;
     },
   },
 
