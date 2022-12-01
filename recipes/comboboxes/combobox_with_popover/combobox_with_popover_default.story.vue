@@ -37,7 +37,6 @@
         v-model="value"
         placeholder="Select one or start typing"
         v-bind="inputProps"
-
         @input="onInput"
       />
     </template>
