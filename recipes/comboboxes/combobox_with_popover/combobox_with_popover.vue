@@ -382,14 +382,8 @@ export default {
 
   methods: {
     handleDisplayList (value) {
-      if (!this.hasSuggestionList) {
-        if (value) {
-          // Displays the list after the user has typed anything
-          this.showComboboxList();
-        } else {
-          this.closeComboboxList();
-        }
-      }
+      if (!this.hasSuggestionList && value) { this.showComboboxList(); }
+      if (!this.hasSuggestionList && !value) { this.closeComboboxList(); }
     },
 
     showComboboxList () {
@@ -428,8 +422,7 @@ export default {
     },
 
     onFocusIn (e) {
-      if (this.hasSuggestionList &&
-          e && this.$refs.input.querySelector('input') === e.target) {
+      if (this.hasSuggestionList && e && this.$refs.input.querySelector('input') === e.target) {
         // only trigger if we show suggestion list when focused, and
         // it's the input specifically that was focused
         this.showComboboxList();
@@ -444,15 +437,11 @@ export default {
       }) || this.visuallyHiddenClose;
 
       // If outside the combobox then close
-      if (!isComboboxStillFocused) {
-        this.closeComboboxList();
-      }
+      if (!isComboboxStillFocused) { this.closeComboboxList(); }
     },
 
-    openOnArrowKeyPress (e) {
-      if (this.showList !== null || this.isListShown || !this.openWithArrowKeys) {
-        return;
-      }
+    openOnArrowKeyPress () {
+      if (this.showList !== null || this.isListShown || !this.openWithArrowKeys) { return; }
 
       this.showComboboxList();
     },
