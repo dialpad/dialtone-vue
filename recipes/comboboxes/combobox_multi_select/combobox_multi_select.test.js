@@ -22,6 +22,7 @@ class ResizeObserverMock {
 // Constants
 const basePropsData = {
   showList: true,
+  label: 'Label Text',
   visuallyHiddenCloseLabel: 'Close combobox',
 };
 
@@ -83,6 +84,17 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
   describe('Presentation Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
     it('should render the input', function () { assert.isTrue(input.exists()); });
+    it('should render the input label', function () {
+      assert.isTrue(wrapper.find('[data-qa="dt-input-label"]').exists());
+    });
+    it('should not render label if `labelVisible` is false', async function () {
+      await wrapper.setProps({ labelVisible: false });
+      assert.isFalse(wrapper.find('[data-qa="dt-input-label"]').exists());
+    });
+    it('should render description', async function () {
+      await wrapper.setProps({ description: 'Description Text' });
+      assert.isTrue(wrapper.find('[data-qa="dt-input-description"]').exists());
+    });
     it('should not render the chip if no selection', function () {
       assert.isTrue(chips.length === 0);
     });

@@ -41,7 +41,6 @@
           v-model="value"
           class="d-fl-grow1 d-mb4"
           :label="labelVisible ? label : ''"
-          :label-visible="labelVisible"
           :description="description"
           :label-size="labelSize"
           :placeholder="inputPlaceHolder"

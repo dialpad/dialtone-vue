@@ -9,7 +9,10 @@ import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_exam
 
 // Constants
 const baseProps = {
-  listAriaLabel: '',
+  label: 'Label Text',
+  labelVisible: true,
+  labelSize: 'md',
+  description: '',
   listId: 'list',
   loading: false,
   showList: null,
@@ -110,6 +113,29 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
 
       it('should render the input wrapper', function () { assert.isTrue(inputWrapper.exists()); });
       it('should render the input', function () { assert.isTrue(wrapper.findComponent(DtInput).exists()); });
+    });
+
+    describe('When label is provided', function () {
+      beforeEach(async function () {
+        slots = { input: '<input v-bind="props.inputProps" />' };
+        _mountWrapper();
+        _setChildWrappers();
+      });
+
+      it('should provide proper props to input element', function () {
+        assert.equal(wrapper.find('input').attributes('label'), baseProps.label);
+        assert.equal(wrapper.find('input').attributes('size'), baseProps.labelSize);
+        assert.equal(wrapper.find('input').attributes('description'), baseProps.description);
+      });
+
+      describe('If `labelVisible` prop is `false`', function () {
+        beforeEach(async function () {
+          await wrapper.setProps({ labelVisible: false });
+        });
+        it('label should be empty', function () {
+          assert.equal(wrapper.find('input').attributes('label'), '');
+        });
+      });
     });
 
     describe('When a list is provided', function () {

@@ -5,7 +5,10 @@ import DtCombobox from './combobox.vue';
 
 // Constants
 const baseProps = {
-  listAriaLabel: '',
+  label: 'Label Text',
+  labelVisible: true,
+  labelSize: 'md',
+  description: '',
   listId: 'list',
   showList: true,
   loading: false,
@@ -77,6 +80,30 @@ describe('DtCombobox Tests', function () {
 
       it('should render the input wrapper', function () { assert.isTrue(inputWrapper.exists()); });
       it('should render the input', function () { assert.isTrue(wrapper.find('input').exists()); });
+    });
+
+    describe('When label is provided', function () {
+      beforeEach(async function () {
+        slots = { input: '<input v-bind="props.inputProps" />' };
+        _mountWrapper();
+        _setChildWrappers();
+      });
+
+      it('should provide proper props to input element', function () {
+        console.log(wrapper.find('input').attributes());
+        assert.equal(wrapper.find('input').attributes('label'), baseProps.label);
+        assert.equal(wrapper.find('input').attributes('size'), baseProps.labelSize);
+        assert.equal(wrapper.find('input').attributes('description'), baseProps.description);
+      });
+
+      describe('If `labelVisible` prop is `false`', function () {
+        beforeEach(async function () {
+          await wrapper.setProps({ labelVisible: false });
+        });
+        it('label should be empty', function () {
+          assert.equal(wrapper.find('input').attributes('label'), '');
+        });
+      });
     });
 
     describe('When a list is provided', function () {
