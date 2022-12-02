@@ -23,8 +23,14 @@ export const AVATAR_ICON_SIZES = {
   lg: '500',
 };
 
+export const AVATAR_ANGLES = [45, -45, 90, -90, 135, -135, 180, -180];
+
+export const MAX_GRADIENT_COLORS = 3;
+export const MAX_GRADIENT_COLORS_100 = 2;
+
 export default {
   AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
   AVATAR_ICON_SIZES,
+  AVATAR_ANGLES,
 };

@@ -35,6 +35,9 @@ import { DtPresence } from '../presence';
 import {
   AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS,
   AVATAR_PRESENCE_SIZE_MODIFIERS,
+  AVATAR_ANGLES,
+  MAX_GRADIENT_COLORS,
+  MAX_GRADIENT_COLORS_100,
 } from './avatar_constants.js';
 
 /**
@@ -200,8 +203,7 @@ export default {
     },
 
     randomizeGradientAngle () {
-      const angles = [45, -45, 90, -90, 135, -135, 180, -180];
-      return getRandomElement(angles);
+      return getRandomElement(AVATAR_ANGLES);
     },
 
     randomizeGradientColorStops () {
@@ -210,8 +212,8 @@ export default {
       const colorsWith200 = ['purple-200', 'magenta-200', 'gold-200', 'blue-200'];
 
       // get 3 unique colors, 2 from colorsWith100 and one from colorsWith200
-      while (colors.size < 3) {
-        if (colors.size === 2) {
+      while (colors.size < MAX_GRADIENT_COLORS) {
+        if (colors.size === MAX_GRADIENT_COLORS_100) {
           colors.add(getRandomElement(colorsWith200));
         } else {
           colors.add(getRandomElement(colorsWith100));
