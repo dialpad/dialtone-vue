@@ -67,7 +67,7 @@ export const argTypesData = {
       type: 'text',
     },
   },
-  labelSize: {
+  size: {
     control: {
       type: 'select',
       options: Object.values(LABEL_SIZES),

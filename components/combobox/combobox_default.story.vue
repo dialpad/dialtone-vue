@@ -5,7 +5,7 @@
     :show-list="!!value && showList"
     :label="label"
     :label-visible="labelVisible"
-    :label-size="labelSize"
+    :size="size"
     :description="description"
     :empty-list="emptyList"
     :empty-state-class="emptyStateClass"

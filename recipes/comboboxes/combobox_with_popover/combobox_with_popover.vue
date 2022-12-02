@@ -4,7 +4,7 @@
     :loading="loading"
     :label="label"
     :label-visible="labelVisible"
-    :label-size="labelSize"
+    :size="size"
     :description="description"
     :empty-list="emptyList"
     :empty-state-message="emptyStateMessage"
@@ -150,7 +150,7 @@ export default {
      * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
      * @values null, xs, sm, md, lg, xl
      */
-    labelSize: {
+    size: {
       type: String,
       default: null,
       validator: (t) => Object.values(LABEL_SIZES).includes(t),

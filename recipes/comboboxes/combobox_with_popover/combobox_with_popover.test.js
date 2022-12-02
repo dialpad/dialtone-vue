@@ -11,7 +11,7 @@ import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_exam
 const basePropsData = {
   label: 'Label Text',
   labelVisible: true,
-  labelSize: 'md',
+  size: 'md',
   description: '',
   listId: 'list',
   loading: false,
@@ -128,19 +128,10 @@ describe('DtRecipeComboboxWithPopover Tests', function () {
       });
 
       it('should provide proper props to input element', function () {
-        console.log(wrapper.find('input').attributes());
         assert.equal(wrapper.find('input').attributes('label'), basePropsData.label);
-        assert.equal(wrapper.find('input').attributes('size'), basePropsData.labelSize);
+        assert.equal(wrapper.find('input').attributes('size'), basePropsData.size);
         assert.equal(wrapper.find('input').attributes('description'), basePropsData.description);
-      });
-
-      describe('If `labelVisible` prop is `false`', function () {
-        beforeEach(async function () {
-          await wrapper.setProps({ labelVisible: false });
-        });
-        it('label should be empty', function () {
-          assert.equal(wrapper.find('input').attributes('label'), '');
-        });
+        assert.equal(wrapper.find('input').attributes('aria-label'), basePropsData.label);
       });
     });
 
