@@ -3,7 +3,6 @@
     ref="comboboxMultiSelect"
     :label="label"
     :label-visible="labelVisible"
-    :label-size="labelSize"
     :description="description"
     :size="size"
     :placeholder="placeholder"

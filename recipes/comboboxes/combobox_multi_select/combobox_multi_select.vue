@@ -45,7 +45,7 @@
           :placeholder="inputPlaceHolder"
           :show-messages="showInputMessages"
           :messages="inputMessages"
-          :size="labelSize"
+          :size="size"
           v-on="inputListeners"
           @input="onInput"
         />
@@ -110,7 +110,6 @@ import DtValidationMessages from '@/components/validation_messages/validation_me
 import { validationMessageValidator } from '@/common/validators';
 import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
-import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 
 export default {
   name: 'DtRecipeComboboxMultiSelect',
@@ -140,16 +139,6 @@ export default {
     labelVisible: {
       type: Boolean,
       default: true,
-    },
-
-    /**
-     * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
-     * @values null, xs, sm, md, lg, xl
-     */
-    labelSize: {
-      type: String,
-      default: null,
-      validator: (t) => Object.values(LABEL_SIZES).includes(t),
     },
 
     /**
