@@ -89,9 +89,13 @@ describe('DtCombobox Tests', function () {
         _setChildWrappers();
       });
 
-      it('should provide proper props to input element', function () {
+      it('should provide proper label prop to input element', function () {
         assert.equal(wrapper.find('input').attributes('label'), baseProps.label);
+      });
+      it('should provide proper size prop to input element', function () {
         assert.equal(wrapper.find('input').attributes('size'), baseProps.size);
+      });
+      it('should provide proper description prop to input element', function () {
         assert.equal(wrapper.find('input').attributes('description'), baseProps.description);
       });
 

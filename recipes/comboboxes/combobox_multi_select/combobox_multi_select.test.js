@@ -31,6 +31,8 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
   let wrapper;
   let chips;
   let input;
+  let inputLabel;
+  let inputDescription;
   let validationMsg;
 
   // Environment
@@ -43,6 +45,8 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
   const _setChildWrappers = () => {
     chips = wrapper.findAll('[data-qa="dt-chip"]');
     input = wrapper.find('[data-qa="dt-input-input"]');
+    inputLabel = wrapper.find('[data-qa="dt-input-label"]');
+    inputDescription = wrapper.find('[data-qa="dt-input-description"]');
     validationMsg = wrapper.find('[data-qa="validation-message"]');
   };
 
@@ -85,19 +89,7 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
     it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
     it('should render the input', function () { assert.isTrue(input.exists()); });
     it('should render the input label', function () {
-      assert.isTrue(wrapper.find('[data-qa="dt-input-label"]').exists());
-    });
-    it('should not render label if `labelVisible` is false', async function () {
-      await wrapper.setProps({ labelVisible: false });
-      assert.isFalse(wrapper.find('[data-qa="dt-input-label"]').exists());
-    });
-    it('should still set aria-label even if label visible is false', async function () {
-      await wrapper.setProps({ labelVisible: false });
-      assert.equal(wrapper.find('input').attributes('aria-label'), basePropsData.label);
-    });
-    it('should render description', async function () {
-      await wrapper.setProps({ description: 'Description Text' });
-      assert.isTrue(wrapper.find('[data-qa="dt-input-description"]').exists());
+      assert.isTrue(inputLabel.exists());
     });
     it('should not render the chip if no selection', function () {
       assert.isTrue(chips.length === 0);
@@ -109,6 +101,29 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
         .find('[data-qa="dt-sr-only-close-button"]')
         .exists(),
       );
+    });
+
+    describe('When description is provided', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ description: 'Description Text' });
+        _setChildWrappers();
+      });
+      it('should render description', async function () {
+        assert.isTrue(inputDescription.exists());
+      });
+    });
+
+    describe('When labelVisible prop is false', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ labelVisible: false });
+        _setChildWrappers();
+      });
+      it('should not render label', async function () {
+        assert.isFalse(inputLabel.exists());
+      });
+      it('should still set aria-label even if label visible is false', async function () {
+        assert.equal(input.attributes('aria-label'), basePropsData.label);
+      });
     });
 
     describe('Should render the chips if any selection', function () {

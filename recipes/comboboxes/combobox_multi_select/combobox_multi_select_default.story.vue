@@ -5,7 +5,6 @@
     :description="$attrs.description"
     :selected-items="$attrs.selectedItems"
     :label-visible="$attrs.labelVisible"
-    :label-size="$attrs.labelSize"
     :size="$attrs.size"
     :placeholder="$attrs.placeholder"
     :input-messages="$attrs.inputMessages"
