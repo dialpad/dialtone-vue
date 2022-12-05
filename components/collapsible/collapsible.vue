@@ -8,7 +8,6 @@
     <div
       :id="!ariaLabelledBy && labelledBy"
       ref="anchor"
-      :aria-label="ariaLabel"
       :class="[
         'd-dt-collapsibe__anchor',
         anchorClass,
@@ -28,6 +27,7 @@
           kind="muted"
           :aria-controls="id"
           :aria-expanded="`${isOpen}`"
+          :aria-label="ariaLabel"
           :style="{
             'width': maxWidth,
           }"
