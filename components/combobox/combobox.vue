@@ -276,6 +276,7 @@ export default {
         // The list has to be positioned relatively so that the auto-scroll can
         // calculate the correct offset for the list items.
         class: 'd-ps-relative',
+        'aria-label': this.label,
       };
     },
 
