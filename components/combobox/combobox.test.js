@@ -79,7 +79,7 @@ describe('DtCombobox Tests', function () {
       });
 
       it('should render the input wrapper', function () { assert.isTrue(inputWrapper.exists()); });
-      it('should render the input', function () { assert.isTrue(wrapper.find('input').exists()); });
+      it('should render the input', function () { assert.isTrue(input.exists()); });
     });
 
     describe('When label is provided', function () {
@@ -90,13 +90,13 @@ describe('DtCombobox Tests', function () {
       });
 
       it('should provide proper label prop to input element', function () {
-        assert.equal(wrapper.find('input').attributes('label'), baseProps.label);
+        assert.equal(input.attributes('label'), baseProps.label);
       });
       it('should provide proper size prop to input element', function () {
-        assert.equal(wrapper.find('input').attributes('size'), baseProps.size);
+        assert.equal(input.attributes('size'), baseProps.size);
       });
       it('should provide proper description prop to input element', function () {
-        assert.equal(wrapper.find('input').attributes('description'), baseProps.description);
+        assert.equal(input.attributes('description'), baseProps.description);
       });
 
       describe('If label visible prop is false', function () {
@@ -104,7 +104,7 @@ describe('DtCombobox Tests', function () {
           await wrapper.setProps({ labelVisible: false });
         });
         it('should still set aria-label even if label visible is false', function () {
-          assert.equal(wrapper.find('input').attributes('aria-label'), baseProps.label);
+          assert.equal(input.attributes('aria-label'), baseProps.label);
         });
       });
     });
