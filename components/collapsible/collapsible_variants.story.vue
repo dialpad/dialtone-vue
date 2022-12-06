@@ -1,10 +1,13 @@
 <template>
   <div>
+    <p>Collapsible is open: {{ isOpenLocal }}</p>
     <dt-collapsible
       anchor-text="Favorites"
       aria-label="Favorites, click to expand or collapse"
       content-element-type="ol"
       class="d-p0 d-w100p"
+      :open="isOpenLocal"
+      @update:open="newValue => isOpenLocal = newValue"
     >
       <template #contentOnExpanded>
         <li
@@ -38,6 +41,7 @@ export default {
 
   data () {
     return {
+      isOpenLocal: true,
       items: [
         {
           name: 'Item 1',

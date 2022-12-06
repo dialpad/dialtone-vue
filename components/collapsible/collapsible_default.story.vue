@@ -25,8 +25,8 @@
     </template>
     <template #contentOnExpanded>
       <div
-        v-if="content"
-        v-html="content"
+        v-if="contentOnExpanded"
+        v-html="contentOnExpanded"
       />
       <div
         v-else
