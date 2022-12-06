@@ -30,7 +30,7 @@
     -->
     <component
       :is="elementType"
-      v-if="(isExpanded && hasContentOnExpanded)"
+      v-if="(isExpanded && $slots.contentOnExpanded)"
       key="onOpen"
       v-on="$listeners"
     >
@@ -39,7 +39,7 @@
     </component>
     <component
       :is="elementType"
-      v-else-if="(!isExpanded && hasContentOnCollapsed)"
+      v-else-if="(!isExpanded && $slots.contentOnCollapsed)"
       key="onClose"
       v-on="$listeners"
     >
@@ -79,16 +79,6 @@ export default {
     elementType: {
       type: String,
       default: 'div',
-    },
-  },
-
-  computed: {
-    hasContentOnCollapsed () {
-      return !!this.$slots.contentOnCollapsed;
-    },
-
-    hasContentOnExpanded () {
-      return !!this.$slots.contentOnExpanded;
     },
   },
 

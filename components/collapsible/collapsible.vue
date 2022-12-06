@@ -253,16 +253,12 @@ export default {
   methods: {
 
     defaultToggleOpen () {
+      this.$emit('opened', !this.isOpen);
       if (this.open === null) {
-        this.toggleOpen();
+        this.isOpen = !this.isOpen;
       } else {
         this.$emit('update:open', !this.isOpen);
       }
-    },
-
-    toggleOpen () {
-      this.isOpen = !this.isOpen;
-      this.$emit('opened', this.isOpen);
     },
 
     validateProperAnchor () {

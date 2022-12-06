@@ -56,6 +56,12 @@
         </p>
       </div>
     </template>
+    <template #contentOnCollapsed>
+      <div
+        v-if="contentOnCollapsed"
+        v-html="contentOnCollapsed"
+      />
+    </template>
   </dt-collapsible>
 </template>
 

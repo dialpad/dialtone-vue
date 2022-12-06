@@ -90,6 +90,12 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtCollapsibleDefaultStory,
 );
 
+// Stories
+export const Default = DefaultTemplate.bind({});
+Default.args = {
+  maxWidth: '512px',
+};
+
 const VariantTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
@@ -97,9 +103,3 @@ const VariantTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 );
 
 export const Variants = VariantTemplate.bind({});
-
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  maxWidth: '512px',
-};

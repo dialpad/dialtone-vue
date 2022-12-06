@@ -6,8 +6,7 @@
       aria-label="Favorites, click to expand or collapse"
       content-element-type="ol"
       class="d-p0 d-w100p"
-      :open="isOpenLocal"
-      @update:open="newValue => isOpenLocal = newValue"
+      :open.sync="isOpenLocal"
     >
       <template #contentOnExpanded>
         <li
