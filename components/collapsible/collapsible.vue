@@ -66,14 +66,14 @@
       v-on="$listeners"
       @transitionfinished="onTransitionFinished"
     >
-      <!-- @slot Slot for content that is shown when collapsible is expanded -->
       <template #contentOnExpanded>
+        <!-- @slot Slot for content that is shown when collapsible is expanded -->
         <slot
           name="contentOnExpanded"
         />
       </template>
-      <!-- @slot Slot for content that is shown when collapsible is collapsed -->
       <template #contentOnCollapsed>
+        <!-- @slot Slot for content that is shown when collapsible is collapsed -->
         <slot
           name="contentOnCollapsed"
         />
