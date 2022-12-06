@@ -7,7 +7,7 @@ import DtCombobox from './combobox.vue';
 const baseProps = {
   label: 'Label Text',
   labelVisible: true,
-  labelSize: 'md',
+  size: 'md',
   description: '',
   listId: 'list',
   showList: true,
@@ -90,18 +90,17 @@ describe('DtCombobox Tests', function () {
       });
 
       it('should provide proper props to input element', function () {
-        console.log(wrapper.find('input').attributes());
         assert.equal(wrapper.find('input').attributes('label'), baseProps.label);
-        assert.equal(wrapper.find('input').attributes('size'), baseProps.labelSize);
+        assert.equal(wrapper.find('input').attributes('size'), baseProps.size);
         assert.equal(wrapper.find('input').attributes('description'), baseProps.description);
       });
 
-      describe('If `labelVisible` prop is `false`', function () {
+      describe('If label visible prop is false', function () {
         beforeEach(async function () {
           await wrapper.setProps({ labelVisible: false });
         });
-        it('label should be empty', function () {
-          assert.equal(wrapper.find('input').attributes('label'), '');
+        it('should still set aria-label even if label visible is false', function () {
+          assert.equal(wrapper.find('input').attributes('aria-label'), baseProps.label);
         });
       });
     });

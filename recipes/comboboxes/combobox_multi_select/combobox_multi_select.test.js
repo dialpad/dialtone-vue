@@ -91,6 +91,10 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
       await wrapper.setProps({ labelVisible: false });
       assert.isFalse(wrapper.find('[data-qa="dt-input-label"]').exists());
     });
+    it('should still set aria-label even if label visible is false', async function () {
+      await wrapper.setProps({ labelVisible: false });
+      assert.equal(wrapper.find('input').attributes('aria-label'), basePropsData.label);
+    });
     it('should render description', async function () {
       await wrapper.setProps({ description: 'Description Text' });
       assert.isTrue(wrapper.find('[data-qa="dt-input-description"]').exists());

@@ -106,7 +106,7 @@ export default {
      * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
      * @values null, xs, sm, md, lg, xl
      */
-    labelSize: {
+    size: {
       type: String,
       default: null,
       validator: (t) => Object.values(LABEL_SIZES).includes(t),
@@ -255,10 +255,12 @@ export default {
   computed: {
     inputProps () {
       return {
-        label: this.labelVisible ? this.label : '',
-        size: this.labelSize,
+        label: this.label,
+        labelVisible: this.labelVisible,
+        size: this.size,
         description: this.description,
         role: 'combobox',
+        'aria-label': this.label,
         'aria-expanded': this.showList.toString(),
         'aria-owns': this.listId,
         'aria-haspopup': 'listbox',

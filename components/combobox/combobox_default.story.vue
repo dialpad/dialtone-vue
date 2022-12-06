@@ -5,7 +5,7 @@
     :show-list="!!value && $attrs.showList"
     :label="$attrs.label"
     :label-visible="$attrs.labelVisible"
-    :label-size="$attrs.labelSize"
+    :size="$attrs.size"
     :description="$attrs.description"
     :empty-list="$attrs.emptyList"
     :empty-state-class="$attrs.emptyStateClass"
