@@ -16,7 +16,15 @@ const argTypesData = {
       },
     },
   },
-  content: {
+  contentOnCollapsed: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  contentOnExpanded: {
     control: 'text',
     table: {
       type: {
