@@ -18,9 +18,11 @@ export const AVATAR_PRESENCE_SIZE_MODIFIERS = {
 };
 
 export const AVATAR_ICON_SIZES = {
+  xs: '100',
   sm: '200',
   md: '400',
   lg: '500',
+  xl: '600',
 };
 
 export const AVATAR_ANGLES = [45, -45, 90, -90, 135, -135, 180, -180];
