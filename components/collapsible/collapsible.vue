@@ -64,7 +64,6 @@
       tabindex="-1"
       appear
       v-on="$listeners"
-      @transitionfinished="onTransitionFinished"
     >
       <template #contentOnExpanded>
         <!-- @slot Slot for content that is shown when collapsible is expanded -->
@@ -253,21 +252,13 @@ export default {
 
   methods: {
 
-    onTransitionFinished () {
-      this.$emit('opened', this.isOpen);
-      if (this.open !== null) {
-        this.$emit('update:open', this.isOpen);
-      }
-    },
-
     defaultToggleOpen () {
+      this.$emit('opened', !this.isOpen);
       if (this.open === null) {
-        this.toggleOpen();
+        this.isOpen = !this.isOpen;
+      } else {
+        this.$emit('update:open', !this.isOpen);
       }
-    },
-
-    toggleOpen () {
-      this.isOpen = !this.isOpen;
     },
 
     validateProperAnchor () {
