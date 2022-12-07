@@ -7,6 +7,7 @@
     <div
       :id="!ariaLabelledBy && labelledBy"
       ref="anchor"
+      :aria-label="ariaLabel"
       :class="[
         'd-dt-collapsibe__anchor',
         anchorClass,
@@ -26,18 +27,15 @@
           kind="muted"
           :aria-controls="id"
           :aria-expanded="`${isOpen}`"
+          :aria-label="ariaLabel"
           :style="{
             'width': maxWidth,
           }"
           @click="defaultToggleOpen"
         >
-          <icon-arrow-accordion-open
-            v-if="isOpen"
-            class="d-svg--size18 d-mr8 d-fl-shrink0"
-          />
-          <icon-arrow-accordion-closed
-            v-else
-            class="d-svg--size18 d-mr8 d-fl-shrink0"
+          <dt-icon
+            :name=" isOpen ? 'chevron-down' : 'chevron-right'"
+            class="d-icon d-icon--size-300 d-mr8 d-fl-shrink0"
           />
           <span
             class="d-mr-auto d-truncate"
@@ -51,10 +49,9 @@
     <dt-collapsible-lazy-show
       :id="id"
       ref="contentWrapper"
-      :aria-hidden="`${!isOpen}`"
+      :aria-hidden="`${!isOpen && !hasContentOnCollapse}`"
       :aria-labelledby="labelledBy"
-      :aria-label="ariaLabel"
-      :show="isOpen"
+      :is-expanded="isOpen"
       :element-type="contentElementType"
       :class="[
         'd-dt-collapsible__content',
@@ -67,13 +64,19 @@
       tabindex="-1"
       appear
       v-bind="$attrs"
-      @after-leave="onLeaveTransitionComplete"
-      @after-enter="onEnterTransitionComplete"
     >
-      <!-- @slot Slot for the collapsible element that is expanded by the anchor -->
-      <slot
-        name="content"
-      />
+      <template #contentOnExpanded>
+        <!-- @slot Slot for content that is shown when collapsible is expanded -->
+        <slot
+          name="contentOnExpanded"
+        />
+      </template>
+      <template #contentOnCollapsed>
+        <!-- @slot Slot for content that is shown when collapsible is collapsed -->
+        <slot
+          name="contentOnCollapsed"
+        />
+      </template>
     </dt-collapsible-lazy-show>
   </component>
 </template>
@@ -81,10 +84,9 @@
 <script>
 import { getUniqueString } from '@/common/utils';
 import DtCollapsibleLazyShow from './collapsible_lazy_show';
-import { DtButton } from '../button';
-import { DtLazyShow } from '../lazy_show';
-import IconArrowAccordionOpen from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionOpen';
-import IconArrowAccordionClosed from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionClosed';
+import { DtButton } from '@/components/button';
+import { DtLazyShow } from '@/components/lazy_show';
+import { DtIcon } from '@/components/icon';
 
 /**
  * A collapsible is a component consisting of an interactive anchor that toggled the expandable/collapsible element.
@@ -97,8 +99,7 @@ export default {
     DtButton,
     DtCollapsibleLazyShow,
     DtLazyShow,
-    IconArrowAccordionOpen,
-    IconArrowAccordionClosed,
+    DtIcon,
   },
 
   inheritAttrs: false,
@@ -184,7 +185,7 @@ export default {
     },
 
     /**
-     * Label on the collapsible content. Should provide this or ariaLabelledBy but not both.
+     * Label on the anchor. Should provide this or ariaLabelledBy but not both.
      */
     ariaLabel: {
       type: String,
@@ -229,6 +230,10 @@ export default {
       // there is no aria-label and the labelledby should point to the anchor
       return this.ariaLabelledBy || (!this.ariaLabel && getUniqueString('DtCollapsible__anchor'));
     },
+
+    hasContentOnCollapse () {
+      return !!this.$slots.contentOnCollapsed;
+    },
   },
 
   watch: {
@@ -248,32 +253,18 @@ export default {
   },
 
   methods: {
-    onLeaveTransitionComplete () {
-      this.$emit('opened', false);
-      if (this.open !== null) {
-        this.$emit('update:open', false);
-      }
-    },
-
-    onEnterTransitionComplete () {
-      this.$emit('opened', true, this.$refs.content);
-      if (this.open !== null) {
-        this.$emit('update:open', true);
-      }
-    },
 
     defaultToggleOpen () {
+      this.$emit('opened', !this.isOpen);
       if (this.open === null) {
-        this.toggleOpen();
+        this.isOpen = !this.isOpen;
+      } else {
+        this.$emit('update:open', !this.isOpen);
       }
-    },
-
-    toggleOpen () {
-      this.isOpen = !this.isOpen;
     },
 
     validateProperAnchor () {
-      if (!this.anchorText && !this.$slots.$anchor) {
+      if (!this.anchorText && !this.$slots.anchor) {
         console.error('anchor text and anchor slot content cannot both be falsy');
       }
     },
