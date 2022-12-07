@@ -148,20 +148,28 @@ export default {
 
   methods: {
     async init () {
-      const firstChild = this.$slots.default[0]?.elm;
-      if (firstChild) {
-        this.setKind(firstChild);
+      const firstChild = this.$slots.default[0]?.elm || this.$slots.default[0];
+      const iconChild = this.$slots.default[0]?.componentOptions?.tag === 'dt-icon';
+
+      if (firstChild || iconChild) {
+        if (iconChild) {
+          this.kind = 'icon';
+        } else {
+          this.setKind(firstChild);
+        }
+
         await this.$nextTick();
         const childEl = this.$el;
 
         if (this.kind === 'image') {
+          childEl.firstChild.classList.add('d-avatar__image');
           // TO DO: remove attached event listener
           childEl.firstChild.addEventListener('error', () => {
             this.kind = 'initials';
             this.imageLoadedSuccessfully = false;
+            childEl.firstChild.classList.remove('d-avatar__image');
           });
           childEl.firstChild.addEventListener('load', () => {
-            childEl.firstChild.classList.add('d-avatar__image');
             this.imageLoadedSuccessfully = true;
           });
 
@@ -195,11 +203,11 @@ export default {
     },
 
     isSvgType (element) {
-      return element?.tagName?.toUpperCase() === 'SVG';
+      return element?.tagName?.toUpperCase() === 'SVG' || element?.tag?.toUpperCase() === 'SVG';
     },
 
     isImageType (element) {
-      return element?.tagName?.toUpperCase() === 'IMG';
+      return element?.tagName?.toUpperCase() === 'IMG' || element?.tag?.toUpperCase() === 'IMG';
     },
 
     randomizeGradientAngle () {
