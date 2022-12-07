@@ -24,8 +24,8 @@
     </template>
     <template #contentOnExpanded>
       <div
-        v-if="$attrs.content"
-        v-html="$attrs.content"
+        v-if="$attrs.contentOnExpanded"
+        v-html="$attrs.contentOnExpanded"
       />
       <div
         v-else
@@ -54,6 +54,12 @@
           est.
         </p>
       </div>
+    </template>
+    <template #contentOnCollapsed>
+      <div
+        v-if="$attrs.contentOnCollapsed"
+        v-html="$attrs.contentOnCollapsed"
+      />
     </template>
   </dt-collapsible>
 </template>

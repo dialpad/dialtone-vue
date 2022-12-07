@@ -1,6 +1,9 @@
+<!-- eslint-disable vue/no-v-model-argument -->
 <template>
   <div>
+    <p>Collapsible is open: {{ isOpenLocal }}</p>
     <dt-collapsible
+      v-model:open="isOpenLocal"
       anchor-text="Favorites"
       aria-label="Favorites, click to expand or collapse"
       content-element-type="ol"
@@ -38,6 +41,7 @@ export default {
 
   data () {
     return {
+      isOpenLocal: true,
       items: [
         {
           name: 'Item 1',

@@ -6,7 +6,6 @@
     enter-active-class="enter-active"
     leave-active-class="leave-active"
     v-bind="$attrs"
-    v-on="$listeners"
     @before-enter="beforeEnter"
     @enter="enter"
     @after-enter="afterEnter"
@@ -24,21 +23,25 @@
       To differentiate them, we need to add a unique
       key attribute on both instances to let the VDOM know that
       they're both different nodes.
+
+      Only render the element if the slot underneath is defined.
+      This prevents unnecessary animation from taking place if
+      a particular slot is not defined
     -->
     <component
       :is="elementType"
-      v-if="isExpanded"
+      v-if="(isExpanded && $slots.contentOnExpanded)"
       key="onOpen"
-      v-on="$listeners"
+      v-bind="$attrs"
     >
       <!-- @slot slot for Content when collapsible is expanded -->
       <slot name="contentOnExpanded" />
     </component>
     <component
       :is="elementType"
-      v-else
+      v-else-if="(!isExpanded && $slots.contentOnCollapsed)"
       key="onClose"
-      v-on="$listeners"
+      v-bind="$attrs"
     >
       <!-- @slot slot for Content when collapsible is collapsed -->
       <slot name="contentOnCollapsed" />
@@ -49,7 +52,6 @@
 <script>
 export default {
   name: 'DtCollapsibleLazyShow',
-
   inheritAttrs: false,
 
   /******************
@@ -81,8 +83,6 @@ export default {
     },
   },
 
-  emits: ['transitionfinished'],
-
   methods: {
 
     beforeEnter (element) {
@@ -110,11 +110,6 @@ export default {
      */
     afterEnter (element) {
       element.style.height = null;
-      // Note: since the mode out transition is "out-in"
-      // the 'enter' event will be the one triggered last in this
-      // transition. It will mark the end of the transition, hence
-      // the trigger of the event below
-      this.$emit('transitionfinished');
     },
 
     /**

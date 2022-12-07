@@ -3,7 +3,7 @@ import {
   DtCollapsible,
 } from './';
 import CollapsibleMdx from './collapsible.mdx';
-import DtCollapsibleDefaultStory from './collapsible_default.story.vue';
+import DtCollapsibleDefaultStory from './collapsible_default.story';
 import DtCollapsibleVariantsStory from './collapsible_variants.story.vue';
 
 const argsTypesData = {
@@ -16,7 +16,15 @@ const argsTypesData = {
       },
     },
   },
-  content: {
+  contentOnCollapsed: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  contentOnExpanded: {
     control: 'text',
     table: {
       type: {
@@ -81,16 +89,15 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   DtCollapsibleDefaultStory,
 );
 
-const VariantTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtCollapsibleVariantsStory,
-);
-
-export const Variants = VariantTemplate.bind({});
-
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   maxWidth: '512px',
 };
+
+const VariantTemplate = (args) => createTemplateFromVueFile(
+  args,
+  DtCollapsibleVariantsStory,
+);
+
+export const Variants = VariantTemplate.bind({});

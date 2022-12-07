@@ -2,6 +2,7 @@
   <component
     :is="elementType"
     ref="collapsible"
+    v-bind="$attrs"
   >
     <!-- Element for capturing keypress events -->
     <div
@@ -27,18 +28,15 @@
           kind="muted"
           :aria-controls="id"
           :aria-expanded="`${isOpen}`"
+          :aria-label="ariaLabel"
           :style="{
             'width': maxWidth,
           }"
           @click="defaultToggleOpen"
         >
-          <icon-arrow-accordion-open
-            v-if="isOpen"
-            class="d-svg--size18 d-mr8 d-fl-shrink0"
-          />
-          <icon-arrow-accordion-closed
-            v-else
-            class="d-svg--size18 d-mr8 d-fl-shrink0"
+          <dt-icon
+            :name=" isOpen ? 'chevron-down' : 'chevron-right'"
+            class="d-icon d-icon--size-300 d-mr8 d-fl-shrink0"
           />
           <span
             class="d-mr-auto d-truncate"
@@ -66,17 +64,16 @@
       }"
       tabindex="-1"
       appear
-      v-on="$listeners"
-      @transitionfinished="onTransitionFinished"
+      v-bind="$attrs"
     >
-      <!-- @slot Slot for content that is shown when collapsible is expanded -->
       <template #contentOnExpanded>
+        <!-- @slot Slot for content that is shown when collapsible is expanded -->
         <slot
           name="contentOnExpanded"
         />
       </template>
-      <!-- @slot Slot for content that is shown when collapsible is collapsed -->
       <template #contentOnCollapsed>
+        <!-- @slot Slot for content that is shown when collapsible is collapsed -->
         <slot
           name="contentOnCollapsed"
         />
@@ -88,10 +85,9 @@
 <script>
 import { getUniqueString } from '@/common/utils';
 import DtCollapsibleLazyShow from './collapsible_lazy_show';
-import { DtButton } from '../button';
-import { DtLazyShow } from '../lazy_show';
-import IconArrowAccordionOpen from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionOpen';
-import IconArrowAccordionClosed from '@dialpad/dialtone/lib/dist/vue/icons/IconArrowAccordionClosed';
+import { DtButton } from '@/components/button';
+import { DtLazyShow } from '@/components/lazy_show';
+import { DtIcon } from '@/components/icon';
 
 /**
  * A collapsible is a component consisting of an interactive anchor that toggled the expandable/collapsible element.
@@ -104,8 +100,7 @@ export default {
     DtButton,
     DtCollapsibleLazyShow,
     DtLazyShow,
-    IconArrowAccordionOpen,
-    IconArrowAccordionClosed,
+    DtIcon,
   },
 
   inheritAttrs: false,
@@ -260,25 +255,17 @@ export default {
 
   methods: {
 
-    onTransitionFinished () {
-      this.$emit('opened', this.isOpen);
-      if (this.open !== null) {
-        this.$emit('update:open', this.isOpen);
-      }
-    },
-
     defaultToggleOpen () {
+      this.$emit('opened', !this.isOpen);
       if (this.open === null) {
-        this.toggleOpen();
+        this.isOpen = !this.isOpen;
+      } else {
+        this.$emit('update:open', !this.isOpen);
       }
-    },
-
-    toggleOpen () {
-      this.isOpen = !this.isOpen;
     },
 
     validateProperAnchor () {
-      if (!this.anchorText && !this.$slots.$anchor) {
+      if (!this.anchorText && !this.$slots.anchor) {
         console.error('anchor text and anchor slot content cannot both be falsy');
       }
     },
