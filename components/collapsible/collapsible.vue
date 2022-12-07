@@ -7,7 +7,6 @@
     <div
       :id="!ariaLabelledBy && labelledBy"
       ref="anchor"
-      :aria-label="ariaLabel"
       :class="[
         'd-dt-collapsibe__anchor',
         anchorClass,
@@ -49,7 +48,8 @@
     <dt-collapsible-lazy-show
       :id="id"
       ref="contentWrapper"
-      :aria-hidden="`${!isOpen && !hasContentOnCollapse}`"
+      data-qa="contentWrapper"
+      :aria-hidden="`${!isOpen && !$slots.contentOnCollapsed}`"
       :aria-labelledby="labelledBy"
       :is-expanded="isOpen"
       :element-type="contentElementType"
@@ -264,7 +264,7 @@ export default {
     },
 
     validateProperAnchor () {
-      if (!this.anchorText && !this.$slots.anchor) {
+      if (!this.anchorText && !this.$slots.$anchor) {
         console.error('anchor text and anchor slot content cannot both be falsy');
       }
     },

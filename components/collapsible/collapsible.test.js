@@ -36,7 +36,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
     anchorSlotElement = wrapper.find('[data-qa="anchor-element"]');
     contentOnExpandedElement = wrapper.find('[data-qa="content-on-expanded-element"]');
     contentOnCollapsedElement = wrapper.find('[data-qa="content-on-collapsed-element"]');
-    contentWrapperElement = wrapper.findComponent({ ref: 'contentWrapper' });
+    contentWrapperElement = wrapper.find('[data-qa="contentWrapper"]');
   };
 
   const mountWrapper = ({ propsData = defaultPropsData, slots = defaultSlots } = {}) => {
@@ -46,7 +46,7 @@ describe('Dialtone vue Collapsible Component Tests', function () {
       attrs,
       global: {
         stubs: {
-          transition: false,
+          transition: true,
         },
       },
       attachTo: document.body,
@@ -294,7 +294,13 @@ describe('Dialtone vue Collapsible Component Tests', function () {
 
     describe('Content is expanded', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ open: true, id: 'contentId' });
+        mountWrapper({
+          propsData: {
+            open: true,
+            id: 'contentId',
+            anchorText: 'hello',
+          },
+        });
       });
 
       it('should pass axe-core accessibility rules', async function () {

@@ -5,7 +5,6 @@
     mode="out-in"
     enter-active-class="enter-active"
     leave-active-class="leave-active"
-    v-bind="$attrs"
     @before-enter="beforeEnter"
     @enter="enter"
     @after-enter="afterEnter"
@@ -32,7 +31,6 @@
       :is="elementType"
       v-if="(isExpanded && $slots.contentOnExpanded)"
       key="onOpen"
-      v-bind="$attrs"
     >
       <!-- @slot slot for Content when collapsible is expanded -->
       <slot name="contentOnExpanded" />
@@ -41,7 +39,6 @@
       :is="elementType"
       v-else-if="(!isExpanded && $slots.contentOnCollapsed)"
       key="onClose"
-      v-bind="$attrs"
     >
       <!-- @slot slot for Content when collapsible is collapsed -->
       <slot name="contentOnCollapsed" />
@@ -52,7 +49,7 @@
 <script>
 export default {
   name: 'DtCollapsibleLazyShow',
-  inheritAttrs: false,
+  inheritAttrs: true,
 
   /******************
    *     PROPS      *
