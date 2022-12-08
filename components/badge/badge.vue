@@ -2,7 +2,6 @@
   <span
     :class="[
       'd-badge',
-      'd-box-border',
       BADGE_TYPE_MODIFIERS[type],
       BADGE_KIND_MODIFIERS[kind],
     ]"
