@@ -3,7 +3,7 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
 # Badge
 
 <Subtitle>
-  A badge is a compact UI element that provides brief, descriptive information about an element.
+  A badge is a compact UI element providing brief, descriptive information about an element and its surrounding context.
   It is terse, ideally one word.
 </Subtitle>
 
@@ -41,10 +41,18 @@ import { DtBadge } from '@dialpad/dialtone-vue';
 
 ### Variants
 
+  default: '',
+  info: 'd-badge--info',
+  success: 'd-badge--success',
+  warning: 'd-badge--warning',
+  critical: 'd-badge--critical',
+  bulletin: 'd-badge--bulletin',
+  ai: 'd-badge--ai',
+
 ```jsx
 <dt-badge
   text="badge"
-  color="black-700 | green-400 | orange-400  | magenta-100 | magenta-300 | magenta-400 | magenta-500
-         | purple-100 | purple-300 | purple-400 | purple-500 | red-300 | white | gold-200"
+  type="default | info | success  | warning | critical | bulletin | ai"
+  kind="label | count"
 />
 ```
