@@ -2,7 +2,6 @@
   <div class="d-fd-column d-p24 d-w100p d-of-auto d-stack8">
     <h2>Kind: Label</h2>
     <div
-      id="components-badge--variants-container"
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
@@ -21,7 +20,6 @@
       />
     </div>
     <div
-      id="components-badge--variants-container"
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
@@ -38,7 +36,6 @@
       />
     </div>
     <div
-      id="components-badge--variants-container"
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
@@ -47,7 +44,6 @@
       />
     </div>
     <div
-      id="components-badge--variants-container"
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
@@ -56,7 +52,6 @@
       />
     </div>
     <div
-      id="components-badge--variants-container"
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
@@ -66,7 +61,6 @@
       />
     </div>
     <div
-      id="components-badge--variants-container"
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
@@ -79,7 +73,6 @@
       />
     </div>
     <div
-      id="components-badge--variants-container"
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
@@ -103,7 +96,6 @@
       Kind: Count
     </h2>
     <div
-      id="components-badge--variants-container"
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
@@ -114,7 +106,6 @@
       />
     </div>
     <div
-      id="components-badge--variants-container"
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
@@ -125,7 +116,6 @@
       />
     </div>
     <div
-      id="components-badge--variants-container"
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
