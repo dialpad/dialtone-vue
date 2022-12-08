@@ -8,16 +8,13 @@
     data-qa="dt-badge"
   >
     <span
-      v-if="$slots.iconLeft || type === 'ai'"
+      v-if="iconLeft || type === 'ai'"
       class="d-badge__icon-left"
     >
-      <!-- @slot Slot for an icon to the left of the badge, insert a dt-icon -->
-      <slot name="iconLeft">
-        <dt-icon
-          name="dialpad-ai"
-          size="200"
-        />
-      </slot>
+      <dt-icon
+        :name="iconLeft || 'dialpad-ai'"
+        size="200"
+      />
     </span>
     <span class="d-badge__label">
       <!-- @slot Slot for badge content, defaults to text prop -->
@@ -26,11 +23,13 @@
       </slot>
     </span>
     <span
-      v-if="$slots.iconRight"
+      v-if="iconRight"
       class="d-badge__icon-right"
     >
-      <!-- @slot Slot for an icon to the right of the badge, insert a dt-icon -->
-      <slot name="iconRight" />
+      <dt-icon
+        :name="iconRight"
+        size="200"
+      />
     </span>
   </span>
 </template>
@@ -52,6 +51,25 @@ export default {
   },
 
   props: {
+    /**
+     * Icon on the left side of the badge. Supports any valid icon name from the icon catalog at
+     * https://dialpad.design/components/icon.html#icon-catalog. If type:'ai' is set, the ai icon
+     * will automatically be shown here, but this can be overridden by setting this prop.
+     */
+    iconLeft: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Icon on the right side of the badge. Supports any valid icon name from the icon catalog at
+     * https://dialpad.design/components/icon.html#icon-catalog
+     */
+    iconRight: {
+      type: String,
+      default: '',
+    },
+
     /**
      * Text for the badge content
      */
