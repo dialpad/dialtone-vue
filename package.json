@@ -132,7 +132,7 @@
     "yo": "^4.3.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=7.9",
+    "@dialpad/dialtone": ">=7.10",
     "vue": ">=2.6"
   },
   "engineStrict": true,
