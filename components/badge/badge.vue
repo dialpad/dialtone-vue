@@ -119,7 +119,7 @@ export default {
   methods: {
     validateProps () {
       if (this.type === 'ai' && this.kind === 'count') {
-        console.error('type: ai and kind: count is an invalid combination.');
+        console.error('DtBadge error: type: \'ai\' with kind: \'count\' is an invalid combination.');
       }
     },
   },
