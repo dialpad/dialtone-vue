@@ -2,6 +2,7 @@ import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_util
 import DtBadge from './badge';
 import DtBadgeDefaultTemplate from './badge_default.story.vue';
 import DtBadgeVariantsTemplate from './badge_variants.story.vue';
+import DtBadgeExamplesTemplate from './badge_examples.story.vue';
 import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS } from './badge_constants';
 import DtBadgeMdx from './badge.mdx';
 
@@ -18,15 +19,25 @@ export const argTypesData = {
     },
   },
   iconLeft: {
+    options: iconsList,
+    mapping: iconsList,
     control: {
       type: 'select',
-      options: iconsList,
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
   iconRight: {
+    options: iconsList,
+    mapping: iconsList,
     control: {
       type: 'select',
-      options: iconsList,
+      labels: {
+        // 'labels' maps option values to string labels
+        '': '(empty)',
+      },
     },
   },
 
@@ -45,6 +56,7 @@ export const argTypesData = {
       type: 'select',
       options: Object.keys(BADGE_KIND_MODIFIERS),
     },
+    if: { arg: 'type', neq: 'ai' },
   },
 };
 
@@ -70,6 +82,7 @@ export default {
 // Templates
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBadgeDefaultTemplate);
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBadgeVariantsTemplate);
+const ExamplesTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBadgeExamplesTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
@@ -80,3 +93,7 @@ Default.args = {
 export const Variants = VariantsTemplate.bind({});
 Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 Variants.args = {};
+
+export const Examples = ExamplesTemplate.bind({});
+Examples.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
+Examples.args = {};
