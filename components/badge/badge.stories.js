@@ -5,6 +5,8 @@ import DtBadgeVariantsTemplate from './badge_variants.story.vue';
 import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS } from './badge_constants';
 import DtBadgeMdx from './badge.mdx';
 
+const iconsList = getIconNames();
+
 export const argTypesData = {
   // Slots
   default: {
@@ -18,13 +20,13 @@ export const argTypesData = {
   iconLeft: {
     control: {
       type: 'select',
-      options: getIconNames(),
+      options: iconsList,
     },
   },
   iconRight: {
     control: {
       type: 'select',
-      options: getIconNames(),
+      options: iconsList,
     },
   },
 
