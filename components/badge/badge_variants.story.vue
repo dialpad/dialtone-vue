@@ -1,23 +1,149 @@
 <template>
-  <div
-    id="components-badge--variants-container"
-    class="d-d-flex"
-  >
-    <dt-badge
-      v-for="type in types"
-      :key="type"
-      :text="type"
-      :type="type"
-      class="d-mr8 d-mb8"
-    />
-    <dt-badge
-      v-for="type in types.slice(0, types.length - 1)"
-      :key="`${type}-count`"
-      text="1"
-      :type="type"
-      kind="count"
-      class="d-mr8 d-mb8"
-    />
+  <div class="d-fd-column d-p24 d-w100p d-of-auto d-stack8">
+    <h2>Kind: Label</h2>
+    <div
+      id="components-badge--variants-container"
+      class="d-d-flex d-gg8 d-ai-center"
+    >
+      <dt-badge
+        text="Co-host"
+      />
+      <dt-badge
+        text="Customer"
+      />
+      <dt-badge
+        text="Locked"
+        icon-left="lock"
+      />
+      <dt-badge
+        text="Chat log"
+        icon-left="message"
+      />
+    </div>
+    <div
+      id="components-badge--variants-container"
+      class="d-d-flex d-gg8 d-ai-center"
+    >
+      <dt-badge
+        text="In progress"
+        type="info"
+      />
+      <dt-badge
+        text="Beta"
+        type="info"
+      />
+      <dt-badge
+        text="Draft"
+        type="info"
+      />
+    </div>
+    <div
+      id="components-badge--variants-container"
+      class="d-d-flex d-gg8 d-ai-center"
+    >
+      <dt-badge
+        text="Overdue"
+        type="warning"
+      />
+    </div>
+    <div
+      id="components-badge--variants-container"
+      class="d-d-flex d-gg8 d-ai-center"
+    >
+      <dt-badge
+        text="Resolved"
+        type="success"
+      />
+    </div>
+    <div
+      id="components-badge--variants-container"
+      class="d-d-flex d-gg8 d-ai-center"
+    >
+      <dt-badge
+        text="Recording"
+        type="critical"
+        icon-left="record-filled"
+      />
+    </div>
+    <div
+      id="components-badge--variants-container"
+      class="d-d-flex d-gg8 d-ai-center"
+    >
+      <dt-badge
+        text="Live"
+        type="bulletin"
+        icon-left="record-filled"
+      />
+      <dt-badge
+        text="Presenter"
+        type="bulletin"
+        icon-left="record-filled"
+      />
+    </div>
+    <div
+      id="components-badge--variants-container"
+      class="d-d-flex d-gg8 d-ai-center"
+    >
+      <dt-badge
+        text="Notes"
+        type="ai"
+      />
+      <dt-badge
+        text="Suggestion"
+        type="ai"
+      />
+      <dt-badge
+        text="on"
+        type="ai"
+      />
+      <dt-badge
+        text="Transcript"
+        type="ai"
+      />
+    </div>
+    <h2>Kind: Count</h2>
+    <div
+      id="components-badge--variants-container"
+      class="d-d-flex d-gg8 d-ai-center"
+    >
+      <dt-badge
+        text="5%"
+        kind="count"
+        type="success"
+        icon-left="arrow-up"
+      />
+    </div>
+    <div
+      id="components-badge--variants-container"
+      class="d-d-flex d-gg8 d-ai-center"
+    >
+      <dt-badge
+        text="-12%"
+        kind="count"
+        type="critical"
+        icon-left="arrow-down"
+      />
+    </div>
+    <div
+      id="components-badge--variants-container"
+      class="d-d-flex d-gg8 d-ai-center"
+    >
+      <dt-badge
+        text="1"
+        kind="count"
+        type="bulletin"
+      />
+      <dt-badge
+        text="18"
+        kind="count"
+        type="bulletin"
+      />
+      <dt-badge
+        text="99+"
+        kind="count"
+        type="bulletin"
+      />
+    </div>
   </div>
 </template>
 
