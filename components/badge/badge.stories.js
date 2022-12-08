@@ -72,7 +72,7 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args,
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  default: 'badge',
+  default: 'Badge',
 };
 
 export const Variants = VariantsTemplate.bind({});
