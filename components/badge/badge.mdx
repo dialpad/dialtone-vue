@@ -13,6 +13,12 @@ import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/ad
   <Story id="components-badge--default" />
 </Canvas>
 
+## Count
+
+<Canvas>
+  <Story id="components-badge--count" />
+</Canvas>
+
 ## Variants
 
 <Canvas>
@@ -42,6 +48,15 @@ import { DtBadge } from '@dialpad/dialtone-vue';
 ```jsx
 <dt-badge
   text="badge"
+/>
+```
+
+### Count
+
+```jsx
+<dt-badge
+  text="1"
+  kind="count"
 />
 ```
 
