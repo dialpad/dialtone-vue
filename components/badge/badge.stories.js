@@ -16,18 +16,12 @@ export const argTypesData = {
     },
   },
   iconLeft: {
-    table: {
-      type: { summary: 'VNode' },
-    },
     control: {
       type: 'select',
       options: getIconNames(),
     },
   },
   iconRight: {
-    table: {
-      type: { summary: 'VNode' },
-    },
     control: {
       type: 'select',
       options: getIconNames(),
