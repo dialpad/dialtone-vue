@@ -90,6 +90,12 @@ Default.args = {
   default: 'Badge',
 };
 
+export const Count = DefaultTemplate.bind({});
+Count.args = {
+  default: '1',
+  kind: 'count',
+};
+
 export const Variants = VariantsTemplate.bind({});
 Variants.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 Variants.args = {};
