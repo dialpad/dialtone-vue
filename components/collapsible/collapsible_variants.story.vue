@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-v-model-argument -->
 <template>
-  <div class="d-d-flex ">
+  <div class="d-d-flex d-w100p d-ai-center d-jc-center d-h100p">
     <div>
       <p>Favorites Collapsible is open: {{ isFavoritesExpanded }}</p>
       <dt-collapsible
@@ -28,7 +28,7 @@
         </template>
       </dt-collapsible>
     </div>
-    <div class="d-ml8">
+    <div class="d-ml24">
       <dt-button @click="toggleRecentsCollapsible">
         Click to Toggle Recents Collapsible
       </dt-button>
