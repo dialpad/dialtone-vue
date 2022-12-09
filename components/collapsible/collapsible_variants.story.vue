@@ -6,7 +6,6 @@
       <dt-collapsible
         v-model:open="isFavoritesExpanded"
         anchor-text="Favorites"
-        aria-label="Favorites, click to expand or collapse"
         content-element-type="ol"
         class="d-p0 d-w100p"
       >
@@ -35,7 +34,6 @@
       <dt-collapsible
         :open="isRecentsExpanded"
         anchor-text="Recents"
-        aria-label="Recents, click to expand or collapse"
         content-element-type="ol"
         class="d-p0 d-w100p"
       >
