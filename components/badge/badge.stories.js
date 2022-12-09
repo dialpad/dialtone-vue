@@ -1,8 +1,8 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtBadge from './badge';
 import DtBadgeDefaultTemplate from './badge_default.story.vue';
 import DtBadgeVariantsTemplate from './badge_variants.story.vue';
-import { BADGE_COLOR_MODIFIERS } from './badge_constants';
+import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS } from './badge_constants';
 import DtBadgeMdx from './badge.mdx';
 
 export const argTypesData = {
@@ -15,12 +15,40 @@ export const argTypesData = {
       },
     },
   },
+  iconLeft: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      options: getIconNames(),
+    },
+  },
+  iconRight: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      options: getIconNames(),
+    },
+  },
 
   // Props
-  color: {
-    defaultValue: 'base',
-    options: Object.keys(BADGE_COLOR_MODIFIERS),
-    control: 'select',
+  type: {
+    defaultValue: 'default',
+    control: {
+      type: 'select',
+      options: Object.keys(BADGE_TYPE_MODIFIERS),
+    },
+  },
+
+  kind: {
+    defaultValue: 'label',
+    control: {
+      type: 'select',
+      options: Object.keys(BADGE_KIND_MODIFIERS),
+    },
   },
 };
 
