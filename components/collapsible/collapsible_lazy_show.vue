@@ -29,7 +29,7 @@
     -->
     <component
       :is="elementType"
-      v-if="(isExpanded && $slots.contentOnExpanded)"
+      v-if="(isExpanded && hasExpandedContent)"
       key="onOpen"
     >
       <!-- @slot slot for Content when collapsible is expanded -->
@@ -37,7 +37,7 @@
     </component>
     <component
       :is="elementType"
-      v-else-if="(!isExpanded && $slots.contentOnCollapsed)"
+      v-else-if="(!isExpanded && hasCollapsedContent)"
       key="onClose"
     >
       <!-- @slot slot for Content when collapsible is collapsed -->
@@ -77,6 +77,18 @@ export default {
     elementType: {
       type: String,
       default: 'div',
+    },
+  },
+
+  computed: {
+    hasCollapsedContent () {
+      // element [0] refers to the @slot comment
+      return this.$slots.contentOnCollapsed()[1].children.length > 0;
+    },
+
+    hasExpandedContent () {
+      // element [0] refers to the @slot comment
+      return this.$slots.contentOnExpanded()[1].children.length > 0;
     },
   },
 
