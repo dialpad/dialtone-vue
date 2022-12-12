@@ -161,25 +161,29 @@ export default {
         await this.$nextTick();
         const childEl = this.$el;
 
-        if (this.kind === 'image') {
+        if (this.kind === 'image' && this.imageLoadedSuccessfully === null) {
           childEl.firstChild.classList.add('d-avatar__image');
-          // TO DO: remove attached event listener
+
           childEl.firstChild.addEventListener('error', () => {
             this.kind = 'initials';
             this.imageLoadedSuccessfully = false;
-            childEl.firstChild.classList.remove('d-avatar__image');
+            childEl.firstChild?.classList?.remove('d-avatar__image');
           });
+
           childEl.firstChild.addEventListener('load', () => {
             this.imageLoadedSuccessfully = true;
+            childEl.classList.add('d-avatar__image--loaded');
           });
 
           if (this.initials) {
             this.formatInitials(this.initials);
           }
         }
+
         if (this.kind === 'initials') {
           this.formatInitials(firstChild.textContent);
         }
+
         this.validateImageAttrsPresence();
       }
     },
@@ -244,3 +248,10 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+.d-avatar__image--loaded {
+  background-color: transparent;
+  background-image: unset;
+}
+</style>
