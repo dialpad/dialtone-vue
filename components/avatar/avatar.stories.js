@@ -95,6 +95,14 @@ export const Default = DefaultTemplate.bind({});
 Default.args = {
   default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
 };
+
+// TO DO: figure out why Icon.argTypes is causing the controls to not show up in the Initials story when
+// it's below the Icon story
+export const Initials = DefaultTemplate.bind({});
+Initials.args = {
+  default: 'DP',
+};
+
 export const Icon = IconTemplate.bind({});
 Icon.args = {
   default: 'accessibility',
@@ -112,11 +120,6 @@ Icon.argTypes = {
       },
     },
   },
-};
-
-export const Initials = DefaultTemplate.bind({});
-Initials.args = {
-  default: 'DP',
 };
 
 export const Presence = PresenceTemplate.bind({});
