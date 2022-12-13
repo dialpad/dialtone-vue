@@ -140,6 +140,7 @@ export default {
 
   mounted () {
     this.init();
+    this.validateImageAttrsPresence();
   },
 
   updated () {
@@ -181,10 +182,8 @@ export default {
         }
 
         if (this.kind === 'initials') {
-          this.formatInitials(firstChild.textContent);
+          this.formatInitials(firstChild.text || firstChild.textContent);
         }
-
-        this.validateImageAttrsPresence();
       }
     },
 
@@ -238,9 +237,11 @@ export default {
     },
 
     validateImageAttrsPresence () {
-      if (this.kind === 'image' && this.imageLoadedSuccessfully) {
-        // Check that default slot image required attributes are provided
-        if (!this.$el.firstChild.getAttribute('src') || !this.$el.firstChild.getAttribute('alt')) {
+      if (this.kind === 'image') {
+        const isSrcMissing = !this.$slots.default[0].data.attrs.src;
+        const isAltMissing = !this.$slots.default[0].data.attrs.alt;
+
+        if (isSrcMissing || isAltMissing) {
           Vue.util.warn('src and alt attributes are required for image avatars', this);
         }
       }
