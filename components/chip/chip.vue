@@ -1,5 +1,5 @@
 <template>
-  <span class="d-chip">
+  <span :class="['d-chip', parentClass]">
     <component
       v-bind="$attrs"
       :is="interactive ? 'button' : 'span'"
@@ -142,6 +142,14 @@ export default {
      * Additional class name for the chip element.
      */
     contentClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the span element.
+     */
+    parentClass: {
       type: [String, Array, Object],
       default: '',
     },
