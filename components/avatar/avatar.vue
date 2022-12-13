@@ -173,7 +173,7 @@ export default {
 
           childEl.firstChild.addEventListener('load', () => {
             this.imageLoadedSuccessfully = true;
-            childEl.classList.add('d-avatar__image--loaded');
+            childEl.classList.add('d-avatar--image-loaded');
           });
 
           if (this.initials) {
@@ -251,7 +251,7 @@ export default {
 </script>
 
 <style lang="less">
-.d-avatar__image--loaded {
+.d-avatar--image-loaded {
   background-color: transparent;
   background-image: unset;
 }
