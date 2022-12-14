@@ -193,9 +193,9 @@ export default {
       if (this.size === 'xs') {
         this.formattedInitials = '';
       } else if (this.size === 'sm') {
-        this.formattedInitials = initials[0];
+        this.formattedInitials = initials.trim()[0];
       } else {
-        this.formattedInitials = initials.slice(0, 2);
+        this.formattedInitials = initials.trim().slice(0, 2);
       }
     },
 
