@@ -108,17 +108,15 @@ describe('DtRecipeContactInfo Tests', function () {
         await wrapper.setProps({
           avatarSrc: '',
           avatarInitials: 'JL',
-          avatarColor: 'orange-500',
         });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
       });
       it('Avatar should display', function () {
         assert.isTrue(avatarElement.exists());
       });
       it('Should display correct initials', function () {
         assert.strictEqual(avatarElement.text(), 'JL');
-      });
-      it('Should have correct background color', function () {
-        assert.include(avatarElement.classes(), 'd-avatar--orange-500');
       });
     });
 
@@ -127,7 +125,6 @@ describe('DtRecipeContactInfo Tests', function () {
         await wrapper.setProps({
           avatarSrc: '',
           avatarInitials: '',
-          avatarColor: 'orange-500',
         });
       });
       it('Should not display avatar', function () {

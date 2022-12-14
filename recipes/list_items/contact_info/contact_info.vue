@@ -22,9 +22,7 @@
         </dt-avatar>
         <dt-avatar
           v-else-if="avatarInitials"
-          kind="initials"
           size="lg"
-          :color="avatarColor"
         >
           {{ avatarInitials }}
         </dt-avatar>
