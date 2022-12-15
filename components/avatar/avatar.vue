@@ -11,7 +11,7 @@
     data-qa="dt-avatar"
   >
     <!-- @slot Slot for avatar content -->
-    <slot v-if="shouldShowContent" />
+    <slot v-if="showDefaultSlot" />
     <span v-else-if="showInitials">
       {{ formattedInitials }}
     </span>
@@ -33,9 +33,11 @@ import { getUniqueString, getRandomElement } from '@/common/utils';
 import Vue from 'vue';
 import { DtPresence } from '../presence';
 import {
-  AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS,
+  AVATAR_KIND_MODIFIERS,
+  AVATAR_SIZE_MODIFIERS,
   AVATAR_PRESENCE_SIZE_MODIFIERS,
   AVATAR_ANGLES,
+  GRADIENT_COLORS,
   MAX_GRADIENT_COLORS,
   MAX_GRADIENT_COLORS_100,
 } from './avatar_constants.js';
@@ -107,17 +109,18 @@ export default {
   data () {
     return {
       // initials, image or icon
-      kind: 'initials',
+      kind: 'image',
       AVATAR_SIZE_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
       imageLoadedSuccessfully: null,
+      slottedInitials: '',
       formattedInitials: '',
     };
   },
 
   computed: {
-    shouldShowContent () {
+    showDefaultSlot () {
       return this.kind !== 'initials' && this.imageLoadedSuccessfully !== false;
     },
 
@@ -127,62 +130,51 @@ export default {
 
     initialKindStyle () {
       const randomGradientColorStops = this.randomizeGradientColorStops();
-      const styles = {
+      return {
         '--avatar-gradient-angle': `${this.randomizeGradientAngle()}deg`,
         '--avatar-gradient-stop-1': `var(--${randomGradientColorStops[0]})`,
         '--avatar-gradient-stop-2': `var(--${randomGradientColorStops[1]})`,
         '--avatar-gradient-stop-3': `var(--${randomGradientColorStops[2]})`,
       };
-
-      return (this.kind === 'initials' || this.kind === 'icon') ? styles : null;
     },
   },
 
   mounted () {
     this.init();
-    this.validateImageAttrsPresence();
   },
 
   updated () {
-    this.init();
+    if (this.kind === 'initials') {
+      this.slottedInitials = this.$slots.default[0].text || this.$slots.default[0].textContent;
+      this.formatInitials(this.slottedInitials);
+    }
   },
 
   methods: {
-    async init () {
-      const firstChild = this.$slots.default[0]?.elm || this.$slots.default[0];
-      const iconChild = this.$slots.default[0]?.componentOptions?.tag === 'dt-icon';
+    init () {
+      const firstChild = this.$el.firstChild;
 
-      if (firstChild || iconChild) {
-        if (iconChild) {
-          this.kind = 'icon';
-        } else {
-          this.setKind(firstChild);
-        }
+      if (firstChild) {
+        this.setKind(firstChild);
 
-        await this.$nextTick();
-        const childEl = this.$el;
+        if (this.kind === 'image') {
+          firstChild.classList.add('d-avatar__image');
+          this.validateImageAttrsPresence();
 
-        if (this.kind === 'image' && this.imageLoadedSuccessfully === null) {
-          childEl.firstChild.classList.add('d-avatar__image');
-
-          childEl.firstChild.addEventListener('error', () => {
-            this.kind = 'initials';
-            this.imageLoadedSuccessfully = false;
-            childEl.firstChild?.classList?.remove('d-avatar__image');
-          });
-
-          childEl.firstChild.addEventListener('load', () => {
-            this.imageLoadedSuccessfully = true;
-            childEl.classList.add('d-avatar--image-loaded');
-          });
-
-          if (this.initials) {
+          firstChild.addEventListener('error', () => {
             this.formatInitials(this.initials);
-          }
+            this.imageLoadedSuccessfully = false;
+          });
+
+          firstChild.addEventListener('load', () => {
+            firstChild.classList.add('d-avatar--image-loaded');
+            this.imageLoadedSuccessfully = true;
+          });
         }
 
         if (this.kind === 'initials') {
-          this.formatInitials(firstChild.text || firstChild.textContent);
+          this.slottedInitials = firstChild.text || firstChild.textContent;
+          this.formatInitials(this.slottedInitials);
         }
       }
     },
@@ -219,31 +211,27 @@ export default {
 
     randomizeGradientColorStops () {
       const colors = new Set();
-      const colorsWith100 = ['purple-100', 'magenta-100', 'gold-100', 'blue-100'];
-      const colorsWith200 = ['purple-200', 'magenta-200', 'gold-200', 'blue-200'];
 
       // get 3 unique colors, 2 from colorsWith100 and one from colorsWith200
       while (colors.size < MAX_GRADIENT_COLORS) {
         if (colors.size === MAX_GRADIENT_COLORS_100) {
-          colors.add(getRandomElement(colorsWith200));
+          colors.add(getRandomElement(GRADIENT_COLORS.with200));
         } else {
-          colors.add(getRandomElement(colorsWith100));
+          colors.add(getRandomElement(GRADIENT_COLORS.with100));
         }
       }
 
       const shuffledColors = Array.from(colors).sort(() => 0.5 - Math.random());
 
-      return Array.from(shuffledColors);
+      return shuffledColors;
     },
 
     validateImageAttrsPresence () {
-      if (this.kind === 'image') {
-        const isSrcMissing = !this.$slots.default[0].data.attrs.src;
-        const isAltMissing = !this.$slots.default[0].data.attrs.alt;
+      const isSrcMissing = !this.$el.firstChild.getAttribute('src');
+      const isAltMissing = !this.$el.firstChild.getAttribute('alt');
 
-        if (isSrcMissing || isAltMissing) {
-          Vue.util.warn('src and alt attributes are required for image avatars', this);
-        }
+      if (isSrcMissing || isAltMissing) {
+        Vue.util.warn('src and alt attributes are required for image avatars', this);
       }
     },
   },
