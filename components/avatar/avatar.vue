@@ -198,11 +198,11 @@ export default {
     },
 
     isSvgType (element) {
-      return element?.tagName?.toUpperCase() === 'SVG' || element?.tag?.toUpperCase() === 'SVG';
+      return element?.tagName?.toUpperCase() === 'SVG';
     },
 
     isImageType (element) {
-      return element?.tagName?.toUpperCase() === 'IMG' || element?.tag?.toUpperCase() === 'IMG';
+      return element?.tagName?.toUpperCase() === 'IMG';
     },
 
     randomizeGradientAngle () {
