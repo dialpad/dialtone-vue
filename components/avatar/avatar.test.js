@@ -304,11 +304,9 @@ describe('DtAvatar Tests', function () {
       describe('When image src and alt attributes are provided', function () {
         // Test Setup
         beforeEach(function () {
-          attrs = {
-            ...baseAttrs,
-            src: IMAGE_ATTRS.SRC,
-            alt: IMAGE_ATTRS.ALT,
-          };
+          const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
+
+          slots = { default: imageSlot };
           _setWrappers();
         });
 
