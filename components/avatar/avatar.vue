@@ -144,14 +144,14 @@ export default {
 
   updated () {
     if (this.kind === 'initials') {
-      this.slottedInitials = this.$el.children[0].text || this.$el.children[0].textContent;
+      this.slottedInitials = this.$el.children[0].textContent;
       this.formatInitials(this.slottedInitials);
     }
   },
 
   methods: {
     init () {
-      const firstChild = this.$el.children[0];
+      const firstChild = this.$el.children[0] || this.$el;
 
       if (firstChild) {
         this.setKind(firstChild);
@@ -172,7 +172,7 @@ export default {
         }
 
         if (this.kind === 'initials') {
-          this.slottedInitials = firstChild.text || firstChild.textContent;
+          this.slottedInitials = firstChild.textContent;
           this.formatInitials(this.slottedInitials);
         }
       }

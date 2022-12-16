@@ -153,7 +153,7 @@ describe('DtAvatar Tests', function () {
         _setWrappers();
       });
 
-      it(' shows a single character', async function () {
+      it('shows a single character', async function () {
         await wrapper.setProps({
           size: 'sm',
         });
