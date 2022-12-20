@@ -24,6 +24,7 @@ describe('DtModal Tests', function () {
   let overlay;
   let title;
   let banner;
+  let content;
 
   const _setChildWrappers = function () {
     closeBtn = wrapper.findComponent(DtButton);
@@ -31,6 +32,7 @@ describe('DtModal Tests', function () {
     overlay = wrapper.find('[data-qa="dt-modal"]');
     title = wrapper.find('[data-qa="dt-modal-title"]');
     banner = wrapper.find('[data-qa="dt-modal-banner"]');
+    content = wrapper.find('[data-qa="dt-modal-copy"]');
   };
 
   const _setWrappers = () => {
@@ -170,6 +172,14 @@ describe('DtModal Tests', function () {
 
     _setChildWrappers();
     assert.isTrue(banner.classes(bannerClass));
+  });
+
+  it('Should pass content class through to content modal element', async function () {
+    const contentClass = 'content-class';
+    assert.isFalse(content.classes(contentClass));
+
+    await wrapper.setProps({ contentClass });
+    assert.isTrue(content.classes(contentClass));
   });
 
   it('Should NOT contain a visually hidden close button', function () {
