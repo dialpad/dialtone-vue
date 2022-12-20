@@ -99,6 +99,7 @@
         >
           <div
             ref="footer"
+            tabindex="0"
             @focusout="onFocusOut"
           >
             <slot name="footer" />
