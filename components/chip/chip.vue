@@ -1,7 +1,6 @@
 <template>
-  <span :class="['d-chip', parentClass]">
+  <span :class="'d-chip'">
     <component
-      v-bind="$attrs"
       :is="interactive ? 'button' : 'span'"
       :id="id"
       :type="interactive && 'button'"
@@ -78,8 +77,6 @@ export default {
     DtIcon,
   },
 
-  inheritAttrs: false,
-
   props: {
     /**
      * A set of props to be passed into the modal's close button. Requires an 'ariaLabel' property.
@@ -149,8 +146,8 @@ export default {
     /**
      * Additional class name for the span element.
      */
-    parentClass: {
-      type: [String, Array, Object],
+    labelClass: {
+      type: [String, Array],
       default: '',
     },
   },
@@ -210,10 +207,7 @@ export default {
 
   methods: {
     chipClasses () {
-      return [
-        this.$attrs['grouped-chip'] ? 'd-chip' : 'd-chip__label',
-        CHIP_SIZE_MODIFIERS[this.size],
-      ];
+      return [...this.labelClass, CHIP_SIZE_MODIFIERS[this.size]];
     },
 
     chipCloseButtonClasses () {
