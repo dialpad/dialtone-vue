@@ -1,3 +1,41 @@
+# [3.32.0](https://github.com/dialpad/dialtone-vue/compare/v3.31.0...v3.32.0) (2022-12-21)
+
+
+### Bug Fixes
+
+* **Dt Recipe Ivr Node:** add new ivr node icons ([#663](https://github.com/dialpad/dialtone-vue/issues/663)) ([ff6b5bf](https://github.com/dialpad/dialtone-vue/commit/ff6b5bfc01dd7fd1f6cb78a0565d34b7541325f5))
+
+
+### Features
+
+* **Modal:** add contentClass prop ([#655](https://github.com/dialpad/dialtone-vue/issues/655)) ([bf725a5](https://github.com/dialpad/dialtone-vue/commit/bf725a5a523e93223f16ce09cd85b84e5f0968f0))
+
+# [3.31.0](https://github.com/dialpad/dialtone-vue/compare/v3.30.1...v3.31.0) (2022-12-19)
+
+
+### Features
+
+* **Avatar:** dialtone 7 visual refresh ([#653](https://github.com/dialpad/dialtone-vue/issues/653)) ([accc6f5](https://github.com/dialpad/dialtone-vue/commit/accc6f5a545b53dad5dfa1a5f08ff4fb8c829d57))
+
+## [3.30.1](https://github.com/dialpad/dialtone-vue/compare/v3.30.0...v3.30.1) (2022-12-15)
+
+
+### Bug Fixes
+
+* **Root Layout:** full height support ([#649](https://github.com/dialpad/dialtone-vue/issues/649)) ([e2aa1cb](https://github.com/dialpad/dialtone-vue/commit/e2aa1cb0424a540fbff2c2261cd2a67cde6e74e0))
+
+# [3.30.0](https://github.com/dialpad/dialtone-vue/compare/v3.29.1...v3.30.0) (2022-12-15)
+
+
+### Bug Fixes
+
+* **Tooltip:** use selector for focus visible rather than attr ([#645](https://github.com/dialpad/dialtone-vue/issues/645)) ([4475ded](https://github.com/dialpad/dialtone-vue/commit/4475ded66e632bdf767e45eb536f3afb9008e733))
+
+
+### Features
+
+* **Collapsible:** change to cubic-bezier transition ([#647](https://github.com/dialpad/dialtone-vue/issues/647)) ([81fbf6d](https://github.com/dialpad/dialtone-vue/commit/81fbf6d6d5f6b8bfbb8c5333555c77ac796c3340))
+
 ## [3.29.1](https://github.com/dialpad/dialtone-vue/compare/v3.29.0...v3.29.1) (2022-12-10)
 
 

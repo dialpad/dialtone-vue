@@ -4,6 +4,7 @@ import {
   VALIDATION_MESSAGE_TYPES,
 } from './constants';
 import { h } from 'vue';
+const seedrandom = require('seedrandom');
 
 let UNIQUE_ID_COUNTER = 0;
 
@@ -20,6 +21,18 @@ const scheduler = typeof setImmediate === 'function' ? setImmediate : setTimeout
 
 export function getUniqueString (prefix = DEFAULT_PREFIX) {
   return `${prefix}${UNIQUE_ID_COUNTER++}`;
+}
+
+/**
+ * Returns a random element from array
+ * @param array - the array to return a random element from
+ * @param {string} seed - use a string to seed the randomization, so it returns the same element each time
+ * based on that string.
+ * @returns {*} - the random element
+ */
+export function getRandomElement (array, seed) {
+  const rng = seedrandom(seed);
+  return array[Math.floor(rng() * array.length)];
 }
 
 export function formatMessages (messages) {
@@ -124,6 +137,7 @@ export const pascalCaseToKebabCase = (string) => {
 
 export default {
   getUniqueString,
+  getRandomElement,
   formatMessages,
   filterFormattedMessages,
   hasFormattedMessageOfType,
