@@ -1,5 +1,5 @@
 <template>
-  <span :class="'d-chip'">
+  <span class="d-chip">
     <component
       :is="interactive ? 'button' : 'span'"
       :id="id"
@@ -147,7 +147,7 @@ export default {
      * Additional class name for the span element.
      */
     labelClass: {
-      type: [String, Array],
+      type: [String, Array, Object],
       default: '',
     },
   },
@@ -207,7 +207,10 @@ export default {
 
   methods: {
     chipClasses () {
-      return [...this.labelClass, CHIP_SIZE_MODIFIERS[this.size]];
+      return [
+        this.$attrs['grouped-chip'] ? ['d-chip', ...this.labelClass] : 'd-chip__label',
+        CHIP_SIZE_MODIFIERS[this.size],
+      ];
     },
 
     chipCloseButtonClasses () {
