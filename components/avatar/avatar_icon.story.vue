@@ -2,8 +2,8 @@
   <dt-avatar
     :id="id"
     :size="size"
-    :color="color"
     :presence="presence"
+    :seed="seed"
   >
     <dt-icon
       :name="defaultSlot"

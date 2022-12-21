@@ -1,3 +1,44 @@
+## [2.46.1](https://github.com/dialpad/dialtone-vue/compare/v2.46.0...v2.46.1) (2022-12-21)
+
+
+### Bug Fixes
+
+* **Dt Recipe Ivr Node:** add new ivr node icons ([#662](https://github.com/dialpad/dialtone-vue/issues/662)) ([768e8b3](https://github.com/dialpad/dialtone-vue/commit/768e8b37288a6345756715918165e119702033b9))
+
+# [2.46.0](https://github.com/dialpad/dialtone-vue/compare/v2.45.1...v2.46.0) (2022-12-20)
+
+
+### Features
+
+* **Modal:** add contentClass prop ([#654](https://github.com/dialpad/dialtone-vue/issues/654)) ([08d6dad](https://github.com/dialpad/dialtone-vue/commit/08d6dadf720273cedede7db92513ccf2828abeec))
+
+## [2.45.1](https://github.com/dialpad/dialtone-vue/compare/v2.45.0...v2.45.1) (2022-12-16)
+
+
+### Bug Fixes
+
+* **Chip:** fix chip with avatar story ([#650](https://github.com/dialpad/dialtone-vue/issues/650)) ([0b35dc3](https://github.com/dialpad/dialtone-vue/commit/0b35dc356d27fe5d2fec45314d0aa33d74efbdc0))
+* **Root Layout:** full height support ([#648](https://github.com/dialpad/dialtone-vue/issues/648)) ([c64a211](https://github.com/dialpad/dialtone-vue/commit/c64a21103769fda63d245458a9fc824957a4c17a))
+
+# [2.45.0](https://github.com/dialpad/dialtone-vue/compare/v2.44.0...v2.45.0) (2022-12-15)
+
+
+### Features
+
+* **Avatar:** dialtone 7 visual refresh ([#623](https://github.com/dialpad/dialtone-vue/issues/623)) ([13d993d](https://github.com/dialpad/dialtone-vue/commit/13d993db3e9f9f33adcce8992d09381d308a5479))
+
+# [2.44.0](https://github.com/dialpad/dialtone-vue/compare/v2.43.2...v2.44.0) (2022-12-14)
+
+
+### Bug Fixes
+
+* **Tooltip:** use selector for focus visible rather than attr ([#644](https://github.com/dialpad/dialtone-vue/issues/644)) ([e5da2bb](https://github.com/dialpad/dialtone-vue/commit/e5da2bb66c3f21a0c521eff81ce0df68154bcad1))
+
+
+### Features
+
+* **Collapsible:** change to cubic-bezier transition ([#646](https://github.com/dialpad/dialtone-vue/issues/646)) ([76e2989](https://github.com/dialpad/dialtone-vue/commit/76e298972bed6624d739dbd392b7e6fff2e812c0))
+
 ## [2.43.2](https://github.com/dialpad/dialtone-vue/compare/v2.43.1...v2.43.2) (2022-12-10)
 
 
