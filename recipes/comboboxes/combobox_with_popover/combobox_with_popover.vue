@@ -94,6 +94,7 @@
           <div
             v-if="$slots.footer"
             ref="footer"
+            tabindex="0"
             @focusout="onFocusOut"
           >
             <slot name="footer" />
