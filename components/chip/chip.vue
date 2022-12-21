@@ -77,8 +77,6 @@ export default {
     DtIcon,
   },
 
-  inheritAttrs: false,
-
   props: {
     /**
      * A set of props to be passed into the modal's close button. Requires an 'ariaLabel' property.
