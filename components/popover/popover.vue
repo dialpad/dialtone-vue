@@ -122,6 +122,7 @@
 <script>
 /* eslint-disable max-lines */
 import {
+  POPOVER_APPEND_TO_VALUES,
   POPOVER_CONTENT_WIDTHS,
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_INITIAL_FOCUS_STRINGS,
@@ -465,14 +466,14 @@ export default {
 
     /**
      * Sets the element to which the popover is going to append to.
-     * @values 'parent', document.body
+     * @values 'parent', HTMLElement,
      */
     appendTo: {
       type: [HTMLElement, String],
       default: () => document.body,
-      validator: v => {
-        if (v instanceof HTMLElement) return true;
-        return !(typeof v === 'string' && v !== 'parent');
+      validator: appendTo => {
+        return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
+            (appendTo instanceof HTMLElement);
       },
     },
   },
