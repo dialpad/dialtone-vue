@@ -461,7 +461,7 @@ export default {
       default: () => document.body,
       validator: v => {
         if (v instanceof HTMLElement) return true;
-        return !(typeof v === 'string' && v !== 'parent');
+        return typeof v === 'string' && v === 'parent';
       },
     },
   },
