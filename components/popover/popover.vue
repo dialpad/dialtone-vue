@@ -451,6 +451,19 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Sets the element to which the popover is going to append to.
+     * @values 'parent', document.body
+     */
+    appendTo: {
+      type: [HTMLElement, String],
+      default: () => document.body,
+      validator: v => {
+        if (v instanceof HTMLElement) return true;
+        return !(typeof v === 'string' && v !== 'parent');
+      },
+    },
   },
 
   emits: [
@@ -593,7 +606,7 @@ export default {
       placement: this.placement,
       offset: this.offset,
       sticky: this.sticky,
-      appendTo: document.body,
+      appendTo: this.appendTo,
       interactive: true,
       trigger: 'manual',
       // We have to manage hideOnClick functionality manually to handle
