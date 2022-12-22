@@ -99,7 +99,6 @@
         >
           <div
             ref="footer"
-            tabindex="0"
             @focusout="onFocusOut"
           >
             <slot name="footer" />
@@ -438,7 +437,7 @@ export default {
     onFocusOut (e) {
       const comboboxRefs = ['input', 'header', 'footer', 'listWrapper'];
       // Check if the focus change was to another target within the combobox component
-      const isComboboxStillFocused = comboboxRefs.some((ref) => {
+      const isComboboxStillFocused = e.relatedTarget === null || comboboxRefs.some((ref) => {
         return this.$refs[ref]?.contains(e.relatedTarget);
       }) || this.visuallyHiddenClose;
 
