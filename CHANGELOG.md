@@ -1,3 +1,39 @@
+# [2.47.0](https://github.com/dialpad/dialtone-vue/compare/v2.46.1...v2.47.0) (2022-12-24)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** firefox fix ([#642](https://github.com/dialpad/dialtone-vue/issues/642)) ([5d92519](https://github.com/dialpad/dialtone-vue/commit/5d92519e2ec625fbe88026ed3959445049e406fb))
+* **Combobox:** combobox components issues ([#658](https://github.com/dialpad/dialtone-vue/issues/658)) ([7edb52a](https://github.com/dialpad/dialtone-vue/commit/7edb52a10ef9ad6b3304506827c800c691facb38))
+
+
+### Features
+
+* **Avatar:** seeeded random colors ([#661](https://github.com/dialpad/dialtone-vue/issues/661)) ([7ce9f35](https://github.com/dialpad/dialtone-vue/commit/7ce9f35b0658133cc1dbef5ec43d5f2f360e7dbe))
+* **Popover:** add appendTo prop. ([#665](https://github.com/dialpad/dialtone-vue/issues/665)) ([222c264](https://github.com/dialpad/dialtone-vue/commit/222c2649941a18f736bdc7d9dadcb0d822591343))
+
+## [2.46.1](https://github.com/dialpad/dialtone-vue/compare/v2.46.0...v2.46.1) (2022-12-21)
+
+
+### Bug Fixes
+
+* **Dt Recipe Ivr Node:** add new ivr node icons ([#662](https://github.com/dialpad/dialtone-vue/issues/662)) ([768e8b3](https://github.com/dialpad/dialtone-vue/commit/768e8b37288a6345756715918165e119702033b9))
+
+# [2.46.0](https://github.com/dialpad/dialtone-vue/compare/v2.45.1...v2.46.0) (2022-12-20)
+
+
+### Features
+
+* **Modal:** add contentClass prop ([#654](https://github.com/dialpad/dialtone-vue/issues/654)) ([08d6dad](https://github.com/dialpad/dialtone-vue/commit/08d6dadf720273cedede7db92513ccf2828abeec))
+
+## [2.45.1](https://github.com/dialpad/dialtone-vue/compare/v2.45.0...v2.45.1) (2022-12-16)
+
+
+### Bug Fixes
+
+* **Chip:** fix chip with avatar story ([#650](https://github.com/dialpad/dialtone-vue/issues/650)) ([0b35dc3](https://github.com/dialpad/dialtone-vue/commit/0b35dc356d27fe5d2fec45314d0aa33d74efbdc0))
+* **Root Layout:** full height support ([#648](https://github.com/dialpad/dialtone-vue/issues/648)) ([c64a211](https://github.com/dialpad/dialtone-vue/commit/c64a21103769fda63d245458a9fc824957a4c17a))
+
 # [2.45.0](https://github.com/dialpad/dialtone-vue/compare/v2.44.0...v2.45.0) (2022-12-15)
 
 
