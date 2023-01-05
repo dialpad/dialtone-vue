@@ -10,8 +10,7 @@
     </section>
     <section class="d-fl-grow1 d-of-hidden">
       <div v-if="$slots.default">
-        <!-- @slot S
-          lot for the main content -->
+        <!-- @slot Slot for the main content -->
         <slot />
       </div>
       <div
