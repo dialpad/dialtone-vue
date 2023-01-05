@@ -121,7 +121,7 @@
         >
           <dt-list-item-group
             heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
-            :list-class="listClass"
+            :list-class="$attrs.listClass"
             heading="Menu Heading A"
           >
             <dt-list-item
@@ -142,7 +142,7 @@
           </dt-list-item-group>
           <dt-dropdown-separator />
           <dt-list-item-group
-            :list-class="listClass"
+            :list-class="$attrs.listClass"
             heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
             heading="Menu Heading B"
           >
