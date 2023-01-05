@@ -234,8 +234,7 @@ export default {
 }
 
 .dt-list-item:focus-visible {
-  border-radius: var(--br4);
   outline: none;
-  box-shadow: inset 0 0 0 var(--su2) var(--focus-ring);
+  box-shadow: inset 0 0 0 var(--su2) var(--focus-ring); // TODO: update with new focus state once done in `dialtone`
 }
 </style>
