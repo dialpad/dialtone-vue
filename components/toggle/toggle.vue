@@ -14,7 +14,7 @@
       :id="id"
       :role="toggleRole"
       type="button"
-      :aria-checked="internalChecked.toString()"
+      :aria-checked="checked.toString()"
       :disabled="disabled"
       :aria-disabled="disabled.toString()"
       :class="toggleClasses"
@@ -140,7 +140,7 @@ export default {
     },
 
     isIndeterminate () {
-      return this.internalChecked === 'mixed';
+      return this.checked === 'mixed';
     },
 
     toggleRole () {
@@ -152,17 +152,11 @@ export default {
         'd-toggle',
         TOGGLE_SIZE_MODIFIERS[this.size],
         {
-          'd-toggle--checked': this.internalChecked === true,
+          'd-toggle--checked': this.checked === true,
           'd-toggle--disabled': this.disabled,
           'd-toggle--indeterminate': this.isIndeterminate,
         },
       ];
-    },
-  },
-
-  watch: {
-    checked (newChecked) {
-      this.internalChecked = newChecked;
     },
   },
 
@@ -172,8 +166,7 @@ export default {
 
   methods: {
     toggleCheckedValue () {
-      this.internalChecked = !this.internalChecked;
-      this.$emit('change', this.internalChecked);
+      this.$emit('change', !this.checked);
     },
 
     hasSlotLabel () {

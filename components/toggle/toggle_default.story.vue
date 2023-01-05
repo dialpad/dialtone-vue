@@ -1,12 +1,11 @@
 <template>
   <dt-toggle
-    :checked="$attrs.checked"
-    :disabled="$attrs.disabled"
-    :size="$attrs.size"
-    :show-icon="$attrs.showIcon"
-    :label-class="$attrs.labelClass"
-    :label-child-props="$attrs.labelChildProps"
-    @change="$attrs.onChange"
+    v-model="internalChecked"
+    :disabled="disabled"
+    :size="size"
+    :show-icon="showIcon"
+    :label-class="labelClass"
+    :label-child-props="labelChildProps"
   >
     <span
       v-if="defaultSlot"
@@ -21,5 +20,10 @@ import DtToggle from './toggle';
 export default {
   name: 'ToggleDefault',
   components: { DtToggle },
+  data () {
+    return {
+      internalChecked: this.checked,
+    };
+  },
 };
 </script>
