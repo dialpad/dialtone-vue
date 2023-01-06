@@ -8,9 +8,10 @@
       class="d-px8"
       data-qa="dt-pagination-prev"
       :aria-label="prevAriaLabel"
+      kind="muted"
       :importance="isFirstPage ? 'primary' : 'clear'"
       :disabled="isFirstPage"
-      :class="isFirstPage ? 'd-fc-black-300 h:d-fc-black-300 d-bgc-transparent' : ''"
+      :class="isFirstPage ? 'd-fc-black-300 h:d-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
       @click="changePage(currentPage - 1)"
     >
       <template #icon>
@@ -41,6 +42,7 @@
       <dt-button
         v-else
         :aria-label="pageNumberAriaLabel(page)"
+        :kind="currentPage === page ? 'default' : 'muted'"
         :importance="currentPage === page ? 'primary' : 'clear'"
         label-class=""
         @click="changePage(page)"
@@ -54,8 +56,9 @@
       data-qa="dt-pagination-next"
       :aria-label="nextAriaLabel"
       :disabled="isLastPage"
+      kind="muted"
       :importance="isLastPage ? 'primary' : 'clear'"
-      :class="isLastPage ? 'd-fc-black-300 h:d-fc-black-300 d-bgc-transparent' : ''"
+      :class="isLastPage ? 'd-fc-black-300 h:d-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
       @click="changePage(currentPage + 1)"
     >
       <template #icon>
