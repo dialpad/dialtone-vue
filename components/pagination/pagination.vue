@@ -3,6 +3,7 @@
     :aria-label="ariaLabel"
     class="d-d-flex d-fd-row d-gg4 d-ai-center"
   >
+    <!-- TODO: remove `h:d-fc-disabled` once DT-871 is completed -->
     <dt-button
       class="d-px8"
       data-qa="dt-pagination-prev"
@@ -47,6 +48,7 @@
         {{ page }}
       </dt-button>
     </div>
+    <!-- TODO: remove `h:d-fc-disabled` once DT-871 is completed -->
     <dt-button
       class="d-px8"
       data-qa="dt-pagination-next"
