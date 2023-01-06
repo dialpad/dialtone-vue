@@ -444,7 +444,6 @@ export default {
     },
 
     onKeyValidation (e, eventHandler) {
-      if (this.open !== null && !this.openOnContext) { return; }
       this[eventHandler](e);
     },
   },
