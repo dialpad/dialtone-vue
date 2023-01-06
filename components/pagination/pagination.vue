@@ -1,59 +1,65 @@
 <template>
   <nav
     :aria-label="ariaLabel"
-    class="d-d-flex d-fd-row d-gg2 d-ai-center"
+    class="d-d-flex d-fd-row d-gg4 d-ai-center"
   >
     <dt-button
-      class="d-h32 d-w32"
+      class="d-px8"
       data-qa="dt-pagination-prev"
       :aria-label="prevAriaLabel"
       :importance="isFirstPage ? 'primary' : 'clear'"
       :disabled="isFirstPage"
+      :class="isFirstPage ? 'd-bgc-transparent h:d-fc-disabled' : ''"
       @click="changePage(currentPage - 1)"
     >
       <template slot="icon">
         <dt-icon
           name="chevron-left"
-          size="200"
+          size="300"
         />
       </template>
     </dt-button>
     <div
       v-for="(page, index) in pages"
       :key="`page-${page}-${index}`"
+      :class="{ 'd-as-flex-end': isNaN(Number(page)) }"
     >
       <!-- eslint-disable vue/no-bare-strings-in-template -->
       <div
         v-if="isNaN(Number(page))"
+        class="d-fc-tertiary d-w24 d-ta-center"
         data-qa="dt-pagination-separator"
-        class="d-h32 d-w32 d-d-flex d-ai-center d-jc-center"
       >
-        …
+        <dt-icon
+          name="more-horizontal"
+          size="300"
+        />
+        <!-- … -->
       </div>
       <!-- eslint-enable vue/no-bare-strings-in-template -->
       <dt-button
         v-else
         :aria-label="pageNumberAriaLabel(page)"
         :importance="currentPage === page ? 'primary' : 'clear'"
-        class="d-h32 d-w32"
-        label-class="d-fs-200"
+        label-class=""
         @click="changePage(page)"
       >
         {{ page }}
       </dt-button>
     </div>
     <dt-button
-      class="d-h32 d-w32"
+      class="d-px8"
       data-qa="dt-pagination-next"
       :aria-label="nextAriaLabel"
       :disabled="isLastPage"
       :importance="isLastPage ? 'primary' : 'clear'"
+      :class="isLastPage ? 'd-bgc-transparent h:d-fc-disabled' : ''"
       @click="changePage(currentPage + 1)"
     >
       <template slot="icon">
         <dt-icon
           name="chevron-right"
-          size="200"
+          size="300"
         />
       </template>
     </dt-button>
