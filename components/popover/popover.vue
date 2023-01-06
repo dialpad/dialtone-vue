@@ -8,7 +8,7 @@
         class="d-modal--transparent"
         :aria-hidden="modal && isOpen ? 'false' : 'true'"
         @click.prevent.stop
-        @wheel="(e) => (isOpen && modal) && e.preventDefault()"
+        @wheel.prevent.stop
       />
     </Teleport>
     <component
