@@ -51,7 +51,7 @@
         :aria-modal="`${!modal}`"
         :transition="transition"
         :show="isOpen"
-        :appear="contentAppear"
+        :appear="toAppear"
         :class="['d-popover__dialog', { 'd-popover__dialog--modal': modal }, dialogClass]"
         :style="{
           'max-height': maxHeight,
@@ -273,7 +273,7 @@ export default {
      */
     contentAppear: {
       type: Boolean,
-      default: false,
+      default: null,
     },
 
     /**
@@ -507,6 +507,7 @@ export default {
       POPOVER_PADDING_CLASSES,
       POPOVER_HEADER_FOOTER_PADDING_CLASSES,
       isOpen: false,
+      toAppear: false,
       anchorEl: null,
       popoverContentEl: null,
     };
@@ -586,9 +587,20 @@ export default {
         if (open !== null) {
           this.isOpen = open;
         }
+        if (open === true) {
+          this.toAppear = true;
+        }
       },
 
       immediate: true,
+    },
+
+    contentAppear: {
+      handler: function (contentAppear) {
+        if (contentAppear !== null) {
+          this.toAppear = contentAppear;
+        }
+      },
     },
 
     isOpen (isOpen, isPrev) {
@@ -679,13 +691,13 @@ export default {
 
       // Only use default toggle behaviour if the user has not set the open prop.
       // Check that the anchor element specifically was clicked.
-      if (
-        (!this.open && !this.anchorEl.contains(e.target) && !this.anchorEl.isEqualNode(e.target)) ||
-          this.anchorEl?.disabled) {
-        return;
-      }
+      if (this.open === null || this.open === undefined) {
+        if ((!this.anchorEl.contains(e.target) && !this.anchorEl.isEqualNode(e.target)) || this.anchorEl?.disabled) {
+          return;
+        }
 
-      this.toggleOpen();
+        this.toggleOpen();
+      }
     },
 
     onContext (event) {
