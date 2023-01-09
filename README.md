@@ -69,7 +69,7 @@ Next read the more detailed contributor documentation in [CONTRIBUTING.md](.gith
 
 Dialtone Vue is a new project, and as such it is under constant development as we add new components and refine existing ones. Please refer to the [jira board][jira] to see what we are currently working on and what we have planned for the future.
 
-[jira]: https://switchcomm.atlassian.net/secure/RapidBoard.jspa?rapidView=246
+[jira]: https://dialpad.atlassian.net/browse/DT
 [request]: https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10901&pid=12428
 [report]: https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10878&pid=12428
 
