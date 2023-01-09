@@ -77,7 +77,7 @@ Dialtone Vue is a new project, and as such it is under constant development as w
 
 Requesting a feature or reporting a bug? Please do so at the below links:
 
-[Request Feature](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10901&pid=12428)
-[Report Bug](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10878&pid=12428)
+- [Request Feature](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10901&pid=12428)
+- [Report Bug](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10878&pid=12428)
 
 Please also feel free to contact us via the [#dialtone slack channel](https://dialpad.slack.com/messages/dialtone/) with any questions
