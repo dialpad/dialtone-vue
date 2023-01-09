@@ -847,11 +847,6 @@ export default {
         this.$refs.content.$el.focus();
       }
     },
-
-    handleWheel (e) {
-      e.preventDefault();
-      console.log(e);
-    },
   },
 };
 </script>
