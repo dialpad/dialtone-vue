@@ -37,7 +37,7 @@
       <dt-popover
         ref="popover"
         v-model:open="isListShown"
-        :hide-on-click="showList === null"
+        :hide-on-click="false"
         :max-height="maxHeight"
         :max-width="maxWidth"
         :offset="popoverOffset"
@@ -438,7 +438,10 @@ export default {
 
     onFocusOut (e) {
       // Check if the focus change was to another target within the combobox component
-      const isComboboxStillFocused = this.$refs?.combobox?.$el.contains(e.target);
+      const isComboboxStillFocused = Object.keys(this.$refs).some(refName => {
+        const ref = this.$refs[refName];
+        return ref.$el ? ref.$el.contains(e.target) : ref.contains(e.target);
+      });
       if (isComboboxStillFocused) return;
 
       // If outside the combobox then close
