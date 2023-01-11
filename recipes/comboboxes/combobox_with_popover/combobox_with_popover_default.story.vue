@@ -36,7 +36,7 @@
     <template #list="{ listProps }">
       <ul
         v-bind="listProps"
-        class="d-p0"
+        class="d-p4"
       >
         <dt-list-item
           v-for="(item, i) in items"
