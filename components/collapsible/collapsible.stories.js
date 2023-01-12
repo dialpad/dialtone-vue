@@ -9,7 +9,6 @@ const argTypesData = {
   // Slots
   anchor: {
     control: 'text',
-    defaultValue: 'Click me to toggle Content',
     table: {
       type: {
         summary: 'VNode',
@@ -28,7 +27,7 @@ const argTypesData = {
   // Props
   anchorText: {
     description: 'Text on the anchor if slot is unused.',
-    defaultValue: null,
+    defaultValue: 'Click me to toggle Content',
     table: {
       type: { summary: 'string' },
     },
