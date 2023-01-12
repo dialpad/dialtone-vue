@@ -236,10 +236,6 @@ export default {
     },
   },
 
-  created () {
-    this.validateProperAnchor();
-  },
-
   mounted () {
     this.validateProperAnchor();
   },
