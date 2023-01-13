@@ -40,6 +40,19 @@ Before submitting a pull request, make sure to communicate what you wish to chan
 
 The Dialtone library exists to serve multiple teams, so it is important to ensure that your PR does not introduce any unnecessary breaking changes. Breaking changes will require extra steps that may prolong the submission review process. If breaking changes are absolutely necessary for your use case, then you must communicate them to the Dialtone team in advance to allow for a smooth migration strategy for all dependant projects.
 
+Examples of breaking include the following:
+
+- **Changing the component API**: renaming or removing props and emits, or changing their expected types
+- **Removing or altering features**: changing a component's existing expected behaviour or output. For example, changing or removing a component's animation style, or updating a component's sorting algorithm for its child items, etc.
+
+Examples of non-breaking changes:
+
+- **Augmenting an existing component's feature set**: for example, adding a new prop to a component that triggers a different flow of behaviour or output, or adding a new emit event to detect specific changes.
+- **Refactoring**: updating a component to use a different util or library (without causing any outward changes).
+- **Accessibility**: updating a component to be more in line with our accessibility guidelines, without changing any external behaviour
+
+Some changes can unintentionally cause breaking changes, like when integrating a new NPM library or using a new util. This is why it is important to evaluate the change carefully and asses its impact on existing usage.
+
 Any new components or updates to existing components require the following:
 
 - Unit tests covering the entire change.
