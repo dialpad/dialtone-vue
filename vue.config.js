@@ -30,7 +30,8 @@ function enableShadowCss (config) {
     config.module.rule('stylus').oneOf('normal').use('vue-style-loader'),
   ];
   configs.forEach(c => c.tap(options => {
-    options.shadowMode = true;
+    // disable shadowMode for test environment.
+    options.shadowMode = process.env.NODE_ENV !== 'test';
     return options;
   }));
 }
