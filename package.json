@@ -45,7 +45,9 @@
   ],
   "files": [
     "dist/*.js",
-    "dist/component-documentation.json"
+    "dist/component-documentation.json",
+    "CHANGELOG.md",
+    "CHANGELOG.json"
   ],
   "repository": "git@github.com:dialpad/dialtone-vue.git",
   "scripts": {
