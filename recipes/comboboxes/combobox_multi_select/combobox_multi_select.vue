@@ -115,7 +115,7 @@ import DtInput from '@/components/input/input';
 import DtChip from '@/components/chip/chip';
 import DtValidationMessages from '@/components/validation_messages/validation_messages';
 import { validationMessageValidator } from '@/common/validators';
-import { MULTI_SELECT_SIZES } from './combobox_multi_select_story_constants';
+import { MULTI_SELECT_SIZES, INPUT_PADDINGS } from './combobox_multi_select_story_constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
@@ -390,7 +390,8 @@ export default {
     this.resizeWindowObserver = new ResizeObserver(() => {
       this.setChipsTopPosition();
       this.setInputPadding();
-    }).observe(document.body);
+    });
+    this.resizeWindowObserver.observe(document.body);
   },
 
   beforeUnmount () {
@@ -523,7 +524,7 @@ export default {
       input.style.paddingLeft = left + 'px';
 
       // Chip has vertical margin. We add buffer to top center the input text
-      const top = lastChip.offsetTop + 3;
+      const top = lastChip.offsetTop + INPUT_PADDINGS[this.size];
       input.style.paddingTop = top + 'px';
 
       // TODO: refresh the tippy.js instance in the popover

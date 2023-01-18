@@ -30,3 +30,9 @@ export const MULTI_SELECT_SIZES = {
   SMALL: 'sm',
   DEFAULT: 'md',
 };
+
+export const INPUT_PADDINGS = {
+  xs: 4,
+  sm: 6,
+  md: 7,
+};
