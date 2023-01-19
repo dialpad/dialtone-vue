@@ -698,6 +698,11 @@ export default {
     **/
     preventScrolling (e) {
       if (!this.modal) return;
+      const isEventComingWithinPopover = Object.keys(this.$refs).some(refName => {
+        const ref = this.$refs[refName];
+        return ref.$el ? ref.$el.contains(e.target) : ref.contains(e.target);
+      });
+      if (isEventComingWithinPopover) return;
       e.preventDefault();
     },
 
@@ -832,7 +837,6 @@ export default {
       this.addEventListeners();
     },
   },
-
 };
 </script>
 
