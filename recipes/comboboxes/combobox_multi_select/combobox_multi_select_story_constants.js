@@ -31,8 +31,14 @@ export const MULTI_SELECT_SIZES = {
   DEFAULT: 'md',
 };
 
-export const INPUT_PADDINGS = {
+export const CHIP_SIZES = {
+  xs: 'xs',
+  sm: 'xs',
+  md: 'sm',
+};
+
+export const CHIP_BOTTOM_POSITION = {
   xs: 4,
-  sm: 6,
-  md: 7,
+  sm: 5,
+  md: 5,
 };
