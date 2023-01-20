@@ -718,12 +718,7 @@ export default {
     * Prevents scrolling only when the popover is set to modal
     **/
     preventScrolling (e) {
-      if (!this.modal) return;
-      const isEventComingWithinPopover = Object.keys(this.$refs).some(refName => {
-        const ref = this.$refs[refName];
-        return ref.$el ? ref.$el.contains(e.target) : ref.contains(e.target);
-      });
-      if (isEventComingWithinPopover) return;
+      if (!this.modal || this.$refs.content.$el.contains(e.target)) return;
       e.preventDefault();
     },
 
