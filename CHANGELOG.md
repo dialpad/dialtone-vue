@@ -1,3 +1,75 @@
+## [2.53.1](https://github.com/dialpad/dialtone-vue/compare/v2.53.0...v2.53.1) (2023-01-20)
+
+
+### Bug Fixes
+
+* **Popover:** blocking wheel event ([#708](https://github.com/dialpad/dialtone-vue/issues/708)) ([0a7f3db](https://github.com/dialpad/dialtone-vue/commit/0a7f3dbd5f298e3f130474c38ed2d2442753c9f9))
+
+# [2.53.0](https://github.com/dialpad/dialtone-vue/compare/v2.52.0...v2.53.0) (2023-01-17)
+
+
+### Features
+
+* include CHANGELOG files in the package ([#704](https://github.com/dialpad/dialtone-vue/issues/704)) ([639dd92](https://github.com/dialpad/dialtone-vue/commit/639dd92cac24d1944be19f9c68d6c4f855cba980))
+
+# [2.52.0](https://github.com/dialpad/dialtone-vue/compare/v2.51.0...v2.52.0) (2023-01-16)
+
+
+### Features
+
+* revert enable shadowMode due to error ([e622436](https://github.com/dialpad/dialtone-vue/commit/e62243660921a933390c07a24e0a4a3ef0e9ddf7))
+
+# [2.51.0](https://github.com/dialpad/dialtone-vue/compare/v2.50.0...v2.51.0) (2023-01-16)
+
+
+### Bug Fixes
+
+* **Callbar:** style update to dt7 ([#700](https://github.com/dialpad/dialtone-vue/issues/700)) ([f3c1bcc](https://github.com/dialpad/dialtone-vue/commit/f3c1bcc4b671ed6f3bf3442a4079ad795682b8f7))
+
+
+### Features
+
+* enable shadowMode ([#702](https://github.com/dialpad/dialtone-vue/issues/702)) ([5829d9b](https://github.com/dialpad/dialtone-vue/commit/5829d9b1323de0262e263386259d1a31cedf5714))
+
+# [2.50.0](https://github.com/dialpad/dialtone-vue/compare/v2.49.1...v2.50.0) (2023-01-12)
+
+
+### Bug Fixes
+
+* **Collapsible:** fix validation of anchor-related prop and slot ([#697](https://github.com/dialpad/dialtone-vue/issues/697)) ([9384b0d](https://github.com/dialpad/dialtone-vue/commit/9384b0d79dbeebb0fd9c96f2c8bf3fec1cea309c))
+
+
+### Features
+
+* **Combobox, Dropdown:** dt7 style update ([#694](https://github.com/dialpad/dialtone-vue/issues/694)) ([eb4aa4f](https://github.com/dialpad/dialtone-vue/commit/eb4aa4f07950c4bc97a49cdeb2fc1d8da3b9d835))
+* **Toggle:** add toggleOnClick prop ([#698](https://github.com/dialpad/dialtone-vue/issues/698)) ([433c25e](https://github.com/dialpad/dialtone-vue/commit/433c25ef71f1e3a2398b4ed640b5edabf115caab))
+
+## [2.49.1](https://github.com/dialpad/dialtone-vue/compare/v2.49.0...v2.49.1) (2023-01-11)
+
+# [2.49.0](https://github.com/dialpad/dialtone-vue/compare/v2.48.0...v2.49.0) (2023-01-10)
+
+
+### Bug Fixes
+
+* **Popover:** refactor wheel event ([#688](https://github.com/dialpad/dialtone-vue/issues/688)) ([8af2967](https://github.com/dialpad/dialtone-vue/commit/8af2967d71b47eeb5ecf0106d1ccb3bd8f5529c7))
+
+
+### Features
+
+* **Pagination:** update style  ([#677](https://github.com/dialpad/dialtone-vue/issues/677)) ([7b08ee9](https://github.com/dialpad/dialtone-vue/commit/7b08ee9c3c19485500a690ce5e79875c2cfcd9fd))
+
+# [2.48.0](https://github.com/dialpad/dialtone-vue/compare/v2.47.0...v2.48.0) (2023-01-09)
+
+
+### Bug Fixes
+
+* **Popover:** blocking wheel event ([#683](https://github.com/dialpad/dialtone-vue/issues/683)) ([d5672ef](https://github.com/dialpad/dialtone-vue/commit/d5672ef6923e69a6647e3c0cb2e87a75bee65851))
+
+
+### Features
+
+* **Dropdown:** update style ([#673](https://github.com/dialpad/dialtone-vue/issues/673)) ([19fd004](https://github.com/dialpad/dialtone-vue/commit/19fd00417e1e40b9b7c7969c41648008e10dd435))
+
 # [2.47.0](https://github.com/dialpad/dialtone-vue/compare/v2.46.1...v2.47.0) (2022-12-24)
 
 
