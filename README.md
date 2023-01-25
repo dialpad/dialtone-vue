@@ -11,12 +11,6 @@ Dialtone Vue is available in Vue 2 as well as Vue 3:
 [dialtone-vue]: https://vue.dialpad.design
 [dialtone-vue3]: https://vue.dialpad.design/vue3
 
-## Project Status
-
-Dialtone Vue is a new project, and as such it is under constant development as we add new components and refine existing ones. Please refer to the [jira board][jira] to see the status of Dialtone Vue components and request new components that should be in the Dialtone Vue library.
-
-[jira]: https://switchcomm.atlassian.net/secure/RapidBoard.jspa?rapidView=246
-
 ## Installation
 
 You can install the Dialtone Vue library into your project via the following commands:
@@ -30,6 +24,12 @@ Dialtone Vue components can be imported directly from the package. Some componen
 
 ```js
 import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
+```
+
+If you are using the Vue 3 version of Dialtone, you must also import the css:
+
+```js
+import '@dialpad/dialtone-vue/css';
 ```
 
 Projects using Dialtone Vue should be aware of the requirements:
@@ -53,14 +53,18 @@ setEmojiAssetUrlSmall('https://my.example.website.com/joypixels/svg/unicode/32/'
 setEmojiAssetUrlLarge('https://my.example.website.com/joypixels/svg/unicode/', '.svg')
 ```
 
+If you are using the Vue 3 version of Dialtone emoji, you must import the css:
+
+```js
+import '@dialpad/dialtone-vue/emoji/css';
+```
+
 You may access the emoji.json data for all emojis Dialtone Vue supports via executing the following function
 
 ```js
 import { getEmojiData } from '@dialpad/dialtone-vue/emoji'
 const emojiData = getEmojiData();
 ```
-
-
 
 ## Contributing
 
@@ -72,3 +76,20 @@ If you would like to contribute to Dialtone Vue the first step is to get the pro
 4. Visit local dev server at http://localhost:9011/
 
 Next read the more detailed contributor documentation in [CONTRIBUTING.md](.github/CONTRIBUTING.md).
+
+## Project Status
+
+Dialtone Vue is a new project, and as such it is under constant development as we add new components and refine existing ones. Please refer to the [jira board][jira] to see what we are currently working on and what we have planned for the future.
+
+[jira]: https://dialpad.atlassian.net/browse/DT
+[request]: https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10901&pid=12428
+[report]: https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10878&pid=12428
+
+## Requesting features / reporting bugs
+
+Requesting a feature or reporting a bug? Please do so at the below links:
+
+- [Request Feature](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10901&pid=12428)
+- [Report Bug](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10878&pid=12428)
+
+Please also feel free to contact us via the [#dialtone slack channel](https://dialpad.slack.com/messages/dialtone/) with any questions

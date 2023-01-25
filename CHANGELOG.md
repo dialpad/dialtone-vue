@@ -1,3 +1,78 @@
+# [3.40.0](https://github.com/dialpad/dialtone-vue/compare/v3.39.0...v3.40.0) (2023-01-24)
+
+
+### Features
+
+* **Semantic Release:** add vue3 releases to GitHub releases ([#712](https://github.com/dialpad/dialtone-vue/issues/712)) ([56d5d88](https://github.com/dialpad/dialtone-vue/commit/56d5d88420cb01da45631b028f0dc356c1297b2d))
+
+# [3.39.0](https://github.com/dialpad/dialtone-vue/compare/v3.38.0...v3.39.0) (2023-01-23)
+
+
+### Bug Fixes
+
+* **Combobox:** chips vertical alignment - vue 3 ([#707](https://github.com/dialpad/dialtone-vue/issues/707)) ([8f52e24](https://github.com/dialpad/dialtone-vue/commit/8f52e2429fec0a7833f81414e19bfe20fb1c0ef7))
+* **Popover:** blocking wheel event - vue 3 ([#709](https://github.com/dialpad/dialtone-vue/issues/709)) ([ddba8a8](https://github.com/dialpad/dialtone-vue/commit/ddba8a8630fafec1308e5520abdc59cba69af3d4))
+* **Root Layout:** detect empty slot ([#710](https://github.com/dialpad/dialtone-vue/issues/710)) ([6a8b831](https://github.com/dialpad/dialtone-vue/commit/6a8b83109592a4997fe4f724f48013e0f8f5c342))
+
+
+### Features
+
+* css as separate file ([#711](https://github.com/dialpad/dialtone-vue/issues/711)) ([1171f35](https://github.com/dialpad/dialtone-vue/commit/1171f350f7e92d769687b83e70c4baafe746feb7))
+
+# [3.38.0](https://github.com/dialpad/dialtone-vue/compare/v3.37.0...v3.38.0) (2023-01-17)
+
+
+### Features
+
+* include CHANGELOG files in the package ([#705](https://github.com/dialpad/dialtone-vue/issues/705)) ([8849584](https://github.com/dialpad/dialtone-vue/commit/884958408f2a6fa2148109337c86206dae7a125f))
+
+# [3.37.0](https://github.com/dialpad/dialtone-vue/compare/v3.36.0...v3.37.0) (2023-01-16)
+
+
+### Bug Fixes
+
+* **Callbar:** style update to dt7 vue3 ([#701](https://github.com/dialpad/dialtone-vue/issues/701)) ([80be6c8](https://github.com/dialpad/dialtone-vue/commit/80be6c80576e82a6eb4a99812aa45c5ba461c2e3))
+
+
+### Features
+
+* enable shadowMode ([#703](https://github.com/dialpad/dialtone-vue/issues/703)) ([3e226ba](https://github.com/dialpad/dialtone-vue/commit/3e226ba2b4b36561e70be9048d9f75d8262580ca))
+
+# [3.36.0](https://github.com/dialpad/dialtone-vue/compare/v3.35.1...v3.36.0) (2023-01-12)
+
+
+### Features
+
+* **Combobox, Dropdown:** dt7 style update vue3 ([#695](https://github.com/dialpad/dialtone-vue/issues/695)) ([717abc8](https://github.com/dialpad/dialtone-vue/commit/717abc8547db22e77bf726809ac8ee64640a5ed5))
+* **Toggle:** add toggleOnClick prop ([#699](https://github.com/dialpad/dialtone-vue/issues/699)) ([096fcc1](https://github.com/dialpad/dialtone-vue/commit/096fcc14b7a98734e3955478c943d77bd460f464))
+
+## [3.35.1](https://github.com/dialpad/dialtone-vue/compare/v3.35.0...v3.35.1) (2023-01-11)
+
+# [3.35.0](https://github.com/dialpad/dialtone-vue/compare/v3.34.0...v3.35.0) (2023-01-10)
+
+
+### Bug Fixes
+
+* **Popover:** refactor wheel event ([#689](https://github.com/dialpad/dialtone-vue/issues/689)) ([547ec09](https://github.com/dialpad/dialtone-vue/commit/547ec0992278654f20a460e45572772332c62f1a))
+
+
+### Features
+
+* **Pagination:** update style vue3 ([#687](https://github.com/dialpad/dialtone-vue/issues/687)) ([0ea1da8](https://github.com/dialpad/dialtone-vue/commit/0ea1da86273bc368f5643d8d9cc1293ee0ef7fa2))
+
+# [3.34.0](https://github.com/dialpad/dialtone-vue/compare/v3.33.0...v3.34.0) (2023-01-09)
+
+
+### Bug Fixes
+
+* **Popover:** blocking wheel event vue3 ([#685](https://github.com/dialpad/dialtone-vue/issues/685)) ([5a46eea](https://github.com/dialpad/dialtone-vue/commit/5a46eea956ed5df283ebaca7cd1d52ced1f37749))
+
+
+### Features
+
+* **Dropdown:** update style vue3 ([#675](https://github.com/dialpad/dialtone-vue/issues/675)) ([92e469e](https://github.com/dialpad/dialtone-vue/commit/92e469e6898f6f71a9a39a20741e42d4f1cf83dc))
+* **Tooltip:** add contentAppear prop ([#676](https://github.com/dialpad/dialtone-vue/issues/676)) ([031f54c](https://github.com/dialpad/dialtone-vue/commit/031f54c70bb01daeb8fa1c522fb5fd86e82acd02))
+
 # [3.33.0](https://github.com/dialpad/dialtone-vue/compare/v3.32.0...v3.33.0) (2022-12-24)
 
 

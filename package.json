@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "3.33.0",
+  "version": "3.40.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "keywords": [
     "Dialpad",
@@ -36,11 +36,19 @@
       "name": "Jose Silva",
       "email": "jose.silva@dialpad.com",
       "url": "https://github.com/josedialpad"
+    },
+    {
+      "name": "Ignacio Ropolo",
+      "email": "ignacio.ropolo@dialpad.com",
+      "url": "https://github.com/iropolo"
     }
   ],
   "files": [
     "dist/*.js",
-    "dist/component-documentation.json"
+    "dist/*.css",
+    "dist/component-documentation.json",
+    "CHANGELOG.md",
+    "CHANGELOG.json"
   ],
   "repository": "git@github.com:dialpad/dialtone-vue.git",
   "scripts": {
@@ -70,7 +78,9 @@
   },
   "exports": {
     ".": "./dist/dialtone-vue.common.js",
-    "./emoji": "./dist/emoji.common.js"
+    "./emoji": "./dist/emoji.common.js",
+    "./css": "./dist/dialtone-vue.css",
+    "./emoji/css": "./dist/emoji.css"
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
@@ -90,7 +100,8 @@
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
     "@dialpad/conventional-changelog-angular": "^1.0.0",
-    "@dialpad/dialtone": "^7.11.2",
+    "@dialpad/dialtone": "^7.14",
+    "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@percy/cli": "1.16.0",
     "@percy/storybook": "4.3.4",
     "@semantic-release/changelog": "^6.0.2",
@@ -130,7 +141,7 @@
     "yo": "^4.3.1"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=7.11",
+    "@dialpad/dialtone": ">=7.14",
     "vue": ">=3.2"
   },
   "engineStrict": true,
