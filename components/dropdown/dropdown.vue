@@ -265,13 +265,13 @@ export default {
           switch (eventCode) {
             case EVENT_KEYNAMES.up:
             case EVENT_KEYNAMES.arrowup:
-              this.onKeyValidation(event, 'onUpKeyPress');
+              this.onUpKeyPress(event);
               event.stopPropagation();
               event.preventDefault();
               break;
             case EVENT_KEYNAMES.down:
             case EVENT_KEYNAMES.arrowdown:
-              this.onKeyValidation(event, 'onDownKeyPress');
+              this.onDownKeyPress(event);
               event.stopPropagation();
               event.preventDefault();
               break;
@@ -283,17 +283,17 @@ export default {
               this.onEnterKey();
               break;
             case EVENT_KEYNAMES.home:
-              this.onKeyValidation(event, 'onHomeKeyPress');
+              this.onHomeKeyPress(event);
               event.stopPropagation();
               event.preventDefault();
               break;
             case EVENT_KEYNAMES.end:
-              this.onKeyValidation(event, 'onEndKeyPress');
+              this.onEndKeyPress(event);
               event.stopPropagation();
               event.preventDefault();
               break;
             default:
-              this.onKeyValidation(event, 'onKeyPress');
+              this.onKeyPress(event);
               break;
           }
 
@@ -328,6 +328,10 @@ export default {
         this.listClass,
         { 'd-context-menu-list': this.openOnContext },
       ];
+    },
+
+    shouldOpenWithArrowKeys () {
+      return !this.openOnContext;
     },
   },
 
@@ -429,10 +433,6 @@ export default {
       e.preventDefault();
 
       return this.onNavigationKey(e.key);
-    },
-
-    shouldOpenWithArrowKeys () {
-      return !this.openOnContext;
     },
   },
 };
