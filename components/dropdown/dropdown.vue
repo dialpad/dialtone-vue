@@ -11,7 +11,7 @@
     :modal="modal"
     :max-height="maxHeight"
     :max-width="maxWidth"
-    :open-with-arrow-keys="true"
+    :open-with-arrow-keys="shouldOpenWithArrowKeys"
     :open-on-context="openOnContext"
     v-on="dropdownListeners"
   >
@@ -431,10 +431,8 @@ export default {
       return this.onNavigationKey(e.key);
     },
 
-    onKeyValidation (e, eventHandler) {
-      if (this.open !== null && !this.openOnContext && !this.isOpen) { return; }
-
-      this[eventHandler](e);
+    shouldOpenWithArrowKeys () {
+      return !this.openOnContext;
     },
   },
 };
