@@ -1,7 +1,9 @@
 <template>
   <div data-qa="dt-tooltip-container">
-    <div
+    <a
       ref="anchor"
+      type="button"
+      tabindex="0"
       data-qa="dt-tooltip-anchor"
       @focusin="onEnterAnchor"
       @focusout="onLeaveAnchor"
@@ -13,7 +15,7 @@
       <slot
         name="anchor"
       />
-    </div>
+    </a>
     <dt-lazy-show
       :id="id"
       ref="content"
@@ -227,11 +229,11 @@ export default {
   computed: {
     tooltipListeners () {
       return {
-        'after-leave': event => {
+        'after-leave': () => {
           this.onLeaveTransitionComplete();
         },
 
-        'after-enter': event => {
+        'after-enter': () => {
           this.onEnterTransitionComplete();
         },
       };
@@ -271,7 +273,7 @@ export default {
       immediate: true,
     },
 
-    isShown (isShown, isPrev) {
+    isShown (isShown) {
       if (isShown) {
         this.setProps();
         this.tip.show();
@@ -334,7 +336,7 @@ export default {
       }
     },
 
-    onLeaveAnchor (e) {
+    onLeaveAnchor () {
       if (this.show === null) this.isShown = false;
     },
 
