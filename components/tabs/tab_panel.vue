@@ -81,7 +81,31 @@ export default {
   },
 
   async mounted () {
-    this.isFirstElementFocusable = !!(await this.getFirstFocusableElement(this.$el));
+    const firstFocusableElement = await this.getFirstFocusableElement(this.$el);
+
+    if (!firstFocusableElement) {
+      this.isFirstElementFocusable = false;
+    } else {
+      // If the first focusable element isn't the first element, then we need to set the panel tabindex to 0
+      this.isFirstElementFocusable = this.isFirstElementOfPanel(firstFocusableElement);
+    }
+  },
+
+  methods: {
+    isFirstElementOfPanel (element) {
+      let current = element;
+      let isFirstElement = false;
+
+      while (current) {
+        if (current.previousElementSibling === null && current.parentNode === this.$el) {
+          isFirstElement = true;
+          break;
+        }
+        current = current.previousElementSibling;
+      }
+
+      return isFirstElement;
+    },
   },
 };
 </script>
