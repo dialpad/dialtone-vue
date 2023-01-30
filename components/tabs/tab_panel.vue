@@ -85,7 +85,9 @@ export default {
     if (!firstFocusableElement) {
       this.isFirstElementFocusable = false;
     } else {
-      // If the first focusable element isn't the first element, then we need to set the panel tabindex to 0
+      // If the first focusable element isn't the first element in the panel,
+      // then we need to set the panel tabindex to 0.
+      // See notes in https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/
       this.isFirstElementFocusable = this.isFirstElementOfPanel(firstFocusableElement);
     }
   },
@@ -93,14 +95,14 @@ export default {
   methods: {
     isFirstElementOfPanel (element) {
       let current = element;
-      let isFirstElement = false;
+      let isFirstElement = true;
 
       while (current) {
-        if (current.previousElementSibling === null && current.parentNode === this.$el) {
-          isFirstElement = true;
+        if (current.previousElementSibling !== null) {
+          isFirstElement = false;
           break;
         }
-        current = current.previousElementSibling;
+        current = current.parentNode !== this.$el ? current.parentNode : null;
       }
 
       return isFirstElement;
