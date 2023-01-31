@@ -73,7 +73,7 @@ export default {
      align-items: baseline;
      justify-content: flex-end;
      gap: var(--size-300);
-     margin: var(--space-300) var(--su12) var(--space-300) 0;
+     margin: var(--space-300) var(--space-500) var(--space-300) 0;
      min-width: 20%;
   }
 }
