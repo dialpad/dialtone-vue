@@ -71,7 +71,7 @@
     >
       <template slot="left">
         <span class="d-fw-bold">Joseph Lumaban</span>
-        <div class="d-fc-critical d-fw-semibold">
+        <div class="d-fc-red-400 d-fw-semibold">
           On hold
           <span class="d-fw-normal">00:08</span>
         </div>
@@ -104,6 +104,7 @@
         <dt-button
           importance="clear"
           kind="danger"
+          class="d-fc-red-400"
         >
           <template slot="icon">
             <dt-icon
