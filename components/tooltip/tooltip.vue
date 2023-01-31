@@ -2,8 +2,7 @@
   <div data-qa="dt-tooltip-container">
     <a
       ref="anchor"
-      type="button"
-      tabindex="0"
+      role="presentation"
       data-qa="dt-tooltip-anchor"
       @focusin="onEnterAnchor"
       @focusout="onLeaveAnchor"
