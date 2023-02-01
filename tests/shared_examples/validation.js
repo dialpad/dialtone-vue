@@ -14,9 +14,9 @@ export const cleanSpy = () => {
 };
 
 export function itBehavesLikePassesCustomPropValidation (prop, value) {
-  // it('passes custom prop validation', function () {
-  //   assert.strictEqual(prop.validator(value), true);
-  // });
+  it('passes custom prop validation', function () {
+    assert.strictEqual(prop.validator(value), true);
+  });
 }
 
 export function itBehavesLikeFailsCustomPropValidation (prop, value) {
