@@ -15,7 +15,7 @@
     <main
       v-if="hasSlotContent($slots.content)"
       :class="['root-layout__content', contentClass]"
-      :style="{ 'min-inline-size': contentWrapWidthPercent }"
+      :style="{ 'min-inline-size': contentWrapWidthPercent, 'height': fixed ? mainHeight : null }"
       data-qa="root-layout-content"
     >
       <!-- @slot Slot for the main content -->
@@ -83,6 +83,21 @@ export default {
       type: String,
       default: undefined,
     },
+
+    headerHeight: {
+      type: String,
+      default: undefined,
+    },
+
+    footerHeight: {
+      type: String,
+      default: undefined,
+    },
+
+    fixed: {
+      type: Boolean,
+      default: undefined,
+    },
   },
 
   data () {
@@ -99,6 +114,10 @@ export default {
           'root-layout__body--invert': this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT,
         },
       ];
+    },
+
+    mainHeight () {
+      return `calc(100vh - (${this.headerHeight} + ${this.footerHeight}))`;
     },
   },
 };
@@ -122,5 +141,6 @@ export default {
 .root-layout__content {
   flex-basis: 0;
   flex-grow: 999;
+  overflow-y: auto;
 }
 </style>

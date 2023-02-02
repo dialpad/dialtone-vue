@@ -106,6 +106,7 @@ export default {
     options: {
       showPanel: true,
     },
+    layout: 'fullscreen',
   },
 };
 
