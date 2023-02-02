@@ -15,7 +15,7 @@
     <main
       v-if="$slots.content"
       :class="['root-layout__content', contentClass]"
-      :style="{ 'min-inline-size': contentWrapWidthPercent, 'height': fixed ? mainHeight : null }"
+      :style="{ 'min-inline-size': contentWrapWidthPercent, 'height': mainHeight }"
       data-qa="root-layout-content"
     >
       <!-- @slot Slot for the main content -->
@@ -108,7 +108,10 @@ export default {
     },
 
     mainHeight () {
-      return `calc(100vh - (${this.headerHeight} + ${this.footerHeight}))`;
+      if (this.fixed) {
+        return `calc(100vh - (${this.headerHeight} + ${this.footerHeight}))`;
+      }
+      return null;
     },
   },
 };
