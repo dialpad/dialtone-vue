@@ -108,6 +108,7 @@ export default {
       hasSlotContent,
       sidebarTop: null,
       contentTop: null,
+      documentHeight: null,
     };
   },
 
@@ -123,7 +124,8 @@ export default {
 
     mainHeight () {
       if (this.fixed) {
-        return `calc(100vh - (${this.headerHeight} + ${this.extraSidebarHeight} + ${this.footerHeight}))`;
+        return `calc(${this.documentHeight}
+          - (${this.headerHeight} + ${this.extraSidebarHeight} + ${this.footerHeight}))`;
       }
       return null;
     },
@@ -140,6 +142,7 @@ export default {
 
   mounted () {
     window.addEventListener('resize', this.onResize);
+    this.getDocumentHeight();
     this.getElementTops();
   },
 
@@ -149,12 +152,17 @@ export default {
 
   methods: {
     onResize () {
+      this.getDocumentHeight();
       this.getElementTops();
     },
 
     getElementTops () {
       this.sidebarTop = this.$refs['root-layout-sidebar'].offsetTop;
       this.contentTop = this.$refs['root-layout-content'].offsetTop;
+    },
+
+    getDocumentHeight () {
+      this.documentHeight = window.innerHeight + 'px';
     },
   },
 };
