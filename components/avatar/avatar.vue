@@ -3,7 +3,6 @@
     :id="id"
     :class="[
       'd-avatar',
-      AVATAR_KIND_MODIFIERS[kind],
       AVATAR_SIZE_MODIFIERS[size],
       avatarClass,
       gradient ? null : 'd-avatar--no-gradient',
@@ -11,11 +10,15 @@
     :style="initialKindStyle"
     data-qa="dt-avatar"
   >
-    <div class="d-avatar__canvas">
+    <div
+      ref="canvas"
+      class="d-avatar__canvas"
+    >
       <!-- @slot Slot for avatar content -->
       <slot v-if="showDefaultSlot" />
       <span
         v-else-if="showInitials"
+        class="d-avatar__initials"
       >
         {{ formattedInitials }}
       </span>
@@ -39,7 +42,6 @@ import Vue from 'vue';
 import { DtPresence } from '../presence';
 import seedrandom from 'seedrandom';
 import {
-  AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
   AVATAR_PRESENCE_SIZE_MODIFIERS,
   AVATAR_ANGLES,
@@ -134,7 +136,6 @@ export default {
       // initials, image or icon
       kind: 'image',
       AVATAR_SIZE_MODIFIERS,
-      AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
       imageLoadedSuccessfully: null,
       slottedInitials: '',
@@ -175,7 +176,7 @@ export default {
 
   methods: {
     init () {
-      const firstChild = this.$el.firstChild;
+      const firstChild = this.$refs.canvas.firstChild;
 
       if (firstChild) {
         this.setKind(firstChild);
@@ -193,6 +194,10 @@ export default {
             firstChild.classList.add('d-avatar--image-loaded');
             this.imageLoadedSuccessfully = true;
           });
+        }
+
+        if (this.kind === 'icon') {
+          firstChild.classList.add('d-avatar__icon');
         }
 
         if (this.kind === 'initials') {
