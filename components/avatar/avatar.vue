@@ -6,6 +6,7 @@
       AVATAR_SIZE_MODIFIERS[size],
       avatarClass,
       gradient ? null : 'd-avatar--no-gradient',
+      showGroup ? 'd-avatar--group' : null,
     ]"
     :style="initialKindStyle"
     data-qa="dt-avatar"
@@ -23,6 +24,10 @@
         {{ formattedInitials }}
       </span>
     </div>
+    <span
+      v-if="showGroup"
+      class="d-avatar__count"
+    >{{ group }}</span>
     <dt-presence
       v-if="presence"
       :presence="presence"
@@ -48,6 +53,7 @@ import {
   GRADIENT_COLORS,
   MAX_GRADIENT_COLORS,
   MAX_GRADIENT_COLORS_100,
+  AVATAR_GROUP_VALIDATOR,
 } from './avatar_constants.js';
 
 /**
@@ -129,6 +135,17 @@ export default {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * Determines whether to show a group avatar.
+     * Limit to 2 digits max, though supports “99+”.
+     * if the number is 1 or less it would just show the regular avatar as if group had not been set.
+     */
+    group: {
+      type: [Number, String],
+      default: undefined,
+      validator: (group) => AVATAR_GROUP_VALIDATOR(group),
+    },
   },
 
   data () {
@@ -150,6 +167,10 @@ export default {
 
     showInitials () {
       return this.kind === 'initials' || this.initials;
+    },
+
+    showGroup () {
+      return AVATAR_GROUP_VALIDATOR(this.group);
     },
 
     initialKindStyle () {

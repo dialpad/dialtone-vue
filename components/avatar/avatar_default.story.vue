@@ -6,6 +6,7 @@
     :initials="initials"
     :seed="seed"
     :gradient="gradient"
+    :group="group"
   >
     <html-fragment
       :html="defaultSlot"
