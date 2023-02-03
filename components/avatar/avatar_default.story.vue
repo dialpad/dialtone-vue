@@ -5,6 +5,7 @@
     :presence="$attrs.presence"
     :initials="$attrs.initials"
     :seed="$attrs.seed"
+    :gradient="$attrs.gradient"
   >
     <v-html :html="defaultSlot" />
   </dt-avatar>

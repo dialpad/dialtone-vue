@@ -6,15 +6,20 @@
       AVATAR_KIND_MODIFIERS[kind],
       AVATAR_SIZE_MODIFIERS[size],
       avatarClass,
+      gradient ? null : 'd-avatar--no-gradient',
     ]"
     :style="initialKindStyle"
     data-qa="dt-avatar"
   >
-    <!-- @slot Slot for avatar content -->
-    <slot v-if="showDefaultSlot" />
-    <span v-else-if="showInitials">
-      {{ formattedInitials }}
-    </span>
+    <div class="d-avatar__canvas">
+      <!-- @slot Slot for avatar content -->
+      <slot v-if="showDefaultSlot" />
+      <span
+        v-else-if="showInitials"
+      >
+        {{ formattedInitials }}
+      </span>
+    </div>
     <dt-presence
       v-if="presence"
       :presence="presence"
@@ -112,6 +117,14 @@ export default {
     initials: {
       type: String,
       default: '',
+    },
+
+    /**
+     * Determines whether to show a gradient background for the avatar.
+     */
+    gradient: {
+      type: Boolean,
+      default: true,
     },
   },
 
