@@ -1,10 +1,12 @@
 <template>
   <div
+    ref="root-layout-body"
     :class="['root-layout__body', 'd-fl-grow1', bodyClasses]"
     data-qa="root-layout-body"
   >
     <aside
       v-if="hasSlotContent($slots.sidebar)"
+      ref="root-layout-sidebar"
       :class="['root-layout__sidebar', sidebarClass]"
       :style="{ 'flex-basis': sidebarWidth }"
       data-qa="root-layout-sidebar"
@@ -14,6 +16,7 @@
     </aside>
     <main
       v-if="hasSlotContent($slots.content)"
+      ref="root-layout-content"
       :class="['root-layout__content', contentClass]"
       :style="{ 'min-inline-size': contentWrapWidthPercent, 'height': mainHeight }"
       data-qa="root-layout-content"
@@ -103,6 +106,8 @@ export default {
   data () {
     return {
       hasSlotContent,
+      sidebarTop: null,
+      contentTop: null,
     };
   },
 
@@ -118,9 +123,38 @@ export default {
 
     mainHeight () {
       if (this.fixed) {
-        return `calc(100vh - (${this.headerHeight} + ${this.footerHeight}))`;
+        return `calc(100vh - (${this.headerHeight} + ${this.extraSidebarHeight} + ${this.footerHeight}))`;
       }
       return null;
+    },
+
+    // When the sidebar is above the header due to contentWrapWidthPercent, it needs to be excluded
+    // in the main content height calculation. Otherwise it is 0 since it is at equal height with the main content.
+    extraSidebarHeight () {
+      if (this.contentTop > this.sidebarTop) {
+        return this.$refs['root-layout-sidebar'].offsetHeight + 'px';
+      }
+      return '0px';
+    },
+  },
+
+  mounted () {
+    window.addEventListener('resize', this.onResize);
+    this.getElementTops();
+  },
+
+  beforeUnmount () {
+    window.removeEventListener('resize', this.onResize);
+  },
+
+  methods: {
+    onResize () {
+      this.getElementTops();
+    },
+
+    getElementTops () {
+      this.sidebarTop = this.$refs['root-layout-sidebar'].offsetTop;
+      this.contentTop = this.$refs['root-layout-content'].offsetTop;
     },
   },
 };
