@@ -202,33 +202,41 @@ export default {
     init () {
       const firstChild = this.$refs.canvas.firstChild;
 
-      if (firstChild) {
-        this.setKind(firstChild);
-
-        if (this.kind === 'image') {
-          firstChild.classList.add('d-avatar__image');
-          this.validateImageAttrsPresence();
-
-          firstChild.addEventListener('error', () => {
-            this.formatInitials(this.initials);
-            this.imageLoadedSuccessfully = false;
-          });
-
-          firstChild.addEventListener('load', () => {
-            firstChild.classList.add('d-avatar--image-loaded');
-            this.imageLoadedSuccessfully = true;
-          });
-        }
-
-        if (this.kind === 'icon') {
-          firstChild.classList.add(AVATAR_KIND_MODIFIERS.icon);
-        }
-
-        if (this.kind === 'initials') {
-          this.slottedInitials = firstChild.text || firstChild.textContent;
-          this.formatInitials(this.slottedInitials);
-        }
+      if (!firstChild) {
+        return;
       }
+
+      this.setKind(firstChild);
+      this.kindHandler(firstChild);
+    },
+
+    kindHandler (el) {
+      switch (this.kind) {
+        case 'image':
+          el.classList.add('d-avatar__image');
+          this.validateImageAttrsPresence();
+          this.setImageListeners(el);
+          break;
+        case 'icon':
+          el.classList.add(AVATAR_KIND_MODIFIERS.icon);
+          break;
+        case 'initials':
+          this.slottedInitials = el.text || el.textContent;
+          this.formatInitials(this.slottedInitials);
+          break;
+      }
+    },
+
+    setImageListeners (el) {
+      el.addEventListener('error', () => {
+        this.formatInitials(this.initials);
+        this.imageLoadedSuccessfully = false;
+      });
+
+      el.addEventListener('load', () => {
+        el.classList.add('d-avatar--image-loaded');
+        this.imageLoadedSuccessfully = true;
+      });
     },
 
     formatInitials (initials) {
