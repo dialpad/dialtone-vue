@@ -27,6 +27,7 @@
     <span
       v-if="showGroup"
       class="d-avatar__count"
+      data-qa="dt-avatar-count"
     >{{ group }}</span>
     <dt-presence
       v-if="presence && !showGroup"

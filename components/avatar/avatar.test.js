@@ -27,6 +27,7 @@ describe('DtAvatar Tests', function () {
   // Wrappers
   let wrapper;
   let image;
+  let count;
   let presence;
 
   // Environment
@@ -37,6 +38,7 @@ describe('DtAvatar Tests', function () {
   // Helpers
   const _setChildWrappers = () => {
     image = wrapper.find('[data-qa="dt-avatar-image"]');
+    count = wrapper.find('[data-qa="dt-avatar-count"]');
     presence = wrapper.find('[data-qa="dt-presence"]');
   };
 
@@ -201,6 +203,35 @@ describe('DtAvatar Tests', function () {
       });
     });
 
+    describe('When a group is provided', function () {
+      // Test Environment
+      const group = 25;
+
+      // Test Setup
+      beforeEach(function () {
+        propsData = {
+          ...basePropsData,
+          group,
+        };
+        slots = { default: DEFAULT_SLOT };
+        _setWrappers();
+      });
+
+      it('should have group count', function () {
+        assert.isTrue(count.exists());
+      });
+
+      it('should have the correct group number', function () {
+        assert.strictEqual(count.text(), group.toString());
+      });
+
+      it('should not render group if group value is 1 or less', async function () {
+        await wrapper.setProps({ group: 1 });
+        _setChildWrappers();
+        assert.isFalse(count.exists());
+      });
+    });
+
     describe('With Presence', function () {
       const initials = 'DP';
 
@@ -270,6 +301,27 @@ describe('DtAvatar Tests', function () {
 
       describe('When provided size is not in AVATAR_SIZE_MODIFIERS', function () {
         itBehavesLikeFailsCustomPropValidation(prop, `INVALID_SIZE`);
+      });
+    });
+
+    describe('Group Validator', function () {
+      // Test Environment
+      const prop = DtAvatar.props.group;
+
+      describe('When provided group is valid to show group count', function () {
+        itBehavesLikePassesCustomPropValidation(prop, 2);
+      });
+
+      describe('When provided group is the string valid to show group count', function () {
+        itBehavesLikePassesCustomPropValidation(prop, '99+');
+      });
+
+      describe('When provided size is not in the valid range (below min)', function () {
+        itBehavesLikeFailsCustomPropValidation(prop, 1);
+      });
+
+      describe('When provided size is not in the valid range (over max)', function () {
+        itBehavesLikeFailsCustomPropValidation(prop, 100);
       });
     });
 
