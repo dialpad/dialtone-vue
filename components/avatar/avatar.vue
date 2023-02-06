@@ -279,8 +279,8 @@ export default {
     },
 
     validateImageAttrsPresence () {
-      const isSrcMissing = !this.$el.children[0].getAttribute('src');
-      const isAltMissing = !this.$el.children[0].getAttribute('alt');
+      const isSrcMissing = !this.$refs.canvas.children[0].getAttribute('src');
+      const isAltMissing = !this.$refs.canvas.children[0].getAttribute('alt');
 
       if (isSrcMissing || isAltMissing) {
         warn('src and alt attributes are required for image avatars', this);
