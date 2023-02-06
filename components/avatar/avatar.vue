@@ -29,7 +29,7 @@
       class="d-avatar__count"
     >{{ group }}</span>
     <dt-presence
-      v-if="presence"
+      v-if="presence && !showGroup"
       :presence="presence"
       :class="[
         'd-avatar__presence',
