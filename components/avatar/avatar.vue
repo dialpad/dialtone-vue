@@ -19,7 +19,7 @@
       <slot v-if="showDefaultSlot" />
       <span
         v-else-if="showInitials"
-        class="d-avatar__initials"
+        :class="AVATAR_KIND_MODIFIERS.initials"
       >
         {{ formattedInitials }}
       </span>
@@ -47,6 +47,7 @@ import { getUniqueString, getRandomElement } from '@/common/utils';
 import { DtPresence } from '../presence';
 import seedrandom from 'seedrandom';
 import {
+  AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
   AVATAR_PRESENCE_SIZE_MODIFIERS,
   AVATAR_ANGLES,
@@ -152,6 +153,7 @@ export default {
       // initials, image or icon
       kind: 'image',
       AVATAR_SIZE_MODIFIERS,
+      AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
       imageLoadedSuccessfully: null,
       slottedInitials: '',
@@ -217,7 +219,7 @@ export default {
         }
 
         if (this.kind === 'icon') {
-          firstChild.classList.add('d-avatar__icon');
+          firstChild.classList.add(AVATAR_KIND_MODIFIERS.icon);
         }
 
         if (this.kind === 'initials') {
