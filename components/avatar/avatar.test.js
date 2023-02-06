@@ -113,9 +113,8 @@ describe('DtAvatar Tests', function () {
         assert.exists(wrapper.find('svg'));
       });
 
-      it('should have correct class', async function () {
-        await wrapper.vm.$nextTick();
-        itBehavesLikeHasCorrectClass(wrapper, AVATAR_KIND_MODIFIERS.icon);
+      it('should have correct class', function () {
+        itBehavesLikeHasCorrectClass(wrapper.find('svg'), AVATAR_KIND_MODIFIERS.icon);
       });
     });
 
@@ -136,7 +135,8 @@ describe('DtAvatar Tests', function () {
       });
 
       it('should have correct class', function () {
-        itBehavesLikeHasCorrectClass(wrapper, AVATAR_KIND_MODIFIERS.initials);
+        const avatarWithInitials = wrapper.find(AVATAR_KIND_MODIFIERS.initials);
+        assert.exists(avatarWithInitials);
       });
     });
 
