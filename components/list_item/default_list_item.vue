@@ -38,6 +38,9 @@
       <!-- @slot Slot for the right content -->
       <slot name="right" />
     </section>
+    <template v-if="$slots.selected">
+      <slot name="selected" />
+    </template>
   </div>
 </template>
 

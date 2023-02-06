@@ -6,6 +6,7 @@
     :class="['dt-list-item d-ls-none', {
       'dt-list-item--focusable': isFocusable,
       'dt-list-item--highlighted': isHighlighted,
+      'dt-list-item--selected': selected,
       'dt-list-item--static': !isHoverable,
     }]"
     :tabindex="isFocusable ? 0 : -1"
@@ -24,6 +25,14 @@
         <!-- @slot named slots for custom list items -->
         <slot :name="slotName" />
       </template>
+      <template
+        v-if="selected"
+        #selected
+      >
+        <dt-icon
+          name="check"
+        />
+      </template>
     </component>
     <!-- @slot slot for the main content -->
     <slot v-else />
@@ -37,6 +46,7 @@ import {
 } from './list_item_constants.js';
 import DtDefaultListItem from './default_list_item';
 import utils from '@/common/utils';
+import { DtIcon } from '@/components/icon';
 
 /**
  * A list item is an element that can be used to represent individual items in a list.
@@ -47,6 +57,7 @@ export default {
 
   components: {
     DtDefaultListItem,
+    DtIcon,
   },
 
   /**
@@ -102,6 +113,14 @@ export default {
       type: String,
       default: LIST_ITEM_NAVIGATION_TYPES.NONE,
       validator: (t) => Object.values(LIST_ITEM_NAVIGATION_TYPES).includes(t),
+    },
+
+    /**
+     * Applies selected styles to the list item
+     */
+    selected: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -224,14 +243,15 @@ export default {
   border-radius: var(--size-300);
 }
 
-.dt-list-item--focusable:focus,
-.dt-list-item--focusable:focus-within,
 .dt-list-item--highlighted {
   background-color: hsla(var(--black-900-h), var(--black-900-s), var(--black-900-l), 0.05);
 }
 
-.dt-list-item--highlighted:active {
-  background-color: hsla(var(--black-900-h), var(--black-900-s), var(--black-900-l), 0.1);
+.dt-list-item--selected {
+  background-color: var(--purple-100);
+  .d-icon{
+    color: var(--purple-400);
+  }
 }
 
 .dt-list-item:focus-visible {
