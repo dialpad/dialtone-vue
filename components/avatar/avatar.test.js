@@ -232,6 +232,25 @@ describe('DtAvatar Tests', function () {
       });
     });
 
+    describe('When setting gradient to not show', function () {
+      // Test Environment
+      const gradient = false;
+
+      // Test Setup
+      beforeEach(function () {
+        propsData = {
+          ...basePropsData,
+          gradient,
+        };
+        slots = { default: DEFAULT_SLOT };
+        _setWrappers();
+      });
+
+      it('should set the correct class', function () {
+        assert.isTrue(avatar.classes('d-avatar--no-gradient'));
+      });
+    });
+
     describe('With Presence', function () {
       const initials = 'DP';
 
