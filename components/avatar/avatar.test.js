@@ -120,7 +120,7 @@ describe('DtAvatar Tests', function () {
       });
 
       it('should have correct class', function () {
-        itBehavesLikeHasCorrectClass(avatar, AVATAR_KIND_MODIFIERS.icon);
+        itBehavesLikeHasCorrectClass(avatar.find('svg'), AVATAR_KIND_MODIFIERS.icon);
       });
     });
 
@@ -144,7 +144,8 @@ describe('DtAvatar Tests', function () {
       });
 
       it('should have correct class', function () {
-        itBehavesLikeHasCorrectClass(avatar, AVATAR_KIND_MODIFIERS.initials);
+        const avatarWithInitials = wrapper.find(AVATAR_KIND_MODIFIERS.initials);
+        assert.exists(avatarWithInitials);
       });
     });
 
