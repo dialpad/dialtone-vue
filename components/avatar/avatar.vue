@@ -281,8 +281,8 @@ export default {
     },
 
     validateImageAttrsPresence () {
-      const isSrcMissing = !this.$el.firstChild.getAttribute('src');
-      const isAltMissing = !this.$el.firstChild.getAttribute('alt');
+      const isSrcMissing = !this.$refs.canvas.firstChild.getAttribute('src');
+      const isAltMissing = !this.$refs.canvas.firstChild.getAttribute('alt');
 
       if (isSrcMissing || isAltMissing) {
         Vue.util.warn('src and alt attributes are required for image avatars', this);
