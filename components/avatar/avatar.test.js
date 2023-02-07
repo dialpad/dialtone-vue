@@ -208,17 +208,17 @@ describe('DtAvatar Tests', function () {
       const group = 25;
 
       // Test Setup
-      beforeEach(function () {
-        propsData = {
-          ...basePropsData,
+      beforeEach(async function () {
+        props = {
+          ...baseProps,
           group,
         };
         slots = { default: DEFAULT_SLOT };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should have group count', function () {
-        assert.isTrue(count.exists());
+        assert.exists(count);
       });
 
       it('should have the correct group number', function () {
@@ -238,8 +238,8 @@ describe('DtAvatar Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = {
-          ...basePropsData,
+        props = {
+          ...baseProps,
           gradient,
         };
         slots = { default: DEFAULT_SLOT };
@@ -247,7 +247,7 @@ describe('DtAvatar Tests', function () {
       });
 
       it('should set the correct class', function () {
-        assert.isTrue(avatar.classes('d-avatar--no-gradient'));
+        assert.isTrue(wrapper.classes('d-avatar--no-gradient'));
       });
     });
 
