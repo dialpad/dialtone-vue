@@ -1,13 +1,7 @@
 <template>
   <div
     :id="id"
-    :class="[
-      'd-avatar',
-      AVATAR_SIZE_MODIFIERS[size],
-      avatarClass,
-      gradient ? null : 'd-avatar--no-gradient',
-      showGroup ? 'd-avatar--group' : null,
-    ]"
+    :class="avatarClasses"
     :style="initialKindStyle"
     data-qa="dt-avatar"
   >
@@ -163,6 +157,18 @@ export default {
   },
 
   computed: {
+    avatarClasses () {
+      return [
+        'd-avatar',
+        AVATAR_SIZE_MODIFIERS[this.size],
+        this.avatarClass,
+        {
+          'd-avatar--no-gradient': !this.gradient,
+          'd-avatar--group': this.showGroup,
+        },
+      ];
+    },
+
     showDefaultSlot () {
       return this.kind !== 'initials' && this.imageLoadedSuccessfully !== false;
     },
