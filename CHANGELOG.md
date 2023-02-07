@@ -1,3 +1,19 @@
+## [3.42.3](https://github.com/dialpad/dialtone-vue/compare/v3.42.2...v3.42.3) (2023-02-03)
+
+
+### Bug Fixes
+
+* **Root Layout:** headerHeight 0 if no slot ([a3bfbc6](https://github.com/dialpad/dialtone-vue/commit/a3bfbc66ad2c62d813dc753a7ffe1616727ee666))
+* **Root Layout:** modify to use hasSlotContent ([a3588b0](https://github.com/dialpad/dialtone-vue/commit/a3588b0b3e14b5f83b16b4dbe60e7584b99c58d6))
+
+## [3.42.2](https://github.com/dialpad/dialtone-vue/compare/v3.42.1...v3.42.2) (2023-02-03)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** wrong chips position while on modal ([#743](https://github.com/dialpad/dialtone-vue/issues/743)) ([49baa71](https://github.com/dialpad/dialtone-vue/commit/49baa717da087b82d609ba3804511aee306c0fd1))
+* **Root Layout:** add fixed prop ([#744](https://github.com/dialpad/dialtone-vue/issues/744)) ([4cde38d](https://github.com/dialpad/dialtone-vue/commit/4cde38dbd780189fc7d1492e1ec992878507fa2f))
+
 ## [3.42.1](https://github.com/dialpad/dialtone-vue/compare/v3.42.0...v3.42.1) (2023-02-02)
 
 
