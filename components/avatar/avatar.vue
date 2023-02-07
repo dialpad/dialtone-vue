@@ -28,7 +28,7 @@
       v-if="showGroup"
       class="d-avatar__count"
       data-qa="dt-avatar-count"
-    >{{ group }}</span>
+    >{{ formattedGroup }}</span>
     <dt-presence
       v-if="presence && !showGroup"
       :presence="presence"
@@ -140,11 +140,11 @@ export default {
 
     /**
      * Determines whether to show a group avatar.
-     * Limit to 2 digits max, though supports “99+”.
+     * Limit to 2 digits max, more than 99 will be rendered as “99+”.
      * if the number is 1 or less it would just show the regular avatar as if group had not been set.
      */
     group: {
-      type: [Number, String],
+      type: Number,
       default: undefined,
       validator: (group) => AVATAR_GROUP_VALIDATOR(group),
     },
@@ -184,6 +184,10 @@ export default {
         '--avatar-gradient-stop-2': `var(--${randomGradientColorStops[1]})`,
         '--avatar-gradient-stop-3': `var(--${randomGradientColorStops[2]})`,
       };
+    },
+
+    formattedGroup () {
+      return this.group > 99 ? '99+' : this.group;
     },
   },
 

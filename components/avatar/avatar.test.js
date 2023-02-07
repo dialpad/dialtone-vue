@@ -239,6 +239,12 @@ describe('DtAvatar Tests', function () {
         _setChildWrappers();
         assert.isFalse(count.exists());
       });
+
+      it('should render "99+" if group is greater than 99', async function () {
+        await wrapper.setProps({ group: 100 });
+        _setChildWrappers();
+        assert.strictEqual(count.text(), '99+');
+      });
     });
 
     describe('When setting gradient to not show', function () {
@@ -340,16 +346,8 @@ describe('DtAvatar Tests', function () {
         itBehavesLikePassesCustomPropValidation(prop, 2);
       });
 
-      describe('When provided group is the string valid to show group count', function () {
-        itBehavesLikePassesCustomPropValidation(prop, '99+');
-      });
-
-      describe('When provided size is not in the valid range (below min)', function () {
+      describe('When provided group is not in the valid range (below min)', function () {
         itBehavesLikeFailsCustomPropValidation(prop, 1);
-      });
-
-      describe('When provided size is not in the valid range (over max)', function () {
-        itBehavesLikeFailsCustomPropValidation(prop, 100);
       });
     });
 

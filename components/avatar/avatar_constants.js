@@ -35,7 +35,7 @@ export const GRADIENT_COLORS = {
 export const MAX_GRADIENT_COLORS = 3;
 export const MAX_GRADIENT_COLORS_100 = 2;
 
-export const AVATAR_GROUP_VALIDATOR = (group) => (group > 1 && group < 100) || group === '99+';
+export const AVATAR_GROUP_VALIDATOR = (group) => group > 1;
 
 export default {
   AVATAR_KIND_MODIFIERS,
