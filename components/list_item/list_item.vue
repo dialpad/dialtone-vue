@@ -250,6 +250,10 @@ export default {
   background-color: hsla(var(--black-900-h), var(--black-900-s), var(--black-900-l), 0.05);
 }
 
+.dt-list-item--highlighted:active {
+  background-color: hsla(var(--black-900-h), var(--black-900-s), var(--black-900-l), 0.1);
+}
+
 .dt-list-item:focus-visible {
   outline: none;
   box-shadow: inset 0 0 0 var(--su2) var(--focus-ring); // TODO: update with new focus state once done in `dialtone`
