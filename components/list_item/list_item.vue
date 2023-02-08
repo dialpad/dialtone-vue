@@ -6,7 +6,6 @@
     :class="['dt-list-item d-ls-none', {
       'dt-list-item--focusable': isFocusable,
       'dt-list-item--highlighted': isHighlighted,
-      'dt-list-item--selected': selected,
       'dt-list-item--static': !isHoverable,
     }]"
     :tabindex="isFocusable ? 0 : -1"
@@ -31,6 +30,8 @@
       >
         <dt-icon
           name="check"
+          size="400"
+          class="d-ml8"
         />
       </template>
     </component>
@@ -243,15 +244,10 @@ export default {
   border-radius: var(--size-300);
 }
 
+.dt-list-item--focusable:focus,
+.dt-list-item--focusable:focus-within,
 .dt-list-item--highlighted {
   background-color: hsla(var(--black-900-h), var(--black-900-s), var(--black-900-l), 0.05);
-}
-
-.dt-list-item--selected {
-  background-color: var(--purple-100);
-  .d-icon{
-    color: var(--purple-400);
-  }
 }
 
 .dt-list-item:focus-visible {
