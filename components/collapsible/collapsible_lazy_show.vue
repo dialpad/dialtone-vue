@@ -5,6 +5,7 @@
     enter-active-class="enter-active"
     leave-active-class="leave-active"
     v-bind="$attrs"
+    :css="isCSSEnabled"
     @before-enter="beforeEnter"
     @enter="enter"
     @after-enter="afterEnter"
@@ -65,6 +66,19 @@ export default {
     return {
       initialized: !!this.show,
     };
+  },
+
+  /******************
+   *    COMPUTED    *
+   ******************/
+  computed: {
+    /**
+     * Set the css property to false when running tests only.
+     * @returns {boolean}
+     */
+    isCSSEnabled () {
+      return process.env.NODE_ENV !== 'test';
+    },
   },
 
   /******************
