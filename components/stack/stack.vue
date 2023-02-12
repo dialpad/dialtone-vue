@@ -2,16 +2,11 @@
   <component
     :is="as"
     :class="[
-      'dt-stack',
-      DT_STACK_GAP[gap],
-      stackStyle(),
+      stackClasses(),
     ]"
+    :style="stackGap"
   >
-    {{ dir }}
-    {{ as }}
-    {{ gap }}
     <slot />
-    {{ stackDir }}
   </component>
 </template>
 
@@ -23,7 +18,7 @@ export default {
 
   props: {
     /**
-     * Set this prop to have the direction of stack.
+     * Set this prop to the direction to stack the items.
      * You can override the default direction with 'default' key.
      * All the undefined breakpoints will have 'default' value
      */
@@ -33,8 +28,7 @@ export default {
     },
 
     /**
-     * Set this prop to have the skeleton render as multiple lines of text.
-     * Set only one option prop at a time.
+     * Set this prop to render a specific HTML element.
      */
     as: {
       type: String,
@@ -42,8 +36,7 @@ export default {
     },
 
     /**
-     * Set this prop to have the skeleton render as multiple lines of text.
-     * Set only one option prop at a time.
+     * Set this prop to have the space between each stack item
      */
     gap: {
       type: String,
@@ -60,18 +53,26 @@ export default {
   },
 
   computed: {
+    spacing () {
+      return this.gap;
+    },
+
+    stackGap () {
+      return { '--stack-gap': DT_STACK_GAP[this.spacing] };
+    },
+
     stackDir () {
       return this.dir;
     },
   },
 
   methods: {
-    stackStyle () {
+    stackClasses () {
       if (DT_STACK_DIR[this.stackDir]) { return `dt-stack--${DT_STACK_DIR[this.stackDir]}`; }
 
       const { default: defaultStyle } = this.stackDir;
 
-      return [`dt-stack--${defaultStyle || 'column'}`,
+      return ['dt-stack', `dt-stack--${defaultStyle || 'column'}`,
         ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
           return this.stackDir[breakpoint] ? `dt-stack--${breakpoint}--${this.stackDir[breakpoint]}` : null;
         })];
@@ -87,33 +88,76 @@ export default {
 
   &--column {
     flex-direction: column;
+    & > :not(style) ~ :not(style) {
+      margin-top: var(--stack-gap);
+      margin-inline: 0;
+      margin-bottom: 0;
+    }
   }
 
   &--column-reverse {
     flex-direction: column-reverse;
+    & > :not(style) ~ :not(style) {
+      margin-top: 0;
+      margin-inline: 0;
+      margin-bottom: var(--stack-gap);
+    }
   }
 
   &--row {
     flex-direction: row;
+    & > :not(style) ~ :not(style) {
+      margin-top: 0;
+      margin-inline: var(--stack-gap) 0;
+      margin-bottom: 0;
+    }
   }
 
   &--row-reverse {
     flex-direction: row-reverse;
+    & > :not(style) ~ :not(style) {
+      margin-top: 0;
+      margin-inline: 0 var(--stack-gap);
+      margin-bottom: 0;
+    }
   }
 
   &--xl{
     @media screen and (max-width: 1264px) {
       &--column {
         flex-direction: column;
+        & > :not(style) ~ :not(style) {
+          margin-top: var(--stack-gap);
+          margin-inline: 0;
+          margin-bottom: 0;
+        }
       }
-      &--row {
-        flex-direction: row;
-      }
+
       &--column-reverse {
         flex-direction: column-reverse;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: 0;
+          margin-bottom: var(--stack-gap);
+        }
       }
+
+      &--row {
+        flex-direction: row;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: var(--stack-gap) 0;
+          margin-bottom: 0;
+        }
+      }
+
       &--row-reverse {
         flex-direction: row-reverse;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: 0 var(--stack-gap);
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -122,15 +166,38 @@ export default {
     @media screen and (max-width: 980px) {
       &--column {
         flex-direction: column;
+        & > :not(style) ~ :not(style) {
+          margin-top: var(--stack-gap);
+          margin-inline: 0;
+          margin-bottom: 0;
+        }
       }
-      &--row {
-        flex-direction: row;
-      }
+
       &--column-reverse {
         flex-direction: column-reverse;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: 0;
+          margin-bottom: var(--stack-gap);
+        }
       }
+
+      &--row {
+        flex-direction: row;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: var(--stack-gap) 0;
+          margin-bottom: 0;
+        }
+      }
+
       &--row-reverse {
         flex-direction: row-reverse;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: 0 var(--stack-gap);
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -139,15 +206,38 @@ export default {
     @media screen and (max-width: 640px) {
       &--column {
         flex-direction: column;
+        & > :not(style) ~ :not(style) {
+          margin-top: var(--stack-gap);
+          margin-inline: 0;
+          margin-bottom: 0;
+        }
       }
-      &--row {
-        flex-direction: row;
-      }
+
       &--column-reverse {
         flex-direction: column-reverse;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: 0;
+          margin-bottom: var(--stack-gap);
+        }
       }
+
+      &--row {
+        flex-direction: row;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: var(--stack-gap) 0;
+          margin-bottom: 0;
+        }
+      }
+
       &--row-reverse {
         flex-direction: row-reverse;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: 0 var(--stack-gap);
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -156,36 +246,40 @@ export default {
     @media screen and (max-width: 480px) {
       &--column {
         flex-direction: column;
+        & > :not(style) ~ :not(style) {
+          margin-top: var(--stack-gap);
+          margin-inline: 0;
+          margin-bottom: 0;
+        }
       }
-      &--row {
-        flex-direction: row;
-      }
+
       &--column-reverse {
         flex-direction: column-reverse;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: 0;
+          margin-bottom: var(--stack-gap);
+        }
       }
+
+      &--row {
+        flex-direction: row;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: var(--stack-gap) 0;
+          margin-bottom: 0;
+        }
+      }
+
       &--row-reverse {
         flex-direction: row-reverse;
+        & > :not(style) ~ :not(style) {
+          margin-top: 0;
+          margin-inline: 0 var(--stack-gap);
+          margin-bottom: 0;
+        }
       }
     }
-  }
-
-  &--100 {
-    gap: 0.1rem;
-  }
-  &--200 {
-    gap: 0.2rem;
-  }
-  &--300 {
-    gap: 0.4rem;
-  }
-  &--400 {
-    gap: 0.8rem;
-  }
-  &--500 {
-    gap: 1.6rem;
-  }
-  &--600 {
-    gap: 3.2rem;
   }
 }
 </style>

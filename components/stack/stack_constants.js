@@ -10,10 +10,10 @@ export const DT_STACK_RESPONSIVE_BREAKPOINTS = ['sm', 'md', 'lg', 'xl'];
 
 export const DT_STACK_GAP = {
   default: '0',
-  100: 'dt-stack--100',
-  200: 'dt-stack--200',
-  300: 'dt-stack--300',
-  400: 'dt-stack--400',
-  500: 'dt-stack--500',
-  600: 'dt-stack--600',
+  100: '0.1rem',
+  200: '0.2rem',
+  300: '0.4rem',
+  400: '0.8rem',
+  500: '1.6rem',
+  600: '3.2rem',
 };

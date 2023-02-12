@@ -8,13 +8,14 @@ export const argTypesData = {
   // Props
   dir: {
     control: 'object',
+    defaultValue: { default: 'column' },
     table: {
       type: {
         detail: `
-        Directions: ${Object.keys(DT_STACK_DIR)}
-Breakpoints: ${DT_STACK_RESPONSIVE_BREAKPOINTS}
-String: 'column' 
-Object: { default: 'row', sm: 'column', lg: 'column-reverse' }`,
+        Directions: "${Object.keys(DT_STACK_DIR)}"
+Breakpoints: "${DT_STACK_RESPONSIVE_BREAKPOINTS}"
+String: "column" 
+Object: { "default": "row", "sm": "column", "lg": "column-reverse" }`,
       },
     },
   },
