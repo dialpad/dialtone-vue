@@ -2,6 +2,7 @@
   <component
     :is="as"
     :class="[
+      'dt-stack',
       stackClasses(),
     ]"
     :style="stackGap"
@@ -72,7 +73,7 @@ export default {
 
       const { default: defaultStyle } = this.stackDir;
 
-      return ['dt-stack', `dt-stack--${defaultStyle || 'column'}`,
+      return [`dt-stack--${defaultStyle || 'column'}`,
         ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
           return this.stackDir[breakpoint] ? `dt-stack--${breakpoint}--${this.stackDir[breakpoint]}` : null;
         })];
