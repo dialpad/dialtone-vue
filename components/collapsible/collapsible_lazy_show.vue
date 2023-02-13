@@ -74,6 +74,8 @@ export default {
   computed: {
     /**
      * Set the css property to false when running tests only.
+     * Refer to: https://vuejs.org/guide/built-ins/transition.html#javascript-hooks for details about
+     * transition `css` property
      * @returns {boolean}
      */
     isCSSEnabled () {
