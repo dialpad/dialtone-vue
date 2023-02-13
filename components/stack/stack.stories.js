@@ -5,6 +5,24 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { DT_STACK_DIR, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS } from '@/components/stack/stack_constants';
 
 export const argTypesData = {
+  // Slots
+  default: {
+    control: { type: null },
+    description: 'Slot for main content',
+    table: {
+      type: {
+        summary: 'VNode',
+        detail: `
+        Example: 
+<dt-stack>
+  <dt-card />
+  <dt-card />
+  <dt-card />
+</dt-stack>`,
+      },
+    },
+  },
+
   // Props
   dir: {
     control: 'object',
@@ -21,13 +39,14 @@ Object: { "default": "row", "sm": "column", "lg": "column-reverse" }`,
   },
   as: {
     control: 'text',
+    defaultValue: 'div',
   },
   gap: {
-    defaultValue: '0',
     control: {
       type: 'select',
       options: Object.keys(DT_STACK_GAP),
     },
+    defaultValue: '400',
   },
 };
 
