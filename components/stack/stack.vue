@@ -29,7 +29,7 @@ export default {
     },
 
     /**
-     * Set this prop to render a specific HTML element.
+     * Set this prop to render stack as a specific HTML element.
      */
     as: {
       type: String,
@@ -73,7 +73,7 @@ export default {
 
       const { default: defaultStyle } = this.stackDir;
 
-      return [`dt-stack--${defaultStyle || 'column'}`,
+      return [`dt-stack--${DT_STACK_DIR[defaultStyle] || 'column'}`,
         ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
           return this.stackDir[breakpoint] ? `dt-stack--${breakpoint}--${this.stackDir[breakpoint]}` : null;
         })];

@@ -58,8 +58,8 @@ describe('DtStack Tests', function () {
     });
   });
 
-  describe('When `dir` prop is provided as a', function () {
-    describe('string', function () {
+  describe('When `dir` prop is provided with', function () {
+    describe('expected string value', function () {
       beforeEach(async function () {
         await wrapper.setProps({ dir: 'row' });
       });
@@ -69,7 +69,17 @@ describe('DtStack Tests', function () {
       });
     });
 
-    describe('object', function () {
+    describe('non expected string value', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ dir: 'invalid' });
+      });
+
+      it('should do not add inexistent class', function () {
+        assert.isFalse(wrapper.classes().includes('dt-stack--invalid'));
+      });
+    });
+
+    describe('expected object value', function () {
       beforeEach(async function () {
         await wrapper.setProps({
           dir: {
@@ -101,24 +111,24 @@ describe('DtStack Tests', function () {
       });
     });
 
-    describe('non expected value as a', function () {
-      describe('string', function () {
-        beforeEach(async function () {
-          await wrapper.setProps({ dir: 'invalid' });
-        });
-
-        it('should do not add inexistent class', function () {
-          assert.isFalse(wrapper.classes().includes('dt-stack--invalid'));
-        });
-      });
-
-      describe('object', function () {
+    describe('non expected object value', function () {
+      describe('When is provided with non expected breakpoint value', function () {
         beforeEach(async function () {
           await wrapper.setProps({ dir: { invalid: 'column' } });
         });
 
         it('should do not add inexistent breakpoint class', function () {
           assert.isFalse(wrapper.classes().includes('dt-stack--invalid--column'));
+        });
+      });
+
+      describe('When `default` is provided with non expected dir value', function () {
+        beforeEach(async function () {
+          await wrapper.setProps({ dir: { default: 'roww' } });
+        });
+
+        it('should override the default value', function () {
+          assert.isTrue(wrapper.classes('dt-stack--column'));
         });
       });
     });
