@@ -1,11 +1,12 @@
 <template>
   <component
-    :is="as"
+    :is="stackElement"
     :class="[
-      'dt-stack',
-      stackClasses(),
+      'd-stack',
+      stackResponsive(),
+      defaultDir(),
+      stackGap,
     ]"
-    :style="stackGap"
   >
     <!-- @slot Slot for main content -->
     <slot />
@@ -55,28 +56,36 @@ export default {
   },
 
   computed: {
-    spacing () {
-      return this.gap;
+    stackDir () {
+      return this.dir;
     },
 
     stackGap () {
-      return { '--stack-gap': DT_STACK_GAP[this.spacing] };
+      return DT_STACK_GAP[this.gap] ? `d-stack--gap-${this.gap}` : null;
     },
 
-    stackDir () {
-      return this.dir;
+    stackElement () {
+      return this.as ? this.as : 'div';
     },
   },
 
   methods: {
-    stackClasses () {
-      if (DT_STACK_DIR[this.stackDir]) { return `dt-stack--${DT_STACK_DIR[this.stackDir]}`; }
+    defaultDir () {
+      if (DT_STACK_DIR[this.stackDir]) {
+        /** String dir resolution */
+        return DT_STACK_DIR[this.stackDir] !== 'column' ? `d-stack--${DT_STACK_DIR[this.stackDir]}` : null;
+      } else {
+        /** Object dir resolution */
+        const { default: defaultStyle } = this.stackDir;
 
-      const { default: defaultStyle } = this.stackDir;
+        return defaultStyle !== 'column' ? `d-stack--${DT_STACK_DIR[defaultStyle]}` : null;
+      }
+    },
 
-      return [`dt-stack--${DT_STACK_DIR[defaultStyle] || 'column'}`,
+    stackResponsive () {
+      return [
         ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
-          return this.stackDir[breakpoint] ? `dt-stack--${breakpoint}--${this.stackDir[breakpoint]}` : null;
+          return this.stackDir[breakpoint] ? `d-stack--${breakpoint}--${this.stackDir[breakpoint]}` : null;
         })];
     },
   },
@@ -85,81 +94,42 @@ export default {
 </script>
 
 <style lang="less">
-.dt-stack {
-  display: flex;
+.d-stack {
+  --stack-gap: 0;
+  --stack-direction: column;
 
-  &--column {
-    flex-direction: column;
-    & > :not(style) ~ :not(style) {
-      margin-top: var(--stack-gap);
-      margin-inline: 0;
-      margin-bottom: 0;
-    }
-  }
+  display: flex;
+  flex-direction: var(--stack-direction);
+  gap: var(--stack-gap);
 
   &--column-reverse {
-    flex-direction: column-reverse;
-    & > :not(style) ~ :not(style) {
-      margin-top: 0;
-      margin-inline: 0;
-      margin-bottom: var(--stack-gap);
-    }
+    --stack-direction: column-reverse;
   }
 
   &--row {
-    flex-direction: row;
-    & > :not(style) ~ :not(style) {
-      margin-top: 0;
-      margin-inline: var(--stack-gap) 0;
-      margin-bottom: 0;
-    }
+    --stack-direction: row;
   }
 
   &--row-reverse {
-    flex-direction: row-reverse;
-    & > :not(style) ~ :not(style) {
-      margin-top: 0;
-      margin-inline: 0 var(--stack-gap);
-      margin-bottom: 0;
-    }
+    --stack-direction: row-reverse;
   }
 
   &--xl{
     @media screen and (max-width: 1264px) {
       &--column {
-        flex-direction: column;
-        & > :not(style) ~ :not(style) {
-          margin-top: var(--stack-gap);
-          margin-inline: 0;
-          margin-bottom: 0;
-        }
+        --stack-direction: column;
       }
 
       &--column-reverse {
-        flex-direction: column-reverse;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: 0;
-          margin-bottom: var(--stack-gap);
-        }
+        --stack-direction: column-reverse;
       }
 
       &--row {
-        flex-direction: row;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: var(--stack-gap) 0;
-          margin-bottom: 0;
-        }
+        --stack-direction: row;
       }
 
       &--row-reverse {
-        flex-direction: row-reverse;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: 0 var(--stack-gap);
-          margin-bottom: 0;
-        }
+        --stack-direction: row-reverse;
       }
     }
   }
@@ -167,39 +137,19 @@ export default {
   &--lg{
     @media screen and (max-width: 980px) {
       &--column {
-        flex-direction: column;
-        & > :not(style) ~ :not(style) {
-          margin-top: var(--stack-gap);
-          margin-inline: 0;
-          margin-bottom: 0;
-        }
+        --stack-direction: column;
       }
 
       &--column-reverse {
-        flex-direction: column-reverse;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: 0;
-          margin-bottom: var(--stack-gap);
-        }
+        --stack-direction: column-reverse;
       }
 
       &--row {
-        flex-direction: row;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: var(--stack-gap) 0;
-          margin-bottom: 0;
-        }
+        --stack-direction: row;
       }
 
       &--row-reverse {
-        flex-direction: row-reverse;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: 0 var(--stack-gap);
-          margin-bottom: 0;
-        }
+        --stack-direction: row-reverse;
       }
     }
   }
@@ -207,39 +157,19 @@ export default {
   &--md{
     @media screen and (max-width: 640px) {
       &--column {
-        flex-direction: column;
-        & > :not(style) ~ :not(style) {
-          margin-top: var(--stack-gap);
-          margin-inline: 0;
-          margin-bottom: 0;
-        }
+        --stack-direction: column;
       }
 
       &--column-reverse {
-        flex-direction: column-reverse;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: 0;
-          margin-bottom: var(--stack-gap);
-        }
+        --stack-direction: column-reverse;
       }
 
       &--row {
-        flex-direction: row;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: var(--stack-gap) 0;
-          margin-bottom: 0;
-        }
+        --stack-direction: row;
       }
 
       &--row-reverse {
-        flex-direction: row-reverse;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: 0 var(--stack-gap);
-          margin-bottom: 0;
-        }
+        --stack-direction: row-reverse;
       }
     }
   }
@@ -247,41 +177,28 @@ export default {
   &--sm{
     @media screen and (max-width: 480px) {
       &--column {
-        flex-direction: column;
-        & > :not(style) ~ :not(style) {
-          margin-top: var(--stack-gap);
-          margin-inline: 0;
-          margin-bottom: 0;
-        }
+        --stack-direction: column;
       }
 
       &--column-reverse {
-        flex-direction: column-reverse;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: 0;
-          margin-bottom: var(--stack-gap);
-        }
+        --stack-direction: column-reverse;
       }
 
       &--row {
-        flex-direction: row;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: var(--stack-gap) 0;
-          margin-bottom: 0;
-        }
+        --stack-direction: row;
       }
 
       &--row-reverse {
-        flex-direction: row-reverse;
-        & > :not(style) ~ :not(style) {
-          margin-top: 0;
-          margin-inline: 0 var(--stack-gap);
-          margin-bottom: 0;
-        }
+        --stack-direction: row-reverse;
       }
     }
   }
+
+  &--gap-100 { --stack-gap: var(--space-100); }
+  &--gap-200 { --stack-gap: var(--space-200); }
+  &--gap-300 { --stack-gap: var(--space-300); }
+  &--gap-400 { --stack-gap: var(--space-400); }
+  &--gap-500 { --stack-gap: var(--space-500); }
+  &--gap-600 { --stack-gap: var(--space-500); }
 }
 </style>
