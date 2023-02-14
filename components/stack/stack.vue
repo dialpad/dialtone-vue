@@ -7,6 +7,7 @@
     ]"
     :style="stackGap"
   >
+    <!-- @slot Slot for main content -->
     <slot />
   </component>
 </template>

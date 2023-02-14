@@ -1,38 +1,88 @@
 import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { Source } from '@storybook/addon-docs'
+import { DT_STACK_DIR } from './stack_constants.js';
+import DtStack from './stack';
 
 # Stack
 
 <Subtitle>
-  subtitle text
+  Stack is a layout component used to group elements together and apply a space between them.
 </Subtitle>
-
-## Styles
-style text
 
 ## Base Style
 
-base style
+Stack base style starts without spacing between elements, on column direction and `div` as HTML element.
 
-## Slots, Props & Events
+## Slots & Props
 
-slots
-
-## Accessibility
-
-accessibility
+<ArgsTable of={DtStack} />
 
 ## Usage
 
+### Available Gap
+
+```js
+{
+  default: '0',
+  100: '0.1rem',
+  200: '0.2rem',
+  300: '0.4rem',
+  400: '0.8rem',
+  500: '1.6rem',
+  600: '3.2rem',
+}
+```
+
+### Available Directions
+
+```js
+{
+  default: 'column',
+  column: 'column',
+  row: 'row',
+  'row-reverse': 'row-reverse',
+  'column-reverse': 'column-reverse',
+}
+```
+
+### Available Breakpoints
+
+```js
+['sm', 'md', 'lg', 'xl']
+```
+
+### Dir Object Structure
+
+```js
+{
+  default: string,
+  sm: string,
+  md: string,
+  lg: string,
+  xl: string,
+}
+```
+
+### Example
+
+```html
+<dt-stack :dir="{'default': 'row', 'sm': 'column', 'lg': 'column-reverse'}" :as='div' :gap='100'>
+  <div>Stack item 1</div>
+  <div>Stack item 2</div>
+</dt-stack>
+```
+
 ### Import
 
-#```js
-#import { DtStack } from '@dialpad/dialtone-vue';
-#```
+```jsx
+import { DtStack } from '@dialpad/dialtone-vue';
+```
 
 ### Default
 
 ```html
-<dt-stack>
- Stack
+<dt-stack :dir="column" :as="div" :gap="0">
+  <div>Stack item 1</div>
+  <div>Stack item 2</div>
 </dt-stack>
 ```
