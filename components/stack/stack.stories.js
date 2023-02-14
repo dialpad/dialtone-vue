@@ -44,7 +44,7 @@ Object: { "default": "row", "sm": "column", "lg": "column-reverse" }`,
   gap: {
     control: {
       type: 'select',
-      options: Object.keys(DT_STACK_GAP),
+      options: DT_STACK_GAP,
     },
     defaultValue: '400',
   },
