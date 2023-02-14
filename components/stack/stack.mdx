@@ -47,12 +47,32 @@ Stack base style starts without spacing between elements, on column direction an
 }
 ```
 
-### Example
+### Examples
 
 ```html
-<dt-stack :dir="{'default': 'row', 'sm': 'column', 'lg': 'column-reverse'}" :as='div' :gap='100'>
+<dt-stack :dir="{'default': 'row', 'sm': 'column', 'lg': 'column-reverse'}" as="article" gap="100">
   <div>Stack item 1</div>
   <div>Stack item 2</div>
+</dt-stack>
+```
+
+```html
+<dt-stack dir="row" as="section" gap="300">
+  <div>Stack item 1</div>
+  <div>Stack item 2</div>
+</dt-stack>
+```
+
+```html
+<dt-stack dir="row" as="section" gap="300">
+  <div>Stack item 1</div>
+  <div>
+    <div>Stack item 2</div>
+      <dt-stack dir="row-reverse" gap="600">
+          <div>Stack item 3</div>
+          <div>Stack item 4</div>
+      </dt-stack>
+  </div>
 </dt-stack>
 ```
 
