@@ -1,6 +1,6 @@
 <template>
   <dt-stack
-    :dir="dir"
+    :direction="direction"
     :as="as"
     :gap="gap"
   >

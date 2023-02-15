@@ -3,8 +3,8 @@
     :is="stackElement"
     :class="[
       'd-stack',
-      stackResponsive(),
-      defaultDir(),
+      defaultDirection,
+      stackResponsive,
       stackGap,
     ]"
   >
@@ -14,7 +14,9 @@
 </template>
 
 <script>
-import { DT_STACK_DIR, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS } from './stack_constants';
+import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS } from './stack_constants';
+import { directionValidator, gapValidator } from './validators';
+import { getDefaultDirectionClass, getResponsiveClasses } from './utils';
 
 export default {
   name: 'DtStack',
@@ -25,9 +27,10 @@ export default {
      * You can override the default direction with 'default' key.
      * All the undefined breakpoints will have 'default' value
      */
-    dir: {
+    direction: {
       type: [String, Object],
       default: 'column',
+      validator: (direction) => directionValidator(direction),
     },
 
     /**
@@ -44,56 +47,54 @@ export default {
     gap: {
       type: String,
       default: '0',
+      validator: (gap) => gapValidator(gap),
     },
   },
 
   data () {
     return {
-      DT_STACK_DIR,
+      DT_STACK_DIRECTION,
       DT_STACK_GAP,
       DT_STACK_RESPONSIVE_BREAKPOINTS,
     };
   },
 
   computed: {
-    stackDir () {
-      return this.dir;
-    },
-
     stackGap () {
-      return DT_STACK_GAP[this.gap] ? `d-stack--gap-${this.gap}` : null;
+      return `d-stack--gap-${this.gap}`;
     },
 
     stackElement () {
       return this.as ? this.as : 'div';
     },
-  },
 
-  methods: {
-    defaultDir () {
-      if (DT_STACK_DIR[this.stackDir]) {
-        /** String dir resolution */
-        return DT_STACK_DIR[this.stackDir] !== 'column' ? `d-stack--${DT_STACK_DIR[this.stackDir]}` : null;
-      } else {
-        /** Object dir resolution */
-        const { default: defaultStyle } = this.stackDir;
-
-        return defaultStyle !== 'column' ? `d-stack--${DT_STACK_DIR[defaultStyle]}` : null;
-      }
+    defaultDirection () {
+      return getDefaultDirectionClass(this.direction);
     },
 
     stackResponsive () {
-      return [
-        ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
-          return this.stackDir[breakpoint] ? `d-stack--${breakpoint}--${this.stackDir[breakpoint]}` : null;
-        })];
+      return getResponsiveClasses(this.direction);
     },
   },
-
 };
 </script>
 
 <style lang="less">
+.direction-options() {
+  &--column {
+    --stack-direction: column;
+  }
+  &--column-reverse {
+    --stack-direction: column-reverse;
+  }
+  &--row {
+    --stack-direction: row;
+  }
+  &--row-reverse {
+    --stack-direction: row-reverse;
+  }
+}
+
 .d-stack {
   --stack-gap: 0;
   --stack-direction: column;
@@ -116,81 +117,25 @@ export default {
 
   &--xl{
     @media screen and (max-width: 1264px) {
-      &--column {
-        --stack-direction: column;
-      }
-
-      &--column-reverse {
-        --stack-direction: column-reverse;
-      }
-
-      &--row {
-        --stack-direction: row;
-      }
-
-      &--row-reverse {
-        --stack-direction: row-reverse;
-      }
+      .direction-options();
     }
   }
 
   &--lg{
     @media screen and (max-width: 980px) {
-      &--column {
-        --stack-direction: column;
-      }
-
-      &--column-reverse {
-        --stack-direction: column-reverse;
-      }
-
-      &--row {
-        --stack-direction: row;
-      }
-
-      &--row-reverse {
-        --stack-direction: row-reverse;
-      }
+      .direction-options();
     }
   }
 
   &--md{
     @media screen and (max-width: 640px) {
-      &--column {
-        --stack-direction: column;
-      }
-
-      &--column-reverse {
-        --stack-direction: column-reverse;
-      }
-
-      &--row {
-        --stack-direction: row;
-      }
-
-      &--row-reverse {
-        --stack-direction: row-reverse;
-      }
+      .direction-options();
     }
   }
 
   &--sm{
     @media screen and (max-width: 480px) {
-      &--column {
-        --stack-direction: column;
-      }
-
-      &--column-reverse {
-        --stack-direction: column-reverse;
-      }
-
-      &--row {
-        --stack-direction: row;
-      }
-
-      &--row-reverse {
-        --stack-direction: row-reverse;
-      }
+      .direction-options();
     }
   }
 

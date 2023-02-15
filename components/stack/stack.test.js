@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import { DT_STACK_DIR, DT_STACK_GAP } from './stack_constants';
+import { DT_STACK_DIRECTION, DT_STACK_GAP } from './stack_constants';
 import DtStack from './stack.vue';
 
 // Constants
@@ -53,7 +53,7 @@ describe('DtStack Tests', function () {
       });
 
       it('should set proper default classes', function () {
-        assert.isTrue(wrapper.classes('dt-stack', DT_STACK_DIR.default));
+        assert.isTrue(wrapper.classes('dt-stack', DT_STACK_DIRECTION.default));
       });
     });
   });

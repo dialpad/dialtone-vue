@@ -2,7 +2,7 @@ import DtStack from './stack';
 import BaseStackMdx from './stack.mdx';
 import StackDefault from './stack_default.story';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { DT_STACK_DIR, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS } from '@/components/stack/stack_constants';
+import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS } from '@/components/stack/stack_constants';
 
 export const argTypesData = {
   // Slots
@@ -24,13 +24,13 @@ export const argTypesData = {
   },
 
   // Props
-  dir: {
+  direction: {
     control: 'object',
     defaultValue: { default: 'column' },
     table: {
       type: {
         detail: `
-        Directions: "${Object.keys(DT_STACK_DIR)}"
+        Directions: "${Object.keys(DT_STACK_DIRECTION)}"
 Breakpoints: "${DT_STACK_RESPONSIVE_BREAKPOINTS}"
 String: "column" 
 Object: { "default": "row", "sm": "column", "lg": "column-reverse" }`,

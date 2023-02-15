@@ -1,4 +1,4 @@
-export const DT_STACK_DIR = {
+export const DT_STACK_DIRECTION = {
   default: 'column',
   column: 'column',
   row: 'row',
@@ -8,11 +8,4 @@ export const DT_STACK_DIR = {
 
 export const DT_STACK_RESPONSIVE_BREAKPOINTS = ['sm', 'md', 'lg', 'xl'];
 
-export const DT_STACK_GAP = {
-  100: '100',
-  200: '200',
-  300: '300',
-  400: '400',
-  500: '500',
-  600: '600',
-};
+export const DT_STACK_GAP = ['0', '100', '200', '300', '400', '500', '600'];
