@@ -1,6 +1,5 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import { DT_STACK_DIRECTION, DT_STACK_GAP } from './stack_constants';
 import DtStack from './stack.vue';
 
 // Constants
@@ -51,38 +50,34 @@ describe('DtStack Tests', function () {
       it('content should exist', function () {
         assert.isTrue(defaultContent.exists());
       });
-
-      it('should set proper default classes', function () {
-        assert.isTrue(wrapper.classes('dt-stack', DT_STACK_DIRECTION.default));
-      });
     });
   });
 
-  describe('When `dir` prop is provided with', function () {
+  describe('When `direction` prop is provided with', function () {
     describe('expected string value', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ dir: 'row' });
+        await wrapper.setProps({ direction: 'row' });
       });
 
       it('should set the proper class and override the default value', function () {
-        assert.isTrue(wrapper.classes('dt-stack', 'dt-stack--row'));
+        assert.isTrue(wrapper.classes('d-stack', 'd-stack--row'));
       });
     });
 
     describe('non expected string value', function () {
       beforeEach(async function () {
-        await wrapper.setProps({ dir: 'invalid' });
+        await wrapper.setProps({ direction: 'invalid' });
       });
 
       it('should do not add inexistent class', function () {
-        assert.isFalse(wrapper.classes().includes('dt-stack--invalid'));
+        assert.isFalse(wrapper.classes().includes('d-stack--invalid'));
       });
     });
 
     describe('expected object value', function () {
       beforeEach(async function () {
         await wrapper.setProps({
-          dir: {
+          direction: {
             sm: 'column',
             lg: 'column-reverse',
             md: 'row-reverse',
@@ -93,20 +88,20 @@ describe('DtStack Tests', function () {
 
       it('should set proper responsive classes', function () {
         assert.isTrue(wrapper.classes(
-          'dt-stack--sm--column',
-          'dt-stack--md--row-reverse',
-          'dt-stack--lg--column-reverse',
-          'dt-stack--xl--row',
+          'd-stack--sm--column',
+          'd-stack--md--row-reverse',
+          'd-stack--lg--column-reverse',
+          'd-stack--xl--row',
         ));
       });
 
       describe('When `default` is provided', function () {
         beforeEach(async function () {
-          await wrapper.setProps({ dir: { default: 'row-reverse' } });
+          await wrapper.setProps({ direction: { default: 'row-reverse' } });
         });
 
         it('should override the default value', function () {
-          assert.isTrue(wrapper.classes('dt-stack', 'dt-stack--row'));
+          assert.isTrue(wrapper.classes('d-stack', 'd-stack--row'));
         });
       });
     });
@@ -114,21 +109,21 @@ describe('DtStack Tests', function () {
     describe('non expected object value', function () {
       describe('When is provided with non expected breakpoint value', function () {
         beforeEach(async function () {
-          await wrapper.setProps({ dir: { invalid: 'column' } });
+          await wrapper.setProps({ direction: { invalid: 'column' } });
         });
 
         it('should do not add inexistent breakpoint class', function () {
-          assert.isFalse(wrapper.classes().includes('dt-stack--invalid--column'));
+          assert.isFalse(wrapper.classes().includes('d-stack--invalid--column'));
         });
       });
 
-      describe('When `default` is provided with non expected dir value', function () {
+      describe('When `default` is provided with non expected direction value', function () {
         beforeEach(async function () {
-          await wrapper.setProps({ dir: { default: 'roww' } });
+          await wrapper.setProps({ direction: { default: 'roww' } });
         });
 
-        it('should override the default value', function () {
-          assert.isTrue(wrapper.classes('dt-stack--column'));
+        it('should do not add inexistent direction class', function () {
+          assert.isFalse(wrapper.classes().includes('d-stack--roww'));
         });
       });
     });
@@ -150,8 +145,8 @@ describe('DtStack Tests', function () {
         await wrapper.setProps({ gap: '300' });
       });
 
-      it('should set inline style with gap variable', function () {
-        assert.strictEqual(wrapper.attributes('style'), `--stack-gap: ${DT_STACK_GAP[300]};`);
+      it('should set proper gap class', function () {
+        assert.isTrue(wrapper.classes().includes('d-stack--gap-300'));
       });
     });
 
@@ -160,8 +155,8 @@ describe('DtStack Tests', function () {
         await wrapper.setProps({ gap: '123' });
       });
 
-      it('should not set inline style', function () {
-        assert.isUndefined(wrapper.attributes('style'));
+      it('should not set gap class', function () {
+        assert.isFalse(wrapper.classes().includes('d-stack--gap-123'));
       });
     });
   });

@@ -16,7 +16,7 @@
 <script>
 import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS } from './stack_constants';
 import { directionValidator, gapValidator } from './validators';
-import { getDefaultDirectionClass, getResponsiveClasses } from './utils';
+import { getDefaultDirectionClass, getResponsiveClasses, getGapClass } from './utils';
 
 export default {
   name: 'DtStack',
@@ -61,7 +61,7 @@ export default {
 
   computed: {
     stackGap () {
-      return `d-stack--gap-${this.gap}`;
+      return getGapClass(this.gap);
     },
 
     stackElement () {
