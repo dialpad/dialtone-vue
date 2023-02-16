@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     :direction="direction"
-    :as="as"
+    :as="stackElement"
     :gap="gap"
   >
     <div class="d-bgc-magenta-100">
@@ -22,5 +22,11 @@ import DtStack from './stack';
 export default {
   name: 'StackDefault',
   components: { DtStack },
+
+  computed: {
+    stackElement () {
+      return this.as ? this.as : 'div';
+    },
+  },
 };
 </script>
