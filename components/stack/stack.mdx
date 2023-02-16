@@ -32,10 +32,13 @@ Stack base style starts without spacing between elements, on column direction an
 ### Available Breakpoints
 
 ```js
-['sm', 'md', 'lg', 'xl']
+{ prefix: 'sm', mediaQuery: '(max-width: 480px)' },
+{ prefix: 'md', mediaQuery: '(max-width: 640px)' },
+{ prefix: 'lg', mediaQuery: '(max-width: 980px)' },
+{ prefix: 'xl', mediaQuery: '(max-width: 1264px)' },
 ```
 
-### Dir Object Structure
+### Direction Object Structure
 
 ```js
 {
@@ -49,26 +52,32 @@ Stack base style starts without spacing between elements, on column direction an
 
 ### Examples
 
+#### Stacks column at small screen size and column reverse at large screen
+
 ```html
-<dt-stack :dir="{'default': 'row', 'sm': 'column', 'lg': 'column-reverse'}" as="article" gap="100">
+<dt-stack :direction="{'default': 'row', 'sm': 'column', 'lg': 'column-reverse'}" as="article" gap="100">
   <div>Stack item 1</div>
   <div>Stack item 2</div>
 </dt-stack>
 ```
 
+#### Stacks row with gap 300 in a section HTML element
+
 ```html
-<dt-stack dir="row" as="section" gap="300">
+<dt-stack direction="row" as="section" gap="300">
   <div>Stack item 1</div>
   <div>Stack item 2</div>
 </dt-stack>
 ```
 
+#### Stacks row with gap 300 and stacks in row reverse the second element with gap 600
+
 ```html
-<dt-stack dir="row" as="section" gap="300">
+<dt-stack direction="row" as="section" gap="300">
   <div>Stack item 1</div>
   <div>
     <div>Stack item 2</div>
-      <dt-stack dir="row-reverse" gap="600">
+      <dt-stack direction="row-reverse" gap="600">
           <div>Stack item 3</div>
           <div>Stack item 4</div>
       </dt-stack>
@@ -85,7 +94,7 @@ import { DtStack } from '@dialpad/dialtone-vue';
 ### Default
 
 ```html
-<dt-stack dir="column" as="div" gap="0">
+<dt-stack direction="column" as="div" gap="0">
   <div>Stack item 1</div>
   <div>Stack item 2</div>
 </dt-stack>
