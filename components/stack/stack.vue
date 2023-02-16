@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="stackElement"
+    :is="as"
     :class="[
       'd-stack',
       defaultDirection,
@@ -62,10 +62,6 @@ export default {
   computed: {
     stackGap () {
       return getGapClass(this.gap);
-    },
-
-    stackElement () {
-      return this.as ? this.as : 'div';
     },
 
     defaultDirection () {
