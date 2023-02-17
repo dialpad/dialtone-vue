@@ -82,7 +82,7 @@ export default {
      * Number of unread messages
      */
     unreadCount: {
-      type: Number,
+      type: String,
       default: null,
     },
   },
@@ -100,7 +100,7 @@ export default {
         'd-mr-auto',
         'd-truncate',
         {
-          'd-fw-bold': this.unreadCount > 0,
+          'd-fw-bold': this.hasUnreadMessages,
         },
       ];
     },
@@ -112,7 +112,7 @@ export default {
     },
 
     hasUnreadMessages () {
-      return this.unreadCount > 0;
+      return this.unreadCount !== 0;
     },
   },
 
