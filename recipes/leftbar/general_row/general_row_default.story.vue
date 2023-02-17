@@ -4,6 +4,7 @@
     :color="color"
     :description="description"
     :unread-count="unreadCount"
+    :selected="selected"
   />
 </template>
 
