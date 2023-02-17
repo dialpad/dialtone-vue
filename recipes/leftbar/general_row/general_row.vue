@@ -172,6 +172,7 @@ export default {
     align-items: center;
     flex-grow: 2;
     gap: var(--size-400);
+    overflow: hidden;
   }
 
   &__description {
