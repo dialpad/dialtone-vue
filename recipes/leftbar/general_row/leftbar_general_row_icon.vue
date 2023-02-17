@@ -3,7 +3,7 @@
     v-if="shouldRenderWithIcon"
     :name="getIconName"
     :class="iconColor"
-    :size="isDialbotType ? 500 : 300"
+    :size="isDialbotType ? '500' : '300'"
   />
   <div
     v-else-if="isContactCenterType"
@@ -46,11 +46,13 @@ export default {
 
   computed: {
     shouldRenderWithIcon () {
-      return this.type !== LEFTBAR_GENERAL_ROW_TYPES.DIALBOT;
+      return this.type !== LEFTBAR_GENERAL_ROW_TYPES.DIALBOT && this.type !== LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER;
     },
 
     contactCenterIconClasses () {
       return [
+        'd-icon',
+        'leftbar-general-row__contact-center-icon',
         LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS[this.color],
       ];
     },
@@ -84,6 +86,12 @@ export default {
 </script>
 
 <style scoped>
+.leftbar-general-row__contact-center-icon {
+  width: var(--icon-size-200);
+  height: var(--icon-size-200);
+  border-radius: var(--size-200);
+}
+
 .leftbar-general-row__dialbot-icon {
   background-color: var(--purple-400);
   width: 100%;
