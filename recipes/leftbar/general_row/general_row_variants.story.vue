@@ -9,6 +9,10 @@
         description="Channel name"
         :unread-count="29"
       />
+      <div class="d-mt8">
+        Note: the unread count is not limited to 99 or any number so make sure to add the necessary
+        logic to limit the number of unread messages if needed.
+      </div>
     </div>
     <div>
       <h3 class="d-mb8">
