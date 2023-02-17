@@ -85,12 +85,23 @@ export default {
       type: String,
       default: null,
     },
+
+    /**
+     * Determines if the row is selected
+     */
+    selected: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
     leftbarGeneralRowClasses () {
       return [
         'leftbar-general-row',
+        {
+          'leftbar-general-row--selected': this.selected,
+        },
       ];
     },
 
@@ -161,6 +172,10 @@ export default {
     line-height: var(--lh-400);
     padding-left: var(--su8);
     width: 100%;
+  }
+
+  &--selected {
+    background-color: var(--black-200);
   }
 }
 </style>
