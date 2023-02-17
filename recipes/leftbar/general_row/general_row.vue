@@ -1,10 +1,13 @@
 <template>
   <div
     :class="leftbarGeneralRowClasses"
-    data-qa="leftbar-general-row"
+    data-qa="dt-leftbar-general-row"
   >
     <div class="leftbar-general-row__content">
-      <div class="leftbar-general-row__type">
+      <div
+        class="leftbar-general-row__type"
+        data-qa="dt-left-sidebar-row-type"
+      >
         <dt-recipe-leftbar-general-row-icon
           :type="getIcon"
           :color="color"
@@ -13,17 +16,20 @@
       </div>
       <dt-emoji-text-wrapper
         :class="descriptionClasses"
-        data-qa="leftbar-general-row-description"
+        data-qa="dt-left-sidebar-row-description"
       >
         {{ description }}
       </dt-emoji-text-wrapper>
     </div>
-    <div class="leftbar-general-row__secondary">
+    <div
+      class="leftbar-general-row__secondary"
+      data-qa="dt-left-sidebar-row-secondary"
+    >
       <dt-badge
         v-if="hasUnreadMessages"
         kind="count"
         type="bulletin"
-        data-qa="leftbar-general-row-unread-badge"
+        data-qa="dt-left-sidebar-row-unread-badge"
       >
         {{ unreadCount }}
       </dt-badge>
