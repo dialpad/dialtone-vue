@@ -156,11 +156,6 @@ export default {
     background-color: var(--theme-sidebar-active-row-color-background);
   }
 
-  &__icon {
-    width: var(--su16);
-    height: var(--su16);
-  }
-
   &__description {
     font-size: var(--fs-200);
     display: flex;

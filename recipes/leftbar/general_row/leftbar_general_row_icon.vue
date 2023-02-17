@@ -3,7 +3,7 @@
     v-if="shouldRenderWithIcon"
     :name="getIconName"
     :class="iconColor"
-    size="300"
+    :size="isDialbotType ? 500 : 300"
   />
   <div
     v-else-if="isContactCenterType"
