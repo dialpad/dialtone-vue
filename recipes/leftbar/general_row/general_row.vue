@@ -18,7 +18,7 @@
         {{ description }}
       </dt-emoji-text-wrapper>
     </div>
-    <div class="d-d-flex d-ai-center">
+    <div class="leftbar-general-row__secondary">
       <dt-badge
         v-if="hasUnreadMessages"
         kind="count"
@@ -181,6 +181,11 @@ export default {
     justify-content: center;
     width: var(--size24);
     height: var(--size24);
+  }
+
+  &__secondary {
+    display: flex;
+    align-items: center;
   }
 
   &__description {
