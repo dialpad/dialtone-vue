@@ -4,7 +4,7 @@
     data-qa="leftbar-general-row"
   >
     <div class="leftbar-general-row__content">
-      <div class="d-w24 d-wmn24 d-h24 d-d-flex d-ai-center d-jc-center">
+      <div class="leftbar-general-row__type">
         <dt-recipe-leftbar-general-row-icon
           :type="getIcon"
           :color="color"
@@ -173,6 +173,14 @@ export default {
     flex-grow: 2;
     gap: var(--size-400);
     overflow: hidden;
+  }
+
+  &__type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size24);
+    height: var(--size24);
   }
 
   &__description {
