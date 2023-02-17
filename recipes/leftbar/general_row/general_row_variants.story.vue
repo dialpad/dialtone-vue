@@ -7,7 +7,7 @@
       <dt-recipe-general-row
         type="channels"
         description="Channel name"
-        :unread-count="29"
+        unread-count="29"
       />
       <div class="d-mt8">
         Note: the unread count is not limited to 99 or any number so make sure to add the necessary
