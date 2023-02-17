@@ -3,7 +3,7 @@
     :class="leftbarGeneralRowClasses"
     data-qa="leftbar-general-row"
   >
-    <div class="d-d-flex d-ai-center d-fl-grow2 d-truncate">
+    <div class="leftbar-general-row__content">
       <div class="d-w24 d-wmn24 d-h24 d-d-flex d-ai-center d-jc-center">
         <dt-recipe-leftbar-general-row-icon
           :type="getIcon"
@@ -167,10 +167,16 @@ export default {
     background-color: var(--theme-sidebar-active-row-color-background);
   }
 
+  &__content {
+    display: flex;
+    align-items: center;
+    flex-grow: 2;
+    gap: var(--size-400);
+  }
+
   &__description {
     font-size: var(--fs-200);
     line-height: var(--lh-400);
-    padding-left: var(--su8);
     width: 100%;
   }
 
