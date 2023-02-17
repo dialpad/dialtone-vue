@@ -22,7 +22,6 @@
       <dt-badge
         v-if="hasUnreadMessages"
         kind="count"
-        color="purple-400"
         type="bulletin"
         data-qa="leftbar-general-row-unread-badge"
       >
