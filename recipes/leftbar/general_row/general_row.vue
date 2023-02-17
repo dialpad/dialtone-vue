@@ -160,6 +160,7 @@ export default {
     font-size: var(--fs-200);
     display: flex;
     align-items: center;
+    line-height: var(--lh-400);
     padding-left: var(--su8);
     width: 100%;
   }
