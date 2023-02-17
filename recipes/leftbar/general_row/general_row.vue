@@ -123,7 +123,7 @@ export default {
     },
 
     hasUnreadMessages () {
-      return this.unreadCount !== 0;
+      return isNaN(Number(this.unreadCount)) ? !!this.unreadCount : Number(this.unreadCount) > 0;
     },
   },
 
