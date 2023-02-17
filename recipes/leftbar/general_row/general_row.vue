@@ -1,5 +1,5 @@
 <template>
-  <li
+  <div
     :class="leftbarGeneralRowClasses"
     data-qa="leftbar-general-row"
   >
@@ -28,7 +28,7 @@
         {{ unreadCount }}
       </dt-badge>
     </div>
-  </li>
+  </div>
 </template>
 
 <script>
