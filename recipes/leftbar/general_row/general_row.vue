@@ -141,7 +141,6 @@ export default {
 <style lang="less">
 .leftbar-general-row {
   padding: calc(var(--space-200) * 3) var(--space-400);
-  height: var(--su24);
   border-radius: calc(var(--space-200) * 14);
   display: flex;
   align-items: center;
