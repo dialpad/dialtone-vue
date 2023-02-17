@@ -18,7 +18,7 @@
         {{ description }}
       </dt-emoji-text-wrapper>
     </div>
-    <div class="d-d-flex d-ai-center d-pl8">
+    <div class="d-d-flex d-ai-center">
       <dt-badge
         v-if="hasUnreadMessages"
         kind="count"
@@ -145,6 +145,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--size-400);
 
   &:hover {
     background-color: var(--theme-sidebar-row-color-background-hover);
