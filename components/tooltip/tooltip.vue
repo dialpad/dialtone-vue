@@ -309,9 +309,9 @@ export default {
       // if a modal is currently active render at modal-element z-index, otherwise at tooltip z-index
       if (this.$el.getRootNode()
         .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
-        // Special case because we don't have any dialtone drawer component yet. Render at 650 when
+        // Special case because we don't have any dialtone drawer component yet. Render at 651 when
         // anchor of popover is within a drawer.
-        this.anchorEl.closest('.d-zi-drawer')) {
+        this.$el.closest('.d-zi-drawer')) {
         return 651;
       } else {
         return 400;
