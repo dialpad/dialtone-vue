@@ -629,15 +629,9 @@ export default {
    ******************/
   methods: {
 
-    hasIntersectedViewport (entries, observer) {
-      const dialog = entries[0];
-
-      // if dialog is cut off from the viewport
-      if (!dialog.isIntersecting) {
-        this.isOutsideViewport = true;
-      } else {
-        this.isOutsideViewport = false;
-      }
+    hasIntersectedViewport (entries) {
+      const dialog = entries?.[0];
+      this.isOutsideViewport = !dialog?.isIntersecting;
     },
 
     popperOptions () {
