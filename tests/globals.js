@@ -14,8 +14,6 @@ class ObserverMock {
 }
 
 before(function () {
-  // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
-  // Need to mock them to avoid error
   global.IntersectionObserver = ObserverMock;
   global.ResizeObserver = ObserverMock;
 });
