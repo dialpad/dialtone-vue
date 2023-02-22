@@ -1,4 +1,5 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { action } from '@storybook/addon-actions';
 import DtRecipeGeneralRow from './general_row';
 import DtRecipeGeneralRowMdx from './general_row.mdx';
 import DtRecipeGeneralRowDefaultTemplate from './general_row_default.story.vue';
@@ -10,6 +11,7 @@ import {
 
 // Default Prop Values
 export const argsData = {
+  onClick: action('click'),
 };
 
 export const argTypesData = {
@@ -44,9 +46,16 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
-  onEvent: {
+  onClick: {
     table: {
       disable: true,
+    },
+  },
+
+  click: {
+    description: 'Native click event',
+    table: {
+      type: { summary: 'event' },
     },
   },
 };

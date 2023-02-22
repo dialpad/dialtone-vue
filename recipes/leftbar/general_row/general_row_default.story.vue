@@ -5,6 +5,7 @@
     :description="description"
     :unread-count="unreadCount"
     :selected="selected"
+    @click="onClick"
   />
 </template>
 
