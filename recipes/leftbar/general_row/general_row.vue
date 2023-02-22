@@ -1,39 +1,41 @@
 <template>
   <div
     :class="leftbarGeneralRowClasses"
-    data-qa="dt-leftbar-general-row"
+    data-qa="dt-leftbar-row"
   >
-    <div class="leftbar-general-row__content">
+    <a
+      class="dt-leftbar-row__primary"
+      data-qa="dt-leftbar-row-link"
+      v-on="$listeners"
+    >
       <div
-        class="leftbar-general-row__type"
-        data-qa="dt-left-sidebar-row-type"
+        class="dt-leftbar-row__alpha"
       >
         <dt-recipe-leftbar-general-row-icon
           :type="getIcon"
           :color="color"
-          class="leftbar-general-row__icon"
+          data-qa="dt-leftbar-row-icon"
         />
       </div>
-      <dt-emoji-text-wrapper
-        :class="descriptionClasses"
-        data-qa="dt-left-sidebar-row-description"
-      >
-        {{ description }}
-      </dt-emoji-text-wrapper>
-    </div>
-    <div
-      class="leftbar-general-row__secondary"
-      data-qa="dt-left-sidebar-row-secondary"
-    >
-      <dt-badge
-        v-if="hasUnreadMessages"
-        kind="count"
-        type="bulletin"
-        data-qa="dt-left-sidebar-row-unread-badge"
-      >
-        {{ unreadCount }}
-      </dt-badge>
-    </div>
+      <div class="dt-leftbar-row__label">
+        <dt-emoji-text-wrapper
+          class="dt-leftbar-row__description"
+          data-qa="dt-leftbar-row-description"
+        >
+          {{ description }}
+        </dt-emoji-text-wrapper>
+      </div>
+      <div class="dt-leftbar-row__omega">
+        <dt-badge
+          v-if="hasUnreadMessages"
+          kind="count"
+          type="bulletin"
+          data-qa="dt-leftbar-row-unread-badge"
+        >
+          {{ unreadCount }}
+        </dt-badge>
+      </div>
+    </a>
   </div>
 </template>
 
@@ -104,20 +106,10 @@ export default {
   computed: {
     leftbarGeneralRowClasses () {
       return [
-        'leftbar-general-row',
+        'dt-leftbar-row',
         {
-          'leftbar-general-row--selected': this.selected,
-        },
-      ];
-    },
-
-    descriptionClasses () {
-      return [
-        'leftbar-general-row__description',
-        'd-mr-auto',
-        'd-truncate',
-        {
-          'd-fw-bold': this.hasUnreadMessages,
+          'dt-leftbar-row--has-unread': this.hasUnreadMessages,
+          'dt-leftbar-row--selected': this.selected,
         },
       ];
     },
@@ -156,52 +148,5 @@ export default {
 </script>
 
 <style lang="less">
-.leftbar-general-row {
-  padding: calc(var(--space-200) * 3) var(--space-400);
-  border-radius: 100em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--size-400);
-
-  &:hover {
-    background-color: var(--theme-sidebar-row-color-background-hover);
-    cursor: pointer;
-  }
-
-  &:active {
-    background-color: var(--theme-sidebar-active-row-color-background);
-  }
-
-  &__content {
-    display: flex;
-    align-items: center;
-    flex-grow: 2;
-    gap: var(--size-400);
-    overflow: hidden;
-  }
-
-  &__type {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--size24);
-    height: var(--size24);
-  }
-
-  &__secondary {
-    display: flex;
-    align-items: center;
-  }
-
-  &__description {
-    font-size: var(--fs-200);
-    line-height: var(--lh-400);
-    width: 100%;
-  }
-
-  &--selected {
-    background-color: var(--black-200);
-  }
-}
+@import "../style/leftbar_row.less";
 </style>
