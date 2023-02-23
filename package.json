@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.56.1",
+  "version": "2.58.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "keywords": [
     "Dialpad",
@@ -69,7 +69,7 @@
     "storybook": "npm run --prefix storybook storybook",
     "storybook:build": "npm run --prefix storybook build",
     "storybook:install": "npm install --prefix storybook",
-    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/**/*.test.js",
+    "test": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --colors tests/globals.js components/**/*.test.js recipes/**/**/*.test.js",
     "test:one": "vue-cli-service test:unit --timeout 100000 --require source-map-support/register --colors",
     "test:watch": "vue-cli-service test:unit --watch --timeout 100000 --require source-map-support/register --colors components/**/*.test.js recipes/**/**/*.test.js",
     "storybook:a11y-test": "npm run --prefix storybook storybook-a11y-test",
@@ -87,7 +87,7 @@
     "node": "16"
   },
   "dependencies": {
-    "@dialpad/dialtone-icons": "0.0.17",
+    "@dialpad/dialtone-icons": "latest",
     "@linusborg/vue-simple-portal": "^0.1.5",
     "emoji-regex": "^10.2.1",
     "emoji-toolkit": "^6.6.0",
@@ -98,7 +98,7 @@
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/dialtone": "^7.16.0",
+    "@dialpad/dialtone": "^7.16.1",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@percy/cli": "1.18.0",
     "@percy/storybook": "4.3.4",
