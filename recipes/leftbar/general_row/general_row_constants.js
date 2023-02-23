@@ -14,7 +14,8 @@ export const LEFTBAR_GENERAL_ROW_ICON_MAPPING = {
   [LEFTBAR_GENERAL_ROW_TYPES.CHANNELS]: 'hash',
   [LEFTBAR_GENERAL_ROW_TYPES.THREADS]: 'thread',
   [LEFTBAR_GENERAL_ROW_TYPES.LOCKED_CHANNEL]: 'lock',
-  'channel bold': 'hash-bold',
+  'locked channel unread': 'lock-filled',
+  'channel unread': 'hash-bold',
 };
 
 export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS = {
