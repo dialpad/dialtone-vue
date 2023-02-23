@@ -3,10 +3,9 @@
     :class="leftbarGeneralRowClasses"
     data-qa="dt-leftbar-row"
   >
-    <a
+    <button
       class="dt-leftbar-row__primary"
       data-qa="dt-leftbar-row-link"
-      href=""
       v-on="$listeners"
     >
       <div
@@ -36,7 +35,7 @@
           {{ unreadCount }}
         </dt-badge>
       </div>
-    </a>
+    </button>
   </div>
 </template>
 
@@ -108,6 +107,7 @@ export default {
     leftbarGeneralRowClasses () {
       return [
         'dt-leftbar-row',
+        'dt-leftbar-row--no-action',
         {
           'dt-leftbar-row--has-unread': this.hasUnreadMessages,
           'dt-leftbar-row--selected': this.selected,
@@ -116,9 +116,15 @@ export default {
     },
 
     getIcon () {
-      return this.type === LEFTBAR_GENERAL_ROW_TYPES.CHANNELS && this.hasUnreadMessages
-        ? 'channel bold'
-        : this.type;
+      switch (this.type) {
+        case LEFTBAR_GENERAL_ROW_TYPES.CHANNELS:
+          if (this.hasUnreadMessages) return 'channel unread';
+          break;
+        case LEFTBAR_GENERAL_ROW_TYPES.LOCKED_CHANNEL:
+          if (this.hasUnreadMessages) return 'locked channel unread';
+          break;
+      }
+      return this.type;
     },
 
     hasUnreadMessages () {
