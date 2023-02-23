@@ -78,18 +78,8 @@ export default {
     },
   },
 };
-
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeGeneralRowDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeGeneralRowVariantsTemplate,
-);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, DtRecipeGeneralRowDefaultTemplate);
+const VariantsTemplate = (args) => createTemplateFromVueFile(args, DtRecipeGeneralRowVariantsTemplate);
 
 // Stories
 export const Default = DefaultTemplate.bind({});

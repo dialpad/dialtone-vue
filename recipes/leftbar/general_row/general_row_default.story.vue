@@ -1,11 +1,11 @@
 <template>
   <dt-recipe-general-row
-    :type="type"
-    :color="color"
-    :description="description"
-    :unread-count="unreadCount"
-    :selected="selected"
-    @click="onClick"
+    :type="$attrs.type"
+    :color="$attrs.color"
+    :description="$attrs.description"
+    :unread-count="$attrs.unreadCount"
+    :selected="$attrs.selected"
+    @click="$attrs.onClick"
   />
 </template>
 
