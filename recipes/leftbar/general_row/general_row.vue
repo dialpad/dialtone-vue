@@ -6,6 +6,7 @@
     <a
       class="dt-leftbar-row__primary"
       data-qa="dt-leftbar-row-link"
+      href=""
       v-on="$listeners"
     >
       <div
