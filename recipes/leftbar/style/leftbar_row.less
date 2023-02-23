@@ -7,7 +7,7 @@
   //  ============================================================================
   //  $   CSS CUSTOM PROPERTIES
   //  ----------------------------------------------------------------------------
-  --leftbar-row-color-foregrond: var(--fc-primary);
+  --leftbar-row-color-foreground: var(--fc-primary);
   --leftbar-row-color-background: transparent;
   --leftbar-row-radius: 100em;
   --leftbar-row-alpha-color-foreground: var(--fc-secondary);
@@ -42,7 +42,7 @@
   //
   &--has-unread {
     --leftbar-row-description-font-weight: var(--fw-bold);
-    --leftbar-row-alpha-color-foreground: var(--leftbar-row-color-foregrond);
+    --leftbar-row-alpha-color-foreground: var(--leftbar-row-color-foreground);
 
     &:hover {
       --leftbar-row-omega-visibility: hidden;
@@ -75,7 +75,7 @@
     flex: 1;
     width: 100%;
     text-align: left;
-    color: var(--leftbar-row-color-foregrond);
+    color: var(--leftbar-row-color-foreground);
     text-decoration: none;
     background-color: var(--leftbar-row-color-background);
     border-radius: var(--leftbar-row-radius);
