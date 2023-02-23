@@ -62,8 +62,7 @@ export default {
 
     contactCenterIconClasses () {
       return [
-        'd-bar2',
-        'dt-leftbar-row-icon-cc--size',
+        'dt-leftbar-row__icon-cc',
         COLORS[this.color],
       ];
     },

@@ -6,6 +6,7 @@
     <button
       class="dt-leftbar-row__primary"
       data-qa="dt-leftbar-row-link"
+      v-bind="$attrs"
       v-on="$listeners"
     >
       <div
@@ -53,6 +54,8 @@ export default {
     DtBadge,
     DtRecipeLeftbarGeneralRowIcon,
   },
+
+  inheritAttrs: false,
 
   props: {
     /**
