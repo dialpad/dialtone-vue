@@ -3,7 +3,7 @@
     :class="leftbarGeneralRowClasses"
     data-qa="dt-leftbar-row"
   >
-    <button
+    <dt-button
       class="dt-leftbar-row__primary"
       data-qa="dt-leftbar-row-link"
       v-bind="$attrs"
@@ -12,11 +12,13 @@
       <div
         class="dt-leftbar-row__alpha"
       >
-        <dt-recipe-leftbar-general-row-icon
-          :type="getIcon"
-          :color="color"
-          data-qa="dt-leftbar-row-icon"
-        />
+        <slot name="left">
+          <dt-recipe-leftbar-general-row-icon
+            :type="getIcon"
+            :color="color"
+            data-qa="dt-leftbar-row-icon"
+          />
+        </slot>
       </div>
       <div class="dt-leftbar-row__label">
         <dt-emoji-text-wrapper
@@ -36,7 +38,7 @@
           {{ unreadCount }}
         </dt-badge>
       </div>
-    </button>
+    </dt-button>
   </div>
 </template>
 
@@ -45,11 +47,13 @@ import { LEFTBAR_GENERAL_ROW_TYPES, LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS } 
 import { DtBadge } from '@/components/badge';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
+import DtButton from '@/components/button/button.vue';
 
 export default {
   name: 'DtRecipeGeneralRow',
 
   components: {
+    DtButton,
     DtEmojiTextWrapper,
     DtBadge,
     DtRecipeLeftbarGeneralRowIcon,
