@@ -9,7 +9,7 @@
         avatar-initials="JN"
         :group-count="2"
         names="Jaqueline Nackos, Lori Smith"
-        avatar-src="/static/media/../components/avatar/person.png"
+        :avatar-src="avatarSrc"
       />
     </div>
 
@@ -22,7 +22,7 @@
         avatar-initials="JN"
         :group-count="4"
         names="Jaqueline Nackos, Lori Smith, Jaqueline Nackos, Lori Smith"
-        avatar-src="/static/media/../components/avatar/person.png"
+        :avatar-src="avatarSrc"
       />
     </div>
 
@@ -35,7 +35,7 @@
         avatar-initials="JN"
         :group-count="2"
         names="Jaqueline Nackos, Lori Smith"
-        avatar-src="/static/media/../components/avatar/person.png"
+        :avatar-src="avatarSrc"
         unread-count="1"
       />
     </div>
@@ -49,7 +49,7 @@
         avatar-initials="JN"
         :group-count="2"
         names="Jaqueline Nackos, Lori Smith"
-        avatar-src="/static/media/../components/avatar/person.png"
+        :avatar-src="avatarSrc"
         selected
       />
     </div>
