@@ -50,7 +50,7 @@
         :group-count="2"
         names="Jaqueline Nackos, Lori Smith"
         avatar-src="/static/media/../components/avatar/person.png"
-        selected="true"
+        selected
       />
     </div>
 
