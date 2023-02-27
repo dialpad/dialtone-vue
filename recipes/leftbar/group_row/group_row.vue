@@ -50,6 +50,7 @@ export default {
     avatarInitials: {
       type: String,
       default: '',
+      required: true,
     },
 
     /**
