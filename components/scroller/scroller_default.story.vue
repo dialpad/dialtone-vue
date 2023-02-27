@@ -9,6 +9,7 @@
     <button @click="scrollToItem(items.length - 1)">
       Go to end
     </button>
+
     <dt-scroller
       ref="scroller"
       v-slot="{ item }"
@@ -43,6 +44,9 @@ function scrollToItem (index) {
 <style scoped>
 .scroller {
   height: 200px;
+  width: 200px;
+  margin: 20px 0;
+  border: 1px solid red;
 }
 
 .user {
@@ -50,5 +54,6 @@ function scrollToItem (index) {
   padding: 0 12px;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #eee;
 }
 </style>
