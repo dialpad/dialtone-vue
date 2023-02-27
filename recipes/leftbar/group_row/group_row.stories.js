@@ -51,7 +51,7 @@ const decorator = () => ({
 
 // Story Collection
 export default {
-  title: 'Recipes/leftbar/Group Row',
+  title: 'Recipes/Leftbar/Group Row',
   component: DtRecipeGroupRow,
   args: argsData,
   argTypes: argTypesData,
