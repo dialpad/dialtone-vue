@@ -1,12 +1,12 @@
 <template>
   <dt-recipe-group-row
-    :avatar-initials="avatarInitials"
-    :group-count="groupCount"
-    :names="names"
-    :avatar-src="avatarSrc"
-    :unread-count="unreadCount"
-    :selected="selected"
-    @click="onClick"
+    :avatar-initials="$attrs.avatarInitials"
+    :group-count="$attrs.groupCount"
+    :names="$attrs.names"
+    :avatar-src="$attrs.avatarSrc"
+    :unread-count="$attrs.unreadCount"
+    :selected="$attrs.selected"
+    @click="$attrs.onClick"
   />
 </template>
 

@@ -3,7 +3,6 @@
     :description="names"
     :unread-count="unreadCount"
     :selected="selected"
-    v-on="$listeners"
   >
     <template #left>
       <dt-avatar
