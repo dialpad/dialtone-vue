@@ -29,9 +29,9 @@ describe('DtRecipeGeneralRow Tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    iconType = wrapper.find('[data-qa="dt-left-sidebar-row-type"]');
-    description = wrapper.find('.leftbar-general-row__description');
-    unreadBadge = wrapper.find('[data-qa="dt-left-sidebar-row-unread-badge"]');
+    iconType = wrapper.find('[data-qa="dt-leftbar-row-icon"]');
+    description = wrapper.find('.dt-leftbar-row__description');
+    unreadBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-badge"]');
   };
 
   const _setWrappers = () => {
