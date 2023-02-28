@@ -5,16 +5,6 @@ import DtRecipeCallbarButton from '../callbar_button/callbar_button';
 import DtPopover from '@/components/popover/popover';
 import sinon from 'sinon';
 
-class ResizeObserverMock {
-  observe () {
-    // do nothing
-  }
-
-  unobserve () {
-    // do nothing
-  }
-}
-
 // Constants
 const basePropsData = {};
 
@@ -46,6 +36,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
       slots,
       provide,
       listeners,
+      attachTo: document.body,
       localVue: this.localVue,
     });
     _setChildWrappers();
@@ -57,7 +48,6 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
     // Need to mock them to avoid error
     global.requestAnimationFrame = sinon.spy();
     global.cancelAnimationFrame = sinon.spy();
-    global.ResizeObserver = ResizeObserverMock;
     this.localVue = createLocalVue();
   });
   beforeEach(function () {
@@ -72,9 +62,6 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
     provide = {};
     listeners = {};
     wrapper.destroy();
-  });
-  after(function () {
-    global.ResizeObserver = null;
   });
 
   describe('Presentation Tests', function () {

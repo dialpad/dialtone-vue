@@ -20,6 +20,7 @@ export * from './components/link';
 export * from './components/notice';
 export * from './components/pagination';
 export * from './components/popover';
+export * from './components/presence';
 export * from './components/radio';
 export * from './components/radio_group';
 export * from './components/tabs';
@@ -35,6 +36,7 @@ export * from './components/skeleton';
 export * from './components/keyboard_shortcut';
 export * from './components/root_layout';
 export * from './components/icon';
+export * from './components/stack';
 
 /// Recipes
 export * from './recipes/comboboxes/combobox_with_popover';
@@ -45,6 +47,8 @@ export * from './recipes/list_items/contact_info';
 export * from './recipes/notices/top_banner_info';
 export * from './recipes/cards/ivr_node';
 export * from './recipes/chips/grouped_chip';
+export * from './recipes/leftbar/general_row';
+export * from './recipes/leftbar/group_row';
 
 // Mixins
 export * from './common/mixins';

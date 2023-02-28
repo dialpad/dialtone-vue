@@ -102,6 +102,7 @@ export default {
      * Determines whether to show the presence indicator for
      * Avatar - accepts PRESENCE_STATES values: 'busy', 'away', 'offline',
      * or 'active'. By default, it's null and nothing is shown.
+     * @values null, busy, away, offline, active
      */
     presence: {
       type: String,
@@ -161,7 +162,7 @@ export default {
     avatarClasses () {
       return [
         'd-avatar',
-        AVATAR_SIZE_MODIFIERS[this.size],
+        AVATAR_SIZE_MODIFIERS[this.validatedSize],
         this.avatarClass,
         {
           'd-avatar--no-gradient': !this.gradient,
@@ -194,6 +195,11 @@ export default {
 
     formattedGroup () {
       return this.group > 99 ? '99+' : this.group;
+    },
+
+    validatedSize () {
+      // TODO: Group only supports xs size for now. Remove this when we support other sizes.
+      return this.group ? 'xs' : this.size;
     },
   },
 
@@ -252,9 +258,9 @@ export default {
     formatInitials (initials) {
       if (!initials) return;
 
-      if (this.size === 'xs') {
+      if (this.validatedSize === 'xs') {
         this.formattedInitials = '';
-      } else if (this.size === 'sm') {
+      } else if (this.validatedSize === 'sm') {
         this.formattedInitials = initials.trim()[0];
       } else {
         this.formattedInitials = initials.trim().slice(0, 2);

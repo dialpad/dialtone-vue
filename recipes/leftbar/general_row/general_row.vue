@@ -1,47 +1,49 @@
 <template>
   <div
     :class="leftbarGeneralRowClasses"
-    data-qa="dt-leftbar-general-row"
+    data-qa="dt-leftbar-row"
   >
-    <div class="leftbar-general-row__content">
-      <div
-        class="leftbar-general-row__type"
-        data-qa="dt-left-sidebar-row-type"
-      >
-        <dt-recipe-leftbar-general-row-icon
-          :type="getIcon"
-          :color="color"
-          class="leftbar-general-row__icon"
-        />
-      </div>
-      <dt-emoji-text-wrapper
-        :class="descriptionClasses"
-      >
-        {{ description }}
-      </dt-emoji-text-wrapper>
-    </div>
-    <div
-      class="leftbar-general-row__secondary"
-      data-qa="dt-left-sidebar-row-secondary"
+    <button
+      class="dt-leftbar-row__primary"
+      data-qa="dt-leftbar-row-link"
+      v-bind="$attrs"
+      v-on="$listeners"
     >
-      <dt-badge
-        v-if="hasUnreadMessages"
-        kind="count"
-        type="bulletin"
-        data-qa="dt-left-sidebar-row-unread-badge"
+      <div
+        class="dt-leftbar-row__alpha"
       >
-        {{ unreadCount }}
-      </dt-badge>
-    </div>
+        <slot name="left">
+          <dt-recipe-leftbar-general-row-icon
+            :type="getIcon"
+            :color="color"
+            data-qa="dt-leftbar-row-icon"
+          />
+        </slot>
+      </div>
+      <div class="dt-leftbar-row__label">
+        <dt-emoji-text-wrapper
+          class="dt-leftbar-row__description"
+          data-qa="dt-leftbar-row-description"
+        >
+          {{ description }}
+        </dt-emoji-text-wrapper>
+      </div>
+      <div class="dt-leftbar-row__omega">
+        <dt-badge
+          v-if="hasUnreadMessages"
+          kind="count"
+          type="bulletin"
+          data-qa="dt-leftbar-row-unread-badge"
+        >
+          {{ unreadCount }}
+        </dt-badge>
+      </div>
+    </button>
   </div>
 </template>
 
 <script>
-import {
-  LEFTBAR_GENERAL_ROW_TYPES,
-  LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
-  LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR,
-} from './general_row_constants.js';
+import { LEFTBAR_GENERAL_ROW_TYPES, LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS } from './general_row_constants.js';
 import { DtBadge } from '@/components/badge';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
@@ -54,6 +56,8 @@ export default {
     DtBadge,
     DtRecipeLeftbarGeneralRowIcon,
   },
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -107,28 +111,25 @@ export default {
   computed: {
     leftbarGeneralRowClasses () {
       return [
-        'leftbar-general-row',
+        'dt-leftbar-row',
+        'dt-leftbar-row--no-action',
         {
-          'leftbar-general-row--selected': this.selected,
-        },
-      ];
-    },
-
-    descriptionClasses () {
-      return [
-        'leftbar-general-row__description',
-        'd-mr-auto',
-        'd-truncate',
-        {
-          'd-fw-bold': this.hasUnreadMessages,
+          'dt-leftbar-row--has-unread': this.hasUnreadMessages,
+          'dt-leftbar-row--selected': this.selected,
         },
       ];
     },
 
     getIcon () {
-      return this.type === LEFTBAR_GENERAL_ROW_TYPES.CHANNELS && this.hasUnreadMessages
-        ? 'channel bold'
-        : this.type;
+      switch (this.type) {
+        case LEFTBAR_GENERAL_ROW_TYPES.CHANNELS:
+          if (this.hasUnreadMessages) return 'channel unread';
+          break;
+        case LEFTBAR_GENERAL_ROW_TYPES.LOCKED_CHANNEL:
+          if (this.hasUnreadMessages) return 'locked channel unread';
+          break;
+      }
+      return this.type;
     },
 
     hasUnreadMessages () {
@@ -150,7 +151,8 @@ export default {
     validateProps () {
       if (this.type === LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER &&
           !Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).includes(this.color)) {
-        console.error(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR);
+        console.error('If type is contact center, color must be one of the following: ' +
+          Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).join(', '));
       }
     },
   },
@@ -158,52 +160,5 @@ export default {
 </script>
 
 <style lang="less">
-.leftbar-general-row {
-  padding: calc(var(--space-200) * 3) var(--space-400);
-  border-radius: 100em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--size-400);
-
-  &:hover {
-    background-color: var(--theme-sidebar-row-color-background-hover);
-    cursor: pointer;
-  }
-
-  &:active {
-    background-color: var(--theme-sidebar-active-row-color-background);
-  }
-
-  &__content {
-    display: flex;
-    align-items: center;
-    flex-grow: 2;
-    gap: var(--size-400);
-    overflow: hidden;
-  }
-
-  &__type {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--size24);
-    height: var(--size24);
-  }
-
-  &__secondary {
-    display: flex;
-    align-items: center;
-  }
-
-  &__description {
-    font-size: var(--fs-200);
-    line-height: var(--lh-400);
-    width: 100%;
-  }
-
-  &--selected {
-    background-color: var(--black-200);
-  }
-}
+@import "../style/leftbar_row.less";
 </style>

@@ -89,6 +89,14 @@ export const argTypesData = {
   hasSuggestionList: {
     defaultValue: true,
   },
+  appendTo: {
+    defaultValue: 'body',
+    table: {
+      defaultValue: {
+        summary: 'body',
+      },
+    },
+  },
   size: {
     control: {
       type: 'select',

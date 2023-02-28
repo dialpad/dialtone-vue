@@ -1,3 +1,67 @@
+## [2.59.2](https://github.com/dialpad/dialtone-vue/compare/v2.59.1...v2.59.2) (2023-02-24)
+
+
+### Bug Fixes
+
+* export leftbar general row ([0af5373](https://github.com/dialpad/dialtone-vue/commit/0af53730fb8630843c244f737449b275d5faa075))
+
+## [2.59.1](https://github.com/dialpad/dialtone-vue/compare/v2.59.0...v2.59.1) (2023-02-24)
+
+
+### Bug Fixes
+
+* export presence ([ea7feb1](https://github.com/dialpad/dialtone-vue/commit/ea7feb1c24f306fcfcc005fd9d3cb945c294cc0f))
+
+# [2.59.0](https://github.com/dialpad/dialtone-vue/compare/v2.58.0...v2.59.0) (2023-02-23)
+
+
+### Bug Fixes
+
+* **Popover, Tooltip:** support shadow dom ([#772](https://github.com/dialpad/dialtone-vue/issues/772)) ([7e3ba47](https://github.com/dialpad/dialtone-vue/commit/7e3ba473beeed1a00f2a44e61011ab99480b861d))
+* **Popover:** prevent viewport from cutting off modal popover ([#770](https://github.com/dialpad/dialtone-vue/issues/770)) ([5e3b542](https://github.com/dialpad/dialtone-vue/commit/5e3b5426cd9b832994e395ed3fbc1929c2f94a70))
+* vue api doc issues ([#776](https://github.com/dialpad/dialtone-vue/issues/776)) ([2620ce5](https://github.com/dialpad/dialtone-vue/commit/2620ce5f39bdec1442252c949447e044ed0d3570))
+
+
+### Features
+
+* **Leftbar:** add general row recipe ([#769](https://github.com/dialpad/dialtone-vue/issues/769)) ([d1b57e0](https://github.com/dialpad/dialtone-vue/commit/d1b57e07082218bcd307097304a74a4ee2f75d17))
+
+# [2.58.0](https://github.com/dialpad/dialtone-vue/compare/v2.57.1...v2.58.0) (2023-02-17)
+
+
+### Features
+
+* **Stack:** new stack component ([#758](https://github.com/dialpad/dialtone-vue/issues/758)) ([7e8e78a](https://github.com/dialpad/dialtone-vue/commit/7e8e78ae5e884ce0d1bb79a61ee5417f04ec4086))
+
+# [2.58.0](https://github.com/dialpad/dialtone-vue/compare/v2.57.1...v2.58.0) (2023-02-17)
+
+
+### Features
+
+* **Stack:** new stack component ([#758](https://github.com/dialpad/dialtone-vue/issues/758)) ([7e8e78a](https://github.com/dialpad/dialtone-vue/commit/7e8e78ae5e884ce0d1bb79a61ee5417f04ec4086))
+
+## [2.57.1](https://github.com/dialpad/dialtone-vue/compare/v2.57.0...v2.57.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* add appendTo prop on all popover based components ([#764](https://github.com/dialpad/dialtone-vue/issues/764)) ([e11a915](https://github.com/dialpad/dialtone-vue/commit/e11a915666a9dff363ca7a489cffbb0464198ed2))
+* **Dropdown:** remove deprecated DropdownList ([#765](https://github.com/dialpad/dialtone-vue/issues/765)) ([72edcf1](https://github.com/dialpad/dialtone-vue/commit/72edcf1edb84656ae88d37c5dfaa996cb240e6c6))
+
+# [2.57.0](https://github.com/dialpad/dialtone-vue/compare/v2.56.1...v2.57.0) (2023-02-14)
+
+
+### Bug Fixes
+
+* **Root Layout Body:** fix a11y keyboard access to main content ([#753](https://github.com/dialpad/dialtone-vue/issues/753)) ([f93ac26](https://github.com/dialpad/dialtone-vue/commit/f93ac26e9ce0b94e6ad858ef5afa1a93e5cfb266))
+* **Root Layout:** null protection on getElementTops ([#762](https://github.com/dialpad/dialtone-vue/issues/762)) ([01754a3](https://github.com/dialpad/dialtone-vue/commit/01754a3484c54dde2feb653b092abe80784398d8))
+* **Root Layout:** sidebar independently scrollable ([#755](https://github.com/dialpad/dialtone-vue/issues/755)) ([a6d3dcb](https://github.com/dialpad/dialtone-vue/commit/a6d3dcb872774092ab1aa5b7dffc4dba32dd31c5))
+
+
+### Features
+
+* **List Item:** add selected prop ([#746](https://github.com/dialpad/dialtone-vue/issues/746)) ([9936198](https://github.com/dialpad/dialtone-vue/commit/9936198fdbdaafc60174767d198430e0f05c42d1))
+
 ## [2.56.1](https://github.com/dialpad/dialtone-vue/compare/v2.56.0...v2.56.1) (2023-02-09)
 
 
