@@ -1,9 +1,9 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtRecipeGroupRow from './group_row.vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   groupCount: 2,
   names: 'Jaqueline Nackos, Lori Smith',
   avatarInitials: 'JN',
@@ -19,7 +19,7 @@ describe('DtRecipeGroupRow Tests', function () {
   let unreadBadge;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -34,29 +34,26 @@ describe('DtRecipeGroupRow Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtRecipeGroupRow, {
-      propsData,
+      props,
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
+  before(function () {});
 
   beforeEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     slots = {};
     _setWrappers();
   });
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
@@ -75,11 +72,11 @@ describe('DtRecipeGroupRow Tests', function () {
       });
 
       it('should render the description', function () {
-        assert.strictEqual(description.text(), basePropsData.names);
+        assert.strictEqual(description.text(), baseProps.names);
       });
 
       it('should render the group count', function () {
-        assert.strictEqual(+avatarGroupCount.text(), basePropsData.groupCount);
+        assert.strictEqual(+avatarGroupCount.text(), baseProps.groupCount);
       });
     });
 
@@ -89,7 +86,7 @@ describe('DtRecipeGroupRow Tests', function () {
 
       // Test Setup
       beforeEach(function () {
-        propsData = { ...propsData, unreadCount };
+        props = { ...props, unreadCount };
         _setWrappers();
       });
 
@@ -101,7 +98,7 @@ describe('DtRecipeGroupRow Tests', function () {
     describe('When selected is provided', function () {
       // Test Setup
       beforeEach(function () {
-        propsData = { ...propsData, selected: true };
+        props = { ...props, selected: true };
         _setWrappers();
       });
 
