@@ -5,6 +5,8 @@
     :description="$attrs.description"
     :unread-count="$attrs.unreadCount"
     :selected="$attrs.selected"
+    :muted="$attrs.muted"
+    :active-voice-chat="$attrs.activeVoiceChat"
     @click="$attrs.onClick"
   />
 </template>
