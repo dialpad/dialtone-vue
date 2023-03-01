@@ -5,6 +5,8 @@
     :description="description"
     :unread-count="unreadCount"
     :selected="selected"
+    :muted="muted"
+    :active-voice-chat="activeVoiceChat"
     @click="onClick"
   />
 </template>
