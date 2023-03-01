@@ -29,11 +29,15 @@
         </dt-emoji-text-wrapper>
       </div>
       <div class="dt-leftbar-row__omega">
-        <dt-icon
+        <div
           v-if="activeVoiceChat"
-          size="300"
-          name="activity"
-        />
+          class="dt-leftbar-row__active-voice"
+        >
+          <dt-icon
+            size="300"
+            name="activity"
+          />
+        </div>
         <dt-badge
           v-else-if="hasUnreadMessages"
           kind="count"
