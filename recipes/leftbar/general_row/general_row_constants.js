@@ -35,8 +35,12 @@ export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS = {
   'magenta-100': 'd-bgc-magenta-100',
 };
 
+export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR = 'If type is contact center, color must be one' +
+    'of the following:' + Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).join(', ');
+
 export default {
   LEFTBAR_GENERAL_ROW_TYPES,
   LEFTBAR_GENERAL_ROW_ICON_MAPPING,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
+  LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR,
 };
