@@ -7,10 +7,10 @@
   //  ============================================================================
   //  $   CSS CUSTOM PROPERTIES
   //  ----------------------------------------------------------------------------
-  --leftbar-row-color-foreground: var(--fc-primary);
+  --leftbar-row-color-foreground: var(--theme-sidebar-color);
   --leftbar-row-color-background: transparent;
   --leftbar-row-radius: 100em;
-  --leftbar-row-alpha-color-foreground: var(--fc-secondary);
+  --leftbar-row-alpha-color-foreground: var(--theme-sidebar-icon-color);
   --leftbar-row-alpha-width: calc(var(--size-300) * 10);
   --leftbar-row-alpha-height: calc(var(--size-300) * 9);
   --leftbar-row-alpha-opacity: 100%;
@@ -21,7 +21,7 @@
   --leftbar-row-description-font-size: var(--fs-200);
   --leftbar-row-description-line-height: var(--lh-200);
   --leftbar-row-description-opacity: 100%;
-  --leftbar-row-status-color-foreground: var(--fc-secondary);
+  --leftbar-row-status-color-foreground: var(--theme-sidebar-status-color);
   --leftbar-row-status-font-size: var(--fs-100);
   --leftbar-row-status-line-height: var(--lh-100);
   --leftbar-row-action-position-right: var(--size-400);
@@ -62,7 +62,11 @@
   }
 
   &--selected {
-    --leftbar-row-color-background: var(--black-200);
+    --leftbar-row-color-background: var(--theme-sidebar-active-row-color-background);
+    --leftbar-row-color-foreground: var(--theme-sidebar-active-row-color);
+    .d-avatar__count {
+      --avatar-count-color-shadow: var(--theme-sidebar-active-row-color-background);
+    }
   }
 
   &--action-focused {
@@ -103,11 +107,11 @@
     cursor: pointer;
 
     &:hover {
-      --leftbar-row-color-background: var(--black-200);
+      --leftbar-row-color-background: var(--theme-sidebar-row-color-background-hover);
     }
 
     &:active {
-      --leftbar-row-color-background: var(--black-300);
+      --leftbar-row-color-background: var(--theme-sidebar-active-row-color-background);
     }
 
     &:focus-visible {
@@ -225,7 +229,7 @@
   &__meta-custom:not(:empty) {
     .dt-leftbar-row__meta-context ~ &:before {
       content: ' • ';
-      color: var(--fc-tertiary);
+      color: var(--theme-sidebar-status-color);
     }
   }
 
