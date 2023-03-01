@@ -30,7 +30,13 @@
       </div>
       <div class="dt-leftbar-row__omega">
         <div
-          v-if="activeVoiceChat"
+          v-if="dndText"
+          class="dt-leftbar-row__dnd"
+        >
+          {{ dndText }}
+        </div>
+        <div
+          v-else-if="activeVoiceChat"
           class="dt-leftbar-row__active-voice"
         >
           <dt-icon
@@ -136,6 +142,15 @@ export default {
     activeVoiceChat: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Acronym used to represent "Do not Disturb" state. If entered will display the entered text over
+     * unreadCount and activeVoiceChat.
+     */
+    dndText: {
+      type: String,
+      default: '',
     },
   },
 
