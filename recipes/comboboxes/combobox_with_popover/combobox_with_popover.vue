@@ -453,7 +453,7 @@ export default {
 
     onFocusOut (e) {
       // Check if the focus change was to another target within the combobox component
-      const popoverEl = this.$refs.popover?.$children?.[0]?.$el;
+      const popoverEl = this.$refs.popover.tip?.popper;
       const comboboxEl = this.$refs.input;
 
       if (e.composedPath()?.some(el => [popoverEl, comboboxEl].includes(el))) return;
