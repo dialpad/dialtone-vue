@@ -47,14 +47,12 @@ export const argTypesData = {
   },
 
   click: {
-    description: 'Native click event',
     table: {
       type: { summary: 'event' },
     },
   },
 
   call: {
-    description: 'Call button clicked',
     table: {
       type: { summary: 'event' },
     },

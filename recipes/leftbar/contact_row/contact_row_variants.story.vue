@@ -8,7 +8,6 @@
         <dt-recipe-contact-row
           name="Jaqueline Nackos"
           :avatar-src="defaultImage"
-          avatar-presence="active"
           user-status="Good Morning! :smile:"
         />
       </div>
@@ -43,7 +42,6 @@
         <dt-recipe-contact-row
           name="Jaqueline Nackos"
           :avatar-src="defaultImage"
-          avatar-presence="active"
           unread-count="5"
           :has-unreads="true"
         />
@@ -55,17 +53,15 @@
         <dt-recipe-contact-row
           name="Jaqueline Nackos"
           :avatar-src="defaultImage"
-          avatar-presence="active"
           :selected="true"
         />
       </div>
       <div>
         <h3>
-          With no image
+          With initial
         </h3>
         <dt-recipe-contact-row
           name="Jaqueline Nackos"
-          avatar-presence="active"
         />
       </div>
     </dt-stack>
