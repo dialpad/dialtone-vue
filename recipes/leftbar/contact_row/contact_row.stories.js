@@ -25,7 +25,6 @@ export const argTypesData = {
   },
 
   avatarPresence: {
-    defaultValue: null,
     control: {
       type: 'select',
       options: [...PRESENCE_STATES_LIST],

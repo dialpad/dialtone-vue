@@ -35,8 +35,7 @@
         <span
           v-if="presenceText"
           data-qa="dt-leftbar-row-presence-text"
-          class="dt-leftbar-row__meta-context"
-          :style="{ color: presenceColor }"
+          :class="['dt-leftbar-row__meta-context', presenceColor]"
         >
           {{ presenceText }}
         </span>
@@ -148,11 +147,11 @@ export default {
     presenceColor () {
       switch (this.avatarPresence) {
         case 'active':
-          return 'var(--theme-presence-color-background-available)';
+          return 'd-fc-success';
         case 'busy':
-          return 'var(--theme-presence-color-background-busy-unavailable)';
+          return 'd-fc-critical';
         case 'away':
-          return 'var(--theme-presence-color-background-busy)';
+          return 'd-fc-warning';
         default:
           return undefined;
       }
