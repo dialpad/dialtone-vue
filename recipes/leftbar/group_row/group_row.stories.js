@@ -39,7 +39,6 @@ export const argTypesData = {
   },
 
   click: {
-    description: 'Native click event on the row',
     table: {
       type: { summary: 'event' },
     },

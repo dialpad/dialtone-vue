@@ -31,18 +31,61 @@ import DtRecipeContactRow from './contact_row';
 import { DtRecipeContactRow } from '@dialpad/dialtone-vue';
 ```
 
-### With Some Variant
+### Default behavior
 
-```vue
-<dt-recipe-contact-row
-  some="variant"
+```html
+<dt-recipe-group-row
+  name="Jaqueline Nackos"
+  avatar-src="/static/media/../components/avatar/person.png"
 />
 ```
 
-### With Some Other Variant
+### With user status
 
-```vue
+```html
 <dt-recipe-contact-row
-  some-other="variant"
+  name="Jaqueline Nackos"
+  avatar-src="/static/media/../components/avatar/person.png"
+  user-status="Good Morning! :smile:"
+/>
+```
+
+### With presence
+
+```html
+<dt-recipe-contact-row
+  name="Jaqueline Nackos"
+  avatar-src="/static/media/../components/avatar/person.png"
+  avatar-presence="away"
+  presence-text="Away"
+/>
+```
+
+### With unread count
+
+```html
+<dt-recipe-contact-row
+  name="Jaqueline Nackos"
+  :avatar-src="defaultImage"
+  unread-count="5"
+  :has-unreads="true"
+/>
+```
+
+### Selected
+
+```html
+<dt-recipe-contact-row
+  name="Jaqueline Nackos"
+  :avatar-src="defaultImage"
+  :selected="true"
+/>
+```
+
+### With initial
+
+```html
+<dt-recipe-contact-row
+  name="Jaqueline Nackos"
 />
 ```

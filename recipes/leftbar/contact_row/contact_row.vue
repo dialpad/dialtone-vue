@@ -35,7 +35,7 @@
         <span
           v-if="presenceText"
           data-qa="dt-leftbar-row-presence-text"
-          :class="['dt-leftbar-row__meta-context', presenceColor]"
+          :class="['dt-leftbar-row__meta-context', presenceColorClass]"
         >
           {{ presenceText }}
         </span>
@@ -70,8 +70,7 @@ export default {
   props: {
     /**
      * Optional avatar image url.
-     * if provided, it's also required to provide a value in the `avatarInitials` prop to use
-     * in the alt attribute of the avatar.
+     * If not provided it will use the initial of the name.
      */
     avatarSrc: {
       type: String,
@@ -127,7 +126,8 @@ export default {
     },
 
     /**
-     * Styles the row with an increased font weight to convey it has unreads
+     * Styles the row with an increased font weight to convey it has unreads. This must be true to see
+     * the unread count badge.
      */
     hasUnreads: {
       type: Boolean,
@@ -143,8 +143,26 @@ export default {
     },
   },
 
+  emits: [
+    /**
+     * Native click event on the row itself
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+
+    /**
+     * Call button clicked
+     *
+     * @event call
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'call',
+  ],
+
   computed: {
-    presenceColor () {
+    presenceColorClass () {
       switch (this.avatarPresence) {
         case 'active':
           return 'd-fc-success';

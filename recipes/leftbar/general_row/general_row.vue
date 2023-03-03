@@ -143,7 +143,8 @@ export default {
     },
 
     /**
-     * Styles the row with an increased font weight to convey it has unreads
+     * Styles the row with an increased font weight to convey it has unreads. This must be true to see
+     * the unread count badge.
      */
     hasUnreads: {
       type: Boolean,
@@ -199,6 +200,24 @@ export default {
       default: false,
     },
   },
+
+  emits: [
+    /**
+     * Native click event on the row itself
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+
+    /**
+     * Call button clicked
+     *
+     * @event call
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'call',
+  ],
 
   data () {
     return {
