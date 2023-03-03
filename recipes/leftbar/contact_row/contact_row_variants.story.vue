@@ -9,7 +9,7 @@
           name="Jaqueline Nackos"
           :avatar-src="defaultImage"
           avatar-presence="active"
-          user-status="Good Morning!"
+          user-status="Good Morning! :smile:"
         />
       </div>
       <div>
