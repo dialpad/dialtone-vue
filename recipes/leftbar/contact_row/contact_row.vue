@@ -58,6 +58,8 @@ import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
 
+import { PRESENCE_STATES, PRESENCE_STATES_LIST } from '@/components/presence/presence_constants';
+
 export default {
   name: 'DtRecipeGroupRow',
 
@@ -78,11 +80,16 @@ export default {
     },
 
     /**
-     * Avatar presence such as "active" or "busy". Maps to the presence prop in the Avatar component.
+     * Determines whether to show the presence indicator for
+     * Avatar - accepts PRESENCE_STATES values: 'active', 'busy', 'away', 'offline'. defaults to active.
+     * @values active, busy, away, offline
      */
     avatarPresence: {
       type: String,
-      default: 'active',
+      default: PRESENCE_STATES.ACTIVE,
+      validator: (role) => {
+        return PRESENCE_STATES_LIST.includes(role);
+      },
     },
 
     /**
