@@ -30,7 +30,10 @@
           </dt-emoji-text-wrapper>
         </slot>
       </div>
-      <div class="dt-leftbar-row__omega">
+      <div
+        v-if="!actionFocused"
+        class="dt-leftbar-row__omega"
+      >
         <div
           v-if="dndText"
           class="dt-leftbar-row__dnd"
@@ -55,28 +58,30 @@
           {{ unreadCount }}
         </dt-badge>
       </div>
-
-      <div
-        class="dt-leftbar-row__action"
-        data-qa="dt-leftbar-row-action"
-      >
-        <dt-button
-          class="dt-leftbar-row__action-button"
-          data-qa="dt-leftbar-row-action-call-button"
-          circle
-          size="xs"
-          kind="inverted"
-          @click.stop="$emit('call', $event)"
-        >
-          <template #icon>
-            <dt-icon
-              name="phone"
-              size="200"
-            />
-          </template>
-        </dt-button>
-      </div>
     </button>
+    <div
+      v-if="hasCallButton"
+      class="dt-leftbar-row__action"
+      data-qa="dt-leftbar-row-action"
+    >
+      <dt-button
+        class="dt-leftbar-row__action-button"
+        data-qa="dt-leftbar-row-action-call-button"
+        circle
+        size="xs"
+        kind="inverted"
+        @focus="actionFocused = true"
+        @blur="actionFocused = false"
+        @click.stop="$emit('call', $event)"
+      >
+        <template #icon>
+          <dt-icon
+            name="phone"
+            size="200"
+          />
+        </template>
+      </dt-button>
+    </div>
   </div>
 </template>
 
@@ -193,6 +198,12 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+
+  data () {
+    return {
+      actionFocused: false,
+    };
   },
 
   computed: {
