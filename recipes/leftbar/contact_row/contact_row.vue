@@ -81,7 +81,7 @@ export default {
      */
     avatarPresence: {
       type: String,
-      required: true,
+      default: 'active',
     },
 
     /**
@@ -97,7 +97,7 @@ export default {
      */
     presenceText: {
       type: String,
-      required: true,
+      default: '',
     },
 
     /**
