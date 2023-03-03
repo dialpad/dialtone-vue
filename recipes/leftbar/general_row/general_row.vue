@@ -30,7 +30,6 @@
         </slot>
       </div>
       <div
-        v-if="!actionFocused"
         class="dt-leftbar-row__omega"
       >
         <div
@@ -71,6 +70,7 @@
         kind="inverted"
         @focus="actionFocused = true"
         @blur="actionFocused = false"
+        @mouseout="actionFocused = false"
         @click.stop="$emit('call', $event)"
       >
         <template #icon>
@@ -214,6 +214,7 @@ export default {
           'dt-leftbar-row--has-unread': this.hasUnreads,
           'dt-leftbar-row--selected': this.selected,
           'dt-leftbar-row--muted': this.muted,
+          'dt-leftbar-row--action-focused': this.actionFocused,
         },
       ];
     },
