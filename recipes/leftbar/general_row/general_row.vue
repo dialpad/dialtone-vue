@@ -20,12 +20,14 @@
         </slot>
       </div>
       <div class="dt-leftbar-row__label">
-        <dt-emoji-text-wrapper
-          class="dt-leftbar-row__description"
-          data-qa="dt-leftbar-row-description"
-        >
-          {{ description }}
-        </dt-emoji-text-wrapper>
+        <slot name="label">
+          <dt-emoji-text-wrapper
+            class="dt-leftbar-row__description"
+            data-qa="dt-leftbar-row-description"
+          >
+            {{ description }}
+          </dt-emoji-text-wrapper>
+        </slot>
       </div>
       <div class="dt-leftbar-row__omega">
         <div
@@ -52,6 +54,27 @@
           {{ unreadCount }}
         </dt-badge>
       </div>
+
+      <div
+        class="dt-leftbar-row__action"
+        data-qa="dt-leftbar-row-action"
+      >
+        <dt-button
+          class="dt-leftbar-row__action-button"
+          data-qa="dt-leftbar-row-action-call-button"
+          circle
+          size="xs"
+          kind="inverted"
+          @click.stop="$emit('call', $event)"
+        >
+          <template #icon>
+            <dt-icon
+              name="phone"
+              size="200"
+            />
+          </template>
+        </dt-button>
+      </div>
     </button>
   </div>
 </template>
@@ -64,6 +87,7 @@ import {
 } from './general_row_constants.js';
 import { DtBadge } from '@/components/badge';
 import { DtIcon } from '@/components/icon';
+import { DtButton } from '@/components/button';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
 
@@ -74,6 +98,7 @@ export default {
     DtEmojiTextWrapper,
     DtBadge,
     DtIcon,
+    DtButton,
     DtRecipeLeftbarGeneralRowIcon,
   },
 
@@ -159,14 +184,22 @@ export default {
       type: String,
       default: '',
     },
+
+    /**
+     * Whether the row should have a call button. Usually only applicable to individual contact rows.
+     */
+    hasCallButton: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
     leftbarGeneralRowClasses () {
       return [
         'dt-leftbar-row',
-        'dt-leftbar-row--no-action',
         {
+          'dt-leftbar-row--no-action': !this.hasCallButton,
           'dt-leftbar-row--has-unread': this.hasUnreads,
           'dt-leftbar-row--selected': this.selected,
           'dt-leftbar-row--muted': this.muted,

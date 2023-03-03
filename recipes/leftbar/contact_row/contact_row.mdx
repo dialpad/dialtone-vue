@@ -1,0 +1,48 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeContactRow from './contact_row';
+
+# Leftbar Contact Row
+
+<Subtitle>
+  Displays the row for one specific contact.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="recipes-leftbar-contact-row--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="recipes-leftbar-contact-row--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeContactRow } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```vue
+<dt-recipe-contact-row
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-recipe-contact-row
+  some-other="variant"
+/>
+```
