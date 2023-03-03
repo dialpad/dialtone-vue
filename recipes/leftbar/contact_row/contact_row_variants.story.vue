@@ -9,7 +9,6 @@
           name="Jaqueline Nackos"
           :avatar-src="defaultImage"
           avatar-presence="active"
-          presence-text="active"
           user-status="Good Morning!"
         />
       </div>
@@ -20,7 +19,7 @@
         <dt-recipe-contact-row
           name="Jaqueline Nackos"
           avatar-presence="away"
-          presence-text="away"
+          presence-text="Away"
           user-status="Out for a bit"
           :avatar-src="defaultImage"
         />
@@ -45,7 +44,6 @@
           name="Jaqueline Nackos"
           :avatar-src="defaultImage"
           avatar-presence="active"
-          presence-text="active"
           unread-count="5"
           :has-unreads="true"
         />
@@ -58,7 +56,6 @@
           name="Jaqueline Nackos"
           :avatar-src="defaultImage"
           avatar-presence="active"
-          presence-text="active"
           :selected="true"
         />
       </div>
@@ -69,7 +66,6 @@
         <dt-recipe-contact-row
           name="Jaqueline Nackos"
           avatar-presence="active"
-          presence-text="active"
         />
       </div>
     </dt-stack>
