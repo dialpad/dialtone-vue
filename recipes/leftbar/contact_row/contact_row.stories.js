@@ -4,6 +4,7 @@ import DtRecipeContactRow from './contact_row';
 import DtRecipeContactRowMdx from './contact_row.mdx';
 import DtRecipeContactRowDefaultTemplate from './contact_row_default.story.vue';
 import DtRecipeContactRowVariantsTemplate from './contact_row_variants.story.vue';
+import { PRESENCE_STATES_LIST } from '@/components/presence/presence_constants';
 const defaultImage = require('./../../../components/avatar/person.png');
 
 // Default Prop Values
@@ -21,6 +22,14 @@ export const argTypesData = {
 
   avatarSrc: {
     defaultValue: defaultImage,
+  },
+
+  avatarPresence: {
+    defaultValue: null,
+    control: {
+      type: 'select',
+      options: [...PRESENCE_STATES_LIST],
+    },
   },
 
   // Slots

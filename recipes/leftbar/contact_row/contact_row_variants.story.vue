@@ -7,7 +7,7 @@
         </h3>
         <dt-recipe-contact-row
           name="Jaqueline Nackos"
-          avatar-src="static/media/../components/avatar/person.png"
+          :avatar-src="defaultImage"
           avatar-presence="active"
           presence-text="active"
           user-status="Good Morning!"
@@ -22,7 +22,7 @@
           avatar-presence="away"
           presence-text="away"
           user-status="Out for a bit"
-          avatar-src="static/media/../components/avatar/person.png"
+          :avatar-src="defaultImage"
         />
       </div>
       <div>
@@ -34,7 +34,7 @@
           avatar-presence="busy"
           presence-text="In a meeting"
           user-status="Meetings all day"
-          avatar-src="static/media/../components/avatar/person.png"
+          :avatar-src="defaultImage"
         />
       </div>
       <div>
@@ -43,7 +43,7 @@
         </h3>
         <dt-recipe-contact-row
           name="Jaqueline Nackos"
-          avatar-src="static/media/../components/avatar/person.png"
+          :avatar-src="defaultImage"
           avatar-presence="active"
           presence-text="active"
           unread-count="5"
@@ -56,7 +56,7 @@
         </h3>
         <dt-recipe-contact-row
           name="Jaqueline Nackos"
-          avatar-src="static/media/../components/avatar/person.png"
+          :avatar-src="defaultImage"
           avatar-presence="active"
           presence-text="active"
           :selected="true"
@@ -79,9 +79,15 @@
 <script>
 import DtRecipeContactRow from './contact_row';
 import { DtStack } from '@/components/stack';
+const defaultImage = require('./../../../components/avatar/person.png');
 
 export default {
   name: 'DtRecipeContactRowVariants',
   components: { DtRecipeContactRow, DtStack },
+  data () {
+    return {
+      defaultImage,
+    };
+  },
 };
 </script>
