@@ -1,622 +1,283 @@
 <template>
-  <div
+  <core-scroller
     ref="scroller"
-    class="vue-recycle-scroller"
-    :class="{
-      ready,
-      [`direction-${direction}`]: true,
-    }"
-    @scroll.passive="handleScroll"
+    :items="itemsWithSize"
+    :min-item-size="minItemSize"
+    :direction="direction"
+    key-field="id"
+    :list-tag="listTag"
+    :item-tag="itemTag"
+    v-bind="$attrs"
   >
-    <component
-      :is="listTag"
-      ref="wrapper"
-      :style="{ [direction === 'vertical' ? 'minHeight' : 'minWidth']: `${totalSize}px` }"
-      class="vue-recycle-scroller__item-wrapper"
-      :class="listClass"
+    <template
+      v-if="!dynamic"
+      #default="{ item: itemWithSize, index, active }"
     >
-      <component
-        :is="itemTag"
-        v-for="view in pool"
-        :key="view.nr.id"
-        :style="ready ? {
-          transform: `translate${direction === 'vertical' ? 'Y' : 'X'}(${view.position}px) translate${direction === 'vertical' ? 'X' : 'Y'}(${view.offset}px)`,
-          width: undefined,
-          height: undefined,
-        } : null"
-        class="vue-recycle-scroller__item-view"
-        :class="[
-          itemClass,
-          {
-            hover: !skipHover && hoverKey === view.nr.key,
-          },
-        ]"
-        v-on="skipHover ? {} : {
-          mouseenter: () => { hoverKey = view.nr.key },
-          mouseleave: () => { hoverKey = null },
+      <slot
+        v-bind="{
+          item: itemWithSize.item,
+          index,
+          active,
+          itemWithSize,
         }"
+      />
+    </template>
+
+    <template
+      v-else
+      #default="{ item: itemWithSize, index, active }"
+    >
+      <dt-scroller-item
+        :item="itemWithSize"
+        :active="active"
+        :size-dependencies="[
+          itemWithSize.message,
+        ]"
+        :data-index="index"
       >
         <slot
-          :item="view.item"
-          :index="view.nr.index"
-          :active="view.nr.used"
+          v-bind="{
+            item: itemWithSize.item,
+            index,
+            active,
+            itemWithSize,
+          }"
         />
-      </component>
-    </component>
-  </div>
+      </dt-scroller-item>
+    </template>
+  </core-scroller>
 </template>
 
-<script setup>
-import { computed, watch, markRaw, shallowReactive, onMounted, nextTick, reactive, ref } from 'vue';
+<script>
+import mitt from 'mitt';
+import CoreScroller from './modules/core-scroller.vue';
+import DtScrollerItem from './modules/scroller-item.vue';
 
-const props = defineProps({
-  /**
-     * List of items you want to display in the scroller.
-     */
-  items: {
-    type: Array,
-    required: true,
+export default {
+  name: 'DynamicScroller',
+
+  components: {
+    CoreScroller,
+    DtScrollerItem,
   },
 
-  /**
-     *
-     * Field used to identify items and optimize managing rendered views
-     */
-  keyField: {
-    type: String,
-    default: 'id',
-  },
-
-  /**
-     * Direction of the scroller. Can be either `vertical` or `horizontal`.
-     */
-  direction: {
-    type: String,
-    default: 'vertical',
-    validator: (value) => ['vertical', 'horizontal'].includes(value),
-  },
-
-  /**
-     * Size of the items in the list.
-     * If it is set to null (the default value), it will use variable size mode.
-     */
-  itemSize: {
-    type: Number,
-    default: null,
-  },
-
-  /**
-     * Minimum size used if the height (or width in horizontal mode) of an item is unknown.
-     */
-  minItemSize: {
-    type: [Number, String],
-    default: null,
-  },
-
-  /**
-     * Field used to get the item's size in variable size mode.
-     */
-  sizeField: {
-    type: String,
-    default: 'size',
-  },
-
-  /**
-     * Amount of pixel to add to edges of the scrolling visible area to start rendering items further away.
-     */
-  buffer: {
-    type: Number,
-    default: 200,
-  },
-
-  /**
-     * If true, the hover state will be skipped.
-     * This can be useful if you want to use the hover state for other purposes.
-     */
-  skipHover: {
-    type: Boolean,
-    default: false,
-  },
-
-  /**
-     * The element to render as the list's wrapper.
-     */
-  listTag: {
-    type: String,
-    default: 'div',
-  },
-
-  /**
-     * The element to render as the list item.
-     */
-  itemTag: {
-    type: String,
-    default: 'div',
-  },
-
-  /**
-     * The custom classes added to the item list wrapper.
-     */
-  listClass: {
-    type: [String, Object, Array],
-    default: '',
-  },
-
-  /**
-     * The custom classes added to each item.
-     */
-  itemClass: {
-    type: [String, Object, Array],
-    default: '',
-  },
-});
-
-const emit = defineEmits(['scroll-start', 'scroll-end']);
-
-const views = reactive(new Map());
-const reactiveItems = reactive(props.items);
-const unusedViews = reactive(new Map());
-const updateTimeout = null;
-const pool = ref([]);
-const hoverKey = ref(null);
-const ready = ref(false);
-const scroller = ref(null);
-
-let startIndex = 0;
-let endIndex = 0;
-let scrollDirty = false;
-let lastUpdateScrollPosition = 0;
-let sortTimer = null;
-let computedMinItemSize = null;
-let totalSize = 0;
-let uid = 0;
-
-const sizes = computed(() => {
-  if (props.itemSize === null) {
-    const sizes = {
-      '-1': { accumulator: 0 },
-    };
-    const items = props.items;
-    const field = props.sizeField;
-    const minItemSize = props.minItemSize;
-    let computedMinSize = 10000;
-    let accumulator = 0;
-    let current;
-    for (let i = 0, l = items.length; i < l; i++) {
-      current = items[i][field] || minItemSize;
-      if (current < computedMinSize) {
-        computedMinSize = current;
-      }
-      accumulator += current;
-      sizes[i] = { accumulator, size: current };
+  provide () {
+    if (typeof ResizeObserver !== 'undefined') {
+      this.$_resizeObserver = new ResizeObserver(entries => {
+        requestAnimationFrame(() => {
+          if (!Array.isArray(entries)) {
+            return;
+          }
+          for (const entry of entries) {
+            if (entry.target && entry.target.$_vs_onResize) {
+              let width, height;
+              if (entry.borderBoxSize) {
+                const resizeObserverSize = entry.borderBoxSize[0];
+                width = resizeObserverSize.inlineSize;
+                height = resizeObserverSize.blockSize;
+              } else {
+                // @TODO remove when contentRect is deprecated
+                width = entry.contentRect.width;
+                height = entry.contentRect.height;
+              }
+              entry.target.$_vs_onResize(entry.target.$_vs_id, width, height);
+            }
+          }
+        });
+      });
     }
 
-    computedMinItemSize = computedMinSize;
-    return sizes;
-  }
-  return [];
-});
-
-const simpleArray = computed(() => {
-  return props.items.length && typeof props.items[0] !== 'object';
-});
-
-const itemIndexByKey = computed(() => {
-  const result = {};
-  for (let i = 0, l = props.items.length; i < l; i++) {
-    result[props.items[i][props.keyField]] = i;
-  }
-  return result;
-});
-
-watch(reactiveItems, () => {
-  _updateVisibleItems(true);
-});
-
-watch(sizes, () => {
-  _updateVisibleItems(false);
-}, { deep: true });
-
-onMounted(() => {
-  nextTick(() => {
-    // In SSR mode, render the real number of visible items
-    _updateVisibleItems(true);
-    ready.value = true;
-  });
-});
-
-const _addView = (pool, index, item, key, type) => {
-  const nr = markRaw({
-    id: uid++,
-    index,
-    used: true,
-    key,
-    type,
-  });
-  const view = shallowReactive({
-    item,
-    position: 0,
-    nr,
-  });
-  pool.value.push(view);
-  return view;
-};
-
-const _unuseView = (view, fake = false) => {
-  const _unusedViews = unusedViews;
-  const type = view.nr.type;
-  let unusedPool = _unusedViews.get(type);
-  if (!unusedPool) {
-    unusedPool = [];
-    _unusedViews.set(type, unusedPool);
-  }
-  unusedPool.push(view);
-  if (!fake) {
-    view.nr.used = false;
-    view.position = -9999;
-  }
-};
-
-const _getScroll = () => {
-  const isVertical = props.direction === 'vertical';
-  let scrollState;
-
-  if (isVertical) {
-    scrollState = {
-      start: scroller.value.scrollTop,
-      end: scroller.value.scrollTop + scroller.value.clientHeight,
+    return {
+      vscrollData: this.vscrollData,
+      vscrollParent: this,
+      vscrollResizeObserver: this.$_resizeObserver,
     };
-  } else {
-    scrollState = {
-      start: scroller.value.scrollLeft,
-      end: scroller.value.scrollLeft + scroller.value.clientWidth,
+  },
+
+  inheritAttrs: false,
+
+  props: {
+    items: {
+      type: Array,
+      required: true,
+    },
+
+    dynamic: {
+      type: Boolean,
+      default: false,
+    },
+
+    keyField: {
+      type: String,
+      default: 'id',
+    },
+
+    direction: {
+      type: String,
+      default: 'vertical',
+      validator: (value) => ['vertical', 'horizontal'].includes(value),
+    },
+
+    listTag: {
+      type: String,
+      default: 'div',
+    },
+
+    itemTag: {
+      type: String,
+      default: 'div',
+    },
+
+    minItemSize: {
+      type: [Number, String],
+      required: true,
+    },
+  },
+
+  emits: [
+    'resize',
+    'visible',
+  ],
+
+  data () {
+    return {
+      vscrollData: {
+        active: true,
+        sizes: {},
+        keyField: this.keyField,
+        simpleArray: false,
+      },
     };
-  }
+  },
 
-  return scrollState;
-};
+  computed: {
+    simpleArray () {
+      return this.items.length && typeof this.items[0] !== 'object';
+    },
 
-const _itemsLimitError = () => {
-  setTimeout(() => {
-    // eslint-disable-next-line max-len
-    console.error('It seems the scroller element isn\'t scrolling, so it tries to render all the items at once.', 'Scroller:', scroller);
-    // eslint-disable-next-line max-len
-    console.error('Make sure the scroller has a fixed height (or width) and \'overflow-y\' (or \'overflow-x\') set to \'auto\' so it can scroll correctly and only render the items visible in the scroll viewport.');
-  });
-  throw new Error('Rendered items limit reached');
-};
+    itemsWithSize () {
+      const result = [];
+      const { items, keyField, simpleArray } = this;
+      const sizes = this.vscrollData.sizes;
+      const l = items.length;
+      for (let i = 0; i < l; i++) {
+        const item = items[i];
+        const id = simpleArray ? i : item[keyField];
+        let size = sizes[id];
+        if (typeof size === 'undefined' && !this.$_undefinedMap[id]) {
+          size = 0;
+        }
+        result.push({
+          item,
+          id,
+          size,
+        });
+      }
+      return result;
+    },
+  },
 
-const _sortViews = () => {
-  pool.value.sort((viewA, viewB) => viewA.nr.index - viewB.nr.index);
-};
+  watch: {
+    items () {
+      this.forceUpdate();
+    },
 
-const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
-  const itemSize = props.itemSize;
-  const minItemSize = computedMinItemSize;
-  const keyField = simpleArray.value ? null : props.keyField;
-  const items = props.items;
-  const count = items.length;
-  const _sizes = sizes.value;
-  const _views = views;
-  const _unusedViews = unusedViews;
-  const _pool = pool;
-  const _itemIndexByKey = itemIndexByKey;
-  let _startIndex, _endIndex;
-  let _totalSize;
-  let visibleStartIndex, visibleEndIndex;
+    simpleArray: {
+      handler (value) {
+        this.vscrollData.simpleArray = value;
+      },
 
-  // console.log(minItemSize)
+      immediate: true,
+    },
 
-  if (!count) {
-    _startIndex = _endIndex = visibleStartIndex = visibleEndIndex = _totalSize = 0;
-  } else {
-    const scroll = _getScroll();
+    direction (value) {
+      this.forceUpdate(true);
+    },
 
-    // Skip update if use hasn't scrolled enough
-    if (checkPositionDiff) {
-      let positionDiff = scroll.start - lastUpdateScrollPosition.value;
-      if (positionDiff < 0) positionDiff = -positionDiff;
-      if ((itemSize === null && positionDiff < minItemSize.value) || positionDiff < itemSize) {
-        return {
-          continuous: true,
+    itemsWithSize (next, prev) {
+      const scrollTop = this.$el.scrollTop;
+
+      // Calculate total diff between prev and next sizes
+      // over current scroll top. Then add it to scrollTop to
+      // avoid jumping the contents that the user is seeing.
+      let prevActiveTop = 0; let activeTop = 0;
+      const length = Math.min(next.length, prev.length);
+      for (let i = 0; i < length; i++) {
+        if (prevActiveTop >= scrollTop) {
+          break;
+        }
+        prevActiveTop += prev[i].size || this.minItemSize;
+        activeTop += next[i].size || this.minItemSize;
+      }
+      const offset = activeTop - prevActiveTop;
+
+      if (offset === 0) {
+        return;
+      }
+
+      this.$el.scrollTop += offset;
+    },
+  },
+
+  beforeCreate () {
+    this.$_updates = [];
+    this.$_undefinedSizes = 0;
+    this.$_undefinedMap = {};
+    this.$_events = mitt();
+  },
+
+  activated () {
+    this.vscrollData.active = true;
+  },
+
+  deactivated () {
+    this.vscrollData.active = false;
+  },
+
+  unmounted () {
+    this.$_events.all.clear();
+  },
+
+  methods: {
+    forceUpdate (clear = false) {
+      if (clear || this.simpleArray) {
+        this.vscrollData.sizes = {};
+      }
+      this.$_events.emit('vscroll:update', { force: true });
+    },
+
+    scrollToItem (index) {
+      const scroller = this.$refs.scroller;
+      if (scroller) scroller.scrollToItem(index);
+    },
+
+    getItemSize (item, index = undefined) {
+      const id = this.simpleArray ? (index != null ? index : this.items.indexOf(item)) : item[this.keyField];
+      return this.vscrollData.sizes[id] || 0;
+    },
+
+    scrollToBottom () {
+      if (this.$_scrollingToBottom) return;
+      this.$_scrollingToBottom = true;
+      const el = this.$el;
+      // Item is inserted to the DOM
+      this.$nextTick(() => {
+        el.scrollTop = el.scrollHeight + 5000;
+        // Item sizes are computed
+        const cb = () => {
+          el.scrollTop = el.scrollHeight + 5000;
+          requestAnimationFrame(() => {
+            el.scrollTop = el.scrollHeight + 5000;
+            if (this.$_undefinedSizes === 0) {
+              this.$_scrollingToBottom = false;
+            } else {
+              requestAnimationFrame(cb);
+            }
+          });
         };
-      }
-    }
-    lastUpdateScrollPosition = scroll.start;
-
-    const _buffer = props.buffer;
-    scroll.start -= _buffer;
-    scroll.end += _buffer;
-
-    // Variable size mode
-    if (itemSize === null) {
-      let h;
-      let a = 0;
-      let b = count - 1;
-      let i = ~~(count / 2);
-      let oldI;
-
-      // Searching for _startIndex
-      do {
-        oldI = i;
-        h = _sizes[i]?.accumulator;
-        if (h < scroll.start) {
-          a = i;
-        } else if (i < count - 1 && _sizes[i + 1]?.accumulator > scroll.start) {
-          b = i;
-        }
-        i = ~~((a + b) / 2);
-      } while (i !== oldI);
-      i < 0 && (i = 0);
-      _startIndex = i;
-
-      // For container style
-      _totalSize = _sizes[count - 1]?.accumulator;
-
-      // console.log(_sizes);
-      // console.log(_totalSize);
-
-      // Searching for _endIndex
-      for (
-        _endIndex = i;
-        _endIndex < count && _sizes[_endIndex]?.accumulator < scroll.end;
-        _endIndex++
-      );
-
-      if (_endIndex === -1) {
-        _endIndex = items.length - 1;
-      } else {
-        _endIndex++;
-        // Bounds
-        _endIndex > count && (_endIndex = count);
-      }
-
-      // search visible _startIndex
-      for (
-        visibleStartIndex = startIndex;
-        visibleStartIndex < count && (_sizes[visibleStartIndex]?.accumulator) < scroll.start;
-        visibleStartIndex++
-      );
-
-      // search visible endIndex
-      for (
-        visibleEndIndex = visibleStartIndex;
-        visibleEndIndex < count && (_sizes[visibleEndIndex]?.accumulator) < scroll.end;
-        visibleEndIndex++
-      );
-    } else {
-      // Fixed size mode
-      _startIndex = ~~(scroll.start / itemSize);
-      const remainer = _startIndex % 1;
-      _startIndex -= remainer;
-      _endIndex = Math.ceil(scroll.end / itemSize);
-      visibleStartIndex = Math.max(0, Math.floor((scroll.start) / itemSize));
-      visibleEndIndex = Math.floor((scroll.end) / itemSize);
-
-      // Bounds
-      _startIndex < 0 && (_startIndex = 0);
-      _endIndex > count && (_endIndex = count);
-      visibleStartIndex < 0 && (visibleStartIndex = 0);
-      visibleEndIndex > count && (visibleEndIndex = count);
-
-      _totalSize = Math.ceil(count / 1) * itemSize;
-    }
-  }
-
-  // items limit 1000
-  if (_endIndex - _startIndex > 1000) {
-    _itemsLimitError();
-  }
-
-  totalSize = _totalSize;
-  // console.log(totalSize)
-
-  let view;
-
-  const continuous = _startIndex <= endIndex && _endIndex >= _startIndex;
-
-  // Unuse views that are no longer visible
-  if (continuous) {
-    for (let i = 0, l = _pool.value.length; i < l; i++) {
-      view = _pool.value[i];
-      if (view?.nr.used) {
-        // Update view item index
-        if (checkItem) {
-          view.nr.index = _itemIndexByKey[view.item[keyField]];
-        }
-
-        // Check if index is still in visible range
-        if (
-          view.nr.index == null ||
-          view.nr.index < _startIndex ||
-          view.nr.index >= _endIndex
-        ) {
-          _unuseView(view);
-        }
-      }
-    }
-  }
-
-  const unusedIndex = continuous ? null : new Map();
-
-  let item, type;
-  let v;
-  for (let i = _startIndex; i < _endIndex; i++) {
-    item = items[i];
-    const key = keyField ? item?.[keyField] : item;
-
-    // console.log(_startIndex);
-    // console.log(_endIndex);
-    if (key == null) {
-      throw new Error(`Key is ${key} on item (keyField is '${keyField}')`);
-    }
-    view = _views.get(key);
-
-    if (!itemSize && !_sizes[i]?.size) {
-      if (view) _unuseView(view);
-      continue;
-    }
-
-    type = item.type;
-
-    let unusedPool = _unusedViews.get(type);
-    let newlyUsedView = false;
-
-    // No view assigned to item
-    if (!view) {
-      if (continuous) {
-        // Reuse existing view
-        if (unusedPool && unusedPool.length) {
-          view = unusedPool.pop();
-        } else {
-          view = _addView(_pool, i, item, key, type);
-        }
-      } else {
-        // Use existing view
-        // We don't care if they are already used
-        // because we are not in continous scrolling
-        v = unusedIndex.get(type) || 0;
-
-        if (!unusedPool || v >= unusedPool.length) {
-          view = _addView(_pool, i, item, key, type);
-          _unuseView(view, true);
-          unusedPool = _unusedViews.get(type);
-        }
-
-        view = unusedPool[v];
-        unusedIndex.set(type, v + 1);
-      }
-
-      // Assign view to item
-      _views.delete(view.nr.key);
-      view.nr.used = true;
-      view.nr.index = i;
-      view.nr.key = key;
-      view.nr.type = type;
-      _views.set(key, view);
-
-      newlyUsedView = true;
-    } else {
-      // View already assigned to item
-      if (!view.nr.used) {
-        view.nr.used = true;
-        newlyUsedView = true;
-        if (unusedPool) {
-          const index = unusedPool.indexOf(view);
-          if (index !== -1) unusedPool.splice(index, 1);
-        }
-      }
-    }
-
-    // Always set item in case it's a new object with the same key
-    view.item = item;
-
-    if (newlyUsedView) {
-      if (i === items.length - 1) emit('scroll-end');
-      if (i === 0) emit('scroll-start');
-    }
-
-    // Update position
-    if (itemSize === null) {
-      view.position = _sizes[i - 1]?.accumulator;
-      view.offset = 0;
-    } else {
-      view.position = Math.floor(i) * itemSize;
-      view.offset = (i % 1) * itemSize;
-    }
-  }
-
-  startIndex = _startIndex;
-  endIndex = _endIndex;
-
-  // After the user has finished scrolling
-  // Sort views so text selection is correct
-  clearTimeout(sortTimer);
-  sortTimer = setTimeout(_sortViews, 300);
-
-  return {
-    continuous,
-  };
+        requestAnimationFrame(cb);
+      });
+    },
+  },
 };
-
-const _scrollToPosition = (position) => {
-  const direction = props.direction === 'vertical'
-    ? { scroll: 'scrollTop', start: 'top' }
-    : { scroll: 'scrollLeft', start: 'left' };
-
-  const viewport = scroller.value;
-  const scrollDirection = direction.scroll;
-
-  viewport[scrollDirection] = position;
-};
-
-const scrollToItem = (index) => {
-  let scroll;
-  if (props.itemSize === null) {
-    scroll = index > 0 ? sizes.value[index - 1]?.accumulator : 0;
-  } else {
-    scroll = Math.floor(index) * props.itemSize;
-  }
-  _scrollToPosition(scroll);
-};
-
-const handleScroll = () => {
-  if (!scrollDirty) {
-    scrollDirty = true;
-    if (updateTimeout) return;
-
-    const requestUpdate = () => requestAnimationFrame(() => {
-      scrollDirty = false;
-      _updateVisibleItems(false, true);
-    });
-
-    requestUpdate();
-  }
-};
-
-defineExpose({
-  scrollToItem,
-});
 </script>
-
-<style>
-.vue-recycle-scroller{
-    position:relative
-}
-.vue-recycle-scroller.direction-vertical:not(.page-mode){
-    overflow-y:auto
-}
-.vue-recycle-scroller.direction-horizontal:not(.page-mode){
-    overflow-x:auto
-}
-.vue-recycle-scroller.direction-horizontal{
-    display:flex
-}
-.vue-recycle-scroller__slot{
-    flex:auto 0 0
-}
-.vue-recycle-scroller__item-wrapper{
-    flex:1;
-    box-sizing:border-box;
-    overflow:hidden;
-    position:relative
-}
-.vue-recycle-scroller.ready .vue-recycle-scroller__item-view{
-    position:absolute;
-    top:0;
-    left:0;
-    will-change:transform
-}
-.vue-recycle-scroller.direction-vertical .vue-recycle-scroller__item-wrapper{
-    width:100%
-}
-.vue-recycle-scroller.direction-horizontal .vue-recycle-scroller__item-wrapper{
-    height:100%
-}
-.vue-recycle-scroller.ready.direction-vertical .vue-recycle-scroller__item-view{
-    width:100%
-}
-.vue-recycle-scroller.ready.direction-horizontal .vue-recycle-scroller__item-view{
-    height:100%
-}
- </style>
