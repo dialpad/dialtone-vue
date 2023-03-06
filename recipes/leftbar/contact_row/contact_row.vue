@@ -5,7 +5,7 @@
     :selected="selected"
     :has-call-button="true"
     :muted="muted"
-    v-on="$listeners"
+    v-on="contactRowListeners"
   >
     <template #left>
       <dt-avatar
@@ -67,6 +67,7 @@ import DtAvatar from '@/components/avatar/avatar.vue';
 import DtIcon from '@/components/icon/icon.vue';
 
 import { PRESENCE_STATES, PRESENCE_STATES_LIST } from '@/components/presence/presence_constants';
+import { extractVueListeners } from '@/common/utils';
 
 export default {
   name: 'DtRecipeGroupRow',
@@ -205,6 +206,10 @@ export default {
         default:
           return undefined;
       }
+    },
+
+    contactRowListeners () {
+      return extractVueListeners(this.$attrs);
     },
 
     avatarInitial () {
