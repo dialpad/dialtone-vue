@@ -27,11 +27,13 @@
       <dt-emoji-text-wrapper
         class="dt-leftbar-row__description"
         data-qa="dt-leftbar-row-description"
+        size="200"
       >
         {{ name }}
       </dt-emoji-text-wrapper>
       <div class="dt-leftbar-row__status">
         <span
+          v-if="presenceText"
           data-qa="dt-leftbar-row-presence-text"
           class="dt-leftbar-row__meta-context"
           :style="{ color: presenceColor }"
@@ -40,6 +42,7 @@
         </span>
         <dt-emoji-text-wrapper
           v-if="userStatus"
+          size="100"
           element-type="span"
           data-qa="dt-leftbar-row-user-status"
           class="dt-leftbar-row__meta-custom"
