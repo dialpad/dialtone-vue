@@ -6,6 +6,7 @@
     :has-call-button="true"
     :muted="muted"
     v-on="contactRowListeners"
+    @call="$emit('call', $event)"
   >
     <template #left>
       <dt-avatar
@@ -177,14 +178,6 @@ export default {
   },
 
   emits: [
-    /**
-     * Native click event on the row itself
-     *
-     * @event click
-     * @type {PointerEvent | KeyboardEvent}
-     */
-    'click',
-
     /**
      * Call button clicked
      *

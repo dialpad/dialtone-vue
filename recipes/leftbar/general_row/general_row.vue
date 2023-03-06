@@ -95,6 +95,7 @@ import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
+import { extractVueListeners } from '@/common/utils';
 
 export default {
   name: 'DtRecipeGeneralRow',
@@ -202,14 +203,6 @@ export default {
 
   emits: [
     /**
-     * Native click event on the row itself
-     *
-     * @event click
-     * @type {PointerEvent | KeyboardEvent}
-     */
-    'click',
-
-    /**
      * Call button clicked
      *
      * @event call
@@ -248,6 +241,10 @@ export default {
           break;
       }
       return this.type;
+    },
+
+    generalRowListeners () {
+      return extractVueListeners(this.$attrs);
     },
   },
 
