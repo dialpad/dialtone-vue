@@ -8,6 +8,7 @@
     :unread-count="unreadCount"
     :user-status="userStatus"
     :has-unreads="hasUnreads"
+    :muted="muted"
     :selected="selected"
     @click="onClick"
     @call="onCall"

@@ -4,6 +4,7 @@
     :has-unreads="hasUnreads"
     :selected="selected"
     :has-call-button="true"
+    :muted="muted"
     v-on="$listeners"
   >
     <template #left>
@@ -122,6 +123,14 @@ export default {
     userStatus: {
       type: String,
       default: '',
+    },
+
+    /**
+     * Gives a faded style to be used when muted
+     */
+    muted: {
+      type: Boolean,
+      default: false,
     },
 
     /**
