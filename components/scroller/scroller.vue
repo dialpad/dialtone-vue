@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import mitt from 'mitt';
 import CoreScroller from './modules/core-scroller.vue';
 import DtScrollerItem from './modules/scroller-item.vue';
 
@@ -97,47 +96,70 @@ export default {
   inheritAttrs: false,
 
   props: {
+    /*
+      * The items to render.
+      * If the items are simple arrays, the index will be used as the key.
+      * If the items are objects, the keyField will be used as the key.
+     */
     items: {
       type: Array,
       required: true,
     },
 
+    /*
+      * Indicates if the items are dynamic.
+      * If true, the items will be wrapped in a DtScrollerItem component.
+      * This is required for dynamic items to be able to react to changes in their size.
+     */
     dynamic: {
       type: Boolean,
       default: false,
     },
 
+    /*
+      * The key field to use for the items.
+      * Only used if the items are objects.
+     */
     keyField: {
       type: String,
       default: 'id',
     },
 
+    /*
+      * The direction of the scroller.
+      * Can be either 'vertical' or 'horizontal'.
+     */
     direction: {
       type: String,
       default: 'vertical',
       validator: (value) => ['vertical', 'horizontal'].includes(value),
     },
 
+    /*
+      * The tag to use for the list.
+     */
     listTag: {
       type: String,
       default: 'div',
     },
 
+    /*
+      * The tag to use for the items.
+     */
     itemTag: {
       type: String,
       default: 'div',
     },
 
+    /*
+      * The minimum size of an item.
+      * This is used to calculate the number of items to render.
+      * Is required for the initial render of items in DYNAMIC size mode.
+     */
     minItemSize: {
       type: [Number, String],
-      required: true,
     },
   },
-
-  emits: [
-    'resize',
-    'visible',
-  ],
 
   data () {
     return {
@@ -190,7 +212,7 @@ export default {
       immediate: true,
     },
 
-    direction (value) {
+    direction () {
       this.forceUpdate(true);
     },
 
@@ -223,7 +245,6 @@ export default {
     this.$_updates = [];
     this.$_undefinedSizes = 0;
     this.$_undefinedMap = {};
-    this.$_events = mitt();
   },
 
   activated () {
@@ -234,16 +255,11 @@ export default {
     this.vscrollData.active = false;
   },
 
-  unmounted () {
-    this.$_events.all.clear();
-  },
-
   methods: {
     forceUpdate (clear = false) {
       if (clear || this.simpleArray) {
         this.vscrollData.sizes = {};
       }
-      this.$_events.emit('vscroll:update', { force: true });
     },
 
     scrollToItem (index) {

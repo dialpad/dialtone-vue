@@ -39,20 +39,11 @@ export default {
       default: null,
     },
 
-    emitResize: {
-      type: Boolean,
-      default: false,
-    },
-
     tag: {
       type: String,
       default: 'div',
     },
   },
-
-  emits: [
-    'resize',
-  ],
 
   computed: {
     id () {
@@ -128,8 +119,6 @@ export default {
       for (const k in this.sizeDependencies) {
         this.$watch(() => this.sizeDependencies[k], this.onDataUpdate);
       }
-
-      this.vscrollParent.$_events.on('vscroll:update', this.onVscrollUpdate);
     }
   },
 
@@ -141,7 +130,6 @@ export default {
   },
 
   beforeUnmount () {
-    this.vscrollParent.$_events.off('vscroll:update', this.onVscrollUpdate);
     this.unobserveSize();
   },
 
@@ -211,7 +199,6 @@ export default {
         this.vscrollParent.$_undefinedMap[this.id] = undefined;
       }
       this.vscrollData.sizes[this.id] = size;
-      if (this.emitResize) this.$emit('resize', this.id);
     },
 
     observeSize () {
