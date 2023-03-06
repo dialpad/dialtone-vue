@@ -10,6 +10,7 @@
     :has-unreads="hasUnreads"
     :muted="muted"
     :selected="selected"
+    :no-initials="noInitials"
     @click="onClick"
     @call="onCall"
   />

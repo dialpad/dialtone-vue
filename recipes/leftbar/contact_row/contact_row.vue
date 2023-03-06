@@ -19,6 +19,12 @@
           :src="avatarSrc"
           :alt="name"
         >
+        <template v-else-if="noInitials">
+          <dt-icon
+            name="user"
+            size="200"
+          />
+        </template>
         <template v-else>
           {{ avatarInitial }}
         </template>
@@ -58,6 +64,7 @@
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
+import DtIcon from '@/components/icon/icon.vue';
 
 import { PRESENCE_STATES, PRESENCE_STATES_LIST } from '@/components/presence/presence_constants';
 
@@ -66,6 +73,7 @@ export default {
 
   components: {
     DtAvatar,
+    DtIcon,
     DtRecipeGeneralRow,
     DtEmojiTextWrapper,
   },
@@ -154,6 +162,14 @@ export default {
      * Determines if the row is selected
      */
     selected: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Initials will never be shown. Instead it will show a "User" icon.
+     */
+    noInitials: {
       type: Boolean,
       default: false,
     },
