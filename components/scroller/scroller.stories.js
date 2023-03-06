@@ -3,49 +3,70 @@ import BaseScrollerMdx from './scroller.mdx';
 import ScrollerDefault from './scroller_default.story';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 export const argTypesData = {
-  // Slots
-//   default: {
-//     control: { type: null },
-//     description: 'Slot for main content',
-//     table: {
-//       type: {
-//         summary: 'VNode',
-//         detail: `
-//         Example:
-// <dt-stack>
-//   <dt-card />
-//   <dt-card />
-//   <dt-card />
-// </dt-stack>`,
-//       },
-//     },
-//   },
+  default: {
+    control: { type: null },
+    description: 'Slot for main content',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
 
   // Props
-//   direction: {
-//     control: 'object',
-//     defaultValue: { default: 'column' },
-//     table: {
-//       type: {
-//         detail: `
-//         Directions: "${Object.keys(DT_STACK_DIRECTION)}"
-// Breakpoints: "${DT_STACK_RESPONSIVE_BREAKPOINTS}"
-// String: "column"
-// Object: { "default": "row", "sm": "column", "lg": "column-reverse" }`,
-//       },
-//     },
-//   },
-//   as: {
-//     control: 'text',
-//     defaultValue: 'div',
-//   },
-//   gap: {
-//     control: {
-//       type: 'select',
-//       options: DT_STACK_GAP,
-//     },
-//     defaultValue: '400',
-//   },
+  items: {
+    control: { type: null },
+    description: 'The items to render. If the items are simple arrays, ' +
+        'the index will be used as the key. ' +
+        'If the items are objects, the keyField will be used as the key.',
+  },
+
+  dynamic: {
+    control: { type: null },
+    description: 'Indicates if the items are dynamic. ' +
+        'If true, the items will be wrapped in a DtScrollerItem component. ' +
+        'This is required for dynamic items to be able to react to changes in their size.',
+  },
+
+  keyField: {
+    control: { type: null },
+    description: 'The key field to use for the items. Only used if the items are objects.',
+  },
+
+  direction: {
+    control: { type: null },
+    description: 'The direction of the scroller. ' +
+        'Can be either "vertical" or "horizontal".',
+  },
+
+  listTag: {
+    control: { type: null },
+    description: 'The tag to use for the list.',
+  },
+
+  itemTag: {
+    control: { type: null },
+    description: 'The tag to use for the items.',
+  },
+
+  minItemSize: {
+    control: { type: null },
+    description: 'The minimum size of an item.' +
+        'This is used to calculate the number of items to render.' +
+        'Is required for the initial render of items in DYNAMIC size mode.',
+  },
+
+  // Events
+  'scroll-start': {
+    control: { type: null },
+    description: 'Emitted when the first item is rendered.',
+  },
+
+  'scroll-end': {
+    control: { type: null },
+    description: 'Emitted when the last item is rendered.',
+  },
+
 };
 
 export default {
