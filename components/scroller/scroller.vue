@@ -152,8 +152,8 @@ export default {
     },
 
     /*
-      * The minimum size of an item.
-      * This is used to calculate the number of items to render.
+      * Display height (or width in horizontal mode) of the items in pixels
+      * used to calculate the scroll size and position.
       * Is required for the initial render of items in DYNAMIC size mode.
      */
     minItemSize: {
@@ -200,20 +200,12 @@ export default {
   },
 
   watch: {
-    items () {
-      this.forceUpdate();
-    },
-
     simpleArray: {
       handler (value) {
         this.vscrollData.simpleArray = value;
       },
 
       immediate: true,
-    },
-
-    direction () {
-      this.forceUpdate(true);
     },
 
     itemsWithSize (next, prev) {
@@ -256,43 +248,9 @@ export default {
   },
 
   methods: {
-    forceUpdate (clear = false) {
-      if (clear || this.simpleArray) {
-        this.vscrollData.sizes = {};
-      }
-    },
-
     scrollToItem (index) {
       const scroller = this.$refs.scroller;
       if (scroller) scroller.scrollToItem(index);
-    },
-
-    getItemSize (item, index = undefined) {
-      const id = this.simpleArray ? (index != null ? index : this.items.indexOf(item)) : item[this.keyField];
-      return this.vscrollData.sizes[id] || 0;
-    },
-
-    scrollToBottom () {
-      if (this.$_scrollingToBottom) return;
-      this.$_scrollingToBottom = true;
-      const el = this.$el;
-      // Item is inserted to the DOM
-      this.$nextTick(() => {
-        el.scrollTop = el.scrollHeight + 5000;
-        // Item sizes are computed
-        const cb = () => {
-          el.scrollTop = el.scrollHeight + 5000;
-          requestAnimationFrame(() => {
-            el.scrollTop = el.scrollHeight + 5000;
-            if (this.$_undefinedSizes === 0) {
-              this.$_scrollingToBottom = false;
-            } else {
-              requestAnimationFrame(cb);
-            }
-          });
-        };
-        requestAnimationFrame(cb);
-      });
     },
   },
 };
