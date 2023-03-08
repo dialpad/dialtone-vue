@@ -77,7 +77,7 @@
         kind="inverted"
         @focus="actionFocused = true"
         @blur="actionFocused = false"
-        @mouseout="actionFocused = false"
+        @mouseleave="actionFocused = false"
         @click.stop="$emit('call', $event)"
       >
         <template #icon>
