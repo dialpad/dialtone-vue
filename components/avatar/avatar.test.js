@@ -385,11 +385,12 @@ describe('DtAvatar Tests', function () {
 
       describe('When image alt attribute is not provided', function () {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(async function () {
           const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" data-qa="dt-avatar-image">`;
 
           slots = { default: imageSlot };
           _setWrappers();
+          await wrapper.vm.$nextTick();
         });
 
         itBehavesLikeRaisesSingleVueWarning(warningMessage);
@@ -397,11 +398,12 @@ describe('DtAvatar Tests', function () {
 
       describe('When image src attribute is not provided', function () {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(async function () {
           const imageSlot = `<img alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
 
           slots = { default: imageSlot };
           _setWrappers();
+          await wrapper.vm.$nextTick();
         });
 
         itBehavesLikeRaisesSingleVueWarning(warningMessage);
