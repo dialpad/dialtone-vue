@@ -12,6 +12,7 @@
       <!-- @slot Slot for avatar content -->
       <slot v-if="showDefaultSlot" />
       <span
+        v-if="showInitials"
         class="d-ps-absolute d-zi-base"
         :class="AVATAR_KIND_MODIFIERS.initials"
       >
@@ -148,7 +149,7 @@ export default {
   data () {
     return {
       // initials, image or icon
-      kind: 'image',
+      kind: 'initials',
       AVATAR_SIZE_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
@@ -177,7 +178,7 @@ export default {
     },
 
     showInitials () {
-      return this.kind === 'initials' || this.initials;
+      return this.kind === 'initials' || (this.initials && this.kind !== 'icon');
     },
 
     showGroup () {
@@ -215,7 +216,7 @@ export default {
   },
 
   updated () {
-    this.defaultSlotContent = this.$slots().default ? this.$slots().default[0] : null;
+    this.defaultSlotContent = this.$slots().default?.[0] ?? null;
     this.imageLoadedSuccessfully = this.defaultSlotContent?.elm?.complete;
   },
 
@@ -290,11 +291,13 @@ export default {
     },
 
     isIconType (element) {
-      return element?.componentOptions?.tag === 'dt-icon' || element?.tagName?.toUpperCase() === 'SVG';
+      return element?.componentOptions?.tag === 'dt-icon' ||
+          element?.tagName?.toUpperCase() === 'SVG' ||
+          element?.tag === 'svg';
     },
 
     isImageType (element) {
-      return element?.tagName?.toUpperCase() === 'IMG';
+      return element?.tag === 'img' || element?.tagName?.toUpperCase() === 'IMG';
     },
 
     randomizeGradientAngle () {
@@ -324,8 +327,8 @@ export default {
     },
 
     validateImageAttrsPresence () {
-      const isSrcMissing = !this.$slots().default[0].elm.getAttribute('src');
-      const isAltMissing = !this.$slots().default[0].elm.getAttribute('alt');
+      const isSrcMissing = !this.defaultSlotContent.elm.getAttribute('src');
+      const isAltMissing = !this.defaultSlotContent.elm.getAttribute('alt');
 
       if (isSrcMissing || isAltMissing) {
         warn('src and alt attributes are required for image avatars', this);
