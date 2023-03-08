@@ -10,6 +10,7 @@
     :active-voice-chat="$attrs.activeVoiceChat"
     :dnd-text="$attrs.dndText"
     :is-typing="$attrs.isTyping"
+    :call-button-tooltip="$attrs.callButtonTooltip"
     @click="$attrs.onClick"
     @call="$attrs.onCall"
   />
