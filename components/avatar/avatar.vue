@@ -12,7 +12,7 @@
       <!-- @slot Slot for avatar content -->
       <slot v-if="showDefaultSlot" />
       <span
-        v-else-if="showInitials"
+        class="d-ps-absolute d-zi-base"
         :class="AVATAR_KIND_MODIFIERS.initials"
       >
         {{ formattedInitials }}
@@ -155,6 +155,7 @@ export default {
       imageLoadedSuccessfully: null,
       slottedInitials: '',
       formattedInitials: '',
+      defaultSlotContent: null,
     };
   },
 
@@ -172,7 +173,7 @@ export default {
     },
 
     showDefaultSlot () {
-      return this.kind !== 'initials' && this.imageLoadedSuccessfully !== false;
+      return this.kind !== 'initials' || this.imageLoadedSuccessfully === true;
     },
 
     showInitials () {
@@ -203,20 +204,26 @@ export default {
     },
   },
 
-  mounted () {
-    this.init();
+  watch: {
+    defaultSlotContent: {
+      deep: true,
+      immediate: true,
+      handler: function () {
+        this.init();
+      },
+    },
   },
 
   updated () {
-    if (this.kind === 'initials') {
-      this.slottedInitials = this.$slots.default[0].text || this.$slots.default[0].textContent;
-      this.formatInitials(this.slottedInitials);
-    }
+    this.defaultSlotContent = this.$slots.default ? this.$slots.default[0] : null;
+    this.imageLoadedSuccessfully = this.defaultSlotContent?.elm?.complete;
   },
 
   methods: {
     init () {
-      const firstChild = this.$refs.canvas.firstChild;
+      this.defaultSlotContent = this.$slots.default ? this.$slots.default[0] : null;
+      const firstChild = this.defaultSlotContent?.elm ? this.defaultSlotContent.elm : this.defaultSlotContent;
+      this.formatInitials(this.initials);
 
       if (!firstChild) {
         return;
@@ -227,14 +234,17 @@ export default {
     },
 
     kindHandler (el) {
+      if (!this.$el) return;
+      const avatarImage = this.$el.querySelector('img');
+      const iconElement = this.$el.querySelector('svg');
       switch (this.kind) {
         case 'image':
-          el.classList.add('d-avatar__image');
+          avatarImage?.classList.add('d-avatar__image', 'd-zi-base1');
           this.validateImageAttrsPresence();
           this.setImageListeners(el);
           break;
         case 'icon':
-          el.classList.add(AVATAR_KIND_MODIFIERS.icon);
+          iconElement?.classList.add(AVATAR_KIND_MODIFIERS.icon);
           break;
         case 'initials':
           this.slottedInitials = el.text || el.textContent;
@@ -244,19 +254,25 @@ export default {
     },
 
     setImageListeners (el) {
-      el.addEventListener('error', () => {
-        this.formatInitials(this.initials);
-        this.imageLoadedSuccessfully = false;
+      const avatarImage = this.$el.querySelector('img');
+      el.addEventListener('load', function () {
+        this.imageLoadedSuccessfully = true;
+        avatarImage?.classList.remove('d-d-none');
+        avatarImage?.classList.add('d-avatar--image-loaded');
       });
 
-      el.addEventListener('load', () => {
-        el.classList.add('d-avatar--image-loaded');
-        this.imageLoadedSuccessfully = true;
+      el.addEventListener('error', function () {
+        this.imageLoadedSuccessfully = false;
+        avatarImage?.classList.remove('d-avatar--image-loaded');
+        avatarImage?.classList.add('d-d-none');
       });
     },
 
     formatInitials (initials) {
-      if (!initials) return;
+      if (!initials) {
+        this.formattedInitials = '';
+        return;
+      }
 
       if (this.validatedSize === 'xs') {
         this.formattedInitials = '';
@@ -268,13 +284,13 @@ export default {
     },
 
     setKind (element) {
-      if (this.isSvgType(element)) { this.kind = 'icon'; return; }
+      if (this.isIconType(element)) { this.kind = 'icon'; return; }
       if (this.isImageType(element)) { this.kind = 'image'; return; }
       this.kind = 'initials';
     },
 
-    isSvgType (element) {
-      return element?.tagName?.toUpperCase() === 'SVG';
+    isIconType (element) {
+      return element?.componentOptions?.tag === 'dt-icon' || element?.tagName?.toUpperCase() === 'SVG';
     },
 
     isImageType (element) {
@@ -308,8 +324,8 @@ export default {
     },
 
     validateImageAttrsPresence () {
-      const isSrcMissing = !this.$refs.canvas.firstChild.getAttribute('src');
-      const isAltMissing = !this.$refs.canvas.firstChild.getAttribute('alt');
+      const isSrcMissing = !this.$slots.default[0].elm.getAttribute('src');
+      const isAltMissing = !this.$slots.default[0].elm.getAttribute('alt');
 
       if (isSrcMissing || isAltMissing) {
         Vue.util.warn('src and alt attributes are required for image avatars', this);
