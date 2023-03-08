@@ -9,6 +9,7 @@
     :muted="$attrs.muted"
     :active-voice-chat="$attrs.activeVoiceChat"
     :dnd-text="$attrs.dndText"
+    :is-typing="$attrs.isTyping"
     @click="$attrs.onClick"
     @call="$attrs.onCall"
   />

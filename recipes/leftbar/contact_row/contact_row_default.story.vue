@@ -11,6 +11,7 @@
     :muted="$attrs.muted"
     :selected="$attrs.selected"
     :no-initials="$attrs.noInitials"
+    :is-typing="$attrs.isTyping"
     @click="$attrs.onClick"
     @call="$attrs.onCall"
   />

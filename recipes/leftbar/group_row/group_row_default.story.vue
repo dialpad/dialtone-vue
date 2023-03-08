@@ -7,6 +7,7 @@
     :unread-count="$attrs.unreadCount"
     :has-unreads="$attrs.hasUnreads"
     :selected="$attrs.selected"
+    :is-typing="$attrs.isTyping"
     @click="$attrs.onClick"
   />
 </template>

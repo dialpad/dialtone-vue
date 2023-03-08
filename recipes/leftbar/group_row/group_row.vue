@@ -4,6 +4,7 @@
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
     :selected="selected"
+    :is-typing="isTyping"
   >
     <template #left>
       <dt-avatar
@@ -90,6 +91,14 @@ export default {
      * Determines if the row is selected
      */
     selected: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Shows an "is typing" animation over the avatar when true.
+     */
+    isTyping: {
       type: Boolean,
       default: false,
     },
