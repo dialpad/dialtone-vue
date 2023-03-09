@@ -5,6 +5,7 @@
     :description="$attrs.description"
     :unread-count="$attrs.unreadCount"
     :has-unreads="$attrs.hasUnreads"
+    :aria-label="$attrs.ariaLabel"
     :unread-count-tooltip="$attrs.unreadCountTooltip"
     :selected="$attrs.selected"
     :has-call-button="$attrs.hasCallButton"

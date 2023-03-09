@@ -6,6 +6,7 @@
     :avatar-seed="$attrs.avatarSeed"
     :presence-text="$attrs.presenceText"
     :unread-count="$attrs.unreadCount"
+    :unread-count-tooltip="$attrs.unreadCountTooltip"
     :user-status="$attrs.userStatus"
     :has-unreads="$attrs.hasUnreads"
     :muted="$attrs.muted"
