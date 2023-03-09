@@ -21,12 +21,13 @@
     </div>
     <span
       v-if="showGroup"
-      class="d-avatar__count"
+      class="d-avatar__count d-zi-base1"
       data-qa="dt-avatar-count"
     >{{ formattedGroup }}</span>
     <dt-presence
       v-if="presence && !showGroup"
       :presence="presence"
+      class="d-zi-base1"
       :class="[
         'd-avatar__presence',
         AVATAR_PRESENCE_SIZE_MODIFIERS[size],
@@ -149,14 +150,14 @@ export default {
   data () {
     return {
       // initials, image or icon
-      kind: 'initials',
+      kind: null,
       AVATAR_SIZE_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
       imageLoadedSuccessfully: null,
       slottedInitials: '',
       formattedInitials: '',
-      defaultSlotContent: null,
+      initializing: false,
     };
   },
 
@@ -174,11 +175,11 @@ export default {
     },
 
     showDefaultSlot () {
-      return this.kind !== 'initials' || this.imageLoadedSuccessfully === true;
+      return this.kind !== 'initials' || (this.kind === 'image' && this.imageLoadedSuccessfully === true);
     },
 
     showInitials () {
-      return this.kind === 'initials' || (this.initials && this.kind !== 'icon');
+      return this.kind === 'initials' || (this.kind === 'image' && this.initials);
     },
 
     showGroup () {
@@ -205,68 +206,48 @@ export default {
     },
   },
 
-  watch: {
-    defaultSlotContent: {
-      deep: true,
-      immediate: true,
-      handler: function () {
-        this.init();
-      },
-    },
+  mounted () {
+    this.init();
   },
 
   updated () {
-    this.defaultSlotContent = this.$slots.default?.[0] ?? null;
-    this.imageLoadedSuccessfully = this.defaultSlotContent?.elm?.complete;
+    this.init();
   },
 
   methods: {
-    init () {
-      this.defaultSlotContent = this.$slots.default ? this.$slots.default[0] : null;
-      const firstChild = this.defaultSlotContent?.elm ? this.defaultSlotContent.elm : this.defaultSlotContent;
+    async init () {
+      if (this.initializing) return;
+      this.kind = null;
+      await this.$nextTick();
+      const firstChild = this.$refs.canvas.firstElementChild || this.$refs.canvas;
       this.formatInitials(this.initials);
-
-      if (!firstChild) {
-        return;
-      }
-
       this.setKind(firstChild);
       this.kindHandler(firstChild);
+      this.initializing = true;
+      await this.$nextTick();
+      this.initializing = false;
     },
 
     kindHandler (el) {
-      if (!this.$el) return;
-      const avatarImage = this.$el.querySelector('img');
-      const iconElement = this.$el.querySelector('svg');
       switch (this.kind) {
         case 'image':
-          avatarImage?.classList.add('d-avatar__image', 'd-zi-base1');
+          el.classList.add('d-avatar__image', 'd-zi-base1');
           this.validateImageAttrsPresence();
           this.setImageListeners(el);
           break;
         case 'icon':
-          iconElement?.classList.add(AVATAR_KIND_MODIFIERS.icon);
+          el.classList.add(AVATAR_KIND_MODIFIERS.icon);
           break;
         case 'initials':
           this.slottedInitials = el.text || el.textContent;
-          this.formatInitials(this.slottedInitials);
+          this.formatInitials(this.slottedInitials.trim() || this.initials);
           break;
       }
     },
 
     setImageListeners (el) {
-      const avatarImage = this.$el.querySelector('img');
-      el.addEventListener('load', function () {
-        this.imageLoadedSuccessfully = true;
-        avatarImage?.classList.remove('d-d-none');
-        avatarImage?.classList.add('d-avatar--image-loaded');
-      });
-
-      el.addEventListener('error', function () {
-        this.imageLoadedSuccessfully = false;
-        avatarImage?.classList.remove('d-avatar--image-loaded');
-        avatarImage?.classList.add('d-d-none');
-      });
+      el.addEventListener('load', () => this._loadedImageEventHandler(el), { once: true });
+      el.addEventListener('error', () => this._erroredImageEventHandler(el), { once: true });
     },
 
     formatInitials (initials) {
@@ -291,13 +272,11 @@ export default {
     },
 
     isIconType (element) {
-      return element?.componentOptions?.tag === 'dt-icon' ||
-          element?.tagName?.toUpperCase() === 'SVG' ||
-          element?.tag === 'svg';
+      return element?.tagName?.toUpperCase() === 'SVG';
     },
 
     isImageType (element) {
-      return element?.tag === 'img' || element?.tagName?.toUpperCase() === 'IMG';
+      return element?.tagName?.toUpperCase() === 'IMG';
     },
 
     randomizeGradientAngle () {
@@ -327,12 +306,24 @@ export default {
     },
 
     validateImageAttrsPresence () {
-      const isSrcMissing = !this.defaultSlotContent.elm.getAttribute('src');
-      const isAltMissing = !this.defaultSlotContent.elm.getAttribute('alt');
+      const isSrcMissing = !this.$refs.canvas.firstChild.getAttribute('src');
+      const isAltMissing = !this.$refs.canvas.firstChild.getAttribute('alt');
 
       if (isSrcMissing || isAltMissing) {
         Vue.util.warn('src and alt attributes are required for image avatars', this);
       }
+    },
+
+    _loadedImageEventHandler (el) {
+      this.imageLoadedSuccessfully = true;
+      el.classList.remove('d-d-none');
+      el.classList.add('d-avatar--image-loaded');
+    },
+
+    _erroredImageEventHandler (el) {
+      this.imageLoadedSuccessfully = false;
+      el.classList.remove('d-avatar--image-loaded');
+      el.classList.add('d-d-none');
     },
   },
 };
