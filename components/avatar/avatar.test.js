@@ -71,9 +71,9 @@ describe('DtAvatar Tests', function () {
   describe('Presentation Tests', function () {
     describe('When the avatar renders', function () {
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         slots = { default: DEFAULT_SLOT };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should exists', function () { assert.exists(wrapper); });
@@ -88,8 +88,6 @@ describe('DtAvatar Tests', function () {
       beforeEach(async function () {
         slots = { default: imageSlot };
         await _setWrappers();
-
-        _setChildWrappers();
       });
 
       it('image should exist', function () {
@@ -134,7 +132,7 @@ describe('DtAvatar Tests', function () {
         await _setWrappers();
       });
 
-      it('initial slot should exist', function () {
+      it('should display initials', function () {
         assert.strictEqual(wrapper.text(), initials);
       });
 
@@ -187,13 +185,13 @@ describe('DtAvatar Tests', function () {
       const size = 'lg';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         propsData = {
           ...basePropsData,
           size,
         };
         slots = { default: DEFAULT_SLOT };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should have size variant class on the avatar', function () {
@@ -206,13 +204,13 @@ describe('DtAvatar Tests', function () {
       const group = 25;
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         propsData = {
           ...basePropsData,
           group,
         };
         slots = { default: DEFAULT_SLOT };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should have group count', function () {
@@ -241,13 +239,13 @@ describe('DtAvatar Tests', function () {
       const gradient = false;
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         propsData = {
           ...basePropsData,
           gradient,
         };
         slots = { default: DEFAULT_SLOT };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should set the correct class', function () {
@@ -259,12 +257,12 @@ describe('DtAvatar Tests', function () {
       const initials = 'DP';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         propsData = {
           ...basePropsData,
         };
         slots = { default: initials };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('should not render presence if presence prop is not defined', async function () {
@@ -362,11 +360,11 @@ describe('DtAvatar Tests', function () {
 
       describe('When image src and alt attributes are provided', function () {
         // Test Setup
-        beforeEach(function () {
+        beforeEach(async function () {
           const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
 
           slots = { default: imageSlot };
-          _setWrappers();
+          await _setWrappers();
         });
 
         itBehavesLikeDoesNotRaiseAnyVueWarnings();
@@ -404,10 +402,10 @@ describe('DtAvatar Tests', function () {
     const customClass = 'my-custom-class';
 
     // Helpers
-    const _setupChildClassTest = (childClassName, selector) => {
+    const _setupChildClassTest = async (childClassName, selector) => {
       propsData[childClassName] = customClass;
       slots = { default: DEFAULT_SLOT };
-      _setWrappers();
+      await _setWrappers();
       element = wrapper.find(selector);
     };
 
@@ -420,7 +418,9 @@ describe('DtAvatar Tests', function () {
 
     describe('When an avatar class is provided', function () {
       // Test Setup
-      beforeEach(function () { _setupChildClassTest('avatarClass', '[data-qa="dt-avatar"]'); });
+      beforeEach(async function () {
+        await _setupChildClassTest('avatarClass', '[data-qa="dt-avatar"]');
+      });
 
       itBehavesLikeAppliesClassToChildLocal();
     });
