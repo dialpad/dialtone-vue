@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3>Scroller</h3>
+
     <button @click="scrollToItem(100)">
       Go to index 100
     </button>
@@ -10,26 +11,34 @@
     <button @click="scrollToItem(items.length - 1)">
       Go to end
     </button>
+
     <dt-scroller
       ref="scroller"
-      v-slot="{ item }"
       class="scroller"
       :items="items"
       :item-size="32"
+      :scroller-height="200"
+      :scroller-width="200"
       key-field="id"
     >
-      <div class="user">
-        {{ item.name }}
-      </div>
+      <template #default="{ item }">
+        <div class="user">
+          {{ item.name }}
+        </div>
+      </template>
     </dt-scroller>
 
     <h3>Scroller with dynamic size</h3>
+
     <button @click="updateItem(0)">
       Update Element Message
     </button>
+
     <dt-scroller
       :items="dynamicItems"
       :min-item-size="54"
+      :scroller-height="300"
+      :scroller-width="500"
       class="scroller"
       :dynamic="true"
     >
@@ -73,7 +82,11 @@ const messages = [
   'lorem ipsum dolor sit amet',
 ];
 
-const dynamicItems = ref(Array.from({ length: 37 }, (_, index) => ({ id: index, avatar: defaultAvatar, message: messages[Math.floor(Math.random() * 8)] })));
+const dynamicItems = ref(Array.from({ length: 37 }, (_, index) => ({
+  id: index,
+  avatar: defaultAvatar,
+  message: messages[Math.floor(Math.random() * 8)],
+})));
 
 const scroller = ref('scroller');
 
@@ -88,9 +101,6 @@ function updateItem (index) {
 
 <style scoped>
 .scroller {
-  height: 200px;
-  width: 100%;
-  max-width: calc(var(--size-300) * 157);
   margin: 20px 0;
   border: 1px solid red;
 }

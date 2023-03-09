@@ -56,6 +56,18 @@ export const argTypesData = {
         'Is required for the initial render of items in DYNAMIC size mode.',
   },
 
+  scrollerWidth: {
+    control: { type: null },
+    description: 'The width of the scroller. ' +
+        'Can be a number (in pixels) or a string (in CSS units).',
+  },
+
+  scrollerHeight: {
+    control: { type: null },
+    description: 'The height of the scroller. ' +
+        'Can be a number (in pixels) or a string (in CSS units).',
+  },
+
   // Events
   'scroll-start': {
     control: { type: null },

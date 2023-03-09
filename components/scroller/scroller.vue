@@ -1,96 +1,40 @@
 <template>
-  <core-scroller
+  <component
+    :is="dynamic ? 'dynamic-scroller' : 'core-scroller'"
     ref="scroller"
-    :items="itemsWithSize"
+    :items="items"
     :min-item-size="minItemSize"
     :direction="direction"
     key-field="id"
     :list-tag="listTag"
     :item-tag="itemTag"
     v-bind="$attrs"
+    :style="computedStyle"
   >
     <template
-      v-if="!dynamic"
-      #default="{ item: itemWithSize, index, active }"
+      #default="{ item, index, active }"
     >
       <slot
         v-bind="{
-          item: itemWithSize.item,
+          item: item,
           index,
           active,
-          itemWithSize,
         }"
       />
     </template>
-
-    <template
-      v-else
-      #default="{ item: itemWithSize, index, active }"
-    >
-      <dt-scroller-item
-        :item="itemWithSize"
-        :active="active"
-        :size-dependencies="[
-          itemWithSize.message,
-        ]"
-        :data-index="index"
-      >
-        <slot
-          v-bind="{
-            item: itemWithSize.item,
-            index,
-            active,
-            itemWithSize,
-          }"
-        />
-      </dt-scroller-item>
-    </template>
-  </core-scroller>
+  </component>
 </template>
 
 <script>
 import CoreScroller from './modules/core-scroller.vue';
-import DtScrollerItem from './modules/scroller-item.vue';
+import DynamicScroller from './modules/dynamic-scroller.vue';
 
 export default {
-  name: 'DynamicScroller',
+  name: 'DtScroller',
 
   components: {
     CoreScroller,
-    DtScrollerItem,
-  },
-
-  provide () {
-    if (typeof ResizeObserver !== 'undefined') {
-      this.$_resizeObserver = new ResizeObserver(entries => {
-        requestAnimationFrame(() => {
-          if (!Array.isArray(entries)) {
-            return;
-          }
-          for (const entry of entries) {
-            if (entry.target && entry.target.$_vs_onResize) {
-              let width, height;
-              if (entry.borderBoxSize) {
-                const resizeObserverSize = entry.borderBoxSize[0];
-                width = resizeObserverSize.inlineSize;
-                height = resizeObserverSize.blockSize;
-              } else {
-                // @TODO remove when contentRect is deprecated
-                width = entry.contentRect.width;
-                height = entry.contentRect.height;
-              }
-              entry.target.$_vs_onResize(entry.target.$_vs_id, width, height);
-            }
-          }
-        });
-      });
-    }
-
-    return {
-      vscrollData: this.vscrollData,
-      vscrollParent: this,
-      vscrollResizeObserver: this.$_resizeObserver,
-    };
+    DynamicScroller,
   },
 
   inheritAttrs: false,
@@ -104,6 +48,24 @@ export default {
     items: {
       type: Array,
       required: true,
+    },
+
+    /*
+      * The width of the scroller.
+      * Can be a number (in pixels) or a string (in CSS units).
+     */
+    scrollerWidth: {
+      type: [String, Number],
+      default: '100%',
+    },
+
+    /*
+      * The height of the scroller.
+      * Can be a number (in pixels) or a string (in CSS units).
+     */
+    scrollerHeight: {
+      type: [String, Number],
+      default: '100%',
     },
 
     /*
@@ -161,90 +123,13 @@ export default {
     },
   },
 
-  data () {
-    return {
-      vscrollData: {
-        active: true,
-        sizes: {},
-        keyField: this.keyField,
-        simpleArray: false,
-      },
-    };
-  },
-
   computed: {
-    simpleArray () {
-      return this.items.length && typeof this.items[0] !== 'object';
+    computedStyle () {
+      return {
+        width: typeof this.scrollerWidth === 'number' ? `${this.scrollerWidth}px` : this.scrollerWidth,
+        height: typeof this.scrollerHeight === 'number' ? `${this.scrollerHeight}px` : this.scrollerHeight,
+      };
     },
-
-    itemsWithSize () {
-      const result = [];
-      const { items, keyField, simpleArray } = this;
-      const sizes = this.vscrollData.sizes;
-      const l = items.length;
-      for (let i = 0; i < l; i++) {
-        const item = items[i];
-        const id = simpleArray ? i : item[keyField];
-        let size = sizes[id];
-        if (typeof size === 'undefined' && !this.$_undefinedMap[id]) {
-          size = 0;
-        }
-        result.push({
-          item,
-          id,
-          size,
-        });
-      }
-      return result;
-    },
-  },
-
-  watch: {
-    simpleArray: {
-      handler (value) {
-        this.vscrollData.simpleArray = value;
-      },
-
-      immediate: true,
-    },
-
-    itemsWithSize (next, prev) {
-      const scrollTop = this.$el.scrollTop;
-
-      // Calculate total diff between prev and next sizes
-      // over current scroll top. Then add it to scrollTop to
-      // avoid jumping the contents that the user is seeing.
-      let prevActiveTop = 0; let activeTop = 0;
-      const length = Math.min(next.length, prev.length);
-      for (let i = 0; i < length; i++) {
-        if (prevActiveTop >= scrollTop) {
-          break;
-        }
-        prevActiveTop += prev[i].size || this.minItemSize;
-        activeTop += next[i].size || this.minItemSize;
-      }
-      const offset = activeTop - prevActiveTop;
-
-      if (offset === 0) {
-        return;
-      }
-
-      this.$el.scrollTop += offset;
-    },
-  },
-
-  beforeCreate () {
-    this.$_updates = [];
-    this.$_undefinedSizes = 0;
-    this.$_undefinedMap = {};
-  },
-
-  activated () {
-    this.vscrollData.active = true;
-  },
-
-  deactivated () {
-    this.vscrollData.active = false;
   },
 
   methods: {
