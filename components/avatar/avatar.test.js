@@ -147,18 +147,16 @@ describe('DtAvatar Tests', function () {
       const initials = 'DP';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         props = {
           ...baseProps,
+          size: 'sm',
         };
         slots = { default: initials };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('shows a single character', async function () {
-        await wrapper.setProps({
-          size: 'sm',
-        });
         assert.strictEqual(wrapper.text(), initials[0]);
       });
     });
@@ -168,18 +166,16 @@ describe('DtAvatar Tests', function () {
       const initials = 'DP';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         props = {
           ...baseProps,
+          size: 'xs',
         };
         slots = { default: initials };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('has no initials', async function () {
-        await wrapper.setProps({
-          size: 'xs',
-        });
         assert.strictEqual(wrapper.text(), '');
       });
     });

@@ -149,14 +149,13 @@ export default {
   data () {
     return {
       // initials, image or icon
-      kind: 'initials',
+      kind: null,
       AVATAR_SIZE_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
       imageLoadedSuccessfully: null,
       slottedInitials: '',
       formattedInitials: '',
-      defaultSlotContent: null,
     };
   },
 
@@ -174,11 +173,11 @@ export default {
     },
 
     showDefaultSlot () {
-      return this.kind !== 'initials' || this.imageLoadedSuccessfully === true;
+      return this.kind !== 'initials' || (this.kind === 'image' && this.imageLoadedSuccessfully === true);
     },
 
     showInitials () {
-      return this.kind === 'initials' || (this.initials && this.kind !== 'icon');
+      return this.kind === 'initials' || (this.kind === 'image' && this.initials);
     },
 
     showGroup () {
@@ -205,49 +204,30 @@ export default {
     },
   },
 
-  watch: {
-    defaultSlotContent: {
-      deep: true,
-      immediate: true,
-      handler: function () {
-        this.init();
-      },
-    },
-  },
-
-  updated () {
-    this.defaultSlotContent = this.$slots().default?.[0] ?? null;
-    this.imageLoadedSuccessfully = this.defaultSlotContent?.elm?.complete;
+  mounted () {
+    this.init();
   },
 
   methods: {
     init () {
-      this.defaultSlotContent = this.$slots().default ? this.$slots().default[0] : null;
-      const firstChild = this.defaultSlotContent?.elm ? this.defaultSlotContent.elm : this.defaultSlotContent;
+      const firstChild = this.$refs.canvas.children[0] || this.$refs.canvas;
       this.formatInitials(this.initials);
-
-      if (!firstChild) {
-        return;
-      }
-
       this.setKind(firstChild);
       this.kindHandler(firstChild);
     },
 
     kindHandler (el) {
-      if (!this.$el) return;
-      const avatarImage = this.$el.querySelector('img');
-      const iconElement = this.$el.querySelector('svg');
       switch (this.kind) {
         case 'image':
-          avatarImage?.classList.add('d-avatar__image', 'd-zi-base1');
+          el.classList.add('d-avatar__image', 'd-zi-base1');
           this.validateImageAttrsPresence();
           this.setImageListeners(el);
           break;
         case 'icon':
-          iconElement?.classList.add(AVATAR_KIND_MODIFIERS.icon);
+          el.classList.add(AVATAR_KIND_MODIFIERS.icon);
           break;
         case 'initials':
+          if (!el.textContent) return;
           this.slottedInitials = el.textContent;
           this.formatInitials(this.slottedInitials);
           break;
@@ -255,17 +235,16 @@ export default {
     },
 
     setImageListeners (el) {
-      const avatarImage = this.$el.querySelector('img');
       el.addEventListener('load', function () {
         this.imageLoadedSuccessfully = true;
-        avatarImage?.classList.remove('d-d-none');
-        avatarImage?.classList.add('d-avatar--image-loaded');
+        el.classList.remove('d-d-none');
+        el.classList.add('d-avatar--image-loaded');
       });
 
       el.addEventListener('error', function () {
         this.imageLoadedSuccessfully = false;
-        avatarImage?.classList.remove('d-avatar--image-loaded');
-        avatarImage?.classList.add('d-d-none');
+        el.classList.remove('d-avatar--image-loaded');
+        el.classList.add('d-d-none');
       });
     },
 
@@ -291,13 +270,11 @@ export default {
     },
 
     isIconType (element) {
-      return element?.componentOptions?.tag === 'dt-icon' ||
-          element?.tagName?.toUpperCase() === 'SVG' ||
-          element?.tag === 'svg';
+      return element?.tagName?.toUpperCase() === 'SVG';
     },
 
     isImageType (element) {
-      return element?.tag === 'img' || element?.tagName?.toUpperCase() === 'IMG';
+      return element?.tagName?.toUpperCase() === 'IMG';
     },
 
     randomizeGradientAngle () {
@@ -327,8 +304,8 @@ export default {
     },
 
     validateImageAttrsPresence () {
-      const isSrcMissing = !this.defaultSlotContent.elm.getAttribute('src');
-      const isAltMissing = !this.defaultSlotContent.elm.getAttribute('alt');
+      const isSrcMissing = !this.$refs.canvas.children[0].getAttribute('src');
+      const isAltMissing = !this.$refs.canvas.children[0].getAttribute('alt');
 
       if (isSrcMissing || isAltMissing) {
         warn('src and alt attributes are required for image avatars', this);
