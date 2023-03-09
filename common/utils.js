@@ -127,8 +127,7 @@ export const flushPromises = () => {
  * @returns {string}
  */
 export const kebabCaseToPascalCase = (string) => {
-  return string
-    .toLowerCase()
+  return string?.toLowerCase()
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join('');
