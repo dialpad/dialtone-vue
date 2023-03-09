@@ -50,7 +50,6 @@ describe('DtAvatar Tests', function () {
     });
     await wrapper.vm.$nextTick();
     _setChildWrappers();
-    await wrapper.vm.$nextTick();
   };
 
   // Setup
@@ -83,9 +82,7 @@ describe('DtAvatar Tests', function () {
       // Test Setup
       beforeEach(async function () {
         slots = { default: imageSlot };
-        _setWrappers();
-        await wrapper.vm.$nextTick();
-        _setChildWrappers();
+        await _setWrappers();
       });
 
       it('image should exist', function () {
@@ -106,9 +103,9 @@ describe('DtAvatar Tests', function () {
       const icon = '<svg></svg>';
 
       // Test Setup
-      beforeEach(function () {
+      beforeEach(async function () {
         slots = { default: icon };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('icon slot should exist', function () {
@@ -127,9 +124,7 @@ describe('DtAvatar Tests', function () {
       // Test Setup
       beforeEach(async function () {
         slots = { default: initials };
-        _setWrappers();
-        await wrapper.vm.$nextTick();
-        _setChildWrappers();
+        await _setWrappers();
       });
 
       it('should display initials', function () {
@@ -374,8 +369,7 @@ describe('DtAvatar Tests', function () {
           const imageSlot = `<img src="${IMAGE_ATTRS.SRC}" data-qa="dt-avatar-image">`;
 
           slots = { default: imageSlot };
-          _setWrappers();
-          await wrapper.vm.$nextTick();
+          await _setWrappers();
         });
 
         itBehavesLikeRaisesVueWarning(warningMessage);
@@ -387,8 +381,7 @@ describe('DtAvatar Tests', function () {
           const imageSlot = `<img alt="${IMAGE_ATTRS.ALT}" data-qa="dt-avatar-image">`;
 
           slots = { default: imageSlot };
-          _setWrappers();
-          await wrapper.vm.$nextTick();
+          await _setWrappers();
         });
 
         itBehavesLikeRaisesVueWarning(warningMessage);

@@ -21,12 +21,13 @@
     </div>
     <span
       v-if="showGroup"
-      class="d-avatar__count"
+      class="d-avatar__count d-zi-base1"
       data-qa="dt-avatar-count"
     >{{ formattedGroup }}</span>
     <dt-presence
       v-if="presence && !showGroup"
       :presence="presence"
+      class="d-zi-base1"
       :class="[
         'd-avatar__presence',
         AVATAR_PRESENCE_SIZE_MODIFIERS[size],
@@ -156,6 +157,7 @@ export default {
       imageLoadedSuccessfully: null,
       slottedInitials: '',
       formattedInitials: '',
+      initializing: false,
     };
   },
 
@@ -208,12 +210,22 @@ export default {
     this.init();
   },
 
+  updated () {
+    this.init();
+  },
+
   methods: {
-    init () {
+    async init () {
+      if (this.initializing) return;
+      this.kind = null;
+      await this.$nextTick();
       const firstChild = this.$refs.canvas.children[0] || this.$refs.canvas;
       this.formatInitials(this.initials);
       this.setKind(firstChild);
       this.kindHandler(firstChild);
+      this.initializing = true;
+      await this.$nextTick();
+      this.initializing = false;
     },
 
     kindHandler (el) {
@@ -229,23 +241,14 @@ export default {
         case 'initials':
           if (!el.textContent) return;
           this.slottedInitials = el.textContent;
-          this.formatInitials(this.slottedInitials);
+          this.formatInitials(this.slottedInitials.trim() || this.initials);
           break;
       }
     },
 
     setImageListeners (el) {
-      el.addEventListener('load', function () {
-        this.imageLoadedSuccessfully = true;
-        el.classList.remove('d-d-none');
-        el.classList.add('d-avatar--image-loaded');
-      });
-
-      el.addEventListener('error', function () {
-        this.imageLoadedSuccessfully = false;
-        el.classList.remove('d-avatar--image-loaded');
-        el.classList.add('d-d-none');
-      });
+      el.addEventListener('load', () => this._loadedImageEventHandler(el), { once: true });
+      el.addEventListener('error', () => this._erroredImageEventHandler(el), { once: true });
     },
 
     formatInitials (initials) {
@@ -310,6 +313,18 @@ export default {
       if (isSrcMissing || isAltMissing) {
         warn('src and alt attributes are required for image avatars', this);
       }
+    },
+
+    _loadedImageEventHandler (el) {
+      this.imageLoadedSuccessfully = true;
+      el.classList.remove('d-d-none');
+      el.classList.add('d-avatar--image-loaded');
+    },
+
+    _erroredImageEventHandler (el) {
+      this.imageLoadedSuccessfully = false;
+      el.classList.remove('d-avatar--image-loaded');
+      el.classList.add('d-d-none');
     },
   },
 };
