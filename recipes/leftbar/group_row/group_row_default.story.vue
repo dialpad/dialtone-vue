@@ -5,6 +5,7 @@
     :names="$attrs.names"
     :avatar-src="$attrs.avatarSrc"
     :unread-count="$attrs.unreadCount"
+    :unread-count-tooltip="$attrs.unreadCountTooltip"
     :has-unreads="$attrs.hasUnreads"
     :selected="$attrs.selected"
     :is-typing="$attrs.isTyping"
