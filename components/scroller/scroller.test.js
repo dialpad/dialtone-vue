@@ -74,13 +74,17 @@ describe('DtScroller Tests', function () {
       it('`scroll-end` event when scroll reach the bottom of the component', async function () {
         defaultContent.element.scrollTop = 500;
         await wrapper.trigger('scroll');
+
         assert.isTrue(!!wrapper.emitted()['scroll-end']);
       });
     });
 
     describe('On `scrollToItem` event', function () {
-      it('should scroll to the item', function () {
+      it('should scroll to the item', async function () {
+        wrapper.vm.scrollToItem(15);
+        await wrapper.trigger('scroll');
 
+        assert.equal(defaultContent.element.scrollTop, 450);
       });
     });
   });
