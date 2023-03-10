@@ -2,6 +2,7 @@
   <component
     :is="dynamic ? 'dynamic-scroller' : 'core-scroller'"
     ref="scroller"
+    data-qa="dt-scroller"
     :items="items"
     :item-size="itemSize"
     :min-item-size="minItemSize"
@@ -36,6 +37,13 @@ export default {
   components: {
     CoreScroller,
     DynamicScroller,
+  },
+
+  provide () {
+    // use function syntax so that we can access `this`
+    return {
+      emit: this.$emit,
+    };
   },
 
   inheritAttrs: false,
@@ -133,6 +141,8 @@ export default {
       type: [Number, String],
     },
   },
+
+  emits: ['scroll-start', 'scroll-end'],
 
   computed: {
     computedStyle () {
