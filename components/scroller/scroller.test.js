@@ -2,6 +2,8 @@ import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtScroller from './scroller.vue';
 
+global.requestAnimationFrame = cb => cb();
+
 // Constants
 const items = Array.from({ length: 20 }, (_, i) => ({
   id: i,
