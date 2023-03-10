@@ -40,7 +40,7 @@ export default {
   inheritAttrs: false,
 
   props: {
-    /*
+    /**
       * The items to render.
       * If the items are simple arrays, the index will be used as the key.
       * If the items are objects, the keyField will be used as the key.
@@ -50,7 +50,7 @@ export default {
       required: true,
     },
 
-    /*
+    /**
       * The width of the scroller.
       * Can be a number (in pixels) or a string (in CSS units).
      */
@@ -59,7 +59,7 @@ export default {
       default: '100%',
     },
 
-    /*
+    /**
       * The height of the scroller.
       * Can be a number (in pixels) or a string (in CSS units).
      */
@@ -68,7 +68,7 @@ export default {
       default: '100%',
     },
 
-    /*
+    /**
       * Indicates if the items are dynamic.
       * If true, the items will be wrapped in a DtScrollerItem component.
       * This is required for dynamic items to be able to react to changes in their size.
@@ -78,7 +78,7 @@ export default {
       default: false,
     },
 
-    /*
+    /**
       * The key field to use for the items.
       * Only used if the items are objects.
      */
@@ -87,7 +87,7 @@ export default {
       default: 'id',
     },
 
-    /*
+    /**
       * The direction of the scroller.
       * Can be either 'vertical' or 'horizontal'.
      */
@@ -97,7 +97,7 @@ export default {
       validator: (value) => ['vertical', 'horizontal'].includes(value),
     },
 
-    /*
+    /**
       * The tag to use for the list.
      */
     listTag: {
@@ -105,7 +105,7 @@ export default {
       default: 'div',
     },
 
-    /*
+    /**
       * The tag to use for the items.
      */
     itemTag: {
@@ -113,7 +113,7 @@ export default {
       default: 'div',
     },
 
-    /*
+    /**
       * Display height (or width in horizontal mode) of the items in pixels
       * used to calculate the scroll size and position.
       * Is required for the initial render of items in DYNAMIC size mode.
