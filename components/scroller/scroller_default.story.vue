@@ -16,9 +16,13 @@
       ref="scroller"
       class="scroller"
       :items="items"
-      :item-size="32"
-      :scroller-height="200"
-      :scroller-width="200"
+      :item-size="$attrs.itemSize"
+      :scroller-height="$attrs.scrollerHeight"
+      :scroller-width="$attrs.scrollerWidth"
+      :min-item-size="$attrs.minItemSize"
+      :list-tag="$attrs.listTag"
+      :item-tag="$attrs.itemTag"
+      :direction="$attrs.direction"
       key-field="id"
     >
       <template #default="{ item }">

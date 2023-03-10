@@ -3,6 +3,7 @@
     :is="dynamic ? 'dynamic-scroller' : 'core-scroller'"
     ref="scroller"
     :items="items"
+    :item-size="itemSize"
     :min-item-size="minItemSize"
     :direction="direction"
     key-field="id"
@@ -80,7 +81,9 @@ export default {
 
     /**
       * The key field to use for the items.
-      * Only used if the items are objects.
+      * If the items are objects, the scroller needs to be able to identify them.
+      * By default it will look for an id field on the items.
+      * This can be configured with this prop if you are using another field name.
      */
     keyField: {
       type: String,
@@ -116,6 +119,14 @@ export default {
     /**
       * Display height (or width in horizontal mode) of the items in pixels
       * used to calculate the scroll size and position.
+     */
+    itemSize: {
+      type: Number,
+      default: null,
+    },
+
+    /**
+      * Minimum size used if the height (or width in horizontal mode) of a item is unknown.
       * Is required for the initial render of items in DYNAMIC size mode.
      */
     minItemSize: {

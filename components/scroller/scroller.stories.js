@@ -4,6 +4,7 @@ import ScrollerDefault from './scroller_default.story';
 import ScrollerDynamic from '@/components/scroller/scroller_dynamic.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
+import { CHIP_SIZE_MODIFIERS } from '@';
 
 export const argTypesData = {
   default: {
@@ -34,15 +35,25 @@ export const argTypesData = {
   },
 
   direction: {
-    control: { type: null },
+    control: {
+      type: 'select',
+      options: ['horizontal', 'vertical'],
+    },
   },
 
   listTag: {
-    control: { type: null },
+    control: { type: 'text' },
+    defaultValue: 'div',
   },
 
   itemTag: {
-    control: { type: null },
+    control: { type: 'text' },
+    defaultValue: 'div',
+  },
+
+  itemSize: {
+    control: { type: 'number' },
+    defaultValue: 32,
   },
 
   minItemSize: {
@@ -50,11 +61,13 @@ export const argTypesData = {
   },
 
   scrollerWidth: {
-    control: { type: null },
+    control: { type: 'number' },
+    defaultValue: 300,
   },
 
   scrollerHeight: {
-    control: { type: null },
+    control: { type: 'number' },
+    defaultValue: 200,
   },
 
   // Events
