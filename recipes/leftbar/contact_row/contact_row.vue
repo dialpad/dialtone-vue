@@ -96,6 +96,7 @@ export default {
      * Determines whether to show the presence indicator for
      * Avatar - accepts PRESENCE_STATES values: 'active', 'busy', 'away', 'offline'. defaults to active.
      * @values active, busy, away, offline
+     * @default active
      */
     avatarPresence: {
       type: String,
