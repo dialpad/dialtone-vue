@@ -137,6 +137,7 @@
   },
   "peerDependencies": {
     "@dialpad/dialtone": ">=7.19",
+    "@dialpad/dialtone-icons": "latest",
     "vue": ">=2.6"
   },
   "engineStrict": true,
