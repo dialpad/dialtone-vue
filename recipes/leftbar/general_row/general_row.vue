@@ -99,6 +99,7 @@
             circle
             size="xs"
             kind="inverted"
+            :aria-label="callButtonTooltip"
             @focus="actionFocused = true"
             @blur="actionFocused = false"
             @mouseleave="actionFocused = false"
