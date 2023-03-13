@@ -8,11 +8,10 @@ import { action } from '@storybook/addon-actions';
 export const argTypesData = {
   default: {
     control: { type: null },
-    description: 'Slot for main content that will be rendered inside the scroller. ' +
-      'Default scoped slot props are:\n\n ' +
-      'item: the item itself, it will be an object if your list is an array with objects.\n\n' +
-      'index: reflects each items position in the list array\n\n' +
-      'active: return if the item is visible for the user or not.',
+    description: 'Markup to display each item from the items array.' +
+      'item {*}: the item currently being rendered from within your items array.\n\n' +
+      'index {number}: the index of this item in the items array.\n\n' +
+      'active {boolean}: whether this item is currently visible to the user.',
     table: {
       type: {
         summary: 'VNode',

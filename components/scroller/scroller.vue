@@ -10,8 +10,8 @@
     key-field="id"
     :list-tag="listTag"
     :item-tag="itemTag"
-    v-bind="$attrs"
     :style="computedStyle"
+    tabindex="0"
   >
     <template
       #default="{ item, index, active }"
@@ -46,13 +46,13 @@ export default {
     };
   },
 
-  inheritAttrs: false,
-
   props: {
     /**
       * The items to render.
       * If the items are simple arrays, the index will be used as the key.
       * If the items are objects, the keyField will be used as the key.
+     * @example items: [ 'item1', 'item2', 'item3' ]
+     * @example items: [ { id: 1, name: 'item1' }, { id: 2, name: 'item2' }, { id: 3, name: 'item3' } ]
      */
     items: {
       type: Array,
@@ -78,9 +78,11 @@ export default {
     },
 
     /**
-      * Indicates if the items are dynamic.
-      * If true, the items will be wrapped in a DtScrollerItem component.
-      * This is required for dynamic items to be able to react to changes in their size.
+     * Indicates if the items need to react to changes in their size.
+     * If disabled the itemSize prop is required and you will get improved performance.
+     * If enabled the minItemSize prop is required and you
+     * will have reduced performance but the ability to reactively size list items
+      * @values true, false
      */
     dynamic: {
       type: Boolean,
@@ -100,7 +102,7 @@ export default {
 
     /**
       * The direction of the scroller.
-      * Can be either 'vertical' or 'horizontal'.
+      * @values vertical, horizontal
      */
     direction: {
       type: String,
@@ -127,6 +129,7 @@ export default {
     /**
       * Display height (or width in horizontal mode) of the items in pixels
       * used to calculate the scroll size and position.
+     *  Required if DYNAMIC is false
      */
     itemSize: {
       type: Number,
@@ -153,10 +156,30 @@ export default {
     },
   },
 
+  watch: {
+    $props: {
+      immediate: true,
+      deep: true,
+      handler () {
+        this.validateProps();
+      },
+    },
+  },
+
   methods: {
     scrollToItem (index) {
       const scroller = this.$refs.scroller;
       if (scroller) scroller.scrollToItem(index);
+    },
+
+    validateProps () {
+      if (this.dynamic && !this.minItemSize) {
+        console.error('DtScroller error: \'minItemSize\' is required on \'dynamic\' mode.');
+      }
+
+      if (!this.dynamic && !this.itemSize) {
+        console.error('DtScroller error: \'itemSize\' is required.');
+      }
     },
   },
 };

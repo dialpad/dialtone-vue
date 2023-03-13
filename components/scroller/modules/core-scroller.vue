@@ -157,8 +157,6 @@ const props = defineProps({
   },
 });
 
-// const emit = defineEmits(['scroll-start', 'scroll-end']);
-
 const views = reactive(new Map());
 const reactiveItems = reactive(props.items);
 const unusedViews = reactive(new Map());
@@ -311,8 +309,6 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
   let _totalSize;
   let visibleStartIndex, visibleEndIndex;
 
-  // console.log(minItemSize)
-
   if (!count) {
     _startIndex = _endIndex = visibleStartIndex = visibleEndIndex = _totalSize = 0;
   } else {
@@ -358,9 +354,6 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
 
       // For container style
       _totalSize = _sizes[count - 1]?.accumulator;
-
-      // console.log(_sizes);
-      // console.log(_totalSize);
 
       // Searching for _endIndex
       for (
@@ -415,7 +408,6 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
   }
 
   totalSize = _totalSize;
-  // console.log(totalSize)
 
   let view;
 
@@ -451,8 +443,6 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
     item = items[i];
     const key = keyField ? item?.[keyField] : item;
 
-    // console.log(_startIndex);
-    // console.log(_endIndex);
     if (key == null) {
       throw new Error(`Key is ${key} on item (keyField is '${keyField}')`);
     }
