@@ -33,6 +33,11 @@ export const argTypesData = {
       type: 'select',
       options: [...PRESENCE_STATES_LIST],
     },
+    table: {
+      defaultValue: {
+        summary: 'active',
+      },
+    },
   },
 
   // Action Event Handlers
