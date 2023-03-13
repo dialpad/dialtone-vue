@@ -25,9 +25,9 @@
       :direction="$attrs.direction"
       key-field="id"
     >
-      <template #default="{ item }">
+      <template #default="{ active }">
         <div class="user">
-          {{ item.name }}
+          active: {{ active }}
         </div>
       </template>
     </dt-scroller>

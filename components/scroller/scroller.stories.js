@@ -70,17 +70,32 @@ export const argTypesData = {
     defaultValue: 200,
   },
 
-  // Events
+  // Action Event Handlers
   onScrollStart: {
-    control: { type: null },
-    description: 'Emitted when the first item is rendered.',
+    table: {
+      disable: true,
+    },
   },
 
   onScrollEnd: {
-    control: { type: null },
-    description: 'Emitted when the last item is rendered.',
+    table: {
+      disable: true,
+    },
   },
 
+  'scroll-start': {
+    description: 'Emitted when the first item is rendered.',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+
+  'scroll-end': {
+    description: 'Emitted when the last item is rendered.',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
 };
 
 export const argsData = {
@@ -94,6 +109,9 @@ export default {
   parameters: {
     docs: {
       page: BaseScrollerMdx,
+    },
+    controls: {
+      sort: 'requiredFirst',
     },
     options: {
       showPanel: true,
@@ -111,8 +129,8 @@ Default.args = {
   default: 'Scroller',
 };
 
-const VariantsTemplate = (args) => createTemplateFromVueFile(args, ScrollerDynamic);
+const DynamicTemplate = (args) => createTemplateFromVueFile(args, ScrollerDynamic);
 
-export const Dynamic = VariantsTemplate.bind({});
+export const Dynamic = DynamicTemplate.bind({});
 Dynamic.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
 Dynamic.args = {};
