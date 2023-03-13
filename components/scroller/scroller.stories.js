@@ -4,7 +4,6 @@ import ScrollerDefault from './scroller_default.story';
 import ScrollerDynamic from '@/components/scroller/scroller_dynamic.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
-import { CHIP_SIZE_MODIFIERS } from '@';
 
 export const argTypesData = {
   default: {
