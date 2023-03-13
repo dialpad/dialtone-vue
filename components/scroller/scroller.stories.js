@@ -11,9 +11,9 @@ export const argTypesData = {
     control: { type: null },
     description: 'Slot for main content that will be rendered inside the scroller. ' +
       'Default scoped slot props are:\n\n ' +
-      'item: item being rendered in a view.\n\n' +
-      'index: reflects each items position in the items array\n\n' +
-      'active: whether or not the view is active.',
+      'item: the item itself, it will be an object if your list is an array with objects.\n\n' +
+      'index: reflects each items position in the list array\n\n' +
+      'active: return if the item is visible for the user or not.',
     table: {
       type: {
         summary: 'VNode',
