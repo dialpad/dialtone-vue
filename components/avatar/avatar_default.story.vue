@@ -3,7 +3,7 @@
     :id="$attrs.id"
     :size="$attrs.size"
     :presence="$attrs.presence"
-    :avatar-class="attrs.avatarClass"
+    :avatar-class="$attrs.avatarClass"
     :initials="$attrs.initials"
     :seed="$attrs.seed"
     :gradient="$attrs.gradient"
