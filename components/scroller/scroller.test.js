@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
-import DtScroller from './scroller.vue';
+import DtScroller from './DtScroller.vue';
 import sinon from 'sinon';
 
 // Constants

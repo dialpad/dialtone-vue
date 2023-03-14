@@ -23,7 +23,8 @@
       :list-tag="$attrs.listTag"
       :item-tag="$attrs.itemTag"
       :direction="$attrs.direction"
-      key-field="id"
+      @scroll-start="$attrs.onScrollStart"
+      @scroll-end="$attrs.onScrollEnd"
     >
       <template #default="{ item }">
         <div class="user">
@@ -35,7 +36,7 @@
 </template>
 
 <script setup>
-import DtScroller from './scroller';
+import DtScroller from './DtScroller';
 import { ref } from 'vue';
 
 const items = Array.from({ length: 1000 }, (_, i) => ({

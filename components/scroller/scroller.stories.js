@@ -1,4 +1,4 @@
-import DtScroller from './scroller';
+import DtScroller from './DtScroller';
 import BaseScrollerMdx from './scroller.mdx';
 import ScrollerDefault from './scroller_default.story';
 import ScrollerDynamic from '@/components/scroller/scroller_dynamic.story.vue';
@@ -8,7 +8,7 @@ import { action } from '@storybook/addon-actions';
 export const argTypesData = {
   default: {
     control: { type: null },
-    description: 'Markup to display each item from the items array.' +
+    description: 'Markup to display each item from the items array.\n\n' +
       'item {*}: the item currently being rendered from within your items array.\n\n' +
       'index {number}: the index of this item in the items array.\n\n' +
       'active {boolean}: whether this item is currently visible to the user.',
