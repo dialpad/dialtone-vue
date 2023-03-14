@@ -10,7 +10,7 @@
         icon-position="top"
         :disabled="disabled"
         :aria-label="ariaLabel"
-        label-class="d-fs-100"
+        :label-class="callbarButtonTextClass"
         :width="buttonWidth"
         :class="callbarButtonClass"
         v-on="$listeners"
@@ -19,6 +19,7 @@
         <slot
           slot="icon"
           name="icon"
+          :class="iconClass"
         />
       </dt-button>
     </template>
@@ -112,6 +113,22 @@ export default {
       default: '',
     },
 
+    /**
+     * Additional class name for the button text.
+     */
+    textClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the icon of button.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
     /*
      * Width size. Valid values are: 'xl', 'lg', 'md' and 'sm'.
      */
@@ -138,11 +155,19 @@ export default {
         this.buttonClass,
         'dt-recipe-callbar-button',
         'd-px0',
+        'd-fc-black-900',
         {
           'dt-recipe-callbar-button--circle': this.circle,
           'dt-recipe-callbar-button--active': this.active,
           'dt-recipe-callbar-button--danger': this.danger,
         }];
+    },
+
+    callbarButtonTextClass () {
+      return [
+        'd-fs-100 lg:d-d-none md:d-d-none sm:d-d-none',
+        this.textClass,
+      ];
     },
 
     buttonWidth () {
