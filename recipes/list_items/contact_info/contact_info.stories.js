@@ -5,7 +5,8 @@ import DtRecipeContactInfo from './contact_info';
 import DtRecipeContactInfoMdx from './contact_info.mdx';
 import DtRecipeContactInfoDefaultTemplate from './contact_info_default.story';
 import DtRecipeContactInfoVariantsTemplate from './contact_info_variants.story';
-import { AVATAR_SIZE_MODIFIERS, PRESENCE_STATES_LIST } from '@';
+import { AVATAR_SIZE_MODIFIERS } from '@/components/avatar';
+import { PRESENCE_STATES_LIST } from '@/components/presence';
 
 // Default Prop Values
 export const argsData = {
