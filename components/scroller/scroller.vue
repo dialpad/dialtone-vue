@@ -12,6 +12,8 @@
     :item-tag="itemTag"
     :style="computedStyle"
     tabindex="0"
+    @scroll-start="$emit('scroll-start')"
+    @scroll-end="$emit('scroll-end')"
   >
     <template
       #default="{ item, index, active }"
@@ -37,13 +39,6 @@ export default {
   components: {
     CoreScroller,
     DynamicScroller,
-  },
-
-  provide () {
-    // use function syntax so that we can access `this`
-    return {
-      emit: this.$emit,
-    };
   },
 
   props: {

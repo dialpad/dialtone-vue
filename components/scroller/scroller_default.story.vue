@@ -24,6 +24,8 @@
       :item-tag="$attrs.itemTag"
       :direction="$attrs.direction"
       key-field="id"
+      @scroll-start="$attrs.onScrollStart"
+      @scroll-end="$attrs.onScrollEnd"
     >
       <template #default="{ item }">
         <div class="user">
