@@ -5,8 +5,7 @@ import DtRecipeContactInfo from './contact_info';
 import DtRecipeContactInfoMdx from './contact_info.mdx';
 import DtRecipeContactInfoDefaultTemplate from './contact_info_default.story';
 import DtRecipeContactInfoVariantsTemplate from './contact_info_variants.story';
-import { USER_STATUS_COLOR_MODIFIERS } from './contact_info_constants';
-import { AVATAR_SIZE_MODIFIERS } from '@';
+import { AVATAR_SIZE_MODIFIERS, PRESENCE_STATES_LIST } from '@';
 
 // Default Prop Values
 export const argsData = {
@@ -33,11 +32,12 @@ export const argTypesData = {
     options: Object.keys(AVATAR_SIZE_MODIFIERS),
   },
 
-  userStatusColor: {
+  presence: {
+    defaultValue: null,
     control: {
       type: 'select',
+      options: [...PRESENCE_STATES_LIST],
     },
-    options: Object.keys(USER_STATUS_COLOR_MODIFIERS),
   },
 
   // Slots
@@ -125,7 +125,7 @@ Default.args = {
   avatarInitials: 'JL',
   avatarColor: 'base',
   avatarSize: 'lg',
-  userStatusColor: 'green',
+  presence: 'active',
   header: `<div class="d-fs-200 d-fw-bold">
   Joseph Lumaban
 </div>`,
@@ -151,7 +151,7 @@ Default.parameters = {
   :avatar-initials="avatarInitials"
   :avatar-color="avatarColor"
   :avatar-size="avatarSize"
-  :user-status-color="userStatusColor"
+  :presence="presence"
 >
   <template #header>
     <div class="d-fs-200 d-fw-bold d-mr4">Joseph Lumaban</div>
@@ -191,7 +191,7 @@ Variants.args = {
   avatarInitials: 'NW',
   avatarColor: 'orange-500',
   avatarSize: 'lg',
-  userStatusColor: 'gold',
+  presence: 'busy',
   onGroupContactClick: action('click: clickable group contact'),
   onMarkAsSpam: action('click: mark this contact as spam'),
   onConnectToARecord: action('click: connect to a record'),
