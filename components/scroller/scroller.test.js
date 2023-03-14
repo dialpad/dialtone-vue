@@ -1,8 +1,8 @@
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtScroller from './DtScroller.vue';
-import sinon from 'sinon';
 
+global.requestAnimationFrame = cb => cb();
 // Constants
 const items = Array.from({ length: 20 }, (_, i) => ({
   id: i,
@@ -49,10 +49,6 @@ describe('DtScroller Tests', function () {
   afterEach(function () {
     propsData = basePropsData;
     slots = baseSlotsData;
-  });
-
-  before(function () {
-    global.requestAnimationFrame = sinon.spy();
   });
 
   beforeEach(function () { _setWrappers(); });
