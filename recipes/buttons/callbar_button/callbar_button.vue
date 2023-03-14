@@ -19,7 +19,6 @@
         <slot
           slot="icon"
           name="icon"
-          :class="iconClass"
         />
       </dt-button>
     </template>
@@ -117,14 +116,6 @@ export default {
      * Additional class name for the button text.
      */
     textClass: {
-      type: [String, Array, Object],
-      default: '',
-    },
-
-    /**
-     * Additional class name for the icon of button.
-     */
-    iconClass: {
       type: [String, Array, Object],
       default: '',
     },
