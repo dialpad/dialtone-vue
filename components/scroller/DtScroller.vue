@@ -12,6 +12,8 @@
     :item-tag="itemTag"
     :style="computedStyle"
     tabindex="0"
+    @scroll-start="$emit('scroll-start')"
+    @scroll-end="$emit('scroll-end')"
   >
     <template
       #default="{ item, index, active }"

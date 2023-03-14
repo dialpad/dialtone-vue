@@ -51,9 +51,7 @@ This is a code from external library (https://github.com/Akryum/vue-virtual-scro
 We have modified it for our own specific use.
 -->
 <script setup>
-import { computed, watch, markRaw, shallowReactive, onMounted, nextTick, reactive, ref, inject } from 'vue';
-
-const emit = inject('emit');
+import { computed, watch, markRaw, shallowReactive, onMounted, nextTick, reactive, ref } from 'vue';
 
 const props = defineProps({
   /**
@@ -156,6 +154,8 @@ const props = defineProps({
     default: '',
   },
 });
+
+const emit = defineEmits(['scroll-start', 'scroll-end']);
 
 const views = reactive(new Map());
 const reactiveItems = reactive(props.items);
