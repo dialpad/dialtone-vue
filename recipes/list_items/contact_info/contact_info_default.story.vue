@@ -2,6 +2,7 @@
   <dt-recipe-contact-info
     :avatar-src="avatarSrc"
     :avatar-initials="avatarInitials"
+    :avatar-size="avatarSize"
     :avatar-color="avatarColor"
     :user-status-color="userStatusColor"
   >

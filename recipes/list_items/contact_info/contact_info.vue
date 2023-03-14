@@ -12,7 +12,7 @@
       >
         <dt-avatar
           v-if="avatarSrc"
-          size="lg"
+          :size="avatarSize"
         >
           <img
             data-qa="dt-contact-avatar"
@@ -81,6 +81,7 @@ import DtListItem from '@/components/list_item/list_item';
 import DtAvatar from '@/components/avatar/avatar';
 import { USER_STATUS_COLOR_MODIFIERS } from './contact_info_constants';
 import utils from '@/common/utils';
+import { AVATAR_SIZE_MODIFIERS } from '@';
 
 export default {
   name: 'DtRecipeContactInfo',
@@ -129,6 +130,16 @@ export default {
     avatarInitials: {
       type: String,
       default: '',
+    },
+
+    /**
+     * The size of the avatar
+     * @values xs, sm, md, lg, xl
+     */
+    avatarSize: {
+      type: String,
+      default: 'lg',
+      validator: (size) => Object.keys(AVATAR_SIZE_MODIFIERS).includes(size),
     },
 
     /**
