@@ -80,6 +80,20 @@ export const argTypesData = {
       options: VALID_WIDTH_SIZE,
     },
   },
+  textClass: {
+    table: {
+      type: {
+        summary: ['string', 'array', 'object'],
+      },
+    },
+  },
+  iconClass: {
+    table: {
+      type: {
+        summary: ['string', 'array', 'object'],
+      },
+    },
+  },
   contentClass: {
     table: {
       type: {
