@@ -13,8 +13,12 @@
     >
       {{ dtmfKey }}
     </div>
+    <slot
+      v-if="$slots.connector"
+      name="connector"
+    />
     <div
-      v-else
+      v-if="!dtmfKey && !$slots.connector"
       data-qa="dt-top-connector"
       class="d-zi-base1 d-d-flex d-w8 d-h8 d-bar-circle d-bc-purple-600 d-bgc-purple-600 d-mbn4"
       :class="{ 'd-mbn8': isSelected }"
