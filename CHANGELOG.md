@@ -1,3 +1,34 @@
+# [2.68.0](https://github.com/dialpad/dialtone-vue/compare/v2.67.0...v2.68.0) (2023-03-15)
+
+
+### Code Refactoring
+
+* modify dt-recipe-callbar component to have common styles baked in ([#811](https://github.com/dialpad/dialtone-vue/issues/811)) ([4bebf71](https://github.com/dialpad/dialtone-vue/commit/4bebf71f8836ff83db0fa36336480195283629ca))
+
+
+### Features
+
+* **Dt Recipe Ivr Node:** add new ivr top connector slot ([#819](https://github.com/dialpad/dialtone-vue/issues/819)) ([d45a305](https://github.com/dialpad/dialtone-vue/commit/d45a3050bd1fa5ad6dc5fc198c49ea4bc6b55c61))
+
+# [2.67.0](https://github.com/dialpad/dialtone-vue/compare/v2.66.0...v2.67.0) (2023-03-15)
+
+
+### Features
+
+* add avatar-size prop to contact info ([#809](https://github.com/dialpad/dialtone-vue/issues/809)) ([583c3fb](https://github.com/dialpad/dialtone-vue/commit/583c3fbe6aaaedc7c37e456b756098e770bd807c))
+
+# [2.66.0](https://github.com/dialpad/dialtone-vue/compare/v2.65.2...v2.66.0) (2023-03-14)
+
+
+### Bug Fixes
+
+* **Leftbar Group Row:** add conditional img render ([#814](https://github.com/dialpad/dialtone-vue/issues/814)) ([4eb8782](https://github.com/dialpad/dialtone-vue/commit/4eb87825ec4b08a4670e807adf0556affed48e9a))
+
+
+### Features
+
+* **Leftbar Contact Row:** support "no presence" ([#813](https://github.com/dialpad/dialtone-vue/issues/813)) ([2364fcf](https://github.com/dialpad/dialtone-vue/commit/2364fcf4a9b801f01bbf1a50af90cec619d3e105))
+
 ## [2.65.2](https://github.com/dialpad/dialtone-vue/compare/v2.65.1...v2.65.2) (2023-03-13)
 
 
