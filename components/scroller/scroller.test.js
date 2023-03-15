@@ -70,10 +70,10 @@ describe('DtScroller Tests', function () {
       it('`scroll-start` event immediately the component renders', function () {
         assert.isTrue(!!wrapper.emitted()['scroll-start']);
       });
-      it('`scroll-end` event when scroll reach the bottom of the component', function () {
+      it('`scroll-end` event when scroll reach the bottom of the component', async function () {
         defaultContent.element.scrollTop = 500;
-        wrapper.trigger('scroll');
-
+        await wrapper.trigger('scroll');
+        
         assert.isTrue(!!wrapper.emitted()['scroll-end']);
       });
     });
