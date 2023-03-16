@@ -38,9 +38,6 @@
   },
   "engineStrict": true,
   "engines": {
-    "node": ">= 16"
-  },
-  "volta": {
-    "node": "16"
+    "node": ">= 18"
   }
 }
