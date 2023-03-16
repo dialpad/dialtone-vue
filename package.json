@@ -86,9 +86,6 @@
     "pre-commit": "lint-staged",
     "commit-msg": "./scripts/commit-msg"
   },
-  "volta": {
-    "node": "16"
-  },
   "dependencies": {
     "@dialpad/dialtone-icons": "0.0.21-vue3",
     "emoji-regex": "^10.2.1",
@@ -146,6 +143,6 @@
   },
   "engineStrict": true,
   "engines": {
-    "node": ">= 16"
+    "node": ">= 18"
   }
 }
