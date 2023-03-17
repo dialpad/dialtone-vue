@@ -43,6 +43,7 @@
           <dt-button
             :aria-label="nodeType"
             importance="clear"
+            kind="muted"
             data-qa="dt-ivr-node-icon"
           >
             <template #icon>
@@ -68,6 +69,7 @@
           <template #anchor>
             <dt-button
               importance="clear"
+              kind="muted"
               :aria-label="menuButtonAriaLabel"
               @click.stop.prevent="openMenu"
             >

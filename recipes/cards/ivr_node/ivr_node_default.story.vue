@@ -36,6 +36,7 @@
         </p>
         <dt-button
           importance="clear"
+          kind="muted"
           icon-position="right"
         >
           Launch Expert
