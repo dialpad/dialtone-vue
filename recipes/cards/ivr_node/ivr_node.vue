@@ -50,7 +50,7 @@
               <dt-icon
                 :name="nodeIcon"
                 size="200"
-                :class="['d-fc-black-900', { 'ivr_node__goto_icon': isGotoNode }]"
+                :class="['', { 'ivr_node__goto_icon': isGotoNode }]"
               />
             </template>
           </dt-button>
@@ -77,7 +77,6 @@
                 <dt-icon
                   name="more-vertical"
                   size="200"
-                  class="d-fc-black-900"
                 />
               </template>
             </dt-button>
