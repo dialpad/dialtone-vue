@@ -18,7 +18,7 @@
         kind="count"
       />
       <dt-badge
-        v-for="decoration in Object.keys(BADGE_DECORATION_MODIFIERS).slice(1)"
+        v-for="decoration in Object.keys(BADGE_DECORATION_MODIFIERS)"
         :key="decoration"
         :decoration="decoration"
         :text="getDecorationText(decoration)"

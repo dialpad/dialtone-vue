@@ -56,12 +56,15 @@ export const argTypesData = {
   },
 
   decoration: {
-    defaultValue: 'default',
+    defaultValue: undefined,
     control: {
       type: 'select',
-      options: Object.keys(BADGE_DECORATION_MODIFIERS),
+      options: [undefined, ...Object.keys(BADGE_DECORATION_MODIFIERS)],
+      labels: {
+        undefined: '(empty)',
+      },
     },
-    // TODO: Is there any way to add conditions on more than one control?
+    // TODO: Find a way to add conditions on more than one argument
   },
 };
 

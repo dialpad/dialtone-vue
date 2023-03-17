@@ -9,7 +9,7 @@
     data-qa="dt-badge"
   >
     <span
-      v-if="decoration !== 'default'"
+      v-if="decoration"
       class="d-badge__decorative"
     />
     <span
@@ -104,14 +104,15 @@ export default {
     },
 
     /**
-     * Decoration for the badge
+     * Decoration for the badge. This can be only used with kind: label and type: default
+     * with no iconLeft and iconRight
      * @values default, black-400, black-500, black-900, red-200, red-300, red-400, purple-200,
      * purple-300, purple-400, purple-500, blue-200, blue-300, blue-400, green-300, green-400,
      * green-500, gold-300, gold-400, gold-500, magenta-200, magenta-300, magenta-400
      */
     decoration: {
       type: String,
-      default: 'default',
+      default: undefined,
       validator: (type) => Object.keys(BADGE_DECORATION_MODIFIERS).includes(type),
     },
   },
@@ -122,6 +123,12 @@ export default {
       BADGE_KIND_MODIFIERS,
       BADGE_DECORATION_MODIFIERS,
     };
+  },
+
+  computed: {
+    hasIcons () {
+      return this.iconLeft !== '' || this.iconRight !== '';
+    },
   },
 
   watch: {
@@ -136,27 +143,26 @@ export default {
 
   methods: {
     validateProps () {
-      if (this.type === 'ai' && this.kind === 'count') {
-        console.error('DtBadge error: type: \'ai\' with kind: \'count\' is an invalid combination.');
-      }
-
+      this.validateTypePropCombination();
       this.validateDecorationPropCombination();
     },
 
+    validateTypePropCombination () {
+      if (this.type === 'ai' && this.kind === 'count') {
+        console.error('DtBadge error: type: \'ai\' with kind: \'count\' is an invalid combination.');
+      }
+    },
+
     validateDecorationPropCombination () {
-      if (this.decoration === 'default') return;
+      if (!this.decoration) return;
 
       if (this.kind !== 'label' || this.type !== 'default') {
         console.error('DtBadge error: decoration prop can only be used with kind: \'label\' and type: \'default\'.');
       }
 
-      if (this.hasIcons()) {
+      if (this.hasIcons) {
         console.error('DtBadge error: decoration prop cannot be used with iconLeft or iconRight.');
       }
-    },
-
-    hasIcons () {
-      return this.iconLeft !== '' || this.iconRight !== '';
     },
   },
 };
