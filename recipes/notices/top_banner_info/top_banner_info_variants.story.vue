@@ -121,7 +121,7 @@
           icon-position="right"
           size="xs"
           kind="muted"
-          class="d-fc-black-900 d-p0 d-fw-bold"
+          class="d-fc-primary d-p0 d-fw-bold"
         >
           Click to answer
         </dt-button>
