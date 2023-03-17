@@ -289,7 +289,6 @@ export default {
 
 <style lang="less">
 .dt-recipe--callbar-button-with-popover--arrow.d-btn--circle {
-  margin-top: -1.2rem;
   margin-top: calc(calc(var(--space-300) * 3) * -1);
   width: var(--size-500);
   height: var(--size-500);
@@ -297,7 +296,7 @@ export default {
   border-radius: var(--size-300);
 
   &.d-btn--active {
-    background: var(--black-025);
+    background: var(--bgc-moderate-opaque);
   }
 }
 .dt-recipe--callbar-button-with-popover--popover {

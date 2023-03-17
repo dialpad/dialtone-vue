@@ -53,6 +53,7 @@ export default {
   &,
   &--left,
   &--right {
+    // TODO: probably not necessary, but maybe there's a reason...?
     min-height: 28px;
   }
 }
