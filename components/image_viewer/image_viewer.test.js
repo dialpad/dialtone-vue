@@ -38,6 +38,12 @@ describe('DtImageViewer Tests', function () {
     overlay = wrapper.find('[data-qa="dt-modal"]');
   };
 
+  const transitionStub = () => ({
+    render: function (h) {
+      return this.$options._renderChildren;
+    },
+  });
+
   const _setWrappers = () => {
     wrapper = mount(DtImageViewer, {
       propsData,
@@ -46,7 +52,8 @@ describe('DtImageViewer Tests', function () {
       provide,
       localVue: this.localVue,
       stubs: {
-        transition: false,
+        // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
+        transition: transitionStub(),
       },
     });
     _setChildWrappers();
