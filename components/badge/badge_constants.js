@@ -14,7 +14,6 @@ export const BADGE_KIND_MODIFIERS = {
 };
 
 export const BADGE_DECORATION_MODIFIERS = {
-  default: '',
   'black-400': 'd-badge--decorate-black-400',
   'black-500': 'd-badge--decorate-black-500',
   'black-900': 'd-badge--decorate-black-900',
