@@ -19,13 +19,13 @@ const props = defineProps({
 const emits = defineEmits([
   /**
    * Emitted when a tab is selected
-   * @event selectedTabset
+   * @event selected-tabset
    * @param {String} tabName - The name of the tab that was selected
    */
-  'selectedTabset',
+  'selected-tabset',
 ]);
 
 function selectTabset (tabName) {
-  emits('selectedTabset', tabName);
+  emits('selected-tabset', tabName);
 }
 </script>

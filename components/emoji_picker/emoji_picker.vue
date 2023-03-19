@@ -12,6 +12,7 @@
         :emoji-filter="searchQuery"
         :skin-tone="skinTone"
         @emoji-data="updateEmojiData"
+        @selected-emoji="emits('selected-emoji', $event)"
       />
     </div>
     <div className="d-emoji-picker--footer">
@@ -39,6 +40,14 @@ const props = defineProps({
   },
 
 });
+const emits = defineEmits(
+  /**
+     * It will emit the selected emoji
+     * @event selected-emoji
+     * @param {Object} emoji - The selected emoji from the emoji selector
+     */
+  ['selected-emoji'],
+);
 
 const searchQuery = ref('');
 const emojiData = ref(null);
@@ -52,6 +61,7 @@ const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
  * @param tabName {String} - The name of the tab that was selected
  */
 function scrollToSelectedTabset (tabName) {
+  // it will scroll the emojiSelector component to the selected tabset with animation
   console.log(tabName);
 }
 

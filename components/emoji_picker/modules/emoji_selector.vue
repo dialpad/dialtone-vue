@@ -18,8 +18,9 @@
           :key="emoji.code"
           class="d-emoji-picker__selector--emoji-list__emoji"
           :code="emoji.code"
-          @mouseover="$emit('emojiData', emoji)"
-          @mouseleave="$emit('emojiData', null)"
+          @mouseover="$emit('emoji-data', emoji)"
+          @mouseleave="$emit('emoji-data', null)"
+          @click="$emit('selected-emoji', emoji)"
         />
       </div>
     </div>
@@ -47,7 +48,7 @@ const props = defineProps({
   /**
    * The skin tone to apply to the emoji list
    * @type {String}
-   * @default ''
+   * @default null
    */
   skinTone: {
     type: Number,
@@ -58,10 +59,17 @@ const props = defineProps({
 const emits = defineEmits([
   /**
    * Emitted when the user hover over an emoji
-   * @event emojiData
-   * @param {Object} emojiData - The emoji data that was selected
+   * @event emoji-data
+   * @param {Object} emoji - The emoji data that was hovered
     */
-  'emojiData',
+  'emoji-data',
+
+  /**
+   * Emitted when the user select an emoji
+   * @event selected-emoji
+   * @param {Object} emoji - The emoji data that was selected
+    */
+  'selected-emoji',
 ]);
 
 // emojiJson

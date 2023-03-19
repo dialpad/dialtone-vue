@@ -11,6 +11,6 @@ const emits = defineEmits([
    * @event skin-tone
    * @type {Number}
    */
-  'skinTone',
+  'skin-tone',
 ]);
 </script>
