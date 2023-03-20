@@ -4,21 +4,25 @@
     :offset="[0, -12]"
   >
     <template #anchor>
-      <dt-button
-        :importance="circle ? 'outlined' : 'clear'"
-        kind="muted"
-        icon-position="top"
-        :disabled="disabled"
-        :aria-label="ariaLabel"
-        :label-class="callbarButtonTextClass"
-        :width="buttonWidth"
-        :class="callbarButtonClass"
+      <span
+        :class="{ 'd-c-not-allowed': disabled }"
       >
-        <slot />
-        <template #icon>
-          <slot name="icon" />
-        </template>
-      </dt-button>
+        <dt-button
+          :importance="circle ? 'outlined' : 'clear'"
+          kind="muted"
+          icon-position="top"
+          :aria-disabled="disabled"
+          :aria-label="ariaLabel"
+          :label-class="callbarButtonTextClass"
+          :width="buttonWidth"
+          :class="callbarButtonClass"
+        >
+          <slot />
+          <slot
+            name="icon"
+          />
+        </dt-button>
+      </span>
     </template>
     <slot name="tooltip" />
   </dt-tooltip>
@@ -126,6 +130,17 @@ export default {
       default: 'xl',
       validator: size => VALID_WIDTH_SIZE.includes(size),
     },
+
+    /**
+     * Whether to show the tooltip text. Sometimes we want to show it when the button is disabled.
+     * @values true, false
+     * @see https://dialpad.design/components/button.html#disabled
+     */
+    showTooltip: {
+      type: Boolean,
+      default: false,
+    },
+
   },
 
   computed: {
@@ -134,12 +149,13 @@ export default {
         this.buttonClass,
         'dt-recipe-callbar-button',
         'd-px0',
-        'd-fc-primary',
         {
           'dt-recipe-callbar-button--circle': this.circle,
           'd-btn--icon-only': this.circle,
           'dt-recipe-callbar-button--active': this.active,
           'dt-recipe-callbar-button--danger': this.danger,
+          'd-btn--disabled': this.disabled,
+          'd-fc-primary': !this.disabled,
         }];
     },
 
