@@ -9,7 +9,7 @@ const defaultImage = require('./test.jpg');
 // Default Prop Values
 export const argsData = {
   imageUrl: defaultImage,
-  imageAlt: 'test',
+  imageAlt: 'Image Alt Text',
   closeAriaLabel: 'Close',
 };
 
@@ -107,7 +107,7 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   imageUrl: defaultImage,
-  imageAlt: 'test',
+  imageAlt: 'Image Alt Text',
   closeAriaLabel: 'Close',
 };
 
