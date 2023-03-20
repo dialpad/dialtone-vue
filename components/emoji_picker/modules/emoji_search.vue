@@ -1,31 +1,19 @@
 <template>
   <div class="d-emoji-picker__search">
-    <input
-      :value="modelValue"
-      type="text"
-      class="d-emoji-picker__search--input"
-      placeholder="Search"
-      @input="$emit('update:modelValue', $event.target.value)"
+    <dt-input
+      placeholder="Search..."
+      @update:model-value="$emit('update:modelValue', $event)"
     >
+      <template #leftIcon>
+        <dt-icon name="search" />
+      </template>
+    </dt-input>
   </div>
 </template>
 
 <script setup>
-const props = defineProps({
-  /**
-   * Value of the input
-   */
-  modelValue: {
-    type: String,
-    default: '',
-  },
-});
+import DtInput from '@/components/input/input.vue';
+import DtIcon from '@/components/icon/icon.vue';
 
-const emits = defineEmits([
-  /**
-     * Event fired to sync the modelValue prop with the parent component
-     * @event update:modelValue
-     */
-  'update:modelValue',
-]);
+defineEmits(['update:modelValue']);
 </script>

@@ -1,28 +1,30 @@
 <template>
   <div className="d-emoji-picker">
     <div className="d-emoji-picker--header">
-      <emojiTabset
+      <emoji-tabset
         :recently-used-tab="showRecentlyUsedTab"
         @tabset-selected="scrollToSelectedTabset"
       />
     </div>
     <div className="d-emoji-picker--body">
-      <emojiSearch v-model="searchQuery" />
-      <emojiSelector
-        :emoji-filter="searchQuery"
-        :skin-tone="skinTone"
-        @emoji-data="updateEmojiData"
-        @selected-emoji="emits('selected-emoji', $event)"
-      />
+      <emoji-search v-model="searchQuery" />
+      <!--      <emojiSelector -->
+      <!--        :emoji-filter="searchQuery" -->
+      <!--        :skin-tone="skinTone" -->
+      <!--        @emoji-data="updateEmojiData" -->
+      <!--        @selected-emoji="emits('selected-emoji', $event)" -->
+      <!--      /> -->
     </div>
     <div className="d-emoji-picker--footer">
-      <emojiData :emoji-data="emojiData" />
-      <emojiSkinSelector @skin-tone="updateSkinTone" />
+      <!--      <emojiData :emoji-data="emojiData" /> -->
+      <!--      <emojiSkinSelector @skin-tone="updateSkinTone" /> -->
     </div>
   </div>
 </template>
 
 <script setup>
+import EmojiSearch from './modules/emoji_search.vue';
+import EmojiTabset from './modules/emoji_tabset.vue';
 import { computed, onBeforeUnmount, ref } from 'vue';
 
 const props = defineProps({
@@ -84,3 +86,37 @@ function cleanUp () {
   console.log('cleanUp');
 }
 </script>
+
+<style lang="less">
+.d-emoji-picker{
+  width: auto;
+  max-width: 372px;
+  height: 100%;
+  max-height: 421px;
+
+  display: inline-flex;
+  flex-direction: column;
+  border-radius: 4px;
+
+  //background-color: red;
+
+  &--header{
+    padding: var(--su4) var(--su4) 0 var(--su8);
+    margin-bottom: var(--su16);
+    position: relative;
+    &::after{
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      background-color: var(--black-200) !important;
+    }
+  }
+
+  &--body{
+    padding: 0 var(--su16);
+  }
+}
+</style>

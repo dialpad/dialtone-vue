@@ -80,7 +80,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Components/DtEmojiPicker',
+  title: 'Components/Emoji Picker',
   component: DtEmojiPicker,
   args: argsData,
   argTypes: argTypesData,
@@ -97,15 +97,7 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
   DtEmojiPickerDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtEmojiPickerVariantsTemplate,
-);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
-
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
