@@ -1,6 +1,7 @@
 <template>
   <component
     :is="currentIcon"
+    v-if="currentIcon"
     data-qa="dt-icon"
     :aria-hidden="ariaLabel ? 'false' : 'true'"
     :aria-label="ariaLabel"
@@ -47,18 +48,10 @@ export default {
     },
   },
 
-  computed: {
-    iconSize () {
-      return ICON_SIZE_MODIFIERS[this.size];
-    },
-
-    iconName () {
-      return kebabCaseToPascalCase(this.name);
-    },
-
-    currentIcon () {
-      return DIALTONE_ICONS[this.iconName];
-    },
+  created () {
+    const iconName = kebabCaseToPascalCase(this.name);
+    this.currentIcon = DIALTONE_ICONS[iconName];
+    this.iconSize = ICON_SIZE_MODIFIERS[this.size];
   },
 };
 </script>
