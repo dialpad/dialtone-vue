@@ -33,10 +33,6 @@ export const argsData = {
 */
 export const argTypesData = {
 
-  // imageUrl: defaultImage,
-  // imageAlt: 'test',
-  // closeAriaLabel: 'Close',
-
   imageUrl: {
     description: 'Url for the image',
     table: {

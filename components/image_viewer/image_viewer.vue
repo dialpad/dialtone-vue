@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div>
     <!-- TODO: Does this also need an aria label but the button image or is the alt enough? -->
     <dt-button
       data-qa="dt-image-viewer-preview"
