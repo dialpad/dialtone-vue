@@ -48,10 +48,18 @@ export default {
     },
   },
 
-  created () {
-    const iconName = kebabCaseToPascalCase(this.name);
-    this.currentIcon = DIALTONE_ICONS[iconName];
-    this.iconSize = ICON_SIZE_MODIFIERS[this.size];
+  computed: {
+    iconSize () {
+      return ICON_SIZE_MODIFIERS[this.size];
+    },
+
+    iconName () {
+      return kebabCaseToPascalCase(this.name);
+    },
+
+    currentIcon () {
+      return DIALTONE_ICONS[this.iconName];
+    },
   },
 };
 </script>
