@@ -46,6 +46,19 @@
           Tooltip
         </template>
       </dt-recipe-callbar-button>
+
+      <dt-recipe-callbar-button
+        disabled
+        show-tooltip
+      >
+        Disabled
+        <template #icon>
+          <dt-icon name="mic" />
+        </template>
+        <template #tooltip>
+          See tooltip when disabled
+        </template>
+      </dt-recipe-callbar-button>
     </div>
 
     <h3>
