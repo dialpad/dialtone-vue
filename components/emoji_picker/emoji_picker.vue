@@ -63,6 +63,7 @@ const emits = defineEmits(
      * @event selected-emoji
      * @param {Object} emoji - The selected emoji from the emoji selector
      */
+    // TODO add unicode_character prop to the emoji object returned
   ['selected-emoji'],
 );
 
