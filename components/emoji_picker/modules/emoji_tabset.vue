@@ -1,7 +1,7 @@
 <template>
   <div class="d-emoji-picker__tabset">
     <dt-tab-group
-      tab-list-class="d-emoji-picker__tabset--list"
+      tab-list-class="d-emoji-picker__tabset-list"
     >
       <template #tabs>
         <dt-tab
@@ -66,8 +66,7 @@ function selectTabset (tabName) {
 
 <style lang="less">
 .d-emoji-picker{
-  &__tabset{
-    &--list{
+  &__tabset-list{
       gap: 0;
 
       &::after{
@@ -82,7 +81,6 @@ function selectTabset (tabName) {
             height: var(--size-300);
           }
         }
-      }
     }
   }
 }

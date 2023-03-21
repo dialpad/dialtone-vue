@@ -4,10 +4,10 @@
     <div
       v-for="emoji in EMOJI_LIST"
       :key="emoji"
-      class="d-emoji-picker__selector--emoji-list"
+      class="d-emoji-picker__selector-emoji-list"
     >
       <p
-        class="d-emoji-picker__selector--emoji-list__tab"
+        class="d-emoji-picker__selector-emoji-list-tab"
       >
         {{ emojiFilter ? 'Search results' : emoji.tab }}
       </p>
@@ -16,7 +16,7 @@
         <dt-emoji
           v-for="emoji in filteredEmojiList"
           :key="emoji.code"
-          class="d-emoji-picker__selector--emoji-list__emoji"
+          class="d-emoji-picker__selector-emoji-list-emoji"
           :code="emoji.code"
           @mouseover="$emit('emoji-data', emoji)"
           @mouseleave="$emit('emoji-data', null)"
