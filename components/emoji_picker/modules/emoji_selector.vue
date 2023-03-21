@@ -22,6 +22,8 @@
           @click="$emit('selected-emoji', emoji)"
           @focusin="$emit('emoji-data', emoji)"
           @focusout="$emit('emoji-data', null)"
+          @mouseover="$emit('emoji-data', emoji)"
+          @mouseleave="$emit('emoji-data', null)"
         >
           <dt-emoji
             :code="emoji.code"
