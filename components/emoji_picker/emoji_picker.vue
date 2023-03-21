@@ -7,7 +7,10 @@
       />
     </div>
     <div className="d-emoji-picker--body">
-      <emoji-search v-model="searchQuery" />
+      <emoji-search
+        v-model="searchQuery"
+        :search-placeholder-label="searchPlaceholderLabel"
+      />
       <!--      <emojiSelector -->
       <!--        :emoji-filter="searchQuery" -->
       <!--        :skin-tone="skinTone" -->
@@ -29,18 +32,29 @@ import { computed, onBeforeUnmount, ref } from 'vue';
 
 const props = defineProps({
   /**
-   * The list of recently used emojis
-   * This list is necessary to fill the recently used tab
-   * @type {Array}
-   * @default []
+   * The object list of recently used emojis
+   * This object list is necessary to fill the recently used tab
+   * @type {Object}
+   * @default {}
    * @example
-   * <dt-emoji-picker :recentlyUsedEmojis="['😀', '😁']" />
+   * <dt-emoji-picker :recentlyUsedEmojis="{ emojiObject, emojiObject, }" />
    */
   recentlyUsedEmojis: {
-    type: Array,
-    default: () => [],
+    type: Object,
+    default: () => ({}),
   },
 
+  /**
+   * The placeholder text for the search input
+   * @type {String}
+   * @required
+   * @example
+   * <dt-emoji-picker :searchPlaceholderLabel="'Search...'" />
+   */
+  searchPlaceholderLabel: {
+    type: String,
+    required: true,
+  },
 });
 const emits = defineEmits(
   /**

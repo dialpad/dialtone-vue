@@ -1,7 +1,7 @@
 <template>
   <div class="d-emoji-picker__search">
     <dt-input
-      placeholder="Search..."
+      :placeholder="searchPlaceholderLabel"
       @update:model-value="$emit('update:modelValue', $event)"
     >
       <template #leftIcon>
@@ -16,4 +16,10 @@ import DtInput from '@/components/input/input.vue';
 import DtIcon from '@/components/icon/icon.vue';
 
 defineEmits(['update:modelValue']);
+defineProps({
+  searchPlaceholderLabel: {
+    type: String,
+    default: '',
+  },
+});
 </script>
