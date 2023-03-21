@@ -39,6 +39,7 @@ const props = defineProps({
    * @example
    * <dt-emoji-picker :recentlyUsedEmojis="{ emojiObject, emojiObject, }" />
    */
+  // TODO try to simplify this to achieve an array of unicode characters and not an entire emoji data object
   recentlyUsedEmojis: {
     type: Object,
     default: () => ({}),
