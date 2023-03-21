@@ -4,10 +4,10 @@
     <div
       v-for="emoji in EMOJI_LIST"
       :key="emoji"
-      class="d-emoji-picker__selector-emoji-list"
+      class="d-emoji-picker__list"
     >
       <p
-        class="d-emoji-picker__selector-emoji-list-tab"
+        class="d-emoji-picker__tab"
       >
         {{ emojiFilter ? 'Search results' : emoji.tab }}
       </p>
@@ -17,7 +17,7 @@
           v-for="emoji in filteredEmojiList"
           :key="emoji.code"
           type="button"
-          class="d-emoji-picker__selector-emoji-list-emoji-button"
+          class="d-emoji-picker__emoji-button"
           :aria-label="emoji.name"
           @click="$emit('selected-emoji', emoji)"
           @focusin="$emit('emoji-data', emoji)"
@@ -85,6 +85,7 @@ const emojiList = [];
  */
 const filteredEmojiList = computed(() => {
   if (props.emojiFilter) {
+    //TODO should filter by keywords also
     return emojiList.filter((emoji) => emoji.includes(props.emojiFilter));
   }
   return emojiList;
