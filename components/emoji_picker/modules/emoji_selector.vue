@@ -13,15 +13,20 @@
       </p>
 
       <div>
-        <dt-emoji
+        <button
           v-for="emoji in filteredEmojiList"
           :key="emoji.code"
-          class="d-emoji-picker__selector-emoji-list-emoji"
-          :code="emoji.code"
-          @mouseover="$emit('emoji-data', emoji)"
-          @mouseleave="$emit('emoji-data', null)"
+          type="button"
+          class="d-emoji-picker__selector-emoji-list-emoji-button"
+          :aria-label="emoji.name"
           @click="$emit('selected-emoji', emoji)"
-        />
+          @focusin="$emit('emoji-data', emoji)"
+          @focusout="$emit('emoji-data', null)"
+        >
+          <dt-emoji
+            :code="emoji.code"
+          />
+        </button>
       </div>
     </div>
   </div>

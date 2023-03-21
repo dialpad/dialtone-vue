@@ -1,5 +1,5 @@
 <template>
-  <div class="d-emoji-picker__hovering">
+  <div class="d-emoji-picker__data">
     <!--    Display emoji data -->
   </div>
 </template>
