@@ -2,68 +2,61 @@
   <div>
     <dt-button
       data-qa="dt-image-viewer-preview"
-      :tabindex="show ? -1 : 0"
+      :aria-label="ariaLabel"
       importance="clear"
       @click="open"
     >
       <img
-        class="d-wmn64 d-hmn64 w-wm332 d-hmx332"
-        :src="imageUrl"
+        :class="imageClass"
+        :src="imageSrc"
         :alt="imageAlt"
       >
     </dt-button>
-
-    <dt-lazy-show
-      transition="d-zoom"
-      :aria-hidden="isOpen"
-      :show="show"
-      class="d-modal"
-      data-qa="dt-modal"
-      v-on="modalListeners"
-      @mouseover="showCloseButton = true"
-      @mouseleave="showCloseButton = false"
-      @focusin=" showCloseButton = true"
-      @focusout=" showCloseButton = false"
-    >
-      <transition
-        appear
-        name="d-modal__dialog"
+    <portal v-if="show">
+      <div
+        :aria-hidden="isOpen"
+        class="d-modal"
+        data-qa="dt-modal"
+        v-on="modalListeners"
+        @mouseover="showCloseButton = true"
+        @mouseleave="showCloseButton = false"
+        @focusin=" showCloseButton = true"
+        @focusout=" showCloseButton = false"
       >
         <div
           v-show="show"
           data-qa="dt-image-viewer-full"
-          :class="[
-            'd-modal__dialog', 'd-p0 d-bar0 d-wmx80p d-hmx80p d-image-viewer--modal',
-          ]"
+          class="d-p0 d-bar0 d-wmx80p d-hmx80p"
           role="dialog"
           aria-modal="true"
         >
           <img
-            :src="imageUrl"
+            class="d-wmx100p d-hmx100p"
+            :src="imageSrc"
             :alt="imageAlt"
           >
         </div>
-      </transition>
-      <dt-button
-        v-if="showCloseButton"
-        ref="closeImage"
-        data-qa="dt-image-viewer-close-btn"
-        class="d-modal__close"
-        circle
-        size="lg"
-        importance="clear"
-        kind="inverted"
-        :aria-label="closeAriaLabel"
-        @click="close"
-      >
-        <template #icon>
-          <dt-icon
-            name="close"
-            size="400"
-          />
-        </template>
-      </dt-button>
-    </dt-lazy-show>
+        <dt-button
+          v-if="showCloseButton"
+          ref="closeImage"
+          data-qa="dt-image-viewer-close-btn"
+          class="d-modal__close"
+          circle
+          size="lg"
+          importance="clear"
+          kind="inverted"
+          :aria-label="closeAriaLabel"
+          @click="close"
+        >
+          <template #icon>
+            <dt-icon
+              name="close"
+              size="400"
+            />
+          </template>
+        </dt-button>
+      </div>
+    </portal>
   </div>
 </template>
 
@@ -73,30 +66,24 @@ import Modal from '@/common/mixins/modal.js';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
-import { DtLazyShow } from '@/components/lazy_show';
+import { Portal } from '@linusborg/vue-simple-portal';
 
 export default {
   name: 'DtImageViewer',
 
   components: {
-    DtLazyShow,
+    Portal,
     DtButton,
     DtIcon,
   },
 
   mixins: [Modal],
 
-  /* inheritAttrs: false is generally an option we want to set on library
-    components. This allows any attributes passed in that are not recognized
-    as props to be passed down to another element or component using v-bind:$attrs
-    more info: https://vuejs.org/v2/api/#inheritAttrs */
-  // inheritAttrs: false,
-
   props: {
     /**
      * URL of the image to be shown
      */
-    imageUrl: {
+    imageSrc: {
       type: String,
       required: true,
     },
@@ -105,6 +92,23 @@ export default {
      * Alt text of image
      */
     imageAlt: {
+      type: String,
+      required: true,
+    },
+
+    /**
+     * Image Class
+     */
+    imageClass: {
+      type: String,
+      required: false,
+      default: '',
+    },
+
+    /**
+     * Aria label
+     */
+    ariaLabel: {
       type: String,
       required: true,
     },
@@ -149,10 +153,6 @@ export default {
               break;
           }
         },
-
-        'after-enter': event => {
-          this.focusAfterOpen();
-        },
       };
     },
   },
@@ -177,6 +177,9 @@ export default {
     open () {
       this.show = true;
       this.showCloseButton = true;
+      setTimeout(() => {
+        this.focusAfterOpen();
+      });
     },
 
     close () {
@@ -196,9 +199,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.d-image-viewer--modal {
-  width: unset;
-}
-</style>
