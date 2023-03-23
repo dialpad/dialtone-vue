@@ -8,7 +8,7 @@ const basePropsData = {
   imageSrc: 'test.png',
   imageAlt: 'imageAltText',
   closeAriaLabel: 'closeButtonAriaLabel',
-  imageClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
+  imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
   ariaLabel: 'Click to open image',
 };
 

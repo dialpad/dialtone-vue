@@ -7,7 +7,7 @@
       @click="open"
     >
       <img
-        :class="imageClass"
+        :class="imageButtonClass"
         :src="imageSrc"
         :alt="imageAlt"
       >
@@ -24,7 +24,6 @@
         @focusout=" showCloseButton = false"
       >
         <div
-          v-show="show"
           data-qa="dt-image-viewer-full"
           class="d-p0 d-bar0 d-wmx80p d-hmx80p"
           role="dialog"
@@ -99,7 +98,7 @@ export default {
     /**
      * Image Class
      */
-    imageClass: {
+    imageButtonClass: {
       type: String,
       required: false,
       default: '',
