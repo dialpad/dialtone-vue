@@ -1,8 +1,10 @@
 <template>
   <dt-image-viewer
-    :image-url="imageUrl"
+    :image-src="imageSrc"
     :image-alt="imageAlt"
     :close-aria-label="closeAriaLabel"
+    :image-class="imageClass"
+    :aria-label="ariaLabel"
   />
 </template>
 

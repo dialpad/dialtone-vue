@@ -1,12 +1,15 @@
 import { assert } from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtImageViewer from './image_viewer.vue';
+import sinon from 'sinon';
 
 // Constants
 const basePropsData = {
-  imageUrl: 'test.png',
+  imageSrc: 'test.png',
   imageAlt: 'imageAltText',
   closeAriaLabel: 'closeButtonAriaLabel',
+  imageClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
+  ariaLabel: 'Click to open image',
 };
 
 describe('DtImageViewer Tests', function () {
@@ -29,6 +32,11 @@ describe('DtImageViewer Tests', function () {
   const _setChildWrappers = () => {
     imageViewerPreview = wrapper.find('[data-qa="dt-image-viewer-preview"]');
     previewImage = imageViewerPreview.find('img');
+  };
+
+  const _openModal = async () => {
+    await imageViewerPreview.trigger('click');
+    _setFullImageChildWrappers();
   };
 
   const _setFullImageChildWrappers = () => {
@@ -55,14 +63,20 @@ describe('DtImageViewer Tests', function () {
         // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
         transition: transitionStub(),
       },
+      attachTo: document.body,
     });
     _setChildWrappers();
   };
 
   // Setup
   before(function () {
+    // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
+    // Need to mock them to avoid error
+    global.requestAnimationFrame = sinon.spy();
+    global.cancelAnimationFrame = sinon.spy();
     this.localVue = createLocalVue();
   });
+
   beforeEach(function () {
     _setWrappers();
   });
@@ -74,7 +88,11 @@ describe('DtImageViewer Tests', function () {
     slots = {};
     provide = {};
   });
-  after(function () {});
+  after(function () {
+    // Restore RequestAnimationFrame and cancelAnimationFrame
+    global.requestAnimationFrame = undefined;
+    global.cancelAnimationFrame = undefined;
+  });
 
   describe('Presentation Tests', function () {
     /*
@@ -94,8 +112,7 @@ describe('DtImageViewer Tests', function () {
 
     describe('Viewing the image in full screen modal', function () {
       beforeEach(async function () {
-        await imageViewerPreview.trigger('click');
-        _setFullImageChildWrappers();
+        await _openModal();
       });
 
       it('Should show the image and a close button', function () {
@@ -114,13 +131,13 @@ describe('DtImageViewer Tests', function () {
     describe('When image has not been clicked', function () {
       it('should have an aria labels', function () {
         assert.strictEqual(previewImage.attributes('alt'), propsData.imageAlt);
+        assert.strictEqual(imageViewerPreview.attributes('aria-label'), propsData.ariaLabel);
       });
     });
 
     describe('After the image is open', function () {
       beforeEach(async function () {
-        await imageViewerPreview.trigger('click');
-        _setFullImageChildWrappers();
+        await _openModal();
       });
 
       it('should have an aria labels', function () {
@@ -137,16 +154,14 @@ describe('DtImageViewer Tests', function () {
 
     describe('As an image preview', function () {
       it('should open on click', async function () {
-        await imageViewerPreview.trigger('click');
-        _setFullImageChildWrappers();
+        await _openModal();
         assert.exists(fullImage);
       });
     });
 
     describe('After the image is open', function () {
       beforeEach(async function () {
-        await imageViewerPreview.trigger('click');
-        _setFullImageChildWrappers();
+        await _openModal();
       });
 
       it('Should close the image when I press close', async function () {
@@ -171,8 +186,6 @@ describe('DtImageViewer Tests', function () {
         await imageViewerFull.trigger('keydown', {
           code: 'Esc',
         });
-
-        await wrapper.vm.$nextTick();
 
         assert.isFalse(imageViewerFull.isVisible());
       });

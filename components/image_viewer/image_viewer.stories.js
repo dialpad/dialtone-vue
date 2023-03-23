@@ -8,7 +8,7 @@ const defaultImage = require('./test.jpg');
 
 // Default Prop Values
 export const argsData = {
-  imageUrl: defaultImage,
+  imageSrc: defaultImage,
   imageAlt: 'Image Alt Text',
   closeAriaLabel: 'Close',
 };
@@ -33,7 +33,7 @@ export const argsData = {
 */
 export const argTypesData = {
 
-  imageUrl: {
+  imageSrc: {
     description: 'Url for the image',
     table: {
       category: 'props',
@@ -48,6 +48,32 @@ export const argTypesData = {
 
   imageAlt: {
     description: 'Alt for image',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'string',
+      },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
+  iamgeClass: {
+    description: 'Image class',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'string',
+      },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
+  ariaLabel: {
+    description: 'Aria label for image button',
     table: {
       category: 'props',
       type: {
@@ -102,9 +128,11 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  imageUrl: defaultImage,
+  imageSrc: defaultImage,
   imageAlt: 'Image Alt Text',
   closeAriaLabel: 'Close',
+  imageClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
+  ariaLabel: 'Click to open image',
 };
 
 export const Variants = VariantsTemplate.bind({});
