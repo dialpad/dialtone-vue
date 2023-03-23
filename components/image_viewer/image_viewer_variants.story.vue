@@ -5,7 +5,7 @@
       :image-src="require('./test.jpg')"
       image-alt="Alt Text"
       close-aria-label="Close"
-      image-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
+      image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
       aria-label="Click to open image"
     />
 
@@ -13,7 +13,7 @@
       :image-src="require('./fry.gif')"
       image-alt="Alt Text"
       close-aria-label="Close"
-      image-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
+      image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
       aria-label="Click to open image"
     />
   </div>

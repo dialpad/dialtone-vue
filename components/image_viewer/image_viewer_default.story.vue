@@ -3,7 +3,7 @@
     :image-src="imageSrc"
     :image-alt="imageAlt"
     :close-aria-label="closeAriaLabel"
-    :image-class="imageClass"
+    :image-button-class="imageButtonClass"
     :aria-label="ariaLabel"
   />
 </template>
