@@ -1,7 +1,7 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
+import DtButton from '../button/button.vue';
 import DtImageViewer from './image_viewer.vue';
-import sinon from 'sinon';
 
 // Constants
 const basePropsData = {
@@ -46,34 +46,22 @@ describe('DtImageViewer Tests', function () {
     overlay = wrapper.find('[data-qa="dt-modal"]');
   };
 
-  const transitionStub = () => ({
-    render: function (h) {
-      return this.$options._renderChildren;
-    },
-  });
-
   const _setWrappers = () => {
-    wrapper = mount(DtImageViewer, {
+    wrapper = shallowMount(DtImageViewer, {
       propsData,
       attrs,
       slots,
       provide,
       localVue: this.localVue,
       stubs: {
-        // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
-        transition: transitionStub(),
+        DtButton,
       },
-      attachTo: document.body,
     });
     _setChildWrappers();
   };
 
   // Setup
   before(function () {
-    // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
-    // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
     this.localVue = createLocalVue();
   });
 
@@ -89,9 +77,6 @@ describe('DtImageViewer Tests', function () {
     provide = {};
   });
   after(function () {
-    // Restore RequestAnimationFrame and cancelAnimationFrame
-    global.requestAnimationFrame = undefined;
-    global.cancelAnimationFrame = undefined;
   });
 
   describe('Presentation Tests', function () {
@@ -168,8 +153,8 @@ describe('DtImageViewer Tests', function () {
         assert.exists(imageViewerFull);
 
         await closeButton.trigger('click');
-
-        assert.isFalse(imageViewerFull.isVisible());
+        imageViewerFull = wrapper.find('[data-qa="dt-image-viewer-full"]');
+        assert.isFalse(imageViewerFull.exists());
       });
 
       it('Should close the image when I press the background', async function () {
@@ -177,7 +162,9 @@ describe('DtImageViewer Tests', function () {
 
         await overlay.trigger('click');
 
-        assert.isFalse(imageViewerFull.isVisible());
+        imageViewerFull = wrapper.find('[data-qa="dt-image-viewer-full"]');
+
+        assert.isFalse(imageViewerFull.exists());
       });
 
       it('Should close the image when I press esc', async function () {
@@ -187,7 +174,9 @@ describe('DtImageViewer Tests', function () {
           code: 'Esc',
         });
 
-        assert.isFalse(imageViewerFull.isVisible());
+        imageViewerFull = wrapper.find('[data-qa="dt-image-viewer-full"]');
+
+        assert.isFalse(imageViewerFull.exists());
       });
     });
   });
