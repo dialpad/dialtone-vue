@@ -60,7 +60,6 @@
 </template>
 
 <script>
-import {} from './image_viewer_constants.js';
 import Modal from '@/common/mixins/modal.js';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import { DtIcon } from '@/components/icon';
@@ -186,7 +185,7 @@ export default {
     },
 
     focusAfterOpen () {
-      this.$refs.closeImage.$el.focus();
+      this.$refs.closeImage?.$el.focus();
     },
 
     trapFocus (e) {
