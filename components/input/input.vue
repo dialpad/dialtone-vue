@@ -483,6 +483,7 @@ export default {
       return this.shouldValidateLength && this.validationProps.length.limitMaxLength;
     },
 
+    // eslint-disable-next-line complexity
     showLengthLimitValidation () {
       return (
         this.shouldValidateLength &&
