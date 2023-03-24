@@ -1,7 +1,7 @@
 <template>
   <pre>
     <code
-      class="d-d-block d-bgc-white d-ws-pre-wrap d-p8 d-my4 d-ba d-bc-black-500 d-bar8 d-fs-100 d-lh-200 d-fc-red-400"
+      class="d-d-block d-bgc-secondary d-ws-pre-wrap d-p8 d-ba d-bc-subtle d-bar8 d-fs-200 d-lh-400 d-fc-secondary"
     >{{ text }}</code>
   </pre>
 </template>
