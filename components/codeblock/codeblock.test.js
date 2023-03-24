@@ -56,22 +56,4 @@ describe('DtCodeblock Tests', function () {
       });
     });
   });
-
-  describe('Accessibility Tests', function () {
-    /*
-     * Test(s) to ensure that the component is accessible
-     */
-  });
-
-  describe('Interactivity Tests', function () {
-    /*
-     * Test(s) to ensure that the component correctly handles user input
-     */
-  });
-
-  describe('Extendability Tests', function () {
-    /*
-     * Test(s) to ensure that the component can be correctly extended
-     */
-  });
 });
