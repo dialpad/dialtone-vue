@@ -36,5 +36,5 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  text: 'function someFunction() {\n  return "some result";',
+  text: 'function someFunction() {\n  return "some result";\n}',
 };
