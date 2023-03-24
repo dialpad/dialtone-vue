@@ -35,25 +35,27 @@
             :alt="imageAlt"
           >
         </div>
-        <dt-button
-          v-if="showCloseButton"
-          ref="closeImage"
-          data-qa="dt-image-viewer-close-btn"
-          class="d-modal__close"
-          circle
-          size="lg"
-          importance="clear"
-          kind="inverted"
-          :aria-label="closeAriaLabel"
-          @click="close"
-        >
-          <template #icon>
-            <dt-icon
-              name="close"
-              size="400"
-            />
-          </template>
-        </dt-button>
+        <transition name="fade">
+          <dt-button
+            v-if="showCloseButton"
+            ref="closeImage"
+            data-qa="dt-image-viewer-close-btn"
+            class="d-modal__close"
+            circle
+            size="lg"
+            importance="clear"
+            kind="inverted"
+            :aria-label="closeAriaLabel"
+            @click="close"
+          >
+            <template #icon>
+              <dt-icon
+                name="close"
+                size="400"
+              />
+            </template>
+          </dt-button>
+        </transition>
       </div>
     </portal>
   </div>
