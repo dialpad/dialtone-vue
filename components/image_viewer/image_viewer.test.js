@@ -1,6 +1,5 @@
 import { assert } from 'chai';
-import { shallowMount } from '@vue/test-utils';
-import DtButton from '../button/button.vue';
+import { mount } from '@vue/test-utils';
 import DtImageViewer from './image_viewer.vue';
 
 // Constants
@@ -47,16 +46,17 @@ describe('DtImageViewer Tests', function () {
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtImageViewer, {
+    wrapper = mount(DtImageViewer, {
       propsData,
       attrs,
       slots,
       provide,
-      globals: {
+      global: {
         stubs: {
-          DtButton,
+          teleport: true,
         },
       },
+      attachTo: document.body,
     });
     _setChildWrappers();
   };
