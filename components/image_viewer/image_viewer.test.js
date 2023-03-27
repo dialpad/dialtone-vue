@@ -52,16 +52,16 @@ describe('DtImageViewer Tests', function () {
       attrs,
       slots,
       provide,
-      localVue: this.localVue,
-      stubs: {
-        DtButton,
+      globals: {
+        stubs: {
+          DtButton,
+        },
       },
     });
     _setChildWrappers();
   };
 
   // Setup
-
   beforeEach(function () {
     _setWrappers();
   });

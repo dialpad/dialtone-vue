@@ -137,8 +137,6 @@ export default {
 
     modalListeners () {
       return {
-        ...this.$listeners,
-
         click: event => {
           (event.target === event.currentTarget) && this.close();
         },
