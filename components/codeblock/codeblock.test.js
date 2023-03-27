@@ -1,9 +1,9 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import DtCodeblock from './codeblock.vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   text: '',
 };
 
@@ -12,23 +12,15 @@ describe('DtCodeblock Tests', function () {
   let wrapper;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtCodeblock, {
-      propsData,
-      localVue: this.localVue,
-    });
+    wrapper = shallowMount(DtCodeblock, { props });
   };
-
-  // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
   });
 
   describe('Presentation Tests', function () {
