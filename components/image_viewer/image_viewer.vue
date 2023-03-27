@@ -12,7 +12,10 @@
         :alt="imageAlt"
       >
     </dt-button>
-    <portal v-if="show">
+    <Teleport
+      v-if="show"
+      to="body"
+    >
       <div
         :aria-hidden="isOpen"
         class="d-modal"
@@ -57,7 +60,7 @@
           </dt-button>
         </transition>
       </div>
-    </portal>
+    </Teleport>
   </div>
 </template>
 
@@ -66,13 +69,11 @@ import Modal from '@/common/mixins/modal.js';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
-import { Portal } from '@linusborg/vue-simple-portal';
 
 export default {
   name: 'DtImageViewer',
 
   components: {
-    Portal,
     DtButton,
     DtIcon,
   },

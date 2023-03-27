@@ -1,10 +1,10 @@
 <template>
   <dt-image-viewer
-    :image-src="imageSrc"
-    :image-alt="imageAlt"
-    :close-aria-label="closeAriaLabel"
-    :image-button-class="imageButtonClass"
-    :aria-label="ariaLabel"
+    :image-src="$attrs.imageSrc"
+    :image-alt="$attrs.imageAlt"
+    :close-aria-label="$attrs.closeAriaLabel"
+    :image-button-class="$attrs.imageButtonClass"
+    :aria-label="$attrs.ariaLabel"
   />
 </template>
 

@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import DtButton from '../button/button.vue';
 import DtImageViewer from './image_viewer.vue';
 
@@ -61,9 +61,6 @@ describe('DtImageViewer Tests', function () {
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
 
   beforeEach(function () {
     _setWrappers();
