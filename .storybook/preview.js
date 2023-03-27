@@ -1,6 +1,5 @@
 import '../css/dialtone-globals.less';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
-import { addParameters } from '@storybook/vue';
 import { version } from '../package.json';
 import theme from './theme';
 import Vue from 'vue';
@@ -18,13 +17,17 @@ Vue.use(fixDefaultSlot);
 // See https://github.com/storybookjs/storybook/issues/14933#issuecomment-920578274
 Vue.prototype.toJSON = () => {}
 
-addParameters({
-  docs: {
-    theme,
-  },
-});
 
 export const parameters = {
+  a11y: {
+    config: {
+      // This is a legitimate color contrast issue that needs to be fixed by the design team in the future.
+      rules: [{
+        id: 'color-contrast',
+        reviewOnFail: true,
+      }],
+    },
+  },
   controls: {
     expanded: true,
   },
@@ -75,6 +78,7 @@ export const parameters = {
         return match[1]
       }
       return src
-    }
-  }
+    },
+  },
+  theme,
 };

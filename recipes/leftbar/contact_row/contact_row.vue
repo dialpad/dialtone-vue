@@ -4,11 +4,12 @@
     :description="`${name} ${presenceText} ${userStatus}`"
     :has-unreads="hasUnreads"
     :selected="selected"
-    :has-call-button="true"
+    :has-call-button="hasCallButton"
     :muted="muted"
     :is-typing="isTyping"
     :call-button-tooltip="callButtonTooltip"
     :unread-count-tooltip="unreadCountTooltip"
+    v-bind="$attrs"
     v-on="$listeners"
   >
     <template #left>
@@ -17,11 +18,13 @@
         :seed="avatarSeed"
         :presence="avatarPresence"
       >
+        <!-- No alt needed as the name is already mentioned in the description
+          https://dequeuniversity.com/rules/axe/4.4/image-redundant-alt?application=axe-puppeteer -->
         <img
           v-if="avatarSrc"
           data-qa="dt-avatar-image"
           :src="avatarSrc"
-          :alt="name"
+          alt=""
         >
         <template v-else-if="noInitials">
           <dt-icon
@@ -79,6 +82,8 @@ export default {
     DtRecipeGeneralRow,
     DtEmojiTextWrapper,
   },
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -181,6 +186,14 @@ export default {
     isTyping: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Whether the contact row should display a call button when hovered.
+     */
+    hasCallButton: {
+      type: Boolean,
+      default: true,
     },
 
     /**

@@ -1,3 +1,84 @@
+## [2.72.6](https://github.com/dialpad/dialtone-vue/compare/v2.72.5...v2.72.6) (2023-03-24)
+
+
+### Bug Fixes
+
+* **Input:** length validation improvement ([#858](https://github.com/dialpad/dialtone-vue/issues/858)) ([34bc349](https://github.com/dialpad/dialtone-vue/commit/34bc34931e60debee8e6a17052aaf6d6612a3961))
+
+## [2.72.5](https://github.com/dialpad/dialtone-vue/compare/v2.72.4...v2.72.5) (2023-03-24)
+
+
+### Bug Fixes
+
+* update dialtone-icons ([#856](https://github.com/dialpad/dialtone-vue/issues/856)) ([9d4c61d](https://github.com/dialpad/dialtone-vue/commit/9d4c61d53b353824b464192fddcb94b9627c73f0))
+
+## [2.72.4](https://github.com/dialpad/dialtone-vue/compare/v2.72.3...v2.72.4) (2023-03-23)
+
+
+### Bug Fixes
+
+* update dialtone-icons ([#854](https://github.com/dialpad/dialtone-vue/issues/854)) ([1b97a5c](https://github.com/dialpad/dialtone-vue/commit/1b97a5c99a145b76df3ce039ba177e79bf13ecfb))
+
+## [2.72.3](https://github.com/dialpad/dialtone-vue/compare/v2.72.2...v2.72.3) (2023-03-22)
+
+
+### Bug Fixes
+
+* update dialtone icons ([#844](https://github.com/dialpad/dialtone-vue/issues/844)) ([d40ee50](https://github.com/dialpad/dialtone-vue/commit/d40ee50c6bff45c77894f3e1ce79ac88b45edd28))
+
+## [2.72.2](https://github.com/dialpad/dialtone-vue/compare/v2.72.1...v2.72.2) (2023-03-20)
+
+
+### Bug Fixes
+
+* **Badge:** export decoration modifiers ([#846](https://github.com/dialpad/dialtone-vue/issues/846)) ([8fa4614](https://github.com/dialpad/dialtone-vue/commit/8fa4614644135965d97e6c494349909ad214aaf4))
+
+## [2.72.1](https://github.com/dialpad/dialtone-vue/compare/v2.72.0...v2.72.1) (2023-03-20)
+
+
+### Bug Fixes
+
+* **Avatar:** allow empty alt if explicitly set ([1e4623f](https://github.com/dialpad/dialtone-vue/commit/1e4623fb28cb73c2044fbfab7793596addabae35))
+
+## [2.71.1](https://github.com/dialpad/dialtone-vue/compare/v2.71.0...v2.71.1) (2023-03-20)
+
+
+### Bug Fixes
+
+* configure passthrough attrs in leftbar components ([#842](https://github.com/dialpad/dialtone-vue/issues/842)) ([0f31156](https://github.com/dialpad/dialtone-vue/commit/0f311561fc06df44468c9ed9a033f47ade7441c2))
+
+# [2.71.0](https://github.com/dialpad/dialtone-vue/compare/v2.70.0...v2.71.0) (2023-03-20)
+
+
+### Bug Fixes
+
+* **Leftbar Group Row:** add missing avatarSeed prop ([#840](https://github.com/dialpad/dialtone-vue/issues/840)) ([ef90afa](https://github.com/dialpad/dialtone-vue/commit/ef90afa86cd29e99fa034cf0d6d199fbe8172a48))
+
+
+### Features
+
+* **Badge:** add decoration prop ([#828](https://github.com/dialpad/dialtone-vue/issues/828)) ([a3183f0](https://github.com/dialpad/dialtone-vue/commit/a3183f05181c4c33f74011ee89906743d7305071))
+
+# [2.70.0](https://github.com/dialpad/dialtone-vue/compare/v2.69.0...v2.70.0) (2023-03-16)
+
+
+### Features
+
+* **Avatar:** add canvasClass prop ([#830](https://github.com/dialpad/dialtone-vue/issues/830)) ([62437c2](https://github.com/dialpad/dialtone-vue/commit/62437c2a17ca5f9287d69ead6d5357afd9f6c45a))
+
+# [2.69.0](https://github.com/dialpad/dialtone-vue/compare/v2.68.0...v2.69.0) (2023-03-16)
+
+
+### Bug Fixes
+
+* dialtone-icons version ([#823](https://github.com/dialpad/dialtone-vue/issues/823)) ([0cde468](https://github.com/dialpad/dialtone-vue/commit/0cde468de8db4c9eeb9f44653e271f1b5d9b78fd))
+* popover fallback placements ([#821](https://github.com/dialpad/dialtone-vue/issues/821)) ([a18ac48](https://github.com/dialpad/dialtone-vue/commit/a18ac482c84c9d73fbee695d6a89c3051c8b28cb))
+
+
+### Features
+
+* **Leftbar Contact Row:** add hasCallButton ([#826](https://github.com/dialpad/dialtone-vue/issues/826)) ([000cd5a](https://github.com/dialpad/dialtone-vue/commit/000cd5a272a0a0fbe53984311b8c6351acdd6c5d))
+
 # [2.68.0](https://github.com/dialpad/dialtone-vue/compare/v2.67.0...v2.68.0) (2023-03-15)
 
 
