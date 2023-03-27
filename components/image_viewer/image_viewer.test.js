@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils';
 import DtImageViewer from './image_viewer.vue';
 
 // Constants
-const basePropsData = {
+const baseProps = {
   imageSrc: 'test.png',
   imageAlt: 'imageAltText',
   closeAriaLabel: 'closeButtonAriaLabel',
@@ -22,7 +22,7 @@ describe('DtImageViewer Tests', function () {
   let overlay;
 
   // Environment
-  let propsData = basePropsData;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -47,7 +47,7 @@ describe('DtImageViewer Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtImageViewer, {
-      propsData,
+      props,
       attrs,
       slots,
       provide,
@@ -68,7 +68,7 @@ describe('DtImageViewer Tests', function () {
 
   // Teardown
   afterEach(function () {
-    propsData = basePropsData;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
@@ -112,8 +112,8 @@ describe('DtImageViewer Tests', function () {
 
     describe('When image has not been clicked', function () {
       it('should have an aria labels', function () {
-        assert.strictEqual(previewImage.attributes('alt'), propsData.imageAlt);
-        assert.strictEqual(imageViewerPreview.attributes('aria-label'), propsData.ariaLabel);
+        assert.strictEqual(previewImage.attributes('alt'), baseProps.imageAlt);
+        assert.strictEqual(imageViewerPreview.attributes('aria-label'), baseProps.ariaLabel);
       });
     });
 
@@ -123,8 +123,8 @@ describe('DtImageViewer Tests', function () {
       });
 
       it('should have an aria labels', function () {
-        assert.strictEqual(fullImage.attributes('alt'), propsData.imageAlt);
-        assert.strictEqual(closeButton.attributes('aria-label'), propsData.closeAriaLabel);
+        assert.strictEqual(fullImage.attributes('alt'), baseProps.imageAlt);
+        assert.strictEqual(closeButton.attributes('aria-label'), baseProps.closeAriaLabel);
       });
     });
   });
