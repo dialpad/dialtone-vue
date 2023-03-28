@@ -5,6 +5,7 @@
     :close-aria-label="closeAriaLabel"
     :image-button-class="imageButtonClass"
     :aria-label="ariaLabel"
+    :force-open="forceOpen"
   />
 </template>
 

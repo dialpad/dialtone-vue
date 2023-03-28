@@ -120,6 +120,14 @@ export default {
       type: String,
       required: true,
     },
+
+    /**
+     * Forces the image to stay open
+     */
+    forceOpen: {
+      type: Boolean,
+      default: null,
+    },
   },
 
   data () {
@@ -171,6 +179,16 @@ export default {
         }
       },
     },
+
+    forceOpen: {
+      immediate: true,
+      handler: function (forceOpen) {
+        if (forceOpen !== null) {
+          this.show = forceOpen;
+        }
+      },
+    },
+
   },
 
   methods: {
@@ -183,6 +201,9 @@ export default {
     },
 
     close () {
+      if (this.forceOpen) {
+        return;
+      }
       this.show = false;
     },
 

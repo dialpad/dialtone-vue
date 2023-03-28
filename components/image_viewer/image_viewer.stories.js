@@ -59,7 +59,7 @@ export const argTypesData = {
     },
   },
 
-  iamgeClass: {
+  imageClass: {
     description: 'Image button class',
     table: {
       category: 'props',
@@ -133,6 +133,7 @@ Default.args = {
   closeAriaLabel: 'Close',
   imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
   ariaLabel: 'Click to open image',
+  forceOpen: false,
 };
 
 export const Variants = VariantsTemplate.bind({});
