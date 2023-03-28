@@ -100,6 +100,11 @@ export const argTypesData = {
       type: 'text',
     },
   },
+
+  forceOpen: {
+    description: 'Forces the image modal to be open',
+    control: 'boolean',
+  },
 };
 
 // Story Collection
