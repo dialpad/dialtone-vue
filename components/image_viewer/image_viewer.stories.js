@@ -13,7 +13,7 @@ export const argsData = {
   closeAriaLabel: 'Close',
   imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
   ariaLabel: 'Click to open image',
-  forceOpen: false,
+  open: false,
 };
 
 /**
@@ -101,9 +101,15 @@ export const argTypesData = {
     },
   },
 
-  forceOpen: {
-    description: 'Forces the image modal to be open',
+  open: {
+    description: 'Controls whether the image modal is shown.',
     control: 'boolean',
+  },
+
+  'update:open': {
+    table: {
+      disable: true,
+    },
   },
 };
 
@@ -141,7 +147,7 @@ Default.args = {
   closeAriaLabel: 'Close',
   imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
   ariaLabel: 'Click to open image',
-  forceOpen: false,
+  open: false,
 };
 
 export const Variants = VariantsTemplate.bind({});

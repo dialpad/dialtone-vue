@@ -24,5 +24,5 @@ export default {
 };
 export { Default };
 Default.args = {
-  forceOpen: true,
+  open: true,
 };

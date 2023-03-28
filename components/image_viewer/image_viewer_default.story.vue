@@ -5,7 +5,7 @@
     :close-aria-label="closeAriaLabel"
     :image-button-class="imageButtonClass"
     :aria-label="ariaLabel"
-    :force-open="forceOpen"
+    :open.sync="isOpen"
   />
 </template>
 
@@ -15,5 +15,16 @@ import DtImageViewer from './image_viewer';
 export default {
   name: 'DtImageViewerDefault',
   components: { DtImageViewer },
+  data: function () {
+    return {
+      isOpen: this.open,
+    };
+  },
+
+  watch: {
+    open: function (open) {
+      this.isOpen = open;
+    },
+  },
 };
 </script>
