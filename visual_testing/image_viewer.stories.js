@@ -6,17 +6,18 @@ import {
 
 export default {
   title: 'Visual Testing/Image Viewer',
-  args: {
-    ...argsData,
-    forceOpen: true,
-  },
-  argTypes: argTypesData,
-  excludeStories: /.*Data$/,
   parameters: {
     options: { showPanel: false },
+    percy: {
+      queryParams: {
+        viewMode: 'story',
+      },
+    },
     a11y: {
       disable: true,
     },
   },
+  args: { ...argsData, forceOpen: true },
+  argTypes: argTypesData,
 };
 export { Default };
