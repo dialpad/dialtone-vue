@@ -11,6 +11,9 @@ export const argsData = {
   imageSrc: defaultImage,
   imageAlt: 'Image Alt Text',
   closeAriaLabel: 'Close',
+  imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
+  ariaLabel: 'Click to open image',
+  forceOpen: false,
 };
 
 /**

@@ -17,7 +17,10 @@ export default {
       disable: true,
     },
   },
-  args: { ...argsData, forceOpen: true },
+  args: {
+    ...argsData,
+    forceOpen: true,
+  },
   argTypes: argTypesData,
 };
 export { Default };
