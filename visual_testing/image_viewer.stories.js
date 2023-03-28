@@ -7,6 +7,11 @@ import {
 export default {
   title: 'Visual Testing/Image Viewer',
   parameters: {
+    percy: {
+      queryParams: {
+        viewMode: 'story',
+      },
+    },
     options: { showPanel: false },
     a11y: {
       disable: true,
