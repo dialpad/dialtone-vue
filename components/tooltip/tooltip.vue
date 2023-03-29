@@ -217,7 +217,6 @@ export default {
       tip: null,
 
       inTimer: null,
-      outTimer: null,
 
       // Internal state for whether the tooltip is shown. Changing the prop
       // will update this.
@@ -337,7 +336,6 @@ export default {
       } else {
         return this.triggerShow(e);
       }
-      clearTimeout(this.outTimer);
     },
 
     triggerShow (e) {
@@ -358,12 +356,8 @@ export default {
     },
 
     onLeaveAnchor () {
-      if (this.delay) {
-        this.outTimer = setTimeout(this.triggerHide, TOOLTIP_DELAY_MS);
-      } else {
-        return this.triggerHide();
-      }
       clearTimeout(this.inTimer);
+      return this.triggerHide();
     },
 
     triggerHide () {
