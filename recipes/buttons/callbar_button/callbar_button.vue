@@ -5,13 +5,13 @@
   >
     <template #anchor>
       <span
-        :class="{ 'd-c-not-allowed': showTooltip }"
+        :class="{ 'd-c-not-allowed': disabled }"
       >
         <dt-button
           :importance="circle ? 'outlined' : 'clear'"
           kind="muted"
           icon-position="top"
-          :disabled="disabled"
+          :aria-disabled="disabled"
           :aria-label="ariaLabel"
           :label-class="callbarButtonTextClass"
           :width="buttonWidth"
@@ -161,12 +161,12 @@ export default {
         this.buttonClass,
         'dt-recipe-callbar-button',
         'd-px0',
-        'd-fc-primary',
         {
           'dt-recipe-callbar-button--circle': this.circle,
           'dt-recipe-callbar-button--active': this.active,
           'dt-recipe-callbar-button--danger': this.danger,
-          'd-btn--disabled': this.showTooltip,
+          'd-btn--disabled': this.disabled,
+          'd-fc-primary': !this.disabled,
         }];
     },
 
