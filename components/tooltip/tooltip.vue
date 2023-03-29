@@ -335,7 +335,7 @@ export default {
           return this.triggerShow(event);
         }.bind(this, e), TOOLTIP_DELAY_MS);
       } else {
-        return this.triggerShow(event);
+        return this.triggerShow(e);
       }
       clearTimeout(this.outTimer);
     },
