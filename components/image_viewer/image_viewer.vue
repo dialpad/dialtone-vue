@@ -85,10 +85,11 @@ export default {
      * trigger on click by default.
      * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
      * Supports .sync modifier
+     * @values null, true, false
      */
     open: {
       type: Boolean,
-      default: false,
+      default: null,
     },
 
     /**
@@ -134,6 +135,14 @@ export default {
   },
 
   emits: [
+    /**
+     * Emitted when popover is shown or hidden
+     *
+     * @event opened
+     * @type {Boolean}
+     */
+    'opened',
+
     /**
      * Event fired to sync the open prop with the parent component
      * @event update:open
@@ -200,9 +209,14 @@ export default {
 
   methods: {
     openModal () {
+      // Has custom control passed in
+      if (this.open !== null) {
+        return;
+      }
       this.isOpen = true;
-      this.$emit('update:open', true);
       this.showCloseButton = true;
+      this.$emit('opened', true);
+      this.$emit('update:open', true);
       setTimeout(() => {
         this.focusAfterOpen();
       });
@@ -210,6 +224,7 @@ export default {
 
     close () {
       this.isOpen = false;
+      this.$emit('opened', false);
       this.$emit('update:open', false);
     },
 

@@ -6,6 +6,7 @@
     :image-button-class="imageButtonClass"
     :aria-label="ariaLabel"
     :open.sync="isOpen"
+    @opened="onOpened"
   />
 </template>
 
