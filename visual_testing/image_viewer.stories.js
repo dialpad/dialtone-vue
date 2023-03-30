@@ -19,10 +19,8 @@ export default {
   },
   args: {
     ...argsData,
+    open: true,
   },
   argTypes: argTypesData,
 };
 export { Default };
-Default.args = {
-  open: true,
-};

@@ -216,7 +216,7 @@ export default {
       this.isOpen = true;
       this.showCloseButton = true;
       this.$emit('opened', true);
-      this.$emit('update:open', true);
+
       setTimeout(() => {
         this.focusAfterOpen();
       });
@@ -225,7 +225,10 @@ export default {
     close () {
       this.isOpen = false;
       this.$emit('opened', false);
-      this.$emit('update:open', false);
+
+      if (this.open !== null) {
+        this.$emit('update:open', false);
+      }
     },
 
     focusAfterOpen () {
