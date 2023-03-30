@@ -102,6 +102,13 @@ export const argTypesData = {
     },
   },
 
+  // Events
+  onOpened: {
+    table: {
+      disable: true,
+    },
+  },
+
   'update:open': {
     table: {
       disable: true,
