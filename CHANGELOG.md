@@ -1,3 +1,18 @@
+## [2.74.1](https://github.com/dialpad/dialtone-vue/compare/v2.74.0...v2.74.1) (2023-03-30)
+
+
+### Bug Fixes
+
+* **Recipe Callbar Btn:** show tooltip when the callbar button is disa… ([#866](https://github.com/dialpad/dialtone-vue/issues/866)) ([b88ec69](https://github.com/dialpad/dialtone-vue/commit/b88ec697bfa23faa3d1d55a44c0ec53a8287665a))
+
+# [2.74.0](https://github.com/dialpad/dialtone-vue/compare/v2.73.0...v2.74.0) (2023-03-30)
+
+
+### Features
+
+* **Input:** add date and time types for input ([#869](https://github.com/dialpad/dialtone-vue/issues/869)) ([a814bb7](https://github.com/dialpad/dialtone-vue/commit/a814bb787d5375320a71fa4d93695b04c196b7ce))
+* **Tooltip:** add 300ms default delay ([#868](https://github.com/dialpad/dialtone-vue/issues/868)) ([9e36848](https://github.com/dialpad/dialtone-vue/commit/9e36848a34817ac6117b726395455d5bd1e454ef))
+
 # [2.73.0](https://github.com/dialpad/dialtone-vue/compare/v2.72.6...v2.73.0) (2023-03-27)
 
 
