@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { itBehavesLikeHasCorrectClass } from '@/tests/shared_examples/classes';
 import DtRecipeUnreadChip from './unread_chip.vue';
 import {
@@ -25,11 +25,10 @@ describe('DtRecipeUnreadChip Tests', function () {
   let unreadChipIcon;
 
   // Environment
-  let propsData = baseProps;
+  let props = baseProps;
   let attrs = {};
   let slots = baseSlots;
   let provide = {};
-  let listeners = {};
 
   // Helpers
   const _setChildWrappers = () => {
@@ -39,31 +38,26 @@ describe('DtRecipeUnreadChip Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtRecipeUnreadChip, {
-      propsData,
+      props,
       attrs,
       slots,
       provide,
-      listeners,
-      localVue: this.localVue,
     });
     _setChildWrappers();
   };
 
   // Setup
-  before(function () {
-    this.localVue = createLocalVue();
-  });
+  before(function () {});
   beforeEach(function () {
     _setWrappers();
   });
 
   // Teardown
   afterEach(function () {
-    propsData = baseProps;
+    props = baseProps;
     attrs = {};
     slots = baseSlots;
     provide = {};
-    listeners = {};
   });
   after(function () {});
 
@@ -111,6 +105,7 @@ describe('DtRecipeUnreadChip Tests', function () {
     describe('When the direction is down', function () {
       beforeEach(async function () {
         await wrapper.setProps({ direction: 'down' });
+        _setChildWrappers();
       });
 
       it('should contain the correct class', function () {
@@ -123,7 +118,7 @@ describe('DtRecipeUnreadChip Tests', function () {
     const clickListenerSpy = sinon.spy();
 
     beforeEach(function () {
-      listeners = { click: clickListenerSpy };
+      attrs = { onClick: clickListenerSpy };
       _setWrappers();
     });
 

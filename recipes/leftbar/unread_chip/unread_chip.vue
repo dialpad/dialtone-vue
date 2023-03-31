@@ -4,7 +4,7 @@
     :class="`dt-leftbar-unread-chip__${kind}`"
     data-qa="dt-leftbar-unread-chip"
     :hide-close="true"
-    v-on="$listeners"
+    v-on="unreadChipListeners"
   >
     <template #icon>
       <dt-icon
@@ -21,6 +21,7 @@
 <script>
 import { DtChip, DtIcon } from '@';
 import { UNREAD_BADGE_DIRECTIONS, UNREAD_BADGE_KINDS } from './unread_chip_constants';
+
 export default {
   name: 'DtRecipeUnreadChip',
 
@@ -60,6 +61,14 @@ export default {
      */
     'click',
   ],
+
+  computed: {
+    unreadChipListeners () {
+      return {
+        click: event => this.$emit('click', event),
+      };
+    },
+  },
 };
 </script>
 

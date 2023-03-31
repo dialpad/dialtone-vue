@@ -1,8 +1,8 @@
 <template>
   <dt-recipe-unread-chip
-    :direction="direction"
-    :kind="kind"
-    @click="onClick"
+    :direction="$attrs.direction"
+    :kind="$attrs.kind"
+    @click="$attrs.onClick"
   >
     <template v-if="defaultSlot">
       <span v-html="defaultSlot" />
