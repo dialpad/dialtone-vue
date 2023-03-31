@@ -4,23 +4,27 @@
     :offset="[0, -12]"
   >
     <template #anchor>
-      <dt-button
-        :importance="circle ? 'outlined' : 'clear'"
-        kind="muted"
-        icon-position="top"
-        :disabled="disabled"
-        :aria-label="ariaLabel"
-        :label-class="callbarButtonTextClass"
-        :width="buttonWidth"
-        :class="callbarButtonClass"
-        v-on="$listeners"
+      <span
+        :class="{ 'd-c-not-allowed': disabled }"
       >
-        <slot />
-        <slot
-          slot="icon"
-          name="icon"
-        />
-      </dt-button>
+        <dt-button
+          :importance="circle ? 'outlined' : 'clear'"
+          kind="muted"
+          icon-position="top"
+          :aria-disabled="disabled"
+          :aria-label="ariaLabel"
+          :label-class="callbarButtonTextClass"
+          :width="buttonWidth"
+          :class="callbarButtonClass"
+          v-on="$listeners"
+        >
+          <slot />
+          <slot
+            slot="icon"
+            name="icon"
+          />
+        </dt-button>
+      </span>
     </template>
     <slot name="tooltip" />
   </dt-tooltip>
@@ -146,11 +150,12 @@ export default {
         this.buttonClass,
         'dt-recipe-callbar-button',
         'd-px0',
-        'd-fc-primary',
         {
           'dt-recipe-callbar-button--circle': this.circle,
           'dt-recipe-callbar-button--active': this.active,
           'dt-recipe-callbar-button--danger': this.danger,
+          'd-btn--disabled d-bgc-transparent': this.disabled,
+          'd-fc-primary': !this.disabled,
         }];
     },
 
