@@ -129,7 +129,7 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Admin view / listening in
       </p>
-      <dt-recipe-contact-info>
+      <dt-recipe-contact-info :avatar-list="adminListenInAvatars">
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
             <div class="d-fw-bold d-fs-200">
@@ -224,6 +224,27 @@
         </template>
       </dt-recipe-contact-info>
     </div>
+    <div class="d-m32">
+      <p class="d-my16 d-fs-200 d-fw-bold">
+        Group call
+      </p>
+      <dt-recipe-contact-info :avatar-list="groupCallAvatars">
+        <template #header>
+          <div class="d-d-flex d-ai-center d-mb2">
+            <div class="d-fw-bold d-fs-200">
+              Group Call
+            </div>
+          </div>
+        </template>
+        <template #subtitle>
+          <div class="d-d-flex d-ai-center">
+            <div class="d-fs-100 d-mt2 d-mr4">
+              Manage participants
+            </div>
+          </div>
+        </template>
+      </dt-recipe-contact-info>
+    </div>
   </div>
 </template>
 
@@ -235,5 +256,19 @@ import { DtIcon } from '@/components/icon';
 export default {
   name: 'DtRecipeContactInfoVariants',
   components: { DtButton, DtRecipeContactInfo, DtIcon },
+  data () {
+    return {
+      adminListenInAvatars: [
+        { src: 'static/media/avatar.6de75276.png' },
+        { src: 'static/media/../recipes/list_items/contact_info/avatar.png', icon: 'listen' },
+      ],
+
+      groupCallAvatars: [
+        { src: 'static/media/avatar.6de75276.png' },
+        { src: 'static/media/person.462ffed1.png' },
+        { src: 'static/media/../recipes/list_items/contact_info/avatar.png', text: '+3' },
+      ],
+    };
+  },
 };
 </script>

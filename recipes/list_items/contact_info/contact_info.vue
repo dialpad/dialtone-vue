@@ -10,8 +10,41 @@
         class="d-ps-relative"
         data-qa="contact-info-left"
       >
+        <template
+          v-if="avatarList"
+        >
+          <dt-avatar
+            v-for="(avatar, index) in avatarList"
+            :key="index"
+            :size="avatarSize"
+            :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
+          >
+            <img
+              data-qa="dt-contact-avatar"
+              :src="avatar.src"
+              :alt="avatar.initials"
+            >
+            <div
+              v-if="avatar.icon || avatar.text"
+              class="d-bgc-black-900 d-o70 d-ps-absolute d-w100p d-h100p
+              d-ba d-baw4 d-bc-white d-bar-pill d-d-flex d-ai-center d-zi-base1"
+            >
+              <dt-icon
+                v-if="avatar.icon"
+                class="d-fc-white d-w100p"
+                :name="avatar.icon"
+              />
+              <p
+                v-else-if="avatar.text"
+                class="d-fs-200 d-fw-bold d-fc-white d-w100p d-ta-center"
+              >
+                {{ avatar.text }}
+              </p>
+            </div>
+          </dt-avatar>
+        </template>
         <dt-avatar
-          v-if="avatarSrc"
+          v-else-if="avatarSrc"
           :size="avatarSize"
           :presence="presence"
         >
@@ -63,12 +96,14 @@
 <script>
 import DtListItem from '@/components/list_item/list_item';
 import DtAvatar from '@/components/avatar/avatar';
+import DtIcon from '@/components/icon/icon';
 import utils from '@/common/utils';
 
 export default {
   name: 'DtRecipeContactInfo',
 
   components: {
+    DtIcon,
     DtAvatar,
     DtListItem,
   },
@@ -132,6 +167,19 @@ export default {
      */
     presence: {
       type: String,
+      default: null,
+    },
+
+    /**
+     * Showing multiple avatars in contact info.
+     * The props of array items are:
+     * `src` - avatar image url
+     * `initials` - Initial letters to display in avatar if `src` is empty.
+     * `text` - cover text that showing over avatar
+     * `icon` - cover icon that showing over avatar
+     */
+    avatarList: {
+      type: Array,
       default: null,
     },
   },
