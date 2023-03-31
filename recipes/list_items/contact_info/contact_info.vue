@@ -20,10 +20,14 @@
             :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
           >
             <img
+              v-if="avatar.src"
               data-qa="dt-contact-avatar"
               :src="avatar.src"
               :alt="avatar.initials"
             >
+            <template v-else-if="avatar.initials">
+              {{ avatar.initials }}
+            </template>
             <div
               v-if="avatar.icon || avatar.text"
               class="d-bgc-black-900 d-o70 d-ps-absolute d-w100p d-h100p
