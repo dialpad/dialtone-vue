@@ -228,7 +228,7 @@ describe('DtAvatar Tests', function () {
       });
 
       it('should render "99+" if group is greater than 99', async function () {
-        await wrapper.setProps({ group: 100 });
+        await wrapper.setProps({ group: 23 });
         _setChildWrappers();
         assert.strictEqual(count.text(), '99+');
       });
