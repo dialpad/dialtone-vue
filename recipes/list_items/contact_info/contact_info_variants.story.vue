@@ -259,14 +259,14 @@ export default {
   data () {
     return {
       adminListenInAvatars: [
-        { src: 'static/media/avatar.6de75276.png' },
-        { src: 'static/media/../recipes/list_items/contact_info/avatar.png', icon: 'listen' },
+        { src: 'static/recipes/list_items/contact_info/avatar.png' },
+        { src: 'static/recipes/list_items/contact_info/avatar2.png', icon: 'listen' },
       ],
 
       groupCallAvatars: [
-        { src: 'static/media/avatar.6de75276.png' },
-        { src: 'static/media/person.462ffed1.png' },
-        { src: 'static/media/../recipes/list_items/contact_info/avatar.png', text: '+3' },
+        { initials: 'JL' },
+        { src: 'static/recipes/list_items/contact_info/avatar.png' },
+        { src: 'static/recipes/list_items/contact_info/avatar2.png', text: '+3' },
       ],
     };
   },
