@@ -1,7 +1,6 @@
 <template>
   <dt-chip
-    class="dt-leftbar-unread-chip"
-    :class="`dt-leftbar-unread-chip__${kind}`"
+    :class="['dt-leftbar-unread-chip', `dt-leftbar-unread-chip__${kind}`]"
     data-qa="dt-leftbar-unread-chip"
     :hide-close="true"
     v-on="unreadChipListeners"
@@ -19,7 +18,8 @@
 </template>
 
 <script>
-import { DtChip, DtIcon } from '@';
+import { DtIcon } from '@/components/icon';
+import { DtChip } from '@/components/chip';
 import { UNREAD_BADGE_DIRECTIONS, UNREAD_BADGE_KINDS } from './unread_chip_constants';
 
 export default {
