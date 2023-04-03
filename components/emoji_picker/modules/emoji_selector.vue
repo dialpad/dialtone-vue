@@ -1,34 +1,31 @@
 <template>
   <div class="d-emoji-picker__selector">
-    <!--    Emoji Selector -->
-    <div
-      v-for="emoji in EMOJI_LIST"
-      :key="emoji"
-      class="d-emoji-picker__list"
-    >
-      <p
-        class="d-emoji-picker__tab"
+    <div class="d-emoji-picker__list">
+      <div
+        v-for="(tabsetLabel, index) in tabsetLabels"
+        :key="tabs[index]"
       >
-        {{ emojiFilter ? 'Search results' : emoji.tab }}
-      </p>
-
-      <div>
-        <button
-          v-for="emoji in filteredEmojiList"
-          :key="emoji.code"
-          type="button"
-          class="d-emoji-picker__emoji-button"
-          :aria-label="emoji.name"
-          @click="$emit('selected-emoji', emoji)"
-          @focusin="$emit('emoji-data', emoji)"
-          @focusout="$emit('emoji-data', null)"
-          @mouseover="$emit('emoji-data', emoji)"
-          @mouseleave="$emit('emoji-data', null)"
+        <p> {{ tabsetLabel }} </p>
+        <!--        {{ emojiFilter ? 'Search results' : emoji.tab }} -->
+        <div
+          class="d-emoji-picker__tab"
         >
-          <dt-emoji
-            :code="emoji.code"
-          />
-        </button>
+          <button
+            v-for="emoji in (emojis[tabs[index] + skinTone] ? emojis[tabs[index] + skinTone] : emojis[tabs[index]])"
+            :key="emoji.shortname"
+            type="button"
+            :aria-label="emoji.name"
+            @click="$emit('selected-emoji', emoji)"
+            @focusin="$emit('emoji-data', emoji)"
+            @focusout="$emit('emoji-data', null)"
+            @mouseover="$emit('emoji-data', emoji)"
+            @mouseleave="$emit('emoji-data', null)"
+          >
+            <dt-emoji
+              :code="emoji.shortname"
+            />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -36,11 +33,8 @@
 
 <script setup>
 import { DtEmoji } from '@/components/emoji';
-import { emojiJson } from '@/common/emoji';
+import emojis from '@/components/emoji_picker/emojis';
 
-// TO DO EMOJI JSON = EMOJI LIST AND UTILITY FUNCTIONS
-
-import { computed } from 'vue';
 const props = defineProps({
   /**
    * The filter to apply to the emoji list
@@ -59,7 +53,12 @@ const props = defineProps({
    */
   skinTone: {
     type: Number,
-    default: null,
+    required: true,
+  },
+
+  tabsetLabels: {
+    type: Array,
+    required: true,
   },
 });
 
@@ -79,17 +78,57 @@ const emits = defineEmits([
   'selected-emoji',
 ]);
 
-// emojiJson
-const emojiList = [];
+const tabs = ['Recently used', 'Custom', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'];
 
-/**
- * Filtered emoji list based on the filter
- */
-const filteredEmojiList = computed(() => {
-  if (props.emojiFilter) {
-    //TODO should filter by keywords also
-    return emojiList.filter((emoji) => emoji.includes(props.emojiFilter));
-  }
-  return emojiList;
-});
+// /**
+//  * Filtered emoji list based on the filter
+//  */
+// const filteredEmojiList = computed(() => {
+//   if (props.emojiFilter) {
+//     // TODO should filter by keywords also
+//     return emojiList.filter((emoji) => emoji.includes(props.emojiFilter));
+//   }
+//   return emojiList;
+// });
 </script>
+
+<style lang="less" scoped>
+.d-emoji-picker{
+  &__selector{
+    margin-top: 20px;
+  }
+
+  &__list{
+    height: 100%;
+    max-height: 297px;
+    overflow: scroll;
+
+    p{
+      margin-bottom: 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    div:not(:first-child){
+      p{
+        margin-top: 25px;
+      }
+    }
+  }
+
+  &__tab{
+    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+
+    button{
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      outline: none;
+    }
+  }
+}
+</style>

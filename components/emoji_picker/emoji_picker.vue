@@ -1,26 +1,27 @@
 <template>
-  <div className="d-emoji-picker">
-    <div className="d-emoji-picker--header">
+  <div class="d-emoji-picker">
+    <div class="d-emoji-picker--header">
       <emoji-tabset
         :recently-used-tab="showRecentlyUsedTab"
         @tabset-selected="scrollToSelectedTabset"
       />
     </div>
-    <div className="d-emoji-picker--body">
+    <div class="d-emoji-picker--body">
       <emoji-search
         v-model="searchQuery"
         :search-placeholder-label="searchPlaceholderLabel"
       />
-      <!--      <emojiSelector -->
-      <!--        :emoji-filter="searchQuery" -->
-      <!--        :skin-tone="skinTone" -->
-      <!--        @emoji-data="updateEmojiData" -->
-      <!--        @selected-emoji="emits('selected-emoji', $event)" -->
-      <!--      /> -->
+      <emoji-selector
+        :emoji-filter="searchQuery"
+        :skin-tone="skinTone"
+        :tabset-labels="tabSetLabels"
+        @emoji-data="updateEmojiData"
+        @selected-emoji="emits('selected-emoji', $event)"
+      />
     </div>
-    <div className="d-emoji-picker--footer">
-      <!--      <emojiData :emoji-data="emojiData" /> -->
-      <!--      <emojiSkinSelector @skin-tone="updateSkinTone" /> -->
+    <div class="d-emoji-picker--footer">
+      <!--      <emojiDescription :emoji-data="emojiData" /> -->
+      <emoji-skin-selector @skin-tone="updateSkinTone" />
     </div>
   </div>
 </template>
@@ -28,6 +29,8 @@
 <script setup>
 import EmojiSearch from './modules/emoji_search.vue';
 import EmojiTabset from './modules/emoji_tabset.vue';
+import EmojiSelector from './modules/emoji_selector.vue';
+import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
 import { computed, onBeforeUnmount, ref } from 'vue';
 
 const props = defineProps({
@@ -56,6 +59,19 @@ const props = defineProps({
     type: String,
     required: true,
   },
+
+  /**
+   * The list of tabsets to show, it is necessary to be updated with the correct language
+   * It must respect the provided order.
+   * @type {Array}
+   * @default ['Recently used', 'Custom', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']
+   * @example
+   * <dt-emoji-picker :tabSetLabels="['Recently used', 'Custom', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
+   */
+  tabSetLabels: {
+    type: Array,
+    default: () => ['Most recently used', 'Custom', 'Smileys and people', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'],
+  },
 });
 const emits = defineEmits(
   /**
@@ -63,13 +79,15 @@ const emits = defineEmits(
      * @event selected-emoji
      * @param {Object} emoji - The selected emoji from the emoji selector
      */
-    // TODO add unicode_character prop to the emoji object returned
+  // TODO add unicode_character prop to the emoji object returned
   ['selected-emoji'],
 );
 
 const searchQuery = ref('');
 const emojiData = ref(null);
-const skinTone = ref(null);
+const skinTone = ref('Default');
+
+const testSkinTones = ['Default', 'Light', 'MediumLight', 'Medium', 'MediumDark', 'Dark'];
 
 const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
 
@@ -87,8 +105,8 @@ function updateEmojiData (emoji) {
   emojiData.value = emoji;
 }
 
-function updateSkinTone (skinTone) {
-  skinTone.value = skinTone;
+function updateSkinTone (skin) {
+  skinTone.value = skin;
 }
 
 /**
@@ -108,7 +126,7 @@ function cleanUp () {
   width: auto;
   max-width: 372px;
   height: 100%;
-  max-height: 421px;
+  //max-height: 421px;
 
   display: inline-flex;
   flex-direction: column;
@@ -133,6 +151,16 @@ function cleanUp () {
 
   &--body{
     padding: 0 var(--su16);
+  }
+
+  &--footer{
+    height: 58px;
+    background: #F9F9F9;
+    border-top: 1px solid #DFDEE5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
   }
 }
 </style>
