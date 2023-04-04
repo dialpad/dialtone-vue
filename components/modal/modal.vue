@@ -1,4 +1,3 @@
-
 <template>
   <dt-lazy-show
     transition="d-zoom"
