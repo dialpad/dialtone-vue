@@ -24,7 +24,7 @@ export default {
       disable: true,
     },
   },
-  args: { ...argsData, show: true },
+  args: { ...argsData, show: true, duration: 0 },
   argTypes: argTypesData,
 };
 
