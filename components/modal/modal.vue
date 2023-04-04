@@ -1,3 +1,4 @@
+
 <template>
   <dt-lazy-show
     transition="d-zoom"
@@ -115,6 +116,7 @@
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import Modal from '@/common/mixins/modal.js';
