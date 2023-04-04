@@ -7,8 +7,11 @@ import {
 } from '@/components/tooltip/tooltip.stories';
 import TooltipMdx from '@/visual_testing/tooltip.mdx';
 
+import DtTooltip from '@/components/tooltip/tooltip';
+
 export default {
   title: 'Visual Testing/Tooltip',
+  component: DtTooltip,
   args: {
     ...argsData,
     show: true,
