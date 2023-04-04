@@ -10,8 +10,11 @@ import {
 } from '@/components/toast/toast.stories';
 import ToastMdx from './toast.mdx';
 
+import DtToast from '@/components/toast/toast';
+
 export default {
   title: 'Visual Testing/Toast',
+  component: DtToast,
   parameters: {
     docs: {
       page: ToastMdx,
