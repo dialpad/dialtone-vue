@@ -15,6 +15,7 @@ export default {
   args: {
     ...argsData,
     show: true,
+    transition: '',
     customDirections: [
       'top-end', 'top', 'top-start',
       'left-start', null, 'right-start',
