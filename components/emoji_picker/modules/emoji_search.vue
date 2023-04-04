@@ -19,7 +19,7 @@ defineEmits(['update:modelValue']);
 defineProps({
   searchPlaceholderLabel: {
     type: String,
-    default: '',
+    required: true,
   },
 });
 </script>

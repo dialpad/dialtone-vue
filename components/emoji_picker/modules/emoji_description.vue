@@ -1,11 +1,17 @@
 <template>
   <div class="d-emoji-picker__data">
-    <!--    Display emoji data -->
+    <dt-emoji
+      v-if="emojiData"
+      :code="emojiData.shortname"
+    />
+    {{ emojiData?.name }}
   </div>
 </template>
 
 <script setup>
-const props = defineProps({
+import { DtEmoji } from '@/components/emoji';
+
+defineProps({
   /**
    * Emoji data
    * @type {Object}
@@ -17,3 +23,13 @@ const props = defineProps({
   },
 });
 </script>
+
+<style lang="less" scoped>
+.d-emoji-picker {
+  &__data {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+</style>

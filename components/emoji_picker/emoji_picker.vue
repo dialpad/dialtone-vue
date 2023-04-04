@@ -15,12 +15,13 @@
         :emoji-filter="searchQuery"
         :skin-tone="skinTone"
         :tabset-labels="tabSetLabels"
+        :search-results-label="searchResultsLabel"
         @emoji-data="updateEmojiData"
         @selected-emoji="emits('selected-emoji', $event)"
       />
     </div>
     <div class="d-emoji-picker--footer">
-      <!--      <emojiDescription :emoji-data="emojiData" /> -->
+      <emoji-description :emoji-data="emojiData" />
       <emoji-skin-selector @skin-tone="updateSkinTone" />
     </div>
   </div>
@@ -31,6 +32,7 @@ import EmojiSearch from './modules/emoji_search.vue';
 import EmojiTabset from './modules/emoji_tabset.vue';
 import EmojiSelector from './modules/emoji_selector.vue';
 import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
+import EmojiDescription from './modules/emoji_description.vue';
 import { computed, onBeforeUnmount, ref } from 'vue';
 
 const props = defineProps({
@@ -56,6 +58,18 @@ const props = defineProps({
    * <dt-emoji-picker :searchPlaceholderLabel="'Search...'" />
    */
   searchPlaceholderLabel: {
+    type: String,
+    required: true,
+  },
+
+  /**
+   * The label for the search results tab
+   * @type {String}
+   * @required
+   * @example
+   * <dt-emoji-picker :searchResultsLabel="'Search results'" />
+   */
+  searchResultsLabel: {
     type: String,
     required: true,
   },
@@ -126,7 +140,6 @@ function cleanUp () {
   width: auto;
   max-width: 372px;
   height: 100%;
-  //max-height: 421px;
 
   display: inline-flex;
   flex-direction: column;
