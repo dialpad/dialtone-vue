@@ -290,6 +290,15 @@ export default {
     },
 
     /**
+     * Whether the modal will close when you click outside of the dialog on the overlay.
+     * @values true, false
+     */
+    closeOnClick: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Scrollable modal that allows scroll the modal content keeping the header and footer fixed
      * @values true, false
      */
@@ -340,6 +349,7 @@ export default {
     modalListeners () {
       return {
         click: event => {
+          if (!this.closeOnClick) return;
           (event.target === event.currentTarget) && this.close();
           this.$emit('click', event);
         },
