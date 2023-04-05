@@ -243,7 +243,6 @@ export default {
     kindHandler (el) {
       switch (this.kind) {
         case 'image':
-          el.classList.add('d-avatar__image', 'd-zi-base1');
           this.validateImageAttrsPresence();
           this.setImageListeners(el);
           break;
