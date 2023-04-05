@@ -32,7 +32,7 @@
             <div
               v-if="avatar.icon || avatar.text"
               class="d-bgc-black-900 d-o70 d-ps-absolute d-w100p d-h100p
-              d-ba d-baw4 d-bc-white d-bar-pill d-d-flex d-ai-center d-zi-base1"
+              d-ba d-baw4 d-bc-white d-bar-pill d-d-flex d-ai-center"
             >
               <dt-icon
                 v-if="avatar.icon"
@@ -180,7 +180,7 @@ export default {
      * `src` - avatar image url (optional) <br>
      * `initials` - Initial letters to display in avatar (required if src is empty)<br>
      * `text` - text that overlays the avatar (optional) <br>
-     * `icon` - icon that overlays the avatar (optional) <br>
+     * `icon` - icon that overlays the avatar (optional)
      */
     avatarList: {
       type: Array,
