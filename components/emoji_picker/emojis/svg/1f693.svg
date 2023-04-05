@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+]>
+<svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+<polygon fill="#302C3B" points="39.213,20.399 39.213,19.914 34.707,19.914 34.707,20.399 33.503,20.399 33.503,22.284 
+	40.416,22.284 40.416,20.399 "/>
+<path fill="#E81C27" d="M39.959,19.941h-5.998c-0.995,0-0.995-1.941,0-1.941h5.998C40.956,18,40.956,19.941,39.959,19.941z"/>
+<rect x="35.162" y="18.255" fill="#F89987" width="0.625" height="1.43"/>
+<rect x="38.135" y="18.255" fill="#F89987" width="0.623" height="1.43"/>
+<path fill="#4E5E67" d="M58.438,55.561c-6.322,0-43.525,0-49.719,0C0.469,55.561,0,52.268,0,52.268h63.252
+	C63.252,52.268,62.447,55.561,58.438,55.561z"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="32.0005" y1="54.4102" x2="32.0005" y2="21.2139">
+	<stop  offset="0.1" style="stop-color:#302C3B"/>
+	<stop  offset="0.1017" style="stop-color:#302D3C"/>
+	<stop  offset="0.195" style="stop-color:#474956"/>
+	<stop  offset="0.2946" style="stop-color:#585F6B"/>
+	<stop  offset="0.4034" style="stop-color:#646F7A"/>
+	<stop  offset="0.5275" style="stop-color:#6C7882"/>
+	<stop  offset="0.7" style="stop-color:#6E7B85"/>
+	<a:midPointStop  offset="0.1" style="stop-color:#302C3B"/>
+	<a:midPointStop  offset="0.23" style="stop-color:#302C3B"/>
+	<a:midPointStop  offset="0.7" style="stop-color:#6E7B85"/>
+</linearGradient>
+<path fill="url(#SVGID_1_)" d="M63.403,43.064v-1.131v-3.486c0,0,0.079-1.789-1.154-2.533c-0.997-0.604-4.558-0.346-5.181-1.332
+	c-1.373-2.175-7.925-13.369-15.451-13.369c0,0-7.734,0-9.543,0c-6.248,0-16.287,13.369-16.287,13.369
+	C3.947,37.211,1.057,40.83,1.057,40.83v2.281C1.057,43.943,0,44.994,0,46.1c0,3.135,0,6.168,0,6.168s0.977,2.143,4.352,2.143H60.09
+	C66.082,54.41,63.403,43.064,63.403,43.064z"/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="35.4629" y1="52.9395" x2="35.4629" y2="35.1563">
+	<stop  offset="0" style="stop-color:#CFD8DD"/>
+	<stop  offset="0.0487" style="stop-color:#D3DBE0"/>
+	<stop  offset="0.2945" style="stop-color:#E1E7EB"/>
+	<stop  offset="0.503" style="stop-color:#E6EBEF"/>
+	<a:midPointStop  offset="0" style="stop-color:#CFD8DD"/>
+	<a:midPointStop  offset="0.3276" style="stop-color:#CFD8DD"/>
+	<a:midPointStop  offset="0.503" style="stop-color:#E6EBEF"/>
+</linearGradient>
+<path fill="url(#SVGID_2_)" d="M52.813,52.939H18.113V35.156h34.699V52.939z"/>
+<path fill="#E81C27" d="M63.403,38.447h-2.96l-0.797,3.486h3.757V38.447z"/>
+<g>
+	<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="36.0615" y1="35.1563" x2="36.0615" y2="23.3242">
+		<stop  offset="0" style="stop-color:#302C3B"/>
+		<stop  offset="0.2926" style="stop-color:#454754"/>
+		<stop  offset="0.7557" style="stop-color:#636D78"/>
+		<stop  offset="1" style="stop-color:#6E7B85"/>
+		<a:midPointStop  offset="0" style="stop-color:#302C3B"/>
+		<a:midPointStop  offset="0.4364" style="stop-color:#302C3B"/>
+		<a:midPointStop  offset="1" style="stop-color:#6E7B85"/>
+	</linearGradient>
+	<path fill="url(#SVGID_3_)" d="M19.659,33.436c-0.701,0.945-0.31,1.721,0.867,1.721h32.287c0,0-5.26-11.833-12.148-11.833h-9.236
+		C27.396,23.324,19.66,33.434,19.659,33.436z"/>
+</g>
+<polygon fill="#1A1626" points="38.01,23.324 36.079,23.324 35.633,35.156 38.373,35.156 "/>
+<path fill="#1A1626" d="M31.428,23.861h9.236c5.479,0,10.252,8.731,11.536,11.295h0.612c0,0-5.26-11.833-12.148-11.833h-9.236
+	c-3.679,0-10.42,8.392-11.579,9.868h0.679C23.316,29.669,28.625,23.861,31.428,23.861z"/>
+<path fill="#1A1626" d="M59.87,54.41c0-4.746-3.817-8.588-8.534-8.588c-4.708-0.002-8.529,3.848-8.533,8.588H59.87z"/>
+<radialGradient id="SVGID_4_" cx="5.1162" cy="94.1855" r="6.4783" gradientTransform="matrix(1.1526 0 0 1.1596 45.4398 -54.7297)" gradientUnits="userSpaceOnUse">
+	<stop  offset="0.4909" style="stop-color:#5B666E"/>
+	<stop  offset="0.6437" style="stop-color:#525A64"/>
+	<stop  offset="0.9181" style="stop-color:#3C3B49"/>
+	<stop  offset="1" style="stop-color:#343040"/>
+	<a:midPointStop  offset="0.4909" style="stop-color:#5B666E"/>
+	<a:midPointStop  offset="0.5765" style="stop-color:#5B666E"/>
+	<a:midPointStop  offset="1" style="stop-color:#343040"/>
+</radialGradient>
+<ellipse fill="url(#SVGID_4_)" cx="51.336" cy="54.488" rx="7.467" ry="7.512"/>
+<ellipse fill="#E6EBEF" cx="51.337" cy="54.488" rx="5.164" ry="5.195"/>
+<path fill="#4E5E67" d="M55.102,55.773c0.135-0.404,0.213-0.836,0.213-1.285c0-0.451-0.078-0.883-0.213-1.285l-2.215,1.285
+	L55.102,55.773z"/>
+<path fill="#4E5E67" d="M52.111,53.135l2.212-1.283c-0.565-0.65-1.337-1.113-2.212-1.289V53.135z"/>
+<path fill="#4E5E67" d="M47.574,53.201c-0.137,0.404-0.215,0.836-0.215,1.287c0,0.449,0.078,0.881,0.215,1.285l2.213-1.285
+	L47.574,53.201z"/>
+<path fill="#4E5E67" d="M52.111,55.838v2.574c0.877-0.176,1.646-0.639,2.215-1.289L52.111,55.838z"/>
+<path fill="#4E5E67" d="M50.561,53.137v-2.574c-0.875,0.176-1.645,0.639-2.211,1.289L50.561,53.137z"/>
+<path fill="#4E5E67" d="M50.561,55.84l-2.211,1.283c0.568,0.65,1.336,1.113,2.211,1.289V55.84z"/>
+<path fill="#CFD8DD" d="M53.365,54.488c0,1.127-0.906,2.039-2.029,2.039c-1.12,0-2.029-0.912-2.029-2.039
+	c0-1.129,0.909-2.043,2.029-2.043C52.459,52.445,53.365,53.359,53.365,54.488z"/>
+<circle fill="#E6EBEF" cx="51.337" cy="54.488" r="0.675"/>
+<path fill="#4E5E67" d="M51.629,53.266c0,0.387-0.582,0.387-0.582,0S51.629,52.879,51.629,53.266z"/>
+<path fill="#4E5E67" d="M51.629,55.709c0,0.389-0.582,0.389-0.582,0C51.047,55.322,51.629,55.322,51.629,55.709z"/>
+<path fill="#4E5E67" d="M52.535,54.129c-0.336,0.195-0.625-0.311-0.29-0.506C52.578,53.43,52.867,53.936,52.535,54.129z"/>
+<path fill="#4E5E67" d="M50.43,55.352c-0.333,0.193-0.623-0.311-0.289-0.506C50.477,54.65,50.765,55.156,50.43,55.352z"/>
+<path fill="#4E5E67" d="M52.242,55.352c-0.332-0.195-0.043-0.701,0.293-0.506C52.867,55.041,52.578,55.545,52.242,55.352z"/>
+<path fill="#4E5E67" d="M50.141,54.129c-0.336-0.193-0.044-0.699,0.289-0.506C50.765,53.818,50.477,54.324,50.141,54.129z"/>
+<path fill="#1A1626" d="M22.484,54.41c0-4.746-3.817-8.588-8.536-8.588C9.242,45.82,5.421,49.67,5.417,54.41H22.484z"/>
+<radialGradient id="SVGID_5_" cx="-27.3193" cy="94.1855" r="6.4783" gradientTransform="matrix(1.1526 0 0 1.1596 45.4398 -54.7297)" gradientUnits="userSpaceOnUse">
+	<stop  offset="0.4909" style="stop-color:#5B666E"/>
+	<stop  offset="0.6437" style="stop-color:#525A64"/>
+	<stop  offset="0.9181" style="stop-color:#3C3B49"/>
+	<stop  offset="1" style="stop-color:#343040"/>
+	<a:midPointStop  offset="0.4909" style="stop-color:#5B666E"/>
+	<a:midPointStop  offset="0.5765" style="stop-color:#5B666E"/>
+	<a:midPointStop  offset="1" style="stop-color:#343040"/>
+</radialGradient>
+<ellipse fill="url(#SVGID_5_)" cx="13.951" cy="54.488" rx="7.467" ry="7.512"/>
+<ellipse fill="#E6EBEF" cx="13.952" cy="54.488" rx="5.164" ry="5.195"/>
+<path fill="#4E5E67" d="M17.716,55.775c0.135-0.406,0.214-0.838,0.214-1.287c0-0.451-0.079-0.883-0.214-1.285l-2.215,1.285
+	L17.716,55.775z"/>
+<path fill="#4E5E67" d="M14.726,53.135l2.212-1.283c-0.566-0.65-1.337-1.113-2.212-1.289V53.135z"/>
+<path fill="#4E5E67" d="M10.188,53.201c-0.138,0.404-0.215,0.836-0.215,1.287c0,0.449,0.077,0.881,0.215,1.285l2.214-1.285
+	L10.188,53.201z"/>
+<path fill="#4E5E67" d="M14.726,55.838v2.576c0.877-0.176,1.646-0.641,2.214-1.289L14.726,55.838z"/>
+<path fill="#4E5E67" d="M13.176,53.137v-2.574c-0.875,0.176-1.646,0.639-2.212,1.289L13.176,53.137z"/>
+<path fill="#4E5E67" d="M13.176,55.84l-2.212,1.285c0.569,0.648,1.337,1.113,2.212,1.289V55.84z"/>
+<path fill="#CFD8DD" d="M15.98,54.488c0,1.127-0.906,2.039-2.029,2.039c-1.121,0-2.029-0.912-2.029-2.039
+	c0-1.129,0.908-2.043,2.029-2.043C15.074,52.445,15.98,53.359,15.98,54.488z"/>
+<circle fill="#E6EBEF" cx="13.952" cy="54.488" r="0.674"/>
+<path fill="#4E5E67" d="M14.243,53.268c0,0.385-0.582,0.385-0.582,0C13.661,52.877,14.243,52.877,14.243,53.268z"/>
+<path fill="#4E5E67" d="M14.243,55.709c0,0.389-0.582,0.389-0.582,0C13.661,55.322,14.243,55.322,14.243,55.709z"/>
+<path fill="#4E5E67" d="M15.149,54.129c-0.335,0.195-0.625-0.311-0.29-0.506C15.193,53.43,15.482,53.934,15.149,54.129z"/>
+<path fill="#4E5E67" d="M13.045,55.352c-0.333,0.193-0.623-0.311-0.29-0.506C13.09,54.65,13.38,55.158,13.045,55.352z"/>
+<path fill="#4E5E67" d="M14.857,55.352c-0.333-0.193-0.044-0.701,0.292-0.506C15.482,55.041,15.193,55.545,14.857,55.352z"/>
+<path fill="#4E5E67" d="M12.755,54.129c-0.335-0.195-0.043-0.699,0.29-0.506C13.38,53.818,13.09,54.324,12.755,54.129z"/>
+<rect x="36.869" y="23.324" opacity="0.1" fill="#1A1626" width="0.269" height="29.481"/>
+<rect x="1.323" y="40.83" fill="#E6EBEF" width="3.252" height="2.281"/>
+<path fill="#F59E01" d="M5.63,40.83H4.575v2.281h2.354C6.929,43.111,6.846,41.414,5.63,40.83z"/>
+<path fill="#4E5E67" d="M22.224,35.416V32.8c0.002-1.103-4.554-0.202-4.554,0.731v1.865C17.67,35.787,22.224,36.322,22.224,35.416z"
+	/>
+<path fill="#4E5E67" d="M34.729,37.383c0-0.51,0-0.924-1.297-0.924h-1.359c-1.299,0-1.299,0.414-1.299,0.924
+	C30.773,37.688,34.729,37.688,34.729,37.383z"/>
+<path fill="#4E5E67" d="M51.511,37.383c0-0.51,0-0.924-1.296-0.924h-1.361c-1.299,0-1.299,0.414-1.299,0.924
+	C47.555,37.688,51.511,37.688,51.511,37.383z"/>
+<path fill="#F59E01" d="M31.155,42.602l1.596-2.693h-3.19l-1.598-2.697l-1.597,2.697h-3.192l1.599,2.693l-1.599,2.695h3.192
+	l1.597,2.695l1.598-2.695h3.19L31.155,42.602z"/>
+<path opacity="0.05" fill="#1A1626" d="M63.403,43.064v-1.131c0,0-40.247-0.318-51.738,0.602
+	C23.18,43.455,63.403,43.064,63.403,43.064z"/>
+<linearGradient id="SVGID_6_" gradientUnits="userSpaceOnUse" x1="17.9468" y1="33.9238" x2="17.9468" y2="33.9238">
+	<stop  offset="0.1" style="stop-color:#302C3B"/>
+	<stop  offset="0.1017" style="stop-color:#302D3C"/>
+	<stop  offset="0.195" style="stop-color:#474956"/>
+	<stop  offset="0.2946" style="stop-color:#585F6B"/>
+	<stop  offset="0.4034" style="stop-color:#646F7A"/>
+	<stop  offset="0.5275" style="stop-color:#6C7882"/>
+	<stop  offset="0.7" style="stop-color:#6E7B85"/>
+	<a:midPointStop  offset="0.1" style="stop-color:#302C3B"/>
+	<a:midPointStop  offset="0.23" style="stop-color:#302C3B"/>
+	<a:midPointStop  offset="0.7" style="stop-color:#6E7B85"/>
+</linearGradient>
+<path fill="url(#SVGID_6_)" d="M17.947,33.924"/>
+</svg>

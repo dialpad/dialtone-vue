@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+]>
+<svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+<path fill="#302C3B" d="M35,3.568c-2.118-2.119-3.938-2.063-6,0c-6.75,6.75-27,27-27,27h60C62,30.568,41.75,10.318,35,3.568z"/>
+<polygon fill="#CF2B2B" points="32,6.568 7,30.568 7,62 57,62 57,30.568 "/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="31.9985" y1="30.5684" x2="31.9985" y2="6.5684">
+	<stop  offset="0.3818" style="stop-color:#302C3B;stop-opacity:0"/>
+	<stop  offset="1" style="stop-color:#302C3B;stop-opacity:0.2"/>
+	<a:midPointStop  offset="0.3818" style="stop-color:#302C3B;stop-opacity:0"/>
+	<a:midPointStop  offset="0.5" style="stop-color:#302C3B;stop-opacity:0"/>
+	<a:midPointStop  offset="1" style="stop-color:#302C3B;stop-opacity:0.2"/>
+</linearGradient>
+<polygon fill="url(#SVGID_1_)" points="31.998,6.568 6.998,30.568 56.998,30.568 "/>
+<rect id="Rectangle-path_75_" x="53" y="55.871" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_74_" x="41.5" y="53.59" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_73_" x="53" y="43.438" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_72_" x="40.819" y="37.318" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_71_" x="51.163" y="31.807" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_70_" x="39" y="28.932" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_69_" x="43.75" y="23.983" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_68_" x="29.625" y="34.9" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_67_" x="16" y="32.244" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_66_" x="15.75" y="24.983" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_65_" x="25.5" y="26.755" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_64_" x="32" y="21.316" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_63_" x="36.333" y="16.862" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_62_" x="25.5" y="14.691" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_61_" x="31" y="10.316" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_60_" x="6.998" y="36.318" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_11_" x="18.717" y="38.131" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_8_" x="22.029" y="45.375" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_7_" x="6.998" y="49.75" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_6_" x="18.717" y="53.875" fill="#AB0404" width="4" height="2"/>
+<rect id="Rectangle-path_5_" x="10.5" y="58.219" fill="#AB0404" width="4" height="2"/>
+<rect x="44.5" y="41.068" fill="#AB0404" width="7" height="11"/>
+<rect x="44" y="52.068" fill="#850303" width="8" height="1"/>
+<rect x="45.5" y="42.068" fill="#302C3B" width="5" height="4"/>
+<rect x="45.5" y="47.068" fill="#302C3B" width="5" height="4"/>
+<rect x="12.5" y="41.068" fill="#AB0404" width="7" height="11"/>
+<rect x="12" y="52.068" fill="#850303" width="8" height="1"/>
+<rect x="13.5" y="42.068" fill="#302C3B" width="5" height="4"/>
+<rect x="13.5" y="47.068" fill="#302C3B" width="5" height="4"/>
+<rect id="Rectangle-path_4_" x="25" y="39" fill="#AB0404" width="14" height="23"/>
+<rect id="Rectangle-path_3_" x="26.5" y="40.5" fill="#785647" width="11" height="21.5"/>
+<rect id="Rectangle-path_2_" x="27.5" y="41.5" fill="#9E6C49" width="9" height="20.5"/>
+<path fill="#B3C2C6" d="M35.917,53.25c0.11,0,0.11-0.416,0-0.416h-0.811c-0.111,0-0.201-0.096-0.201-0.209v-1.25
+	c0-0.115,0.09-0.209,0.201-0.209h0.811c0.11,0,0.11-0.416,0-0.416h-1.126c-0.11,0-0.291,0.053-0.291,0.273v1.951
+	c0,0.221,0.181,0.275,0.291,0.275H35.917z"/>
+<rect x="29" y="43" fill="#302C3B" width="2.625" height="2.625"/>
+<rect x="32.375" y="43" fill="#302C3B" width="2.625" height="2.625"/>
+<rect x="29" y="46.375" fill="#302C3B" width="2.625" height="2.625"/>
+<rect x="32.375" y="46.375" fill="#302C3B" width="2.625" height="2.625"/>
+<path fill="#FFC200" d="M39.741,21.541c-0.2,0.626,0.211,2.944-0.453,4.385c-0.707,1.531-2.643,3.403-5.037,4.535l-0.426,1.964
+	c2.973-1.306,6.549-3.468,8.027-3.938c0.891-0.285,3.41-0.506,4.062-0.768L39.741,21.541z"/>
+<path fill="#D99100" d="M39.741,21.541c-0.558,0.557,5.614,6.736,6.173,6.178C46.319,27.313,40.146,21.136,39.741,21.541z"/>
+<path fill="#FFC200" d="M30.351,32.806c-6.222-0.587-10.271-6.176-10.595-6.465l1.473-0.919c0.332,0.292,2.546,4.647,8.776,5.235
+	C30.612,30.715,30.958,32.86,30.351,32.806z"/>
+<path fill="#FFC200" d="M21.509,25.054c-0.015-0.203-0.286-0.782-0.286-0.782s0.085-0.437-0.025-0.495
+	c-0.412-0.218-2.918,1.343-2.906,1.812c0.003,0.123,0.434,0.239,0.434,0.239s0.399,0.5,0.574,0.603
+	c0.145,0.084,0.614,0.129,0.614,0.129l1.441-0.899C21.354,25.659,21.521,25.219,21.509,25.054z"/>
+<path fill="#FFC200" d="M31.291,17.862c-4.143,0-7.501,3.358-7.501,7.501c0,4.141,3.358,7.501,7.501,7.501
+	c4.142,0,7.499-3.36,7.499-7.501C38.79,21.221,35.433,17.862,31.291,17.862z M31.291,30.332c-2.745,0-4.971-2.225-4.971-4.969
+	c0-2.746,2.226-4.971,4.971-4.971c2.743,0,4.969,2.225,4.969,4.971C36.26,28.107,34.034,30.332,31.291,30.332z"/>
+<path fill="#0085BD" d="M53,42.968c-0.618,0-0.669-0.389-1.287-0.389c-0.617,0-0.617,0.396-1.234,0.396s-0.617-0.396-1.234-0.396
+	c-0.619,0-0.619,0.396-1.237,0.396s-0.618-0.396-1.235-0.396c-0.619,0-0.619,0.396-1.236,0.396c-0.62,0-0.62-0.396-1.241-0.396
+	c-0.62,0-0.671,0.396-1.29,0.396L43,40.974h10V42.968z"/>
+<polygon fill="#00A2E8" points="53,40.974 43.002,40.974 43.833,38.976 52.166,38.976 "/>
+<path fill="#0085BD" d="M21,42.968c-0.618,0-0.669-0.389-1.287-0.389c-0.617,0-0.617,0.396-1.234,0.396s-0.617-0.396-1.235-0.396
+	c-0.619,0-0.619,0.396-1.237,0.396c-0.618,0-0.618-0.396-1.235-0.396c-0.619,0-0.619,0.396-1.237,0.396
+	c-0.62,0-0.62-0.396-1.241-0.396c-0.62,0-0.671,0.396-1.29,0.396L11,40.974h10V42.968z"/>
+<polygon fill="#00A2E8" points="21,40.974 11.002,40.974 11.833,38.976 20.166,38.976 "/>
+</svg>
