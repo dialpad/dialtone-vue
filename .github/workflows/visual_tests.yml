@@ -13,8 +13,19 @@ env:
   STORYBOOK_ROOT: ./storybook
 
 jobs:
+
+  label_when_approved:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Label When Approved
+        uses: TobKed/label-when-approved-action@v1.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          label: 'visual-test-ready'
+
+
   visual_tests:
-    if: github.event_name == 'push' || (contains(fromJSON('["synchronize", "submitted", "labeled"]'), github.event.action) && (github.event.label.name == 'visual-test-ready' || (github.event.review.state == 'approved' && !contains( github.event.pull_request.labels.*.name, 'no-visual-test' ))))
+    if: github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'visual-test-ready')
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
