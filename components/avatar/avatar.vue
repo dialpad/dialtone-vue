@@ -176,11 +176,17 @@ export default {
       validator: (group) => AVATAR_GROUP_VALIDATOR(group),
     },
 
+    /**
+     * The icon that overlays the avatar
+     */
     overlayIcon: {
       type: String,
       default: '',
     },
 
+    /**
+     * The text that overlays the avatar
+     */
     overlayText: {
       type: String,
       default: '',
