@@ -10,8 +10,9 @@
         class="d-ps-relative"
         data-qa="contact-info-left"
       >
-        <template
+        <div
           v-if="avatarList"
+          class="d-mrn4"
         >
           <dt-avatar
             v-for="(avatar, index) in avatarList"
@@ -46,7 +47,7 @@
               </p>
             </div>
           </dt-avatar>
-        </template>
+        </div>
         <dt-avatar
           v-else-if="avatarSrc"
           :size="avatarSize"
@@ -175,11 +176,11 @@ export default {
 
     /**
      * Showing multiple avatars in contact info.
-     * The props of array items are:
-     * `src` - avatar image url
-     * `initials` - Initial letters to display in avatar if `src` is empty.
-     * `text` - cover text that showing over avatar
-     * `icon` - cover icon that showing over avatar
+     * The props of array items are: <br>
+     * `src` - avatar image url (optional) <br>
+     * `initials` - Initial letters to display in avatar (required if src is empty)<br>
+     * `text` - text that overlays the avatar (optional) <br>
+     * `icon` - icon that overlays the avatar (optional) <br>
      */
     avatarList: {
       type: Array,

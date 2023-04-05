@@ -142,7 +142,7 @@
         </template>
         <template #subtitle>
           <div class="d-d-flex d-ai-center">
-            <div class="d-fs-100 d-mt2 d-mr4">
+            <div class="d-fs-100 d-mr4">
               +1 (415) 123-4567
             </div>
             <dt-icon
@@ -153,7 +153,7 @@
           </div>
         </template>
         <template #bottom>
-          <div class="d-d-flex d-ai-center d-mtn6">
+          <div class="d-d-flex d-ai-center d-mtn4">
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
               &nbsp;
             </div>
@@ -238,7 +238,7 @@
         </template>
         <template #subtitle>
           <div class="d-d-flex d-ai-center">
-            <div class="d-fs-100 d-mt2 d-mr4">
+            <div class="d-fs-100 d-mr4">
               Manage participants
             </div>
           </div>
@@ -261,7 +261,7 @@ export default {
     return {
       adminListenInAvatars: [
         { src: 'static/recipes/list_items/contact_info/avatar.png' },
-        { src: 'static/recipes/list_items/contact_info/avatar2.png', icon: 'listen' },
+        { src: 'static/recipes/list_items/contact_info/avatar2.png', icon: 'hear' },
       ],
 
       groupCallAvatars: [
