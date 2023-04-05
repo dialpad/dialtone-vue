@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="64px" height="64px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E81C27;}
+	.st1{fill:#FCFCFC;}
+	.st2{fill:#1A1626;}
+	.st3{opacity:0.1;fill:url(#SVGID_1_);}
+</style>
+<path class="st0" d="M53.22,10.79c-8.7-8.7-21.41-10.93-32.17-6.71l38.88,38.88C64.14,32.19,61.91,19.48,53.22,10.79z"/>
+<path class="st0" d="M4.07,21.04c-4.22,10.77-1.99,23.47,6.71,32.17c8.7,8.7,21.41,10.93,32.17,6.71L4.07,21.04z"/>
+<path class="st1" d="M44.93,59.08c0.63-0.3,1.24-0.64,1.85-0.98L5.9,17.22c-0.35,0.61-0.68,1.22-0.98,1.85
+	c-0.31,0.65-0.59,1.31-0.85,1.98l38.88,38.88C43.62,59.67,44.28,59.39,44.93,59.08z"/>
+<path class="st1" d="M59.08,44.93c0.31-0.65,0.59-1.31,0.85-1.98L21.04,4.07c-0.67,0.26-1.33,0.54-1.98,0.85
+	c-0.63,0.3-1.24,0.63-1.85,0.98L58.1,46.78C58.44,46.17,58.78,45.56,59.08,44.93z"/>
+<path class="st2" d="M59,45.09L18.91,5.01c-2.94,1.42-5.69,3.34-8.13,5.78C8.35,13.22,6.43,15.98,5,18.91L45.09,59
+	c2.93-1.42,5.69-3.34,8.13-5.78C55.65,50.78,57.57,48.02,59,45.09z"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="31.9999" y1="61.9996" x2="31.9999" y2="1.9996" gradientTransform="matrix(1 0 0 1 1.000000e-04 4.000000e-04)">
+	<stop  offset="0" style="stop-color:#1A1A1A"/>
+	<stop  offset="0.102" style="stop-color:#393939;stop-opacity:0.949"/>
+	<stop  offset="0.3475" style="stop-color:#7F7F7F;stop-opacity:0.8262"/>
+	<stop  offset="0.5688" style="stop-color:#B6B6B6;stop-opacity:0.7156"/>
+	<stop  offset="0.7582" style="stop-color:#DEDEDE;stop-opacity:0.6209"/>
+	<stop  offset="0.9081" style="stop-color:#F6F6F6;stop-opacity:0.5459"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0.5"/>
+</linearGradient>
+<circle class="st3" cx="32" cy="32" r="30"/>
+</svg>

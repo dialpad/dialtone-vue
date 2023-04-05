@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="64px" height="64px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#003893;}
+	.st1{fill:#FCFCFC;}
+	.st2{fill:#FF0000;}
+	.st3{opacity:0.1;fill:url(#SVGID_1_);}
+</style>
+<path class="st0" d="M32,2C32,2,6.53,8,2,32c0,17.2,14.48,31.02,31.91,29.94c14.94-0.93,27.1-13.09,28.03-28.03
+	C63.02,16.48,49.2,2,32,2z"/>
+<path class="st1" d="M32,2c-4.69,0-9.13,1.09-13.09,3.01L11,11l-5.99,7.91C3.09,22.87,2,27.3,2,32h12V17l12,15h6v-7.5L23.6,14H32V2z
+	"/>
+<polygon class="st2" points="15.43,14 30,32 32,32 32,27.06 21.43,14 "/>
+<path class="st2" d="M18.91,5C12.86,7.94,7.94,12.86,5,18.91V32h6V11h21V5H18.91z"/>
+<path class="st1" d="M37.13,32l1.01-2.93l-2.72-1.91h3.39l0.98-2.82l1,2.82h3.38l-2.72,1.91L42.46,32l-2.66-1.79L37.13,32z"/>
+<polygon class="st2" points="39.8,29.52 41.39,30.6 40.79,28.85 42.38,27.73 40.41,27.73 39.8,26.02 39.2,27.73 37.22,27.73 
+	38.81,28.85 38.21,30.6 "/>
+<path class="st1" d="M54.63,32l1.01-2.93l-2.72-1.91h3.39l0.98-2.82l1,2.82h3.38l-2.72,1.91L59.96,32l-2.66-1.79L54.63,32z"/>
+<polygon class="st2" points="57.3,29.52 58.89,30.6 58.29,28.85 59.88,27.73 57.91,27.73 57.3,26.02 56.7,27.73 54.72,27.73 
+	56.31,28.85 55.71,30.6 "/>
+<path class="st1" d="M45.88,21.66l1.01-2.93l-2.72-1.91h3.39L48.54,14l1,2.82h3.38l-2.72,1.91l1.01,2.93l-2.66-1.8L45.88,21.66z"/>
+<polygon class="st2" points="48.55,19.18 50.14,20.25 49.54,18.51 51.13,17.39 49.16,17.39 48.55,15.67 47.95,17.39 45.97,17.39 
+	47.56,18.51 46.96,20.25 "/>
+<path class="st1" d="M45.05,48.66l1.33-3.85l-3.58-2.52h4.46l1.28-3.7l1.32,3.7h4.44l-3.57,2.52l1.32,3.85l-3.5-2.36L45.05,48.66z"
+	/>
+<polygon class="st2" points="48.55,45.4 50.64,46.81 49.85,44.52 51.94,43.05 49.35,43.05 48.55,40.79 47.77,43.05 45.16,43.05 
+	47.25,44.52 46.45,46.81 "/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="32" y1="62" x2="32" y2="2">
+	<stop  offset="0" style="stop-color:#1A1A1A"/>
+	<stop  offset="0.102" style="stop-color:#393939;stop-opacity:0.949"/>
+	<stop  offset="0.3475" style="stop-color:#7F7F7F;stop-opacity:0.8262"/>
+	<stop  offset="0.5688" style="stop-color:#B6B6B6;stop-opacity:0.7156"/>
+	<stop  offset="0.7582" style="stop-color:#DEDEDE;stop-opacity:0.6209"/>
+	<stop  offset="0.9081" style="stop-color:#F6F6F6;stop-opacity:0.5459"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0.5"/>
+</linearGradient>
+<circle class="st3" cx="32" cy="32" r="30"/>
+</svg>

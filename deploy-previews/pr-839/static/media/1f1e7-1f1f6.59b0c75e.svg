@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="64px" height="64px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#0038B8;}
+	.st1{fill:#FCFCFC;}
+	.st2{fill:#FFE000;}
+	.st3{fill:#1A1626;}
+	.st4{fill:#FF0000;}
+	.st5{opacity:0.1;fill:url(#SVGID_1_);}
+</style>
+<path class="st0" d="M10.97,53.39C16.39,58.71,23.81,62,32,62c16.57,0,30-13.43,30-30c0-3.95-0.77-7.72-2.16-11.18L10.97,53.39z"/>
+<path class="st1" d="M44.72,4.83L2.03,33.29c0.33,7.86,3.69,14.94,8.94,20.1l48.86-32.57C57.01,13.77,51.57,8.04,44.72,4.83z"/>
+<path class="st2" d="M2,32c0,0.43,0.01,0.86,0.03,1.29L44.72,4.83C40.86,3.02,36.55,2,32,2C15.43,2,2,15.43,2,32z"/>
+<path class="st3" d="M33.9,32.28l2.03-1.17l-2.03-1.17c-0.53-4.26-3.91-7.63-8.17-8.16l-1.17-2.03l-1.17,2.03
+	c-4.26,0.53-7.63,3.91-8.17,8.16l-2.02,1.17l2.02,1.17c0.53,4.26,3.91,7.63,8.17,8.16l1.17,2.03l1.17-2.03
+	C29.99,39.92,33.37,36.54,33.9,32.28z M24.56,39.31c-4.52,0-8.2-3.68-8.2-8.2s3.68-8.2,8.2-8.2s8.2,3.68,8.2,8.2
+	S29.09,39.31,24.56,39.31z"/>
+<polygon class="st4" points="27.8,31.11 29.43,28.3 26.18,28.3 24.56,25.5 22.94,28.3 19.7,28.3 21.32,31.11 19.7,33.92 
+	22.94,33.92 24.56,36.73 26.18,33.92 29.43,33.92 "/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="32" y1="62" x2="32" y2="2">
+	<stop  offset="0" style="stop-color:#1A1A1A"/>
+	<stop  offset="0.102" style="stop-color:#393939;stop-opacity:0.949"/>
+	<stop  offset="0.3475" style="stop-color:#7F7F7F;stop-opacity:0.8262"/>
+	<stop  offset="0.5688" style="stop-color:#B6B6B6;stop-opacity:0.7156"/>
+	<stop  offset="0.7582" style="stop-color:#DEDEDE;stop-opacity:0.6209"/>
+	<stop  offset="0.9081" style="stop-color:#F6F6F6;stop-opacity:0.5459"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0.5"/>
+</linearGradient>
+<circle class="st5" cx="32" cy="32" r="30"/>
+</svg>
