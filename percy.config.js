@@ -23,6 +23,7 @@ module.exports = {
   },
   snapshot: {
     enableJavaScript: true,
+    widths: [1280],
   },
   discovery: {
     disableCache: true,
