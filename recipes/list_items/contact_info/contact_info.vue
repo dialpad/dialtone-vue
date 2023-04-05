@@ -12,41 +12,35 @@
       >
         <div
           v-if="avatarList"
-          class="d-mrn4"
+          class="d-mrn4 d-d-flex d-fd-row"
         >
-          <dt-avatar
+          <div
             v-for="(avatar, index) in avatarList"
             :key="index"
-            :size="avatarSize"
-            :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
           >
-            <img
+            <dt-avatar
               v-if="avatar.src"
-              data-qa="dt-contact-avatar"
-              :src="avatar.src"
-              :alt="avatar.initials"
+              :size="avatarSize"
+              :overlay-icon="avatar.icon"
+              :overlay-text="avatar.text"
+              :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
             >
-            <template v-else-if="avatar.initials">
-              {{ avatar.initials }}
-            </template>
-            <div
-              v-if="avatar.icon || avatar.text"
-              class="d-bgc-black-900 d-o70 d-ps-absolute d-w100p d-h100p
-              d-ba d-baw4 d-bc-white d-bar-pill d-d-flex d-ai-center"
-            >
-              <dt-icon
-                v-if="avatar.icon"
-                class="d-fc-white d-w100p"
-                :name="avatar.icon"
-              />
-              <p
-                v-else-if="avatar.text"
-                class="d-fs-200 d-fw-bold d-fc-white d-w100p d-ta-center"
+              <img
+                data-qa="dt-contact-avatar"
+                :src="avatar.src"
+                :alt="avatar.initials"
               >
-                {{ avatar.text }}
-              </p>
-            </div>
-          </dt-avatar>
+            </dt-avatar>
+            <dt-avatar
+              v-else-if="avatar.initials"
+              :size="avatarSize"
+              :overlay-icon="avatar.icon"
+              :overlay-text="avatar.text"
+              :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
+            >
+              {{ avatar.initials }}
+            </dt-avatar>
+          </div>
         </div>
         <dt-avatar
           v-else-if="avatarSrc"
@@ -101,14 +95,12 @@
 <script>
 import DtListItem from '@/components/list_item/list_item';
 import DtAvatar from '@/components/avatar/avatar';
-import DtIcon from '@/components/icon/icon';
 import utils from '@/common/utils';
 
 export default {
   name: 'DtRecipeContactInfo',
 
   components: {
-    DtIcon,
     DtAvatar,
     DtListItem,
   },
