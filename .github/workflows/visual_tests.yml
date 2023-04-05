@@ -14,7 +14,7 @@ env:
 
 jobs:
   visual_tests:
-    if: ${{ github.event_name == 'push' || ((github.event.action == 'synchronize' || github.event.action == 'submitted' || github.event.action == 'labeled') && github.event.label.name == 'visual-test-ready' || (github.event.review.state == 'approved' && !contains( github.event.pull_request.labels.*.name, 'no-visual-test' ))) }}
+    if: github.event_name == 'push' || (contains(fromJSON('["synchronize", "submitted", "labeled"]'), github.event.action) && (github.event.label.name == 'visual-test-ready' || (github.event.review.state == 'approved' && !contains( github.event.pull_request.labels.*.name, 'no-visual-test' ))))
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
