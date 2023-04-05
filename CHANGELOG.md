@@ -1,3 +1,30 @@
+# [2.76.0](https://github.com/dialpad/dialtone-vue/compare/v2.75.1...v2.76.0) (2023-04-04)
+
+
+### Bug Fixes
+
+* **Popover:** null protection ([#883](https://github.com/dialpad/dialtone-vue/issues/883)) ([70c19c4](https://github.com/dialpad/dialtone-vue/commit/70c19c43867ef2654cebc6837f12b3d33fee413d))
+* **Recipe Contact Info:** remove d-of-hidden ([#889](https://github.com/dialpad/dialtone-vue/issues/889)) ([421a111](https://github.com/dialpad/dialtone-vue/commit/421a11145a3be85de99f45ccb32d7db9eed0f894))
+
+
+### Features
+
+* **Modal:** add closeOnClick prop ([#888](https://github.com/dialpad/dialtone-vue/issues/888)) ([0276d8b](https://github.com/dialpad/dialtone-vue/commit/0276d8bc3cc203bcf0888e4b93ead1b70e93f4f3))
+
+## [2.75.1](https://github.com/dialpad/dialtone-vue/compare/v2.75.0...v2.75.1) (2023-04-03)
+
+
+### Bug Fixes
+
+* **Recipe Leftbar Unread Chip:** background-color ([ac6614e](https://github.com/dialpad/dialtone-vue/commit/ac6614e4b5dc5281afff9dbb0317acea9745616e))
+
+# [2.75.0](https://github.com/dialpad/dialtone-vue/compare/v2.74.4...v2.75.0) (2023-04-03)
+
+
+### Features
+
+* **Recipe Leftbar Unread Chip:** add leftbar unread chip recipe ([#877](https://github.com/dialpad/dialtone-vue/issues/877)) ([9975262](https://github.com/dialpad/dialtone-vue/commit/997526260eb0dbce1779c3eec81edbb75a2ff7f9))
+
 ## [2.74.4](https://github.com/dialpad/dialtone-vue/compare/v2.74.3...v2.74.4) (2023-04-01)
 
 
