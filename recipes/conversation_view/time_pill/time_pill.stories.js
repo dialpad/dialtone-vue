@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeFeedItemTimePill from './feed_item_time_pill';
-import DtRecipeFeedItemTimePillMdx from './feed_item_time_pill.mdx';
-import DtRecipeFeedItemTimePillDefaultTemplate from './feed_item_time_pill_default.story.vue';
+import DtRecipeTimePill from './time_pill';
+import DtRecipeTimePillMdx from './time_pill.mdx';
+import DtRecipeTimePillDefaultTemplate from './time_pill_default.story.vue';
 
 // Default Prop Values
 export const argsData = {
@@ -30,14 +30,14 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/Feed Items/Time Pill',
-  component: DtRecipeFeedItemTimePill,
+  title: 'Recipes/Conversation View/Time Pill',
+  component: DtRecipeTimePill,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
   parameters: {
     docs: {
-      page: DtRecipeFeedItemTimePillMdx,
+      page: DtRecipeTimePillMdx,
     },
   },
 };
@@ -46,7 +46,7 @@ export default {
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeFeedItemTimePillDefaultTemplate,
+  DtRecipeTimePillDefaultTemplate,
 );
 
 // Stories

@@ -1,6 +1,10 @@
 import { assert } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import DtRecipeFeedItemTimePill from './feed_item_time_pill.vue';
+import DtRecipeTimePill from './time_pill.vue';
+import {
+  itBehavesLikeFailsCustomPropValidation,
+  itBehavesLikePassesCustomPropValidation,
+} from '../../../tests/shared_examples/validation';
 
 // Constants
 const today = new Date();
@@ -9,7 +13,7 @@ const basePropsData = {
   dateTimeDisplay: 'Today',
 };
 
-describe('DtRecipeFeedItemTimePill Tests', function () {
+describe('DtRecipeTimePill Tests', function () {
   // Wrappers
   let wrapper;
   let timePill;
@@ -22,11 +26,11 @@ describe('DtRecipeFeedItemTimePill Tests', function () {
 
   // Helpers
   const _setChildWrappers = () => {
-    timePill = wrapper.find('[data-qa="dt-feed-item-time-pill"]');
+    timePill = wrapper.find('[data-qa="dt-time-pill"]');
   };
 
   const _setWrappers = () => {
-    wrapper = shallowMount(DtRecipeFeedItemTimePill, {
+    wrapper = shallowMount(DtRecipeTimePill, {
       propsData,
       attrs,
       slots,
@@ -65,6 +69,33 @@ describe('DtRecipeFeedItemTimePill Tests', function () {
     describe('When some description of the current environment', function () {
       it('Should have a datetime attribute', function () {
         assert.strictEqual(timePill.attributes('datetime'), basePropsData.dateTime);
+      });
+    });
+  });
+
+  describe('Validation Tests', function () {
+    describe('dateTime Validator', function () {
+      // Test Environment
+      const prop = DtRecipeTimePill.props.dateTime;
+
+      describe('When provided datetime is YYYY-MM-DD', function () {
+        itBehavesLikePassesCustomPropValidation(prop, '1914-12-20');
+      });
+
+      describe('When provided datetime is YYYY-MM-DD HH:MM:SS', function () {
+        itBehavesLikePassesCustomPropValidation(prop, '1914-12-20 08:30:45');
+      });
+
+      describe('When provided datetime is duration in days', function () {
+        itBehavesLikePassesCustomPropValidation(prop, 'P2D');
+      });
+
+      describe('When provided datetime is duration in time', function () {
+        itBehavesLikePassesCustomPropValidation(prop, 'PT15H10M');
+      });
+
+      describe('When provided datetime is abcdef', function () {
+        itBehavesLikeFailsCustomPropValidation(prop, `abcdef`);
       });
     });
   });

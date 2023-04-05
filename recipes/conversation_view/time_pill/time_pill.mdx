@@ -1,10 +1,10 @@
 import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeFeedItemTimePill from './feed_item_time_pill';
+import DtRecipeTimePill from './time_pill';
 
 # Time Pill
 
 <Subtitle>
-  Used to divide feed items that are from differente dates.
+  Used to divide feed items that are from different dates.
 </Subtitle>
 
 ## Base Style
@@ -18,7 +18,7 @@ Pass in a display value as dateTimeDisplay, and the actual date into dateTime.
 - dateTime: '2022-09-13'
 
 <Canvas>
-  <Story id="recipes-feed-items-time-pill--default" />
+  <Story id="recipes-conversation-view-time-pill--default" />
 </Canvas>
 
 ## Slots, Props & Events
@@ -30,5 +30,5 @@ Pass in a display value as dateTimeDisplay, and the actual date into dateTime.
 ### Import
 
 ```jsx
-import { DtRecipeFeedItemTimePill } from '@dialpad/dialtone-vue';
+import { DtRecipeTimePill } from '@dialpad/dialtone-vue';
 ```
