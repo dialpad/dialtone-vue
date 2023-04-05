@@ -29,22 +29,18 @@ export default {
 
     /**
      * Machine-readable attribute
-     * Accepts a string value of YYYY-MM-DDThh:mm:ssTZD or PTDHMS
+     * Accepts a string value of YYYY-MM-DD or YYYY-MM-DDThh:mm:ssTZD
      */
     dateTime: {
       type: String,
       required: true,
       validator: (t) => {
-        // This is actually only accounting for a subset of valid values for datetime,
-        // however I don't think we'll ever need to accept values aside from Date
-
+        // Since this will only ever be used in the context of a date, we're rejecting non date inputs
         const x = new Date(t);
         if (x instanceof Date && !isNaN(x)) {
           return true;
-        } else {
-          const PTDHMSregex = /^P(\d+D)?(T(\d+H)?(\d+M)?(\d+S)?)?$/;
-          return PTDHMSregex.test(t);
         }
+        return false;
       },
     },
   },

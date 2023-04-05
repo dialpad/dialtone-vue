@@ -87,11 +87,11 @@ describe('DtRecipeTimePill Tests', function () {
       });
 
       describe('When provided datetime is duration in days', function () {
-        itBehavesLikePassesCustomPropValidation(prop, 'P2D');
+        itBehavesLikeFailsCustomPropValidation(prop, 'P2D');
       });
 
       describe('When provided datetime is duration in time', function () {
-        itBehavesLikePassesCustomPropValidation(prop, 'PT15H10M');
+        itBehavesLikeFailsCustomPropValidation(prop, 'PT15H10M');
       });
 
       describe('When provided datetime is abcdef', function () {
