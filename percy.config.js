@@ -6,6 +6,7 @@ module.exports = {
     },
     include: [
       'Visual Testing/Combobox With Popover: Default',
+      'Visual Testing/Combobox Multi-Select: Default',
       'Visual Testing/Dropdown: Default',
       'Visual Testing/Popover: Default',
       'Visual Testing/Toast: Default',
