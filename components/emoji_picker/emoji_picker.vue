@@ -11,7 +11,25 @@
         v-model="searchQuery"
         :search-placeholder-label="searchPlaceholderLabel"
       />
+
+      <!-- ********************** -->
+      <!-- EMOJI SELECTOR TO TEST CDN LOAD -->
+      <!-- SHOULD BE REMOVED -->
+      <!-- ********************** -->
+      <CDN_TEST_TO_REMOVE
+        v-if="cdnTestToRemove"
+        :emoji-filter="searchQuery"
+        :skin-tone="skinTone"
+        :tabset-labels="tabSetLabels"
+        :search-results-label="searchResultsLabel"
+        @emoji-data="updateEmojiData"
+        @selected-emoji="emits('selected-emoji', $event)"
+      />
+      <!-- ********************** -->
+      <!-- ********************** -->
+
       <emoji-selector
+        v-else
         :emoji-filter="searchQuery"
         :skin-tone="skinTone"
         :tabset-labels="tabSetLabels"
@@ -35,7 +53,14 @@ import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
 import EmojiDescription from './modules/emoji_description.vue';
 import { computed, onBeforeUnmount, ref } from 'vue';
 
+import CDN_TEST_TO_REMOVE from './modules/CDN_TEST_TO_REMOVE_emoji_selector.vue';
+
 const props = defineProps({
+  cdnTestToRemove: {
+    type: Boolean,
+    default: false,
+  },
+
   /**
    * The object list of recently used emojis
    * This object list is necessary to fill the recently used tab

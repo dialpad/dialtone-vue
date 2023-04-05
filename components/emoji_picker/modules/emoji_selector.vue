@@ -24,10 +24,18 @@
             @mouseover="$emit('emoji-data', emoji)"
             @mouseleave="$emit('emoji-data', null)"
           >
-            <!--            <dt-emoji -->
-            <!--              :code="emoji.shortname" -->
-            <!--            /> -->
-            {{ emoji.shortname }}
+            <dt-emoji
+              v-if="emoji.custom"
+              :code="emoji.shortname"
+            />
+            <img
+              v-else
+              class="d-icon d-icon--size-500"
+              :alt="emoji.name"
+              :aria-label="emoji.name"
+              :title="emoji.name"
+              :src="getImage(emoji.unicode_character)"
+            >
           </button>
         </div>
       </div>
@@ -46,10 +54,18 @@
           @mouseover="$emit('emoji-data', emoji)"
           @mouseleave="$emit('emoji-data', null)"
         >
-          <!--          <dt-emoji -->
-          <!--            :code="emoji.shortname" -->
-          <!--          /> -->
-          {{ emoji.shortname }}
+          <dt-emoji
+            v-if="emoji.custom"
+            :code="emoji.shortname"
+          />
+          <img
+            v-else
+            class="d-icon d-icon--size-500"
+            :alt="emoji.name"
+            :aria-label="emoji.name"
+            :title="emoji.name"
+            :src="getImage(emoji.unicode_character)"
+          >
         </button>
       </div>
     </div>
@@ -172,6 +188,14 @@ function debounce (fn, delay = 300) {
     timeout = setTimeout(() => fn(...args), delay);
   };
 }
+function getImage (emoji) {
+  try {
+    return require(`../emojis/svg/${emoji}.svg`);
+  } catch (error) {
+    // The module wasn't found, execute fallback behavior
+    return require('../emojis/svg/00a9.svg');
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -179,12 +203,12 @@ function debounce (fn, delay = 300) {
   &__selector{
     margin-top: 20px;
     min-height: 297px;
+    overflow: auto;
   }
 
   &__list{
     height: 100%;
     max-height: 297px;
-    overflow: scroll;
 
     p{
       margin-bottom: 10px;

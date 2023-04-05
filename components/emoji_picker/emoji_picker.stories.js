@@ -98,6 +98,14 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   DtEmojiPickerDefaultTemplate,
 );
 
+const VariantsTemplate = (args) => createTemplateFromVueFile(
+  args,
+  DtEmojiPickerVariantsTemplate,
+);
+
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
+
+export const WithCDN = VariantsTemplate.bind({});
+WithCDN.args = {};

@@ -6,6 +6,7 @@
   -->
   <dt-emoji-picker
     :some="some"
+    :cdn-test-to-remove="true"
   >
     <!--
       We can also bind any slot data that the user has entered into the storybook controls. In this example we
@@ -20,8 +21,8 @@
       <span v-html="defaultSlot" />
     </template>
     <template
-      #some
       v-if="someSlot"
+      #some
     >
       <span v-html="someSlot" />
     </template>
