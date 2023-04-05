@@ -24,9 +24,10 @@
             @mouseover="$emit('emoji-data', emoji)"
             @mouseleave="$emit('emoji-data', null)"
           >
-            <dt-emoji
-              :code="emoji.shortname"
-            />
+            <!--            <dt-emoji -->
+            <!--              :code="emoji.shortname" -->
+            <!--            /> -->
+            {{ emoji.shortname }}
           </button>
         </div>
       </div>
@@ -45,9 +46,10 @@
           @mouseover="$emit('emoji-data', emoji)"
           @mouseleave="$emit('emoji-data', null)"
         >
-          <dt-emoji
-            :code="emoji.shortname"
-          />
+          <!--          <dt-emoji -->
+          <!--            :code="emoji.shortname" -->
+          <!--          /> -->
+          {{ emoji.shortname }}
         </button>
       </div>
     </div>
@@ -154,70 +156,12 @@ watch(() => props.emojiFilter,
     searchByNameAndKeywords();
   }));
 
-/**
- * Search for a string using the Boyer-Moore algorithm.
- * @param {string} haystack - The string to search in.
- * @param {string} needle - The string to search for.
- * @returns {number} - The index of the first occurrence of the needle string in the haystack string, or -1 if the needle string is not found.
- */
-function boyerMooreSearch (haystack, needle) {
-  const needleLen = needle.length;
-
-  // populate bad character table
-  const badCharTable = {};
-  for (let i = 0; i < needleLen; i++) {
-    // calculate the distance from the rightmost occurrence of the character to the end of the needle string
-    const dist = needleLen - i - 1;
-    // update the bad character table with the distance for this character
-    badCharTable[needle[i]] = dist;
-  }
-
-  let i = needleLen - 1;
-  while (i < haystack.length) {
-    let j = needleLen - 1;
-
-    // compare characters from right to left
-    while (j >= 0 && haystack[i] === needle[j]) {
-      i--;
-      j--;
-    }
-
-    if (j < 0) {
-      // match found
-      return i + 1;
-    }
-
-    // calculate shift distance
-    const badCharDist = badCharTable[haystack[i]] || needleLen;
-    const goodSuffixDist = j - (needle.lastIndexOf(needle.slice(j + 1)) || -1);
-    const shift = Math.max(badCharDist, goodSuffixDist);
-
-    i += shift;
-  }
-
-  return -1;
-}
-
 function searchByNameAndKeywords () {
-  const t0 = performance.now();
-  if (!props.emojiFilter) { return; }
-
-  const emojiFilter = props.emojiFilter;
   filteredEmojis.value = currentEmojis.value.filter(obj => {
-    const nameIncludesSearchStr = boyerMooreSearch(obj.name, emojiFilter) !== -1;
-    let keywordsIncludeSearchStr = false;
-    for (let i = 0; i < obj.keywords.length; i++) {
-      if (boyerMooreSearch(obj.keywords[i], emojiFilter) !== -1) {
-        keywordsIncludeSearchStr = true;
-        break;
-      }
-    }
-
+    const nameIncludesSearchStr = obj.name.includes(props.emojiFilter);
+    const keywordsIncludeSearchStr = obj.keywords.some(keyword => keyword.includes(props.emojiFilter));
     return nameIncludesSearchStr || keywordsIncludeSearchStr;
   });
-
-  const t1 = performance.now();
-  console.log(`Search took ${t1 - t0} milliseconds.`);
 }
 
 function debounce (fn, delay = 300) {
