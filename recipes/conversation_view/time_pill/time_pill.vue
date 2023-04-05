@@ -14,10 +14,6 @@ import {} from './time_pill_constants.js';
 export default {
   name: 'DtRecipeTimePill',
 
-  components: {},
-
-  mixins: [],
-
   props: {
     /**
      * Date time display value

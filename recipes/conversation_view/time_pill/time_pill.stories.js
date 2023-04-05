@@ -52,7 +52,7 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 // Stories
 export const Default = DefaultTemplate.bind({});
 
-const today = new Date();
+const today = new Date('1999-03-28');
 
 Default.args = {
   dateTime: today.toISOString().split('T')[0],
