@@ -15,6 +15,7 @@ export default {
     ...argsData,
     open: true,
     modal: false,
+    transition: '',
     hideOnClick: false,
   },
   argTypes: argTypesData,
