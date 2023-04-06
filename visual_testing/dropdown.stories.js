@@ -6,10 +6,14 @@ import {
 } from '@/components/dropdown/dropdown.stories';
 import DropdownMdx from './dropdown.mdx';
 
+import DtDropdown from '@/components/dropdown/dropdown';
+
 export default {
   title: 'Visual Testing/Dropdown',
+  component: DtDropdown,
   args: {
     ...argsData,
+    transition: '',
     open: true,
   },
   argTypes: argTypesData,

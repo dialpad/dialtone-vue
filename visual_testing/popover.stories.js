@@ -6,12 +6,16 @@ import {
 } from '@/components/popover/popover.stories';
 import PopoverMdx from '@/visual_testing/popover.mdx';
 
+import DtPopover from '@/components/popover/popover';
+
 export default {
   title: 'Visual Testing/Popover',
+  component: DtPopover,
   args: {
     ...argsData,
     open: true,
     modal: false,
+    transition: '',
     hideOnClick: false,
   },
   argTypes: argTypesData,
@@ -24,6 +28,7 @@ export default {
     a11y: {
       disable: true,
     },
+    percy: { waitForTimeout: 5000 },
   },
 };
 export { Default, Variants };
