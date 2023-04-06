@@ -783,11 +783,9 @@ export default {
     async onLeaveTransitionComplete () {
       if (this.modal) {
         await this.focusFirstElement(this.$refs.anchor);
-        // await next tick in case the user wants to change focus themselves.
-        await this.$nextTick();
       }
-      this.tip?.unmount();
       await this.enableScrolling();
+      this.tip?.unmount();
       this.$emit('opened', false);
       if (this.open !== null) {
         this.$emit('update:open', false);
@@ -797,8 +795,6 @@ export default {
     async onEnterTransitionComplete () {
       this.focusInitialElement();
       await this.preventScrolling();
-      // await next tick in case the user wants to change focus themselves.
-      await this.$nextTick();
       this.$emit('opened', true, this.$refs.popover__content);
       if (this.open !== null) {
         this.$emit('update:open', true);
