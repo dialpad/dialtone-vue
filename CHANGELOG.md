@@ -1,3 +1,71 @@
+## [2.77.2](https://github.com/dialpad/dialtone-vue/compare/v2.77.1...v2.77.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* update dialtone-icons ([f83850d](https://github.com/dialpad/dialtone-vue/commit/f83850d8a6e12b6108f4e2cadb0159a9ce171b45))
+
+## [2.77.1](https://github.com/dialpad/dialtone-vue/compare/v2.77.0...v2.77.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* **Popover:** losing focus ([#896](https://github.com/dialpad/dialtone-vue/issues/896)) ([28f6ccd](https://github.com/dialpad/dialtone-vue/commit/28f6ccd82a6b4ed904227baceb395dbd115b4d36))
+
+# [2.77.0](https://github.com/dialpad/dialtone-vue/compare/v2.76.0...v2.77.0) (2023-04-06)
+
+
+### Documentation
+
+* add rich text editor tech spec ([#893](https://github.com/dialpad/dialtone-vue/issues/893)) ([960bc92](https://github.com/dialpad/dialtone-vue/commit/960bc927d112102f7e7c0fe9903ed146f761134e))
+
+
+### Features
+
+* **Callbar Button:** add importance prop ([#886](https://github.com/dialpad/dialtone-vue/issues/886)) ([6e24d74](https://github.com/dialpad/dialtone-vue/commit/6e24d746dd2601c8dd3e40063e56cc7088fb5900))
+* **Feed Items:** create feed item time pill ([#885](https://github.com/dialpad/dialtone-vue/issues/885)) ([fe388a4](https://github.com/dialpad/dialtone-vue/commit/fe388a48a64fd007f840e728122f339b49ba6e1f))
+
+# [2.76.0](https://github.com/dialpad/dialtone-vue/compare/v2.75.1...v2.76.0) (2023-04-04)
+
+
+### Bug Fixes
+
+* **Popover:** null protection ([#883](https://github.com/dialpad/dialtone-vue/issues/883)) ([70c19c4](https://github.com/dialpad/dialtone-vue/commit/70c19c43867ef2654cebc6837f12b3d33fee413d))
+* **Recipe Contact Info:** remove d-of-hidden ([#889](https://github.com/dialpad/dialtone-vue/issues/889)) ([421a111](https://github.com/dialpad/dialtone-vue/commit/421a11145a3be85de99f45ccb32d7db9eed0f894))
+
+
+### Features
+
+* **Modal:** add closeOnClick prop ([#888](https://github.com/dialpad/dialtone-vue/issues/888)) ([0276d8b](https://github.com/dialpad/dialtone-vue/commit/0276d8bc3cc203bcf0888e4b93ead1b70e93f4f3))
+
+## [2.75.1](https://github.com/dialpad/dialtone-vue/compare/v2.75.0...v2.75.1) (2023-04-03)
+
+
+### Bug Fixes
+
+* **Recipe Leftbar Unread Chip:** background-color ([ac6614e](https://github.com/dialpad/dialtone-vue/commit/ac6614e4b5dc5281afff9dbb0317acea9745616e))
+
+# [2.75.0](https://github.com/dialpad/dialtone-vue/compare/v2.74.4...v2.75.0) (2023-04-03)
+
+
+### Features
+
+* **Recipe Leftbar Unread Chip:** add leftbar unread chip recipe ([#877](https://github.com/dialpad/dialtone-vue/issues/877)) ([9975262](https://github.com/dialpad/dialtone-vue/commit/997526260eb0dbce1779c3eec81edbb75a2ff7f9))
+
+## [2.74.4](https://github.com/dialpad/dialtone-vue/compare/v2.74.3...v2.74.4) (2023-04-01)
+
+
+### Bug Fixes
+
+* **Avatar:** additional null protection ([4f169d1](https://github.com/dialpad/dialtone-vue/commit/4f169d1433f838aa272ccc718567964830a744ba))
+
+## [2.74.3](https://github.com/dialpad/dialtone-vue/compare/v2.74.2...v2.74.3) (2023-03-31)
+
+
+### Bug Fixes
+
+* **Avatar:** null protect firstElementChild ([8cc0b40](https://github.com/dialpad/dialtone-vue/commit/8cc0b409fa2347fba70cdabe9afd47d7cd0c108f))
+
 ## [2.74.2](https://github.com/dialpad/dialtone-vue/compare/v2.74.1...v2.74.2) (2023-03-31)
 
 
