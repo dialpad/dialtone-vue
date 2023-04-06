@@ -28,6 +28,7 @@ export default {
     a11y: {
       disable: true,
     },
+    percy: { waitForSelector: '.d-popover__content' },
   },
 };
 export { Default, Variants };
