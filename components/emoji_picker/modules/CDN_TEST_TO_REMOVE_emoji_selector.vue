@@ -1,6 +1,5 @@
 <template>
   <div class="d-emoji-picker__selector">
-    <h1>CDN TEST EMOJIS</h1>
     <div class="d-emoji-picker__list">
       <p v-if="emojiFilter">
         {{ searchResultsLabel }}
@@ -26,8 +25,17 @@
             @mouseleave="$emit('emoji-data', null)"
           >
             <dt-emoji
+              v-if="emoji.custom"
               :code="emoji.shortname"
             />
+            <img
+              v-else
+              class="d-icon d-icon--size-500"
+              :alt="emoji.name"
+              :aria-label="emoji.name"
+              :title="emoji.name"
+              :src="`https://static.dialpadcdn.com/joypixels/png/unicode/32/${emoji.unicode_character}.png`"
+            >
           </button>
         </div>
       </div>
@@ -47,8 +55,17 @@
           @mouseleave="$emit('emoji-data', null)"
         >
           <dt-emoji
+            v-if="emoji.custom"
             :code="emoji.shortname"
           />
+          <img
+            v-else
+            class="d-icon d-icon--size-500"
+            :alt="emoji.name"
+            :aria-label="emoji.name"
+            :title="emoji.name"
+            :src="`https://static.dialpadcdn.com/joypixels/png/unicode/32/${emoji.unicode_character}.png`"
+          >
         </button>
       </div>
     </div>
@@ -178,12 +195,12 @@ function debounce (fn, delay = 300) {
   &__selector{
     margin-top: 20px;
     min-height: 297px;
+    overflow: auto;
   }
 
   &__list{
     height: 100%;
     max-height: 297px;
-    overflow: scroll;
 
     p{
       margin-bottom: 10px;
