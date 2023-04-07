@@ -34,7 +34,7 @@
               :alt="emoji.name"
               :aria-label="emoji.name"
               :title="emoji.name"
-              :src="getImage(emoji.unicode_character)"
+              :src="`static/components/emoji_picker/emojis/svg/${emoji.unicode_character}.svg`"
             >
           </button>
         </div>
@@ -64,7 +64,7 @@
             :alt="emoji.name"
             :aria-label="emoji.name"
             :title="emoji.name"
-            :src="getImage(emoji.unicode_character)"
+            :src="`static/components/emoji_picker/emojis/svg/${emoji.unicode_character}.svg`"
           >
         </button>
       </div>
@@ -75,7 +75,7 @@
 <script setup>
 import { DtEmoji } from '@/components/emoji';
 import emojis from '@/components/emoji_picker/emojis';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const props = defineProps({
   /**
@@ -188,14 +188,15 @@ function debounce (fn, delay = 300) {
     timeout = setTimeout(() => fn(...args), delay);
   };
 }
-function getImage (emoji) {
-  try {
-    return require(`../emojis/svg/${emoji}.svg`);
-  } catch (error) {
-    // The module wasn't found, execute fallback behavior
-    return require('../emojis/svg/00a9.svg');
-  }
-}
+
+// function getImage (emoji) {
+//   try {
+//     return require(`../emojis/svg/${emoji}.svg`);
+//   } catch (error) {
+//     // The module wasn't found, execute fallback behavior
+//     return require('../emojis/svg/00a9.svg');
+//   }
+// }
 </script>
 
 <style lang="less" scoped>
