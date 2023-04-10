@@ -12,9 +12,13 @@
         }"
         @click="selectSkin(skin)"
       >
-        <dt-emoji
-          :code="skin.name"
-        />
+        <img
+          class="d-icon d-icon--size-500"
+          :alt="skin.name"
+          :aria-label="skin.name"
+          :title="skin.name"
+          :src="`${CDN_URL + skin.unicode_output}.png`"
+        >
       </button>
     </div>
     <div
@@ -22,9 +26,13 @@
       class="d-emoji-picker__skin-selected"
     >
       <button @click="isOpen = true">
-        <dt-emoji
-          :code="`:wave${skinSelected}:`"
-        />
+        <img
+          class="d-icon d-icon--size-500"
+          :alt="skinSelected.name"
+          :aria-label="skinSelected.name"
+          :title="skinSelected.name"
+          :src="`${CDN_URL + skinSelected.unicode_output}.png`"
+        >
       </button>
     </div>
   </div>
@@ -32,7 +40,20 @@
 
 <script setup>
 import { DtEmoji } from '@/components/emoji';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
+
+const props = defineProps({
+  /**
+   * The skin tone to apply to the emoji list
+   * @type {String}
+   * @required
+   */
+  skinTone: {
+    type: String,
+    required: true,
+  },
+});
 
 const emits = defineEmits([
   /**
@@ -46,40 +67,47 @@ const emits = defineEmits([
 const skinList = [
   {
     name: ':wave_tone1:',
+    unicode_output: '1f44b-1f3fb',
     skinTone: 'Light',
     skinCode: '_tone1',
   },
   {
     name: ':wave_tone2:',
+    unicode_output: '1f44b-1f3fc',
     skinTone: 'MediumLight',
     skinCode: '_tone2',
   },
   {
     name: ':wave_tone3:',
+    unicode_output: '1f44b-1f3fd',
     skinTone: 'Medium',
     skinCode: '_tone3',
   },
   {
     name: ':wave_tone4:',
+    unicode_output: '1f44b-1f3fe',
     skinTone: 'MediumDark',
     skinCode: '_tone4',
   },
   {
     name: ':wave_tone5:',
+    unicode_output: '1f44b-1f3ff',
     skinTone: 'Dark',
     skinCode: '_tone5',
   },
   {
     name: ':wave:',
+    unicode_output: '1f44b',
     skinTone: 'Default',
     skinCode: '',
   },
 ];
-const skinSelected = ref('');
+
+const skinSelected = ref(skinList.find((skin) => skin.skinTone === props.skinTone));
 const isOpen = ref(false);
 
 function selectSkin (skin) {
-  skinSelected.value = skin.skinCode;
+  skinSelected.value = skin;
   isOpen.value = false;
   emits('skin-tone', skin.skinTone);
 }

@@ -2,7 +2,7 @@
   <div class="d-emoji-picker">
     <div class="d-emoji-picker--header">
       <emoji-tabset
-        :recently-used-tab="showRecentlyUsedTab"
+        :show-recently-used-tab="showRecentlyUsedTab"
         @tabset-selected="scrollToSelectedTabset"
       />
     </div>
@@ -12,18 +12,21 @@
         :search-placeholder-label="searchPlaceholderLabel"
       />
       <emoji-selector
-        v-else
         :emoji-filter="searchQuery"
         :skin-tone="skinTone"
         :tabset-labels="tabSetLabels"
         :search-results-label="searchResultsLabel"
+        :recently-used-emojis="recentlyUsedEmojis"
         @emoji-data="updateEmojiData"
         @selected-emoji="emits('selected-emoji', $event)"
       />
     </div>
     <div class="d-emoji-picker--footer">
-      <emoji-description :emoji-data="emojiData" />
-      <emoji-skin-selector @skin-tone="updateSkinTone" />
+      <emoji-description :emoji="emojiData" />
+      <emoji-skin-selector
+        :skin-tone="skinTone"
+        @skin-tone="emits('skin-tone', $event)"
+      />
     </div>
   </div>
 </template>
@@ -38,17 +41,17 @@ import { computed, onBeforeUnmount, ref } from 'vue';
 
 const props = defineProps({
   /**
-   * The object list of recently used emojis
-   * This object list is necessary to fill the recently used tab
-   * @type {Object}
-   * @default {}
+   * The array with recently used  emoji object
+   * This list is necessary to fill the recently used tab
+   * @type {Array}
+   * @default []
    * @example
-   * <dt-emoji-picker :recentlyUsedEmojis="{ emojiObject, emojiObject, }" />
+   * <dt-emoji-picker :recentlyUsedEmojis="[emojiObject, emojiObject]" />
    */
   // TODO try to simplify this to achieve an array of unicode characters and not an entire emoji data object
   recentlyUsedEmojis: {
-    type: Object,
-    default: () => ({}),
+    type: Array,
+    default: () => ([]),
   },
 
   /**
@@ -79,30 +82,49 @@ const props = defineProps({
    * The list of tabsets to show, it is necessary to be updated with the correct language
    * It must respect the provided order.
    * @type {Array}
-   * @default ['Recently used', 'Custom', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']
+   * @default ['Most recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']
    * @example
-   * <dt-emoji-picker :tabSetLabels="['Recently used', 'Custom', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
+   * <dt-emoji-picker :tabSetLabels="['Most recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
    */
   tabSetLabels: {
     type: Array,
-    default: () => ['Most recently used', 'Custom', 'Smileys and people', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'],
+    default: () => ['Most recently used', 'Smileys and people', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'],
+  },
+
+  /**
+   * The skin tone to show the emojis
+   * This prop gives the possibility to use the skin tone selected by the user previously
+   * @type {String}
+   * @default 'Default'
+   * @values 'Default', 'Light', 'MediumLight', 'Medium', 'MediumDark', 'Dark'
+   * @example
+   * <dt-emoji-picker :skinTone="'Default'" />
+   */
+  skinTone: {
+    type: String,
+    default: 'Default',
   },
 });
 const emits = defineEmits(
-  /**
+  [
+    /**
      * It will emit the selected emoji
      * @event selected-emoji
      * @param {Object} emoji - The selected emoji from the emoji selector
      */
-  // TODO add unicode_character prop to the emoji object returned
-  ['selected-emoji'],
+    'selected-emoji',
+
+    /**
+     * It will emit the selected skin tone
+     * @event skin-tone
+     * @param {String} skin - The selected skin tone from the skin selector
+     */
+    'skin-tone',
+  ],
 );
 
 const searchQuery = ref('');
 const emojiData = ref(null);
-const skinTone = ref('Default');
-
-const testSkinTones = ['Default', 'Light', 'MediumLight', 'Medium', 'MediumDark', 'Dark'];
 
 const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
 
@@ -118,10 +140,6 @@ function scrollToSelectedTabset (tabName) {
 
 function updateEmojiData (emoji) {
   emojiData.value = emoji;
-}
-
-function updateSkinTone (skin) {
-  skinTone.value = skin;
 }
 
 /**

@@ -1,38 +1,25 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
-  <!--
-    We can bind the data that the user entered into the storybook controls to props by using a property of the same name
-    as the storybook control defined in the corresponding `.story.js` file.
-  -->
   <dt-emoji-picker
-    :some="some"
-  >
-    <!--
-      We can also bind any slot data that the user has entered into the storybook controls. In this example we
-      conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
-
-      The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-
-      We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-      same name.
-    -->
-    <template v-if="defaultSlot">
-      <span v-html="defaultSlot" />
-    </template>
-    <template
-      #some
-      v-if="someSlot"
-    >
-      <span v-html="someSlot" />
-    </template>
-  </dt-emoji-picker>
+    :skin-tone="skinTone"
+    :recently-used-emojis="recentlyUsedEmojis"
+    @skin-tone="updateSkinTone"
+  />
 </template>
 
-<script>
+<script setup>
 import DtEmojiPicker from './emoji_picker';
+import { ref } from 'vue';
 
-export default {
-  name: 'DtEmojiPickerDefault',
-  components: { DtEmojiPicker },
-};
+const skinTone = ref('Light');
+const recentlyUsedEmojis = [
+  { name: 'thumbs up', category: 'people', shortname: ':thumbsup:', shortname_alternates: [':+1:', ':thumbup:'], keywords: ['+1', 'hand', 'thumb', 'up', 'uc6'], unicode_output: '1f44d', unicode_character: '1f44d' },
+  { name: 'thumbs up: medium-light skin tone', category: 'people', shortname: ':thumbsup_tone2:', shortname_alternates: [':+1_tone2:', ':thumbup_tone2:'], keywords: ['+1', 'hand', 'medium-light skin tone', 'thumb', 'up', 'uc8'], unicode_output: '1f44d-1f3fc', unicode_character: '1f44d-1f3fc' },
+  { name: 'thumbs up: dark skin tone', category: 'people', shortname: ':thumbsup_tone5:', shortname_alternates: [':+1_tone5:', ':thumbup_tone5:'], keywords: ['+1', 'dark skin tone', 'hand', 'thumb', 'up', 'uc8'], unicode_output: '1f44d-1f3ff', unicode_character: '1f44d-1f3ff' },
+  { name: 'person: light skin tone', category: 'people', shortname: ':adult_tone1:', shortname_alternates: [':adult_light_skin_tone:'], keywords: ['gender-neutral', 'light skin tone', 'uc10'], unicode_output: '1f9d1-1f3fb', unicode_character: '1f9d1-1f3fb' },
+  { name: 'woman with veil: dark skin tone', category: 'people', shortname: ':woman_with_veil_tone5:', shortname_alternates: [':woman_with_veil_dark_skin_tone:'], keywords: ['uc13'], unicode_output: '1f470-1f3ff-200d-2640-fe0f', unicode_character: '1f470-1f3ff-2640' },
+];
+
+function updateSkinTone (skin) {
+  skinTone.value = skin;
+}
 </script>

@@ -7,8 +7,10 @@
         <dt-tab
           v-for="tab in tabs"
           :id="tab.id"
+          :key="tab.id"
           :panel-id="tab.panelId"
           :selected="tab.selected"
+          :label="tab.label"
         >
           <dt-icon
             size="400"
@@ -24,6 +26,7 @@
 import DtTabGroup from '@/components/tabs/tab_group.vue';
 import DtTab from '@/components/tabs/tab.vue';
 import DtIcon from '@/components/icon/icon.vue';
+import { computed } from 'vue';
 
 const props = defineProps({
   /**
@@ -46,18 +49,26 @@ const emits = defineEmits([
   'selected-tabset',
 ]);
 
-const tabs = [
-  { id: '1', panelId: '1', selected: true, label: 'Recently used', icon: 'clock' },
-  { id: '2', panelId: '2', label: 'Custom', icon: 'Asterisk' },
-  { id: '3', panelId: '3', label: 'Smiley’s and people', icon: 'satisfied' },
-  { id: '4', panelId: '4', label: 'Nature', icon: 'living-thing' },
-  { id: '5', panelId: '5', label: 'Food', icon: 'food' },
-  { id: '6', panelId: '6', label: 'Activity', icon: 'Asterisk' },
-  { id: '7', panelId: '7', label: 'Travel', icon: 'Asterisk' },
-  { id: '8', panelId: '8', label: 'Objects', icon: 'lightbulb' },
-  { id: '9', panelId: '9', label: 'Symbols', icon: 'heart' },
-  { id: '10', panelId: '10', label: 'Flags', icon: 'flag' },
+const TABS_DATA = [
+  { id: '1', panelId: '1', label: 'Recently used', icon: 'clock' },
+  { id: '2', panelId: '2', label: 'Smiley’s and people', icon: 'satisfied' },
+  { id: '3', panelId: '3', label: 'Nature', icon: 'living-thing' },
+  { id: '4', panelId: '4', label: 'Food', icon: 'food' },
+  { id: '5', panelId: '5', label: 'Activity', icon: 'Object' },
+  { id: '6', panelId: '6', label: 'Travel', icon: 'Asterisk' },
+  { id: '7', panelId: '7', label: 'Objects', icon: 'lightbulb' },
+  { id: '8', panelId: '8', label: 'Symbols', icon: 'heart' },
+  { id: '9', panelId: '9', label: 'Flags', icon: 'flag' },
 ];
+
+const tabs = computed(() => {
+  const tabsData = props.showRecentlyUsedTab ? TABS_DATA : TABS_DATA.slice(1);
+
+  return tabsData.map((tab, index) => ({
+    ...tab,
+    selected: index === 0,
+  }));
+});
 
 function selectTabset (tabName) {
   emits('selected-tabset', tabName);

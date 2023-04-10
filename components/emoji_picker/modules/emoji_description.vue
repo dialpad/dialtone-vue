@@ -1,15 +1,19 @@
 <template>
   <div class="d-emoji-picker__data">
-    <dt-emoji
-      v-if="emojiData"
-      :code="emojiData.shortname"
-    />
-    {{ emojiData?.name }}
+    <img
+      v-if="emoji"
+      class="d-icon d-icon--size-500"
+      :alt="emoji.name"
+      :aria-label="emoji.name"
+      :title="emoji.name"
+      :src="`${CDN_URL + emoji.unicode_character}.png`"
+    >
+    {{ emoji?.name }}
   </div>
 </template>
 
 <script setup>
-import { DtEmoji } from '@/components/emoji';
+import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
 
 defineProps({
   /**
@@ -17,7 +21,7 @@ defineProps({
    * @type {Object}
    * @default null
    */
-  emojiData: {
+  emoji: {
     type: Object,
     default: null,
   },

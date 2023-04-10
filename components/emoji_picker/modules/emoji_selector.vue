@@ -5,11 +5,11 @@
         {{ searchResultsLabel }}
       </p>
       <div
-        v-for="(tabsetLabel, index) in tabsetLabels"
+        v-for="(tabLabel, index) in tabLabels"
         v-show="!emojiFilter"
         :key="tabs[index]"
       >
-        <p> {{ tabsetLabel }} </p>
+        <p> {{ tabLabel }} </p>
         <div
           class="d-emoji-picker__tab"
         >
@@ -24,17 +24,12 @@
             @mouseover="$emit('emoji-data', emoji)"
             @mouseleave="$emit('emoji-data', null)"
           >
-            <dt-emoji
-              v-if="emoji.custom"
-              :code="emoji.shortname"
-            />
             <img
-              v-else
               class="d-icon d-icon--size-500"
               :alt="emoji.name"
               :aria-label="emoji.name"
               :title="emoji.name"
-              :src="`https://static.dialpadcdn.com/joypixels/png/unicode/32/${emoji.unicode_character}.png`"
+              :src="`${CDN_URL + emoji.unicode_character}.png`"
             >
           </button>
         </div>
@@ -54,17 +49,12 @@
           @mouseover="$emit('emoji-data', emoji)"
           @mouseleave="$emit('emoji-data', null)"
         >
-          <dt-emoji
-            v-if="emoji.custom"
-            :code="emoji.shortname"
-          />
           <img
-            v-else
             class="d-icon d-icon--size-500"
             :alt="emoji.name"
             :aria-label="emoji.name"
             :title="emoji.name"
-            :src="`https://static.dialpadcdn.com/joypixels/png/unicode/32/${emoji.unicode_character}.png`"
+            :src="`${CDN_URL + emoji.unicode_character}.png`"
           >
         </button>
       </div>
@@ -73,9 +63,9 @@
 </template>
 
 <script setup>
-import { DtEmoji } from '@/components/emoji';
 import emojis from '@/components/emoji_picker/emojis';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
+import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
 
 const props = defineProps({
   /**
@@ -117,6 +107,15 @@ const props = defineProps({
     type: String,
     required: true,
   },
+
+  /**
+   * The list of recently used emojis
+   * @type {Array}
+   */
+  recentlyUsedEmojis: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 defineEmits([
@@ -135,7 +134,19 @@ defineEmits([
   'selected-emoji',
 ]);
 
-const tabs = ['Recently used', 'Custom', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'];
+/**
+ * The list of tabs
+ * This is used to display the tabs
+ */
+const TABS_DATA = ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'];
+
+const tabLabels = computed(() => {
+  return props.recentlyUsedEmojis.length ? props.tabsetLabels : props.tabsetLabels.slice(1);
+});
+
+const tabs = computed(() => {
+  return props.recentlyUsedEmojis.length ? TABS_DATA : TABS_DATA.slice(1);
+});
 
 /**
  * The list of current emojis that match the filter
@@ -148,19 +159,38 @@ const filteredEmojis = ref([]);
 /**
  * The current emojis list we are displaying
  * This will be updated when the skin tone changes
- * The difference between this and the emojis list is that this one will have the skin tone applied
+ * The difference between this and the emojis list is that this one will have only the skin tone applied
  */
-const currentEmojis = ref([]);
+const currentEmojis = computed(() => {
+  return [
+    ...emojis[`People${props.skinTone}`],
+    ...emojis.Nature,
+    ...emojis.Food,
+    ...emojis[`Activity${props.skinTone}`],
+    ...emojis.Travel,
+    ...emojis[`Objects${props.skinTone}`],
+    ...emojis.Symbols,
+    ...emojis.Flags,
+  ];
+});
 
 /**
  * Update the current emojis list on skin tone changes
  * Also update the filtered emojis list
  * @listens skinTone
  */
-watch(() => props.skinTone, () => {
-  currentEmojis.value = [...emojis[`People${props.skinTone}`], ...emojis.Nature, ...emojis.Food, ...emojis[`Activity${props.skinTone}`], ...emojis.Travel, ...emojis[`Objects${props.skinTone}`], ...emojis.Symbols, ...emojis.Flags];
+watch(currentEmojis, () => {
   searchByNameAndKeywords();
 }, { immediate: true });
+
+/**
+ * Update the recently used emojis list on recently used emojis prop changes
+ * @listens recentlyUsedEmojis
+ */
+watch(() => props.recentlyUsedEmojis,
+  () => {
+    emojis['Recently used'] = props.recentlyUsedEmojis;
+  }, { immediate: true });
 
 /**
  * Search for emojis by name and keywords
