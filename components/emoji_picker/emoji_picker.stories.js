@@ -3,7 +3,6 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtEmojiPicker from './emoji_picker';
 import DtEmojiPickerMdx from './emoji_picker.mdx';
 import DtEmojiPickerDefaultTemplate from './emoji_picker_default.story.vue';
-import DtEmojiPickerVariantsTemplate from './emoji_picker_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
@@ -98,14 +97,6 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   DtEmojiPickerDefaultTemplate,
 );
 
-const VariantsTemplate = (args) => createTemplateFromVueFile(
-  args,
-  DtEmojiPickerVariantsTemplate,
-);
-
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
-
-export const WithCDN = VariantsTemplate.bind({});
-WithCDN.args = {};
