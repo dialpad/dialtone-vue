@@ -3,6 +3,7 @@
     v-model="inputValue"
     :editable="editable"
     :input-aria-label="inputAriaLabel"
+    :output-format="outputFormat"
     @blur="onBlur"
     @input="onInput"
     @focus="onFocus"
