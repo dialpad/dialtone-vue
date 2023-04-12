@@ -21,8 +21,7 @@
     </div>
     <div
       v-if="overlayIcon || overlayText"
-      class="d-bgc-black-900 d-o70 d-ps-absolute d-w100p d-h100p d-mn4
-      d-ba d-baw4 d-bc-white d-bar-pill d-d-flex d-ai-center d-zi-base d-box-unset"
+      :class="overlayClasses"
     >
       <dt-icon
         v-if="overlayIcon"
@@ -191,6 +190,14 @@ export default {
       type: String,
       default: '',
     },
+
+    /**
+     * Used to customize the avatar overlay
+     */
+    overlayClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
   },
 
   data () {
@@ -217,6 +224,13 @@ export default {
           'd-avatar--no-gradient': !this.gradient,
           'd-avatar--group': this.showGroup,
         },
+      ];
+    },
+
+    overlayClasses () {
+      return [
+        'd-bgc-black-900 d-o70 d-ps-absolute d-w100p d-h100p d-d-flex d-ai-center d-zi-base',
+        this.overlayClass,
       ];
     },
 
