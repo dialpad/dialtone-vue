@@ -6,8 +6,6 @@
     @blur="onBlur"
     @input="onInput"
     @focus="onFocus"
-    @focusin="onFocusIn"
-    @focusout="onFocusOut"
   />
 </template>
 

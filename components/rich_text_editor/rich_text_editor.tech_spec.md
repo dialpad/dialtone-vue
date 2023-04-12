@@ -265,14 +265,11 @@ for the initial implementation:
 ### Emits
 
 - `input`
+- `update:value/modelValue`
   - payload: current value in the chosen format
 - `blur`
   - payload: event
 - `focus`
-  - payload: event
-- `focusin`
-  - payload: event
-- `focusout`
   - payload: event
 
 ## Extensions

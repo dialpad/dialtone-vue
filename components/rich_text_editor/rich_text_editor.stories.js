@@ -68,16 +68,6 @@ export const argTypesData = {
       disable: true,
     },
   },
-  onFocusIn: {
-    table: {
-      disable: true,
-    },
-  },
-  onFocusOut: {
-    table: {
-      disable: true,
-    },
-  },
 };
 
 // Default Prop Values

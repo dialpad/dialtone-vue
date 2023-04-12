@@ -2,7 +2,6 @@
   <editor-content
     :editor="editor"
     data-qa="dt-rich-text-editor"
-    v-on="inputListeners"
   />
 </template>
 
@@ -123,20 +122,6 @@ export default {
      * @type {FocusEvent}
      */
     'focus',
-
-    /**
-     * Native focusin event
-     * @event focusin
-     * @type {FocusEvent}
-     */
-    'focusin',
-
-    /**
-     * Native focusout event
-     * @event focusout
-     * @type {FocusEvent}
-     */
-    'focusout',
   ],
 
   data () {
@@ -163,13 +148,6 @@ export default {
         attrs['aria-readonly'] = true;
       }
       return attrs;
-    },
-
-    inputListeners () {
-      return {
-        focusin: event => this.$emit('focusin', event),
-        focusout: event => this.$emit('focusout', event),
-      };
     },
   },
 
