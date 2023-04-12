@@ -22,7 +22,7 @@
     <div
       v-if="overlayIcon || overlayText"
       class="d-bgc-black-900 d-o70 d-ps-absolute d-w100p d-h100p d-mn4
-      d-ba d-baw4 d-bc-white d-bar-pill d-d-flex d-ai-center d-zi-base"
+      d-ba d-baw4 d-bc-white d-bar-pill d-d-flex d-ai-center d-zi-base d-box-unset"
     >
       <dt-icon
         v-if="overlayIcon"
