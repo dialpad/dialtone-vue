@@ -98,14 +98,14 @@ export default {
     /**
      * Editor input event
      * @event input
-     * @type {String}
+     * @type {String|JSON}
      */
     'input',
 
     /**
      * Event to sync the value with the parent
      * @event input
-     * @type {String}
+     * @type {String|JSON}
      */
     'update:value',
 
