@@ -8,6 +8,7 @@
         {{ searchResultsLabel }}
       </p>
       <div
+        v-else
         ref="tabCategoryRef"
         class="d-emoji-picker__category"
       >
@@ -218,10 +219,15 @@ watch(() => props.emojiFilter,
     searchByNameAndKeywords();
   }));
 
+/**
+ * Filters an array of emoji objects based on a search string that matches both the name and keywords.
+ * Will update the filtered emojis list
+ */
 function searchByNameAndKeywords () {
+  const searchStr = props.emojiFilter.toLowerCase();
   filteredEmojis.value = currentEmojis.value.filter(obj => {
-    const nameIncludesSearchStr = obj.name.includes(props.emojiFilter);
-    const keywordsIncludeSearchStr = obj.keywords.some(keyword => keyword.includes(props.emojiFilter));
+    const nameIncludesSearchStr = obj.name.toLowerCase().includes(searchStr);
+    const keywordsIncludeSearchStr = obj.keywords.some(keyword => keyword.toLowerCase().includes(searchStr));
     return nameIncludesSearchStr || keywordsIncludeSearchStr;
   });
 }
