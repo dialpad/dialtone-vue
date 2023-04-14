@@ -1,15 +1,30 @@
 <template>
   <div class="d-emoji-picker__selector">
-    <div class="d-emoji-picker__list">
+    <div
+      ref="listRef"
+      class="d-emoji-picker__list"
+    >
       <p v-if="emojiFilter">
         {{ searchResultsLabel }}
       </p>
       <div
+        ref="tabCategoryRef"
+        class="d-emoji-picker__category"
+      >
+        <p>
+          {{ fixedLabel }}
+        </p>
+      </div>
+      <div
         v-for="(tabLabel, index) in tabLabels"
         v-show="!emojiFilter"
-        :key="tabs[index]"
+        :key="index"
       >
-        <p> {{ tabLabel }} </p>
+        <p
+          v-if="index"
+        >
+          {{ tabLabel }}
+        </p>
         <div
           class="d-emoji-picker__tab"
         >
@@ -29,7 +44,8 @@
               :alt="emoji.name"
               :aria-label="emoji.name"
               :title="emoji.name"
-              :src="`${CDN_URL + emoji.unicode_character}.png`"
+              :src="getImgSrc(emoji.unicode_character)"
+              @error="handleImageError"
             >
           </button>
         </div>
@@ -64,7 +80,7 @@
 
 <script setup>
 import emojis from '@/components/emoji_picker/emojis';
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
 
 const props = defineProps({
@@ -218,25 +234,97 @@ function debounce (fn, delay = 300) {
     timeout = setTimeout(() => fn(...args), delay);
   };
 }
+
+function getImgSrc (emoji) {
+  return `${CDN_URL + emoji}.png`;
+}
+
+/**
+ * Handle image error - We hide the entire button if the image is not found
+ */
+function handleImageError (event) {
+  event.target.parentNode.style.display = 'none';
+}
+
+const tabCategoryRef = ref(null);
+const listRef = ref(null);
+const fixedLabel = ref(tabLabels.value[0]);
+const tabLabelObserver = ref(null);
+
+/**
+ * This code creates an IntersectionObserver object that monitors the intersection between
+ * the root element (tabCategoryRef) and its targets (the child elements of listRef),
+ * and updates the value of the fixedLabel variable accordingly.
+ */
+onMounted(() => {
+  /**
+   * The code extracts the target element and its index from the IntersectionObserverEntry object,
+   * and checks whether the target intersects with the root and is positioned above or below it.
+   */
+  tabLabelObserver.value = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const { target } = entry;
+      const index = parseInt(target.dataset.index);
+
+      /**
+       * If the target is positioned above the root,
+       * the code updates the value of the fixed label to the label of the previous tab, or the first tab if the current tab is the first one.
+       * If the target is positioned below the root, the code updates the value of the fixed label to the label of the current tab.
+       * If the target stops intersecting with the root and its index is 1 (the second tab),
+       * the code updates the value of the fixed label to the label of the first tab.
+       * (this last condition is needed because sometimes it is
+       * not detect the intersection between the root and the target)
+       */
+      if (entry.isIntersecting && target.offsetTop <= tabCategoryRef.value.offsetTop) {
+        fixedLabel.value = tabLabels.value[index - 1] ?? tabLabels.value[0];
+      } else if (entry.boundingClientRect.bottom <= tabCategoryRef.value.getBoundingClientRect().bottom) {
+        fixedLabel.value = tabLabels.value[index];
+      } else if (index === 1) {
+        fixedLabel.value = tabLabels.value[0];
+      }
+    });
+  });
+
+  /**
+   * The tabLabelObserver is set to observe the root element and all its children elements with
+   * the IntersectionObserver object, and sets their data-index attribute to their index.
+   */
+  tabLabelObserver.value.observe(tabCategoryRef.value);
+
+  Array.from(listRef.value.children).forEach((child, index) => {
+    tabLabelObserver.value.observe(child);
+    child.dataset.index = index;
+  });
+});
+
+onUnmounted(() => {
+  tabLabelObserver.value.disconnect();
+});
 </script>
 
 <style lang="less" scoped>
 .d-emoji-picker{
   &__selector{
-    margin-top: 20px;
     min-height: 297px;
-    overflow: auto;
-  }
-
-  &__list{
-    height: 100%;
-    max-height: 297px;
 
     p{
       margin-bottom: 10px;
       font-size: 12px;
       font-weight: 700;
     }
+  }
+
+  &__category {
+    background: rgba(255, 255, 255, 0.9);
+    position: sticky;
+    top: 0;
+  }
+
+  &__list{
+    height: 100%;
+    max-height: 297px;
+    overflow: auto;
+    scroll-behavior: smooth;
 
     div:not(:first-child){
       p{

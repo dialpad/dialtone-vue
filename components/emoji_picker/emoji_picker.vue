@@ -168,7 +168,6 @@ function cleanUp () {
 
   &--header{
     padding: var(--su4) var(--su4) 0 var(--su8);
-    margin-bottom: var(--su16);
     position: relative;
     &::after{
       content: '';
