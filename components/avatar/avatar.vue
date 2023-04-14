@@ -315,12 +315,7 @@ export default {
     },
 
     formatInitials (initials) {
-      if (!initials) {
-        this.formattedInitials = '';
-        return;
-      }
-
-      if (this.validatedSize === 'xs') {
+      if (!initials || this.validatedSize === 'xs') {
         this.formattedInitials = '';
       } else if (this.validatedSize === 'sm') {
         this.formattedInitials = initials.trim()[0];
@@ -364,9 +359,7 @@ export default {
         count++;
       }
       const rng = seedrandom(this.seed);
-      const shuffledColors = Array.from(colors).sort(() => 0.5 - rng());
-
-      return shuffledColors;
+      return Array.from(colors).sort(() => 0.5 - rng()); // shuffle colors
     },
 
     validateImageAttrsPresence () {
@@ -375,7 +368,7 @@ export default {
       // If alt set to empty string consider it valid, as this is a valid case if the
       // image is already described by something else (ex: visible description)
       // eslint-disable-next-line no-unneeded-ternary
-      const isAltMissing = this.$refs.canvas.firstChild.getAttribute('alt') === null ? true : false;
+      const isAltMissing = this.$refs.canvas.firstChild.getAttribute('alt') === null;
 
       if (isSrcMissing || isAltMissing) {
         Vue.util.warn('src and alt attributes are required for image avatars', this);
