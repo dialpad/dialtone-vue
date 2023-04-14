@@ -1,3 +1,46 @@
+## [3.61.3](https://github.com/dialpad/dialtone-vue/compare/v3.61.2...v3.61.3) (2023-04-14)
+
+
+### Bug Fixes
+
+* incorrect version of icons ([2948ed7](https://github.com/dialpad/dialtone-vue/commit/2948ed7b77e49ad1f7e5afed0a7be78bb6a6a388))
+
+## [3.61.2](https://github.com/dialpad/dialtone-vue/compare/v3.61.1...v3.61.2) (2023-04-13)
+
+
+### Bug Fixes
+
+* update dialtone / dialtone-icons ([911bb31](https://github.com/dialpad/dialtone-vue/commit/911bb31ee8316f7ee1c7817a255f164c341d5b39))
+
+## [3.61.1](https://github.com/dialpad/dialtone-vue/compare/v3.61.0...v3.61.1) (2023-04-11)
+
+
+### Bug Fixes
+
+* lock to exact dialtone-icons version ([38da5f7](https://github.com/dialpad/dialtone-vue/commit/38da5f7cea2b30c8f9631ce9f44bde557271c2f3))
+
+# [3.61.0](https://github.com/dialpad/dialtone-vue/compare/v3.60.2...v3.61.0) (2023-04-11)
+
+
+### Features
+
+* update dialtone-icons ([2e2e893](https://github.com/dialpad/dialtone-vue/commit/2e2e8935bf568214e476e0d200cb5cf89a478ec2))
+
+## [3.60.2](https://github.com/dialpad/dialtone-vue/compare/v3.60.1...v3.60.2) (2023-04-11)
+
+
+### Bug Fixes
+
+* null protection on some refs ([#904](https://github.com/dialpad/dialtone-vue/issues/904)) ([0fb4d2a](https://github.com/dialpad/dialtone-vue/commit/0fb4d2a50df5b3c451ab135c8172b9114b0cee2d))
+* **Tooltip:** arrow not displaying - vue3 ([#900](https://github.com/dialpad/dialtone-vue/issues/900)) ([0d02815](https://github.com/dialpad/dialtone-vue/commit/0d02815a9a6d38ed55e11388c30f9728d4f83e2a))
+
+## [3.60.1](https://github.com/dialpad/dialtone-vue/compare/v3.60.0...v3.60.1) (2023-04-10)
+
+
+### Bug Fixes
+
+* showing both image and initials issue ([#902](https://github.com/dialpad/dialtone-vue/issues/902)) ([2ff0b1b](https://github.com/dialpad/dialtone-vue/commit/2ff0b1b3d22d61902ea3fa7b362bcdd79c3137d5))
+
 # [3.60.0](https://github.com/dialpad/dialtone-vue/compare/v3.59.2...v3.60.0) (2023-04-06)
 
 
