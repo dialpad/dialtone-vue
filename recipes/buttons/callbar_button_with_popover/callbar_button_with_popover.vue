@@ -30,7 +30,7 @@
       :show-close-button="showCloseButton"
       padding="none"
       class="dt-recipe--callbar-button-with-popover--popover-wrapper"
-      :dialog-class="['dt-recipe--callbar-button-with-popover--popover', contentClass]"
+      :dialog-class="['dt-recipe--callbar-button-with-popover--popover d-mb12', contentClass]"
       header-class="d-d-flex d-ai-center d-fw-normal d-px12"
       v-bind="$attrs"
       @opened="onModalIsOpened"
