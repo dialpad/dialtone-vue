@@ -78,8 +78,6 @@ export const argsData = {
   onBlur: action('blur'),
   onInput: action('input'),
   onFocus: action('focus'),
-  onFocusIn: action('focusin'),
-  onFocusOut: action('focusout'),
 };
 
 // Story Collection
