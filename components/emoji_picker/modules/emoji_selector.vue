@@ -270,7 +270,7 @@ onMounted(() => {
   tabLabelObserver.value = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       const { target } = entry;
-      const index = parseInt(target.dataset.index);
+      const index = target.dataset.index;
 
       /**
        * If the target is positioned above the root,
@@ -278,10 +278,13 @@ onMounted(() => {
        * If the target is positioned below the root, the code updates the value of the fixed label to the label of the current tab.
        * If the target stops intersecting with the root and its index is 1 (the second tab),
        * the code updates the value of the fixed label to the label of the first tab.
-       * (this last condition is needed because sometimes it is
-       * not detect the intersection between the root and the target)
+       * NOTES:
+       * This last condition is needed because sometimes it is
+       * not detect the intersection between the root and the target.
+       * We also provide a 50 pixels offset to the root element in the first condition to always get the
+       * first tab if it has fewer emojis, because in some cases if you quickly scroll the observer does not detect it.
        */
-      if (entry.isIntersecting && target.offsetTop <= tabCategoryRef.value.offsetTop) {
+      if (entry.isIntersecting && target.offsetTop <= tabCategoryRef.value.offsetTop + 50) {
         fixedLabel.value = tabLabels.value[index - 1] ?? tabLabels.value[0];
       } else if (entry.boundingClientRect.bottom <= tabCategoryRef.value.getBoundingClientRect().bottom) {
         fixedLabel.value = tabLabels.value[index];
@@ -324,6 +327,7 @@ onUnmounted(() => {
     background: rgba(255, 255, 255, 0.9);
     position: sticky;
     top: 0;
+    padding-top: 20px;
   }
 
   &__list{
@@ -331,6 +335,8 @@ onUnmounted(() => {
     max-height: 297px;
     overflow: auto;
     scroll-behavior: smooth;
+    position: relative;
+    top: -20px;
 
     div:not(:first-child){
       p{

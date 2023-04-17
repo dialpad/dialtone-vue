@@ -23,8 +23,11 @@ defineProps({
   },
 });
 </script>
+
 <style>
 .d-emoji-picker__search {
+  position: relative;
+  z-index: 1;
   margin: var(--su16) 0 var(--su16) 0;
 }
 </style>
