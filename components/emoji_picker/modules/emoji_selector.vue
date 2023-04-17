@@ -4,7 +4,10 @@
       ref="listRef"
       class="d-emoji-picker__list"
     >
-      <p v-if="emojiFilter">
+      <p
+        v-if="emojiFilter"
+        class="d-emoji-picker__search-label"
+      >
         {{ searchResultsLabel }}
       </p>
       <div
@@ -343,6 +346,10 @@ onUnmounted(() => {
         margin-top: 25px;
       }
     }
+  }
+
+  &__search-label{
+    margin-top: 20px;
   }
 
   &__tab{
