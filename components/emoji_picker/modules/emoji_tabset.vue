@@ -11,6 +11,7 @@
           :panel-id="tab.panelId"
           :selected="tab.selected"
           :label="tab.label"
+          @click="selectTabset(tab.id)"
         >
           <dt-icon
             size="400"
@@ -44,7 +45,7 @@ const emits = defineEmits([
   /**
    * Emitted when a tab is selected
    * @event selected-tabset
-   * @param {String} tabName - The name of the tab that was selected
+   * @param {String} tabId - The name of the tab that was selected
    */
   'selected-tabset',
 ]);
@@ -70,8 +71,8 @@ const tabs = computed(() => {
   }));
 });
 
-function selectTabset (tabName) {
-  emits('selected-tabset', tabName);
+function selectTabset (id) {
+  emits('selected-tabset', id);
 }
 </script>
 

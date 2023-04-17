@@ -3,6 +3,7 @@
     :skin-tone="skinTone"
     :recently-used-emojis="recentlyUsedEmojis"
     :search-results-label="searchResultsLabel"
+    :search-placeholder-label="searchPlaceholderLabel"
     @skin-tone="updateSkinTone"
   />
 </template>
@@ -20,6 +21,7 @@ const recentlyUsedEmojis = [
   { name: 'woman with veil: dark skin tone', category: 'people', shortname: ':woman_with_veil_tone5:', shortname_alternates: [':woman_with_veil_dark_skin_tone:'], keywords: ['uc13'], unicode_output: '1f470-1f3ff-200d-2640-fe0f', unicode_character: '1f470-1f3ff-2640' },
 ];
 
+const searchPlaceholderLabel = 'Search...';
 const searchResultsLabel = 'Search results';
 
 // const tabSetLabels = [

@@ -23,11 +23,12 @@
         v-for="(tabLabel, index) in tabLabels"
         v-show="!emojiFilter"
         :key="index"
+        :ref="tabLabel.ref"
       >
         <p
           v-if="index"
         >
-          {{ tabLabel }}
+          {{ tabLabel.label }}
         </p>
         <div
           class="d-emoji-picker__tab"
@@ -84,7 +85,7 @@
 
 <script setup>
 import emojis from '@/components/emoji_picker/emojis';
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch, toRef, nextTick } from 'vue';
 import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
 
 const props = defineProps({
@@ -104,7 +105,7 @@ const props = defineProps({
    * @required
    */
   skinTone: {
-    type: Number,
+    type: String,
     required: true,
   },
 
@@ -115,6 +116,11 @@ const props = defineProps({
    */
   tabsetLabels: {
     type: Array,
+    required: true,
+  },
+
+  selectedTabset: {
+    type: String,
     required: true,
   },
 
@@ -155,15 +161,55 @@ defineEmits([
 ]);
 
 /**
+ * The ref for the tab category
+ * This is used to display the fixed label
+ */
+const tabCategoryRef = ref(null);
+
+/**
+ * The ref for the list
+ * This is used to display the tabs
+ */
+const listRef = ref(null);
+
+/**
+ * The ref for the tab label observer
+ * This is used to update the fixed label
+ */
+const tabLabelObserver = ref(null);
+
+/**
  * The list of tabs
  * This is used to display the tabs
  */
 const TABS_DATA = ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'];
 
+/**
+ * The list of tab labels
+ * This is used to display the tabs
+ * This is a computed property because it will check if the recently used emojis list is empty
+ * If it is empty, it will remove the recently used tab
+ */
 const tabLabels = computed(() => {
-  return props.recentlyUsedEmojis.length ? props.tabsetLabels : props.tabsetLabels.slice(1);
+  return props.recentlyUsedEmojis.length
+    ? props.tabsetLabels.map((label) => ({ label, ref: ref(null) }))
+    : props.tabsetLabels.slice(1).map((label) => ({ label, ref: ref(null) }));
 });
 
+/**
+ * The label of the fixed tab
+ * This is used to display the fixed label
+ */
+const fixedLabel = ref(tabLabels.value[0].label);
+
+/**
+ * The list of tabs
+ * This is used to display the tabs
+ * This is a computed property because it will check if the recently used emojis list is empty
+ * If it is empty, it will remove the recently used tab
+ * The difference between this and the tab labels is that this one will set the structure of tabs
+ * and the tab labels will set the labels
+ */
 const tabs = computed(() => {
   return props.recentlyUsedEmojis.length ? TABS_DATA : TABS_DATA.slice(1);
 });
@@ -222,6 +268,10 @@ watch(() => props.emojiFilter,
     searchByNameAndKeywords();
   }));
 
+watch(() => props.selectedTabset, (tab) => {
+  scrollToTab(tab);
+});
+
 /**
  * Filters an array of emoji objects based on a search string that matches both the name and keywords.
  * Will update the filtered emojis list
@@ -255,17 +305,37 @@ function handleImageError (event) {
   event.target.parentNode.style.display = 'none';
 }
 
-const tabCategoryRef = ref(null);
-const listRef = ref(null);
-const fixedLabel = ref(tabLabels.value[0]);
-const tabLabelObserver = ref(null);
+/**
+ * Scroll to the selected tab
+ */
+function scrollToTab (tabIndex) {
+  const tabLabel = tabLabels.value[tabIndex - 1];
+  const tabElement = tabLabel.ref.value[0];
+  /**
+   * This will wait for the next tick of the event loop before trying to get the offsetTop value,
+   * allowing the element to be fully rendered.
+   * Then it sets the scrollTop value of the listRef to the adjusted offsetTop value.
+   * It will be adjusted by 20px to account for the margin-bottom of the tab element.
+   * It will be 0 if the tabIndex is 1, because the first tab is not offset by the margin-bottom.
+   * The behavior is set to smooth, so the scroll will be animated.
+   */
+  nextTick(() => {
+    const container = listRef.value;
+    const offsetTop = tabIndex === '1' ? 0 : tabElement.offsetTop - 20;
+
+    container.scrollTo({
+      top: offsetTop,
+      behavior: 'smooth',
+    });
+  });
+}
 
 /**
  * This code creates an IntersectionObserver object that monitors the intersection between
  * the root element (tabCategoryRef) and its targets (the child elements of listRef),
  * and updates the value of the fixedLabel variable accordingly.
  */
-onMounted(() => {
+function setTabLabelObserver () {
   /**
    * The code extracts the target element and its index from the IntersectionObserverEntry object,
    * and checks whether the target intersects with the root and is positioned above or below it.
@@ -288,11 +358,11 @@ onMounted(() => {
        * first tab if it has fewer emojis, because in some cases if you quickly scroll the observer does not detect it.
        */
       if (entry.isIntersecting && target.offsetTop <= tabCategoryRef.value.offsetTop + 50) {
-        fixedLabel.value = tabLabels.value[index - 1] ?? tabLabels.value[0];
-      } else if (entry.boundingClientRect.bottom <= tabCategoryRef.value.getBoundingClientRect().bottom) {
-        fixedLabel.value = tabLabels.value[index];
+        fixedLabel.value = tabLabels.value[index - 1]?.label ?? tabLabels.value[0]?.label;
+      } else if (entry.boundingClientRect.bottom <= tabCategoryRef.value?.getBoundingClientRect().bottom) {
+        fixedLabel.value = tabLabels.value[index]?.label;
       } else if (index === 1) {
-        fixedLabel.value = tabLabels.value[0];
+        fixedLabel.value = tabLabels.value[0]?.label;
       }
     });
   });
@@ -307,6 +377,10 @@ onMounted(() => {
     tabLabelObserver.value.observe(child);
     child.dataset.index = index;
   });
+}
+
+onMounted(() => {
+  setTabLabelObserver();
 });
 
 onUnmounted(() => {

@@ -3,7 +3,7 @@
     <div class="d-emoji-picker--header">
       <emoji-tabset
         :show-recently-used-tab="showRecentlyUsedTab"
-        @tabset-selected="scrollToSelectedTabset"
+        @selected-tabset="scrollToSelectedTabset"
       />
     </div>
     <div class="d-emoji-picker--body">
@@ -17,6 +17,7 @@
         :tabset-labels="tabSetLabels"
         :search-results-label="searchResultsLabel"
         :recently-used-emojis="recentlyUsedEmojis"
+        :selected-tabset="selectedTabset"
         @emoji-data="updateEmojiData"
         @selected-emoji="emits('selected-emoji', $event)"
       />
@@ -125,6 +126,7 @@ const emits = defineEmits(
 
 const searchQuery = ref('');
 const emojiData = ref(null);
+const selectedTabset = ref('1');
 
 const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
 
@@ -133,9 +135,8 @@ const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
  * @event selectedTabset
  * @param tabName {String} - The name of the tab that was selected
  */
-function scrollToSelectedTabset (tabName) {
-  // it will scroll the emojiSelector component to the selected tabset with animation
-  console.log(tabName);
+function scrollToSelectedTabset (tabId) {
+  selectedTabset.value = tabId;
 }
 
 function updateEmojiData (emoji) {
@@ -157,14 +158,11 @@ function cleanUp () {
 <style lang="less">
 .d-emoji-picker{
   width: auto;
-  max-width: 372px;
+  max-width: 336px;
   height: 100%;
-
   display: inline-flex;
   flex-direction: column;
   border-radius: 4px;
-
-  //background-color: red;
 
   &--header{
     padding: var(--su4) var(--su4) 0 var(--su8);
