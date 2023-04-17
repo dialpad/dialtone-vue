@@ -17,7 +17,7 @@ export const argTypesData = {
     control: 'text',
   },
 
-  autofocus: {
+  autoFocus: {
     control: 'select',
     options: [...Object.values(RICH_TEXT_EDITOR_AUTOFOCUS_TYPES), false, true],
     defaultValue: false,
@@ -75,6 +75,7 @@ export const argsData = {
   value: `I’m not a standalone component, please use Message Input instead 🙏!`,
   editable: true,
   inputAriaLabel: 'This is a descriptive label',
+  autoFocus: false,
   onBlur: action('blur'),
   onInput: action('input'),
   onFocus: action('focus'),

@@ -205,7 +205,7 @@ for the initial implementation:
     selected output format. Examples of all formats are provided below.
 - `editable` (Boolean)
   - Default: `true`
-- `autofocus` (String|Number|Boolean)
+- `autoFocus` (String|Number|Boolean)
   - Disabled by default
   - `"start"` sets the focus to the beginning of the input
   - `"end"` sets the focus to the end of the input

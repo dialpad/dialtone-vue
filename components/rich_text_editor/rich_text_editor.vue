@@ -68,12 +68,12 @@ export default {
      * - `false`  Disables autofocus
      * @values true, false, start, end, all, number
      */
-    autofocus: {
+    autoFocus: {
       type: [Boolean, String, Number],
       default: false,
-      validator (autofocus) {
-        if (typeof autofocus === 'string') {
-          return RICH_TEXT_EDITOR_AUTOFOCUS_TYPES.includes(autofocus);
+      validator (autoFocus) {
+        if (typeof autoFocus === 'string') {
+          return RICH_TEXT_EDITOR_AUTOFOCUS_TYPES.includes(autoFocus);
         }
         return true;
       },
@@ -194,7 +194,7 @@ export default {
     createEditor () {
       // For all available options, see https://tiptap.dev/api/editor#settings
       this.editor = new Editor({
-        autofocus: this.autofocus,
+        autofocus: this.autoFocus,
         content: this.value,
         editable: this.editable,
         extensions: this.extensions,

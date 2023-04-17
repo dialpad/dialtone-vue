@@ -5,6 +5,7 @@
     :input-aria-label="inputAriaLabel"
     :input-class="inputClass"
     :output-format="outputFormat"
+    :auto-focus="autoFocus"
     @blur="onBlur"
     @input="onInput"
     @focus="onFocus"
