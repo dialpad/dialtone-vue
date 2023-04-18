@@ -76,9 +76,9 @@ export default {
 .dt-leftbar-unread-chip {
   &__mentions {
     .d-chip__label {
-      font-weight: var(--fw-medium);
-      background-color: var(--theme-mention-color-background);
-      color: var(--theme-mention-color-foreground);
+      font-weight: var(--fw-semibold);
+      background-color: var(--purple-400);
+      color: var(--fc-primary-inverted);
     }
   }
 
@@ -89,8 +89,10 @@ export default {
   }
 
   .d-chip__label {
-    padding: var(--space-300) var(--space-500) var(--space-300) var(--space-400);
+    padding: var(--space-200) var(--space-500) var(--space-200) var(--space-400);
     box-shadow: var(--bs-md);
+    gap: var(--space-300);
+    height: 28px;
   }
 }
 </style>
