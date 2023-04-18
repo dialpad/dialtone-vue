@@ -181,7 +181,7 @@ export default {
     },
   },
 
-  mounted () {
+  created () {
     this.createEditor();
     this.addEditorListeners();
   },
