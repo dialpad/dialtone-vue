@@ -1,3 +1,35 @@
+## [2.79.4](https://github.com/dialpad/dialtone-vue/compare/v2.79.3...v2.79.4) (2023-04-18)
+
+
+### Bug Fixes
+
+* emoji size in leftbar item descriptions ([#918](https://github.com/dialpad/dialtone-vue/issues/918)) ([79ab216](https://github.com/dialpad/dialtone-vue/commit/79ab216af83a776dfe2b3383dc7c3b4170bb4a6d))
+* **Leftbar Row:** animation speed to 1.5s ([#916](https://github.com/dialpad/dialtone-vue/issues/916)) ([fea71c4](https://github.com/dialpad/dialtone-vue/commit/fea71c482a56e5aaca610c1fd343261a1d154158))
+
+## [2.79.3](https://github.com/dialpad/dialtone-vue/compare/v2.79.2...v2.79.3) (2023-04-17)
+
+
+### Bug Fixes
+
+* remove dialtone-icons from externals ([#914](https://github.com/dialpad/dialtone-vue/issues/914)) ([fb3a47a](https://github.com/dialpad/dialtone-vue/commit/fb3a47af2f5ce8b1e834280bd98eb39c8baf095b))
+
+## [2.79.2](https://github.com/dialpad/dialtone-vue/compare/v2.79.1...v2.79.2) (2023-04-15)
+
+
+### Bug Fixes
+
+* **Avatar:** image size and z-index issues ([#908](https://github.com/dialpad/dialtone-vue/issues/908)) ([d0ad6ca](https://github.com/dialpad/dialtone-vue/commit/d0ad6ca8e3fba993272f92c150c620a55295d167))
+* **Avatar:** remove box sizing for overlay text/icon ([#906](https://github.com/dialpad/dialtone-vue/issues/906)) ([a88d026](https://github.com/dialpad/dialtone-vue/commit/a88d026e529b6a9ca550e22df88a606eb94d0bdf))
+* **Recipe Callbar Ai Popover:** fixed popover positioning in the callbar ([#912](https://github.com/dialpad/dialtone-vue/issues/912)) ([9fc1e42](https://github.com/dialpad/dialtone-vue/commit/9fc1e424eeb44563f10843c3cad9e93207d1c228))
+* **Recipe Callbar Tooltip:** fixed tooltip positioning in the callbar ([#910](https://github.com/dialpad/dialtone-vue/issues/910)) ([0957e6c](https://github.com/dialpad/dialtone-vue/commit/0957e6cef1db63b01259719814f0e617c2dc67e0))
+
+## [2.79.1](https://github.com/dialpad/dialtone-vue/compare/v2.79.0...v2.79.1) (2023-04-13)
+
+
+### Bug Fixes
+
+* update dialtone / dialtone-icons ([03f7fdf](https://github.com/dialpad/dialtone-vue/commit/03f7fdf3d2ba05f54fe3ac47e8c0311894eeef34))
+
 # [2.79.0](https://github.com/dialpad/dialtone-vue/compare/v2.78.2...v2.79.0) (2023-04-11)
 
 
