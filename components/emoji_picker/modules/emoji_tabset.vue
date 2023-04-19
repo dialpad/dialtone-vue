@@ -2,6 +2,7 @@
   <div class="d-emoji-picker__tabset">
     <dt-tab-group
       tab-list-class="d-emoji-picker__tabset-list"
+      :selected="selectedTab"
     >
       <template #tabs>
         <dt-tab
@@ -9,7 +10,6 @@
           :id="tab.id"
           :key="tab.id"
           :panel-id="tab.panelId"
-          :selected="tab.selected"
           :label="tab.label"
           @click="selectTabset(tab.id)"
         >
@@ -27,7 +27,7 @@
 import DtTabGroup from '@/components/tabs/tab_group.vue';
 import DtTab from '@/components/tabs/tab.vue';
 import DtIcon from '@/components/icon/icon.vue';
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const props = defineProps({
   /**
@@ -36,6 +36,16 @@ const props = defineProps({
    * @default false
    */
   showRecentlyUsedTab: {
+    type: Boolean,
+    default: false,
+  },
+
+  scrollIntoTab: {
+    type: Number,
+    required: true,
+  },
+
+  isScrollingWithScrollTo: {
     type: Boolean,
     default: false,
   },
@@ -67,11 +77,26 @@ const tabs = computed(() => {
 
   return tabsData.map((tab, index) => ({
     ...tab,
-    selected: index === 0,
+    selected: index === props.scrollIntoTab,
+    // TO DO fix it if there is no recently used tab
+    // id: index.toString(),
+    // panelId: index.toString(),
   }));
 });
 
+const selectedTab = ref('1');
+
+watch(() => props.scrollIntoTab,
+  () => {
+    if (!props.isScrollingWithScrollTo) {
+      selectedTab.value = (props.scrollIntoTab + 1).toString();
+    }
+  });
+
 function selectTabset (id) {
+  if (props.isScrollingWithScrollTo) {
+    selectedTab.value = id;
+  }
   emits('selected-tabset', id);
 }
 </script>

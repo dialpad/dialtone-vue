@@ -3,6 +3,8 @@
     <div class="d-emoji-picker--header">
       <emoji-tabset
         :show-recently-used-tab="showRecentlyUsedTab"
+        :scroll-into-tab="scrollIntoTab"
+        :is-scrolling-with-scroll-to="isScrollingWithScrollTo"
         @selected-tabset="scrollToSelectedTabset"
       />
     </div>
@@ -18,6 +20,8 @@
         :search-results-label="searchResultsLabel"
         :recently-used-emojis="recentlyUsedEmojis"
         :selected-tabset="selectedTabset"
+        @scroll-into-tab="updateScrollIntoTab"
+        @is-scrolling-with-scroll-to="updateIsScrollingWithScrollTo"
         @emoji-data="updateEmojiData"
         @selected-emoji="emits('selected-emoji', $event)"
       />
@@ -126,19 +130,33 @@ const emits = defineEmits(
 
 const searchQuery = ref('');
 const emojiData = ref(null);
-const selectedTabset = ref('1');
+const selectedTabset = ref({});
+
+const scrollIntoTab = ref(0);
+const isScrollingWithScrollTo = ref(false);
 
 const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
 
 /**
  * Handle the selected tabset event
+ * We're creating a new object with the same value as selectedTabset and assigning it back to selectedTabset.
+ * Vue will see this as a new object and trigger the watcher in the child component.
+ * Using this method, we are able to trigger the watcher in the child component even if the value being passed is the same as the previous value.
  * @event selectedTabset
  * @param tabName {String} - The name of the tab that was selected
  */
 function scrollToSelectedTabset (tabId) {
   selectedTabset.value = tabId;
+  selectedTabset.value = { ...selectedTabset.value, tabId };
 }
 
+function updateScrollIntoTab (value) {
+  scrollIntoTab.value = value;
+}
+
+function updateIsScrollingWithScrollTo (value) {
+  isScrollingWithScrollTo.value = value;
+}
 function updateEmojiData (emoji) {
   emojiData.value = emoji;
 }

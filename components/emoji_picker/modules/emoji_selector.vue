@@ -85,7 +85,7 @@
 
 <script setup>
 import emojis from '@/components/emoji_picker/emojis';
-import { computed, onMounted, onUnmounted, ref, watch, toRef, nextTick } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
 import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
 
 const props = defineProps({
@@ -120,7 +120,7 @@ const props = defineProps({
   },
 
   selectedTabset: {
-    type: String,
+    type: Object,
     required: true,
   },
 
@@ -144,7 +144,7 @@ const props = defineProps({
   },
 });
 
-defineEmits([
+const emits = defineEmits([
   /**
    * Emitted when the user hover over an emoji
    * @event emoji-data
@@ -158,6 +158,20 @@ defineEmits([
    * @param {Object} emoji - The emoji data that was selected
     */
   'selected-emoji',
+
+  /**
+   * Emitted when the user scroll into an emoji tab
+   * @event scroll-into-tab
+   * @param {Number} tab-index - The tab that was scrolled into
+    */
+  'scroll-into-tab',
+
+  /**
+   * Emitted when the scrollTo function starts scrolling and stops scrolling
+   * @event is-scrolling-with-scroll-to
+   * @param {Boolean} is-scrolling - Whether the user is scrolling with the scroll-to
+    */
+  'is-scrolling-with-scroll-to',
 ]);
 
 /**
@@ -268,9 +282,13 @@ watch(() => props.emojiFilter,
     searchByNameAndKeywords();
   }));
 
-watch(() => props.selectedTabset, (tab) => {
-  scrollToTab(tab);
-});
+watch(
+  () => props.selectedTabset,
+  (tab) => {
+    scrollToTab(tab.tabId);
+  },
+  { deep: true },
+);
 
 /**
  * Filters an array of emoji objects based on a search string that matches both the name and keywords.
@@ -311,17 +329,40 @@ function handleImageError (event) {
 function scrollToTab (tabIndex) {
   const tabLabel = tabLabels.value[tabIndex - 1];
   const tabElement = tabLabel.ref.value[0];
-  /**
-   * This will wait for the next tick of the event loop before trying to get the offsetTop value,
-   * allowing the element to be fully rendered.
-   * Then it sets the scrollTop value of the listRef to the adjusted offsetTop value.
-   * It will be adjusted by 20px to account for the margin-bottom of the tab element.
-   * It will be 0 if the tabIndex is 1, because the first tab is not offset by the margin-bottom.
-   * The behavior is set to smooth, so the scroll will be animated.
-   */
+
   nextTick(() => {
     const container = listRef.value;
     const offsetTop = tabIndex === '1' ? 0 : tabElement.offsetTop - 20;
+
+    /**
+     * This variable is used to check if the user is scrolling inside the emoji picker
+     * This is used to check if the user is scrolling using the scrollTo function
+     * This is useful because this flag will prevent to update the fixed label when the user is scrolling using the scrollTo function
+     */
+    let isScrollingWithScrollTo = true;
+
+    let prevScrollTop = container.scrollTop;
+    emits('is-scrolling-with-scroll-to', true);
+
+    /**
+     * This event listener checks whether the user is scrolling up or down by comparing the current scrollTop to prevScrollTop.
+     * If the scrollToTab function is scrolling from bottom to top and has reached the desired position (scrollTop <= offsetTop),
+     * or if the scrollToTab function is scrolling from top to bottom and has passed the desired position (scrollTop >= offsetTop),
+     * then isScrollingWithScrollTo is set to false.
+     */
+    container.addEventListener('scroll', () => {
+      if (isScrollingWithScrollTo) {
+        const scrollTop = container.scrollTop;
+        if (
+          (prevScrollTop < scrollTop && scrollTop >= offsetTop) ||
+          (prevScrollTop > scrollTop && scrollTop <= offsetTop)
+        ) {
+          isScrollingWithScrollTo = false;
+          emits('is-scrolling-with-scroll-to', false);
+        }
+        prevScrollTop = scrollTop;
+      }
+    });
 
     container.scrollTo({
       top: offsetTop,
@@ -343,7 +384,7 @@ function setTabLabelObserver () {
   tabLabelObserver.value = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       const { target } = entry;
-      const index = target.dataset.index;
+      const index = parseInt(target.dataset.index);
 
       /**
        * If the target is positioned above the root,
@@ -359,9 +400,12 @@ function setTabLabelObserver () {
        */
       if (entry.isIntersecting && target.offsetTop <= tabCategoryRef.value.offsetTop + 50) {
         fixedLabel.value = tabLabels.value[index - 1]?.label ?? tabLabels.value[0]?.label;
+        emits('scroll-into-tab', index - 1);
       } else if (entry.boundingClientRect.bottom <= tabCategoryRef.value?.getBoundingClientRect().bottom) {
+        emits('scroll-into-tab', index);
         fixedLabel.value = tabLabels.value[index]?.label;
       } else if (index === 1) {
+        emits('scroll-into-tab', index);
         fixedLabel.value = tabLabels.value[0]?.label;
       }
     });
