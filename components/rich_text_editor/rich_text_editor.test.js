@@ -38,26 +38,17 @@ const _mountWrapper = () => {
   });
 };
 
-async function mountWithProps (newProps) {
-  // Can't use setProps since the Editor instance is created in mounted().
-  // There are helper methods we could use to update the editor options
-  // (editor.setOptions), but we want to test that the passed props are
-  // properly getting through to the editor, so rather re-mount.
-  propsData = { ...propsData, ...newProps };
-  _mountWrapper();
-  await wrapper.vm.$nextTick();
-  _setChildWrappers();
-}
-
 describe('DtRichTextEditor tests', function () {
   // Test Setup
-  beforeEach(function () {
+  beforeEach(async function () {
     propsData = baseProps;
     inputStub = sinon.stub();
     listeners = {
       input: inputStub,
     };
-    mountWithProps();
+    _mountWrapper();
+    await wrapper.vm.$nextTick();
+    _setChildWrappers();
   });
 
   // Test Teardown
@@ -95,7 +86,7 @@ describe('DtRichTextEditor tests', function () {
         describe('When using text output', function () {
           // Test Setup
           beforeEach(async function () {
-            await mountWithProps({ outputFormat: 'text' });
+            await wrapper.setProps({ outputFormat: 'text' });
           });
 
           itBehavesLikeOutputsCorrectly(baseProps.value);
@@ -116,7 +107,7 @@ describe('DtRichTextEditor tests', function () {
 
           // Test Setup
           beforeEach(async function () {
-            await mountWithProps({ outputFormat: 'json' });
+            await wrapper.setProps({ outputFormat: 'json' });
           });
 
           itBehavesLikeOutputsCorrectly(jsonOutput);
@@ -125,7 +116,7 @@ describe('DtRichTextEditor tests', function () {
         describe('When using html output', function () {
           // Test Setup
           beforeEach(async function () {
-            await mountWithProps({ outputFormat: 'html' });
+            await wrapper.setProps({ outputFormat: 'html' });
           });
 
           itBehavesLikeOutputsCorrectly(`<p>${baseProps.value}</p>`);
@@ -145,7 +136,7 @@ describe('DtRichTextEditor tests', function () {
 
     describe('When not editable', function () {
       beforeEach(async function () {
-        await mountWithProps({ editable: false });
+        await wrapper.setProps({ editable: false });
       });
 
       it('should have aria-readonly attribute', function () {
@@ -157,7 +148,7 @@ describe('DtRichTextEditor tests', function () {
   describe('Extendability Tests', function () {
     describe('When an inputAriaLabel prop is provided', function () {
       beforeEach(async function () {
-        await mountWithProps({ inputAriaLabel: 'new aria-label' });
+        await wrapper.setProps({ inputAriaLabel: 'new aria-label' });
       });
 
       it('should pass through the prop to the editor', function () {
@@ -167,7 +158,7 @@ describe('DtRichTextEditor tests', function () {
 
     describe('When an inputClass prop is provided', function () {
       beforeEach(async function () {
-        await mountWithProps({ inputClass: 'input-class' });
+        await wrapper.setProps({ inputClass: 'input-class' });
       });
 
       it('should pass through the prop to the editor', function () {
@@ -177,7 +168,7 @@ describe('DtRichTextEditor tests', function () {
 
     describe('When an editable prop is provided', function () {
       beforeEach(async function () {
-        await mountWithProps({ editable: false });
+        await wrapper.setProps({ editable: false });
       });
 
       it('should pass through the prop to the editor', function () {
