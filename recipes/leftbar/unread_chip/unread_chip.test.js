@@ -6,13 +6,13 @@ import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
 } from '@/tests/shared_examples/validation';
-import { UNREAD_BADGE_DIRECTIONS, UNREAD_BADGE_KINDS } from '@/recipes/leftbar/unread_chip/unread_chip_constants';
+import { UNREAD_CHIP_DIRECTIONS, UNREAD_CHIP_KINDS } from '@/recipes/leftbar/unread_chip/unread_chip_constants';
 import sinon from 'sinon';
 
 // Constants
 const baseProps = {
-  kind: UNREAD_BADGE_KINDS[0],
-  direction: UNREAD_BADGE_DIRECTIONS[0],
+  kind: UNREAD_CHIP_KINDS[0],
+  direction: UNREAD_CHIP_DIRECTIONS[0],
 };
 const baseSlots = {
   default: 'Unread mentions',
@@ -137,11 +137,11 @@ describe('DtRecipeUnreadChip Tests', function () {
     describe('Kind validator', function () {
       const prop = DtRecipeUnreadChip.props.kind;
 
-      describe('When provided kind is in UNREAD_BADGE_KINDS', function () {
-        itBehavesLikePassesCustomPropValidation(prop, UNREAD_BADGE_KINDS[0]);
+      describe('When provided kind is in UNREAD_CHIP_KINDS', function () {
+        itBehavesLikePassesCustomPropValidation(prop, UNREAD_CHIP_KINDS[0]);
       });
 
-      describe('When provided kind is not in UNREAD_BADGE_KINDS', function () {
+      describe('When provided kind is not in UNREAD_CHIP_KINDS', function () {
         itBehavesLikeFailsCustomPropValidation(prop, 'other_value');
       });
     });
@@ -149,11 +149,11 @@ describe('DtRecipeUnreadChip Tests', function () {
     describe('Direction validator', function () {
       const prop = DtRecipeUnreadChip.props.direction;
 
-      describe('When provided direction is in UNREAD_BADGE_DIRECTIONS', function () {
-        itBehavesLikePassesCustomPropValidation(prop, UNREAD_BADGE_DIRECTIONS[0]);
+      describe('When provided direction is in UNREAD_CHIP_DIRECTIONS', function () {
+        itBehavesLikePassesCustomPropValidation(prop, UNREAD_CHIP_DIRECTIONS[0]);
       });
 
-      describe('When provided kind is not in UNREAD_BADGE_DIRECTIONS', function () {
+      describe('When provided kind is not in UNREAD_CHIP_DIRECTIONS', function () {
         itBehavesLikeFailsCustomPropValidation(prop, 'other_value');
       });
     });

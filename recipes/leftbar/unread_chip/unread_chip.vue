@@ -1,33 +1,27 @@
 <template>
-  <dt-chip
+  <button
     :class="['dt-leftbar-unread-chip', `dt-leftbar-unread-chip__${kind}`]"
     data-qa="dt-leftbar-unread-chip"
-    :hide-close="true"
     v-on="unreadChipListeners"
   >
-    <template #icon>
-      <dt-icon
-        :name="`arrow-${direction}`"
-        size="300"
-      />
-    </template>
+    <dt-icon
+      :name="`arrow-${direction}`"
+      size="300"
+    />
     <span data-qa="dt-leftbar-unread-chip__label">
       <slot />
     </span>
-  </dt-chip>
+  </button>
 </template>
 
 <script>
 import { DtIcon } from '@/components/icon';
-import { DtChip } from '@/components/chip';
-import { UNREAD_BADGE_DIRECTIONS, UNREAD_BADGE_KINDS } from './unread_chip_constants';
-
+import { UNREAD_CHIP_DIRECTIONS, UNREAD_CHIP_KINDS } from './unread_chip_constants';
 export default {
   name: 'DtRecipeUnreadChip',
 
   components: {
     DtIcon,
-    DtChip,
   },
 
   props: {
@@ -38,7 +32,7 @@ export default {
     kind: {
       type: String,
       required: true,
-      validator: (kind) => UNREAD_BADGE_KINDS.includes(kind),
+      validator: (kind) => UNREAD_CHIP_KINDS.includes(kind),
     },
 
     /**
@@ -48,7 +42,7 @@ export default {
     direction: {
       type: String,
       required: true,
-      validator: (dir) => UNREAD_BADGE_DIRECTIONS.includes(dir),
+      validator: (dir) => UNREAD_CHIP_DIRECTIONS.includes(dir),
     },
   },
 
@@ -74,25 +68,27 @@ export default {
 
 <style lang="less">
 .dt-leftbar-unread-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-200) var(--space-500) var(--space-200) var(--space-400);
+  gap: var(--space-300);
+  font-size: var(--fs-100);
+  box-shadow: var(--bs-md);
+  border-radius: var(--br-pill);
+  border: none;
+  height: 28px;
+  cursor: pointer;
+
   &__mentions {
-    .d-chip__label {
-      font-weight: var(--fw-semibold);
-      background-color: var(--purple-400);
-      color: var(--fc-primary-inverted);
-    }
+    font-weight: var(--fw-bold);
+    background-color: var(--theme-mention-color-background);
+    color: var(--theme-mention-color-foreground);
   }
 
   &__messages {
-    .d-chip__label {
-      background-color: var(--bgc-primary);
-    }
-  }
-
-  .d-chip__label {
-    padding: var(--space-200) var(--space-500) var(--space-200) var(--space-400);
-    box-shadow: var(--bs-md);
-    gap: var(--space-300);
-    height: 28px;
+    background-color: var(--bgc-primary);
+    color: var(--fc-primary);
   }
 }
 </style>
