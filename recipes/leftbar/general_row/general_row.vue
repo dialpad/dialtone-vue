@@ -25,7 +25,6 @@
           name="left"
         >
           <dt-recipe-leftbar-general-row-icon
-            :class="{ 'd-o50': isTyping }"
             :type="getIcon"
             :color="color"
             data-qa="dt-leftbar-row-icon"

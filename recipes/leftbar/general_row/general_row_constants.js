@@ -44,9 +44,18 @@ export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS = {
 export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR = 'If type is contact center, color must be one' +
     'of the following:' + Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).join(', ');
 
+// these icons should be rendered at size 200 rather than 300.
+export const LEFTBAR_GENERAL_ROW_ICONS_SIZE_200 = [
+  LEFTBAR_GENERAL_ROW_TYPES.CHANNELS,
+  LEFTBAR_GENERAL_ROW_TYPES.LOCKED_CHANNEL,
+  'channel unread',
+  'locked channel unread',
+];
+
 export default {
   LEFTBAR_GENERAL_ROW_TYPES,
   LEFTBAR_GENERAL_ROW_ICON_MAPPING,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR,
+  LEFTBAR_GENERAL_ROW_ICONS_SIZE_200,
 };
