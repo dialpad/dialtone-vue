@@ -2,7 +2,7 @@
   <dt-icon
     v-if="isIconType"
     :name="getIconName"
-    size="300"
+    :size="iconSize"
   />
   <div
     v-else-if="isContactCenterType"
@@ -25,6 +25,7 @@ import {
   LEFTBAR_GENERAL_ROW_ICON_MAPPING as ICON_MAPPING,
   LEFTBAR_GENERAL_ROW_TYPES as TYPES,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS as COLORS,
+  LEFTBAR_GENERAL_ROW_ICONS_SIZE_200 as ICONS_SIZE_200,
 } from '@/recipes/leftbar/general_row/general_row_constants';
 
 export default {
@@ -53,6 +54,11 @@ export default {
 
     isDialbotType () {
       return this.type === TYPES.DIALBOT;
+    },
+
+    iconSize () {
+      // Special case for channel icons, they need to be size 200 instead of 300
+      return ICONS_SIZE_200.includes(this.type) ? '200' : '300';
     },
 
     getIconName () {
