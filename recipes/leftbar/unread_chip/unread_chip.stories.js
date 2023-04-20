@@ -4,7 +4,7 @@ import DtRecipeUnreadChip from './unread_chip.vue';
 import DtRecipeUnreadChipMdx from './unread_chip.mdx';
 import DtRecipeUnreadChipDefaultTemplate from './unread_chip_default.story.vue';
 import DtRecipeUnreadChipVariantsTemplate from './unread_chip_variants.story.vue';
-import { UNREAD_BADGE_DIRECTIONS, UNREAD_BADGE_KINDS } from '@/recipes/leftbar/unread_chip/unread_chip_constants';
+import { UNREAD_CHIP_DIRECTIONS, UNREAD_CHIP_KINDS } from '@/recipes/leftbar/unread_chip/unread_chip_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -16,14 +16,14 @@ export const argTypesData = {
   kind: {
     control: {
       type: 'select',
-      options: UNREAD_BADGE_KINDS,
+      options: UNREAD_CHIP_KINDS,
     },
   },
 
   direction: {
     control: {
       type: 'select',
-      options: UNREAD_BADGE_DIRECTIONS,
+      options: UNREAD_CHIP_DIRECTIONS,
     },
   },
 
