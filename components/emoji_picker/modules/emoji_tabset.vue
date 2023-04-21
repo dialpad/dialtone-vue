@@ -11,7 +11,7 @@
           :key="tab.id"
           :panel-id="tab.panelId"
           :label="tab.label"
-          @click="selectTabset(tab.id)"
+          @click.capture.stop="selectTabset(tab.id)"
         >
           <dt-icon
             size="400"
@@ -27,7 +27,7 @@
 import DtTabGroup from '@/components/tabs/tab_group.vue';
 import DtTab from '@/components/tabs/tab.vue';
 import DtIcon from '@/components/icon/icon.vue';
-import { computed, ref, watch } from 'vue';
+import { computed, ref, toRefs, watch } from 'vue';
 
 const props = defineProps({
   /**
@@ -49,6 +49,11 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+
+  emojiFilter: {
+    type: String,
+    default: '',
+  },
 });
 
 const emits = defineEmits([
@@ -61,15 +66,15 @@ const emits = defineEmits([
 ]);
 
 const TABS_DATA = [
-  { id: '1', panelId: '1', label: 'Recently used', icon: 'clock' },
-  { id: '2', panelId: '2', label: 'Smiley’s and people', icon: 'satisfied' },
-  { id: '3', panelId: '3', label: 'Nature', icon: 'living-thing' },
-  { id: '4', panelId: '4', label: 'Food', icon: 'food' },
-  { id: '5', panelId: '5', label: 'Activity', icon: 'Object' },
-  { id: '6', panelId: '6', label: 'Travel', icon: 'Asterisk' },
-  { id: '7', panelId: '7', label: 'Objects', icon: 'lightbulb' },
-  { id: '8', panelId: '8', label: 'Symbols', icon: 'heart' },
-  { id: '9', panelId: '9', label: 'Flags', icon: 'flag' },
+  { label: 'Recently used', icon: 'clock' },
+  { label: 'Smiley’s and people', icon: 'satisfied' },
+  { label: 'Nature', icon: 'living-thing' },
+  { label: 'Food', icon: 'food' },
+  { label: 'Activity', icon: 'object' },
+  { label: 'Travel', icon: 'transportation' },
+  { label: 'Objects', icon: 'lightbulb' },
+  { label: 'Symbols', icon: 'heart' },
+  { label: 'Flags', icon: 'flag' },
 ];
 
 const tabs = computed(() => {
@@ -77,24 +82,38 @@ const tabs = computed(() => {
 
   return tabsData.map((tab, index) => ({
     ...tab,
-    selected: index === props.scrollIntoTab,
-    // TO DO fix it if there is no recently used tab
-    // id: index.toString(),
-    // panelId: index.toString(),
+    id: (index + 1).toString(),
+    panelId: (index + 1).toString(),
   }));
 });
 
+const isSearching = computed(() => props.emojiFilter.length > 0);
+
 const selectedTab = ref('1');
+
+const { isScrollingWithScrollTo } = toRefs(props);
 
 watch(() => props.scrollIntoTab,
   () => {
-    if (!props.isScrollingWithScrollTo) {
+    if (!isScrollingWithScrollTo.value && !isSearching.value) {
       selectedTab.value = (props.scrollIntoTab + 1).toString();
     }
   });
 
+watch(isSearching,
+  () => {
+    if (isSearching.value) {
+      selectedTab.value = null;
+    }
+  });
+
+/**
+ * We are using .capture.stop modifiers on the click event
+ * because we don't want to trigger the click event of the
+ * dt-tab component
+ */
 function selectTabset (id) {
-  if (props.isScrollingWithScrollTo) {
+  if (!isScrollingWithScrollTo.value) {
     selectedTab.value = id;
   }
   emits('selected-tabset', id);

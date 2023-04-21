@@ -24,17 +24,17 @@ const recentlyUsedEmojis = [
 const searchPlaceholderLabel = 'Search...';
 const searchResultsLabel = 'Search results';
 
-// const tabSetLabels = [
-//   'Recientes',
-//   'Emoticonos & Emociones',
-//   'Animales & Naturaleza',
-//   'Comida & Bebida',
-//   'Actividades',
-//   'Viajes & Lugares',
-//   'Objetos',
-//   'Símbolos',
-//   'Banderas',
-// ];
+const tabSetLabels = [
+  'Recientes',
+  'Emoticonos & Emociones',
+  'Animales & Naturaleza',
+  'Comida & Bebida',
+  'Actividades',
+  'Viajes & Lugares',
+  'Objetos',
+  'Símbolos',
+  'Banderas',
+];
 
 function updateSkinTone (skin) {
   skinTone.value = skin;

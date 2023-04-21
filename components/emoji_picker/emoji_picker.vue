@@ -2,6 +2,7 @@
   <div class="d-emoji-picker">
     <div class="d-emoji-picker--header">
       <emoji-tabset
+        :emoji-filter="searchQuery"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :is-scrolling-with-scroll-to="isScrollingWithScrollTo"
@@ -146,6 +147,7 @@ const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
  * @param tabName {String} - The name of the tab that was selected
  */
 function scrollToSelectedTabset (tabId) {
+  searchQuery.value = '';
   selectedTabset.value = tabId;
   selectedTabset.value = { ...selectedTabset.value, tabId };
 }
@@ -169,7 +171,8 @@ onBeforeUnmount(() => {
 });
 
 function cleanUp () {
-  console.log('cleanUp');
+  searchQuery.value = '';
+  selectedTabset.value = {};
 }
 </script>
 

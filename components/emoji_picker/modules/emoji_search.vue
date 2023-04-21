@@ -2,6 +2,7 @@
   <div class="d-emoji-picker__search">
     <dt-input
       :placeholder="searchPlaceholderLabel"
+      :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
     >
       <template #leftIcon>
@@ -21,6 +22,10 @@ defineProps({
     type: String,
     required: true,
   },
+  modelValue: {
+    type: String,
+    default: '',
+  },
 });
 </script>
 
@@ -29,5 +34,6 @@ defineProps({
   position: relative;
   z-index: 1;
   margin: var(--su16) 0 var(--su16) 0;
+  background-color: #FFFFFF;
 }
 </style>

@@ -255,6 +255,28 @@ const currentEmojis = computed(() => {
 });
 
 /**
+ * This variable is used to check if the user is scrolling inside the emoji picker
+ * This is used to check if the user is scrolling using the mouse wheel
+ * This is useful because this flag will update the fixed label when the user is scrolling using the mouse wheel
+ */
+const isScrolling = ref(false);
+
+/**
+ * This variable is used inside the handleScroll function because
+ * we use a setTimeout function to wait for a brief period of time (in this case, 100 milliseconds)
+ * to see if the user has stopped scrolling.
+ * If they have, we set isScrolling back to false
+ */
+const timeoutId = ref(null);
+
+/**
+ * This will trigger the searchByNameAndKeywords function with debounce of 300 milliseconds
+ */
+const debouncedSearch = debounce(() => {
+  searchByNameAndKeywords();
+});
+
+/**
  * Update the current emojis list on skin tone changes
  * Also update the filtered emojis list
  * @listens skinTone
@@ -277,10 +299,10 @@ watch(() => props.recentlyUsedEmojis,
  * Will update the filtered emojis list on emojiFilter update
  * @listens emojiFilter
  */
-watch(() => props.emojiFilter,
-  debounce(() => {
-    searchByNameAndKeywords();
-  }));
+watch(() => props.emojiFilter, () => {
+  resetScroll();
+  debouncedSearch();
+});
 
 watch(
   () => props.selectedTabset,
@@ -327,6 +349,7 @@ function handleImageError (event) {
  * Scroll to the selected tab
  */
 function scrollToTab (tabIndex) {
+  if (isScrolling.value) { return; }
   const tabLabel = tabLabels.value[tabIndex - 1];
   const tabElement = tabLabel.ref.value[0];
 
@@ -369,6 +392,12 @@ function scrollToTab (tabIndex) {
       behavior: 'smooth',
     });
   });
+}
+
+function resetScroll () {
+  const container = listRef.value;
+
+  container.scrollTop = 0;
 }
 
 /**
@@ -423,11 +452,26 @@ function setTabLabelObserver () {
   });
 }
 
+/**
+ * This function is called when the user scrolls the listRef element.
+ * It sets the isScrolling variable to true, and then it sets it to false after 100 milliseconds.
+ * This is done to limit the user from clicking tabset too fast
+ */
+function handleScroll () {
+  isScrolling.value = true;
+  clearTimeout(timeoutId.value);
+  timeoutId.value = setTimeout(() => {
+    isScrolling.value = false;
+  }, 100);
+}
+
 onMounted(() => {
+  listRef.value.addEventListener('scroll', handleScroll);
   setTabLabelObserver();
 });
 
 onUnmounted(() => {
+  listRef.value?.removeEventListener('scroll', handleScroll);
   tabLabelObserver.value.disconnect();
 });
 </script>
@@ -455,7 +499,6 @@ onUnmounted(() => {
     height: 100%;
     max-height: 297px;
     overflow: auto;
-    scroll-behavior: smooth;
     position: relative;
     top: -20px;
 
