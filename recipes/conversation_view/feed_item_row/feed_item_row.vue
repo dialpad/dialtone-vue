@@ -3,8 +3,8 @@
     ref="FeedItemRef"
     element-type="article"
     navigation-type="tab"
-    class="d-w100p d-box-border d-ps-relative d-py8 d-pl16"
-    :class="{ 'd-bgc-black-100': isActive }"
+    class="d-w100p d-box-border d-ps-relative d-px16 d-py4"
+    :class="{ 'd-bgc-secondary-opaque': isActive }"
     data-qa="feed-item-row"
     v-on="feedListeners"
   >
@@ -26,7 +26,7 @@
       <div
         v-if="!showHeader"
         v-show="isActive"
-        class="d-fs-100 d-fw-normal d-ws-nowrap d-lh-100 d-fc-tertiary"
+        class="d-fs-100 d-fw-normal d-ws-nowrap d-lh-100 d-fc-tertiary d-mb6"
         data-qa="feed-item-row-time-left"
       >
         {{ time }}
@@ -36,20 +36,21 @@
     <!-- Feed Item -->
     <div
       v-if="showHeader"
-      class="d-d-flex"
+      class="d-d-flex d-ai-center"
     >
-      <p class="d-fs-200 d-fw-bold d-to-ellipsis d-of-hidden d-ws-nowrap">
+      <p class="d-fs-200 d-lh-300 d-fw-bold d-to-ellipsis d-of-hidden d-ws-nowrap">
         {{ displayName }}
       </p>
       <time
-        class="d-fs-100 d-lh-600 d-fc-black-500 d-fw-normal d-ml4 d-fl-shrink0"
+        class="d-fs-100 d-lh-300 d-fc-tertiary d-fw-normal d-ml4 d-fl-shrink0"
       >
         {{ time }}
       </time>
     </div>
     <!-- Default content slot -->
-    <slot />
-
+    <span class="content-text-wrapper-class">
+      <slot />
+    </span>
     <template #bottom>
       <div class="d-d-flex d-fw-wrap">
         <slot name="reactions" />
@@ -190,5 +191,7 @@ export default {
 </script>
 
 <style lang="less">
-
+content-text-wrapper-class:not(img) {
+  line-height: 1.4rem;
+}
 </style>

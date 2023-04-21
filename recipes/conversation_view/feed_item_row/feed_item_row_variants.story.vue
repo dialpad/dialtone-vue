@@ -9,7 +9,6 @@
         :display-name="displayName"
         :time="time"
         :is-active="true"
-        :state="state"
         @on-hover="onHover"
         @on-focus="onFocus"
       >
@@ -88,7 +87,6 @@
         :display-name="displayName"
         :time="time"
         :is-active="true"
-        :state="state"
         @on-hover="onHover"
         @on-focus="onFocus"
       >
