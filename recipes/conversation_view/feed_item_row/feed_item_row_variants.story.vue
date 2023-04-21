@@ -3,164 +3,168 @@
   <dt-stack gap="600">
     <div>
       <h3>Feed item with showHeader as False and isActive true</h3>
-      <dt-recipe-feed-item-row
-        :show-header="false"
-        :avatar-image-url="avatarImageUrl"
-        :display-name="displayName"
-        :time="time"
-        :is-active="true"
-        @on-hover="onHover"
-        @on-focus="onFocus"
-      >
-        <template v-if="defaultSlot">
-          <span v-html="defaultSlot" />
-        </template>
-        <template
-          #threading
+      <ul>
+        <dt-recipe-feed-item-row
+          :show-header="false"
+          :avatar-image-url="avatarImageUrl"
+          :display-name="displayName"
+          :time="time"
+          :is-active="true"
+          @on-hover="onHover"
+          @on-focus="onFocus"
         >
-          <div class="d-d-flex d-my6">
-            <dt-avatar
-              presence="busy"
-              class="d-mx1"
-              seed="seed"
-              size="sm"
-            >
-              <img
-                data-qa="dt-avatar-image"
-                src="./person.png"
-                alt="Person Avatar"
-              >
-            </dt-avatar>
-            <dt-avatar
-              presence="active"
-              class="d-mx1"
-              seed="seed"
-              size="sm"
-            >
-              <img
-                data-qa="dt-avatar-image"
-                src="./person.png"
-                alt="Person Avatar"
-              >
-            </dt-avatar>
-            <dt-avatar
-              class="d-mx1"
-              seed="seed"
-              size="sm"
-            >
-              <img
-                data-qa="dt-avatar-image"
-                src="./person.png"
-                alt="Person Avatar"
-              >
-            </dt-avatar>
-            <div
-              class="d-mx6 d-my-auto d-fs-100"
-            >
-              3 replies
-            </div>
-          </div>
-        </template>
-        <template
-          #reactions
-        >
-          <dt-emoji-text-wrapper
-            class="d-btn d-btn--outlined d-btn--xs"
-            element-type="button"
-            size="200"
+          <template v-if="defaultSlot">
+            <span v-html="defaultSlot" />
+          </template>
+          <template
+            #threading
           >
-            emoji reactions :smile:
-          </dt-emoji-text-wrapper>
-        </template>
-        <template
-          #menu
-        >
-          <dt-icon :name="menu" />
-        </template>
-      </dt-recipe-feed-item-row>
+            <div class="d-d-flex d-my6">
+              <dt-avatar
+                presence="busy"
+                class="d-mx1"
+                seed="seed"
+                size="sm"
+              >
+                <img
+                  data-qa="dt-avatar-image"
+                  src="./person.png"
+                  alt="Person Avatar"
+                >
+              </dt-avatar>
+              <dt-avatar
+                presence="active"
+                class="d-mx1"
+                seed="seed"
+                size="sm"
+              >
+                <img
+                  data-qa="dt-avatar-image"
+                  src="./person.png"
+                  alt="Person Avatar"
+                >
+              </dt-avatar>
+              <dt-avatar
+                class="d-mx1"
+                seed="seed"
+                size="sm"
+              >
+                <img
+                  data-qa="dt-avatar-image"
+                  src="./person.png"
+                  alt="Person Avatar"
+                >
+              </dt-avatar>
+              <div
+                class="d-mx6 d-my-auto d-fs-100"
+              >
+                3 replies
+              </div>
+            </div>
+          </template>
+          <template
+            #reactions
+          >
+            <dt-emoji-text-wrapper
+              class="d-btn d-btn--outlined d-btn--xs"
+              element-type="button"
+              size="200"
+            >
+              emoji reactions :smile:
+            </dt-emoji-text-wrapper>
+          </template>
+          <template
+            #menu
+          >
+            <dt-icon :name="menu" />
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
     </div>
     <div>
       <h3>Feed item with rich media</h3>
-      <dt-recipe-feed-item-row
-        :show-header="true"
-        :avatar-image-url="avatarImageUrl"
-        :display-name="displayName"
-        :time="time"
-        :is-active="true"
-        @on-hover="onHover"
-        @on-focus="onFocus"
-      >
-        <dt-image-viewer
-          :image-src="require('./test.jpg')"
-          image-alt="Alt Text"
-          close-aria-label="Close"
-          image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
-          aria-label="Click to open image"
-        />
-        <template
-          #threading
+      <ul>
+        <dt-recipe-feed-item-row
+          :show-header="true"
+          :avatar-image-url="avatarImageUrl"
+          :display-name="displayName"
+          :time="time"
+          :is-active="true"
+          @on-hover="onHover"
+          @on-focus="onFocus"
         >
-          <div class="d-d-flex d-my6">
-            <dt-avatar
-              presence="busy"
-              class="d-mx1"
-              seed="seed"
-              size="sm"
-            >
-              <img
-                data-qa="dt-avatar-image"
-                src="./person.png"
-                alt="Person Avatar"
-              >
-            </dt-avatar>
-            <dt-avatar
-              presence="active"
-              class="d-mx1"
-              seed="seed"
-              size="sm"
-            >
-              <img
-                data-qa="dt-avatar-image"
-                src="./person.png"
-                alt="Person Avatar"
-              >
-            </dt-avatar>
-            <dt-avatar
-              class="d-mx1"
-              seed="seed"
-              size="sm"
-            >
-              <img
-                data-qa="dt-avatar-image"
-                src="./person.png"
-                alt="Person Avatar"
-              >
-            </dt-avatar>
-            <div
-              class="d-mx6 d-my-auto d-fs-100"
-            >
-              3 replies
-            </div>
-          </div>
-        </template>
-        <template
-          #reactions
-        >
-          <dt-emoji-text-wrapper
-            class="d-btn d-btn--outlined d-btn--xs"
-            element-type="button"
-            size="200"
+          <dt-image-viewer
+            :image-src="require('./test.jpg')"
+            image-alt="Alt Text"
+            close-aria-label="Close"
+            image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
+            aria-label="Click to open image"
+          />
+          <template
+            #threading
           >
-            emoji reactions :smile:
-          </dt-emoji-text-wrapper>
-        </template>
-        <template
-          v-if="menu"
-          #menu
-        >
-          <dt-icon :name="menu" />
-        </template>
-      </dt-recipe-feed-item-row>
+            <div class="d-d-flex d-my6">
+              <dt-avatar
+                presence="busy"
+                class="d-mx1"
+                seed="seed"
+                size="sm"
+              >
+                <img
+                  data-qa="dt-avatar-image"
+                  src="./person.png"
+                  alt="Person Avatar"
+                >
+              </dt-avatar>
+              <dt-avatar
+                presence="active"
+                class="d-mx1"
+                seed="seed"
+                size="sm"
+              >
+                <img
+                  data-qa="dt-avatar-image"
+                  src="./person.png"
+                  alt="Person Avatar"
+                >
+              </dt-avatar>
+              <dt-avatar
+                class="d-mx1"
+                seed="seed"
+                size="sm"
+              >
+                <img
+                  data-qa="dt-avatar-image"
+                  src="./person.png"
+                  alt="Person Avatar"
+                >
+              </dt-avatar>
+              <div
+                class="d-mx6 d-my-auto d-fs-100"
+              >
+                3 replies
+              </div>
+            </div>
+          </template>
+          <template
+            #reactions
+          >
+            <dt-emoji-text-wrapper
+              class="d-btn d-btn--outlined d-btn--xs"
+              element-type="button"
+              size="200"
+            >
+              emoji reactions :smile:
+            </dt-emoji-text-wrapper>
+          </template>
+          <template
+            v-if="menu"
+            #menu
+          >
+            <dt-icon :name="menu" />
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
     </div>
   </dt-stack>
 </template>
