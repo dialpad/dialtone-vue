@@ -29,28 +29,31 @@
         class="d-fs-100 d-fw-normal d-ws-nowrap d-lh-100 d-fc-tertiary d-mb6"
         data-qa="feed-item-row-time-left"
       >
-        {{ time }}
+        {{ shortTime }}
       </div>
     </template>
 
-    <!-- Feed Item -->
-    <div
-      v-if="showHeader"
-      class="d-d-flex d-ai-center"
-    >
-      <p class="d-fs-200 d-lh-300 d-fw-bold d-to-ellipsis d-of-hidden d-ws-nowrap">
-        {{ displayName }}
-      </p>
-      <time
-        class="d-fs-100 d-lh-300 d-fc-tertiary d-fw-normal d-ml4 d-fl-shrink0"
+    <article>
+      <!-- Feed Item -->
+      <div
+        v-if="showHeader"
+        class="d-d-flex d-ai-center"
       >
-        {{ time }}
-      </time>
-    </div>
-    <!-- Default content slot -->
-    <span class="content-text-wrapper-class">
-      <slot />
-    </span>
+        <p class="d-fs-200 d-lh-300 d-fw-bold d-to-ellipsis d-of-hidden d-ws-nowrap">
+          {{ displayName }}
+        </p>
+        <time
+          class="d-fs-100 d-lh-300 d-fc-tertiary d-fw-normal d-ml4 d-fl-shrink0"
+        >
+          {{ time }}
+        </time>
+      </div>
+      <!-- Default content slot -->
+      <span class="content-text-wrapper-class">
+        <slot />
+      </span>
+    </article>
+
     <template #bottom>
       <div class="d-d-flex d-fw-wrap">
         <slot name="reactions" />
@@ -114,23 +117,40 @@ export default {
     },
 
     /**
-     * The display name
+     * The display name of the sender
      */
     displayName: {
       type: String,
       default: '',
     },
 
+    /**
+     * time string displayed as is.
+     * Shown on the header when showHeader is true
+     */
     time: {
       type: String,
       default: '',
     },
 
+    /**
+     * short time string without AM/PM displayed as is.
+     * Shown on the left of feed item when showHeader is false and isActive is true
+     */
+    shortTime: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * displays a darked background on the row.
+     */
     isActive: {
       type: Boolean,
       default: false,
     },
 
+    // TODO: implement as part of DT-1157
     // state: {
     //   type: String,
     //   default: 'normal',
