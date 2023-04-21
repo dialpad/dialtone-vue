@@ -1,3 +1,18 @@
+## [2.79.4](https://github.com/dialpad/dialtone-vue/compare/v2.79.3...v2.79.4) (2023-04-18)
+
+
+### Bug Fixes
+
+* emoji size in leftbar item descriptions ([#918](https://github.com/dialpad/dialtone-vue/issues/918)) ([79ab216](https://github.com/dialpad/dialtone-vue/commit/79ab216af83a776dfe2b3383dc7c3b4170bb4a6d))
+* **Leftbar Row:** animation speed to 1.5s ([#916](https://github.com/dialpad/dialtone-vue/issues/916)) ([fea71c4](https://github.com/dialpad/dialtone-vue/commit/fea71c482a56e5aaca610c1fd343261a1d154158))
+
+## [2.79.3](https://github.com/dialpad/dialtone-vue/compare/v2.79.2...v2.79.3) (2023-04-17)
+
+
+### Bug Fixes
+
+* remove dialtone-icons from externals ([#914](https://github.com/dialpad/dialtone-vue/issues/914)) ([fb3a47a](https://github.com/dialpad/dialtone-vue/commit/fb3a47af2f5ce8b1e834280bd98eb39c8baf095b))
+
 ## [2.79.2](https://github.com/dialpad/dialtone-vue/compare/v2.79.1...v2.79.2) (2023-04-15)
 
 
