@@ -1,7 +1,7 @@
 <template>
   <dt-list-item
     ref="FeedItemRef"
-    element-type="article"
+    element-type="li"
     navigation-type="tab"
     class="d-w100p d-box-border d-ps-relative d-px16 d-py4"
     :class="{ 'd-bgc-secondary-opaque': isActive }"
