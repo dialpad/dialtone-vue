@@ -4,17 +4,30 @@ on:
   push:
     branches: [ staging, staging-vue3 ]
   pull_request:
-    types: [ labeled ]
+    types: [ labeled, synchronize ]
   pull_request_review:
-    types: [submitted]
+    types: [ submitted ]
 
 env:
   NODE_MODULES_CACHE_VERSION: v2
   STORYBOOK_ROOT: ./storybook
 
 jobs:
+
+  label_when_approved:
+    if: github.event_name == 'pull_request_review' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Label When Approved
+        uses: TobKed/label-when-approved-action@v1.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          label: 'visual-test-ready'
+
+
   visual_tests:
-    if: ${{ github.event_name == 'push' || github.event.label.name == 'visual-test-ready' || (github.event.review.state == 'approved' && !contains( github.event.pull_request.labels.*.name, 'no-visual-test' )) }}
+    needs: label_when_approved
+    if: always() && (github.event_name == 'push' || github.event_name == 'pull_request_review' || contains(github.event.pull_request.labels.*.name, 'visual-test-ready'))
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
@@ -63,4 +76,4 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_TARGET_BRANCH: ${{ github.base_ref }}
-        run: npx percy storybook --verbose storybook/compiled
+        run: npx percy storybook --config percy.config.js --verbose storybook/compiled

@@ -148,9 +148,9 @@ export default {
     },
 
     /**
-     * Type of the input, one of: `text`, `password`, `email`, `number`, `textarea`.
+     * Type of the input, one of: `text`, `password`, `email`, `number`, `textarea`, 'date', 'time'.
      * When `textarea` a `<textarea>` element will be rendered instead of an `<input>` element.
-     * @values text, password, email, number, textarea.
+     * @values text, password, email, number, textarea, date, time
      */
     type: {
       type: String,
@@ -251,6 +251,14 @@ export default {
     currentLength: {
       type: Number,
       default: null,
+    },
+
+    /**
+     * Whether the input will continue to display a warning validation message even if the input has lost focus.
+     */
+    retainWarning: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -457,7 +465,7 @@ export default {
     inputLengthState () {
       if (this.inputLength < this.validationProps.length.warn) {
         return null;
-      } else if (this.inputLength < this.validationProps.length.max) {
+      } else if (this.inputLength <= this.validationProps.length.max) {
         return this.validationProps.length.warn ? VALIDATION_MESSAGE_TYPES.WARNING : null;
       } else {
         return VALIDATION_MESSAGE_TYPES.ERROR;
@@ -475,12 +483,13 @@ export default {
       return this.shouldValidateLength && this.validationProps.length.limitMaxLength;
     },
 
+    // eslint-disable-next-line complexity
     showLengthLimitValidation () {
       return (
         this.shouldValidateLength &&
         this.inputLengthState !== null &&
         this.validationProps.length.message &&
-        (this.isInputFocused || this.isInvalid)
+        (this.retainWarning || this.isInputFocused || this.isInvalid)
       );
     },
 

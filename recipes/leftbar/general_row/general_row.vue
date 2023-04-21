@@ -5,7 +5,7 @@
   >
     <button
       class="dt-leftbar-row__primary"
-      data-qa="dt-leftbar-row-link"
+      :data-qa="'data-qa' in $attrs ? $attrs['data-qa'] : 'dt-leftbar-row-link'"
       :aria-label="getAriaLabel"
       :title="description"
       v-bind="$attrs"
@@ -36,6 +36,7 @@
           <dt-emoji-text-wrapper
             class="dt-leftbar-row__description"
             data-qa="dt-leftbar-row-description"
+            size="200"
           >
             {{ description }}
           </dt-emoji-text-wrapper>

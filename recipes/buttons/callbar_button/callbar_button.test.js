@@ -92,7 +92,14 @@ describe('DtRecipeCallbarButton Tests', function () {
 
       it('Should display a disabled button when "disabled"', async function () {
         await wrapper.setProps({ disabled: true });
-        assert.isTrue(button.element.disabled);
+        assert.isTrue(button.classes().includes('d-btn--disabled'));
+        assert.isTrue(button.classes().includes('d-bgc-transparent'));
+      });
+
+      it('Should add appropriate class to circle button when "importance"', async function () {
+        await wrapper.setProps({ importance: 'clear', circle: 'true' });
+        assert.isTrue(button.classes().includes('dt-recipe-callbar-button--circle'));
+        assert.equal(button.props().importance, 'clear');
       });
     });
   });

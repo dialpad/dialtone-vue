@@ -1,10 +1,7 @@
 <template>
   <dt-recipe-group-row
-    :avatar-initials="$attrs.avatarInitials"
-    :group-count="$attrs.groupCount"
     :group-count-text="$attrs.groupCountText"
     :names="$attrs.names"
-    :avatar-src="$attrs.avatarSrc"
     :unread-count="$attrs.unreadCount"
     :unread-count-tooltip="$attrs.unreadCountTooltip"
     :has-unreads="$attrs.hasUnreads"

@@ -19,6 +19,7 @@
     :visually-hidden-close="$attrs.visuallyHiddenClose"
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     :append-to="$attrs.appendTo"
+    :transition="$attrs.transition"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
@@ -43,7 +44,7 @@
         >
           {{ item.value }}
           <template #right>
-            {{ item.type }}
+            <span class="d-fc-secondary">{{ item.type }}</span>
           </template>
         </dt-list-item>
       </ul>

@@ -13,6 +13,8 @@
     :open-on-context="$attrs.openOnContext"
     :visually-hidden-close="$attrs.visuallyHiddenClose"
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
+    :tether="$attrs.tether"
+    :transition="$attrs.transition"
     @highlight="$attrs.onHighlight"
     @opened="$attrs.onOpened"
   >

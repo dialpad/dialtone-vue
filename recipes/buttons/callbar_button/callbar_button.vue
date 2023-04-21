@@ -1,24 +1,28 @@
 <template>
   <dt-tooltip
     :id="id"
-    :offset="[0, -12]"
+    :offset="[0, 8]"
   >
     <template #anchor>
-      <dt-button
-        :importance="circle ? 'outlined' : 'clear'"
-        kind="muted"
-        icon-position="top"
-        :disabled="disabled"
-        :aria-label="ariaLabel"
-        :label-class="callbarButtonTextClass"
-        :width="buttonWidth"
-        :class="callbarButtonClass"
+      <span
+        :class="{ 'd-c-not-allowed': disabled }"
       >
-        <slot />
-        <template #icon>
-          <slot name="icon" />
-        </template>
-      </dt-button>
+        <dt-button
+          :importance="buttonImportance"
+          kind="muted"
+          icon-position="top"
+          :aria-disabled="disabled"
+          :aria-label="ariaLabel"
+          :label-class="callbarButtonTextClass"
+          :width="buttonWidth"
+          :class="callbarButtonClass"
+        >
+          <slot />
+          <slot
+            name="icon"
+          />
+        </dt-button>
+      </span>
     </template>
     <slot name="tooltip" />
   </dt-tooltip>
@@ -126,6 +130,16 @@ export default {
       default: 'xl',
       validator: size => VALID_WIDTH_SIZE.includes(size),
     },
+
+    /**
+     * The fill and outline of the button associated with its visual importance.
+     * @values clear, outlined, primary
+     */
+    importance: {
+      type: String,
+      default: '',
+    },
+
   },
 
   computed: {
@@ -134,12 +148,13 @@ export default {
         this.buttonClass,
         'dt-recipe-callbar-button',
         'd-px0',
-        'd-fc-black-900',
         {
           'dt-recipe-callbar-button--circle': this.circle,
           'd-btn--icon-only': this.circle,
           'dt-recipe-callbar-button--active': this.active,
           'dt-recipe-callbar-button--danger': this.danger,
+          'd-btn--disabled d-bgc-transparent': this.disabled,
+          'd-fc-primary': !this.disabled,
         }];
     },
 
@@ -160,6 +175,13 @@ export default {
           return '8.4rem';
       }
     },
+
+    buttonImportance () {
+      if (this.importance) {
+        return this.importance;
+      }
+      return this.circle ? 'outlined' : 'clear';
+    },
   },
 };
 </script>
@@ -175,6 +197,7 @@ export default {
 
 .dt-recipe-callbar-button.d-btn[disabled] {
   background-color: unset;
+  opacity: .5;
 }
 
 .dt-recipe-callbar-button--circle.d-btn[disabled] {

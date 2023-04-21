@@ -15,6 +15,8 @@
     :open-with-arrow-keys="shouldOpenWithArrowKeys"
     :open-on-context="openOnContext"
     v-bind="$attrs"
+    :tether="tether"
+    :transition="transition"
     v-on="dropdownListeners"
   >
     <template #anchor="{ attrs }">
@@ -26,7 +28,8 @@
       />
     </template>
     <template #content="{ close }">
-      <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
+      <!-- eslint-disable-next-line max-len -->
+      <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/no-static-element-interactions -->
       <ul
         :id="listId"
         ref="listWrapper"
@@ -243,6 +246,26 @@ export default {
         return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
             (appendTo instanceof HTMLElement);
       },
+    },
+
+    /**
+     * If set to false the dialog will display over top of the anchor when there is insufficient space.
+     * If set to true it will never move from its position relative to the anchor and will clip instead.
+     * See <a href="https://popper.js.org/docs/v2/modifiers/prevent-overflow/#tether" target="_blank">Popper.js docs</a>
+     * @values true, false
+     */
+    tether: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Named transition when the content display is toggled.
+     * @see DtLazyShow
+     */
+    transition: {
+      type: String,
+      default: 'fade',
     },
   },
 

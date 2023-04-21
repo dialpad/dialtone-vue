@@ -48,6 +48,21 @@ export const argTypesData = {
       },
     },
   },
+  overlayIcon: {
+    options: iconsList,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  overlayText: {
+    description: 'The text that overlays the avatar',
+  },
+  overlayClass: {
+    description: 'Pass through classes. Used to customize the avatar overlay',
+  },
 };
 
 // Story Collection
@@ -88,8 +103,11 @@ const PresenceTemplate = (args) => createTemplateFromVueFile(
 const defaultImage = require('./person.png');
 
 // Stories
-export const Image = DefaultTemplate.bind({});
-Image.args = {
+export const Default = DefaultTemplate.bind({});
+Default.decorators = [() => ({
+  template: `<div class="d-d-flex"><story /></div>`,
+})];
+Default.args = {
   default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
   initials: 'PS',
 };

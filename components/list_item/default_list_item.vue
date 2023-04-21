@@ -8,7 +8,7 @@
       <!-- @slot Slot for the left content -->
       <slot name="left" />
     </section>
-    <section class="d-fl-grow1 d-of-hidden">
+    <section class="d-fl-grow1">
       <div v-if="hasSlotContent($slots.default)">
         <!-- @slot Slot for the main content -->
         <slot />
@@ -16,7 +16,7 @@
       <div
         v-if="hasSlotContent($slots.subtitle)"
         data-qa="dt-default-list-item-subtitle-wrapper"
-        :class="['d-fs-100 d-fc-black-600', { 'd-mtn2': $slots.default }]"
+        :class="['d-fs-100 d-fc-tertiary', { 'd-mtn2': $slots.default }]"
       >
         <!-- @slot Slot for the content below the main content -->
         <slot name="subtitle" />
@@ -61,6 +61,7 @@ export default {
   &,
   &--left,
   &--right {
+    // TODO: probably not necessary, but maybe there's a reason...?
     min-height: 28px;
   }
 }

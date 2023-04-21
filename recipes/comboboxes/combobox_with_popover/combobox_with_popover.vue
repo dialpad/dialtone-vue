@@ -54,6 +54,7 @@
         :modal="false"
         :auto-focus="false"
         :append-to="appendTo"
+        :transition="transition"
         :visually-hidden-close-label="visuallyHiddenCloseLabel"
         :visually-hidden-close="visuallyHiddenClose"
         @opened="opened"
@@ -328,6 +329,15 @@ export default {
             (appendTo instanceof HTMLElement);
       },
     },
+
+    /**
+     * Named transition when the content display is toggled.
+     * @see DtLazyShow
+     */
+    transition: {
+      type: String,
+      default: 'fade',
+    },
   },
 
   emits: [
@@ -451,7 +461,7 @@ export default {
     },
 
     onFocusIn (e) {
-      if (this.hasSuggestionList && e && this.$refs.input.querySelector('input') === e.target) {
+      if (this.hasSuggestionList && e && this.$refs.input?.querySelector('input') === e.target) {
         // only trigger if we show suggestion list when focused, and
         // it's the input specifically that was focused
         this.showComboboxList();
@@ -460,7 +470,7 @@ export default {
 
     onFocusOut (e) {
       // Check if the focus change was to another target within the combobox component
-      const popoverEl = this.$refs.popover.tip?.popper;
+      const popoverEl = this.$refs.popover?.tip?.popper;
       const comboboxEl = this.$refs.input;
 
       if (e.composedPath()?.some(el => [popoverEl, comboboxEl].includes(el))) return;

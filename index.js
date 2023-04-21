@@ -6,9 +6,11 @@ export * from './components/breadcrumbs';
 export * from './components/button';
 export * from './components/button_group';
 export * from './components/card';
+export * from './components/codeblock';
 export * from './components/combobox';
 export * from './components/collapsible';
 export * from './components/dropdown';
+export * from './components/image_viewer';
 export * from './components/input';
 export * from './components/input_group';
 export * from './components/modal';
@@ -51,6 +53,7 @@ export * from './recipes/chips/grouped_chip';
 export * from './recipes/leftbar/general_row';
 export * from './recipes/leftbar/group_row';
 export * from './recipes/leftbar/contact_row';
+export * from './recipes/leftbar/unread_chip';
 
 // Mixins
 export * from './common/mixins';

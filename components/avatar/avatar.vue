@@ -19,15 +19,31 @@
         {{ formattedInitials }}
       </span>
     </div>
+    <div
+      v-if="overlayIcon || overlayText"
+      :class="overlayClasses"
+    >
+      <dt-icon
+        v-if="overlayIcon"
+        class="d-fc-white d-w100p"
+        :name="overlayIcon"
+      />
+      <p
+        v-else-if="overlayText"
+        class="d-fs-200 d-fw-bold d-fc-white d-w100p d-ta-center"
+      >
+        {{ overlayText }}
+      </p>
+    </div>
     <span
       v-if="showGroup"
-      class="d-avatar__count d-zi-base1"
+      class="d-avatar__count d-zi-base"
       data-qa="dt-avatar-count"
     >{{ formattedGroup }}</span>
     <dt-presence
       v-if="presence && !showGroup"
       :presence="presence"
-      class="d-zi-base1"
+      class="d-zi-base"
       :class="[
         'd-avatar__presence',
         AVATAR_PRESENCE_SIZE_MODIFIERS[size],
@@ -42,6 +58,7 @@
 import { warn } from 'vue';
 import { getUniqueString, getRandomElement } from '@/common/utils';
 import { DtPresence } from '../presence';
+import DtIcon from '@/components/icon/icon';
 import seedrandom from 'seedrandom';
 import {
   AVATAR_KIND_MODIFIERS,
@@ -61,7 +78,7 @@ import {
  */
 export default {
   name: 'DtAvatar',
-  components: { DtPresence },
+  components: { DtPresence, DtIcon },
 
   inheritAttrs: false,
 
@@ -157,6 +174,30 @@ export default {
       default: undefined,
       validator: (group) => AVATAR_GROUP_VALIDATOR(group),
     },
+
+    /**
+     * The icon that overlays the avatar
+     */
+    overlayIcon: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * The text that overlays the avatar
+     */
+    overlayText: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Used to customize the avatar overlay
+     */
+    overlayClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
   },
 
   data () {
@@ -186,12 +227,21 @@ export default {
       ];
     },
 
+    overlayClasses () {
+      return [
+        'd-bgc-black-900 d-o70 d-ps-absolute d-w100p d-h100p d-d-flex d-ai-center d-bar-circle d-zi-base',
+        this.overlayClass,
+      ];
+    },
+
     showDefaultSlot () {
-      return this.kind !== 'initials' || (this.kind === 'image' && this.imageLoadedSuccessfully === true);
+      return this.kind !== 'initials' ||
+      (this.kind === 'image' && this.imageLoadedSuccessfully === true);
     },
 
     showInitials () {
-      return this.kind === 'initials' || (this.kind === 'image' && this.initials);
+      return this.kind === 'initials' ||
+      (this.kind === 'image' && this.initials && this.imageLoadedSuccessfully !== true);
     },
 
     showGroup () {
@@ -231,19 +281,22 @@ export default {
       if (this.initializing) return;
       this.kind = null;
       await this.$nextTick();
-      const firstChild = this.$refs.canvas.children[0] || this.$refs.canvas;
+      const firstChild = this.$refs.canvas?.children[0] || this.$refs.canvas;
       this.formatInitials(this.initials);
-      this.setKind(firstChild);
-      this.kindHandler(firstChild);
+      if (firstChild) {
+        this.setKind(firstChild);
+        this.kindHandler(firstChild);
+      }
       this.initializing = true;
       await this.$nextTick();
       this.initializing = false;
     },
 
+    // eslint-disable-next-line complexity
     kindHandler (el) {
       switch (this.kind) {
         case 'image':
-          el.classList.add('d-avatar__image', 'd-zi-base1');
+          el.classList.add('d-avatar__image');
           this.validateImageAttrsPresence();
           this.setImageListeners(el);
           break;
@@ -264,12 +317,7 @@ export default {
     },
 
     formatInitials (initials) {
-      if (!initials) {
-        this.formattedInitials = '';
-        return;
-      }
-
-      if (this.validatedSize === 'xs') {
+      if (!initials || this.validatedSize === 'xs') {
         this.formattedInitials = '';
       } else if (this.validatedSize === 'sm') {
         this.formattedInitials = initials.trim()[0];
@@ -313,14 +361,16 @@ export default {
         count++;
       }
       const rng = seedrandom(this.seed);
-      const shuffledColors = Array.from(colors).sort(() => 0.5 - rng());
-
-      return shuffledColors;
+      return Array.from(colors).sort(() => 0.5 - rng()); // shuffle colors
     },
 
     validateImageAttrsPresence () {
       const isSrcMissing = !this.$refs.canvas.children[0].getAttribute('src');
-      const isAltMissing = !this.$refs.canvas.children[0].getAttribute('alt');
+
+      // If alt set to empty string consider it valid, as this is a valid case if the
+      // image is already described by something else (ex: visible description)
+      // eslint-disable-next-line no-unneeded-ternary
+      const isAltMissing = this.$refs.canvas.children[0].getAttribute('alt') === null;
 
       if (isSrcMissing || isAltMissing) {
         warn('src and alt attributes are required for image avatars', this);

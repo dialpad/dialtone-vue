@@ -6,6 +6,7 @@ module.exports = {
     },
     include: [
       'Visual Testing/Combobox With Popover: Default',
+      'Visual Testing/Combobox Multi-Select: Default',
       'Visual Testing/Dropdown: Default',
       'Visual Testing/Popover: Default',
       'Visual Testing/Toast: Default',
@@ -17,11 +18,15 @@ module.exports = {
       'Visual Testing/Modal: With Danger Style',
       'Visual Testing/Modal: With Full Size',
       'Visual Testing/Modal: With Custom Header And Content',
+      'Visual Testing/Image Viewer: Default',
     ],
     waitForTimeout: 250,
   },
   snapshot: {
-    widths: [2000],
-    minHeight: 2000,
+    enableJavaScript: true,
+    widths: [1280],
+  },
+  discovery: {
+    disableCache: true,
   },
 };
