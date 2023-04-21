@@ -1,14 +1,15 @@
 <template>
   <button
-    :class="['dt-leftbar-unread-chip', `dt-leftbar-unread-chip__${kind}`]"
-    data-qa="dt-leftbar-unread-chip"
+    :class="['dt-leftbar-unread-pill', `dt-leftbar-unread-pill--${kind}`]"
+    type="button"
+    data-qa="dt-leftbar-unread-pill"
     v-on="$listeners"
   >
     <dt-icon
       :name="`arrow-${direction}`"
       size="300"
     />
-    <span data-qa="dt-leftbar-unread-chip__label">
+    <span data-qa="dt-leftbar-unread-pill__label">
       <slot />
     </span>
   </button>
@@ -16,9 +17,9 @@
 
 <script>
 import { DtIcon } from '@/components/icon';
-import { UNREAD_CHIP_DIRECTIONS, UNREAD_CHIP_KINDS } from './unread_chip_constants';
+import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from './unread_pill_constants';
 export default {
-  name: 'DtRecipeUnreadChip',
+  name: 'DtRecipeUnreadPill',
 
   components: {
     DtIcon,
@@ -26,13 +27,13 @@ export default {
 
   props: {
     /**
-     * The kind of unread chip which determines the styling
+     * The kind of unread pill which determines the styling
      * @values 'mentions', 'messages'
      **/
     kind: {
       type: String,
       required: true,
-      validator: (kind) => UNREAD_CHIP_KINDS.includes(kind),
+      validator: (kind) => UNREAD_PILL_KINDS.includes(kind),
     },
 
     /**
@@ -42,7 +43,7 @@ export default {
     direction: {
       type: String,
       required: true,
-      validator: (dir) => UNREAD_CHIP_DIRECTIONS.includes(dir),
+      validator: (dir) => UNREAD_PILL_DIRECTIONS.includes(dir),
     },
   },
 
@@ -59,7 +60,7 @@ export default {
 </script>
 
 <style lang="less">
-.dt-leftbar-unread-chip {
+.dt-leftbar-unread-pill {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,16 +70,16 @@ export default {
   box-shadow: var(--bs-md);
   border-radius: var(--br-pill);
   border: none;
-  height: 28px;
+  line-height: var(--lh-600);
   cursor: pointer;
 
-  &__mentions {
+  &--mentions {
     font-weight: var(--fw-bold);
     background-color: var(--theme-mention-color-background);
     color: var(--theme-mention-color-foreground);
   }
 
-  &__messages {
+  &--messages {
     background-color: var(--bgc-primary);
     color: var(--fc-primary);
   }
