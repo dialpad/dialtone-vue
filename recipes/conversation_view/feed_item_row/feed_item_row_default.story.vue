@@ -5,6 +5,7 @@
       :avatar-image-url="avatarImageUrl"
       :display-name="displayName"
       :time="time"
+      :short-time="shortTime"
       :is-active="isActive"
       @on-hover="onHover"
       @on-focus="onFocus"

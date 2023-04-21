@@ -118,6 +118,7 @@ Default.args = {
   avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
   displayName: 'Dwight Schrute',
   time: '4:54 PM',
+  shortTime: '4:54',
   onFocus: action('onFocus'),
   onHover: action('onHover'),
   default: `<p>Elementum fames nullam elementum velit proin vitae aliquet.
@@ -133,6 +134,7 @@ Variants.args = {
   avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
   displayName: 'Dwight Schrute',
   time: '4:54 PM',
+  shortTime: '4:54',
   onFocus: action('onFocus'),
   onHover: action('onHover'),
   default: `<p>Elementum fames nullam elementum velit proin vitae aliquet.
