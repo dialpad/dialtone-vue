@@ -93,6 +93,7 @@
     "@dialpad/dialtone-icons": "0.6.1-vue3",
     "emoji-regex": "^10.2.1",
     "emoji-toolkit": "^6.6.0",
+    "jest": "^29.5.0",
     "seedrandom": "^3.0.5",
     "tippy.js": "^6.3.7"
   },
