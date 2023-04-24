@@ -226,7 +226,9 @@ function cleanUp () {
   }
 
   &--footer{
+    position: relative;
     height: 58px;
+    top: -20px;
     background: #F9F9F9;
     border-top: 1px solid var(--bc-subtle);
     display: flex;
