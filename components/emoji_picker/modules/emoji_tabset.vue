@@ -11,6 +11,7 @@
           :key="tab.id"
           :panel-id="tab.panelId"
           :label="tab.label"
+          class="d-ml2 d-mr2"
           @click.capture.stop="selectTabset(tab.id)"
         >
           <dt-icon
@@ -134,7 +135,7 @@ function selectTabset (id) {
 
         &.d-tab--selected{
           &::after{
-            height: var(--size-300);
+            height: var(--size-200);
           }
         }
     }

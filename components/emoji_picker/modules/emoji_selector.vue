@@ -6,14 +6,14 @@
     >
       <p
         v-if="emojiFilter"
-        class="d-emoji-picker__search-label"
+        class="d-emoji-picker__search-label d-emoji-picker__alignment"
       >
-        {{ searchResultsLabel }}
+        {{ filteredEmojis.length > 0 ? searchResultsLabel : searchNoResultsLabel }}
       </p>
       <div
         v-else
         ref="tabCategoryRef"
-        class="d-emoji-picker__category"
+        class="d-emoji-picker__category d-emoji-picker__alignment"
       >
         <p>
           {{ fixedLabel }}
@@ -24,6 +24,7 @@
         v-show="!emojiFilter"
         :key="index"
         :ref="tabLabel.ref"
+        class="d-emoji-picker__alignment"
       >
         <p
           v-if="index"
@@ -57,7 +58,7 @@
       </div>
       <div
         v-if="emojiFilter"
-        class="d-emoji-picker__tab"
+        class="d-emoji-picker__tab d-emoji-picker__alignment"
       >
         <button
           v-for="emoji in filteredEmojis"
@@ -130,6 +131,11 @@ const props = defineProps({
    * @required
    */
   searchResultsLabel: {
+    type: String,
+    required: true,
+  },
+
+  searchNoResultsLabel: {
     type: String,
     required: true,
   },
@@ -387,10 +393,7 @@ function scrollToTab (tabIndex) {
       }
     });
 
-    container.scrollTo({
-      top: offsetTop,
-      behavior: 'smooth',
-    });
+    container.scrollTop = offsetTop;
   });
 }
 
@@ -478,6 +481,7 @@ onUnmounted(() => {
 
 <style lang="less" scoped>
 .d-emoji-picker{
+
   &__selector{
     min-height: 297px;
 
@@ -514,17 +518,28 @@ onUnmounted(() => {
   }
 
   &__tab{
-    gap: 10px;
+    gap: 2px;
     display: flex;
     flex-wrap: wrap;
 
     button{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+
       border: none;
       background: none;
       cursor: pointer;
       margin: 0;
       padding: 0;
       outline: none;
+
+      &:hover, &:active{
+        background: rgba(0, 0, 0, 0.1);
+      }
     }
   }
 }

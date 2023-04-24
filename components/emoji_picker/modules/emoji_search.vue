@@ -1,5 +1,5 @@
 <template>
-  <div class="d-emoji-picker__search">
+  <div class="d-emoji-picker__search d-emoji-picker__alignment">
     <dt-input
       :placeholder="searchPlaceholderLabel"
       :model-value="modelValue"
@@ -7,6 +7,19 @@
     >
       <template #leftIcon>
         <dt-icon name="search" />
+      </template>
+      <template
+        v-if="modelValue.length > 0"
+        #rightIcon
+      >
+        <button
+          class="d-emoji-picker__search-button"
+        >
+          <dt-icon
+            name="close"
+            @click="$emit('update:modelValue', '')"
+          />
+        </button>
       </template>
     </dt-input>
   </div>
@@ -29,11 +42,19 @@ defineProps({
 });
 </script>
 
-<style>
+<style scoped>
 .d-emoji-picker__search {
   position: relative;
   z-index: 1;
-  margin: var(--su16) 0 var(--su16) 0;
+  margin: var(--su16) auto var(--su16) auto;
   background-color: #FFFFFF;
+}
+.d-emoji-picker__search-button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    outline: none;
 }
 </style>

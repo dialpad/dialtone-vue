@@ -8,7 +8,7 @@
         v-for="skin in skinList"
         :key="skin.name"
         :class="{
-          'selected': skinSelected === skin.skinCode,
+          'selected': skinSelected.skinCode === skin.skinCode,
         }"
         @click="selectSkin(skin)"
       >
@@ -25,7 +25,10 @@
       v-show="!isOpen"
       class="d-emoji-picker__skin-selected"
     >
-      <button @click="isOpen = true">
+      <button
+        :title="skinSelectorButtonTooltipLabel"
+        @click="isOpen = true"
+      >
         <img
           class="d-icon d-icon--size-500"
           :alt="skinSelected.name"
@@ -39,8 +42,7 @@
 </template>
 
 <script setup>
-import { DtEmoji } from '@/components/emoji';
-import { computed, ref } from 'vue';
+import { ref, watch } from 'vue';
 import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
 
 const props = defineProps({
@@ -50,6 +52,16 @@ const props = defineProps({
    * @required
    */
   skinTone: {
+    type: String,
+    required: true,
+  },
+
+  isHovering: {
+    type: Boolean,
+    default: false,
+  },
+
+  skinSelectorButtonTooltipLabel: {
     type: String,
     required: true,
   },
@@ -104,7 +116,15 @@ const skinList = [
 ];
 
 const skinSelected = ref(skinList.find((skin) => skin.skinTone === props.skinTone));
+
 const isOpen = ref(false);
+
+/**
+ * It will close the skin selector if the user is hovering over the emoji list
+ */
+watch(
+  () => props.isHovering && (isOpen.value = false),
+);
 
 function selectSkin (skin) {
   skinSelected.value = skin;
@@ -155,6 +175,12 @@ function selectSkin (skin) {
       display: inline-block;
       background: rgba(0, 0, 0, 0.1);
       border-radius: 28px;
+      width: 42px;
+      height: 42px;
+
+      &:hover{
+        background: #D2D2D2;
+      }
     }
   }
 }

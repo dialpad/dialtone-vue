@@ -19,6 +19,7 @@
         :skin-tone="skinTone"
         :tabset-labels="tabSetLabels"
         :search-results-label="searchResultsLabel"
+        :search-no-results-label="searchNoResultsLabel"
         :recently-used-emojis="recentlyUsedEmojis"
         :selected-tabset="selectedTabset"
         @scroll-into-tab="updateScrollIntoTab"
@@ -30,6 +31,8 @@
     <div class="d-emoji-picker--footer">
       <emoji-description :emoji="emojiData" />
       <emoji-skin-selector
+        :is-hovering="!!emojiData"
+        :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
         :skin-tone="skinTone"
         @skin-tone="emits('skin-tone', $event)"
       />
@@ -85,6 +88,18 @@ const props = defineProps({
   },
 
   /**
+   * The label for the search no results
+   * @type {String}
+   * @required
+   * @example
+   * <dt-emoji-picker :searchNoResultsLabel="'No results'" />
+   */
+  searchNoResultsLabel: {
+    type: String,
+    required: true,
+  },
+
+  /**
    * The list of tabsets to show, it is necessary to be updated with the correct language
    * It must respect the provided order.
    * @type {Array}
@@ -109,6 +124,11 @@ const props = defineProps({
   skinTone: {
     type: String,
     default: 'Default',
+  },
+
+  skinSelectorButtonTooltipLabel: {
+    type: String,
+    required: true,
   },
 });
 const emits = defineEmits(
@@ -179,14 +199,14 @@ function cleanUp () {
 <style lang="less">
 .d-emoji-picker{
   width: auto;
-  max-width: 336px;
+  max-width: 372px;
   height: 100%;
   display: inline-flex;
   flex-direction: column;
   border-radius: 4px;
 
   &--header{
-    padding: var(--su4) var(--su4) 0 var(--su8);
+    padding: var(--su4) var(--su4) 0 var(--su4);
     position: relative;
     &::after{
       content: '';
@@ -199,14 +219,16 @@ function cleanUp () {
     }
   }
 
-  &--body{
-    padding: 0 var(--su16);
+  &__alignment{
+    width: auto;
+    max-width: 340px;
+    margin: 0 auto;
   }
 
   &--footer{
     height: 58px;
     background: #F9F9F9;
-    border-top: 1px solid #DFDEE5;
+    border-top: 1px solid var(--bc-subtle);
     display: flex;
     align-items: center;
     justify-content: space-between;

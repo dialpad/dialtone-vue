@@ -1,8 +1,10 @@
 <template>
   <dt-emoji-picker
     :skin-tone="skinTone"
+    :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
     :recently-used-emojis="recentlyUsedEmojis"
     :search-results-label="searchResultsLabel"
+    :search-no-results-label="searchNoResultsLabel"
     :search-placeholder-label="searchPlaceholderLabel"
     @skin-tone="updateSkinTone"
   />
@@ -23,6 +25,8 @@ const recentlyUsedEmojis = [
 
 const searchPlaceholderLabel = 'Search...';
 const searchResultsLabel = 'Search results';
+const searchNoResultsLabel = 'No results';
+const skinSelectorButtonTooltipLabel = 'Change default skin tone';
 
 const tabSetLabels = [
   'Recientes',
