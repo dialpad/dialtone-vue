@@ -160,18 +160,18 @@ export default {
     /**
      * Fires when hovered over feed row
      *
-     * @event onHover
+     * @event hover
      * @type {Boolean}
      */
-    'onHover',
+    'hover',
 
     /**
      * Fires when focused over feed row
      *
-     * @event onFocus
+     * @event focus
      * @type {Boolean}
      */
-    'onFocus',
+    'focus',
   ],
 
   computed: {
@@ -199,11 +199,11 @@ export default {
 
   methods: {
     setFocus (bool) {
-      this.$emit('onFocus', bool);
+      this.$emit('focus', bool);
     },
 
     setHover (bool) {
-      this.$emit('onHover', bool);
+      this.$emit('hover', bool);
     },
   },
 };
