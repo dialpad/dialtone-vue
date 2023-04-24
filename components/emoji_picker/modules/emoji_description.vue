@@ -32,6 +32,8 @@ defineProps({
 .d-emoji-picker {
   &__data {
     display: flex;
+    width: 100%;
+    max-width: 290px;
     align-items: center;
     gap: 10px;
   }
