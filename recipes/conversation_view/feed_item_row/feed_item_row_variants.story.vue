@@ -20,44 +20,41 @@
           <template
             #threading
           >
-            <div class="d-d-flex d-my6">
+            <div class="d-d-flex d-d-flow1 d-my6">
               <dt-avatar
                 presence="busy"
-                class="d-mx1"
                 seed="seed"
                 size="sm"
               >
                 <img
                   data-qa="dt-avatar-image"
-                  src="./person.png"
+                  src="@/common/assets/person.png"
                   alt="Person Avatar"
                 >
               </dt-avatar>
               <dt-avatar
                 presence="active"
-                class="d-mx1"
                 seed="seed"
                 size="sm"
               >
                 <img
                   data-qa="dt-avatar-image"
-                  src="./person.png"
+                  src="@/common/assets/person.png"
                   alt="Person Avatar"
                 >
               </dt-avatar>
               <dt-avatar
-                class="d-mx1"
                 seed="seed"
                 size="sm"
               >
                 <img
                   data-qa="dt-avatar-image"
-                  src="./person.png"
+                  src="@/common/assets/person.png"
                   alt="Person Avatar"
                 >
               </dt-avatar>
               <div
-                class="d-mx6 d-my-auto d-fs-100"
+                class="d-mx4 d-my-auto d-fs-100"
               >
                 3 replies
               </div>
@@ -96,7 +93,7 @@
           @on-focus="onFocus"
         >
           <dt-image-viewer
-            :image-src="require('./test.jpg')"
+            :image-src="require('@/common/assets/fry.gif')"
             image-alt="Alt Text"
             close-aria-label="Close"
             image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
@@ -105,44 +102,41 @@
           <template
             #threading
           >
-            <div class="d-d-flex d-my6">
+            <div class="d-d-flex d-d-flow1 d-my6">
               <dt-avatar
                 presence="busy"
-                class="d-mx1"
                 seed="seed"
                 size="sm"
               >
                 <img
                   data-qa="dt-avatar-image"
-                  src="./person.png"
+                  src="@/common/assets/person.png"
                   alt="Person Avatar"
                 >
               </dt-avatar>
               <dt-avatar
                 presence="active"
-                class="d-mx1"
                 seed="seed"
                 size="sm"
               >
                 <img
                   data-qa="dt-avatar-image"
-                  src="./person.png"
+                  src="@/common/assets/person.png"
                   alt="Person Avatar"
                 >
               </dt-avatar>
               <dt-avatar
-                class="d-mx1"
                 seed="seed"
                 size="sm"
               >
                 <img
                   data-qa="dt-avatar-image"
-                  src="./person.png"
+                  src="@/common/assets/person.png"
                   alt="Person Avatar"
                 >
               </dt-avatar>
               <div
-                class="d-mx6 d-my-auto d-fs-100"
+                class="d-mx4 d-my-auto d-fs-100"
               >
                 3 replies
               </div>

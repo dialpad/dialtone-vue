@@ -1,10 +1,9 @@
 <template>
   <dt-list-item
     ref="FeedItemRef"
-    element-type="li"
     navigation-type="tab"
-    class="d-w100p d-box-border d-ps-relative d-px16 d-py4"
-    :class="{ 'd-bgc-secondary-opaque': isActive }"
+    v-bind="$attrs"
+    :class="['d-w100p', 'd-box-border', 'd-ps-relative', 'd-px16', 'd-py4', { 'd-bgc-secondary-opaque': isActive }]"
     data-qa="feed-item-row"
     v-on="feedListeners"
   >
@@ -48,7 +47,7 @@
           {{ time }}
         </time>
       </div>
-      <!-- Default content slot -->
+      <!-- @slot Default content slot for feed item row -->
       <span class="content-text-wrapper-class">
         <slot />
       </span>
@@ -56,9 +55,10 @@
 
     <template #bottom>
       <div class="d-d-flex d-fw-wrap">
+        <!-- @slot Slot for reactions row component -->
         <slot name="reactions" />
       </div>
-      <!-- Threads -->
+      <!-- @slot Slot for threading row component -->
       <slot name="threading" />
     </template>
 
@@ -73,6 +73,7 @@
           transition="fade"
           :show="isActive"
         >
+          <!-- @slot Slot for actions hover menu component -->
           <slot name="menu" />
         </dt-lazy-show>
       </div>
@@ -94,8 +95,6 @@ export default {
     DtLazyShow,
     DtListItem,
   },
-
-  mixins: [],
 
   inheritAttrs: false,
 
@@ -143,7 +142,7 @@ export default {
     },
 
     /**
-     * displays a darked background on the row.
+     * displays a darkened background on the row.
      */
     isActive: {
       type: Boolean,

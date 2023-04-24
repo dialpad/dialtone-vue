@@ -42,7 +42,6 @@ export const argTypesData = {
 
   threading: {
     name: 'threading',
-    description: 'Slot for threading row component',
     control: 'text',
     table: {
       category: 'slots',
@@ -54,7 +53,6 @@ export const argTypesData = {
 
   reactions: {
     name: 'reactions',
-    description: 'Slot for reactions row component',
     control: 'text',
     table: {
       category: 'slots',
@@ -67,7 +65,6 @@ export const argTypesData = {
   menu: {
     name: 'menu',
     options: iconsList,
-    description: 'Slot for the actions hover menu component',
     table: {
       category: 'slots',
       type: { summary: 'component' },
