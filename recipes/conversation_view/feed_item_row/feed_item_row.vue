@@ -1,7 +1,7 @@
 <template>
   <dt-list-item
     ref="FeedItemRef"
-    navigation-type="tab"
+    navigation-type="none"
     v-bind="$attrs"
     :class="['d-w100p', 'd-box-border', 'd-ps-relative', 'd-px16', 'd-py4', { 'd-bgc-secondary-opaque': isActive }]"
     data-qa="feed-item-row"
