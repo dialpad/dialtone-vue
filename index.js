@@ -53,6 +53,8 @@ export * from './recipes/leftbar/general_row';
 export * from './recipes/leftbar/group_row';
 export * from './recipes/leftbar/contact_row';
 export * from './recipes/leftbar/unread_chip';
+export * from './recipes/conversation_view/feed_item_row';
+export * from './recipes/conversation_view/time_pill';
 
 // Mixins
 export * from './common/mixins';
