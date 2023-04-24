@@ -5,6 +5,7 @@
     size="xs"
     icon-position="right"
     class="d-h32 d-bar-pill d-bgc-blue-200 d-bgo25 h:d-bgo50 d-bc-blue-500 d-bco25 d-fc-blue-500"
+    :aria-label="ariaLabel"
   >
     <slot />
     <template #icon>
@@ -20,6 +21,7 @@
     importance="clear"
     kind="inverted"
     class="settings-menu-button d-p0 d-bar24 d-h32 d-w24 d-theme-topbar-fc"
+    :aria-label="ariaLabel"
   >
     <template #icon>
       <dt-icon
@@ -52,6 +54,14 @@ export default {
     updateAvailable: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Aria label
+     */
+    ariaLabel: {
+      type: String,
+      required: true,
     },
   },
 
