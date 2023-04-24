@@ -8,6 +8,16 @@ import DtRecipeFeedItemRowVariantsTemplate from './feed_item_row_variants.story.
 const iconsList = getIconNames();
 
 export const argsData = {
+  avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
+  displayName: 'Dwight Schrute',
+  time: '4:54 PM',
+  shortTime: '4:54',
+  onFocus: action('focus'),
+  onHover: action('hover'),
+  default: `<p>Elementum fames nullam elementum velit proin vitae aliquet.
+  Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
+  aliquet elementum venenatis quisque.</p>`,
+  menu: 'menu',
 };
 
 /*
@@ -112,30 +122,10 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   showHeader: true,
-  avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
-  displayName: 'Dwight Schrute',
-  time: '4:54 PM',
-  shortTime: '4:54',
-  onFocus: action('onFocus'),
-  onHover: action('onHover'),
-  default: `<p>Elementum fames nullam elementum velit proin vitae aliquet.
-  Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
-  aliquet elementum venenatis quisque.</p>`,
-  menu: 'menu',
   reactions: 'emoji reactions',
   threading: 'threading',
 };
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {
-  avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
-  displayName: 'Dwight Schrute',
-  time: '4:54 PM',
-  shortTime: '4:54',
-  onFocus: action('onFocus'),
-  onHover: action('onHover'),
-  default: `<p>Elementum fames nullam elementum velit proin vitae aliquet.
-  Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
-  aliquet elementum venenatis quisque.</p>`,
-  menu: 'menu',
 };

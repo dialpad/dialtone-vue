@@ -7,8 +7,8 @@
       :time="time"
       :short-time="shortTime"
       :is-active="isActive"
-      @on-hover="onHover"
-      @on-focus="onFocus"
+      @hover="onHover"
+      @focus="onFocus"
     >
       <template v-if="defaultSlot">
         <span v-html="defaultSlot" />

@@ -11,8 +11,8 @@
           :time="time"
           :short-time="shortTime"
           :is-active="true"
-          @on-hover="onHover"
-          @on-focus="onFocus"
+          @hover="onHover"
+          @focus="onFocus"
         >
           <template v-if="defaultSlot">
             <span v-html="defaultSlot" />
@@ -89,8 +89,8 @@
           :time="time"
           :short-time="shortTime"
           :is-active="true"
-          @on-hover="onHover"
-          @on-focus="onFocus"
+          @hover="onHover"
+          @focus="onFocus"
         >
           <dt-image-viewer
             :image-src="require('@/common/assets/fry.gif')"
