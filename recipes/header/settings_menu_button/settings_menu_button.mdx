@@ -1,0 +1,46 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeSettingsMenuButton from './settings_menu_button'
+
+# Settings Menu Button
+
+<Subtitle>
+  This is the button in the header that indicates the app settings menu. It can show if there is an app update.
+</Subtitle>
+
+## Base Style
+
+<Canvas>
+  <Story id="recipes-header-settings-menu-button--default" />
+</Canvas>
+
+## Variants
+
+<Canvas>
+  <Story id="recipes-header-settings-menu-button--variants" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeSettingsMenuButton } from '@dialpad/dialtone-vue';
+```
+
+### Simplest form
+
+```html
+<dt-recipe-settings-menu-button />
+```
+
+### Complex
+
+```html
+<dt-recipe-settings-menu-button
+  :update-available="true"
+/>
+```
