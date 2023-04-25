@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtImageViewer from './image_viewer.vue';
 
@@ -11,7 +10,13 @@ const baseProps = {
   ariaLabel: 'Click to open image',
 };
 
-describe('DtImageViewer Tests', function () {
+describe('DtImageViewer Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let imageViewerPreview;
@@ -22,7 +27,7 @@ describe('DtImageViewer Tests', function () {
   let overlay;
 
   // Environment
-  let props = baseProps;
+  const props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -67,37 +72,37 @@ describe('DtImageViewer Tests', function () {
   });
 
   // Teardown
-  afterEach(function () {
-    props = baseProps;
+  afterEach(() => {
+    props = props;
     attrs = {};
     slots = {};
     provide = {};
   });
-  after(function () {
+  afterAll(() => {
   });
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     /*
      * Test(s) to ensure that the component is correctly rendering
      */
 
-    describe('Viewing the image as a preview', function () {
-      it('should render the component', function () {
+    describe('Viewing the image as a preview', () => {
+      it('should render the component', () => {
         assert.exists(wrapper);
       });
 
-      it('Should display the image in a preview form', function () {
+      it('Should display the image in a preview form', () => {
         assert.exists(imageViewerPreview);
         assert.exists(previewImage);
       });
     });
 
-    describe('Viewing the image in full screen modal', function () {
-      beforeEach(async function () {
+    describe('Viewing the image in full screen modal', () => {
+      beforeEach(async () => {
         await _openModal();
       });
 
-      it('Should show the image and a close button', function () {
+      it('Should show the image and a close button', () => {
         assert.exists(fullImage);
         assert.exists(imageViewerFull.find('img'));
         assert.exists(closeButton);
@@ -105,66 +110,66 @@ describe('DtImageViewer Tests', function () {
     });
   });
 
-  describe('Accessibility Tests', function () {
+  describe('Accessibility Tests', () => {
     /*
      * Test(s) to ensure that the component is accessible
      */
 
-    describe('When image has not been clicked', function () {
-      it('should have an aria labels', function () {
-        assert.strictEqual(previewImage.attributes('alt'), baseProps.imageAlt);
-        assert.strictEqual(imageViewerPreview.attributes('aria-label'), baseProps.ariaLabel);
+    describe('When image has not been clicked', () => {
+      it('should have an aria labels', () => {
+        expect(previewImage.attributes('alt')).toBe(props.imageAlt);
+        expect(imageViewerPreview.attributes('aria-label')).toBe(props.ariaLabel);
       });
     });
 
-    describe('After the image is open', function () {
-      beforeEach(async function () {
+    describe('After the image is open', () => {
+      beforeEach(async () => {
         await _openModal();
       });
 
-      it('should have an aria labels', function () {
-        assert.strictEqual(fullImage.attributes('alt'), baseProps.imageAlt);
-        assert.strictEqual(closeButton.attributes('aria-label'), baseProps.closeAriaLabel);
+      it('should have an aria labels', () => {
+        expect(fullImage.attributes('alt')).toBe(props.imageAlt);
+        expect(closeButton.attributes('aria-label')).toBe(props.closeAriaLabel);
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
+  describe('Interactivity Tests', () => {
     /*
      * Test(s) to ensure that the component correctly handles user input
      */
 
-    describe('As an image preview', function () {
-      it('should open on click', async function () {
+    describe('As an image preview', () => {
+      it('should open on click', async () => {
         await _openModal();
         assert.exists(fullImage);
       });
     });
 
-    describe('After the image is open', function () {
-      beforeEach(async function () {
+    describe('After the image is open', () => {
+      beforeEach(async () => {
         await _openModal();
       });
 
-      it('Should close the image when I press close', async function () {
+      it('Should close the image when I press close', async () => {
         assert.exists(imageViewerFull);
 
         await closeButton.trigger('click');
         imageViewerFull = wrapper.find('[data-qa="dt-image-viewer-full"]');
-        assert.isFalse(imageViewerFull.exists());
+        expect(imageViewerFull.exists()).toBe(false);
       });
 
-      it('Should close the image when I press the background', async function () {
+      it('Should close the image when I press the background', async () => {
         assert.exists(imageViewerFull);
 
         await overlay.trigger('click');
 
         imageViewerFull = wrapper.find('[data-qa="dt-image-viewer-full"]');
 
-        assert.isFalse(imageViewerFull.exists());
+        expect(imageViewerFull.exists()).toBe(false);
       });
 
-      it('Should close the image when I press esc', async function () {
+      it('Should close the image when I press esc', async () => {
         assert.exists(imageViewerFull);
 
         await imageViewerFull.trigger('keydown', {
@@ -173,7 +178,7 @@ describe('DtImageViewer Tests', function () {
 
         imageViewerFull = wrapper.find('[data-qa="dt-image-viewer-full"]');
 
-        assert.isFalse(imageViewerFull.exists());
+        expect(imageViewerFull.exists()).toBe(false);
       });
     });
   });

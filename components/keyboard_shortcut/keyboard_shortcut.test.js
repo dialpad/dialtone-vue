@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
 import { DtIcon } from '@/components/icon';
@@ -9,7 +8,13 @@ const baseProps = {
   shortcut: SHORTCUTS_ALIASES_LIST.join('+').trim(),
 };
 
-describe('DtKeyboardShortcut Tests', function () {
+describe('DtKeyboardShortcut Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let iconComponents;
@@ -33,7 +38,13 @@ describe('DtKeyboardShortcut Tests', function () {
     // Setup
     _mountWrapper();
 
-    it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-    it('should render 11 icons', function () { assert.isTrue(iconComponents.length === 11); });
+    it(
+      'should render the component',
+      () => { assert.exists(wrapper, 'wrapper exists'); },
+    );
+    it(
+      'should render 11 icons',
+      () => { expect(iconComponents.length === 11).toBe(true); },
+    );
   });
 });

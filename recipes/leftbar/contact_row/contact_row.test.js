@@ -3,7 +3,7 @@
 // import DtRecipeContactRow from './contact_row.vue';
 
 // // Constants
-// const basePropsData = {};
+// const props = {};
 
 // describe('DtRecipeContactRow Tests', function () {
 //   // Wrappers
@@ -11,7 +11,7 @@
 //   let childContainer;
 
 //   // Environment
-//   let propsData = basePropsData;
+//   let props = props;
 //   let attrs = {};
 //   let slots = {};
 //   let provide = {};
@@ -23,7 +23,7 @@
 
 //   const _setWrappers = () => {
 //     wrapper = shallowMount(DtRecipeContactRow, {
-//       propsData,
+//       props,
 //       attrs,
 //       slots,
 //       provide,
@@ -45,7 +45,7 @@
 
 //   // Teardown
 //   afterEach(function () {
-//     propsData = basePropsData;
+//     props = props;
 //     attrs = {};
 //     slots = {};
 //     provide = {};

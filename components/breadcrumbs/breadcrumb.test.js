@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
+=======
+import { createLocalVue, mount } from '@vue/test-utils';
+>>>>>>> febc8cda (migrate tests)
 import DtBreadcrumb from './breadcrumbs.vue';
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 
@@ -29,7 +33,7 @@ const baseProps = {
   }],
 };
 
-describe('DtBreadcrumb Tests', function () {
+describe('DtBreadcrumb Tests', () => {
   // Wrappers
   let wrapper;
   let breadcrumbs;
@@ -52,7 +56,7 @@ describe('DtBreadcrumb Tests', function () {
   };
 
   // Setup
-  beforeEach(function () {
+  beforeEach(() => {
     _mountWrapper();
   });
 
@@ -61,51 +65,51 @@ describe('DtBreadcrumb Tests', function () {
     it('should render the breadcrumbs', function () { assert.exists(breadcrumbs.exists(), 'breadcrumbs exist'); });
     it('should render the item breadcrumb', function () { assert.isNotEmpty(breadcrumbItems); });
 
-    describe('When the breadcrumb has default state', function () {
-      it('should has correct aria-current', function () {
+    describe('When the breadcrumb has default state', () => {
+      it('should has correct aria-current', () => {
         const elementWithValidAria = breadcrumbItems.filter(item => {
           return item.find('[aria-current="location"]').exists();
         });
-        assert.equal(elementWithValidAria.length, 1);
+        expect(elementWithValidAria.length).toEqual(1);
       });
-      it('should has correct rendered items', function () {
-        assert.equal(breadcrumbItems.length, baseProps.breadcrumbs.length);
+      it('should has correct rendered items', () => {
+        expect(breadcrumbItems.length).toEqual(baseProps.breadcrumbs.length);
       });
-      it('should has correct sequence', function () {
-        assert.equal(breadcrumbItems.length, baseProps.breadcrumbs.length);
-        baseProps.breadcrumbs.forEach(({ label }, i) => {
-          assert.equal(breadcrumbItems.at(i).text(), label);
+      it('should has correct sequence', () => {
+        expect(breadcrumbItems.length).toEqual(baseProps.breadcrumbs.length);
+        props.breadcrumbs.forEach(({ label }, i) => {
+          expect(breadcrumbItems.at(i).text()).toEqual(label);
         });
       });
     });
 
-    describe('When a inverted is provided to breadcrumbs', function () {
-      before(function () {
+    describe('When a inverted is provided to breadcrumbs', () => {
+      beforeAll(() => {
         baseProps.inverted = true;
       });
-      it('should render label', function () {
-        assert.isTrue(breadcrumbs.classes().includes(BREADCRUMBS_INVERTED_MODIFIER));
+      it('should render label', () => {
+        expect(breadcrumbs.classes().includes(BREADCRUMBS_INVERTED_MODIFIER)).toBe(true);
       });
     });
 
-    describe('When a selected is provided to breadcrumbs', function () {
-      it('should render label', function () {
+    describe('When a selected is provided to breadcrumbs', () => {
+      it('should render label', () => {
         const elementWithValidAria = breadcrumbItems.filter(item => {
           return item.classes().includes(BREADCRUMB_ITEM_SELECTED_MODIFIER);
         });
-        assert.equal(elementWithValidAria.length, 1);
+        expect(elementWithValidAria.length).toEqual(1);
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When a new area-label is provided', function () {
-      before(function () {
+  describe('Accessibility Tests', () => {
+    describe('When a new area-label is provided', () => {
+      beforeAll(() => {
         baseProps.ariaLabel = 'newAria';
       });
 
-      it('should update area-label value', function () {
-        assert.strictEqual(breadcrumbs.attributes('aria-label'), 'newAria');
+      it('should update area-label value', () => {
+        expect(breadcrumbs.attributes('aria-label')).toBe('newAria');
       });
     });
   });

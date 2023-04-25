@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover';
 import DtRecipeCallbarButton from '../callbar_button/callbar_button';
@@ -9,7 +8,13 @@ const baseProps = {
   arrowButtonLabel: 'arrowButton',
 };
 
-describe('DtRecipeCallbarButtonWithPopover Tests', function () {
+describe('DtRecipeCallbarButtonWithPopover Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let arrow;
@@ -17,7 +22,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
   let popover;
 
   // Environment
-  let props = baseProps;
+  const props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -41,62 +46,78 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
   };
 
   // Setup
-  before(function () {
+  beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
     global.requestAnimationFrame = jest.fn();
     global.cancelAnimationFrame = jest.fn();
   });
-  beforeEach(function () {
+  beforeEach(() => {
     _setWrappers();
   });
 
   // Teardown
-  afterEach(function () {
-    props = baseProps;
+  afterEach(() => {
+    props = props;
     attrs = {};
     slots = {};
     provide = {};
     wrapper.unmount();
   });
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     /*
      * Test(s) to ensure that the component is correctly rendering
      */
 
-    it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-    it('should render the button', function () { assert.isTrue(button.exists()); });
-    it('should render the popover', function () { assert.isTrue(popover.exists()); });
-    it('should render the arrow', function () { assert.isTrue(arrow.exists()); });
+    it(
+      'should render the component',
+      () => { assert.exists(wrapper, 'wrapper exists'); },
+    );
+    it(
+      'should render the button',
+      () => { expect(button.exists()).toBe(true); },
+    );
+    it(
+      'should render the popover',
+      () => { expect(popover.exists()).toBe(true); },
+    );
+    it('should render the arrow', () => { expect(arrow.exists()).toBe(true); });
 
-    it('should not render the arrow if disabled', async function () {
+    it('should not render the arrow if disabled', async () => {
       await wrapper.setProps({ disabled: true });
       _setChildWrappers();
 
-      assert.isFalse(arrow.exists());
+      expect(arrow.exists()).toBe(false);
     });
 
-    it('should render the arrow if disabled but the forceShowArrow prop is true', async function () {
-      await wrapper.setProps({ disabled: true, forceShowArrow: true });
-      _setChildWrappers();
+    it(
+      'should render the arrow if disabled but the forceShowArrow prop is true',
+      async () => {
+        await wrapper.setProps({ disabled: true, forceShowArrow: true });
+        _setChildWrappers();
 
-      assert.isTrue(arrow.exists());
-    });
+        expect(arrow.exists()).toBe(true);
+      },
+    );
 
-    it('should propagate disabled, active and danger props to the button component', async function () {
-      await wrapper.setProps({ disabled: true, active: true, danger: true });
-      _setChildWrappers();
+    it(
+      'should propagate disabled, active and danger props to the button component',
+      async () => {
+        await wrapper.setProps({ disabled: true, active: true, danger: true });
+        _setChildWrappers();
 
-      const buttonProps = button.props();
+        const buttonProps = button.props();
 
-      assert.isTrue(buttonProps.disabled);
-      assert.isTrue(buttonProps.active);
-      assert.isTrue(buttonProps.danger);
-    });
+        expect(buttonProps.disabled).toBe(true);
+        expect(buttonProps.active).toBe(true);
+        expect(buttonProps.danger).toBe(true);
+      },
+    );
 
-    it('should propagate placement, initialFocusElement and showCloseButton props to the popover component',
-      async function () {
+    it(
+      'should propagate placement, initialFocusElement and showCloseButton props to the popover component',
+      async () => {
         await wrapper.setProps({
           placement: 'mock',
           initialFocusElement: '#mock',
@@ -106,10 +127,11 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
 
         const popoverProps = popover.props();
 
-        assert.isTrue(popoverProps.showCloseButton);
-        assert.equal(popoverProps.placement, 'mock');
-        assert.equal(popoverProps.initialFocusElement, '#mock');
-      });
+        expect(popoverProps.showCloseButton).toBe(true);
+        expect(popoverProps.placement).toEqual('mock');
+        expect(popoverProps.initialFocusElement).toEqual('#mock');
+      },
+    );
   });
 
   describe('Interactivity Tests', function () {
@@ -128,9 +150,10 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
         await button.trigger('click');
 
         const clickEvents = wrapper.emitted().click;
-        assert.equal(clickEvents.length, 1);
-        assert.isTrue(clickStub.called);
-      });
+        expect(clickEvents.length).toEqual(1);
+        expect(clickStub.called).toBe(true);
+      },
+      );
     });
 
     describe('When clicking on the arrow', function () {
@@ -143,14 +166,13 @@ describe('DtRecipeCallbarButtonWithPopover Tests', function () {
         await arrow.trigger('click');
       });
 
-      it('should pass the open prop to the popover, so it opens', function () {
-        assert.isTrue(wrapper.vm.open);
+      it('should pass the open prop to the popover, so it opens', () => {
+        expect(wrapper.vm.open).toBe(true);
       });
 
-      it('should trigger the "arrowClick" event', function () {
+      it('should trigger the "arrowClick" event', () => {
         const arrowClickEvents = wrapper.emitted().arrowClick;
-        assert.equal(arrowClickEvents.length, 1);
-        assert.isTrue(clickStub.called);
+        expect(arrowClickEvents.length).toEqual(1);
       });
     });
   });

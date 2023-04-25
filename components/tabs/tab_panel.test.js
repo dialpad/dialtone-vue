@@ -1,9 +1,8 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtTabPanel from './tab_panel.vue';
 import { flushPromises } from '@/common/utils';
 
-describe('DtTabPanel Tests', function () {
+describe('DtTabPanel Tests', () => {
   // Wrappers
   let wrapper;
   let tabPanel;
@@ -14,7 +13,7 @@ describe('DtTabPanel Tests', function () {
     disabled: false,
     selected: '',
   };
-  const propsData = {
+  const props = {
     id: '1',
     tabId: '2',
   };
@@ -25,7 +24,7 @@ describe('DtTabPanel Tests', function () {
   const _mountWrapper = () => {
     wrapper = mount(DtTabPanel, {
       slots,
-      propsData,
+      props,
       global: {
         provide: {
           groupContext,
@@ -36,117 +35,120 @@ describe('DtTabPanel Tests', function () {
     _setWrappers();
   };
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     // Setup
     _mountWrapper();
 
-    it('should render the component', function () {
+    it('should render the component', () => {
       assert.exists(wrapper, 'wrapper exists');
     });
 
-    it('should render the default slot', function () {
-      assert.strictEqual(tabPanel.text(), defaultSlot);
+    it('should render the default slot', () => {
+      expect(tabPanel.text()).toBe(defaultSlot);
     });
 
-    describe('Attributes', function () {
-      it('id attribute should be content the prop id', function () {
-        assert.strictEqual(tabPanel.attributes('id'), `dt-panel-${propsData.id}`);
-      });
-    });
-  });
-
-  describe('Interactivity Tests', function () {
-    describe('Selected state', function () {
-      beforeEach(function () {
-        groupContext.selected = propsData.id;
-        _mountWrapper();
-      });
-
-      it('default slot should be shown', function () {
-        assert.strictEqual(tabPanel.text(), defaultSlot);
-      });
-    });
-
-    describe('Hidden state', function () {
-      beforeEach(function () {
-        groupContext.selected = propsData.id;
-        _mountWrapper();
-      });
-
-      describe('Hidden by prop', function () {
-        before(function () {
-          propsData.hidden = true;
-        });
-
-        after(function () {
-          propsData.hidden = false;
-        });
-
-        it('aria-hidden should be "true"', function () {
-          assert.strictEqual(tabPanel.attributes('aria-hidden'), 'true');
-        });
+    describe('Attributes', () => {
+      it('id attribute should be content the prop id', () => {
+        expect(tabPanel.attributes('id')).toBe(`dt-panel-${props.id}`);
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('Unselected aria-hidden', function () {
-      beforeEach(function () {
-        groupContext.selected = propsData.id;
+  describe('Interactivity Tests', () => {
+    describe('Selected state', () => {
+      beforeEach(() => {
+        groupContext.selected = props.id;
         _mountWrapper();
       });
 
-      it('aria-hidden should be "false"', function () {
-        assert.strictEqual(tabPanel.attributes('aria-hidden'), 'false');
+      it('default slot should be shown', () => {
+        expect(tabPanel.text()).toBe(defaultSlot);
       });
     });
 
-    describe('Default A11y Attrs', function () {
-      beforeEach(function () {
+    describe('Hidden state', () => {
+      beforeEach(() => {
+        groupContext.selected = props.id;
+        _mountWrapper();
+      });
+
+      describe('Hidden by prop', () => {
+        beforeAll(() => {
+          props.hidden = true;
+        });
+
+        afterAll(() => {
+          props.hidden = false;
+        });
+
+        it('aria-hidden should be "true"', () => {
+          expect(tabPanel.attributes('aria-hidden')).toBe('true');
+        });
+      });
+    });
+  });
+
+  describe('Accessibility Tests', () => {
+    describe('Unselected aria-hidden', () => {
+      beforeEach(() => {
+        groupContext.selected = props.id;
+        _mountWrapper();
+      });
+
+      it('aria-hidden should be "false"', () => {
+        expect(tabPanel.attributes('aria-hidden')).toBe('false');
+      });
+    });
+
+    describe('Default A11y Attrs', () => {
+      beforeEach(() => {
         groupContext.selected = '';
         _mountWrapper();
       });
 
-      it('aria-hidden should be "true"', function () {
-        assert.strictEqual(tabPanel.attributes('aria-hidden'), 'true');
+      it('aria-hidden should be "true"', () => {
+        expect(tabPanel.attributes('aria-hidden')).toBe('true');
       });
 
-      it('aria-labelledby should be match the tab id', function () {
-        assert.strictEqual(tabPanel.attributes('aria-labelledby'), `dt-tab-${propsData.tabId}`);
+      it('aria-labelledby should be match the tab id', () => {
+        expect(tabPanel.attributes('aria-labelledby')).toBe(`dt-tab-${props.tabId}`);
       });
 
-      it('role should be "tabpanel"', function () {
-        assert.strictEqual(tabPanel.attributes('role'), 'tabpanel');
+      it('role should be "tabpanel"', () => {
+        expect(tabPanel.attributes('role')).toBe('tabpanel');
       });
 
-      it('tabindex should be "0" if the first element is not focusable', function () {
-        assert.strictEqual(tabPanel.attributes('tabindex'), '0');
-      });
+      it(
+        'tabindex should be "0" if the first element is not focusable',
+        () => {
+          expect(tabPanel.attributes('tabindex')).toBe('0');
+        },
+      );
     });
 
-    describe('When the first element is focusable', function () {
-      beforeEach(async function () {
+    describe('When the first element is focusable', () => {
+      beforeEach(async () => {
         slots.default = '<div><button>Focusable Slot</button></div>';
         await _mountWrapper();
         await flushPromises();
         _setWrappers();
       });
 
-      it('tabindex should be "-1"', function () {
-        assert.strictEqual(tabPanel.attributes('tabindex'), '-1');
+      it('tabindex should be "-1"', () => {
+        expect(tabPanel.attributes('tabindex')).toBe('-1');
       });
     });
 
-    describe(`When there is a focusable element but it isn't the first element`, function () {
-      beforeEach(async function () {
+    describe(`When there is a focusable element but it isn't the first element`, () => {
+      beforeEach(async () => {
         slots.default = '<h1>Content</h1><div><button>Focusable Slot</button></div>';
         await _mountWrapper();
         await flushPromises();
         _setWrappers();
       });
 
-      it('tabindex should be "0"', function () {
-        assert.strictEqual(tabPanel.attributes('tabindex'), '0');
+      it('tabindex should be "0"', () => {
+        expect(tabPanel.attributes('tabindex')).toBe('0');
       });
     });
   });

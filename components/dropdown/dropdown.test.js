@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { config, mount } from '@vue/test-utils';
 import DtDropdown from './dropdown.vue';
 import axe from 'axe-core';
@@ -17,7 +16,14 @@ const baseProps = {
 };
 
 const baseSlots = {
-  anchor: '<template #anchor="attrs"><a href="#" id="anchor" v-bind="attrs">Link</a></template>',
+  anchor: `<template #anchor="attrs">
+<a
+id="anchor"
+href="#"
+v-bind="attrs"
+>Link</a>
+</template>`,
+
   list: `<ul id="list">
     <li role="menuitem">1</li>
     <li role="menuitem">2</li>
@@ -25,7 +31,7 @@ const baseSlots = {
   </ul>`,
 };
 
-describe('DtDropdown Tests', function () {
+describe('DtDropdown Tests', () => {
   // Wrappers
   let wrapper;
   let anchorElement;
@@ -63,16 +69,25 @@ describe('DtDropdown Tests', function () {
   };
 
   // Setup
-  before(function () {
-    config.global.renderStubDefaultSlot = true;
+  beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
+    config.global.renderStubDefaultSlot = true;
     global.requestAnimationFrame = jest.fn();
     global.cancelAnimationFrame = jest.fn();
+    testContext.localVue = createLocalVue();
   });
 
-  // Test Teardown
-  after(function () {
+  // Teardown
+  afterEach(() => {
+    props = props;
+    slots = baseSlots;
+    scopedSlots = baseScopedSlots;
+    listeners = {};
+    wrapper.destroy();
+  });
+
+  afterAll(() => {
     config.global.renderStubDefaultSlot = false;
     // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
@@ -86,40 +101,52 @@ describe('DtDropdown Tests', function () {
     wrapper.unmount();
   });
 
-  describe('Presentation Tests', function () {
+  describe('Presentation Tests', () => {
     // Test setup
-    beforeEach(function () {
+    beforeEach(() => {
       _setWrappers();
     });
 
-    it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
+    it(
+      'should render the component',
+      () => { assert.exists(wrapper, 'wrapper exists'); },
+    );
 
-    it('should not render the visually hidden close button', async function () {
+    it('should not render the visually hidden close button', async () => {
       itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper, false);
     });
 
-    describe('When a list is provided', function () {
-      it('should render the list wrapper', function () { assert.isTrue(listWrapper.exists()); });
-      it('should render the anchor', function () { assert.isTrue(anchorElement.exists()); });
-      it('should render the list', function () { assert.isTrue(listWrapper.find('#list').exists()); });
+    describe('When a list is provided', () => {
+      it(
+        'should render the list wrapper',
+        () => { expect(listWrapper.exists()).toBe(true); },
+      );
+      it(
+        'should render the anchor',
+        () => { expect(anchorElement.exists()).toBe(true); },
+      );
+      it(
+        'should render the list',
+        () => { expect(wrapper.find('#list').exists()).toBe(true); },
+      );
     });
 
-    describe('When visuallyHiddenClose is true', function () {
-      beforeEach(async function () {
+    describe('When visuallyHiddenClose is true', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ visuallyHiddenClose: true });
       });
 
-      it('should contain a visually hidden close button', function () {
+      it('should contain a visually hidden close button', () => {
         itBehavesLikeVisuallyHiddenCloseButtonExists(wrapper);
       });
 
-      describe('When visuallyHiddenCloseLabel is null', function () {
-        beforeEach(async function () {
+      describe('When visuallyHiddenCloseLabel is null', () => {
+        beforeEach(async () => {
           initializeSpy();
           await wrapper.setProps({ visuallyHiddenCloseLabel: null });
         });
 
-        afterEach(function () {
+        afterEach(() => {
           cleanSpy();
         });
 
@@ -128,79 +155,88 @@ describe('DtDropdown Tests', function () {
     });
   });
 
-  describe('Accessibility Tests', function () {
-    describe('When the dropdown is not open', function () {
+  describe('Accessibility Tests', () => {
+    describe('When the dropdown is not open', () => {
       // Test setup
-      beforeEach(function () {
+      beforeEach(() => {
         props = {
-          ...baseProps,
+          ...props,
           open: false,
         };
         _setWrappers();
       });
 
-      it('aria-expanded should be "false"', function () {
-        assert.isTrue(anchorElement.attributes('aria-expanded') === 'false');
+      it('aria-expanded should be "false"', () => {
+        expect(anchorElement.attributes('aria-expanded') === 'false').toBe(true);
       });
     });
 
-    describe('When the dropdown is open', function () {
+    describe('When the dropdown is open', () => {
       // Test setup
-      beforeEach(function () {
+      beforeEach(() => {
         _setWrappers();
       });
 
-      it('aria-expanded should be "true"', function () {
-        assert.isTrue(anchorElement.attributes('aria-expanded') === 'true');
+      it('aria-expanded should be "true"', () => {
+        expect(anchorElement.attributes('aria-expanded') === 'true').toBe(true);
       });
 
-      it('should pass axe-core accessibility rules', async function () {
+      it('should pass axe-core accessibility rules', async () => {
         const a11yResults = await axe.run(wrapper.element, configA11y);
         const violations = a11yResults.violations;
         if (violations.length) {
           console.log('axe-core accessibility violations:', violations);
         }
-        assert.equal(violations.length, 0);
+        expect(violations.length).toEqual(0);
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
+  describe('Interactivity Tests', () => {
     // Test setup
-    beforeEach(function () {
+    beforeEach(() => {
       highlightStub = jest.fn();
       attrs = { onHighlight: highlightStub };
       _setWrappers();
     });
 
-    describe('When the highlightIndex changes', function () {
-      beforeEach(async function () {
+    describe('When the highlightIndex changes', () => {
+      beforeEach(async () => {
         wrapper.vm.setHighlightIndex(1);
         await wrapper.vm.$nextTick();
       });
 
-      it('should call listener', function () { assert.isTrue(highlightStub.called); });
-      it('should emit highlight event', function () { assert.equal(wrapper.emitted().highlight.length, 1); });
+      it(
+        'should call listener',
+        () => { expect(highlightStub.called).toBe(true); },
+      );
+      it(
+        'should emit highlight event',
+        () => { expect(wrapper.emitted().highlight.length).toEqual(1); },
+      );
     });
 
-    describe('When mouseleave is detected on the list wrapper', function () {
+    describe('When mouseleave is detected on the list wrapper', () => {
       // Test Setup
-      beforeEach(async function () {
+      beforeEach(async () => {
         await listWrapper.trigger('mouseleave');
       });
 
-      it('should reset the highlightIndex', function () { assert.equal(wrapper.vm.highlightIndex, -1); });
+      it(
+        'should reset the highlightIndex',
+        () => { expect(wrapper.vm.highlightIndex).toEqual(-1); },
+      );
     });
 
-    describe('When sr-only close button is enabled and activated', function () {
-      beforeEach(async function () {
+    describe('When sr-only close button is enabled and activated', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ visuallyHiddenClose: true });
         _setChildWrappers();
         await wrapper.findComponent(SrOnlyCloseButton).trigger('click');
       });
 
-      it('should close the dropdown', function () {
-        assert.isTrue(anchorElement.attributes('aria-expanded') === 'false');
+      it('should close the dropdown', () => {
+        expect(anchorElement.attributes('aria-expanded') === 'false').toBe(true);
       });
     });
   });

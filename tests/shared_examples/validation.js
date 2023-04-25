@@ -1,5 +1,3 @@
-import { assert } from 'chai';
-
 let consoleErrorSpy;
 
 export const initializeSpy = () => {
@@ -12,30 +10,33 @@ export const cleanSpy = () => {
 };
 
 export function itBehavesLikePassesCustomPropValidation (prop, value) {
-  it('passes custom prop validation', function () {
-    assert.strictEqual(prop.validator(value), true);
+  it('passes custom prop validation', () => {
+    expect(prop.validator(value)).toBe(true);
   });
 }
 
 export function itBehavesLikeFailsCustomPropValidation (prop, value) {
-  it('fails custom prop validation', function () {
-    assert.strictEqual(prop.validator(value), false);
+  it('fails custom prop validation', () => {
+    expect(prop.validator(value)).toBe(false);
   });
 }
 
 export const itBehavesLikeDoesNotRaiseAnyVueWarnings = () => {
-  it('should not raise any warnings', function () { assert.isTrue(console.warn.notCalled); });
+  it('should not raise any warnings', function () { expect(console.warn).not.toHaveBeenCalled(); });
 };
 
 export const itBehavesLikeRaisesSingleVueWarning = (message) => {
-  it('should raise a single warning', function () { assert.isTrue(console.warn.calledOnce); });
+  it('should raise a single warning', function () { expect(console.warn).toHaveBeenCalledTimes(1); });
   it('should have expected warning message', function () {
-    assert.strictEqual(console.warn.firstCall.args[0], message);
+    expect(console.warn).toHaveBeenCalledWith(message);
   });
 };
 
 export const itBehavesLikeRaisesValidationError = (message) => {
-  it('should raise a validation error', function () { assert.isTrue(consoleErrorSpy.calledWith(message)); });
+  it(
+    'should raise a validation error',
+    () => { expect(consoleErrorSpy.calledWith(message)).toBe(true); },
+  );
 };
 
 export default {

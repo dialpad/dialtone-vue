@@ -1,10 +1,15 @@
 import { shallowMount } from '@vue/test-utils';
-import { assert } from 'chai';
 import DtButton from './button.vue';
 import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 import { itBehavesLikeAppliesClassToChild } from '../../tests/shared_examples/extendability';
 
-describe('DtButton Tests', function () {
+describe('DtButton Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   let wrapper;
   let button;
   let icon;
@@ -22,33 +27,35 @@ describe('DtButton Tests', function () {
 
   const _assertButtonDefaultClasses = function () {
     const expected = ['base-button__button', 'd-btn', 'd-btn--primary'];
-    assert.isTrue(button.classes().every(function (value, index) { return value === expected[index]; }));
+    expect(
+      button.classes().every(function (value, index) { return value === expected[index]; }),
+    ).toBe(true);
   };
 
-  describe('Presentation Tests', function () {
-    describe('When rendered with default props', function () {
-      beforeEach(function () {
+  describe('Presentation Tests', () => {
+    describe('When rendered with default props', () => {
+      beforeEach(() => {
         props = {};
         wrapper = shallowMount(DtButton, { props });
         _setElements();
       });
 
-      it('Should render the native button', function () {
+      it('Should render the native button', () => {
         assert.exists(wrapper, 'wrapper exists');
-        assert.isTrue(button.exists(), '<button> native html must be rendered');
+        expect(button.exists()).toBe(true);
       });
 
-      it('Should render primary by default', async function () {
+      it('Should render primary by default', async () => {
         // Default (no props) button should be d-btn--primary
-        assert.isTrue(button.classes().includes('d-btn--primary'));
+        expect(button.classes().includes('d-btn--primary')).toBe(true);
       });
 
-      it('Should not render label', async function () {
-        assert.isFalse(label.exists());
+      it('Should not render label', async () => {
+        expect(label.exists()).toBe(false);
       });
 
-      describe('When button is a circle', function () {
-        beforeEach(async function () {
+      describe('When button is a circle', () => {
+        beforeEach(async () => {
           // Test that main class is populated with input props
           const props = {
             circle: true,
@@ -57,14 +64,14 @@ describe('DtButton Tests', function () {
           await wrapper.setProps(props);
         });
 
-        it('Should have circle class', async function () {
+        it('Should have circle class', async () => {
           button = wrapper.find('.base-button__button');
-          assert.isTrue(button.classes().includes('d-btn--circle'));
+          expect(button.classes().includes('d-btn--circle')).toBe(true);
         });
       });
 
-      describe('When button has kind set to danger', function () {
-        beforeEach(async function () {
+      describe('When button has kind set to danger', () => {
+        beforeEach(async () => {
           // Test that main class is populated with input props
           const props = {
             kind: 'danger',
@@ -72,27 +79,27 @@ describe('DtButton Tests', function () {
           await wrapper.setProps(props);
         });
 
-        it('Should have danger class', async function () {
+        it('Should have danger class', async () => {
           button = wrapper.find('.base-button__button');
-          assert.isTrue(button.classes().includes('d-btn--danger'));
+          expect(button.classes().includes('d-btn--danger')).toBe(true);
         });
       });
 
-      describe('When button has an invalid kind prop', function () {
-        beforeEach(async function () {
+      describe('When button has an invalid kind prop', () => {
+        beforeEach(async () => {
           const props = {
             kind: 'bad',
           };
           await wrapper.setProps(props);
         });
 
-        it('should not have danger class', async function () {
+        it('should not have danger class', async () => {
           _assertButtonDefaultClasses();
         });
       });
 
-      describe('When button has importance set to outlined', function () {
-        beforeEach(async function () {
+      describe('When button has importance set to outlined', () => {
+        beforeEach(async () => {
           // Test that main class is populated with input props
           const props = {
             importance: 'outlined',
@@ -100,27 +107,27 @@ describe('DtButton Tests', function () {
           await wrapper.setProps(props);
         });
 
-        it('Should have outlined class', async function () {
+        it('Should have outlined class', async () => {
           button = wrapper.find('.base-button__button');
-          assert.isTrue(button.classes().includes('d-btn--outlined'));
+          expect(button.classes().includes('d-btn--outlined')).toBe(true);
         });
       });
 
-      describe('When button has an invalid importance prop', function () {
-        beforeEach(async function () {
+      describe('When button has an invalid importance prop', () => {
+        beforeEach(async () => {
           const props = {
             importance: 'bad',
           };
           await wrapper.setProps(props);
         });
 
-        it('should not have importance class', async function () {
+        it('should not have importance class', async () => {
           _assertButtonDefaultClasses();
         });
       });
 
-      describe('When button has loading set to true', function () {
-        beforeEach(async function () {
+      describe('When button has loading set to true', () => {
+        beforeEach(async () => {
           // Test that main class is populated with input props
           const props = {
             loading: true,
@@ -128,27 +135,27 @@ describe('DtButton Tests', function () {
           await wrapper.setProps(props);
         });
 
-        it('Should have loading class', async function () {
+        it('Should have loading class', async () => {
           button = wrapper.find('.base-button__button');
-          assert.isTrue(button.classes().includes('d-btn--loading'));
+          expect(button.classes().includes('d-btn--loading')).toBe(true);
         });
       });
 
-      describe('When button has loading set to false', function () {
-        beforeEach(async function () {
+      describe('When button has loading set to false', () => {
+        beforeEach(async () => {
           const props = {
             loading: false,
           };
           await wrapper.setProps(props);
         });
 
-        it('should not have loading class', async function () {
+        it('should not have loading class', async () => {
           _assertButtonDefaultClasses();
         });
       });
 
-      describe('When button has active set to true', function () {
-        beforeEach(async function () {
+      describe('When button has active set to true', () => {
+        beforeEach(async () => {
           // Test that main class is populated with input props
           const props = {
             active: true,
@@ -156,14 +163,14 @@ describe('DtButton Tests', function () {
           await wrapper.setProps(props);
         });
 
-        it('Should have active class', async function () {
+        it('Should have active class', async () => {
           button = wrapper.find('.base-button__button');
-          assert.isTrue(button.classes().includes('d-btn--active'));
+          expect(button.classes().includes('d-btn--active')).toBe(true);
         });
       });
 
-      describe('When button has active set to false', function () {
-        beforeEach(async function () {
+      describe('When button has active set to false', () => {
+        beforeEach(async () => {
           // Test that main class is populated with input props
           const props = {
             active: false,
@@ -171,13 +178,13 @@ describe('DtButton Tests', function () {
           await wrapper.setProps(props);
         });
 
-        it('Should not have active class', async function () {
+        it('Should not have active class', async () => {
           _assertButtonDefaultClasses();
         });
       });
 
-      describe('When button only contains an icon', function () {
-        beforeEach(function () {
+      describe('When button only contains an icon', () => {
+        beforeEach(() => {
           props = {};
           wrapper = shallowMount(DtButton, {
             props,
@@ -188,14 +195,14 @@ describe('DtButton Tests', function () {
           _setElements();
         });
 
-        it('should have icon only class', async function () {
+        it('should have icon only class', async () => {
           button = wrapper.find('.base-button__button');
-          assert.isTrue(button.classes().includes('d-btn--icon-only'));
+          expect(button.classes().includes('d-btn--icon-only')).toBe(true);
         });
       });
 
-      describe('When button contains an icon and text', function () {
-        beforeEach(function () {
+      describe('When button contains an icon and text', () => {
+        beforeEach(() => {
           props = {};
           wrapper = shallowMount(DtButton, {
             props,
@@ -207,13 +214,13 @@ describe('DtButton Tests', function () {
           _setElements();
         });
 
-        it('should not have icon only class', async function () {
+        it('should not have icon only class', async () => {
           _assertButtonDefaultClasses();
         });
       });
 
-      describe('When size is set to xl', function () {
-        beforeEach(async function () {
+      describe('When size is set to xl', () => {
+        beforeEach(async () => {
           // Test that main class is populated with input props
           const props = {
             size: 'xl',
@@ -221,69 +228,71 @@ describe('DtButton Tests', function () {
           await wrapper.setProps(props);
         });
 
-        it('Class is set to the correct size', async function () {
+        it('Class is set to the correct size', async () => {
           button = wrapper.find('.base-button__button');
-          assert.isTrue(button.classes().includes('d-btn--xl'));
+          expect(button.classes().includes('d-btn--xl')).toBe(true);
         });
       });
 
-      describe('When button has an invalid size prop', function () {
-        beforeEach(async function () {
+      describe('When button has an invalid size prop', () => {
+        beforeEach(async () => {
           const props = {
             size: 'extra medium',
           };
           await wrapper.setProps(props);
         });
 
-        it('should not have a size class', async function () {
+        it('should not have a size class', async () => {
           _assertButtonDefaultClasses();
         });
       });
 
-      describe('When link prop is set to true', function () {
-        beforeEach(async function () {
+      describe('When link prop is set to true', () => {
+        beforeEach(async () => {
           const props = {
             link: true,
           };
           await wrapper.setProps(props);
         });
 
-        it('d-link class is rendered on button', function () {
-          assert.isTrue(button.classes().includes('d-link'));
+        it('d-link class is rendered on button', () => {
+          expect(button.classes().includes('d-link')).toBe(true);
         });
 
-        describe('When link kind is invalid', function () {
-          beforeEach(async function () {
+        describe('When link kind is invalid', () => {
+          beforeEach(async () => {
             const props = {
               linkKind: 'fake kind',
             };
             await wrapper.setProps(props);
           });
 
-          it('does not set any link kind class', function () {
+          it('does not set any link kind class', () => {
             button = wrapper.find('.base-button__button');
             const expected = ['base-button__button', 'd-link'];
-            assert.isTrue(button.classes().every(function (value, index) { return value === expected[index]; }));
+            expect(
+              button.classes().every(function (value, index) { return value === expected[index]; }),
+            ).toBe(true);
           });
         });
 
-        describe('When link kind is danger', function () {
-          beforeEach(async function () {
+        describe('When link kind is danger', () => {
+          beforeEach(async () => {
             const props = {
               linkKind: 'danger',
             };
             await wrapper.setProps(props);
           });
 
-          it('sets the correct class', function () {
-            assert.isTrue(button.classes().includes('d-link--danger'));
+          it('sets the correct class', () => {
+            expect(button.classes().includes('d-link--danger')).toBe(true);
           });
         });
       });
     });
 
-    describe('With icon slot populated', function () {
-      beforeEach(function () {
+    describe('With icon slot populated', () => {
+      beforeEach(() => {
         props = {};
         wrapper = shallowMount(DtButton, {
           props,
@@ -295,35 +304,47 @@ describe('DtButton Tests', function () {
         _setElements();
       });
 
-      it('Should add appropriate position class to icon when iconPosition is "left"', async function () {
-        await wrapper.setProps({ iconPosition: 'left' });
-        icon = wrapper.find('.base-button__icon');
-        assert.isTrue(icon.classes().includes('d-btn__icon--left'));
-      });
+      it(
+        'Should add appropriate position class to icon when iconPosition is "left"',
+        async () => {
+          await wrapper.setProps({ iconPosition: 'left' });
+          icon = wrapper.find('.base-button__icon');
+          expect(icon.classes().includes('d-btn__icon--left')).toBe(true);
+        },
+      );
 
-      it('Should add appropriate position class to icon when iconPosition is "right"', async function () {
-        await wrapper.setProps({ iconPosition: 'right' });
-        icon = wrapper.find('.base-button__icon');
-        assert.isTrue(icon.classes().includes('d-btn__icon--right'));
-      });
+      it(
+        'Should add appropriate position class to icon when iconPosition is "right"',
+        async () => {
+          await wrapper.setProps({ iconPosition: 'right' });
+          icon = wrapper.find('.base-button__icon');
+          expect(icon.classes().includes('d-btn__icon--right')).toBe(true);
+        },
+      );
 
-      it('Should add appropriate classes when iconPosition is "top"', async function () {
-        await wrapper.setProps({ iconPosition: 'top' });
-        icon = wrapper.find('.base-button__icon');
-        assert.isTrue(icon.classes().includes('d-btn__icon--top'));
-        assert.isTrue(button.classes().includes('d-btn--vertical'));
-      });
+      it(
+        'Should add appropriate classes when iconPosition is "top"',
+        async () => {
+          await wrapper.setProps({ iconPosition: 'top' });
+          icon = wrapper.find('.base-button__icon');
+          expect(icon.classes().includes('d-btn__icon--top')).toBe(true);
+          expect(button.classes().includes('d-btn--vertical')).toBe(true);
+        },
+      );
 
-      it('Should add appropriate classes when iconPosition is "bottom"', async function () {
-        await wrapper.setProps({ iconPosition: 'bottom' });
-        icon = wrapper.find('.base-button__icon');
-        assert.isTrue(icon.classes().includes('d-btn__icon--bottom'));
-        assert.isTrue(button.classes().includes('d-btn--vertical'));
-      });
+      it(
+        'Should add appropriate classes when iconPosition is "bottom"',
+        async () => {
+          await wrapper.setProps({ iconPosition: 'bottom' });
+          icon = wrapper.find('.base-button__icon');
+          expect(icon.classes().includes('d-btn__icon--bottom')).toBe(true);
+          expect(button.classes().includes('d-btn--vertical')).toBe(true);
+        },
+      );
     });
 
-    describe('When default slot is populated with text', function () {
-      beforeEach(function () {
+    describe('When default slot is populated with text', () => {
+      beforeEach(() => {
         props = {};
         wrapper = shallowMount(DtButton, {
           props,
@@ -334,14 +355,14 @@ describe('DtButton Tests', function () {
         _setElements();
       });
 
-      it('text should display in the button label', function () {
-        assert.strictEqual(wrapper.find('.base-button__label').text(), 'hello');
+      it('text should display in the button label', () => {
+        expect(wrapper.find('.base-button__label').text()).toBe('hello');
       });
     });
   });
 
-  describe('Interactivity Tests', function () {
-    beforeEach(function () {
+  describe('Interactivity Tests', () => {
+    beforeEach(() => {
       buttonStub = jest.fn();
       attrs = { onClick: buttonStub };
       props = {};
@@ -355,26 +376,26 @@ describe('DtButton Tests', function () {
       _setElements();
     });
 
-    describe('When button is clicked', function () {
-      beforeEach(async function () {
+    describe('When button is clicked', () => {
+      beforeEach(async () => {
         await button.trigger('click');
       });
 
-      it('Should call listener', async function () {
-        assert.isTrue(buttonStub.called);
+      it('Should call listener', async () => {
+        expect(buttonStub.called).toBe(true);
       });
 
-      it('Should emit click event', function () {
-        assert.equal(wrapper.emitted('click').length, 1);
+      it('Should emit click event', () => {
+        expect(wrapper.emitted().click).toEqual();
       });
     });
   });
 
-  describe('Extendability Tests', function () {
+  describe('Extendability Tests', () => {
     const customClass = 'my-custom-class';
 
-    describe('When an label class is provided', function () {
-      beforeEach(function () {
+    describe('When an label class is provided', () => {
+      beforeEach(() => {
         props = {
           labelClass: customClass,
         };
@@ -385,14 +406,14 @@ describe('DtButton Tests', function () {
         _setElements();
       });
 
-      it('should apply custom class to child', function () {
+      it('should apply custom class to child', () => {
         itBehavesLikeAppliesClassToChild(wrapper, '.my-custom-class', label);
       });
     });
   });
 
-  describe('Accessibility Tests', function () {
-    beforeEach(function () {
+  describe('Accessibility Tests', () => {
+    beforeEach(() => {
       wrapper = shallowMount(DtButton, {
         attrs,
         props,
@@ -400,28 +421,28 @@ describe('DtButton Tests', function () {
       _setElements();
     });
 
-    describe('When assertiveOnFocus is true', function () {
-      beforeEach(async function () {
+    describe('When assertiveOnFocus is true', () => {
+      beforeEach(async () => {
         await wrapper.setProps({ assertiveOnFocus: true });
       });
 
-      describe('When button is focused', function () {
-        beforeEach(async function () {
+      describe('When button is focused', () => {
+        beforeEach(async () => {
           await wrapper.setData({ isInFocus: true });
         });
 
-        it('aria-live should be set to "assertive"', async function () {
-          assert.isTrue(wrapper.attributes('aria-live') === 'assertive');
+        it('aria-live should be set to "assertive"', async () => {
+          expect(wrapper.attributes('aria-live') === 'assertive').toBe(true);
         });
       });
 
-      describe('When button is not in focus', function () {
-        beforeEach(async function () {
+      describe('When button is not in focus', () => {
+        beforeEach(async () => {
           await wrapper.setData({ isInFocus: false });
         });
 
-        it('aria-live is "falsy"', async function () {
-          assert.isNotOk(wrapper.attributes('aria-live'));
+        it('aria-live is "falsy"', async () => {
+          expect(wrapper.attributes('aria-live')).toBeFalsy();
         });
       });
     });

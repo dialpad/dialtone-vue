@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtRecipeGeneralRow from './general_row.vue';
 import {
@@ -8,12 +7,18 @@ import {
 } from '@/recipes/leftbar/general_row/general_row_constants';
 
 // Constants
-const basePropsData = {
+const props = {
   type: 'inbox',
   description: 'Description',
 };
 
-describe('DtRecipeGeneralRow Tests', function () {
+describe('DtRecipeGeneralRow Tests', () => {
+  let testContext;
+
+  beforeAll(() => {
+    testContext = {};
+  });
+
   // Wrappers
   let wrapper;
   let iconType;
@@ -21,7 +26,7 @@ describe('DtRecipeGeneralRow Tests', function () {
   let unreadBadge;
 
   // Environment
-  let propsData = basePropsData;
+  let props = props;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -35,7 +40,7 @@ describe('DtRecipeGeneralRow Tests', function () {
 
   const _setWrappers = () => {
     wrapper = mount(DtRecipeGeneralRow, {
-      propsData,
+      props,
       attrs,
       slots,
       provide,
@@ -46,107 +51,112 @@ describe('DtRecipeGeneralRow Tests', function () {
   // Setup
   before(function () {});
 
-  beforeEach(function () {
-    propsData = basePropsData;
+  beforeEach(() => {
+    props = props;
     slots = {};
     _setWrappers();
   });
 
   // Teardown
-  afterEach(function () {
-    propsData = basePropsData;
+  afterEach(() => {
+    props = props;
     attrs = {};
     slots = {};
     provide = {};
   });
-  after(function () {});
+  afterAll(() => {});
 
-  describe('Presentation Tests', function () {
-    describe('When the leftbar renders', function () {
+  describe('Presentation Tests', () => {
+    describe('When the leftbar renders', () => {
       // Test Setup
-      beforeEach(function () { _setWrappers(); });
+      beforeEach(() => { _setWrappers(); });
 
-      it('should exist', function () { assert.exists(wrapper); });
+      it('should exist', () => { assert.exists(wrapper); });
 
-      it('should render the icon', function () {
-        assert.isTrue(iconType.exists());
+      it('should render the icon', () => {
+        expect(iconType.exists()).toBe(true);
         assert.exists(iconType.find('svg'));
       });
 
-      it('should render the description', function () {
-        assert.strictEqual(description.text(), basePropsData.description);
+      it('should render the description', () => {
+        expect(description.text()).toBe(props.description);
       });
     });
 
-    describe('When a unreadCount is provided', function () {
+    describe('When a unreadCount is provided', () => {
       // Test Environment
       const unreadCount = '25';
       const hasUnreads = true;
 
       // Test Setup
-      beforeEach(function () {
-        propsData = { ...propsData, hasUnreads, unreadCount };
+      beforeEach(() => {
+        props = { ...props, hasUnreads, unreadCount };
         _setWrappers();
       });
 
-      it('should render the unreadCount', function () {
-        assert.strictEqual(unreadBadge.text(), unreadCount);
+      it('should render the unreadCount', () => {
+        expect(unreadBadge.text()).toBe(unreadCount);
       });
     });
 
-    describe('When type is contact center', function () {
+    describe('When type is contact center', () => {
       // Test Environment
       const type = LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER;
       const color = 'red';
 
       // Test Setup
-      beforeEach(function () {
-        propsData = { ...propsData, type, color };
+      beforeEach(() => {
+        props = { ...props, type, color };
         _setWrappers();
       });
 
-      it('should render the contact center icon', function () {
+      it('should render the contact center icon', () => {
         assert.exists(iconType.find('.leftbar-general-row__contact-center-icon'));
       });
 
-      it('should render the contact center icon with the correct color', function () {
-        assert.exists(iconType.find(`.${LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS[color]}`));
-      });
+      it(
+        'should render the contact center icon with the correct color',
+        () => {
+          assert.exists(iconType.find(`.${LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS[color]}`));
+        },
+      );
     });
 
-    describe('When type is dialbot', function () {
+    describe('When type is dialbot', () => {
       // Test Environment
       const type = LEFTBAR_GENERAL_ROW_TYPES.DIALBOT;
 
       // Test Setup
-      beforeEach(function () {
-        propsData = { ...propsData, type };
+      beforeEach(() => {
+        props = { ...props, type };
         _setWrappers();
       });
 
-      it('should render the icon', function () {
+      it('should render the icon', () => {
         assert.exists(iconType.find('.leftbar-general-row__dialbot-icon'));
       });
     });
 
-    describe('When type is contact center and no color is provided', function () {
+    describe('When type is contact center and no color is provided', () => {
       // Test Environment
       let consoleErrorSpy;
       const type = LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER;
 
-      beforeEach(async function () {
+      beforeEach(async () => {
         consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
-        propsData = { ...propsData, type };
+        props = { ...props, type };
         _setWrappers();
       });
 
-      afterEach(function () {
+      afterEach(() => {
         consoleErrorSpy = null;
         console.error.mockRestore();
       });
 
-      it('should output error message', function () {
-        assert.isTrue(consoleErrorSpy.calledWith(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR));
+      it('should output error message', () => {
+        expect(
+          consoleErrorSpy.calledWith(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR),
+        ).toBe(true);
       });
     });
   });
