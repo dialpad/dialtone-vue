@@ -10,8 +10,8 @@
       @hover="$attrs.onHover"
       @focus="$attrs.onFocus"
     >
-      <template v-if="$attrs.defaultSlot">
-        <span v-html="$attrs.defaultSlot" />
+      <template v-if="$attrs.default">
+        <span v-html="$attrs.default" />
       </template>
       <template
         v-if="$attrs.threading"
