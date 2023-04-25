@@ -86,6 +86,18 @@ export const argTypesData = {
       },
     },
   },
+
+  // Events
+  onFocus: {
+    table: {
+      disable: true,
+    },
+  },
+  onHover: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Story Collection
