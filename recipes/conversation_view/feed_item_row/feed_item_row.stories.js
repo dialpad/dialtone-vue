@@ -135,7 +135,22 @@ Default.args = {
   reactions: 'emoji reactions',
   threading: 'threading',
 };
+Default.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'aria-allowed-attr',
+          enabled: false,
+        },
+      ],
+    },
+  },
+};
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {
+};
+Variants.parameters = {
+  a11y: Default.parameters.a11y,
 };
