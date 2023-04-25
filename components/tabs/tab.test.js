@@ -1,5 +1,4 @@
 import { assert } from 'chai';
-import sinon from 'sinon';
 import { mount } from '@vue/test-utils';
 import DtTab from './tab.vue';
 import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants.js';
@@ -26,14 +25,14 @@ describe('DtTab Tests', function () {
   const _setWrappers = () => {
     tab = wrapper.find('[data-qa="dt-tab"]');
   };
-  const changeContentPanel = sinon.spy();
+  const changeContentPanel = jest.fn();
   const _mountWrapper = () => {
     wrapper = mount(DtTab, {
       slots,
       propsData,
       global: {
         provide: {
-          setFocus: sinon.spy(),
+          setFocus: jest.fn(),
           groupContext,
           changeContentPanel,
         },

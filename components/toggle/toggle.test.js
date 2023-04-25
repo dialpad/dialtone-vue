@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { assert } from 'chai';
 import DtToggle from './toggle.vue';
-import sinon from 'sinon';
 import {
   itBehavesLikeDoesNotRaiseAnyVueWarnings,
   itBehavesLikeRaisesSingleVueWarning,
@@ -170,12 +169,12 @@ describe('DtToggle Tests', function () {
 
         // Test Setup
         before(function () {
-          sinon.spy(console, 'warn');
+          jest.spyOn(console, 'warn').mockClear();
         });
 
         // Test Teardown
         after(function () {
-          console.warn.restore();
+          console.warn.mockRestore();
         });
 
         describe('should not throw a Vue error if a label is provided', function () {

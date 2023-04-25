@@ -1,4 +1,3 @@
-import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtCombobox from './combobox.vue';
@@ -58,11 +57,11 @@ describe('DtCombobox Tests', function () {
   // Test Setup
   beforeEach(function () {
     props = baseProps;
-    selectStub = sinon.stub();
-    escapeStub = sinon.stub();
-    highlightStub = sinon.stub();
-    openedStub = sinon.stub();
-    attrs = { onSelect: selectStub, onEscape: escapeStub, onHighlight: highlightStub, onOpened: openedStub };
+    selectStub = jest.fn();
+    escapeStub = jest.fn();
+    highlightStub = jest.fn();
+    openedStub = jest.fn();
+    attrs = { select: selectStub, escape: escapeStub, highlight: highlightStub, opened: openedStub };
     _mountWrapper();
     _setChildWrappers();
   });

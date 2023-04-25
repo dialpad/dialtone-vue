@@ -1,6 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
 import { assert } from 'chai';
-import sinon from 'sinon';
 import DtButton from './button.vue';
 import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 import { itBehavesLikeAppliesClassToChild } from '../../tests/shared_examples/extendability';
@@ -343,7 +342,7 @@ describe('DtButton Tests', function () {
 
   describe('Interactivity Tests', function () {
     beforeEach(function () {
-      buttonStub = sinon.stub();
+      buttonStub = jest.fn();
       attrs = { onClick: buttonStub };
       props = {};
       wrapper = shallowMount(DtButton, {

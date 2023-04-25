@@ -12,7 +12,7 @@ import {
 import {
   itBehavesLikeAppliesClassToChild,
 } from '../../tests/shared_examples/extendability';
-import sinon from 'sinon';
+import Vue from 'vue';
 
 // Constants
 const DEFAULT_SLOT = 'DP';
@@ -339,16 +339,18 @@ describe('DtAvatar Tests', function () {
 
       // Test Setup
       before(function () {
-        sinon.spy(console, 'warn');
+        Vue.config.silent = true;
+        jest.spyOn(Vue.util, 'warn').mockClear();
       });
 
       // Test Teardown
       afterEach(function () {
-        console.warn.resetHistory();
+        Vue.util.warn.mockReset();
       });
 
       after(function () {
-        console.warn.restore();
+        Vue.util.warn.mockRestore();
+        Vue.config.silent = false;
       });
 
       describe('When image src and alt attributes are provided', function () {

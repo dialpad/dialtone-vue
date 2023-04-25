@@ -1,6 +1,5 @@
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
-import sinon from 'sinon';
 import { itBehavesLikeEmitsExpectedEvent } from '../../tests/shared_examples/events';
 import {
   itBehavesLikePassesCustomPropValidation,
@@ -339,16 +338,16 @@ describe('DtSelectMenu Tests', function () {
 
       // Test Setup
       before(function () {
-        sinon.spy(console, 'warn');
+        jest.spyOn(console, 'warn').mockClear();
       });
 
       // Test Teardown
       afterEach(function () {
-        console.warn.resetHistory();
+        console.warn.mockReset();
       });
 
       after(function () {
-        console.warn.restore();
+        console.warn.mockRestore();
       });
 
       describe('When options are provided via prop', function () {

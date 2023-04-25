@@ -7,7 +7,6 @@ import {
   itBehavesLikePassesCustomPropValidation,
 } from '@/tests/shared_examples/validation';
 import { UNREAD_BADGE_DIRECTIONS, UNREAD_BADGE_KINDS } from '@/recipes/leftbar/unread_chip/unread_chip_constants';
-import sinon from 'sinon';
 
 // Constants
 const baseProps = {
@@ -115,7 +114,7 @@ describe('DtRecipeUnreadChip Tests', function () {
   });
 
   describe('Interactivity Tests', function () {
-    const clickListenerSpy = sinon.spy();
+    const clickListenerSpy = jest.fn();
 
     beforeEach(function () {
       attrs = { onClick: clickListenerSpy };

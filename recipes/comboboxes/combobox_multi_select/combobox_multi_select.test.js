@@ -3,7 +3,6 @@ import { mount } from '@vue/test-utils';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { flushPromises } from '@/common/utils';
-import sinon from 'sinon';
 import DtPopover from '@/components/popover/popover';
 import { itBehavesLikeDoesNotHaveClass } from '@/tests/shared_examples/classes';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
@@ -55,8 +54,8 @@ describe('DtRecipeComboboxMultiSelect Tests', function () {
   before(function () {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
   });
   beforeEach(function () {
     _setWrappers();

@@ -1,7 +1,6 @@
 import { assert } from 'chai';
 import { config, mount } from '@vue/test-utils';
 import DtDropdown from './dropdown.vue';
-import sinon from 'sinon';
 import axe from 'axe-core';
 import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 import {
@@ -68,8 +67,8 @@ describe('DtDropdown Tests', function () {
     config.global.renderStubDefaultSlot = true;
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = sinon.spy();
-    global.cancelAnimationFrame = sinon.spy();
+    global.requestAnimationFrame = jest.fn();
+    global.cancelAnimationFrame = jest.fn();
   });
 
   // Test Teardown
@@ -169,7 +168,7 @@ describe('DtDropdown Tests', function () {
   describe('Interactivity Tests', function () {
     // Test setup
     beforeEach(function () {
-      highlightStub = sinon.stub();
+      highlightStub = jest.fn();
       attrs = { onHighlight: highlightStub };
       _setWrappers();
     });

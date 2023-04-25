@@ -1,4 +1,3 @@
-import sinon from 'sinon';
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtListItem from './list_item.vue';
@@ -33,7 +32,7 @@ describe('DtListItem tests', function () {
 
   // Test Setup
   beforeEach(function () {
-    clickStub = sinon.stub();
+    clickStub = jest.fn();
     attrs = { onClick: clickStub };
     provide = { highlightId: () => 'dt-item2' };
     _mountWrapper();
