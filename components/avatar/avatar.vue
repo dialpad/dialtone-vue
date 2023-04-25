@@ -394,7 +394,7 @@ export default {
 <style lang="less">
 .d-avatar__initials {
   color: var(--fc-primary-inverted);
-  text-shadow: .5px .5px 0 var(--bc-default);
+  text-shadow: .5px .5px 0 var(--bc-moderate);
 }
 .d-avatar--image-loaded {
   background-color: transparent;
