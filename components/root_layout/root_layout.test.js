@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import DtRootLayout from './root_layout.vue';
 
 // Constants
-const props = {
+const baseProps = {
   headerHeight: '32px',
   footerHeight: '64px',
 };
@@ -26,7 +26,7 @@ describe('DtRootLayout Tests', () => {
   let footer;
 
   // Environment
-  let props = props;
+  let props = baseProps;
   let slots = baseSlotsData;
 
   // Helpers
@@ -47,7 +47,7 @@ describe('DtRootLayout Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     slots = baseSlotsData;
   });
 

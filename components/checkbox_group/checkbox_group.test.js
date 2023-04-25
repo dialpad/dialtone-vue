@@ -1,3 +1,5 @@
+import Vue from 'vue';
+import { flushPromises } from '@/common/utils';
 import {
   mount,
 } from '@vue/test-utils';
@@ -207,10 +209,11 @@ describe('Checkbox Group Tests', () => {
     const selectedValue = 'apple';
 
     // Helpers
-    const _selectCheckbox = (value) => {
+    const _selectCheckbox = async (value) => {
       const selectedCheckbox = checkboxGroup.find(`[value="${value}"]`);
-      selectedCheckbox.trigger('click');
-      selectedCheckbox.trigger('change');
+      selectedCheckbox.element.checked = true;
+      await selectedCheckbox.trigger('change');
+      await flushPromises();
     };
 
     // Shared Examples
@@ -244,8 +247,8 @@ describe('Checkbox Group Tests', () => {
         const selectedValues = [selectedValue, selectedValue2];
 
         // Test Setup
-        beforeEach(() => {
-          _selectCheckbox(selectedValue2);
+        beforeEach(async () => {
+          await _selectCheckbox(selectedValue2);
         });
 
         itBehavesLikeUpdatesProvideObj(selectedValues);

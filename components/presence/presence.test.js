@@ -3,7 +3,7 @@ import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classe
 import DtPresence from './presence.vue';
 
 // Constants
-const props = {};
+const baseProps = {};
 
 describe('DtPresence Tests', () => {
   let testContext;
@@ -16,7 +16,7 @@ describe('DtPresence Tests', () => {
   let presence;
   let innerPresence;
   // Environment
-  let props = props;
+  let props = baseProps;
   let slots = {};
 
   // Helpers
@@ -35,7 +35,7 @@ describe('DtPresence Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     slots = {};
   });
 

@@ -58,15 +58,15 @@ describe('DtNotice tests', () => {
       });
 
       it('action slot is passed down correctly', async () => {
-        expect(actionChildStub.text()).toBe(baseSlotsData.action);
+        expect(actionChild.text()).toBe(baseSlotsData.action);
       });
 
       it('default slot is passed down correctly', async () => {
-        expect(contentChildStub.text()).toBe(baseSlotsData.default);
+        expect(contentChild.text()).toBe(baseSlotsData.default);
       });
 
       it('icon slot is passed down correctly', async () => {
-        expect(iconChildStub.text()).toBe(baseSlotsData.icon);
+        expect(iconChild.text()).toBe(baseSlotsData.icon);
       });
     });
 

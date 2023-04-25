@@ -7,7 +7,7 @@ import {
 
 // Constants
 const today = new Date();
-const props = {
+const baseProps = {
   dateTime: today.toISOString().split('T')[0],
   dateTimeDisplay: 'Today',
 };
@@ -24,7 +24,7 @@ describe('DtRecipeTimePill Tests', () => {
   let timePill;
 
   // Environment
-  let props = props;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -51,7 +51,7 @@ describe('DtRecipeTimePill Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};

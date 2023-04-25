@@ -58,7 +58,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
@@ -72,7 +72,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
 
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); },
+      () => { expect(wrapper.exists()).toBe(true); },
     );
     it(
       'should render the button',
@@ -134,13 +134,16 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
     );
   });
 
-  describe('Interactivity Tests', function () {
-    describe('When clicking on the button', function () {
-      it('should trigger the "arrowClick" event when no listener attached', async function () {
-        await button.trigger('click');
-        const arrowClickEvents = wrapper.emitted().arrowClick;
-        assert.equal(arrowClickEvents.length, 1);
-      });
+  describe('Interactivity Tests', () => {
+    describe('When clicking on the button', () => {
+      it(
+        'should trigger the "arrowClick" event when no listener attached',
+        async () => {
+          await button.trigger('click');
+          const arrowClickEvents = wrapper.emitted().arrowClick;
+          expect(arrowClickEvents.length).toEqual(1);
+        },
+      );
 
       it('should trigger the "click" event when at least one listener is attached', async function () {
         const clickStub = jest.fn();
@@ -151,7 +154,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
 
         const clickEvents = wrapper.emitted().click;
         expect(clickEvents.length).toEqual(1);
-        expect(clickStub.called).toBe(true);
+        expect(clickStub).toHaveBeenCalled();
       },
       );
     });

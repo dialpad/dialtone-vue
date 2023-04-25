@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
-=======
-import { createLocalVue, mount } from '@vue/test-utils';
->>>>>>> febc8cda (migrate tests)
 import DtBreadcrumb from './breadcrumbs.vue';
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 
@@ -60,10 +56,19 @@ describe('DtBreadcrumb Tests', () => {
     _mountWrapper();
   });
 
-  describe('Presentation Tests', function () {
-    it('should render the component', function () { assert.exists(wrapper, 'wrapper exists'); });
-    it('should render the breadcrumbs', function () { assert.exists(breadcrumbs.exists(), 'breadcrumbs exist'); });
-    it('should render the item breadcrumb', function () { assert.isNotEmpty(breadcrumbItems); });
+  describe('Presentation Tests', () => {
+    it(
+      'should render the component',
+      () => { expect(wrapper.exists()).toBe(true); },
+    );
+    it(
+      'should render the breadcrumbs',
+      () => { expect(breadcrumbs.exists()).toBeTruthy(); },
+    );
+    it(
+      'should render the item breadcrumb',
+      () => { expect(breadcrumbItems.exists()).toBeTruthy(); },
+    );
 
     describe('When the breadcrumb has default state', () => {
       it('should has correct aria-current', () => {

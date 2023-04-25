@@ -45,7 +45,7 @@ describe('DtTab Tests', () => {
     _mountWrapper();
 
     it('should render the component', () => {
-      assert.exists(wrapper, 'wrapper exists');
+      expect(wrapper.exists()).toBe(true);
     });
 
     it('should have default class', () => {
@@ -63,10 +63,10 @@ describe('DtTab Tests', () => {
       });
 
       it('changeContentPanel should be called with valid data', () => {
-        expect(changeContentPanel.calledWith({
-          selected: props.panelId,
+        expect(changeContentPanel).toHaveBeenCalledWith({
+          selected: propsData.panelId,
           selectOverride: true,
-        })).toBe(true);
+        });
       });
     });
 

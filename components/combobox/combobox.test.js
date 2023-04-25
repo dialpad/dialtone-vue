@@ -73,14 +73,14 @@ describe('DtCombobox Tests', () => {
 
   // Test Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     slots = {};
   });
 
   describe('Presentation Tests', () => {
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); },
+      () => { expect(wrapper.exists()).toBe(true); },
     );
 
     describe('When a input is provided', () => {
@@ -122,7 +122,7 @@ describe('DtCombobox Tests', () => {
         it(
           'should still set aria-label even if label visible is false',
           () => {
-            expect(input.attributes('aria-label')).toEqual(props.label);
+            expect(input.attributes('aria-label')).toEqual(basePropsData.label);
           },
         );
       });
@@ -246,7 +246,7 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.esc');
         });
 
-        it('should call listener', () => { expect(escapeStub.called).toBe(true); });
+        it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
         it(
           'should emit escape event',
           () => { expect(wrapper.emitted().escape.length).toEqual(1); },
@@ -260,7 +260,7 @@ describe('DtCombobox Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(selectStub.called).toBe(false); },
+          () => { expect(selectStub).toHaveBeenCalledTimes(0); },
         );
         it(
           'should not emit select event',
@@ -275,7 +275,7 @@ describe('DtCombobox Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); },
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
@@ -290,7 +290,7 @@ describe('DtCombobox Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); },
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
@@ -305,7 +305,7 @@ describe('DtCombobox Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); },
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
@@ -320,7 +320,7 @@ describe('DtCombobox Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); },
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
@@ -340,7 +340,7 @@ describe('DtCombobox Tests', () => {
           await wrapper.trigger('keydown.esc');
         });
 
-        it('should call listener', () => { expect(escapeStub.called).toBe(true); });
+        it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
         it(
           'should emit escape event',
           () => { expect(wrapper.emitted().escape.length).toEqual(1); },
@@ -354,7 +354,7 @@ describe('DtCombobox Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(selectStub.called).toBe(false); },
+          () => { expect(selectStub).toHaveBeenCalledTimes(0); },
         );
         it(
           'should not emit select event',
@@ -369,7 +369,7 @@ describe('DtCombobox Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); },
+          () => { expect(highlightStub).toHaveBeenCalledTimes(0); },
         );
         it(
           'should not emit highlight event',
@@ -384,7 +384,7 @@ describe('DtCombobox Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); },
+          () => { expect(highlightStub).toHaveBeenCalledTimes(0); },
         );
         it(
           'should not emit highlight event',
@@ -399,7 +399,7 @@ describe('DtCombobox Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); },
+          () => { expect(highlightStub).toHaveBeenCalledTimes(0); },
         );
         it(
           'should not emit highlight event',
@@ -414,7 +414,7 @@ describe('DtCombobox Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); },
+          () => { expect(highlightStub).toHaveBeenCalledTimes(0); },
         );
         it(
           'should not emit highlight event',
@@ -429,7 +429,7 @@ describe('DtCombobox Tests', () => {
         await wrapper.setProps({ showList: true });
       });
 
-      it('should call listener', () => { expect(openedStub.called).toBe(true); });
+      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
       it(
         'should emit open event',
         () => { expect(wrapper.emitted().opened.length).toEqual(2); },
@@ -441,7 +441,7 @@ describe('DtCombobox Tests', () => {
         await wrapper.setProps({ showList: false });
       });
 
-      it('should call listener', () => { expect(openedStub.called).toBe(true); });
+      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
       it(
         'should emit open event',
         () => { expect(wrapper.emitted().opened.length).toEqual(1); },
@@ -456,7 +456,7 @@ describe('DtCombobox Tests', () => {
 
       it(
         'should not call listener',
-        () => { expect(selectStub.called).toBe(false); },
+        () => { expect(selectStub).toHaveBeenCalledTimes(0); },
       );
       it(
         'should not emit select event',
@@ -470,7 +470,7 @@ describe('DtCombobox Tests', () => {
         await wrapper.trigger('keydown.enter');
       });
 
-      it('should call listener', () => { expect(selectStub.called).toBe(true); });
+      it('should call listener', () => { expect(selectStub).toHaveBeenCalled(); });
       it(
         'should emit select event',
         () => { expect(wrapper.emitted().select.length).toEqual(1); },
@@ -485,7 +485,7 @@ describe('DtCombobox Tests', () => {
 
       it(
         'should not call listener',
-        () => { expect(selectStub.called).toBe(false); },
+        () => { expect(selectStub).toHaveBeenCalledTimes(0); },
       );
       it(
         'should not emit select event',
@@ -498,7 +498,7 @@ describe('DtCombobox Tests', () => {
         await wrapper.trigger('keydown.esc');
       });
 
-      it('should call listener', () => { expect(escapeStub.called).toBe(true); });
+      it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
       it(
         'should emit escape event',
         () => { expect(wrapper.emitted().escape.length).toEqual(1); },
@@ -513,7 +513,7 @@ describe('DtCombobox Tests', () => {
 
       it(
         'should call listener',
-        () => { expect(highlightStub.called).toBe(true); },
+        () => { expect(highlightStub).toHaveBeenCalled(); },
       );
       it(
         'should emit highlight event',

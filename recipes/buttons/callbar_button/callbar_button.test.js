@@ -53,7 +53,7 @@ describe('DtRecipeCallbarButton Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
@@ -63,16 +63,16 @@ describe('DtRecipeCallbarButton Tests', () => {
   describe('Presentation Tests', () => {
     describe('Default render', () => {
       it('should render the component', () => {
-        assert.exists(wrapper);
+        expect(wrapper.exists()).toBeTruthy();
       });
 
       it('should render a tooltip component', () => {
-        assert.exists(tooltip);
+        expect(tooltip.exists()).toBeTruthy();
       });
 
       it('should render a muted button', () => {
         const buttonProps = button.props();
-        assert.exists(button);
+        expect(button.exists()).toBeTruthy();
         expect(buttonProps.kind).toEqual('muted');
       });
     });
@@ -121,7 +121,7 @@ describe('DtRecipeCallbarButton Tests', () => {
         await button.trigger('click');
         await wrapper.vm.$nextTick();
 
-        expect(clickStub.called).toBe(true);
+        expect(clickStub).toHaveBeenCalled();
       });
     });
   });

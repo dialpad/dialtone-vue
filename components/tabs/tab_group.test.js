@@ -97,7 +97,7 @@ describe('DtTabGroup Tests', () => {
     });
 
     it('should render the component', () => {
-      assert.exists(wrapper, 'wrapper exists');
+      expect(wrapper.exists()).toBe(true);
     });
 
     it('should not emitted on mount', () => {

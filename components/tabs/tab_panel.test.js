@@ -40,7 +40,7 @@ describe('DtTabPanel Tests', () => {
     _mountWrapper();
 
     it('should render the component', () => {
-      assert.exists(wrapper, 'wrapper exists');
+      expect(wrapper.exists()).toBe(true);
     });
 
     it('should render the default slot', () => {

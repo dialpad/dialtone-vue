@@ -35,7 +35,7 @@ export const itBehavesLikeRaisesSingleVueWarning = (message) => {
 export const itBehavesLikeRaisesValidationError = (message) => {
   it(
     'should raise a validation error',
-    () => { expect(consoleErrorSpy.calledWith(message)).toBe(true); },
+    () => { expect(consoleErrorSpy).toHaveBeenCalledWith(message); },
   );
 };
 

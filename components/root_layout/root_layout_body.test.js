@@ -3,7 +3,7 @@ import DtRootLayoutBody from './root_layout_body.vue';
 import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
 
 // Constants
-const props = {
+const baseProps = {
   sidebarWidth: '256px',
 };
 
@@ -27,7 +27,7 @@ describe('DtRootLayoutBody Tests', () => {
   let content;
 
   // Environment
-  let props = props;
+  let props = baseProps;
   let slots = baseSlotsData;
 
   // Helpers
@@ -49,7 +49,7 @@ describe('DtRootLayoutBody Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     slots = baseSlotsData;
   });
 

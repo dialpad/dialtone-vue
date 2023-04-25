@@ -45,7 +45,7 @@ describe('DtListItem tests', () => {
 
   // Test Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     slots = {};
     attrs = {};
     provide = {};
@@ -54,7 +54,7 @@ describe('DtListItem tests', () => {
   describe('Presentation Tests', () => {
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); },
+      () => { expect(wrapper.exists()).toBe(true); },
     );
 
     describe('When navigation type is set to tab', () => {
@@ -144,7 +144,7 @@ describe('DtListItem tests', () => {
     // Shared Examples
     const itBehavesLikeHandlesClick = () => {
       it('should call listener', async () => {
-        expect(clickStub.called).toBe(true);
+        expect(clickStub).toHaveBeenCalled();
       });
 
       it('should emit click event', () => {

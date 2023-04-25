@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import DtListItemGroup from './list_item_group.vue';
 
 // Constants
-const props = {
+const baseProps = {
   heading: 'Heading',
   id: 'list-item-group',
 };
@@ -19,7 +19,7 @@ describe('DtListItemGroup Tests', () => {
   let heading;
 
   // Environment
-  let props = props;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -48,7 +48,7 @@ describe('DtListItemGroup Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
@@ -68,7 +68,7 @@ describe('DtListItemGroup Tests', () => {
       it(
         'the root ul is aria-labelledby the id of the header element',
         () => {
-          expect(wrapper.attributes('aria-labelledby')).toBe(props.id + '-heading');
+          expect(wrapper.attributes('aria-labelledby')).toBe(basePropsData.id + '-heading');
         },
       );
     });

@@ -75,15 +75,12 @@ describe('DtDropdown Tests', () => {
     config.global.renderStubDefaultSlot = true;
     global.requestAnimationFrame = jest.fn();
     global.cancelAnimationFrame = jest.fn();
-    testContext.localVue = createLocalVue();
   });
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     slots = baseSlots;
-    scopedSlots = baseScopedSlots;
-    listeners = {};
     wrapper.destroy();
   });
 
@@ -109,7 +106,7 @@ describe('DtDropdown Tests', () => {
 
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); },
+      () => { expect(wrapper.exists()).toBe(true); },
     );
 
     it('should not render the visually hidden close button', async () => {
@@ -208,7 +205,7 @@ describe('DtDropdown Tests', () => {
 
       it(
         'should call listener',
-        () => { expect(highlightStub.called).toBe(true); },
+        () => { expect(highlightStub).toHaveBeenCalled(); },
       );
       it(
         'should emit highlight event',

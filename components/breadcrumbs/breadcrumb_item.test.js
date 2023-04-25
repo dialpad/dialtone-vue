@@ -25,7 +25,7 @@ describe('DtBreadcrumbItem Tests', () => {
 
   describe('Presentation Tests', () => {
     it('should render the breadcrumbItem', () => {
-      assert.exists(wrapper.exists(), 'breadcrumbItem exist');
+      expect(wrapper.exists()).toBeTruthy();
     });
 
     describe('When a default slot is provided to breadcrumb item', () => {

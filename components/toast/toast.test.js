@@ -48,7 +48,6 @@ describe('DtToast Tests', () => {
     iconChild = wrapper.findComponent(DtNoticeIcon);
     message = wrapper.find('[data-qa="notice-content-message"]');
   };
-  let clock;
 
   const _setWrappers = () => {
     wrapper = mount(DtToast, {
@@ -79,7 +78,7 @@ describe('DtToast Tests', () => {
         await _showToast();
       });
 
-      it('should exist', () => { assert.exists(wrapper); });
+      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
       it('should render the toast', () => { expect(toast.exists()).toBe(true); });
     });
 
@@ -196,9 +195,6 @@ describe('DtToast Tests', () => {
     });
 
     describe('When duration is not provided', () => {
-      // Test Environment
-      const duration = TOAST_MIN_DURATION;
-
       // Test Setup
       beforeEach(() => {
         _setWrappers();
@@ -214,7 +210,7 @@ describe('DtToast Tests', () => {
 
         expect(toast.exists()).toBe(true);
 
-        clock.tick(duration);
+        jest.runAllTimers();
         await wrapper.vm.$nextTick();
         _setChildWrappers();
 
@@ -244,7 +240,7 @@ describe('DtToast Tests', () => {
 
           expect(toast.exists()).toBe(true);
 
-          clock.tick(duration + 1);
+          jest.runAllTimers();
           await wrapper.vm.$nextTick();
           _setChildWrappers();
 

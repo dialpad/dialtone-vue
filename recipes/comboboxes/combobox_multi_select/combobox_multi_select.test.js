@@ -8,7 +8,7 @@ import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 
 // Constants
-const props = {
+const baseProps = {
   showList: true,
   label: 'Label Text',
   visuallyHiddenCloseLabel: 'Close combobox',
@@ -30,7 +30,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
   let validationMsg;
 
   // Environment
-  const props = props;
+  const props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -68,7 +68,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
@@ -78,7 +78,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
   describe('Presentation Tests', () => {
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); },
+      () => { expect(wrapper.exists()).toBe(true); },
     );
     it('should render the input', () => { expect(input.exists()).toBe(true); });
     it('should render the input label', () => {
@@ -117,7 +117,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       it(
         'should still set aria-label even if label visible is false',
         async () => {
-          expect(input.attributes('aria-label')).toEqual(props.label);
+          expect(input.attributes('aria-label')).toEqual(basePropsData.label);
         },
       );
     });
@@ -275,7 +275,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       () => {
         const chip = chips.at(0);
         chip.trigger('keyup', { code: 'delete' });
-        expect(wrapper.emitted().remove).toEqual('1');
+        expect(wrapper.emitted().remove[0][0]).toEqual('1');
         expect(document.activeElement).toBe(input.element);
       },
     );

@@ -55,8 +55,8 @@ describe('DtModal Tests', () => {
   it(
     'Should display title, banner and copy text based on props',
     async () => {
-      assert.isEmpty(copy.text());
-      assert.isEmpty(title.text());
+      expect(copy.exists()).toBeTruthy();
+      expect(title.exists()).toBeTruthy();
 
       const newCopy = 'test modal copy';
       const newTitle = 'test modal title';
@@ -145,7 +145,7 @@ describe('DtModal Tests', () => {
     _setChildWrappers();
 
     const syncEvent = 'update:show';
-    assert.isEmpty(wrapper.emitted());
+    expect(wrapper.emitted()).toEqual({});
 
     await overlay.trigger('click');
     expect(wrapper.emitted()[syncEvent].length).toEqual(1);

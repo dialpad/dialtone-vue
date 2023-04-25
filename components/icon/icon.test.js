@@ -33,7 +33,7 @@ describe('DtIcon Tests', () => {
 
   describe('Presentation Tests', () => {
     it('Should render the accessibility icon', () => {
-      assert.exists(wrapper, 'wrapper exists');
+      expect(wrapper.exists()).toBe(true);
       expect(icon.exists()).toBe(true);
       expect(icon.classes('d-icon--accessibility')).toBe(true);
     });

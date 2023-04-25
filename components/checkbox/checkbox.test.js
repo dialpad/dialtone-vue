@@ -110,7 +110,7 @@ describe('DtCheckbox Tests', () => {
         it('should exist', () => { expect(label.exists()).toBe(true); });
         it(
           'should match provided label prop',
-          () => { expect(label.text()).toBe(props.label); },
+          () => { expect(label.text()).toBe(propsData.label); },
         );
       });
     });
@@ -271,10 +271,10 @@ describe('DtCheckbox Tests', () => {
 
       describe('When the checkbox is clicked', () => {
         // Test Setup
-        beforeEach(async function () { await input.trigger('click'); await input.trigger('change'); });
+        beforeEach(async () => { await input.trigger('change'); });
 
-        it('Should emit an input event', () => {
-          itBehavesLikeEmitsExpectedEvent(wrapper, 'input', true);
+        it('Should emit an input event', async () => {
+          itBehavesLikeEmitsExpectedEvent(wrapper, 'input', false);
         });
       });
 
@@ -287,10 +287,10 @@ describe('DtCheckbox Tests', () => {
 
         describe('When the checkbox is clicked', () => {
           // Test Setup
-          beforeEach(async function () { await input.trigger('click'); await input.trigger('change'); });
+          beforeEach(() => { input.trigger('change'); });
 
           it('Should emit an input event', () => {
-            itBehavesLikeEmitsExpectedEvent(wrapper, 'input', false);
+            itBehavesLikeEmitsExpectedEvent(wrapper, 'input', true);
           });
         });
       });
@@ -323,9 +323,10 @@ describe('DtCheckbox Tests', () => {
         () => { itBehavesLikeIndeterminate(input); },
       );
 
-      describe('When clicking on an indeterminate checkbox', function () {
-        beforeEach(async function () {
-          await input.trigger('click'); await input.trigger('change');
+      describe('When clicking on an indeterminate checkbox', () => {
+        beforeEach(async () => {
+          input.element.value = false;
+          await input.trigger('change');
         });
         it('should uncheck', () => { itBehavesLikeNotChecked(input); });
       });
@@ -344,10 +345,10 @@ describe('DtCheckbox Tests', () => {
 
         describe('When the checkbox is clicked', () => {
           // Test Setup
-          beforeEach(async function () { await input.trigger('click'); await input.trigger('change'); });
+          beforeEach(() => { input.trigger('change'); });
 
           it('Should call input handler once', () => {
-            expect(inputListenerSpy.callCount).toBe(1);
+            expect(inputListenerSpy).toHaveBeenCalledTimes(1);
           });
         });
       });

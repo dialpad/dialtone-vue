@@ -3,7 +3,7 @@ import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 import DtChip from './chip.vue';
 
 // Constants
-const props = {
+const baseProps = {
   closeButtonProps: {
     ariaLabel: 'close',
   },
@@ -25,7 +25,7 @@ describe('DtChip Tests', () => {
   let remove;
 
   // Environment
-  let props = props;
+  let props = baseProps;
   let slots = {};
   let listeners;
 
@@ -49,7 +49,7 @@ describe('DtChip Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     slots = {};
   });
 
@@ -62,14 +62,14 @@ describe('DtChip Tests', () => {
       });
       it(
         'should render the component',
-        () => { assert.exists(wrapper, 'wrapper exists'); },
+        () => { expect(wrapper.exists()).toBe(true); },
       );
-      it('should render chip', () => { assert.exists(chip, 'chip exists'); });
+      it('should render chip', () => { expect(chip.exists()).toBeTruthy(); });
       it(
         'should render remove button',
-        () => { assert.exists(remove, 'close button exists'); },
+        () => { expect(remove.exists()).toBeTruthy(); },
       );
-      it('should render label', () => { assert.exists(label); });
+      it('should render label', () => { expect(label.exists()).toBeTruthy(); });
       it(
         'should display the correct text',
         () => { expect(label.text()).toBe(defaultText); },
@@ -119,16 +119,12 @@ describe('DtChip Tests', () => {
 
     describe('When show avatar', () => {
       beforeEach(() => {
-        props = {
-          ...props,
-          avatarProps: {
-            SRC: 'image.png',
-            ALT: 'Avatar image',
-          },
+        slots = {
+          avatar: EmptyComponentFixture,
         };
         _setWrappers();
       });
-      it('should render avatar', () => { assert.exists(avatar); });
+      it('should render avatar', () => { expect(avatar.exists()).toBeTruthy(); });
     });
 
     describe('With icon slot', () => {
@@ -138,7 +134,7 @@ describe('DtChip Tests', () => {
         };
         _setWrappers();
       });
-      it('should render icon', () => { assert.exists(icon); });
+      it('should render icon', () => { expect(icon.exists()).toBeTruthy(); });
     });
   });
 

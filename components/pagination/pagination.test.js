@@ -1,13 +1,13 @@
 import { mount } from '@vue/test-utils';
 import DtPagination from './pagination.vue';
-import { DtButton } from '@';
+import { DtButton } from '@/components/button';
 
 // Constants
 const getPageNumberAriaLabel = (page) => {
   return `Page number ${page}`;
 };
 
-const props = {
+const baseProps = {
   totalPages: 5,
   prevAriaLabel: 'previous',
   nextAriaLabel: 'next',
@@ -30,7 +30,7 @@ describe('DtPagination Tests', () => {
   let pages;
 
   // Environment
-  let props = props;
+  let props = baseProps;
   let slots = {};
   let listeners;
 
@@ -53,7 +53,7 @@ describe('DtPagination Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     slots = {};
   });
 
@@ -68,11 +68,11 @@ describe('DtPagination Tests', () => {
       );
       it(
         'should render the component',
-        () => { assert.exists(wrapper, 'wrapper exists'); },
+        () => { expect(wrapper.exists()).toBe(true); },
       );
       it(
         'should render prev button',
-        () => { assert.exists(prev, 'previous button exists'); },
+        () => { expect(prev.exists()).toBeTruthy(); },
       );
       it(
         'should disable prev button',
@@ -80,7 +80,7 @@ describe('DtPagination Tests', () => {
       );
       it(
         'should render next button',
-        () => { assert.exists(next, 'next button exists'); },
+        () => { expect(next.exists()).toBeTruthy(); },
       );
       it(
         'should enable next button',
@@ -107,7 +107,6 @@ describe('DtPagination Tests', () => {
         await _setWrappers();
       });
       it('should render one separators', () => {
-        assert.exists(separators, 'separators exists');
         expect(separators.length).toBe(1);
       });
     });
@@ -124,7 +123,6 @@ describe('DtPagination Tests', () => {
         await _setWrappers();
       });
       it('should render two separators', () => {
-        assert.exists(separators, 'separators exists');
         expect(separators.length).toBe(2);
         // case when maxVisible is even - we round to the nearest odd when active page is in the mid-range
         expect(pages.length).toBe(9);

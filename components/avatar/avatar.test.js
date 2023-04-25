@@ -69,7 +69,7 @@ describe('DtAvatar Tests', () => {
         await _setWrappers();
       });
 
-      it('should exists', () => { assert.exists(wrapper); });
+      it('should exists', () => { expect(wrapper.exists()).toBeTruthy(); });
       it(
         'should render the avatar',
         () => { expect(wrapper.exists()).toBe(true); },
@@ -87,7 +87,7 @@ describe('DtAvatar Tests', () => {
       });
 
       it('image should exist', () => {
-        assert.exists(image);
+        expect(image).toBeTruthy();
       });
 
       it('src should match those provided by attrs', () => {
@@ -110,7 +110,7 @@ describe('DtAvatar Tests', () => {
       });
 
       it('icon slot should exist', () => {
-        assert.exists(wrapper.find('svg'));
+        expect(wrapper.find('svg').exists()).toBeTruthy();
       });
 
       it('should have correct class', () => {
@@ -133,8 +133,8 @@ describe('DtAvatar Tests', () => {
       });
 
       it('should have correct class', () => {
-        const avatarWithInitials = wrapper.find(AVATAR_KIND_MODIFIERS.initials);
-        assert.exists(avatarWithInitials);
+        const avatarWithInitials = wrapper.find('.' + AVATAR_KIND_MODIFIERS.initials);
+        expect(avatarWithInitials.exists()).toBeTruthy();
       });
     });
 
@@ -210,7 +210,7 @@ describe('DtAvatar Tests', () => {
       });
 
       it('should have group count', () => {
-        assert.exists(count);
+        expect(count).toBeTruthy();
       });
 
       it('should have the correct group number', () => {

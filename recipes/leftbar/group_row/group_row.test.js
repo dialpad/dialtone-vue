@@ -54,7 +54,7 @@ describe('DtRecipeGroupRow Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
@@ -66,7 +66,7 @@ describe('DtRecipeGroupRow Tests', () => {
       // Test Setup
       beforeEach(() => { _setWrappers(); });
 
-      it('should exist', () => { assert.exists(wrapper); });
+      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
 
       it('should render the description', () => {
         expect(description.text()).toBe(props.names);

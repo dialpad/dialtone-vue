@@ -14,7 +14,7 @@ const baseSlotsData = {
         </div>`,
 };
 
-const props = {
+const baseProps = {
   items,
   itemSize: 30,
   scrollerHeight: 60,
@@ -28,7 +28,7 @@ describe('DtScroller Tests', function () {
   let defaultContent;
 
   // Environment
-  let props = props;
+  let props = baseProps;
   let slots = baseSlotsData;
 
   // Helpers
@@ -46,7 +46,7 @@ describe('DtScroller Tests', function () {
 
   // Teardown
   afterEach(function () {
-    props = props;
+    props = baseProps;
     slots = baseSlotsData;
   });
 

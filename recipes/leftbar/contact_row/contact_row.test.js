@@ -3,7 +3,7 @@
 // import DtRecipeContactRow from './contact_row.vue';
 
 // // Constants
-// const props = {};
+// const baseProps = {};
 
 // describe('DtRecipeContactRow Tests', function () {
 //   // Wrappers
@@ -11,7 +11,7 @@
 //   let childContainer;
 
 //   // Environment
-//   let props = props;
+//   let props = baseProps;
 //   let attrs = {};
 //   let slots = {};
 //   let provide = {};
@@ -45,7 +45,7 @@
 
 //   // Teardown
 //   afterEach(function () {
-//     props = props;
+//     props = baseProps;
 //     attrs = {};
 //     slots = {};
 //     provide = {};

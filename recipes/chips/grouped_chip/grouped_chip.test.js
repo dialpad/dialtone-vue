@@ -3,7 +3,7 @@ import DtRecipeGroupedChip from './grouped_chip.vue';
 import { DtIcon } from '@/components/icon';
 
 // Constants
-const props = {};
+const baseProps = {};
 const baseSlotsData = {
   leftIcon: '<dt-icon name="clock" />',
   leftContent: `<div>0.13</div>`,
@@ -27,7 +27,7 @@ describe('DtRecipeGroupedChip Tests', () => {
   let rightChipContentElement;
 
   // Environment
-  let props = props;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -60,7 +60,7 @@ describe('DtRecipeGroupedChip Tests', () => {
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};

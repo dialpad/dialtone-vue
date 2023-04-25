@@ -206,7 +206,7 @@ describe('DtRadioGroup Tests', () => {
     const selectedValue = 'kiwi';
 
     // Helpers
-    const _selectRadio = () => {
+    const _selectRadio = async () => {
       selectedRadio = radioGroup.find(`[value="${selectedValue}"]`);
       selectedRadio.trigger('click');
       selectedRadio.trigger('change');
@@ -230,9 +230,9 @@ describe('DtRadioGroup Tests', () => {
 
     describe('When a radio is selected', () => {
       // Test Setup
-      beforeEach(() => {
+      beforeEach(async () => {
         _mountWrappers();
-        _selectRadio();
+        await _selectRadio();
       });
 
       it('emits an input event', function () {
@@ -252,7 +252,7 @@ describe('DtRadioGroup Tests', () => {
         beforeEach(() => { _selectRadio(); });
 
         it('does not emit an input event', () => {
-          assert.notExists(wrapper.emitted('input'));
+          expect(wrapper.emitted('input')).toBeFalsy();
         });
       });
     });

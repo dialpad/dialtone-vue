@@ -189,8 +189,8 @@ describe('DtPopover Tests', () => {
       });
 
       it('should output error message', async () => {
-        expect(consoleErrorSpy.calledWith('If the popover is modal you must set the ' +
-        'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement')).toBe(true);
+        expect(consoleErrorSpy).toBeCalledWith('If the popover is modal you must set the ' +
+        'initialFocusElement prop. Possible values: "dialog", "first", HTMLElement');
       });
     });
 

@@ -77,14 +77,14 @@ describe('DtRadio Tests', () => {
       // Test Setup
       beforeEach(() => { _setWrappers(); });
 
-      it('should exist', () => { assert.exists(wrapper); });
+      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
       it(
         'should have radio group class',
-        () => { assert.exists(wrapper.find('.d-radio-group')); },
+        () => { expect(wrapper.find('.d-radio-group').exists()).toBeTruthy(); },
       );
 
       describe('Radio Input Tests', () => {
-        it('should exist', () => { assert.exists(input); });
+        it('should exist', () => { expect(input.exists()).toBeTruthy(); });
         it(
           'should have type radio',
           () => { expect(input.attributes('type')).toBe('radio'); },
@@ -101,10 +101,10 @@ describe('DtRadio Tests', () => {
           radioLabel = wrapper.find('[data-qa="radio-label"]');
         });
 
-        it('should exist', () => { assert.exists(radioLabel); });
+        it('should exist', () => { expect(radioLabel.exists()).toBeTruthy(); });
         it(
           'should match provided label prop',
-          () => { expect(radioLabel.text()).toBe(props.label); },
+          () => { expect(radioLabel.text()).toBe(propsData.label); },
         );
       });
     });
@@ -120,7 +120,7 @@ describe('DtRadio Tests', () => {
         radioDescription = wrapper.find('[data-qa="radio-description"]');
       });
 
-      it('should exist', () => { assert.exists(radioDescription); });
+      it('should exist', () => { expect(radioDescription.exists()).toBeTruthy(); });
     });
 
     describe('When a validation state is provided', () => {
@@ -169,7 +169,7 @@ describe('DtRadio Tests', () => {
       );
       it(
         'should have disabled class',
-        () => { assert.exists(wrapper.find('.d-radio-group--disabled')); },
+        () => { expect(wrapper.find('.d-radio-group--disabled').exists()).toBeTruthy(); },
       );
 
       describe('When clicked', () => {
@@ -337,7 +337,7 @@ describe('DtRadio Tests', () => {
 
       describe('When the radio is selected', () => {
         // Test Setup
-        beforeEach(() => { input.trigger('click'); });
+        beforeEach(() => { input.trigger('change'); });
 
         it('should emit the input event with Value', () => {
           itBehavesLikeEmitsExpectedEvent(wrapper, 'input', value);
@@ -352,16 +352,16 @@ describe('DtRadio Tests', () => {
 
         // Test Setup
         beforeEach(() => {
-          listeners = { onInput: inputListenerSpy };
+          attrs = { onInput: inputListenerSpy };
           _setWrappers();
         });
 
         describe('When the radio is clicked', () => {
           // Test Setup
-          beforeEach(() => { input.trigger('click'); input.trigger('change'); });
+          beforeEach(async () => { await input.trigger('change'); });
 
           it('Should call input handler once', () => {
-            expect(inputListenerSpy.callCount).toBe(1);
+            expect(inputListenerSpy).toHaveBeenCalledTimes(1);
           });
         });
       });

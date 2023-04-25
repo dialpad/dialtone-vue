@@ -41,7 +41,7 @@ describe('DtButton Tests', () => {
       });
 
       it('Should render the native button', () => {
-        assert.exists(wrapper, 'wrapper exists');
+        expect(wrapper.exists()).toBe(true);
         expect(button.exists()).toBe(true);
       });
 
@@ -382,7 +382,7 @@ describe('DtButton Tests', () => {
       });
 
       it('Should call listener', async () => {
-        expect(buttonStub.called).toBe(true);
+        expect(buttonStub).toHaveBeenCalled();
       });
 
       it('Should emit click event', () => {

@@ -113,7 +113,7 @@ describe('DtSelectMenu Tests', () => {
       });
       it('should render the select menu options', () => {
         OPTIONS.forEach(option => {
-          assert.exists(select.find(`[value="${option.value}"]`));
+          expect(select.find(`[value="${option.value}"]`).exists()).toBeTruthy();
         });
       });
       it('should not render any validation messages', () => {
@@ -200,7 +200,7 @@ describe('DtSelectMenu Tests', () => {
       });
 
       it('should render the select menu options', () => {
-        assert.exists(select.findAll('option').length, 2);
+        expect(select.findAll('option').length).toBe(2);
       });
     });
 
@@ -296,7 +296,7 @@ describe('DtSelectMenu Tests', () => {
         });
 
         it('label aria-details should not exist', () => {
-          assert.notExists(label.attributes('aria-details'));
+          expect(label.attributes('aria-details')).toBeFalsy();
         });
       });
 

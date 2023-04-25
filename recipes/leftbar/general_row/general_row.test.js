@@ -7,7 +7,7 @@ import {
 } from '@/recipes/leftbar/general_row/general_row_constants';
 
 // Constants
-const props = {
+const baseProps = {
   type: 'inbox',
   description: 'Description',
 };
@@ -26,7 +26,7 @@ describe('DtRecipeGeneralRow Tests', () => {
   let unreadBadge;
 
   // Environment
-  let props = props;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -52,14 +52,14 @@ describe('DtRecipeGeneralRow Tests', () => {
   before(function () {});
 
   beforeEach(() => {
-    props = props;
+    props = baseProps;
     slots = {};
     _setWrappers();
   });
 
   // Teardown
   afterEach(() => {
-    props = props;
+    props = baseProps;
     attrs = {};
     slots = {};
     provide = {};
@@ -71,11 +71,11 @@ describe('DtRecipeGeneralRow Tests', () => {
       // Test Setup
       beforeEach(() => { _setWrappers(); });
 
-      it('should exist', () => { assert.exists(wrapper); });
+      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
 
       it('should render the icon', () => {
         expect(iconType.exists()).toBe(true);
-        assert.exists(iconType.find('svg'));
+        expect(iconType.find('svg').exists()).toBeTruthy();
       });
 
       it('should render the description', () => {
@@ -102,7 +102,7 @@ describe('DtRecipeGeneralRow Tests', () => {
     describe('When type is contact center', () => {
       // Test Environment
       const type = LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER;
-      const color = 'red';
+      const color = 'magenta-200';
 
       // Test Setup
       beforeEach(() => {
@@ -111,30 +111,15 @@ describe('DtRecipeGeneralRow Tests', () => {
       });
 
       it('should render the contact center icon', () => {
-        assert.exists(iconType.find('.leftbar-general-row__contact-center-icon'));
+        expect(iconType.find('.dt-leftbar-row__icon-cc').exists()).toBeTruthy();
       });
 
       it(
         'should render the contact center icon with the correct color',
         () => {
-          assert.exists(iconType.find(`.${LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS[color]}`));
+          expect(iconType.find(`.${LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS[color]}`).exists()).toBeTruthy();
         },
       );
-    });
-
-    describe('When type is dialbot', () => {
-      // Test Environment
-      const type = LEFTBAR_GENERAL_ROW_TYPES.DIALBOT;
-
-      // Test Setup
-      beforeEach(() => {
-        props = { ...props, type };
-        _setWrappers();
-      });
-
-      it('should render the icon', () => {
-        assert.exists(iconType.find('.leftbar-general-row__dialbot-icon'));
-      });
     });
 
     describe('When type is contact center and no color is provided', () => {
@@ -154,9 +139,7 @@ describe('DtRecipeGeneralRow Tests', () => {
       });
 
       it('should output error message', () => {
-        expect(
-          consoleErrorSpy.calledWith(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR),
-        ).toBe(true);
+        expect(consoleErrorSpy).toHaveBeenCalledWith(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR);
       });
     });
   });

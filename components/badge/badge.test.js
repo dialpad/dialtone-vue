@@ -35,7 +35,7 @@ describe('DtBadge Tests', () => {
     wrapper = mount(DtBadge, {
       props,
       slots,
-      localVue: this.localVue,
+      localVue: testContext.localVue,
     });
     _setChildWrappers();
   };
@@ -83,7 +83,7 @@ describe('DtBadge Tests', () => {
       // Test Setup
       beforeEach(() => { _setWrappers(); });
 
-      it('should exist', () => { assert.exists(wrapper); });
+      it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
     });
 
     describe('When a text is provided via slot', () => {

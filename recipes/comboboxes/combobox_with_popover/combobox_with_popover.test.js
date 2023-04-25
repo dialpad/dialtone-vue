@@ -20,10 +20,6 @@ const baseProps = {
 describe('DtRecipeComboboxWithPopover Tests', () => {
   let testContext;
 
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let inputWrapper;
@@ -86,7 +82,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
   // Teardown
   afterEach(async () => {
-    props = props;
+    props = baseProps;
     slots = {};
     wrapper.unmount();
     document.body.innerHTML = '';
@@ -101,7 +97,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
   describe('Presentation Tests', () => {
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); },
+      () => { expect(wrapper.exists()).toBe(true); },
     );
     it('should not render the visually hidden close button', async () => {
       await _openComboboxPopover();
@@ -331,7 +327,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
           await wrapper.trigger('keydown.esc');
         });
 
-        it('should call listener', () => { expect(escapeStub.called).toBe(true); });
+        it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
         it(
           'should emit escape event',
           () => { expect(wrapper.emitted().escape.length).toEqual(1); },
@@ -345,7 +341,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(selectStub.called).toBe(false); },
+          () => { expect(selectStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit select event',
@@ -360,7 +356,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); },
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit highlight event',
@@ -375,7 +371,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); },
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit highlight event',
@@ -390,7 +386,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); },
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit highlight event',
@@ -405,7 +401,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(highlightStub.called).toBe(false); },
+          () => { expect(highlightStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit highlight event',
@@ -431,7 +427,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
           await wrapper.trigger('keydown.esc');
         });
 
-        it('should call listener', () => { expect(escapeStub.called).toBe(true); });
+        it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
         it(
           'should emit escape event',
           () => { expect(wrapper.emitted().escape.length).toEqual(1); },
@@ -445,7 +441,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should not call listener',
-          () => { expect(selectStub.called).toBe(false); },
+          () => { expect(selectStub).not.toHaveBeenCalled(); },
         );
         it(
           'should not emit select event',
@@ -460,7 +456,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); },
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
@@ -475,7 +471,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); },
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
@@ -490,7 +486,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); },
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
@@ -505,7 +501,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
         it(
           'should call listener',
-          () => { expect(highlightStub.called).toBe(true); },
+          () => { expect(highlightStub).toHaveBeenCalled(); },
         );
         it(
           'should emit highlight event',
@@ -519,7 +515,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         await _openComboboxPopover();
       });
 
-      it('should call listener', () => { expect(openedStub.called).toBe(true); });
+      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
       it(
         'should emit open event',
         () => { expect(wrapper.emitted().opened.length).toEqual(1); },
@@ -532,7 +528,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         await wrapper.setProps({ showList: false });
       });
 
-      it('should call listener', () => { expect(openedStub.called).toBe(true); });
+      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
       it(
         'should emit open event',
         () => { expect(wrapper.emitted().opened.length).toEqual(2); },
@@ -546,7 +542,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
       it(
         'should not call listener',
-        () => { expect(selectStub.called).toBe(false); },
+        () => { expect(selectStub).not.toHaveBeenCalled(); },
       );
       it(
         'should not emit select event',
@@ -560,7 +556,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         await wrapper.trigger('keydown.enter');
       });
 
-      it('should call listener', () => { expect(selectStub.called).toBe(true); });
+      it('should call listener', () => { expect(selectStub).toHaveBeenCalled(); });
       it(
         'should emit select event',
         () => { expect(wrapper.emitted().select.length).toEqual(1); },
@@ -573,7 +569,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         await wrapper.trigger('keydown.esc');
       });
 
-      it('should call listener', () => { expect(escapeStub.called).toBe(true); });
+      it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
       it(
         'should emit escape event',
         () => { expect(wrapper.emitted().escape.length).toEqual(1); },
@@ -591,7 +587,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
           .trigger('click');
       });
 
-      it('should call listener', () => { expect(openedStub.called).toBe(true); });
+      it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
       it(
         'should emit open event',
         () => { expect(wrapper.emitted().opened.length).toEqual(1); },

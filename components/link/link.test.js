@@ -52,7 +52,7 @@ describe('DtLink tests', () => {
   describe('Presentation Tests', () => {
     it(
       'should render the component',
-      () => { assert.exists(wrapper, 'wrapper exists'); },
+      () => { expect(wrapper.exists()).toBe(true); },
     );
     it(
       'should render the native anchor',
