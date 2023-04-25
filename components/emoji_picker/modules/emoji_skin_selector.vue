@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
 
 const props = defineProps({
@@ -122,7 +122,7 @@ const isOpen = ref(false);
 /**
  * It will close the skin selector if the user is hovering over the emoji list
  */
-watch(
+watchEffect(
   () => props.isHovering && (isOpen.value = false),
 );
 

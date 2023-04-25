@@ -55,6 +55,16 @@ const props = defineProps({
     type: String,
     default: '',
   },
+
+  /**
+   * The labels for the aria-label
+   * @type {Array}
+   * @required
+   */
+  tabsetLabels: {
+    type: Array,
+    required: true,
+  },
 });
 
 const emits = defineEmits([
@@ -83,6 +93,7 @@ const tabs = computed(() => {
 
   return tabsData.map((tab, index) => ({
     ...tab,
+    label: props.tabsetLabels[index],
     id: (index + 1).toString(),
     panelId: (index + 1).toString(),
   }));

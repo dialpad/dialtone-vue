@@ -40,10 +40,10 @@
             type="button"
             :aria-label="emoji.name"
             @click="$emit('selected-emoji', emoji)"
-            @focusin="$emit('emoji-data', emoji)"
-            @focusout="$emit('emoji-data', null)"
-            @mouseover="$emit('emoji-data', emoji)"
-            @mouseleave="$emit('emoji-data', null)"
+            @focusin="$emit('highlighted-emoji', emoji)"
+            @focusout="$emit('highlighted-emoji', null)"
+            @mouseover="$emit('highlighted-emoji', emoji)"
+            @mouseleave="$emit('highlighted-emoji', null)"
           >
             <img
               class="d-icon d-icon--size-500"
@@ -66,10 +66,10 @@
           type="button"
           :aria-label="emoji.name"
           @click="$emit('selected-emoji', emoji)"
-          @focusin="$emit('emoji-data', emoji)"
-          @focusout="$emit('emoji-data', null)"
-          @mouseover="$emit('emoji-data', emoji)"
-          @mouseleave="$emit('emoji-data', null)"
+          @focusin="$emit('highlighted-emoji', emoji)"
+          @focusout="$emit('highlighted-emoji', null)"
+          @mouseover="$emit('highlighted-emoji', emoji)"
+          @mouseleave="$emit('highlighted-emoji', null)"
         >
           <img
             class="d-icon d-icon--size-500"
@@ -153,10 +153,10 @@ const props = defineProps({
 const emits = defineEmits([
   /**
    * Emitted when the user hover over an emoji
-   * @event emoji-data
+   * @event highlighted-emoji
    * @param {Object} emoji - The emoji data that was hovered
     */
-  'emoji-data',
+  'highlighted-emoji',
 
   /**
    * Emitted when the user select an emoji
@@ -261,21 +261,6 @@ const currentEmojis = computed(() => {
 });
 
 /**
- * This variable is used to check if the user is scrolling inside the emoji picker
- * This is used to check if the user is scrolling using the mouse wheel
- * This is useful because this flag will update the fixed label when the user is scrolling using the mouse wheel
- */
-const isScrolling = ref(false);
-
-/**
- * This variable is used inside the handleScroll function because
- * we use a setTimeout function to wait for a brief period of time (in this case, 100 milliseconds)
- * to see if the user has stopped scrolling.
- * If they have, we set isScrolling back to false
- */
-const timeoutId = ref(null);
-
-/**
  * This will trigger the searchByNameAndKeywords function with debounce of 300 milliseconds
  */
 const debouncedSearch = debounce(() => {
@@ -355,7 +340,6 @@ function handleImageError (event) {
  * Scroll to the selected tab
  */
 function scrollToTab (tabIndex) {
-  if (isScrolling.value) { return; }
   const tabLabel = tabLabels.value[tabIndex - 1];
   const tabElement = tabLabel.ref.value[0];
 
@@ -455,26 +439,11 @@ function setTabLabelObserver () {
   });
 }
 
-/**
- * This function is called when the user scrolls the listRef element.
- * It sets the isScrolling variable to true, and then it sets it to false after 100 milliseconds.
- * This is done to limit the user from clicking tabset too fast
- */
-function handleScroll () {
-  isScrolling.value = true;
-  clearTimeout(timeoutId.value);
-  timeoutId.value = setTimeout(() => {
-    isScrolling.value = false;
-  }, 100);
-}
-
 onMounted(() => {
-  listRef.value.addEventListener('scroll', handleScroll);
   setTabLabelObserver();
 });
 
 onUnmounted(() => {
-  listRef.value?.removeEventListener('scroll', handleScroll);
   tabLabelObserver.value.disconnect();
 });
 </script>

@@ -5,6 +5,7 @@
         :emoji-filter="searchQuery"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
+        :tabset-labels="tabSetLabels"
         :is-scrolling-with-scroll-to="isScrollingWithScrollTo"
         @selected-tabset="scrollToSelectedTabset"
       />
@@ -24,14 +25,14 @@
         :selected-tabset="selectedTabset"
         @scroll-into-tab="updateScrollIntoTab"
         @is-scrolling-with-scroll-to="updateIsScrollingWithScrollTo"
-        @emoji-data="updateEmojiData"
+        @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="emits('selected-emoji', $event)"
       />
     </div>
     <div class="d-emoji-picker--footer">
-      <emoji-description :emoji="emojiData" />
+      <emoji-description :emoji="highlightedEmoji" />
       <emoji-skin-selector
-        :is-hovering="!!emojiData"
+        :is-hovering="!!highlightedEmoji"
         :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
         :skin-tone="skinTone"
         @skin-tone="emits('skin-tone', $event)"
@@ -46,7 +47,7 @@ import EmojiTabset from './modules/emoji_tabset.vue';
 import EmojiSelector from './modules/emoji_selector.vue';
 import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
 import EmojiDescription from './modules/emoji_description.vue';
-import { computed, onBeforeUnmount, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
   /**
@@ -105,11 +106,11 @@ const props = defineProps({
    * @type {Array}
    * @default ['Most recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']
    * @example
-   * <dt-emoji-picker :tabSetLabels="['Most recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
+   * <dt-emoji-picker :tabSetLabels="['Most recently used', 'Smileys and people', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
    */
   tabSetLabels: {
     type: Array,
-    default: () => ['Most recently used', 'Smileys and people', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'],
+    required: true,
   },
 
   /**
@@ -150,7 +151,7 @@ const emits = defineEmits(
 );
 
 const searchQuery = ref('');
-const emojiData = ref(null);
+const highlightedEmoji = ref(null);
 const selectedTabset = ref({});
 
 const scrollIntoTab = ref(0);
@@ -179,20 +180,8 @@ function updateScrollIntoTab (value) {
 function updateIsScrollingWithScrollTo (value) {
   isScrollingWithScrollTo.value = value;
 }
-function updateEmojiData (emoji) {
-  emojiData.value = emoji;
-}
-
-/**
- * It will clean the state of the component before unmounting
- */
-onBeforeUnmount(() => {
-  cleanUp();
-});
-
-function cleanUp () {
-  searchQuery.value = '';
-  selectedTabset.value = {};
+function updateHighlightedEmoji (emoji) {
+  highlightedEmoji.value = emoji;
 }
 </script>
 
