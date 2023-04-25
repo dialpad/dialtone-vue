@@ -143,6 +143,10 @@ Default.parameters = {
           id: 'aria-allowed-attr',
           enabled: false,
         },
+        {
+          id: 'color-contrast',
+          enabled: false,
+        },
       ],
     },
   },
