@@ -91,6 +91,11 @@
   },
   "dependencies": {
     "@dialpad/dialtone-icons": "0.6.1-vue3",
+    "@tiptap/extension-document": "^2.0.2",
+    "@tiptap/extension-paragraph": "^2.0.2",
+    "@tiptap/extension-text": "^2.0.2",
+    "@tiptap/pm": "^2.0.2",
+    "@tiptap/vue-3": "^2.0.2",
     "emoji-regex": "^10.2.1",
     "emoji-toolkit": "^6.6.0",
     "seedrandom": "^3.0.5",
@@ -100,7 +105,7 @@
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/dialtone": "^7.24.1",
+    "@dialpad/dialtone": "^7.25.1",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@percy/cli": "^1.21.0",
     "@percy/storybook": "^4.3.5",
@@ -141,7 +146,7 @@
     "yo": "^4.3.1"
   },
   "peerDependencies": {
-    "@dialpad/dialtone": ">=7.24",
+    "@dialpad/dialtone": ">=7.25",
     "vue": ">=3.2"
   },
   "engineStrict": true,
