@@ -6,16 +6,16 @@
       <ul>
         <dt-recipe-feed-item-row
           :show-header="false"
-          :avatar-image-url="avatarImageUrl"
-          :display-name="displayName"
-          :time="time"
-          :short-time="shortTime"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
           :is-active="true"
-          @hover="onHover"
-          @focus="onFocus"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
         >
-          <template v-if="defaultSlot">
-            <span v-html="defaultSlot" />
+          <template v-if="$attrs.defaultSlot">
+            <span v-html="$attrs.defaultSlot" />
           </template>
           <template
             #threading
@@ -74,7 +74,7 @@
           <template
             #menu
           >
-            <dt-icon :name="menu" />
+            <dt-icon :name="$attrs.menu" />
           </template>
         </dt-recipe-feed-item-row>
       </ul>
@@ -84,13 +84,13 @@
       <ul>
         <dt-recipe-feed-item-row
           :show-header="true"
-          :avatar-image-url="avatarImageUrl"
-          :display-name="displayName"
-          :time="time"
-          :short-time="shortTime"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
           :is-active="true"
-          @hover="onHover"
-          @focus="onFocus"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
         >
           <dt-image-viewer
             :image-src="require('@/common/assets/fry.gif')"
@@ -154,10 +154,10 @@
             </dt-emoji-text-wrapper>
           </template>
           <template
-            v-if="menu"
+            v-if="$attrs.menu"
             #menu
           >
-            <dt-icon :name="menu" />
+            <dt-icon :name="$attrs.menu" />
           </template>
         </dt-recipe-feed-item-row>
       </ul>

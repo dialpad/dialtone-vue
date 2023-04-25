@@ -1,20 +1,20 @@
 <template>
   <ul>
     <dt-recipe-feed-item-row
-      :show-header="showHeader"
-      :avatar-image-url="avatarImageUrl"
-      :display-name="displayName"
-      :time="time"
-      :short-time="shortTime"
-      :is-active="isActive"
-      @hover="onHover"
-      @focus="onFocus"
+      :show-header="$attrs.showHeader"
+      :avatar-image-url="$attrs.avatarImageUrl"
+      :display-name="$attrs.displayName"
+      :time="$attrs.time"
+      :short-time="$attrs.shortTime"
+      :is-active="$attrs.isActive"
+      @hover="$attrs.onHover"
+      @focus="$attrs.onFocus"
     >
-      <template v-if="defaultSlot">
-        <span v-html="defaultSlot" />
+      <template v-if="$attrs.defaultSlot">
+        <span v-html="$attrs.defaultSlot" />
       </template>
       <template
-        v-if="threading"
+        v-if="$attrs.threading"
         #threading
       >
         <div class="d-d-flex d-flow1 d-my6">
@@ -58,7 +58,7 @@
         </div>
       </template>
       <template
-        v-if="reactions"
+        v-if="$attrs.reactions"
         #reactions
       >
         <dt-emoji-text-wrapper
@@ -66,14 +66,14 @@
           element-type="button"
           size="200"
         >
-          <span v-html="reactions" /> :smile:
+          <span v-html="$attrs.reactions" /> :smile:
         </dt-emoji-text-wrapper>
       </template>
       <template
         v-if="menu"
         #menu
       >
-        <dt-icon :name="menu" />
+        <dt-icon :name="$attrs.menu" />
       </template>
     </dt-recipe-feed-item-row>
   </ul>

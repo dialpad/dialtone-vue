@@ -86,6 +86,18 @@ export const argTypesData = {
       },
     },
   },
+
+  // Events
+  onFocus: {
+    table: {
+      disable: true,
+    },
+  },
+  onHover: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Story Collection
@@ -109,12 +121,10 @@ export default {
 // Templates
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeFeedItemRowDefaultTemplate,
 );
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeFeedItemRowVariantsTemplate,
 );
 
