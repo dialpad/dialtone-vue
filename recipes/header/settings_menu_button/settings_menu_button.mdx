@@ -13,12 +13,6 @@ import DtRecipeSettingsMenuButton from './settings_menu_button'
   <Story id="recipes-header-settings-menu-button--default" />
 </Canvas>
 
-## Variants
-
-<Canvas>
-  <Story id="recipes-header-settings-menu-button--variants" />
-</Canvas>
-
 ## Slots, Props & Events
 
 <ArgsTable story={PRIMARY_STORY} />
@@ -31,16 +25,23 @@ import DtRecipeSettingsMenuButton from './settings_menu_button'
 import { DtRecipeSettingsMenuButton } from '@dialpad/dialtone-vue';
 ```
 
-### Simplest form
+### Default
 
 ```html
-<dt-recipe-settings-menu-button />
+<dt-recipe-settings-menu-button
+  :aria-label="ariaLabel"
+  @click="onClick"
+/>
 ```
 
-### Complex
+### Update Available
 
 ```html
 <dt-recipe-settings-menu-button
   :update-available="true"
-/>
+  :aria-label="ariaLabel"
+  @click="onClick"
+>
+  Update
+</dt-recipe-settings-menu-button>
 ```

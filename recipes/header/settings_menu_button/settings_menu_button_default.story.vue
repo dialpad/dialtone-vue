@@ -1,6 +1,8 @@
 <template>
   <dt-recipe-settings-menu-button
     :update-available="updateAvailable"
+    :aria-label="ariaLabel"
+    @click="onClick"
   >
     <template v-if="defaultSlot">
       {{ defaultSlot }}

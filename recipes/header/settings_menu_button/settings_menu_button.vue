@@ -6,13 +6,14 @@
     icon-position="right"
     class="d-h32 d-bar-pill d-bgc-blue-200 d-bgo25 h:d-bgo50 d-bc-blue-500 d-bco25 d-fc-blue-500"
     :aria-label="ariaLabel"
+    v-on="$listeners"
   >
     <slot />
     <template #icon>
       <dt-icon
         name="more-vertical"
         size="400"
-        class="d-bs-none d-fc-blue-500 d-ol-none d-svg--size20"
+        class="d-fc-blue-500"
       />
     </template>
   </dt-button>
@@ -22,12 +23,12 @@
     kind="inverted"
     class="settings-menu-button d-p0 d-bar24 d-h32 d-w24 d-theme-topbar-fc"
     :aria-label="ariaLabel"
+    v-on="$listeners"
   >
     <template #icon>
       <dt-icon
         name="more-vertical"
         size="400"
-        class="d-bs-none d-ol-none d-svg--size20"
       />
     </template>
   </dt-button>
@@ -90,7 +91,7 @@ export default {
 
   &:focus-visible {
     color: var(--theme-topbar-color-hsl);
-    box-shadow: 0 0 0 var(--su2) hsla(var(--theme-sidebar-color-hsl) / .15);
+    box-shadow: 0 0 0 var(--size-200) hsla(var(--theme-sidebar-color-hsl) / .15);
   }
 }
 </style>

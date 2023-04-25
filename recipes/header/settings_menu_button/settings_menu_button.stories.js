@@ -3,7 +3,6 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeSettingsMenuButton from './settings_menu_button';
 import DtRecipeSettingsMenuButtonMdx from './settings_menu_button.mdx';
 import DtRecipeSettingsMenuButtonDefaultTemplate from './settings_menu_button_default.story.vue';
-import DtRecipeSettingsMenuButtonVariantsTemplate from './settings_menu_button_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
@@ -72,21 +71,10 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   argTypes,
   DtRecipeSettingsMenuButtonDefaultTemplate,
 );
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeSettingsMenuButtonVariantsTemplate,
-);
 
 // Stories
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  default: 'Update',
-  ariaLabel: 'Update app',
-};
-
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {
   default: 'Update',
   ariaLabel: 'Update app',
 };
