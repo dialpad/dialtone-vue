@@ -3,7 +3,7 @@
     ref="FeedItemRef"
     navigation-type="none"
     v-bind="$attrs"
-    :class="['d-w100p', 'd-box-border', 'd-ps-relative', 'd-p8', { 'd-bgc-secondary-opaque': isActive }]"
+    :class="['d-w100p', 'd-box-border', 'd-ps-relative', 'd-px8', { 'd-bgc-secondary-opaque': isActive }]"
     data-qa="feed-item-row"
     v-on="feedListeners"
   >
