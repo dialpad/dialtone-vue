@@ -56,5 +56,6 @@ defineProps({
     margin: 0;
     padding: 0;
     outline: none;
+    line-height: 0;
 }
 </style>

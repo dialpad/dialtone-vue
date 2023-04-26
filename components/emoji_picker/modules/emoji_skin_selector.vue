@@ -149,8 +149,10 @@ function selectSkin (skin) {
       background: none;
       cursor: pointer;
       margin: 0;
+      padding: 0;
       outline: none;
-      padding: 3px;
+      width: 34px;
+      height: 34px;
 
       &:hover{
         background: rgba(0, 0, 0, 0.1);

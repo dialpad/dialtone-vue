@@ -490,6 +490,8 @@ onUnmounted(() => {
     gap: 2px;
     display: flex;
     flex-wrap: wrap;
+    // We use this margin left to align the emoji list with the tabset label
+    margin-left: -6px;
 
     button{
       display: flex;
