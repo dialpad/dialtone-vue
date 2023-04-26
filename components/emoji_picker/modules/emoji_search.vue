@@ -46,7 +46,7 @@ defineProps({
 .d-emoji-picker__search {
   position: relative;
   z-index: 1;
-  margin: var(--su16) auto var(--su16) auto;
+  margin: var(--su16) 30px var(--su16) 6px;
   background-color: #FFFFFF;
 }
 .d-emoji-picker__search-button{

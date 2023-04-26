@@ -455,7 +455,7 @@ onUnmounted(() => {
     min-height: 297px;
 
     p{
-      margin-bottom: 10px;
+      margin-bottom: 4px;
       font-size: 12px;
       font-weight: 700;
     }
@@ -477,7 +477,7 @@ onUnmounted(() => {
 
     div:not(:first-child){
       p{
-        margin-top: 25px;
+        margin-top: 20px;
       }
     }
   }

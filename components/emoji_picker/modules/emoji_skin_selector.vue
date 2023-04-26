@@ -33,7 +33,6 @@
           class="d-icon d-icon--size-500"
           :alt="skinSelected.name"
           :aria-label="skinSelected.name"
-          :title="skinSelected.name"
           :src="`${CDN_URL + skinSelected.unicode_output}.png`"
         >
       </button>
