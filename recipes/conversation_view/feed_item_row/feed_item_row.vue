@@ -3,7 +3,7 @@
     ref="FeedItemRef"
     navigation-type="none"
     v-bind="$attrs"
-    :class="['d-w100p', 'd-box-border', 'd-ps-relative', 'd-px16', 'd-py4', { 'd-bgc-secondary-opaque': isActive }]"
+    :class="['d-w100p', 'd-box-border', 'd-ps-relative', 'd-p8', { 'd-bgc-secondary-opaque': isActive }]"
     data-qa="feed-item-row"
     v-on="feedListeners"
   >
@@ -42,7 +42,7 @@
           {{ displayName }}
         </p>
         <time
-          class="d-fs-100 d-lh-300 d-fc-tertiary d-fw-normal d-ml4 d-fl-shrink0"
+          class="d-fs-100 d-mt2 d-lh-300 d-fc-tertiary d-fw-normal d-ml4 d-fl-shrink0"
         >
           {{ time }}
         </time>
@@ -211,6 +211,6 @@ export default {
 
 <style lang="less">
 content-text-wrapper-class:not(img) {
-  line-height: 1.4rem;
+  line-height: 1.6rem;
 }
 </style>
