@@ -11,7 +11,6 @@
           :key="tab.id"
           :panel-id="tab.panelId"
           :label="tab.label"
-          class="d-ml2 d-mr2"
           @click.capture.stop="selectTabset(tab.id)"
         >
           <dt-icon
@@ -135,7 +134,7 @@ function selectTabset (id) {
 <style lang="less">
 .d-emoji-picker{
   &__tabset-list{
-      gap: 0;
+      gap: 4px;
 
       &::after{
         background-color: var(--black-200) !important;

@@ -58,27 +58,31 @@
       </div>
       <div
         v-if="emojiFilter"
-        class="d-emoji-picker__tab d-emoji-picker__alignment"
+        class="d-emoji-picker__alignment"
       >
-        <button
-          v-for="emoji in filteredEmojis"
-          :key="emoji.shortname"
-          type="button"
-          :aria-label="emoji.name"
-          @click="$emit('selected-emoji', emoji)"
-          @focusin="$emit('highlighted-emoji', emoji)"
-          @focusout="$emit('highlighted-emoji', null)"
-          @mouseover="$emit('highlighted-emoji', emoji)"
-          @mouseleave="$emit('highlighted-emoji', null)"
+        <div
+          class="d-emoji-picker__tab "
         >
-          <img
-            class="d-icon d-icon--size-500"
-            :alt="emoji.name"
+          <button
+            v-for="emoji in filteredEmojis"
+            :key="emoji.shortname"
+            type="button"
             :aria-label="emoji.name"
-            :title="emoji.name"
-            :src="`${CDN_URL + emoji.unicode_character}.png`"
+            @click="$emit('selected-emoji', emoji)"
+            @focusin="$emit('highlighted-emoji', emoji)"
+            @focusout="$emit('highlighted-emoji', null)"
+            @mouseover="$emit('highlighted-emoji', emoji)"
+            @mouseleave="$emit('highlighted-emoji', null)"
           >
-        </button>
+            <img
+              class="d-icon d-icon--size-500"
+              :alt="emoji.name"
+              :aria-label="emoji.name"
+              :title="emoji.name"
+              :src="`${CDN_URL + emoji.unicode_character}.png`"
+            >
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -458,6 +462,7 @@ onUnmounted(() => {
       margin-bottom: 4px;
       font-size: 12px;
       font-weight: 700;
+      letter-spacing: -0.01em;
     }
   }
 
@@ -466,18 +471,20 @@ onUnmounted(() => {
     position: sticky;
     top: 0;
     padding-top: 20px;
+    width: 100%;
   }
 
   &__list{
     height: 100%;
     max-height: 297px;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
     top: -20px;
 
     div:not(:first-child){
       p{
-        margin-top: 20px;
+        margin-top: 18px;
       }
     }
   }
@@ -487,6 +494,8 @@ onUnmounted(() => {
   }
 
   &__tab{
+    width: calc(100% + 15px);
+    max-width: 340px;
     gap: 2px;
     display: flex;
     flex-wrap: wrap;

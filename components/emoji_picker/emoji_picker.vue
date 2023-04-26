@@ -195,7 +195,7 @@ function updateHighlightedEmoji (emoji) {
   border-radius: 4px;
 
   &--header{
-    padding: var(--su4) var(--su4) 0 var(--su4);
+    padding: var(--su4) var(--su4) 0 var(--su8);
     position: relative;
     &::after{
       content: '';
@@ -211,7 +211,7 @@ function updateHighlightedEmoji (emoji) {
   &__alignment{
     width: auto;
     max-width: 340px;
-    margin: 0 auto;
+    margin: 0 16px;
   }
 
   &--footer{
