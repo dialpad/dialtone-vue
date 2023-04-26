@@ -7,12 +7,6 @@ const baseProps = {
 };
 
 describe('DtCodeblock Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
 

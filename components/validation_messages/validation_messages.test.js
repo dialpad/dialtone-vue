@@ -18,12 +18,6 @@ const baseValidationMessages = [{
 }];
 
 describe('Validation Messages Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let messages;
@@ -82,7 +76,7 @@ describe('Validation Messages Tests', () => {
       describe('When the radio group renders', () => {
         // Test Setup
         beforeEach(() => {
-          props = { ...props, validationMessages };
+          props = { ...baseProps, validationMessages };
           _setWrappers();
         });
 
@@ -92,7 +86,7 @@ describe('Validation Messages Tests', () => {
       describe('When validation messages are hidden', () => {
         // Test Setup
         beforeEach(() => {
-          props = { ...props, validationMessages, showMessages: false };
+          props = { ...baseProps, validationMessages, showMessages: false };
         });
 
         describe('When the radio group renders', () => {
@@ -119,7 +113,7 @@ describe('Validation Messages Tests', () => {
         describe('When the radio group renders', () => {
           // Test Setup
           beforeEach(() => {
-            props = { ...props, validationMessages };
+            props = { ...baseProps, validationMessages };
             _setWrappers();
           });
 
@@ -142,7 +136,7 @@ describe('Validation Messages Tests', () => {
           describe('When the radio group renders', () => {
             // Test Setup
             beforeEach(() => {
-              props = { ...props, validationMessages };
+              props = { ...baseProps, validationMessages };
               _setWrappers();
             });
 
@@ -164,7 +158,7 @@ describe('Validation Messages Tests', () => {
       describe('When there is a warning validation message with an empty message', () => {
         // Test Setup
         beforeEach(() => {
-          props = { ...props, validationMessages };
+          props = { ...baseProps, validationMessages };
           _setWrappers();
         });
 
@@ -187,7 +181,7 @@ describe('Validation Messages Tests', () => {
         describe('When the validation message renders', () => {
           // Test Setup
           beforeEach(() => {
-            props = { ...props, validationMessages };
+            props = { ...baseProps, validationMessages };
             _setWrappers();
           });
 
@@ -211,7 +205,7 @@ describe('Validation Messages Tests', () => {
         describe('When the validation message renders', () => {
           // Test Setup
           beforeEach(() => {
-            props = { ...props, validationMessages };
+            props = { ...baseProps, validationMessages };
             _setWrappers();
           });
 
@@ -225,7 +219,7 @@ describe('Validation Messages Tests', () => {
     describe('When there is a validation message', () => {
       // Test Setup
       beforeEach(() => {
-        props = { ...props, validationMessages: baseValidationMessages };
+        props = { ...baseProps, validationMessages: baseValidationMessages };
       });
 
       describe('When validation messages are shown', () => {

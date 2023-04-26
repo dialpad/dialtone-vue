@@ -6,12 +6,11 @@ import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeDoesNotRaiseAnyVueWarnings,
-  itBehavesLikeRaisesVueWarning,
+  itBehavesLikeRaisesSingleVueWarning,
 } from '../../tests/shared_examples/validation';
 import {
   itBehavesLikeAppliesClassToChild,
 } from '../../tests/shared_examples/extendability';
-import Vue from 'vue';
 
 // Constants
 const DEFAULT_SLOT = 'DP';
@@ -349,18 +348,16 @@ describe('DtAvatar Tests', () => {
 
       // Test Setup
       beforeAll(() => {
-        Vue.config.silent = true;
-        jest.spyOn(Vue.util, 'warn').mockClear();
+        jest.spyOn(console, 'warn').mockClear();
       });
 
       // Test Teardown
       afterEach(() => {
-        Vue.util.warn.mockReset();
+        console.warn.mockReset();
       });
 
       afterAll(() => {
-        Vue.util.warn.mockRestore();
-        Vue.config.silent = false;
+        console.warn.mockRestore();
       });
 
       describe('When image src and alt attributes are provided', () => {
@@ -384,7 +381,7 @@ describe('DtAvatar Tests', () => {
           await _setWrappers();
         });
 
-        itBehavesLikeRaisesVueWarning(warningMessage);
+        itBehavesLikeRaisesSingleVueWarning(warningMessage);
       });
 
       describe('When image src attribute is not provided', () => {
@@ -396,7 +393,7 @@ describe('DtAvatar Tests', () => {
           await _setWrappers();
         });
 
-        itBehavesLikeRaisesVueWarning(warningMessage);
+        itBehavesLikeRaisesSingleVueWarning(warningMessage);
       });
     });
   });

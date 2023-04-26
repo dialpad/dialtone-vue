@@ -17,19 +17,13 @@ const baseSlots = {
 };
 
 describe('DtRecipeUnreadChip Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let unreadChipLabel;
   let unreadChipIcon;
 
   // Environment
-  const props = baseProps;
+  let props = baseProps;
   let attrs = {};
   let slots = baseSlots;
   let provide = {};
@@ -50,8 +44,6 @@ describe('DtRecipeUnreadChip Tests', () => {
     _setChildWrappers();
   };
 
-  // Setup
-  before(function () {});
   beforeEach(function () {
     _setWrappers();
   });

@@ -6,12 +6,6 @@ import DtPresence from './presence.vue';
 const baseProps = {};
 
 describe('DtPresence Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   let wrapper;
   let presence;
   let innerPresence;
@@ -71,7 +65,7 @@ describe('DtPresence Tests', () => {
       const srText = 'SR Presence Text';
       beforeEach(() => {
         props = {
-          ...props,
+          ...baseProps,
           srText,
         };
         _setWrappers();

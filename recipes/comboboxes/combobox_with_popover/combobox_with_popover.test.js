@@ -18,8 +18,6 @@ const baseProps = {
 };
 
 describe('DtRecipeComboboxWithPopover Tests', () => {
-  let testContext;
-
   // Wrappers
   let wrapper;
   let inputWrapper;
@@ -140,7 +138,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         expect(wrapper.findComponent({ name: 'dt-input' }).props('size')).toEqual(baseProps.size);
       });
       it('should provide proper description prop to input element', () => {
-        expect(wrapper.find('input').attributes('description').props('description')).toEqual(baseProps.description);
+        expect(wrapper.findComponent({ name: 'dt-input' }).props('description')).toEqual(baseProps.description);
       });
       it('should provide proper aria-label prop to input element', () => {
         expect(wrapper.find('input').attributes('aria-label')).toEqual(baseProps.label);
@@ -172,7 +170,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
     describe('When it is loading', () => {
       // Test Setup
       beforeEach(async function () {
-        props = { ...props, loading: true };
+        props = { ...baseProps, loading: true };
         slots = {
           input: '<template #input="{ inputProps }"><dt-input id="input" v-bind="inputProps" /></template>',
           list: `<template #list="{ listProps }">
@@ -316,7 +314,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
 
     describe('When the list is loading', () => {
       beforeEach(async () => {
-        props = { ...props, loading: true };
+        props = { ...baseProps, loading: true };
         _mountWrapper();
         await _openComboboxPopover();
         _setChildWrappers();
@@ -460,7 +458,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
+          () => { expect(wrapper.emitted().highlight.length).toEqual(3); },
         );
       });
 
@@ -475,7 +473,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
+          () => { expect(wrapper.emitted().highlight.length).toEqual(3); },
         );
       });
 
@@ -490,7 +488,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
+          () => { expect(wrapper.emitted().highlight.length).toEqual(3); },
         );
       });
 
@@ -505,7 +503,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(2); },
+          () => { expect(wrapper.emitted().highlight.length).toEqual(3); },
         );
       });
     });
@@ -590,7 +588,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
       it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
       it(
         'should emit open event',
-        () => { expect(wrapper.emitted().opened.length).toEqual(1); },
+        () => { expect(wrapper.emitted().opened.length).toEqual(2); },
       );
     });
   });

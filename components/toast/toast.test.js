@@ -17,23 +17,18 @@ import {
 import { TOAST_MIN_DURATION } from './toast_constants';
 
 // Constants
-const baseProps = {};
+const baseProps = {
+  title: '',
+};
 const baseSlotsData = {};
 
 describe('DtToast Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let toast;
   let actionChild;
   let contentChild;
   let iconChild;
-  let message;
 
   // Environment
   let props = baseProps;
@@ -46,7 +41,6 @@ describe('DtToast Tests', () => {
     actionChild = wrapper.findComponent(DtNoticeAction);
     contentChild = wrapper.findComponent(DtNoticeContent);
     iconChild = wrapper.findComponent(DtNoticeIcon);
-    message = wrapper.find('[data-qa="notice-content-message"]');
   };
 
   const _setWrappers = () => {
@@ -112,10 +106,10 @@ describe('DtToast Tests', () => {
       // Test Setup
       beforeEach(async () => {
         props = {
-          ...props,
+          ...baseProps,
           titleId: 'titleId prop content',
           contentId: 'contentId prop content',
-          title: 'title prop content',
+          title: '',
           message: 'message prop content',
           hideClose: true,
         };
@@ -136,7 +130,7 @@ describe('DtToast Tests', () => {
       });
 
       it('message prop is passed down correctly', () => {
-        expect(contentChildStub.text()).toBe(props.message);
+        expect(contentChild.text()).toBe(props.message);
       });
 
       it('hideClose prop is passed down correctly', () => {
@@ -159,7 +153,7 @@ describe('DtToast Tests', () => {
     describe('When kind is set to error', () => {
       // Test Setup
       beforeEach(async () => {
-        props = { ...props, kind: 'error' };
+        props = { ...baseProps, kind: 'error' };
         _setWrappers();
         await _showToast();
       });
@@ -184,7 +178,7 @@ describe('DtToast Tests', () => {
     describe('When important is true', () => {
       // Test Setup
       beforeEach(async () => {
-        props = { ...props, important: true };
+        props = { ...baseProps, important: true };
         _setWrappers();
         await _showToast();
       });
@@ -224,7 +218,7 @@ describe('DtToast Tests', () => {
 
       // Test Setup
       beforeEach(() => {
-        props = { ...props, duration };
+        props = { ...baseProps, duration };
         _setWrappers();
         jest.useFakeTimers();
       });
@@ -285,7 +279,7 @@ describe('DtToast Tests', () => {
     describe('When role is alert', () => {
       // Test Setup
       beforeEach(async () => {
-        props = { ...props, role: 'alert' };
+        props = { ...baseProps, role: 'alert' };
         _setWrappers();
         await _showToast();
       });

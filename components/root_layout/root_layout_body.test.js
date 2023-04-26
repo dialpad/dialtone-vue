@@ -13,12 +13,6 @@ const baseSlotsData = {
 };
 
 describe('DtRootLayoutBody Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
 

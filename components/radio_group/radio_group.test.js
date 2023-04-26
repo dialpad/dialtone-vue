@@ -14,12 +14,6 @@ const baseProps = {
 const baseAttrs = { 'aria-label': 'Test Radio Group' };
 
 describe('DtRadioGroup Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let radioGroup;
@@ -54,7 +48,9 @@ describe('DtRadioGroup Tests', () => {
     _setChildWrappers();
   };
 
-  config.global.renderStubDefaultSlot = true;
+  beforeAll(() => {
+    config.global.renderStubDefaultSlot = true;
+  });
 
   // Test Teardown
   afterEach(function () {
@@ -63,7 +59,7 @@ describe('DtRadioGroup Tests', () => {
     slots = {};
   });
 
-  after(function () {
+  afterAll(function () {
     config.global.renderStubDefaultSlot = false;
   });
 
@@ -143,7 +139,7 @@ describe('DtRadioGroup Tests', () => {
       describe('When the legend is provided via prop', () => {
         // Test Setup
         beforeEach(() => {
-          props = { ...props, legend };
+          props = { ...baseProps, legend };
         });
 
         describe('When the radio group renders', () => {
@@ -186,7 +182,7 @@ describe('DtRadioGroup Tests', () => {
     describe('When validation messages are provided', () => {
       // Test Setup
       beforeEach(() => {
-        props = { ...props, messages: ['Error'] };
+        props = { ...baseProps, messages: ['Error'] };
       });
 
       describe('When the radio group renders', () => {
@@ -219,7 +215,7 @@ describe('DtRadioGroup Tests', () => {
     describe('When an initial value is provided', () => {
       // Test Setup
       beforeEach(() => {
-        props = { ...props, value: selectedValue };
+        props = { ...baseProps, value: selectedValue };
         _setWrappers();
       });
 
@@ -243,7 +239,7 @@ describe('DtRadioGroup Tests', () => {
     describe('When the radio group is disabled', () => {
       // Test Setup
       beforeEach(() => {
-        props = { ...props, disabled: true };
+        props = { ...baseProps, disabled: true };
         _mountWrappers();
       });
 
@@ -297,7 +293,7 @@ describe('DtRadioGroup Tests', () => {
     });
 
     beforeEach(() => {
-      props = { ...props, legend: 'My Radio Group' };
+      props = { ...baseProps, legend: 'My Radio Group' };
     });
 
     describe('When a legend class is provided', () => {

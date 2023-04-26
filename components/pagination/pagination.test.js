@@ -16,12 +16,6 @@ const baseProps = {
 };
 
 describe('DtPagination Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let prev;
@@ -100,7 +94,7 @@ describe('DtPagination Tests', () => {
     describe('When rendered with active page', () => {
       beforeEach(async () => {
         props = {
-          ...props,
+          ...baseProps,
           totalPages: 10,
           activePage: 9,
         };
@@ -114,7 +108,7 @@ describe('DtPagination Tests', () => {
     describe('When rendered with more pages', () => {
       beforeEach(async () => {
         props = {
-          ...props,
+          ...baseProps,
           totalPages: 15,
           activePage: 7,
           maxVisible: 7,
@@ -132,7 +126,7 @@ describe('DtPagination Tests', () => {
     describe('When maxVisible is even', () => {
       beforeEach(async () => {
         props = {
-          ...props,
+          ...baseProps,
           totalPages: 15,
           activePage: 7,
           maxVisible: 6,

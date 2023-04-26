@@ -8,12 +8,6 @@ const baseProps = {
 };
 
 describe('DtListItemGroup Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let heading;
@@ -39,9 +33,6 @@ describe('DtListItemGroup Tests', () => {
     _setChildWrappers();
   };
 
-  // Setup
-  before(function () {
-  });
   beforeEach(() => {
     _setWrappers();
   });
@@ -68,7 +59,7 @@ describe('DtListItemGroup Tests', () => {
       it(
         'the root ul is aria-labelledby the id of the header element',
         () => {
-          expect(wrapper.attributes('aria-labelledby')).toBe(basePropsData.id + '-heading');
+          expect(wrapper.attributes('aria-labelledby')).toBe(baseProps.id + '-heading');
         },
       );
     });

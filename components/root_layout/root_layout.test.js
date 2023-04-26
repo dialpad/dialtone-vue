@@ -13,12 +13,6 @@ const baseSlotsData = {
 };
 
 describe('DtRootLayout Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
 
@@ -82,7 +76,7 @@ describe('DtRootLayout Tests', () => {
 
     describe('When headerSticky is set to default', () => {
       it('Has correct class', async () => {
-        expect(header.classes('root-layout__header--sticky')).toBe(false);
+        expect(header.classes('d-root-layout__header--sticky')).toBe(false);
       });
     });
 
@@ -91,8 +85,8 @@ describe('DtRootLayout Tests', () => {
         await wrapper.setProps({ headerSticky: true });
       });
 
-      it('Has correct class', async () => {
-        expect(header.classes('root-layout__header--sticky')).toBe(true);
+      it('Has correct class', () => {
+        expect(header.classes('d-root-layout__header--sticky')).toBe(true);
       });
     });
   });

@@ -2,12 +2,6 @@ import { mount } from '@vue/test-utils';
 import DtDefaultListItem from './default_list_item.vue';
 
 describe('DtDefaultListItem tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let leftWrapper;

@@ -14,7 +14,6 @@ describe('DtCollapsible Tests', () => {
   let contentElement;
   let contentWrapperElement;
   let anchorElement;
-  let anchorSlotElement;
   let slots = { content };
 
   // Environment
@@ -24,13 +23,11 @@ describe('DtCollapsible Tests', () => {
     contentElement = undefined;
     contentWrapperElement = undefined;
     anchorElement = undefined;
-    anchorSlotElement = undefined;
     slots = { content };
   };
 
   const _setChildWrappers = () => {
     anchorElement = wrapper.find('[data-qa="dt-button"]');
-    anchorSlotElement = wrapper.find('[data-qa="anchor-element"]');
     contentElement = wrapper.find('[data-qa="content-element"]');
     contentWrapperElement = wrapper.getComponent('.d-dt-collapsible__content');
   };
@@ -91,7 +88,7 @@ describe('DtCollapsible Tests', () => {
       slots = { anchor };
     });
     it('should render the scoped slot', () => {
-      expect(anchorSlotElement.exists()).toBeTruthy();
+      expect(anchorElement.exists()).toBeTruthy();
     });
   });
 

@@ -6,7 +6,7 @@ import DtNoticeIcon from '../notice/notice_icon';
 
 // Constants
 const baseProps = {
-  title: 'Notice Title',
+  title: '',
   closeButtonProps: { ariaLabel: 'close' },
 };
 
@@ -17,19 +17,12 @@ const baseSlotsData = {
 };
 
 describe('DtNotice tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   let wrapper;
 
   let rootElement;
   let actionChild;
   let contentChild;
   let iconChild;
-  let message;
 
   const _setWrappers = () => {
     wrapper = mount(DtNotice, {
@@ -44,7 +37,6 @@ describe('DtNotice tests', () => {
     actionChild = wrapper.findComponent(DtNoticeAction);
     contentChild = wrapper.findComponent(DtNoticeContent);
     iconChild = wrapper.findComponent(DtNoticeIcon);
-    message = wrapper.find('[data-qa="notice-content-message"]');
   };
 
   beforeEach(function () {

@@ -7,12 +7,6 @@ const baseSlotsData = {
 };
 
 describe('DtStack Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
 

@@ -18,12 +18,6 @@ const baseSlotsData = {
 };
 
 describe('DtNoticeAction tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   let wrapper;
 
   const props = baseProps;

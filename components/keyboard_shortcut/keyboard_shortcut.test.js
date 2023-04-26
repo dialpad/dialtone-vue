@@ -9,16 +9,6 @@ const baseProps = {
 };
 
 describe('DtKeyboardShortcut Tests', () => {
-  let testContext = {
-    localVue: null,
-  };
-
-  // Setup
-  beforeAll(() => {
-    testContext = {};
-    testContext.localVue = createLocalVue();
-  });
-
   // Wrappers
   let wrapper;
   let iconComponents;

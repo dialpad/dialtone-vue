@@ -7,7 +7,7 @@ export function itBehavesLikeAppliesChildProp (element, propName, propValue) {
 }
 
 export function itBehavesLikePassesChildProp (element, propName, propValue) {
-  expect(element.props(propName)).toBe(propValue);
+  expect(element.props(propName)).toEqual(propValue);
 }
 
 export default {

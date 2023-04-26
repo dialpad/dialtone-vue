@@ -15,12 +15,6 @@ const baseProps = {
 };
 
 describe('DtRecipeComboboxMultiSelect Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let chips;
@@ -30,7 +24,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
   let validationMsg;
 
   // Environment
-  const props = baseProps;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};
@@ -85,7 +79,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       expect(inputLabel.exists()).toBe(true);
     });
     it('should not render the chip if no selection', () => {
-      expect(chips.exists()).toBe(false);
+      expect(chips.length).toBe(0);
     });
     it('should not render the visually hidden close button', async () => {
       await input.trigger('focus');
@@ -117,7 +111,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       it(
         'should still set aria-label even if label visible is false',
         async () => {
-          expect(input.attributes('aria-label')).toEqual(basePropsData.label);
+          expect(input.attributes('aria-label')).toEqual(baseProps.label);
         },
       );
     });
@@ -130,7 +124,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       });
 
       it('should render the chip component', () => {
-        expect(chips.exists()).toBe(true);
+        expect(chips.length).toBeGreaterThan(0);
       });
 
       it('should be two chip components', () => {

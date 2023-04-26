@@ -6,19 +6,13 @@ import DtTooltip from '@/components/tooltip/tooltip';
 const baseProps = {};
 
 describe('DtRecipeCallbarButton Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let button;
   let tooltip;
 
   // Environment
-  const props = baseProps;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};

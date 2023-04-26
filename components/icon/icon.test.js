@@ -6,12 +6,6 @@ const baseProps = {
 };
 
 describe('DtIcon Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   let wrapper;
   let icon;
 

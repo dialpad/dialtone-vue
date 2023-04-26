@@ -4,12 +4,6 @@ import EmptyComponentFixture from '../../tests/fixtures/component.vue';
 import { itBehavesLikeAppliesClassToChild } from '../../tests/shared_examples/extendability';
 
 describe('DtButton Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   let wrapper;
   let button;
   let icon;
@@ -386,7 +380,7 @@ describe('DtButton Tests', () => {
       });
 
       it('Should emit click event', () => {
-        expect(wrapper.emitted().click).toEqual();
+        expect(wrapper.emitted().click).toBeTruthy();
       });
     });
   });

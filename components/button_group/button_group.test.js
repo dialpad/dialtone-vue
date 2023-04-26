@@ -11,12 +11,6 @@ import {
 const baseProps = {};
 
 describe('DtButtonGroup Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let buttonGroup;

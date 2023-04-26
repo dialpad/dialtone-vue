@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import <%= componentName %> from './<%= fileName %>.vue';
 
 // Constants
@@ -27,7 +27,7 @@ describe('<%= componentName %> Tests', function () {
       attrs,
       slots,
       provide,
-      localVue: testContext.localVue,
+
     });
     _setChildWrappers();
   };
@@ -40,7 +40,7 @@ describe('<%= componentName %> Tests', function () {
   // Setup
   beforAll(function () {
     testContext = {};
-    testContext.localVue = createLocalVue();
+
   });
   beforeEach(function () {});
 

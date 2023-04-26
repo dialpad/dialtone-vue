@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import { mount } from '@vue/test-utils';
 import DtBreadcrumb from './breadcrumbs.vue';
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
@@ -67,7 +66,7 @@ describe('DtBreadcrumb Tests', () => {
     );
     it(
       'should render the item breadcrumb',
-      () => { expect(breadcrumbItems.exists()).toBeTruthy(); },
+      () => { expect(breadcrumbItems.length).toBeGreaterThan(0); },
     );
 
     describe('When the breadcrumb has default state', () => {

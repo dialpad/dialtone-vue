@@ -19,12 +19,6 @@ const baseSlots = {
 const connector = '<div data-qa="dt-connector-element"> connector content </div>';
 
 describe('DtPagination Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let topConnector;
@@ -76,7 +70,7 @@ describe('DtPagination Tests', () => {
     describe('When top connector has dtmf', () => {
       beforeEach(async () => {
         props = {
-          ...props,
+          ...baseProps,
           dtmfKey: '2',
         };
         await _setWrappers();
@@ -91,7 +85,7 @@ describe('DtPagination Tests', () => {
     describe('When top connector has different template', () => {
       beforeEach(async () => {
         props = {
-          ...props,
+          ...baseProps,
           connector,
         };
         await _setWrappers();
@@ -105,7 +99,7 @@ describe('DtPagination Tests', () => {
     describe('When node is selected', () => {
       beforeEach(async () => {
         props = {
-          ...props,
+          ...baseProps,
           isSelected: true,
         };
         await _setWrappers();
@@ -131,7 +125,7 @@ describe('DtPagination Tests', () => {
         await nodeIcon.trigger('click');
       });
       it('should emit click event', () => {
-        expect(wrapper.emitted().click).toEqual();
+        expect(wrapper.emitted().click).toBeTruthy();
       });
     });
   });

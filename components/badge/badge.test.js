@@ -7,12 +7,6 @@ import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classe
 const baseProps = {};
 
 describe('DtBadge Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   let wrapper;
   let badge;
   let iconLeftWrapper;
@@ -35,7 +29,7 @@ describe('DtBadge Tests', () => {
     wrapper = mount(DtBadge, {
       props,
       slots,
-      localVue: testContext.localVue,
+
     });
     _setChildWrappers();
   };

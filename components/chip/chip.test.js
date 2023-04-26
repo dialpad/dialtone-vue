@@ -10,12 +10,6 @@ const baseProps = {
 };
 
 describe('DtChip Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let chip;
@@ -93,7 +87,7 @@ describe('DtChip Tests', () => {
     describe('When interactive is false', () => {
       beforeEach(async () => {
         props = {
-          ...props,
+          ...baseProps,
           interactive: false,
         };
         await _setWrappers();
@@ -106,7 +100,7 @@ describe('DtChip Tests', () => {
     describe('When hide close button', () => {
       beforeEach(async () => {
         props = {
-          ...props,
+          ...baseProps,
           hideClose: true,
         };
         await _setWrappers();

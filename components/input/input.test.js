@@ -16,12 +16,6 @@ const baseAttrs = {
 };
 
 describe('DtInput tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let labelWrapper;
@@ -131,14 +125,14 @@ describe('DtInput tests', () => {
         expect(nativeInput.attributes('type')).toBe(props.type);
       });
       it('should have a bound value prop', () => {
-        expect(nativeInput.element.value).toBe(props.value);
+        expect(nativeInput.element.value).toBe(props.modelValue);
       });
       it(
         'should have input class',
         () => { expect(nativeInput.classes().includes('d-input')).toBe(true); },
       );
       it('should display the initial value prop', () => {
-        expect(nativeInput.element.value).toBe(wrapper.vm.value);
+        expect(nativeInput.element.value).toBe(wrapper.vm.modelValue);
       });
     });
 
@@ -166,7 +160,7 @@ describe('DtInput tests', () => {
         () => { expect(nativeTextarea.classes().includes('d-textarea')).toBe(true); },
       );
       it('should display the initial value prop', () => {
-        expect(nativeTextarea.element.value).toBe(wrapper.vm.value);
+        expect(nativeTextarea.element.value).toBe(wrapper.vm.modelValue);
       });
     });
 
@@ -696,11 +690,11 @@ describe('DtInput tests', () => {
 
     it('should handle pass through props/attrs', async () => {
       // Validating all attrs from base-input get passed down to the native input.
-      expect(nativeInput.attributes()).toMatchObject(attrs);
+      expect(nativeInput.attributes()).toMatchObject(baseAttrs);
       expect(nativeInput.attributes().disabled).not.toBeDefined();
 
       await wrapper.setProps({ disabled: true });
-      expect(nativeInput.attributes().disabled).toEqual('disabled');
+      expect(nativeInput.element.disabled).toBe(true);
     });
   });
 });

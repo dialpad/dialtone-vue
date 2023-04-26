@@ -11,12 +11,6 @@ setCustomEmojiUrl('https://mockstorage.com/emojis/');
 const baseProps = {};
 
 describe('DtEmojiTextWrapper Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let emoji;
@@ -44,10 +38,6 @@ describe('DtEmojiTextWrapper Tests', () => {
     await flushPromises();
     await _setChildWrappers();
   };
-
-  // Setup
-  before(function () {});
-  beforeEach(function () {});
 
   // Teardown
   afterEach(function () {

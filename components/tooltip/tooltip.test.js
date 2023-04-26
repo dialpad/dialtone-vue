@@ -6,12 +6,6 @@ import {
 } from './tooltip_constants';
 
 describe('DtTooltip tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let tooltipContainer;
@@ -91,11 +85,7 @@ describe('DtTooltip tests', () => {
 
       it(
         'should render the component',
-<<<<<<< HEAD
-        () => { assert.exists(wrapper, 'wrapper exists'); },
-=======
         () => { expect(wrapper.exists()).toBe(true); },
->>>>>>> aa49b228 (many manual test fixes)
       );
       it(
         'should render the container',

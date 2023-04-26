@@ -15,12 +15,6 @@ const baseSlots = {
 };
 
 describe('DtRecipeContactInfo Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let rootElement;

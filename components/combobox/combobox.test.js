@@ -14,12 +14,6 @@ const baseProps = {
 };
 
 describe('DtCombobox Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let inputWrapper;
@@ -66,7 +60,7 @@ describe('DtCombobox Tests', () => {
     escapeStub = jest.fn();
     highlightStub = jest.fn();
     openedStub = jest.fn();
-    attrs = { select: selectStub, escape: escapeStub, highlight: highlightStub, opened: openedStub };
+    attrs = { onSelect: selectStub, onEscape: escapeStub, onHighlight: highlightStub, onOpened: openedStub };
     _mountWrapper();
     _setChildWrappers();
   });
@@ -106,13 +100,13 @@ describe('DtCombobox Tests', () => {
       });
 
       it('should provide proper label prop to input element', () => {
-        expect(input.attributes('label')).toEqual(props.label);
+        expect(input.props('label')).toEqual(baseProps.label);
       });
       it('should provide proper size prop to input element', () => {
-        expect(input.attributes('size')).toEqual(props.size);
+        expect(input.props('size')).toEqual(baseProps.size);
       });
       it('should provide proper description prop to input element', () => {
-        expect(input.attributes('description')).toEqual(props.description);
+        expect(input.props('description')).toEqual(baseProps.description);
       });
 
       describe('If label visible prop is false', () => {
@@ -122,7 +116,7 @@ describe('DtCombobox Tests', () => {
         it(
           'should still set aria-label even if label visible is false',
           () => {
-            expect(input.attributes('aria-label')).toEqual(basePropsData.label);
+            expect(input.find('input').attributes('aria-label')).toEqual(baseProps.label);
           },
         );
       });
@@ -200,7 +194,7 @@ describe('DtCombobox Tests', () => {
         });
 
         it('aria-expanded should be "false"', () => {
-          expect(input.attributes('aria-expanded') === 'false').toBe(true);
+          expect(input.find('input').attributes('aria-expanded') === 'false').toBe(true);
         });
       });
 
@@ -210,7 +204,7 @@ describe('DtCombobox Tests', () => {
         });
 
         it('aria-expanded should be "true"', () => {
-          expect(input.attributes('aria-expanded') === 'true').toBe(true);
+          expect(input.find('input').attributes('aria-expanded') === 'true').toBe(true);
         });
 
         describe('When list is loading', () => {

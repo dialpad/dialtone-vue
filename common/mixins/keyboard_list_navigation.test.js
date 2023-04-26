@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import KeyboardListNavigation, {
   KEYBOARD_LIST_NAVIGATION_TESTER_ITEMS,
   KEYBOARD_LIST_NAVIGATION_TESTER_KEY,
@@ -8,12 +8,6 @@ import KeyboardListNavigation, {
 // render what we need to test.
 
 describe('Keyboard Navigation Mixin Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
 
@@ -32,7 +26,7 @@ describe('Keyboard Navigation Mixin Tests', () => {
       attrs,
       slots,
       listeners,
-      localVue: testContext.localVue,
+
     });
   };
 
@@ -41,7 +35,6 @@ describe('Keyboard Navigation Mixin Tests', () => {
     afterHighlightSpy = jest.spyOn(KeyboardListNavigation.methods, 'afterHighlightMethod').mockClear();
     beginningOfListSpy = jest.spyOn(KeyboardListNavigation.methods, 'beginningOfListMethod').mockClear();
     endOfListSpy = jest.spyOn(KeyboardListNavigation.methods, 'endOfListMethod').mockClear();
-    testContext.localVue = createLocalVue();
   });
 
   beforeEach(() => {

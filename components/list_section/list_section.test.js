@@ -16,12 +16,6 @@ const baseSlotsData = {
 };
 
 describe('ListSection tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   let wrapper;
 
   const props = baseProps;

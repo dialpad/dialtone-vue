@@ -10,12 +10,6 @@ const baseProps = {
 const baseSlotsData = {};
 
 describe('DtNoticeIcon tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   let wrapper;
   let icon;
   let props;

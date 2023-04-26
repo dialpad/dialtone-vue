@@ -17,12 +17,6 @@ const baseProps = {
 };
 
 describe('DtModal Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   let wrapper;
 
   let closeBtn;
@@ -106,7 +100,7 @@ describe('DtModal Tests', () => {
 
       wrapper = mount(DtModal, {
         props: {
-          ...props,
+          ...baseProps,
           copy: 'non-slot copy',
           title: 'non-slot title',
           bannerTitle: 'non-slot banner',
@@ -129,7 +123,7 @@ describe('DtModal Tests', () => {
     const labelProp = 'aria-label';
     const newAriaLabel = 'NEW test close aria label';
 
-    expect(closeBtn.attributes(labelProp)).toEqual(props.closeButtonProps.ariaLabel);
+    expect(closeBtn.attributes(labelProp)).toEqual(baseProps.closeButtonProps.ariaLabel);
     await wrapper.setProps({ closeButtonProps: { ariaLabel: newAriaLabel } });
     _setChildWrappers();
     expect(closeBtn.attributes(labelProp)).toEqual(newAriaLabel);

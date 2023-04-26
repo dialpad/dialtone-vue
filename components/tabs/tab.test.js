@@ -64,7 +64,7 @@ describe('DtTab Tests', () => {
 
       it('changeContentPanel should be called with valid data', () => {
         expect(changeContentPanel).toHaveBeenCalledWith({
-          selected: propsData.panelId,
+          selected: props.panelId,
           selectOverride: true,
         });
       });
@@ -123,7 +123,7 @@ describe('DtTab Tests', () => {
         });
 
         it('should be disabled', () => {
-          expect(tab.attributes('disabled')).toBe('true');
+          expect(tab.attributes('disabled')).toBe('');
         });
       });
 
@@ -132,12 +132,8 @@ describe('DtTab Tests', () => {
           props.disabled = true;
         });
 
-        afterAll(() => {
-          props.disabled = false;
-        });
-
         it('disabled attribute should be "true"', () => {
-          expect(tab.attributes('disabled')).toBe('true');
+          expect(tab.attributes('disabled')).toBe('');
         });
       });
     });

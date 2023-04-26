@@ -24,12 +24,6 @@ const baseProps = {
 };
 
 describe('DtCheckbox Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let input;
@@ -110,7 +104,7 @@ describe('DtCheckbox Tests', () => {
         it('should exist', () => { expect(label.exists()).toBe(true); });
         it(
           'should match provided label prop',
-          () => { expect(label.text()).toBe(propsData.label); },
+          () => { expect(label.text()).toBe(props.label); },
         );
       });
     });
@@ -417,7 +411,7 @@ describe('DtCheckbox Tests', () => {
         describe('When the checkbox has a validation state', () => {
           // Test Setup
           beforeEach(() => {
-            props = { ...props, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
+            props = { ...baseProps, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
             _setWrappers();
           });
 
@@ -465,7 +459,7 @@ describe('DtCheckbox Tests', () => {
       childProps[propName] = propValue;
     });
     beforeEach(() => {
-      props = { ...props, label: 'Label', description: 'Description' };
+      props = { ...baseProps, label: 'Label', description: 'Description' };
     });
 
     describe('When an input class is provided', () => {

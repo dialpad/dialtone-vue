@@ -13,12 +13,6 @@ const baseProps = {
 };
 
 describe('DtRecipeGeneralRow Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let iconType;
@@ -48,9 +42,6 @@ describe('DtRecipeGeneralRow Tests', () => {
     _setChildWrappers();
   };
 
-  // Setup
-  before(function () {});
-
   beforeEach(() => {
     props = baseProps;
     slots = {};
@@ -64,7 +55,6 @@ describe('DtRecipeGeneralRow Tests', () => {
     slots = {};
     provide = {};
   });
-  afterAll(() => {});
 
   describe('Presentation Tests', () => {
     describe('When the leftbar renders', () => {
@@ -75,7 +65,7 @@ describe('DtRecipeGeneralRow Tests', () => {
 
       it('should render the icon', () => {
         expect(iconType.exists()).toBe(true);
-        expect(iconType.find('svg').exists()).toBeTruthy();
+        expect(iconType.find('svg')).toBeTruthy();
       });
 
       it('should render the description', () => {
@@ -90,7 +80,7 @@ describe('DtRecipeGeneralRow Tests', () => {
 
       // Test Setup
       beforeEach(() => {
-        props = { ...props, hasUnreads, unreadCount };
+        props = { ...baseProps, hasUnreads, unreadCount };
         _setWrappers();
       });
 
@@ -106,18 +96,18 @@ describe('DtRecipeGeneralRow Tests', () => {
 
       // Test Setup
       beforeEach(() => {
-        props = { ...props, type, color };
+        props = { ...baseProps, type, color };
         _setWrappers();
       });
 
       it('should render the contact center icon', () => {
-        expect(iconType.find('.dt-leftbar-row__icon-cc').exists()).toBeTruthy();
+        expect(iconType.classes('dt-leftbar-row__icon-cc')).toBe(true);
       });
 
       it(
         'should render the contact center icon with the correct color',
         () => {
-          expect(iconType.find(`.${LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS[color]}`).exists()).toBeTruthy();
+          expect(iconType.classes(`${LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS[color]}`)).toBe(true);
         },
       );
     });
@@ -129,7 +119,7 @@ describe('DtRecipeGeneralRow Tests', () => {
 
       beforeEach(async () => {
         consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
-        props = { ...props, type };
+        props = { ...baseProps, type };
         _setWrappers();
       });
 

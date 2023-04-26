@@ -9,12 +9,6 @@ const baseProps = {
 };
 
 describe('DtRecipeCallbarButtonWithPopover Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let arrow;
@@ -22,7 +16,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
   let popover;
 
   // Environment
-  const props = baseProps;
+  let props = baseProps;
   let attrs = {};
   let slots = {};
   let provide = {};

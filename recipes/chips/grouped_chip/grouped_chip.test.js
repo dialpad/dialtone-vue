@@ -12,12 +12,6 @@ const baseSlotsData = {
 };
 
 describe('DtRecipeGroupedChip Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let rootElement;
@@ -53,10 +47,6 @@ describe('DtRecipeGroupedChip Tests', () => {
     });
     _setChildWrappers();
   };
-
-  // Setup
-  before(function () {
-  });
 
   // Teardown
   afterEach(() => {

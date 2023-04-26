@@ -23,12 +23,6 @@ const baseProps = {
 };
 
 describe('DtRadio Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let input;
@@ -104,7 +98,7 @@ describe('DtRadio Tests', () => {
         it('should exist', () => { expect(radioLabel.exists()).toBeTruthy(); });
         it(
           'should match provided label prop',
-          () => { expect(radioLabel.text()).toBe(propsData.label); },
+          () => { expect(radioLabel.text()).toBe(props.label); },
         );
       });
     });
@@ -115,7 +109,7 @@ describe('DtRadio Tests', () => {
 
       // Test Setup
       beforeEach(() => {
-        props = { ...props, description: 'Description' };
+        props = { ...baseProps, description: 'Description' };
         _setWrappers();
         radioDescription = wrapper.find('[data-qa="radio-description"]');
       });
@@ -149,7 +143,7 @@ describe('DtRadio Tests', () => {
     describe('When checked', () => {
       // Test Setup
       beforeEach(() => {
-        props = { ...props, checked: true };
+        props = { ...baseProps, checked: true };
         _setWrappers();
       });
 
@@ -159,7 +153,7 @@ describe('DtRadio Tests', () => {
     describe('When disabled', () => {
       // Test Setup
       beforeEach(() => {
-        props = { ...props, disabled: true };
+        props = { ...baseProps, disabled: true };
         _setWrappers();
       });
 
@@ -281,7 +275,7 @@ describe('DtRadio Tests', () => {
         childProps[propName] = propValue;
       });
       beforeEach(() => {
-        props = { ...props, label: 'Label', description: 'Description' };
+        props = { ...baseProps, label: 'Label', description: 'Description' };
       });
 
       describe('When an input class is provided', () => {
@@ -424,7 +418,7 @@ describe('DtRadio Tests', () => {
         describe('When the radio has a validation state', () => {
           // Test Setup
           beforeEach(() => {
-            props = { ...props, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
+            props = { ...baseProps, validationState: VALIDATION_MESSAGE_TYPES.WARNING };
             _setWrappers();
           });
 

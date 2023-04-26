@@ -13,12 +13,6 @@ const baseProps = {
 };
 
 describe('DtRecipeTimePill Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let timePill;

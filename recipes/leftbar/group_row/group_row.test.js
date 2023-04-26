@@ -10,12 +10,6 @@ const baseProps = {
 };
 
 describe('DtRecipeGroupRow Tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
   let description;
@@ -42,9 +36,6 @@ describe('DtRecipeGroupRow Tests', () => {
     });
     _setChildWrappers();
   };
-
-  // Setup
-  before(function () {});
 
   beforeEach(function () {
     props = baseProps;
@@ -80,7 +71,7 @@ describe('DtRecipeGroupRow Tests', () => {
 
       // Test Setup
       beforeEach(() => {
-        props = { ...props, hasUnreads, unreadCount };
+        props = { ...baseProps, hasUnreads, unreadCount };
         _setWrappers();
       });
 
@@ -92,7 +83,7 @@ describe('DtRecipeGroupRow Tests', () => {
     describe('When selected is provided', () => {
       // Test Setup
       beforeEach(() => {
-        props = { ...props, selected: true };
+        props = { ...baseProps, selected: true };
         _setWrappers();
       });
 

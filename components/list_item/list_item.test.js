@@ -8,17 +8,11 @@ const baseProps = {
 };
 
 describe('DtListItem tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
 
   // Test Environment
-  const props = baseProps;
+  let props = baseProps;
   let slots;
   let attrs;
   let provide;
@@ -91,7 +85,7 @@ describe('DtListItem tests', () => {
         expect(wrapper.classes('dt-list-item--highlighted')).toBe(false);
       });
       it('aria-selected should not be set', () => {
-        expect(wrapper.attributes('aria-selected')).not.toBeDefined();
+        expect(wrapper.attributes('aria-selected')).toBe('false');
       });
     });
 
