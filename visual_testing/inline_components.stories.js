@@ -13,6 +13,7 @@ export default {
     a11y: {
       disable: true,
     },
+    percy: { waitForSelector: '.d-avatar--image-loaded' },
   },
 };
 
