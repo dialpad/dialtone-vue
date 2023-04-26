@@ -7,6 +7,7 @@ on:
       - alpha
       - beta
       - vue3
+      - deploy-to-github-packages
 
 jobs:
   deploy:
@@ -45,33 +46,43 @@ jobs:
         if: ${{ github.ref == 'refs/heads/production' || github.ref == 'refs/heads/vue3' }}
         run: npm run storybook:install && npm run storybook:build
 
-      - name: Deploy production
+      # - name: Deploy production
+      #   if: ${{ github.ref == 'refs/heads/production' }}
+      #   run: npm publish
+
+      - name: Set registry to github packages
+        run: npm config set @dialpad:registry https://npm.pkg.github.com
+
+      - name: Set github auth token
+        run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy production to github packages
         if: ${{ github.ref == 'refs/heads/production' }}
         run: npm publish
 
-      - name: Deploy to GitHub Pages (Production)
-        if: ${{ github.ref == 'refs/heads/production' && always() }}
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
-        with:
-          branch: gh-pages
-          folder: storybook/compiled
-          clean-exclude: |
-            deploy-previews
-            vue3
+      # - name: Deploy to GitHub Pages (Production)
+      #   if: ${{ github.ref == 'refs/heads/production' && always() }}
+      #   uses: JamesIves/github-pages-deploy-action@v4.2.5
+      #   with:
+      #     branch: gh-pages
+      #     folder: storybook/compiled
+      #     clean-exclude: |
+      #       deploy-previews
+      #       vue3
 
-      - name: Deploy ${{ steps.branch.outputs.BRANCH }}
-        if: ${{ github.ref != 'refs/heads/production' }}
-        run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
+      # - name: Deploy ${{ steps.branch.outputs.BRANCH }}
+      #   if: ${{ github.ref != 'refs/heads/production' }}
+      #   run: npm publish --tag ${{ steps.branch.outputs.BRANCH }}
 
-      - name: Deploy to GitHub Pages (Vue 3)
-        if: ${{ github.ref == 'refs/heads/vue3' && always() }}
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
-        with:
-          branch: gh-pages
-          folder: storybook/compiled
-          target-folder: vue3
+      # - name: Deploy to GitHub Pages (Vue 3)
+      #   if: ${{ github.ref == 'refs/heads/vue3' && always() }}
+      #   uses: JamesIves/github-pages-deploy-action@v4.2.5
+      #   with:
+      #     branch: gh-pages
+      #     folder: storybook/compiled
+      #     target-folder: vue3
 
-      - name: Github Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release --extends ./release-ci.config.js
+      # - name: Github Release
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: npx semantic-release --extends ./release-ci.config.js
