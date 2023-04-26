@@ -25,17 +25,22 @@
       v-show="!isOpen"
       class="d-emoji-picker__skin-selected"
     >
-      <button
-        :title="skinSelectorButtonTooltipLabel"
-        @click="isOpen = true"
-      >
-        <img
-          class="d-icon d-icon--size-500"
-          :alt="skinSelected.name"
-          :aria-label="skinSelected.name"
-          :src="`${CDN_URL + skinSelected.unicode_output}.png`"
-        >
-      </button>
+      <dt-tooltip placement="top-end">
+        {{ skinSelectorButtonTooltipLabel }}
+        <template #anchor>
+          <button
+            @click="isOpen = true"
+          >
+            <img
+              class="d-icon d-icon--size-500"
+              :alt="skinSelected.name"
+              :aria-label="skinSelected.name"
+              :title="skinSelected.name"
+              :src="`${CDN_URL + skinSelected.unicode_output}.png`"
+            >
+          </button>
+        </template>
+      </dt-tooltip>
     </div>
   </div>
 </template>
@@ -43,6 +48,7 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
 import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
+import DtTooltip from '@/components/tooltip/tooltip.vue';
 
 const props = defineProps({
   /**
