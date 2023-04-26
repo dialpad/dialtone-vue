@@ -57,7 +57,7 @@ jobs:
         run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy production to github packages
-        if: ${{ github.ref == 'refs/heads/production' }}
+        if: ${{ github.ref == 'refs/heads/deploy-to-github-packages' }}
         run: npm publish
 
       # - name: Deploy to GitHub Pages (Production)
