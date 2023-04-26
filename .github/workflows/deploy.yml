@@ -7,7 +7,7 @@ on:
       - alpha
       - beta
       - vue3
-      - deploy-to-github-packages
+      - deploy-to-github-packages-vue3
 
 jobs:
   deploy:
@@ -57,7 +57,7 @@ jobs:
         run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy production to github packages
-        if: ${{ github.ref == 'refs/heads/deploy-to-github-packages' }}
+        if: ${{ github.ref == 'refs/heads/deploy-to-github-packages-vue3' }}
         run: npm publish
 
       # - name: Deploy to GitHub Pages (Production)
