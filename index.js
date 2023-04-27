@@ -53,7 +53,7 @@ export * from './recipes/chips/grouped_chip';
 export * from './recipes/leftbar/general_row';
 export * from './recipes/leftbar/group_row';
 export * from './recipes/leftbar/contact_row';
-export * from './recipes/leftbar/unread_chip';
+export * from './recipes/leftbar/unread_pill';
 export * from './recipes/conversation_view/feed_item_row';
 export * from './recipes/conversation_view/time_pill';
 
