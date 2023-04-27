@@ -1,26 +1,26 @@
 import { mount } from '@vue/test-utils';
 import { itBehavesLikeHasCorrectClass } from '@/tests/shared_examples/classes';
-import DtRecipeUnreadChip from './unread_chip.vue';
+import DtRecipeUnreadPill from './unread_pill.vue';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
 } from '@/tests/shared_examples/validation';
-import { UNREAD_BADGE_DIRECTIONS, UNREAD_BADGE_KINDS } from '@/recipes/leftbar/unread_chip/unread_chip_constants';
+import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from '@/recipes/leftbar/unread_pill/unread_pill_constants';
 
 // Constants
 const baseProps = {
-  kind: UNREAD_BADGE_KINDS[0],
-  direction: UNREAD_BADGE_DIRECTIONS[0],
+  kind: UNREAD_PILL_KINDS[0],
+  direction: UNREAD_PILL_DIRECTIONS[0],
 };
 const baseSlots = {
   default: 'Unread mentions',
 };
 
-describe('DtRecipeUnreadChip Tests', () => {
+describe('DtRecipeUnreadPill Tests', () => {
   // Wrappers
   let wrapper;
-  let unreadChipLabel;
-  let unreadChipIcon;
+  let unreadPillLabel;
+  let unreadPillIcon;
 
   // Environment
   let props = baseProps;
@@ -30,12 +30,12 @@ describe('DtRecipeUnreadChip Tests', () => {
 
   // Helpers
   const _setChildWrappers = () => {
-    unreadChipLabel = wrapper.find('[data-qa="dt-leftbar-unread-chip__label"]');
-    unreadChipIcon = wrapper.find('[data-qa="dt-icon"]');
+    unreadPillLabel = wrapper.find('[data-qa="dt-leftbar-unread-pill__label"]');
+    unreadPillIcon = wrapper.find('[data-qa="dt-icon"]');
   };
 
   const _setWrappers = () => {
-    wrapper = mount(DtRecipeUnreadChip, {
+    wrapper = mount(DtRecipeUnreadPill, {
       props,
       attrs,
       slots,
@@ -58,13 +58,13 @@ describe('DtRecipeUnreadChip Tests', () => {
   afterAll(() => {});
 
   describe('Presentation Tests', () => {
-    describe('When the unread chip renders', () => {
+    describe('When the unread pill renders', () => {
       it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
       it('should render the text', () => {
-        expect(unreadChipLabel.text()).toBe(baseSlots.default);
+        expect(unreadPillLabel.text()).toBe(baseSlots.default);
       });
       it('should render the icon', () => {
-        expect(unreadChipIcon.exists()).toBeTruthy();
+        expect(unreadPillIcon.exists()).toBeTruthy();
       });
     });
 
@@ -74,7 +74,7 @@ describe('DtRecipeUnreadChip Tests', () => {
       });
 
       it('should contain the correct class', () => {
-        itBehavesLikeHasCorrectClass(wrapper, 'dt-leftbar-unread-chip__messages');
+        itBehavesLikeHasCorrectClass(wrapper, 'dt-leftbar-unread-pill--messages');
       });
     });
 
@@ -84,7 +84,7 @@ describe('DtRecipeUnreadChip Tests', () => {
       });
 
       it('should contain the correct class', () => {
-        itBehavesLikeHasCorrectClass(wrapper, 'dt-leftbar-unread-chip__mentions');
+        itBehavesLikeHasCorrectClass(wrapper, 'dt-leftbar-unread-pill--mentions');
       });
     });
 
@@ -94,7 +94,7 @@ describe('DtRecipeUnreadChip Tests', () => {
       });
 
       it('should contain the correct class', () => {
-        itBehavesLikeHasCorrectClass(unreadChipIcon, 'd-icon--arrow-up');
+        itBehavesLikeHasCorrectClass(unreadPillIcon, 'd-icon--arrow-up');
       });
     });
 
@@ -105,7 +105,7 @@ describe('DtRecipeUnreadChip Tests', () => {
       });
 
       it('should contain the correct class', () => {
-        itBehavesLikeHasCorrectClass(unreadChipIcon, 'd-icon--arrow-down');
+        itBehavesLikeHasCorrectClass(unreadPillIcon, 'd-icon--arrow-down');
       });
     });
   });
@@ -118,9 +118,9 @@ describe('DtRecipeUnreadChip Tests', () => {
       _setWrappers();
     });
 
-    describe('When the unread chip is clicked', () => {
+    describe('When the unread pill is clicked', () => {
       beforeEach(() => {
-        wrapper.find('[data-qa="dt-chip"]').trigger('click');
+        wrapper.trigger('click');
       });
 
       it('should emit click', () => {
@@ -131,25 +131,25 @@ describe('DtRecipeUnreadChip Tests', () => {
 
   describe('Validation Tests', () => {
     describe('Kind validator', () => {
-      const prop = DtRecipeUnreadChip.props.kind;
+      const prop = DtRecipeUnreadPill.props.kind;
 
-      describe('When provided kind is in UNREAD_BADGE_KINDS', () => {
-        itBehavesLikePassesCustomPropValidation(prop, UNREAD_BADGE_KINDS[0]);
+      describe('When provided kind is in UNREAD_PILL_KINDS', () => {
+        itBehavesLikePassesCustomPropValidation(prop, UNREAD_PILL_KINDS[0]);
       });
 
-      describe('When provided kind is not in UNREAD_BADGE_KINDS', () => {
+      describe('When provided kind is not in UNREAD_PILL_KINDS', () => {
         itBehavesLikeFailsCustomPropValidation(prop, 'other_value');
       });
     });
 
     describe('Direction validator', () => {
-      const prop = DtRecipeUnreadChip.props.direction;
+      const prop = DtRecipeUnreadPill.props.direction;
 
-      describe('When provided direction is in UNREAD_BADGE_DIRECTIONS', () => {
-        itBehavesLikePassesCustomPropValidation(prop, UNREAD_BADGE_DIRECTIONS[0]);
+      describe('When provided direction is in UNREAD_PILL_DIRECTIONS', () => {
+        itBehavesLikePassesCustomPropValidation(prop, UNREAD_PILL_DIRECTIONS[0]);
       });
 
-      describe('When provided kind is not in UNREAD_BADGE_DIRECTIONS', () => {
+      describe('When provided kind is not in UNREAD_PILL_DIRECTIONS', () => {
         itBehavesLikeFailsCustomPropValidation(prop, 'other_value');
       });
     });
