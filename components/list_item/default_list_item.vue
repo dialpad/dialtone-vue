@@ -63,7 +63,7 @@ export default {
   &--right {
     // align things like time that have smaller width/height compared to avatar
     min-height: 28px;
-    min-width: 30px;
+    min-width: 32px;
   }
 }
 </style>
