@@ -6,6 +6,7 @@
     icon-position="right"
     class="d-h32 d-bar-pill d-bgc-blue-200 d-bgo25 h:d-bgo50 d-bc-blue-500 d-bco25 d-fc-blue-500"
     :aria-label="ariaLabel"
+    v-bind="$attrs"
   >
     <slot />
     <template #icon>
@@ -22,6 +23,7 @@
     kind="inverted"
     class="settings-menu-button d-p0 d-bar24 d-h32 d-w24 d-theme-topbar-fc"
     :aria-label="ariaLabel"
+    v-bind="$attrs"
   >
     <template #icon>
       <dt-icon
@@ -44,6 +46,8 @@ export default {
     DtIcon,
   },
 
+  inheritAttrs: false,
+
   props: {
     /**
      * Determines whether the button should display the update state
@@ -63,16 +67,6 @@ export default {
       required: true,
     },
   },
-
-  emits: [
-    /**
-     * Native click event
-     *
-     * @event click
-     * @type {PointerEvent | KeyboardEvent}
-     */
-    'click',
-  ],
 
 };
 </script>
