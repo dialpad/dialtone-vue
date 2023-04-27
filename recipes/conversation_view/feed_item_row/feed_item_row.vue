@@ -176,23 +176,18 @@ export default {
 
   computed: {
     avatarInitials () {
-      const name = this.displayName.split(' ');
-      if (name.length >= 2) {
-        return name[0].charAt(0) + name[1].charAt(0);
-      } else if (name && name[0].charAt(0) != null) {
-        return name[0].charAt(0);
-      }
-
-      return '';
+      const name = (this.displayName || '').split(' ');
+      const initials = name.map(word => word.charAt(0)).join('');
+      return initials.slice(0, 2).toUpperCase();
     },
 
     feedListeners () {
       return {
         ...this.$listeners,
-        mouseenter: _ => this.setHover(true),
-        mouseleave: _ => this.setHover(false),
-        focusin: _ => this.setFocus(true),
-        focusout: _ => this.setFocus(false),
+        mouseenter: () => this.setHover(true),
+        mouseleave: () => this.setHover(false),
+        focusin: () => this.setFocus(true),
+        focusout: () => this.setFocus(false),
       };
     },
   },
