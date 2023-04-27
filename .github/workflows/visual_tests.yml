@@ -9,7 +9,7 @@ on:
     types: [ submitted ]
 
 env:
-  NODE_MODULES_CACHE_VERSION: v2
+  NODE_MODULES_CACHE_VERSION: v3
 
 jobs:
 

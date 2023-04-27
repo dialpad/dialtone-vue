@@ -13,7 +13,7 @@ jobs:
 
     env:
       NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      NODE_MODULES_CACHE_VERSION: v2
+      NODE_MODULES_CACHE_VERSION: v3
 
     steps:
       - name: Check out branch
