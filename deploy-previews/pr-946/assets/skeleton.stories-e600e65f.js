@@ -1,2 +1,0 @@
-import{a,b as t}from"./skeleton.stories-c60de900.js";import{D,V as u}from"./skeleton.stories-c60de900.js";import{D as e}from"./skeleton-6bfe2369.js";import"./_plugin-vue2_normalizer-bbedbd26.js";import"./_commonjsHelpers-042e6b4d.js";import"./vue.esm-eff6e72e.js";const p={title:"Visual Testing/Skeleton",component:e,parameters:{options:{showPanel:!1},a11y:{disable:!0}},args:{...a,show:!0,animate:!1},argTypes:t},l=["Default","Variants"];export{D as Default,u as Variants,l as __namedExportsOrder,p as default};
-//# sourceMappingURL=skeleton.stories-e600e65f.js.map
