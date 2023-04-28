@@ -141,7 +141,7 @@ function selectTabset (id) {
       }
 
       button{
-        padding: var(--su8);
+        padding: var(--space-400);
 
         &.d-tab--selected{
           &::after{
