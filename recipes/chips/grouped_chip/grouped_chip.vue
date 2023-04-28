@@ -9,7 +9,7 @@
       content-class="d-fs100"
       size="xs"
       :grouped-chip="true"
-      class="d-blr-pill d-bgc-moderate-opaque d-w100p d-wmx64"
+      class="d-blr-pill d-bgc-moderate-opaque d-w72"
     >
       <template
         v-if="$slots.leftIcon"
@@ -41,7 +41,7 @@
       content-class="d-fs100"
       size="xs"
       :grouped-chip="true"
-      class="d-brr-pill d-bgc-purple-200 d-w100p d-wmx64"
+      class="d-brr-pill d-bgc-purple-200 d-w72"
     >
       <template #icon>
         <div
@@ -56,7 +56,6 @@
         <div
           v-if="$slots.rightContent"
           data-qa="right-grouped-chip-content"
-          class="d-wmx50p"
         >
           <!-- @slot Slot for right chip content information -->
           <slot name="rightContent" />
