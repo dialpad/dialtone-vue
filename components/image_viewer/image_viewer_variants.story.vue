@@ -22,7 +22,7 @@
 <script>
 import DtImageViewer from './image_viewer.vue';
 import test from './test.jpg';
-import fry from './fry.gif';
+import fry from '@/common/assets/fry.gif';
 
 export default {
   name: 'DtImageViewerVariants',

@@ -5,7 +5,7 @@ import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarIconTemplate from './avatar_icon.story.vue';
 import DtAvatarPresenceTemplate from './avatar_presence.story.vue';
 
-import defaultImage from './person.png';
+import defaultImage from '@/common/assets/person.png';
 
 const iconsList = getIconNames();
 

@@ -80,7 +80,7 @@
 <script>
 import DtRecipeContactRow from './contact_row.vue';
 import { DtStack } from '@/components/stack';
-import defaultImage from '@/components/avatar/person.png';
+import defaultImage from '@/common/assets/person.png';
 
 export default {
   name: 'DtRecipeContactRowVariants',

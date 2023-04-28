@@ -45,7 +45,7 @@
 <script>
 import DtRecipeGroupRow from './group_row.vue';
 import { DtStack } from '@/components/stack';
-import defaultImage from '@/components/avatar/person.png';
+import defaultImage from '@/common/assets/person.png';
 
 export default {
   name: 'DtRecipeGroupRowVariants',
