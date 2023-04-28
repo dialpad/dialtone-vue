@@ -17,7 +17,7 @@ export const argsData = {
 };
 
 export const argTypesData = {
-// Props
+  // Props
   totalPages: {
     control: {
       type: 'number',
@@ -74,87 +74,84 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtPaginationDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtPaginationVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtPaginationDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtPaginationVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `
-<dt-pagination
-    :total-pages="totalPages"
-    :active-page="activePage"
-    :max-visible="maxVisible"
-    :aria-label="ariaLabel"
-    :prev-aria-label="prevAriaLabel"
-    :next-aria-label="nextAriaLabel"
-    :page-number-aria-label="getPageNumberAriaLabel"
-    @change="onChange"
-  />   `,
+  parameters: {
+    docs: {
+      source: {
+        code: `
+  <dt-pagination
+      :total-pages="totalPages"
+      :active-page="activePage"
+      :max-visible="maxVisible"
+      :aria-label="ariaLabel"
+      :prev-aria-label="prevAriaLabel"
+      :next-aria-label="nextAriaLabel"
+      :page-number-aria-label="getPageNumberAriaLabel"
+      @change="onChange"
+    />   `,
+      },
     },
   },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
 
-Variants.parameters = {
-  docs: {
-    source: {
-      code: `
- <div class="d-divide-y d-divide-purple-400">
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
-        Separator in the end
-      </p>
-      <dt-pagination
-        :total-pages="10"
-        :aria-label="'pagination with separator in the end'"
-        :prev-aria-label="'previous'"
-        :next-aria-label="'next'"
-        :page-number-aria-label="getPageNumberAriaLabel"
-      />
+  parameters: {
+    docs: {
+      source: {
+        code: `
+   <div class="d-divide-y d-divide-purple-400">
+      <div class="d-m32">
+        <p class="d-my16 d-fs-200 d-fw-bold">
+          Separator in the end
+        </p>
+        <dt-pagination
+          :total-pages="10"
+          :aria-label="'pagination with separator in the end'"
+          :prev-aria-label="'previous'"
+          :next-aria-label="'next'"
+          :page-number-aria-label="getPageNumberAriaLabel"
+        />
+      </div>
+      <div class="d-m32">
+        <p class="d-my16 d-fs-200 d-fw-bold">
+          Separator in the beginning
+        </p>
+        <dt-pagination
+          :total-pages="15"
+          :active-page="13"
+          :aria-label="'pagination with separator in the beginning'"
+          :prev-aria-label="'previous'"
+          :next-aria-label="'next'"
+          :page-number-aria-label="getPageNumberAriaLabel"
+        />
+      </div>
+      <div class="d-m32">
+        <p class="d-my16 d-fs-200 d-fw-bold">
+          Separator on both sides
+        </p>
+        <dt-pagination
+          :total-pages="10"
+          :active-page="5"
+          :aria-label="'pagination with separator on both sides'"
+          :prev-aria-label="'previous'"
+          :next-aria-label="'next'"
+          :page-number-aria-label="getPageNumberAriaLabel"
+        />
+      </div>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
-        Separator in the beginning
-      </p>
-      <dt-pagination
-        :total-pages="15"
-        :active-page="13"
-        :aria-label="'pagination with separator in the beginning'"
-        :prev-aria-label="'previous'"
-        :next-aria-label="'next'"
-        :page-number-aria-label="getPageNumberAriaLabel"
-      />
-    </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
-        Separator on both sides
-      </p>
-      <dt-pagination
-        :total-pages="10"
-        :active-page="5"
-        :aria-label="'pagination with separator on both sides'"
-        :prev-aria-label="'previous'"
-        :next-aria-label="'next'"
-        :page-number-aria-label="getPageNumberAriaLabel"
-      />
-    </div>
-  </div>
-`,
+  `,
+      },
     },
   },
 };

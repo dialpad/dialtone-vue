@@ -127,47 +127,46 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallbarButtonDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallbarButtonVariantsTemplate,
-);
-const CallbarTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallbarButtonCallbarTemplate,
-);
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  default: 'Button',
-  tooltip: 'Tooltip Text',
-  ariaLabel: 'Button',
-  icon: 'accessibility',
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeCallbarButtonDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeCallbarButtonVariantsTemplate);
+const CallbarTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeCallbarButtonCallbarTemplate);
+
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default: 'Button',
+    tooltip: 'Tooltip Text',
+    ariaLabel: 'Button',
+    icon: 'accessibility',
+  },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { options: { showPanel: false }, controls: { disable: true } };
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};
 
-export const Callbar = CallbarTemplate.bind({});
-Callbar.args = {};
-Callbar.parameters = {
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'duplicate-id',
-          enabled: false,
-        },
-      ],
+export const Callbar = {
+  render: CallbarTemplate,
+  args: {},
+
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'duplicate-id',
+            enabled: false,
+          },
+        ],
+      },
     },
+    options: { showPanel: false },
+    controls: { disable: true },
   },
-  options: { showPanel: false },
-  controls: { disable: true },
 };

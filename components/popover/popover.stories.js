@@ -168,29 +168,39 @@ export default {
 };
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverDefault);
-const TemplateVariants = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverVariants);
+const TemplateVariants = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, PopoverVariants);
 
-export const Default = Template.bind({});
-Default.args = {};
-Default.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-ai-center d-h332"><story /></div>`,
-})];
-Default.parameters = {};
+export const Default = {
+  render: Template,
+  args: {},
 
-export const Variants = TemplateVariants.bind({});
-Variants.args = {};
-Variants.parameters = {
-  options: {
-    showPanel: false,
-  },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'aria-allowed-attr',
-          enabled: false,
-        },
-      ],
+  decorators: [
+    () => ({
+      template: `<div class="d-d-flex d-jc-center d-ai-center d-h332"><story /></div>`,
+    }),
+  ],
+
+  parameters: {},
+};
+
+export const Variants = {
+  render: TemplateVariants,
+  args: {},
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'aria-allowed-attr',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

@@ -19,19 +19,17 @@ export default {
   component: DtCodeblock,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-  },
+  parameters: {},
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtCodeblockDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtCodeblockDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  text: 'function someFunction() {\n  return "some result";\n}',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    text: 'function someFunction() {\n  return "some result";\n}',
+  },
 };

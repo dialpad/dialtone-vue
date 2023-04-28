@@ -153,19 +153,25 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtListItemDefaultTemplate);
-const CustomTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtListItemCustomTemplate);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtListItemDefaultTemplate);
+const CustomTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtListItemCustomTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  left: 'globe-2',
-  right: 'external-link',
-  default: 'Default List Item',
-  subtitle: 'Description',
-  bottom: '<span class="d-badge">Label</span>',
-  navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB,
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    left: 'globe-2',
+    right: 'external-link',
+    default: 'Default List Item',
+    subtitle: 'Description',
+    bottom: '<span class="d-badge">Label</span>',
+    navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB,
+  },
 };
 
-export const Custom = CustomTemplate.bind({});
-Custom.args = {};
+export const Custom = {
+  render: CustomTemplate,
+  args: {},
+};

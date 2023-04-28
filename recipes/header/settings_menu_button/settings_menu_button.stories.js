@@ -66,15 +66,14 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeSettingsMenuButtonDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeSettingsMenuButtonDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  default: 'Update',
-  ariaLabel: 'Update app',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default: 'Update',
+    ariaLabel: 'Update app',
+  },
 };

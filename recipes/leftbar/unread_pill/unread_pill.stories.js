@@ -4,7 +4,10 @@ import DtRecipeUnreadPill from './unread_pill.vue';
 
 import DtRecipeUnreadPillDefaultTemplate from './unread_pill_default.story.vue';
 import DtRecipeUnreadPillVariantsTemplate from './unread_pill_variants.story.vue';
-import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from '@/recipes/leftbar/unread_pill/unread_pill_constants';
+import {
+  UNREAD_PILL_DIRECTIONS,
+  UNREAD_PILL_KINDS,
+} from '@/recipes/leftbar/unread_pill/unread_pill_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -66,25 +69,23 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeUnreadPillDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeUnreadPillVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeUnreadPillDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeUnreadPillVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  default: 'Unread mentions',
-  kind: 'mentions',
-  direction: 'up',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default: 'Unread mentions',
+    kind: 'mentions',
+    direction: 'up',
+  },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { options: { showPanel: false }, controls: { disable: true } };
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

@@ -5,12 +5,8 @@ import DtDropdown from './dropdown.vue';
 import DtDropdownDefaultTemplate from './dropdown_default.story.vue';
 import DtDropdownVariantsTemplate from './dropdown_variants.story.vue';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
-import {
-  POPOVER_CONTENT_WIDTHS,
-} from '../popover';
-import {
-  DROPDOWN_PADDING_CLASSES,
-} from './dropdown_constants';
+import { POPOVER_CONTENT_WIDTHS } from '../popover';
+import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
 import { POPOVER_DIRECTIONS } from '../popover/popover_constants';
 
 // Default Prop Values
@@ -144,40 +140,44 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtDropdownDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtDropdownVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtDropdownDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtDropdownVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
-Default.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
-})];
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = {
-  options: { showPanel: false },
-  controls: { disable: true },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'aria-allowed-attr',
-          enabled: false,
-        },
-      ],
+  decorators: [
+    () => ({
+      template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
+    }),
+  ],
+};
+
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'aria-allowed-attr',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
+
+  decorators: [
+    () => ({
+      template: `<div class="d-d-flex d-jc-center d-ai-center"><story /></div>`,
+    }),
+  ],
 };
-Variants.decorators = [() => ({
-  template: `<div class="d-d-flex d-jc-center d-ai-center"><story /></div>`,
-})];

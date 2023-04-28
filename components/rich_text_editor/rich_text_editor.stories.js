@@ -89,11 +89,9 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRichTextEditorDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRichTextEditorDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
+export const Default = {
+  render: DefaultTemplate,
+};

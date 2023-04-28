@@ -103,20 +103,28 @@ export default {
 // Templates
 const TooltipFlipTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTooltipFlipTemplate);
-const TooltipDefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTooltipDefault);
+const TooltipDefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTooltipDefault);
 const TooltipVariantsTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTooltipVariantsTemplate);
-// Stories
 
-export const Default = TooltipDefaultTemplate.bind({});
-Default.args = {};
-
-export const Variants = TooltipVariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { options: { showPanel: false }, controls: { disable: true } };
-
-export const Flip = TooltipFlipTemplate.bind({});
-Flip.args = {
-  default: 'Scroll down to see how the tooltip changes based on the available space.',
+export const Default = {
+  render: TooltipDefaultTemplate,
+  args: {},
 };
-Flip.parameters = { options: { showPanel: false }, controls: { disable: true } };
+
+export const Variants = {
+  render: TooltipVariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};
+
+export const Flip = {
+  render: TooltipFlipTemplate,
+
+  args: {
+    default: 'Scroll down to see how the tooltip changes based on the available space.',
+  },
+
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

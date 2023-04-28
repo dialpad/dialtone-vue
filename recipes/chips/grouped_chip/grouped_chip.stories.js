@@ -81,23 +81,22 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeGroupedChipDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeGroupedChipDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  leftIcon: 'clock',
-  leftContent: `<div>
-    0.13
-</div>`,
-  rightIcon: 'pause',
-  rightContent: `<div>
-    0.25
-</div>`,
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    leftIcon: 'clock',
+    leftContent: `<div>
+      0.13
+  </div>`,
+    rightIcon: 'pause',
+    rightContent: `<div>
+      0.25
+  </div>`,
+  },
+
+  parameters: {},
 };
-
-Default.parameters = {};

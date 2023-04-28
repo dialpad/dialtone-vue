@@ -1,9 +1,4 @@
-import {
-  argsData,
-  argTypesData,
-  Default,
-  Variants,
-} from '@/components/popover/popover.stories.js';
+import { argsData, argTypesData, Default, Variants } from '@/components/popover/popover.stories.js';
 
 import DtPopover from '@/components/popover/popover.vue';
 

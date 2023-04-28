@@ -7,27 +7,29 @@ import DtBreadcrumbsVariantsTemplate from './breadcrumbs_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  breadcrumbs: [{
-    href: '#',
-    label: 'Root',
-  },
-  {
-    href: '#',
-    label: 'Section',
-  },
-  {
-    href: '#',
-    label: 'Section',
-  },
-  {
-    href: '#',
-    label: 'Section',
-  },
-  {
-    href: '#',
-    label: 'Current Page',
-    selected: true,
-  }],
+  breadcrumbs: [
+    {
+      href: '#',
+      label: 'Root',
+    },
+    {
+      href: '#',
+      label: 'Section',
+    },
+    {
+      href: '#',
+      label: 'Section',
+    },
+    {
+      href: '#',
+      label: 'Section',
+    },
+    {
+      href: '#',
+      label: 'Current Page',
+      selected: true,
+    },
+  ],
 };
 
 export const argTypesData = {
@@ -67,31 +69,36 @@ const DefaultTemplate = (args, { argTypes }) =>
 const VariantsTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtBreadcrumbsVariantsTemplate);
 
-  const BreadcrumbItemTemplate = (args, { argTypes }) =>
+const BreadcrumbItemTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtBreadcrumbItem);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = {
-  options: {
-    showPanel: false,
-  },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'landmark-unique',
-          enabled: false,
-        },
-      ],
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'landmark-unique',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };
 
-
-export const BreadcrumbItem = BreadcrumbItemTemplate.bind({});
-BreadcrumbItem.args = {};
+export const BreadcrumbItem = {
+  render: BreadcrumbItemTemplate,
+  args: {},
+};

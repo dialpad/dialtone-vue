@@ -134,35 +134,37 @@ export default {
 };
 
 // Templates
-const Template = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeComboboxMultiSelectDefaultTemplate,
-);
+const Template = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeComboboxMultiSelectDefaultTemplate);
 
-// Stories
-export const Default = Template.bind({});
-
-export const WithMaxSelectValidation = Template.bind({});
-WithMaxSelectValidation.args = {
-  description: 'Select up to 2 options.',
-  maxSelected: 2,
-  selectedItems: ['item12', 'item13', 'item14'],
-  maxSelectedMessage: [{ message: 'More than 2 selected', type: 'error' }],
+export const Default = {
+  render: Template,
 };
-WithMaxSelectValidation.parameters = {
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'color-contrast',
-          enabled: false,
-        },
-        {
-          id: 'label',
-          enabled: false,
-        },
-      ],
+
+export const WithMaxSelectValidation = {
+  render: Template,
+
+  args: {
+    description: 'Select up to 2 options.',
+    maxSelected: 2,
+    selectedItems: ['item12', 'item13', 'item14'],
+    maxSelectedMessage: [{ message: 'More than 2 selected', type: 'error' }],
+  },
+
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+          {
+            id: 'label',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

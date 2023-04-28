@@ -29,7 +29,8 @@ export const argTypesData = {
 
   // Props
   checked: {
-    description: 'Used to set the initial state of the toggle. Setting "mixed" means it gets the indeterminate state.',
+    description:
+      'Used to set the initial state of the toggle. Setting "mixed" means it gets the indeterminate state.',
     options: TOGGLE_CHECKED_VALUES,
     control: {
       type: 'select',
@@ -118,31 +119,38 @@ export default {
 };
 
 // Toggle Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ToggleDefault);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ToggleVariants);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, ToggleDefault);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, ToggleVariants);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
-Default.parameters = {
-  a11y: {
-    config: {
-      rules: [
-        // TODO: it's possible to pass a custom aria-label but adding a built-in label can cover most of cases
-        {
-          id: 'button-name',
-          enabled: false,
-        },
-      ],
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          // TODO: it's possible to pass a custom aria-label but adding a built-in label can cover most of cases
+          {
+            id: 'button-name',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = {
-  options: {
-    showPanel: false,
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    a11y: Default.parameters.a11y,
   },
-  a11y: Default.parameters.a11y,
 };

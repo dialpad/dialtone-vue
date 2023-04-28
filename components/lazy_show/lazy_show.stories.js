@@ -2,7 +2,6 @@ import { DtLazyShow } from './';
 import LazyShowDefault from './lazy_show_default.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
-
 const argTypesData = {
   // Slots
   default: {
@@ -33,5 +32,7 @@ export default {
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, LazyShowDefault);
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  render: Template,
+  args: {},
+};

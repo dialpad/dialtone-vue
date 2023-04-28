@@ -118,50 +118,70 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtModalDefaultTemplate);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtModalDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {},
 };
 
-export const WithFooter = DefaultTemplate.bind({});
-WithFooter.args = {
-  showFooter: true,
+export const WithFooter = {
+  render: DefaultTemplate,
+
+  args: {
+    showFooter: true,
+  },
 };
 
-export const WithFixedHeaderFooter = DefaultTemplate.bind({});
-WithFixedHeaderFooter.args = {
-  showFooter: true,
-  fixedHeaderFooter: true,
-  copy: argsData.copy.repeat(4),
+export const WithFixedHeaderFooter = {
+  render: DefaultTemplate,
+
+  args: {
+    showFooter: true,
+    fixedHeaderFooter: true,
+    copy: argsData.copy.repeat(4),
+  },
 };
 
-export const WithBanner = DefaultTemplate.bind({});
-WithBanner.args = {
-  bannerTitle: 'Example banner',
+export const WithBanner = {
+  render: DefaultTemplate,
+
+  args: {
+    bannerTitle: 'Example banner',
+  },
 };
 
-export const WithDangerStyle = DefaultTemplate.bind({});
-WithDangerStyle.args = {
-  kind: 'danger',
-  showFooter: true,
+export const WithDangerStyle = {
+  render: DefaultTemplate,
+
+  args: {
+    kind: 'danger',
+    showFooter: true,
+  },
 };
 
-export const WithFullSize = DefaultTemplate.bind({});
-WithFullSize.args = {
-  size: 'full',
-  showFooter: true,
+export const WithFullSize = {
+  render: DefaultTemplate,
+
+  args: {
+    size: 'full',
+    showFooter: true,
+  },
 };
 
-export const WithCustomHeaderAndContent = DefaultTemplate.bind({});
-WithCustomHeaderAndContent.args = {
-  header: `
-    <div class="d-fl-center d-p12 d-bgc-purple-100">
-      <div>[custom header]</div>
-    </div>`,
-  default: `
-    <div class="d-fl-center d-p32 d-bgc-gold-200">
-      <h2>[custom body]</h2>
-    </div>`,
+export const WithCustomHeaderAndContent = {
+  render: DefaultTemplate,
+
+  args: {
+    header: `
+      <div class="d-fl-center d-p12 d-bgc-purple-100">
+        <div>[custom header]</div>
+      </div>`,
+    default: `
+      <div class="d-fl-center d-p32 d-bgc-gold-200">
+        <h2>[custom body]</h2>
+      </div>`,
+  },
 };

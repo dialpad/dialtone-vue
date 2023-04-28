@@ -4,8 +4,7 @@ import DtRecipeTimePill from './time_pill.vue';
 import DtRecipeTimePillDefaultTemplate from './time_pill_default.story.vue';
 
 // Default Prop Values
-export const argsData = {
-};
+export const argsData = {};
 
 /**
  * example prop description decorator
@@ -25,8 +24,7 @@ export const argsData = {
 
   <!-- @slot example slot decorator -->
 */
-export const argTypesData = {
-};
+export const argTypesData = {};
 
 // Story Collection
 export default {
@@ -37,19 +35,17 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeTimePillDefaultTemplate,
-);
-
-// Stories
-export const Default = DefaultTemplate.bind({});
-
 const today = new Date('1999-03-28');
 
-Default.args = {
-  dateTime: today.toISOString().split('T')[0],
-  dateTimeDisplay: 'Today',
+// Templates
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeTimePillDefaultTemplate);
+
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    dateTime: today.toISOString().split('T')[0],
+    dateTimeDisplay: 'Today',
+  },
 };

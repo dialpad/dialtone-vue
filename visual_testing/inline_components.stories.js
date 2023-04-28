@@ -1,4 +1,3 @@
-
 export default {
   title: 'Visual Testing/Inline Components',
   args: {

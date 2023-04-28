@@ -3,10 +3,12 @@ import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtValidationMessages from './validation_messages.vue';
 
 // Constants
-const VALIDATION_MESSAGES = [{
-  message: 'Validation Message',
-  type: VALIDATION_MESSAGE_TYPES.SUCCESS,
-}];
+const VALIDATION_MESSAGES = [
+  {
+    message: 'Validation Message',
+    type: VALIDATION_MESSAGE_TYPES.SUCCESS,
+  },
+];
 
 // Default Prop Values
 export const argsData = {
@@ -43,8 +45,9 @@ const Template = (_args, { argTypes }) => {
   };
 };
 
-// Stories
-export const Default = Template.bind({});
+export const Default = {
+  render: Template,
+};
 
 // Variants Story
 const VariantsTemplate = () => {
@@ -68,18 +71,22 @@ const VariantsTemplate = () => {
     `,
   };
 };
-export const Variants = VariantsTemplate.bind({});
-Variants.parameters = {
-  options: { showPanel: false },
-  controls: { disable: true },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'color-contrast',
-          enabled: false,
-        },
-      ],
+
+export const Variants = {
+  render: VariantsTemplate,
+
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

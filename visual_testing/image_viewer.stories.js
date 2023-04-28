@@ -1,8 +1,4 @@
-import {
-  argsData,
-  argTypesData,
-  Default,
-} from '@/components/image_viewer/image_viewer.stories.js';
+import { argsData, argTypesData, Default } from '@/components/image_viewer/image_viewer.stories.js';
 
 import DtImageViewer from '@/components/image_viewer/image_viewer.vue';
 

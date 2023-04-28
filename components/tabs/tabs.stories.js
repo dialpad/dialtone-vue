@@ -49,7 +49,8 @@ export const argTypesData = {
   },
 
   change: {
-    description: 'Change tab event with the arguments: `selected` id of the current tab and `disabled` value',
+    description:
+      'Change tab event with the arguments: `selected` id of the current tab and `disabled` value',
     table: {
       type: { summary: 'event' },
     },
@@ -74,39 +75,33 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtTabsDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtTabsVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTabsDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTabsVariantsTemplate);
 
-const TabPanelTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtTabPanel,
-);
+const TabPanelTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTabPanel);
 
-const TabTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtTab,
-);
+const TabTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTab);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
+  args: {},
+};
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { options: { showPanel: false }, controls: { disable: true } };
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};
 
-export const TabPanel = TabPanelTemplate.bind({});
-TabPanel.args = {};
+export const TabPanel = {
+  render: TabPanelTemplate,
+  args: {},
+};
 
-export const Tab = TabTemplate.bind({});
-Tab.args = {};
+export const Tab = {
+  render: TabTemplate,
+  args: {},
+};

@@ -84,30 +84,23 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtAvatarDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtAvatarDefaultTemplate);
 
-const IconTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtAvatarIconTemplate,
-);
+const IconTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtAvatarIconTemplate);
 
-const PresenceTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtAvatarPresenceTemplate,
-);
+const PresenceTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtAvatarPresenceTemplate);
 
 // Stories
 export const Default = {
   render: DefaultTemplate,
-  decorators: [() => ({
-    template: `<div class="d-d-flex"><story /></div>`,
-  })],
+  decorators: [
+    () => ({
+      template: `<div class="d-d-flex"><story /></div>`,
+    }),
+  ],
   args: {
     default: `<img data-qa="dt-avatar-image" src="${defaultImage}" alt="Person Avatar">`,
     initials: 'PS',

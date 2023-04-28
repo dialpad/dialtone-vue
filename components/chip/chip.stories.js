@@ -117,32 +117,44 @@ export default {
 };
 
 // Templates
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtChipDefaultTemplate);
+const Template = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtChipDefaultTemplate);
 
-// Stories
-export const Default = Template.bind({});
-Default.args = {
-  default: 'Chip',
-  closeButtonProps: {
-    ariaLabel: 'close',
+export const Default = {
+  render: Template,
+
+  args: {
+    default: 'Chip',
+    closeButtonProps: {
+      ariaLabel: 'close',
+    },
   },
 };
 
-export const WithIcon = Template.bind({});
-WithIcon.args = {
-  ...Default.args,
-  icon: 'lock-filled',
+export const WithIcon = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    icon: 'lock-filled',
+  },
 };
 
-export const WithAvatar = Template.bind({});
-WithAvatar.args = {
-  ...Default.args,
-  avatar: 'DP',
+export const WithAvatar = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    avatar: 'DP',
+  },
 };
 
-export const NonInteractive = Template.bind({});
-NonInteractive.args = {
-  ...Default.args,
-  interactive: false,
-  hideClose: true,
+export const NonInteractive = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    interactive: false,
+    hideClose: true,
+  },
 };

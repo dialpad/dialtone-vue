@@ -120,49 +120,63 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtToastDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtToastDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  title: 'Base title (optional)',
-  kind: 'base',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    title: 'Base title (optional)',
+    kind: 'base',
+  },
 };
 
-export const Error = DefaultTemplate.bind({});
-Error.args = {
-  ...Default.args,
-  title: 'Error title (optional)',
-  kind: 'error',
+export const Error = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    title: 'Error title (optional)',
+    kind: 'error',
+  },
 };
 
-export const Info = DefaultTemplate.bind({});
-Info.args = {
-  ...Default.args,
-  title: 'Info title (optional)',
-  kind: 'info',
+export const Info = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    title: 'Info title (optional)',
+    kind: 'info',
+  },
 };
 
-export const Success = DefaultTemplate.bind({});
-Success.args = {
-  ...Default.args,
-  title: 'Success title (optional)',
-  kind: 'success',
+export const Success = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    title: 'Success title (optional)',
+    kind: 'success',
+  },
 };
 
-export const Warning = DefaultTemplate.bind({});
-Warning.args = {
-  ...Default.args,
-  title: 'Warning title (optional)',
-  kind: 'warning',
+export const Warning = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    title: 'Warning title (optional)',
+    kind: 'warning',
+  },
 };
 
-export const Important = DefaultTemplate.bind({});
-Important.args = {
-  ...Default.args,
-  important: true,
+export const Important = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    important: true,
+  },
 };

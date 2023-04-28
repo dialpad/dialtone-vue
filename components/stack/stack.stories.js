@@ -2,13 +2,17 @@ import DtStack from './stack.vue';
 
 import StackDefault from './stack_default.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS } from '@/components/stack/stack_constants';
+import {
+  DT_STACK_DIRECTION,
+  DT_STACK_GAP,
+  DT_STACK_RESPONSIVE_BREAKPOINTS,
+} from '@/components/stack/stack_constants';
 
 export const argsData = {
   direction: { default: 'column' },
   as: 'div',
   gap: '400',
-}
+};
 
 export const argTypesData = {
   // Slots
@@ -63,5 +67,7 @@ export default {
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, StackDefault);
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  render: Template,
+  args: {},
+};

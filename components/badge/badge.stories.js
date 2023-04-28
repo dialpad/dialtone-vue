@@ -3,7 +3,11 @@ import DtBadge from './badge.vue';
 import DtBadgeDefaultTemplate from './badge_default.story.vue';
 import DtBadgeVariantsTemplate from './badge_variants.story.vue';
 import DtBadgeExamplesTemplate from './badge_examples.story.vue';
-import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
+import {
+  BADGE_TYPE_MODIFIERS,
+  BADGE_KIND_MODIFIERS,
+  BADGE_DECORATION_MODIFIERS,
+} from './badge_constants';
 
 const iconsList = getIconNames();
 
@@ -80,26 +84,38 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBadgeDefaultTemplate);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBadgeVariantsTemplate);
-const ExamplesTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtBadgeExamplesTemplate);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBadgeDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBadgeVariantsTemplate);
+const ExamplesTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBadgeExamplesTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  default: 'Badge',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default: 'Badge',
+  },
 };
 
-export const Count = DefaultTemplate.bind({});
-Count.args = {
-  default: '1',
-  kind: 'count',
+export const Count = {
+  render: DefaultTemplate,
+
+  args: {
+    default: '1',
+    kind: 'count',
+  },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.parameters = { options: { showPanel: false }, controls: { disable: true } };
-Variants.args = {};
+export const Variants = {
+  render: VariantsTemplate,
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  args: {},
+};
 
-export const Examples = ExamplesTemplate.bind({});
-Examples.parameters = { options: { showPanel: false }, controls: { disable: true } };
-Examples.args = {};
+export const Examples = {
+  render: ExamplesTemplate,
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  args: {},
+};

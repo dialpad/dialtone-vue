@@ -119,25 +119,23 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeFeedItemRowDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeFeedItemRowVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeFeedItemRowDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeFeedItemRowVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  showHeader: true,
-  reactions: 'emoji reactions',
-  threading: 'threading',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    showHeader: true,
+    reactions: 'emoji reactions',
+    threading: 'threading',
+  },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {
+export const Variants = {
+  render: VariantsTemplate,
+
+  args: {},
 };

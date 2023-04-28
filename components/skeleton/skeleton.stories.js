@@ -84,24 +84,25 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtSkeletonDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtSkeletonVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtSkeletonDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtSkeletonVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.decorators = [() => ({
-  template: '<div style="width: 500px"><story /></div>',
-})];
-Default.args = {};
+export const Default = {
+  render: DefaultTemplate,
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { options: { showPanel: false }, controls: { disable: true } };
+  decorators: [
+    () => ({
+      template: '<div style="width: 500px"><story /></div>',
+    }),
+  ],
+
+  args: {},
+};
+
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};

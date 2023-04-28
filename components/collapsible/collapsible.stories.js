@@ -1,6 +1,4 @@
-import {
-  DtCollapsible,
-} from './';
+import { DtCollapsible } from './';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
 import DtCollapsibleDefaultStory from './collapsible_default.story.vue';
@@ -68,14 +66,13 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtCollapsibleDefaultStory,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtCollapsibleDefaultStory);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  maxWidth: '512px',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    maxWidth: '512px',
+  },
 };

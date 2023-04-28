@@ -1,9 +1,4 @@
-import {
-  argsData,
-  argTypesData,
-  Default,
-  Variants,
-} from '@/components/skeleton/skeleton.stories';
+import { argsData, argTypesData, Default, Variants } from '@/components/skeleton/skeleton.stories';
 
 import DtSkeleton from '@/components/skeleton/skeleton.vue';
 

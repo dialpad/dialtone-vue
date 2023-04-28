@@ -1,9 +1,4 @@
-import {
-  argsData,
-  argTypesData,
-  Default,
-  Variants,
-} from '@/components/dropdown/dropdown.stories';
+import { argsData, argTypesData, Default, Variants } from '@/components/dropdown/dropdown.stories';
 
 import DtDropdown from '@/components/dropdown/dropdown.vue';
 

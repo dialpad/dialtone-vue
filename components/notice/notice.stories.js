@@ -112,42 +112,60 @@ export default {
 
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, NoticeDefault);
 
-export const Default = Template.bind({});
-Default.args = {
-  title: 'Base title (optional)',
-  kind: 'base',
+export const Default = {
+  render: Template,
+
+  args: {
+    title: 'Base title (optional)',
+    kind: 'base',
+  },
 };
 
-export const Error = Template.bind({});
-Error.args = {
-  ...Default.args,
-  title: 'Error title (optional)',
-  kind: 'error',
+export const Error = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    title: 'Error title (optional)',
+    kind: 'error',
+  },
 };
 
-export const Info = Template.bind({});
-Info.args = {
-  ...Default.args,
-  title: 'Info title (optional)',
-  kind: 'info',
+export const Info = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    title: 'Info title (optional)',
+    kind: 'info',
+  },
 };
 
-export const Success = Template.bind({});
-Success.args = {
-  ...Default.args,
-  title: 'Success title (optional)',
-  kind: 'success',
+export const Success = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    title: 'Success title (optional)',
+    kind: 'success',
+  },
 };
 
-export const Warning = Template.bind({});
-Warning.args = {
-  ...Default.args,
-  title: 'Warning title (optional)',
-  kind: 'warning',
+export const Warning = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    title: 'Warning title (optional)',
+    kind: 'warning',
+  },
 };
 
-export const Important = Template.bind({});
-Important.args = {
-  ...Default.args,
-  important: true,
+export const Important = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    important: true,
+  },
 };

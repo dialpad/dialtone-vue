@@ -36,7 +36,6 @@ export const argsData = {
   <!-- @slot example slot decorator -->
 */
 export const argTypesData = {
-
   imageSrc: {
     description: 'Url for the image',
     table: {
@@ -135,41 +134,40 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtImageViewerDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtImageViewerVariantsTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtImageViewerDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtImageViewerVariantsTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  imageSrc: defaultImage,
-  imageAlt: 'Image Alt Text',
-  closeAriaLabel: 'Close',
-  imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
-  ariaLabel: 'Click to open image',
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    imageSrc: defaultImage,
+    imageAlt: 'Image Alt Text',
+    closeAriaLabel: 'Close',
+    imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
+    ariaLabel: 'Click to open image',
+  },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = {
-  options: {
-    showPanel: false,
-  },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'aria-allowed-attr',
-          enabled: false,
-        },
-      ],
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'aria-allowed-attr',
+            enabled: false,
+          },
+        ],
+      },
     },
   },
 };

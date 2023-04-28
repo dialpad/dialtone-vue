@@ -11,7 +11,6 @@ export const argsData = {
   labelVisible: true,
   showList: true,
   size: LABEL_SIZES.DEFAULT,
-  labelVisible: true,
   emptyList: false,
   loading: false,
   clickOnSelect: false,
@@ -45,7 +44,8 @@ export const argTypesData = {
     },
   },
   emptyListItem: {
-    description: 'Slot for the empty list item. Defaults to emptyStateMessage prop. It\'s shown when `emptyList=true`',
+    description:
+      'Slot for the empty list item. Defaults to emptyStateMessage prop. It\'s shown when `emptyList=true`',
     control: 'text',
     table: {
       category: 'slots',
@@ -188,34 +188,36 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtComboboxDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtComboboxDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  items: [
-    { name: 'combobox item 1', id: 1 },
-    { name: 'combobox item 2', id: 2 },
-    { name: 'combobox item 3', id: 3 },
-    { name: 'combobox item 4', id: 4 },
-    { name: 'combobox item 5', id: 5 },
-    { name: 'combobox item 6', id: 6 },
-    { name: 'combobox item 7', id: 7 },
-    { name: 'combobox item 8', id: 8 },
-    { name: 'combobox item 9', id: 9 },
-    { name: 'combobox item 10', id: 10 },
-    { name: 'combobox item 11', id: 11 },
-    { name: 'combobox item 12', id: 12 },
-  ],
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    items: [
+      { name: 'combobox item 1', id: 1 },
+      { name: 'combobox item 2', id: 2 },
+      { name: 'combobox item 3', id: 3 },
+      { name: 'combobox item 4', id: 4 },
+      { name: 'combobox item 5', id: 5 },
+      { name: 'combobox item 6', id: 6 },
+      { name: 'combobox item 7', id: 7 },
+      { name: 'combobox item 8', id: 8 },
+      { name: 'combobox item 9', id: 9 },
+      { name: 'combobox item 10', id: 10 },
+      { name: 'combobox item 11', id: 11 },
+      { name: 'combobox item 12', id: 12 },
+    ],
+  },
 };
 
-export const Empty = DefaultTemplate.bind({});
-Empty.args = {
-  items: [],
-  emptyStateMessage: 'No matches found.',
-  emptyList: true,
+export const Empty = {
+  render: DefaultTemplate,
+
+  args: {
+    items: [],
+    emptyStateMessage: 'No matches found.',
+    emptyList: true,
+  },
 };

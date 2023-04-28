@@ -92,91 +92,123 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeIvrNodeDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeIvrNodeDefaultTemplate);
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  nodeType: 'hangup',
-};
+export const Default = {
+  render: DefaultTemplate,
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `
-<dt-recipe-ivr-node
-  :node-label="Hangup"
-  :node-type="hangup"
-  :drop-down-menu-items="items"
-  :is-selected="false"
-  :menu-button-label="'Node menu'"
->
-  <p class="d-fs14 d-fw-bold">Hangup</p>
-  <p class="d-fs14">Description</p>
-</dt-recipe-ivr-node>
-   `,
+  args: {
+    nodeType: 'hangup',
+  },
+
+  parameters: {
+    docs: {
+      source: {
+        code: `
+  <dt-recipe-ivr-node
+    :node-label="Hangup"
+    :node-type="hangup"
+    :drop-down-menu-items="items"
+    :is-selected="false"
+    :menu-button-label="'Node menu'"
+  >
+    <p class="d-fs14 d-fw-bold">Hangup</p>
+    <p class="d-fs14">Description</p>
+  </dt-recipe-ivr-node>
+     `,
+      },
     },
   },
 };
 
-export const PromptMenu = DefaultTemplate.bind({});
-PromptMenu.args = {
-  nodeType: 'promptmenu',
+export const PromptMenu = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'promptmenu',
+  },
 };
 
-export const PromptCollect = DefaultTemplate.bind({});
-PromptCollect.args = {
-  nodeType: 'promptcollect',
+export const PromptCollect = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'promptcollect',
+  },
 };
 
-export const PromptPlay = DefaultTemplate.bind({});
-PromptPlay.args = {
-  nodeType: 'promptplay',
+export const PromptPlay = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'promptplay',
+  },
 };
 
-export const Expert = DefaultTemplate.bind({});
-Expert.args = {
-  nodeType: 'gotoexpert',
+export const Expert = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'gotoexpert',
+  },
 };
 
-export const GoTo = DefaultTemplate.bind({});
-GoTo.args = {
-  nodeType: 'goto',
+export const GoTo = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'goto',
+  },
 };
 
-export const Branch = DefaultTemplate.bind({});
-Branch.args = {
-  nodeType: 'branch',
+export const Branch = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'branch',
+  },
 };
 
-export const Transfer = DefaultTemplate.bind({});
-Transfer.args = {
-  nodeType: 'transfer',
+export const Transfer = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'transfer',
+  },
 };
 
-export const Hangup = DefaultTemplate.bind({});
-Hangup.args = {
-  nodeType: 'hangup',
+export const Hangup = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'hangup',
+  },
 };
 
-export const SelectedNode = DefaultTemplate.bind({});
-SelectedNode.args = {
-  nodeType: 'promptmenu',
-  isSelected: true,
+export const SelectedNode = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'promptmenu',
+    isSelected: true,
+  },
 };
 
-export const NodeWithDtmf = DefaultTemplate.bind({});
-NodeWithDtmf.args = {
-  nodeType: 'transfer',
-  dtmfKey: '1',
+export const NodeWithDtmf = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'transfer',
+    dtmfKey: '1',
+  },
 };
 
-export const NodeWithTopConnector = DefaultTemplate.bind({});
-NodeWithTopConnector.args = {
-  nodeType: 'branch',
-  connector: 'text',
+export const NodeWithTopConnector = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'branch',
+    connector: 'text',
+  },
 };

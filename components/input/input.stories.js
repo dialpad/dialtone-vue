@@ -259,7 +259,7 @@ export default {
 export const Default = {
   render: (args, { argTypes }) => {
     return createTemplateFromVueFile(args, argTypes, InputDefault);
-  }
+  },
 };
 
 export const WithDescription = {
@@ -267,21 +267,21 @@ export const WithDescription = {
   args: {
     label: 'Label',
     description: 'Description',
-  }
+  },
 };
 
 export const WithLeftIcon = {
   ...Default,
   args: {
     leftIcon: 'send',
-  }
+  },
 };
 
 export const WithRightIcon = {
   ...Default,
   args: {
     rightIcon: 'lock-filled',
-  }
+  },
 };
 
 export const WithBothIcons = {
@@ -301,7 +301,7 @@ export const WithBothIcons = {
         ],
       },
     },
-  }
+  },
 };
 
 export const WithWarning = {
@@ -320,7 +320,7 @@ export const WithWarning = {
         ],
       },
     },
-  }
+  },
 };
 
 export const WithError = {
@@ -351,28 +351,28 @@ export const WithMultipleMessages = {
 export const ExtraSmall = {
   ...Default,
   args: {
-    size: 'xs'
+    size: 'xs',
   },
 };
 
 export const Small = {
   ...Default,
   args: {
-    size: 'sm'
+    size: 'sm',
   },
 };
 
 export const Large = {
   ...Default,
   args: {
-    size: 'lg'
+    size: 'lg',
   },
 };
 
 export const ExtraLarge = {
   ...Default,
   args: {
-    size: 'xl'
+    size: 'xl',
   },
 };
 

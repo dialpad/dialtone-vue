@@ -5,7 +5,10 @@ import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover.vue'
 import DtRecipeCallbarButtonWithPopoverDefaultTemplate from './callbar_button_with_popover_default.story.vue';
 import DtRecipeCallbarButtonWithPopoverVariantsTemplate from './callbar_button_with_popover_variants.story.vue';
 
-import { POPOVER_DIRECTIONS, POPOVER_INITIAL_FOCUS_STRINGS } from '@/components/popover/popover_constants';
+import {
+  POPOVER_DIRECTIONS,
+  POPOVER_INITIAL_FOCUS_STRINGS,
+} from '@/components/popover/popover_constants';
 import { VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button.vue';
 
 const iconsList = getIconNames();
@@ -194,31 +197,30 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallbarButtonWithPopoverDefaultTemplate,
-);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeCallbarButtonWithPopoverVariantsTemplate,
-);
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  default: 'Button',
-  tooltip: 'Tooltip Text',
-  ariaLabel: 'Button',
-  arrowButtonLabel: 'Open popover',
-  content: 'Popover body content',
-  contentClass: ['d-h464', 'd-w512'],
-  headerContent: 'Header content',
-  showCloseButton: true,
-  forceShowArrow: false,
-  icon: 'dialpad-ai',
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeCallbarButtonWithPopoverDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtRecipeCallbarButtonWithPopoverVariantsTemplate);
+
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default: 'Button',
+    tooltip: 'Tooltip Text',
+    ariaLabel: 'Button',
+    arrowButtonLabel: 'Open popover',
+    content: 'Popover body content',
+    contentClass: ['d-h464', 'd-w512'],
+    headerContent: 'Header content',
+    showCloseButton: true,
+    forceShowArrow: false,
+    icon: 'dialpad-ai',
+  },
 };
 
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
-Variants.parameters = { options: { showPanel: false }, controls: { disable: true } };
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};
