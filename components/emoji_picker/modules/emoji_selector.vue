@@ -484,7 +484,7 @@ onUnmounted(() => {
 
     div:not(:first-child){
       p{
-        margin-top: 20px;
+        margin-top: 22px;
       }
     }
   }
