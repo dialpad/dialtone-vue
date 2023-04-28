@@ -22,10 +22,7 @@ import PeopleDark from './people-dark.json';
 import Symbols from './symbols.json';
 import Travel from './travel.json';
 
-// NO MODIFIER, NO REGIONAL
-
-// TODO ADD CUSTOM
-export default {
+export const emojisGrouped = {
   ActivityDefault,
   ActivityLight,
   ActivityMediumLight,
@@ -50,3 +47,8 @@ export default {
   Symbols,
   Travel,
 };
+
+export const emojisIndexed = [].concat(...Object.values(emojisGrouped)).reduce((accumulator, item) => {
+  accumulator[item.unicode_character] = item;
+  return accumulator;
+}, {});

@@ -89,7 +89,7 @@
 </template>
 
 <script setup>
-import emojis from '@/components/emoji_picker/emojis';
+import { emojisGrouped as emojis } from '@/components/emoji_picker/emojis';
 import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
 import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
 

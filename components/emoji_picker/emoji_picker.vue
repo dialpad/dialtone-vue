@@ -204,7 +204,7 @@ function updateHighlightedEmoji (emoji) {
       bottom: 0;
       left: 0;
       height: 1px;
-      background-color: var(--black-200) !important;
+      background-color: var(--bgc-moderate) !important;
     }
   }
 
