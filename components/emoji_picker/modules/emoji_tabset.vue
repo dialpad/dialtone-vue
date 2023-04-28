@@ -45,7 +45,7 @@ const props = defineProps({
     required: true,
   },
 
-  isScrollingWithScrollTo: {
+  isScrolling: {
     type: Boolean,
     default: false,
   },
@@ -102,11 +102,11 @@ const isSearching = computed(() => props.emojiFilter.length > 0);
 
 const selectedTab = ref('1');
 
-const { isScrollingWithScrollTo } = toRefs(props);
+const { isScrolling } = toRefs(props);
 
 watch(() => props.scrollIntoTab,
   () => {
-    if (!isScrollingWithScrollTo.value && !isSearching.value) {
+    if (!isScrolling.value && !isSearching.value) {
       selectedTab.value = (props.scrollIntoTab + 1).toString();
     }
   });
@@ -124,7 +124,7 @@ watch(isSearching,
  * dt-tab component
  */
 function selectTabset (id) {
-  if (!isScrollingWithScrollTo.value) {
+  if (!isScrolling.value) {
     selectedTab.value = id;
   }
   emits('selected-tabset', id);

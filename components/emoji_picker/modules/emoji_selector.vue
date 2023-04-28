@@ -178,10 +178,10 @@ const emits = defineEmits([
 
   /**
    * Emitted when the scrollTo function starts scrolling and stops scrolling
-   * @event is-scrolling-with-scroll-to
+   * @event is-scrolling
    * @param {Boolean} is-scrolling - Whether the user is scrolling with the scroll-to
     */
-  'is-scrolling-with-scroll-to',
+  'is-scrolling',
 ]);
 
 /**
@@ -356,26 +356,26 @@ function scrollToTab (tabIndex) {
      * This is used to check if the user is scrolling using the scrollTo function
      * This is useful because this flag will prevent to update the fixed label when the user is scrolling using the scrollTo function
      */
-    let isScrollingWithScrollTo = true;
+    let isScrolling = true;
 
     let prevScrollTop = container.scrollTop;
-    emits('is-scrolling-with-scroll-to', true);
+    emits('is-scrolling', true);
 
     /**
      * This event listener checks whether the user is scrolling up or down by comparing the current scrollTop to prevScrollTop.
      * If the scrollToTab function is scrolling from bottom to top and has reached the desired position (scrollTop <= offsetTop),
      * or if the scrollToTab function is scrolling from top to bottom and has passed the desired position (scrollTop >= offsetTop),
-     * then isScrollingWithScrollTo is set to false.
+     * then isScrolling is set to false.
      */
     container.addEventListener('scroll', () => {
-      if (isScrollingWithScrollTo) {
+      if (isScrolling) {
         const scrollTop = container.scrollTop;
         if (
           (prevScrollTop < scrollTop && scrollTop >= offsetTop) ||
           (prevScrollTop > scrollTop && scrollTop <= offsetTop)
         ) {
-          isScrollingWithScrollTo = false;
-          emits('is-scrolling-with-scroll-to', false);
+          isScrolling = false;
+          emits('is-scrolling', false);
         }
         prevScrollTop = scrollTop;
       }
@@ -484,7 +484,7 @@ onUnmounted(() => {
 
     div:not(:first-child){
       p{
-        margin-top: 18px;
+        margin-top: 20px;
       }
     }
   }

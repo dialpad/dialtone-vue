@@ -6,7 +6,7 @@
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tabset-labels="tabSetLabels"
-        :is-scrolling-with-scroll-to="isScrollingWithScrollTo"
+        :is-scrolling="isScrolling"
         @selected-tabset="scrollToSelectedTabset"
       />
     </div>
@@ -24,7 +24,7 @@
         :recently-used-emojis="recentlyUsedEmojis"
         :selected-tabset="selectedTabset"
         @scroll-into-tab="updateScrollIntoTab"
-        @is-scrolling-with-scroll-to="updateIsScrollingWithScrollTo"
+        @is-scrolling="updateIsScrolling"
         @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="emits('selected-emoji', $event)"
       />
@@ -155,7 +155,7 @@ const highlightedEmoji = ref(null);
 const selectedTabset = ref({});
 
 const scrollIntoTab = ref(0);
-const isScrollingWithScrollTo = ref(false);
+const isScrolling = ref(false);
 
 const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
 
@@ -177,8 +177,8 @@ function updateScrollIntoTab (value) {
   scrollIntoTab.value = value;
 }
 
-function updateIsScrollingWithScrollTo (value) {
-  isScrollingWithScrollTo.value = value;
+function updateIsScrolling (value) {
+  isScrolling.value = value;
 }
 function updateHighlightedEmoji (emoji) {
   highlightedEmoji.value = emoji;
