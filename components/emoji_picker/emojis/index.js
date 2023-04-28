@@ -48,7 +48,7 @@ export const emojisGrouped = {
   Travel,
 };
 
-export const emojisIndexed = [].concat(...Object.values(emojisGrouped)).reduce((accumulator, item) => {
-  accumulator[item.unicode_character] = item;
-  return accumulator;
-}, {});
+// export const emojisIndexed = [].concat(...Object.values(emojisGrouped)).reduce((accumulator, item) => {
+//   accumulator[item.unicode_character] = item;
+//   return accumulator;
+// }, {});
