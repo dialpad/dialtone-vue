@@ -47,8 +47,3 @@ export const emojisGrouped = {
   Symbols,
   Travel,
 };
-
-export const emojisIndexed = [].concat(...Object.values(emojisGrouped)).reduce((accumulator, item) => {
-  accumulator[item.unicode_character] = item;
-  return accumulator;
-}, {});
