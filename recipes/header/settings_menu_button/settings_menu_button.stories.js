@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeSettingsMenuButton from './settings_menu_button.vue';
-import DtRecipeSettingsMenuButtonMdx from './settings_menu_button.mdx';
 import DtRecipeSettingsMenuButtonDefaultTemplate from './settings_menu_button_default.story.vue';
 
 // Default Prop Values
@@ -52,17 +51,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    docs: {
-      page: DtRecipeSettingsMenuButtonMdx,
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
