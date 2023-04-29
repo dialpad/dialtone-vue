@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtRecipeFeedItemRow from './feed_item_row';
+import DtRecipeFeedItemRow from './feed_item_row.vue';
 import DtRecipeFeedItemRowMdx from './feed_item_row.mdx';
 import DtRecipeFeedItemRowDefaultTemplate from './feed_item_row_default.story.vue';
 import DtRecipeFeedItemRowVariantsTemplate from './feed_item_row_variants.story.vue';
