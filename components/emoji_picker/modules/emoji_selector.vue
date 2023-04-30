@@ -1,6 +1,7 @@
 <template>
   <div class="d-emoji-picker__selector">
     <div
+      id="d-emoji-picker-list"
       ref="listRef"
       class="d-emoji-picker__list"
     >

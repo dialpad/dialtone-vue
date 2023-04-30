@@ -5,19 +5,20 @@
       :selected="selectedTab"
     >
       <template #tabs>
-        <!--        <dt-tab -->
-        <!--          v-for="tab in tabs" -->
-        <!--          :id="tab.id" -->
-        <!--          :key="tab.id" -->
-        <!--          :panel-id="tab.panelId" -->
-        <!--          :label="tab.label" -->
-        <!--          @click.capture.stop="selectTabset(tab.id)" -->
-        <!--        > -->
-        <!--          <dt-icon -->
-        <!--            size="400" -->
-        <!--            :name="tab.icon" -->
-        <!--          /> -->
-        <!--        </dt-tab> -->
+        <dt-tab
+          v-for="tab in tabs"
+          :id="tab.id"
+          :key="tab.id"
+          :panel-id="tab.panelId"
+          :label="tab.label"
+          aria-controls="d-emoji-picker-list"
+          @click.capture.stop="selectTabset(tab.id)"
+        >
+          <dt-icon
+            size="400"
+            :name="tab.icon"
+          />
+        </dt-tab>
       </template>
     </dt-tab-group>
   </div>
