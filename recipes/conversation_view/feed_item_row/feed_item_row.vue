@@ -191,6 +191,7 @@ export default {
 
     feedListeners () {
       return {
+        ...this.$listeners,
         mouseenter: () => this.setHover(true),
         mouseleave: () => this.setHover(false),
         focusin: () => this.setFocus(true),
