@@ -1,3 +1,24 @@
+## [2.81.4](https://github.com/dialpad/dialtone-vue/compare/v2.81.3...v2.81.4) (2023-05-02)
+
+
+### Bug Fixes
+
+* **Leftbar General Row:** button to a ([d26667a](https://github.com/dialpad/dialtone-vue/commit/d26667a76c073f8d2172862ac6bf53a9883bc634))
+
+## [2.81.3](https://github.com/dialpad/dialtone-vue/compare/v2.81.2...v2.81.3) (2023-05-01)
+
+
+### Bug Fixes
+
+* **Recipe Grouped Chip:** grouped chip width and content style fixes. ([#949](https://github.com/dialpad/dialtone-vue/issues/949)) ([6bd84ec](https://github.com/dialpad/dialtone-vue/commit/6bd84ec5a4678949f058d102d4f966814e05c835))
+
+## [2.81.2](https://github.com/dialpad/dialtone-vue/compare/v2.81.1...v2.81.2) (2023-05-01)
+
+
+### Bug Fixes
+
+* **Header:** fix exports ([#950](https://github.com/dialpad/dialtone-vue/issues/950)) ([1e96b68](https://github.com/dialpad/dialtone-vue/commit/1e96b683e1b7358960e70522a2b6ab270f3e5dfc))
+
 ## [2.81.1](https://github.com/dialpad/dialtone-vue/compare/v2.81.0...v2.81.1) (2023-04-27)
 
 
