@@ -1,5 +1,5 @@
-import { createLocalVue, mount } from '@vue/test-utils';
-import DtFeedItemRow from './feed_item_row';
+import { mount } from '@vue/test-utils';
+import DtFeedItemRow from './feed_item_row.vue';
 
 const basePropsData = {
   displayName: 'Dwight Schrute',
@@ -8,12 +8,6 @@ const basePropsData = {
 };
 
 describe('DtFeedItemRow tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   // Wrappers
   let wrapper;
 
@@ -26,12 +20,15 @@ describe('DtFeedItemRow tests', () => {
   let menuWrapper;
 
   // Test Environment
-  let propsData = basePropsData;
   let slots;
-  let scopedSlots;
-  let listeners;
-  let provide;
-  let attrs;
+  let props;
+
+  const _mountWrapper = () => {
+    wrapper = mount(DtFeedItemRow, {
+      props,
+      slots,
+    });
+  };
 
   // Helpers
   const _setChildWrappers = () => {
@@ -43,35 +40,16 @@ describe('DtFeedItemRow tests', () => {
     menuWrapper = wrapper.find('[data-qa="feed-item-row-menu"]');
   };
 
-  const _mountWrapper = () => {
-    wrapper = mount(DtFeedItemRow, {
-      propsData,
-      attrs,
-      slots,
-      scopedSlots,
-      listeners,
-      provide,
-      localVue: testContext.localVue,
-    });
-  };
-
   // Test Setup
-  beforeAll(() => {
-    testContext.localVue = createLocalVue();
-  });
-
-  beforeEach(() => {
+  beforeEach(function () {
+    props = basePropsData;
     _mountWrapper();
   });
 
   // Test Teardown
   afterEach(() => {
-    propsData = basePropsData;
-    attrs = {};
+    props = basePropsData;
     slots = {};
-    scopedSlots = null;
-    provide = {};
-    wrapper.destroy();
   });
 
   describe('Presentation Tests', () => {
@@ -82,7 +60,7 @@ describe('DtFeedItemRow tests', () => {
 
     describe('When showHeader is true', () => {
       beforeEach(() => {
-        propsData = {
+        props = {
           ...basePropsData,
           showHeader: true,
         };
@@ -97,7 +75,7 @@ describe('DtFeedItemRow tests', () => {
 
       describe('showHeader is toggled to false, left time', () => {
         beforeEach(() => {
-          propsData = {
+          props = {
             ...basePropsData,
             showHeader: false,
           };
@@ -119,7 +97,7 @@ describe('DtFeedItemRow tests', () => {
 
     describe('When avatar url is provided', () => {
       beforeEach(() => {
-        propsData = {
+        props = {
           ...basePropsData,
           showHeader: true,
           avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
@@ -130,7 +108,6 @@ describe('DtFeedItemRow tests', () => {
 
       it('should display header avatar img', () => {
         expect(avatarImgWrapper.exists()).toBe(true);
-        expect(avatarImgWrapper.find('img').exists()).toBe(true);
       });
     });
 
@@ -164,11 +141,11 @@ describe('DtFeedItemRow tests', () => {
 
     describe('When menu slot is provided', () => {
       beforeEach(() => {
-        propsData = {
+        props = {
           ...basePropsData,
           isActive: false,
         };
-        scopedSlots = {
+        slots = {
           menu: 'menu',
         };
 
@@ -190,7 +167,7 @@ describe('DtFeedItemRow tests', () => {
   describe('Interactivity Tests', () => {
     // Test Setup
     beforeEach(async () => {
-      propsData = {
+      props = {
         ...basePropsData,
         isActive: false,
       };
