@@ -405,9 +405,9 @@ following:
 
 - All links are invalid (not linkified) if preceded by `#` or `@` characters,
 since they're reserved for user mentions and channel hashtags.
-- Similarly links wrapped with ` ``` ` will not be linkified as the triple
-backticks are reserved for codeblocks
-  - Except if ONLY preceding or following
+- In the future when we have other extensions we will want to come back and add
+rules for which other Nodes and Marks can contain links (for example we probably
+shouldn't linkify content inside codeblocks).
 
 Otherwise all link types should go by the following behavior:
 
