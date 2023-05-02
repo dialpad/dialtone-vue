@@ -1,5 +1,4 @@
 import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
-
 import * as BannerStories from './banner.stories';
 
 <Meta of={BannerStories}/>
@@ -39,7 +38,7 @@ Provides different styles of banners
 Applies error visual style.
 
 <Canvas>
-  <Story of={ButtonStories.Error} />
+  <Story of={BannerStories.Error} />
 </Canvas>
 
 ### Info
@@ -47,7 +46,7 @@ Applies error visual style.
 Applies info visual style.
 
 <Canvas>
-  <Story of={ButtonStories.Info} />
+  <Story of={BannerStories.Info} />
 </Canvas>
 
 ### Success
@@ -55,7 +54,7 @@ Applies info visual style.
 Success visual style.
 
 <Canvas>
-  <Story of={ButtonStories.Success} />
+  <Story of={BannerStories.Success} />
 </Canvas>
 
 ### Pinned
