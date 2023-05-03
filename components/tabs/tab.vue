@@ -14,7 +14,7 @@
     :aria-label="label"
     data-qa="dt-tab"
     :tabindex="isSelected ? '0' : '-1'"
-    :disabled="groupContext.disabled || disabled"
+    :disabled="groupContext?.disabled || disabled"
     v-bind="$attrs"
     v-on="tabListeners"
   >
@@ -101,7 +101,7 @@ export default {
 
   computed: {
     isSelected () {
-      return this.groupContext.selected === this.panelId;
+      return this.groupContext?.selected === this.panelId;
     },
 
     tabListeners () {

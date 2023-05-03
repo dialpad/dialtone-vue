@@ -1,6 +1,7 @@
 import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
-
-import * as TabsStories from './tabs.stories';
+import *as TabsStories from './tabs.stories';
+import* as TabStories from './tab.stories';
+import * as TabPanelStories from './tab_panel.stories';
 
 <Meta of={TabsStories}/>
 
@@ -35,11 +36,10 @@ Tabs have two slots:
 
 ### TabPanel
 
-<Controls of={TabsStories.TabPanel} />
-
+<Controls of={TabPanelStories.TabPanel} />
 ### Tab
 
-<Controls of={TabsStories.Tab} />
+<Controls of={TabStories.Tab} />
 
 ## Accessibility
 

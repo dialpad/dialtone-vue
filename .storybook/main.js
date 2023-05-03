@@ -12,7 +12,6 @@ const config = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
     "@storybook/addon-a11y",
     "@storybook/addon-styling",
   ],
@@ -21,7 +20,7 @@ const config = {
     options: {},
   },
   docs: {
-    autodocs: "tag",
+    autodocs: false,
   },
 };
 export default config;

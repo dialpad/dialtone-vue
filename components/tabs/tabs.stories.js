@@ -1,8 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtTabGroup from './tab_group.vue';
-import DtTabPanel from './tab_panel.vue';
-import DtTab from './tab.vue';
 
 import DtTabsDefaultTemplate from './tabs_default.story.vue';
 import DtTabsVariantsTemplate from './tabs_variants.story.vue';
@@ -64,14 +62,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst',
-    },
-    options: {
-      showPanel: true,
-    },
-  },
 };
 
 // Templates
@@ -79,11 +69,6 @@ const DefaultTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTabsDefaultTemplate);
 const VariantsTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTabsVariantsTemplate);
-
-const TabPanelTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtTabPanel);
-
-const TabTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTab);
 
 export const Default = {
   render: DefaultTemplate,
@@ -94,14 +79,4 @@ export const Variants = {
   render: VariantsTemplate,
   args: {},
   parameters: { options: { showPanel: false }, controls: { disable: true } },
-};
-
-export const TabPanel = {
-  render: TabPanelTemplate,
-  args: {},
-};
-
-export const Tab = {
-  render: TabTemplate,
-  args: {},
 };

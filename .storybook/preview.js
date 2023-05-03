@@ -36,7 +36,7 @@ export default {
       viewports: MINIMAL_VIEWPORTS,
     },
     options: {
-      showPanel: true,
+      showPanel: 'bottom',
       storySort: {
         method: 'alphabetical',
         // Make sure the docs come first

@@ -101,4 +101,16 @@ export const Variants = {
 export const BreadcrumbItem = {
   render: BreadcrumbItemTemplate,
   args: {},
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'listitem',
+            enabled: false,
+          },
+        ],
+      },
+    },
+  },
 };

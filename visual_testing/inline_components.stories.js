@@ -15,6 +15,7 @@ export default {
     },
     percy: {
       queryParams: {
+        path: '/docs/visual-testing-inline-components--docs',
         viewMode: 'docs',
       },
       waitForTimeout: 5000,

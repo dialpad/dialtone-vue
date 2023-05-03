@@ -3,12 +3,12 @@
   <aside
     :class="bannerClass"
     :style="bannerBackgroundImage"
-    :role="role"
     @keydown.tab="trapFocus"
   >
     <div
       class="d-banner__dialog"
       :class="dialogClass"
+      :role="role"
       :aria-labelledby="titleId"
       :aria-describedby="contentId"
     >
