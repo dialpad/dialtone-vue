@@ -7,7 +7,7 @@
     :item-size="itemSize"
     :min-item-size="minItemSize"
     :direction="direction"
-    key-field="id"
+    :key-field="keyField"
     :list-tag="listTag"
     :item-tag="itemTag"
     :style="computedStyle"
@@ -30,8 +30,8 @@
 </template>
 
 <script setup>
-import CoreScroller from './modules/core-scroller.vue';
-import DynamicScroller from './modules/dynamic-scroller.vue';
+import CoreScroller from './modules/core_scroller.vue';
+import DynamicScroller from './modules/dynamic_scroller.vue';
 import { provide, computed, watch, ref } from 'vue';
 
 const props = defineProps({

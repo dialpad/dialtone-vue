@@ -4,7 +4,7 @@
     :items="itemsWithSize"
     :min-item-size="minItemSize"
     :direction="direction"
-    key-field="id"
+    :key-field="keyField"
     :list-tag="listTag"
     :item-tag="itemTag"
     v-bind="$attrs"
@@ -38,8 +38,8 @@ This is a code from external library (https://github.com/Akryum/vue-virtual-scro
 We have modified it for our own specific use.
 -->
 <script>
-import CoreScroller from './core-scroller.vue';
-import DtScrollerItem from './scroller-item.vue';
+import CoreScroller from './core_scroller.vue';
+import DtScrollerItem from './scroller_item.vue';
 
 export default {
   name: 'DynamicScroller',

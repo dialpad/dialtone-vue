@@ -507,10 +507,11 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
     // Always set item in case it's a new object with the same key
     view.item = item;
 
-    if (newlyUsedView) {
-      if (i === items.length - 1) emit('scroll-end');
-      if (i === 0) emit('scroll-start');
-    }
+    // if (newlyUsedView) {
+    //   if (items.length === 0) return;
+    //   if (i === items.length - 1) emit('scroll-end');
+    //   if (i === 0) emit('scroll-start');
+    // }
 
     // Update position
     if (itemSize === null) {
@@ -557,6 +558,17 @@ const scrollToItem = (index) => {
 };
 
 const handleScroll = () => {
+  const container = scroller.value;
+
+  // Check if the scroll is at the top of the container
+  if (container.scrollTop === 0) {
+    emit('scroll-start');
+  }
+
+  // Check if the scroll is at the bottom of the container
+  if (container.scrollTop + container.clientHeight === container.scrollHeight) {
+    emit('scroll-end');
+  }
   if (!scrollDirty) {
     scrollDirty = true;
     if (updateTimeout) return;

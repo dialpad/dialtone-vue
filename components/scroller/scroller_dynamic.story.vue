@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import DtScroller from './DtScroller';
+import DtScroller from './scroller.vue';
 import { ref } from 'vue';
 
 const defaultAvatar = require('./person.png');

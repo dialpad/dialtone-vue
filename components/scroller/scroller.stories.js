@@ -1,4 +1,4 @@
-import DtScroller from './DtScroller';
+import DtScroller from './scroller.vue';
 import BaseScrollerMdx from './scroller.mdx';
 import ScrollerDefault from './scroller_default.story';
 import ScrollerDynamic from '@/components/scroller/scroller_dynamic.story.vue';
