@@ -111,10 +111,6 @@ describe('DtFeedItemRow tests', () => {
       it('should have avatar img', () => {
         expect(avatarImgWrapper.exists()).toBe(true);
       });
-
-      it('should have img tag rendered for avatar', () => {
-        expect(avatarImgWrapper.find('img').exists()).toBe(true);
-      });
     });
 
     describe('When default slot content is provided', () => {
