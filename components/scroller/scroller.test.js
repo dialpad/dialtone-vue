@@ -70,10 +70,13 @@ describe('DtScroller Tests', function () {
   describe('Interactivity Tests', function () {
     describe('Should emit', function () {
       it('`scroll-start` event immediately the component renders', function () {
+        defaultContent.element.scrollTop = 0;
+        wrapper.trigger('scroll');
+
         assert.isTrue(!!wrapper.emitted()['scroll-start']);
       });
       it('`scroll-end` event when scroll reach the bottom of the component', function () {
-        wrapper.vm.scrollToItem(20);
+        defaultContent.element.scrollTop = defaultContent.element.scrollHeight - defaultContent.element.clientHeight;
         wrapper.trigger('scroll');
 
         assert.isTrue(!!wrapper.emitted()['scroll-end']);
