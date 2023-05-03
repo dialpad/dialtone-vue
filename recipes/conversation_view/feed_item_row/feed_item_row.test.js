@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import DtFeedItemRow from './feed_item_row.vue';
 
-const basePropsData = {
+const baseProps = {
   displayName: 'Dwight Schrute',
   time: '4:54 PM',
   shortTime: '4:54',
@@ -42,13 +42,13 @@ describe('DtFeedItemRow tests', () => {
 
   // Test Setup
   beforeEach(function () {
-    props = basePropsData;
+    props = baseProps;
     _mountWrapper();
   });
 
   // Test Teardown
   afterEach(() => {
-    props = basePropsData;
+    props = baseProps;
     slots = {};
   });
 
@@ -61,22 +61,25 @@ describe('DtFeedItemRow tests', () => {
     describe('When showHeader is true', () => {
       beforeEach(() => {
         props = {
-          ...basePropsData,
+          ...baseProps,
           showHeader: true,
         };
         _mountWrapper();
         _setChildWrappers();
       });
 
-      it('should render avatar and not render left time', () => {
+      it('should render avatar', () => {
         expect(headerWrapper.exists()).toBe(true);
+      });
+
+      it('should not render left time', () => {
         expect(leftTimeWrapper.exists()).toBe(false);
       });
 
       describe('showHeader is toggled to false, left time', () => {
         beforeEach(() => {
           props = {
-            ...basePropsData,
+            ...baseProps,
             showHeader: false,
           };
           _mountWrapper();
@@ -89,7 +92,6 @@ describe('DtFeedItemRow tests', () => {
 
         it('should be visible and rendered when isActive is true', async () => {
           await wrapper.setProps({ isActive: true });
-          expect(leftTimeWrapper.exists()).toBe(true);
           expect(leftTimeWrapper.isVisible()).toBe(true);
         });
       });
@@ -98,7 +100,7 @@ describe('DtFeedItemRow tests', () => {
     describe('When avatar url is provided', () => {
       beforeEach(() => {
         props = {
-          ...basePropsData,
+          ...baseProps,
           showHeader: true,
           avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
         };
@@ -106,43 +108,49 @@ describe('DtFeedItemRow tests', () => {
         _setChildWrappers();
       });
 
-      it('should display header avatar img', () => {
+      it('should have avatar img', () => {
         expect(avatarImgWrapper.exists()).toBe(true);
+      });
+
+      it('should have img tag rendered for avatar', () => {
+        expect(avatarImgWrapper.find('img').exists()).toBe(true);
       });
     });
 
     describe('When default slot content is provided', () => {
+      const TEST_CONTENT = 'Test default content';
       beforeEach(() => {
         slots = {
-          default: 'Test default content',
+          default: TEST_CONTENT,
         };
         _mountWrapper();
         _setChildWrappers();
       });
 
       it('should render default content in the slot provided', () => {
-        expect(contentWrapper.exists()).toBe(true);
+        expect(contentWrapper.text()).toBe(TEST_CONTENT);
       });
     });
 
     describe('When reactions slot is provided', () => {
+      const REACTION_CONTENT = 'reactions here';
       beforeEach(() => {
         slots = {
-          reactions: 'reactions',
+          reactions: REACTION_CONTENT,
         };
         _mountWrapper();
         _setChildWrappers();
       });
 
       it('should render reactions slot', () => {
-        expect(reactionsWrapper.exists()).toBe(true);
+        expect(reactionsWrapper.text()).toBe(REACTION_CONTENT);
       });
     });
 
     describe('When menu slot is provided', () => {
       beforeEach(() => {
         props = {
-          ...basePropsData,
+          ...baseProps,
           isActive: false,
         };
         slots = {
@@ -162,20 +170,18 @@ describe('DtFeedItemRow tests', () => {
         expect(wrapper.exists()).toBe(true);
       });
     });
-  });
 
-  describe('Interactivity Tests', () => {
-    // Test Setup
-    beforeEach(async () => {
-      props = {
-        ...basePropsData,
-        isActive: false,
-      };
-      _mountWrapper();
-      _setChildWrappers();
-    });
+    describe('When isActive is false,', () => {
+      // Test Setup
+      beforeEach(() => {
+        props = {
+          ...baseProps,
+          isActive: false,
+        };
+        _mountWrapper();
+        _setChildWrappers();
+      });
 
-    describe('When isActive is false', () => {
       it('should not add highlight background to the feed row', () => {
         expect(wrapper.classes('d-bgc-secondary-opaque')).toBe(false);
       });
