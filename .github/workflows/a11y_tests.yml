@@ -26,5 +26,8 @@ jobs:
       - name: Build storybook
         run: npm run storybook:build
 
-      - name: Run accessibility tests
-        run: npm run storybook:test
+      - name: Start storybook and run a11y tests
+        run: |
+          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "npx http-server storybook-static --port 9010 --silent" \
+            "npx wait-on tcp:9010 && npm run storybook:test"
