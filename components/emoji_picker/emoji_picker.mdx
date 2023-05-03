@@ -1,0 +1,65 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+
+# DtEmojiPicker
+
+<Subtitle>
+  Allows you to view and select an emoji from a list.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas>
+  <Story id="components-emoji-picker--default" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtEmojiPicker } from '@dialpad/dialtone-vue/emoji';
+```
+
+### Example Usage
+
+```jsx
+const tabSetLabels = [
+  'Most recently used',
+  'Smileys and people',
+  'Nature',
+  'Food',
+  'Activity',
+  'Travel',
+  'Objects',
+  'Symbols',
+  'Flags',
+],
+
+const recentlyUsedEmojis = [
+  {
+    name: 'thumbs up',
+    category: 'people',
+    shortname: ':thumbsup:',
+    shortname_alternates: [':+1:', ':thumbup:'],
+    keywords: ['+1', 'hand', 'thumb', 'up', 'uc6'],
+    unicode_output: '1f44d',
+    unicode_character: '1f44d',
+  },
+];
+
+<dt-emoji-picker
+  :tab-set-labels="tabSetLabels",
+  skin-tone="Light",
+  :recently-used-emojis="recentlyUsedEmojis"
+  skin-selector-button-tooltip-label="Change default skin tone"
+  search-no-results-label="No results"
+  search-results-label="Search results"
+  search-placeholder-label="Search..."
+/>
+```
