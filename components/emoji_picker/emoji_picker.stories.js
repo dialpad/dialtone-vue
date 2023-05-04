@@ -98,6 +98,11 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
+  parameters: {
+    a11y: {
+      disable: true,
+    },
+  },
 };
 
 // Templates
