@@ -81,15 +81,8 @@ export const argTypesData = {
     },
   },
 
-  'scroll-start': {
-    description: 'Emitted when the first item is rendered.',
-    table: {
-      type: { summary: 'event' },
-    },
-  },
-
-  'scroll-end': {
-    description: 'Emitted when the last item is rendered.',
+  'user-position': {
+    description: 'Emit the last user position.',
     table: {
       type: { summary: 'event' },
     },
@@ -97,8 +90,7 @@ export const argTypesData = {
 };
 
 export const argsData = {
-  onScrollStart: action('scroll-start'),
-  onScrollEnd: action('scroll-end'),
+  onUserPosition: action('user-position'),
 };
 
 export default {

@@ -155,7 +155,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['scroll-start', 'scroll-end']);
+const emit = defineEmits(['user-position']);
 
 const views = reactive(new Map());
 const reactiveItems = reactive(props.items);
@@ -214,7 +214,8 @@ const itemIndexByKey = computed(() => {
 });
 
 watch(reactiveItems, () => {
-  _updateVisibleItems(true);
+  // _updateVisibleItems(true);
+  _updateVisibleItems(false, true);
 });
 
 watch(sizes, () => {
@@ -560,15 +561,18 @@ const scrollToItem = (index) => {
 const handleScroll = () => {
   const container = scroller.value;
 
+  emit('user-position', 'middle');
+
   // Check if the scroll is at the top of the container
   if (container.scrollTop === 0) {
-    emit('scroll-start');
+    emit('user-position', 'top');
   }
 
   // Check if the scroll is at the bottom of the container
   if (container.scrollTop + container.clientHeight === container.scrollHeight) {
-    emit('scroll-end');
+    emit('user-position', 'bottom');
   }
+
   if (!scrollDirty) {
     scrollDirty = true;
     if (updateTimeout) return;

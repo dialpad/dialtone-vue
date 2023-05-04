@@ -2,14 +2,23 @@
   <div>
     <h3>Scroller</h3>
 
-    <button @click="scrollToItem(100)">
-      Go to index 100
+    <button @click="scrollToItem(25)">
+      Go to index 25
     </button>
     <button @click="scrollToItem(0)">
       Go to start
     </button>
     <button @click="scrollToItem(items.length - 1)">
       Go to end
+    </button>
+
+    <br>
+    <br>
+    <button
+      class="autoscrolling"
+      @click="switchAutoScrolling"
+    >
+      Auto scrolling <div :class="{ 'enabled': autoScrolling }" />
     </button>
 
     <dt-scroller
@@ -23,8 +32,7 @@
       :list-tag="$attrs.listTag"
       :item-tag="$attrs.itemTag"
       :direction="$attrs.direction"
-      @scroll-start="$attrs.onScrollStart"
-      @scroll-end="$attrs.onScrollEnd"
+      @user-position="$attrs.onUserPosition($event); userPosition = $event"
     >
       <template #default="{ item }">
         <div class="user">
@@ -37,21 +45,50 @@
 
 <script setup>
 import DtScroller from './scroller.vue';
-import { ref } from 'vue';
+import { nextTick, ref } from 'vue';
 
-const items = Array.from({ length: 1000 }, (_, i) => ({
+const items = ref(Array.from({ length: 50 }, (_, i) => ({
   id: i,
   name: `User ${i}`,
-}));
+})));
 
 const scroller = ref('scroller');
+
+const autoScrolling = ref(false);
+
+const userPosition = ref(null);
+
+let intervalId;
 
 function scrollToItem (index) {
   scroller.value.scrollToItem(index);
 }
+
+function addItem () {
+  items.value.push({
+    id: items.value.length,
+    name: `User ${items.value.length}`,
+  });
+}
+
+function switchAutoScrolling () {
+  autoScrolling.value = !autoScrolling.value;
+  scroller.value.scrollToItem(items.value.length);
+
+  clearInterval(intervalId);
+  intervalId = setInterval(function () {
+    if (!autoScrolling.value) return;
+    addItem();
+    nextTick(() => {
+      if (userPosition.value === 'bottom') {
+        scroller.value.scrollToItem(items.value.length);
+      }
+    });
+  }, 1000);
+}
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .scroller {
   margin: 20px 0;
   border: 1px solid red;
@@ -63,5 +100,21 @@ function scrollToItem (index) {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #eee;
+}
+
+.autoscrolling{
+  display: flex;
+  align-items: center;
+  div {
+    background-color: red;
+    width: 5px;
+    height: 5px;
+    border-radius: 25px;
+    margin-left: 5px;
+
+    &.enabled{
+      background-color: #00ff00;
+    }
+  }
 }
 </style>
