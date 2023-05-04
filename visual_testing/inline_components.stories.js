@@ -18,7 +18,6 @@ export default {
         path: '/docs/visual-testing-inline-components--docs',
         viewMode: 'docs',
       },
-      waitForTimeout: 5000,
     },
   },
 };

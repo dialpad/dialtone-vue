@@ -17,11 +17,6 @@ export default {
   parameters: {
     options: { showPanel: false },
     controls: { disable: true },
-    percy: {
-      queryParams: {
-        viewMode: 'story',
-      },
-    },
     a11y: {
       disable: true,
     },

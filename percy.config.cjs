@@ -1,6 +1,10 @@
 module.exports = {
   version: 2,
   storybook: {
+    queryParams: {
+      viewMode: 'docs',
+      id: 'visual-testing-inline-components--docs',
+    },
     include: [
       // 'Visual Testing/Combobox With Popover: Default',
       // 'Visual Testing/Combobox Multi-Select: Default',
@@ -17,7 +21,6 @@ module.exports = {
       // 'Visual Testing/Modal: With Custom Header And Content',
       // 'Visual Testing/Image Viewer: Default',
     ],
-    waitForTimeout: 250,
   },
   snapshot: {
     enableJavaScript: true,

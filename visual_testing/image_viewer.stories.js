@@ -6,11 +6,6 @@ export default {
   title: 'Visual Testing/Image Viewer',
   component: DtImageViewer,
   parameters: {
-    percy: {
-      queryParams: {
-        viewMode: 'story',
-      },
-    },
     options: { showPanel: false },
     controls: { disable: true },
     a11y: {
