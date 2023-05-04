@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
+import KeyboardNavigation from '../../common/mixins/keyboard_list_navigation';
 import { DtPopover } from '@/components/popover';
 import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item/list_item_constants';
 import {
@@ -65,7 +65,7 @@ import {
 } from '@/components/popover/popover_constants';
 import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button.js';
+import SrOnlyCloseButtonMixin from '../../common/mixins/sr_only_close_button.js';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 export default {

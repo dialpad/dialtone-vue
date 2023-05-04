@@ -105,11 +105,6 @@ export const argTypesData = {
     control: {
       type: 'select',
     },
-    table: {
-      defaultValue: {
-        summary: 'null',
-      },
-    },
   },
   sticky: {
     options: POPOVER_STICKY_VALUES,

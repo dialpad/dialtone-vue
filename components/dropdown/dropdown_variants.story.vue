@@ -6,7 +6,6 @@
         :key="i"
         class="d-mr8"
         :placement="variant"
-        :content-width="contentWidth"
         :padding="padding"
         :navigation-type="navigationType"
         :transition="transition"
@@ -38,7 +37,6 @@
         class="d-mr8"
         :placement="placement"
         :fallback-placements="fallbackPlacements"
-        :content-width="contentWidth"
         :padding="padding"
         :modal="modal"
         :max-height="maxHeight"
@@ -100,7 +98,6 @@
         :open="open"
         :placement="placement"
         :fallback-placements="fallbackPlacements"
-        :content-width="contentWidth"
         :padding="padding"
         :modal="modal"
         :max-height="maxHeight"
@@ -176,7 +173,6 @@
       <div class="d-d-flex">
         <dt-dropdown
           class="d-mr8"
-          :content-width="contentWidth"
           :padding="padding"
           :navigation-type="navigationType"
           :open="open"

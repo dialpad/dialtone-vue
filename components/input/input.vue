@@ -119,7 +119,7 @@ import {
   getValidationState,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
-import { MessagesMixin } from '@/common/mixins/input.js';
+import { MessagesMixin } from '../../common/mixins/input.js';
 
 /**
  * An input field is an input control that allows users to enter alphanumeric information.

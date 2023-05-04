@@ -119,7 +119,7 @@ import {
   CHIP_SIZES,
   CHIP_TOP_POSITION,
 } from './combobox_multi_select_story_constants';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButtonMixin from '../../../common/mixins/sr_only_close_button';
 
 export default {
   name: 'DtRecipeComboboxMultiSelect',

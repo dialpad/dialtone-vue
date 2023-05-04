@@ -13,6 +13,7 @@
     :padding="padding"
     :list-id="listId"
     :empty-list="emptyList"
+    :empty-state-message="emptyStateMessage"
     :append-to="appendTo"
     :visually-hidden-close="visuallyHiddenClose"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
@@ -63,7 +64,7 @@
       <span v-html="footer" />
     </template>
     <template
-      v-else
+      v-else-if="!emptyList"
       #footer
     >
       <div class="d-d-flex d-ai-center d-px12">

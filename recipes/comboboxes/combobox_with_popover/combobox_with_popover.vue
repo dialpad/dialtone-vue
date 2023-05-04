@@ -117,7 +117,7 @@ import {
 import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import SrOnlyCloseButtonMixin from '../../../common/mixins/sr_only_close_button';
 import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 
 export default {
