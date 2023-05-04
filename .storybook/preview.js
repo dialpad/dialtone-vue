@@ -1,6 +1,6 @@
 import '../css/dialtone-globals.less';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
-import { app } from '@storybook/vue3';
+import { setup } from '@storybook/vue3';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '../common/emoji.js';
 import customEmojiJson from '@/common/custom-emoji.json';
@@ -10,7 +10,8 @@ setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/',
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
 setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
 setCustomEmojiJson(customEmojiJson);
-app.use(fixDefaultSlot);
+
+setup((app) => { app.use(fixDefaultSlot) });
 
 export default {
   parameters: {

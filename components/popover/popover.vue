@@ -132,7 +132,7 @@ import {
 } from './popover_constants';
 import { getUniqueString, hasSlotContent, isOutOfViewPort } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show.vue';
-import ModalMixin from '@/common/mixins/modal.js';
+import ModalMixin from '../../common/mixins/modal.js';
 import { createTippy, getPopperOptions } from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer.vue';
 import SrOnlyCloseButtonMixin from '../../common/mixins/sr_only_close_button';

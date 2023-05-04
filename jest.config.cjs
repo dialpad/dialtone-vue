@@ -9,10 +9,13 @@ module.exports = {
     'js',
     'vue',
   ],
-  testEnvironment: "jsdom",
+  testEnvironment: 'jsdom',
+  testEnvironmentOptions: {
+    customExportConditions: ['node', 'node-addons'],
+  },
   transform: {
-    '.*\\.(vue)$': 'vue-jest',
-    ".*\\.(js)$": "babel-jest"
+    '.*\\.(vue)$': '@vue/vue3-jest',
+    '.*\\.(js)$': 'babel-jest',
   },
   setupFilesAfterEnv: [
     '<rootDir>/tests/setupTests.js',

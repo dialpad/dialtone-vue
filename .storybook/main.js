@@ -1,4 +1,4 @@
-/** @type { import('@storybook/vue-vite').StorybookConfig } */
+/** @type { import('@storybook/vue3-vite').StorybookConfig } */
 const config = {
   stories: [
     '../components/**/*.stories.@(js|jsx|ts|tsx)',
@@ -16,7 +16,7 @@ const config = {
     "@storybook/addon-styling",
   ],
   framework: {
-    name: "@storybook/vue-vite",
+    name: "@storybook/vue3-vite",
     options: {},
   },
   docs: {
