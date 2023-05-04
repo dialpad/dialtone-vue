@@ -1,6 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
-import DtRecipeCallbarButton, { VALID_WIDTH_SIZE } from './callbar_button.vue';
+import DtRecipeCallbarButton from './callbar_button.vue';
+import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
 
 import DtRecipeCallbarButtonDefaultTemplate from './callbar_button_default.story.vue';
 import DtRecipeCallbarButtonVariantsTemplate from './callbar_button_variants.story.vue';
@@ -53,7 +54,7 @@ export const argTypesData = {
     control: 'text',
   },
   buttonWidthSize: {
-    options: VALID_WIDTH_SIZE,
+    options: CALLBAR_BUTTON_VALID_WIDTH_SIZE,
     control: {
       type: 'select',
     },

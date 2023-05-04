@@ -109,11 +109,12 @@
 import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
 import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
 import { DtCombobox } from '@/components/combobox';
-import { DtPopover, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
+import { DtPopover } from '@/components/popover';
 import { getUniqueString } from '@/common/utils';
 import {
   POPOVER_APPEND_TO_VALUES,
-} from '@/components/popover/popover_constants';
+  POPOVER_CONTENT_WIDTHS,
+} from '../../../components/popover/popover_constants';
 import {
   DROPDOWN_PADDING_CLASSES,
 } from '@/components/dropdown/dropdown_constants';

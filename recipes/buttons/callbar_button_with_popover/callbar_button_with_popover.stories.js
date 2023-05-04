@@ -9,7 +9,7 @@ import {
   POPOVER_DIRECTIONS,
   POPOVER_INITIAL_FOCUS_STRINGS,
 } from '@/components/popover/popover_constants';
-import { VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button.vue';
+import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button_constants';
 
 const iconsList = getIconNames();
 
@@ -79,7 +79,7 @@ export const argTypesData = {
     control: 'text',
   },
   buttonWidthSize: {
-    options: VALID_WIDTH_SIZE,
+    options: CALLBAR_BUTTON_VALID_WIDTH_SIZE,
     control: {
       type: 'select',
     },
