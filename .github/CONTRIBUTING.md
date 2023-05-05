@@ -225,7 +225,7 @@ export {
 
 ### Unit Testing
 
-Our unit tests are written with [Jest](https://jestjs.io/) and can be found alongside any javascript/vue code files existing in Dialtone Vue. Tests are suffixed with `.test.js` of the corresponding javascript/vue file. ex: `link.vue` is tested by `link.test.js`. All code in Dialtone Vue should have tests written for it. You can see more details on writing tests in the following [documentation](https://vue.dialpad.design/?path=/story/docs-component-driven-development-unit-tests--page).
+Our unit tests are written with [Vitest](https://vitest.dev/) and can be found alongside any javascript/vue code files existing in Dialtone Vue. Tests are suffixed with `.test.js` of the corresponding javascript/vue file. ex: `link.vue` is tested by `link.test.js`. All code in Dialtone Vue should have tests written for it. You can see more details on writing tests in the following [documentation](https://vue.dialpad.design/?path=/story/docs-component-driven-development-unit-tests--page).
 
 ### Dialtone Usage
 
@@ -248,7 +248,6 @@ Dialtone Vue is a dependency of other projects so you must always be aware of ma
 - **`docs`:** Any storybook documentation not directly related to a component.
 - **`generator-dialtone-vue`:** - Yeoman generator config.
 - **`scripts`:** - Contains shell scripts.
-- **`storybook`:** - Contains the storybook dependencies and package.json. When storybook is built it is output to `storybook/compiled`.
 - **`tools`:** - Any additional tooling related to Dialtone Vue. Right now contains files related to the migration from Dialtone 5 to Dialtone 6.
 
 ## Commit Message Convention
@@ -268,9 +267,9 @@ Dialtone Vue follows [SemVer](https://semver.org/) for versioning and the commit
 
 ## Tooling
 
-### Vue-CLI
+### Vite
 
-We use [Vue CLI](https://cli.vuejs.org/) for standard tooling within Dialtone Vue. The configuration for Vue CLI is in [vue.config.js](../vue.config.js). All common Vue CLI commands we use are encapsulated in npm scripts ex: `npm run build`, `npm test`, `npm start`.
+We use [Vite](https://vitejs.dev/) to run our local server and bundle our build.
 
 ### Storybook
 
@@ -280,7 +279,7 @@ Storybook has it's own build process and dependencies separate from our project.
 
 ### ESLint
 
-We use ESLint to promote best practices throughout our codebase. ESLint will check any of our javascript or vue code for styling or syntax errors. The configuration can be found in [.eslintrc.js](../eslintrc.js). Any changes code changes you make will be automatically linted upon commit (configuration in [lint-staged.config.js](../lint-staged.config.js)). You can manually run ESLint via `npm run lint`.
+We use ESLint to promote best practices throughout our codebase. ESLint will check any of our javascript or vue code for styling or syntax errors. The configuration can be found in [.eslintrc.cjs](../eslintrc.cjs). Any changes code changes you make will be automatically linted upon commit (configuration in [lint-staged.config.cjs](../lint-staged.config.cjs)). You can manually run ESLint via `npm run lint`.
 
 ### Yeoman
 

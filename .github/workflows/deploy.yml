@@ -43,7 +43,7 @@ jobs:
 
       - name: Build storybook
         if: ${{ github.ref == 'refs/heads/production' || github.ref == 'refs/heads/vue3' }}
-        run: npm run storybook:install && npm run storybook:build
+        run: npm run storybook:build
 
       - name: Deploy production
         if: ${{ github.ref == 'refs/heads/production' }}
@@ -72,7 +72,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
-          folder: storybook/compiled
+          folder: storybook-static
           clean-exclude: |
             deploy-previews
             vue3
@@ -82,10 +82,10 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
-          folder: storybook/compiled
+          folder: storybook-static
           target-folder: vue3
 
       - name: Github Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release --extends ./release-ci.config.js
+        run: npx semantic-release --extends ./release-ci.config.cjs

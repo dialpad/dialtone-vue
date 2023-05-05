@@ -3,7 +3,7 @@
     :class="leftbarGeneralRowClasses"
     data-qa="dt-leftbar-row"
   >
-    <button
+    <a
       class="dt-leftbar-row__primary"
       :data-qa="'data-qa' in $attrs ? $attrs['data-qa'] : 'dt-leftbar-row-link'"
       :aria-label="getAriaLabel"
@@ -84,7 +84,7 @@
           </template>
         </dt-tooltip>
       </div>
-    </button>
+    </a>
     <div
       v-if="hasCallButton"
       class="dt-leftbar-row__action"
@@ -126,7 +126,7 @@ import {
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR,
   LEFTBAR_GENERAL_ROW_ICON_SIZES,
-} from './general_row_constants.js';
+} from './general_row_constants';
 import { DtBadge } from '@/components/badge';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';

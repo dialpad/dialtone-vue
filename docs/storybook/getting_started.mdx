@@ -1,12 +1,8 @@
-import { Meta, Subtitle } from '@storybook/addon-docs/blocks';
+import { Meta, Subtitle } from '@storybook/blocks';
 
 <Meta title="Docs/Storybook/Getting Started" />
 
 # Getting Started
-
-<Subtitle>
-  Setting up, Building, and Deploying Storybook
-</Subtitle>
 
 ## What is Storybook?
 
@@ -38,19 +34,15 @@ Runs storybook locally at `localhost:9010`
 ```shell
 cd dialtone-vue
 
-npm run storybook:install
-
 npm run storybook
 ```
 
 ### Building Storybook
 
-Outputs the bundled storybook to `dialtone-vue/storybook/compiled`
+Outputs the bundled storybook to `dialtone-vue/storybook-static`
 
 ```shell
 cd dialtone-vue
-
-npm run storybook:install
 
 npm run storybook:build
 ```
