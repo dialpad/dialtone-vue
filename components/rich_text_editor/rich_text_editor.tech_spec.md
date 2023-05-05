@@ -401,6 +401,23 @@ following:
   matched, further uses a more rigorous validation using `phone_number_util`,
   but for our purposes we'll just replicate the initial validation.
 
+From the validators we create we should also derive util functions into
+`common/utils.js` so they can be reused elsewhere. They could utilize the same
+regexes as the extension does, but written more specifically to check for
+individual strings, e.g.
+
+```js
+// checks whether phone number is valid against all the possible formats
+function isPhoneNumber (phoneNumber: string): boolean {};
+```
+
+The following util functions should be created:
+
+- isPhoneNumber
+- isEmailAddress
+- isURL
+- isIPAddress
+
 ### Common Editor Behavior
 
 - All links are invalid (not linkified) if preceded by `#` or `@` characters,
