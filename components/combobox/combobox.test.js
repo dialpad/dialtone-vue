@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtCombobox from './combobox.vue';
-import DtInput from '@/components/input/input';
+import DtInput from '@/components/input/input.vue';
 
 // Constants
 const baseProps = {

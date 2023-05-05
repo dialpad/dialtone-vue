@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils';
 import DtToast from './toast.vue';
-import DtNoticeAction from '../notice/notice_action';
-import DtNoticeContent from '../notice/notice_content';
-import DtNoticeIcon from '../notice/notice_icon';
+import DtNoticeAction from '../notice/notice_action.vue';
+import DtNoticeContent from '../notice/notice_content.vue';
+import DtNoticeIcon from '../notice/notice_icon.vue';
 import {
   itBehavesLikeDoesNotHaveClass,
   itBehavesLikeHasCorrectClass,
