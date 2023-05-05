@@ -192,11 +192,11 @@ describe('DtToast Tests', () => {
       // Test Setup
       beforeEach(() => {
         _setWrappers();
-        jest.useFakeTimers();
+        vi.useFakeTimers();
       });
 
       afterEach(() => {
-        jest.useRealTimers();
+        vi.useRealTimers();
       });
 
       it('should show the toast', async () => {
@@ -204,7 +204,7 @@ describe('DtToast Tests', () => {
 
         expect(toast.exists()).toBe(true);
 
-        jest.runAllTimers();
+        vi.runAllTimers();
         await wrapper.vm.$nextTick();
         _setChildWrappers();
 
@@ -220,11 +220,11 @@ describe('DtToast Tests', () => {
       beforeEach(() => {
         props = { ...baseProps, duration };
         _setWrappers();
-        jest.useFakeTimers();
+        vi.useFakeTimers();
       });
 
       afterEach(() => {
-        jest.useRealTimers();
+        vi.useRealTimers();
       });
 
       it(
@@ -234,7 +234,7 @@ describe('DtToast Tests', () => {
 
           expect(toast.exists()).toBe(true);
 
-          jest.runAllTimers();
+          vi.runAllTimers();
           await wrapper.vm.$nextTick();
           _setChildWrappers();
 
