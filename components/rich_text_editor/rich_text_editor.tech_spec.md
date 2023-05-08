@@ -396,6 +396,8 @@ following:
   - With dashes `-`, e.g. `714-410-7035`
   - With whitespace `\s`, e.g. `714 410 7035`
   - With parentheses `()`, e.g. `(714) 410-7035`
+  - With country code and optional `+` sign, e.g. `1 714 410 7035` or
+  `+1 714 410 7035` (as long as the total length is under 15 characters)
   
   Dialpad backend uses these rules to do an initial validation first and when
   matched, further uses a more rigorous validation using `phone_number_util`,
