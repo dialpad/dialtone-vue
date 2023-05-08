@@ -213,10 +213,12 @@ const itemIndexByKey = computed(() => {
   return result;
 });
 
-watch(reactiveItems, () => {
-  // _updateVisibleItems(true);
-  _updateVisibleItems(false, true);
-});
+// watch(reactiveItems, () => {
+//   // if add to the top
+//   // _updateVisibleItems(true);
+//   // if autoscrolling  if add to the bottom
+//   // _updateVisibleItems(false, true);
+// });
 
 watch(sizes, () => {
   _updateVisibleItems(false);
@@ -457,7 +459,7 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
     type = item.type;
 
     let unusedPool = _unusedViews.get(type);
-    let newlyUsedView = false;
+    // let newlyUsedView = false;
 
     // No view assigned to item
     if (!view) {
@@ -492,12 +494,12 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
       view.nr.type = type;
       _views.set(key, view);
 
-      newlyUsedView = true;
+      // newlyUsedView = true;
     } else {
       // View already assigned to item
       if (!view.nr.used) {
         view.nr.used = true;
-        newlyUsedView = true;
+        // newlyUsedView = true;
         if (unusedPool) {
           const index = unusedPool.indexOf(view);
           if (index !== -1) unusedPool.splice(index, 1);
@@ -588,6 +590,7 @@ const handleScroll = () => {
 
 defineExpose({
   scrollToItem,
+  _updateVisibleItems,
 });
 </script>
 

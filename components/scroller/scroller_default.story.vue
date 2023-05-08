@@ -12,6 +12,10 @@
       Go to end
     </button>
 
+    <button @click="addItemTop">
+      Add 10 items top
+    </button>
+
     <br>
     <br>
     <button
@@ -71,9 +75,21 @@ function addItem () {
   });
 }
 
+function addItemTop () {
+  const aux = items.value.length;
+  for (let i = 1; i <= 10; i++) {
+    items.value.unshift({
+      id: aux + i,
+      name: `User ${aux + i}`,
+    });
+  }
+  scroller.value.scrollToItem(10);
+  scroller.value.updateItems();
+}
+
 function switchAutoScrolling () {
   autoScrolling.value = !autoScrolling.value;
-  scroller.value.scrollToItem(items.value.length);
+  scroller.value.scrollToItem(items.value.length - 1);
 
   clearInterval(intervalId);
   intervalId = setInterval(function () {
@@ -81,9 +97,10 @@ function switchAutoScrolling () {
     addItem();
     nextTick(() => {
       if (userPosition.value === 'bottom') {
-        scroller.value.scrollToItem(items.value.length);
+        scroller.value.scrollToItem(items.value.length - 1);
       }
     });
+    scroller.value.updateItemsFromBottom();
   }, 1000);
 }
 </script>

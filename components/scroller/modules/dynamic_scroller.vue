@@ -241,6 +241,29 @@ export default {
       const scroller = this.$refs.scroller;
       if (scroller) scroller.scrollToItem(index);
     },
+
+    scrollToBottom () {
+      if (this.$_scrollingToBottom) return;
+      this.$_scrollingToBottom = true;
+      const el = this.$el;
+      // Item is inserted to the DOM
+      this.$nextTick(() => {
+        el.scrollTop = el.scrollHeight + 5000;
+        // Item sizes are computed
+        const cb = () => {
+          el.scrollTop = el.scrollHeight + 5000;
+          requestAnimationFrame(() => {
+            el.scrollTop = el.scrollHeight + 5000;
+            if (this.$_undefinedSizes === 0) {
+              this.$_scrollingToBottom = false;
+            } else {
+              requestAnimationFrame(cb);
+            }
+          });
+        };
+        requestAnimationFrame(cb);
+      });
+    },
   },
 };
 </script>

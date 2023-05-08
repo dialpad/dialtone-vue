@@ -157,8 +157,20 @@ watch(props, () => {
   validateProps();
 }, { deep: true, immediate: true });
 
+function scrollToBottom () {
+  if (scroller.value) scroller.value.scrollToBottom();
+}
+
 function scrollToItem (index) {
   if (scroller.value) scroller.value.scrollToItem(index);
+}
+
+function updateItems () {
+  if (scroller.value) scroller.value._updateVisibleItems(true);
+}
+
+function updateItemsFromBottom () {
+  if (scroller.value) scroller.value._updateVisibleItems(false, true);
 }
 
 function validateProps () {
@@ -172,6 +184,9 @@ function validateProps () {
 }
 
 defineExpose({
+  scrollToBottom,
   scrollToItem,
+  updateItems,
+  updateItemsFromBottom,
 });
 </script>
