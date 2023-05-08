@@ -1,5 +1,5 @@
 import DtScroller from './scroller.vue';
-import ScrollerDefault from './scroller_default.story';
+import ScrollerDefault from './scroller_default.story.vue';
 import ScrollerDynamic from './scroller_dynamic.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
@@ -13,6 +13,7 @@ export const argsData = {
   scrollerHeight: 200,
   onScrollStart: action('scroll-start'),
   onScrollEnd: action('scroll-end'),
+  onUserPosition: action('user-position'),
 };
 
 export const argTypesData = {

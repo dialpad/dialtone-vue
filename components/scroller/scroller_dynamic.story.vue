@@ -22,7 +22,7 @@
       :scroller-width="500"
       class="scroller"
       :dynamic="true"
-      @user-position="$attrs.onUserPosition($event); userPosition = $event"
+      @user-position="userPosition = $event"
     >
       <template #default="{ item }">
         <div class="avatar">
