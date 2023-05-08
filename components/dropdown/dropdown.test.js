@@ -1,13 +1,11 @@
 import { config, mount } from '@vue/test-utils';
 import DtDropdown from './dropdown.vue';
-import axe from 'axe-core';
-import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 import {
   itBehavesLikeVisuallyHiddenCloseButtonExists,
   itBehavesLikeVisuallyHiddenCloseLabelIsNull,
 } from '@/tests/shared_examples/sr_only_close_button';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
-import SrOnlyCloseButton from '@/common/sr_only_close_button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 // Constants
 const baseProps = {
@@ -73,8 +71,8 @@ describe('DtDropdown Tests', () => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
     config.global.renderStubDefaultSlot = true;
-    global.requestAnimationFrame = jest.fn();
-    global.cancelAnimationFrame = jest.fn();
+    global.requestAnimationFrame = vi.fn();
+    global.cancelAnimationFrame = vi.fn();
   });
 
   afterAll(() => {
@@ -173,22 +171,13 @@ describe('DtDropdown Tests', () => {
       it('aria-expanded should be "true"', () => {
         expect(anchorElement.attributes('aria-expanded') === 'true').toBe(true);
       });
-
-      it('should pass axe-core accessibility rules', async () => {
-        const a11yResults = await axe.run(wrapper.element, configA11y);
-        const violations = a11yResults.violations;
-        if (violations.length) {
-          console.log('axe-core accessibility violations:', violations);
-        }
-        expect(violations.length).toEqual(0);
-      });
     });
   });
 
   describe('Interactivity Tests', () => {
     // Test setup
     beforeEach(() => {
-      highlightStub = jest.fn();
+      highlightStub = vi.fn();
       attrs = { onHighlight: highlightStub };
       _setWrappers();
     });
@@ -205,7 +194,7 @@ describe('DtDropdown Tests', () => {
       );
       it(
         'should emit highlight event',
-        () => { expect(wrapper.emitted().highlight.length).toEqual(1); },
+        () => { expect(wrapper.emitted().highlight.length).toBe(1); },
       );
     });
 
@@ -217,7 +206,7 @@ describe('DtDropdown Tests', () => {
 
       it(
         'should reset the highlightIndex',
-        () => { expect(wrapper.vm.highlightIndex).toEqual(-1); },
+        () => { expect(wrapper.vm.highlightIndex).toBe(-1); },
       );
     });
 

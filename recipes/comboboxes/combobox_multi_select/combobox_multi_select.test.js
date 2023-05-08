@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { flushPromises } from '@/common/utils';
-import DtPopover from '@/components/popover/popover';
+import DtPopover from '@/components/popover/popover.vue';
 import { itBehavesLikeDoesNotHaveClass } from '@/tests/shared_examples/classes';
 import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
 import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
@@ -53,8 +53,8 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
   beforeAll(() => {
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
-    global.requestAnimationFrame = jest.fn();
-    global.cancelAnimationFrame = jest.fn();
+    global.requestAnimationFrame = vi.fn();
+    global.cancelAnimationFrame = vi.fn();
   });
   beforeEach(() => {
     _setWrappers();
@@ -128,7 +128,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       });
 
       it('should be two chip components', () => {
-        expect(chips.length).toEqual(2);
+        expect(chips.length).toBe(2);
       });
     });
 
@@ -269,7 +269,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       () => {
         const chip = chips.at(0);
         chip.trigger('keyup', { code: 'delete' });
-        expect(wrapper.emitted().remove[0][0]).toEqual('1');
+        expect(wrapper.emitted().remove[0][0]).toBe('1');
         expect(document.activeElement).toBe(input.element);
       },
     );

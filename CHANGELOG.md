@@ -1,3 +1,30 @@
+## [3.65.2](https://github.com/dialpad/dialtone-vue/compare/v3.65.1...v3.65.2) (2023-05-05)
+
+
+### Bug Fixes
+
+* add missing plugin to vite config ([d15347a](https://github.com/dialpad/dialtone-vue/commit/d15347a23b5fb67c05b8f1f717ccc105d38ee1c5))
+
+## [3.65.1](https://github.com/dialpad/dialtone-vue/compare/v3.65.0...v3.65.1) (2023-05-05)
+
+
+### Bug Fixes
+
+* storybook-static references ([8340caa](https://github.com/dialpad/dialtone-vue/commit/8340caae47c52d598a2b921b6d435c77004d65ec))
+
+# [3.65.0](https://github.com/dialpad/dialtone-vue/compare/v3.64.1...v3.65.0) (2023-05-05)
+
+
+### Bug Fixes
+
+* add tests for feed row - vue3 ([#957](https://github.com/dialpad/dialtone-vue/issues/957)) ([54d2a8e](https://github.com/dialpad/dialtone-vue/commit/54d2a8e89ffd04b898cb7112ae8ddfea1b79f175))
+* **Header:** use smaller icon size for settings menu button ([#960](https://github.com/dialpad/dialtone-vue/issues/960)) ([ff0caec](https://github.com/dialpad/dialtone-vue/commit/ff0caec67f724d8fd21df6f7c5e7a73014e3c8a6))
+
+
+### Features
+
+* update to vite and storybook 7 ([#961](https://github.com/dialpad/dialtone-vue/issues/961)) ([9a19a84](https://github.com/dialpad/dialtone-vue/commit/9a19a84b12821b3872cbe785282c974f4e964e16))
+
 ## [3.64.1](https://github.com/dialpad/dialtone-vue/compare/v3.64.0...v3.64.1) (2023-05-02)
 
 

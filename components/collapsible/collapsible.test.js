@@ -1,7 +1,5 @@
 import { config, mount } from '@vue/test-utils';
 import DtCollapsible from './collapsible.vue';
-import axe from 'axe-core';
-import configA11y from '../../storybook/scripts/storybook-a11y-test.config';
 
 const content = '<div data-qa="content-element"> Test Text </div>';
 const baseProps = {
@@ -47,8 +45,8 @@ describe('DtCollapsible Tests', () => {
   };
 
   beforeAll(() => {
-    global.requestAnimationFrame = jest.fn();
-    global.cancelAnimationFrame = jest.fn();
+    global.requestAnimationFrame = vi.fn();
+    global.cancelAnimationFrame = vi.fn();
     config.global.renderStubDefaultSlot = true;
   });
 
@@ -149,7 +147,7 @@ describe('DtCollapsible Tests', () => {
     let consoleErrorSpy;
 
     beforeEach(async () => {
-      consoleErrorSpy = jest.spyOn(console, 'error').mockClear();
+      consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
       props = { ...baseProps, anchorText: undefined };
       _mountWrapper();
     });
@@ -170,25 +168,16 @@ describe('DtCollapsible Tests', () => {
         await wrapper.setProps({ open: true, id: 'contentId' });
       });
 
-      it('should pass axe-core accessibility rules', async () => {
-        const a11yResults = await axe.run(wrapper.element, configA11y);
-        const violations = a11yResults.violations;
-        if (violations.length) {
-          console.log('axe-core accessibility violations:', violations);
-        }
-        expect(violations.length).toEqual(0);
-      });
-
       it(
         'aria-controls on anchor should be set to the id of the contentWrapper',
         () => {
-          expect(anchorElement.attributes('aria-controls')).toEqual('contentId');
-          expect(contentWrapperElement.attributes('id')).toEqual('contentId');
+          expect(anchorElement.attributes('aria-controls')).toBe('contentId');
+          expect(contentWrapperElement.attributes('id')).toBe('contentId');
         },
       );
 
       it('aria-expanded should be true', () => {
-        expect(anchorElement.attributes('aria-expanded')).toEqual('true');
+        expect(anchorElement.attributes('aria-expanded')).toBe('true');
       });
     });
 
@@ -198,7 +187,7 @@ describe('DtCollapsible Tests', () => {
       });
 
       it('aria-expanded should be "false"', () => {
-        expect(anchorElement.attributes('aria-expanded')).toEqual('false');
+        expect(anchorElement.attributes('aria-expanded')).toBe('false');
       });
     });
   });

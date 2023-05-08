@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtCombobox from './combobox.vue';
-import DtInput from '@/components/input/input';
+import DtInput from '@/components/input/input.vue';
 
 // Constants
 const baseProps = {
@@ -56,10 +56,10 @@ describe('DtCombobox Tests', () => {
   // Test Setup
   beforeEach(() => {
     props = baseProps;
-    selectStub = jest.fn();
-    escapeStub = jest.fn();
-    highlightStub = jest.fn();
-    openedStub = jest.fn();
+    selectStub = vi.fn();
+    escapeStub = vi.fn();
+    highlightStub = vi.fn();
+    openedStub = vi.fn();
     attrs = { onSelect: selectStub, onEscape: escapeStub, onHighlight: highlightStub, onOpened: openedStub };
     _mountWrapper();
     _setChildWrappers();
@@ -237,13 +237,14 @@ describe('DtCombobox Tests', () => {
 
       describe('When "Esc" key is pressed', () => {
         beforeEach(async () => {
+          console.log(wrapper.html());
           await wrapper.trigger('keydown.esc');
         });
 
         it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
         it(
           'should emit escape event',
-          () => { expect(wrapper.emitted().escape.length).toEqual(1); },
+          () => { expect(wrapper.emitted().escape.length).toBe(1); },
         );
       });
 
@@ -258,7 +259,7 @@ describe('DtCombobox Tests', () => {
         );
         it(
           'should not emit select event',
-          () => { expect(wrapper.emitted().select).not.toBeDefined(); },
+          () => { expect(wrapper.emitted().select).toBeUndefined(); },
         );
       });
 
@@ -273,7 +274,7 @@ describe('DtCombobox Tests', () => {
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(1); },
+          () => { expect(wrapper.emitted().highlight.length).toBe(1); },
         );
       });
 
@@ -288,7 +289,7 @@ describe('DtCombobox Tests', () => {
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(1); },
+          () => { expect(wrapper.emitted().highlight.length).toBe(1); },
         );
       });
 
@@ -303,7 +304,7 @@ describe('DtCombobox Tests', () => {
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(1); },
+          () => { expect(wrapper.emitted().highlight.length).toBe(1); },
         );
       });
 
@@ -318,7 +319,7 @@ describe('DtCombobox Tests', () => {
         );
         it(
           'should emit highlight event',
-          () => { expect(wrapper.emitted().highlight.length).toEqual(1); },
+          () => { expect(wrapper.emitted().highlight.length).toBe(1); },
         );
       });
     });
@@ -337,7 +338,7 @@ describe('DtCombobox Tests', () => {
         it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
         it(
           'should emit escape event',
-          () => { expect(wrapper.emitted().escape.length).toEqual(1); },
+          () => { expect(wrapper.emitted().escape.length).toBe(1); },
         );
       });
 
@@ -352,7 +353,7 @@ describe('DtCombobox Tests', () => {
         );
         it(
           'should not emit select event',
-          () => { expect(wrapper.emitted().select).not.toBeDefined(); },
+          () => { expect(wrapper.emitted().select).toBeUndefined(); },
         );
       });
 
@@ -367,7 +368,7 @@ describe('DtCombobox Tests', () => {
         );
         it(
           'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
+          () => { expect(wrapper.emitted().highlight).toBeUndefined(); },
         );
       });
 
@@ -382,7 +383,7 @@ describe('DtCombobox Tests', () => {
         );
         it(
           'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
+          () => { expect(wrapper.emitted().highlight).toBeUndefined(); },
         );
       });
 
@@ -397,7 +398,7 @@ describe('DtCombobox Tests', () => {
         );
         it(
           'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
+          () => { expect(wrapper.emitted().highlight).toBeUndefined(); },
         );
       });
 
@@ -412,7 +413,7 @@ describe('DtCombobox Tests', () => {
         );
         it(
           'should not emit highlight event',
-          () => { expect(wrapper.emitted().highlight).not.toBeDefined(); },
+          () => { expect(wrapper.emitted().highlight).toBeUndefined(); },
         );
       });
     });
@@ -426,7 +427,7 @@ describe('DtCombobox Tests', () => {
       it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
       it(
         'should emit open event',
-        () => { expect(wrapper.emitted().opened.length).toEqual(2); },
+        () => { expect(wrapper.emitted().opened.length).toBe(2); },
       );
     });
 
@@ -438,7 +439,7 @@ describe('DtCombobox Tests', () => {
       it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
       it(
         'should emit open event',
-        () => { expect(wrapper.emitted().opened.length).toEqual(1); },
+        () => { expect(wrapper.emitted().opened.length).toBe(1); },
       );
     });
 
@@ -454,7 +455,7 @@ describe('DtCombobox Tests', () => {
       );
       it(
         'should not emit select event',
-        () => { expect(wrapper.emitted().select).not.toBeDefined(); },
+        () => { expect(wrapper.emitted().select).toBeUndefined(); },
       );
     });
 
@@ -467,7 +468,7 @@ describe('DtCombobox Tests', () => {
       it('should call listener', () => { expect(selectStub).toHaveBeenCalled(); });
       it(
         'should emit select event',
-        () => { expect(wrapper.emitted().select.length).toEqual(1); },
+        () => { expect(wrapper.emitted().select.length).toBe(1); },
       );
     });
 
@@ -483,7 +484,7 @@ describe('DtCombobox Tests', () => {
       );
       it(
         'should not emit select event',
-        () => { expect(wrapper.emitted().select).not.toBeDefined(); },
+        () => { expect(wrapper.emitted().select).toBeUndefined(); },
       );
     });
 
@@ -495,7 +496,7 @@ describe('DtCombobox Tests', () => {
       it('should call listener', () => { expect(escapeStub).toHaveBeenCalled(); });
       it(
         'should emit escape event',
-        () => { expect(wrapper.emitted().escape.length).toEqual(1); },
+        () => { expect(wrapper.emitted().escape.length).toBe(1); },
       );
     });
 
@@ -511,7 +512,7 @@ describe('DtCombobox Tests', () => {
       );
       it(
         'should emit highlight event',
-        () => { expect(wrapper.emitted().highlight.length).toEqual(1); },
+        () => { expect(wrapper.emitted().highlight.length).toBe(1); },
       );
     });
 
@@ -523,7 +524,7 @@ describe('DtCombobox Tests', () => {
 
       it(
         'should reset the highlightIndex',
-        () => { expect(wrapper.vm.highlightIndex).toEqual(-1); },
+        () => { expect(wrapper.vm.highlightIndex).toBe(-1); },
       );
     });
 
@@ -535,7 +536,7 @@ describe('DtCombobox Tests', () => {
 
       it(
         'should reset the highlightIndex',
-        () => { expect(wrapper.vm.highlightIndex).toEqual(-1); },
+        () => { expect(wrapper.vm.highlightIndex).toBe(-1); },
       );
     });
   });

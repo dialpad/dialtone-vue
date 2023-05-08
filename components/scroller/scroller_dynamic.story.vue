@@ -46,7 +46,7 @@
 import DtScroller from './scroller.vue';
 import { nextTick, ref } from 'vue';
 
-const defaultAvatar = require('./person.png');
+import defaultAvatar from './person.png';
 
 /* eslint-disable max-len */
 const messages = [

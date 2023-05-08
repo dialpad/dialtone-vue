@@ -5,6 +5,17 @@ import ScrollerDynamic from '@/components/scroller/scroller_dynamic.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
 
+// Default Prop Values
+export const argsData = {
+  listTag: 'div',
+  itemTag: 'div',
+  itemSize: 32,
+  scrollerWidth: 300,
+  scrollerHeight: 200,
+  onScrollStart: action('scroll-start'),
+  onScrollEnd: action('scroll-end'),
+};
+
 export const argTypesData = {
   default: {
     control: { type: null },
@@ -96,31 +107,23 @@ export const argsData = {
 export default {
   title: 'Components/Scroller',
   component: DtScroller,
-  parameters: {
-    docs: {
-      page: BaseScrollerMdx,
-    },
-    controls: {
-      sort: 'requiredFirst',
-    },
-    options: {
-      showPanel: true,
-    },
-  },
   argTypes: argTypesData,
   args: argsData,
   excludeStories: /.*Data$/,
 };
 
-const Template = (args) => createTemplateFromVueFile(args, ScrollerDefault);
+const DefaultTemplate = (args) => createTemplateFromVueFile(args, ScrollerDefault);
 
-export const Default = Template.bind({});
-Default.args = {
-  default: 'Scroller',
+export const Default = {
+  render: DefaultTemplate,
+  args: {
+    default: 'Scroller',
+  },
 };
 
 const DynamicTemplate = (args) => createTemplateFromVueFile(args, ScrollerDynamic);
 
-export const Dynamic = DynamicTemplate.bind({});
-Dynamic.parameters = { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } };
-Dynamic.args = {};
+export const Dynamic = {
+  render: DynamicTemplate,
+  parameters: { controls: { disable: true }, actions: { disable: true }, options: { showPanel: false } },
+};

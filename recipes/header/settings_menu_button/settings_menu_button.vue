@@ -12,7 +12,7 @@
     <template #icon>
       <dt-icon
         name="more-vertical"
-        size="400"
+        size="300"
         class="d-fc-blue-500"
       />
     </template>
@@ -28,14 +28,14 @@
     <template #icon>
       <dt-icon
         name="more-vertical"
-        size="400"
+        size="300"
       />
     </template>
   </dt-button>
 </template>
 
 <script>
-import DtButton from '@/components/button/button';
+import DtButton from '@/components/button/button.vue';
 import { DtIcon } from '@/components/icon';
 
 export default {
