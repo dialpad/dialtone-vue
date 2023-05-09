@@ -50,10 +50,6 @@
     "yaml.schemas": {
       "https://json.schemastore.org/github-workflow.json": "file:///.github/workflows/deploy.yml"
     },
-    "jest.autoRun": {
-      "watch": false,
-      "onSave": "test-file"
-    },
   },
   "launch": {
     "version": "0.2.0",
