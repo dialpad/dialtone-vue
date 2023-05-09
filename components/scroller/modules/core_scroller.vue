@@ -551,18 +551,6 @@ const _scrollToPosition = (position) => {
   viewport[scrollDirection] = position;
 };
 
-const _getScrollPosition = (container) => {
-  const { scrollTop, clientHeight, scrollHeight } = container;
-
-  if (scrollTop === 0) {
-    return 'top';
-  } else if (scrollTop + clientHeight === scrollHeight) {
-    return 'bottom';
-  } else {
-    return 'middle';
-  }
-};
-
 const scrollToItem = (index) => {
   let scroll;
   if (props.itemSize === null) {
@@ -576,11 +564,21 @@ const scrollToItem = (index) => {
 const handleScroll = () => {
   const container = scroller.value;
 
-  const scrollPosition = _getScrollPosition(container);
+  if (userPosition.value !== 'middle') {
+    userPosition.value = 'middle';
+    emit('user-position', 'middle');
+  }
 
-  if (userPosition.value !== scrollPosition) {
-    userPosition.value = scrollPosition;
-    emit('user-position', scrollPosition);
+  // Check if the scroll is at the top of the container
+  if (container.scrollTop === 0) {
+    userPosition.value = 'top';
+    emit('user-position', 'top');
+  }
+
+  // Check if the scroll is at the bottom of the container
+  if (container.scrollTop + container.clientHeight === container.scrollHeight) {
+    userPosition.value = 'bottom';
+    emit('user-position', 'bottom');
   }
 
   if (!scrollDirty) {

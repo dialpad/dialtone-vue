@@ -70,6 +70,8 @@ describe('DtScroller Tests', function () {
   describe('Interactivity Tests', function () {
     describe('Should emit', function () {
       it('`top` event when scroll reach the top of the component', function () {
+        defaultContent.element.scrollTop = 25;
+        wrapper.trigger('scroll');
         defaultContent.element.scrollTop = 0;
         wrapper.trigger('scroll');
 
