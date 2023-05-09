@@ -1,0 +1,46 @@
+import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import DtRecipeEmojiRow from './emoji_row.vue';
+
+# Emoji Row
+
+<Subtitle>
+  Display a number of emojis in a row
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+Pass in an array of emojis with the following formatMessages
+//format
+
+<Canvas>
+  <Story id="recipes-conversation-view-emoji-row--default" />
+</Canvas>
+
+## Slots, Props & Events
+
+<ArgsTable story={PRIMARY_STORY} />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeEmojiRow } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```vue
+<dt-recipe-emoji-row
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```vue
+<dt-recipe-emoji-row
+  some-other="variant"
+/>
+```
