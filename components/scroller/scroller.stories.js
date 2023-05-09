@@ -92,6 +92,12 @@ export const argTypesData = {
     },
   },
 
+  onUserPosition: {
+    table: {
+      disable: true,
+    },
+  },
+
   'user-position': {
     description: 'Emit the last user position.',
     table: {

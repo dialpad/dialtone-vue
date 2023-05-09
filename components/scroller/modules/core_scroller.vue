@@ -158,13 +158,14 @@ const props = defineProps({
 const emit = defineEmits(['user-position']);
 
 const views = reactive(new Map());
-const reactiveItems = reactive(props.items);
+// const reactiveItems = reactive(props.items);
 const unusedViews = reactive(new Map());
 const updateTimeout = null;
 const pool = ref([]);
 const hoverKey = ref(null);
 const ready = ref(false);
 const scroller = ref(null);
+const userPosition = ref('top');
 
 let startIndex = 0;
 let endIndex = 0;
@@ -550,6 +551,18 @@ const _scrollToPosition = (position) => {
   viewport[scrollDirection] = position;
 };
 
+const _getScrollPosition = (container) => {
+  const { scrollTop, clientHeight, scrollHeight } = container;
+
+  if (scrollTop === 0) {
+    return 'top';
+  } else if (scrollTop + clientHeight === scrollHeight) {
+    return 'bottom';
+  } else {
+    return 'middle';
+  }
+};
+
 const scrollToItem = (index) => {
   let scroll;
   if (props.itemSize === null) {
@@ -563,16 +576,11 @@ const scrollToItem = (index) => {
 const handleScroll = () => {
   const container = scroller.value;
 
-  emit('user-position', 'middle');
+  const scrollPosition = _getScrollPosition(container);
 
-  // Check if the scroll is at the top of the container
-  if (container.scrollTop === 0) {
-    emit('user-position', 'top');
-  }
-
-  // Check if the scroll is at the bottom of the container
-  if (container.scrollTop + container.clientHeight === container.scrollHeight) {
-    emit('user-position', 'bottom');
+  if (userPosition.value !== scrollPosition) {
+    userPosition.value = scrollPosition;
+    emit('user-position', scrollPosition);
   }
 
   if (!scrollDirty) {
