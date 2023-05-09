@@ -1,5 +1,8 @@
-import { Canvas, Story, Subtitle, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
-import DtRecipeEmojiRow from './emoji_row.vue';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as EmojiRowStories from './emoji_row.stories';
+
+<Meta of={EmojiRowStories}/>
 
 # Emoji Row
 
@@ -14,12 +17,12 @@ Pass in an array of emojis with the following formatMessages
 //format
 
 <Canvas>
-  <Story id="recipes-conversation-view-emoji-row--default" />
+  <Story of={EmojiRowStories.Default} />
 </Canvas>
 
 ## Slots, Props & Events
 
-<ArgsTable story={PRIMARY_STORY} />
+<Controls />
 
 ## Usage
 

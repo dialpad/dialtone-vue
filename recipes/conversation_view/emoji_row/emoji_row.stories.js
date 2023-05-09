@@ -65,29 +65,32 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 );
 
 // Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  reactions: [
-    {
-      emojiUnicodeOrShortname: '😀',
-      isSelected: true,
-      ariaLabel: 'Emoji aria label',
-      tooltip: 'You reacted with 😀',
-      num: 1,
-    },
-    {
-      emojiUnicodeOrShortname: '😒',
-      isSelected: false,
-      ariaLabel: 'Emoji aria label',
-      tooltip: 'You reacted with 😒',
-      num: 1,
-    },
-    {
-      emojiUnicodeOrShortname: '🙃',
-      isSelected: false,
-      ariaLabel: 'Emoji aria label',
-      tooltip: 'You reacted with 🙃',
-      num: 99,
-    },
-  ],
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    reactions: [
+      {
+        emojiUnicodeOrShortname: '😀',
+        isSelected: true,
+        ariaLabel: 'Emoji aria label',
+        tooltip: 'You reacted with 😀',
+        num: 1,
+      },
+      {
+        emojiUnicodeOrShortname: '😒',
+        isSelected: false,
+        ariaLabel: 'Emoji aria label',
+        tooltip: 'You reacted with 😒',
+        num: 1,
+      },
+      {
+        emojiUnicodeOrShortname: '🙃',
+        isSelected: false,
+        ariaLabel: 'Emoji aria label',
+        tooltip: 'You reacted with 🙃',
+        num: 99,
+      },
+    ],
+  },
 };
