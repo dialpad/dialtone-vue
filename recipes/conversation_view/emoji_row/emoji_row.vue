@@ -67,6 +67,9 @@ export default {
   // inheritAttrs: false,
 
   props: {
+    /**
+     * Provide an array of reaction objects to be shown.
+     */
     reactions: {
       type: Array,
       default: () => [],

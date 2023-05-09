@@ -12,14 +12,16 @@ export const argsData = {
 export const argTypesData = {
   // Props
   reactions: {
-    description: 'Array of reactions to be displayed. Expects an object with these attributes: ' +
-    ' emojiUnicodeOrShortname,' +
-    ' isSelected,' +
-    ' ariaLabel,' +
-    ' tooltip,' +
-    ' num',
-    control: {
-      type: 'object',
+    table: {
+      type: {
+        detail: `[{
+          "emojiUnicodeOrShortname": string,
+          "isSelected": boolean,
+          "ariaLabel": string,
+          "tooltip": string,
+          "num": number,
+        }]`,
+      },
     },
   },
 

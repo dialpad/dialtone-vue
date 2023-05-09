@@ -12,9 +12,7 @@ import * as EmojiRowStories from './emoji_row.stories';
 
 ## Base Style
 
-Some description of how to use the base component, potential gotchas and limitations.
-Pass in an array of emojis with the following formatMessages
-//format
+Pass in an array of reactions to be shown
 
 <Canvas>
   <Story of={EmojiRowStories.Default} />
@@ -36,14 +34,14 @@ import { DtRecipeEmojiRow } from '@dialpad/dialtone-vue';
 
 ```vue
 <dt-recipe-emoji-row
-  some="variant"
-/>
-```
-
-### With Some Other Variant
-
-```vue
-<dt-recipe-emoji-row
-  some-other="variant"
+  :reactions="[
+    {
+      emojiUnicodeOrShortname: '🙃',
+      isSelected: false,
+      ariaLabel: 'Emoji aria label',
+      tooltip: 'You reacted with 🙃',
+      num: 99,
+    },
+  ]"
 />
 ```
