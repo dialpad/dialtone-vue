@@ -69,17 +69,25 @@ describe('DtScroller Tests', function () {
 
   describe('Interactivity Tests', function () {
     describe('Should emit', function () {
-      it('`scroll-start` event immediately the component renders', function () {
+      it('`top` event when scroll reach the top of the component', function () {
         defaultContent.element.scrollTop = 0;
         wrapper.trigger('scroll');
 
-        assert.isTrue(!!wrapper.emitted()['scroll-start']);
+        assert.equal(wrapper.emitted()['user-position'][1], 'top');
       });
-      it('`scroll-end` event when scroll reach the bottom of the component', function () {
+
+      it('`middle` on scroll', function () {
+        defaultContent.element.scrollTop = 25;
+        wrapper.trigger('scroll');
+
+        assert.equal(wrapper.emitted()['user-position'][0], 'middle');
+      });
+
+      it('`bottom` event when scroll reach the bottom of the component', function () {
         defaultContent.element.scrollTop = defaultContent.element.scrollHeight - defaultContent.element.clientHeight;
         wrapper.trigger('scroll');
 
-        assert.isTrue(!!wrapper.emitted()['scroll-end']);
+        assert.equal(wrapper.emitted()['user-position'][2], 'bottom');
       });
     });
 
