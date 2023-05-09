@@ -31,6 +31,7 @@ describe('DtRecipeEmojiRow Tests', function () {
   let wrapper;
   let emojiReactionButton;
   let tooltip;
+  // let anchor;
 
   // Environment
   let propsData = basePropsData;
@@ -42,6 +43,7 @@ describe('DtRecipeEmojiRow Tests', function () {
   const _setChildWrappers = () => {
     emojiReactionButton = wrapper.find('[data-qa="feed-item-reaction-button"');
     tooltip = wrapper.findComponent(DtTooltip);
+    // anchor = wrapper.find('[data-qa="dt-tooltip-anchor"');
   };
 
   const transitionStub = () => ({
@@ -129,19 +131,19 @@ describe('DtRecipeEmojiRow Tests', function () {
      */
 
     describe('Click Emoji button event', async function () {
-      it('Should emit an input event', async () => {
+      it('Should emit a emoji clicked event', async () => {
         await emojiReactionButton.trigger('click');
         itBehavesLikeEmitsExpectedEvent(wrapper, 'emojiClicked', testEmojiObj.emojiUnicodeOrShortname);
       });
     });
 
-    // Can't get this test to pass - tried using trigger 'mouseenter' and 'focusin'
+    // // Can't get this test to pass - tried using trigger 'mouseenter' and 'focusin'
     // describe('Hover Emoji button event', async function () {
     //   beforeEach((async () => {
-    //     await emojiReactionButton.trigger('focusin');
+    //     await anchor.trigger('mouseenter');
     //   }))
 
-    //   it('Should emit an input event', async () => {
+    //   it('Should emit a hovered event', async () => {
     //     itBehavesLikeEmitsExpectedEvent(wrapper, 'emojiHovered', {
     //       reaction: testEmojiObj.emojiUnicodeOrShortname,
     //       state: true
