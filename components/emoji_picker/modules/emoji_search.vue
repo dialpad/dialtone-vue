@@ -1,6 +1,7 @@
 <template>
   <div class="d-emoji-picker__search d-emoji-picker__alignment">
     <dt-input
+      ref="searchInput"
       :placeholder="searchPlaceholderLabel"
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
@@ -28,6 +29,7 @@
 <script setup>
 import DtInput from '@/components/input/input.vue';
 import DtIcon from '@/components/icon/icon.vue';
+import { onMounted, ref } from 'vue';
 
 defineEmits(['update:modelValue']);
 defineProps({
@@ -39,6 +41,12 @@ defineProps({
     type: String,
     default: '',
   },
+});
+
+const searchInput = ref('searchInput');
+
+onMounted(() => {
+  searchInput.value.focus();
 });
 </script>
 
