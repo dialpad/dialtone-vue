@@ -22,7 +22,7 @@
             :class="[
               'd-h24 d-bar16 d-py0 d-fs-200 d-mb0 d-t',
               !!reaction.isSelected
-                ? `d-fc-purple-400 d-bgc-purple-400 d-bgo10 d-bc-purple-400 d-bco50 ' +
+                ? `d-fc-purple-500 d-bgc-purple-400 d-bgo10 d-bc-purple-400 d-bco50 ' +
                   'h:d-bgc-purple-400 h:d-bco25 a:d-bgc-purple-400 a:d-bco25`
                 : 'd-fc-black-600 d-bgc-black-100 h:d-bgc-white h:d-bc-black-600 a:d-bgc-white a:d-bc-black-600',
             ]"
@@ -68,22 +68,11 @@ export default {
       type: Array,
       default: () => [],
       validator: (reactions) => {
-        let validInput = true;
-        if (!Array.isArray(reactions)) {
-          return false;
+        for (const reaction of reactions) {
+          const validInput = REACTIONS_ATTRIBUTES.every((attribute) => reaction[attribute] !== undefined ?? false);
+          if (!validInput) return false;
         }
-        for (let i = 0; i < reactions.length; i++) {
-          const reaction = reactions[i];
-          REACTIONS_ATTRIBUTES.forEach((attribute) => {
-            if (reaction[attribute] === undefined || reaction[attribute] === null) {
-              validInput = false;
-            }
-          });
-          if (!validInput) {
-            break;
-          }
-        }
-        return validInput;
+        return true;
       },
     },
   },
@@ -93,21 +82,13 @@ export default {
     'emojiHovered',
   ],
 
-  data () {
-    return {};
-  },
-
-  computed: {},
-
-  watch: {},
-
   methods: {
     emojiClicked (reaction) {
-      this.$emit('emojiClicked', reaction.emojiUnicodeOrShortname);
+      this.$emit('emoji-clicked', reaction.emojiUnicodeOrShortname);
     },
 
     emojiHovered (reaction, state) {
-      this.$emit('emojiHovered', {
+      this.$emit('emoji-hovered', {
         reaction: reaction.emojiUnicodeOrShortname,
         state,
       });

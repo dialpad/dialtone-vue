@@ -133,7 +133,7 @@ describe('DtRecipeEmojiRow Tests', function () {
     describe('Click Emoji button event', async function () {
       it('Should emit a emoji clicked event', async () => {
         await emojiReactionButton.trigger('click');
-        itBehavesLikeEmitsExpectedEvent(wrapper, 'emojiClicked', testEmojiObj.emojiUnicodeOrShortname);
+        itBehavesLikeEmitsExpectedEvent(wrapper, 'emoji-clicked', testEmojiObj.emojiUnicodeOrShortname);
       });
     });
 
@@ -166,12 +166,6 @@ describe('DtRecipeEmojiRow Tests', function () {
       });
       describe('Empty array', () => {
         itBehavesLikePassesCustomPropValidation(prop, []);
-      });
-      describe('Reaction not in an array', () => {
-        itBehavesLikeFailsCustomPropValidation(prop, testEmojiObj);
-      });
-      describe('Reaction is not provided', () => {
-        itBehavesLikeFailsCustomPropValidation(prop, undefined);
       });
       describe('Reaction with missing attributes', () => {
         itBehavesLikeFailsCustomPropValidation(prop, [{}]);

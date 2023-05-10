@@ -5,8 +5,8 @@ import DtRecipeEmojiRowDefaultTemplate from './emoji_row_default.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  onEmojiClicked: action('emojiClicked'),
-  onEmojiHovered: action('emojiHovered'),
+  onEmojiClicked: action('emoji-clicked'),
+  onEmojiHovered: action('emoji-hovered'),
 };
 
 export const argTypesData = {
