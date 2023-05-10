@@ -11,9 +11,11 @@
         content-class="d-wmx464"
         @shown="(shown) => emojiHovered(reaction, shown)"
       >
-        <dt-emoji-text-wrapper size="200">
-          {{ reaction.tooltip }}
-        </dt-emoji-text-wrapper>
+        <span aria-hidden="true">
+          <dt-emoji-text-wrapper size="200">
+            {{ reaction.tooltip }}
+          </dt-emoji-text-wrapper>
+        </span>
         <template #anchor="{ attrs }">
           <dt-button
             importance="clear"
