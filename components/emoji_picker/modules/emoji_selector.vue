@@ -65,15 +65,18 @@
           class="d-emoji-picker__tab "
         >
           <button
-            v-for="emoji in filteredEmojis"
+            v-for="(emoji, index) in filteredEmojis"
             :key="emoji.shortname"
             type="button"
             :aria-label="emoji.name"
+            :class="{
+              'hover-emoji': (index === 0 && hoverFirstEmoji),
+            }"
             @click="$emit('selected-emoji', emoji)"
             @focusin="$emit('highlighted-emoji', emoji)"
             @focusout="$emit('highlighted-emoji', null)"
-            @mouseover="$emit('highlighted-emoji', emoji)"
-            @mouseleave="$emit('highlighted-emoji', null)"
+            @mouseover="hoverEmoji(emoji)"
+            @mouseleave="hoverEmoji(null)"
           >
             <img
               class="d-icon d-icon--size-500"
@@ -248,6 +251,11 @@ const tabs = computed(() => {
 const filteredEmojis = ref([]);
 
 /**
+ * This flag is necessary to hover
+ */
+const hoverFirstEmoji = ref(true);
+
+/**
  * The current emojis list we are displaying
  * This will be updated when the skin tone changes
  * The difference between this and the emojis list is that this one will have only the skin tone applied
@@ -297,6 +305,9 @@ watch(() => props.recentlyUsedEmojis,
  */
 watch(() => props.emojiFilter, () => {
   resetScroll();
+  // If the emoji filter is empty, emit null to remove the highlighted emoji
+  // of the previous search
+  if (!props.emojiFilter) { emits('highlighted-emoji', null); }
   debouncedSearch();
 });
 
@@ -318,6 +329,11 @@ function searchByNameAndKeywords () {
     const nameIncludesSearchStr = obj.name.toLowerCase().includes(searchStr);
     const keywordsIncludeSearchStr = obj.keywords.some(keyword => keyword.toLowerCase().includes(searchStr));
     return nameIncludesSearchStr || keywordsIncludeSearchStr;
+  });
+  nextTick(() => {
+    if (searchStr) {
+      hoverEmoji(filteredEmojis.value[0], true);
+    }
   });
 }
 
@@ -444,6 +460,11 @@ function setTabLabelObserver () {
   });
 }
 
+function hoverEmoji (emoji, isFirst = false) {
+  hoverFirstEmoji.value = isFirst;
+  emits('highlighted-emoji', emoji);
+}
+
 onMounted(() => {
   setTabLabelObserver();
 });
@@ -519,6 +540,10 @@ onUnmounted(() => {
       outline: none;
 
       &:hover, &:active{
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      &.hover-emoji{
         background: rgba(0, 0, 0, 0.1);
       }
     }
