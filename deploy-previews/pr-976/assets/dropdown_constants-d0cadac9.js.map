@@ -1,1 +1,0 @@
-{"version":3,"file":"dropdown_constants-d0cadac9.js","sources":["../../components/dropdown/dropdown_constants.js"],"sourcesContent":["export const DROPDOWN_PADDING_CLASSES = {\n  none: undefined,\n  small: 'd-py0',\n  large: 'd-py4',\n};\n"],"names":["DROPDOWN_PADDING_CLASSES"],"mappings":"AAAY,MAACA,EAA2B,CACtC,KAAM,OACN,MAAO,QACP,MAAO,OACT"}
