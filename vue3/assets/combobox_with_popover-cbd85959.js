@@ -1,0 +1,5 @@
+import{j as o}from"./jsx-runtime-d382ce31.js";import"./chunk-PCJTTTQV-a6e058a8.js";import{M as s,a as m}from"./index-a0982da5.js";import{u as i}from"./index-927d6570.js";import"./iframe-d46a3296.js";import"../sb-preview/runtime.js";import"./_commonjsHelpers-042e6b4d.js";import"./chunk-4NMOSTKD-938b085e.js";import"./index-d475d2ea.js";import"./index-d37d4223.js";import"./index-ac12cf05.js";import"./index-356e4a49.js";const a=({children:t})=>{const n=Object.assign({div:"div"},i());return o.jsx(n.div,{"data-qa":"custom-container",style:{marginBottom:"35rem"},children:t})};function C(t={}){const{wrapper:n}=Object.assign({},i(),t.components);return n?o.jsx(n,Object.assign({},t,{children:o.jsx(e,{})})):e();function e(){const r=Object.assign({h2:"h2"},i(),t.components);return o.jsxs(o.Fragment,{children:[o.jsx(s,{title:"Visual Testing/Combobox With Popover"}),`
+`,`
+`,o.jsx(r.h2,{id:"combobox-with-popover",children:"Combobox With Popover"}),`
+`,o.jsx(a,{children:o.jsx(m,{id:"visual-testing-combobox-with-popover--default"})})]})}}export{a as CustomContainer,C as default};
+//# sourceMappingURL=combobox_with_popover-cbd85959.js.map
