@@ -1,0 +1,4 @@
+import{j as t}from"./jsx-runtime-7d9277a7.js";import"./chunk-PCJTTTQV-7888f70a.js";import{M as s,a as i}from"./index-71558b5b.js";import{u as e}from"./index-d36f0cb2.js";import"./iframe-1e641036.js";import"../sb-preview/runtime.js";import"./_commonjsHelpers-042e6b4d.js";import"./chunk-4NMOSTKD-938b085e.js";import"./index-d475d2ea.js";import"./index-d37d4223.js";import"./index-ac12cf05.js";import"./index-356e4a49.js";function w(o={}){const{wrapper:r}=Object.assign({},e(),o.components);return r?t.jsx(r,Object.assign({},o,{children:t.jsx(n,{})})):n();function n(){return t.jsxs(t.Fragment,{children:[t.jsx(s,{title:"Visual Testing/Dropdown"}),`
+`,t.jsx(i,{id:"visual-testing-dropdown--default"}),`
+`,t.jsx(i,{id:"visual-testing-dropdown--variants"})]})}}export{w as default};
+//# sourceMappingURL=dropdown-48103bd7.js.map
