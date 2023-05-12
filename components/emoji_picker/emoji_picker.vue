@@ -14,6 +14,7 @@
       <emoji-search
         v-model="searchQuery"
         :search-placeholder-label="searchPlaceholderLabel"
+        @keydown.enter="emits('selected-emoji', highlightedEmoji)"
       />
       <emoji-selector
         :emoji-filter="searchQuery"
