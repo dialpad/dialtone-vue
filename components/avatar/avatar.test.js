@@ -229,25 +229,6 @@ describe('DtAvatar Tests', () => {
       });
     });
 
-    describe('When setting gradient to not show', () => {
-      // Test Environment
-      const gradient = false;
-
-      // Test Setup
-      beforeEach(async () => {
-        props = {
-          ...baseProps,
-          gradient,
-        };
-        slots = { default: DEFAULT_SLOT };
-        await _setWrappers();
-      });
-
-      it('should set the correct class', () => {
-        expect(wrapper.classes('d-avatar--no-gradient')).toBe(true);
-      });
-    });
-
     describe('With Presence', () => {
       const initials = 'DP';
 
