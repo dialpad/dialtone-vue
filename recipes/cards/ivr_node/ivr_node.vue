@@ -212,7 +212,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-color: var(--purple-600);
-  background-color: var(--purple-600);
+  border-color: var(--dt-color-purple-600);
+  background-color: var(--dt-color-purple-600);
 }
 </style>

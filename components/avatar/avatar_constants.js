@@ -36,8 +36,8 @@ export const AVATAR_ICON_SIZES = {
 export const AVATAR_ANGLES = [45, -45, 90, -90, 135, -135, 180, -180];
 
 export const GRADIENT_COLORS = {
-  with100: ['purple-100', 'magenta-100', 'gold-100', 'blue-100'],
-  with200: ['purple-200', 'magenta-200', 'gold-200', 'blue-200'],
+  with100: ['dt-color-purple-100', 'dt-color-magenta-100', 'dt-color-gold-100', 'dt-color-blue-100'],
+  with200: ['dt-color-purple-200', 'dt-color-magenta-200', 'dt-color-gold-200', 'dt-color-blue-200'],
 };
 
 export const MAX_GRADIENT_COLORS = 3;

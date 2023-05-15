@@ -1,4 +1,6 @@
 import '../css/dialtone-globals.less';
+import '@dialpad/dialtone/lib/dist/css/dialtone.min.css';
+import '@dialpad/dialtone-tokens/dist/css/variables-light.css';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { version } from '../package.json';
 import Vue from 'vue';

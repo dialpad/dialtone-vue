@@ -490,6 +490,6 @@ export default {
 
 <style lang="less">
 .d-context-menu-list {
-  width: var(--size-850);
+  width: var(--dt-size-850);
 }
 </style>
