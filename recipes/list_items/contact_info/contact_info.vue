@@ -7,6 +7,7 @@
   >
     <template #left>
       <div
+        v-if="showAvatar"
         class="d-ps-relative"
         data-qa="contact-info-left"
       >
@@ -46,6 +47,17 @@
             >
               {{ avatar.initials }}
             </dt-avatar>
+            <dt-avatar
+              v-else
+              :size="avatarSize"
+              :seed="avatar.seed"
+              :overlay-icon="avatar.icon"
+              :overlay-text="avatar.text"
+              overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
+              :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
+            >
+              <dt-icon :name="avatarIcon" />
+            </dt-avatar>
           </div>
         </div>
         <dt-avatar
@@ -71,6 +83,14 @@
           :presence="presence"
         >
           {{ avatarInitials }}
+        </dt-avatar>
+        <dt-avatar
+          v-else
+          :size="avatarSize"
+          :seed="avatarSeed"
+          :presence="presence"
+        >
+          <dt-icon :name="avatarIcon" />
         </dt-avatar>
       </div>
     </template>
@@ -107,6 +127,7 @@
 <script>
 import DtListItem from '@/components/list_item/list_item.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
+import DtIcon from '@/components/icon/icon.vue';
 import utils from '@/common/utils';
 
 export default {
@@ -114,6 +135,7 @@ export default {
 
   components: {
     DtAvatar,
+    DtIcon,
     DtListItem,
   },
 
@@ -138,6 +160,14 @@ export default {
     role: {
       type: String,
       default: '',
+    },
+
+    /**
+     * Display avatar if `showAvatar` property is true.
+     */
+    showAvatar: {
+      type: Boolean,
+      default: true,
     },
 
     /**
@@ -167,7 +197,14 @@ export default {
     },
 
     /**
-     * Status color of user from contact.
+     * Avatar icon to display if `avatarSrc` and `avatarInitials` are empty.
+     */
+    avatarIcon: {
+      type: String,
+      default: 'user',
+    },
+
+    /**
      * The size of the avatar
      * @values xs, sm, md, lg, xl
      */

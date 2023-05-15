@@ -112,9 +112,11 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {
+    showAvatar: true,
     avatarSrc: avatarImage,
     avatarSeed: 'seed',
     avatarInitials: 'JL',
+    avatarIcon: 'user',
     avatarColor: 'base',
     avatarSize: 'lg',
     presence: 'active',
@@ -186,6 +188,7 @@ export const Variants = {
     avatarInitials: 'NW',
     avatarColor: 'orange-500',
     avatarSize: 'lg',
+    avatarIcon: 'user',
     presence: 'busy',
     onGroupContactClick: action('click: clickable group contact'),
     onMarkAsSpam: action('click: mark this contact as spam'),
