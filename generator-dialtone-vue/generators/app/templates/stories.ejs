@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import <%= componentName %> from './<%= fileName %>.vue';
-import <%= componentName %>Mdx from './<%= fileName %>.mdx';
 import <%= componentName %>DefaultTemplate from './<%= fileName %>_default.story.vue';
 import <%= componentName %>VariantsTemplate from './<%= fileName %>_variants.story.vue';
 
@@ -30,11 +29,9 @@ export const argsData = {
   <!-- @slot example slot decorator -->
 */
 export const argTypesData = {
-  // Props
+  // Props: only define things here that cannot be set by jsdoc comments on the component itself.
   some: {
-    description: 'Describes the some prop',
     table: {
-      category: 'props',
       type: {
         summary: 'string',
       },
@@ -49,7 +46,7 @@ export const argTypesData = {
     control: 'text',
     table: {
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },
@@ -60,12 +57,11 @@ export const argTypesData = {
   */
   someSlot: {
     name: 'some',
-    description: 'Slot for some',
     control: 'text',
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'VNode',
       },
     },
   },
@@ -85,11 +81,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {
-    docs: {
-      page: <%= componentName %>Mdx,
-    },
-  },
 };
 
 // Templates
@@ -98,15 +89,20 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   argTypes,
   <%= componentName %>DefaultTemplate,
 );
+
+// Stories
+export const Default = {
+  render: DefaultTemplate,
+  args: {}
+}
+
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
   <%= componentName %>VariantsTemplate,
 );
 
-// Stories
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
-
-export const Variants = VariantsTemplate.bind({});
-Variants.args = {};
+export const Variants = {
+  render: VariantsTemplate,
+  args: {}
+}
