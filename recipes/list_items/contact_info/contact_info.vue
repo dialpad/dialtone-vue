@@ -197,7 +197,7 @@ export default {
     },
 
     /**
-     * Avatar icon to display if `avatarSrc` is empty.
+     * Avatar icon to display if `avatarSrc` and `avatarInitials` are empty.
      */
     avatarIcon: {
       type: String,
