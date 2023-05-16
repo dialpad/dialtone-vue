@@ -10,6 +10,7 @@
     :overlay-class="overlayClass"
   >
     <dt-icon
+      v-show="iconSize"
       :name="defaultSlot"
       :size="iconSize"
     />
@@ -26,7 +27,7 @@ export default {
   components: { DtAvatar, DtIcon },
   computed: {
     iconSize () {
-      return AVATAR_ICON_SIZES[this.size];
+      return AVATAR_ICON_SIZES[this.size ?? 'md'];
     },
   },
 };
