@@ -128,7 +128,7 @@ export const Initials = {
 export const Icon = {
   render: IconTemplate,
   args: {
-    default: 'accessibility',
+    default: 'user',
   },
   argTypes: {
     default: {
