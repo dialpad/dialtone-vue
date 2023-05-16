@@ -20,7 +20,6 @@
             :key="index"
           >
             <dt-avatar
-              v-if="avatar.src"
               :size="avatarSize"
               :seed="avatar.seed"
               :initials="avatar.initials"
@@ -30,67 +29,41 @@
               :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
             >
               <img
+                v-if="avatar.src"
                 data-qa="dt-contact-avatar"
                 :src="avatar.src"
                 :alt="avatar.initials"
               >
-            </dt-avatar>
-            <dt-avatar
-              v-else-if="avatar.initials"
-              :size="avatarSize"
-              :seed="avatar.seed"
-              :initials="avatar.initials"
-              :overlay-icon="avatar.icon"
-              :overlay-text="avatar.text"
-              overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
-              :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
-            >
-              {{ avatar.initials }}
-            </dt-avatar>
-            <dt-avatar
-              v-else
-              :size="avatarSize"
-              :seed="avatar.seed"
-              :overlay-icon="avatar.icon"
-              :overlay-text="avatar.text"
-              overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
-              :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
-            >
-              <dt-icon :name="avatarIcon" />
+              <div v-else-if="avatar.initials">
+                {{ avatar.initials }}
+              </div>
+              <div v-else>
+                <dt-icon :name="avatarIcon" />
+              </div>
             </dt-avatar>
           </div>
         </div>
         <dt-avatar
-          v-else-if="avatarSrc"
+          v-else
           :size="avatarSize"
           :initials="avatarInitials"
           :seed="avatarSeed"
           :presence="presence"
         >
           <img
+            v-if="avatarSrc"
             data-qa="dt-contact-avatar"
             :src="avatarSrc"
             :initials="avatarInitials"
             :seed="avatarSeed"
             :alt="avatarInitials"
           >
-        </dt-avatar>
-        <dt-avatar
-          v-else-if="avatarInitials"
-          :size="avatarSize"
-          :initials="avatarInitials"
-          :seed="avatarSeed"
-          :presence="presence"
-        >
-          {{ avatarInitials }}
-        </dt-avatar>
-        <dt-avatar
-          v-else
-          :size="avatarSize"
-          :seed="avatarSeed"
-          :presence="presence"
-        >
-          <dt-icon :name="avatarIcon" />
+          <div v-else-if="avatarInitials">
+            {{ avatarInitials }}
+          </div>
+          <div v-else>
+            <dt-icon :name="avatarIcon" />
+          </div>
         </dt-avatar>
       </div>
     </template>
