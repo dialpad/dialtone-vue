@@ -108,7 +108,6 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {
-    showAvatar: true,
     avatarSrc: avatarImage,
     avatarSeed: 'seed',
     avatarInitials: 'JL',
