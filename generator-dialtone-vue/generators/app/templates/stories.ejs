@@ -1,43 +1,31 @@
-import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import <%= componentName %> from './<%= fileName %>.vue';
 import <%= componentName %>DefaultTemplate from './<%= fileName %>_default.story.vue';
 import <%= componentName %>VariantsTemplate from './<%= fileName %>_variants.story.vue';
 
-// Default Prop Values
-export const argsData = {
-  some: 'prop',
-  onEvent: action('event'),
-};
-
-/**
- * example prop description decorator
- */
-
 /*
   Controls
   ========
 
-  Here we define any custom controls or control overrides for our components.
+  Here we define any custom configuration for props / slots / events in storybook
 
-  By default storybook will attempt to provide an appropriate control of the same name for each property in the
-  component as well as include any description provided using a prop decorator within your component (see above).
+  By default storybook will display any props / slots / events from the associated component. It will also use jsdoc
+  comments on the component to populate details such as description and default value. You should only enter config
+  here if it was not possible to add into the jsdoc of the component itself.
 
-  Storybook will also attempt to provide an appropriate control for each slot in the component as well as include any
-  description provided using a slot decorator within your component (see below).
+  See https://storybook.js.org/docs/vue/api/argtypes#manual-specification
 
+  To set the description of a slot, add the below comment to the line above where the slot is defined:
   <!-- @slot example slot decorator -->
 */
+
 export const argTypesData = {
   // Props: only define things here that cannot be set by jsdoc comments on the component itself.
-  some: {
+  genericProp: {
     table: {
       type: {
-        summary: 'string',
+        summary: 'summary for test purposes',
       },
-    },
-    control: {
-      type: 'text',
     },
   },
 
@@ -52,31 +40,34 @@ export const argTypesData = {
   },
   /*
     We use the following naming scheme `<SLOT_NAME>Slot` for slot controls to prevent conflicts with props that share
-    the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
-    table and description within the controls accurately reflects the correct names of our component's props and slots.
+    the same name.
   */
-  someSlot: {
-    name: 'some',
+  namedSlot: {
     control: 'text',
     table: {
-      category: 'slots',
       type: {
         summary: 'VNode',
       },
     },
   },
 
-  // Action Event Handlers
-  onEvent: {
+  // Events: Exclude this from the table as event names will automatically be added from the component itself.
+  onGenericEvent: {
+    action: 'generic-event',
     table: {
       disable: true,
     },
   },
 };
 
+// Set default values at the story level here.
+export const argsData = {
+  namedSlot: 'This is a named slot with it\'s default set at the story level.',
+};
+
 // Story Collection
 export default {
-  title: '<%= isRecipe ? 'Recipes' : 'Components' %>/<%= category ? category + '/' : '' %><%= componentName %>',
+  title: '<%= isRecipe ? 'Recipes' : 'Components' %>/<%= category ? category + '/' : '' %><%= readableComponentName %>',
   component: <%= componentName %>,
   args: argsData,
   argTypes: argTypesData,
@@ -93,8 +84,8 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 // Stories
 export const Default = {
   render: DefaultTemplate,
-  args: {}
-}
+  args: {},
+};
 
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
@@ -104,5 +95,5 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 
 export const Variants = {
   render: VariantsTemplate,
-  args: {}
-}
+  args: {},
+};
