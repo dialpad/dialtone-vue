@@ -1,5 +1,7 @@
 <template>
-  <div class="d-emoji-picker__selector">
+  <div
+    class="d-emoji-picker__selector"
+  >
     <div
       id="d-emoji-picker-list"
       ref="listRef"
@@ -21,14 +23,14 @@
         </p>
       </div>
       <div
-        v-for="(tabLabel, index) in tabLabels"
+        v-for="(tabLabel, indexTab) in tabLabels"
         v-show="!emojiFilter"
-        :key="index"
+        :key="indexTab"
         :ref="tabLabel.ref"
         class="d-emoji-picker__alignment"
       >
         <p
-          v-if="index"
+          v-if="indexTab"
         >
           {{ tabLabel.label }}
         </p>
@@ -36,8 +38,9 @@
           class="d-emoji-picker__tab"
         >
           <button
-            v-for="emoji in (emojis[tabs[index] + skinTone] ? emojis[tabs[index] + skinTone] : emojis[tabs[index]])"
+            v-for="(emoji, indexEmoji) in (emojis[tabs[indexTab] + skinTone] ? emojis[tabs[indexTab] + skinTone] : emojis[tabs[indexTab]])"
             :key="emoji.shortname"
+            :ref="el => { if (el) setEmojiRef(el, indexTab, indexEmoji) }"
             type="button"
             :aria-label="emoji.name"
             @click="$emit('selected-emoji', emoji)"
@@ -45,6 +48,8 @@
             @focusout="$emit('highlighted-emoji', null)"
             @mouseover="$emit('highlighted-emoji', emoji)"
             @mouseleave="$emit('highlighted-emoji', null)"
+            @focus="() => handleFocus(indexTab, indexEmoji)"
+            @keydown="event => handleKeyDown(event, indexTab, indexEmoji, emoji)"
           >
             <img
               class="d-icon d-icon--size-500"
@@ -95,7 +100,7 @@
 <script setup>
 import { emojisGrouped as emojis } from '@/components/emoji_picker/emojis';
 import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
-import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
+import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker/emoji_picker_constants';
 
 const props = defineProps({
   /**
@@ -465,6 +470,96 @@ function hoverEmoji (emoji, isFirst = false) {
   emits('highlighted-emoji', emoji);
 }
 
+const emojiRefs = ref([]);
+function setEmojiRef (el, indexTab, indexEmoji) {
+  if (!emojiRefs.value[indexTab]) {
+    emojiRefs.value[indexTab] = [];
+  }
+  emojiRefs.value[indexTab][indexEmoji] = el;
+}
+
+function focusEmoji (indexTab, indexEmoji) {
+  const emojiRef = emojiRefs.value?.[indexTab]?.[indexEmoji];
+
+  if (emojiRef) {
+    emojiRef.focus();
+    return true;
+  }
+
+  return false;
+}
+
+const handleFocus = (indexTab, indexEmoji) => {
+  // console.log(indexTab, indexEmoji);
+
+  // console.log('Element focused');
+};
+
+const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
+  // console.log(indexTab, indexEmoji);
+  event.preventDefault();
+
+  if (event.key === 'ArrowUp') {
+    console.log('ArrowUp');
+  }
+
+  if (event.key === 'ArrowDown') {
+    console.log('ArrowDown');
+
+    if (!focusEmoji(indexTab, indexEmoji + EMOJIS_PER_ROW)) {
+      // if cannot go down
+
+      const emojisPerRow = EMOJIS_PER_ROW;
+
+      // Calculate position from cell 0 to cell 8
+      const position = indexEmoji % emojisPerRow;
+
+      // check if it exists a next row in the current tab
+      if (emojiRefs.value?.[indexTab]?.[indexEmoji + (emojisPerRow - position)]) {
+        // if it exists, we should focus the last emoji of the next row in the current tab
+        focusEmoji(indexTab, emojiRefs.value[indexTab].length - 1);
+        // if we are at the end of the list it will do nothing
+      } else {
+        // We don't have next row, we are in the last of the tab, then jump
+        // to the next tab but in the equal emoji position in row 0.
+        focusEmoji(indexTab + 1, position);
+      }
+    }
+  }
+
+  if (event.key === 'ArrowLeft') {
+    console.log('ArrowLeft');
+    if (!focusEmoji(indexTab, indexEmoji - 1)) {
+      // Jump to the last emoji of the previous tab
+      // handle end of tab
+      if (emojiRefs.value[indexTab - 1]) {
+        focusEmoji(indexTab - 1, emojiRefs.value[indexTab - 1].length - 1);
+      }
+      // else {
+      // it will do nothing because it reaches the beginning of the list
+    }
+  }
+
+  if (event.key === 'ArrowRight') {
+    console.log('ArrowRight');
+
+    if (!focusEmoji(indexTab, indexEmoji + 1)) {
+      // Jump to the next tab
+      // handle end of tab
+      focusEmoji(indexTab + 1, 0);
+      // when reach the end of the list it will do nothing
+    }
+  }
+
+  if (event.key === 'Tab') {
+    focusEmoji(indexTab + 1, 0);
+  }
+
+  if (event.key === 'Enter') {
+    emits('selected-emoji', emoji);
+  }
+};
+
 onMounted(() => {
   setTabLabelObserver();
 });
@@ -545,6 +640,10 @@ onUnmounted(() => {
 
       &.hover-emoji{
         background: rgba(0, 0, 0, 0.1);
+      }
+
+      &:focus{
+        box-shadow: var(--bs-focus-ring);
       }
     }
   }

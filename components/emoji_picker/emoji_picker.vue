@@ -199,8 +199,9 @@ function updateHighlightedEmoji (emoji) {
 
 <style lang="less">
 .d-emoji-picker{
-  width: auto;
-  max-width: 372px;
+  // fixed with to achieve accessibility in keyboard
+  // with this width we have 9 emoji per row
+  width: 372px;
   height: 100%;
   display: inline-flex;
   flex-direction: column;
