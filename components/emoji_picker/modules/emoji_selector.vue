@@ -496,58 +496,86 @@ const handleFocus = (indexTab, indexEmoji) => {
 };
 
 const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
-  // console.log(indexTab, indexEmoji);
   event.preventDefault();
 
   if (event.key === 'ArrowUp') {
-    console.log('ArrowUp');
+    const position = indexEmoji % EMOJIS_PER_ROW;
+
+    if (indexTab === 0) {
+      // we are on the first emoji tab, then we should jump to the last row of the last emoji tab
+      const numberOfMissingEmojis = EMOJIS_PER_ROW - (emojiRefs.value[emojiRefs.value.length - 1].length % EMOJIS_PER_ROW);
+
+      const emojiToJump = emojiRefs.value[emojiRefs.value.length - 1].length + numberOfMissingEmojis - (EMOJIS_PER_ROW - position);
+
+      if (!focusEmoji(emojiRefs.value.length - 1, emojiToJump)) {
+        // if there is no emoji in this position, jump to the last emoji of the row
+        focusEmoji(emojiRefs.value.length - 1, emojiRefs.value[emojiRefs.value.length - 1].length - 1);
+      }
+      return;
+    }
+
+    // if we are not on the first tab, we should jump to the previous row of the current tab
+    if (!focusEmoji(indexTab, indexEmoji - EMOJIS_PER_ROW)) {
+      // if there is no previous row, we should jump to emoji in the sampe position of the previous tab
+      const previousTab = indexTab - 1 < 0 ? 0 : indexTab - 1;
+      const emojisInPreviousTab = emojiRefs.value[previousTab].length;
+      const lastEmojiPosition = emojisInPreviousTab - (emojisInPreviousTab % EMOJIS_PER_ROW) + position;
+
+      if (!focusEmoji(previousTab, lastEmojiPosition)) {
+        // if there is no emoji in this position, jump to the last emoji of the row
+        focusEmoji(indexTab - 1, emojiRefs.value[indexTab - 1].length - 1);
+      }
+    }
   }
 
   if (event.key === 'ArrowDown') {
-    console.log('ArrowDown');
-
     if (!focusEmoji(indexTab, indexEmoji + EMOJIS_PER_ROW)) {
       // if cannot go down
 
-      const emojisPerRow = EMOJIS_PER_ROW;
-
       // Calculate position from cell 0 to cell 8
-      const position = indexEmoji % emojisPerRow;
+      const position = indexEmoji % EMOJIS_PER_ROW;
 
       // check if it exists a next row in the current tab
-      if (emojiRefs.value?.[indexTab]?.[indexEmoji + (emojisPerRow - position)]) {
+      if (emojiRefs.value?.[indexTab]?.[indexEmoji + (EMOJIS_PER_ROW - position)]) {
         // if it exists, we should focus the last emoji of the next row in the current tab
         focusEmoji(indexTab, emojiRefs.value[indexTab].length - 1);
         // if we are at the end of the list it will do nothing
       } else {
         // We don't have next row, we are in the last of the tab, then jump
         // to the next tab but in the equal emoji position in row 0.
-        focusEmoji(indexTab + 1, position);
+
+        if (!focusEmoji(indexTab + 1, position)) {
+          // We are on the bottom!, should jump to the same position emoji in the first row of the first tabset
+          // if it doesn't has, jump to the last
+          if (!focusEmoji(0, position)) {
+            focusEmoji(0, emojiRefs.value[0].length - 1);
+          }
+        }
       }
     }
   }
 
   if (event.key === 'ArrowLeft') {
-    console.log('ArrowLeft');
     if (!focusEmoji(indexTab, indexEmoji - 1)) {
       // Jump to the last emoji of the previous tab
       // handle end of tab
       if (emojiRefs.value[indexTab - 1]) {
         focusEmoji(indexTab - 1, emojiRefs.value[indexTab - 1].length - 1);
+      } else {
+        // jump to the last emoji of the last tab
+        focusEmoji(emojiRefs.value.length - 1, emojiRefs.value[emojiRefs.value.length - 1].length - 1);
       }
-      // else {
-      // it will do nothing because it reaches the beginning of the list
     }
   }
 
   if (event.key === 'ArrowRight') {
-    console.log('ArrowRight');
-
     if (!focusEmoji(indexTab, indexEmoji + 1)) {
       // Jump to the next tab
       // handle end of tab
-      focusEmoji(indexTab + 1, 0);
-      // when reach the end of the list it will do nothing
+      if (!focusEmoji(indexTab + 1, 0)) {
+      // when reach the end of the list, jump to the first emoji of the first tabset
+        focusEmoji(0, 0);
+      }
     }
   }
 
