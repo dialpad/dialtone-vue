@@ -37,9 +37,10 @@
               <div v-else-if="avatar.initials">
                 {{ avatar.initials }}
               </div>
-              <div v-else>
-                <dt-icon :name="avatarIcon" />
-              </div>
+              <dt-icon
+                v-else
+                :name="avatarIcon"
+              />
             </dt-avatar>
           </div>
         </div>
@@ -61,9 +62,10 @@
           <div v-else-if="avatarInitials">
             {{ avatarInitials }}
           </div>
-          <div v-else>
-            <dt-icon :name="avatarIcon" />
-          </div>
+          <dt-icon
+            v-else
+            :name="avatarIcon"
+          />
         </dt-avatar>
       </div>
     </template>
