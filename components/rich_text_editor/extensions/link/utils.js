@@ -37,6 +37,7 @@ export function hasValidPrefix (text, match) {
  * Find the word from a string at a given index. For example for "example here"
  * - indices 0-7  => "example"
  * - indices 8-12 => "here".
+ * Modified from https://stackoverflow.com/a/5174867
  */
 export function getWordAt (text, index) {
   // Position of the first non-whitespace character following a possible
