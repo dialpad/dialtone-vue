@@ -156,7 +156,6 @@ function handleKeyDown (event, tabId) {
   }
 
   if (event.key === 'ArrowDown') {
-    selectTabset(tabId);
     // Jump to search input
     emits('focus-search-input');
   }
