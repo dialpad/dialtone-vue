@@ -1,3 +1,17 @@
+## [3.67.4](https://github.com/dialpad/dialtone-vue/compare/v3.67.3...v3.67.4) (2023-05-17)
+
+
+### Bug Fixes
+
+* component documentation link class ([#986](https://github.com/dialpad/dialtone-vue/issues/986)) ([fe3ac97](https://github.com/dialpad/dialtone-vue/commit/fe3ac97732074c3eeed1eadd68ba86462e913823))
+
+## [3.67.3](https://github.com/dialpad/dialtone-vue/compare/v3.67.2...v3.67.3) (2023-05-17)
+
+
+### Bug Fixes
+
+* update dialtone-icons ([ed96c11](https://github.com/dialpad/dialtone-vue/commit/ed96c11fea713cf100e9e71f1a325820ae9d3902))
+
 ## [3.67.2](https://github.com/dialpad/dialtone-vue/compare/v3.67.1...v3.67.2) (2023-05-15)
 
 
