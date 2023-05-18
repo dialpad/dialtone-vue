@@ -219,7 +219,7 @@ export default {
         this.avatarClass,
         {
           'd-avatar--group': this.showGroup,
-          [`d-avatar--color-${this.internalColor}`]: this.kind !== 'icon',
+          [`d-avatar--color-${this.internalColor}`]: this.kind !== 'icon' && this.internalColor,
         },
       ];
     },
@@ -346,8 +346,8 @@ export default {
     },
 
     async getColor () {
-      const set = this.color ?? await getRandomElement(AVATAR_COLORS, this.seed);
-      this.internalColor = set;
+      const color = this.color ?? await getRandomElement(AVATAR_COLORS, this.seed);
+      this.internalColor = color;
     },
 
     validateImageAttrsPresence () {
