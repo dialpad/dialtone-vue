@@ -1,12 +1,12 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtAvatar from './avatar.vue';
+import { flushPromises } from '@/common/utils';
 import { itBehavesLikeHasCorrectClass } from '../../tests/shared_examples/classes';
 import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeDoesNotRaiseAnyVueWarnings,
-  itBehavesLikeRaisesSingleVueWarning,
 } from '../../tests/shared_examples/validation';
 import {
   itBehavesLikeAppliesClassToChild,
@@ -54,7 +54,7 @@ describe('DtAvatar Tests', () => {
       slots,
       localVue: testContext.localVue,
     });
-    await wrapper.vm.$nextTick();
+    await flushPromises();
     _setChildWrappers();
   };
 
@@ -145,6 +145,7 @@ describe('DtAvatar Tests', () => {
 
       it('should have correct class', () => {
         const avatarWithInitials = wrapper.find('.' + AVATAR_KIND_MODIFIERS.initials);
+        console.log(avatarWithInitials.html());
         expect(avatarWithInitials.exists()).toBeTruthy();
       });
     });
@@ -376,7 +377,9 @@ describe('DtAvatar Tests', () => {
           await _setWrappers();
         });
 
-        itBehavesLikeRaisesSingleVueWarning(warningMessage);
+        it('should have expected warning message', () => {
+          expect(Vue.util.warn.mock.calls[0][0]).toBe(warningMessage);
+        });
       });
 
       describe('When image src attribute is not provided', () => {
@@ -388,7 +391,9 @@ describe('DtAvatar Tests', () => {
           await _setWrappers();
         });
 
-        itBehavesLikeRaisesSingleVueWarning(warningMessage);
+        it('should have expected warning message', () => {
+          expect(Vue.util.warn.mock.calls[0][0]).toBe(warningMessage);
+        });
       });
     });
   });
