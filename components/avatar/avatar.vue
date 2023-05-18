@@ -207,6 +207,7 @@ export default {
       slottedInitials: '',
       formattedInitials: '',
       initializing: false,
+      internalColor: '',
     };
   },
 
@@ -218,7 +219,7 @@ export default {
         this.avatarClass,
         {
           'd-avatar--group': this.showGroup,
-          [`d-avatar--color-${this.getColor()}`]: this.kind !== 'icon',
+          [`d-avatar--color-${this.internalColor}`]: this.kind !== 'icon',
         },
       ];
     },
@@ -251,6 +252,24 @@ export default {
     validatedSize () {
       // TODO: Group only supports xs size for now. Remove this when we support other sizes.
       return this.group ? 'xs' : this.size;
+    },
+  },
+
+  watch: {
+    color: {
+      handler: function () {
+        this.getColor();
+      },
+
+      immediate: true,
+    },
+
+    seed: {
+      handler: function () {
+        this.getColor();
+      },
+
+      immediate: true,
     },
   },
 
@@ -325,8 +344,9 @@ export default {
       return element?.tagName?.toUpperCase() === 'IMG';
     },
 
-    getColor () {
-      return this.color ?? getRandomElement(AVATAR_COLORS, this.seed);
+    async getColor () {
+      const set = this.color ?? await getRandomElement(AVATAR_COLORS, this.seed);
+      this.internalColor = set;
     },
 
     validateImageAttrsPresence () {
