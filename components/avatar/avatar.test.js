@@ -364,7 +364,7 @@ describe('DtAvatar Tests', () => {
         });
 
         it('should have expected warning message', () => {
-          expect(Vue.util.warn.mock.calls[0][0]).toBe(warningMessage);
+          expect(console.warn.mock.calls[0][0]).toBe(warningMessage);
         });
       });
 
@@ -378,7 +378,7 @@ describe('DtAvatar Tests', () => {
         });
 
         it('should have expected warning message', () => {
-          expect(Vue.util.warn.mock.calls[0][0]).toBe(warningMessage);
+          expect(console.warn.mock.calls[0][0]).toBe(warningMessage);
         });
       });
     });
