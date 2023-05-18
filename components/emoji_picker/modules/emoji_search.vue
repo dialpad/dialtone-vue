@@ -43,10 +43,17 @@ defineProps({
   },
 });
 
-const searchInput = ref('searchInput');
+const searchInput = ref(null);
 
-onMounted(() => {
+function focusSearchInput () {
   searchInput.value.focus();
+}
+onMounted(() => {
+  focusSearchInput();
+});
+
+defineExpose({
+  focusSearchInput,
 });
 </script>
 

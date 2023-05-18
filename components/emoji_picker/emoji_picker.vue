@@ -1,17 +1,22 @@
 <template>
-  <div class="d-emoji-picker">
+  <div
+    class="d-emoji-picker"
+  >
     <div class="d-emoji-picker--header">
       <emoji-tabset
+        ref="tabsetRef"
         :emoji-filter="searchQuery"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tabset-labels="tabSetLabels"
         :is-scrolling="isScrolling"
+        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
         @selected-tabset="scrollToSelectedTabset"
       />
     </div>
     <div class="d-emoji-picker--body">
       <emoji-search
+        ref="searchInputRef"
         v-model="searchQuery"
         :search-placeholder-label="searchPlaceholderLabel"
         @keydown.enter="emits('selected-emoji', highlightedEmoji)"
@@ -28,15 +33,18 @@
         @is-scrolling="updateIsScrolling"
         @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="emits('selected-emoji', $event)"
+        @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
       />
     </div>
     <div class="d-emoji-picker--footer">
       <emoji-description :emoji="highlightedEmoji" />
       <emoji-skin-selector
+        ref="skinSelectorRef"
         :is-hovering="!!highlightedEmoji"
         :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
         :skin-tone="skinTone"
         @skin-tone="emits('skin-tone', $event)"
+        @focus-tabset="$refs.tabsetRef.focusTabset()"
       />
     </div>
   </div>

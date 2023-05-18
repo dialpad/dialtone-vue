@@ -191,6 +191,12 @@ const emits = defineEmits([
    * @param {Boolean} is-scrolling - Whether the user is scrolling with the scroll-to
     */
   'is-scrolling',
+
+  /**
+   * Emitted when the user reach the end of the emoji list
+   * @event focus-skin-selector
+    */
+  'focus-skin-selector',
 ]);
 
 /**
@@ -365,7 +371,7 @@ function handleImageError (event) {
 /**
  * Scroll to the selected tab
  */
-function scrollToTab (tabIndex) {
+function scrollToTab (tabIndex, focusFirstEmoji = true) {
   const tabLabel = tabLabels.value[tabIndex - 1];
   const tabElement = tabLabel.ref.value[0];
 
@@ -404,6 +410,10 @@ function scrollToTab (tabIndex) {
     });
 
     container.scrollTop = offsetTop;
+
+    if (focusFirstEmoji) {
+      focusEmoji((tabIndex - 1), 0);
+    }
   });
 }
 
@@ -580,7 +590,12 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
   }
 
   if (event.key === 'Tab') {
-    focusEmoji(indexTab + 1, 0);
+    if (focusEmoji(indexTab + 1, 0)) {
+      scrollToTab((indexTab + 1) + 1, false);
+    } else {
+      // We are on the last emoji tabset, jump to the skin selector
+      emits('focus-skin-selector');
+    }
   }
 
   if (event.key === 'Enter') {
