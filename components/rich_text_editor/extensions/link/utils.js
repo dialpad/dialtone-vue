@@ -42,6 +42,7 @@ export function getWordAt (text, index) {
   // Position of the first non-whitespace character following a possible
   // whitespace when looking from the index to the left.
   const left = text.slice(0, index + 1).search(/\S+\s*$/);
+
   // Position of the first whitespace when looking from the index to the right.
   const right = text.slice(index).search(/\s/);
 
