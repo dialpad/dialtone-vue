@@ -5,6 +5,9 @@
       :placeholder="searchPlaceholderLabel"
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
+      @keydown.up="$emit('focus-tabset')"
+      @keydown.down.prevent="$emit('focus-emoji-selector')"
+      @keydown.enter="$emit('select-first-emoji')"
     >
       <template #leftIcon>
         <dt-icon name="search" />
@@ -15,10 +18,11 @@
       >
         <button
           class="d-emoji-picker__search-button"
+          @click="clearSearch"
+          @keydown.enter="clearSearch"
         >
           <dt-icon
             name="close"
-            @click="$emit('update:modelValue', '')"
           />
         </button>
       </template>
@@ -31,7 +35,6 @@ import DtInput from '@/components/input/input.vue';
 import DtIcon from '@/components/icon/icon.vue';
 import { onMounted, ref } from 'vue';
 
-defineEmits(['update:modelValue']);
 defineProps({
   searchPlaceholderLabel: {
     type: String,
@@ -43,7 +46,14 @@ defineProps({
   },
 });
 
+const emits = defineEmits(['update:modelValue', 'focus-emoji-selector', 'focus-tabset', 'select-first-emoji']);
+
 const searchInput = ref(null);
+
+function clearSearch () {
+  emits('update:modelValue', '');
+  focusSearchInput();
+}
 
 function focusSearchInput () {
   searchInput.value.focus();

@@ -603,12 +603,20 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
   }
 };
 
+function focusEmojiSelector () {
+  focusEmoji(0, 0);
+}
+
 onMounted(() => {
   setTabLabelObserver();
 });
 
 onUnmounted(() => {
   tabLabelObserver.value.disconnect();
+});
+
+defineExpose({
+  focusEmojiSelector,
 });
 </script>
 

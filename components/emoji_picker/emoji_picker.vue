@@ -19,9 +19,12 @@
         ref="searchInputRef"
         v-model="searchQuery"
         :search-placeholder-label="searchPlaceholderLabel"
-        @keydown.enter="emits('selected-emoji', highlightedEmoji)"
+        @select-first-emoji="emits('selected-emoji', highlightedEmoji)"
+        @focus-tabset="$refs.tabsetRef.focusTabset()"
+        @focus-emoji-selector="$refs.emojiSelectorRef.focusEmojiSelector()"
       />
       <emoji-selector
+        ref="emojiSelectorRef"
         :emoji-filter="searchQuery"
         :skin-tone="skinTone"
         :tabset-labels="tabSetLabels"

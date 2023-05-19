@@ -155,6 +155,11 @@ function handleKeyDown (event, tabId) {
     tabsetRef.value[tabId - 1].blur();
   }
 
+  if (event.key === 'Tab') {
+    event.preventDefault();
+    emits('focus-search-input');
+  }
+
   if (event.key === 'ArrowDown') {
     // Jump to search input
     emits('focus-search-input');
