@@ -33,10 +33,9 @@
   </core-scroller>
 </template>
 
-<!--
-This is a code from external library (https://github.com/Akryum/vue-virtual-scroller/blob/master/packages/vue-virtual-scroller/src/components/DynamicScroller.vue)
-We have modified it for our own specific use.
--->
+<!-- eslint-disable-next-line max-len -->
+<!-- This is a code from external library (https://github.com/Akryum/vue-virtual-scroller/blob/master/packages/vue-virtual-scroller/src/components/DynamicScroller.vue)
+We have modified it for our own specific use. -->
 <script>
 import CoreScroller from './core_scroller.vue';
 import DtScrollerItem from './scroller_item.vue';
@@ -178,11 +177,12 @@ export default {
         if (typeof size === 'undefined' && !this.$_undefinedMap[id]) {
           size = 0;
         }
-        result.push({
+        const data = {
           item,
-          id,
           size,
-        });
+        };
+        data[keyField] = id;
+        result.push(data);
       }
       return result;
     },
