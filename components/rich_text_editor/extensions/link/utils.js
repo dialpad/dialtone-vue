@@ -34,6 +34,22 @@ export function hasValidPrefix (text, match) {
 }
 
 /**
+ * Trim punctuation characters at the a of the string, e.g. "dialpad.com!" =>
+ * "dialpad.com"
+ */
+export function trimEndPunctiation (string) {
+  const endPunctuationRegex = new RegExp(
+    '(?:' +
+    [
+      '[!?.,:;\'"]',
+      '(?:&|&amp;)(?:lt|gt|quot|apos|raquo|laquo|rsaquo|lsaquo);)+$',
+    ].join('|'),
+    'g',
+  );
+  return string.replace(endPunctuationRegex, '');
+}
+
+/**
  * Find the word from a string at a given index. For example for "example here"
  * - indices 0-7  => "example"
  * - indices 8-12 => "here".
@@ -156,6 +172,9 @@ export function addMarks (text, pos, from, to, tr, type) {
 
   // Loop through the matches and add marks.
   matches.forEach(match => {
+    // Trim any punctuation characters at the end of the match.
+    const word = trimEndPunctiation(match[0]);
+
     // pos                   = start index of the node
     // firstWordInRange.from = start index of the first word in range
     // match.index           = index of the regex match
@@ -163,7 +182,7 @@ export function addMarks (text, pos, from, to, tr, type) {
     const from = pos + firstWordInRange.from + match.index + 1;
 
     // Sum up the from index and the match length to get the end index.
-    const to = from + match[0].length;
+    const to = from + word.length;
 
     tr.addMark(from, to, type.create());
   });
