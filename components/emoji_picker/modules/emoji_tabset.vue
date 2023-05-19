@@ -31,7 +31,7 @@
 import DtTabGroup from '@/components/tabs/tab_group.vue';
 import DtTab from '@/components/tabs/tab.vue';
 import DtIcon from '@/components/icon/icon.vue';
-import { computed, nextTick, ref, toRefs, watch } from 'vue';
+import { computed, ref, toRefs, watch } from 'vue';
 
 const props = defineProps({
   /**

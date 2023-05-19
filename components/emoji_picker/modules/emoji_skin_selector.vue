@@ -32,6 +32,7 @@
         <template #anchor>
           <button
             ref="skinSelectorRef"
+            :aria-label="skinSelectorButtonTooltipLabel"
             @click="toggleSkinList"
             @keydown="event => handleKeyDown(event)"
           >

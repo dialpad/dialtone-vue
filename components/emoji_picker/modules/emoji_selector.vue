@@ -48,7 +48,6 @@
             @focusout="$emit('highlighted-emoji', null)"
             @mouseover="$emit('highlighted-emoji', emoji)"
             @mouseleave="$emit('highlighted-emoji', null)"
-            @focus="() => handleFocus(indexTab, indexEmoji)"
             @keydown="event => handleKeyDown(event, indexTab, indexEmoji, emoji)"
           >
             <img
@@ -72,6 +71,7 @@
           <button
             v-for="(emoji, index) in filteredEmojis"
             :key="emoji.shortname"
+            :ref="el => { if (el) setFilteredRef(el, index) }"
             type="button"
             :aria-label="emoji.name"
             :class="{
@@ -82,6 +82,7 @@
             @focusout="$emit('highlighted-emoji', null)"
             @mouseover="hoverEmoji(emoji)"
             @mouseleave="hoverEmoji(null)"
+            @keydown="event => handleKeyDownFilteredEmojis(event, index, emoji)"
           >
             <img
               class="d-icon d-icon--size-500"
@@ -288,6 +289,8 @@ const currentEmojis = computed(() => {
  * This will trigger the searchByNameAndKeywords function with debounce of 300 milliseconds
  */
 const debouncedSearch = debounce(() => {
+  // We clean the emojiFilteredRefs to have an updated ref list for the search results
+  emojiFilteredRefs.value = [];
   searchByNameAndKeywords();
 });
 
@@ -481,6 +484,12 @@ function hoverEmoji (emoji, isFirst = false) {
 }
 
 const emojiRefs = ref([]);
+const emojiFilteredRefs = ref([]);
+
+function setFilteredRef (el, index) {
+  emojiFilteredRefs.value[index] = el;
+}
+
 function setEmojiRef (el, indexTab, indexEmoji) {
   if (!emojiRefs.value[indexTab]) {
     emojiRefs.value[indexTab] = [];
@@ -489,7 +498,7 @@ function setEmojiRef (el, indexTab, indexEmoji) {
 }
 
 function focusEmoji (indexTab, indexEmoji) {
-  const emojiRef = emojiRefs.value?.[indexTab]?.[indexEmoji];
+  const emojiRef = props.emojiFilter ? emojiFilteredRefs.value?.[indexEmoji] : emojiRefs.value?.[indexTab]?.[indexEmoji];
 
   if (emojiRef) {
     emojiRef.focus();
@@ -499,10 +508,57 @@ function focusEmoji (indexTab, indexEmoji) {
   return false;
 }
 
-const handleFocus = (indexTab, indexEmoji) => {
-  // console.log(indexTab, indexEmoji);
+const handleKeyDownFilteredEmojis = (event, indexEmoji, emoji) => {
+  event.preventDefault();
+  hoverFirstEmoji.value = false;
 
-  // console.log('Element focused');
+  if (event.key === 'ArrowUp') {
+    const position = indexEmoji % EMOJIS_PER_ROW;
+
+    if (!focusEmoji(0, indexEmoji - EMOJIS_PER_ROW)) {
+      const lastEmojiPosition = emojiFilteredRefs.value.length - (emojiFilteredRefs.value.length % EMOJIS_PER_ROW) + position;
+
+      focusEmoji(0, lastEmojiPosition);
+
+      if (!focusEmoji(0, lastEmojiPosition)) {
+        focusEmoji(0, emojiFilteredRefs.value.length - 1);
+      }
+    }
+  }
+
+  if (event.key === 'ArrowDown') {
+    if (!focusEmoji(0, indexEmoji + EMOJIS_PER_ROW)) {
+      const position = indexEmoji % EMOJIS_PER_ROW;
+
+      if (emojiFilteredRefs.value?.[indexEmoji + (EMOJIS_PER_ROW - position)]) {
+        focusEmoji(0, emojiFilteredRefs.value.length - 1);
+      } else {
+        focusEmoji(0, position);
+      }
+    }
+  }
+
+  if (event.key === 'ArrowLeft') {
+    if (!focusEmoji(0, indexEmoji - 1)) {
+      // Jump to the last emoji of the previous tab
+      // handle end of tab
+      focusEmoji(0, emojiFilteredRefs.value.length - 1);
+    }
+  }
+
+  if (event.key === 'ArrowRight') {
+    if (!focusEmoji(0, indexEmoji + 1)) {
+      focusEmoji(0, 0);
+    }
+  }
+
+  if (event.key === 'Tab') {
+    emits('focus-skin-selector');
+  }
+
+  if (event.key === 'Enter') {
+    emits('selected-emoji', emoji);
+  }
 };
 
 const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
