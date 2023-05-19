@@ -4,7 +4,7 @@ import {
   VALIDATION_MESSAGE_TYPES,
 } from './constants';
 import Vue from 'vue';
-import seedrandom from 'seedrandom';
+import fnv from 'fnv-plus';
 
 let UNIQUE_ID_COUNTER = 0;
 let TIMER;
@@ -32,8 +32,21 @@ export function getUniqueString (prefix = DEFAULT_PREFIX) {
  * @returns {*} - the random element
  */
 export function getRandomElement (array, seed) {
-  const rng = seedrandom(seed);
-  return array[Math.floor(rng() * array.length)];
+  if (seed) {
+    const hash = fnv.hash(seed);
+    return array[hash.value % array.length];
+  } else {
+    return array[getRandomInt(array.length)];
+  }
+}
+
+/**
+ * Generate a random integer
+ * @param {number} max - max range of integer to generate
+ * @returns {number} randomly generated integer between 0 and max
+ */
+export function getRandomInt (max) {
+  return Math.floor(Math.random() * max);
 }
 
 export function formatMessages (messages) {
@@ -178,6 +191,7 @@ export function isOutOfViewPort (element) {
 export default {
   getUniqueString,
   getRandomElement,
+  getRandomInt,
   formatMessages,
   filterFormattedMessages,
   hasFormattedMessageOfType,

@@ -26,29 +26,43 @@ export const AVATAR_PRESENCE_STATES = {
 };
 
 export const AVATAR_ICON_SIZES = {
-  xs: '100',
+  xs: undefined,
   sm: '200',
-  md: '400',
+  md: '300',
   lg: '500',
   xl: '600',
 };
 
-export const AVATAR_ANGLES = [45, -45, 90, -90, 135, -135, 180, -180];
-
-export const GRADIENT_COLORS = {
-  with100: ['dt-color-purple-100', 'dt-color-magenta-100', 'dt-color-gold-100', 'dt-color-blue-100'],
-  with200: ['dt-color-purple-200', 'dt-color-magenta-200', 'dt-color-gold-200', 'dt-color-blue-200'],
-};
-
-export const MAX_GRADIENT_COLORS = 3;
-export const MAX_GRADIENT_COLORS_100 = 2;
+export const AVATAR_COLORS = [
+  undefined,
+  '100',
+  '200',
+  '300',
+  '400',
+  '500',
+  '600',
+  '700',
+  '800',
+  '900',
+  '1000',
+  '1100',
+  '1200',
+  '1300',
+  '1400',
+  '1500',
+  '1600',
+  '1700',
+  '1800',
+];
 
 export const AVATAR_GROUP_VALIDATOR = (group) => group > 1;
 
 export default {
-  AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
+  AVATAR_KIND_MODIFIERS,
+  AVATAR_PRESENCE_SIZE_MODIFIERS,
+  AVATAR_PRESENCE_STATES,
   AVATAR_ICON_SIZES,
-  AVATAR_ANGLES,
+  AVATAR_COLORS,
   AVATAR_GROUP_VALIDATOR,
 };
