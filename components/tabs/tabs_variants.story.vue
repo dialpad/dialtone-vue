@@ -41,7 +41,7 @@
 
         <div
           :class="{
-            'd-fc-white': variant.propsToBind.inverted,
+            'd-fc-neutral-white': variant.propsToBind.inverted,
           }"
         >
           <dt-tab-panel
