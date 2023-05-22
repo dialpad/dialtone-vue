@@ -95,6 +95,7 @@
     "sinon": "^15.0.1",
     "source-map-support": "^0.5.21",
     "storybook": "^7.0.8",
+    "storybook-dark-mode": "^3.0.0",
     "vite": "^4.2.1",
     "vitest": "^0.31.0",
     "vue": "^2.7.14",

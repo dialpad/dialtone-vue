@@ -135,3 +135,14 @@
   white-space: nowrap;
   width: 1px;
 }
+
+// Component preview background and foreground colors need to be set apart from global theme
+.sb-show-main {
+   background: var(--dt-color-surface-primary) !important;
+   color: var(--dt-color-foreground-primary) !important;
+}
+
+// CSS override to avoid header links to move while changing theme on Docs mode
+.css-1ofkq6d {
+  margin-left: -24px !important;
+}
