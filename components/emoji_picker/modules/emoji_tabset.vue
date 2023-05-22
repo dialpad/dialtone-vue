@@ -15,7 +15,7 @@
           aria-controls="d-emoji-picker-list"
           :tabindex="index + 1"
           @click.capture.stop="selectTabset(tab.id)"
-          @keydown.capture.stop="handleKeyDown($event, tab.id)"
+          @keydown="handleKeyDown($event, tab.id)"
         >
           <dt-icon
             size="400"

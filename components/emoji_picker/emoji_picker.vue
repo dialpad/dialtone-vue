@@ -12,6 +12,7 @@
         :is-scrolling="isScrolling"
         @focus-search-input="$refs.searchInputRef.focusSearchInput()"
         @selected-tabset="scrollToSelectedTabset"
+        @keydown.esc="emits('close')"
       />
     </div>
     <div class="d-emoji-picker--body">
@@ -22,6 +23,7 @@
         @select-first-emoji="emits('selected-emoji', highlightedEmoji)"
         @focus-tabset="$refs.tabsetRef.focusTabset()"
         @focus-emoji-selector="$refs.emojiSelectorRef.focusEmojiSelector()"
+        @keydown.esc="emits('close')"
       />
       <emoji-selector
         ref="emojiSelectorRef"
@@ -37,6 +39,7 @@
         @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="emits('selected-emoji', $event)"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
+        @keydown.esc="emits('close')"
       />
     </div>
     <div class="d-emoji-picker--footer">
@@ -48,6 +51,7 @@
         :skin-tone="skinTone"
         @skin-tone="emits('skin-tone', $event)"
         @focus-tabset="$refs.tabsetRef.focusTabset()"
+        @keydown.esc="emits('close')"
       />
     </div>
   </div>
@@ -169,6 +173,12 @@ const emits = defineEmits(
      * @param {String} skin - The selected skin tone from the skin selector
      */
     'skin-tone',
+
+    /**
+     * Since they keyboard events are encapsulated, we emit this event to close the picker
+     * @event close
+     */
+    'close',
   ],
 );
 
