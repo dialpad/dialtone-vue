@@ -1,3 +1,82 @@
+# [3.68.0](https://github.com/dialpad/dialtone-vue/compare/v3.67.4...v3.68.0) (2023-05-18)
+
+
+### Bug Fixes
+
+* set node engine minimum ([#989](https://github.com/dialpad/dialtone-vue/issues/989)) ([31daed2](https://github.com/dialpad/dialtone-vue/commit/31daed2de3f34d55dbf58195d626125e0d575940))
+
+
+### Features
+
+* **Avatar:** update to flat colors ([#990](https://github.com/dialpad/dialtone-vue/issues/990)) ([12774ea](https://github.com/dialpad/dialtone-vue/commit/12774ea2f8dadc8806aac4dd7c4d762746f800f9))
+* **Confact Info:** add `showAvatar` and `avatarIcon` props (Vue3) ([#983](https://github.com/dialpad/dialtone-vue/issues/983)) ([86fed3b](https://github.com/dialpad/dialtone-vue/commit/86fed3bb7a5ba032c43e1c0ae93ab43175ba01b9))
+
+## [3.67.4](https://github.com/dialpad/dialtone-vue/compare/v3.67.3...v3.67.4) (2023-05-17)
+
+
+### Bug Fixes
+
+* component documentation link class ([#986](https://github.com/dialpad/dialtone-vue/issues/986)) ([fe3ac97](https://github.com/dialpad/dialtone-vue/commit/fe3ac97732074c3eeed1eadd68ba86462e913823))
+
+## [3.67.3](https://github.com/dialpad/dialtone-vue/compare/v3.67.2...v3.67.3) (2023-05-17)
+
+
+### Bug Fixes
+
+* update dialtone-icons ([ed96c11](https://github.com/dialpad/dialtone-vue/commit/ed96c11fea713cf100e9e71f1a325820ae9d3902))
+
+## [3.67.2](https://github.com/dialpad/dialtone-vue/compare/v3.67.1...v3.67.2) (2023-05-15)
+
+
+### Bug Fixes
+
+* **Leftbar Row:** css typo ([#978](https://github.com/dialpad/dialtone-vue/issues/978)) ([cce5175](https://github.com/dialpad/dialtone-vue/commit/cce5175a15a6ec1d550dca9c566c9274e58547a6))
+* **Leftbar:** muted opacity to 60% ([774e6e1](https://github.com/dialpad/dialtone-vue/commit/774e6e1aeac4ca82502b806a9bc1fc396af8d13e))
+* **Popover:** anchorEl null protection ([597e9b1](https://github.com/dialpad/dialtone-vue/commit/597e9b1e2a20942a06973987ae5cf17eb365e821))
+* update dialtone-icons ([d1743eb](https://github.com/dialpad/dialtone-vue/commit/d1743eb931b4c3bd0c7a4a3ebe46ae6e2b374d25))
+
+## [3.67.1](https://github.com/dialpad/dialtone-vue/compare/v3.67.0...v3.67.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* update dialtone-icons ([4e75d21](https://github.com/dialpad/dialtone-vue/commit/4e75d21cfb79f5a8f55f6091b1d8403226418f4e))
+
+# [3.67.0](https://github.com/dialpad/dialtone-vue/compare/v3.66.1...v3.67.0) (2023-05-12)
+
+
+### Bug Fixes
+
+* **Feed Items:** fix test failure for emoji row ([#975](https://github.com/dialpad/dialtone-vue/issues/975)) ([96697b0](https://github.com/dialpad/dialtone-vue/commit/96697b01c141f7c40fddc1c60c645972b7074a1f))
+* Revert bundle in vue ([#973](https://github.com/dialpad/dialtone-vue/issues/973)) ([e8035b4](https://github.com/dialpad/dialtone-vue/commit/e8035b4777c9030230bf3bbeae0f10390674d3a2))
+
+
+### Features
+
+* **Feed Items:** create feed item emoji row (vue3) ([#974](https://github.com/dialpad/dialtone-vue/issues/974)) ([b925e0d](https://github.com/dialpad/dialtone-vue/commit/b925e0d558e282710820bdbbc4a4ba644a81a3e1))
+* update dialtone-icons ([3eb61a8](https://github.com/dialpad/dialtone-vue/commit/3eb61a878765f59e6f6933379887ed956ad6dc5d))
+
+## [3.66.1](https://github.com/dialpad/dialtone-vue/compare/v3.66.0...v3.66.1) (2023-05-10)
+
+
+### Bug Fixes
+
+* exports, style reference ([5cd6964](https://github.com/dialpad/dialtone-vue/commit/5cd696474cfa1ec0bfbefe614d0c0c29e74a85dc))
+
+# [3.66.0](https://github.com/dialpad/dialtone-vue/compare/v3.65.3...v3.66.0) (2023-05-10)
+
+
+### Bug Fixes
+
+* bundle in vue ([#973](https://github.com/dialpad/dialtone-vue/issues/973)) ([366722f](https://github.com/dialpad/dialtone-vue/commit/366722f13010d72f7fa7b7949f411612a38df120))
+* **Scroller:** name refactor, events behaviour and hardcoded attribute ([#958](https://github.com/dialpad/dialtone-vue/issues/958)) ([7674920](https://github.com/dialpad/dialtone-vue/commit/76749203182ec000c75cceba1ca046d6e43bac89))
+* visual test stories showing up in prod ([#969](https://github.com/dialpad/dialtone-vue/issues/969)) ([f979a28](https://github.com/dialpad/dialtone-vue/commit/f979a28a639c5f2b837c4ffc93ea060bacad9185))
+
+
+### Features
+
+* **Size And Space:** apply between stops and negative variables vue3 ([#965](https://github.com/dialpad/dialtone-vue/issues/965)) ([f3a681a](https://github.com/dialpad/dialtone-vue/commit/f3a681a5e217bbfc6f3a1487f22a0bf09d23f6a8))
+
 ## [3.65.3](https://github.com/dialpad/dialtone-vue/compare/v3.65.2...v3.65.3) (2023-05-08)
 
 
