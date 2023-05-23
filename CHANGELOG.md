@@ -1,3 +1,17 @@
+# [2.85.0](https://github.com/dialpad/dialtone-vue/compare/v2.84.1...v2.85.0) (2023-05-23)
+
+
+### Features
+
+* update dialtone-icons ([7fc7543](https://github.com/dialpad/dialtone-vue/commit/7fc75435abbf5ad0b525b276e262143a92d64ea7))
+
+## [2.84.1](https://github.com/dialpad/dialtone-vue/compare/v2.84.0...v2.84.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* change to fnv algo ([ff2bc21](https://github.com/dialpad/dialtone-vue/commit/ff2bc21422e84c7322eb405485aec6fa310899e7))
+
 # [2.84.0](https://github.com/dialpad/dialtone-vue/compare/v2.83.5...v2.84.0) (2023-05-18)
 
 
