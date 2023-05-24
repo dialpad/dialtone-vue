@@ -63,6 +63,7 @@
       >
         <div
           class="d-emoji-picker__tab "
+          data-qa="filtered-emojis"
         >
           <button
             v-for="emoji in filteredEmojis"
