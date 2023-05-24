@@ -177,12 +177,11 @@ export default {
         if (typeof size === 'undefined' && !this.$_undefinedMap[id]) {
           size = 0;
         }
-        const data = {
+        result.push({
           item,
+          [keyField]: id,
           size,
-        };
-        data[keyField] = id;
-        result.push(data);
+        });
       }
       return result;
     },
