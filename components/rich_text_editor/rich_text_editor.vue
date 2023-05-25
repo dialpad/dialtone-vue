@@ -25,7 +25,8 @@ export default {
 
   props: {
     /**
-     * Value of the input
+     * Value of the input. The object format should match TipTap's JSON
+     * document structure: https://tiptap.dev/guide/output#option-1-json
      */
     value: {
       type: [Object, String],
