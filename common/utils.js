@@ -255,8 +255,12 @@ const emailAddressRegex = new RegExp(
   '(?!\\w)',
 );
 
-// match phone numbers, e.g. "765-8813", "(778) 765-8813" or "+17787658813".
-// create it as a function so the length can be adjusted
+/**
+ * Match phone numbers, e.g. "765-8813", "(778) 765-8813" or "+17787658813".
+ * @param {number} minLength
+ * @param {number} maxLength
+ * @returns {RegExp}
+ */
 export function getPhoneNumberRegex (minLength = 7, maxLength = 15) {
   return new RegExp(
     '(?:^|(?<=\\W))(?![\\s\\-])\\+?(?:[0-9()\\- \\t]' +

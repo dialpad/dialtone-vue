@@ -9,6 +9,8 @@ const defaultAttributes = {
   rel: 'noopener noreferrer nofollow',
 };
 
+// This is the actual extension code, which is mostly showing that all the
+// functionality comes from the ProseMirror plugin.
 export const Link = Mark.create({
   name: 'Link',
 

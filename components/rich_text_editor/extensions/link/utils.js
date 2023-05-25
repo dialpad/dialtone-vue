@@ -97,7 +97,7 @@ export function getWordAtUntil (text, index, direction, regex) {
   // preceding or following word.
   const newIndex = direction === 'left' ? word.from - 1 : word.to + 1;
 
-  // Prevent an infinite loop for the edge cases.
+  // Prevent an infinite loop for the base cases.
   if (newIndex <= 0 || newIndex >= text.length || newIndex === index) {
     return word;
   }
