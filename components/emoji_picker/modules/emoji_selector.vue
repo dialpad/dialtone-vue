@@ -102,6 +102,7 @@
 import { emojisGrouped as emojis } from '@/components/emoji_picker/emojis';
 import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
 import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker/emoji_picker_constants';
+import { useKeyboardNavigation } from '@/components/emoji_picker/composables/useKeyboardNavigation';
 
 const props = defineProps({
   /**
@@ -198,7 +199,25 @@ const emits = defineEmits([
    * @event focus-skin-selector
     */
   'focus-skin-selector',
+
+  /**
+   * Emitted when the user shift tab in first tab of emoji selector
+   * @event focus-search-input
+    */
+  'focus-search-input',
 ]);
+
+const {
+  emojiRefs,
+  emojiFilteredRefs,
+  isFiltering,
+  hoverFirstEmoji,
+  setEmojiRef,
+  setFilteredRef,
+  hoverEmoji,
+  focusEmoji,
+  handleHorizontalNavigation,
+} = useKeyboardNavigation(emits);
 
 /**
  * The ref for the tab category
@@ -263,11 +282,6 @@ const tabs = computed(() => {
 const filteredEmojis = ref([]);
 
 /**
- * This flag is necessary to hover
- */
-const hoverFirstEmoji = ref(true);
-
-/**
  * The current emojis list we are displaying
  * This will be updated when the skin tone changes
  * The difference between this and the emojis list is that this one will have only the skin tone applied
@@ -319,9 +333,14 @@ watch(() => props.recentlyUsedEmojis,
  */
 watch(() => props.emojiFilter, () => {
   resetScroll();
-  // If the emoji filter is empty, emit null to remove the highlighted emoji
-  // of the previous search
-  if (!props.emojiFilter) { emits('highlighted-emoji', null); }
+  if (props.emojiFilter) {
+    isFiltering.value = true;
+  } else {
+    isFiltering.value = false;
+    // If the emoji filter is empty, emit null to remove the highlighted emoji
+    // of the previous search
+    emits('highlighted-emoji', null);
+  }
   debouncedSearch();
 });
 
@@ -478,36 +497,6 @@ function setTabLabelObserver () {
   });
 }
 
-function hoverEmoji (emoji, isFirst = false) {
-  hoverFirstEmoji.value = isFirst;
-  emits('highlighted-emoji', emoji);
-}
-
-const emojiRefs = ref([]);
-const emojiFilteredRefs = ref([]);
-
-function setFilteredRef (el, index) {
-  emojiFilteredRefs.value[index] = el;
-}
-
-function setEmojiRef (el, indexTab, indexEmoji) {
-  if (!emojiRefs.value[indexTab]) {
-    emojiRefs.value[indexTab] = [];
-  }
-  emojiRefs.value[indexTab][indexEmoji] = el;
-}
-
-function focusEmoji (indexTab, indexEmoji) {
-  const emojiRef = props.emojiFilter ? emojiFilteredRefs.value?.[indexEmoji] : emojiRefs.value?.[indexTab]?.[indexEmoji];
-
-  if (emojiRef) {
-    emojiRef.focus();
-    return true;
-  }
-
-  return false;
-}
-
 const handleKeyDownFilteredEmojis = (event, indexEmoji, emoji) => {
   event.preventDefault();
   hoverFirstEmoji.value = false;
@@ -539,17 +528,11 @@ const handleKeyDownFilteredEmojis = (event, indexEmoji, emoji) => {
   }
 
   if (event.key === 'ArrowLeft') {
-    if (!focusEmoji(0, indexEmoji - 1)) {
-      // Jump to the last emoji of the previous tab
-      // handle end of tab
-      focusEmoji(0, emojiFilteredRefs.value.length - 1);
-    }
+    handleHorizontalNavigation('left', 0, indexEmoji);
   }
 
   if (event.key === 'ArrowRight') {
-    if (!focusEmoji(0, indexEmoji + 1)) {
-      focusEmoji(0, 0);
-    }
+    handleHorizontalNavigation('right', 0, indexEmoji);
   }
 
   if (event.key === 'Tab') {
@@ -622,27 +605,11 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
   }
 
   if (event.key === 'ArrowLeft') {
-    if (!focusEmoji(indexTab, indexEmoji - 1)) {
-      // Jump to the last emoji of the previous tab
-      // handle end of tab
-      if (emojiRefs.value[indexTab - 1]) {
-        focusEmoji(indexTab - 1, emojiRefs.value[indexTab - 1].length - 1);
-      } else {
-        // jump to the last emoji of the last tab
-        focusEmoji(emojiRefs.value.length - 1, emojiRefs.value[emojiRefs.value.length - 1].length - 1);
-      }
-    }
+    handleHorizontalNavigation('left', indexTab, indexEmoji);
   }
 
   if (event.key === 'ArrowRight') {
-    if (!focusEmoji(indexTab, indexEmoji + 1)) {
-      // Jump to the next tab
-      // handle end of tab
-      if (!focusEmoji(indexTab + 1, 0)) {
-      // when reach the end of the list, jump to the first emoji of the first tabset
-        focusEmoji(0, 0);
-      }
-    }
+    handleHorizontalNavigation('right', indexTab, indexEmoji);
   }
 
   if (event.key === 'Tab') {
@@ -651,6 +618,15 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
     } else {
       // We are on the last emoji tabset, jump to the skin selector
       emits('focus-skin-selector');
+    }
+  }
+
+  if (event.key === 'Tab' && event.shiftKey) {
+    if (focusEmoji(indexTab, 0) && indexTab > 0) {
+      scrollToTab(indexTab, true);
+    } else {
+      scrollToTab(1, false);
+      emits('focus-search-input');
     }
   }
 
