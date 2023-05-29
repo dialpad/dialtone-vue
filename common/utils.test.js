@@ -10,6 +10,9 @@ import {
   filterFormattedMessages,
   hasFormattedMessageOfType,
   getValidationState,
+  isPhoneNumber,
+  isURL,
+  isEmailAddress,
 } from './utils';
 
 describe('Util Tests', () => {
@@ -341,6 +344,114 @@ describe('Util Tests', () => {
 
       it('should return ERROR', () => {
         expect(getValidationState(formattedMessages)).toBe(VALIDATION_MESSAGE_TYPES.ERROR);
+      });
+    });
+  });
+
+  describe('isPhoneNumber', () => {
+    describe('when there is no input', () => {
+      it('should return false', () => {
+        expect(isPhoneNumber()).toBe(false);
+        expect(isPhoneNumber('')).toBe(false);
+      });
+    });
+
+    describe('when input is not a string or a number', () => {
+      it('should return false', () => {
+        expect(isPhoneNumber([1, 2, 3])).toBe(false);
+        expect(isPhoneNumber({ phone_number: '+17144107035' })).toBe(false);
+        expect(isPhoneNumber(undefined)).toBe(false);
+      });
+    });
+
+    describe('when input is not an exact match', () => {
+      it('should return false', () => {
+        expect(isPhoneNumber('oops text (714) 410-7035')).toBe(false);
+      });
+    });
+
+    describe('when input is an exact match', () => {
+      it('should return true', () => {
+        expect(isPhoneNumber('(714) 410-7035')).toBe(true);
+        expect(isPhoneNumber('714-410-7035')).toBe(true);
+        expect(isPhoneNumber('+17144107035')).toBe(true);
+        expect(isPhoneNumber('714 410 7035')).toBe(true);
+        expect(isPhoneNumber(7144107035)).toBe(true);
+      });
+    });
+  });
+
+  describe('isURL', () => {
+    describe('when there is no input', () => {
+      it('should return false', () => {
+        expect(isURL()).toBe(false);
+        expect(isURL('')).toBe(false);
+      });
+    });
+
+    describe('when input is not a string', () => {
+      it('should return false', () => {
+        expect(isURL(123)).toBe(false);
+        expect(isURL([1, 2, 3])).toBe(false);
+        expect(isURL({ url: 'dialpad.com' })).toBe(false);
+        expect(isURL(undefined)).toBe(false);
+      });
+    });
+
+    describe('when input is not an exact match', () => {
+      it('should return false', () => {
+        expect(isURL('oops text dialpad.com')).toBe(false);
+      });
+    });
+
+    describe('when input is an exact match', () => {
+      [
+        'dialpad.com',
+        'dialpad.com/news',
+        'help.dialpad.com',
+        'dialpad.com?cache=1&dark=true',
+      ].forEach((url) => {
+        it(`should return true for ${url} and https://${url}`, () => {
+          expect(isURL(url)).toBe(true);
+          expect(isURL(`https://${url}`)).toBe(true);
+        });
+      });
+    });
+
+    describe('isEmailAddress', () => {
+      describe('when there is no input', () => {
+        it('should return false', () => {
+          expect(isEmailAddress()).toBe(false);
+          expect(isEmailAddress('')).toBe(false);
+        });
+      });
+
+      describe('when input is not a string', () => {
+        it('should return false', () => {
+          expect(isEmailAddress(123)).toBe(false);
+          expect(isEmailAddress([1, 2, 3])).toBe(false);
+          expect(isEmailAddress({ email: 'noreply@dialpad.com' })).toBe(false);
+          expect(isEmailAddress(undefined)).toBe(false);
+        });
+      });
+
+      describe('when input is not an exact match', () => {
+        it('should return false', () => {
+          expect(isEmailAddress('oops text noreply@dialpad.com')).toBe(false);
+        });
+      });
+
+      describe('when input is an exact match', () => {
+        [
+          'noreply@dialpad.com',
+          'help.noreply@dialpad.com',
+          'noreply@dialpad.com?subject=Hi&body=Hey%20there!',
+        ].forEach((url) => {
+          it(`should return true for ${url} and mailto:${url}`, () => {
+            expect(isEmailAddress(url)).toBe(true);
+            expect(isEmailAddress(`mailto:${url}`)).toBe(true);
+          });
+        });
       });
     });
   });
