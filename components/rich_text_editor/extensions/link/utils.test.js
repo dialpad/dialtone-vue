@@ -104,7 +104,7 @@ describe('Links Utils Tests', () => {
 
     punctuationMarks.forEach(p => {
       describe(`when string ends with ${p} character`, () => {
-        it(`should return trimmed string`, () => {
+        it('should return trimmed string', () => {
           expect(trimEndPunctiation(`hello world${p}`)).toBe('hello world');
         });
       });
