@@ -30,9 +30,11 @@ It is important to know the sequence of tab and emoji tabset will **not change**
 .
 You should always provide a proper `tabSetLabels` array to match the order of the emoji tabset.
 
-The 'Most recently used' tab will always be the first tab in the tabSetLabels array. It will be updated dynamically to be shown if there are or not recently used emojis (`recentlyUsedEmojis` prop).
+The 'Most recently used' tab will always be the first tab in the tabSetLabels array.
+It will be updated dynamically to be shown if there are or not recently used emojis (`recentlyUsedEmojis` prop).
 
-The `skin-tone` prop provided to the component should listen to the `skin-tone` event emitted by the skin selector button to be updated instantly.
+The `skin-tone` prop provided to the component should listen to
+the `skin-tone` event emitted by the skin selector button to be updated instantly.
 
 You must be listen the `close` event to close the emoji picker. This event is emitted by the keyboard navigation on `ESC`.
 
@@ -40,16 +42,21 @@ You must be listen the `close` event to close the emoji picker. This event is em
 
 The emoji picker starts with a `focus` on the input search to give the user a quick way to search for an emoji.
 
-When the user search for an emoji, the first emoji in the list will be with hovered style, this allow the user to press `ENTER` to select this emoji.
+When the user search for an emoji, the first emoji in the list will be with hovered style,
+this allow the user to press `ENTER` to select this emoji.
 
 From the input search the user can navigate to `TOP` arrow to the tabset or `DOWN` arrow to the emoji list.
 
-From the tabset it is possible to navigate through the tabs with `LEFT` and `RIGHT` arrows, it will jump again to the input search with `DOWN` arrow.
+From the tabset it is possible to navigate through the tabs with `LEFT` and `RIGHT` arrows,
+it will jump again to the input search with `DOWN` arrow.
 
-From the emoji list you can navigate through the first emoji of each emoji tabset with `TAB`. If you are on the last emoji tabset (flags), it will jump to the skin tone selector.
-You can also navigate through all the emojis with arrow keys. It will detect automatically if there are emojis on the subsequen emoji tabset and it will jump to the desire location.
+From the emoji list you can navigate through the first emoji of each emoji tabset with `TAB`.
+If you are on the last emoji tabset (flags), it will jump to the skin tone selector.
+You can also navigate through all the emojis with arrow keys.
+It will detect automatically if there are emojis on the subsequen emoji tabset and it will jump to the desire location.
 
-In the skin tone selector the user can press `ENTER` to open the skin tone selector and select the desire skin tone, it can navigate through with `LEFT` and `RIGHT` arrows and select with `ENTER`.
+In the skin tone selector the user can press `ENTER` to open the skin tone selector and select the desire skin tone,
+it can navigate through with `LEFT` and `RIGHT` arrows and select with `ENTER`.
 This selection will close the skin tone selector and emit the `skin-tone` event with the selected skin tone.
 
 From the skin tone selector the user can jump to the tabset selector with `TAB` button.
