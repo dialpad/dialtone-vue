@@ -55,11 +55,11 @@ We will start with the Activity set of emojis.
 First we will remove all the multiple skin tone emojis.
 
 ```
-const emojisWithoutMultipleSinToneEmojis = ref([]);
+const emojisWithoutMultipleSkinToneEmojis = ref([]);
 
 function removeMultipleSkinToneEmojis () {
   const excludedRegex = /_tone[1-5]_tone[1-5]/;
-  emojisWithoutMultipleSinToneEmojis.value = emojis.objects.filter(obj => !excludedRegex.test(obj.shortname));
+  emojisWithoutMultipleSkinToneEmojis.value = emojis.objects.filter(obj => !excludedRegex.test(obj.shortname));
 }
 ```
 
@@ -89,7 +89,7 @@ To do this we will do the following.
 Since the emojis have a skin tone modifier like '_tone1/2/3/4/5' in the name, this allows us to filter it.
 We will use this function to extract the emojis with only one skin tone modifier.
 
-From the emojisWithoutMultipleSinToneEmojis array (which we obtain after running our removeMultipleSkinToneEmojis function),
+From the emojisWithoutMultipleSkinToneEmojis array (which we obtain after running our removeMultipleSkinToneEmojis function),
 we will get the emojis with only one skin tone modifier.
 For this, we will re-use the filterEmojisBySkinTone to get only those with '_tone1'.
 
