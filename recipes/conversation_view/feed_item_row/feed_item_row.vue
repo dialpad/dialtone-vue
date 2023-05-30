@@ -3,7 +3,7 @@
     ref="FeedItemRef"
     navigation-type="none"
     v-bind="$attrs"
-    :class="['d-w100p', 'd-box-border', 'd-ps-relative', 'd-px8', { 'd-bgc-secondary-opaque': isActive }]"
+    :class="listItemClasses"
     data-qa="feed-item-row"
     v-on="feedListeners"
   >
@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import {} from './feed_item_row_constants.js';
+import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './feed_item_row_constants.js';
 import { DtAvatar } from '@/components/avatar';
 import { DtLazyShow } from '@/components/lazy_show';
 import { DtListItem } from '@/components/list_item';
@@ -157,11 +157,21 @@ export default {
       default: false,
     },
 
-    // TODO: implement as part of DT-1157
-    // state: {
-    //   type: String,
-    //   default: 'normal',
-    // },
+    /**
+     * state for the feed item row. Can be default, searched & error
+     */
+    state: {
+      type: String,
+      default: 'NORMAL',
+    },
+
+    /**
+     * Whether to fade the background color to default
+     */
+    fade: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -183,6 +193,7 @@ export default {
   ],
 
   computed: {
+
     avatarInitials () {
       const name = (this.displayName || '').split(' ');
       const initials = name.map(word => word.charAt(0)).join('');
@@ -197,6 +208,29 @@ export default {
         focusout: () => this.setFocus(false),
       };
     },
+
+    listItemClasses () {
+      return [
+        'd-w100p',
+        'd-box-border',
+        'd-ps-relative',
+        'd-px8',
+        { 'd-bgc-secondary-opaque': this.isActive && this.state === DEFAULT_FEED_ROW_STATE },
+        FEED_ROW_STATE_BACKGROUND_COLOR[this.state],
+        'feed-item-row',
+        'd-t',
+        'd-tp-bgc',
+      ];
+    },
+  },
+
+  mounted () {
+    if (!this.fade) {
+      return;
+    }
+    setTimeout(() => {
+      this.$refs.FeedItemRef.$el.classList.remove(FEED_ROW_STATE_BACKGROUND_COLOR[this.state]);
+    }, 1500);
   },
 
   methods: {
@@ -214,5 +248,9 @@ export default {
 <style lang="less">
 content-text-wrapper-class:not(img) {
   line-height: 1.6rem;
+}
+
+.feed-item-row {
+  transition-duration: 2s !important;
 }
 </style>
