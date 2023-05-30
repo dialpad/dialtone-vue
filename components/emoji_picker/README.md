@@ -1,5 +1,5 @@
-We don't support all the emojis, like those which have multiple skin tone modifier.
-We also dont support the regional / modifier and emojis-skin-tones set of emojis.
+Emoji's with multiple skin tone modifiers will only be shown in their default form, as we don't support all the emojis.
+We also don't support the regional / modifier and emojis-skin-tones set of emojis.
 Since our component doesn't handle all the emojis, we need to extract the emojis from the json file.
 
 
