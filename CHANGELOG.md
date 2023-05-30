@@ -1,3 +1,37 @@
+## [3.69.3](https://github.com/dialpad/dialtone-vue/compare/v3.69.2...v3.69.3) (2023-05-25)
+
+
+### Bug Fixes
+
+* correct dialtone-icons version ([352a9bb](https://github.com/dialpad/dialtone-vue/commit/352a9bb2094d36840a13a11f0e20dcd8b90c3151))
+
+## [3.69.2](https://github.com/dialpad/dialtone-vue/compare/v3.69.1...v3.69.2) (2023-05-25)
+
+
+### Bug Fixes
+
+* **Keyboard Shortcut:** inverted border color ([9c87729](https://github.com/dialpad/dialtone-vue/commit/9c87729d4508bc166a41658d3ed0020c50701a62))
+
+## [3.69.1](https://github.com/dialpad/dialtone-vue/compare/v3.69.0...v3.69.1) (2023-05-24)
+
+
+### Bug Fixes
+
+* **Dt Scroller:** fix dynamic scroller not passing fieldKey properly ([#992](https://github.com/dialpad/dialtone-vue/issues/992)) ([6859a5d](https://github.com/dialpad/dialtone-vue/commit/6859a5d558423c394dce790ea531523aaa1f9de0))
+* **Leftbar General Row:** add href for focusability ([#995](https://github.com/dialpad/dialtone-vue/issues/995)) ([0ddfc2d](https://github.com/dialpad/dialtone-vue/commit/0ddfc2d0e409141a3af92ee532c5577fb2cd7198))
+
+# [3.69.0](https://github.com/dialpad/dialtone-vue/compare/v3.68.0...v3.69.0) (2023-05-23)
+
+
+### Bug Fixes
+
+* change to fnv algo ([1177a06](https://github.com/dialpad/dialtone-vue/commit/1177a0647fa315f9dbdc4c8d8522e47774c946ed))
+
+
+### Features
+
+* update dialtone icons ([bfffabb](https://github.com/dialpad/dialtone-vue/commit/bfffabba29f5fd48c2cfffdbb017ea0a18f2d62c))
+
 # [3.68.0](https://github.com/dialpad/dialtone-vue/compare/v3.67.4...v3.68.0) (2023-05-18)
 
 
