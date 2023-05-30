@@ -39,6 +39,7 @@
         @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="emits('selected-emoji', $event)"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
+        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
         @keydown.esc="emits('close')"
       />
     </div>
