@@ -11,6 +11,7 @@
           :time="time"
           :short-time="shortTime"
           :is-active="true"
+          :state="state"
           @hover="onHover"
           @focus="onFocus"
         >
@@ -158,6 +159,47 @@
             #menu
           >
             <dt-icon :name="menu" />
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
+    <div>
+      <h3>Feed item state "error"</h3>
+      <ul>
+        <dt-recipe-feed-item-row
+          :show-header="false"
+          :avatar-image-url="avatarImageUrl"
+          :display-name="displayName"
+          :time="time"
+          :short-time="shortTime"
+          :is-active="true"
+          state="ERROR"
+          @hover="onHover"
+          @focus="onFocus"
+        >
+          <template v-if="defaultSlot">
+            <span v-html="defaultSlot" />
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
+    <div>
+      <h3>Feed item state "searched" with fade true</h3>
+      <ul>
+        <dt-recipe-feed-item-row
+          :show-header="false"
+          :avatar-image-url="avatarImageUrl"
+          :display-name="displayName"
+          :time="time"
+          :short-time="shortTime"
+          :is-active="true"
+          state="SEARCHED"
+          fade="True"
+          @hover="onHover"
+          @focus="onFocus"
+        >
+          <template v-if="defaultSlot">
+            <span v-html="defaultSlot" />
           </template>
         </dt-recipe-feed-item-row>
       </ul>
