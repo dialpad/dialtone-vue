@@ -165,12 +165,22 @@ function scrollToItem (index) {
   if (scroller.value) scroller.value.scrollToItem(index);
 }
 
-function updateItems () {
-  if (scroller.value) scroller.value._updateVisibleItems(true);
+function updateItems (dynamic = false) {
+  if (!scroller.value) return;
+  if (dynamic) {
+    scroller.value.dynamicScrollerUpdateItems();
+  } else {
+    scroller.value._updateVisibleItems(true);
+  }
 }
 
-function updateItemsFromBottom () {
-  if (scroller.value) scroller.value._updateVisibleItems(false, true);
+function updateItemsFromBottom (dynamic = false) {
+  if (!scroller.value) return;
+  if (dynamic) {
+    scroller.value.dynamicScrollerUpdateItemsFromBottom();
+  } else {
+    scroller.value._updateVisibleItems(false, true);
+  }
 }
 
 function validateProps () {
