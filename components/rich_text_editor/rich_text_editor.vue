@@ -9,7 +9,9 @@
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import Document from '@tiptap/extension-document';
 import Paragraph from '@tiptap/extension-paragraph';
+import Placeholder from '@tiptap/extension-placeholder';
 import Text from '@tiptap/extension-text';
+import Link from './extensions/link';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
@@ -92,6 +94,22 @@ export default {
         return RICH_TEXT_EDITOR_OUTPUT_FORMATS.includes(outputFormat);
       },
     },
+
+    /**
+     * Enables the Link extension and optionally passes configurations to it
+     */
+    link: {
+      type: [Boolean, Object],
+      default: false,
+    },
+
+    /**
+     * Placeholder text
+     */
+    placeholderText: {
+      type: String,
+      default: 'Type here...',
+    },
   },
 
   emits: [
@@ -134,7 +152,16 @@ export default {
     extensions () {
       // These are the default extensions needed jsut for plain text.
       const extensions = [Document, Paragraph, Text];
-      // TODO: Add logic for extensions passed as props.
+      if (this.link) {
+        extensions.push(this.getExtension(Link, this.link));
+      }
+      // Enable placeholderText
+      extensions.push(
+        this.getExtension(
+          Placeholder,
+          { placeholder: this.placeholderText },
+        ),
+      );
       return extensions;
     },
 
@@ -248,3 +275,13 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+.ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #adb5bd;
+    pointer-events: none;
+    height: 0;
+  }
+</style>
