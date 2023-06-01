@@ -11,7 +11,6 @@ import Document from '@tiptap/extension-document';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
 import Text from '@tiptap/extension-text';
-import Link from './extensions/link';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
@@ -96,14 +95,6 @@ export default {
     },
 
     /**
-     * Enables the Link extension and optionally passes configurations to it
-     */
-    link: {
-      type: [Boolean, Object],
-      default: false,
-    },
-
-    /**
      * Placeholder text
      */
     placeholderText: {
@@ -152,9 +143,6 @@ export default {
     extensions () {
       // These are the default extensions needed jsut for plain text.
       const extensions = [Document, Paragraph, Text];
-      if (this.link) {
-        extensions.push(this.getExtension(Link, this.link));
-      }
       // Enable placeholderText
       extensions.push(
         this.getExtension(

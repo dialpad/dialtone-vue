@@ -6,7 +6,6 @@
     :input-class="inputClass"
     :output-format="outputFormat"
     :auto-focus="autoFocus"
-    :link="link"
     :placeholder-text="placeholderText"
     @blur="onBlur"
     @input="onInput"
