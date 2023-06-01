@@ -106,7 +106,7 @@ function switchAutoScrolling () {
 
 function replaceItems () {
   dynamicItems.value = [...dynamicItems.value].reverse();
-  scroller.value.updateItems(true);
+  scroller.value.updateItems();
 }
 </script>
 

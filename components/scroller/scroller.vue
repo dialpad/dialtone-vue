@@ -165,18 +165,18 @@ function scrollToItem (index) {
   if (scroller.value) scroller.value.scrollToItem(index);
 }
 
-function updateItems (dynamic = false) {
+function updateItems () {
   if (!scroller.value) return;
-  if (dynamic) {
+  if (props.dynamic) {
     scroller.value.dynamicScrollerUpdateItems();
   } else {
     scroller.value._updateVisibleItems(true);
   }
 }
 
-function updateItemsFromBottom (dynamic = false) {
+function updateItemsFromBottom () {
   if (!scroller.value) return;
-  if (dynamic) {
+  if (props.dynamic) {
     scroller.value.dynamicScrollerUpdateItemsFromBottom();
   } else {
     scroller.value._updateVisibleItems(false, true);
