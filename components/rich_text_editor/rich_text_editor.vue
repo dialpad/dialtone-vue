@@ -97,7 +97,7 @@ export default {
     /**
      * Placeholder text
      */
-    placeholderText: {
+    placeholder: {
       type: String,
       default: 'Type here...',
     },
@@ -145,10 +145,7 @@ export default {
       const extensions = [Document, Paragraph, Text];
       // Enable placeholderText
       extensions.push(
-        this.getExtension(
-          Placeholder,
-          { placeholder: this.placeholderText },
-        ),
+        Placeholder.configure({ placeholder: this.placeholder }),
       );
       return extensions;
     },
@@ -264,11 +261,11 @@ export default {
 };
 </script>
 
-<style lang="less">
-.ProseMirror p.is-editor-empty:first-child::before {
+<style>
+  .ProseMirror p.is-editor-empty:first-child::before {
     content: attr(data-placeholder);
     float: left;
-    color: #adb5bd;
+    color: var(--fc-placeholder);
     pointer-events: none;
     height: 0;
   }
