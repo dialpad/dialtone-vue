@@ -162,7 +162,8 @@ export default {
      */
     state: {
       type: String,
-      default: 'NORMAL',
+      default: DEFAULT_FEED_ROW_STATE,
+      validator: state => Object.keys(FEED_ROW_STATE_BACKGROUND_COLOR).includes(state),
     },
 
     /**
