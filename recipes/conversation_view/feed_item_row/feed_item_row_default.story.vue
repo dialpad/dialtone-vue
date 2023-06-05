@@ -8,7 +8,6 @@
       :short-time="shortTime"
       :is-active="isActive"
       :state="state"
-      :fade="fade"
       @hover="onHover"
       @focus="onFocus"
     >
