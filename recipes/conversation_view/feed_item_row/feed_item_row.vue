@@ -165,14 +165,6 @@ export default {
       default: DEFAULT_FEED_ROW_STATE,
       validator: state => Object.keys(FEED_ROW_STATE_BACKGROUND_COLOR).includes(state),
     },
-
-    /**
-     * Whether to fade the background color to default
-     */
-    fade: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   emits: [
@@ -192,6 +184,12 @@ export default {
      */
     'focus',
   ],
+
+  data () {
+    return {
+      faded: false,
+    };
+  },
 
   computed: {
 
@@ -225,15 +223,6 @@ export default {
     },
   },
 
-  mounted () {
-    if (!this.fade) {
-      return;
-    }
-    setTimeout(() => {
-      this.$refs.FeedItemRef.$el.classList.remove(FEED_ROW_STATE_BACKGROUND_COLOR[this.state]);
-    }, 1500);
-  },
-
   methods: {
     setFocus (bool) {
       this.$emit('focus', bool);
@@ -241,6 +230,16 @@ export default {
 
     setHover (bool) {
       this.$emit('hover', bool);
+    },
+
+    fade () {
+      // Do not fade if its a default feed row state
+      if (this.state === DEFAULT_FEED_ROW_STATE || this.faded === true) {
+        return;
+      }
+
+      this.$refs.FeedItemRef.$el.classList.remove(FEED_ROW_STATE_BACKGROUND_COLOR[this.state]);
+      this.faded = true;
     },
   },
 };

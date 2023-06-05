@@ -184,9 +184,15 @@
       </ul>
     </div>
     <div>
-      <h3>Feed item state "searched" with fade true</h3>
+      <h3>Feed item state "searched"</h3>
+      <dt-button
+        @click="$refs.feedItemRowFade.fade()"
+      >
+        Click to fade
+      </dt-button>
       <ul>
         <dt-recipe-feed-item-row
+          ref="feedItemRowFade"
           :show-header="false"
           :avatar-image-url="avatarImageUrl"
           :display-name="displayName"
@@ -194,7 +200,6 @@
           :short-time="shortTime"
           :is-active="true"
           state="SEARCHED"
-          fade="True"
           @hover="onHover"
           @focus="onFocus"
         >
@@ -215,6 +220,7 @@ import { DtStack } from '@/components/stack';
 import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtImageViewer } from '@/components/image_viewer';
+import { DtButton } from '@/components/button';
 
 import image from '@/common/assets/fry.gif';
 
@@ -228,6 +234,7 @@ export default {
     DtAvatar,
     DtIcon,
     DtImageViewer,
+    DtButton,
   },
 
   data () {
