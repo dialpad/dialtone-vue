@@ -1,29 +1,19 @@
 <template>
-  <div>
-    <div>
-      {{ genericProp }}
+  <div class="d-datepicker">
+    <div class="d-datepicker--header">
+      <month-year-picker />
     </div>
-    <div>
-      <!-- @slot description of the default slot -->
-      <slot>
-        The default slot
-      </slot>
-    </div>
-    <div>
-      <!-- @slot description of the named slot -->
-      <slot name="namedSlot" />
-    </div>
-    <button @click="$emit('generic-event')">Click to fire generic-event</button>
   </div>
 </template>
 
 <script>
 import {} from './datepicker_constants';
+import MonthYearPicker from './modules/month-year-picker.vue';
 
 export default {
   name: 'DtDatepicker',
 
-  components: {},
+  components: { MonthYearPicker },
 
   mixins: [],
 
@@ -39,8 +29,8 @@ export default {
      */
     genericProp: {
       type: String,
-      default: 'a generic prop'
-    }
+      default: 'a generic prop',
+    },
   },
 
   emits: [
@@ -50,7 +40,7 @@ export default {
      * @event generic-event
      * @type {Boolean}
      */
-    'generic-event'
+    'generic-event',
   ],
 
   data () {
