@@ -1,3 +1,52 @@
+## [2.85.1](https://github.com/dialpad/dialtone-vue/compare/v2.85.0...v2.85.1) (2023-05-25)
+
+
+### Bug Fixes
+
+* **Keyboard Shortcut:** inverted border color ([75b0de2](https://github.com/dialpad/dialtone-vue/commit/75b0de235bf762805384f7c1eefaf2891dc31268))
+* **Leftbar General Row:** add href for focusability ([#994](https://github.com/dialpad/dialtone-vue/issues/994)) ([d7954a7](https://github.com/dialpad/dialtone-vue/commit/d7954a709a9b3ce10d4aefb3aed9e726d717cab3))
+
+# [2.85.0](https://github.com/dialpad/dialtone-vue/compare/v2.84.1...v2.85.0) (2023-05-23)
+
+
+### Features
+
+* update dialtone-icons ([7fc7543](https://github.com/dialpad/dialtone-vue/commit/7fc75435abbf5ad0b525b276e262143a92d64ea7))
+
+## [2.84.1](https://github.com/dialpad/dialtone-vue/compare/v2.84.0...v2.84.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* change to fnv algo ([ff2bc21](https://github.com/dialpad/dialtone-vue/commit/ff2bc21422e84c7322eb405485aec6fa310899e7))
+
+# [2.84.0](https://github.com/dialpad/dialtone-vue/compare/v2.83.5...v2.84.0) (2023-05-18)
+
+
+### Bug Fixes
+
+* set node engine minimum to 12.20 ([#988](https://github.com/dialpad/dialtone-vue/issues/988)) ([9c0b45d](https://github.com/dialpad/dialtone-vue/commit/9c0b45db2c937a634625cb7bcd3a7157481c499b))
+
+
+### Features
+
+* **Avatar:** update to flat colors ([#982](https://github.com/dialpad/dialtone-vue/issues/982)) ([74e98da](https://github.com/dialpad/dialtone-vue/commit/74e98da8b5e60bab559e670d95a8c3ee8f123b18))
+* **Confact Info:** add `showAvatar` and `avatarIcon` props ([#981](https://github.com/dialpad/dialtone-vue/issues/981)) ([80cbf02](https://github.com/dialpad/dialtone-vue/commit/80cbf02d734745b5962e97a8cac5858432d4b19e))
+
+## [2.83.5](https://github.com/dialpad/dialtone-vue/compare/v2.83.4...v2.83.5) (2023-05-17)
+
+
+### Bug Fixes
+
+* component documentation link class ([#985](https://github.com/dialpad/dialtone-vue/issues/985)) ([a565285](https://github.com/dialpad/dialtone-vue/commit/a565285cac178cb30339e81853d5e3b445444bdc))
+
+## [2.83.4](https://github.com/dialpad/dialtone-vue/compare/v2.83.3...v2.83.4) (2023-05-17)
+
+
+### Bug Fixes
+
+* update dialtone-icons ([14ae0e6](https://github.com/dialpad/dialtone-vue/commit/14ae0e6200baeecdbfb7fc87a3c3fb5d38bedd31))
+
 ## [2.83.3](https://github.com/dialpad/dialtone-vue/compare/v2.83.2...v2.83.3) (2023-05-15)
 
 
