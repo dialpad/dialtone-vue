@@ -62,26 +62,22 @@ describe('Links Utils Tests', () => {
 
   describe('hasValidPrefix', () => {
     // Test Environment
-    const charactersToText = ['@', '#'];
+    const charactersToTest = [['@'], ['#']];
 
-    charactersToText.forEach(c => {
-      describe(`when match has ${c} character`, () => {
-        it(`should return false when index has ${c}`, () => {
-          expect(hasValidPrefix(`not ${c}valid`, { index: 4 })).toBe(false);
-        });
+    it.each(charactersToTest)('should return false when index has "%s" character', async (input) => {
+      expect(hasValidPrefix(`not ${input}valid`, { index: 4 })).toBe(false);
+    });
 
-        it(`should return false when index - 1 has ${c}`, () => {
-          expect(hasValidPrefix(`not ${c}valid`, { index: 5 })).toBe(false);
-        });
+    it.each(charactersToTest)('should return false when index - 1 has "%s" character', async (input) => {
+      expect(hasValidPrefix(`not ${input}valid`, { index: 5 })).toBe(false);
+    });
 
-        it(`should return true when index - 2 has ${c}`, () => {
-          expect(hasValidPrefix(`not ${c}valid`, { index: 6 })).toBe(true);
-        });
+    it.each(charactersToTest)('should return true when index - 2 has "%s" character', async (input) => {
+      expect(hasValidPrefix(`not ${input}valid`, { index: 6 })).toBe(true);
+    });
 
-        it(`should return true when index + 1 has ${c}`, () => {
-          expect(hasValidPrefix(`not ${c}valid`, { index: 3 })).toBe(true);
-        });
-      });
+    it.each(charactersToTest)('should return true when index + 1 has "%s" character', async (input) => {
+      expect(hasValidPrefix(`not ${input}valid`, { index: 3 })).toBe(true);
     });
   });
 
@@ -91,22 +87,22 @@ describe('Links Utils Tests', () => {
     const symbolPrefixes = ['&', '&amp;'];
     const symbolCodes = ['lt', 'gt', 'quot', 'apos', 'raquo', 'laquo', 'rsaquo', 'lsaquo'];
     const symbols = symbolCodes.map(c => symbolPrefixes.map(p => p + c + ';')).flat();
-    const punctuationMarks = [...characters, ...symbols];
+    const punctuationMarks = [...characters, ...symbols].map(c => [c]);
 
-    describe(`when string does not ends with a punctuation character`, () => {
-      it(`should return original string`, () => {
-        expect(trimEndPunctiation('hello world')).toBe('hello world');
-        expect(trimEndPunctiation('!hello world')).toBe('!hello world');
-        expect(trimEndPunctiation('hello worl!d')).toBe('hello worl!d');
-        expect(trimEndPunctiation('hello world! ')).toBe('hello world! ');
+    describe('when string does not end with a punctuation character', () => {
+      it.each([
+        ['hello world'],
+        ['!hello world'],
+        ['hello worl!d'],
+        ['hello world! '],
+      ])('should return original string "%s"', async (input) => {
+        expect(trimEndPunctiation(input)).toBe(input);
       });
     });
 
-    punctuationMarks.forEach(p => {
-      describe(`when string ends with ${p} character`, () => {
-        it('should return trimmed string', () => {
-          expect(trimEndPunctiation(`hello world${p}`)).toBe('hello world');
-        });
+    describe('when string ends with a punctuation character', () => {
+      it.each(punctuationMarks)('should return trimmed string when ends with "%s"', async (input) => {
+        expect(trimEndPunctiation(`hello world${input}`)).toBe('hello world');
       });
     });
   });
@@ -214,11 +210,16 @@ describe('Links Utils Tests', () => {
       });
 
       describe('when given a dumb regex', () => {
-        it('should return the matching word without blowing up', () => {
-          const everythingMatch = { text: 'everything', from: 0, to: 10 };
-          expect(getWordAtUntil('everything', 3, 'left', /(.*)/g))
+        const dumbRegex = /(.*)/g;
+        const everythingMatch = { text: 'everything', from: 0, to: 10 };
+
+        it('should return the matching word without blowing up when direction is left', () => {
+          expect(getWordAtUntil(everythingMatch.text, 3, 'left', dumbRegex))
             .toEqual(everythingMatch);
-          expect(getWordAtUntil('everything', 3, 'right', /(.*)/g))
+        });
+
+        it('should return the matching word without blowing up when direction is right', () => {
+          expect(getWordAtUntil(everythingMatch.text, 3, 'right', dumbRegex))
             .toEqual(everythingMatch);
         });
       });
