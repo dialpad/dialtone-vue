@@ -1,6 +1,6 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtRichTextEditor from '../../rich_text_editor.vue';
-import { EditorContent } from '@tiptap/vue-2';
+import { EditorContent } from '@tiptap/vue-3';
 
 // Wrappers
 let wrapper;
@@ -11,7 +11,6 @@ let propsData;
 let attrs;
 let slots;
 let listeners;
-const localVue = createLocalVue();
 
 // Constants
 const baseProps = {
@@ -68,7 +67,6 @@ const _mountWrapper = () => {
     listeners,
     attrs,
     slots,
-    localVue,
     attachTo: document.body,
   });
 };

@@ -108,7 +108,7 @@ export const WithLinks = {
   ...Default,
   args: {
     link: true,
-    value: 'The editor can autolink URLs: dialpad.com, https://www.dialpad.com/about-us/, ' +
+    modelValue: 'The editor can autolink URLs: dialpad.com, https://www.dialpad.com/about-us/, ' +
     'IP addresses: 192.158.1.38, email addresses: noreply@dialpad.com and phone numbers: (778) 765-8813, +17787658813!',
   },
 };
