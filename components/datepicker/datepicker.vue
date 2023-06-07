@@ -3,25 +3,21 @@
     <div class="d-datepicker--header">
       <month-year-picker />
     </div>
+    <div class="d-datepicker--body">
+      <calendar />
+    </div>
   </div>
 </template>
 
 <script>
 import {} from './datepicker_constants';
 import MonthYearPicker from './modules/month-year-picker.vue';
+import Calendar from './modules/calendar.vue';
 
 export default {
   name: 'DtDatepicker',
 
-  components: { MonthYearPicker },
-
-  mixins: [],
-
-  /* inheritAttrs: false is generally an option we want to set on library
-    components. This allows any attributes passed in that are not recognized
-    as props to be passed down to another element or component using v-bind:$attrs
-    more info: https://vuejs.org/v2/api/#inheritAttrs */
-  // inheritAttrs: false,
+  components: { MonthYearPicker, Calendar },
 
   props: {
     /**
