@@ -1,7 +1,7 @@
 <template>
   <dt-recipe-general-row
     :unread-count="unreadCount"
-    :description="`${name} ${presenceText} ${userStatus}`"
+    :description="contactDescription"
     :has-unreads="hasUnreads"
     :selected="selected"
     :has-call-button="hasCallButton"
@@ -245,6 +245,12 @@ export default {
 
     avatarInitial () {
       return this.name?.[0] ?? '';
+    },
+
+    contactDescription () {
+      return [this.name, this.presenceText, this.userStatus]
+        .filter(str => !!str)
+        .join(' ');
     },
   },
 };
