@@ -11,7 +11,7 @@
         :key="indexWeek + indexDays"
         type="button"
         :aria-label="day.text"
-        @click="$emit('select-date', day.value)"
+        @click="selectDay(day)"
         @keydown="$emit('select-date', day.value)"
       >
         {{ day.text }}
@@ -30,6 +30,11 @@ export default {
   props: {
     calendarDays: {
       type: Array,
+      required: true,
+    },
+
+    locale: {
+      type: String,
       required: true,
     },
   },
@@ -52,12 +57,17 @@ export default {
 
   computed: {
     weekDays () {
-      return getDayNames('en-US', WEEK_START);
+      return getDayNames(this.locale, WEEK_START);
     },
   },
 
   watch: {},
 
-  methods: {},
+  methods: {
+    selectDay (day) {
+      if (!day.current) { return; }
+      this.$emit('select-date', day.value);
+    },
+  },
 };
 </script>

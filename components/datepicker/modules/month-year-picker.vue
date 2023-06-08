@@ -61,6 +61,13 @@ export default {
 
   components: { DtIcon },
 
+  props: {
+    selectedDate: {
+      type: Date,
+      required: true,
+    },
+  },
+
   emits: [
     /**
      * Will retrieve the calendar days of the given date
@@ -73,8 +80,8 @@ export default {
 
   data () {
     return {
-      year: getYear(new Date()),
-      month: getMonth(new Date()),
+      year: getYear(this.selectedDate),
+      month: getMonth(this.selectedDate),
     };
   },
 
@@ -85,7 +92,7 @@ export default {
     },
 
     getMonth () {
-      return format(new Date(this.year, this.month), 'MMMM');
+      return format(new Date(2000, this.month, 1), 'MMMM');
     },
   },
 
@@ -95,7 +102,7 @@ export default {
 
   methods: {
     handleMonth (isNext = false) {
-      const initialDate = set(new Date(), { month: this.month, year: this.year });
+      const initialDate = set(this.selectedDate, { month: this.month, year: this.year });
       const date = isNext ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
 
       this.month = getMonth(date);

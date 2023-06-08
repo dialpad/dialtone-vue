@@ -2,12 +2,15 @@
   <div class="d-datepicker">
     <div class="d-datepicker--header">
       <month-year-picker
+        :selected-date="selectedDate"
         @calendar-days="updateCalendarDays"
       />
     </div>
     <div class="d-datepicker--body">
       <calendar
+        :locale="locale"
         :calendar-days="calendarDays"
+        :selected-date="selectedDate"
         @select-date="$emit('selected-date', $event)"
       />
     </div>
@@ -23,7 +26,17 @@ export default {
 
   components: { MonthYearPicker, Calendar },
 
-  props: {},
+  props: {
+    locale: {
+      type: String,
+      default: 'en-US',
+    },
+
+    selectedDate: {
+      type: Date,
+      default: () => (new Date()),
+    },
+  },
 
   emits: [
     /**
