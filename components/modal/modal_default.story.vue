@@ -106,7 +106,7 @@ export default {
     },
 
     secondaryButtonKind () {
-      return this.$attrs.kind === 'danger' ? 'muted' : 'default';
+      return this.kind === 'danger' ? 'muted' : 'default';
     },
   },
 
