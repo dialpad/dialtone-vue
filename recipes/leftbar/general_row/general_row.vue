@@ -343,7 +343,9 @@ export default {
     },
 
     getAriaLabel () {
-      return this.ariaLabel ? this.ariaLabel : `${this.description} ${this.unreadCountTooltip} ${this.dndTextTooltip}`;
+      return this.ariaLabel
+        ? this.ariaLabel
+        : [this.description, this.unreadCountTooltip, this.dndTextTooltip].filter(str => !!str).join(' ');
     },
   },
 
