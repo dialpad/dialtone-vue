@@ -42,7 +42,7 @@ export default {
 
     async focusElementById (elementId) {
       await this.$nextTick();
-      const result = this.$el.querySelector(elementId);
+      const result = this.$el?.querySelector(elementId);
       if (result) {
         result.focus();
         return;
@@ -50,7 +50,7 @@ export default {
 
       // eslint-disable-next-line no-console
       console.warn('Could not find the element specified in dt-modal prop "initialFocusElement". ' +
-          'Defaulting to focusing the first element.');
+        'Defaulting to focusing the first element.');
       await this.focusFirstElement();
     },
 
