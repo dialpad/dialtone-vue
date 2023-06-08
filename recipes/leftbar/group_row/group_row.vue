@@ -1,7 +1,7 @@
 <template>
   <dt-recipe-general-row
     :description="names"
-    :aria-label="`${groupCountText} ${names}`"
+    :aria-label="ariaLabel"
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
     :unread-count-tooltip="unreadCountTooltip"
@@ -102,5 +102,11 @@ export default {
      */
     'click',
   ],
+
+  computed: {
+    ariaLabel () {
+      return [this.groupCountText, this.names].filter(str => !!str).join(' ');
+    },
+  },
 };
 </script>
