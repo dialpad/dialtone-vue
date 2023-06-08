@@ -22,27 +22,11 @@
     </div>
     <div>
       <p>
-        {{ month }}
-        <br>
-        <br>
-        {{ year }}
-        <br>
-        <br>
-        {{ getDays }}
-        <br>
-        <br>
         {{ getMonth }}
         <br>
         <br>
-        {{ weekDays }}
-        <br>
-        <br>
+        {{ year }}
       </p>
-      <div v-for="week in dates">
-        <span v-for="day in week.days">
-          {{ day.text }}
-        </span>
-      </div>
     </div>
     <div>
       <button
@@ -69,41 +53,44 @@
 
 <script>
 import { DtIcon } from '@/components/icon';
-import { addMonths, format, getDaysInMonth, getMonth, set, subMonths } from 'date-fns';
-import { getDayNames, getCalendarDays } from '../utils';
+import { getYear, addMonths, format, getMonth, set, subMonths } from 'date-fns';
+import { getCalendarDays } from '../utils';
 
 export default {
   name: 'DtDatepickerMonthYearPicker',
 
   components: { DtIcon },
 
+  emits: [
+    /**
+     * Will retrieve the calendar days of the given date
+     *
+     * @event calendar-days
+     * @type {Array}
+     */
+    'calendar-days',
+  ],
+
   data () {
     return {
-      minDate: null,
-      maxDate: null,
-
-      year: 2023,
-      month: 0,
+      year: getYear(new Date()),
+      month: getMonth(new Date()),
     };
   },
 
   computed: {
-    // Get dates for the currently selected month and year
-    dates () {
+    // Get days for the currently selected month and year
+    calendarDays () {
       return getCalendarDays(this.month, this.year);
     },
 
     getMonth () {
       return format(new Date(this.year, this.month), 'MMMM');
     },
+  },
 
-    getDays () {
-      return getDaysInMonth(new Date(this.year, this.month));
-    },
-
-    weekDays () {
-      return getDayNames('en-US', 0);
-    },
+  mounted () {
+    this.$emit('calendar-days', this.calendarDays);
   },
 
   methods: {
@@ -112,14 +99,13 @@ export default {
       const date = isNext ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
 
       this.month = getMonth(date);
-      // emit('update-month-year', { month, year });
+      this.$emit('calendar-days', this.calendarDays);
     },
 
     handleYear (increment = false) {
       this.year = increment ? this.year + 1 : this.year - 1;
-      // emit('update-month-year', { year: increment ? props.year + 1 : props.year - 1, month: props.month });
+      this.$emit('calendar-days', this.calendarDays);
     },
-
   },
 };
 </script>

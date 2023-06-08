@@ -4,6 +4,7 @@ import {
   setSeconds,
   setMilliseconds,
 } from 'date-fns';
+import { WEEK_START } from '@/components/datepicker/datepicker_constants.js';
 
 const resetDateTime = (value) => {
   let dateParse = getDate(JSON.parse(JSON.stringify(value)));
@@ -31,7 +32,6 @@ const getWeekDays = (startDay, month) => {
       text: next.getDate(),
       value: next,
       current: !isNext,
-      classData: {},
     });
   }
   return dates;
@@ -52,7 +52,7 @@ export const getCalendarDays = (month, year) => {
   const firstDate = getDate(new Date(year, month));
   const lastDate = getDate(new Date(year, month + 1, 0));
 
-  const weekStartsOn = 0;
+  const weekStartsOn = WEEK_START;
 
   const firstDateInCalendar = startOfWeek(firstDate, { weekStartsOn });
 

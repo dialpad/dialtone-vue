@@ -1,16 +1,20 @@
 <template>
   <div class="d-datepicker">
     <div class="d-datepicker--header">
-      <month-year-picker />
+      <month-year-picker
+        @calendar-days="updateCalendarDays"
+      />
     </div>
     <div class="d-datepicker--body">
-      <calendar />
+      <calendar
+        :calendar-days="calendarDays"
+        @select-date="$emit('selected-date', $event)"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import {} from './datepicker_constants';
 import MonthYearPicker from './modules/month-year-picker.vue';
 import Calendar from './modules/calendar.vue';
 
@@ -19,35 +23,33 @@ export default {
 
   components: { MonthYearPicker, Calendar },
 
-  props: {
-    /**
-     * description of this generic prop
-     */
-    genericProp: {
-      type: String,
-      default: 'a generic prop',
-    },
-  },
+  props: {},
 
   emits: [
     /**
-     * Event fired when something happens
+     * Event fired when a date is selected
      *
-     * @event generic-event
-     * @type {Boolean}
+     * @event selected-date
+     * @type {Date}
      */
-    'generic-event',
+    'selected-date',
   ],
 
   data () {
-    return {};
+    return {
+      calendarDays: [],
+    };
   },
 
   computed: {},
 
   watch: {},
 
-  methods: {},
+  methods: {
+    updateCalendarDays (days) {
+      this.calendarDays = days;
+    },
+  },
 };
 </script>
 

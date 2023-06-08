@@ -1,5 +1,6 @@
-export const DEFAULT_CONSTANTS = null;
-
-export default {
-  DEFAULT_CONSTANTS,
-};
+/**
+ * Week start day
+ * 0 - Sunday
+ * 1 - Monday
+ */
+export const WEEK_START = 0;
