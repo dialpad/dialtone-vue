@@ -1,6 +1,10 @@
 <template>
   <div>
     <dt-datepicker
+      :prev-month-label="prevMonthLabel"
+      :next-month-label="nextMonthLabel"
+      :prev-year-label="prevYearLabel"
+      :next-year-label="nextYearLabel"
       :selected-date="date"
       @selected-date="date = $event"
     />
@@ -17,6 +21,10 @@ export default {
   data () {
     return {
       date: new Date(),
+      prevMonthLabel: 'Previous month',
+      nextMonthLabel: 'Next month',
+      prevYearLabel: 'Previous year',
+      nextYearLabel: 'Next year',
     };
   },
 };

@@ -38,7 +38,7 @@ describe('DtDatepicker Tests', function () {
   };
 
   // Setup
-  beforAll(function () {
+  beforeAll(() => {
     testContext = {};
     testContext.localVue = createLocalVue();
   });

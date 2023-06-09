@@ -2,6 +2,7 @@
   <div class="d-datepicker__month-year-picker">
     <div>
       <button
+        :aria-label="prevYearLabel"
         @click="handleYear(false)"
       >
         <dt-icon
@@ -12,6 +13,7 @@
     </div>
     <div>
       <button
+        :aria-label="prevMonthLabel"
         @click="handleMonth(false)"
       >
         <dt-icon
@@ -30,6 +32,7 @@
     </div>
     <div>
       <button
+        :aria-label="nextMonthLabel"
         @click="handleMonth(true)"
       >
         <dt-icon
@@ -40,6 +43,7 @@
     </div>
     <div>
       <button
+        :aria-label="nextYearLabel"
         @click="handleYear(true)"
       >
         <dt-icon
@@ -62,6 +66,26 @@ export default {
   components: { DtIcon },
 
   props: {
+    prevMonthLabel: {
+      type: String,
+      required: true,
+    },
+
+    nextMonthLabel: {
+      type: String,
+      required: true,
+    },
+
+    prevYearLabel: {
+      type: String,
+      required: true,
+    },
+
+    nextYearLabel: {
+      type: String,
+      required: true,
+    },
+
     selectedDate: {
       type: Date,
       required: true,
