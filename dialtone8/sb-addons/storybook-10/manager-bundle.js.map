@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["global-externals:@storybook/addons", "../../../.storybook/manager.js"],
+  "sourcesContent": ["export default __STORYBOOKADDONS__;\nconst { addons, types, mockChannel } = __STORYBOOKADDONS__;\nexport { addons, types, mockChannel };", "import { addons } from '@storybook/addons';\n\nconst CSS_TO_HIDE_TEST_SECTION_FROM_SIDEBAR = `\n#visual-testing,\n*[data-parent-id*=\"visual-testing\"],\n*[title*=\"Visual Testing\"] {\n  display: none !important;\n}\n`;\n\nif (process.env.STORYBOOK_ENV === 'production') {\n  const head = document.head || document.getElementsByTagName('head')[0];\n  const style = document.createElement('style');\n  head.appendChild(style);\n  style.appendChild(\n    document.createTextNode(CSS_TO_HIDE_TEST_SECTION_FROM_SIDEBAR)\n  );\n}\n\naddons.setConfig({\n  showRoots: true,\n});\n"],
+  "mappings": ";AAAA,IAAOA,EAAQ,oBACT,CAAE,OAAAC,EAAQ,MAAAC,EAAO,YAAAC,CAAY,EAAI,oBCCvC,IAAMC,EAAwC;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,EAQE,CAC9C,IAAMC,EAAO,SAAS,MAAQ,SAAS,qBAAqB,MAAM,EAAE,CAAC,EAC/DC,EAAQ,SAAS,cAAc,OAAO,EAC5CD,EAAK,YAAYC,CAAK,EACtBA,EAAM,YACJ,SAAS,eAAeF,CAAqC,CAC/D,EAGFG,EAAO,UAAU,CACf,UAAW,EACb,CAAC",
+  "names": ["addons_default", "addons", "types", "mockChannel", "CSS_TO_HIDE_TEST_SECTION_FROM_SIDEBAR", "head", "style", "addons"]
+}
