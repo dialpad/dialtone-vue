@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtDatepicker from './datepicker.vue';
 import DtDatepickerDefaultTemplate from './datepicker_default.story.vue';
-import DtDatepickerVariantsTemplate from './datepicker_variants.story.vue';
+import { action } from '@storybook/addon-actions';
 
 /*
   Controls
@@ -20,17 +20,8 @@ import DtDatepickerVariantsTemplate from './datepicker_variants.story.vue';
 */
 
 export const argTypesData = {
-  // Props: only define things here that cannot be set by jsdoc comments on the component itself.
-  genericProp: {
-    table: {
-      type: {
-        summary: 'summary for test purposes',
-      },
-    },
-  },
-
-  // Slots
-  default: {
+  // Props
+  prevMonthLabel: {
     control: 'text',
     table: {
       type: {
@@ -38,11 +29,7 @@ export const argTypesData = {
       },
     },
   },
-  /*
-    We use the following naming scheme `<SLOT_NAME>Slot` for slot controls to prevent conflicts with props that share
-    the same name.
-  */
-  namedSlot: {
+  nextMonthLabel: {
     control: 'text',
     table: {
       type: {
@@ -51,18 +38,42 @@ export const argTypesData = {
     },
   },
 
-  // Events: Exclude this from the table as event names will automatically be added from the component itself.
-  onGenericEvent: {
-    action: 'generic-event',
+  prevYearLabel: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  nextYearLabel: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  // Action Event Handlers
+  onSelectedDate: {
     table: {
       disable: true,
+    },
+  },
+
+  'selected-date': {
+    description: 'Event fired when a date is selected',
+    table: {
+      type: { summary: 'event' },
     },
   },
 };
 
 // Set default values at the story level here.
 export const argsData = {
-  namedSlot: 'This is a named slot with it\'s default set at the story level.',
+  onSelectedDate: action('selected-date'),
 };
 
 // Story Collection
@@ -90,15 +101,4 @@ export const Default = {
     prevYearLabel: 'Previous year',
     nextYearLabel: 'Next year',
   },
-};
-
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtDatepickerVariantsTemplate,
-);
-
-export const Variants = {
-  render: VariantsTemplate,
-  args: {},
 };
