@@ -21,6 +21,7 @@
 <script>
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import DtIcon from '@/components/icon/icon.vue';
+import { safeConcatStrings } from '@/common/utils.js';
 
 export default {
   name: 'DtRecipeGroupRow',
@@ -104,7 +105,7 @@ export default {
 
   computed: {
     ariaLabel () {
-      return [this.groupCountText, this.names].filter(str => !!str).join(' ');
+      return safeConcatStrings([this.groupCountText, this.names]);
     },
   },
 };
