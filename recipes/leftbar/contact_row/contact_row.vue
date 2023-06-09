@@ -72,6 +72,7 @@ import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
 import DtIcon from '@/components/icon/icon.vue';
+import { safeConcatStrings } from '@/common/utils.js';
 
 export default {
   name: 'DtRecipeGroupRow',
@@ -250,9 +251,7 @@ export default {
     },
 
     contactDescription () {
-      return [this.name, this.presenceText, this.userStatus]
-        .filter(str => !!str)
-        .join(' ');
+      return safeConcatStrings([this.name, this.presenceText, this.userStatus]);
     },
   },
 };
