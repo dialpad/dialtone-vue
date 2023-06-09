@@ -84,7 +84,12 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 // Stories
 export const Default = {
   render: DefaultTemplate,
-  args: {},
+  args: {
+    prevMonthLabel: 'Previous month',
+    nextMonthLabel: 'Next month',
+    prevYearLabel: 'Previous year',
+    nextYearLabel: 'Next year',
+  },
 };
 
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(

@@ -21,10 +21,6 @@ export default {
   data () {
     return {
       date: new Date(),
-      prevMonthLabel: 'Previous month',
-      nextMonthLabel: 'Next month',
-      prevYearLabel: 'Previous year',
-      nextYearLabel: 'Next year',
     };
   },
 };
