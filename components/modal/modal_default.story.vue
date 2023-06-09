@@ -51,6 +51,7 @@
         <div v-else>
           <dt-button
             id="cancel-button"
+            :kind="secondaryButtonKind"
             importance="clear"
           >
             Cancel
@@ -105,6 +106,10 @@ export default {
         ...this.closeButtonProps,
         ariaLabel: 'Close',
       };
+    },
+
+    secondaryButtonKind () {
+      return this.kind === 'danger' ? 'muted' : 'default';
     },
   },
 
