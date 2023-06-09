@@ -1,28 +1,32 @@
 <template>
   <div class="d-datepicker__month-year-picker">
     <div>
-      <button
+      <dt-button
         type="button"
         :aria-label="prevYearLabel"
         @click="handleYear(false)"
       >
-        <dt-icon
-          name="chevrons-left"
-          size="300"
-        />
-      </button>
+        <template slot="icon">
+          <dt-icon
+            name="chevrons-left"
+            size="300"
+          />
+        </template>
+      </dt-button>
     </div>
     <div>
-      <button
+      <dt-button
         type="button"
         :aria-label="prevMonthLabel"
         @click="handleMonth(false)"
       >
-        <dt-icon
-          name="chevron-left"
-          size="300"
-        />
-      </button>
+        <template slot="icon">
+          <dt-icon
+            name="chevron-left"
+            size="300"
+          />
+        </template>
+      </dt-button>
     </div>
     <div>
       <p>
@@ -33,28 +37,32 @@
       </p>
     </div>
     <div>
-      <button
+      <dt-button
         type="button"
         :aria-label="nextMonthLabel"
         @click="handleMonth(true)"
       >
-        <dt-icon
-          name="chevron-right"
-          size="300"
-        />
-      </button>
+        <template slot="icon">
+          <dt-icon
+            name="chevron-right"
+            size="300"
+          />
+        </template>
+      </dt-button>
     </div>
     <div>
-      <button
+      <dt-button
         type="button"
         :aria-label="nextYearLabel"
         @click="handleYear(true)"
       >
-        <dt-icon
-          name="chevrons-right"
-          size="300"
-        />
-      </button>
+        <template slot="icon">
+          <dt-icon
+            name="chevrons-right"
+            size="300"
+          />
+        </template>
+      </dt-button>
     </div>
   </div>
 </template>
@@ -63,11 +71,12 @@
 import { DtIcon } from '@/components/icon';
 import { getYear, addMonths, format, getMonth, set, subMonths } from 'date-fns';
 import { getCalendarDays } from '../utils';
+import DtButton from '@/components/button/button.vue';
 
 export default {
   name: 'DtDatepickerMonthYearPicker',
 
-  components: { DtIcon },
+  components: { DtButton, DtIcon },
 
   props: {
     prevMonthLabel: {
