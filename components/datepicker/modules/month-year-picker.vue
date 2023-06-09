@@ -1,6 +1,7 @@
 <template>
   <div class="d-datepicker__month-year-picker">
     <div>
+      <!-- eslint-disable-next-line jsx-a11y/button-name -->
       <button
         type="button"
         :aria-label="prevYearLabel"
@@ -9,11 +10,11 @@
         <dt-icon
           name="chevrons-left"
           size="300"
-          :description="prevYearLabel"
         />
       </button>
     </div>
     <div>
+      <!-- eslint-disable-next-line jsx-a11y/button-name -->
       <button
         type="button"
         :aria-label="prevMonthLabel"
@@ -22,7 +23,6 @@
         <dt-icon
           name="chevron-left"
           size="300"
-          :description="prevMonthLabel"
         />
       </button>
     </div>
@@ -35,6 +35,7 @@
       </p>
     </div>
     <div>
+      <!-- eslint-disable-next-line jsx-a11y/button-name -->
       <button
         type="button"
         :aria-label="nextMonthLabel"
@@ -43,11 +44,11 @@
         <dt-icon
           name="chevron-right"
           size="300"
-          :description="nextMonthLabel"
         />
       </button>
     </div>
     <div>
+      <!-- eslint-disable-next-line jsx-a11y/button-name -->
       <button
         type="button"
         :aria-label="nextYearLabel"
@@ -56,7 +57,6 @@
         <dt-icon
           name="chevrons-right"
           size="300"
-          :description="nextYearLabel"
         />
       </button>
     </div>
