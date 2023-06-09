@@ -31,31 +31,61 @@ export default {
   components: { MonthYearPicker, Calendar },
 
   props: {
+    /**
+     * Label for the previous month button
+     *
+     * @type {String}
+     */
     prevMonthLabel: {
       type: String,
       required: true,
     },
 
+    /**
+     * Label for the next month button
+     *
+     * @type {String}
+     */
     nextMonthLabel: {
       type: String,
       required: true,
     },
 
+    /**
+     * Label for the previous year button
+     *
+     * @type {String}
+     */
     prevYearLabel: {
       type: String,
       required: true,
     },
 
+    /**
+     * Label for the next year button
+     *
+     * @type {String}
+     */
     nextYearLabel: {
       type: String,
       required: true,
     },
 
+    /**
+     * Locale for the calendar
+     *
+     * @type {String}
+     */
     locale: {
       type: String,
       default: 'en-US',
     },
 
+    /**
+     * Selected date
+     *
+     * @type {Date}
+     */
     selectedDate: {
       type: Date,
       default: () => (new Date()),

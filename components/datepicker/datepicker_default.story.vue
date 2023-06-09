@@ -6,7 +6,7 @@
       :prev-year-label="prevYearLabel"
       :next-year-label="nextYearLabel"
       :selected-date="date"
-      @selected-date="date = $event"
+      @selected-date="date = $event; onSelectedDate($event)"
     />
   </div>
 </template>
