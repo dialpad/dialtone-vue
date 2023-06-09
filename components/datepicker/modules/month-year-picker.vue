@@ -2,6 +2,7 @@
   <div class="d-datepicker__month-year-picker">
     <div>
       <button
+        type="button"
         :aria-label="prevYearLabel"
         @click="handleYear(false)"
       >
@@ -13,6 +14,7 @@
     </div>
     <div>
       <button
+        type="button"
         :aria-label="prevMonthLabel"
         @click="handleMonth(false)"
       >
@@ -32,6 +34,7 @@
     </div>
     <div>
       <button
+        type="button"
         :aria-label="nextMonthLabel"
         @click="handleMonth(true)"
       >
@@ -43,6 +46,7 @@
     </div>
     <div>
       <button
+        type="button"
         :aria-label="nextYearLabel"
         @click="handleYear(true)"
       >
