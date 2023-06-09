@@ -6,12 +6,11 @@
         :aria-label="prevYearLabel"
         @click="handleYear(false)"
       >
-        <span>
-          <dt-icon
-            name="chevrons-left"
-            size="300"
-          />
-        </span>
+        <dt-icon
+          name="chevrons-left"
+          size="300"
+          :description="prevYearLabel"
+        />
       </button>
     </div>
     <div>
@@ -23,6 +22,7 @@
         <dt-icon
           name="chevron-left"
           size="300"
+          :description="prevMonthLabel"
         />
       </button>
     </div>
@@ -43,6 +43,7 @@
         <dt-icon
           name="chevron-right"
           size="300"
+          :description="nextMonthLabel"
         />
       </button>
     </div>
@@ -55,6 +56,7 @@
         <dt-icon
           name="chevrons-right"
           size="300"
+          :description="nextYearLabel"
         />
       </button>
     </div>
