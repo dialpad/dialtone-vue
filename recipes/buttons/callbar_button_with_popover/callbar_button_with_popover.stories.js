@@ -16,8 +16,10 @@ const iconsList = getIconNames();
 // Default Prop Values
 export const argsData = {
   buttonWidthSize: 'xl',
+  openPopover: false,
   onArrowClick: action('arrowClick'),
   onClick: action('click'),
+  onModalIsOpened: action('opened'),
 };
 
 export const argTypesData = {
@@ -99,6 +101,9 @@ export const argTypesData = {
       },
     },
     control: 'text',
+  },
+  openPopover: {
+    control: 'boolean',
   },
 
   // Popover slots
@@ -215,6 +220,7 @@ export const Default = {
     headerContent: 'Header content',
     showCloseButton: true,
     forceShowArrow: false,
+    openPopover: false,
     icon: 'dialpad-ai',
   },
 };

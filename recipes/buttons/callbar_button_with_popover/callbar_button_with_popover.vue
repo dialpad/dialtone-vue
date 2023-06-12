@@ -236,7 +236,7 @@ export default {
     },
 
     /**
-     * To open the modal popover.
+     * To auto open the modal popover.
      */
     openPopover: {
       type: Boolean,
