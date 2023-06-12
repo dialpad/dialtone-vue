@@ -37,48 +37,35 @@
               />
             </template>
           </dt-button>
-          <dt-popover
-            :open="emojiPickerOpened"
-            @opened="(open) => { emojiPickerOpened = open }"
+          <dt-button
+            size="sm"
+            circle
+            importance="clear"
+            @click="toggleEmojiPicker"
           >
-            <template #anchor>
-              <dt-button
-                size="sm"
-                circle
-                importance="clear"
-                @click="toggleEmojiPicker"
-              >
-                <template #icon>
-                  <dt-icon
-                    name="satisfied"
-                    size="300"
-                  />
-                </template>
-              </dt-button>
-            </template>
-            <template #content>
-              <dt-emoji-picker
-                :tab-set-labels="[
-                  &quot;Most recently used&quot;,
-                  &quot;Smileys and people&quot;,
-                  &quot;Nature&quot;,
-                  &quot;Food&quot;,
-                  &quot;Activity&quot;,
-                  &quot;Travel&quot;,
-                  &quot;Objects&quot;,
-                  &quot;Symbols&quot;,
-                  &quot;Flags&quot;,
-                ]"
-                skin-selector-button-tooltip-label="Change default skin tone"
-                search-no-results-label="No results"
-                search-results-label="Search results"
-                search-placeholder-label="Search..."
-                @skin-tone="() => {}"
-                @selected-emoji="onSelectEmoji"
-                @close="() => {}"
+            <template #icon>
+              <dt-icon
+                name="satisfied"
+                size="300"
               />
             </template>
-          </dt-popover>
+          </dt-button>
+          <div
+            v-if="emojiPickerOpened"
+            class="d-ps-absolute"
+          >
+            <dt-emoji-picker
+              :tab-set-labels="tabSetLabels"
+              :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
+              :search-no-results-label="searchNoResultsLabel"
+              :search-results-label="searchResultsLabel"
+              :search-placeholder-label="searchPlaceholderLabel"
+              :skin-tone="skinTone"
+              @skin-tone="skinTone = $event"
+              @selected-emoji="onSelectEmoji"
+              @close="emojiPickerOpened = false"
+            />
+          </div>
         </div>
         <!-- Right content -->
         <div class="d-d-flex">
@@ -127,7 +114,6 @@ import {
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
-import { DtPopover } from '@/components/popover';
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -136,7 +122,6 @@ export default {
     DtButton,
     DtEmojiPicker,
     DtIcon,
-    DtPopover,
     DtRichTextEditor,
   },
 
@@ -239,6 +224,42 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    // Emoji picker props
+    tabSetLabels: {
+      type: Array,
+      default: () => [
+        'Most recently used',
+        'Smileys and people',
+        'Nature',
+        'Food',
+        'Activity',
+        'Travel',
+        'Objects',
+        'Symbols',
+        'Flags',
+      ],
+    },
+
+    skinSelectorButtonTooltipLabel: {
+      type: String,
+      default: 'Change default skin tone',
+    },
+
+    searchNoResultsLabel: {
+      type: String,
+      default: 'No results',
+    },
+
+    searchResultsLabel: {
+      type: String,
+      default: 'Search results',
+    },
+
+    searchPlaceholderLabel: {
+      type: String,
+      default: 'Search...',
+    },
   },
 
   emits: [
@@ -253,6 +274,7 @@ export default {
 
   data () {
     return {
+      skinTone: 'Default',
       inputValue: this.value,
       hasFocus: false,
       emojiPickerOpened: false,
@@ -261,6 +283,11 @@ export default {
 
   methods: {
     onSelectEmoji (emoji) {
+      if (!emoji) {
+        this.emojiPickerOpened = false;
+        return;
+      }
+
       this.inputValue = this.inputValue + emoji.shortname;
       this.emojiPickerOpened = false;
     },
