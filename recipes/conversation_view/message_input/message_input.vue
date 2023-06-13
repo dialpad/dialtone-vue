@@ -70,18 +70,16 @@
         <!-- Right content -->
         <div class="d-d-flex">
           <!-- Optionally displayed remaining character counter -->
-          <p
-            v-if="displayCharacterLimitWarning"
-            class="d-fc-error d-mr16 d-as-center dt-message-input--remaining-char"
-          >
-            {{ characterLimitCount - inputLength }}
+          <p class="d-fc-error d-mr16 d-as-center dt-message-input--remaining-char">
+            <!-- TODO: Replace with char remaining logic -->
+            {{ 500 }}
           </p>
           <!-- Right positioned UI - send button -->
           <dt-button
             size="sm"
             circle
             importance="primary"
-            :disabled="isSendDisabled"
+            :disabled="disableSend"
             @click="onSend"
           >
             <template #icon>
@@ -227,37 +225,7 @@ export default {
       default: false,
     },
 
-    // Character limit props
-
-    /**
-     * Enable character Limit warning
-     */
-    hasCharacterLimit: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Max number of characters allowed
-     */
-    characterLimitCount: {
-      type: Number,
-      default: 1500,
-    },
-
-    /**
-     * Number after which warning for max limit appears
-     */
-    characterLimitWarning: {
-      type: Number,
-      default: 500,
-    },
-
     // Emoji picker props
-
-    /**
-     * tab labels for emoji
-     */
     tabSetLabels: {
       type: Array,
       default: () => [
@@ -311,22 +279,6 @@ export default {
       hasFocus: false,
       emojiPickerOpened: false,
     };
-  },
-
-  computed: {
-    inputLength () {
-      return this.inputValue.length;
-    },
-
-    displayCharacterLimitWarning () {
-      return this.hasCharacterLimit &&
-        (this.characterLimitCount - this.inputLength) <= this.characterLimitWarning;
-    },
-
-    isSendDisabled () {
-      return this.disableSend ||
-      (this.hasCharacterLimit && this.inputLength > this.characterLimitCount);
-    },
   },
 
   methods: {
