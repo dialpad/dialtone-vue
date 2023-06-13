@@ -1,14 +1,12 @@
 <template>
-  <div>
-    <dt-datepicker
-      :prev-month-label="prevMonthLabel"
-      :next-month-label="nextMonthLabel"
-      :prev-year-label="prevYearLabel"
-      :next-year-label="nextYearLabel"
-      :selected-date="date"
-      @selected-date="date = $event; onSelectedDate($event)"
-    />
-  </div>
+  <dt-datepicker
+    :prev-month-label="prevMonthLabel"
+    :next-month-label="nextMonthLabel"
+    :prev-year-label="prevYearLabel"
+    :next-year-label="nextYearLabel"
+    :selected-date="date"
+    @selected-date="date = $event; onSelectedDate($event)"
+  />
 </template>
 
 <script>

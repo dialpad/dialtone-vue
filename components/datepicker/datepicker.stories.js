@@ -1,9 +1,13 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
 import DtDatepicker from './datepicker.vue';
-import DtDatepickerTemplate from './datepicker_default.story.vue';
+import DtDatepickerDefaultTemplate from './datepicker_default.story.vue';
 
 export const argsData = {
+  prevMonthLabel: 'Previous month',
+  nextMonthLabel: 'Next month',
+  prevYearLabel: 'Previous year',
+  nextYearLabel: 'Next year',
   onSelectedDate: action('selected-date'),
 };
 
@@ -73,17 +77,11 @@ export default {
 const Template = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtDatepickerTemplate,
+  DtDatepickerDefaultTemplate,
 );
 
 // Stories
 export const Default = {
   render: Template,
-
-  args: {
-    prevMonthLabel: 'Previous month',
-    nextMonthLabel: 'Next month',
-    prevYearLabel: 'Previous year',
-    nextYearLabel: 'Next year',
-  },
+  args: {},
 };

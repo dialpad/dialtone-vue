@@ -1,20 +1,7 @@
 import {
-  startOfWeek, addDays, getMonth, isEqual, setHours,
-  setMinutes,
-  setSeconds,
-  setMilliseconds,
+  startOfWeek, addDays, getMonth, isEqual,
 } from 'date-fns';
 import { WEEK_START } from '@/components/datepicker/datepicker_constants.js';
-
-const resetDateTime = (value) => {
-  let dateParse = getDate(JSON.parse(JSON.stringify(value)));
-  dateParse = setHours(dateParse, 0);
-  dateParse = setMinutes(dateParse, 0);
-  dateParse = setSeconds(dateParse, 0);
-  dateParse = setMilliseconds(dateParse, 0);
-
-  return dateParse;
-};
 
 const getDate = (value) => (value ? new Date(value) : new Date());
 
@@ -41,7 +28,7 @@ const isDateEqual = (date, dateToCompare) => {
   if (!date || !dateToCompare) {
     return false;
   }
-  return isEqual(resetDateTime(date), resetDateTime(dateToCompare));
+  return isEqual(date, dateToCompare);
 };
 
 /**
@@ -61,7 +48,7 @@ export const getCalendarDays = (month, year) => {
     weeks.push({ days });
     if (
       !weeks[weeks.length - 1].days.some((day) =>
-        isDateEqual(resetDateTime(day.value), resetDateTime(lastDate)),
+        isDateEqual(day.value, lastDate),
       )
     ) {
       const nextDate = addDays(date, 7);
@@ -77,7 +64,7 @@ export const getCalendarDays = (month, year) => {
 /**
  * Generate week day names based on locale and in order specified in week start
  */
-export const getDayNames = (locale, weekStart) => {
+export const getWeekDayNames = (locale, weekStart) => {
   // Get list in order from sun ... sat
   const days = [1, 2, 3, 4, 5, 6, 7].map((day) => {
     return new Intl.DateTimeFormat(locale, { weekday: 'short', timeZone: 'UTC' })

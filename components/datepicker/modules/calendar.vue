@@ -5,14 +5,14 @@
       v-for="(week, indexWeek) in calendarDays"
       :key="indexWeek"
     >
-      {{ indexWeek }}
       <button
         v-for="(day, indexDays) in week.days"
         :key="indexWeek + indexDays"
         type="button"
         :aria-label="day.text"
         @click="selectDay(day)"
-        @keydown="$emit('select-date', day.value)"
+        @keydown.enter="selectDay(day)"
+        @keydown.space="selectDay(day)"
       >
         {{ day.text }}
       </button>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { getDayNames } from '@/components/datepicker/utils.js';
+import { getWeekDayNames } from '@/components/datepicker/utils.js';
 import { WEEK_START } from '@/components/datepicker/datepicker_constants.js';
 
 export default {
@@ -49,15 +49,9 @@ export default {
     'select-date',
   ],
 
-  data () {
-    return {
-      thisCalendarDays: this.calendarDays,
-    };
-  },
-
   computed: {
     weekDays () {
-      return getDayNames(this.locale, WEEK_START);
+      return getWeekDayNames(this.locale, WEEK_START);
     },
   },
 
