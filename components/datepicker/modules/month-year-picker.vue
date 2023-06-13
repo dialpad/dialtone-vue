@@ -25,7 +25,7 @@
     <div>
       <p>
         {{ getMonth }}
-        {{ year }}
+        {{ selectYear }}
       </p>
     </div>
     <div>
@@ -102,8 +102,8 @@ export default {
 
   data () {
     return {
-      year: getYear(this.selectedDate),
-      month: getMonth(this.selectedDate),
+      selectMonth: getMonth(this.selectedDate),
+      selectYear: getYear(this.selectedDate),
       highlightedDay: null,
     };
   },
@@ -111,16 +111,16 @@ export default {
   computed: {
     // Get days for the currently selected month and year and highlight the selected day
     calendarDays () {
-      return getCalendarDays(this.month, this.year, this.highlightedDay);
+      return getCalendarDays(this.selectMonth, this.selectYear, this.highlightedDay);
     },
 
     getMonth () {
-      return format(new Date(2000, this.month, 1), 'MMMM');
+      return format(new Date(2000, this.selectMonth, 1), 'MMMM');
     },
   },
 
   watch: {
-    month: {
+    selectMonth: {
       handler () {
         this.highlightDay();
         this.$emit('calendar-days', this.calendarDays);
@@ -129,7 +129,7 @@ export default {
       immediate: true,
     },
 
-    year: {
+    selectYear: {
       handler () {
         this.highlightDay();
         this.$emit('calendar-days', this.calendarDays);
@@ -145,7 +145,7 @@ export default {
       const year = getYear(this.selectedDate);
       const month = getMonth(this.selectedDate);
 
-      if (year !== this.year || month !== this.month) {
+      if (year !== this.selectYear || month !== this.selectMonth) {
         this.highlightedDay = null;
       } else {
         this.highlightedDay = getDate(this.selectedDate);
@@ -153,14 +153,14 @@ export default {
     },
 
     handleMonth (isNext = false) {
-      const initialDate = set(this.selectedDate, { month: this.month, year: this.year });
+      const initialDate = set(this.selectedDate, { month: this.selectMonth, year: this.selectYear });
       const date = isNext ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
 
-      this.month = getMonth(date);
+      this.selectMonth = getMonth(date);
     },
 
     handleYear (increment = false) {
-      this.year = increment ? this.year + 1 : this.year - 1;
+      this.selectYear = increment ? this.selectYear + 1 : this.selectYear - 1;
     },
   },
 };
