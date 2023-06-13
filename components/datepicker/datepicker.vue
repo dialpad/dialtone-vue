@@ -14,7 +14,6 @@
       <calendar
         :locale="locale"
         :calendar-days="calendarDays"
-        :selected-date="selectedDate"
         @select-date="$emit('selected-date', $event)"
       />
     </div>
@@ -108,10 +107,6 @@ export default {
     };
   },
 
-  computed: {},
-
-  watch: {},
-
   methods: {
     updateCalendarDays (days) {
       this.calendarDays = days;
@@ -121,5 +116,18 @@ export default {
 </script>
 
 <style lang="less">
+.d-datepicker{
+  max-width: 308px;
+  padding: 16px;
 
+  p{
+    font-family: inherit;
+    margin: 0;
+    display: flex;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+}
 </style>

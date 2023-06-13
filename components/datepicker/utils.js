@@ -9,7 +9,7 @@ const getDate = (value) => (value ? new Date(value) : new Date());
  * Get 7 days from the provided start date, month is used to check
  * whether the date is from the specified month or in the offset
  */
-const getWeekDays = (startDay, month) => {
+const getWeekDays = (startDay, month, selectedDay) => {
   const startDate = getDate(JSON.parse(JSON.stringify(startDay)));
   const dates = [];
   for (let i = 0; i < 7; i++) {
@@ -18,7 +18,9 @@ const getWeekDays = (startDay, month) => {
     dates.push({
       text: next.getDate(),
       value: next,
-      current: !isNext,
+      currentMonth: !isNext,
+      // will be selected if the date is the same as the selected day and is from the current month
+      selected: selectedDay ? (next.getDate() === selectedDay && !isNext) : false,
     });
   }
   return dates;
@@ -34,7 +36,7 @@ const isDateEqual = (date, dateToCompare) => {
 /**
  * Get days for the calendar to be displayed in a table grouped by weeks
  */
-export const getCalendarDays = (month, year) => {
+export const getCalendarDays = (month, year, selectedDay) => {
   const weeks = [];
   const firstDate = getDate(new Date(year, month));
   const lastDate = getDate(new Date(year, month + 1, 0));
@@ -44,8 +46,10 @@ export const getCalendarDays = (month, year) => {
   const firstDateInCalendar = startOfWeek(firstDate, { weekStartsOn });
 
   const addDaysToWeek = (date) => {
-    const days = getWeekDays(date, month);
+    const days = getWeekDays(date, month, selectedDay);
+
     weeks.push({ days });
+
     if (
       !weeks[weeks.length - 1].days.some((day) =>
         isDateEqual(day.value, lastDate),

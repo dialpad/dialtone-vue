@@ -8,11 +8,9 @@
       >
         <dt-icon
           name="chevrons-left"
-          size="300"
+          size="400"
         />
       </button>
-    </div>
-    <div>
       <button
         type="button"
         :aria-label="prevMonthLabel"
@@ -27,8 +25,6 @@
     <div>
       <p>
         {{ getMonth }}
-        <br>
-        <br>
         {{ year }}
       </p>
     </div>
@@ -43,8 +39,6 @@
           size="300"
         />
       </button>
-    </div>
-    <div>
       <button
         type="button"
         :aria-label="nextYearLabel"
@@ -61,7 +55,7 @@
 
 <script>
 import { DtIcon } from '@/components/icon';
-import { getYear, addMonths, format, getMonth, set, subMonths } from 'date-fns';
+import { getYear, addMonths, format, getMonth, set, subMonths, getDate } from 'date-fns';
 import { getCalendarDays } from '../utils';
 
 export default {
@@ -110,13 +104,14 @@ export default {
     return {
       year: getYear(this.selectedDate),
       month: getMonth(this.selectedDate),
+      highlightedDay: null,
     };
   },
 
   computed: {
-    // Get days for the currently selected month and year
+    // Get days for the currently selected month and year and highlight the selected day
     calendarDays () {
-      return getCalendarDays(this.month, this.year);
+      return getCalendarDays(this.month, this.year, this.highlightedDay);
     },
 
     getMonth () {
@@ -124,23 +119,75 @@ export default {
     },
   },
 
-  mounted () {
-    this.$emit('calendar-days', this.calendarDays);
+  watch: {
+    month: {
+      handler () {
+        this.highlightDay();
+        this.$emit('calendar-days', this.calendarDays);
+      },
+
+      immediate: true,
+    },
+
+    year: {
+      handler () {
+        this.highlightDay();
+        this.$emit('calendar-days', this.calendarDays);
+      },
+
+      immediate: true,
+    },
+
   },
 
   methods: {
+    highlightDay () {
+      const year = getYear(this.selectedDate);
+      const month = getMonth(this.selectedDate);
+
+      if (year !== this.year || month !== this.month) {
+        this.highlightedDay = null;
+      } else {
+        this.highlightedDay = getDate(this.selectedDate);
+      }
+    },
+
     handleMonth (isNext = false) {
       const initialDate = set(this.selectedDate, { month: this.month, year: this.year });
       const date = isNext ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
 
       this.month = getMonth(date);
-      this.$emit('calendar-days', this.calendarDays);
     },
 
     handleYear (increment = false) {
       this.year = increment ? this.year + 1 : this.year - 1;
-      this.$emit('calendar-days', this.calendarDays);
     },
   },
 };
 </script>
+
+<style lang="less">
+.d-datepicker__month-year-picker{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  margin-bottom: 20px;
+
+  > div {
+      display: inline-flex;
+    }
+
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--primary-color);
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+  }
+
+}
+</style>
