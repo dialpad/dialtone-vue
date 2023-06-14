@@ -50,10 +50,5 @@ const emojiPickerRef = ref(null);
 
 const toggleEmojiPicker = () => {
   emojiPickerOpened.value = !emojiPickerOpened.value;
-  // if (emojiPickerOpened.value) {
-  //   setTimeout(() => {
-  //     emojiPickerRef.value.focusSearchInput();
-  //   }, 1500);
-  // }
 };
 </script>

@@ -38,6 +38,9 @@ the `skin-tone` event emitted by the skin selector button to be updated instantl
 
 You must listen to the `close` event to close the emoji picker. This event is emitted by the keyboard navigation on `ESC`.
 
+For the `withPopover` variant it is necessary to provide the `initial-focus-element="#searchInput"` prop to the `dt-popover` component.
+With this we accomplish the requirement to have the search input focused when the emoji picker is opened.
+
 ## Accessibility
 
 The emoji picker starts with a `focus` on the input search to give the user a quick way to search for an emoji.
