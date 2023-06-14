@@ -3,12 +3,14 @@
     <div
       class="d-datepicker__week-day"
     >
-      <p
+      <div
         v-for="day in weekDays"
         :key="day"
       >
-        {{ day }}
-      </p>
+        <p>
+          {{ day }}
+        </p>
+      </div>
     </div>
     <div
       v-for="(week, indexWeek) in calendarDays"
@@ -98,17 +100,22 @@ export default {
 
 <style lang="less">
 .d-datepicker{
-  &__calendar {
-    margin-bottom: 6px;
-  }
-
   &__week-day{
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
 
-    p{
-      color: var(--black-600);
+    > div{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+
+      p{
+        color: var(--black-600);
+        margin: 0;
+      }
     }
   }
 

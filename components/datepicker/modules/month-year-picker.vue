@@ -4,7 +4,7 @@
       <button
         type="button"
         :aria-label="prevYearLabel"
-        @click="handleYear(false)"
+        @click="changeYear(-1)"
       >
         <dt-icon
           name="chevrons-left"
@@ -14,7 +14,7 @@
       <button
         type="button"
         :aria-label="prevMonthLabel"
-        @click="handleMonth(false)"
+        @click="changeMonth(-1)"
       >
         <dt-icon
           name="chevron-left"
@@ -32,7 +32,7 @@
       <button
         type="button"
         :aria-label="nextMonthLabel"
-        @click="handleMonth(true)"
+        @click="changeMonth(1)"
       >
         <dt-icon
           name="chevron-right"
@@ -42,7 +42,7 @@
       <button
         type="button"
         :aria-label="nextYearLabel"
-        @click="handleYear(true)"
+        @click="changeYear(1)"
       >
         <dt-icon
           name="chevrons-right"
@@ -152,15 +152,15 @@ export default {
       }
     },
 
-    handleMonth (isNext = false) {
+    changeMonth (value) {
       const initialDate = set(this.selectedDate, { month: this.selectMonth, year: this.selectYear });
-      const date = isNext ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
+      const date = ++value ? addMonths(initialDate, 1) : subMonths(initialDate, 1);
 
       this.selectMonth = getMonth(date);
     },
 
-    handleYear (increment = false) {
-      this.selectYear = increment ? this.selectYear + 1 : this.selectYear - 1;
+    changeYear (value) {
+      this.selectYear = this.selectYear + value;
     },
   },
 };

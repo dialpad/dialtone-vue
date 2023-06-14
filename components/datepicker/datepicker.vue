@@ -129,5 +129,9 @@ export default {
     font-size: 12px;
     text-transform: uppercase;
   }
+
+  &--body{
+    padding: 0 8px;
+  }
 }
 </style>
