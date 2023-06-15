@@ -1,35 +1,41 @@
 <template>
-  <dt-popover
-    :open="datepickerOpened"
-    padding="none"
-  >
-    <template #anchor>
-      <dt-button
-        size="sm"
-        circle
-        importance="clear"
-        aria-label="Open datepicker"
-        @click="toggleDatepicker"
-      >
-        <template #icon>
-          <dt-icon
-            name="calendar"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </template>
-    <template #content>
-      <dt-datepicker
-        :prev-month-label="prevMonthLabel"
-        :next-month-label="nextMonthLabel"
-        :prev-year-label="prevYearLabel"
-        :next-year-label="nextYearLabel"
-        :selected-date="date"
-        @selected-date="date = $event; onSelectedDate($event)"
-      />
-    </template>
-  </dt-popover>
+  <div>
+    <p>
+      Selected date: {{ date }}
+    </p>
+
+    <dt-popover
+      :open="datepickerOpened"
+      padding="none"
+    >
+      <template #anchor>
+        <dt-button
+          size="sm"
+          circle
+          importance="clear"
+          aria-label="Open datepicker"
+          @click="toggleDatepicker"
+        >
+          <template #icon>
+            <dt-icon
+              name="calendar"
+              size="300"
+            />
+          </template>
+        </dt-button>
+      </template>
+      <template #content>
+        <dt-datepicker
+          :prev-month-label="prevMonthLabel"
+          :next-month-label="nextMonthLabel"
+          :prev-year-label="prevYearLabel"
+          :next-year-label="nextYearLabel"
+          :selected-date="date"
+          @selected-date="date = $event; onSelectedDate($event)"
+        />
+      </template>
+    </dt-popover>
+  </div>
 </template>
 
 <script>
