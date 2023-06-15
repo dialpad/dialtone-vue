@@ -46,6 +46,7 @@
       </div>
     </a>
     <div
+      v-if="hasActions"
       class="dt-leftbar-row__omega"
     >
       <dt-tooltip
@@ -80,43 +81,45 @@
             kind="count"
             type="bulletin"
             data-qa="dt-leftbar-row-unread-badge"
+            class="dt-leftbar-row__unread-badge"
           >
             {{ unreadCount }}
           </dt-badge>
         </template>
       </dt-tooltip>
-    </div>
-    <div
-      v-if="hasCallButton"
-      class="dt-leftbar-row__action"
-      data-qa="dt-leftbar-row-action"
-    >
-      <dt-tooltip
-        :message="callButtonTooltip"
-        placement="top"
+      <div
+        v-if="hasCallButton"
+        class="dt-leftbar-row__action"
+        data-qa="dt-leftbar-row-action"
       >
-        <template #anchor>
-          <dt-button
-            class="dt-leftbar-row__action-button"
-            data-qa="dt-leftbar-row-action-call-button"
-            circle
-            size="xs"
-            kind="inverted"
-            :aria-label="callButtonTooltip"
-            @focus="actionFocused = true"
-            @blur="actionFocused = false"
-            @mouseleave="actionFocused = false"
-            @click.stop="$emit('call', $event)"
-          >
-            <template #icon>
-              <dt-icon
-                name="phone"
-                size="200"
-              />
-            </template>
-          </dt-button>
-        </template>
-      </dt-tooltip>
+        <dt-tooltip
+          :message="callButtonTooltip"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              class="dt-leftbar-row__action-button"
+              data-qa="dt-leftbar-row-action-call-button"
+              :circle="true"
+              size="xs"
+              kind="inverted"
+              :aria-label="callButtonTooltip"
+              @focus="actionFocused = true"
+              @blur="actionFocused = false"
+              @mouseover="actionFocused = true"
+              @mouseleave="actionFocused = false"
+              @click.stop="$emit('call', $event)"
+            >
+              <template #icon>
+                <dt-icon
+                  name="phone"
+                  size="200"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+      </div>
     </div>
   </div>
 </template>
@@ -347,6 +350,10 @@ export default {
       return this.ariaLabel
         ? this.ariaLabel
         : safeConcatStrings([this.description, this.unreadCountTooltip, this.dndTextTooltip]);
+    },
+
+    hasActions () {
+      return this.dndText || this.activeVoiceChat || (!!this.unreadCount && this.hasUnreads) || this.hasCallButton;
     },
   },
 
