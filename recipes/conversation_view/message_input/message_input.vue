@@ -81,7 +81,7 @@
             size="sm"
             circle
             importance="primary"
-            :disabled="isSendDisabled"
+            :class="{ 'message-input-button__disabled': isSendDisabled }"
             @click="onSend"
           >
             <template #icon>
@@ -324,7 +324,8 @@ export default {
     },
 
     isSendDisabled () {
-      return this.disableSend ||
+      return this.inputLength === 0 ||
+      this.disableSend ||
       (this.hasCharacterLimit && this.inputLength > this.characterLimitCount);
     },
   },
@@ -345,6 +346,9 @@ export default {
     },
 
     onSend () {
+      if (this.isSendDisabled) {
+        return;
+      }
       this.$emit('submit', this.inputValue);
       this.inputValue = '';
     },
@@ -355,5 +359,11 @@ export default {
 <style lang="less">
 .dt-message-input--remaining-char {
   font-size: 1.2rem;
+}
+
+.message-input-button__disabled {
+  background-color: unset;
+  color: var(--theme-sidebar-icon-color);
+  cursor: default;
 }
 </style>
