@@ -7,6 +7,7 @@
     <dt-popover
       :open="datepickerOpened"
       padding="none"
+      @opened="(open) => { datepickerOpened = open }"
     >
       <template #anchor>
         <dt-button
@@ -51,6 +52,7 @@ export default {
   data () {
     return {
       date: new Date(),
+      datepickerOpened: false,
     };
   },
 
