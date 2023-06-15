@@ -8,6 +8,7 @@
         size="sm"
         circle
         importance="clear"
+        aria-label="Open datepicker"
         @click="toggleDatepicker"
       >
         <template #icon>
