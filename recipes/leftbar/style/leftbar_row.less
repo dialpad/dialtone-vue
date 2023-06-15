@@ -33,6 +33,13 @@
   //  ----------------------------------------------------------------------------
   position: relative;
   opacity: var(--leftbar-row-opacity);
+  display: flex;
+  background-color: var(--leftbar-row-color-background);
+  border-radius: var(--leftbar-row-radius);
+  transition-duration: var(--td200);
+  transition-property: background-color,border,box-shadow;
+  transition-timing-function: var(--ttf-out-quint);
+  cursor: pointer;
 
   //  ============================================================================
   //  $   VARIANTS
@@ -47,6 +54,8 @@
   }
 
   &:hover {
+    --leftbar-row-color-background: var(--theme-sidebar-row-color-background-hover);
+
     .d-presence {
       --presence-color-border-base: var(--theme-sidebar-selected-row-color-background);
     }
@@ -137,22 +146,12 @@
     text-align: left;
     color: var(--leftbar-row-color-foreground);
     text-decoration: none;
-    background-color: var(--leftbar-row-color-background);
-    border-radius: var(--leftbar-row-radius);
-    transition-duration: var(--td200);
-    transition-property: background-color,border,box-shadow;
-    transition-timing-function: var(--ttf-out-quint);
     appearance: none;
     font-size: inherit;
     line-height: inherit;
     margin: 0;
     border: 0;
     padding: 0;
-    cursor: pointer;
-
-    &:hover {
-      --leftbar-row-color-background: var(--theme-sidebar-row-color-background-hover);
-    }
 
     &:active {
       --leftbar-row-color-background: var(--theme-sidebar-row-color-background-active);

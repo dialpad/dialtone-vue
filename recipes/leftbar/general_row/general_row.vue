@@ -44,48 +44,48 @@
           </dt-emoji-text-wrapper>
         </slot>
       </div>
-      <div
-        class="dt-leftbar-row__omega"
-      >
-        <dt-tooltip
-          v-if="dndText"
-          placement="top"
-          :message="dndTextTooltip"
-        >
-          <template #anchor>
-            <div
-              class="dt-leftbar-row__dnd"
-            >
-              {{ dndText }}
-            </div>
-          </template>
-        </dt-tooltip>
-        <div
-          v-if="activeVoiceChat"
-          class="dt-leftbar-row__active-voice"
-        >
-          <dt-icon
-            size="300"
-            name="activity"
-          />
-        </div>
-        <dt-tooltip
-          v-else-if="!!unreadCount && hasUnreads"
-          :message="unreadCountTooltip"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-badge
-              kind="count"
-              type="bulletin"
-              data-qa="dt-leftbar-row-unread-badge"
-            >
-              {{ unreadCount }}
-            </dt-badge>
-          </template>
-        </dt-tooltip>
-      </div>
     </a>
+    <div
+      class="dt-leftbar-row__omega"
+    >
+      <dt-tooltip
+        v-if="dndText"
+        placement="top"
+        :message="dndTextTooltip"
+      >
+        <template #anchor>
+          <div
+            class="dt-leftbar-row__dnd"
+          >
+            {{ dndText }}
+          </div>
+        </template>
+      </dt-tooltip>
+      <div
+        v-if="activeVoiceChat"
+        class="dt-leftbar-row__active-voice"
+      >
+        <dt-icon
+          size="300"
+          name="activity"
+        />
+      </div>
+      <dt-tooltip
+        v-else-if="!!unreadCount && hasUnreads"
+        :message="unreadCountTooltip"
+        placement="top"
+      >
+        <template #anchor>
+          <dt-badge
+            kind="count"
+            type="bulletin"
+            data-qa="dt-leftbar-row-unread-badge"
+          >
+            {{ unreadCount }}
+          </dt-badge>
+        </template>
+      </dt-tooltip>
+    </div>
     <div
       v-if="hasCallButton"
       class="dt-leftbar-row__action"
