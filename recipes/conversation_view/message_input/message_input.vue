@@ -31,6 +31,7 @@
             size="sm"
             circle
             importance="clear"
+            :aria-label="imageButtonAriaLabel"
           >
             <template #icon>
               <dt-icon
@@ -50,6 +51,7 @@
                 size="sm"
                 circle
                 importance="clear"
+                :aria-label="emojiButtonAriaLabel"
                 @click="toggleEmojiPicker"
               >
                 <template #icon>
@@ -87,8 +89,10 @@
           <dt-button
             size="sm"
             circle
+            kind="outlined"
             importance="primary"
             :class="{ 'message-input-button__disabled': isSendDisabled }"
+            :aria-label="sendButtonAriaLabel"
             :aria-disabled="isSendDisabled"
             @click="onSend"
           >
@@ -302,6 +306,27 @@ export default {
       type: String,
       default: 'Search...',
     },
+
+    // Aria label for buttons
+
+    /**
+     * Emoji button aria label
+     */
+    emojiButtonAriaLabel: {
+      type: String,
+      default: 'emoji button',
+    },
+
+    imageButtonAriaLabel: {
+      type: String,
+      default: 'image button',
+    },
+
+    sendButtonAriaLabel: {
+      type: String,
+      default: 'send button',
+    },
+
   },
 
   emits: [
