@@ -21,14 +21,14 @@
       <template
         #footerLeft
       >
-        <div class="message-input-recipe-subtitle d-fc-black-500">
+        <div class="d-fc-100 d-fc-muted">
           <b>Dwight</b> is typing...
         </div>
       </template>
       <template
         #footerRight
       >
-        <div class="message-input-recipe-subtitle d-fc-black-500">
+        <div class="d-fc-100 d-fc-tertiary">
           <b>Shift</b> + <b>Return</b> to add a new line
         </div>
       </template>
@@ -44,9 +44,3 @@ export default {
   components: { DtRecipeMessageInput },
 };
 </script>
-
-<style>
-.message-input-recipe-subtitle {
-  font-size: 1rem;
-}
-</style>
