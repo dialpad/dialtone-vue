@@ -82,6 +82,7 @@
             circle
             importance="primary"
             :class="{ 'message-input-button__disabled': isSendDisabled }"
+            :aria-disabled="isSendDisabled"
             @click="onSend"
           >
             <template #icon>
