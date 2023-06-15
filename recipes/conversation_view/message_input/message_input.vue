@@ -37,35 +37,40 @@
               />
             </template>
           </dt-button>
-          <dt-button
-            size="sm"
-            circle
-            importance="clear"
-            @click="toggleEmojiPicker"
+          <dt-popover
+            :open="emojiPickerOpened"
+            initial-focus-element="#searchInput"
+            padding="none"
+            @opened="(open) => { emojiPickerOpened = open }"
           >
-            <template #icon>
-              <dt-icon
-                name="satisfied"
-                size="300"
+            <template #anchor>
+              <dt-button
+                size="sm"
+                circle
+                importance="clear"
+                @click="toggleEmojiPicker"
+              >
+                <template #icon>
+                  <dt-icon
+                    name="satisfied"
+                    size="300"
+                  />
+                </template>
+              </dt-button>
+            </template>
+            <template #content>
+              <dt-emoji-picker
+                :tab-set-labels="emojiTabSetLabels"
+                :skin-selector-button-tooltip-label="emojiSkinSelectorButtonTooltipLabel"
+                :search-no-results-label="emojiSearchNoResultsLabel"
+                :search-results-label="emojiSearchResultsLabel"
+                :search-placeholder-label="emojiSearchPlaceholderLabel"
+                :skin-tone="skinTone"
+                @skin-tone="skinTone = $event"
+                @selected-emoji="onSelectEmoji"
               />
             </template>
-          </dt-button>
-          <div
-            v-if="emojiPickerOpened"
-            class="d-ps-absolute"
-          >
-            <dt-emoji-picker
-              :tab-set-labels="tabSetLabels"
-              :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
-              :search-no-results-label="searchNoResultsLabel"
-              :search-results-label="searchResultsLabel"
-              :search-placeholder-label="searchPlaceholderLabel"
-              :skin-tone="skinTone"
-              @skin-tone="skinTone = $event"
-              @selected-emoji="onSelectEmoji"
-              @close="emojiPickerOpened = false"
-            />
-          </div>
+          </dt-popover>
         </div>
         <!-- Right content -->
         <div class="d-d-flex">
@@ -117,6 +122,7 @@ import {
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
+import { DtPopover } from '@/components/popover/index';
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -125,6 +131,7 @@ export default {
     DtButton,
     DtEmojiPicker,
     DtIcon,
+    DtPopover,
     DtRichTextEditor,
   },
 
@@ -259,7 +266,7 @@ export default {
     /**
      * tab labels for emoji
      */
-    tabSetLabels: {
+    emojiTabSetLabels: {
       type: Array,
       default: () => [
         'Most recently used',
@@ -274,22 +281,22 @@ export default {
       ],
     },
 
-    skinSelectorButtonTooltipLabel: {
+    emojiSkinSelectorButtonTooltipLabel: {
       type: String,
       default: 'Change default skin tone',
     },
 
-    searchNoResultsLabel: {
+    emojiSearchNoResultsLabel: {
       type: String,
       default: 'No results',
     },
 
-    searchResultsLabel: {
+    emojiSearchResultsLabel: {
       type: String,
       default: 'Search results',
     },
 
-    searchPlaceholderLabel: {
+    emojiSearchPlaceholderLabel: {
       type: String,
       default: 'Search...',
     },
