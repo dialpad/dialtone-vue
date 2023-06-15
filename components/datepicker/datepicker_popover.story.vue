@@ -13,7 +13,7 @@
       >
         <template #icon>
           <dt-icon
-            name="satisfied"
+            name="calendar"
             size="300"
           />
         </template>
