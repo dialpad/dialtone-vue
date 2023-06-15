@@ -89,9 +89,11 @@
           <dt-button
             size="sm"
             circle
-            kind="outlined"
-            importance="primary"
-            :class="{ 'message-input-button__disabled': isSendDisabled }"
+            importance="clear"
+            :class="{
+              'message-input-button__disabled': isSendDisabled,
+              'd-bgc-purple-400 d-fc-primary-inverted': !isSendDisabled,
+            }"
             :aria-label="sendButtonAriaLabel"
             :aria-disabled="isSendDisabled"
             @click="onSend"
@@ -169,6 +171,7 @@ export default {
     inputAriaLabel: {
       type: String,
       required: true,
+      default: '',
     },
 
     /**
