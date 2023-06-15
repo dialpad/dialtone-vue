@@ -40,6 +40,7 @@
   transition-property: background-color,border,box-shadow;
   transition-timing-function: var(--ttf-out-quint);
   cursor: pointer;
+  //overflow: hidden;
 
   //  ============================================================================
   //  $   VARIANTS
@@ -50,12 +51,15 @@
   //  </div>
   //
   &:not(.dt-leftbar-row--no-action):hover {
+    --leftbar-row-omega-visibility: hidden;
     --leftbar-row-omega-min-width: var(--leftbar-row-alpha-width);
   }
 
-  &:hover {
+  &:not(.dt-leftbar-row--action-focused):hover {
     --leftbar-row-color-background: var(--theme-sidebar-row-color-background-hover);
+  }
 
+  &:hover {
     .d-presence {
       --presence-color-border-base: var(--theme-sidebar-selected-row-color-background);
     }
@@ -67,10 +71,6 @@
   &--has-unread {
     --leftbar-row-description-font-weight: var(--fw-bold);
     --leftbar-row-alpha-color-foreground: var(--leftbar-row-color-foreground);
-
-    &:not(.dt-leftbar-row--no-action):hover {
-      --leftbar-row-omega-visibility: hidden;
-    }
   }
 
   &--muted {
@@ -215,6 +215,10 @@
     height: var(--leftbar-row-omega-height);
     padding-left: var(--space-400);
     padding-right: var(--space-400);
+    border-radius: var(--leftbar-row-radius);
+  }
+
+  &__unread-badge {
     visibility: var(--leftbar-row-omega-visibility);
   }
 
