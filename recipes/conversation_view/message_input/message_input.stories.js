@@ -49,6 +49,7 @@ export const argTypesData = {
 // Set default values at the story level here.
 export const argsData = {
   placeholder: 'New Message',
+  inputAriaLabel: 'input text field',
   onSubmit: action('submit'),
   onFocus: action('focus'),
   onBlur: action('blur'),
