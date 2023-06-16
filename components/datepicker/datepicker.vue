@@ -2,19 +2,25 @@
   <div class="d-datepicker">
     <div class="d-datepicker--header">
       <month-year-picker
+        ref="monthYearPicker"
         :prev-month-label="prevMonthLabel"
         :next-month-label="nextMonthLabel"
         :prev-year-label="prevYearLabel"
         :next-year-label="nextYearLabel"
         :selected-date="selectedDate"
         @calendar-days="updateCalendarDays"
+        @focus-day="$refs.calendar.focusFirstDay()"
+        @close-datepicker="$emit('close-datepicker')"
       />
     </div>
     <div class="d-datepicker--body">
       <calendar
+        ref="calendar"
         :locale="locale"
         :calendar-days="calendarDays"
         @select-date="$emit('selected-date', $event)"
+        @focus-month-year-picker="$refs.monthYearPicker.focusMonthYearPicker()"
+        @close-datepicker="$emit('close-datepicker')"
       />
     </div>
   </div>
@@ -99,6 +105,13 @@ export default {
      * @type {Date}
      */
     'selected-date',
+
+    /**
+     * Event fired when user presses the esc key
+     *
+     * @event close-datepicker
+     */
+    'close-datepicker',
   ],
 
   data () {

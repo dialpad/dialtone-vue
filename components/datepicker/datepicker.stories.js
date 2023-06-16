@@ -10,6 +10,7 @@ export const argsData = {
   prevYearLabel: 'Previous year',
   nextYearLabel: 'Next year',
   onSelectedDate: action('selected-date'),
+  onCloseDatepicker: action('close-datepicker'),
 };
 
 export const argTypesData = {
@@ -58,8 +59,21 @@ export const argTypesData = {
     },
   },
 
+  onCloseDatepicker: {
+    table: {
+      disable: true,
+    },
+  },
+
   'selected-date': {
     description: 'Event fired when a date is selected',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+
+  'close-datepicker': {
+    description: 'Event fired when user presses the esc key',
     table: {
       type: { summary: 'event' },
     },

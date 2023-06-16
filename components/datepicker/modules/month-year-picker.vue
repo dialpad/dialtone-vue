@@ -2,9 +2,12 @@
   <div class="d-datepicker__month-year-picker">
     <div>
       <button
+        id="prevYearButton"
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
         :aria-label="prevYearLabel"
         @click="changeYear(-1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevrons-left"
@@ -12,9 +15,11 @@
         />
       </button>
       <button
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
         :aria-label="prevMonthLabel"
         @click="changeMonth(-1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevron-left"
@@ -30,9 +35,11 @@
     </div>
     <div>
       <button
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
         :aria-label="nextMonthLabel"
         @click="changeMonth(1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevron-right"
@@ -40,9 +47,11 @@
         />
       </button>
       <button
+        :ref="el => { if (el) setDayRef(el) }"
         type="button"
         :aria-label="nextYearLabel"
         @click="changeYear(1)"
+        @keydown="handleKeyDown($event)"
       >
         <dt-icon
           name="chevrons-right"
@@ -105,6 +114,8 @@ export default {
       selectMonth: getMonth(this.selectedDate),
       selectYear: getYear(this.selectedDate),
       highlightedDay: null,
+      focusPicker: 0,
+      focusRefs: [],
     };
   },
 
@@ -140,7 +151,60 @@ export default {
 
   },
 
+  mounted () {
+    this.focusMonthYearPicker();
+  },
+
   methods: {
+    setDayRef (el) {
+      if (!this.focusRefs.includes(el)) {
+        this.focusRefs.push(el);
+      }
+    },
+
+    focusMonthYearPicker () {
+      this.focusRefs[0].focus();
+    },
+
+    handleKeyDown (event) {
+      switch (event.key) {
+        case 'ArrowLeft':
+          event.preventDefault();
+          if (this.focusPicker === 0) {
+            this.focusPicker = 3;
+            this.focusRefs[this.focusPicker].focus();
+          } else {
+            this.focusPicker--;
+            this.focusRefs[this.focusPicker].focus();
+          }
+          break;
+
+        case 'ArrowRight':
+          event.preventDefault();
+          if (this.focusPicker === 3) {
+            this.focusPicker = 0;
+            this.focusRefs[this.focusPicker].focus();
+          } else {
+            this.focusPicker++;
+            this.focusRefs[this.focusPicker].focus();
+          }
+          break;
+
+        case 'ArrowDown':
+          event.preventDefault();
+          this.$emit('focus-day');
+          break;
+
+        case 'Tab':
+          this.$emit('focus-day');
+          break;
+
+        case 'Escape':
+          this.$emit('close-datepicker');
+          break;
+      }
+    },
+
     highlightDay () {
       const year = getYear(this.selectedDate);
       const month = getMonth(this.selectedDate);

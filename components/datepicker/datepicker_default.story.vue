@@ -11,6 +11,7 @@
       :next-year-label="nextYearLabel"
       :selected-date="date"
       @selected-date="date = $event; onSelectedDate($event)"
+      @close-datepicker="onCloseDatepicker"
     />
   </div>
 </template>
