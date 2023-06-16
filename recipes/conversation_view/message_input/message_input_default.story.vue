@@ -26,6 +26,7 @@
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
       @select-media="$attrs.onSelectMedia"
+      @add-media="$attrs.onAddMedia"
     >
       <template
         #footerLeft

@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div
+    role="presentation"
+    @drag-enter="onDrag"
+    @drag-over="onDrag"
+    @drop="onDrop"
+  >
     <!-- TODO: A purpose-built place to display validation errors using DtBanner -->
     <div
       class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
@@ -353,12 +358,20 @@ export default {
     'submit',
 
     /**
-     * Fires when media is selected
+     * Fires when media is selected from image button
      *
-     * @event submit
-     * @type {Object}
+     * @event select-media
+     * @type {Array}
      */
     'select-media',
+
+    /**
+     * Fires when media is dropped into the message input
+     *
+     * @event add-media
+     * @type {Array}
+     */
+    'add-media',
   ],
 
   data () {
@@ -388,6 +401,21 @@ export default {
   },
 
   methods: {
+    onDrag (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    },
+
+    onDrop (e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      const dt = e.dataTransfer;
+      const files = Array.from(dt.files);
+      const fileNames = files.map(file => file.name);
+      this.$emit('add-media', fileNames);
+    },
+
     onSelectEmoji (emoji) {
       if (!emoji) {
         this.emojiPickerOpened = false;
