@@ -106,8 +106,6 @@
               :aria-label="callButtonTooltip"
               @focus="actionFocused = true"
               @blur="actionFocused = false"
-              @mouseover="actionFocused = true"
-              @mouseleave="actionFocused = false"
               @click.stop="$emit('call', $event)"
             >
               <template #icon>
