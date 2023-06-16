@@ -72,7 +72,7 @@
         />
       </div>
       <dt-tooltip
-        v-else-if="!!unreadCount && hasUnreads"
+        v-else-if="showUnreadCount"
         :message="unreadCountTooltip"
         placement="top"
       >
@@ -351,7 +351,11 @@ export default {
     },
 
     hasActions () {
-      return this.dndText || this.activeVoiceChat || (!!this.unreadCount && this.hasUnreads) || this.hasCallButton;
+      return this.dndText || this.activeVoiceChat || this.showUnreadCount || this.hasCallButton;
+    },
+
+    showUnreadCount () {
+      return !!this.unreadCount && this.hasUnreads;
     },
   },
 
