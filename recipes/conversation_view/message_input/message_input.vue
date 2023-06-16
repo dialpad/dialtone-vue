@@ -32,6 +32,7 @@
             circle
             importance="clear"
             :aria-label="imageButtonAriaLabel"
+            @click="onSelectImage"
           >
             <template #icon>
               <dt-icon
@@ -39,7 +40,16 @@
                 size="300"
               />
             </template>
+            <dt-input
+              ref="messageInputImageUpload"
+              type="file"
+              class="d-ps-absolute"
+              multiple="multiple"
+              hidden
+              @input="onImageUpload"
+            />
           </dt-button>
+
           <dt-popover
             :open="emojiPickerOpened"
             initial-focus-element="#searchInput"
@@ -131,6 +141,7 @@ import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
 import { DtPopover } from '@/components/popover/index';
+import { DtInput } from '@/components/input/index';
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -139,6 +150,7 @@ export default {
     DtButton,
     DtEmojiPicker,
     DtIcon,
+    DtInput,
     DtPopover,
     DtRichTextEditor,
   },
@@ -340,6 +352,14 @@ export default {
      * @type {String}
      */
     'submit',
+
+    /**
+     * Fires when media is selected
+     *
+     * @event submit
+     * @type {Object}
+     */
+    'select-media',
   ],
 
   data () {
@@ -377,6 +397,14 @@ export default {
 
       this.inputValue = this.inputValue + emoji.shortname;
       this.emojiPickerOpened = false;
+    },
+
+    onSelectImage () {
+      this.$refs.messageInputImageUpload.$refs.input.click();
+    },
+
+    onImageUpload (val) {
+      this.$emit('select-media', val);
     },
 
     toggleEmojiPicker () {

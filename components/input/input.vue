@@ -2,6 +2,7 @@
   <div
     ref="container"
     class="base-input"
+    :class="{ 'd-vi-hidden': hidden }"
     data-qa="dt-input"
   >
     <label
@@ -269,6 +270,14 @@ export default {
     validate: {
       type: Object,
       default: null,
+    },
+
+    /**
+     * hidden allows to use input without the element visually present in DOM
+     */
+    hidden: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -556,6 +565,9 @@ export default {
 
   methods: {
     inputClasses () {
+      if (this.hidden) {
+        return [];
+      }
       return [
         'base-input__input',
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
@@ -570,6 +582,9 @@ export default {
     },
 
     inputWrapperClasses () {
+      if (this.hidden) {
+        return [];
+      }
       return [
         'd-input__wrapper',
         { [this.stateClass]: this.showInputState },
