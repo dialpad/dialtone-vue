@@ -1,8 +1,7 @@
 <template>
   <div
     ref="container"
-    class="base-input"
-    :class="{ 'd-vi-hidden': hidden }"
+    :class="['base-input', { 'd-vi-hidden': hidden }]"
     data-qa="dt-input"
   >
     <label
@@ -410,9 +409,14 @@ export default {
 
     inputListeners () {
       return {
-        input: event => {
-          this.$emit('input', event.target.value);
-          this.$emit('update:modelValue', event.target.value);
+        input: async event => {
+          let val = event.target.value;
+          if (this.type === INPUT_TYPES.FILE) {
+            const files = Array.from(event.target.files);
+            val = files.map(file => file.name);
+          }
+          this.$emit('input', val);
+          this.$emit('update:modelValue', val);
         },
 
         blur: event => {
@@ -565,9 +569,6 @@ export default {
 
   methods: {
     inputClasses () {
-      if (this.hidden) {
-        return [];
-      }
       return [
         'base-input__input',
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',

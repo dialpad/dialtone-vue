@@ -40,16 +40,15 @@
                 size="300"
               />
             </template>
-            <dt-input
-              ref="messageInputImageUpload"
-              type="file"
-              class="d-ps-absolute"
-              multiple="multiple"
-              hidden
-              @input="onImageUpload"
-            />
           </dt-button>
-
+          <dt-input
+            ref="messageInputImageUpload"
+            type="file"
+            class="d-ps-absolute"
+            multiple
+            hidden
+            @input="onImageUpload"
+          />
           <dt-popover
             :open="emojiPickerOpened"
             initial-focus-element="#searchInput"
