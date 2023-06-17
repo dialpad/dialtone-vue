@@ -5,7 +5,7 @@
         id="prevYearButton"
         :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="prevYearLabel"
+        :aria-label="`${changeToLabel} ${prevYearLabel} ${selectYear - 1}`"
         @click="changeYear(-1)"
         @keydown="handleKeyDown($event)"
       >
@@ -17,7 +17,7 @@
       <button
         :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="prevMonthLabel"
+        :aria-label="`${changeToLabel} ${prevMonthLabel} ${formatMonth(selectMonth - 1, 'MMMM')}`"
         @click="changeMonth(-1)"
         @keydown="handleKeyDown($event)"
       >
@@ -29,7 +29,7 @@
     </div>
     <div>
       <p>
-        {{ getMonth }}
+        {{ formattedMonth }}
         {{ selectYear }}
       </p>
     </div>
@@ -37,7 +37,7 @@
       <button
         :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="nextMonthLabel"
+        :aria-label="`${changeToLabel} ${nextMonthLabel} ${formatMonth(selectMonth + 1, 'MMMM')}`"
         @click="changeMonth(1)"
         @keydown="handleKeyDown($event)"
       >
@@ -49,7 +49,7 @@
       <button
         :ref="el => { if (el) setDayRef(el) }"
         type="button"
-        :aria-label="nextYearLabel"
+        :aria-label="`${changeToLabel} ${nextYearLabel} ${selectYear + 1}`"
         @click="changeYear(1)"
         @keydown="handleKeyDown($event)"
       >
@@ -93,6 +93,11 @@ export default {
       required: true,
     },
 
+    changeToLabel: {
+      type: String,
+      required: true,
+    },
+
     selectedDate: {
       type: Date,
       required: true,
@@ -125,8 +130,8 @@ export default {
       return getCalendarDays(this.selectMonth, this.selectYear, this.highlightedDay);
     },
 
-    getMonth () {
-      return format(new Date(2000, this.selectMonth, 1), 'MMMM');
+    formattedMonth () {
+      return this.formatMonth(this.selectMonth, 'MMMM');
     },
   },
 
@@ -156,6 +161,10 @@ export default {
   },
 
   methods: {
+    formatMonth (month, monthFormat) {
+      return format(new Date(2000, month, 1), monthFormat);
+    },
+
     setDayRef (el) {
       if (!this.focusRefs.includes(el)) {
         this.focusRefs.push(el);

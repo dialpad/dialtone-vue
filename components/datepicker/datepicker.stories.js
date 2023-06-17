@@ -5,10 +5,12 @@ import DtDatepickerDefaultTemplate from './datepicker_default.story.vue';
 import DtDatepickerWithPopoverTemplate from './datepicker_popover.story.vue';
 
 export const argsData = {
+  changeToLabel: 'Change to',
   prevMonthLabel: 'Previous month',
   nextMonthLabel: 'Next month',
   prevYearLabel: 'Previous year',
   nextYearLabel: 'Next year',
+  selectDayLabel: 'Select day',
   onSelectedDate: action('selected-date'),
   onCloseDatepicker: action('close-datepicker'),
 };
@@ -43,6 +45,25 @@ export const argTypesData = {
     },
   },
   nextYearLabel: {
+    control: 'text',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'String',
+      },
+    },
+  },
+  selectDayLabel: {
+    control: 'text',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'String',
+      },
+    },
+  },
+
+  changeToLabel: {
     control: 'text',
     table: {
       category: 'props',
