@@ -27,7 +27,7 @@
           'd-datepicker__day--selected': selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected,
         }"
         type="button"
-        :aria-label="`${selectDayLabel} ${day.text}`"
+        :aria-label="`${selectDayLabel} ${day.value}`"
         @click="selectDay(day)"
         @keydown="handleKeyDown($event)"
       >
