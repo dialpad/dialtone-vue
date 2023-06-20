@@ -1,0 +1,4 @@
+import{j as t}from"./jsx-runtime-2b868991.js";import"./chunk-PCJTTTQV-30e81a56.js";import{M as e,a as s}from"./index-cd76076d.js";import{u as n}from"./index-f8a06a9e.js";import"./iframe-419a1bb9.js";import"../sb-preview/runtime.js";import"./_commonjsHelpers-725317a4.js";import"./chunk-4NMOSTKD-938b085e.js";import"./index-d475d2ea.js";import"./index-d37d4223.js";import"./index-aefc0af2.js";import"./index-356e4a49.js";function M(o={}){const{wrapper:r}=Object.assign({},n(),o.components);return r?t.jsx(r,Object.assign({},o,{children:t.jsx(i,{})})):i();function i(){return t.jsxs(t.Fragment,{children:[t.jsx(e,{title:"Visual Testing/Popover"}),`
+`,t.jsx(s,{id:"visual-testing-popover--default"}),`
+`,t.jsx(s,{id:"visual-testing-popover--variants"})]})}}export{M as default};
+//# sourceMappingURL=popover-bdeb2925.js.map
