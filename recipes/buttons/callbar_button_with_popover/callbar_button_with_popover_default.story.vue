@@ -17,6 +17,7 @@
     :open-popover="openPopover"
     @arrow-click="onClick"
     @click="onClick"
+    @opened="onOpened"
   >
     <span
       v-if="defaultSlot"

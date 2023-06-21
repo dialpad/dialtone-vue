@@ -19,7 +19,7 @@ export const argsData = {
   openPopover: false,
   onArrowClick: action('arrowClick'),
   onClick: action('click'),
-  onModalIsOpened: action('opened'),
+  onOpened: action('opened'),
 };
 
 export const argTypesData = {
@@ -156,6 +156,24 @@ export const argTypesData = {
       },
     },
   },
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
+  opened: {
+    table: {
+      disable: false,
+      type: {
+        summary: 'event',
+      },
+    },
+  },
+  onOpened: {
+    table: {
+      disable: true,
+    },
+  },
 
   id: {
     table: {
@@ -176,18 +194,6 @@ export const argTypesData = {
     options: POPOVER_DIRECTIONS,
     control: {
       type: 'select',
-    },
-  },
-
-  // Action Event Handlers
-  onArrowClick: {
-    table: {
-      disable: true,
-    },
-  },
-  onClick: {
-    table: {
-      disable: true,
     },
   },
 };
