@@ -169,12 +169,12 @@ describe('DtDatepicker Tests', function () {
     });
 
     describe('On calendar', function () {
-      it('day should has correct aria label', function () {
-        const days = wrapper.findAll('.d-datepicker__calendar button');
-
-        // expect(days.at(26).attributes('aria-label')).toContain(`${basePropsData.selectDayLabel} ${formatDate(testDate, DAY_FORMAT)}`);
-        // console.log(days.at(26).attributes('aria-label'));
-      });
+      // it('day should has correct aria label', function () {
+      //   const days = wrapper.findAll('.d-datepicker__calendar button');
+      // eslint-disable-next-line max-len
+      //   // expect(days.at(26).attributes('aria-label')).toContain(`${basePropsData.selectDayLabel} ${formatDate(testDate, DAY_FORMAT)}`);
+      //   // console.log(days.at(26).attributes('aria-label'));
+      // });
     });
 
     describe('On mount', function () {
@@ -242,9 +242,13 @@ describe('DtDatepicker Tests', function () {
       });
     });
   });
-  //
-  // describe('Interactivity Tests', function () {
-  //   describe('When some description of the current environment', function () {});
-  // });
-  //
+
+  describe('Interactivity Tests', function () {
+    it('should emit selected-date event when a day is clicked', async function () {
+      const days = wrapper.findAll('.d-datepicker__calendar button');
+
+      await days.at(6).trigger('click');
+      expect(wrapper.emitted('selected-date')).toBeTruthy();
+    });
+  });
 });
