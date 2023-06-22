@@ -14,7 +14,7 @@
     :button-width-size="$attrs.buttonWidthSize"
     :text-class="$attrs.textClass"
     :content-class="$attrs.contentClass"
-    :open-popover="openPopover"
+    :open-popover="$attrs.openPopover"
     @arrow-click="$attrs.onClick"
     @click="$attrs.onClick"
     @opened="$attrs.onOpened"
