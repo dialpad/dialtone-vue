@@ -1,2 +1,0 @@
-import{_ as e}from"./iframe-922de53a.js";import"../sb-preview/runtime.js";var a={docs:{renderer:async()=>{let{DocsRenderer:r}=await e(()=>import("./DocsRenderer-EYKKDMVH-bcbc2853.js"),["./DocsRenderer-EYKKDMVH-bcbc2853.js","./chunk-PCJTTTQV-7d5ac57e.js","./iframe-922de53a.js","./index-723d171c.js","./_commonjsHelpers-725317a4.js","./chunk-4NMOSTKD-938b085e.js","./index-d475d2ea.js","./index-d37d4223.js","./index-aefc0af2.js","./index-356e4a49.js"],import.meta.url);return new r}}};export{a as parameters};
-//# sourceMappingURL=preview-54c42dfc.js.map
