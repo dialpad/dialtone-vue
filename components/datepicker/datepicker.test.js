@@ -169,12 +169,12 @@ describe('DtDatepicker Tests', function () {
     });
 
     describe('On calendar', function () {
-      // it('day should has correct aria label', function () {
-      //   const days = wrapper.findAll('.d-datepicker__calendar button');
-      // eslint-disable-next-line max-len
-      //   // expect(days.at(26).attributes('aria-label')).toContain(`${basePropsData.selectDayLabel} ${formatDate(testDate, DAY_FORMAT)}`);
-      //   // console.log(days.at(26).attributes('aria-label'));
-      // });
+      it('day should has correct aria label', function () {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+
+        // eslint-disable-next-line max-len
+        expect(days.at(26).attributes('aria-label')).toContain(`${basePropsData.selectDayLabel} ${day} ${formattedTodayMonth} ${todayYear}`);
+      });
     });
 
     describe('On mount', function () {
