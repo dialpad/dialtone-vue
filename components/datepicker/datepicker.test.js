@@ -2,13 +2,12 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import { formatMonth } from '@/components/datepicker/utils.js';
 import DtDatepicker from './datepicker.vue';
 import { MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
-import { set } from 'date-fns';
 
 const day = 21;
 const month = 6; // Note: month is zero-based, so 6 represents July
 const year = 2023;
 
-const testDate = set(new Date(), { day, month, year });
+const testDate = new Date(year, month, day);
 
 // Constants
 const basePropsData = {
@@ -57,6 +56,7 @@ describe('DtDatepicker Tests', function () {
     wrapper = mount(DtDatepicker, {
       propsData,
       localVue: testContext.localVue,
+      attachTo: document.body,
     });
   };
 
@@ -167,17 +167,84 @@ describe('DtDatepicker Tests', function () {
         expect(nextYearButton.attributes('aria-label')).toContain(`${basePropsData.changeToLabel} ${basePropsData.nextYearLabel} ${todayYear + 1}`);
       });
     });
+
+    describe('On calendar', function () {
+      it('day should has correct aria label', function () {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+
+        // expect(days.at(26).attributes('aria-label')).toContain(`${basePropsData.selectDayLabel} ${formatDate(testDate, DAY_FORMAT)}`);
+        // console.log(days.at(26).attributes('aria-label'));
+      });
+    });
+
+    describe('On mount', function () {
+      it('should focus previous year button', function () {
+        expect(prevYearButton.element).toBe(document.activeElement);
+      });
+    });
+
+    describe('On keyboard navigation', function () {
+      it('should focus first available day of the week when tab', async function () {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+
+        await prevYearButton.trigger('keydown.tab');
+        expect(days.at(6).element).toBe(document.activeElement);
+      });
+
+      it('should focus prev year button on tab from calendar', async function () {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+
+        await prevYearButton.trigger('keydown.tab');
+        expect(days.at(6).element).toBe(document.activeElement);
+
+        await days.at(6).trigger('keydown.tab');
+        expect(prevYearButton.element).toBe(document.activeElement);
+      });
+
+      it('should focus next day on arrow right', async function () {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+
+        await days.at(6).trigger('keydown.right');
+        expect(days.at(7).element).toBe(document.activeElement);
+      });
+
+      it('should focus previous day on arrow left', async function () {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+
+        await days.at(6).trigger('keydown.right');
+        expect(days.at(7).element).toBe(document.activeElement);
+
+        await days.at(7).trigger('keydown.left');
+        expect(days.at(6).element).toBe(document.activeElement);
+      });
+
+      it('should focus the day below on down arrow', async function () {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+
+        await days.at(6).trigger('keydown.right');
+        expect(days.at(7).element).toBe(document.activeElement);
+
+        await days.at(7).trigger('keydown.down');
+        expect(days.at(14).element).toBe(document.activeElement);
+      });
+
+      it('should focus the day above on up arrow', async function () {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+
+        await days.at(6).trigger('keydown.right');
+        expect(days.at(7).element).toBe(document.activeElement);
+
+        await days.at(7).trigger('keydown.down');
+        expect(days.at(14).element).toBe(document.activeElement);
+
+        await days.at(14).trigger('keydown.up');
+        expect(days.at(7).element).toBe(document.activeElement);
+      });
+    });
   });
   //
   // describe('Interactivity Tests', function () {
   //   describe('When some description of the current environment', function () {});
   // });
   //
-  // describe('Validation Tests', function () {
-  //   describe('When some description of the current environment', function () {});
-  // });
-  //
-  // describe('Extendability Tests', function () {
-  //   describe('When some description of the current environment', function () {});
-  // });
 });
