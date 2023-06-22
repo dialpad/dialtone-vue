@@ -244,6 +244,32 @@ describe('DtDatepicker Tests', function () {
   });
 
   describe('Interactivity Tests', function () {
+    it('should update year when previous year button is clicked', async function () {
+      await prevYearButton.trigger('click');
+
+      expect(wrapper.find('.d-datepicker--header p').text()).toBe(`${formattedTodayMonth} ${todayYear - 1}`);
+    });
+
+    it('should update year when next year button is clicked', async function () {
+      await nextYearButton.trigger('click');
+
+      expect(wrapper.find('.d-datepicker--header p').text()).toBe(`${formattedTodayMonth} ${todayYear + 1}`);
+    });
+
+    it('should update month when previous month button is clicked', async function () {
+      await prevMonthButton.trigger('click');
+
+      // eslint-disable-next-line max-len
+      expect(wrapper.find('.d-datepicker--header p').text()).toBe(`${formatMonth(todayMonth - 1, MONTH_FORMAT)} ${todayYear}`);
+    });
+
+    it('should update month when next month button is clicked', async function () {
+      await nextMonthButton.trigger('click');
+
+      // eslint-disable-next-line max-len
+      expect(wrapper.find('.d-datepicker--header p').text()).toBe(`${formatMonth(todayMonth + 1, MONTH_FORMAT)} ${todayYear}`);
+    });
+
     it('should emit selected-date event when a day is clicked', async function () {
       const days = wrapper.findAll('.d-datepicker__calendar button');
 
