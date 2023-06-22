@@ -27,7 +27,7 @@
           'd-datepicker__day--selected': selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected,
         }"
         type="button"
-        :aria-label="`${selectDayLabel} ${day.value}`"
+        :aria-label="dayAriaLabel(day)"
         @click="selectDay(day)"
         @keydown="handleKeyDown($event)"
       >
@@ -40,6 +40,7 @@
 <script>
 import { getWeekDayNames } from '@/components/datepicker/utils.js';
 import { WEEK_START } from '@/components/datepicker/datepicker_constants.js';
+import { format, getYear } from 'date-fns';
 
 export default {
   name: 'DtDatepickerCalendar',
@@ -96,6 +97,10 @@ export default {
   },
 
   methods: {
+    dayAriaLabel (day) {
+      return `${this.selectDayLabel} ${day.text} ${format(day.value, 'MMMM')} ${getYear(day.value)}`;
+    },
+
     setDayRef (el, currentMonth) {
       if (!this.daysRef.includes(el) && currentMonth) {
         this.daysRef.push(el);
