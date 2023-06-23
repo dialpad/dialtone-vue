@@ -380,7 +380,7 @@ export default {
     window.addEventListener('resize', this.handleResize);
   },
 
-  beforeDestroy: function () {
+  beforeUnmount: function () {
     window.removeEventListener('resize', this.handleResize);
   },
 
