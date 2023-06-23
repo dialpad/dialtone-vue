@@ -31,6 +31,7 @@
     <div>
       <p>
         {{ formattedMonth(selectMonth, MONTH_FORMAT) }}
+
         {{ selectYear }}
       </p>
     </div>
@@ -169,6 +170,10 @@ export default {
   },
 
   methods: {
+    formatMonth (month, monthFormat) {
+      return format(new Date(2000, month, 1), monthFormat);
+    },
+    
     setDayRef (el) {
       if (!this.focusRefs.includes(el)) {
         this.focusRefs.push(el);
