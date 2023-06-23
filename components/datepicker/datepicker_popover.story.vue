@@ -6,6 +6,7 @@
 
     <dt-popover
       :open="datepickerOpened"
+      initial-focus-element="#prevYearButton"
       padding="none"
       @opened="(open) => { datepickerOpened = open }"
     >
