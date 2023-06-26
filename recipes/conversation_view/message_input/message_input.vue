@@ -1,26 +1,26 @@
 <template>
+  <dt-notice
+    v-if="errorNoticeOpen"
+    :class="noticeClasses"
+    :kind="noticeKind"
+    :close-button-props="computedCloseButtonProps"
+    @close="noticeClose"
+  >
+    {{ noticeMessage }}
+    <template #icon>
+      <dt-icon
+        size="300"
+        name="alert-circle"
+      />
+    </template>
+  </dt-notice>
   <div
     role="presentation"
-    :class="{ 'd-mt16': errorNoticeOpen }"
+    class="d-ps-relative d-bar8 d-bgc-white"
     @drag-enter="onDrag"
     @drag-over="onDrag"
     @drop="onDrop"
   >
-    <dt-notice
-      v-if="errorNoticeOpen"
-      :class="noticeClasses"
-      :kind="noticeKind"
-      :close-button-props="computedCloseButtonProps"
-      @close="noticeClose"
-    >
-      {{ noticeMessage }}
-      <template #icon>
-        <dt-icon
-          size="100"
-          name="alert-circle"
-        />
-      </template>
-    </dt-notice>
     <div
       class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
       :class="{ 'd-bc-black-500 d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }"
@@ -451,8 +451,13 @@ export default {
 
     noticeClasses () {
       return [
-        'd-p6',
+        'd-ps-relative',
+        'd-t8',
+        'd-pb16',
+        'd-p12',
         'd-fs-100',
+        'd-wmx-unset',
+        'dt-message-input-notice',
       ];
     },
   },
