@@ -13,6 +13,8 @@
       :has-character-limit="$attrs.hasCharacterLimit"
       :character-limit-count="$attrs.characterLimitCount"
       :character-limit-warning="$attrs.characterLimitWarning"
+      :notice-kind="$attrs.noticeKind"
+      :notice-message="$attrs.noticeMessage"
       :emoji-tab-set-labels="$attrs.emojiTabSetLabels"
       :emoji-skin-selector-button-tooltip-label="$attrs.emojiSkinSelectorButtonTooltipLabel"
       :emoji-search-no-results-label="$attrs.emojiSearchNoResultsLabel"

@@ -50,6 +50,7 @@ export const argTypesData = {
 export const argsData = {
   placeholder: 'New Message',
   inputAriaLabel: 'input text field',
+  noticeMessage: 'Files must be less than 32 MB to be sent as Dialpad messages.',
   onSubmit: action('submit'),
   onFocus: action('focus'),
   onBlur: action('blur'),

@@ -310,7 +310,7 @@ export default {
      */
     noticeMessage: {
       type: String,
-      default: 'images need to have size of 10mb or below!',
+      default: '',
     },
 
     /**
@@ -453,8 +453,10 @@ export default {
       return [
         'd-ps-relative',
         'd-t8',
+        'd-bbr0',
+        'd-pt12',
         'd-pb16',
-        'd-p12',
+        'd-px16',
         'd-fs-100',
         'd-wmx-unset',
         'dt-message-input-notice',
@@ -525,5 +527,13 @@ export default {
   background-color: unset;
   color: var(--theme-sidebar-icon-color);
   cursor: default;
+}
+
+.d-notice__icon {
+  margin-right: 8px;
+}
+
+.d-notice__actions button {
+  padding: 0px;
 }
 </style>
