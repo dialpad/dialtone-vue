@@ -55,7 +55,8 @@ export const argsData = {
   onBlur: action('blur'),
   onInput: action('input'),
   onSelectMedia: action('select-media'),
-  onAddMedia: action('addd-media'),
+  onAddMedia: action('add-media'),
+  onNoticeClose: action('notice-close'),
 };
 
 // Story Collection

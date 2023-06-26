@@ -1,11 +1,26 @@
 <template>
   <div
     role="presentation"
+    :class="{ 'd-mt16': errorNoticeOpen }"
     @drag-enter="onDrag"
     @drag-over="onDrag"
     @drop="onDrop"
   >
-    <!-- TODO: A purpose-built place to display validation errors using DtBanner -->
+    <dt-notice
+      v-if="errorNoticeOpen"
+      :class="noticeClasses"
+      :kind="noticeKind"
+      :close-button-props="computedCloseButtonProps"
+      @close="noticeClose"
+    >
+      {{ noticeMessage }}
+      <template #icon>
+        <dt-icon
+          size="100"
+          name="alert-circle"
+        />
+      </template>
+    </dt-notice>
     <div
       class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
       :class="{ 'd-bc-black-500 d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }"
@@ -146,6 +161,7 @@ import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
 import { DtPopover } from '@/components/popover/index';
 import { DtInput } from '@/components/input/index';
+import { DtNotice } from '@/components/notice/index';
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -155,6 +171,7 @@ export default {
     DtEmojiPicker,
     DtIcon,
     DtInput,
+    DtNotice,
     DtPopover,
     DtRichTextEditor,
   },
@@ -286,6 +303,24 @@ export default {
       default: 500,
     },
 
+    // Error related props
+
+    /**
+     * message in the notice
+     */
+    noticeMessage: {
+      type: String,
+      default: 'images need to have size of 10mb or below!',
+    },
+
+    /**
+     * kind of notice to manage color
+     */
+    noticeKind: {
+      type: String,
+      default: 'error',
+    },
+
     // Emoji picker props
 
     /**
@@ -372,6 +407,14 @@ export default {
      * @type {Array}
      */
     'add-media',
+
+    /**
+     * Fires when notice is closed by user.
+     *
+     * @event notice-close
+     * @type {Boolean}
+     */
+    'notice-close',
   ],
 
   data () {
@@ -380,6 +423,7 @@ export default {
       inputValue: this.value,
       hasFocus: false,
       emojiPickerOpened: false,
+      errorNoticeOpen: this.noticeMessage !== '',
     };
   },
 
@@ -397,6 +441,19 @@ export default {
       return this.inputLength === 0 ||
       this.disableSend ||
       (this.hasCharacterLimit && this.inputLength > this.characterLimitCount);
+    },
+
+    computedCloseButtonProps () {
+      return {
+        ariaLabel: 'Close',
+      };
+    },
+
+    noticeClasses () {
+      return [
+        'd-p6',
+        'd-fs-100',
+      ];
     },
   },
 
@@ -444,6 +501,11 @@ export default {
       }
       this.$emit('submit', this.inputValue);
       this.inputValue = '';
+    },
+
+    noticeClose () {
+      this.$emit('notice-close', true);
+      this.errorNoticeOpen = false;
     },
   },
 };

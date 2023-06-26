@@ -27,6 +27,7 @@
       @input="$attrs.onInput"
       @select-media="$attrs.onSelectMedia"
       @add-media="$attrs.onAddMedia"
+      @notice-close="$attrs.onNoticeClose"
     >
       <template
         #footerLeft
