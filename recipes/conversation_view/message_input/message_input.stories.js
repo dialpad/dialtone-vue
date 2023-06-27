@@ -3,6 +3,8 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeMessageInput from './message_input.vue';
 import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.vue';
 
+import { NOTICE_KINDS } from '@/components/notice/notice_constants';
+
 /*
   Controls
   ========
@@ -20,6 +22,13 @@ import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.v
 */
 
 export const argTypesData = {
+  // Props
+  noticeKind: {
+    options: NOTICE_KINDS,
+    control: {
+      type: 'select',
+    },
+  },
   // Events
   onSubmit: {
     table: {

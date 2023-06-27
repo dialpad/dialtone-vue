@@ -37,8 +37,6 @@
           :link="link"
           :placeholder="placeholder"
           v-bind="$attrs"
-          @focus="hasFocus = true"
-          @blur="hasFocus = false"
         />
       </div>
       <!-- @slot Slot for attachment carousel -->
@@ -47,28 +45,40 @@
       <section class="d-d-flex d-jc-space-between d-mx8 d-my4">
         <!-- Left content -->
         <div class="d-d-flex">
-          <dt-button
-            size="sm"
-            circle
-            importance="clear"
-            :aria-label="imageButtonAriaLabel"
-            @click="onSelectImage"
+          <dt-tooltip
+            placement="top-start"
+            :message="imageTooltipLabel"
           >
-            <template #icon>
-              <dt-icon
-                name="image"
-                size="300"
+            <template #anchor>
+              <dt-button
+                size="sm"
+                circle
+                :kind="imagePickerFocus ? 'default' : 'muted'"
+                importance="clear"
+                :aria-label="imageButtonAriaLabel"
+                @click="onSelectImage"
+                @input="onImageUpload"
+                @mouseenter="imagePickerFocus = true"
+                @mouseleave="imagePickerFocus = false"
+                @focusin="imagePickerFocus = true"
+                @focusout="imagePickerFocus = false"
+              >
+                <template #icon>
+                  <dt-icon
+                    name="image"
+                    size="300"
+                  />
+                </template>
+              </dt-button>
+              <dt-input
+                ref="messageInputImageUpload"
+                type="file"
+                class="d-ps-absolute"
+                multiple
+                hidden
               />
             </template>
-          </dt-button>
-          <dt-input
-            ref="messageInputImageUpload"
-            type="file"
-            class="d-ps-absolute"
-            multiple
-            hidden
-            @input="onImageUpload"
-          />
+          </dt-tooltip>
           <dt-popover
             :open="emojiPickerOpened"
             initial-focus-element="#searchInput"
@@ -76,20 +86,31 @@
             @opened="(open) => { emojiPickerOpened = open }"
           >
             <template #anchor>
-              <dt-button
-                size="sm"
-                circle
-                importance="clear"
-                :aria-label="emojiButtonAriaLabel"
-                @click="toggleEmojiPicker"
+              <dt-tooltip
+                :message="emojiTooltipMessage"
               >
-                <template #icon>
-                  <dt-icon
-                    name="satisfied"
-                    size="300"
-                  />
+                <template #anchor>
+                  <dt-button
+                    size="sm"
+                    circle
+                    :kind="emojiPickerHovered ? 'default' : 'muted'"
+                    importance="clear"
+                    :aria-label="emojiButtonAriaLabel"
+                    @click="toggleEmojiPicker"
+                    @mouseenter="emojiPickerFocus = true"
+                    @mouseleave="emojiPickerFocus = false"
+                    @focusin="emojiPickerFocus = true"
+                    @focusout="emojiPickerFocus = false"
+                  >
+                    <template #icon>
+                      <dt-icon
+                        :name="!emojiPickerHovered ? 'satisfied' : 'very-satisfied'"
+                        size="300"
+                      />
+                    </template>
+                  </dt-button>
                 </template>
-              </dt-button>
+              </dt-tooltip>
             </template>
             <template #content>
               <dt-emoji-picker
@@ -114,26 +135,38 @@
           >
             {{ characterLimitCount - inputLength }}
           </p>
-          <!-- Right positioned UI - send button -->
-          <dt-button
-            size="sm"
-            circle
-            importance="clear"
-            :class="{
-              'message-input-button__disabled': isSendDisabled,
-              'd-bgc-purple-400 d-fc-primary-inverted': !isSendDisabled,
-            }"
-            :aria-label="sendButtonAriaLabel"
-            :aria-disabled="isSendDisabled"
-            @click="onSend"
+          <dt-tooltip
+            placement="top-end"
+            :message="sendTooltipLabel"
           >
-            <template #icon>
-              <dt-icon
-                name="send"
-                size="300"
-              />
+            <template #anchor>
+              <!-- Right positioned UI - send button -->
+              <dt-button
+                size="sm"
+                :kind="sendButtonFocus ? 'default' : 'muted'"
+                circle
+                importance="clear"
+                :class="{
+                  'message-input-button__disabled d-fc-muted': isSendDisabled,
+                  'd-bgc-purple-400 d-fc-primary-inverted': !isSendDisabled,
+                }"
+                :aria-label="sendButtonAriaLabel"
+                :aria-disabled="isSendDisabled"
+                @click="onSend"
+                @mouseenter="sendButtonFocus = true"
+                @mouseleave="sendButtonFocus = false"
+                @focusin="sendButtonFocus = true"
+                @focusout="sendButtonFocus = false"
+              >
+                <template #icon>
+                  <dt-icon
+                    name="send"
+                    size="300"
+                  />
+                </template>
+              </dt-button>
             </template>
-          </dt-button>
+          </dt-tooltip>
         </div>
       </section>
     </div>
@@ -162,6 +195,8 @@ import { DtEmojiPicker } from '@/components/emoji_picker';
 import { DtPopover } from '@/components/popover/index';
 import { DtInput } from '@/components/input/index';
 import { DtNotice } from '@/components/notice/index';
+import { NOTICE_KINDS } from '@/components/notice/notice_constants';
+import { DtTooltip } from '@/components/tooltip/index';
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -174,6 +209,7 @@ export default {
     DtNotice,
     DtPopover,
     DtRichTextEditor,
+    DtTooltip,
   },
 
   mixins: [],
@@ -323,10 +359,14 @@ export default {
 
     /**
      * kind of notice to manage color
+     * @values base, error, info, success, warning
      */
     noticeKind: {
       type: String,
       default: 'error',
+      validate (kind) {
+        return NOTICE_KINDS.includes(kind);
+      },
     },
 
     // Emoji picker props
@@ -369,6 +409,14 @@ export default {
       default: 'Search...',
     },
 
+    /**
+     * Emoji button tooltip label
+     */
+    emojiTooltipMessage: {
+      type: String,
+      default: 'Emoji',
+    },
+
     // Aria label for buttons
 
     /**
@@ -384,11 +432,26 @@ export default {
       default: 'image button',
     },
 
+    /**
+     * Image button tooltip label
+     */
+    imageTooltipLabel: {
+      type: String,
+      default: 'Attach Image',
+    },
+
     sendButtonAriaLabel: {
       type: String,
       default: 'send button',
     },
 
+    /**
+     * Send button tooltip label
+     */
+    sendTooltipLabel: {
+      type: String,
+      default: 'Send',
+    },
   },
 
   emits: [
@@ -430,6 +493,9 @@ export default {
       skinTone: 'Default',
       inputValue: this.value,
       hasFocus: false,
+      imagePickerFocus: false,
+      emojiPickerFocus: false,
+      sendButtonFocus: false,
       emojiPickerOpened: false,
       errorNoticeOpen: this.showNotice,
     };
@@ -470,6 +536,10 @@ export default {
         'd-fs-100',
         'd-wmx-unset',
       ];
+    },
+
+    emojiPickerHovered () {
+      return this.emojiPickerFocus || this.emojiPickerOpened;
     },
   },
 
