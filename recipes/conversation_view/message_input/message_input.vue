@@ -473,6 +473,12 @@ export default {
     },
   },
 
+  watch: {
+    showNotice (val) {
+      this.errorNoticeOpen = val;
+    },
+  },
+
   methods: {
     onDrag (e) {
       e.stopPropagation();
