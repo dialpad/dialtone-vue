@@ -343,6 +343,7 @@ export default {
 
     /**
      * Show error notice
+     * This should be turned to false after notice-close event is fired.
      */
     showNotice: {
       type: Boolean,
@@ -481,6 +482,7 @@ export default {
 
     /**
      * Fires when notice is closed by user.
+     * Listen to this event to toggle showNotice on usage.
      *
      * @event notice-close
      * @type {Boolean}
