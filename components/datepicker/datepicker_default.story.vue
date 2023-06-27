@@ -5,6 +5,7 @@
     </p>
 
     <dt-datepicker
+      :locale="$attrs.locale"
       :prev-month-label="$attrs.prevMonthLabel"
       :next-month-label="$attrs.nextMonthLabel"
       :prev-year-label="$attrs.prevYearLabel"
