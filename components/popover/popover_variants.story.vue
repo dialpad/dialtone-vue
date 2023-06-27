@@ -446,6 +446,64 @@
         </p>
       </template>
     </dt-popover>
+
+    <dt-popover
+      :modal="false"
+      :hide-on-click="true"
+      transition="fade"
+      initial-focus-element="#call-user-button"
+      content-class="d-pl12 d-pr16"
+      class="d-my128 d-jc-flex-end"
+      max-height="20rem"
+      max-width="50rem"
+      :open.sync="showHoverCard"
+    >
+      <template #anchor="{ attrs }">
+        <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
+        <dt-link
+          v-bind="attrs"
+          @mouseover="toggleHoverCard(true)"
+          @mouseout="toggleHoverCard(false)"
+        >
+          @josephlumaban
+        </dt-link>
+      </template>
+      <template #content>
+        <dt-recipe-contact-info
+          avatar-initials="JL"
+          avatar-size="LG"
+          avatar-seed="some-seed"
+          presence="active"
+        >
+          <template #header>
+            <div class="d-fs-200 d-fw-bold">
+              Joseph Lumaban
+            </div>
+          </template>
+          <template #subtitle>
+            <div class="d-fs-100 d-mt2">
+              +1 (415) 123-4567
+            </div>
+          </template>
+        </dt-recipe-contact-info>
+        <div class="d-d-flex d-jc-flex-end d-mt8">
+          <dt-button
+            id="call-user-button"
+            size="xs"
+            importance="outlined"
+            kind="muted"
+          >
+            <template #icon>
+              <dt-icon
+                name="phone"
+                size="200"
+              />
+            </template>
+            Call user
+          </dt-button>
+        </div>
+      </template>
+    </dt-popover>
   </div>
 </template>
 
@@ -456,21 +514,26 @@ import { DtDropdown } from '@/components/dropdown';
 import { DtListItem } from '@/components/list_item';
 import { DtTooltip } from '@/components/tooltip';
 import { DtIcon } from '@/components/icon';
+import { DtLink } from '@/components/link';
+import { DtRecipeContactInfo } from '@/recipes/list_items/contact_info';
 
 export default {
   name: 'PopoverVariantsStory',
   components: {
+    DtRecipeContactInfo,
     DtPopover,
     DtButton,
     DtDropdown,
     DtTooltip,
     DtIcon,
     DtListItem,
+    DtLink,
   },
 
   data () {
     return {
       openPopoverWithTriggerOverride: this.open,
+      showHoverCard: false,
       sampleText: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Consequuntur delectus distinctio id iure labore,
             maiores mollitia reprehenderit sunt tempore veritatis.
@@ -480,6 +543,10 @@ export default {
   },
 
   methods: {
+    toggleHoverCard (show) {
+      this.showHoverCard = show;
+    },
+
     onMouseOver () {
       this.openPopoverWithTriggerOverride = true;
     },
