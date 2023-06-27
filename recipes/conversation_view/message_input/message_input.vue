@@ -306,6 +306,14 @@ export default {
     // Error related props
 
     /**
+     * Show error notice
+     */
+    showNotice: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * message in the notice
      */
     noticeMessage: {
@@ -423,7 +431,7 @@ export default {
       inputValue: this.value,
       hasFocus: false,
       emojiPickerOpened: false,
-      errorNoticeOpen: this.noticeMessage !== '',
+      errorNoticeOpen: this.showNotice,
     };
   },
 
@@ -454,12 +462,13 @@ export default {
         'd-ps-relative',
         'd-t8',
         'd-bbr0',
-        'd-pt12',
-        'd-pb16',
-        'd-px16',
+        'd-pt4',
+        'd-pb8',
+        'd-pr12',
+        'd-pl16',
+        'd-bs-none',
         'd-fs-100',
         'd-wmx-unset',
-        'dt-message-input-notice',
       ];
     },
   },
@@ -531,9 +540,5 @@ export default {
 
 .d-notice__icon {
   margin-right: 8px;
-}
-
-.d-notice__actions button {
-  padding: 0px;
 }
 </style>

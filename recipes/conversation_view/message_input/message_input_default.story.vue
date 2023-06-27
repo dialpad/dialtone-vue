@@ -13,6 +13,7 @@
       :has-character-limit="$attrs.hasCharacterLimit"
       :character-limit-count="$attrs.characterLimitCount"
       :character-limit-warning="$attrs.characterLimitWarning"
+      :show-notice="$attrs.showNotice"
       :notice-kind="$attrs.noticeKind"
       :notice-message="$attrs.noticeMessage"
       :emoji-tab-set-labels="$attrs.emojiTabSetLabels"
@@ -34,14 +35,14 @@
       <template
         #footerLeft
       >
-        <div class="d-fc-100 d-fc-muted">
+        <div class="d-body-small d-fc-muted">
           <b>Dwight</b> is typing...
         </div>
       </template>
       <template
         #footerRight
       >
-        <div class="d-fc-100 d-fc-tertiary">
+        <div class="d-body-small d-fc-tertiary">
           <b>Shift</b> + <b>Return</b> to add a new line
         </div>
       </template>

@@ -48,9 +48,10 @@ export const argTypesData = {
 
 // Set default values at the story level here.
 export const argsData = {
-  placeholder: 'New Message',
-  inputAriaLabel: 'input text field',
+  placeholder: 'New message',
+  inputAriaLabel: 'Input text field',
   noticeMessage: 'Files must be less than 32 MB to be sent as Dialpad messages.',
+  showNotice: true,
   onSubmit: action('submit'),
   onFocus: action('focus'),
   onBlur: action('blur'),
