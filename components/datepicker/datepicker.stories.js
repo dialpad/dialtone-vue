@@ -2,6 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtDatepicker from './datepicker.vue';
 import DtDatepickerDefaultTemplate from './datepicker_default.story.vue';
+import DtDatepickerWithPopoverTemplate from './datepicker_popover.story.vue';
 
 export const argsData = {
   changeToLabel: 'Change to',
@@ -111,7 +112,18 @@ const Template = (args) => createTemplateFromVueFile(
   DtDatepickerDefaultTemplate,
 );
 
+const WithPopoverTemplate = (args) => createTemplateFromVueFile(
+  args,
+  DtDatepickerWithPopoverTemplate,
+);
+
 export const Default = {
   render: Template,
   args: {},
+};
+
+export const WithPopover = {
+  render: WithPopoverTemplate,
+  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
 };
