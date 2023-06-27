@@ -1,6 +1,6 @@
 <template>
   <dt-notice
-    v-if="errorNoticeOpen"
+    v-if="showNotice"
     :class="noticeClasses"
     :kind="noticeKind"
     :close-button-props="computedCloseButtonProps"
@@ -497,7 +497,6 @@ export default {
       emojiPickerFocus: false,
       sendButtonFocus: false,
       emojiPickerOpened: false,
-      errorNoticeOpen: this.showNotice,
     };
   },
 
@@ -540,12 +539,6 @@ export default {
 
     emojiPickerHovered () {
       return this.emojiPickerFocus || this.emojiPickerOpened;
-    },
-  },
-
-  watch: {
-    showNotice (val) {
-      this.errorNoticeOpen = val;
     },
   },
 
@@ -597,7 +590,6 @@ export default {
 
     noticeClose () {
       this.$emit('notice-close', true);
-      this.errorNoticeOpen = false;
     },
   },
 };

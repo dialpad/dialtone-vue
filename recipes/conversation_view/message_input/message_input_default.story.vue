@@ -1,6 +1,7 @@
 <template>
   <div class="d-h264">
     <dt-recipe-message-input
+      v-model:show-notice="$attrs.showNotice"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"
       :editable="$attrs.editable"
@@ -13,7 +14,6 @@
       :has-character-limit="$attrs.hasCharacterLimit"
       :character-limit-count="$attrs.characterLimitCount"
       :character-limit-warning="$attrs.characterLimitWarning"
-      :show-notice="$attrs.showNotice"
       :notice-kind="$attrs.noticeKind"
       :notice-message="$attrs.noticeMessage"
       :emoji-tab-set-labels="$attrs.emojiTabSetLabels"
