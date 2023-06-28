@@ -22,7 +22,7 @@ const componentsList = [
   'codeblock.vue',
   'collapsible.vue',
   'combobox.vue',
-  'datepicker',
+  'datepicker.vue',
   'dropdown.vue',
   'emoji.vue',
   'emoji_picker.vue',
