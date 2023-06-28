@@ -22,11 +22,12 @@
     @drop="onDrop"
     @focusin="hasFocus = true"
     @focusout="hasFocus = false"
-    @click="$refs.richTextEditor.focusEditor()"
   >
     <div
+      role="presentation"
       class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
       :class="{ 'd-bc-black-500 d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }"
+      @click="() => { $refs.richTextEditor.focusEditor() }"
     >
       <!-- Some wrapper to restrict the height and show the scrollbar -->
       <div class="d-of-auto d-mx16 d-mt8 d-mb4 d-hmx40p">
