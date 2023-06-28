@@ -157,7 +157,6 @@
                 importance="primary"
                 :class="{
                   'message-input-button__disabled d-fc-muted': isSendDisabled,
-                  'd-fc-primary-inverted': !isSendDisabled,
                 }"
                 :aria-label="sendButtonAriaLabel"
                 :aria-disabled="isSendDisabled"
