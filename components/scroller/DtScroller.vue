@@ -158,28 +158,28 @@ watch(props, () => {
 }, { deep: true, immediate: true });
 
 function scrollToBottom () {
-  if (scroller.value) scroller.value.scrollToBottom();
+  if (DtScroller.value) DtScroller.value.scrollToBottom();
 }
 
 function scrollToItem (index) {
-  if (scroller.value) scroller.value.scrollToItem(index);
+  if (DtScroller.value) DtScroller.value.scrollToItem(index);
 }
 
 function updateItems () {
-  if (!scroller.value) return;
+  if (!DtScroller.value) return;
   if (props.dynamic) {
-    scroller.value.dynamicScrollerUpdateItems();
+    DtScroller.value.dynamicScrollerUpdateItems();
   } else {
-    scroller.value._updateVisibleItems(true);
+    DtScroller.value._updateVisibleItems(true);
   }
 }
 
 function updateItemsFromBottom () {
-  if (!scroller.value) return;
+  if (!DtScroller.value) return;
   if (props.dynamic) {
-    scroller.value.dynamicScrollerUpdateItemsFromBottom();
+    DtScroller.value.dynamicScrollerUpdateItemsFromBottom();
   } else {
-    scroller.value._updateVisibleItems(false, true);
+    DtScroller.value._updateVisibleItems(false, true);
   }
 }
 
