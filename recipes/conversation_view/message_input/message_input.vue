@@ -20,6 +20,8 @@
     @drag-enter="onDrag"
     @drag-over="onDrag"
     @drop="onDrop"
+    @focusin="hasFocus = true"
+    @focusout="hasFocus = false"
   >
     <div
       class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
@@ -37,6 +39,8 @@
           :link="link"
           :placeholder="placeholder"
           v-bind="$attrs"
+          @focus="hasFocus = true"
+          @blur="hasFocus = false"
         />
       </div>
       <!-- @slot Slot for attachment carousel -->
@@ -48,6 +52,7 @@
           <dt-tooltip
             placement="top-start"
             :message="imageTooltipLabel"
+            :offset="[-4, -4]"
           >
             <template #anchor>
               <dt-button
@@ -88,6 +93,7 @@
             <template #anchor>
               <dt-tooltip
                 :message="emojiTooltipMessage"
+                :offset="[0, -4]"
               >
                 <template #anchor>
                   <dt-button
@@ -96,6 +102,7 @@
                     :kind="emojiPickerHovered ? 'default' : 'muted'"
                     importance="clear"
                     :aria-label="emojiButtonAriaLabel"
+                    :offset="[0, 0]"
                     @click="toggleEmojiPicker"
                     @mouseenter="emojiPickerFocus = true"
                     @mouseleave="emojiPickerFocus = false"
@@ -138,12 +145,14 @@
           <dt-tooltip
             placement="top-end"
             :message="sendTooltipLabel"
+            :show="!isSendDisabled && sendButtonFocus"
+            :offset="[6, -4]"
           >
             <template #anchor>
               <!-- Right positioned UI - send button -->
               <dt-button
                 size="sm"
-                :kind="sendButtonFocus ? 'default' : 'muted'"
+                :kind="!isSendDisabled ? 'default' : 'muted'"
                 circle
                 importance="clear"
                 :class="{
