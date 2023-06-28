@@ -158,38 +158,38 @@ watch(props, () => {
 }, { deep: true, immediate: true });
 
 function scrollToBottom () {
-  if (DtScroller.value) DtScroller.value.scrollToBottom();
+  if (scroller.value) scroller.value.scrollToBottom();
 }
 
 function scrollToItem (index) {
-  if (DtScroller.value) DtScroller.value.scrollToItem(index);
+  if (scroller.value) scroller.value.scrollToItem(index);
 }
 
 function updateItems () {
-  if (!DtScroller.value) return;
+  if (!scroller.value) return;
   if (props.dynamic) {
-    DtScroller.value.dynamicScrollerUpdateItems();
+    scroller.value.dynamicScrollerUpdateItems();
   } else {
-    DtScroller.value._updateVisibleItems(true);
+    scroller.value._updateVisibleItems(true);
   }
 }
 
 function updateItemsFromBottom () {
-  if (!DtScroller.value) return;
+  if (!scroller.value) return;
   if (props.dynamic) {
-    DtScroller.value.dynamicScrollerUpdateItemsFromBottom();
+    scroller.value.dynamicScrollerUpdateItemsFromBottom();
   } else {
-    DtScroller.value._updateVisibleItems(false, true);
+    scroller.value._updateVisibleItems(false, true);
   }
 }
 
 function validateProps () {
   if (props.dynamic && !props.minItemSize) {
-    console.error('DtScroller error: \'minItemSize\' is required on \'dynamic\' mode.');
+    console.error('scroller error: \'minItemSize\' is required on \'dynamic\' mode.');
   }
 
   if (!props.dynamic && !props.itemSize) {
-    console.error('DtScroller error: \'itemSize\' is required.');
+    console.error('scroller error: \'itemSize\' is required.');
   }
 }
 
