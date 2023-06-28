@@ -15,19 +15,18 @@
     </template>
   </dt-notice>
   <div
-    role="presentation"
     class="d-ps-relative d-bar8 d-bgc-white"
-    @drag-enter="onDrag"
-    @drag-over="onDrag"
-    @drop="onDrop"
-    @focusin="hasFocus = true"
-    @focusout="hasFocus = false"
   >
     <div
       role="presentation"
       class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
       :class="{ 'd-bc-black-500 d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }"
-      @click="() => { $refs.richTextEditor.focusEditor() }"
+      @click="$refs.richTextEditor.focusEditor()"
+      @drag-enter="onDrag"
+      @drag-over="onDrag"
+      @drop="onDrop"
+      @focusin="hasFocus = true"
+      @focusout="hasFocus = false"
     >
       <!-- Some wrapper to restrict the height and show the scrollbar -->
       <div class="d-of-auto d-mx16 d-mt8 d-mb4 d-hmx40p">
