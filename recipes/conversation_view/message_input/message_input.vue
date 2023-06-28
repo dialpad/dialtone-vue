@@ -22,7 +22,7 @@
     @drop="onDrop"
     @focusin="hasFocus = true"
     @focusout="hasFocus = false"
-    @click="$refs.richTextEditor.$el.querySelector('.ProseMirror').focus()"
+    @click="$refs.richTextEditor.focusEditor()"
   >
     <div
       class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
