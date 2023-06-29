@@ -53,6 +53,24 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onAddMedia: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onNoticeClose: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onSelectMedia: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
