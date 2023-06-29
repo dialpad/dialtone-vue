@@ -1,3 +1,39 @@
+## [3.75.2](https://github.com/dialpad/dialtone-vue/compare/v3.75.1...v3.75.2) (2023-06-29)
+
+
+### Code Refactoring
+
+* **Emoji Picker, Datepicker, Scroller:** component documentation name update ([#1050](https://github.com/dialpad/dialtone-vue/issues/1050)) ([cef5119](https://github.com/dialpad/dialtone-vue/commit/cef511928ea4cba889c004a6aee0b7e5b53359fa))
+
+## [3.75.1](https://github.com/dialpad/dialtone-vue/compare/v3.75.0...v3.75.1) (2023-06-29)
+
+
+### Code Refactoring
+
+* **Emoji Picker, Datepicker, Scroller:** name refactoring vue3 ([#1048](https://github.com/dialpad/dialtone-vue/issues/1048)) ([4e198d8](https://github.com/dialpad/dialtone-vue/commit/4e198d878341008a9ad6e103cea62541e32c793a))
+
+# [3.75.0](https://github.com/dialpad/dialtone-vue/compare/v3.74.0...v3.75.0) (2023-06-28)
+
+
+### Features
+
+* update dialtone-icons ([2968023](https://github.com/dialpad/dialtone-vue/commit/2968023071368badf3e31035d78a8d654bb2b8a4))
+
+# [3.74.0](https://github.com/dialpad/dialtone-vue/compare/v3.73.3...v3.74.0) (2023-06-28)
+
+
+### Bug Fixes
+
+* **General Row:** overlapping text - vue 3 ([#1037](https://github.com/dialpad/dialtone-vue/issues/1037)) ([4d38b3c](https://github.com/dialpad/dialtone-vue/commit/4d38b3c6d3543bb825b41327875660bba0324f06))
+* **List Item:** border radius ([#1039](https://github.com/dialpad/dialtone-vue/issues/1039)) ([f522667](https://github.com/dialpad/dialtone-vue/commit/f5226670b726d3c5fadebf523b73d52fac5943f5))
+* **Rich Text Editor:** fix v-model not working ([#1034](https://github.com/dialpad/dialtone-vue/issues/1034)) ([99b0729](https://github.com/dialpad/dialtone-vue/commit/99b0729e3a7b7d7fc97de4ea047e9ac4ed47b53d))
+
+
+### Features
+
+* **Datepicker:** datepicker vue3 component ([#1042](https://github.com/dialpad/dialtone-vue/issues/1042)) ([62310da](https://github.com/dialpad/dialtone-vue/commit/62310da0eba8a8c86b3fd959ad4dc75c40b2bb94))
+* **Emoji Picker, Scroller, Datepicker:** build registration component and sort vue3 ([#1045](https://github.com/dialpad/dialtone-vue/issues/1045)) ([32028b7](https://github.com/dialpad/dialtone-vue/commit/32028b7dad569281994f34016f44cbc69052bf4a))
+
 ## [3.73.3](https://github.com/dialpad/dialtone-vue/compare/v3.73.2...v3.73.3) (2023-06-22)
 
 
