@@ -39,6 +39,7 @@ export * from './components/keyboard_shortcut';
 export * from './components/root_layout';
 export * from './components/icon';
 export * from './components/stack';
+export * from './components/datepicker';
 export * from './components/item_layout';
 
 /// Recipes
