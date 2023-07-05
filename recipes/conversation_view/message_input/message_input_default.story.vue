@@ -1,7 +1,6 @@
 <template>
   <div class="d-h264">
     <dt-recipe-message-input
-      ref="messageInput"
       v-model:show-notice="$attrs.showNotice"
       v-model="$attrs.modelValue"
       :input-aria-label="$attrs.inputAriaLabel"

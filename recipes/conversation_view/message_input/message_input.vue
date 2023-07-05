@@ -609,14 +609,6 @@ export default {
     noticeClose () {
       this.$emit('notice-close', true);
     },
-
-    /**
-     * Set Value of the input. The object format should match TipTap's JSON
-     * document structure: https://tiptap.dev/guide/output#option-1-json
-     */
-    setContent (val) {
-      this.inputValue = val;
-    },
   },
 };
 </script>
