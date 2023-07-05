@@ -537,6 +537,7 @@ export default {
 
     noticeClasses () {
       return [
+        'dt-message-input-notice',
         'd-ps-relative',
         'd-t8',
         'd-bbr0',
@@ -624,7 +625,7 @@ export default {
   cursor: default;
 }
 
-.d-notice__icon {
+.dt-message-input-notice .d-notice__icon {
   margin-right: 8px;
 }
 </style>
