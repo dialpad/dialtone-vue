@@ -194,6 +194,7 @@
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
@@ -231,7 +232,7 @@ export default {
      * Value of the input. The object format should match TipTap's JSON
      * document structure: https://tiptap.dev/guide/output#option-1-json
      */
-    value: {
+    modelValue: {
       type: [Object, String],
       default: '',
     },
@@ -503,7 +504,7 @@ export default {
   data () {
     return {
       skinTone: 'Default',
-      inputValue: this.value,
+      inputValue: this.modelValue,
       hasFocus: false,
       imagePickerFocus: false,
       emojiPickerFocus: false,
@@ -554,6 +555,12 @@ export default {
     },
   },
 
+  watch: {
+    modelValue (newValue) {
+      this.inputValue = newValue;
+    },
+  },
+
   methods: {
     onDrag (e) {
       e.stopPropagation();
@@ -597,11 +604,18 @@ export default {
         return;
       }
       this.$emit('submit', this.inputValue);
-      this.inputValue = '';
     },
 
     noticeClose () {
       this.$emit('notice-close', true);
+    },
+
+    /**
+     * Set Value of the input. The object format should match TipTap's JSON
+     * document structure: https://tiptap.dev/guide/output#option-1-json
+     */
+    setContent (val) {
+      this.inputValue = val;
     },
   },
 };
