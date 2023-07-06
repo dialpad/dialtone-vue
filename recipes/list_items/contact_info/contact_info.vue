@@ -26,7 +26,10 @@
               :overlay-icon="avatar.icon"
               :overlay-text="avatar.text"
               overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
-              :avatar-class="['d-ba d-baw4 d-bc-white d-bar-pill', { 'd-mln24': index > 0 }]"
+              :avatar-class="['d-baw4 d-bc-white d-bar-pill d-ba d-bc-transparent', {
+                'd-mln24': index > 0,
+                'd-bc-brand': !!avatar.halo,
+              }]"
             >
               <img
                 v-if="avatar.src"
@@ -50,6 +53,7 @@
           :initials="avatarInitials"
           :seed="avatarSeed"
           :presence="presence"
+          :style="avatarHalo"
         >
           <img
             v-if="avatarSrc"
