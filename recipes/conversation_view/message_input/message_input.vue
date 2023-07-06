@@ -32,7 +32,7 @@
       <div class="d-of-auto d-mx16 d-mt8 d-mb4 d-hmx40p">
         <dt-rich-text-editor
           ref="richTextEditor"
-          v-model="inputValue"
+          v-model="internalInputValue"
           :editable="editable"
           :input-aria-label="inputAriaLabel"
           :input-class="inputClass"
@@ -504,7 +504,7 @@ export default {
   data () {
     return {
       skinTone: 'Default',
-      inputValue: this.modelValue,
+      internalInputValue: this.modelValue, // internal input content
       hasFocus: false,
       imagePickerFocus: false,
       emojiPickerFocus: false,
@@ -515,7 +515,7 @@ export default {
 
   computed: {
     inputLength () {
-      return this.inputValue.length;
+      return this.internalInputValue.length;
     },
 
     displayCharacterLimitWarning () {
@@ -558,7 +558,7 @@ export default {
 
   watch: {
     modelValue (newValue) {
-      this.inputValue = newValue;
+      this.internalInputValue = newValue;
     },
   },
 
@@ -584,7 +584,7 @@ export default {
         return;
       }
 
-      this.inputValue = this.inputValue + emoji.shortname;
+      this.internalInputValue = this.internalInputValue + emoji.shortname;
       this.emojiPickerOpened = false;
     },
 
@@ -604,7 +604,7 @@ export default {
       if (this.isSendDisabled) {
         return;
       }
-      this.$emit('submit', this.inputValue);
+      this.$emit('submit', this.internalInputValue);
     },
 
     noticeClose () {
