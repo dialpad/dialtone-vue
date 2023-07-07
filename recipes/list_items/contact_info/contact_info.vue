@@ -53,7 +53,6 @@
           :initials="avatarInitials"
           :seed="avatarSeed"
           :presence="presence"
-          :style="avatarHalo"
         >
           <img
             v-if="avatarSrc"
@@ -210,7 +209,8 @@ export default {
      * `initials` - Initial letters to display in avatar (required if src is empty)<br>
      * `seed` - determines uniqueness of avatar background <br>
      * `text` - text that overlays the avatar (optional) <br>
-     * `icon` - icon that overlays the avatar (optional)
+     * `icon` - icon that overlays the avatar (optional) <br>
+     * `halo` - halo highlight around the avatar. boolean true/false
      */
     avatarList: {
       type: Array,
