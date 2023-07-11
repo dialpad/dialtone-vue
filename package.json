@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.90.1",
+  "version": "2.91.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "build": "npm run clean && npm run build:main && npm run build:documentation",
@@ -49,7 +49,7 @@
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/dialtone": "^7.28.0",
+    "@dialpad/dialtone": "^7.29.0",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@percy/cli": "^1.26.1",
     "@percy/storybook": "^4.3.6",
