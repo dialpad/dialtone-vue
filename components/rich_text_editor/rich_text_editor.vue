@@ -154,7 +154,7 @@ export default {
   computed: {
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [CodeBlock, Document, HardBreak, Paragraph, Text];
+      const extensions = [CodeBlock, Document, Paragraph, Text];
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
       }
