@@ -167,6 +167,7 @@ export default {
         HardBreak.extend({
           addKeyboardShortcuts () {
             return {
+              Enter: () => true,
               'Shift-Enter': () => this.editor.commands.first(({ commands }) => [
                 () => commands.newlineInCode(),
                 () => commands.createParagraphNear(),
