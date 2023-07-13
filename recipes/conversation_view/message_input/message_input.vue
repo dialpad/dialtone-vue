@@ -1,6 +1,7 @@
 <template>
   <dt-notice
     v-if="showNotice"
+    data-qa="dt-message-input-error-notice"
     :class="noticeClasses"
     :kind="noticeKind"
     :close-button-props="computedCloseButtonProps"
@@ -18,6 +19,7 @@
     class="d-ps-relative d-bar8 d-bgc-white"
   >
     <div
+      data-qa="dt-message-input"
       role="presentation"
       class="d-d-flex d-fd-column d-bar8 d-baw1 d-ba d-c-text"
       :class="{ 'd-bc-black-500 d-bs-sm': hasFocus, 'd-bc-default': !hasFocus }"
@@ -58,13 +60,13 @@
           >
             <template #anchor>
               <dt-button
+                data-qa="dt-message-input-image-btn"
                 size="sm"
                 circle
                 :kind="imagePickerFocus ? 'default' : 'muted'"
                 importance="clear"
                 :aria-label="imageButtonAriaLabel"
                 @click="onSelectImage"
-                @input="onImageUpload"
                 @mouseenter="imagePickerFocus = true"
                 @mouseleave="imagePickerFocus = false"
                 @focusin="imagePickerFocus = true"
@@ -79,14 +81,17 @@
               </dt-button>
               <dt-input
                 ref="messageInputImageUpload"
+                data-qa="dt-message-input-image-input"
                 type="file"
                 class="d-ps-absolute"
                 multiple
                 hidden
+                @input="onImageUpload"
               />
             </template>
           </dt-tooltip>
           <dt-popover
+            data-qa="dt-message-input-emoji-picker-popover"
             :open="emojiPickerOpened"
             initial-focus-element="#searchInput"
             padding="none"
@@ -99,6 +104,7 @@
               >
                 <template #anchor>
                   <dt-button
+                    data-qa="dt-message-input-emoji-picker-btn"
                     size="sm"
                     circle
                     :kind="emojiPickerHovered ? 'default' : 'muted'"
@@ -141,6 +147,7 @@
           <p
             v-if="displayCharacterLimitWarning"
             class="d-fc-error d-mr16 d-as-center dt-message-input--remaining-char"
+            data-qa="dt-message-input-character-limit"
           >
             {{ characterLimitCount - inputLength }}
           </p>
@@ -153,6 +160,7 @@
             <template #anchor>
               <!-- Right positioned UI - send button -->
               <dt-button
+                data-qa="dt-message-input-send-btn"
                 size="sm"
                 :kind="!isSendDisabled ? 'default' : 'muted'"
                 circle
@@ -181,11 +189,15 @@
       </section>
     </div>
     <section class="d-d-flex d-jc-space-between d-h24 d-ai-center">
-      <div>
+      <div
+        data-qa="dt-message-input-footer-left"
+      >
         <!-- @slot Slot for helper text. Who is typing can go here -->
         <slot name="footerLeft" />
       </div>
-      <div>
+      <div
+        data-qa="dt-message-input-footer-right"
+      >
         <!-- @slot helper text for the input. Shift + enter for new line -->
         <slot name="footerRight" />
       </div>
@@ -593,6 +605,7 @@ export default {
     },
 
     onImageUpload (val) {
+      console.log('TESTEST');
       this.$emit('select-media', val);
     },
 
