@@ -33,7 +33,7 @@
       <div class="d-of-auto d-mx16 d-mt8 d-mb4 d-hmx40p">
         <dt-rich-text-editor
           ref="richTextEditor"
-          v-model="inputValue"
+          v-model="internalInputValue"
           :editable="editable"
           :input-aria-label="inputAriaLabel"
           :input-class="inputClass"
@@ -195,6 +195,7 @@
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
@@ -232,7 +233,7 @@ export default {
      * Value of the input. The object format should match TipTap's JSON
      * document structure: https://tiptap.dev/guide/output#option-1-json
      */
-    value: {
+    modelValue: {
       type: [Object, String],
       default: '',
     },
@@ -504,7 +505,7 @@ export default {
   data () {
     return {
       skinTone: 'Default',
-      inputValue: this.value,
+      internalInputValue: this.modelValue, // internal input content
       hasFocus: false,
       imagePickerFocus: false,
       emojiPickerFocus: false,
@@ -515,7 +516,7 @@ export default {
 
   computed: {
     inputLength () {
-      return this.inputValue.length;
+      return this.internalInputValue.length;
     },
 
     displayCharacterLimitWarning () {
@@ -537,6 +538,7 @@ export default {
 
     noticeClasses () {
       return [
+        'dt-message-input-notice',
         'd-ps-relative',
         'd-t8',
         'd-bbr0',
@@ -552,6 +554,12 @@ export default {
 
     emojiPickerHovered () {
       return this.emojiPickerFocus || this.emojiPickerOpened;
+    },
+  },
+
+  watch: {
+    modelValue (newValue) {
+      this.internalInputValue = newValue;
     },
   },
 
@@ -577,7 +585,7 @@ export default {
         return;
       }
 
-      this.inputValue = this.inputValue + emoji.shortname;
+      this.internalInputValue = this.internalInputValue + emoji.shortname;
       this.emojiPickerOpened = false;
     },
 
@@ -597,8 +605,7 @@ export default {
       if (this.isSendDisabled) {
         return;
       }
-      this.$emit('submit', this.inputValue);
-      this.inputValue = '';
+      this.$emit('submit', this.internalInputValue);
     },
 
     noticeClose () {
@@ -619,7 +626,7 @@ export default {
   cursor: default;
 }
 
-.d-notice__icon {
+.dt-message-input-notice .d-notice__icon {
   margin-right: 8px;
 }
 </style>
