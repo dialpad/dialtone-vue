@@ -605,7 +605,6 @@ export default {
     },
 
     onImageUpload (val) {
-      console.log('TESTEST');
       this.$emit('select-media', val);
     },
 

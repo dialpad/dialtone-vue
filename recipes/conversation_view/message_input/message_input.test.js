@@ -30,7 +30,6 @@ let attrs;
 let slots;
 let listeners;
 let imageUploadStub;
-let inputStub;
 
 // Constants
 const baseProps = {
@@ -58,7 +57,6 @@ const _setChildWrappers = () => {
 
   // Els
   imageInputEl = wrapper.find('[data-qa="dt-message-input-image-input"]');
-  // emojiPickerPopover = wrapper.find('[data-qa="dt-message-input-emoji-picker-popover"]');
   messageInputEl = wrapper.find('[data-qa="dt-message-input"]');
   characterLimitEl = wrapper.find('[data-qa="dt-message-input-character-limit"]');
   errorNoticeEl = wrapper.find('[data-qa="dt-message-input-error-notice"]');
@@ -90,7 +88,6 @@ describe('DtMessage tests', () => {
     props = baseProps;
     imageUploadStub = vi.fn();
     attrs = {
-      onInput: inputStub,
       onImageUpload: imageUploadStub,
     };
     slots = baseSlots;
@@ -230,71 +227,14 @@ describe('DtMessage tests', () => {
       });
     });
 
-    // doesnt work
+    // select-media event
     describe('When image input is selected', () => {
       beforeEach(async () => {
         await imageInputEl.trigger('input');
       });
 
-      it('should call imageUploadStub stub', async () => {
-        expect(imageUploadStub).toHaveBeenCalled();
-      });
-    });
-
-    // doesnt work
-    describe('User Input Tests', function () {
-      describe('When user inputs a value', function () {
-        // Shared Examples
-        const itBehavesLikeOutputsCorrectly = (value, output) => {
-          it('should emit the output value', async () => {
-            await wrapper.setProps({
-              modelValue: value,
-            });
-            await wrapper.vm.$nextTick();
-            console.log('Text output', wrapper.emitted());
-            expect(wrapper.emitted().input[0][0]).toEqual(output);
-            expect(inputStub).toHaveBeenCalled();
-          });
-        };
-
-        describe('When using text output', function () {
-          // Test Setup
-          beforeEach(async function () {
-            await wrapper.setProps({ outputFormat: 'text' });
-          });
-
-          itBehavesLikeOutputsCorrectly('new value', 'new value');
-        });
-
-        describe('When using json output', function () {
-          // Test Environment
-          const jsonOutput = {
-            type: 'doc',
-            content: [{
-              type: 'paragraph',
-              content: [{
-                text: 'new value',
-                type: 'text',
-              }],
-            }],
-          };
-
-          // Test Setup
-          beforeEach(async function () {
-            await wrapper.setProps({ outputFormat: 'json' });
-          });
-
-          itBehavesLikeOutputsCorrectly('new value', jsonOutput);
-        });
-
-        describe('When using html output', function () {
-          // Test Setup
-          beforeEach(async function () {
-            await wrapper.setProps({ outputFormat: 'html' });
-          });
-
-          itBehavesLikeOutputsCorrectly('new value', '<p>new value</p>');
-        });
+      it('should emit select-media event', async () => {
+        expect(wrapper.emitted()).toHaveProperty('select-media');
       });
     });
   });
