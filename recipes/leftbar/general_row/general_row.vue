@@ -10,6 +10,7 @@
       :title="description"
       :href="'href' in $attrs ? $attrs.href : 'javascript:void(0)'"
       v-bind="$attrs"
+      v-on="generalRowListeners"
     >
       <div
         class="dt-leftbar-row__alpha"
