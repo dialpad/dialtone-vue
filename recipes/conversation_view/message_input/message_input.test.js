@@ -4,12 +4,12 @@ import { beforeEach, describe } from '@/node_modules/vitest/dist/index';
 
 import {
   itBehavesLikeEmitsExpectedEvent,
-} from '../../../tests/shared_examples/events';
+} from '@/tests/shared_examples/events';
 
 // Wrappers
 let wrapper;
 let editor;
-// let editorEl;
+
 let imageInputEl;
 let messageInputEl;
 let characterLimitEl;
@@ -19,8 +19,6 @@ let imageBtn;
 let emojiPickerBtn;
 let sendBtn;
 
-// let emojiPickerPopover;
-
 let footerLeftSlot;
 let footerRightSlot;
 
@@ -29,7 +27,9 @@ let props;
 let attrs;
 let slots;
 let listeners;
-let imageUploadStub;
+const getClientRectsMock = vi.fn(() => [{}]);
+const getBoundingClientRectMock = vi.fn(() => [{}]);
+const scrollByMock = vi.fn();
 
 // Constants
 const baseProps = {
@@ -79,17 +79,14 @@ const _mountWrapper = () => {
 describe('DtMessage tests', () => {
   // Test Setup
   beforeAll(() => {
-    global.Range.prototype.getClientRects = vi.fn(() => [{}]);
-    global.Range.prototype.getBoundingClientRect = vi.fn(() => [{}]);
-    global.scrollBy = vi.fn();
+    global.Range.prototype.getClientRects = getClientRectsMock;
+    global.Range.prototype.getBoundingClientRect = getBoundingClientRectMock;
+    global.scrollBy = scrollByMock;
   });
 
   beforeEach(async () => {
     props = baseProps;
-    imageUploadStub = vi.fn();
-    attrs = {
-      onImageUpload: imageUploadStub,
-    };
+    attrs = {};
     slots = baseSlots;
     _mountWrapper();
     await wrapper.vm.$nextTick();
@@ -208,7 +205,7 @@ describe('DtMessage tests', () => {
 
       it('should fire notice-close event when closed', async () => {
         expect(errorNoticeEl.exists()).toBe(true);
-        errorNoticeEl.find('button').trigger('click');
+        await errorNoticeEl.find('button').trigger('click');
         itBehavesLikeEmitsExpectedEvent(wrapper, 'notice-close', true);
       });
     });
@@ -221,8 +218,8 @@ describe('DtMessage tests', () => {
         _setChildWrappers();
       });
       // eslint-disable-next-line vitest/expect-expect
-      it('should fire submit event with the text as payload', () => {
-        sendBtn.trigger('click');
+      it('should fire submit event with the text as payload', async () => {
+        await sendBtn.trigger('click');
         itBehavesLikeEmitsExpectedEvent(wrapper, 'submit', randoText);
       });
     });
@@ -233,7 +230,7 @@ describe('DtMessage tests', () => {
         await imageInputEl.trigger('input');
       });
 
-      it('should emit select-media event', async () => {
+      it('should emit select-media event', () => {
         expect(wrapper.emitted()).toHaveProperty('select-media');
       });
     });
