@@ -221,7 +221,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .dt-contact-info .dt-item-layout--content {
   /*
   DP-74536: Add `min-width` to make the width of "contact info" adjustable.
