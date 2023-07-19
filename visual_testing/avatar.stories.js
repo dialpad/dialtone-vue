@@ -15,9 +15,7 @@ export default {
   parameters: {
     options: { showPanel: false },
     controls: { disable: true },
-    a11y: {
-      disable: true,
-    },
+    a11y: { disable: true },
   },
   args: { ...argsData, show: true, seed: 'seed' },
   argTypes: argTypesData,
