@@ -57,8 +57,4 @@ module.exports = {
     enableJavaScript: true,
     widths: [1280],
   },
-  discovery: {
-    disableCache: true,
-    networkIdleTimeout: 150,
-  },
 };
