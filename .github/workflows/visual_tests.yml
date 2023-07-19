@@ -14,10 +14,10 @@ env:
 jobs:
 
   label_when_approved:
+    if: github.event_name == 'pull_request_review' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')
     runs-on: ubuntu-latest
     steps:
       - name: Set Label When Approved
-        if: github.event_name == 'pull_request_review' && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')
         uses: TobKed/label-when-approved-action@v1.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
