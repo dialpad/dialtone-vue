@@ -126,5 +126,13 @@ export const Flip = {
     default: 'Scroll down to see how the tooltip changes based on the available space.',
   },
 
-  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
+    percy: {
+      args: {
+        show: true,
+      },
+    },
+  },
 };
