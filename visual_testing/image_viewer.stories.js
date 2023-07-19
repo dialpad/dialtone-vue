@@ -18,4 +18,5 @@ export default {
   },
   argTypes: argTypesData,
 };
+
 export { Default };
