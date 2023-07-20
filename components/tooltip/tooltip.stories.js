@@ -116,16 +116,6 @@ export const Default = {
 export const Variants = {
   render: TooltipVariantsTemplate,
   args: {},
-  parameters: { options: { showPanel: false }, controls: { disable: true } },
-};
-
-export const Flip = {
-  render: TooltipFlipTemplate,
-
-  args: {
-    default: 'Scroll down to see how the tooltip changes based on the available space.',
-  },
-
   parameters: {
     options: { showPanel: false },
     controls: { disable: true },
@@ -135,4 +125,14 @@ export const Flip = {
       },
     },
   },
+};
+
+export const Flip = {
+  render: TooltipFlipTemplate,
+
+  args: {
+    default: 'Scroll down to see how the tooltip changes based on the available space.',
+  },
+
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
 };
