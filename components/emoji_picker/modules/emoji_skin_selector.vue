@@ -146,7 +146,7 @@ watchEffect(
  */
 const skinPassedIn = computed(() => skinList.find((skin) => skin.skinTone === props.skinTone));
 const skinSelected = ref(skinPassedIn.value);
-watchEffect(() => skinPassedIn && (skinSelected.value = skinPassedIn.value));
+watchEffect(() => skinPassedIn.value && (skinSelected.value = skinPassedIn.value));
 
 function setSkinsRef (ref) {
   skinsRef.value.push(ref);
