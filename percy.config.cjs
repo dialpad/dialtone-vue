@@ -58,7 +58,7 @@ module.exports = {
     widths: [1280],
   },
   discovery: {
-    disableCache: false,
+    disableCache: true,
     allowedHostnames: [
       'proxyme.percy.io',
       'render.percy.local',
