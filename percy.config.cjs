@@ -12,7 +12,7 @@ module.exports = {
       'Components/Checkbox Group: Default',
       'Components/Combobox: Empty',
       'Components/Datepicker',
-      'Components/Dropdown',
+      'Components/Dropdown: Default',
       'Components/Emoji: Default',
       'Components/Emoji: Custom Emoji',
       'Components/Emoji Text Wrapper: Default',
@@ -50,7 +50,7 @@ module.exports = {
       'Recipes/List Items/Contact Info: Default',
       'Recipes/Notices/Top Banner Info: Default',
       'Utilities/Lazy Show',
-      'Visual Testing/',
+      'Visual Testing/'
     ],
   },
   snapshot: {
@@ -58,6 +58,7 @@ module.exports = {
     widths: [1280],
   },
   discovery: {
+    disableCache: false,
     allowedHostnames: [
       'proxyme.percy.io',
       'render.percy.local',
