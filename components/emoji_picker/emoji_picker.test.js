@@ -78,6 +78,7 @@ const baseProps = {
 describe('DtEmojiPicker Tests', () => {
   // Wrappers
   let wrapper;
+  let skinToneSelectorButton, skinToneSelectorImg, skinToneMediumLightButton;
 
   // Environment
   let props = baseProps;
@@ -88,6 +89,13 @@ describe('DtEmojiPicker Tests', () => {
       attachTo: document.body,
     });
     await wrapper.vm.$nextTick();
+    _setChildWrappers();
+  };
+
+  const _setChildWrappers = () => {
+    skinToneSelectorButton = wrapper.find('.d-emoji-picker__skin-selected button');
+    skinToneSelectorImg = wrapper.find('.d-emoji-picker__skin-selected button img');
+    skinToneMediumLightButton = wrapper.find('.d-emoji-picker__skin-list').findAll('button').at(1);
   };
 
   afterEach(() => {
@@ -159,26 +167,19 @@ describe('DtEmojiPicker Tests', () => {
 
     describe('Skin tone selector tests', () => {
       it('Should render provided skin selector button tooltip label', () => {
-        const skinToneSelector = wrapper.find('.d-emoji-picker__skin-selected button');
-
-        expect(skinToneSelector.exists()).toBe(true);
-        expect(skinToneSelector.attributes('aria-label')).toBe(skinSelectorButtonTooltipLabel);
+        expect(skinToneSelectorButton.exists()).toBe(true);
+        expect(skinToneSelectorButton.attributes('aria-label')).toBe(skinSelectorButtonTooltipLabel);
       });
 
       it('Should render provided skin tone in skin tone selector', () => {
-        const skinToneSelector = wrapper.find('.d-emoji-picker__skin-selected button img');
-
-        expect(skinToneSelector.exists()).toBe(true);
-        expect(skinToneSelector.attributes('aria-label')).toBe(':wave_tone1:');
+        expect(skinToneSelectorImg.exists()).toBe(true);
+        expect(skinToneSelectorImg.attributes('aria-label')).toBe(':wave_tone1:');
       });
 
       it('Should display skin tone selected from selector', async () => {
-        const skinToneSelectorButton = wrapper.find('.d-emoji-picker__skin-selected button');
-        const skinToneSelectorImg = wrapper.find('.d-emoji-picker__skin-selected button img');
         expect(skinToneSelectorImg.exists()).toBe(true);
         expect(skinToneSelectorImg.attributes('aria-label')).toBe(':wave_tone1:');
 
-        const skinToneMediumLightButton = wrapper.find('.d-emoji-picker__skin-list').findAll('button').at(1);
         await skinToneSelectorButton.trigger('click');
         await wrapper.vm.$nextTick();
         await skinToneMediumLightButton.trigger('click');
@@ -189,12 +190,9 @@ describe('DtEmojiPicker Tests', () => {
       });
 
       it('Should display skin tone prop if it changes', async () => {
-        const skinToneSelectorButton = wrapper.find('.d-emoji-picker__skin-selected button');
-        const skinToneSelectorImg = wrapper.find('.d-emoji-picker__skin-selected button img');
         expect(skinToneSelectorImg.exists()).toBe(true);
         expect(skinToneSelectorImg.attributes('aria-label')).toBe(':wave_tone1:');
 
-        const skinToneMediumLightButton = wrapper.find('.d-emoji-picker__skin-list').findAll('button').at(1);
         await skinToneSelectorButton.trigger('click');
         await wrapper.vm.$nextTick();
         await skinToneMediumLightButton.trigger('click');
