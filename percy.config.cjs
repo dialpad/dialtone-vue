@@ -61,6 +61,8 @@ module.exports = {
     allowedHostnames: [
       'proxyme.percy.io',
       'render.percy.local',
-    ]
+    ],
+    networkIdleTimeout: 150,
+    concurrency: 1,
   },
 };
