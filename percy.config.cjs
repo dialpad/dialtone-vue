@@ -57,4 +57,10 @@ module.exports = {
     enableJavaScript: true,
     widths: [1280],
   },
+  discovery: {
+    allowedHostnames: [
+      'proxyme.percy.io',
+      'render.percy.local',
+    ]
+  },
 };
