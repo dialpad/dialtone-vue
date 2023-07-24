@@ -1,5 +1,7 @@
 <template>
   <div>
+    test
+    test
     <h3>Scroller with dynamic size</h3>
 
     <button @click="updateItem(0)">
