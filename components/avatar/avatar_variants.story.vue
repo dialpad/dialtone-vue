@@ -6,7 +6,7 @@
         <dt-avatar
           v-for="size in avatarSizes"
           :key="`default-${size}`"
-          :seed="seed"
+          :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Image"
           image-src="/common/assets/person.png"
@@ -19,7 +19,7 @@
         <dt-avatar
           v-for="size in avatarSizes"
           :key="`default-${size}`"
-          :seed="seed"
+          :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Icon"
         />
@@ -31,7 +31,7 @@
         <dt-avatar
           v-for="size in avatarSizes"
           :key="`default-${size}`"
-          :seed="seed"
+          :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Icon"
           icon-name="user"
@@ -47,7 +47,7 @@
           class="d-d-inline-flex"
         >
           <dt-avatar
-            :seed="seed"
+            :seed="$attrs.seed"
             :size="size"
             full-name="Person avatar"
             presence="busy"
