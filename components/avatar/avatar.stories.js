@@ -12,7 +12,7 @@ export const argsData = {
   size: 'md',
   presence: null,
   fullName: 'Jaqueline Nackos',
-  seed: 'seed',
+  seed: null,
 };
 
 export const argTypesData = {
