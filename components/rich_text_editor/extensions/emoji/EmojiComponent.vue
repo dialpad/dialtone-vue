@@ -1,7 +1,9 @@
 <template>
-  <node-view-wrapper class="d-d-inline-block">
+  <node-view-wrapper
+    class="d-d-inline-block"
+  >
     <dt-emoji
-      size="200"
+      size="300"
       :code="node.attrs.code"
     />
   </node-view-wrapper>

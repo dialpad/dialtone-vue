@@ -8,9 +8,6 @@ let editorEl;
 
 // Test Environment
 let propsData;
-let attrs;
-let slots;
-let listeners;
 
 // Constants
 const baseProps = {
@@ -19,6 +16,10 @@ const baseProps = {
   link: true,
   inputClass: 'qa-editor',
 };
+
+const getClientRectsMock = vi.fn(() => [{}]);
+const getBoundingClientRect = vi.fn(() => [{}]);
+const scrollByMock = vi.fn();
 
 // Helpers
 const _setChildWrappers = () => {
@@ -50,9 +51,6 @@ const _mountWrapper = () => {
   wrapper = mount(DtRichTextEditor, {
     propsData,
     components: { EditorContent },
-    listeners,
-    attrs,
-    slots,
     attachTo: document.body,
   });
 };
@@ -60,9 +58,9 @@ const _mountWrapper = () => {
 describe('DtRichTextEditor Emoji Extension tests', () => {
   // Test Setup
   beforeAll(() => {
-    global.Range.prototype.getClientRects = vi.fn(() => [{}]);
-    global.Range.prototype.getBoundingClientRect = vi.fn(() => [{}]);
-    global.scrollBy = vi.fn();
+    global.Range.prototype.getClientRects = getClientRectsMock;
+    global.Range.prototype.getBoundingClientRect = getBoundingClientRect;
+    global.scrollBy = scrollByMock;
   });
 
   beforeEach(async () => {
@@ -75,7 +73,6 @@ describe('DtRichTextEditor Emoji Extension tests', () => {
   // Test Teardown
   afterEach(() => {
     propsData = baseProps;
-    slots = {};
   });
 
   describe('Functionality Tests', () => {
