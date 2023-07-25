@@ -105,19 +105,16 @@ export const Default = {
     }),
   ],
   args: { imageSrc: defaultImage },
+};
+
+export const Variants = {
+  render: VariantsTemplate,
   parameters: {
     percy: {
       args: {
         seed: 'seed',
       },
     },
-  },
-};
-
-export const Variants = {
-  render: VariantsTemplate,
-  parameters: {
-    ...Default.parameters,
     options: { showPanel: false },
     controls: { disable: true },
   },
