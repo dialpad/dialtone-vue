@@ -11,14 +11,16 @@
       <img
         v-if="showImage"
         ref="avatarImage"
+        class="d-avatar__image"
+        data-qa="dt-avatar-image"
         :src="imageSrc"
         :alt="fullName"
-        class="d-avatar__image"
       >
       <dt-icon
         v-else-if="iconName"
         :name="iconName"
         :class="AVATAR_KIND_MODIFIERS.icon"
+        data-qa="dt-avatar-icon"
       />
       <span
         v-else
