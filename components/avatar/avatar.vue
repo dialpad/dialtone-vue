@@ -301,6 +301,9 @@ export default {
   methods: {
     setImageListeners () {
       const el = this.$refs.avatarImage;
+
+      if (!el) return;
+
       el.addEventListener('load', () => this._loadedImageEventHandler(el), { once: true });
 
       if (this.imageLoadedSuccessfully === false) return;
