@@ -10,6 +10,7 @@
       :title="description"
       :href="'href' in $attrs ? $attrs.href : 'javascript:void(0)'"
       v-bind="$attrs"
+      v-on="generalRowListeners"
     >
       <div
         class="dt-leftbar-row__alpha"
@@ -323,6 +324,7 @@ export default {
         {
           'dt-leftbar-row--no-action': !this.hasCallButton,
           'dt-leftbar-row--has-unread': this.hasUnreads,
+          'dt-leftbar-row--unread-count': this.showUnreadCount,
           'dt-leftbar-row--selected': this.selected,
           'dt-leftbar-row--muted': this.muted,
           'dt-leftbar-row--action-focused': this.actionFocused,
@@ -365,34 +367,33 @@ export default {
     $props: {
       immediate: true,
       deep: true,
-      handler () {
+      async handler () {
         this.validateProps();
+        await this.$nextTick();
+        this.adjustLabelWidth();
       },
     },
   },
 
-  beforeUpdate () {
-    this.handleResize();
-  },
-
-  mounted: function () {
-    this.handleResize();
-    window.addEventListener('resize', this.handleResize);
+  mounted () {
+    this.resizeObserver = new ResizeObserver(this.adjustLabelWidth);
+    this.resizeObserver.observe(this.$el);
+    this.adjustLabelWidth();
   },
 
   beforeUnmount: function () {
-    window.removeEventListener('resize', this.handleResize);
+    this.resizeObserver.disconnect();
   },
 
   methods: {
     validateProps () {
       if (this.type === LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER &&
-          !Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).includes(this.color)) {
+        !Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).includes(this.color)) {
         console.error(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR);
       }
     },
 
-    async handleResize () {
+    adjustLabelWidth () {
       const labelWidth = this.$el?.querySelector('.dt-leftbar-row__primary')?.clientWidth || 0;
       const omegaWidth = this.$el?.querySelector('.dt-leftbar-row__omega')?.clientWidth || 0;
       const alphaWidth = this.$el?.querySelector('.dt-leftbar-row__alpha')?.clientWidth || 0;
