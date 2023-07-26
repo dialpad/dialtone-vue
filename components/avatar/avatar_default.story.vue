@@ -4,6 +4,7 @@
     :full-name="fullName"
     :icon-name="iconName"
     :image-src="imageSrc"
+    :icon-size="iconSize"
     :size="size"
     :presence="presence"
     :avatar-class="avatarClass"

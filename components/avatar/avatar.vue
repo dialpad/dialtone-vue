@@ -222,7 +222,7 @@ export default {
 
     /**
      * Icon size to be displayed on the avatar
-     * @values: 100, 200, 300, 400, 500, 600, 700, 800
+     * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     iconSize: {
       type: String,
