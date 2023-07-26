@@ -341,13 +341,15 @@ export default {
     },
 
     _extractInitials (string) {
-      if (!string) return '';
+      if (typeof string !== 'string' || !string.trim()) return '';
 
       const names = string.split(' ');
-      let initials = names[0].substring(0, 1).toUpperCase();
+      let initials = '';
 
-      if (names.length > 1) {
-        initials += names[1].substring(0, 1).toUpperCase();
+      if (names.length === 1) {
+        initials = names[0].substring(0, 2).toUpperCase();
+      } else {
+        initials = (names[0].substring(0, 1) + names[1].substring(0, 1)).toUpperCase();
       }
 
       return initials;
