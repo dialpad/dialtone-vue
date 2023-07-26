@@ -8,7 +8,7 @@
         name="Jaqueline Nackos"
         avatar-presence="active"
         avatar-seed="JN"
-        :avatar-src="defaultImage"
+        avatar-src="/common/assets/person.png"
         user-status="Good Morning! :smile:"
         call-button-tooltip="Call"
       />
@@ -23,7 +23,7 @@
         avatar-seed="JN"
         presence-text="Away"
         user-status="Out for a bit"
-        :avatar-src="defaultImage"
+        avatar-src="/common/assets/person.png"
         call-button-tooltip="Call"
       />
     </div>
@@ -37,7 +37,7 @@
         avatar-seed="JN"
         presence-text="In a meeting"
         user-status="Meetings all day"
-        :avatar-src="defaultImage"
+        avatar-src="/common/assets/person.png"
         call-button-tooltip="Call"
       />
     </div>
@@ -49,7 +49,7 @@
         name="Jaqueline Nackos"
         avatar-presence="active"
         avatar-seed="JN"
-        :avatar-src="defaultImage"
+        avatar-src="/common/assets/person.png"
         unread-count="5"
         unread-count-tooltip="55 unread messages"
         :has-unreads="true"
@@ -64,7 +64,7 @@
         name="Jaqueline Nackos"
         avatar-presence="active"
         avatar-seed="JN"
-        :avatar-src="defaultImage"
+        avatar-src="/common/assets/person.png"
         :selected="true"
         call-button-tooltip="Call"
       />
@@ -86,15 +86,9 @@
 <script>
 import DtRecipeContactRow from './contact_row.vue';
 import { DtStack } from '@/components/stack';
-import defaultImage from '@/common/assets/person.png';
 
 export default {
   name: 'DtRecipeContactRowVariants',
   components: { DtRecipeContactRow, DtStack },
-  data () {
-    return {
-      defaultImage,
-    };
-  },
 };
 </script>
