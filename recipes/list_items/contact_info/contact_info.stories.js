@@ -295,7 +295,7 @@ export const Variants = {
     <div class="d-m32">
       <p class="d-my16 d-fs-200 d-fw-bold">Contact with items in right slot</p>
       <dt-recipe-contact-info
-        :avatar-initials="avatarInitials"
+        :avatar-full-name="avatarFullName"
         :avatar-seed="avatarSeed"
       >
         <template #header><div class="d-fw-bold d-fs-200">Natalie Woods</div></template>
