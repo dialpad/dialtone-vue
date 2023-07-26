@@ -214,8 +214,8 @@ export default {
   }
 
   &:deep(.d-avatar) {
-    border-radius: var(--dt-size-radius-pill);
-    border: var(--dt-size-300) solid var(--dt-color-surface-primary);
+    border-radius: var(--br-pill);
+    border: var(--size-300) solid var(--bgc-primary);
     box-sizing: unset;
   }
 }
