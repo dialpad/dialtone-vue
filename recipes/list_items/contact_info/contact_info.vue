@@ -23,7 +23,9 @@
             <dt-avatar
               :size="avatarSize"
               :seed="avatar.seed"
-              :initials="avatar.initials"
+              :full-name="avatar.fullName"
+              :image-src="avatar.src"
+              :icon-name="avatarIcon"
               :overlay-icon="avatar.icon"
               :overlay-text="avatar.text"
               overlay-class="d-mn4 d-ba d-baw4 d-bc-white d-box-unset"
@@ -31,46 +33,18 @@
                 'd-mln24': index > 0,
                 'd-bc-brand': !!avatar.halo,
               }]"
-            >
-              <img
-                v-if="avatar.src"
-                data-qa="dt-contact-avatar"
-                :src="avatar.src"
-                :alt="avatar.initials"
-              >
-              <div v-else-if="avatar.initials">
-                {{ avatar.initials }}
-              </div>
-              <dt-icon
-                v-else
-                :name="avatarIcon"
-              />
-            </dt-avatar>
+            />
           </div>
         </div>
         <dt-avatar
           v-else
           :size="avatarSize"
-          :initials="avatarInitials"
+          :full-name="avatarFullName"
+          :image-src="avatarSrc"
+          :icon-name="avatarIcon"
           :seed="avatarSeed"
           :presence="presence"
-        >
-          <img
-            v-if="avatarSrc"
-            data-qa="dt-contact-avatar"
-            :src="avatarSrc"
-            :initials="avatarInitials"
-            :seed="avatarSeed"
-            :alt="avatarInitials"
-          >
-          <div v-else-if="avatarInitials">
-            {{ avatarInitials }}
-          </div>
-          <dt-icon
-            v-else
-            :name="avatarIcon"
-          />
-        </dt-avatar>
+        />
       </div>
     </template>
     <template #default>
@@ -106,7 +80,6 @@
 <script>
 import DtListItem from '@/components/list_item/list_item.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
-import DtIcon from '@/components/icon/icon.vue';
 import utils from '@/common/utils';
 
 export default {
@@ -114,7 +87,6 @@ export default {
 
   components: {
     DtAvatar,
-    DtIcon,
     DtListItem,
   },
 
@@ -151,8 +123,6 @@ export default {
 
     /**
      * Optional avatar image url.
-     * if provided, it's also required to provide a value in the `avatarInitials` prop to use
-     * in the alt attribute of the avatar.
      */
     avatarSrc: {
       type: String,
@@ -168,19 +138,20 @@ export default {
     },
 
     /**
-     * Initial letters to display in avatar if `avatarSrc` is empty.
+     * Avatar's full name, used as alt attribute for image and
+     * to extract initials to display in avatar if `avatarSrc` and `avatarIcon` are empty.
      */
-    avatarInitials: {
+    avatarFullName: {
       type: String,
       default: '',
     },
 
     /**
-     * Avatar icon to display if `avatarSrc` and `avatarInitials` are empty.
+     * Avatar icon to display if `avatarSrc` is empty.
      */
     avatarIcon: {
       type: String,
-      default: 'user',
+      default: null,
     },
 
     /**
@@ -207,7 +178,8 @@ export default {
      * Showing multiple avatars in contact info.
      * The props of array items are: <br>
      * `src` - avatar image url (optional) <br>
-     * `initials` - Initial letters to display in avatar (required if src is empty)<br>
+     * `fullName` - full name, used as alt attribute for image and extract initials to display in avatar<br>
+     *  if `avatarSrc` and `avatarIcon` are empty<br>
      * `seed` - determines uniqueness of avatar background <br>
      * `text` - text that overlays the avatar (optional) <br>
      * `icon` - icon that overlays the avatar (optional) <br>
