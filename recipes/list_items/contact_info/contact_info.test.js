@@ -98,11 +98,11 @@ describe('DtRecipeContactInfo Tests', () => {
       });
     });
 
-    describe('When `avatarSrc` is empty and `avatarInitials` is passed', () => {
+    describe('When `avatarSrc` is empty and `avatarFullName` is passed', () => {
       beforeEach(async () => {
         await wrapper.setProps({
           avatarSrc: '',
-          avatarInitials: 'JL',
+          avatarFullName: 'JL',
         });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
