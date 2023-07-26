@@ -19,6 +19,7 @@
       <dt-icon
         v-else-if="iconName"
         :name="iconName"
+        :size="iconSize"
         :class="AVATAR_KIND_MODIFIERS.icon"
         data-qa="dt-avatar-icon"
       />
@@ -78,6 +79,7 @@ import {
   AVATAR_GROUP_VALIDATOR,
 } from './avatar_constants';
 import { getIconNames } from '@/common/storybook_utils.js';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 
 const ICONS_LIST = getIconNames();
 
@@ -216,6 +218,16 @@ export default {
       type: String,
       default: undefined,
       validator: (name) => ICONS_LIST.includes(name),
+    },
+
+    /**
+     * Icon size to be displayed on the avatar
+     * @values: 100, 200, 300, 400, 500, 600, 700, 800
+     */
+    iconSize: {
+      type: String,
+      default: '500',
+      validator: (size) => Object.keys(ICON_SIZE_MODIFIERS).includes(size),
     },
 
     /**
