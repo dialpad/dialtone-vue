@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="d-d-flex d-jc-center d-ai-center d-w100p">
-      <div>
+      <div id="circle-button-tooltip-label">
         Circle button tooltip
       </div>
       <dt-tooltip
@@ -44,7 +44,10 @@
         :show="show"
       >
         <template #anchor>
-          <dt-button circle>
+          <dt-button
+            aria-labelledby="circle-button-tooltip-label"
+            circle
+          >
             <template #icon>
               <dt-icon
                 name="dp-phone"
