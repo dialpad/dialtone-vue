@@ -13,6 +13,7 @@ export const argsData = {
   presence: null,
   fullName: 'Jaqueline Nackos',
   seed: null,
+  iconSize: '500',
 };
 
 export const argTypesData = {
@@ -77,6 +78,9 @@ export const argTypesData = {
         undefined: '(empty)',
       },
     },
+  },
+  iconSize: {
+    defaultValue: null,
   },
 };
 

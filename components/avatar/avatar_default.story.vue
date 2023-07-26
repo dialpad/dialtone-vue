@@ -4,6 +4,7 @@
     :full-name="$attrs.fullName"
     :icon-name="$attrs.iconName"
     :image-src="$attrs.imageSrc"
+    :icon-size="$attrs.iconSize"
     :size="$attrs.size"
     :presence="$attrs.presence"
     :avatar-class="$attrs.avatarClass"
