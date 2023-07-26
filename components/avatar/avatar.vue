@@ -6,7 +6,7 @@
   >
     <div
       ref="canvas"
-      :class="[canvasClass, 'd-avatar__canvas']"
+      :class="[canvasClass, 'd-avatar__canvas', { 'd-avatar--image-loaded': imageLoadedSuccessfully }]"
     >
       <img
         v-if="showImage"
@@ -344,12 +344,10 @@ export default {
     _loadedImageEventHandler (el) {
       this.imageLoadedSuccessfully = true;
       el.classList.remove('d-d-none');
-      el.classList.add('d-avatar--image-loaded');
     },
 
     _erroredImageEventHandler (el) {
       this.imageLoadedSuccessfully = false;
-      el.classList.remove('d-avatar--image-loaded');
       el.classList.add('d-d-none');
     },
   },
