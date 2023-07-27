@@ -80,6 +80,7 @@ import {
 } from './avatar_constants';
 import { getIconNames } from '@/common/storybook_utils.js';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
+import { extractInitialsFromName } from './utils';
 
 const ICONS_LIST = getIconNames();
 
@@ -334,7 +335,7 @@ export default {
     },
 
     formatInitials (string) {
-      const initials = this._extractInitials(string);
+      const initials = extractInitialsFromName(string);
 
       if (this.validatedSize === 'xs') {
         this.formattedInitials = '';
@@ -347,21 +348,6 @@ export default {
 
     getColor () {
       return this.color ?? getRandomElement(AVATAR_COLORS, this.seed);
-    },
-
-    _extractInitials (string) {
-      if (typeof string !== 'string' || !string.trim()) return '';
-
-      const names = string.split(' ');
-      let initials = '';
-
-      if (names.length === 1) {
-        initials = names[0].substring(0, 2).toUpperCase();
-      } else {
-        initials = (names[0].substring(0, 1) + names[1].substring(0, 1)).toUpperCase();
-      }
-
-      return initials;
     },
 
     _loadedImageEventHandler (el) {
