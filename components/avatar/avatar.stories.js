@@ -12,15 +12,14 @@ export const argsData = {
   size: 'md',
   presence: null,
   fullName: 'Jaqueline Nackos',
-  seed: null,
+  seed: '',
   iconSize: '500',
 };
 
 export const argTypesData = {
   // Props
-  size: {
-    control: 'select',
-    options: Object.keys(AVATAR_SIZE_MODIFIERS),
+  avatarClass: {
+    description: 'Pass through classes. Used to customize the avatar container',
   },
   color: {
     control: {
@@ -31,22 +30,17 @@ export const argTypesData = {
     },
     options: AVATAR_COLORS,
   },
-  presence: {
+  iconName: {
+    options: iconsList,
     control: {
       type: 'select',
-    },
-    options: Object.values(AVATAR_PRESENCE_STATES),
-    table: {
-      defaultValue: {
-        summary: 'null',
+      labels: {
+        undefined: '(empty)',
       },
     },
   },
-  presenceProps: {
-    description: 'Pass through props. Used to customize the presence component',
-  },
-  avatarClass: {
-    description: 'Pass through classes. Used to customize the avatar container',
+  iconSize: {
+    defaultValue: null,
   },
   id: {
     table: {
@@ -54,6 +48,9 @@ export const argTypesData = {
         summary: 'generated unique ID',
       },
     },
+  },
+  overlayClass: {
+    description: 'Pass through classes. Used to customize the avatar overlay',
   },
   overlayIcon: {
     options: iconsList,
@@ -67,20 +64,26 @@ export const argTypesData = {
   overlayText: {
     description: 'The text that overlays the avatar',
   },
-  overlayClass: {
-    description: 'Pass through classes. Used to customize the avatar overlay',
-  },
-  iconName: {
-    options: iconsList,
+  presence: {
+    defaultValue: null,
     control: {
       type: 'select',
-      labels: {
-        undefined: '(empty)',
+    },
+    options: Object.values(AVATAR_PRESENCE_STATES),
+    table: {
+      defaultValue: {
+        summary: 'null',
       },
     },
   },
-  iconSize: {
-    defaultValue: null,
+  presenceProps: {
+    description: 'Pass through props. Used to customize the presence component',
+  },
+  size: {
+    control: {
+      type: 'select',
+    },
+    options: Object.keys(AVATAR_SIZE_MODIFIERS),
   },
 };
 
