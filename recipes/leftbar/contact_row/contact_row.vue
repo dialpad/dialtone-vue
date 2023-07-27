@@ -18,7 +18,7 @@
         :full-name="name"
         :image-src="avatarSrc"
         :image-alt="avatarAlt"
-        :icon-name="noInitials ? 'user' : null"
+        :icon-name="iconName"
         icon-size="200"
         size="sm"
         :seed="avatarSeed"
@@ -239,6 +239,10 @@ export default {
 
     contactDescription () {
       return safeConcatStrings([this.name, this.presenceText, this.userStatus]);
+    },
+
+    iconName () {
+      return this.noInitials ? 'user' : null;
     },
   },
 };
