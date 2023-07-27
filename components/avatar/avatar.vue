@@ -14,7 +14,7 @@
         class="d-avatar__image"
         data-qa="dt-avatar-image"
         :src="imageSrc"
-        :alt="fullName"
+        :alt="imageAlt || fullName"
       >
       <dt-icon
         v-else-if="iconName"
@@ -207,6 +207,15 @@ export default {
      * Source of the image
      */
     imageSrc: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Alt attribute of the image, by default
+     * it'd be the full name
+     */
+    imageAlt: {
       type: String,
       default: '',
     },
