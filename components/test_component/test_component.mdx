@@ -1,0 +1,48 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as DtTestComponentStories from './test_component.stories.js';
+
+<Meta of={DtTestComponentStories}/>
+
+# DtTestComponent
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas of={DtTestComponentStories.Default} />
+
+## Variants
+
+<Canvas of={DtTestComponentStories.Variants} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtTestComponent } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```jsx
+<dt-test-component
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```jsx
+<dt-test-component
+  some-other="variant"
+/>
+```
