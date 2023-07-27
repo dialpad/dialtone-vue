@@ -132,7 +132,6 @@ describe('DtAvatar Tests', () => {
       });
 
       it('should display initials', () => {
-        console.log(wrapper);
         expect(wrapper.text()).toBe(initials);
       });
 
