@@ -12,17 +12,14 @@ export const argsData = {
   size: 'md',
   presence: null,
   fullName: 'Jaqueline Nackos',
-  seed: null,
+  seed: '',
   iconSize: '500',
 };
 
 export const argTypesData = {
   // Props
-  size: {
-    control: {
-      type: 'select',
-    },
-    options: Object.keys(AVATAR_SIZE_MODIFIERS),
+  avatarClass: {
+    description: 'Pass through classes. Used to customize the avatar container',
   },
   color: {
     control: {
@@ -32,6 +29,40 @@ export const argTypesData = {
       },
     },
     options: AVATAR_COLORS,
+  },
+  iconName: {
+    options: iconsList,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  iconSize: {
+    defaultValue: null,
+  },
+  id: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  overlayClass: {
+    description: 'Pass through classes. Used to customize the avatar overlay',
+  },
+  overlayIcon: {
+    options: iconsList,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  overlayText: {
+    description: 'The text that overlays the avatar',
   },
   presence: {
     defaultValue: null,
@@ -48,42 +79,11 @@ export const argTypesData = {
   presenceProps: {
     description: 'Pass through props. Used to customize the presence component',
   },
-  avatarClass: {
-    description: 'Pass through classes. Used to customize the avatar container',
-  },
-  id: {
-    table: {
-      defaultValue: {
-        summary: 'generated unique ID',
-      },
-    },
-  },
-  overlayIcon: {
-    options: iconsList,
+  size: {
     control: {
       type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
     },
-  },
-  overlayText: {
-    description: 'The text that overlays the avatar',
-  },
-  overlayClass: {
-    description: 'Pass through classes. Used to customize the avatar overlay',
-  },
-  iconName: {
-    options: iconsList,
-    control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
-    },
-  },
-  iconSize: {
-    defaultValue: null,
+    options: Object.keys(AVATAR_SIZE_MODIFIERS),
   },
 };
 
