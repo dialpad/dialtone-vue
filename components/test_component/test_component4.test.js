@@ -5,7 +5,7 @@ import DtTestComponent from './test_component.vue';
  * Auxiliary variables
  * These variables will be used inside tests to help readability and DRY
  * @prefix MOCK_
- * @notation MOCK_[NAME]_[TYPE]
+ * @notation MOCK_[NAME]
  */
 const MOCK_EXPECTED_VALUE = true;
 const MOCK_FIELD_NAME = 'mockFieldName';
@@ -17,7 +17,7 @@ const MOCK_FUNCTION = vi.fn();
  * @prefix base
  * @notation base[NAME]
  */
-const baseProps = {}; // This way of doing can be replaced with setProps, but this is more consistent with the rest of the code
+const baseProps = {};
 const baseAttrs = {};
 const baseSlots = {};
 const baseProvide = {};
@@ -71,6 +71,9 @@ describe('DtTestComponent Tests', () => {
   });
 
   describe('Presentation Tests', () => {
+    /*
+     * Test(s) to ensure that the component is correctly rendering
+     */
     it('Should render the component', () => {
       expect(wrapper).toBeDefined();
     });
