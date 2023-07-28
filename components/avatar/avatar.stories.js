@@ -4,15 +4,15 @@ import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES, AVATAR_COLORS } from './
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarVariantsTemplate from './avatar_variants.story.vue';
 
-import defaultImage from '@/common/assets/person.png';
-
-const iconsList = getIconNames();
+const ICONS_LIST = getIconNames();
 
 export const argsData = {
   size: 'md',
   presence: null,
   fullName: 'Jaqueline Nackos',
+  imageAlt: 'image-alt',
   seed: '',
+  iconName: 'accessibility',
   iconSize: '500',
 };
 
@@ -31,7 +31,7 @@ export const argTypesData = {
     options: AVATAR_COLORS,
   },
   iconName: {
-    options: iconsList,
+    options: ICONS_LIST,
     control: {
       type: 'select',
       labels: {
@@ -53,7 +53,7 @@ export const argTypesData = {
     description: 'Pass through classes. Used to customize the avatar overlay',
   },
   overlayIcon: {
-    options: iconsList,
+    options: ICONS_LIST,
     control: {
       type: 'select',
       labels: {
@@ -111,7 +111,7 @@ export const Default = {
       template: `<div class="d-d-flex"><story /></div>`,
     }),
   ],
-  args: { imageSrc: defaultImage },
+  args: { imageSrc: '/common/assets/person.png' },
 };
 
 export const Variants = {
