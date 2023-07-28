@@ -178,7 +178,6 @@ describe('DtTestComponent Tests', () => {
     });
 
     describe('When disabled', () => {
-      // Test Setup
       beforeEach(() => {
         mockProps = { disabled: true };
 
@@ -315,6 +314,7 @@ describe('DtTestComponent Tests', () => {
     describe('When indeterminate', () => {
       beforeAll(() => {
         mockProps = { indeterminate: true };
+
         updateWrapper();
       });
 
@@ -397,7 +397,6 @@ describe('DtTestComponent Tests', () => {
       });
 
       describe('When the checkbox group has a validation state', () => {
-        // Test Setup
         beforeEach(() => {
           _setGroupContext([], false, VALIDATION_MESSAGE_TYPES.SUCCESS);
         });

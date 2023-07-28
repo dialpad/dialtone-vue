@@ -37,7 +37,6 @@ describe('DtIcon Tests', () => {
     describe('When size prop is set', () => {
       it('Should have correct class', () => {
         mockProps = { size: '800' };
-        // await wrapper.setProps({ size: '800' });
 
         updateWrapper();
 
@@ -50,13 +49,14 @@ describe('DtIcon Tests', () => {
     describe('When ariaLabel prop is set', () => {
       beforeEach(() => {
         mockProps = { ariaLabel: 'icon description' };
-        // await wrapper.setProps({ ariaLabel: 'icon description' });
 
         updateWrapper();
       });
+
       it('sets the aria-label attribute', () => {
         expect(wrapper.attributes()['aria-label']).toBe('icon description');
       });
+
       it('sets aria-hidden to false', () => {
         expect(wrapper.attributes()['aria-hidden']).toBe('false');
       });
