@@ -4,7 +4,7 @@ import DtRecipeContactInfo from './contact_info.vue';
 // Constants
 const baseProps = {
   avatarSrc: 'avatar.png',
-  avatarInitials: 'JL',
+  avatarFullName: 'Joseph Lumaban',
   presence: 'active',
 };
 
