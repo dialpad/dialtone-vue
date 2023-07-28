@@ -245,7 +245,7 @@ export default {
      */
     fullName: {
       type: String,
-      required: true,
+      default: '',
     },
   },
 
@@ -315,6 +315,8 @@ export default {
       async handler (newSrc) {
         if (!newSrc) return;
 
+        this.validateProps();
+
         this.imageLoadedSuccessfully = null;
         await this.$nextTick();
         this.setImageListeners();
@@ -358,6 +360,12 @@ export default {
     _erroredImageEventHandler (el) {
       this.imageLoadedSuccessfully = false;
       el.classList.add('d-d-none');
+    },
+
+    validateProps () {
+      if (this.imageSrc && !(this.fullName || this.imageAlt)) {
+        throw new Error('full-name or image-alt must be set if image-src is provided');
+      }
     },
   },
 };
