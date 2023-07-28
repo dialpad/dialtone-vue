@@ -11,6 +11,18 @@ import * as AvatarStories from './avatar.stories.js';
 
 ## Image
 
+The Avatar component is designed to prioritize different sources for content display.
+It will sequentially check for the availability of an image source `image-src` or an icon name `icon-name`.
+If both properties are not provided, the avatar will extract and display initials from the full name `full-name`,
+the resulting initials are extracted using the following logic:
+
+- If the string contains two or more words, the result will be the first character of every word capitalized e.g.:
+  - `full-name: "Jaqueline Nackos"` will result in: `JN`.
+- If the string contains only one word, the result will be the first two characters capitalized e.g:
+  - `full-name: "Jaqueline"` will result in: `JA`.
+  - `full-name: "10"` will result in: `10`.
+- If full-name is not provided, the result will be an empty string.
+
 <Canvas>
   <Story of={AvatarStories.Default} />
 </Canvas>
@@ -31,6 +43,35 @@ import * as AvatarStories from './avatar.stories.js';
 
 ```jsx
 import { DtAvatar } from '@dialpad/dialtone-vue';
+```
+
+### Image
+
+If image-src is not provided, or if image fails to load, the avatar will fall back to the initials extracted from the full-name.
+By default, alt attribute of the image will be the full-name, this can be overridden via image-alt prop.
+
+```jsx
+<dt-avatar
+  full-name="Jaqueline Nackos"
+  image-src="/common/assets/person.png"
+  image-alt="Person avatar"
+/>
+```
+
+### Icon
+
+```jsx
+<dt-avatar
+  icon-name="person"
+/>
+```
+
+### Initials
+
+```jsx
+<dt-avatar
+  full-name="person"
+/>
 ```
 
 ### Seeded
