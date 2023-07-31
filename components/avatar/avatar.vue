@@ -310,18 +310,18 @@ export default {
       },
     },
 
-    imageSrc: {
-      immediate: true,
-      async handler (newSrc) {
-        if (!newSrc) return;
+    imageSrc (newSrc) {
+      if (!newSrc) return;
 
-        this.validateProps();
-
-        this.imageLoadedSuccessfully = null;
-        await this.$nextTick();
-        this.setImageListeners();
-      },
+      this.imageLoadedSuccessfully = null;
+      this.validateProps();
+      this.setImageListeners();
     },
+  },
+
+  mounted () {
+    this.validateProps();
+    this.setImageListeners();
   },
 
   methods: {
