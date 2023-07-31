@@ -261,8 +261,8 @@ export default {
   },
 
   computed: {
-    isIconType () {
-      return !!this.iconName;
+    isNotIconType () {
+      return !this.iconName;
     },
 
     avatarClasses () {
@@ -272,7 +272,7 @@ export default {
         this.avatarClass,
         {
           'd-avatar--group': this.showGroup,
-          [`d-avatar--color-${this.getColor()}`]: !this.isIconType,
+          [`d-avatar--color-${this.getColor()}`]: this.isNotIconType,
         },
       ];
     },
