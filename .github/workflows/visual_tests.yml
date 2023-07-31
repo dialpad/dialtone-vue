@@ -14,10 +14,12 @@ env:
 jobs:
 
   label_when_approved:
-    if: !contains(github.event.pull_request.labels.*.name, 'no-visual-test')
+    if: "!contains(github.event.pull_request.labels.*.name, 'no-visual-test')"
     runs-on: ubuntu-latest
+
     outputs:
       isApproved: ${{ steps.set-label-when-approved.outputs.isApproved }}
+
     steps:
       - name: Set Label When Approved
         uses: TobKed/label-when-approved-action@v1.3
