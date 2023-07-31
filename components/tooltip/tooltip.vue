@@ -1,5 +1,5 @@
 <template>
-  <div data-qa="dt-tooltip-container">
+  <span data-qa="dt-tooltip-container">
     <!-- disabling as the below events are for capturing events from interactive
          elements within the span rather than on the span itself -->
     <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
@@ -43,7 +43,7 @@
         {{ message }}
       </slot>
     </dt-lazy-show>
-  </div>
+  </span>
 </template>
 
 <script>

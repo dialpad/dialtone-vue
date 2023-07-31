@@ -33,31 +33,6 @@
         </dt-tooltip>
       </div>
     </div>
-    <div class="d-d-flex d-jc-center d-ai-center d-w100p">
-      <div id="circle-button-tooltip-label">
-        Circle button tooltip
-      </div>
-      <dt-tooltip
-        class="d-ml4"
-        :transition="transition"
-        :message="localMessage"
-        :show="show"
-      >
-        <template #anchor>
-          <dt-button
-            aria-labelledby="circle-button-tooltip-label"
-            circle
-          >
-            <template #icon>
-              <dt-icon
-                name="dp-phone"
-                size="300"
-              />
-            </template>
-          </dt-button>
-        </template>
-      </dt-tooltip>
-    </div>
     <div class="d-d-flex d-jc-center d-w100p">
       <!-- Text -->
       <dt-tooltip
@@ -117,7 +92,6 @@
 <script>
 import DtTooltip from './tooltip.vue';
 import { DtButton } from './../button';
-import { DtIcon } from './../icon';
 import { TOOLTIP_DIRECTIONS } from './tooltip_constants';
 
 function sliceIntoChunks (arr, chunkSize) {
@@ -131,7 +105,7 @@ function sliceIntoChunks (arr, chunkSize) {
 
 export default {
   name: 'TooltipVariants',
-  components: { DtTooltip, DtIcon, DtButton },
+  components: { DtTooltip, DtButton },
   data () {
     return {
       TOOLTIP_DIRECTIONS: sliceIntoChunks(this.$attrs.customDirections || TOOLTIP_DIRECTIONS, 3),
