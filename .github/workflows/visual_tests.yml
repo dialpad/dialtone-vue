@@ -14,18 +14,21 @@ env:
 jobs:
 
   label_when_approved:
-    if: (github.event_name == 'pull_request_review' && github.event.review.state == 'approved') && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')
+    if: !contains(github.event.pull_request.labels.*.name, 'no-visual-test')
     runs-on: ubuntu-latest
+    outputs:
+      isApproved: ${{ steps.set-label-when-approved.outputs.isApproved }}
     steps:
       - name: Set Label When Approved
         uses: TobKed/label-when-approved-action@v1.3
+        id: set-label-when-approved
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           label: 'visual-test-ready'
 
   visual_tests:
     needs: label_when_approved
-    if: always() && contains(github.event.pull_request.labels.*.name, 'visual-test-ready') && (github.event_name == 'push' || (github.event_name == 'pull_request_review' && github.event.review.state == 'approved'))
+    if: always() && (${{ needs.label_when_approved.outputs.isApproved }} || (contains(github.event.pull_request.labels.*.name, 'visual-test-ready') && (github.event_name == 'push')))
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
