@@ -12,7 +12,7 @@ const MOCK_FIELD_NAME = 'mockFieldName';
 const MOCK_FUNCTION = vi.fn();
 
 /**
- * Constants variables
+ * Environment Constants variables
  * Will be always present in every test
  * @prefix base
  * @notation base[NAME]

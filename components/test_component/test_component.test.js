@@ -30,11 +30,6 @@ describe('DtTestComponent Tests', function () {
     _setChildWrappers();
   };
 
-  // Shared Examples
-  const itBehavesLikeSomeExpectation = () => {
-    it('should be equal', function () { assert.strictEqual(1, 1); });
-  };
-
   // Setup
   beforeAll(function () {});
   beforeEach(function () {});
