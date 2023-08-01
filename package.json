@@ -149,16 +149,34 @@
   "module": "./dist/dialtone-vue.js",
   "exports": {
     ".": {
-      "import": "./dist/dialtone-vue.js",
-      "require": "./dist/dialtone-vue.cjs"
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/dialtone-vue.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/dialtone-vue.cjs"
+      }
     },
     "./emoji": {
-      "import": "./dist/emoji.js",
-      "require": "./dist/emoji.cjs"
+      "import": {
+        "types": "./dist/types/emoji.d.ts",
+        "default": "./dist/emoji.js"
+      },
+      "require": {
+        "types": "./dist/types/emoji.d.ts",
+        "default": "./dist/emoji.cjs"
+      }
     },
     "./message_input": {
-      "import": "./dist/message_input.js",
-      "require": "./dist/message_input.cjs"
+      "import": {
+        "types": "./dist/types/message_input.d.ts",
+        "default": "./dist/message_input.js"
+      },
+      "require": {
+        "types": "./dist/types/message_input.d.ts",
+        "default": "./dist/message_input.cjs"
+      }
     },
     "./css": "./dist/style.css"
   },

@@ -1,6 +1,16 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "components/**/*", "components/**/*.vue", "index.js"],
+  "include": [
+    "**/*.ts",
+    "**/*.d.ts",
+    "components/**/*",
+    "components/**/*.vue",
+    "recipes/**/*",
+    "recipes/**/*.vue",
+    "index.js",
+    "emoji.js",
+    "message_input.js"
+  ],
   "exclude": [
     "**/*.story.vue",
     "**/*.stories.js",
@@ -12,7 +22,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationMap": true,
-    "outDir": "dist/types",
+    "declarationDir": "dist/types",
     "strict": true,
     "paths": {
       "@/*": ["./*"]
