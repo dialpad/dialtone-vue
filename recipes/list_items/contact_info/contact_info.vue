@@ -21,7 +21,7 @@
             :key="index"
           >
             <dt-avatar
-              overlay-class="d-ac-center"
+              overlay-class="d-jc-center"
               :size="avatarSize"
               :seed="avatar.seed"
               :full-name="avatar.fullName"
