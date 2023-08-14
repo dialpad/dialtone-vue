@@ -227,6 +227,8 @@ export {
 
 Our unit tests are written with [Vitest](https://vitest.dev/) and can be found alongside any javascript/vue code files existing in Dialtone Vue. Tests are suffixed with `.test.js` of the corresponding javascript/vue file. ex: `link.vue` is tested by `link.test.js`. All code in Dialtone Vue should have tests written for it. You can see more details on writing tests in the following [documentation](https://vue.dialpad.design/?path=/story/docs-component-driven-development-unit-tests--page).
 
+Before start to write tests, please follow the [Contributing Guideline - Writing Tests for Design System Components](https://dialpad.atlassian.net/wiki/spaces/ENG/pages/726859796/Contributing+Guideline+-+Writing+Tests+for+Design+System+Components).
+
 ### Dialtone Usage
 
 Dialtone Vue components should utilize the global immutable CSS classes provided by Dialtone whenever possible. It is a requirement of any project using Dialtone Vue to include Dialtone as a dependency. If needed, you can also write custom CSS using Dialtone LESS variables by importing `../css/dialtone.less`.
