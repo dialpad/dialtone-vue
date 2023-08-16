@@ -27,7 +27,7 @@ let mockAttrs = {};
 let mockSlots = {};
 let mockProvide = {};
 
-describe('DtTestComponent Tests', () => {
+describe('DtCheckbox Tests', () => {
   let wrapper;
   let checkbox;
   let input;
