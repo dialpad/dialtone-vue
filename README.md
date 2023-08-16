@@ -44,7 +44,7 @@ Projects using Dialtone Vue should be aware of the requirements:
 - A tool like Webpack must be used to package the SFC components from Dialtone Vue.
 - LESS preprocessor support for Vue SFC `<style>` blocks.
 
-These requirements are enforced via peerDependencies of Dialtone Vue when possible.
+These requirements are enforced via peer dependencies of Dialtone Vue when possible.
 
 ## Emojis
 

@@ -12,7 +12,7 @@ Dialtone Vue is the Vue component portion of Dialtone and is distributed as a se
 It is recommended that you are familiar with [Dialtone](https://github.com/dialpad/dialtone/tree/staging)
 as well as it's [contribution guide](https://github.com/dialpad/dialtone/blob/staging/.github/CONTRIBUTING.md) before you contribute to Dialtone Vue.
 
-Dialtone is a peerDependency of Dialtone Vue.
+Dialtone is a peer dependency of Dialtone Vue.
 
 ### What Is a Contribution?
 
@@ -274,7 +274,8 @@ Please **do not** use any mixins or utility classes in Dialtone Vue components.
 
 Dialtone Vue is a dependency of other projects, so you must always be aware of making a breaking change.
 It is possible to make breaking changes to a component, however if you do so you will need to update / verify
-all instances of usage of the component in ubervoice/uberconf before updating.
+all instances of usage of the component in ubervoice/uberconf before updating and communicate the breaking
+change via a blog post on [dialpad.design](https://dialpad.design/about/whats-new/).
 
 ### Folder Structure
 
