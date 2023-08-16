@@ -29,7 +29,7 @@ let mockProvide = {};
 let mockListeners = {};
 const testContext = {};
 
-describe('DtTestComponent Tests', () => {
+describe('DtCheckbox Tests', () => {
   let wrapper;
   let checkbox;
   let input;
