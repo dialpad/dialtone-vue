@@ -14,11 +14,11 @@ describe('DtIcon Tests', () => {
     });
   };
 
-  beforeEach(function () {
+  beforeEach(() => {
     updateWrapper();
   });
 
-  afterEach(function () {
+  afterEach(() => {
     mockProps = {};
   });
 
