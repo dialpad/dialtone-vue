@@ -58,11 +58,11 @@ describe('DtCheckbox Tests', () => {
     testContext.localVue = createLocalVue();
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     updateWrapper();
   });
 
-  afterEach(function () {
+  afterEach(() => {
     mockProps = {};
     mockAttrs = {};
     mockSlots = {};
@@ -239,7 +239,7 @@ describe('DtCheckbox Tests', () => {
     });
   });
 
-  describe('Accessibility Tests', function () {
+  describe('Accessibility Tests', () => {
     describe('Custom Event Tests', () => {
       describe('When the checkbox is clicked', () => {
         it('Should emit an input event', async () => {
@@ -279,7 +279,7 @@ describe('DtCheckbox Tests', () => {
     });
   });
 
-  describe('Interactivity Tests', function () {
+  describe('Interactivity Tests', () => {
     describe('Custom Event Tests', () => {
       describe('When the checkbox is clicked', () => {
         it('Should emit an input event', async () => {
@@ -425,7 +425,7 @@ describe('DtCheckbox Tests', () => {
     });
   });
 
-  describe('Extendability Tests', function () {
+  describe('Extendability Tests', () => {
     const _setupChildClassTest = (childClassName, selector) => {
       mockProps[childClassName] = MOCK_CUSTOM_CLASS;
 
