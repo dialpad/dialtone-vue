@@ -93,7 +93,7 @@ describe('DtTestComponent Tests', () => {
    * Setup
    * Will prepare the environment for each test
    */
-  beforeEach(function () {
+  beforeEach(() => {
     updateWrapper();
   });
 
@@ -101,7 +101,7 @@ describe('DtTestComponent Tests', () => {
    * Teardown
    * Will reset the environment after each test
    */
-  afterEach(function () {
+  afterEach(() => {
     mockProps = {};
     mockAttrs = {};
     mockSlots = {};
@@ -136,11 +136,11 @@ describe('DtIcon Tests', () => {
     });
   };
 
-  beforeEach(function () {
+  beforeEach(() => {
     updateWrapper();
   });
 
-  afterEach(function () {
+  afterEach(() => {
     mockProps = {};
   });
 ```
@@ -172,11 +172,11 @@ describe('DtCheckbox Tests', () => {
     labelDescriptionContainer = wrapper.find('[data-qa="checkbox-label-description-container"]');
   };
 
-  beforeEach(function () {
+  beforeEach(() => {
     updateWrapper();
   });
 
-  afterEach(function () {
+  afterEach(() => {
     mockProps = {};
     mockAttrs = {};
     mockSlots = {};
@@ -196,25 +196,25 @@ describe('Presentation Tests', () => {
     });
   });
 
-  describe('Accessibility Tests', function () {
+  describe('Accessibility Tests', () => {
     /*
      * Test(s) to ensure that the component is accessible
      */
   });
 
-  describe('Interactivity Tests', function () {
+  describe('Interactivity Tests', () => {
     /*
      * Test(s) to ensure that the component correctly handles user input
      */
   });
 
-  describe('Validation Tests', function () {
+  describe('Validation Tests', () => {
     /*
      * Test(s) to ensure that custom validators are working as expected
      */
   });
 
-  describe('Extendability Tests', function () {
+  describe('Extendability Tests', () => {
     /*
      * Test(s) to ensure that the component can be correctly extended
      */
@@ -280,7 +280,7 @@ describe('When the group is disabled', () => {
   E.g.
 
 ```js
-describe('Interactivity Tests', function () {
+describe('Interactivity Tests', () => {
   describe('Custom Event Tests', () => { **NO BREAK LINE**
     describe('When the checkbox is clicked', () => { **NO BREAK LINE**
       it('Should emit an input event', async () => { **NO BREAK LINE**
@@ -365,7 +365,7 @@ If you need to test more cases of it, it would be better to **trigger this event
   E.g.
 
 ```js
-describe('Extendability Tests', function () {
+describe('Extendability Tests', () => {
     const _setupChildClassTest = (childClassName, selector) => {
       mockProps[childClassName] = MOCK_CUSTOM_CLASS;
 
@@ -451,11 +451,11 @@ describe('DtCheckbox Tests', () => {
     testContext.localVue = createLocalVue(); **CREATE LOCAL VUE**
   });
 
-  beforeEach(function () {
+  beforeEach(() => {
     updateWrapper();
   });
 
-  afterEach(function () {
+  afterEach(() => {
     mockProps = {};
     mockAttrs = {};
     mockSlots = {};
