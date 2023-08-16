@@ -55,7 +55,7 @@ describe('DtTestComponent Tests', () => {
    * Setup
    * Will prepare the environment for each test
    */
-  beforeEach(function () {
+  beforeEach( () => {
     updateWrapper();
   });
 
@@ -63,7 +63,7 @@ describe('DtTestComponent Tests', () => {
    * Teardown
    * Will reset the environment after each test
    */
-  afterEach(function () {
+  afterEach( () => {
     mockProps = {};
     mockAttrs = {};
     mockSlots = {};
@@ -79,25 +79,25 @@ describe('DtTestComponent Tests', () => {
     });
   });
 
-  describe('Accessibility Tests', function () {
+  describe('Accessibility Tests', () => {
     /*
      * Test(s) to ensure that the component is accessible
      */
   });
 
-  describe('Interactivity Tests', function () {
+  describe('Interactivity Tests', () => {
     /*
      * Test(s) to ensure that the component correctly handles user input
      */
   });
 
-  describe('Validation Tests', function () {
+  describe('Validation Tests', () => {
     /*
      * Test(s) to ensure that custom validators are working as expected
      */
   });
 
-  describe('Extendability Tests', function () {
+  describe('Extendability Tests', () => {
     /*
      * Test(s) to ensure that the component can be correctly extended
      */
