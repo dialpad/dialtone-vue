@@ -214,7 +214,7 @@ export {
 
 Our unit tests are written with [Vitest](https://vitest.dev/) and can be found alongside any javascript/vue code files existing in Dialtone Vue. Tests are suffixed with `.test.js` of the corresponding javascript/vue file. ex: `link.vue` is tested by `link.test.js`. All code in Dialtone Vue should have tests written for it. You can see more details on writing tests in the following [documentation](https://vue.dialpad.design/?path=/story/docs-component-driven-development-unit-tests--page).
 
-Before start to write tests, please follow the [Contributing Guideline - Writing Tests for Design System Components](https://dialpad.atlassian.net/wiki/spaces/ENG/pages/726859796/Contributing+Guideline+-+Writing+Tests+for+Design+System+Components).
+Before start to write tests, please follow the [Contributing Guideline - Writing Tests for Design System Components](TEST_CONTRIBUTING/TEST_GUIDELINE.md).
 
 ### Dialtone Usage
 
