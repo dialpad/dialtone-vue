@@ -261,8 +261,6 @@ You can see more details on writing tests in the following [documentation](https
 
 Before you start to write tests, please follow the [Contributing Guideline - Writing Tests for Design System Components](TEST_CONTRIBUTING/TEST_GUIDELINE.md).
 
-Before you start to write tests, please follow the [Contributing Guideline - Writing Tests for Design System Components](TEST_CONTRIBUTING/TEST_GUIDELINE.md).
-
 ### Dialtone Usage
 
 Dialtone Vue components should utilize the global immutable CSS classes provided by Dialtone whenever possible.
