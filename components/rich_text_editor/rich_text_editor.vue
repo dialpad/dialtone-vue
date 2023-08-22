@@ -1,8 +1,17 @@
 <template>
   <editor-content
+    id="dtRichTextEditor"
     :editor="editor"
     data-qa="dt-rich-text-editor"
   />
+  <dt-popover
+    :open="popoverOpened"
+  >
+    <template #content>
+      <!-- eslint-disable-next-line vue/no-bare-strings-in-template -->
+      <p>Hello World</p>
+    </template>
+  </dt-popover>
 </template>
 
 <script>
@@ -20,11 +29,17 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from './rich_text_editor_constants';
 
+import { DtPopover } from '../popover';
+import { PluginKey } from '@tiptap/pm/state';
+
+export const EmojiPluginKey = new PluginKey('emoji');
+
 export default {
   name: 'DtRichTextEditor',
 
   components: {
     EditorContent,
+    DtPopover,
   },
 
   props: {
@@ -149,13 +164,14 @@ export default {
   data () {
     return {
       editor: null,
+      popoverOpened: false,
     };
   },
 
   computed: {
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [CodeBlock, Document, Paragraph, Text, Emoji];
+      const extensions = [CodeBlock, Document, Paragraph, Text];
       if (this.link) {
         extensions.push(this.getExtension(Link, this.link));
       }
@@ -175,6 +191,74 @@ export default {
                 () => commands.liftEmptyBlock(),
                 () => commands.splitBlock(),
               ]),
+            };
+          },
+        }),
+      );
+
+      extensions.push(
+        Emoji.extend({
+          addOptions () {
+            return {
+              HTMLAttributes: {},
+              suggestion: {
+                char: ':',
+                pluginKey: EmojiPluginKey,
+                command: ({ editor, range, props }) => {
+                  // increase range.to by one when the next node is of type "text"
+                  // and starts with a space character
+                  const nodeAfter = editor.view.state.selection.$to.nodeAfter;
+                  const overrideSpace = nodeAfter?.text?.startsWith(' ');
+
+                  if (overrideSpace) {
+                    range.to += 1;
+                  }
+
+                  editor
+                    .chain()
+                    .focus()
+                    .insertContentAt(range, [
+                      {
+                        type: this.name,
+                        attrs: props,
+                      },
+                      {
+                        type: 'text',
+                        text: ' ',
+                      },
+                    ])
+                    .run();
+
+                  window.getSelection()?.collapseToEnd();
+                },
+
+                allow: () => true,
+                render () {
+                  // let component;
+                  // let popup;
+
+                  return {
+                    onStart (props) {
+                      console.log('OnStart');
+                      console.log('This', this);
+                      console.log('this.popover', this.popoverOpened);
+                      this.popoverOpened = true;
+                    },
+
+                    onUpdate (props) {
+                      console.log('OnUpdate');
+                    },
+
+                    onKeyDown (props) {
+                      console.log('OnKeydown');
+                    },
+
+                    onExit () {
+                      console.log('Exit');
+                    },
+                  };
+                },
+              },
             };
           },
         }),

@@ -2,6 +2,12 @@ import { mergeAttributes, Node, nodeInputRule, nodePasteRule } from '@tiptap/cor
 import { VueNodeViewRenderer } from '@tiptap/vue-3';
 import EmojiComponent from './EmojiComponent.vue';
 import { shortcodeToEmojiData, codeToEmojiData } from '@/common/emoji';
+import { PluginKey } from '@tiptap/pm/state';
+
+import Suggestion from '@tiptap/suggestion';
+// import suggestion from './suggestion';
+
+export const EmojiPluginKey = new PluginKey('emoji');
 
 const inputShortCodeRegex = /:\w+:$/;
 const pasteShortCodeRegex = /:\w+:/g;
@@ -36,6 +42,50 @@ const shortCodePasteMatch = (text) => {
 };
 
 export const Emoji = Node.create({
+  addOptions () {
+    return {
+      HTMLAttributes: {},
+      // suggestion: {
+      //   char: ':',
+      //   pluginKey: EmojiPluginKey,
+      //   command: ({ editor, range, props }) => {
+      //     // increase range.to by one when the next node is of type "text"
+      //     // and starts with a space character
+      //     const nodeAfter = editor.view.state.selection.$to.nodeAfter;
+      //     const overrideSpace = nodeAfter?.text?.startsWith(' ');
+
+      //     if (overrideSpace) {
+      //       range.to += 1;
+      //     }
+
+      //     editor
+      //       .chain()
+      //       .focus()
+      //       .insertContentAt(range, [
+      //         {
+      //           type: this.name,
+      //           attrs: props,
+      //         },
+      //         {
+      //           type: 'text',
+      //           text: ' ',
+      //         },
+      //       ])
+      //       .run();
+
+      //     window.getSelection()?.collapseToEnd();
+      //   },
+
+      //   allow: ({ state, range }) => {
+      //     const $from = state.doc.resolve(range.from);
+      //     const type = state.schema.nodes[this.name];
+      //     const allow = !!$from.parent.type.contentMatch.matchType(type);
+
+      //     return allow;
+      //   },
+      // },
+    };
+  },
   name: 'emoji',
   group: 'inline',
   inline: true,
@@ -50,12 +100,6 @@ export const Emoji = Node.create({
       code: {
         default: null,
       },
-    };
-  },
-
-  addOptions () {
-    return {
-      HTMLAttributes: {},
     };
   },
 
@@ -128,6 +172,16 @@ export const Emoji = Node.create({
             code: attrs[0],
           };
         },
+      }),
+    ];
+  },
+
+  addProseMirrorPlugins () {
+    return [
+      Suggestion({
+        editor: this.editor,
+        ...this.options.suggestion,
+        // ...suggestion,
       }),
     ];
   },
