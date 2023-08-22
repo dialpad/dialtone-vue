@@ -203,9 +203,7 @@ export default {
   }
 
   .dt-recipe-callbox-badge--warning {
-    &:deep(.dt-badge) {
-      background-color: var(--dt-color-surface-warning);
-    }
+    background-color: var(--dt-color-surface-warning);
   }
 }
 </style>
