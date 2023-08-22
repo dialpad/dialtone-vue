@@ -39,9 +39,8 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const DefaultTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeCallboxDefaultTemplate,
 );
 
@@ -51,9 +50,8 @@ export const Default = {
   args: {},
 };
 
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeCallboxVariantsTemplate,
 );
 

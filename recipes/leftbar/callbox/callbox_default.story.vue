@@ -1,28 +1,32 @@
 <template>
   <dt-recipe-callbox
-    :badge-text="badgeText"
-    :badge-color="badgeColor"
-    :avatar-src="avatarSrc"
-    :avatar-full-name="avatarFullName"
-    :title="title"
-    :border-color="borderColor"
+    :badge-text="$attrs.badgeText"
+    :badge-color="$attrs.badgeColor"
+    :avatar-src="$attrs.avatarSrc"
+    :avatar-full-name="$attrs.avatarFullName"
+    :title="$attrs.title"
+    :border-color="$attrs.borderColor"
   >
-    <template #video>
+    <template
+      v-if="$attrs.video"
+      #video
+    >
       <div
-        v-if="video"
-        v-html="video"
+        v-html="$attrs.video"
       />
     </template>
-    <template #badge>
+    <template
+      v-if="$attrs.badge"
+      #badge
+    >
       <span
-        v-if="badge"
-        v-html="badge"
+        v-html="$attrs.badge"
       />
     </template>
     <template #subtitle>
       <span
-        v-if="subtitle"
-        v-html="subtitle"
+        v-if="$attrs.subtitle"
+        v-html="$attrs.subtitle"
       />
       <div
         v-else
@@ -37,8 +41,8 @@
     </template>
     <template #right>
       <div
-        v-if="right"
-        v-html="right"
+        v-if="$attrs.right"
+        v-html="$attrs.right"
       />
       <div v-else>
         <dt-button
