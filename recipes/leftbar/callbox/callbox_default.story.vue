@@ -91,7 +91,6 @@
         <template #right>
           <dt-button
             importance="clear"
-            circle
             class="d-fc-critical"
           >
             <template #icon>
