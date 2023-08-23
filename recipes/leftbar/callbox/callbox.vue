@@ -108,6 +108,14 @@ export default {
     },
 
     /**
+     * Avatar seed, set this to the user's ID to get the same avatar background gradient each time it is displayed.
+     */
+    avatarSeed: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * Callbox title
      */
     title: {
