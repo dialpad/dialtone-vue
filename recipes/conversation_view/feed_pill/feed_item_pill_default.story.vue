@@ -17,6 +17,7 @@
     <template #right>
       <div class="d-pr16">
         <dt-button
+          aria-label="Open external link"
           kind="muted"
           importance="clear"
           @click.stop=""
