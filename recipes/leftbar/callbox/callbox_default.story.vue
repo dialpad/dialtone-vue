@@ -42,6 +42,7 @@
       />
       <div v-else>
         <dt-button
+          aria-label="toggle dialpad ai"
           circle
           importance="clear"
         >
@@ -53,6 +54,7 @@
           </template>
         </dt-button>
         <dt-button
+          aria-label="hang call"
           circle
           importance="clear"
         >
@@ -66,39 +68,11 @@
         </dt-button>
       </div>
     </template>
-    <template #bottom>
-      <dt-item-layout>
-        <template #left>
-          <dt-button
-            circle
-            importance="clear"
-          >
-            <template #icon>
-              <dt-icon
-                name="share-screen"
-                size="400"
-              />
-            </template>
-          </dt-button>
-        </template>
-        <template #default>
-          <span class="d-fs-100">Sharing screen</span>
-        </template>
-        <template #right>
-          <dt-button
-            importance="clear"
-            class="d-fc-critical"
-          >
-            <template #icon>
-              <dt-icon
-                name="stop-filled"
-                size="200"
-              />
-            </template>
-            Stop
-          </dt-button>
-        </template>
-      </dt-item-layout>
+    <template
+      v-if="bottom"
+      #bottom
+    >
+      <div v-html="bottom" />
     </template>
   </dt-recipe-callbox>
 </template>
@@ -107,10 +81,9 @@
 import DtRecipeCallbox from './callbox.vue';
 import DtIcon from '@/components/icon/icon.vue';
 import DtButton from '@/components/button/button.vue';
-import DtItemLayout from '@/components/item_layout/item_layout.vue';
 
 export default {
   name: 'DtRecipeCallboxDefault',
-  components: { DtItemLayout, DtButton, DtIcon, DtRecipeCallbox },
+  components: { DtButton, DtIcon, DtRecipeCallbox },
 };
 </script>

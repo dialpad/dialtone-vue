@@ -26,6 +26,7 @@ const decorator = () => ({
 export const argsData = {
   title: 'Somebody',
   avatarFullName: 'Somebody',
+  borderColor: 'ai',
 };
 
 // Story Collection
@@ -60,4 +61,5 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Variants = {
   render: VariantsTemplate,
   args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
 };
