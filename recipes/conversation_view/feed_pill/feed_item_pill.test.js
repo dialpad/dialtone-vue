@@ -14,7 +14,7 @@ const basePropsData = {
   ariaLabel: 'Click to expand',
 };
 
-// lsots
+// slots
 const content = '<div data-qa="content-element"> card content </div>';
 
 describe('DtRecipeFeedItemPill Tests', function () {
@@ -128,7 +128,6 @@ describe('DtRecipeFeedItemPill Tests', function () {
         feedItemPill.trigger('focus');
       });
       it('should show a different icon', async () => {
-        console.log(wrapper.html());
         expect(icon.exists()).toBe(false);
         expect(hoverIcon.exists()).toBe(true);
       });

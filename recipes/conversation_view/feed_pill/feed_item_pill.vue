@@ -1,7 +1,5 @@
 <template>
-  <div
-    :class="[wrapperClass, expanded ? 'dt-feed-item--expanded-pill' : 'd-bar-pill']"
-  >
+  <div :class="[wrapperClass, expanded ? 'dt-feed-item--expanded-pill' : 'd-bar-pill']">
     <div :class="['d-bgc-secondary', expanded ? 'dt-feed-item--expanded-pill' : 'd-bar-pill']">
       <div class="d-p8">
         <button
@@ -118,12 +116,6 @@ export default {
     return {
       hover: false,
     };
-  },
-
-  computed: {
-  },
-
-  methods: {
   },
 };
 </script>
