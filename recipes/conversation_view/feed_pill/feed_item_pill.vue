@@ -21,14 +21,15 @@
           <dt-item-layout class="d-w100p d-p8">
             {{ title }}
             <template slot="left">
-              <!-- TODO: Add transition styling to the icon on hover -->
               <dt-icon
                 v-if="hover"
+                class="dt-feed-icon"
                 data-qa="dt-feed-item-hover-icon"
                 :name="expanded ? 'chevron-down' : 'chevron-right'"
               />
               <dt-icon
                 v-else
+                class="dt-feed-icon"
                 data-qa="dt-feed-item-icon"
                 :name="iconName"
                 size="300"
@@ -123,5 +124,14 @@ export default {
 <style lang="less">
   .dt-feed-item--expanded-pill {
     border-radius: 5rem
+  }
+
+  .dt-feed-icon {
+    animation: fade 0.2s ease-in;
+  }
+
+  @keyframes fade {
+    0%   {transform: scale(0);}
+    100% {transform: scale(1);}
   }
 </style>
