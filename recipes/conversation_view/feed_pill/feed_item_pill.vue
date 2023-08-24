@@ -5,13 +5,7 @@
         <button
           :aria-label="ariaLabel"
           data-qa="dt-feed-item-pill"
-          class="
-            d-baw0
-            d-bgc-moderate
-            d-bar-pill
-            d-w100p
-            d-c-pointer
-            d-ta-left"
+          :class="['d-baw0 d-bgc-moderate d-bar-pill d-w100p d-ta-left', buttonClass]"
           @focusin="hover = true"
           @focusout="hover = false"
           @mouseenter="hover = true"
@@ -22,7 +16,7 @@
             {{ title }}
             <template slot="left">
               <dt-icon
-                v-if="hover"
+                v-if="toggleable && hover"
                 class="dt-feed-icon"
                 data-qa="dt-feed-item-hover-icon"
                 :name="expanded ? 'chevron-down' : 'chevron-right'"
@@ -101,11 +95,27 @@ export default {
     },
 
     /**
+     * Additional styling for the pill
+     */
+    buttonClass: {
+      type: String,
+      default: () => '',
+    },
+
+    /**
      * Aria label for feed pill
      */
     ariaLabel: {
       type: String,
       default: () => '',
+    },
+
+    /**
+     * Sets whether the pill can be toggled
+     */
+    toggleable: {
+      type: Boolean,
+      default: () => true,
     },
   },
 

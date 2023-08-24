@@ -5,7 +5,9 @@
     :title="title"
     :expanded="isExpanded"
     :wrapper-class="wrapperClass"
+    :button-class="buttonClass"
     :aria-label="ariaLabel"
+    :toggleable="toggleable"
     @click="isExpanded = !isExpanded"
   >
     <template #subtitle>
@@ -68,12 +70,22 @@ export default {
 
     wrapperClass: {
       type: String,
-      default: 'd-p2 d-bgg-to-br d-bgg-from-purple-400 d-bgg-to-magenta-300',
+      default: '',
+    },
+
+    buttonClass: {
+      type: String,
+      default: '',
     },
 
     ariaLabel: {
       type: String,
       default: 'Click to expand',
+    },
+
+    toggleable: {
+      type: Boolean,
+      default: false,
     },
   },
 

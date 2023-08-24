@@ -10,8 +10,22 @@ import * as FeedItemPillStories from './feed_item_pill.stories';
   A generic layout for different Feed Items
 </Subtitle>
 
+## Base Style
+
 <Canvas>
   <Story of={FeedItemPillStories.Default} />
+</Canvas>
+
+## Variants
+
+Can provide a styling around the pill via wrapperStyle
+<Canvas>
+  <Story of={FeedItemPillStories.GradientVariant} />
+</Canvas>
+
+Can disable the changing icon via toggleable prop.
+<Canvas>
+  <Story of={FeedItemPillStories.NoToggleVariant} />
 </Canvas>
 
 ## Slots, Props & Events
@@ -31,17 +45,20 @@ import { DtRecipeFeedItemPill } from '@dialpad/dialtone-vue';
 ```vue
   <dt-recipe-feed-item-pill
     class="d-w464"
-    icon-name="video"
-    title="This meeting has ended"
+    :icon-name="iconName"
+    :title="title"
     :expanded="isExpanded"
     :wrapper-class="wrapperClass"
+    :button-class="buttonClass"
+    :aria-label="ariaLabel"
+    :toggleable="toggleable"
     @click="isExpanded = !isExpanded"
   >
     <template #subtitle>
-      Last 43 minutes - Ended at 5:04pm
+      Subtitle
     </template>
     <template #bottom>
-      <span class="d-fc-tertiary d-fs-100">8 people joined</span>
+      <span class="d-fc-tertiary d-fs-100">Bottom</span>
     </template>
     <template #right>
       <div class="d-pr16">
@@ -61,10 +78,7 @@ import { DtRecipeFeedItemPill } from '@dialpad/dialtone-vue';
     </template>
     <template #content>
       <span class="d-p16">
-        The agent from Dialpad called to follow up on a support ticket
-        that Jeff was handling for them regarding Dialpad CTI. They apologized
-        for calling outside of the requested time and expressed that they had
-        asked the team to look into the issue and would email them after the call. 
+        Content
       </span>
     </template>
   </dt-recipe-feed-item-pill>
