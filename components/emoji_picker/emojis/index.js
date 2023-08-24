@@ -52,3 +52,8 @@ export const emojisIndexed = [].concat(...Object.values(emojisGrouped)).reduce((
   accumulator[item.unicode_character] = item;
   return accumulator;
 }, {});
+
+export const emojisShortCodeIndexed = [].concat(...Object.values(emojisGrouped)).reduce((accumulator, item) => {
+  accumulator[item.shortcode] = item;
+  return accumulator;
+}, {});

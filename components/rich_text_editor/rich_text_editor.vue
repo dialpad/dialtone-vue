@@ -1,17 +1,8 @@
 <template>
   <editor-content
-    id="dtRichTextEditor"
     :editor="editor"
     data-qa="dt-rich-text-editor"
   />
-  <dt-popover
-    :open="popoverOpened"
-  >
-    <template #content>
-      <!-- eslint-disable-next-line vue/no-bare-strings-in-template -->
-      <p>Hello World</p>
-    </template>
-  </dt-popover>
 </template>
 
 <script>
@@ -29,17 +20,11 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from './rich_text_editor_constants';
 
-import { DtPopover } from '../popover';
-import { PluginKey } from '@tiptap/pm/state';
-
-export const EmojiPluginKey = new PluginKey('emoji');
-
 export default {
   name: 'DtRichTextEditor',
 
   components: {
     EditorContent,
-    DtPopover,
   },
 
   props: {
@@ -180,6 +165,8 @@ export default {
         Placeholder.configure({ placeholder: this.placeholder }),
       );
 
+      // make sure that this is defined before any other extensions
+      // where Enter and Shift+Enter should have its own interaction. otherwise it will be ignored
       extensions.push(
         HardBreak.extend({
           addKeyboardShortcuts () {
@@ -196,73 +183,9 @@ export default {
         }),
       );
 
-      extensions.push(
-        Emoji.extend({
-          addOptions () {
-            return {
-              HTMLAttributes: {},
-              suggestion: {
-                char: ':',
-                pluginKey: EmojiPluginKey,
-                command: ({ editor, range, props }) => {
-                  // increase range.to by one when the next node is of type "text"
-                  // and starts with a space character
-                  const nodeAfter = editor.view.state.selection.$to.nodeAfter;
-                  const overrideSpace = nodeAfter?.text?.startsWith(' ');
-
-                  if (overrideSpace) {
-                    range.to += 1;
-                  }
-
-                  editor
-                    .chain()
-                    .focus()
-                    .insertContentAt(range, [
-                      {
-                        type: this.name,
-                        attrs: props,
-                      },
-                      {
-                        type: 'text',
-                        text: ' ',
-                      },
-                    ])
-                    .run();
-
-                  window.getSelection()?.collapseToEnd();
-                },
-
-                allow: () => true,
-                render () {
-                  // let component;
-                  // let popup;
-
-                  return {
-                    onStart (props) {
-                      console.log('OnStart');
-                      console.log('This', this);
-                      console.log('this.popover', this.popoverOpened);
-                      this.popoverOpened = true;
-                    },
-
-                    onUpdate (props) {
-                      console.log('OnUpdate');
-                    },
-
-                    onKeyDown (props) {
-                      console.log('OnKeydown');
-                    },
-
-                    onExit () {
-                      console.log('Exit');
-                    },
-                  };
-                },
-              },
-            };
-          },
-        }),
-      );
+      // Emoji has some interactions with Enter key
+      // hence this should be done last otherwise the enter wont add a emoji.
+      extensions.push(Emoji);
 
       return extensions;
     },

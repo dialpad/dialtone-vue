@@ -5,7 +5,7 @@ import { shortcodeToEmojiData, codeToEmojiData } from '@/common/emoji';
 import { PluginKey } from '@tiptap/pm/state';
 
 import Suggestion from '@tiptap/suggestion';
-// import suggestion from './suggestion';
+import suggestionOptions from './suggestion';
 
 export const EmojiPluginKey = new PluginKey('emoji');
 
@@ -45,45 +45,17 @@ export const Emoji = Node.create({
   addOptions () {
     return {
       HTMLAttributes: {},
-      // suggestion: {
-      //   char: ':',
-      //   pluginKey: EmojiPluginKey,
-      //   command: ({ editor, range, props }) => {
-      //     // increase range.to by one when the next node is of type "text"
-      //     // and starts with a space character
-      //     const nodeAfter = editor.view.state.selection.$to.nodeAfter;
-      //     const overrideSpace = nodeAfter?.text?.startsWith(' ');
+      suggestion: {
+        char: ':',
+        pluginKey: EmojiPluginKey,
+        allow: ({ state, range }) => {
+          const $from = state.doc.resolve(range.from);
+          const type = state.schema.nodes[this.name];
+          const allow = !!$from.parent.type.contentMatch.matchType(type);
 
-      //     if (overrideSpace) {
-      //       range.to += 1;
-      //     }
-
-      //     editor
-      //       .chain()
-      //       .focus()
-      //       .insertContentAt(range, [
-      //         {
-      //           type: this.name,
-      //           attrs: props,
-      //         },
-      //         {
-      //           type: 'text',
-      //           text: ' ',
-      //         },
-      //       ])
-      //       .run();
-
-      //     window.getSelection()?.collapseToEnd();
-      //   },
-
-      //   allow: ({ state, range }) => {
-      //     const $from = state.doc.resolve(range.from);
-      //     const type = state.schema.nodes[this.name];
-      //     const allow = !!$from.parent.type.contentMatch.matchType(type);
-
-      //     return allow;
-      //   },
-      // },
+          return allow;
+        },
+      },
     };
   },
   name: 'emoji',
@@ -118,6 +90,15 @@ export const Emoji = Node.create({
   renderHTML ({ HTMLAttributes }) {
     return ['emoji-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
+
+  // addCommands () {
+  //   return {
+  //     setEmoji:
+  //       attributes => ({ commands }) => {
+  //         commands.setNode('emoji', attributes);
+  //       },
+  //   };
+  // },
 
   addInputRules () {
     return [
@@ -181,7 +162,7 @@ export const Emoji = Node.create({
       Suggestion({
         editor: this.editor,
         ...this.options.suggestion,
-        // ...suggestion,
+        ...suggestionOptions,
       }),
     ];
   },

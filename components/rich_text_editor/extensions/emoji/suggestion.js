@@ -1,96 +1,106 @@
-// import { VueRenderer } from '@tiptap/vue-3';
-// import tippy from 'tippy.js';
-// import { emojisIndexed } from '@/components/emoji_picker/emojis';
+import { VueRenderer } from '@tiptap/vue-3';
+import { emojisIndexed } from '@/components/emoji_picker/emojis';
 
-// // import MentionList from './MentionList.vue';
-// import { DtPopover } from '@/components/popover';
+import EmojiList from './EmojiList.vue';
+import { createTippy } from '@/components/popover/tippy_utils';
 
-// export const emojiJson = emojisIndexed;
+export default {
+  items: ({ query }) => {
+    const emojiList = Object.values(emojisIndexed);
+    const filteredEmoji = emojiList.filter(function (item) {
+      if (this.count < 5 &&
+        item.shortname.substring(1, item.shortname.length - 1).startsWith(query.toLowerCase())) {
+        this.count++;
+        return true;
+      }
+      return false;
+    }, { count: 0 });
+    return filteredEmoji.map(item => item.shortname);
+  },
 
-// export function getEmojiData () {
-//   console.log('Emojis', emojiJson);
-//   return emojiJson;
-// }
+  command: ({ editor, range, props }) => {
+    // increase range.to by one when the next node is of type "text"
+    // and starts with a space character
+    const nodeAfter = editor.view.state.selection.$to.nodeAfter;
+    const overrideSpace = nodeAfter?.text?.startsWith(' ');
 
-// export default {
-//   items: ({ query }) => {
-//     const emoji = getEmojiData();
-//     return [
-//       'Lea Thompson',
-//       'Cyndi Lauper',
-//       'Tom Cruise',
-//       'Madonna',
-//       'Jerry Hall',
-//       'Joan Collins',
-//       'Winona Ryder',
-//       'Christina Applegate',
-//       'Alyssa Milano',
-//       'Molly Ringwald',
-//       'Ally Sheedy',
-//       'Debbie Harry',
-//       'Olivia Newton-John',
-//       'Elton John',
-//       'Michael J. Fox',
-//       'Axl Rose', 'Emilio Estevez',
-//       'Ralph Macchio',
-//       'Rob Lowe',
-//       'Jennifer Grey', 'Mickey Rourke',
-//       'John Cusack', 'Matthew Broderick', 'Justine Bateman', 'Lisa Bonet',
-//     ].filter(item => item.toLowerCase().startsWith(query.toLowerCase())).slice(0, 5);
-//   },
+    if (overrideSpace) {
+      range.to += 1;
+    }
 
-//   // render: () => {
-//   //   let component;
-//   //   let popup;
+    editor
+      .chain()
+      .focus()
+      .insertContentAt(range, [
+        {
+          type: 'emoji',
+          attrs: props,
+        },
+        {
+          type: 'text',
+          text: ' ',
+        },
+      ])
+      .run();
 
-//   //   return {
-//   //     onStart: props => {
-//   //       component = new VueRenderer(MentionList, {
-//   //         props,
-//   //         editor: props.editor,
-//   //       });
+    window.getSelection()?.collapseToEnd();
+  },
 
-//   //       if (!props.clientRect) {
-//   //         return;
-//   //       }
+  render: () => {
+    let component;
+    let popup;
 
-//   //       popup = tippy('#dtRichTextEditor', {
-//   //         getReferenceClientRect: props.clientRect,
-//   //         // appendTo: () => document.body,
-//   //         content: component.element,
-//   //         showOnCreate: true,
-//   //         interactive: true,
-//   //         trigger: 'manual',
-//   //         placement: 'bottom-start',
-//   //       });
-//   //     },
+    return {
+      onStart: props => {
+        component = new VueRenderer(EmojiList, {
+          props,
+          editor: props.editor,
+        });
 
-//   //     onUpdate (props) {
-//   //       component.updateProps(props);
+        if (!props.clientRect) {
+          return;
+        }
 
-//   //       if (!props.clientRect) {
-//   //         return;
-//   //       }
+        const tippyOptions = {
+          getReferenceClientRect: props.clientRect,
+          appendTo: () => document.body,
+          content: component.element,
+          showOnCreate: true,
+          interactive: true,
+          trigger: 'manual',
+          placement: 'bottom-start',
+          contentElement: null,
+        };
 
-//   //       popup[0].setProps({
-//   //         getReferenceClientRect: props.clientRect,
-//   //       });
-//   //     },
+        popup = createTippy('body', tippyOptions);
+      },
 
-//   //     onKeyDown (props) {
-//   //       if (props.event.key === 'Escape') {
-//   //         popup[0].hide();
+      onUpdate (props) {
+        component.updateProps(props);
 
-//   //         return true;
-//   //       }
+        if (!props.clientRect) {
+          return;
+        }
 
-//   //       return component.ref?.onKeyDown(props);
-//   //     },
+        popup[0].setProps({
+          getReferenceClientRect: props.clientRect,
+        });
+      },
 
-//   //     onExit () {
-//   //       popup[0].destroy();
-//   //       component.destroy();
-//   //     },
-//   //   };
-//   // },
-// };
+      onKeyDown (props) {
+        if (props.event.key === 'Escape') {
+          popup[0].hide();
+
+          return true;
+        }
+
+        return component.ref?.onKeyDown(props);
+      },
+
+      onExit () {
+        popup[0].destroy();
+        component.destroy();
+      },
+    };
+  },
+};
