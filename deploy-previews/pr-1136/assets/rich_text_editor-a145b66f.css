@@ -1,0 +1,1 @@
+.dt-emoji-list-item{border:1px solid transparent}.dt-emoji-list-item.is-selected{border-color:var(--bc-bold)}.ProseMirror p.is-editor-empty:first-child:before{content:attr(data-placeholder);float:left;color:var(--dt-color-foreground-placeholder);pointer-events:none;height:0}
