@@ -1,11 +1,9 @@
-import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 import DtRecipeFeedItemPillDefaultTemplate from './feed_item_pill_default.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  onClicked: action('clicked'),
 };
 
 export const argTypesData = {
@@ -42,19 +40,6 @@ export const argTypesData = {
       },
     },
   },
-
-  // Action Event Handlers
-  onClicked: {
-    table: {
-      disable: true,
-    },
-  },
-  clicked: {
-    description: 'Pill click event',
-    table: {
-      type: { summary: 'event' },
-    },
-  },
 };
 
 // Story Collection
@@ -79,8 +64,8 @@ export const Default = {
   args: {
     iconName: 'video',
     title: 'This meeting has ended',
-    expanded: false,
     ariaLabel: 'Click to expand',
+    buttonClass: '',
     toggleable: true,
   },
 };
@@ -93,9 +78,8 @@ export const GradientVariant = {
     title: 'This meeting has ended',
     wrapperClass: 'd-p2 d-bgg-to-br d-bgg-from-purple-400 d-bgg-to-magenta-300',
     buttonClass: '',
-    expanded: false,
     ariaLabel: 'Click to expand',
-    toggleable: false,
+    toggleable: true,
   },
 };
 
@@ -106,7 +90,6 @@ export const NoToggleVariant = {
     iconName: 'video',
     title: 'This meeting has ended',
     wrapperClass: '',
-    buttonClass: '',
     expanded: false,
     ariaLabel: 'Click to expand',
     toggleable: false,

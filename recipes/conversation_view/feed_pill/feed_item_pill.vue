@@ -1,29 +1,29 @@
 <template>
-  <div :class="[wrapperClass, expanded ? 'dt-feed-item--expanded-pill' : 'd-bar-pill']">
-    <div :class="['d-bgc-secondary', expanded ? 'dt-feed-item--expanded-pill' : 'd-bar-pill']">
+  <div :class="[wrapperClass, pillClass]">
+    <div :class="['d-bgc-secondary', pillClass]">
       <div class="d-p8">
         <button
           :aria-label="ariaLabel"
           data-qa="dt-feed-item-pill"
-          :class="['d-baw0 d-bgc-moderate d-bar-pill d-w100p d-ta-left', buttonClass]"
+          :class="['d-baw0 d-bgc-moderate d-bar-pill d-w100p d-ta-left', toggleableClass, buttonClass]"
           @focusin="hover = true"
           @focusout="hover = false"
           @mouseenter="hover = true"
           @mouseleave="hover = false"
-          @click="$emit('click')"
+          @click="onClick"
         >
           <dt-item-layout class="d-w100p d-p8">
             {{ title }}
             <template slot="left">
               <dt-icon
                 v-if="toggleable && hover"
-                class="dt-feed-icon"
+                class="dt-feed-pill--icon"
                 data-qa="dt-feed-item-hover-icon"
-                :name="expanded ? 'chevron-down' : 'chevron-right'"
+                :name="hoverIcon"
               />
               <dt-icon
                 v-else
-                class="dt-feed-icon"
+                class="dt-feed-pill--icon"
                 data-qa="dt-feed-item-icon"
                 :name="iconName"
                 size="300"
@@ -59,8 +59,6 @@ export default {
 
   components: { DtItemLayout, DtIcon },
 
-  mixins: [],
-
   props: {
     /**
      * Accepts a DtIcon name to be shown in the left
@@ -79,27 +77,19 @@ export default {
     },
 
     /**
-     * Shows/hides the expanded portion
-     */
-    expanded: {
-      type: Boolean,
-      default: () => false,
-    },
-
-    /**
      * Additional styling around the pill
      */
     wrapperClass: {
-      type: String,
-      default: () => '',
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**
      * Additional styling for the pill
      */
     buttonClass: {
-      type: String,
-      default: () => '',
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**
@@ -107,7 +97,10 @@ export default {
      */
     ariaLabel: {
       type: String,
-      default: () => '',
+      default: null,
+      validator: (val) => {
+        return !!val;
+      },
     },
 
     /**
@@ -119,24 +112,43 @@ export default {
     },
   },
 
-  emits: [
-    'click',
-  ],
-
   data () {
     return {
       hover: false,
+      expanded: false,
     };
+  },
+
+  computed: {
+    pillClass () {
+      return this.expanded ? 'dt-feed-pill--expanded' : 'd-bar-pill';
+    },
+
+    hoverIcon () {
+      return this.expanded ? 'chevron-down' : 'chevron-right';
+    },
+
+    toggleableClass () {
+      return this.toggleable ? 'd-c-pointer' : '';
+    },
+  },
+
+  methods: {
+    onClick () {
+      if (this.toggleable) {
+        this.expanded = !this.expanded;
+      }
+    },
   },
 };
 </script>
 
-<style lang="less">
-  .dt-feed-item--expanded-pill {
+<style scoped>
+  .dt-feed-pill--expanded {
     border-radius: 5rem
   }
 
-  .dt-feed-icon {
+  .dt-feed-pill--icon {
     animation: fade 0.2s ease-in;
   }
 

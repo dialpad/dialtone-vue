@@ -9,9 +9,9 @@ import DtRecipeFeedItemPill from './feed_item_pill.vue';
 const basePropsData = {
   iconName: 'video',
   title: 'This meeting has ended',
-  wrapperClass: 'd-p2 d-bgg-to-br d-bgg-from-purple-400 d-bgg-to-magenta-300',
-  expanded: false,
   ariaLabel: 'Click to expand',
+  buttonClass: '',
+  toggleable: true,
 };
 
 // slots

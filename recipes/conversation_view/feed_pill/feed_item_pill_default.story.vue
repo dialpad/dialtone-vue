@@ -3,12 +3,10 @@
     class="d-w464"
     :icon-name="iconName"
     :title="title"
-    :expanded="isExpanded"
     :wrapper-class="wrapperClass"
     :button-class="buttonClass"
     :aria-label="ariaLabel"
     :toggleable="toggleable"
-    @click="isExpanded = !isExpanded"
   >
     <template #subtitle>
       Last 43 minutes - Ended at 5:04pm
@@ -52,53 +50,11 @@ import DtRecipeFeedItemPill from './feed_item_pill.vue';
 export default {
   name: 'DtRecipeFeedItemPillDefault',
   components: { DtRecipeFeedItemPill, DtButton, DtIcon },
-  props: {
-    iconName: {
-      type: String,
-      default: 'video',
-    },
-
-    title: {
-      type: String,
-      default: 'Title',
-    },
-
-    expanded: {
-      type: Boolean,
-      default: false,
-    },
-
-    wrapperClass: {
-      type: String,
-      default: '',
-    },
-
-    buttonClass: {
-      type: String,
-      default: '',
-    },
-
-    ariaLabel: {
-      type: String,
-      default: 'Click to expand',
-    },
-
-    toggleable: {
-      type: Boolean,
-      default: false,
-    },
-  },
 
   data () {
     return {
-      isExpanded: this.expanded | false,
+      defaultExpanded: this.defaultExpanded | false,
     };
-  },
-
-  watch: {
-    expanded (isExpanded) {
-      this.isExpanded = isExpanded;
-    },
   },
 };
 </script>
