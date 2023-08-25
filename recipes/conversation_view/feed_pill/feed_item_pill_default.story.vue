@@ -50,11 +50,5 @@ import DtRecipeFeedItemPill from './feed_item_pill.vue';
 export default {
   name: 'DtRecipeFeedItemPillDefault',
   components: { DtRecipeFeedItemPill, DtButton, DtIcon },
-
-  data () {
-    return {
-      defaultExpanded: this.defaultExpanded | false,
-    };
-  },
 };
 </script>
