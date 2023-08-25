@@ -91,15 +91,6 @@ export const Emoji = Node.create({
     return ['emoji-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
 
-  // addCommands () {
-  //   return {
-  //     setEmoji:
-  //       attributes => ({ commands }) => {
-  //         commands.setNode('emoji', attributes);
-  //       },
-  //   };
-  // },
-
   addInputRules () {
     return [
       // shortcode input
