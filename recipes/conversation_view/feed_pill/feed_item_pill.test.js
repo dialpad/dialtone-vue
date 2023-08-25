@@ -1,9 +1,6 @@
 /* eslint-disable vitest/expect-expect */
 /* eslint-disable vitest/valid-describe-callback */
 import { createLocalVue, mount } from '@vue/test-utils';
-import {
-  itBehavesLikeEmitsExpectedEvent,
-} from '../../../tests/shared_examples/events';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 
 const basePropsData = {
@@ -15,21 +12,19 @@ const basePropsData = {
 };
 
 // slots
-const content = '<div data-qa="content-element"> card content </div>';
+const content = '<div data-qa="content-element"> content </div>';
 
 describe('DtRecipeFeedItemPill Tests', function () {
   let testContext = {};
 
   // Wrappers
-  let wrapper, feedItemPill, hoverIcon, icon, contentSlot;
+  let wrapper, feedItemPill, hoverIcon, icon;
 
   // Helpers
   const _setChildWrappers = () => {
     feedItemPill = wrapper.find('[data-qa="dt-feed-item-pill"]');
     hoverIcon = wrapper.find('[data-qa="dt-feed-item-hover-icon"]');
     icon = wrapper.find('[data-qa="dt-feed-item-icon"]');
-    // test stuff
-    contentSlot = wrapper.find('[data-qa="content-element"]');
   };
 
   // Test Environment
@@ -81,19 +76,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
         expect(feedItemPill.exists()).toBeTruthy();
         expect(icon.exists()).toBe(true);
         expect(hoverIcon.exists()).toBe(false);
-        expect(contentSlot.exists()).toBe(false);
-      });
-    });
-
-    describe('Expand true', function () {
-      beforeAll(() => {
-        propsData = {
-          ...basePropsData,
-          expanded: true,
-        };
-      });
-      it('should show contentSlot', () => {
-        expect(contentSlot.exists()).toBe(true);
+        expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(false);
       });
     });
   });
@@ -115,10 +98,30 @@ describe('DtRecipeFeedItemPill Tests', function () {
      * Test(s) to ensure that the component correctly handles user input
      */
 
-    describe('Click Feed Item Pill event', async function () {
+    describe('Toggle feed item pill', async function () {
       it('Should emit a click event', async () => {
         await feedItemPill.trigger('click');
-        itBehavesLikeEmitsExpectedEvent(wrapper, 'click');
+        await wrapper.vm.$nextTick();
+        expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(true);
+      });
+
+      describe('toggleable false', function () {
+        beforeAll(() => {
+          propsData = {
+            ...basePropsData,
+            toggleable: false,
+          };
+        });
+
+        it('should exist', () => {
+          expect(wrapper.exists()).toBe(true);
+        });
+        it('should not respond to clicks', () => {
+          expect(feedItemPill.exists()).toBeTruthy();
+          expect(icon.exists()).toBe(true);
+          expect(hoverIcon.exists()).toBe(false);
+          expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(false);
+        });
       });
     });
 
