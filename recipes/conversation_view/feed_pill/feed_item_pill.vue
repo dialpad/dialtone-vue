@@ -104,7 +104,7 @@ export default {
     },
 
     /**
-     * Sets whether the pill can be toggled
+     * Sets whether the pill can be toggled (Icon changing on hover, expanding and collapsing, pointer)
      */
     toggleable: {
       type: Boolean,
@@ -144,8 +144,9 @@ export default {
 </script>
 
 <style scoped>
+  /* Border radius needs to half of pill */
   .dt-feed-pill--expanded {
-    border-radius: 5rem
+    border-radius: calc(var(--dt-size-radius-pill)/2)
   }
 
   .dt-feed-pill--icon {
