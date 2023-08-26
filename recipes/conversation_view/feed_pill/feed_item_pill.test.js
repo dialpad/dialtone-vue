@@ -1,5 +1,3 @@
-/* eslint-disable vitest/expect-expect */
-/* eslint-disable vitest/valid-describe-callback */
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 
@@ -98,7 +96,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
      * Test(s) to ensure that the component correctly handles user input
      */
 
-    describe('Toggle feed item pill', async function () {
+    describe('Toggle feed item pill', function () {
       it('Should emit a click event', async () => {
         await feedItemPill.trigger('click');
         await wrapper.vm.$nextTick();
@@ -126,7 +124,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
     });
 
     // Why this no work with trigger focus or trigger mouseenter
-    describe.skip('Hover Feed Item Pill event', async function () {
+    describe.skip('Hover Feed Item Pill event', function () {
       beforeAll(() => {
         feedItemPill.trigger('focus');
       });
