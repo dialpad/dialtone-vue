@@ -1,20 +1,7 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 
-const basePropsData = {
-  iconName: 'video',
-  title: 'This meeting has ended',
-  ariaLabel: 'Click to expand',
-  buttonClass: '',
-  toggleable: true,
-};
-
-// slots
-const content = '<div data-qa="content-element"> content </div>';
-
 describe('DtRecipeFeedItemPill Tests', function () {
-  let testContext = {};
-
   // Wrappers
   let wrapper, feedItemPill, hoverIcon, icon;
 
@@ -25,52 +12,58 @@ describe('DtRecipeFeedItemPill Tests', function () {
     icon = wrapper.find('[data-qa="dt-feed-item-icon"]');
   };
 
-  // Test Environment
-  let propsData = basePropsData;
-  const slots = { content };
-  let provide;
-  let attrs;
+  const MOCK_ARIA_LABEL = 'Click to expand';
 
-  const _setWrappers = () => {
+  const baseProps = {
+    iconName: 'video',
+    title: 'This meeting has ended',
+    ariaLabel: MOCK_ARIA_LABEL,
+    buttonClass: '',
+    toggleable: true,
+  };
+  const baseAttrs = {};
+  const baseSlots = {
+    content: '<div data-qa="content-element"> content </div>',
+  };
+  const baseProvide = {};
+
+  let mockProps = {};
+  let mockAttrs = {};
+  let mockSlots = {};
+  let mockProvide = {};
+
+  const updateWrapper = () => {
     wrapper = mount(DtRecipeFeedItemPill, {
-      stubs: {
+      propsData: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
+      slots: { ...baseSlots, ...mockSlots },
+      global: {
+        provide: { ...baseProvide, ...mockProvide },
       },
-      propsData,
-      attrs,
-      slots,
-      provide,
-      localVue: testContext.localVue,
-      attachTo: document.body,
     });
     _setChildWrappers();
   };
 
   // Setup
-  beforeAll(function () {
-    testContext.localVue = createLocalVue();
-  });
-
   beforeEach(function () {
-    testContext = {};
-    _setWrappers();
+    updateWrapper();
   });
 
   // Teardown
   afterEach(function () {
-  });
-  afterAll(function () {
+    mockProps = {};
+    mockAttrs = {};
+    mockSlots = {};
+    mockProvide = {};
   });
 
   describe('Presentation Tests', function () {
-    /*
-     * Test(s) to ensure that the component is correctly rendering
-     */
-
     describe('Default render', function () {
       it('should exist', () => {
         expect(wrapper.exists()).toBe(true);
       });
       it('should render a feed item pill', () => {
+        console.log(wrapper.html());
         expect(feedItemPill.exists()).toBeTruthy();
         expect(icon.exists()).toBe(true);
         expect(hoverIcon.exists()).toBe(false);
@@ -80,22 +73,14 @@ describe('DtRecipeFeedItemPill Tests', function () {
   });
 
   describe('Accessibility Tests', function () {
-    /*
-     * Test(s) to ensure that the component is accessible
-     */
-
     describe('Default Render', function () {
       it('should render a reaction button', () => {
-        expect(feedItemPill.attributes('aria-label')).toBe(basePropsData.ariaLabel);
+        expect(feedItemPill.attributes('aria-label')).toBe(MOCK_ARIA_LABEL);
       });
     });
   });
 
   describe('Interactivity Tests', function () {
-    /*
-     * Test(s) to ensure that the component correctly handles user input
-     */
-
     describe('Toggle feed item pill', function () {
       it('Should emit a click event', async () => {
         await feedItemPill.trigger('click');
@@ -105,8 +90,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
 
       describe('toggleable false', function () {
         beforeAll(() => {
-          propsData = {
-            ...basePropsData,
+          mockProps = {
             toggleable: false,
           };
         });
@@ -125,12 +109,9 @@ describe('DtRecipeFeedItemPill Tests', function () {
 
     // Test not working
     describe.skip('Hover Feed Item Pill event', function () {
-      beforeAll(async () => {
+      it('should show a different icon', async () => {
         await feedItemPill.trigger('focus');
         _setChildWrappers();
-      });
-      it('should show a different icon', async () => {
-        // Printing wrapper html here still shows the default button
         expect(icon.exists()).toBe(false);
         expect(hoverIcon.exists()).toBe(true);
       });
