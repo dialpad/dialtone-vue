@@ -1,0 +1,25 @@
+import{e as h,c as v}from"./storybook_utils-010d0d6a.js";import{D as o,A as f,a as x,b as D}from"./avatar-1eae1434.js";import{n as _}from"./_plugin-vue2_normalizer-2bbd088e.js";const z={name:"DtAvatarDefault",components:{DtAvatar:o}};var T=function(){var e=this,a=e._self._c;return a("dt-avatar",{attrs:{id:e.id,"full-name":e.fullName,"icon-name":e.iconName,"image-src":e.imageSrc,"image-alt":e.imageAlt,"icon-size":e.iconSize,size:e.size,presence:e.presence,"avatar-class":e.avatarClass,"canvas-class":e.canvasClass,"icon-class":e.iconClass,seed:e.seed,group:e.group,color:e.color,"overlay-icon":e.overlayIcon,"overlay-text":e.overlayText,"overlay-class":e.overlayClass}})},C=[],g=_(z,T,C,!1,null,null,null,null);const I=g.exports;g.exports.__docgenInfo={displayName:"DtAvatarDefault",exportName:"default",description:"",tags:{},sourceFiles:["/home/runner/work/dialtone-vue/dialtone-vue/components/avatar/avatar_default.story.vue"]};const b={name:"DtAvatarVariants",components:{DtAvatar:o},data(){return{avatarSizes:Object.keys(f)}}};var V=function(){var e=this,a=e._self._c;return a("div",{staticClass:"d-stack16"},[a("div",[a("h2",[e._v("Image")]),a("div",{staticClass:"d-flow16 d-d-flex d-ai-center"},e._l(e.avatarSizes,function(s){return a("dt-avatar",{key:`image-${s}`,attrs:{seed:e.seed,size:s,"full-name":"Avatar Image","image-src":"/common/assets/person.png"}})}),1)]),a("div",[a("h2",[e._v("Initials")]),a("div",{staticClass:"d-flow16 d-d-flex d-ai-center"},e._l(e.avatarSizes,function(s){return a("dt-avatar",{key:`initials-${s}`,attrs:{seed:e.seed,size:s,"full-name":"Avatar Icon"}})}),1)]),a("div",[a("h2",[e._v("Icon")]),a("div",{staticClass:"d-flow16 d-d-flex d-ai-center"},e._l(e.avatarSizes,function(s){return a("dt-avatar",{key:`icon-${s}`,attrs:{seed:e.seed,size:s,"full-name":"Avatar Icon","icon-name":"user"}})}),1)]),a("div",[a("h2",[e._v("Presence")]),a("div",{staticClass:"d-flow16 d-d-flex d-ai-center"},e._l(e.avatarSizes,function(s){return a("dt-avatar",{key:`presence-${s}`,attrs:{seed:e.seed,size:s,"full-name":"Person avatar",presence:"busy","image-src":"/common/assets/person.png"}})}),1)]),a("div",[a("h2",[e._v("Overlay")]),a("div",{staticClass:"d-flow16 d-d-flex"},[a("dt-avatar",{attrs:{seed:e.seed,size:"xl","full-name":"Person avatar","image-src":"/common/assets/person.png","overlay-icon":"hear"}}),a("dt-avatar",{attrs:{seed:e.seed,size:"xl","full-name":"Person avatar","image-src":"/common/assets/person.png","overlay-text":"+3"}})],1)])])},N=[],y=_(b,V,N,!1,null,null,null,null);const P=y.exports;y.exports.__docgenInfo={displayName:"DtAvatarVariants",exportName:"default",description:"",tags:{},sourceFiles:["/home/runner/work/dialtone-vue/dialtone-vue/components/avatar/avatar_variants.story.vue"]};const l=h(),A={size:"md",presence:null,fullName:"Jaqueline Nackos",imageAlt:"image-alt",seed:"",iconName:"accessibility",iconSize:"500"},S={avatarClass:{description:"Pass through classes. Used to customize the avatar container"},color:{control:{type:"select",labels:{undefined:"(empty)"}},options:x},iconName:{options:l,control:{type:"select",labels:{undefined:"(empty)"}}},iconSize:{defaultValue:null},id:{table:{defaultValue:{summary:"generated unique ID"}}},overlayClass:{description:"Pass through classes. Used to customize the avatar overlay"},overlayIcon:{options:l,control:{type:"select",labels:{undefined:"(empty)"}}},overlayText:{description:"The text that overlays the avatar"},presence:{defaultValue:null,control:{type:"select"},options:Object.values(D),table:{defaultValue:{summary:"null"}}},presenceProps:{description:"Pass through props. Used to customize the presence component"},size:{control:{type:"select"},options:Object.keys(f)}},O={title:"Components/Avatar",component:o,args:A,argTypes:S,excludeStories:/.*Data$/},k=(t,{argTypes:e})=>v(t,e,I),w=(t,{argTypes:e})=>v(t,e,P),r={render:k,decorators:[()=>({template:'<div class="d-d-flex"><story /></div>'})],args:{imageSrc:"/common/assets/person.png"}},n={render:w,parameters:{percy:{args:{seed:"seed"}},options:{showPanel:!1},controls:{disable:!0}}};var c,i,d;r.parameters={...r.parameters,docs:{...(c=r.parameters)==null?void 0:c.docs,source:{originalSource:`{
+  render: DefaultTemplate,
+  decorators: [() => ({
+    template: \`<div class="d-d-flex"><story /></div>\`
+  })],
+  args: {
+    imageSrc: '/common/assets/person.png'
+  }
+}`,...(d=(i=r.parameters)==null?void 0:i.docs)==null?void 0:d.source}}};var m,p,u;n.parameters={...n.parameters,docs:{...(m=n.parameters)==null?void 0:m.docs,source:{originalSource:`{
+  render: VariantsTemplate,
+  parameters: {
+    percy: {
+      args: {
+        seed: 'seed'
+      }
+    },
+    options: {
+      showPanel: false
+    },
+    controls: {
+      disable: true
+    }
+  }
+}`,...(u=(p=n.parameters)==null?void 0:p.docs)==null?void 0:u.source}}};const $=["argsData","argTypesData","Default","Variants"],j=Object.freeze(Object.defineProperty({__proto__:null,Default:r,Variants:n,__namedExportsOrder:$,argTypesData:S,argsData:A,default:O},Symbol.toStringTag,{value:"Module"}));export{j as A,r as D,n as V};
+//# sourceMappingURL=avatar.stories-55f37e37.js.map
