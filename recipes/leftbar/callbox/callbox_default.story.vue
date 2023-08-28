@@ -4,6 +4,7 @@
     :badge-color="badgeColor"
     :avatar-src="avatarSrc"
     :avatar-full-name="avatarFullName"
+    :avatar-seed="avatarSeed"
     :title="title"
     :border-color="borderColor"
   >
