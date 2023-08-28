@@ -3,19 +3,19 @@ import DtRecipeFeedItemPill from './feed_item_pill.vue';
 
 describe('DtRecipeFeedItemPill Tests', function () {
   // Wrappers
-  let wrapper, feedItemPill, hoverIcon, icon;
+  let wrapper, feedItemPill, icon;
 
   // Helpers
   const _setChildWrappers = () => {
     feedItemPill = wrapper.find('[data-qa="dt-feed-item-pill"]');
-    hoverIcon = wrapper.find('[data-qa="dt-feed-item-hover-icon"]');
-    icon = wrapper.find('[data-qa="dt-feed-item-icon"]');
+    icon = wrapper.find('[data-qa="dt-feed-item-pill-icon"]');
   };
 
   const MOCK_ARIA_LABEL = 'Click to expand';
+  const MOCK_ICON_NAME = 'Video';
 
   const baseProps = {
-    iconName: 'video',
+    iconName: MOCK_ICON_NAME,
     title: 'This meeting has ended',
     ariaLabel: MOCK_ARIA_LABEL,
     buttonClass: '',
@@ -66,7 +66,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
       it('should render a feed item pill', () => {
         expect(feedItemPill.exists()).toBeTruthy();
         expect(icon.exists()).toBe(true);
-        expect(hoverIcon.exists()).toBe(false);
+        expect(icon.attributes('data-name')).toBe(MOCK_ICON_NAME);
         expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(false);
       });
     });
@@ -102,7 +102,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
         it('should not respond to clicks', () => {
           expect(feedItemPill.exists()).toBeTruthy();
           expect(icon.exists()).toBe(true);
-          expect(hoverIcon.exists()).toBe(false);
+          expect(icon.attributes('data-name')).toBe(MOCK_ICON_NAME);
           expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(false);
         });
       });
@@ -113,8 +113,8 @@ describe('DtRecipeFeedItemPill Tests', function () {
       it('should show a different icon', async () => {
         await feedItemPill.trigger('focus');
         _setChildWrappers();
-        expect(icon.exists()).toBe(false);
-        expect(hoverIcon.exists()).toBe(true);
+        expect(icon.exists()).toBe(true);
+        expect(icon.attributes('data-name')).toBe('Chevron Right');
       });
     });
   });

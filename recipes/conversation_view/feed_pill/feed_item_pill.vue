@@ -17,7 +17,7 @@
             <template slot="left">
               <dt-icon
                 class="dt-feed-item-pill--icon"
-                data-qa="dt-feed-item-hover-icon"
+                data-qa="dt-feed-item-pill-icon"
                 :name="computedIcon"
               />
             </template>
