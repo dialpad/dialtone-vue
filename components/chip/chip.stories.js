@@ -13,6 +13,7 @@ export const argsData = {
   onClick: action('click'),
   size: 'md',
   closeButtonProps: { ariaLabel: 'close' },
+  avatarSeed: '',
 };
 
 export const argTypesData = {
