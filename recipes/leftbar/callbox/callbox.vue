@@ -20,6 +20,7 @@
               <dt-avatar
                 :image-src="avatarSrc"
                 :full-name="avatarFullName"
+                :seed="avatarSeed"
                 size="sm"
               />
             </template>

@@ -4,6 +4,7 @@
     :badge-color="$attrs.badgeColor"
     :avatar-src="$attrs.avatarSrc"
     :avatar-full-name="$attrs.avatarFullName"
+    :avatar-seed="$attrs.avatarSeed"
     :title="$attrs.title"
     :border-color="$attrs.borderColor"
   >
@@ -40,10 +41,10 @@
       />
     </template>
     <template
-      v-if="bottom"
+      v-if="$attrs.bottom"
       #bottom
     >
-      <div v-html="bottom" />
+      <div v-html="$attrs.bottom" />
     </template>
   </dt-recipe-callbox>
 </template>

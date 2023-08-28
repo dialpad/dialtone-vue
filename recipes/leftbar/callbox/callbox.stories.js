@@ -54,4 +54,12 @@ export const Default = {
     right: 'Right slot',
     bottom: 'Bottom slot',
   },
+
+  parameters: {
+    percy: {
+      args: {
+        avatarSeed: 'seed',
+      },
+    },
+  },
 };
