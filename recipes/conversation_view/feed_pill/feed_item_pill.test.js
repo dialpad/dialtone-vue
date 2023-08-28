@@ -123,12 +123,14 @@ describe('DtRecipeFeedItemPill Tests', function () {
       });
     });
 
-    // Why this no work with trigger focus or trigger mouseenter
+    // Test not working
     describe.skip('Hover Feed Item Pill event', function () {
-      beforeAll(() => {
-        feedItemPill.trigger('focus');
+      beforeAll(async () => {
+        await feedItemPill.trigger('focus');
+        _setChildWrappers();
       });
       it('should show a different icon', async () => {
+        // Printing wrapper html here still shows the default button
         expect(icon.exists()).toBe(false);
         expect(hoverIcon.exists()).toBe(true);
       });
