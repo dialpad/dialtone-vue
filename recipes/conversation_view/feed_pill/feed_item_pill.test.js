@@ -108,10 +108,9 @@ describe('DtRecipeFeedItemPill Tests', function () {
       });
     });
 
-    // Test not working
-    describe.skip('Hover Feed Item Pill event', function () {
+    describe('Hover Feed Item Pill event', function () {
       it('should show a different icon', async () => {
-        await feedItemPill.trigger('focus');
+        await feedItemPill.trigger('focusin');
         _setChildWrappers();
         expect(icon.exists()).toBe(true);
         expect(icon.attributes('data-name')).toBe('Chevron Right');
