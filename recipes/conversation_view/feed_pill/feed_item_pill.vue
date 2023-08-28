@@ -16,17 +16,9 @@
             {{ title }}
             <template slot="left">
               <dt-icon
-                v-if="toggleable && hover"
-                class="dt-feed-pill--icon"
+                class="dt-feed-item-pill--icon"
                 data-qa="dt-feed-item-hover-icon"
-                :name="hoverIcon"
-              />
-              <dt-icon
-                v-else
-                class="dt-feed-pill--icon"
-                data-qa="dt-feed-item-icon"
-                :name="iconName"
-                size="300"
+                :name="computedIcon"
               />
             </template>
             <template slot="subtitle">
@@ -97,10 +89,7 @@ export default {
      */
     ariaLabel: {
       type: String,
-      default: null,
-      validator: (val) => {
-        return !!val;
-      },
+      required: true,
     },
 
     /**
@@ -121,11 +110,15 @@ export default {
 
   computed: {
     pillClass () {
-      return this.expanded ? 'dt-feed-pill--expanded' : 'd-bar-pill';
+      return this.expanded ? 'dt-feed-item-pill--expanded' : 'd-bar-pill';
     },
 
-    hoverIcon () {
-      return this.expanded ? 'chevron-down' : 'chevron-right';
+    computedIcon () {
+      if (this.toggleable && this.hover) {
+        return this.expanded ? 'chevron-down' : 'chevron-right';
+      } else {
+        return this.iconName;
+      }
     },
 
     toggleableClass () {
@@ -135,22 +128,22 @@ export default {
 
   methods: {
     onClick () {
-      if (this.toggleable) {
-        this.expanded = !this.expanded;
-      }
+      if (!this.toggleable) return;
+
+      this.expanded = !this.expanded;
     },
   },
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   /* Border radius needs to half of pill */
-  .dt-feed-pill--expanded {
+  .dt-feed-item-pill--expanded {
     border-radius: calc(var(--dt-size-radius-pill)/2)
   }
 
-  .dt-feed-pill--icon {
-    animation: fade 0.2s ease-in;
+  .dt-feed-item-pill--icon {
+    animation: fade 0.3s ease-in;
   }
 
   @keyframes fade {

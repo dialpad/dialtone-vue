@@ -62,8 +62,8 @@ describe('DtRecipeFeedItemPill Tests', function () {
       it('should exist', () => {
         expect(wrapper.exists()).toBe(true);
       });
+
       it('should render a feed item pill', () => {
-        console.log(wrapper.html());
         expect(feedItemPill.exists()).toBeTruthy();
         expect(icon.exists()).toBe(true);
         expect(hoverIcon.exists()).toBe(false);
@@ -98,6 +98,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
         it('should exist', () => {
           expect(wrapper.exists()).toBe(true);
         });
+
         it('should not respond to clicks', () => {
           expect(feedItemPill.exists()).toBeTruthy();
           expect(icon.exists()).toBe(true);
