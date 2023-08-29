@@ -158,7 +158,9 @@ export default {
   }
 
   .dt-feed-item-pill--border-ai {
-    background-image: linear-gradient(white, white), var(--dt-badge-color-background-ai);
+    background-image:
+      linear-gradient(var(--dt-color-surface-primary), var(--dt-color-surface-primary)),
+      var(--dt-badge-color-background-ai);
   }
 
   .dt-feed-item-pill--border-critical {
