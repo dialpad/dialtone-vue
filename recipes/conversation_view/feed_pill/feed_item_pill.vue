@@ -133,6 +133,7 @@ export default {
 
 <style lang="less" scoped>
   /* Border radius needs to half of pill */
+  // Gradient radius solution taken from https://stackoverflow.com/a/53037637
   .dt-feed-item-pill--container {
     border: double 4px transparent;
     border-radius: calc(var(--dt-size-radius-pill)/2);
