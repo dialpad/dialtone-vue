@@ -1,55 +1,58 @@
 <template>
   <div :class="['dt-feed-item-pill--border', borderClass, wrapperClass]">
     <div class="d-p8 d-bgc-secondary">
-      <button
-        :aria-label="ariaLabel"
-        data-qa="dt-feed-item-pill"
-        :class="['d-baw0 d-bgc-moderate d-bar-pill d-w100p d-ta-left d-btn--circle', toggleableClass, buttonClass]"
-        @focusin="hover = true"
-        @focusout="hover = false"
-        @mouseenter="hover = true"
-        @mouseleave="hover = false"
-        @click="onClick"
-      >
-        <dt-item-layout class="d-w100p d-p8">
-          {{ title }}
-          <template slot="left">
-            <dt-icon
-              size="300"
-              class="dt-feed-item-pill--icon"
-              data-qa="dt-feed-item-pill-icon"
-              :name="computedIcon"
-            />
-          </template>
-          <template slot="subtitle">
-            <slot name="subtitle" />
-          </template>
-          <template slot="bottom">
-            <slot name="bottom" />
-          </template>
-          <template slot="right">
-            <slot name="right" />
-          </template>
-        </dt-item-layout>
-      </button>
-      <div
-        v-if="expanded"
-        class="d-jc-center d-d-flex"
-      >
-        <slot name="content" />
-      </div>
+      <dt-collapsible :open="expanded">
+        <template #anchor>
+          <button
+            :aria-label="ariaLabel"
+            data-qa="dt-feed-item-pill"
+            :class="['d-baw0 d-bgc-moderate d-bar-pill d-w100p d-ta-left d-btn--circle', toggleableClass, buttonClass]"
+            @focusin="hover = true"
+            @focusout="hover = false"
+            @mouseenter="hover = true"
+            @mouseleave="hover = false"
+            @click="onClick"
+          >
+            <dt-item-layout class="d-w100p d-p8">
+              {{ title }}
+              <template slot="left">
+                <dt-icon
+                  size="300"
+                  class="dt-feed-item-pill--icon"
+                  data-qa="dt-feed-item-pill-icon"
+                  :name="computedIcon"
+                />
+              </template>
+              <template slot="subtitle">
+                <slot name="subtitle" />
+              </template>
+              <template slot="bottom">
+                <slot name="bottom" />
+              </template>
+              <template slot="right">
+                <slot name="right" />
+              </template>
+            </dt-item-layout>
+          </button>
+        </template>
+        <template #content>
+          <div class="d-jc-center d-d-flex">
+            <slot name="content" />
+          </div>
+        </template>
+      </dt-collapsible>
     </div>
   </div>
 </template>
 
 <script>
 import { BORDER_COLORS } from './feed_item_pill_constants';
-import { DtIcon, DtItemLayout } from '@/index';
+import { DtIcon, DtItemLayout, DtCollapsible } from '@/index';
 
 export default {
   name: 'DtRecipeFeedItemPill',
 
-  components: { DtItemLayout, DtIcon },
+  components: { DtItemLayout, DtIcon, DtCollapsible },
 
   props: {
     /**

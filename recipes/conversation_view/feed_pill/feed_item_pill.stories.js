@@ -68,7 +68,7 @@ export const Default = {
     buttonClass: '',
     toggleable: true,
     wrapperClass: 'd-w628',
-    borderColor: '',
+    borderColor: 'default',
   },
 };
 
