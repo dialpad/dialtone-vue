@@ -1,43 +1,41 @@
 <template>
-  <div class="d-p4 d-bar8 d-bgc-contrast d-fs-200 d-truncate">
-    <template v-if="items.length">
-      <button
-        v-for="(item, index) in items"
-        :key="index"
-        :class="[
-          'd-d-flex',
-          'd-mb2',
-          'd-bar4',
-          'd-d-block',
-          'd-ta-left',
-          'd-fc-primary-inverted',
-          'dt-emoji-list-item',
-          'd-bgc-transparent',
-          'd-w100p',
-          { 'is-selected': index === selectedIndex },
-        ]"
-        @click="selectItem(index)"
-        @keydown.prevent.stop="onKeyDown"
-      >
+  <div
+    v-show="items.length"
+    class="dt-emoji-suggestion-list d-bgc-strong"
+  >
+    <dt-list-item
+      v-for="(item, index) in items"
+      :key="index"
+      :class="[
+        'dt-emoji-suggestion-list-item',
+        { 'is-selected': index === selectedIndex },
+      ]"
+      navigation-type="arrow-keys"
+      @click="selectItem(index)"
+      @keydown.prevent.stop="onKeyDown"
+    >
+      <template #left>
         <dt-emoji
           size="200"
           :code="item"
         />
-        <div class="d-ml8 d-ta-center">
-          {{ item }}
-        </div>
-      </button>
-    </template>
+      </template>
+      <div class="dt-emoji-suggestion-list-text">
+        {{ item }}
+      </div>
+    </dt-list-item>
   </div>
 </template>
 
 <script>
 import { DtEmoji } from '@/emoji';
+import { DtListItem } from '@/components/list_item';
 
 export default {
   name: 'EmojiList',
   components: {
     DtEmoji,
+    DtListItem,
   },
 
   props: {
@@ -108,8 +106,21 @@ export default {
 </script>
 
 <style>
-.dt-emoji-list-item {
+.dt-emoji-suggestion-list {
+  background-color: var(--dt-color-surface-secondary) !important;
+  border-color: var(--dt-color-border-subtle) !important;
+  max-height: 216px !important;
+  overflow: hidden !important;
+  overflow-y: scroll !important;
+}
+.dt-emoji-suggestion-list .dt-item-layout {
+    min-width: none !important;
+}
+.dt-emoji-suggestion-list-item {
+  display: flex !important;
   border: 1px solid transparent;
+  min-width: 20rem;
+  width: 100% !important;
 
   &.is-selected {
     border-color: var(--bc-bold);

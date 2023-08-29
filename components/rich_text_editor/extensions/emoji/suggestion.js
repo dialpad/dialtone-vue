@@ -6,15 +6,17 @@ import { createTippy } from '@/components/popover/tippy_utils';
 
 export default {
   items: ({ query }) => {
+    console.log(query.length);
+    if (query.length < 2) {
+      return [];
+    }
     const emojiList = Object.values(emojisIndexed);
     const filteredEmoji = emojiList.filter(function (item) {
-      if (this.count < 5 &&
-        item.shortname.substring(1, item.shortname.length - 1).startsWith(query.toLowerCase())) {
-        this.count++;
+      if (item.shortname.substring(1, item.shortname.length - 1).startsWith(query.toLowerCase())) {
         return true;
       }
       return false;
-    }, { count: 0 });
+    });
     return filteredEmoji.map(item => item.shortname);
   },
 

@@ -48,13 +48,6 @@ export const Emoji = Node.create({
       suggestion: {
         char: ':',
         pluginKey: EmojiPluginKey,
-        allow: ({ state, range }) => {
-          const $from = state.doc.resolve(range.from);
-          const type = state.schema.nodes[this.name];
-          const allow = !!$from.parent.type.contentMatch.matchType(type);
-
-          return allow;
-        },
       },
     };
   },
