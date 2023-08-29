@@ -1,5 +1,5 @@
 <template>
-  <div :class="['dt-feed-item-pill--container dt-feed-item-pill--container-ai', wrapperClass]">
+  <div :class="['dt-feed-item-pill--border', borderClass, wrapperClass]">
     <div class="d-p8 d-bgc-secondary">
       <button
         :aria-label="ariaLabel"
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { BORDER_COLORS } from './feed_item_pill_constants';
 import { DtIcon, DtItemLayout } from '@/index';
 
 export default {
@@ -98,6 +99,16 @@ export default {
       type: Boolean,
       default: () => true,
     },
+
+    /**
+     * Callbox border color
+     * @values default, ai, critical
+     */
+    borderColor: {
+      type: String,
+      default: 'default',
+      validator: (color) => Object.keys(BORDER_COLORS).includes(color),
+    },
   },
 
   data () {
@@ -119,6 +130,10 @@ export default {
     toggleableClass () {
       return this.toggleable ? 'd-c-pointer' : '';
     },
+
+    borderClass () {
+      return BORDER_COLORS[this.borderColor];
+    },
   },
 
   methods: {
@@ -134,16 +149,20 @@ export default {
 <style lang="less" scoped>
   /* Border radius needs to half of pill */
   // Gradient radius solution taken from https://stackoverflow.com/a/53037637
-  .dt-feed-item-pill--container {
-    border: double 4px transparent;
+  .dt-feed-item-pill--border {
+    border: double 1px transparent;
     border-radius: calc(var(--dt-size-radius-pill)/2);
     background-origin: border-box;
     background-clip: content-box, border-box;
     overflow: hidden;
   }
 
-  .dt-feed-item-pill--container-ai {
+  .dt-feed-item-pill--border-ai {
     background-image: linear-gradient(white, white), var(--dt-badge-color-background-ai);
+  }
+
+  .dt-feed-item-pill--border-critical {
+    background: var(--dt-color-foreground-critical);
   }
 
   .dt-feed-item-pill--icon {

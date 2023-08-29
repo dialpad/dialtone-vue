@@ -4,6 +4,7 @@
     :title="title"
     :wrapper-class="wrapperClass"
     :button-class="buttonClass"
+    :border-color="borderColor"
     :aria-label="ariaLabel"
     :toggleable="toggleable"
   >

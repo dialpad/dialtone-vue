@@ -68,6 +68,7 @@ export const Default = {
     buttonClass: '',
     toggleable: true,
     wrapperClass: 'd-w628',
+    borderColor: '',
   },
 };
 
@@ -81,6 +82,7 @@ export const GradientVariant = {
     buttonClass: '',
     ariaLabel: 'Click to expand',
     toggleable: true,
+    borderColor: 'ai',
   },
 };
 
@@ -94,5 +96,6 @@ export const NoToggleVariant = {
     expanded: false,
     ariaLabel: 'Click to expand',
     toggleable: false,
+    borderColor: 'critical',
   },
 };
