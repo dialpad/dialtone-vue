@@ -1,6 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeCallbox from './callbox.vue';
 import DtRecipeCallboxDefaultTemplate from './callbox_default.story.vue';
+import DtRecipeCallboxVariantsTemplate from './callbox_variants.story.vue';
 
 export const argTypesData = {
   // Props: only define things here that cannot be set by jsdoc comments on the component itself.
@@ -45,6 +46,12 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtRecipeCallboxDefaultTemplate,
 );
 
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeCallboxVariantsTemplate,
+);
+
 // Stories
 export const Default = {
   render: DefaultTemplate,
@@ -63,4 +70,10 @@ export const Default = {
       },
     },
   },
+};
+
+export const Variants = {
+  render: VariantsTemplate,
+
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
 };
