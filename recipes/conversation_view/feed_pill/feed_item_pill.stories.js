@@ -67,6 +67,7 @@ export const Default = {
     ariaLabel: 'Click to expand',
     buttonClass: '',
     toggleable: true,
+    wrapperClass: 'd-w628',
   },
 };
 
@@ -76,7 +77,7 @@ export const GradientVariant = {
   args: {
     iconName: 'video',
     title: 'This meeting has ended',
-    wrapperClass: 'd-p2 d-bgg-to-br d-bgg-from-purple-400 d-bgg-to-magenta-300',
+    wrapperClass: 'd-p2 d-bgg-to-br d-bgg-from-purple-400 d-bgg-to-magenta-300 d-w628',
     buttonClass: '',
     ariaLabel: 'Click to expand',
     toggleable: true,
@@ -89,7 +90,7 @@ export const NoToggleVariant = {
   args: {
     iconName: 'video',
     title: 'This meeting has ended',
-    wrapperClass: '',
+    wrapperClass: 'd-w628',
     expanded: false,
     ariaLabel: 'Click to expand',
     toggleable: false,

@@ -1,11 +1,11 @@
 <template>
-  <div :class="[wrapperClass, pillClass]">
-    <div :class="['d-bgc-secondary', pillClass]">
+  <div :class="[wrapperClass, 'dt-feed-item-pill--border-radius']">
+    <div :class="['d-bgc-secondary', 'dt-feed-item-pill--border-radius']">
       <div class="d-p8">
         <button
           :aria-label="ariaLabel"
           data-qa="dt-feed-item-pill"
-          :class="['d-baw0 d-bgc-moderate d-bar-pill d-w100p d-ta-left', toggleableClass, buttonClass]"
+          :class="['d-baw0 d-bgc-moderate d-bar-pill d-w100p d-ta-left d-btn--circle', toggleableClass, buttonClass]"
           @focusin="hover = true"
           @focusout="hover = false"
           @mouseenter="hover = true"
@@ -16,6 +16,7 @@
             {{ title }}
             <template slot="left">
               <dt-icon
+                size="300"
                 class="dt-feed-item-pill--icon"
                 data-qa="dt-feed-item-pill-icon"
                 :name="computedIcon"
@@ -109,10 +110,6 @@ export default {
   },
 
   computed: {
-    pillClass () {
-      return this.expanded ? 'dt-feed-item-pill--expanded' : 'd-bar-pill';
-    },
-
     computedIcon () {
       if (this.toggleable && this.hover) {
         return this.expanded ? 'chevron-down' : 'chevron-right';
@@ -138,7 +135,7 @@ export default {
 
 <style lang="less" scoped>
   /* Border radius needs to half of pill */
-  .dt-feed-item-pill--expanded {
+  .dt-feed-item-pill--border-radius {
     border-radius: calc(var(--dt-size-radius-pill)/2)
   }
 

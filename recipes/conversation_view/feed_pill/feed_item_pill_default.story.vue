@@ -1,6 +1,5 @@
 <template>
   <dt-recipe-feed-item-pill
-    class="d-w464"
     :icon-name="iconName"
     :title="title"
     :wrapper-class="wrapperClass"
