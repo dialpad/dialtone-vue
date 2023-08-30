@@ -18,7 +18,7 @@
               <template slot="left">
                 <dt-icon
                   size="300"
-                  class="dt-feed-item-pill--icon"
+                  class="dt-feed-item-pill--icon d-pr8"
                   data-qa="dt-feed-item-pill-icon"
                   :name="computedIcon"
                 />
