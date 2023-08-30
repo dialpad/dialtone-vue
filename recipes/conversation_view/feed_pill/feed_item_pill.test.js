@@ -1,15 +1,9 @@
 import { mount } from '@vue/test-utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
+import { beforeEach } from 'vitest';
 
 describe('DtRecipeFeedItemPill Tests', function () {
-  // Wrappers
   let wrapper, feedItemPill, icon;
-
-  // Helpers
-  const _setChildWrappers = () => {
-    feedItemPill = wrapper.find('[data-qa="dt-feed-item-pill"]');
-    icon = wrapper.find('[data-qa="dt-feed-item-pill-icon"]');
-  };
 
   const MOCK_ARIA_LABEL = 'Click to expand';
   const MOCK_ICON_NAME = 'Video';
@@ -41,15 +35,14 @@ describe('DtRecipeFeedItemPill Tests', function () {
         provide: { ...baseProvide, ...mockProvide },
       },
     });
-    _setChildWrappers();
+    feedItemPill = wrapper.find('[data-qa="dt-feed-item-pill"]');
+    icon = wrapper.find('[data-qa="dt-feed-item-pill-icon"]');
   };
 
-  // Setup
   beforeEach(function () {
     updateWrapper();
   });
 
-  // Teardown
   afterEach(function () {
     mockProps = {};
     mockAttrs = {};
@@ -85,6 +78,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
       it('Should emit a click event', async () => {
         await feedItemPill.trigger('click');
         await wrapper.vm.$nextTick();
+
         expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(true);
       });
 
@@ -109,9 +103,11 @@ describe('DtRecipeFeedItemPill Tests', function () {
     });
 
     describe('Hover Feed Item Pill event', function () {
-      it('should show a different icon', async () => {
+      beforeEach(async () => {
         await feedItemPill.trigger('focusin');
-        _setChildWrappers();
+        icon = wrapper.find('[data-qa="dt-feed-item-pill-icon"]');
+      });
+      it('should show a different icon', () => {
         expect(icon.exists()).toBe(true);
         expect(icon.attributes('data-name')).toBe('Chevron Right');
       });
