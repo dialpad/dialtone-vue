@@ -72,7 +72,7 @@ export const Default = {
   },
 };
 
-export const GradientVariant = {
+export const AiBorderGradient = {
   render: DefaultTemplate,
   parameters: { options: { showPanel: false }, controls: { disable: true } },
   args: {
