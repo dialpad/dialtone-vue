@@ -150,11 +150,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  /* Border radius needs to half of pill */
   // Gradient radius solution taken from https://stackoverflow.com/a/53037637
   .dt-feed-item-pill--border {
     border: double 1px transparent;
-    border-radius: calc(var(--dt-size-radius-pill)/2);
+    border-radius: 4.8rem; // Special value determined by designer here where it works in both expanded and collapsed
     background-origin: border-box;
     background-clip: content-box, border-box;
     overflow: hidden;
