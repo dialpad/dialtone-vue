@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="items.length"
-    class="dt-emoji-suggestion-list d-bgc-strong"
+    class="dt-emoji-suggestion-list"
   >
     <dt-list-item
       v-for="(item, index) in items"
@@ -14,12 +14,10 @@
       @click="selectItem(index)"
       @keydown.prevent.stop="onKeyDown"
     >
-      <template #left>
-        <dt-emoji
-          size="200"
-          :code="item"
-        />
-      </template>
+      <dt-emoji
+        size="200"
+        :code="item"
+      />
       <div class="dt-emoji-suggestion-list-text">
         {{ item }}
       </div>
@@ -113,8 +111,8 @@ export default {
   overflow: hidden !important;
   overflow-y: scroll !important;
 }
-.dt-emoji-suggestion-list .dt-item-layout {
-    min-width: none !important;
+.dt-emoji-suggestion-list .dt-item-layout--title {
+  display: flex;
 }
 .dt-emoji-suggestion-list-item {
   display: flex !important;
@@ -125,5 +123,9 @@ export default {
   &.is-selected {
     border-color: var(--bc-bold);
   }
+}
+
+.dt-emoji-suggestion-list-text {
+  margin-left: 0.6rem;
 }
 </style>
