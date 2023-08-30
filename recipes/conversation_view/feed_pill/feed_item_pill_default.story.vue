@@ -20,12 +20,13 @@
           aria-label="Open external link"
           kind="muted"
           importance="clear"
+          :circle="true"
           @click.stop=""
         >
           <template slot="icon">
             <dt-icon
               name="external-link"
-              size="200"
+              size="300"
             />
           </template>
         </dt-button>

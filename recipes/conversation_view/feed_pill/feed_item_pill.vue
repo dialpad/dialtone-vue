@@ -160,6 +160,10 @@ export default {
     overflow: hidden;
   }
 
+  .dt-feed-item-pill--border-default {
+    background: var(--dt-color-border-default)
+  }
+
   .dt-feed-item-pill--border-ai {
     background-image:
       linear-gradient(var(--dt-color-surface-primary), var(--dt-color-surface-primary)),
