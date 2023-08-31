@@ -2,11 +2,11 @@ import { VueRenderer } from '@tiptap/vue-3';
 import { emojisIndexed } from '@/components/emoji_picker/emojis';
 
 import EmojiList from './EmojiList.vue';
-import { createTippy } from '@/components/popover/tippy_utils';
+
+import tippy from 'tippy.js';
 
 export default {
   items: ({ query }) => {
-    console.log(query.length);
     if (query.length < 2) {
       return [];
     }
@@ -63,7 +63,7 @@ export default {
           return;
         }
 
-        const tippyOptions = {
+        popup = tippy('body', {
           getReferenceClientRect: props.clientRect,
           appendTo: () => document.body,
           content: component.element,
@@ -72,9 +72,7 @@ export default {
           trigger: 'manual',
           placement: 'bottom-start',
           contentElement: null,
-        };
-
-        popup = createTippy('body', tippyOptions);
+        });
       },
 
       onUpdate (props) {

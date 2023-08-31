@@ -13,13 +13,6 @@ export const TIPPY_STICKY_VALUES = [true, false, 'reference', 'popper'];
 export const createTippy = (anchorElement, options) => {
   const { contentElement } = { ...options };
   delete options.contentElement;
-  if (contentElement === null) {
-    // create tippy instance without custom render
-    return tippy(anchorElement, {
-      ...options,
-      plugins: [sticky],
-    });
-  }
   return tippy(anchorElement, {
     ...options,
     plugins: [sticky],
