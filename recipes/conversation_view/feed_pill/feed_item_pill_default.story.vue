@@ -23,7 +23,7 @@
           :circle="true"
           @click.stop=""
         >
-          <template slot="icon">
+          <template #icon>
             <dt-icon
               name="external-link"
               size="300"

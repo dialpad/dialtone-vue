@@ -15,7 +15,7 @@
           >
             <dt-item-layout class="d-w100p d-p8">
               {{ title }}
-              <template slot="left">
+              <template #left>
                 <dt-icon
                   size="300"
                   class="dt-feed-item-pill--icon d-pr8"
@@ -23,13 +23,13 @@
                   :name="computedIcon"
                 />
               </template>
-              <template slot="subtitle">
+              <template #subtitle>
                 <slot name="subtitle" />
               </template>
-              <template slot="bottom">
+              <template #bottom>
                 <slot name="bottom" />
               </template>
-              <template slot="right">
+              <template #right>
                 <slot name="right" />
               </template>
             </dt-item-layout>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { BORDER_COLORS } from './feed_item_pill_constants';
+import { PILL_BORDER_COLORS } from './feed_item_pill_constants';
 import { DtIcon, DtItemLayout, DtCollapsible } from '@/index';
 
 export default {
@@ -110,7 +110,7 @@ export default {
     borderColor: {
       type: String,
       default: 'default',
-      validator: (color) => Object.keys(BORDER_COLORS).includes(color),
+      validator: (color) => Object.keys(PILL_BORDER_COLORS).includes(color),
     },
   },
 
@@ -135,7 +135,7 @@ export default {
     },
 
     borderClass () {
-      return BORDER_COLORS[this.borderColor];
+      return PILL_BORDER_COLORS[this.borderColor];
     },
   },
 

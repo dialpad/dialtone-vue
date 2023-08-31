@@ -107,6 +107,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
         await feedItemPill.trigger('focusin');
         icon = wrapper.find('[data-qa="dt-feed-item-pill-icon"]');
       });
+
       it('should show a different icon', () => {
         expect(icon.exists()).toBe(true);
         expect(icon.attributes('data-name')).toBe('Chevron Right');
