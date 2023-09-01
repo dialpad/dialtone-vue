@@ -403,6 +403,30 @@ describe('Extendability Tests', () => {
 });
 ```
 
+- If you are testing with `vi.fn()` mocks it is necessary to restore it after each test.
+For this, vitest provide `.restoreAllMocks()`. Doc: https://vitest.dev/guide/mocking.html
+
+  E.g.
+
+```js
+const MOCK_SELECT_STUB = vi.fn();
+
+describe(
+    ...
+    ...    
+
+const updateWrapper = () ...
+
+afterEach(() => {
+    mockAttrs = {};
+    mockProps = {};
+    ...
+    vi.restoreAllMocks();
+  });
+
+```
+
+
 
 ## Notes for vue2 test:
 
