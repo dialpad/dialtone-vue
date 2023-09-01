@@ -19,7 +19,7 @@
       <dt-icon
         v-else-if="iconName"
         :name="iconName"
-        :size="iconSize"
+        :size="iconSize || AVATAR_ICON_SIZES[size]"
         :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
         data-qa="dt-avatar-icon"
       />
@@ -76,6 +76,7 @@ import {
   AVATAR_PRESENCE_STATES,
   AVATAR_COLORS,
   AVATAR_GROUP_VALIDATOR,
+  AVATAR_ICON_SIZES,
 } from './avatar_constants';
 import { getIconNames } from '@/common/storybook_utils.js';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
@@ -243,8 +244,8 @@ export default {
      */
     iconSize: {
       type: String,
-      default: '500',
-      validator: (size) => Object.keys(ICON_SIZE_MODIFIERS).includes(size),
+      default: '',
+      validator: (size) => !size || Object.keys(ICON_SIZE_MODIFIERS).includes(size),
     },
 
     /**
@@ -261,6 +262,7 @@ export default {
       AVATAR_SIZE_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
+      AVATAR_ICON_SIZES,
       imageLoadedSuccessfully: null,
       formattedInitials: '',
       initializing: false,
@@ -318,9 +320,9 @@ export default {
     },
 
     imageSrc (newSrc) {
+      this.imageLoadedSuccessfully = null;
       if (!newSrc) return;
 
-      this.imageLoadedSuccessfully = null;
       this.validateProps();
       this.setImageListeners();
     },
@@ -332,14 +334,12 @@ export default {
   },
 
   methods: {
-    setImageListeners () {
+    async setImageListeners () {
+      await this.$nextTick();
       const el = this.$refs.avatarImage;
-
       if (!el) return;
 
       el.addEventListener('load', () => this._loadedImageEventHandler(el), { once: true });
-
-      if (this.imageLoadedSuccessfully === false) return;
       el.addEventListener('error', () => this._erroredImageEventHandler(el), { once: true });
     },
 

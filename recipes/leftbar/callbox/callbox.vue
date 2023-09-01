@@ -1,6 +1,9 @@
 <template>
   <dt-item-layout class="dt-recipe-callbox">
-    <template #default>
+    <template
+      v-if="$slots.video"
+      #default
+    >
       <div class="dt-recipe-callbox--video">
         <!-- @slot Slot for video stream -->
         <slot name="video" />
@@ -10,38 +13,52 @@
       <dt-item-layout :class="['dt-recipe-callbox--main-content', borderClass]">
         <template #default>
           <dt-item-layout class="dt-recipe-callbox--top-content">
-            <template #left>
+            <template
+              v-if="shouldShowAvatar"
+              #left
+            >
               <dt-avatar
-                v-if="shouldShowAvatar"
                 :image-src="avatarSrc"
                 :full-name="avatarFullName"
+                :seed="avatarSeed"
                 size="sm"
               />
             </template>
             <template #default>
-              <div class="dt-recipe-callbox--title">
-                {{ title }}
-              </div>
+              <span
+                class="dt-recipe-callbox--title"
+                v-text="title"
+              />
             </template>
             <template #subtitle>
               <dt-item-layout class="dt-recipe-callbox--subtitle">
                 <template #default>
-                  <!-- @slot Slot for call center badge -->
-                  <slot name="badge">
-                    <dt-badge
-                      v-if="badgeText"
-                      :class="badgeClass"
-                      :text="badgeText"
-                    />
-                  </slot>
+                  <div class="dt-recipe-callbox--subtitle-badge">
+                    <!-- @slot Slot for call center badge -->
+                    <slot name="badge">
+                      <dt-badge
+                        v-if="badgeText"
+                        :class="badgeClass"
+                        :text="badgeText"
+                      />
+                    </slot>
+                  </div>
                 </template>
-                <template #bottom>
-                  <!-- @slot Slot for subtitle -->
-                  <slot name="subtitle" />
+                <template
+                  v-if="$slots.subtitle"
+                  #bottom
+                >
+                  <div class="dt-recipe-callbox--subtitle-content">
+                    <!-- @slot Slot for subtitle -->
+                    <slot name="subtitle" />
+                  </div>
                 </template>
               </dt-item-layout>
             </template>
-            <template #right>
+            <template
+              v-if="$slots.right"
+              #right
+            >
               <div class="dt-recipe-callbox--right">
                 <!-- @slot Slot for right icons -->
                 <slot name="right" />
@@ -49,7 +66,10 @@
             </template>
           </dt-item-layout>
         </template>
-        <template #bottom>
+        <template
+          v-if="$slots.bottom"
+          #bottom
+        >
           <div class="dt-recipe-callbox--bottom-content">
             <slot name="bottom" />
           </div>
@@ -60,7 +80,7 @@
 </template>
 
 <script>
-import { BADGE_COLORS, BORDER_COLORS } from './callbox_constants';
+import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from './callbox_constants';
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
 import DtBadge from '@/components/badge/badge.vue';
@@ -86,7 +106,7 @@ export default {
     badgeColor: {
       type: String,
       default: null,
-      validator: (color) => !!color || Object.keys(BADGE_COLORS).includes(color),
+      validator: (color) => !!color || Object.keys(CALLBOX_BADGE_COLORS).includes(color),
     },
 
     /**
@@ -130,7 +150,7 @@ export default {
     borderColor: {
       type: String,
       default: 'default',
-      validator: (color) => Object.keys(BORDER_COLORS).includes(color),
+      validator: (color) => Object.keys(CALLBOX_BORDER_COLORS).includes(color),
     },
   },
 
@@ -140,11 +160,11 @@ export default {
     },
 
     badgeClass () {
-      return BADGE_COLORS[this.badgeColor];
+      return CALLBOX_BADGE_COLORS[this.badgeColor];
     },
 
     borderClass () {
-      return BORDER_COLORS[this.borderColor];
+      return CALLBOX_BORDER_COLORS[this.borderColor];
     },
   },
 };
@@ -152,6 +172,8 @@ export default {
 
 <style lang="less" scoped>
 .dt-recipe-callbox {
+  padding: 0;
+  color: var(--dt-color-foreground-primary);
   background-color: var(--dt-color-surface-primary);
   border-radius: var(--dt-size-radius-300);
 
@@ -164,19 +186,34 @@ export default {
     overflow: hidden;
   }
 
+  &:deep(.dt-item-layout--bottom) {
+    margin-top: 0;
+  }
+
   &:deep(.dt-item-layout--right) {
     flex-shrink: 0;
   }
 
-  &--video {}
+  &--video {
+    border-radius: var(--dt-size-radius-200) var(--dt-size-radius-200) 0 0;
+    overflow: hidden;
+    height: calc(var(--dt-size-760) + var(--dt-size-650));
+    margin-bottom: var(--dt-size-300-negative);
+
+    :deep(img) {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
 
   &--main-content {
     padding: 0;
     border-radius: var(--dt-size-radius-300);
-    border: var(--dt-size-border-200) solid transparent;
+    border: var(--dt-size-border-100) solid transparent;
 
     &.dt-recipe-callbox--border-default {
-      border: var(--dt-size-border-200) solid var(--dt-color-border-default);
+      border-color: var(--dt-color-border-default);
     }
 
     &.dt-recipe-callbox--border-ai {
@@ -200,14 +237,27 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    font-weight: var(--dt-font-weight-bold) ;
+    color: var(--dt-color-foreground-primary);
+    background-color: var(--dt-color-surface-primary);
+    font-weight: var(--dt-font-weight-bold);
   }
 
   &--subtitle {
     padding: 0;
     min-height: auto;
     font-size: var(--dt-font-size-100);
-    color: var(--dt-color-foreground-tertiary);
+
+    &-badge {
+      padding-top: var(--dt-space-300);
+    }
+
+    &-content :last-child {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: var(--dt-color-foreground-tertiary);
+        background-color: var(--dt-color-surface-primary);
+    }
   }
 
   .dt-recipe-callbox-badge--warning {
