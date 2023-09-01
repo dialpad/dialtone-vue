@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DtRecipeCallbox from './callbox.vue';
 import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from '@/recipes/leftbar/callbox/callbox_constants.js';
 
@@ -25,7 +25,6 @@ const baseSlots = {};
 
 let mockProps = {};
 let mockSlots = {};
-const testContext = {};
 
 describe('DtRecipeCallbox Tests', () => {
   let avatar;
@@ -42,9 +41,8 @@ describe('DtRecipeCallbox Tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtRecipeCallbox, {
-      propsData: { ...baseProps, ...mockProps },
+      props: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
-      localVue: testContext.localVue,
     });
 
     avatar = wrapper.find('[data-qa="dt-avatar"]');
@@ -58,10 +56,6 @@ describe('DtRecipeCallbox Tests', () => {
     title = wrapper.find('[data-qa="dt-recipe-callbox--title"]');
     videoSlot = wrapper.find('[data-qa="dt-recipe-callbox--video-wrapper"]');
   };
-
-  beforeAll(() => {
-    testContext.localVue = createLocalVue();
-  });
 
   beforeEach(() => {
     updateWrapper();
