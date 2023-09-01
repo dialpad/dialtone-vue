@@ -107,7 +107,7 @@ export default {
 .dt-emoji-suggestion-list {
   background-color: var(--dt-color-surface-secondary) !important;
   border-color: var(--dt-color-border-subtle) !important;
-  max-height: 216px !important;
+  max-height: var(--dt-size-875) !important;
   overflow: hidden !important;
   overflow-y: scroll !important;
 }
@@ -116,9 +116,9 @@ export default {
 }
 .dt-emoji-suggestion-list-item {
   display: flex !important;
-  border: 1px solid transparent;
-  min-width: 20rem;
-  width: 100% !important;
+  border: var(--dt-size-100) solid transparent;
+  min-width: var(--dt-size-850);
+  width: var(--dt-size-100-percent) !important;
 
   &.is-selected {
     border-color: var(--bc-bold);
@@ -126,6 +126,6 @@ export default {
 }
 
 .dt-emoji-suggestion-list-text {
-  margin-left: 0.6rem;
+  margin-left: var(--dt-size-350);
 }
 </style>

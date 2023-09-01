@@ -72,6 +72,7 @@ export default {
           trigger: 'manual',
           placement: 'bottom-start',
           contentElement: null,
+          zIndex: 650,
         });
       },
 
