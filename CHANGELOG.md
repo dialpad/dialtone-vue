@@ -1,3 +1,49 @@
+## [3.82.1](https://github.com/dialpad/dialtone-vue/compare/v3.82.0...v3.82.1) (2023-08-28)
+
+
+### Bug Fixes
+
+* **Avatar:** dynamic icon sizes ([#1147](https://github.com/dialpad/dialtone-vue/issues/1147)) ([1c1b390](https://github.com/dialpad/dialtone-vue/commit/1c1b390f74ab9070db51112c7138ff308e72d5af))
+* **Avatar:** image events ([#1144](https://github.com/dialpad/dialtone-vue/issues/1144)) ([a03c3b9](https://github.com/dialpad/dialtone-vue/commit/a03c3b95823e72c3857c2b3cbcf2ab825e58ed66))
+* **Contact Info:** avatar's border color ([#1138](https://github.com/dialpad/dialtone-vue/issues/1138)) ([3c8e6fb](https://github.com/dialpad/dialtone-vue/commit/3c8e6fb21eafcacbb4b5ebdf4503d22a47f1fedb))
+
+
+### Code Refactoring
+
+* **Callbox:** visuals - vue3 ([#1140](https://github.com/dialpad/dialtone-vue/issues/1140)) ([5db9860](https://github.com/dialpad/dialtone-vue/commit/5db98605520b4a3696bb570fce5bd0ab1c0519ad))
+
+
+### Documentation
+
+* **Chip:** variants story - vue3 ([#1149](https://github.com/dialpad/dialtone-vue/issues/1149)) ([d8fe2a9](https://github.com/dialpad/dialtone-vue/commit/d8fe2a9da0f45cfe2c1fe2766c50802803776038))
+
+# [3.82.0](https://github.com/dialpad/dialtone-vue/compare/v3.81.0...v3.82.0) (2023-08-23)
+
+
+### Bug Fixes
+
+* end -> flex-end ([bd8cd3a](https://github.com/dialpad/dialtone-vue/commit/bd8cd3a28204aa509a6275bf0b6300d83fa3d4cb))
+* **Recipe Callbar Button With Popover:** do not autofocus on the popover ([#1132](https://github.com/dialpad/dialtone-vue/issues/1132)) ([b18114d](https://github.com/dialpad/dialtone-vue/commit/b18114dced0e7792d84ac1bd7da5a4e1eb123a3b))
+* **Select Menu:** emit value first ([#1134](https://github.com/dialpad/dialtone-vue/issues/1134)) ([d043c1e](https://github.com/dialpad/dialtone-vue/commit/d043c1efb1cb426d320f3d21b94941cf56556233))
+* **Select Menu:** pass event object onChange ([#1126](https://github.com/dialpad/dialtone-vue/issues/1126)) ([7b9b822](https://github.com/dialpad/dialtone-vue/commit/7b9b822695cf463931f665aff2c631b870ace8cf))
+
+
+### Documentation
+
+* update documentation - vue3 ([#1120](https://github.com/dialpad/dialtone-vue/issues/1120)) ([67d89ac](https://github.com/dialpad/dialtone-vue/commit/67d89ac38dd5aaa127838e124941e09bf4d42921))
+
+
+### Features
+
+* **Callbox:** scaffold component - vue3 ([#1130](https://github.com/dialpad/dialtone-vue/issues/1130)) ([c652d37](https://github.com/dialpad/dialtone-vue/commit/c652d37e419c80490023f828dc007d572e7be5b7))
+
+# [3.81.0](https://github.com/dialpad/dialtone-vue/compare/v3.80.2...v3.81.0) (2023-08-16)
+
+
+### Features
+
+* update theme variables in dt-vue ([#1122](https://github.com/dialpad/dialtone-vue/issues/1122)) ([ea68d8d](https://github.com/dialpad/dialtone-vue/commit/ea68d8d8c04d5485b9af9b726de318bf8350a376))
+
 ## [3.80.2](https://github.com/dialpad/dialtone-vue/compare/v3.80.1...v3.80.2) (2023-08-09)
 
 

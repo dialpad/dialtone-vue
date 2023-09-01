@@ -83,13 +83,13 @@ export default {
 
   &--mentions {
     font-weight: var(--dt-font-weight-bold);
-    background-color: var(--theme-mention-color-background);
-    color: var(--theme-mention-color-foreground);
+    background-color: var(--dt-theme-mention-color-background);
+    color: var(--dt-theme-mention-color-foreground);
   }
 
   &--messages {
-    background-color: var(--dt-color-surface-primary);
-    color: var(--dt-color-foreground-primary);
+    background-color: var(--dt-color-surface-contrast);
+    color: var(--dt-color-foreground-secondary-inverted);
   }
 }
 </style>
