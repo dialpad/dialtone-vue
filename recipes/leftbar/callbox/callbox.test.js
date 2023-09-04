@@ -136,6 +136,7 @@ describe('DtRecipeCallbox Tests', () => {
       describe('When badge slot is provided', () => {
         it('Renders badge slot content', () => {
           mockSlots = { badge: MOCK_BADGE_SLOT_CONTENT };
+
           updateWrapper();
 
           expect(badgeSlot.text()).toBe(MOCK_BADGE_SLOT_CONTENT);
@@ -145,6 +146,7 @@ describe('DtRecipeCallbox Tests', () => {
       describe('When bottom slot is provided', () => {
         it('Renders bottom slot content', () => {
           mockSlots = { bottom: MOCK_BOTTOM_SLOT_CONTENT };
+
           updateWrapper();
 
           expect(bottomSlot.text()).toBe(MOCK_BOTTOM_SLOT_CONTENT);
@@ -154,6 +156,7 @@ describe('DtRecipeCallbox Tests', () => {
       describe('When right slot is provided', () => {
         it('Renders right slot content', () => {
           mockSlots = { right: MOCK_RIGHT_SLOT_CONTENT };
+
           updateWrapper();
 
           expect(rightSlot.text()).toBe(MOCK_RIGHT_SLOT_CONTENT);
@@ -163,6 +166,7 @@ describe('DtRecipeCallbox Tests', () => {
       describe('When subtitle slot is provided', () => {
         it('Renders subtitle slot content', () => {
           mockSlots = { subtitle: MOCK_SUBTITLE_SLOT_CONTENT };
+
           updateWrapper();
 
           expect(subtitleSlot.text()).toBe(MOCK_SUBTITLE_SLOT_CONTENT);
@@ -172,6 +176,7 @@ describe('DtRecipeCallbox Tests', () => {
       describe('When video slot is provided', () => {
         it('Renders video slot content', () => {
           mockSlots = { video: MOCK_VIDEO_SLOT_CONTENT };
+
           updateWrapper();
 
           expect(videoSlot.text()).toBe(MOCK_VIDEO_SLOT_CONTENT);
