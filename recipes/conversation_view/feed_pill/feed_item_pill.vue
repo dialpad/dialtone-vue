@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { PILL_BORDER_COLORS } from './feed_item_pill_constants';
+import { FEED_ITEM_PILL_BORDER_COLORS } from './feed_item_pill_constants';
 import { DtIcon, DtItemLayout, DtCollapsible } from '@/index';
 
 export default {
@@ -110,7 +110,7 @@ export default {
     borderColor: {
       type: String,
       default: 'default',
-      validator: (color) => Object.keys(PILL_BORDER_COLORS).includes(color),
+      validator: (color) => Object.keys(FEED_ITEM_PILL_BORDER_COLORS).includes(color),
     },
   },
 
@@ -135,7 +135,7 @@ export default {
     },
 
     borderClass () {
-      return PILL_BORDER_COLORS[this.borderColor];
+      return FEED_ITEM_PILL_BORDER_COLORS[this.borderColor];
     },
   },
 
