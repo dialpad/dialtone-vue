@@ -331,10 +331,8 @@ describe('When checked', () => {
 describe('When disabled', () => {
   describe('When the checkbox is clicked', () => {
     it('Should not emit an input event', async () => {
-      mockProps = { disabled: true };
-
-      updateWrapper();
-
+      await wrapper.setProps({ disabled: true});
+      
       await input.trigger('click');
 
       expect(wrapper.emitted('input')).toBeFalsy();
@@ -344,19 +342,52 @@ describe('When disabled', () => {
 ```
 
 
-- If you are testing some conditional render of the component, you can create a wrapper inside the test to work on it.
+- If you are testing some conditional render of the component, you can create or update a wrapper inside the test to work on it.
 
   E.g.
 
 ```js
-it('decorative span should exist on decoration prop', async () => {
-  await wrapper.setProps({ decoration });
+describe(...){
+    ...
+    const updateWrapper = () => {
+      ...
+      ...
+      decorativeSpan = wrapper.find('.d-badge__decorative');
+    }
+    ...
+  describe(...)
+     ...
+    {
+     it(..., async () => {
+        mockProps = { disabled: true };
 
-  const decorativeSpan = wrapper.find('.d-badge__decorative');
+        updateWrapper();
+    
+        expect(decorativeSpan.exists()).toBeTruthy();
+     });
+     
+     it(..., async () => {
+         await wrapper.setProps({disabled: true});
 
-  expect(decorativeSpan.exists()).toBeTruthy();
-});
+         decorativeSpan = wrapper.find('.d-badge__decorative');
+
+         expect(decorativeSpan.exists()).toBeTruthy();
+     });
+     
+     it(..., async () => {
+        await wrapper.setProps({disabledSection: false});
+      
+        const decorativeSection = wrapper.find('.d-badge__decorative-section');
+      
+        expect(decorativeSection.exists()).toBeTruthy();
+      });
+    }
+}
 ```
+
+**NOTE**:
+- `updateWrapper()` will re-mount the component and update all child wrappers.
+- `wrapper.setProps()` will update the component props and re-render it. This will not update child wrappers.
 
 If you need to test more cases of it, it would be better to **trigger this event** and **create the wrapper** inside a beforeEach.
 
@@ -403,7 +434,7 @@ describe('Extendability Tests', () => {
 });
 ```
 
-- If you are testing with `vi.fn()` mocks it is necessary to restore it after each test.
+- If you are testing with `vi.fn()` mocks it is necessary/recommend to restore it after each test.
 For this, vitest provide `.restoreAllMocks()`. Doc: https://vitest.dev/guide/mocking.html
 
   E.g.
