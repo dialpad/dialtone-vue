@@ -358,7 +358,7 @@ describe(...){
   describe(...)
      ...
     {
-     it(..., async () => {
+     it(..., () => {
         mockProps = { disabled: true };
 
         updateWrapper();
@@ -434,7 +434,7 @@ describe('Extendability Tests', () => {
 });
 ```
 
-- If you are testing with `vi.fn()` mocks it is necessary/recommend to restore it after each test.
+- If you are testing with `vi.fn()` mocks it is necessary/recommended to restore it after each test.
 For this, vitest provide `.restoreAllMocks()`. Doc: https://vitest.dev/guide/mocking.html
 
   E.g.

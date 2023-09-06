@@ -36,7 +36,7 @@ describe('DtDropdown Tests', () => {
   let wrapper;
   let anchorElement;
   let listWrapper;
-  let buttonExists;
+  let closeButton;
 
   const updateWrapper = () => {
     wrapper = mount(DtDropdown, {
@@ -53,7 +53,7 @@ describe('DtDropdown Tests', () => {
 
     anchorElement = wrapper.find('#anchor');
     listWrapper = wrapper.find('[data-qa="dt-dropdown-list-wrapper"]');
-    buttonExists = wrapper.findComponent(SrOnlyCloseButton);
+    closeButton = wrapper.findComponent(SrOnlyCloseButton);
   };
 
   beforeAll(() => {
@@ -87,7 +87,7 @@ describe('DtDropdown Tests', () => {
     });
 
     it('should not render the visually hidden close button', () => {
-      expect(buttonExists.exists()).toBe(false);
+      expect(closeButton.exists()).toBe(false);
     });
 
     describe('When a list is provided', () => {
@@ -112,7 +112,7 @@ describe('DtDropdown Tests', () => {
       });
 
       it('should contain a visually hidden close button', () => {
-        expect(buttonExists.exists()).toBe(true);
+        expect(closeButton.exists()).toBe(true);
       });
 
       describe('When visuallyHiddenCloseLabel is null', () => {
