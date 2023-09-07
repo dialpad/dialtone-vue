@@ -103,6 +103,7 @@ describe('DtImageViewer Tests', () => {
     describe('As an image preview', () => {
       it('should open on click', async () => {
         await _openModal();
+
         expect(fullImage.exists()).toBeTruthy();
       });
     });

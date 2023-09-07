@@ -63,7 +63,7 @@ describe('DtEmojiTextWrapper Tests', () => {
 
       describe('When default slot contains shortcodes', () => {
         describe('When default slot contains valid shortcode', () => {
-          beforeEach(async () => {
+          beforeEach(() => {
             mockSlots = { default: 'Content with :smile: emoji.' };
 
             updateWrapper();
@@ -79,7 +79,7 @@ describe('DtEmojiTextWrapper Tests', () => {
         });
 
         describe('When default slot contains valid custom shortcode', () => {
-          beforeEach(async () => {
+          beforeEach(() => {
             setCustomEmojiJson(customEmojiJson);
 
             mockSlots = { default: 'Content with :octocat: emoji.' };
@@ -100,7 +100,7 @@ describe('DtEmojiTextWrapper Tests', () => {
         });
 
         describe('When default slot contains text with a colon and a valid emoji', () => {
-          beforeEach(async () => {
+          beforeEach(() => {
             mockSlots = { default: 'This is a smile emoji: :smile:' };
 
             updateWrapper();
@@ -116,7 +116,7 @@ describe('DtEmojiTextWrapper Tests', () => {
         });
 
         describe('When default slot contains invalid shortcode', () => {
-          beforeEach(async () => {
+          beforeEach(() => {
             mockSlots = { default: 'Content with :invalid: emoji.' };
 
             updateWrapper();
@@ -134,7 +134,7 @@ describe('DtEmojiTextWrapper Tests', () => {
 
       describe('When default slot contains unicode emoji', () => {
         describe('When default slot contains valid unicode emoji', () => {
-          beforeEach(async () => {
+          beforeEach(() => {
             mockSlots = { default: 'Content with valid 😄 emoji.' };
 
             updateWrapper();
@@ -150,7 +150,7 @@ describe('DtEmojiTextWrapper Tests', () => {
         });
 
         describe('When default slot contains invalid unicode emoji', () => {
-          beforeEach(async () => {
+          beforeEach(() => {
             mockSlots = { default: 'Content with invalid 🫡 emoji.' };
 
             updateWrapper();
