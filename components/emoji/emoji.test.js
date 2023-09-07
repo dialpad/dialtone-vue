@@ -39,7 +39,7 @@ describe('DtEmoji Tests', () => {
 
   describe('Presentation Tests', () => {
     describe('When a code string is passed in', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         mockProps = { code: ':smile:' };
 
         updateWrapper();
