@@ -11,7 +11,7 @@
         v-if="showAvatar"
         class="d-ps-relative d-bgc-transparent d-baw0 d-c-pointer"
         data-qa="contact-info-left"
-        :aria-label="$i18n('avatar')"
+        :aria-label="avatarAriaLabel"
         @click="avatarClick"
       >
         <span
@@ -156,6 +156,14 @@ export default {
     avatarSize: {
       type: String,
       default: 'lg',
+    },
+
+    /**
+     * The aria label of the avatar
+     */
+    avatarAriaLabel: {
+      type: String,
+      default: '',
     },
 
     /**
