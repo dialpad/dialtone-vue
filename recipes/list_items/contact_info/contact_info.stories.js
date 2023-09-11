@@ -47,6 +47,12 @@ export const argTypesData = {
     },
   },
 
+  avatarAriaLabel: {
+    table: {
+      type: { summary: 'string' },
+    },
+  },
+
   presence: {
     options: [...PRESENCE_STATES_LIST],
     control: {
