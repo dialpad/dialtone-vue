@@ -9,8 +9,9 @@
     <template #left>
       <button
         v-if="showAvatar"
-        class="d-ps-relative d-bgc-transparent d-baw0"
+        class="d-ps-relative d-bgc-transparent d-baw0 d-c-pointer"
         data-qa="contact-info-left"
+        :aria-label="$i18n('avatar')"
         @click="avatarClick"
       >
         <span
