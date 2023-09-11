@@ -98,6 +98,13 @@ export const argTypesData = {
       },
     },
   },
+
+  'avatar-click': {
+    description: 'click on avatar event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
 };
 
 // Story Collection
