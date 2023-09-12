@@ -13,6 +13,7 @@ const iconsList = getIconNames();
 
 // Default Prop Values
 export const argsData = {
+  onAvatarClick: action('avatar-click'),
   presence: null,
 };
 
@@ -109,6 +110,12 @@ export const argTypesData = {
     description: 'click on avatar event',
     table: {
       type: { summary: 'event' },
+    },
+  },
+
+  onAvatarClick: {
+    table: {
+      disable: true,
     },
   },
 };
