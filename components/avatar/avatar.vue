@@ -6,7 +6,17 @@
   >
     <div
       ref="canvas"
-      :class="[canvasClass, 'd-avatar__canvas', { 'd-avatar--image-loaded': imageLoadedSuccessfully }]"
+      :class="[
+        canvasClass,
+        'd-avatar__canvas',
+        {
+          'd-avatar--image-loaded': imageLoadedSuccessfully,
+          'd-avatar--clickable': clickable,
+        },
+      ]"
+      :tabindex="clickable ? 0 : -1"
+      :role="clickable ? 'button' : 'presentation'"
+      v-on="avatarListeners"
     >
       <img
         v-if="showImage"
@@ -25,8 +35,7 @@
       />
       <span
         v-else
-        class="d-ps-absolute d-zi-base"
-        :class="AVATAR_KIND_MODIFIERS.initials"
+        :class="[AVATAR_KIND_MODIFIERS.initials, 'd-ps-absolute d-zi-base d-us-none']"
       >
         {{ formattedInitials }}
       </span>
@@ -255,7 +264,26 @@ export default {
       type: String,
       default: '',
     },
+
+    /**
+     * Makes the avatar focusable and clickable,
+     * emits a click event when clicked.
+     */
+    clickable: {
+      type: Boolean,
+      default: false,
+    },
   },
+
+  emits: [
+    /**
+     * Avatar click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+  ],
 
   data () {
     return {
@@ -308,6 +336,19 @@ export default {
 
     showImage () {
       return this.imageLoadedSuccessfully !== false && this.imageSrc;
+    },
+
+    avatarListeners () {
+      if (!this.clickable) return {};
+
+      return {
+        click: (e) => this.$emit('click', e),
+        keydown: (e) => {
+          if (!['Space', 'Enter'].includes(e.code)) return;
+          e.preventDefault();
+          this.$emit('click', e);
+        },
+      };
     },
   },
 
@@ -418,5 +459,9 @@ export default {
   font-size: var(--dt-font-size-200);
   width: 100%;
   text-align: center;
+}
+
+.d-avatar--clickable {
+  cursor: pointer;
 }
 </style>
