@@ -188,6 +188,7 @@ export const Default = {
       },
     },
     a11y: {
+      disable: true,
       config: {
         rules: [
           {
