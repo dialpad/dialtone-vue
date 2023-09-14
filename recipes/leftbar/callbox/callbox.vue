@@ -18,10 +18,12 @@
     <template #bottom>
       <dt-item-layout
         data-qa="dt-recipe-callbox--main-content"
-        :class="['dt-recipe-callbox--main-content', borderClass]"
+        :class="['dt-recipe-callbox--main-content', borderClass, { 'dt-recipe-callbox--clickable': clickable }]"
       >
         <template #default>
-          <dt-item-layout class="dt-recipe-callbox--top-content">
+          <dt-item-layout
+            class="dt-recipe-callbox--top-content"
+          >
             <template
               v-if="shouldShowAvatar"
               #left
@@ -30,27 +32,32 @@
                 :image-src="avatarSrc"
                 :full-name="avatarFullName"
                 :seed="avatarSeed"
+                :clickable="clickable"
                 size="sm"
+                @click="handleClick"
               />
             </template>
             <template #default>
               <span
                 data-qa="dt-recipe-callbox--title"
                 class="dt-recipe-callbox--title"
-                v-text="title"
-              />
+                tabindex="-1"
+                v-on="titleListeners"
+              >
+                {{ title }}
+              </span>
             </template>
             <template #subtitle>
               <dt-item-layout class="dt-recipe-callbox--subtitle">
                 <template #default>
                   <div
+                    v-if="$slots.badge || badgeText"
                     data-qa="dt-recipe-callbox--badge-wrapper"
                     class="dt-recipe-callbox--subtitle-badge"
                   >
                     <!-- @slot Slot for call center badge -->
                     <slot name="badge">
                       <dt-badge
-                        v-if="badgeText"
                         :class="badgeClass"
                         :text="badgeText"
                       />
@@ -174,6 +181,15 @@ export default {
       default: 'default',
       validator: (color) => Object.keys(CALLBOX_BORDER_COLORS).includes(color),
     },
+
+    /**
+     * Makes the callbox avatar and title clickable,
+     * emits a click event when clicked.
+     */
+    clickable: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -188,6 +204,19 @@ export default {
     borderClass () {
       return CALLBOX_BORDER_COLORS[this.borderColor];
     },
+
+    titleListeners () {
+      return {
+        click: (e) => this.handleClick(e),
+      };
+    },
+  },
+
+  methods: {
+    handleClick (e) {
+      if (!this.clickable) return;
+      this.$emit('click', e);
+    },
   },
 };
 </script>
@@ -201,11 +230,14 @@ export default {
 
   &:deep(.dt-item-layout--left) {
     justify-content: flex-start;
+    align-items: center;
     padding-right: 0;
+    flex: 0 0 0;
   }
 
   &:deep(.dt-item-layout--content) {
-    overflow: hidden;
+    flex: 1 0 0;
+    overflow-y: auto;
   }
 
   &:deep(.dt-item-layout--bottom) {
@@ -213,12 +245,13 @@ export default {
   }
 
   &:deep(.dt-item-layout--right) {
-    flex-shrink: 0;
+    flex: 1 1 inherit;
+    justify-content: flex-end;
   }
 
   &--video {
     border-radius: var(--dt-size-radius-200) var(--dt-size-radius-200) 0 0;
-    overflow: hidden;
+    overflow: clip;
     height: calc(var(--dt-size-760) + var(--dt-size-650));
     margin-bottom: var(--dt-size-300-negative);
 
@@ -251,14 +284,22 @@ export default {
     }
   }
 
+  &--clickable {
+    .dt-recipe-callbox--title {
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+
   &--bottom-content {
     border-top: 1px solid var(--dt-color-border-subtle);
   }
 
   &--title {
-    text-overflow: ellipsis;
+    overflow: clip;
     white-space: nowrap;
-    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
     color: var(--dt-color-foreground-primary);
     background-color: var(--dt-color-surface-primary);
     font-weight: var(--dt-font-weight-bold);
@@ -274,7 +315,7 @@ export default {
     }
 
     &-content :last-child {
-        overflow: hidden;
+        overflow: clip;
         white-space: nowrap;
         text-overflow: ellipsis;
         color: var(--dt-color-foreground-tertiary);
