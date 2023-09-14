@@ -2,6 +2,8 @@
   <component
     :is="as"
     class="dt-item-layout"
+    v-bind="$attrs"
+    v-on="itemLayoutListeners"
   >
     <section
       v-if="$slots.left"
@@ -61,6 +63,7 @@
 <script>
 export default {
   name: 'DtItemLayout',
+  inheritAttrs: false,
   props: {
     /**
      * Set this prop to render layout as a specific HTML element.
@@ -68,6 +71,14 @@ export default {
     as: {
       type: String,
       default: 'div',
+    },
+  },
+
+  computed: {
+    itemLayoutListeners () {
+      return {
+        ...this.$attrs,
+      };
     },
   },
 };
