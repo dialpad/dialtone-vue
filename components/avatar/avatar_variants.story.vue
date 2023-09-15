@@ -90,6 +90,7 @@
         <dt-avatar
           :seed="seed"
           icon-name="user"
+          aria-label="user icon avatar"
           clickable
           @click="onClick"
         />

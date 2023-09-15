@@ -1,22 +1,19 @@
 <template>
-  <div
+  <component
+    :is="clickable ? 'button' : 'div'"
     :id="id"
     :class="avatarClasses"
     data-qa="dt-avatar"
+    :aria-label="buttonAriaLabel"
+    @click="handleClick"
   >
     <div
       ref="canvas"
       :class="[
         canvasClass,
         'd-avatar__canvas',
-        {
-          'd-avatar--image-loaded': imageLoadedSuccessfully,
-          'd-avatar--clickable': clickable,
-        },
+        { 'd-avatar--image-loaded': imageLoadedSuccessfully },
       ]"
-      :tabindex="clickable ? 0 : -1"
-      :role="clickable ? 'button' : 'presentation'"
-      v-on="avatarListeners"
     >
       <img
         v-if="showImage"
@@ -71,7 +68,7 @@
       v-bind="presenceProps"
       data-qa="dt-presence"
     />
-  </div>
+  </component>
 </template>
 
 <script>
@@ -310,6 +307,7 @@ export default {
         {
           'd-avatar--group': this.showGroup,
           [`d-avatar--color-${this.getColor()}`]: this.isNotIconType,
+          'd-avatar--clickable': this.clickable,
         },
       ];
     },
@@ -338,17 +336,10 @@ export default {
       return this.imageLoadedSuccessfully !== false && this.imageSrc;
     },
 
-    avatarListeners () {
-      if (!this.clickable) return {};
+    buttonAriaLabel () {
+      if (!this.clickable) return undefined;
 
-      return {
-        click: (e) => this.$emit('click', e),
-        keydown: (e) => {
-          if (!['Space', 'Enter'].includes(e.code)) return;
-          e.preventDefault();
-          this.$emit('click', e);
-        },
-      };
+      return this.fullName || this.imageAlt || this.$attrs['aria-label'];
     },
   },
 
@@ -415,6 +406,11 @@ export default {
         throw new Error('full-name or image-alt must be set if image-src is provided');
       }
     },
+
+    handleClick (e) {
+      if (!this.clickable) return;
+      this.$emit('click', e);
+    },
   },
 };
 </script>
@@ -463,5 +459,22 @@ export default {
 
 .d-avatar--clickable {
   cursor: pointer;
+  padding: 0;
+  border-radius: var(--dt-size-radius-pill);
+  border: var(--dt-size-border-100) solid var(--dt-color-surface-primary);
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--dt-shadow-focus);
+  }
+
+  &:hover {
+    border-color: var(--dt-color-border-default);
+  }
+
+  &:active {
+    transform: scale(0.98);
+    border-color: var(--dt-color-border-moderate);
+  }
 }
 </style>
