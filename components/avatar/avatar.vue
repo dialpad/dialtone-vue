@@ -459,14 +459,9 @@ export default {
 
 .d-avatar--clickable {
   cursor: pointer;
-  border: none;
   padding: 0;
   border-radius: var(--dt-size-radius-pill);
-
-  &:active {
-    transform: scale(0.98);
-    box-shadow: var(--dt-shadow-small);
-  }
+  border: var(--dt-size-border-100) solid var(--dt-color-surface-primary);
 
   &:focus-visible {
     outline: none;
@@ -474,7 +469,12 @@ export default {
   }
 
   &:hover {
-    box-shadow: var(--dt-shadow-medium);
+    border-color: var(--dt-color-border-default);
+  }
+
+  &:active {
+    transform: scale(0.98);
+    border-color: var(--dt-color-border-moderate);
   }
 }
 </style>
