@@ -4,7 +4,8 @@
     :class="avatarClasses"
     data-qa="dt-avatar"
   >
-    <div
+    <component
+      :is="clickable ? 'button' : 'div'"
       ref="canvas"
       :class="[
         canvasClass,
@@ -14,9 +15,7 @@
           'd-avatar--clickable': clickable,
         },
       ]"
-      :tabindex="clickable ? 0 : -1"
-      :role="clickable ? 'button' : 'presentation'"
-      v-on="avatarListeners"
+      @click="handleClick"
     >
       <img
         v-if="showImage"
@@ -39,7 +38,7 @@
       >
         {{ formattedInitials }}
       </span>
-    </div>
+    </component>
     <div
       v-if="overlayIcon || overlayText"
       :class="overlayClasses"
@@ -337,19 +336,6 @@ export default {
     showImage () {
       return this.imageLoadedSuccessfully !== false && this.imageSrc;
     },
-
-    avatarListeners () {
-      if (!this.clickable) return {};
-
-      return {
-        click: (e) => this.$emit('click', e),
-        keydown: (e) => {
-          if (!['Space', 'Enter'].includes(e.code)) return;
-          e.preventDefault();
-          this.$emit('click', e);
-        },
-      };
-    },
   },
 
   watch: {
@@ -415,6 +401,11 @@ export default {
         throw new Error('full-name or image-alt must be set if image-src is provided');
       }
     },
+
+    handleClick (e) {
+      if (!this.clickable) return;
+      this.$emit('click', e);
+    },
   },
 };
 </script>
@@ -463,5 +454,21 @@ export default {
 
 .d-avatar--clickable {
   cursor: pointer;
+  border: none;
+  padding: 0;
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: var(--dt-shadow-small);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--dt-shadow-focus);
+  }
+
+  &:hover {
+    box-shadow: var(--dt-shadow-medium);
+  }
 }
 </style>
