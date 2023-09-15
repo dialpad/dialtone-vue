@@ -1,21 +1,19 @@
 <template>
-  <div
+  <component
+    :is="clickable ? 'button' : 'div'"
     :id="id"
     :class="avatarClasses"
     data-qa="dt-avatar"
+    :aria-label="buttonAriaLabel"
+    @click="handleClick"
   >
-    <component
-      :is="clickable ? 'button' : 'div'"
+    <div
       ref="canvas"
       :class="[
         canvasClass,
         'd-avatar__canvas',
-        {
-          'd-avatar--image-loaded': imageLoadedSuccessfully,
-          'd-avatar--clickable': clickable,
-        },
+        { 'd-avatar--image-loaded': imageLoadedSuccessfully },
       ]"
-      @click="handleClick"
     >
       <img
         v-if="showImage"
@@ -38,7 +36,7 @@
       >
         {{ formattedInitials }}
       </span>
-    </component>
+    </div>
     <div
       v-if="overlayIcon || overlayText"
       :class="overlayClasses"
@@ -70,7 +68,7 @@
       v-bind="presenceProps"
       data-qa="dt-presence"
     />
-  </div>
+  </component>
 </template>
 
 <script>
@@ -309,6 +307,7 @@ export default {
         {
           'd-avatar--group': this.showGroup,
           [`d-avatar--color-${this.getColor()}`]: this.isNotIconType,
+          'd-avatar--clickable': this.clickable,
         },
       ];
     },
@@ -335,6 +334,12 @@ export default {
 
     showImage () {
       return this.imageLoadedSuccessfully !== false && this.imageSrc;
+    },
+
+    buttonAriaLabel () {
+      if (!this.clickable) return undefined;
+
+      return this.fullName || this.imageAlt || this.$attrs['aria-label'];
     },
   },
 
@@ -456,6 +461,7 @@ export default {
   cursor: pointer;
   border: none;
   padding: 0;
+  border-radius: var(--dt-size-radius-pill);
 
   &:active {
     transform: scale(0.98);
