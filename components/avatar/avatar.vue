@@ -417,6 +417,14 @@ export default {
 
 <style lang="less">
 //TODO: Move these classes to dialtone and document.
+.d-avatar {
+  --avatar-color-border: var(--dt-color-surface-primary);
+
+  border-radius: var(--dt-size-radius-circle);
+  border-width: var(--dt-size-border-100);
+  border-style: solid;
+  border-color: var(--avatar-color-border);
+}
 
 .d-avatar--image-loaded {
   background-color: transparent;
@@ -460,8 +468,6 @@ export default {
 .d-avatar--clickable {
   cursor: pointer;
   padding: 0;
-  border-radius: var(--dt-size-radius-pill);
-  border: var(--dt-size-border-100) solid var(--dt-color-surface-primary);
 
   &:focus-visible {
     outline: none;
@@ -469,12 +475,13 @@ export default {
   }
 
   &:hover {
-    border-color: var(--dt-color-border-default);
+    --avatar-color-border: var(--dt-color-border-default);
   }
 
   &:active {
+    --avatar-color-border: var(--dt-color-border-moderate);
+
     transform: scale(0.98);
-    border-color: var(--dt-color-border-moderate);
   }
 }
 </style>
