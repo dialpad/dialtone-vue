@@ -21,13 +21,7 @@
             importance="clear"
             size="sm"
             data-qa="feed-item-reaction-button"
-            :class="[
-              'd-h24 d-bar16 d-py0 d-fs-200 d-mb0 d-t',
-              !!reaction.isSelected
-                ? `d-fc-purple-500 d-bgc-purple-400 d-bgo10 d-bc-purple-400 d-bco50 ` +
-                  `h:d-bgc-purple-400 h:d-bco25 f:d-bgc-purple-400 f:d-bco25`
-                : 'd-fc-black-600 d-bgc-black-100 h:d-bgc-white h:d-bc-black-600 f:d-bgc-white f:d-bc-black-600',
-            ]"
+            :class="['emoji-row__reaction', reaction.isSelected ? 'emoji-row__reaction--selected' : '']"
             :aria-label="reaction.ariaLabel"
             :attrs="attrs"
             @click="emojiClicked(reaction)"
@@ -100,5 +94,32 @@ export default {
 </script>
 
 <style lang="less">
+.emoji-row__reaction {
+  height: var(--dt-size-550);
+  border-radius: var(--dt-size-radius-500);
+  font-size: var(--dt-font-size-200);
+  margin-bottom: 0;
+  transition-delay: 0s;
+  transition-duration: var(--td50);
+  transition-property: all;
+  transition-timing-function: var(--ttf-in-out);
 
+  color: var(--dt-color-black-600);
+  background-color: var(--dt-color-black-100);
+
+  &:hover, &:focus{
+    color: var(--dt-color-white);
+    background-color: var(--dt-color-white);
+    border-color: hsla(var(--dt-color-black-600-hsl)/100%)!important;
+  }
+
+  &--selected {
+    color: var(--dt-color-purple-500) !important;
+    background-color: hsla(var(--dt-color-purple-400-hsl) / var(--dt-opacity-200)) !important;
+    border-color: hsla(var(--dt-color-purple-400-hsl)/100%)!important;
+    &:hover {
+      color: var(--dt-color-purple-400);
+    }
+  }
+}
 </style>
