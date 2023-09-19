@@ -19,7 +19,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            throw "Please add either the "visual-test-ready" or "no-visual-test" label to this PR depending on whether you want to run visual tests or not. It is recommended to run visual tests if your PR changes any UI.";
+            throw "Please add either the visual-test-ready or no-visual-test label to this PR depending on whether you want to run visual tests or not. It is recommended to run visual tests if your PR changes any UI.";
 
 
   visual_tests:
