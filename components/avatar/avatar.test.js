@@ -13,10 +13,10 @@ let MOCK_ELEMENT = null;
 const baseProps = {
   fullName: 'Jaqueline Nackos',
 };
-const baseListeners = {};
+const baseAttrs = {};
 
 let mockProps = {};
-let mockListeners = {};
+let mockAttrs = {};
 const testContext = {};
 
 describe('DtAvatar Tests', () => {
@@ -27,8 +27,8 @@ describe('DtAvatar Tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtAvatar, {
-      props: { ...baseProps, ...mockProps },
-      listeners: { ...baseListeners, ...mockListeners },
+      propsData: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
       localVue: testContext.localVue,
     });
 
@@ -43,7 +43,7 @@ describe('DtAvatar Tests', () => {
 
   afterEach(() => {
     mockProps = {};
-    mockListeners = {};
+    mockAttrs = {};
   });
 
   describe('Presentation Tests', () => {
@@ -243,7 +243,7 @@ describe('DtAvatar Tests', () => {
     describe('When clickable is false (default)', () => {
       describe('When avatar is clicked', () => {
         beforeEach(async () => {
-          mockListeners = { click: MOCK_AVATAR_STUB };
+          mockAttrs = { onClick: MOCK_AVATAR_STUB };
 
           updateWrapper();
 
@@ -263,7 +263,7 @@ describe('DtAvatar Tests', () => {
       describe('When avatar is clicked', () => {
         beforeEach(async () => {
           mockProps = { clickable: true };
-          mockListeners = { click: MOCK_AVATAR_STUB };
+          mockAttrs = { onClick: MOCK_AVATAR_STUB };
 
           updateWrapper();
 
