@@ -93,7 +93,9 @@ After you have discussed your change with the Dialtone team, follow these steps 
 4. Make and commit your changes. Note our [commit message conventions](COMMIT_CONVENTION.md).
 5. Push your branch to remote. `git push -u origin my-change-branch`.
 6. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
-7. If your PR includes visual UI changes, set the 'visual-test-ready' label on your PR. If not set 'no-visual-test'.
+7. Set the label on your PR:
+ - 'visual-test-ready' if your PR includes visual UI changes.
+ - 'no-visual-test' if not UI changes.
 8. Run `./copy_pr_vue3.sh` in the root of the repository to copy your changes to a vue3 branch titled `my-change-branch-vue3`
 9. Create a pull request into the `staging-vue3` branch, reviewers will be automatically added and notified of your PR.
 10. Any subsequent changes that need to be copied to your Vue 3 branch can be done so with `./copy_pr_vue3.sh GIT_SHA` where GIT_SHA is the commit SHA before the first one you wish to copy.
