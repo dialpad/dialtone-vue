@@ -22,11 +22,11 @@ const baseProps = {
   borderColor: MOCK_BORDER_COLOR,
   title: MOCK_TITLE,
 };
-const baseAttributes = {};
+const baseAttrs = {};
 const baseSlots = {};
 
 let mockProps = {};
-let mockAttributes = {};
+let mockAttrs = {};
 let mockSlots = {};
 
 describe('DtRecipeCallbox Tests', () => {
@@ -44,8 +44,8 @@ describe('DtRecipeCallbox Tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtRecipeCallbox, {
-      props: { ...baseProps, ...mockProps },
-      attrs: { ...baseAttributes, ...mockAttributes },
+      propsData: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
       slots: { ...baseSlots, ...mockSlots },
     });
 
@@ -67,7 +67,7 @@ describe('DtRecipeCallbox Tests', () => {
 
   afterEach(() => {
     mockProps = {};
-    mockAttributes = {};
+    mockAttrs = {};
     mockSlots = {};
     vi.resetAllMocks();
   });
@@ -199,7 +199,7 @@ describe('DtRecipeCallbox Tests', () => {
             avatarSrc: MOCK_AVATAR_IMAGE_SOURCE,
             avatarFullName: MOCK_AVATAR_FULL_NAME,
           };
-          mockAttributes = { onClick: MOCK_CALLBOX_STUB };
+          mockAttrs = { onClick: MOCK_CALLBOX_STUB };
 
           updateWrapper();
 
@@ -217,7 +217,7 @@ describe('DtRecipeCallbox Tests', () => {
 
       describe('When title is clicked', () => {
         beforeEach(async () => {
-          mockAttributes = { onClick: MOCK_CALLBOX_STUB };
+          mockAttrs = { onClick: MOCK_CALLBOX_STUB };
 
           updateWrapper();
 
@@ -241,7 +241,7 @@ describe('DtRecipeCallbox Tests', () => {
             avatarFullName: MOCK_AVATAR_FULL_NAME,
             clickable: true,
           };
-          mockAttributes = { onClick: MOCK_CALLBOX_STUB };
+          mockAttrs = { onClick: MOCK_CALLBOX_STUB };
 
           updateWrapper();
 
@@ -260,7 +260,7 @@ describe('DtRecipeCallbox Tests', () => {
       describe('When title is clicked', () => {
         beforeEach(async () => {
           mockProps = { clickable: true };
-          mockAttributes = { onClick: MOCK_CALLBOX_STUB };
+          mockAttrs = { onClick: MOCK_CALLBOX_STUB };
 
           updateWrapper();
 
