@@ -1,9 +1,11 @@
+<!-- eslint-disable vue/no-bare-strings-in-template -->
 <template>
   <div
     ref="container"
     class="base-input"
     data-qa="dt-input"
   >
+    Breaking change
     <label
       class="base-input__label"
       :aria-details="$slots.description || description ? descriptionKey : undefined"
