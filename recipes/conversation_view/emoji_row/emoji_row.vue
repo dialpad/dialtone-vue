@@ -24,9 +24,9 @@
             :class="[
               'd-h24 d-bar16 d-py0 d-fs-200 d-mb0 d-t',
               !!reaction.isSelected
-                ? `d-fc-purple-500 d-bgc-purple-400 d-bgo10 d-bc-purple-400 d-bco50 ' +
-                  'h:d-bgc-purple-400 h:d-bco25 a:d-bgc-purple-400 a:d-bco25`
-                : 'd-fc-black-600 d-bgc-black-100 h:d-bgc-white h:d-bc-black-600 a:d-bgc-white a:d-bc-black-600',
+                ? `d-fc-purple-500 d-bgc-purple-400 d-bgo10 d-bc-purple-400 d-bco50 ` +
+                  `h:d-bgc-purple-400 h:d-bco25 f:d-bgc-purple-400 f:d-bco25`
+                : 'd-fc-black-600 d-bgc-black-100 h:d-bgc-white h:d-bc-black-600 f:d-bgc-white f:d-bc-black-600',
             ]"
             :aria-label="reaction.ariaLabel"
             :attrs="attrs"
