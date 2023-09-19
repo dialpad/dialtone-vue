@@ -264,7 +264,6 @@
       title="design-product-lt-so"
       border-color="critical"
       clickable
-      @click="onClick"
     >
       <template #subtitle>
         <div class="d-d-flex d-flow4 d-ai-center">
@@ -403,10 +402,5 @@ import DtItemLayout from '@/components/item_layout/item_layout.vue';
 export default {
   name: 'DtRecipeCallboxVariants',
   components: { DtItemLayout, DtIcon, DtButton, DtRecipeCallbox },
-  methods: {
-    handleClick () {
-      this.$emit('click');
-    },
-  },
 };
 </script>
