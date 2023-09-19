@@ -89,6 +89,8 @@ export default {
 
   components: { DtBadge, DtAvatar },
 
+  inheritAttrs: false,
+
   props: {
     /**
      * Text for the badge element
