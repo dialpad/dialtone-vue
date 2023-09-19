@@ -29,13 +29,14 @@
           @click="handleClick"
         />
         <div class="dt-recipe-callbox--content">
-          <button
+          <component
+            :is="clickable ? 'button' : 'span'"
             data-qa="dt-recipe-callbox--title"
             class="dt-recipe-callbox--content-title"
             @click="handleClick"
           >
             {{ title }}
-          </button>
+          </component>
           <div
             v-if="$slots.badge || badgeText"
             data-qa="dt-recipe-callbox--badge-wrapper"
@@ -260,6 +261,7 @@ export default {
       min-width: 100%;
       text-align: left;
       user-select: text;
+      line-height: normal;
     }
 
     &-badge {
