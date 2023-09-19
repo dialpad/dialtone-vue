@@ -4,7 +4,7 @@ on:
   push:
     branches: [ staging, staging-vue3 ]
   pull_request:
-    types: [ labeled, synchronize ]
+    types: [ labeled, synchronize, opened ]
 
 env:
   NODE_MODULES_CACHE_VERSION: v3
