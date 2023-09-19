@@ -20,7 +20,7 @@
       >
         <dt-avatar
           v-if="shouldShowAvatar"
-          class="dt-recipe-callbox--avatar"
+          avatar-class="dt-recipe-callbox--avatar"
           :image-src="avatarSrc"
           :full-name="avatarFullName"
           :seed="avatarSeed"
