@@ -39,7 +39,7 @@
           data-qa="dt-leftbar-row-presence-text"
           :class="['dt-leftbar-row__meta-context', presenceColorClass]"
         >
-          {{ presenceText }}
+          {{ `${presenceText} ` }}
         </span>
         <dt-emoji-text-wrapper
           v-if="userStatus"
@@ -62,7 +62,7 @@ import DtAvatar from '@/components/avatar/avatar.vue';
 import { extractVueListeners, safeConcatStrings } from '@/common/utils';
 
 export default {
-  name: 'DtRecipeGroupRow',
+  name: 'DtRecipeContactRow',
 
   components: {
     DtAvatar,
