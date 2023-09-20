@@ -1,5 +1,5 @@
 <template>
-  <span class="d-d-flex d-fw-wrap">
+  <span class="dt-emoji-row">
     <span
       v-for="reaction in reactions"
       :key="reaction.unicodeOutput"
@@ -21,7 +21,7 @@
             importance="clear"
             size="sm"
             data-qa="feed-item-reaction-button"
-            :class="['emoji-row__reaction', reaction.isSelected ? 'emoji-row__reaction--selected' : '']"
+            :class="['dt-emoji-row__reaction', reaction.isSelected ? 'dt-emoji-row__reaction--selected' : '']"
             :aria-label="reaction.ariaLabel"
             :attrs="attrs"
             @click="emojiClicked(reaction)"
@@ -94,31 +94,35 @@ export default {
 </script>
 
 <style lang="less">
-.emoji-row__reaction {
-  height: var(--dt-size-550);
-  border-radius: var(--dt-size-radius-500);
-  font-size: var(--dt-font-size-200);
-  margin-bottom: 0;
-  transition-delay: 0s;
-  transition-duration: var(--td50);
-  transition-property: all;
-  transition-timing-function: var(--ttf-in-out);
+.dt-emoji-row {
+  display: flex;
+  flex-wrap: wrap;
 
-  color: var(--dt-color-black-600);
-  background-color: var(--dt-color-black-100);
+  &__reaction {
+    padding: var(--dt-space-300) var(--dt-space-400); // 4px 8px
+    gap: var(--dt-space-300);
+    border-radius: var(--dt-size-radius-500);
+    font-size: var(--dt-font-size-200);
+    margin-bottom: 0;
+    transition-delay: 0s;
+    transition-duration: var(--td50);
+    transition-property: all;
+    transition-timing-function: var(--ttf-in-out);
 
-  &:hover, &:focus{
-    color: var(--dt-color-white);
-    background-color: var(--dt-color-white);
-    border-color: hsla(var(--dt-color-black-600-hsl)/100%)!important;
-  }
+    color: var(--dt-color-foreground-secondary);
+    background-color: var(--dt-color-surface-moderate-opaque);
 
-  &--selected {
-    color: var(--dt-color-purple-500) !important;
-    background-color: hsla(var(--dt-color-purple-400-hsl) / var(--dt-opacity-200)) !important;
-    border-color: hsla(var(--dt-color-purple-400-hsl)/100%)!important;
-    &:hover {
-      color: var(--dt-color-purple-400);
+    &:hover, &:focus{
+      border-color: hsla(var(--dt-color-black-600-hsl)/100%)!important;
+    }
+
+    &--selected {
+      color: var(--dt-color-link-primary);
+      background-color: var(--dt-color-purple-100) !important;
+      border-color: var(--dt-color-brand-purple) !important;
+      &:hover {
+        color: var(--dt-color-link-primary);
+      }
     }
   }
 }
