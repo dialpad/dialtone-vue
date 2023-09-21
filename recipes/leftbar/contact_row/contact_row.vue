@@ -39,7 +39,7 @@
           data-qa="dt-leftbar-row-presence-text"
           :class="['dt-leftbar-row__meta-context', presenceColorClass]"
         >
-          {{ `${presenceText} ` }}
+          {{ presenceText }}
         </span>
         <dt-emoji-text-wrapper
           v-if="userStatus"
@@ -247,3 +247,7 @@ export default {
   },
 };
 </script>
+
+<style lang="less" scoped>
+@import "../style/leftbar_row.less";
+</style>
