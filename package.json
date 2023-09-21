@@ -103,7 +103,7 @@
     "storybook": "^7.4.3",
     "storybook-dark-mode": "^3.0.1",
     "vite": "^4.4.9",
-    "vitest": "^0.34.5",
+    "vitest": "0.33.0",
     "vue": "^3.3.4",
     "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
     "vue-docgen-api": "^4.73.0",
