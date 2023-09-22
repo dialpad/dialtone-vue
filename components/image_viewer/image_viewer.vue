@@ -5,7 +5,7 @@
       class="d-p0 d-c-zoom-in"
       :aria-label="ariaLabel"
       importance="clear"
-      @click="openModal"
+      v-on="eventListeners"
     >
       <img
         :class="imageButtonClass"
@@ -151,6 +151,9 @@ export default {
      * @event update:open
      */
     'update:open',
+
+    'mouseenter',
+    'mouseleave',
   ],
 
   data () {
@@ -178,6 +181,14 @@ export default {
               break;
           }
         },
+      };
+    },
+
+    eventListeners () {
+      return {
+        mouseenter: event => this.$emit('mouseenter', event),
+        mouseleave: event => this.$emit('mouseleave', event),
+        click: () => this.openModal(),
       };
     },
   },
@@ -241,7 +252,6 @@ export default {
         this.focusTrappedTabPress(e);
       }
     },
-
   },
 };
 </script>
