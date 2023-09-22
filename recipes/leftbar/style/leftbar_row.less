@@ -273,11 +273,9 @@
   }
 
 
-  &__meta-custom:not(:empty) {
-    .dt-leftbar-row__meta-context ~ &:before {
-      content: ' • ';
-      color: var(--dt-theme-sidebar-status-color-foreground);
-    }
+  &:deep(&__meta-context ~ &__meta-custom:not(:empty):before) {
+    content: ' • ';
+    color: var(--dt-theme-sidebar-status-color-foreground);
   }
 
   &__icon-cc {
