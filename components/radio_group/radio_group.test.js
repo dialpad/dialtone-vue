@@ -184,9 +184,15 @@ describe('DtRadioGroup Tests', () => {
         it('does not emit an input event', async () => {
           mockProps = { disabled: true };
 
-          updateWrapper();
+          const mountWrapper = mount(DtRadioGroup, {
+            propsData: { ...baseProps, ...mockProps },
+            attrs: { ...baseAttrs, ...mockAttrs },
+            slots: { ...baseSlots, ...mockSlots },
+          });
 
-          await radioGroup.find(`[value="${MOCK_SELECTED_VALUE}"]`).trigger('change');
+          const mountedRadioGroup = mountWrapper.find('[data-qa="radio-group"]');
+
+          await mountedRadioGroup.find(`[value="${MOCK_SELECTED_VALUE}"]`).trigger('change');
 
           expect(wrapper.emitted('input')).toBeFalsy();
         });
