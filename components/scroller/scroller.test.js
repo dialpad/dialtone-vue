@@ -1,14 +1,13 @@
 import { mount } from '@vue/test-utils';
 import DtScroller from './DtScroller.vue';
 
-// Constants
-const items = Array.from({ length: 20 }, (_, i) => ({
+const MOCK_ITEMS = Array.from({ length: 20 }, (_, i) => ({
   id: i,
   name: `User ${i}`,
 }));
 
 const baseProps = {
-  items,
+  items: MOCK_ITEMS,
   itemSize: 30,
   scrollerHeight: 60,
   scrollerWidth: 60,
