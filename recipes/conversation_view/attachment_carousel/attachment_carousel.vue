@@ -1,58 +1,65 @@
 <template>
   <div
-    v-if="mediaList.length > 0"
-    ref="carousel"
-    role="presentation"
     class="dt-attachment-carousel"
-    :aria-label="attachmentAriaLabel"
+    role="presentation"
     @mouseenter="showCarouselArrows = true"
     @mouseleave="showCarouselArrows = false"
     @focusin="showCarouselArrows = true"
     @focusout="showCarouselArrows = false"
   >
-    <!-- Image list -->
     <div
-      v-for="(mediaItem, index) in mediaList"
-      :key="`media-${index}`"
-      role="presentation"
-      class="d-ps-relative"
-      @focusin="closeButton(true, index)"
-      @focusout="closeButton(false, index)"
-      @mouseenter="closeButton(true, index)"
-      @mouseleave="closeButton(false, index)"
+      v-if="mediaList.length > 0"
+      ref="carousel"
+      class="dt-attachment-carousel--media-list"
+      :aria-label="attachmentAriaLabel"
+      @scroll="handleScroll"
     >
-      <dt-image-viewer
-        image-button-class="d-h64 d-w64 d-bar4 d-ba d-baw6 d-bc-subtle"
-        :image-src="mediaItem.path"
-        :image-alt="mediaItem.altText"
-        :close-aria-label="closeAriaLabel"
-        :aria-label="clickToOpenAriaLabel"
-      />
-      <dt-button
-        v-show="showCloseButton[index]"
-        class="dt-attachment-carousel--close-button"
-        circle
-        size="xs"
-        importance="clear"
-        :aria-label="closeAriaLabel"
-        @click="removeMediaItem(index)"
+      <!-- Image list -->
+      <div
+        v-for="(mediaItem, index) in mediaList"
+        :key="`media-${index}`"
+        role="presentation"
+        class="d-ps-relative"
+        @focusin="closeButton(true, index)"
+        @focusout="closeButton(false, index)"
+        @mouseenter="closeButton(true, index)"
+        @mouseleave="closeButton(false, index)"
       >
-        <template #icon>
-          <dt-icon
-            name="close"
-            size="200"
-          />
-        </template>
-      </dt-button>
+        <dt-image-viewer
+          image-button-class="d-h64 d-w64 d-bar4 d-ba d-baw6 d-bc-subtle"
+          :image-src="mediaItem.path"
+          :image-alt="mediaItem.altText"
+          :close-aria-label="closeAriaLabel"
+          :aria-label="clickToOpenAriaLabel"
+        />
+        <dt-button
+          v-show="showCloseButton[index]"
+          class="dt-attachment-carousel--close-button"
+          circle
+          size="xs"
+          importance="clear"
+          :aria-label="closeAriaLabel"
+          @click="removeMediaItem(index)"
+        >
+          <template #icon>
+            <dt-icon
+              name="close"
+              size="200"
+            />
+          </template>
+        </dt-button>
+      </div>
     </div>
+
     <!-- Carousel Arrows -->
     <dt-button
+      v-if="showLeftArrow && showCarouselArrows"
       class="dt-attachment-carousel--left-arrow d-ba d-baw1 d-bc-default"
       circle
       size="xs"
       importance="clear"
       :aria-label="leftArrowAriaLabel"
-      @click="console.log('left arrow clicked')"
+      @click="leftScroll"
     >
       <template #icon>
         <dt-icon
@@ -62,12 +69,13 @@
       </template>
     </dt-button>
     <dt-button
+      v-if="showRightArrow && showCarouselArrows"
       class="dt-attachment-carousel--right-arrow d-ba d-baw1 d-bc-default"
       circle
       size="xs"
       importance="clear"
       :aria-label="rightArrowAriaLabel"
-      @click="console.log('right arrow clicked')"
+      @click="rightScroll"
     >
       <template #icon>
         <dt-icon
@@ -165,29 +173,19 @@ export default {
     return {
       showCloseButton: {},
       showCarouselArrows: false,
+      showRightArrow: true,
+      showLeftArrow: false,
       isMounted: false,
     };
   },
 
   computed: {
-    showRightArrow () {
-      if (!this.isMounted) {
-        return false;
-      }
-      return this.$refs.carousel.scrollWidth > this.$refs.carousel.clientWidth && this.showCarouselArrows;
-    },
-
-    showLeftArrow () {
-      if (!this.isMounted) {
-        return false;
-      }
-      return this.$refs.carousel.scrollLeft > 0 && this.showCarouselArrows;
-    },
 
   },
 
   mounted: function () {
-    this.isMounted = true;
+    this.showLeftArrow = this.$refs.carousel.scrollLeft > 0;
+    this.showRightArrow = this.$refs.carousel.scrollWidth > this.$refs.carousel.clientWidth;
   },
 
   methods: {
@@ -198,20 +196,44 @@ export default {
     closeButton (val, index) {
       this.showCloseButton[index] = val;
     },
+
+    handleScroll () {
+      const carousel = this.$refs.carousel;
+      this.showLeftArrow = carousel.scrollLeft > 0;
+      this.showRightArrow = !((carousel.scrollLeft + carousel.clientWidth) === carousel.scrollWidth);
+    },
+
+    leftScroll () {
+      this.$refs.carousel.scrollTo({
+        left: this.$refs.carousel.scrollLeft - 100,
+        behavior: 'smooth',
+      });
+    },
+
+    rightScroll () {
+      this.$refs.carousel.scrollTo({
+        left: this.$refs.carousel.scrollLeft + 100,
+        behavior: 'smooth',
+      });
+    },
   },
 };
 </script>
 
 <style lang="less">
 .dt-attachment-carousel {
+  position: relative;
+  max-height: 100px;
+  width: var(--dt-space-1000);
+
+}
+
+.dt-attachment-carousel--media-list {
   display: flex;
   flex-direction: row;
-  position: relative;
-  overflow: auto;
-  width: var(--dt-space-1000);
-  max-height: 100px;
+  overflow-x: scroll;
 }
-.dt-attachment-carousel::-webkit-scrollbar {
+.dt-attachment-carousel--media-list::-webkit-scrollbar {
   display: none;
 }
 
@@ -223,15 +245,17 @@ export default {
   background-color: var(--dt-color-black-400);
 }
 .dt-attachment-carousel--left-arrow {
-  position: fixed;
+  z-index: 100;
+  position: absolute;
   background-color: var(--dt-color-neutral-white);
-  top: var(--dt-size-550);
-  left: var(--dt-size-400);
+  top: var(--dt-space-30-percent);
+  left: var(--dt-space-300);
 }
 .dt-attachment-carousel--right-arrow {
-  position: fixed;
+  z-index: 100;
+  position: absolute;
   background-color: var(--dt-color-neutral-white);
-  top: var(--dt-size-550);
-  left: var(--dt-space-75-percent);
+  top: var(--dt-space-30-percent);
+  right: var(--dt-space-300);
 }
 </style>
