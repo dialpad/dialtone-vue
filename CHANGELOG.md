@@ -1,3 +1,35 @@
+## [2.98.1](https://github.com/dialpad/dialtone-vue/compare/v2.98.0...v2.98.1) (2023-09-25)
+
+
+### Bug Fixes
+
+* **Contact Row:** add space between presence and status text ([#1198](https://github.com/dialpad/dialtone-vue/issues/1198)) ([5d26b6d](https://github.com/dialpad/dialtone-vue/commit/5d26b6d26f7f8a6c1e27fb222fa6378638da544b))
+
+# [2.98.0](https://github.com/dialpad/dialtone-vue/compare/v2.97.0...v2.98.0) (2023-09-21)
+
+
+### Features
+
+* update dialtone icons to 2.2.0 ([543b160](https://github.com/dialpad/dialtone-vue/commit/543b1601cc728bf49fc200ca54f7d9ed4ea83057))
+
+# [2.97.0](https://github.com/dialpad/dialtone-vue/compare/v2.96.0...v2.97.0) (2023-09-20)
+
+
+### Bug Fixes
+
+* add virtual "prompt" for visual tests on PR ([#1192](https://github.com/dialpad/dialtone-vue/issues/1192)) ([4a41d02](https://github.com/dialpad/dialtone-vue/commit/4a41d02dcc85570e9119934dfdbd86f783c4da05))
+* **Avatar:** change avatar seed algorithm to sync with android ([#1182](https://github.com/dialpad/dialtone-vue/issues/1182)) ([53a09f3](https://github.com/dialpad/dialtone-vue/commit/53a09f3b3070d0cab38b570017f4c9c9737f31f1))
+* **Contact Info, Feed Item Row, Item Layout:** alignment issues ([#1186](https://github.com/dialpad/dialtone-vue/issues/1186)) ([bdaa355](https://github.com/dialpad/dialtone-vue/commit/bdaa355ba438ff23f27ee539cf9530cdc7e63618))
+* feed pill not exported ([#1180](https://github.com/dialpad/dialtone-vue/issues/1180)) ([792b838](https://github.com/dialpad/dialtone-vue/commit/792b838beed44094c7ff4dd3f9a02ac0a8b764cd))
+* **Item Layout:** selected slot alignment ([#1194](https://github.com/dialpad/dialtone-vue/issues/1194)) ([09c37c4](https://github.com/dialpad/dialtone-vue/commit/09c37c42f0d13f171baef2fd85fe2e40be39923c))
+* **Recipe Callbar Button With Popover:** change event name and sync open state ([#1183](https://github.com/dialpad/dialtone-vue/issues/1183)) ([b91dc02](https://github.com/dialpad/dialtone-vue/commit/b91dc02f092ae0324fdb81212de6c4168387e5e7))
+
+
+### Features
+
+* **Avatar:** add clickable behavior ([#1176](https://github.com/dialpad/dialtone-vue/issues/1176)) ([2b80018](https://github.com/dialpad/dialtone-vue/commit/2b80018426f4b22d397cf940b35f3b766d8a0eb6))
+* **Callbox:** add clickable behavior ([#1196](https://github.com/dialpad/dialtone-vue/issues/1196)) ([bf5ac2b](https://github.com/dialpad/dialtone-vue/commit/bf5ac2bee6efc34730201da7de4c861ff2c0f4fa))
+
 # [2.96.0](https://github.com/dialpad/dialtone-vue/compare/v2.95.2...v2.96.0) (2023-09-14)
 
 
