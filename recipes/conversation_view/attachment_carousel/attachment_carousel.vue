@@ -54,6 +54,7 @@
     <!-- Carousel Arrows -->
     <dt-button
       v-if="showLeftArrow && showCarouselArrows"
+      tabindex="-1"
       class="dt-attachment-carousel--left-arrow d-ba d-baw1 d-bc-default"
       circle
       size="xs"
@@ -70,6 +71,7 @@
     </dt-button>
     <dt-button
       v-if="showRightArrow && showCarouselArrows"
+      tabindex="-1"
       class="dt-attachment-carousel--right-arrow d-ba d-baw1 d-bc-default"
       circle
       size="xs"
