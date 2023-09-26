@@ -17,7 +17,7 @@
       <!-- media list -->
       <component
         :is="mediaComponent(mediaItem.type)"
-        v-for="(mediaItem, index) in mediaList"
+        v-for="(mediaItem, index) in filteredMediaList"
         :key="`media-${index}`"
         :index="index"
         :media-item="mediaItem"
@@ -70,7 +70,9 @@ import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import {} from './attachment_carousel_constants';
 
-import DtImageCarousel from './media_components/Image_carousel.vue';
+import DtImageCarousel from './media_components/image_carousel.vue';
+
+const MEDIA_ITEM_WIDTH = 64;
 
 export default {
   name: 'DtRecipeAttachmentCarousel',
@@ -159,6 +161,9 @@ export default {
   },
 
   computed: {
+    filteredMediaList () {
+      return this.mediaList.filter((mediaItem) => mediaItem.type === 'image' || mediaItem.type === 'video');
+    },
   },
 
   mounted: function () {
@@ -172,13 +177,14 @@ export default {
         case 'image':
           return 'dt-image-carousel';
         default:
-          return 'dt-image-carousel';
+          // unknown media type
+          return null;
       }
     },
 
     removeMediaItem (index) {
       // make sure the carousel arrows is updated. 64 is the width of each media item
-      this.showRightArrow = this.$refs.carousel.scrollWidth > (this.$refs.carousel.clientWidth + 64);
+      this.showRightArrow = this.$refs.carousel.scrollWidth > (this.$refs.carousel.clientWidth + MEDIA_ITEM_WIDTH);
       this.$emit('remove-media', index);
     },
 
