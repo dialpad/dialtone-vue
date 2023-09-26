@@ -14,22 +14,34 @@
       :close-aria-label="closeAriaLabel"
       :aria-label="clickToOpenAriaLabel"
     />
-    <dt-button
-      v-show="showCloseButton"
-      class="dt-attachment-carousel--close-button"
-      circle
-      size="xs"
-      importance="clear"
-      :aria-label="closeAriaLabel"
-      @click="removeMediaItem(index)"
+
+    <!-- Loader / Close button -->
+    <div
+      class="dt-image-carousel--top-right"
     >
-      <template #icon>
-        <dt-icon
-          name="close"
-          size="200"
-        />
-      </template>
-    </dt-button>
+      <dt-progress-bar
+        v-if="mediaItem.isUploading && !showCloseButton"
+        class="dt-image-carousel--progress-bar d-ba d-bc-subtle d-baw2"
+        :progress="mediaItem.progress"
+      />
+      <dt-button
+        v-else
+        v-show="showCloseButton"
+        class="dt-image-carousel--close-button d-ba d-bc-white d-baw2"
+        circle
+        size="xs"
+        importance="clear"
+        :aria-label="closeAriaLabel"
+        @click="removeMediaItem(index)"
+      >
+        <template #icon>
+          <dt-icon
+            name="close"
+            size="200"
+          />
+        </template>
+      </dt-button>
+    </div>
   </div>
 </template>
 
@@ -38,6 +50,8 @@ import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 
+import DtProgressBar from './progress_bar.vue';
+
 export default {
   name: 'DtImageCarousel',
 
@@ -45,6 +59,7 @@ export default {
     DtImageViewer,
     DtButton,
     DtIcon,
+    DtProgressBar,
   },
 
   props: {
@@ -93,4 +108,19 @@ export default {
 </script>
 
 <style>
+.dt-image-carousel--top-right {
+  position: absolute;
+  top: var(--dt-size-100);
+  right: var(--dt-size-100);
+}
+.dt-image-carousel--close-button {
+  color: var(--dt-color-neutral-white);
+  background-color: var(--dt-color-black-400);
+}
+.dt-image-carousel--progress-bar {
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  transform: rotate(-90deg);
+}
 </style>

@@ -225,14 +225,6 @@ export default {
 .dt-attachment-carousel--media-list::-webkit-scrollbar {
   display: none;
 }
-
-.dt-attachment-carousel--close-button {
-  position: absolute;
-  color: var(--dt-color-neutral-white);
-  top: var(--dt-size-100);
-  right: var(--dt-size-100);
-  background-color: var(--dt-color-black-400);
-}
 .dt-attachment-carousel--left-arrow {
   z-index: 100;
   position: absolute;
