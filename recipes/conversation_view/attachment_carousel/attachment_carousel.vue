@@ -14,41 +14,17 @@
       :aria-label="attachmentAriaLabel"
       @scroll="handleScroll"
     >
-      <!-- Image list -->
-      <div
+      <!-- media list -->
+      <component
+        :is="mediaComponent(mediaItem.type)"
         v-for="(mediaItem, index) in mediaList"
         :key="`media-${index}`"
-        role="presentation"
-        class="d-ps-relative"
-        @focusin="closeButton(true, index)"
-        @focusout="closeButton(false, index)"
-        @mouseenter="closeButton(true, index)"
-        @mouseleave="closeButton(false, index)"
-      >
-        <dt-image-viewer
-          image-button-class="d-h64 d-w64 d-bar4 d-ba d-baw6 d-bc-subtle"
-          :image-src="mediaItem.path"
-          :image-alt="mediaItem.altText"
-          :close-aria-label="closeAriaLabel"
-          :aria-label="clickToOpenAriaLabel"
-        />
-        <dt-button
-          v-show="showCloseButton[index]"
-          class="dt-attachment-carousel--close-button"
-          circle
-          size="xs"
-          importance="clear"
-          :aria-label="closeAriaLabel"
-          @click="removeMediaItem(index)"
-        >
-          <template #icon>
-            <dt-icon
-              name="close"
-              size="200"
-            />
-          </template>
-        </dt-button>
-      </div>
+        :index="index"
+        :media-item="mediaItem"
+        :close-aria-label="closeAriaLabel"
+        :click-to-open-aria-label="clickToOpenAriaLabel"
+        @remove-image="removeMediaItem(index)"
+      />
     </div>
 
     <!-- Carousel Arrows -->
@@ -91,17 +67,18 @@
 
 <script>
 import { DtIcon } from '@/components/icon';
-import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
 import {} from './attachment_carousel_constants';
+
+import DtImageCarousel from './media_components/Image_carousel.vue';
 
 export default {
   name: 'DtRecipeAttachmentCarousel',
 
   components: {
     DtButton,
-    DtImageViewer,
     DtIcon,
+    DtImageCarousel,
   },
 
   mixins: [],
@@ -165,10 +142,10 @@ export default {
     /**
      * Emitted when popover is shown or hidden
      *
-     * @event remove-image
+     * @event remove-media
      * @type {Number}
      */
-    'remove-image',
+    'remove-media',
   ],
 
   data () {
@@ -182,7 +159,6 @@ export default {
   },
 
   computed: {
-
   },
 
   mounted: function () {
@@ -191,8 +167,19 @@ export default {
   },
 
   methods: {
+    mediaComponent (type) {
+      switch (type) {
+        case 'image':
+          return 'dt-image-carousel';
+        default:
+          return 'dt-image-carousel';
+      }
+    },
+
     removeMediaItem (index) {
-      this.$emit('remove-image', index);
+      // make sure the carousel arrows is updated. 64 is the width of each media item
+      this.showRightArrow = this.$refs.carousel.scrollWidth > (this.$refs.carousel.clientWidth + 64);
+      this.$emit('remove-media', index);
     },
 
     closeButton (val, index) {
