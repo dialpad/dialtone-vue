@@ -247,7 +247,7 @@ export default {
   right: var(--dt-space-300);
   border: var(--dt-space-100) solid;
   border-width: var(--dt-size-100);
-  border-color: var(--bc-default);
+  border-color: var(--dt-color-border-default);
 }
 .dt-attachment-carousel--image-viewer {
   height: var(--dt-size-700);
@@ -255,6 +255,6 @@ export default {
   border-radius: var(--br4);
   border: var(--dt-space-100) solid;
   border-width: var(--dt-size-350);
-  border-color: var(--bc-subtle);
+  border-color: var(--dt-color-border-subtle);
 }
 </style>
