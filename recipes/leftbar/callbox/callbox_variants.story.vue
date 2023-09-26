@@ -1,7 +1,9 @@
+<!-- eslint-disable max-lines -->
 <template>
   <div class="d-stack16">
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       border-color="ai"
     >
@@ -38,6 +40,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       title="1 Participant"
+      avatar-seed="1 Participant"
     >
       <template #subtitle>
         <span>06:01</span>
@@ -84,11 +87,13 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       title="1 Participant"
+      avatar-seed="1 Participant"
     >
       <template #video>
         <img
           src="/common/assets/chatting-person-example.png"
           alt="person avatar"
+          class="callbox-image"
         >
       </template>
       <template #subtitle>
@@ -136,6 +141,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       badge-text="Test_Call_Center"
       badge-color="warning"
@@ -174,6 +180,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       border-color="ai"
     >
@@ -231,6 +238,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       title="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       border-color="ai"
     >
       <template #subtitle>
@@ -261,27 +269,33 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="design-product-lt-so"
+      avatar-seed="design-product-lt-so"
       title="design-product-lt-so"
       border-color="critical"
+      clickable
     >
       <template #subtitle>
-        <div class="d-d-flex d-flow4">
+        <div class="d-d-flex d-flow4 d-ai-center">
           <div class="d-d-flex d-ai-center">
             <dt-icon
               name="users"
               size="100"
               class="d-mr2"
             />
-            <span>3</span>
+            <p>3</p>
           </div>
-          <span class="d-fs-300">•</span>
+          <p class="d-fs-300">
+            •
+          </p>
           <div class="d-d-flex d-ai-center">
             <dt-icon
               name="activity"
               size="100"
             />
-            <span>Jaqueline Nackos</span>
           </div>
+          <p class="d-to-ellipsis d-ws-nowrap d-of-hidden">
+            Jaqueline Nackos Jaqueline Nackos
+          </p>
         </div>
       </template>
       <template #right>
@@ -315,6 +329,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       border-color="ai"
     >
@@ -357,14 +372,15 @@
       </template>
       <template #bottom>
         <dt-item-layout>
-          <template #left>
-            <dt-icon
-              name="share-screen"
-              size="400"
-            />
-          </template>
           <template #default>
-            <span class="d-fs-100">Sharing screen</span>
+            <div class="d-d-flex d-ai-center">
+              <dt-icon
+                class="d-mr8"
+                name="share-screen"
+                size="400"
+              />
+              <span class="d-fs-100">Sharing screen</span>
+            </div>
           </template>
           <template #right>
             <dt-button
@@ -398,3 +414,11 @@ export default {
   components: { DtItemLayout, DtIcon, DtButton, DtRecipeCallbox },
 };
 </script>
+
+<style lang="less" scoped>
+.callbox-image {
+  height: 140px;
+  object-fit: cover;
+  width: 100%;
+}
+</style>

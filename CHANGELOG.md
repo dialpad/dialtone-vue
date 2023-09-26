@@ -1,3 +1,42 @@
+## [3.86.3](https://github.com/dialpad/dialtone-vue/compare/v3.86.2...v3.86.3) (2023-09-26)
+
+
+### Bug Fixes
+
+* **Callbox:** video height ([#1211](https://github.com/dialpad/dialtone-vue/issues/1211)) ([ceaf1f4](https://github.com/dialpad/dialtone-vue/commit/ceaf1f445a2dfa06e239453a3159a1569819246e))
+
+## [3.86.2](https://github.com/dialpad/dialtone-vue/compare/v3.86.1...v3.86.2) (2023-09-25)
+
+
+### Bug Fixes
+
+* **Modal:** export modal banner kinds ([#1208](https://github.com/dialpad/dialtone-vue/issues/1208)) ([663090f](https://github.com/dialpad/dialtone-vue/commit/663090fdade25857c80c0b2f022c7903edc019d1))
+
+## [3.86.1](https://github.com/dialpad/dialtone-vue/compare/v3.86.0...v3.86.1) (2023-09-22)
+
+
+### Bug Fixes
+
+* **Contact Row:** add space between presence and status text ([#1198](https://github.com/dialpad/dialtone-vue/issues/1198)) ([5ad6215](https://github.com/dialpad/dialtone-vue/commit/5ad62157af30becf443d2bab8d63ea7ab48782cf))
+
+# [3.86.0](https://github.com/dialpad/dialtone-vue/compare/v3.85.0...v3.86.0) (2023-09-21)
+
+
+### Bug Fixes
+
+* add virtual "prompt" for visual tests on PR ([#1193](https://github.com/dialpad/dialtone-vue/issues/1193)) ([952fd5a](https://github.com/dialpad/dialtone-vue/commit/952fd5a59f6c37aa598b839700ce6f0b5f810cc2))
+* **Avatar:** change avatar seed algorithm to sync with android ([#1185](https://github.com/dialpad/dialtone-vue/issues/1185)) ([2eef1c3](https://github.com/dialpad/dialtone-vue/commit/2eef1c35a418e1aae8bf8fc916cec923c20b95a5))
+* **Contact Info, Feed Item Row, Item Layout:** alignment issues ([#1187](https://github.com/dialpad/dialtone-vue/issues/1187)) ([04ebc27](https://github.com/dialpad/dialtone-vue/commit/04ebc271da4dace97641ec66ea252812be3d6c78))
+* **Item Layout:** selected slot alignment ([#1195](https://github.com/dialpad/dialtone-vue/issues/1195)) ([135c3c0](https://github.com/dialpad/dialtone-vue/commit/135c3c09c28c9d42d2007a24323f6bbbd09886ec))
+* **Recipe Callbar Button With Popover:** change event name and sync open state - Vue3 ([#1184](https://github.com/dialpad/dialtone-vue/issues/1184)) ([13a6f35](https://github.com/dialpad/dialtone-vue/commit/13a6f352d6562934ffb315cd3398aa774008770d))
+
+
+### Features
+
+* **Avatar:** add clickable behavior - vue3 ([#1188](https://github.com/dialpad/dialtone-vue/issues/1188)) ([f63ed42](https://github.com/dialpad/dialtone-vue/commit/f63ed4207bac19511280fb2c111c49f8f46c70cd))
+* **Callbox:** add clickable behavior - vue3 ([#1197](https://github.com/dialpad/dialtone-vue/issues/1197)) ([3921e37](https://github.com/dialpad/dialtone-vue/commit/3921e37ae86f7d872d155ab7610016b8ec5cf8cf))
+* update dialtone icons to 3.2.0 ([b069176](https://github.com/dialpad/dialtone-vue/commit/b0691769af969ad400ccf81dbb31950428c1555a))
+
 # [3.85.0](https://github.com/dialpad/dialtone-vue/compare/v3.84.0...v3.85.0) (2023-09-14)
 
 

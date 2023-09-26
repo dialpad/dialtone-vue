@@ -3,10 +3,12 @@ import DtAvatar from './avatar.vue';
 import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES, AVATAR_COLORS } from './avatar_constants';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarVariantsTemplate from './avatar_variants.story.vue';
+import { action } from '@storybook/addon-actions';
 
 const ICONS_LIST = getIconNames();
 
 export const argsData = {
+  onClick: action('click'),
   size: 'md',
   presence: null,
   fullName: 'Jaqueline Nackos',
@@ -85,6 +87,13 @@ export const argTypesData = {
     },
     options: Object.keys(AVATAR_SIZE_MODIFIERS),
   },
+
+  // Action Event Handlers
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Story Collection
@@ -100,7 +109,7 @@ export default {
 const DefaultTemplate = (args) =>
   createTemplateFromVueFile(args, DtAvatarDefaultTemplate);
 
-const VariantsTemplate = (args, { argTypes }) =>
+const VariantsTemplate = (args) =>
   createTemplateFromVueFile(args, DtAvatarVariantsTemplate);
 
 // Stories
