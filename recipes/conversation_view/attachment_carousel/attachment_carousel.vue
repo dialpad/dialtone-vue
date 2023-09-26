@@ -26,7 +26,7 @@
         @mouseleave="closeButton(false, index)"
       >
         <dt-image-viewer
-          image-button-class="d-h64 d-w64 d-bar4 d-ba d-baw6 d-bc-subtle"
+          image-button-class="dt-attachment-carousel--image-viewer"
           :image-src="mediaItem.path"
           :image-alt="mediaItem.altText"
           :close-aria-label="closeAriaLabel"
@@ -55,7 +55,7 @@
     <dt-button
       v-if="showLeftArrow && showCarouselArrows"
       tabindex="-1"
-      class="dt-attachment-carousel--left-arrow d-ba d-baw1 d-bc-default"
+      class="dt-attachment-carousel--left-arrow"
       circle
       size="xs"
       importance="clear"
@@ -71,7 +71,7 @@
     <dt-button
       v-if="showRightArrow && showCarouselArrows"
       tabindex="-1"
-      class="dt-attachment-carousel--right-arrow d-ba d-baw1 d-bc-default"
+      class="dt-attachment-carousel--right-arrow"
       circle
       size="xs"
       importance="clear"
@@ -236,11 +236,25 @@ export default {
   background-color: var(--dt-color-neutral-white);
   top: var(--dt-space-30-percent);
   left: var(--dt-space-300);
+  border: var(--dt-space-100) solid;
+  border-width: var(--dt-size-100);
+  border-color: var(--bc-default);
 }
 .dt-attachment-carousel--right-arrow {
   position: absolute;
   background-color: var(--dt-color-neutral-white);
   top: var(--dt-space-30-percent);
   right: var(--dt-space-300);
+  border: var(--dt-space-100) solid;
+  border-width: var(--dt-size-100);
+  border-color: var(--bc-default);
+}
+.dt-attachment-carousel--image-viewer {
+  height: var(--dt-size-700);
+  width: var(--dt-size-700);
+  border-radius: var(--br4);
+  border: var(--dt-space-100) solid;
+  border-width: var(--dt-size-350);
+  border-color: var(--bc-subtle);
 }
 </style>
