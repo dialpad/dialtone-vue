@@ -59,7 +59,6 @@
       circle
       size="xs"
       importance="clear"
-      :aria-label="leftArrowAriaLabel"
       @click="leftScroll"
     >
       <template #icon>
@@ -76,7 +75,6 @@
       circle
       size="xs"
       importance="clear"
-      :aria-label="rightArrowAriaLabel"
       @click="rightScroll"
     >
       <template #icon>
@@ -93,7 +91,6 @@
 import { DtIcon } from '@/components/icon';
 import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
-import {} from './attachment_carousel_constants';
 
 export default {
   name: 'DtRecipeAttachmentCarousel',
@@ -143,18 +140,6 @@ export default {
     },
 
     clickToOpenAriaLabel: {
-      type: String,
-      required: true,
-      default: '',
-    },
-
-    leftArrowAriaLabel: {
-      type: String,
-      required: true,
-      default: '',
-    },
-
-    rightArrowAriaLabel: {
       type: String,
       required: true,
       default: '',
@@ -247,14 +232,12 @@ export default {
   background-color: var(--dt-color-black-400);
 }
 .dt-attachment-carousel--left-arrow {
-  z-index: 100;
   position: absolute;
   background-color: var(--dt-color-neutral-white);
   top: var(--dt-space-30-percent);
   left: var(--dt-space-300);
 }
 .dt-attachment-carousel--right-arrow {
-  z-index: 100;
   position: absolute;
   background-color: var(--dt-color-neutral-white);
   top: var(--dt-space-30-percent);
