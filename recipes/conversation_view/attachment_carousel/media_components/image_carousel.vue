@@ -85,6 +85,12 @@ export default {
   },
 
   emits: [
+    /**
+     * Emitted when media close button is clicked to remove the image
+     *
+     * @event remove-media
+     * @type {Number}
+     */
     'remove-image',
   ],
 
@@ -94,16 +100,11 @@ export default {
     };
   },
 
-  computed: {
-
-  },
-
   methods: {
     removeMediaItem (index) {
       this.$emit('remove-image', index);
     },
   },
-
 };
 </script>
 
@@ -118,7 +119,7 @@ export default {
   background-color: var(--dt-color-black-400);
 }
 .dt-image-carousel--progress-bar {
-  background-color: white;
+  background-color: var(--dt-color-neutral-white);
   border-radius: 50%;
   display: flex;
   transform: rotate(-90deg);
