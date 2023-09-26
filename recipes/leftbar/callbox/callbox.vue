@@ -198,10 +198,7 @@ export default {
     display: flex;
     border-radius: var(--dt-size-radius-200) var(--dt-size-radius-200) 0 0;
     overflow: clip;
-
-    & ~ .dt-recipe-callbox--main-content {
-      border-radius: 0 0 var(--dt-size-radius-300) var(--dt-size-radius-300);
-    }
+    margin-bottom: var(--dt-space-300-negative);
   }
 
   &--main-content {
