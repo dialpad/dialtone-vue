@@ -7,7 +7,7 @@
     <aside
       v-if="$slots.sidebar"
       ref="root-layout-sidebar"
-      :class="['d-root-layout__sidebar', { 'd-root-layout__sidebar--sticky': fixed }, sidebarClass]"
+      :class="['d-root-layout__sidebar', 'd-fl-shrink0', { 'd-root-layout__sidebar--sticky': fixed }, sidebarClass]"
       :style="{ 'flex-basis': sidebarWidth }"
       data-qa="dt-root-layout-sidebar"
     >
