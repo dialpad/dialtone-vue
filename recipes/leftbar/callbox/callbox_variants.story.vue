@@ -185,14 +185,16 @@
       border-color="ai"
     >
       <template #subtitle>
-        <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+        >
           <dt-icon
             name="share-screen"
             size="100"
-            class="d-mr4"
           />
           <span>06:01</span>
-        </div>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
@@ -242,14 +244,16 @@
       border-color="ai"
     >
       <template #subtitle>
-        <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+        >
           <dt-icon
             name="share-screen"
             size="100"
-            class="d-mr4"
           />
           <span>Screenshare</span>
-        </div>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
@@ -275,28 +279,30 @@
       clickable
     >
       <template #subtitle>
-        <div class="d-d-flex d-flow4 d-ai-center">
-          <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+          class="d-ai-center"
+        >
+          <dt-stack direction="row">
             <dt-icon
               name="users"
               size="100"
               class="d-mr2"
             />
-            <p>3</p>
-          </div>
-          <p class="d-fs-300">
+            <span>3</span>
+          </dt-stack>
+          <span class="d-fs-300">
             •
-          </p>
-          <div class="d-d-flex d-ai-center">
-            <dt-icon
-              name="activity"
-              size="100"
-            />
-          </div>
-          <p class="d-to-ellipsis d-ws-nowrap d-of-hidden">
+          </span>
+          <dt-icon
+            name="activity"
+            size="100"
+          />
+          <span class="d-to-ellipsis d-ws-nowrap d-of-hidden">
             Jaqueline Nackos Jaqueline Nackos
-          </p>
-        </div>
+          </span>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
@@ -334,14 +340,16 @@
       border-color="ai"
     >
       <template #subtitle>
-        <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+        >
           <dt-icon
             name="share-screen"
             size="100"
-            class="d-mr4"
           />
           <span>06:01</span>
-        </div>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
@@ -408,10 +416,11 @@ import DtRecipeCallbox from './callbox.vue';
 import DtButton from '@/components/button/button.vue';
 import DtIcon from '@/components/icon/icon.vue';
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
+import DtStack from '@/components/stack/stack.vue';
 
 export default {
   name: 'DtRecipeCallboxVariants',
-  components: { DtItemLayout, DtIcon, DtButton, DtRecipeCallbox },
+  components: { DtStack, DtItemLayout, DtIcon, DtButton, DtRecipeCallbox },
 };
 </script>
 
