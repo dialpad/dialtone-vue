@@ -164,6 +164,16 @@ export default {
     },
   },
 
+  emits: [
+    /**
+     * Callbox click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+  ],
+
   computed: {
     shouldShowAvatar () {
       return this.avatarFullName || this.avatarSrc;
