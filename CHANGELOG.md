@@ -1,3 +1,17 @@
+## [3.86.3](https://github.com/dialpad/dialtone-vue/compare/v3.86.2...v3.86.3) (2023-09-26)
+
+
+### Bug Fixes
+
+* **Callbox:** video height ([#1211](https://github.com/dialpad/dialtone-vue/issues/1211)) ([ceaf1f4](https://github.com/dialpad/dialtone-vue/commit/ceaf1f445a2dfa06e239453a3159a1569819246e))
+
+## [3.86.2](https://github.com/dialpad/dialtone-vue/compare/v3.86.1...v3.86.2) (2023-09-25)
+
+
+### Bug Fixes
+
+* **Modal:** export modal banner kinds ([#1208](https://github.com/dialpad/dialtone-vue/issues/1208)) ([663090f](https://github.com/dialpad/dialtone-vue/commit/663090fdade25857c80c0b2f022c7903edc019d1))
+
 ## [3.86.1](https://github.com/dialpad/dialtone-vue/compare/v3.86.0...v3.86.1) (2023-09-22)
 
 
