@@ -291,12 +291,8 @@ export default {
         box-shadow: var(--dt-shadow-focus);
       }
 
-      &:hover {
-        background-color: var(--dt-action-color-background-muted-hover)
-      }
-
-      &:active {
-        background-color: var(--dt-action-color-background-muted-active)
+      &:hover, &:active {
+        text-decoration: underline;
       }
     }
   }
