@@ -1,3 +1,17 @@
+## [2.98.2](https://github.com/dialpad/dialtone-vue/compare/v2.98.1...v2.98.2) (2023-09-26)
+
+
+### Bug Fixes
+
+* **Callbox:** video height ([#1210](https://github.com/dialpad/dialtone-vue/issues/1210)) ([a51e5cc](https://github.com/dialpad/dialtone-vue/commit/a51e5cc1276a224f431c62f1574045a71ce61775))
+
+## [2.98.1](https://github.com/dialpad/dialtone-vue/compare/v2.98.0...v2.98.1) (2023-09-25)
+
+
+### Bug Fixes
+
+* **Contact Row:** add space between presence and status text ([#1198](https://github.com/dialpad/dialtone-vue/issues/1198)) ([5d26b6d](https://github.com/dialpad/dialtone-vue/commit/5d26b6d26f7f8a6c1e27fb222fa6378638da544b))
+
 # [2.98.0](https://github.com/dialpad/dialtone-vue/compare/v2.97.0...v2.98.0) (2023-09-21)
 
 
