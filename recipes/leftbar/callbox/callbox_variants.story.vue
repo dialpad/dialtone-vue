@@ -27,11 +27,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -74,11 +74,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -128,11 +128,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -167,11 +167,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -226,11 +226,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -259,7 +259,7 @@
         <dt-button
           aria-label="stop call"
           importance="clear"
-          class="d-fc-critical"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
@@ -322,11 +322,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -368,11 +368,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -394,7 +394,7 @@
             <dt-button
               aria-label="stop call"
               importance="clear"
-              class="d-fc-critical"
+              kind="danger"
             >
               <template #icon>
                 <dt-icon
