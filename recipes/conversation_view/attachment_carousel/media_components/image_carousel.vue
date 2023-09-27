@@ -1,14 +1,14 @@
 <template>
   <div
     role="presentation"
-    class="d-ps-relative"
+    class="dt-image-carousel"
     @focusin="showCloseButton = true"
     @focusout="showCloseButton = false"
     @mouseenter="showCloseButton = true"
     @mouseleave="showCloseButton = false"
   >
     <dt-image-viewer
-      image-button-class="d-h64 d-w64 d-bar4 d-ba d-baw6 d-bc-subtle"
+      image-button-class="dt-image-carousel--image-viewer"
       :image-src="mediaItem.path"
       :image-alt="mediaItem.altText"
       :close-aria-label="closeAriaLabel"
@@ -21,13 +21,12 @@
     >
       <dt-progress-bar
         v-if="mediaItem.isUploading && !showCloseButton"
-        class="dt-image-carousel--progress-bar d-ba d-bc-subtle d-baw2"
+        class="dt-image-carousel--progress-bar"
         :progress="mediaItem.progress"
       />
       <dt-button
-        v-else
-        v-show="showCloseButton"
-        class="dt-image-carousel--close-button d-ba d-bc-white d-baw2"
+        v-else-if="showCloseButton"
+        class="dt-image-carousel--close-button"
         circle
         size="xs"
         importance="clear"
@@ -109,6 +108,17 @@ export default {
 </script>
 
 <style>
+.dt-image-carousel {
+  position: relative;
+}
+.dt-image-carousel--image-viewer {
+  height: var(--dt-size-700);
+  width: var(--dt-size-700);
+  border: var(--dt-space-100) solid;
+  border-radius: var(--br4);
+  border-width: var(--dt-size-350);
+  border-color: var(--dt-color-border-subtle);
+}
 .dt-image-carousel--top-right {
   position: absolute;
   top: var(--dt-size-100);
@@ -117,11 +127,17 @@ export default {
 .dt-image-carousel--close-button {
   color: var(--dt-color-neutral-white);
   background-color: var(--dt-color-black-400);
+  border: var(--dt-space-100) solid;
+  border-width: var(--dt-size-200);
+  border-color: var(--dt-color-neutral-white);
 }
 .dt-image-carousel--progress-bar {
   background-color: var(--dt-color-neutral-white);
   border-radius: 50%;
   display: flex;
   transform: rotate(-90deg);
+  border: var(--dt-space-100) solid;
+  border-width: var(--dt-size-200);
+  border-color: var(--dt-color-border-subtle);
 }
 </style>
