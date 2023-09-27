@@ -90,7 +90,7 @@ export default {
      * @event remove-media
      * @type {Number}
      */
-    'remove-image',
+    'remove-media',
   ],
 
   data () {
@@ -101,7 +101,7 @@ export default {
 
   methods: {
     removeMediaItem (index) {
-      this.$emit('remove-image', index);
+      this.$emit('remove-media', index);
     },
   },
 };

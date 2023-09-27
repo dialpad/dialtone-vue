@@ -22,6 +22,7 @@ export default {
   methods: {
     removeMedia (index) {
       this.$attrs.mediaList.splice(index, 1);
+      this.$attrs.onRemoveMedia(index);
     },
   },
 };

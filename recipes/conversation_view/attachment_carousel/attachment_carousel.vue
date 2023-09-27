@@ -23,7 +23,7 @@
         :media-item="mediaItem"
         :close-aria-label="closeAriaLabel"
         :click-to-open-aria-label="clickToOpenAriaLabel"
-        @remove-image="removeMediaItem(index)"
+        @remove-media="removeMediaItem(index)"
       />
     </div>
 
@@ -31,11 +31,10 @@
     <dt-button
       v-if="showLeftArrow && showCarouselArrows"
       tabindex="-1"
-      class="dt-attachment-carousel--left-arrow d-ba d-baw1 d-bc-default"
+      class="dt-attachment-carousel--left-arrow"
       circle
       size="xs"
       importance="clear"
-      :aria-label="leftArrowAriaLabel"
       @click="leftScroll"
     >
       <template #icon>
@@ -48,11 +47,10 @@
     <dt-button
       v-if="showRightArrow && showCarouselArrows"
       tabindex="-1"
-      class="dt-attachment-carousel--right-arrow d-ba d-baw1 d-bc-default"
+      class="dt-attachment-carousel--right-arrow"
       circle
       size="xs"
       importance="clear"
-      :aria-label="rightArrowAriaLabel"
       @click="rightScroll"
     >
       <template #icon>
@@ -68,7 +66,6 @@
 <script>
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
-import {} from './attachment_carousel_constants';
 
 import DtImageCarousel from './media_components/image_carousel.vue';
 
@@ -122,18 +119,6 @@ export default {
     },
 
     clickToOpenAriaLabel: {
-      type: String,
-      required: true,
-      default: '',
-    },
-
-    leftArrowAriaLabel: {
-      type: String,
-      required: true,
-      default: '',
-    },
-
-    rightArrowAriaLabel: {
       type: String,
       required: true,
       default: '',
@@ -232,17 +217,29 @@ export default {
   display: none;
 }
 .dt-attachment-carousel--left-arrow {
-  z-index: 100;
   position: absolute;
   background-color: var(--dt-color-neutral-white);
   top: var(--dt-space-30-percent);
   left: var(--dt-space-300);
+  border: var(--dt-space-100) solid;
+  border-width: var(--dt-size-100);
+  border-color: var(--bc-default);
 }
 .dt-attachment-carousel--right-arrow {
-  z-index: 100;
   position: absolute;
   background-color: var(--dt-color-neutral-white);
   top: var(--dt-space-30-percent);
   right: var(--dt-space-300);
+  border: var(--dt-space-100) solid;
+  border-width: var(--dt-size-100);
+  border-color: var(--dt-color-border-default);
+}
+.dt-attachment-carousel--image-viewer {
+  height: var(--dt-size-700);
+  width: var(--dt-size-700);
+  border-radius: var(--br4);
+  border: var(--dt-space-100) solid;
+  border-width: var(--dt-size-350);
+  border-color: var(--dt-color-border-subtle);
 }
 </style>

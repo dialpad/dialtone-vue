@@ -1,7 +1,7 @@
+import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeAttachmentCarousel from './attachment_carousel.vue';
 import DtRecipeAttachmentCarouselDefaultTemplate from './attachment_carousel_default.story.vue';
-import DtRecipeAttachmentCarouselVariantsTemplate from './attachment_carousel_variants.story.vue';
 
 /*
   Controls
@@ -89,9 +89,23 @@ const mediaList = [
   },
 ];
 
+export const argTypesData = {
+  // Props
+  // Events
+  onRemoveMedia: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
 // Set default values at the story level here.
 export const argsData = {
   mediaList,
+  attachmentAriaLabel: 'Attachment Carousel',
+  closeAriaLabel: 'Close',
+  clickToOpenAriaLabel: 'Click to open',
+  onRemoveMedia: action('remove-media'),
 };
 
 // Story Collection
@@ -99,6 +113,7 @@ export default {
   title: 'Recipes/Conversation View/Attachment Carousel',
   component: DtRecipeAttachmentCarousel,
   args: argsData,
+  argTypes: argTypesData,
   excludeStories: /.*Data$/,
 };
 
@@ -111,15 +126,5 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
 // Stories
 export const Default = {
   render: DefaultTemplate,
-  args: {},
-};
-
-const VariantsTemplate = (args) => createTemplateFromVueFile(
-  args,
-  DtRecipeAttachmentCarouselVariantsTemplate,
-);
-
-export const Variants = {
-  render: VariantsTemplate,
   args: {},
 };
