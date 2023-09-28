@@ -240,6 +240,7 @@ export default {
 <style lang="less">
 .dt-list-item {
   list-style: none;
+  background-color: var(--dt-action-color-background-muted-default);
 
   &:not(.dt-list-item--static) {
     cursor: pointer;
