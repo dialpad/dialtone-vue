@@ -9,7 +9,7 @@
     attachment-aria-label="Attachment carousel"
     close-aria-label="Close"
     click-to-open-aria-label="Click to open image"
-    @remove-image="removeImage"
+    @remove-media="removeMedia"
   />
 </template>
 
@@ -20,7 +20,7 @@ export default {
   name: 'DtRecipeAttachmentCarouselDefault',
   components: { DtRecipeAttachmentCarousel },
   methods: {
-    removeImage (index) {
+    removeMedia (index) {
       this.$attrs.mediaList.splice(index, 1);
       this.$attrs.onRemoveMedia(index);
     },

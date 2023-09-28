@@ -14,41 +14,17 @@
       :aria-label="attachmentAriaLabel"
       @scroll="handleScroll"
     >
-      <!-- Image list -->
-      <div
-        v-for="(mediaItem, index) in mediaList"
+      <!-- media list -->
+      <component
+        :is="mediaComponent(mediaItem.type)"
+        v-for="(mediaItem, index) in filteredMediaList"
         :key="`media-${index}`"
-        role="presentation"
-        class="d-ps-relative"
-        @focusin="closeButton(true, index)"
-        @focusout="closeButton(false, index)"
-        @mouseenter="closeButton(true, index)"
-        @mouseleave="closeButton(false, index)"
-      >
-        <dt-image-viewer
-          image-button-class="dt-attachment-carousel--image-viewer"
-          :image-src="mediaItem.path"
-          :image-alt="mediaItem.altText"
-          :close-aria-label="closeAriaLabel"
-          :aria-label="clickToOpenAriaLabel"
-        />
-        <dt-button
-          v-show="showCloseButton[index]"
-          class="dt-attachment-carousel--close-button"
-          circle
-          size="xs"
-          importance="clear"
-          :aria-label="closeAriaLabel"
-          @click="removeMediaItem(index)"
-        >
-          <template #icon>
-            <dt-icon
-              name="close"
-              size="200"
-            />
-          </template>
-        </dt-button>
-      </div>
+        :index="index"
+        :media-item="mediaItem"
+        :close-aria-label="closeAriaLabel"
+        :click-to-open-aria-label="clickToOpenAriaLabel"
+        @remove-media="removeMediaItem(index)"
+      />
     </div>
 
     <!-- Carousel Arrows -->
@@ -89,16 +65,19 @@
 
 <script>
 import { DtIcon } from '@/components/icon';
-import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
+
+import DtImageCarousel from './media_components/image_carousel.vue';
+
+const MEDIA_ITEM_WIDTH = 64;
 
 export default {
   name: 'DtRecipeAttachmentCarousel',
 
   components: {
     DtButton,
-    DtImageViewer,
     DtIcon,
+    DtImageCarousel,
   },
 
   mixins: [],
@@ -150,10 +129,10 @@ export default {
     /**
      * Emitted when popover is shown or hidden
      *
-     * @event remove-image
+     * @event remove-media
      * @type {Number}
      */
-    'remove-image',
+    'remove-media',
   ],
 
   data () {
@@ -167,7 +146,9 @@ export default {
   },
 
   computed: {
-
+    filteredMediaList () {
+      return this.mediaList.filter((mediaItem) => mediaItem.type === 'image' || mediaItem.type === 'video');
+    },
   },
 
   mounted: function () {
@@ -176,8 +157,20 @@ export default {
   },
 
   methods: {
+    mediaComponent (type) {
+      switch (type) {
+        case 'image':
+          return 'dt-image-carousel';
+        default:
+          // unknown media type
+          return null;
+      }
+    },
+
     removeMediaItem (index) {
-      this.$emit('remove-image', index);
+      // make sure the carousel arrows is updated. 64 is the width of each media item
+      this.showRightArrow = this.$refs.carousel.scrollWidth > (this.$refs.carousel.clientWidth + MEDIA_ITEM_WIDTH);
+      this.$emit('remove-media', index);
     },
 
     closeButton (val, index) {
@@ -222,14 +215,6 @@ export default {
 }
 .dt-attachment-carousel--media-list::-webkit-scrollbar {
   display: none;
-}
-
-.dt-attachment-carousel--close-button {
-  position: absolute;
-  color: var(--dt-color-neutral-white);
-  top: var(--dt-size-100);
-  right: var(--dt-size-100);
-  background-color: var(--dt-color-black-400);
 }
 .dt-attachment-carousel--left-arrow {
   position: absolute;
