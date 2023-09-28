@@ -431,6 +431,12 @@ import DtStack from '@/components/stack/stack.vue';
 export default {
   name: 'DtRecipeCallboxVariants',
   components: { DtStack, DtItemLayout, DtIcon, DtButton, DtRecipeCallbox },
+  emits: [
+    /**
+     * Add click event here to prevent story from emitting clicks on Vue 3
+     */
+    'click',
+  ],
 };
 </script>
 
