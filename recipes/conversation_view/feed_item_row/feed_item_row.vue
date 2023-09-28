@@ -102,6 +102,14 @@ export default {
 
   props: {
     /**
+     * Avatar seed, set this to the user's ID to get the same avatar background gradient each time it is displayed.
+     */
+    avatarSeed: {
+      type: String,
+      default: null,
+    },
+
+    /**
      * Show avatar, show header text or dont show left time and vice versa
      */
     showHeader: {
@@ -186,13 +194,6 @@ export default {
   },
 
   computed: {
-
-    avatarSeed () {
-      const name = (this.displayName || '').split(' ');
-      const initials = name.map(word => word.charAt(0)).join('');
-      return initials.slice(0, 2).toUpperCase();
-    },
-
     feedListeners () {
       return {
         ...this.$listeners,
