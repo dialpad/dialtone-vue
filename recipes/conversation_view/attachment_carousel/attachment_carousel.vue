@@ -68,6 +68,7 @@ import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 
 import DtImageCarousel from './media_components/image_carousel.vue';
+import DtVideoCarousel from './media_components/video_carousel.vue';
 
 const MEDIA_ITEM_WIDTH = 64;
 
@@ -78,6 +79,7 @@ export default {
     DtButton,
     DtIcon,
     DtImageCarousel,
+    DtVideoCarousel,
   },
 
   mixins: [],
@@ -161,6 +163,8 @@ export default {
       switch (type) {
         case 'image':
           return 'dt-image-carousel';
+        case 'video':
+          return 'dt-video-carousel';
         default:
           // unknown media type
           return null;
