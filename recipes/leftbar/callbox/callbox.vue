@@ -25,6 +25,7 @@
           :full-name="avatarFullName"
           :seed="avatarSeed"
           :clickable="clickable"
+          :overlay-icon="isOnHold ? 'pause' : null"
           size="sm"
           @click="handleClick"
         />
@@ -159,6 +160,14 @@ export default {
      * emits a click event when clicked.
      */
     clickable: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Add an on-hold overlay to the avatar
+     */
+    isOnHold: {
       type: Boolean,
       default: false,
     },
