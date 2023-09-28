@@ -188,6 +188,7 @@
         <dt-stack
           direction="row"
           gap="300"
+          class="d-ai-center"
         >
           <dt-icon
             name="share-screen"
@@ -247,12 +248,13 @@
         <dt-stack
           direction="row"
           gap="300"
+          class="d-ai-center"
         >
           <dt-icon
             name="share-screen"
             size="100"
           />
-          <span>Screenshare</span>
+          <p>Screenshare</p>
         </dt-stack>
       </template>
       <template #right>
@@ -282,9 +284,11 @@
         <dt-stack
           direction="row"
           gap="300"
-          class="d-ai-center"
         >
-          <dt-stack direction="row">
+          <dt-stack
+            direction="row"
+            class="d-ai-center"
+          >
             <dt-icon
               name="users"
               size="100"
@@ -295,13 +299,18 @@
           <span class="d-fs-300">
             •
           </span>
-          <dt-icon
-            name="activity"
-            size="100"
-          />
-          <span class="d-to-ellipsis d-ws-nowrap d-of-hidden">
-            Jaqueline Nackos Jaqueline Nackos
-          </span>
+          <dt-stack
+            direction="row"
+            class="d-ai-center d-of-x-hidden"
+          >
+            <dt-icon
+              name="activity"
+              size="100"
+            />
+            <p class="d-to-ellipsis d-ws-nowrap d-of-hidden">
+              Jaqueline Nackos Jaqueline Nackos
+            </p>
+          </dt-stack>
         </dt-stack>
       </template>
       <template #right>
@@ -343,6 +352,7 @@
         <dt-stack
           direction="row"
           gap="300"
+          class="d-ai-center"
         >
           <dt-icon
             name="share-screen"
