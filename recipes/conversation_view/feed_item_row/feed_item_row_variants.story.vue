@@ -31,18 +31,9 @@
                 gap="300"
               >
                 <dt-avatar
-                  image-src="/common/assets/person.png"
-                  full-name="Person Avatar"
-                  seed="seed"
-                  size="sm"
-                />
-                <dt-avatar
-                  full-name="Michael Scott"
-                  seed="seed"
-                  size="sm"
-                />
-                <dt-avatar
-                  full-name="Jim Halpert"
+                  v-for="person of persons"
+                  :key="person"
+                  :full-name="person"
                   seed="seed"
                   size="sm"
                 />
