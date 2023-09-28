@@ -243,17 +243,17 @@ export default {
 
   &:not(.dt-list-item--static) {
     cursor: pointer;
-    border-radius: var(--dt-size-300);
+    border-radius: var(--dt-size-radius-300);
   }
 
   &--focusable:focus,
   &--focusable:focus-within,
   &--highlighted {
-    background-color: var(--dt-color-surface-moderate-opaque);
+    background-color: var(--dt-action-color-background-muted-hover);
   }
 
   &--highlighted:active {
-    background-color: var(--dt-color-surface-bold-opaque);
+    background-color: var(--dt-action-color-background-muted-active);
   }
 
   &--selected-icon {
