@@ -165,7 +165,7 @@ export default {
     },
 
     /**
-     * Add an on-hold overlay to the avatar
+     * Controls the avatars overlay icon
      */
     isOnHold: {
       type: Boolean,
