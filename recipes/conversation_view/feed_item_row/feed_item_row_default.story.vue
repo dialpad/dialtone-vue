@@ -1,5 +1,5 @@
 <template>
-  <ul class="d-pt16 feed-item-row__default_story">
+  <ul class="d-pt16 feed-item-row__default-story">
     <dt-recipe-feed-item-row
       :show-header="showHeader"
       :avatar-image-url="avatarImageUrl"
@@ -19,7 +19,7 @@
         #threading
       >
         <dt-stack
-          class="feed-item-row__default_story__thread d-d-flex d-ai-center"
+          class="feed-item-row__thread d-d-flex d-ai-center"
           direction="row"
           gap="400"
         >
@@ -41,7 +41,7 @@
           >
             <div class="d-fs-100 d-lh200 d-d-flex d-ai-center">
               <a class="d-link d-pr4">3 replies</a>
-              <span class="feed-item-row__default_story__thread__reply">Last reply an hour ago</span>
+              <span class="feed-item-row__reply">Last reply an hour ago</span>
             </div>
           </dt-stack>
         </dt-stack>
@@ -135,25 +135,27 @@ export default {
 };
 </script>
 
-<style lang="less">
-  .feed-item-row__default_story {
-    p {
-      color: var(--dt-color-foreground-primary);
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 24px;
+<style lang="less" scoped>
+  .feed-item-row {
+    &__default-story {
+      p {
+        color: var(--dt-color-foreground-primary);
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+      }
     }
     &__thread{
       height: 32px;
-      &__reply{
-        color: var(--dt-color-foreground-tertiary);
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 16px;
-        letter-spacing: -0.12px;
-      }
+    }
+    &__reply{
+      color: var(--dt-color-foreground-tertiary);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: -0.12px;
     }
   }
 </style>
