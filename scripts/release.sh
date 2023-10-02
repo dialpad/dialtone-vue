@@ -9,7 +9,7 @@ if [[ $branch != "staging" || $branch != "staging-vue3" ]]; then
 fi
 
 git pull &&
-semantic-release --no-ci --extends ./release-local.config.cjs;
+npx semantic-release --no-ci --extends ./release-local.config.cjs;
 
 case $branch in
   "staging")
