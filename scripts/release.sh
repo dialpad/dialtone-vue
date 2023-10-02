@@ -3,7 +3,7 @@ set -e
 
 branch="$(git rev-parse --abbrev-ref HEAD)"
 
-if [[ $branch != "staging" || $branch != "staging-vue3" ]]; then
+if ! [[ "$branch" =~ ^staging(-vue3)?$ ]]; then
   echo "This script can only be run while on staging or staging-vue3 branches"
   exit 1;
 fi
