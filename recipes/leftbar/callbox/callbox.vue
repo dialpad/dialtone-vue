@@ -25,15 +25,16 @@
           :full-name="avatarFullName"
           :seed="avatarSeed"
           :clickable="clickable"
+          :overlay-icon="isOnHold ? 'pause' : null"
           size="sm"
-          @click.stop="handleClick"
+          @click="handleClick"
         />
         <div class="dt-recipe-callbox--content">
           <component
             :is="clickable ? 'button' : 'span'"
             data-qa="dt-recipe-callbox--title"
             class="dt-recipe-callbox--content-title"
-            @click.stop="handleClick"
+            @click="handleClick"
           >
             {{ title }}
           </component>
@@ -162,7 +163,25 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Controls the avatars overlay icon
+     */
+    isOnHold: {
+      type: Boolean,
+      default: false,
+    },
   },
+
+  emits: [
+    /**
+     * Callbox click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+  ],
 
   computed: {
     shouldShowAvatar () {
@@ -291,12 +310,8 @@ export default {
         box-shadow: var(--dt-shadow-focus);
       }
 
-      &:hover {
-        background-color: var(--dt-action-color-background-muted-hover)
-      }
-
-      &:active {
-        background-color: var(--dt-action-color-background-muted-active)
+      &:hover, &:active {
+        text-decoration: underline;
       }
     }
   }
