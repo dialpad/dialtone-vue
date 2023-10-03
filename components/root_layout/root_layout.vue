@@ -32,7 +32,7 @@
         tabindex="0"
       >
         <!-- @slot Slot for the main content -->
-        <slot name="default" />
+        <slot />
       </main>
     </div>
     <footer
