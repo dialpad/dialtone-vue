@@ -105,6 +105,7 @@ export const argsData = {
   attachmentAriaLabel: 'Attachment Carousel',
   closeAriaLabel: 'Close',
   clickToOpenAriaLabel: 'Click to open',
+  progressbarArilLabel: 'Uploading',
   onRemoveMedia: action('remove-media'),
 };
 

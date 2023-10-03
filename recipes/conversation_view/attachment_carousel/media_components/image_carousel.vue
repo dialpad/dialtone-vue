@@ -23,6 +23,7 @@
         v-if="mediaItem.isUploading && !showCloseButton"
         class="dt-image-carousel--progress-bar"
         :progress="mediaItem.progress"
+        :progressbar-aria-label="progressbarAriaLabel"
       />
       <dt-button
         v-else-if="showCloseButton"
@@ -81,6 +82,11 @@ export default {
       type: String,
       required: true,
     },
+
+    progressbarAriaLabel: {
+      type: String,
+      required: true,
+    },
   },
 
   emits: [
@@ -118,6 +124,7 @@ export default {
   border-radius: var(--br4);
   border-width: var(--dt-size-350);
   border-color: var(--dt-color-border-subtle);
+  object-fit: cover;
 }
 .dt-image-carousel--top-right {
   position: absolute;

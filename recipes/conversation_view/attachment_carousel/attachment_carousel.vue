@@ -2,6 +2,7 @@
   <div
     class="dt-attachment-carousel"
     role="presentation"
+    :aria-label="attachmentAriaLabel"
     @mouseenter="showCarouselArrows = true"
     @mouseleave="showCarouselArrows = false"
     @focusin="showCarouselArrows = true"
@@ -11,7 +12,6 @@
       v-if="mediaList.length > 0"
       ref="carousel"
       class="dt-attachment-carousel--media-list"
-      :aria-label="attachmentAriaLabel"
       @scroll="handleScroll"
     >
       <!-- media list -->
@@ -109,7 +109,6 @@ export default {
     attachmentAriaLabel: {
       type: String,
       required: true,
-      default: '',
     },
 
     closeAriaLabel: {
