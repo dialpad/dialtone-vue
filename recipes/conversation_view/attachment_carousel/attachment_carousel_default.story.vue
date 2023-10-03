@@ -6,9 +6,9 @@
   -->
   <dt-recipe-attachment-carousel
     :media-list="$attrs.mediaList"
-    attachment-aria-label="Attachment carousel"
-    close-aria-label="Close"
-    click-to-open-aria-label="Click to open image"
+    :close-aria-label="$attrs.closeAriaLabel"
+    :click-to-open-aria-label="$attrs.clickToOpenAriaLabel"
+    :progressbar-aria-label="$attrs.progressbarAriaLabel"
     @remove-media="removeMedia"
   />
 </template>

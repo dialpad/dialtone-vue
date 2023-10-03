@@ -2,7 +2,6 @@
   <div
     class="dt-attachment-carousel"
     role="presentation"
-    :aria-label="attachmentAriaLabel"
     @mouseenter="showCarouselArrows = true"
     @mouseleave="showCarouselArrows = false"
     @focusin="showCarouselArrows = true"
@@ -103,24 +102,14 @@ export default {
       default: () => [],
     },
 
-    /**
-     * Descriptive label for the attachment element
-     */
-    attachmentAriaLabel: {
-      type: String,
-      required: true,
-    },
-
     closeAriaLabel: {
       type: String,
       required: true,
-      default: '',
     },
 
     clickToOpenAriaLabel: {
       type: String,
       required: true,
-      default: '',
     },
   },
 
