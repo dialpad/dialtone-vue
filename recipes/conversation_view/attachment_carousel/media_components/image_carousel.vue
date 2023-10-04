@@ -3,7 +3,7 @@
     role="presentation"
     class="dt-image-carousel"
     @focusin="showCloseButton = true"
-    @focusout="showCloseButton = false"
+    @focusout="focusOut"
     @mouseenter="showCloseButton = true"
     @mouseleave="showCloseButton = false"
   >
@@ -26,7 +26,9 @@
         :progressbar-aria-label="progressbarAriaLabel"
       />
       <dt-button
-        v-else-if="showCloseButton"
+        v-show="showCloseButton"
+        id="closeButton"
+        tabindex="0"
         class="dt-image-carousel--close-button"
         circle
         size="xs"
@@ -108,6 +110,14 @@ export default {
   methods: {
     removeMediaItem (index) {
       this.$emit('remove-media', index);
+    },
+
+    focusOut (event) {
+      if (event.relatedTarget?.id === 'closeButton') {
+        this.showCloseButton = true;
+        return;
+      }
+      this.showCloseButton = false;
     },
   },
 };

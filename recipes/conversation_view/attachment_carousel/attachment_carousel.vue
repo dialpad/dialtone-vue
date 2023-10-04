@@ -22,6 +22,7 @@
         :media-item="mediaItem"
         :close-aria-label="closeAriaLabel"
         :click-to-open-aria-label="clickToOpenAriaLabel"
+        :progressbar-aria-label="progressbarAriaLabel"
         @remove-media="removeMediaItem(index)"
       />
     </div>
@@ -108,6 +109,11 @@ export default {
     },
 
     clickToOpenAriaLabel: {
+      type: String,
+      required: true,
+    },
+
+    progressbarAriaLabel: {
       type: String,
       required: true,
     },
