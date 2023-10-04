@@ -27,7 +27,7 @@
       />
       <dt-button
         v-show="showCloseButton"
-        id="closeButton"
+        :id="`closeButton-${index}`"
         tabindex="0"
         class="dt-image-carousel--close-button"
         circle
@@ -113,7 +113,7 @@ export default {
     },
 
     focusOut (event) {
-      if (event.relatedTarget?.id === 'closeButton') {
+      if (event.relatedTarget?.id === 'closeButton-'.concat(this.index)) {
         this.showCloseButton = true;
         return;
       }
