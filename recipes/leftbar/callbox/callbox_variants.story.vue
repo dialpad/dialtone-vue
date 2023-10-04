@@ -91,7 +91,7 @@
     >
       <template #video>
         <img
-          src="/common/assets/chatting-person-example.png"
+          :src="require('@/common/assets/chatting-person-example.png')"
           alt="person avatar"
           class="callbox-image"
         >
