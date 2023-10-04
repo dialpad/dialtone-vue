@@ -1,0 +1,21 @@
+import{h as b}from"./storybook_utils-0b506883.js";import{D as p,R as g,a as _}from"./root_layout-02441f37.js";import{n as v}from"./_plugin-vue2_normalizer-2bbd088e.js";const h={name:"DtRootLayoutDefault",components:{DtRootLayout:p}};var S=function(){var e=this,t=e._self._c;return t("dt-root-layout",{attrs:{"body-class":e.bodyClass,"header-class":e.headerClass,"header-sticky":e.headerSticky,"header-height":e.headerHeight,"content-class":e.contentClass,"sidebar-class":e.sidebarClass,"sidebar-position":e.sidebarPosition,"sidebar-width":e.sidebarWidth,"footer-class":e.footerClass,"footer-height":e.footerHeight,fixed:e.fixed,"responsive-breakpoint":e.responsiveBreakpoint},scopedSlots:e._u([{key:"header",fn:function(){return[t("span",{domProps:{innerHTML:e._s(e.header)}})]},proxy:!0},{key:"sidebar",fn:function(){return[t("span",{domProps:{innerHTML:e._s(e.sidebar)}})]},proxy:!0},{key:"footer",fn:function(){return[t("span",{domProps:{innerHTML:e._s(e.footer)}})]},proxy:!0}])},[t("span",{domProps:{innerHTML:e._s(e.defaultSlot)}})])},D=[],m=v(h,S,D,!1,null,null,null,null);const T=m.exports;m.exports.__docgenInfo={displayName:"DtRootLayoutDefault",exportName:"default",description:"",tags:{},sourceFiles:["/home/runner/work/dialtone-vue/dialtone-vue/components/root_layout/root_layout_default.story.vue"]};const r={sidebarPosition:"left",header:'<div class="d-bgc-purple-200 d-h64 d-h100p">Header</div>',footer:'<div class="d-bgc-gold-200 d-h64 d-h100p">Footer</div>',sidebar:'<div class="d-bgc-black-200 d-hmn100p"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>',default:`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim eleifend condimentum.
+  Vestibulum euismod leo at finibus mattis. Integer ut dui id ligula tincidunt pellentesque. Vestibulum a ullamcorper
+  risus. Ut tristique sapien eget magna lacinia, non interdum lacus malesuada. Proin augue lacus, finibus eget aliquam
+  eu, efficitur sit amet magna. Suspendisse a nunc volutpat, maximus enim vitae, pretium dui. Suspendisse pretium
+  faucibus posuere. Aenean consequat imperdiet laoreet. Pellentesque habitant morbi tristique senectus et netus et
+  malesuada fames ac turpis egestas. Aliquam elit lacus, venenatis ac risus at, ullamcorper tempor tortor. Ut sed
+  pulvinar mi, vitae vehicula odio. Fusce ornare vestibulum rhoncus. In vel ante arcu. Nunc pharetra libero non
+  enim dapibus efficitur. Suspendisse dolor ante, pulvinar et faucibus quis, condimentum at dui.`},f={default:{control:"text",description:"Slot for main content",table:{type:{summary:"VNode"}}},header:{description:"Slot for header content",control:"text",table:{category:"slots",type:{summary:"VNode"}}},sidebar:{description:"Slot for sidebar content",control:"text",table:{category:"slots",type:{summary:"VNode"}}},footer:{description:"Slot for footer content",control:"text",table:{category:"slots",type:{summary:"VNode"}}},sidebarPosition:{options:Object.values(g),control:{type:"select"}},responsiveBreakpoint:{defaultValue:null,control:{type:"select",options:_}}},x={title:"Components/Root Layout",component:p,args:r,argTypes:f,excludeStories:/.*Data$/},y=(s,{argTypes:e})=>b(s,e,T),a={render:y,args:{default:r.default.repeat(40)}},o={render:y,args:{headerSticky:!0,fixed:!1,default:r.default.repeat(40)}};var i,n,u;a.parameters={...a.parameters,docs:{...(i=a.parameters)==null?void 0:i.docs,source:{originalSource:`{
+  render: DefaultTemplate,
+  args: {
+    default: argsData.default.repeat(40)
+  }
+}`,...(u=(n=a.parameters)==null?void 0:n.docs)==null?void 0:u.source}}};var d,l,c;o.parameters={...o.parameters,docs:{...(d=o.parameters)==null?void 0:d.docs,source:{originalSource:`{
+  render: DefaultTemplate,
+  args: {
+    headerSticky: true,
+    fixed: false,
+    default: argsData.default.repeat(40)
+  }
+}`,...(c=(l=o.parameters)==null?void 0:l.docs)==null?void 0:c.source}}};const k=["argsData","argTypesData","Default","StickyHeader"],P=Object.freeze(Object.defineProperty({__proto__:null,Default:a,StickyHeader:o,__namedExportsOrder:k,argTypesData:f,argsData:r,default:x},Symbol.toStringTag,{value:"Module"}));export{a as D,P as R,o as S};
+//# sourceMappingURL=root_layout.stories-160e2fc7.js.map
