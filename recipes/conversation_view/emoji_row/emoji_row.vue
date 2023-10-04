@@ -26,7 +26,7 @@
             :attrs="attrs"
             @click="emojiClicked(reaction)"
           >
-            <span class="d-mr4">
+            <span class="d-mr4 d-d-inline-flex">
               <dt-emoji
                 size="200"
                 :code="reaction.emojiUnicodeOrShortname"

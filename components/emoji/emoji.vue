@@ -1,5 +1,5 @@
 <template>
-  <span :class="emojiSize">
+  <span :class="['d-d-inline-block', 'd-icon', emojiSize]">
     <dt-skeleton
       v-show="imgLoading && showSkeleton"
       :offset="0"
