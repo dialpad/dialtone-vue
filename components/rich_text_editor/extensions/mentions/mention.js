@@ -27,6 +27,10 @@ export const MentionPlugin = Mention.extend({
     };
   },
 
+  renderText ({ node }) {
+    return '@ ' + node.attrs.name;
+  },
+
   renderHTML ({ HTMLAttributes }) {
     return ['mention-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
