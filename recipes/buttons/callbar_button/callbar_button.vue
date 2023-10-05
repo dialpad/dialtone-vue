@@ -2,6 +2,7 @@
   <dt-tooltip
     :id="id"
     :offset="[0, 8]"
+    v-on="callbarButtonListeners"
   >
     <template #anchor>
       <span
@@ -16,7 +17,6 @@
           :label-class="callbarButtonTextClass"
           :width="buttonWidth"
           :class="callbarButtonClass"
-          v-on="$listeners"
         >
           <slot />
           <template #icon>
@@ -40,7 +40,7 @@ export default {
 
   components: { DtButton, DtTooltip },
 
-  inheritAttrs: true,
+  inheritAttrs: false,
 
   props: {
     /**
@@ -190,6 +190,13 @@ export default {
         return this.importance;
       }
       return this.circle ? 'outlined' : 'clear';
+    },
+
+    callbarButtonListeners () {
+      return {
+        ...this.$listeners,
+        click: (event) => this.$emit('click'),
+      };
     },
   },
 };
