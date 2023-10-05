@@ -2,6 +2,7 @@
   <dt-tooltip
     :id="id"
     :offset="[0, 8]"
+    v-bind="$attrs"
     v-on="callbarButtonListeners"
   >
     <template #anchor>
