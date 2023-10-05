@@ -2,6 +2,7 @@
   <dt-tooltip
     :id="id"
     :offset="[0, 8]"
+    v-on="callbarButtonListeners"
   >
     <template #anchor>
       <span
@@ -32,12 +33,14 @@
 import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
 import DtButton from '@/components/button/button.vue';
 import DtTooltip from '@/components/tooltip/tooltip.vue';
-import utils from '@/common/utils';
+import utils, { extractVueListeners } from '@/common/utils';
 
 export default {
   name: 'DtRecipeCallbarButton',
 
   components: { DtButton, DtTooltip },
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -139,6 +142,16 @@ export default {
 
   },
 
+  emits: [
+    /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+  ],
+
   computed: {
     callbarButtonClass () {
       return [
@@ -177,6 +190,13 @@ export default {
         return this.importance;
       }
       return this.circle ? 'outlined' : 'clear';
+    },
+
+    callbarButtonListeners () {
+      return {
+        ...extractVueListeners(this.$attrs),
+        click: (event) => this.$emit('click', event),
+      };
     },
   },
 };
