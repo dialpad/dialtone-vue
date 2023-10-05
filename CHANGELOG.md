@@ -1,3 +1,28 @@
+# [2.100.0](https://github.com/dialpad/dialtone-vue/compare/v2.99.1...v2.100.0) (2023-10-05)
+
+
+### Bug Fixes
+
+* alignment for emoji and emoji row ([#1232](https://github.com/dialpad/dialtone-vue/issues/1232)) ([8a9afad](https://github.com/dialpad/dialtone-vue/commit/8a9afadb024b4aa3a58dc47a24b5250eee9fd3ba))
+
+
+### Features
+
+* update dialtone-icons ([92d5498](https://github.com/dialpad/dialtone-vue/commit/92d549847cabb8a4cbdd560f92cbe8c6baed89e0))
+
+## [2.99.1](https://github.com/dialpad/dialtone-vue/compare/v2.99.0...v2.99.1) (2023-10-04)
+
+
+### Bug Fixes
+
+* address feedItemRow and feedItemPill css issues ([#1215](https://github.com/dialpad/dialtone-vue/issues/1215)) ([69fd69f](https://github.com/dialpad/dialtone-vue/commit/69fd69fe561ee6f9e54cac7b339fcfb65b118ed6))
+* **Root Layout:** remove fixed height on header/footer  ([#1236](https://github.com/dialpad/dialtone-vue/issues/1236)) ([8e575b0](https://github.com/dialpad/dialtone-vue/commit/8e575b0c3405b3972d1191d3c847db027275ff51))
+
+
+### Documentation
+
+* **Stack:** add new defaults for alignment ([#1229](https://github.com/dialpad/dialtone-vue/issues/1229)) ([11cfb62](https://github.com/dialpad/dialtone-vue/commit/11cfb62edca1b94c72aee6af06dc7bd9a00982ff))
+
 # [2.99.0](https://github.com/dialpad/dialtone-vue/compare/v2.98.3...v2.99.0) (2023-09-29)
 
 
