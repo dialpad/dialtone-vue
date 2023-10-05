@@ -19,10 +19,9 @@
           v-on="$listeners"
         >
           <slot />
-          <slot
-            slot="icon"
-            name="icon"
-          />
+          <template #icon>
+            <slot name="icon" />
+          </template>
         </dt-button>
       </span>
     </template>
