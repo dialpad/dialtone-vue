@@ -5,7 +5,6 @@
       LINK_KIND_MODIFIERS[kind],
     ]"
     data-qa="dt-link"
-    :href="'href' in $attrs ? $attrs.href : 'javascript:void(0)'"
   >
     <!-- @slot Slot for main content -->
     <slot />
