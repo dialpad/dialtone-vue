@@ -43,7 +43,7 @@
       <div class="d-flow16 d-d-flex d-ai-center">
         <dt-avatar
           v-for="state in AVATAR_PRESENCE_STATES"
-          :key="state"
+          :key="`presence-${state}`"
           :seed="seed"
           size="md"
           full-name="Person avatar"
