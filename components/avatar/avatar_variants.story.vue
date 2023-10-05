@@ -9,7 +9,7 @@
           :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Image"
-          image-src="/common/assets/person.png"
+          :image-src="$attrs.imageSrc"
         />
       </div>
     </div>
@@ -59,14 +59,14 @@
           :seed="$attrs.seed"
           size="xl"
           full-name="Person avatar"
-          image-src="/common/assets/person.png"
+          :image-src="$attrs.imageSrc"
           overlay-icon="hear"
         />
         <dt-avatar
           :seed="$attrs.seed"
           size="xl"
           full-name="Person avatar"
-          image-src="/common/assets/person.png"
+          :image-src="$attrs.imageSrc"
           overlay-text="+3"
         />
       </div>
