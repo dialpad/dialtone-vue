@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "3.86.3",
+  "version": "3.88.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "build": "run-s clean build:main build:typescript build:documentation",
@@ -16,7 +16,7 @@
     "lint:docs": "markdownlint '**/*.mdx'",
     "prepublishOnly": "npm run build",
     "pretest": "npm run clean",
-    "release": "semantic-release --no-ci --extends ./release-local.config.cjs",
+    "release": "./scripts/release.sh",
     "start": "npm run storybook",
     "storybook": "STORYBOOK_ENV=development storybook dev -p 9010",
     "storybook:clean": "rm -rf ./storybook-static",
@@ -34,7 +34,7 @@
     "CHANGELOG.json"
   ],
   "dependencies": {
-    "@dialpad/dialtone-icons": "^3.2.0",
+    "@dialpad/dialtone-icons": "^3.3.0",
     "@tiptap/extension-code-block": "^2.0.3",
     "@tiptap/extension-document": "^2.0.3",
     "@tiptap/extension-hard-break": "^2.0.3",
@@ -53,7 +53,7 @@
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/dialtone": "^8.15.0",
+    "@dialpad/dialtone": "^8.17.0",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@percy/cli": "^1.26.2",
     "@percy/storybook": "^4.3.6",

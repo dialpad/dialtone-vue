@@ -1,3 +1,52 @@
+# [3.88.0](https://github.com/dialpad/dialtone-vue/compare/v3.87.1...v3.88.0) (2023-10-05)
+
+
+### Bug Fixes
+
+* alignment for emoji and emoji row - vue3 ([#1233](https://github.com/dialpad/dialtone-vue/issues/1233)) ([53d7fa6](https://github.com/dialpad/dialtone-vue/commit/53d7fa6fa3f9e352831d0614e70d67f8903090ae))
+
+
+### Features
+
+* update dialtone-icons ([52a3c92](https://github.com/dialpad/dialtone-vue/commit/52a3c927ae53cac9664d431469876078ba2b89ec))
+
+## [3.87.1](https://github.com/dialpad/dialtone-vue/compare/v3.87.0...v3.87.1) (2023-10-04)
+
+
+### Bug Fixes
+
+* address feedItemRow and feedItemPill css issues vue3 ([#1224](https://github.com/dialpad/dialtone-vue/issues/1224)) ([aa08b34](https://github.com/dialpad/dialtone-vue/commit/aa08b34210c49bfbedba4c8885e593ba40f521f3))
+* **Root Layout:** remove fixed height on header/footer ([#1231](https://github.com/dialpad/dialtone-vue/issues/1231)) ([3a6d9af](https://github.com/dialpad/dialtone-vue/commit/3a6d9af27f3dede8520be48473667447f6b7fd04))
+
+
+### Documentation
+
+* **Stack:** add new defaults for alignment - vue3 ([#1230](https://github.com/dialpad/dialtone-vue/issues/1230)) ([beb8baf](https://github.com/dialpad/dialtone-vue/commit/beb8baf7e95e8915130bd386fb227d4a2327c4f1))
+
+# [3.87.0](https://github.com/dialpad/dialtone-vue/compare/v3.86.4...v3.87.0) (2023-09-29)
+
+
+### Features
+
+* **Callbox:** on hold status ([#1226](https://github.com/dialpad/dialtone-vue/issues/1226)) ([8f5e1bd](https://github.com/dialpad/dialtone-vue/commit/8f5e1bd04810c7f111126d9840581f249460b2da))
+
+# [3.87.0](https://github.com/dialpad/dialtone-vue/compare/v3.86.4...v3.87.0) (2023-09-29)
+
+
+### Features
+
+* **Callbox:** on hold status ([#1226](https://github.com/dialpad/dialtone-vue/issues/1226)) ([8f5e1bd](https://github.com/dialpad/dialtone-vue/commit/8f5e1bd04810c7f111126d9840581f249460b2da))
+
+## [3.86.4](https://github.com/dialpad/dialtone-vue/compare/v3.86.3...v3.86.4) (2023-09-28)
+
+
+### Bug Fixes
+
+* **Callbox, Avatar:** events and styling ([#1219](https://github.com/dialpad/dialtone-vue/issues/1219)) ([5875cf9](https://github.com/dialpad/dialtone-vue/commit/5875cf9948c701a7a6866d40429959232fa76a6c))
+* emoji picker to trigger emoji plugin with insertContent node ([#1220](https://github.com/dialpad/dialtone-vue/issues/1220)) ([5d35041](https://github.com/dialpad/dialtone-vue/commit/5d35041b97483abd2a34fff2c4b57d973d8ad2ef))
+* emoji row css vue3 ([#1191](https://github.com/dialpad/dialtone-vue/issues/1191)) ([1b68b87](https://github.com/dialpad/dialtone-vue/commit/1b68b87312f41a1020cf0f7a466ef09e166cd37a))
+* **List Item:** apply correct color design tokens - vue3 ([#1223](https://github.com/dialpad/dialtone-vue/issues/1223)) ([ed2e786](https://github.com/dialpad/dialtone-vue/commit/ed2e786a5802859341d718b1859fa095cb9d0746))
+
 ## [3.86.3](https://github.com/dialpad/dialtone-vue/compare/v3.86.2...v3.86.3) (2023-09-26)
 
 
