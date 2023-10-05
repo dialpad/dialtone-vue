@@ -195,7 +195,7 @@ export default {
     callbarButtonListeners () {
       return {
         ...this.$listeners,
-        click: (event) => this.$emit('click'),
+        click: (event) => this.$emit('click', event),
       };
     },
   },
