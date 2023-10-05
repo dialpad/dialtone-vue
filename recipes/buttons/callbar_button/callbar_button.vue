@@ -16,7 +16,6 @@
           :label-class="callbarButtonTextClass"
           :width="buttonWidth"
           :class="callbarButtonClass"
-          v-on="callbarButtonListeners"
         >
           <slot />
           <template #icon>
@@ -39,8 +38,6 @@ export default {
   name: 'DtRecipeCallbarButton',
 
   components: { DtButton, DtTooltip },
-
-  inheritAttrs: true,
 
   props: {
     /**
@@ -142,16 +139,6 @@ export default {
 
   },
 
-  emits: [
-    /**
-     * Native click event
-     *
-     * @event click
-     * @type {PointerEvent | KeyboardEvent}
-     */
-    'click',
-  ],
-
   computed: {
     callbarButtonClass () {
       return [
@@ -190,13 +177,6 @@ export default {
         return this.importance;
       }
       return this.circle ? 'outlined' : 'clear';
-    },
-
-    callbarButtonListeners () {
-      return {
-        ...this.$attrs,
-        click: (e) => this.$emit('click', e),
-      };
     },
   },
 };
