@@ -47,7 +47,7 @@ export const argTypesData = {
     control: 'object',
     table: {
       defaultValue: {
-        summary: '{ url: string, label: string }[]',
+        summary: '{ href: string, label: string }[]',
       },
     },
   },
