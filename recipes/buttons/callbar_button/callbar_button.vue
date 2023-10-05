@@ -16,11 +16,12 @@
           :label-class="callbarButtonTextClass"
           :width="buttonWidth"
           :class="callbarButtonClass"
+          v-on="callbarButtonListeners"
         >
           <slot />
-          <slot
-            name="icon"
-          />
+          <template #icon>
+            <slot name="icon" />
+          </template>
         </dt-button>
       </span>
     </template>
@@ -29,11 +30,10 @@
 </template>
 
 <script>
+import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
 import DtButton from '@/components/button/button.vue';
 import DtTooltip from '@/components/tooltip/tooltip.vue';
 import utils from '@/common/utils';
-
-import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
 
 export default {
   name: 'DtRecipeCallbarButton',
@@ -142,6 +142,16 @@ export default {
 
   },
 
+  emits: [
+    /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+  ],
+
   computed: {
     callbarButtonClass () {
       return [
@@ -150,7 +160,6 @@ export default {
         'd-px0',
         {
           'dt-recipe-callbar-button--circle': this.circle,
-          'd-btn--icon-only': this.circle,
           'dt-recipe-callbar-button--active': this.active,
           'dt-recipe-callbar-button--danger': this.danger,
           'd-btn--disabled d-bgc-transparent': this.disabled,
@@ -182,6 +191,13 @@ export default {
       }
       return this.circle ? 'outlined' : 'clear';
     },
+
+    callbarButtonListeners () {
+      return {
+        ...this.$attrs,
+        click: (e) => this.$emit('click', e),
+      };
+    },
   },
 };
 </script>
@@ -202,10 +218,6 @@ export default {
 
 .dt-recipe-callbar-button--circle.d-btn[disabled] {
   border-color: unset;
-}
-
-.dt-recipe-callbar-button--circle.d-btn--icon-only .d-btn__label {
-  display: none;
 }
 
 .dt-recipe-callbar-button--active,
