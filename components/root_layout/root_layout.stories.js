@@ -15,7 +15,7 @@ export const argsData = {
   header: '<div class="d-bgc-purple-200 d-h64 d-h100p">Header</div>',
   footer: '<div class="d-bgc-gold-200 d-h64 d-h100p">Footer</div>',
   sidebar:
-    '<div class="d-bgc-black-200 d-hmn100p"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>',
+    '<div class="d-bgc-black-200 d-w264"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>',
   default: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim eleifend condimentum.
   Vestibulum euismod leo at finibus mattis. Integer ut dui id ligula tincidunt pellentesque. Vestibulum a ullamcorper
   risus. Ut tristique sapien eget magna lacinia, non interdum lacus malesuada. Proin augue lacus, finibus eget aliquam
