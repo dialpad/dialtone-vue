@@ -48,7 +48,6 @@ export const argTypesData = {
   // Slots
   default: {
     control: 'text',
-    description: 'Slot for main content',
     table: {
       type: {
         summary: 'VNode',
@@ -57,7 +56,6 @@ export const argTypesData = {
   },
 
   header: {
-    description: 'Slot for header content',
     control: 'text',
     table: {
       category: 'slots',
@@ -68,7 +66,6 @@ export const argTypesData = {
   },
 
   sidebar: {
-    description: 'Slot for sidebar content',
     control: 'text',
     table: {
       category: 'slots',
@@ -79,7 +76,6 @@ export const argTypesData = {
   },
 
   footer: {
-    description: 'Slot for footer content',
     control: 'text',
     table: {
       category: 'slots',
