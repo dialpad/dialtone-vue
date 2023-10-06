@@ -2,8 +2,6 @@
   <dt-tooltip
     :id="id"
     :offset="[0, 8]"
-    v-bind="$attrs"
-    v-on="callbarButtonListeners"
   >
     <template #anchor>
       <span
@@ -18,6 +16,8 @@
           :label-class="callbarButtonTextClass"
           :width="buttonWidth"
           :class="callbarButtonClass"
+          v-bind="$attrs"
+          v-on="callbarButtonListeners"
         >
           <slot />
           <template #icon>
