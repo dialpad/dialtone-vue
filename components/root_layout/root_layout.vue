@@ -19,7 +19,6 @@
       <aside
         ref="root-layout-sidebar"
         :class="['d-root-layout__sidebar', { 'd-root-layout__sidebar--sticky': fixed }, sidebarClass]"
-        :style="{ 'flex-basis': sidebarWidth }"
         data-qa="dt-root-layout-sidebar"
       >
         <!-- @slot Slot for the sidebar -->
@@ -116,8 +115,7 @@ export default {
     },
 
     /**
-     * The width of the sidebar
-     * Possible units rem|px|%|em
+     * DEPRECATED: set the height of the inner element instead.
      */
     sidebarWidth: {
       type: String,
