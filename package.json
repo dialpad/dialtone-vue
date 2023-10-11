@@ -172,6 +172,16 @@
         "default": "./dist/emoji.cjs"
       }
     },
+    "./directives": {
+      "import": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.js"
+      },
+      "require": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.cjs"
+      }
+    },
     "./css": {
       "style": "./dist/style.css"
     }
