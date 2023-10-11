@@ -101,6 +101,14 @@ export const argTypesData = {
       type: 'select',
     },
   },
+
+  headerSticky: {
+    control: 'boolean',
+  },
+
+  fixed: {
+    control: 'boolean',
+  },
 };
 
 // Story Collection
@@ -131,14 +139,6 @@ export const Default = {
 
 export const StickyHeader = {
   render: StickyTemplate,
-
-  argTypes: {
-    fixed: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 
   args: {
     headerSticky: true,
