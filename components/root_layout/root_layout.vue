@@ -199,12 +199,6 @@ export default {
     grid-area: sidebar;
     height: 100%;
     box-shadow: none;
-
-    &--sticky {
-      position: sticky;
-      top: 0;
-      overflow: auto;
-    }
   }
 
   &__content {
