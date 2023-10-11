@@ -1,23 +1,26 @@
 <template>
-  <div class="dt-mention-suggestion">
+  <dt-stack
+    direction="row"
+    gap="400"
+  >
     <dt-avatar
       :full-name="name"
       :image-src="avatarSrc"
       size="xs"
     />
-    <div class="dt-mention-suggestion---text">
-      {{ name }}
-    </div>
-  </div>
+    {{ name }}
+  </dt-stack>
 </template>
 
 <script>
 import DtAvatar from '@/components/avatar/avatar.vue';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'MentionSuggestion',
   components: {
     DtAvatar,
+    DtStack,
   },
 
   props: {
@@ -38,12 +41,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.dt-mention-suggestion {
-  display: flex;
-}
-.dt-mention-suggestion---text {
-  margin-left: var(--dt-size-350);
-}
-</style>

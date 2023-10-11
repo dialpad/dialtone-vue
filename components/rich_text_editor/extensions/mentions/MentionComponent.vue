@@ -5,7 +5,7 @@
     <dt-link
       kind="inverted"
       class="dt-link--mention"
-      href="null"
+      :href="null"
     >
       {{ text }}
     </dt-link>
@@ -36,15 +36,14 @@ export default {
 
 <style lang="less">
 .dt-link--mention {
-  background-color: hsl(var(--dt-color-link-primary-hsl) / 10%);
+  background-color: hsl(var(--dt-color-purple-400-hsl) / 10%);
   color: var(--dt-color-link-primary);
   border-radius: var(--dt-space-200);
   height: 1.8rem;
-}
-.dt-link--mention:hover {
-  background-color: hsl(var(--dt-color-link-primary-hsl) / 10%);
-  color: var(--dt-color-link-primary);
-  border-radius: var(--dt-space-200);
-  height: 1.8rem;
+
+  &:hover {
+    color: var(--dt-color-link-primary);
+    background-color: hsl(var(--dt-color-purple-500-hsl) / 10%);
+  }
 }
 </style>

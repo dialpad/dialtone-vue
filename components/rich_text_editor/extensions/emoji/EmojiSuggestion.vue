@@ -1,24 +1,25 @@
 <template>
-  <div
-    class="dt-emoji-suggestion"
+  <dt-stack
+    direction="row"
+    gap="400"
   >
     <dt-emoji
       size="200"
       :code="item"
     />
-    <div class="dt-emoji-suggestion--text">
-      {{ item }}
-    </div>
-  </div>
+    {{ item }}
+  </dt-stack>
 </template>
 
 <script>
 import { DtEmoji } from '@/emoji';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'EmojiSuggestion',
   components: {
     DtEmoji,
+    DtStack,
   },
 
   props: {
@@ -29,12 +30,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.dt-emoji-suggestion {
-  display: flex;
-}
-.dt-emoji-suggestion--text {
-  margin-left: var(--dt-size-350);
-}
-</style>

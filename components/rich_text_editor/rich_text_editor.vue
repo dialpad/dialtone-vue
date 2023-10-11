@@ -119,12 +119,19 @@ export default {
     },
 
     /**
-     * suggestion object containing the items query function. When null, it does not add the plugin.
+     * suggestion object containing the items query function.
+     * The valid keys passed into this object can be found here: https://tiptap.dev/api/utilities/suggestion
+     *
+     * The only required key is the items function which is used to query the contacts for suggestion.
+     * items({ query }) => { return [<ContactObj>]; }
+     * ContactObj format:
+     * { name: string, avatarSrc: string, contactId: string }
+     *
+     * When null, it does not add the plugin.
      */
     mentionSuggestion: {
       type: Object,
       default: null,
-      // required: true,
     },
   },
 

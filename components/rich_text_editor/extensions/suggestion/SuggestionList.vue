@@ -117,18 +117,15 @@ export default {
 <style>
 .dt-suggestion-list {
   position: relative;
-  padding: 0rem;
-  margin: .4rem;
+  padding: var(--dt-size-300);
   max-height: var(--dt-size-875) !important;
 }
 
 .dt-suggestion-list--item {
-  display: list-item;
   border: var(--dt-size-100) solid transparent;
-  /* min-width: var(--dt-size-850); */
 
   &.is-selected {
-    border-color: var(--bc-bold);
+    border-color: var(--dt-color-border-bold);
   }
 }
 </style>
