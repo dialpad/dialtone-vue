@@ -6,7 +6,7 @@
     :sidebar-class="$attrs.sidebarClass"
     :sidebar-position="$attrs.sidebarPosition"
     :footer-class="$attrs.footerClass"
-    :fixed="false"
+    :fixed="$attrs.fixed"
     :responsive-breakpoint="$attrs.responsiveBreakpoint"
   >
     <template
