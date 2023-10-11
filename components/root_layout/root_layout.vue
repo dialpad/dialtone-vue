@@ -1,7 +1,8 @@
 <template>
   <div
     :class="[
-      'root-layout d-root-layout',
+      'root-layout',
+      'd-root-layout',
       {
         'd-root-layout--fixed': fixed,
         'd-root-layout--inverted': isInverted,
