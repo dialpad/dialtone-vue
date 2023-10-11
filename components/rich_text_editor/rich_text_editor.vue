@@ -273,10 +273,6 @@ export default {
   },
 
   methods: {
-    onclick (event) {
-      alert('clicked');
-    },
-
     createEditor () {
       // For all available options, see https://tiptap.dev/api/editor#settings
       this.editor = new Editor({

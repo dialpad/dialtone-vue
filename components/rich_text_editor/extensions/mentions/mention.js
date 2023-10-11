@@ -24,6 +24,12 @@ export const MentionPlugin = Mention.extend({
       name: {
         default: '',
       },
+      avatarSrc: {
+        default: '',
+      },
+      contactId: {
+        default: '',
+      },
     };
   },
 

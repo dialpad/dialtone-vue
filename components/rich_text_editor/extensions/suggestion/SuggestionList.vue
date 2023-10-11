@@ -107,7 +107,7 @@ export default {
           this.command({ code: item });
           return;
         case 'mention':
-          this.command({ name: item });
+          this.command({ name: item.name, contactId: item.contactId, avatarSrc: item.avatarSrc });
       }
     },
   },
