@@ -185,7 +185,19 @@
         "default": "./dist/message_input.cjs"
       }
     },
-    "./css": "./dist/style.css"
+    "./directives": {
+      "import": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.js"
+      },
+      "require": {
+        "types": "./dist/types/directives.d.ts",
+        "default": "./dist/directives.cjs"
+      }
+    },
+    "./css": {
+      "style": "./dist/style.css"
+    }
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
