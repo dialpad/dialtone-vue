@@ -1,23 +1,26 @@
 <template>
-  <div
-    v-show="items.length"
-    class="dt-mention-suggestion-list"
-  >
-    <dt-list-item
-      v-for="(item, index) in items"
-      :key="index"
-      :class="[
-        'dt-mention-suggestion-list-item',
-        { 'is-selected': index === selectedIndex },
-      ]"
-      navigation-type="arrow-keys"
-      @click="selectItem(index)"
-      @keydown.prevent.stop="onKeyDown"
+  <div class="d-popover__dialog">
+    <ul
+      v-show="items.length"
+      class="dt-suggestion-list"
     >
-      <div class="dt-mention-suggestion-list-text">
-        {{ item }}
-      </div>
-    </dt-list-item>
+      <dt-list-item
+        v-for="(item, index) in items"
+        :key="index"
+        :class="[
+          'dt-suggestion-list--item',
+          { 'is-selected dt-list-item--highlighted': index === selectedIndex },
+        ]"
+        navigation-type="arrow-keys"
+        @click="selectItem(index)"
+        @keydown.prevent.stop="onKeyDown"
+      >
+        <component
+          :is="itemComponent"
+          :item="item"
+        />
+      </dt-list-item>
+    </ul>
   </div>
 </template>
 
@@ -25,7 +28,7 @@
 import { DtListItem } from '@/components/list_item';
 
 export default {
-  name: 'MentionList',
+  name: 'SuggestionList',
   components: {
     DtListItem,
   },
@@ -38,6 +41,16 @@ export default {
 
     command: {
       type: Function,
+      required: true,
+    },
+
+    itemComponent: {
+      type: Object,
+      required: true,
+    },
+
+    itemType: {
+      type: String,
       required: true,
     },
   },
@@ -89,8 +102,12 @@ export default {
     selectItem (index) {
       const item = this.items[index];
 
-      if (item) {
-        this.command({ name: item });
+      switch (this.itemType) {
+        case 'emoji':
+          this.command({ code: item });
+          return;
+        case 'mention':
+          this.command({ name: item });
       }
     },
   },
@@ -98,28 +115,20 @@ export default {
 </script>
 
 <style>
-.dt-mention-suggestion-list {
-  background-color: var(--dt-color-surface-secondary) !important;
-  border-color: var(--dt-color-border-subtle) !important;
+.dt-suggestion-list {
+  position: relative;
+  padding: 0rem;
+  margin: .4rem;
   max-height: var(--dt-size-875) !important;
-  overflow: hidden !important;
-  overflow-y: scroll !important;
 }
-.dt-mention-suggestion-list .dt-item-layout--title {
-  display: flex;
-}
-.dt-mention-suggestion-list-item {
-  display: flex !important;
+
+.dt-suggestion-list--item {
+  display: list-item;
   border: var(--dt-size-100) solid transparent;
-  min-width: var(--dt-size-850);
-  width: var(--dt-size-100-percent) !important;
+  /* min-width: var(--dt-size-850); */
 
   &.is-selected {
     border-color: var(--bc-bold);
   }
-}
-
-.dt-mention-suggestion-list-text {
-  margin-left: var(--dt-size-350);
 }
 </style>

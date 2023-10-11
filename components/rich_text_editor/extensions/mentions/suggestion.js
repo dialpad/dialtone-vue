@@ -1,7 +1,9 @@
+import { markRaw } from 'vue';
 import { VueRenderer } from '@tiptap/vue-3';
 import tippy from 'tippy.js';
 
-import MentionList from './MentionList.vue';
+import SuggestionList from '../suggestion/SuggestionList.vue';
+import MentionSuggestion from './MentionSuggestion.vue';
 
 export default {
 
@@ -15,12 +17,16 @@ export default {
 
     return {
       onStart: props => {
-        component = new VueRenderer(MentionList, {
+        component = new VueRenderer(SuggestionList, {
           // // using vue 2:
           // parent: this,
           // propsData: props,
           // using vue 3:
-          props,
+          props: {
+            itemComponent: markRaw(MentionSuggestion),
+            itemType: 'mention',
+            ...props,
+          },
           editor: props.editor,
         });
 

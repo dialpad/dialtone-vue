@@ -28,7 +28,7 @@ export default {
 
   computed: {
     text () {
-      return '@ ' + this.$props.node.attrs.name;
+      return '@' + this.$props.node.attrs.name;
     },
   },
 };
