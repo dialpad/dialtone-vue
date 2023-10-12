@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import DtAvatar from '@/components/avatar/avatar.vue';
+import { DtAvatar } from '@/components/avatar';
 import { DtStack } from '@/components/stack';
 
 export default {

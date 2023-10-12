@@ -108,6 +108,7 @@ export default {
           return;
         case 'mention':
           this.command({ name: item.name, contactId: item.contactId, avatarSrc: item.avatarSrc });
+          break;
       }
     },
   },
