@@ -2,6 +2,7 @@
   <div class="d-popover__dialog">
     <ul
       v-show="items.length"
+      ref="suggestionList"
       class="dt-suggestion-list"
     >
       <dt-list-item
@@ -9,7 +10,7 @@
         :key="index"
         :class="[
           'dt-suggestion-list--item',
-          { 'is-selected dt-list-item--highlighted': index === selectedIndex },
+          { 'dt-list-item--highlighted': index === selectedIndex },
         ]"
         navigation-type="arrow-keys"
         @click="selectItem(index)"
@@ -24,6 +25,7 @@
   </div>
 </template>
 
+import type { resolveFocusPosition } from '@tiptap/vue-3';
 <script>
 import { DtListItem } from '@/components/list_item';
 
@@ -89,10 +91,26 @@ export default {
 
     upHandler () {
       this.selectedIndex = ((this.selectedIndex + this.items.length) - 1) % this.items.length;
+
+      const activeElement = this.$refs.suggestionList.querySelector('.dt-list-item--highlighted');
+      if (activeElement) {
+        activeElement.scrollIntoView({
+          behaviour: 'smooth',
+          block: 'center',
+        });
+      }
     },
 
     downHandler () {
       this.selectedIndex = (this.selectedIndex + 1) % this.items.length;
+
+      const activeElement = this.$refs.suggestionList.querySelector('.dt-list-item--highlighted');
+      if (activeElement) {
+        activeElement.scrollIntoView({
+          behaviour: 'smooth',
+          block: 'center',
+        });
+      }
     },
 
     enterHandler () {
@@ -120,13 +138,11 @@ export default {
   position: relative;
   padding: var(--dt-size-300);
   max-height: var(--dt-size-875) !important;
+  min-width: var(--dt-size-925);
+  max-width: var(--dt-size-975);
 }
 
 .dt-suggestion-list--item {
   border: var(--dt-size-100) solid transparent;
-
-  &.is-selected {
-    border-color: var(--dt-color-border-bold);
-  }
 }
 </style>
