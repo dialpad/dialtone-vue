@@ -1,116 +1,96 @@
 <template>
-  <dt-item-layout
+  <div
     data-qa="dt-recipe-callbox"
     class="dt-recipe-callbox"
   >
-    <template
+    <div
       v-if="$slots.video"
-      #default
+      data-qa="dt-recipe-callbox--video-wrapper"
+      class="dt-recipe-callbox--video"
+    >
+      <!-- @slot Slot for video stream -->
+      <slot name="video" />
+    </div>
+    <div
+      data-qa="dt-recipe-callbox--main-content"
+      :class="['dt-recipe-callbox--main-content', borderClass, { 'dt-recipe-callbox--clickable': clickable }]"
     >
       <div
-        data-qa="dt-recipe-callbox--video-wrapper"
-        class="dt-recipe-callbox--video"
+        class="dt-recipe-callbox--main-content-top"
       >
-        <!-- @slot Slot for video stream -->
-        <slot name="video" />
-      </div>
-    </template>
-    <template #bottom>
-      <dt-item-layout
-        data-qa="dt-recipe-callbox--main-content"
-        :class="['dt-recipe-callbox--main-content', borderClass]"
-      >
-        <template #default>
-          <dt-item-layout class="dt-recipe-callbox--top-content">
-            <template
-              v-if="shouldShowAvatar"
-              #left
-            >
-              <dt-avatar
-                :image-src="avatarSrc"
-                :full-name="avatarFullName"
-                :seed="avatarSeed"
-                size="sm"
-              />
-            </template>
-            <template #default>
-              <span
-                data-qa="dt-recipe-callbox--title"
-                class="dt-recipe-callbox--title"
-                v-text="title"
-              />
-            </template>
-            <template #subtitle>
-              <dt-item-layout class="dt-recipe-callbox--subtitle">
-                <template #default>
-                  <div
-                    data-qa="dt-recipe-callbox--badge-wrapper"
-                    class="dt-recipe-callbox--subtitle-badge"
-                  >
-                    <!-- @slot Slot for call center badge -->
-                    <slot name="badge">
-                      <dt-badge
-                        v-if="badgeText"
-                        :class="badgeClass"
-                        :text="badgeText"
-                      />
-                    </slot>
-                  </div>
-                </template>
-                <template
-                  v-if="$slots.subtitle"
-                  #bottom
-                >
-                  <div
-                    data-qa="dt-recipe-callbox--subtitle-wrapper"
-                    class="dt-recipe-callbox--subtitle-content"
-                  >
-                    <!-- @slot Slot for subtitle -->
-                    <slot name="subtitle" />
-                  </div>
-                </template>
-              </dt-item-layout>
-            </template>
-            <template
-              v-if="$slots.right"
-              #right
-            >
-              <div
-                data-qa="dt-recipe-callbox--right-wrapper"
-                class="dt-recipe-callbox--right"
-              >
-                <!-- @slot Slot for right icons -->
-                <slot name="right" />
-              </div>
-            </template>
-          </dt-item-layout>
-        </template>
-        <template
-          v-if="$slots.bottom"
-          #bottom
-        >
-          <div
-            data-qa="dt-recipe-callbox--bottom-wrapper"
-            class="dt-recipe-callbox--bottom-content"
+        <dt-avatar
+          v-if="shouldShowAvatar"
+          avatar-class="dt-recipe-callbox--avatar"
+          :image-src="avatarSrc"
+          :full-name="avatarFullName"
+          :seed="avatarSeed"
+          :clickable="clickable"
+          :overlay-icon="isOnHold ? 'pause' : null"
+          size="sm"
+          @click="handleClick"
+        />
+        <div class="dt-recipe-callbox--content">
+          <component
+            :is="clickable ? 'button' : 'span'"
+            data-qa="dt-recipe-callbox--title"
+            class="dt-recipe-callbox--content-title"
+            @click="handleClick"
           >
-            <slot name="bottom" />
+            {{ title }}
+          </component>
+          <div
+            v-if="$slots.badge || badgeText"
+            data-qa="dt-recipe-callbox--badge-wrapper"
+            class="dt-recipe-callbox--content-badge"
+          >
+            <!-- @slot Slot for call center badge -->
+            <slot name="badge">
+              <dt-badge
+                :class="badgeClass"
+                :text="badgeText"
+              />
+            </slot>
           </div>
-        </template>
-      </dt-item-layout>
-    </template>
-  </dt-item-layout>
+          <div
+            v-if="$slots.subtitle"
+            data-qa="dt-recipe-callbox--subtitle-wrapper"
+            class="dt-recipe-callbox--content-subtitle"
+          >
+            <!-- @slot Slot for subtitle -->
+            <slot name="subtitle" />
+          </div>
+        </div>
+        <div
+          v-if="$slots.right"
+          data-qa="dt-recipe-callbox--right-wrapper"
+          class="dt-recipe-callbox--right"
+        >
+          <!-- @slot Slot for right icons -->
+          <slot name="right" />
+        </div>
+      </div>
+      <div
+        v-if="$slots.bottom"
+        data-qa="dt-recipe-callbox--bottom-wrapper"
+        class="dt-recipe-callbox--main-content-bottom"
+      >
+        <slot name="bottom" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from './callbox_constants';
-import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
 import DtBadge from '@/components/badge/badge.vue';
 
 export default {
   name: 'DtRecipeCallbox',
 
-  components: { DtBadge, DtAvatar, DtItemLayout },
+  components: { DtBadge, DtAvatar },
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -174,7 +154,34 @@ export default {
       default: 'default',
       validator: (color) => Object.keys(CALLBOX_BORDER_COLORS).includes(color),
     },
+
+    /**
+     * Makes the callbox avatar and title clickable,
+     * emits a click event when clicked.
+     */
+    clickable: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Controls the avatars overlay icon
+     */
+    isOnHold: {
+      type: Boolean,
+      default: false,
+    },
   },
+
+  emits: [
+    /**
+     * Callbox click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+  ],
 
   computed: {
     shouldShowAvatar () {
@@ -189,6 +196,13 @@ export default {
       return CALLBOX_BORDER_COLORS[this.borderColor];
     },
   },
+
+  methods: {
+    handleClick (e) {
+      if (!this.clickable) return;
+      this.$emit('click', e);
+    },
+  },
 };
 </script>
 
@@ -199,40 +213,18 @@ export default {
   background-color: var(--dt-color-surface-primary);
   border-radius: var(--dt-size-radius-300);
 
-  &:deep(.dt-item-layout--left) {
-    justify-content: flex-start;
-    padding-right: 0;
-  }
-
-  &:deep(.dt-item-layout--content) {
-    overflow: hidden;
-  }
-
-  &:deep(.dt-item-layout--bottom) {
-    margin-top: 0;
-  }
-
-  &:deep(.dt-item-layout--right) {
-    flex-shrink: 0;
-  }
-
   &--video {
+    display: flex;
     border-radius: var(--dt-size-radius-200) var(--dt-size-radius-200) 0 0;
-    overflow: hidden;
-    height: calc(var(--dt-size-760) + var(--dt-size-650));
-    margin-bottom: var(--dt-size-300-negative);
-
-    :deep(img) {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
+    overflow: clip;
+    margin-bottom: var(--dt-space-300-negative);
   }
 
   &--main-content {
     padding: 0;
     border-radius: var(--dt-size-radius-300);
     border: var(--dt-size-border-100) solid transparent;
+    align-items: stretch;
 
     &.dt-recipe-callbox--border-default {
       border-color: var(--dt-color-border-default);
@@ -249,36 +241,78 @@ export default {
         radial-gradient(var(--dt-color-surface-primary), var(--dt-color-surface-primary)) padding-box,
         radial-gradient(circle, #E7301D, #F78B23) border-box;
     }
-  }
 
-  &--bottom-content {
-    border-top: 1px solid var(--dt-color-border-subtle);
-  }
-
-  &--title {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    color: var(--dt-color-foreground-primary);
-    background-color: var(--dt-color-surface-primary);
-    font-weight: var(--dt-font-weight-bold);
-  }
-
-  &--subtitle {
-    padding: 0;
-    min-height: auto;
-    font-size: var(--dt-font-size-100);
-
-    &-badge {
-      padding-top: var(--dt-space-300);
+    &-top {
+      display: flex;
+      align-items: center;
+      padding: var(--dt-space-350) var(--dt-space-400);
     }
 
-    &-content :last-child {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        color: var(--dt-color-foreground-tertiary);
-        background-color: var(--dt-color-surface-primary);
+    &-bottom {
+      border-top: 1px solid var(--dt-color-border-subtle);
+    }
+  }
+
+  &--avatar {
+    margin-right: var(--dt-space-400);
+  }
+
+  &--content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    min-width: 0;
+
+    &-title {
+      overflow: clip;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: var(--dt-color-foreground-primary);
+      background-color: var(--dt-color-surface-primary);
+      font-weight: var(--dt-font-weight-bold);
+      border: none;
+      padding: 0;
+      width: 0;
+      min-width: 100%;
+      text-align: left;
+      user-select: text;
+      line-height: normal;
+    }
+
+    &-badge {
+      line-height: normal;
+    }
+
+    &-subtitle {
+      padding: 0;
+      font-size: var(--dt-font-size-100);
+      color: var(--dt-color-foreground-tertiary);
+      line-height: normal;
+      overflow: hidden;
+      width: 0;
+      min-width: 100%;
+    }
+  }
+
+  &--right {
+    display: flex;
+    justify-content: right;
+  }
+
+  &--clickable {
+    .dt-recipe-callbox--content-title {
+      cursor: pointer;
+      user-select: none;
+      border-radius: var(--dt-size-100);
+
+      &:focus-visible {
+        outline: none;
+        box-shadow: var(--dt-shadow-focus);
+      }
+
+      &:hover, &:active {
+        text-decoration: underline;
+      }
     }
   }
 

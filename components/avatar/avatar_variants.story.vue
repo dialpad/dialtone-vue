@@ -9,7 +9,7 @@
           :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Image"
-          image-src="/common/assets/person.png"
+          :image-src="$attrs.imageSrc"
         />
       </div>
     </div>
@@ -42,13 +42,13 @@
       <h2>Presence</h2>
       <div class="d-flow16 d-d-flex d-ai-center">
         <dt-avatar
-          v-for="size in avatarSizes"
-          :key="`presence-${size}`"
+          v-for="state in AVATAR_PRESENCE_STATES"
+          :key="`presence-${state}`"
           :seed="$attrs.seed"
-          :size="size"
+          size="md"
           full-name="Person avatar"
-          presence="busy"
-          image-src="/common/assets/person.png"
+          :image-src="$attrs.imageSrc"
+          :presence="state"
         />
       </div>
     </div>
@@ -59,14 +59,14 @@
           :seed="$attrs.seed"
           size="xl"
           full-name="Person avatar"
-          image-src="/common/assets/person.png"
+          :image-src="$attrs.imageSrc"
           overlay-icon="hear"
         />
         <dt-avatar
           :seed="$attrs.seed"
           size="xl"
           full-name="Person avatar"
-          image-src="/common/assets/person.png"
+          :image-src="$attrs.imageSrc"
           overlay-text="+3"
         />
       </div>
@@ -77,22 +77,40 @@
         <dt-avatar
           :seed="$attrs.seed"
           full-name="Person avatar"
-          image-src="/common/assets/person.png"
           clickable
-          @click="$attrs.onClick"
-        />
-        <dt-avatar
-          :seed="$attrs.seed"
-          full-name="Person avatar"
-          clickable
-          @click="$attrs.onClick"
         />
         <dt-avatar
           :seed="$attrs.seed"
           icon-name="user"
           aria-label="user icon avatar"
           clickable
-          @click="$attrs.onClick"
+        />
+        <dt-avatar
+          :seed="$attrs.seed"
+          full-name="Person avatar"
+          :image-src="$attrs.imageSrc"
+          clickable
+        />
+      </div>
+    </div>
+    <div>
+      <h2>Group</h2>
+      <div class="d-flow16 d-d-flex">
+        <dt-avatar
+          :seed="$attrs.seed"
+          full-name="Person avatar"
+          group="3"
+        />
+        <dt-avatar
+          :seed="$attrs.seed"
+          icon-name="user"
+          group="10"
+        />
+        <dt-avatar
+          :seed="$attrs.seed"
+          full-name="Person avatar"
+          :image-src="$attrs.imageSrc"
+          group="100"
         />
       </div>
     </div>
@@ -101,7 +119,7 @@
 
 <script>
 import DtAvatar from './avatar.vue';
-import { AVATAR_SIZE_MODIFIERS } from './avatar_constants.js';
+import { AVATAR_PRESENCE_STATES, AVATAR_SIZE_MODIFIERS } from './avatar_constants.js';
 
 export default {
   name: 'DtAvatarVariants',
@@ -110,6 +128,12 @@ export default {
     return {
       avatarSizes: Object.keys(AVATAR_SIZE_MODIFIERS),
     };
+  },
+
+  computed: {
+    AVATAR_PRESENCE_STATES () {
+      return AVATAR_PRESENCE_STATES;
+    },
   },
 };
 </script>

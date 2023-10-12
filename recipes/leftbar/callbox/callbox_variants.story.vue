@@ -1,7 +1,9 @@
+<!-- eslint-disable max-lines -->
 <template>
   <div class="d-stack16">
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       border-color="ai"
     >
@@ -25,11 +27,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -38,6 +40,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       title="1 Participant"
+      avatar-seed="1 Participant"
     >
       <template #subtitle>
         <span>06:01</span>
@@ -71,11 +74,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -84,11 +87,13 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       title="1 Participant"
+      avatar-seed="1 Participant"
     >
       <template #video>
         <img
-          src="/common/assets/chatting-person-example.png"
+          :src="chattingPersonImage"
           alt="person avatar"
+          class="callbox-image"
         >
       </template>
       <template #subtitle>
@@ -123,11 +128,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -136,6 +141,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       badge-text="Test_Call_Center"
       badge-color="warning"
@@ -161,11 +167,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -174,18 +180,22 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       border-color="ai"
     >
       <template #subtitle>
-        <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+          class="d-ai-center"
+        >
           <dt-icon
             name="share-screen"
             size="100"
-            class="d-mr4"
           />
           <span>06:01</span>
-        </div>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
@@ -217,11 +227,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -231,23 +241,27 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       title="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       border-color="ai"
     >
       <template #subtitle>
-        <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+          class="d-ai-center"
+        >
           <dt-icon
             name="share-screen"
             size="100"
-            class="d-mr4"
           />
-          <span>Screenshare</span>
-        </div>
+          <p>Screenshare</p>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
           aria-label="stop call"
           importance="clear"
-          class="d-fc-critical"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
@@ -261,28 +275,43 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="design-product-lt-so"
+      avatar-seed="design-product-lt-so"
       title="design-product-lt-so"
       border-color="critical"
+      clickable
     >
       <template #subtitle>
-        <div class="d-d-flex d-flow4">
-          <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+        >
+          <dt-stack
+            direction="row"
+            class="d-ai-center"
+          >
             <dt-icon
               name="users"
               size="100"
               class="d-mr2"
             />
             <span>3</span>
-          </div>
-          <span class="d-fs-300">•</span>
-          <div class="d-d-flex d-ai-center">
+          </dt-stack>
+          <span class="d-fs-300">
+            •
+          </span>
+          <dt-stack
+            direction="row"
+            class="d-ai-center d-of-x-hidden"
+          >
             <dt-icon
               name="activity"
               size="100"
             />
-            <span>Jaqueline Nackos</span>
-          </div>
-        </div>
+            <p class="d-to-ellipsis d-ws-nowrap d-of-hidden">
+              Jaqueline Nackos Jaqueline Nackos
+            </p>
+          </dt-stack>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
@@ -302,11 +331,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -315,18 +344,22 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
       title="Jaqueline Nackos"
       border-color="ai"
     >
       <template #subtitle>
-        <div class="d-d-flex d-ai-center">
+        <dt-stack
+          direction="row"
+          gap="300"
+          class="d-ai-center"
+        >
           <dt-icon
             name="share-screen"
             size="100"
-            class="d-mr4"
           />
           <span>06:01</span>
-        </div>
+        </dt-stack>
       </template>
       <template #right>
         <dt-button
@@ -345,11 +378,11 @@
           aria-label="hang call"
           circle
           importance="clear"
+          kind="danger"
         >
           <template #icon>
             <dt-icon
               name="phone-hang-up"
-              class="d-fc-critical"
               size="400"
             />
           </template>
@@ -357,20 +390,21 @@
       </template>
       <template #bottom>
         <dt-item-layout>
-          <template #left>
-            <dt-icon
-              name="share-screen"
-              size="400"
-            />
-          </template>
           <template #default>
-            <span class="d-fs-100">Sharing screen</span>
+            <div class="d-d-flex d-ai-center">
+              <dt-icon
+                class="d-mr8"
+                name="share-screen"
+                size="400"
+              />
+              <span class="d-fs-100">Sharing screen</span>
+            </div>
           </template>
           <template #right>
             <dt-button
               aria-label="stop call"
               importance="clear"
-              class="d-fc-critical"
+              kind="danger"
             >
               <template #icon>
                 <dt-icon
@@ -384,6 +418,41 @@
         </dt-item-layout>
       </template>
     </dt-recipe-callbox>
+    <dt-recipe-callbox
+      avatar-full-name="Jaqueline Nackos"
+      avatar-seed="Jaqueline Nackos"
+      title="Jaqueline Nackos"
+      is-on-hold
+    >
+      <template #subtitle>
+        <dt-stack
+          direction="row"
+          gap="300"
+          class="d-ai-center"
+        >
+          <dt-icon
+            name="share-screen"
+            size="100"
+          />
+          <span>06:01</span>
+        </dt-stack>
+      </template>
+      <template #right>
+        <dt-button
+          aria-label="hang call"
+          circle
+          importance="clear"
+          kind="danger"
+        >
+          <template #icon>
+            <dt-icon
+              name="phone-hang-up"
+              size="400"
+            />
+          </template>
+        </dt-button>
+      </template>
+    </dt-recipe-callbox>
   </div>
 </template>
 
@@ -392,9 +461,31 @@ import DtRecipeCallbox from './callbox.vue';
 import DtButton from '@/components/button/button.vue';
 import DtIcon from '@/components/icon/icon.vue';
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
+import DtStack from '@/components/stack/stack.vue';
+import chattingPersonImage from '@/common/assets/chatting-person-example.png';
 
 export default {
   name: 'DtRecipeCallboxVariants',
-  components: { DtItemLayout, DtIcon, DtButton, DtRecipeCallbox },
+  components: { DtStack, DtItemLayout, DtIcon, DtButton, DtRecipeCallbox },
+  emits: [
+    /**
+     * Add click event here to prevent story from emitting clicks on Vue 3
+     */
+    'click',
+  ],
+
+  data () {
+    return {
+      chattingPersonImage,
+    };
+  },
 };
 </script>
+
+<style lang="less" scoped>
+.callbox-image {
+  height: 140px;
+  object-fit: cover;
+  width: 100%;
+}
+</style>
