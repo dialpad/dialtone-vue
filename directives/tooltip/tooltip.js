@@ -15,13 +15,14 @@ const DEFAULT_PLACEMENT = 'bottom';
 export const DtTooltipDirective = {
   name: 'dt-tooltip-directive',
   config: {},
-  install (Vue, installOptions) {
-    const mountPoint = document.createElement('div');
+  install (Vue) {
     let currentTooltipId = 1;
+    const mountPoint = document.createElement('div');
     mountPoint.id = 'dt-tooltip-directive-app';
     document.body.appendChild(mountPoint);
 
     const DtTooltipDirectiveApp = new Vue({
+      el: mountPoint,
       name: 'DtTooltipDirectiveApp',
       components: { DtTooltip, Portal },
       data () {
@@ -30,26 +31,24 @@ export const DtTooltipDirective = {
         };
       },
 
-      mounted () {
-        console.log(this.$el);
-      },
-
-      render (createElement) {
-        return createElement('div',
+      render (h) {
+        return h('div',
+          {
+            domProps: { id: 'dt-tooltip-directive-app' },
+          },
           [
-            this.tooltips.map(tooltip => {
-              delete tooltip.anchor.data.directives;
-              console.log(tooltip.anchor.elm.id);
-              return createElement('Portal', {
-                selector: tooltip.anchor.elm.id,
+            this.tooltips.map(({ id, vnode, message, placement }) => {
+              vnode.data.attrs = { 'data-dt-tooltip-inserted': id };
+              // vnode.elm.setAttribute('data-dt-tooltip-inserted', 'true');
+              // _removeTooltipDirective(vnode);
+              return h('Portal', {
+                props: {
+                  selector: `[data-dt-tooltip-id="${id}"]`,
+                },
               }, [
-                createElement(DtTooltip, {
-                  parent: tooltip.anchor.parentNode,
-                  props: {
-                    message: tooltip.message,
-                    placement: tooltip.placement,
-                  },
-                }, [createElement('span', { slot: 'anchor' }, [tooltip.anchor])]),
+                h(DtTooltip, {
+                  props: { message, placement },
+                }, [h('span', { slot: 'anchor' }, [vnode])]),
               ]);
             }),
           ],
@@ -57,10 +56,10 @@ export const DtTooltipDirective = {
       },
     });
 
-    DtTooltipDirectiveApp.$mount(mountPoint);
-
     Vue.directive('dt-tooltip', {
-      bind (anchor, binding) {
+      bind (anchor, binding, vnode) {
+        if (anchor.hasAttribute('data-dt-tooltip-inserted')) return;
+        console.log('bind');
         // if (!isValidBindingTextValue(binding.value)) {
         //   console.warn('Missing value for v-dt-tooltip directive on: ', anchor, 'received value: ', binding.value);
         //   return;
@@ -74,45 +73,19 @@ export const DtTooltipDirective = {
         // }
       },
       inserted: function (anchor, binding, vnode) {
+        if (anchor.hasAttribute('data-dt-tooltip-inserted')) return;
+        anchor.setAttribute('data-dt-tooltip-inserted', currentTooltipId);
         // if (!isValidBindingTextValue(binding)) return;
 
         const message = binding.value?.text || binding.value;
         const placement = binding.value?.placement || DEFAULT_PLACEMENT;
-        anchor.id = 'tooltip-directive-' + currentTooltipId++;
+        const wrapper = document.createElement('span');
+        wrapper.setAttribute('data-dt-tooltip-id', `${currentTooltipId}`);
+        anchor.replaceWith(wrapper);
 
-        DtTooltipDirectiveApp.tooltips.push({ message, placement, anchor: vnode });
-
-        // const newApp = new Vue({
-        //   name: 'DtTooltipDirectiveInstance',
-        //   components: { DtTooltip },
-        //   data () {
-        //     return {
-        //       message: binding.value?.text || binding.value,
-        //       placement: binding.value?.placement || DEFAULT_PLACEMENT,
-        //     };
-        //   },
-        //
-        //   render (createElement) {
-        //     delete anchorEl.data.directives;
-        //     delete anchorEl.data.hook;
-        //
-        //     return createElement(DtTooltip, {
-        //       props: {
-        //         placement: this.placement,
-        //         message: this.message,
-        //       },
-        //     }, [
-        //       createElement(anchorEl.tag, {
-        //         ...anchorEl.data,
-        //         slot: 'anchor',
-        //       }, anchorEl.children),
-        //     ]);
-        //   },
-        // });
-        //
-        // newApp.$mount(anchor);
+        DtTooltipDirectiveApp.tooltips.push({ id: currentTooltipId, message, placement, vnode });
+        currentTooltipId += 1;
       },
-      unbind () {},
     });
   },
 };
