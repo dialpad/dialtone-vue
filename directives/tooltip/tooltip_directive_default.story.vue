@@ -11,7 +11,7 @@
     >
       Trying complex examples
     </dt-button>
-    <span>More text</span>
+    <span v-dt-tooltip="'Simple example'">More text</span>
     <dt-button v-dt-tooltip="'Tooltip text on button'">
       Button with tooltip
     </dt-button>
