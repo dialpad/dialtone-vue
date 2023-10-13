@@ -1,14 +1,9 @@
 <template>
-  <div
-    role="presentation"
-    class="dt-image-carousel"
-    @focusin="showCloseButton = true"
-    @focusout="focusOut"
-    @mouseenter="showCloseButton = true"
-    @mouseleave="showCloseButton = false"
+  <li
+    class="dt-attachment-image"
   >
     <dt-image-viewer
-      image-button-class="dt-image-carousel--image-viewer"
+      image-button-class="dt-attachment-image__image-viewer"
       :image-src="mediaItem.path"
       :image-alt="mediaItem.altText"
       :close-aria-label="closeAriaLabel"
@@ -17,19 +12,18 @@
 
     <!-- Loader / Close button -->
     <div
-      class="dt-image-carousel--top-right"
+      class="dt-attachment-image__top-right"
     >
       <dt-progress-bar
-        v-if="mediaItem.isUploading && !showCloseButton"
-        class="dt-image-carousel--progress-bar"
+        v-if="mediaItem.isUploading"
+        class="dt-attachment-image__progress-bar"
         :progress="mediaItem.progress"
         :progressbar-aria-label="progressbarAriaLabel"
       />
       <dt-button
-        v-show="showCloseButton"
         :id="`closeButton-${index}`"
         tabindex="0"
-        class="dt-image-carousel--close-button"
+        class="dt-attachment-image__close-button"
         circle
         size="xs"
         importance="clear"
@@ -44,7 +38,7 @@
         </template>
       </dt-button>
     </div>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -101,33 +95,23 @@ export default {
     'remove-media',
   ],
 
-  data () {
-    return {
-      showCloseButton: false,
-    };
-  },
-
   methods: {
     removeMediaItem (index) {
       this.$emit('remove-media', index);
-    },
-
-    focusOut (event) {
-      if (event.relatedTarget?.id === 'closeButton-'.concat(this.index)) {
-        this.showCloseButton = true;
-        return;
-      }
-      this.showCloseButton = false;
     },
   },
 };
 </script>
 
-<style>
-.dt-image-carousel {
+<style lang="less">
+.dt-attachment-image {
   position: relative;
+
+  &:focus-within .dt-attachment-image__close-button, &:hover .dt-attachment-image__close-button {
+    opacity: 1;
+  }
 }
-.dt-image-carousel--image-viewer {
+.dt-attachment-image__image-viewer {
   height: var(--dt-size-700);
   width: var(--dt-size-700);
   border: var(--dt-space-100) solid;
@@ -136,19 +120,26 @@ export default {
   border-color: var(--dt-color-border-subtle);
   object-fit: cover;
 }
-.dt-image-carousel--top-right {
+.dt-attachment-image__top-right {
   position: absolute;
   top: var(--dt-size-100);
   right: var(--dt-size-100);
 }
-.dt-image-carousel--close-button {
+.dt-attachment-image__close-button {
+  opacity: 0;
+  position: absolute;
+  top: inherit;
+  right: inherit;
   color: var(--dt-color-neutral-white);
   background-color: var(--dt-color-black-400);
   border: var(--dt-space-100) solid;
   border-width: var(--dt-size-200);
   border-color: var(--dt-color-neutral-white);
 }
-.dt-image-carousel--progress-bar {
+.dt-attachment-image__progress-bar {
+  position: absolute;
+  top: inherit;
+  right: inherit;
   background-color: var(--dt-color-neutral-white);
   border-radius: 50%;
   display: flex;

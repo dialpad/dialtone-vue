@@ -2,15 +2,11 @@
   <div
     class="dt-attachment-carousel"
     role="presentation"
-    @mouseenter="showCarouselArrows = true"
-    @mouseleave="showCarouselArrows = false"
-    @focusin="showCarouselArrows = true"
-    @focusout="showCarouselArrows = false"
   >
-    <div
+    <ul
       v-if="mediaList.length > 0"
       ref="carousel"
-      class="dt-attachment-carousel--media-list"
+      class="dt-attachment-carousel__media-list"
       @scroll="handleScroll"
     >
       <!-- media list -->
@@ -24,14 +20,15 @@
         :click-to-open-aria-label="clickToOpenAriaLabel"
         :progressbar-aria-label="progressbarAriaLabel"
         @remove-media="removeMediaItem(index)"
+        @focusin="onItemFocus"
       />
-    </div>
+    </ul>
 
     <!-- Carousel Arrows -->
     <dt-button
-      v-if="showLeftArrow && showCarouselArrows"
+      v-show="showLeftArrow"
       tabindex="-1"
-      class="dt-attachment-carousel--left-arrow"
+      class="dt-attachment-carousel__arrow dt-attachment-carousel__arrow--left"
       circle
       size="xs"
       importance="clear"
@@ -45,9 +42,9 @@
       </template>
     </dt-button>
     <dt-button
-      v-if="showRightArrow && showCarouselArrows"
+      v-show="showRightArrow"
       tabindex="-1"
-      class="dt-attachment-carousel--right-arrow"
+      class="dt-attachment-carousel__arrow dt-attachment-carousel__arrow--right"
       circle
       size="xs"
       importance="clear"
@@ -132,7 +129,6 @@ export default {
   data () {
     return {
       showCloseButton: {},
-      showCarouselArrows: false,
       showRightArrow: true,
       showLeftArrow: false,
       isMounted: false,
@@ -151,6 +147,10 @@ export default {
   },
 
   methods: {
+    onItemFocus (e) {
+      e.currentTarget.scrollIntoView({ behavior: 'smooth' });
+    },
+
     mediaComponent (type) {
       switch (type) {
         case 'image':
@@ -199,36 +199,39 @@ export default {
   position: relative;
   max-height: 100px;
   width: var(--dt-space-1000);
-
 }
 
-.dt-attachment-carousel--media-list {
+.dt-attachment-carousel__media-list {
   display: flex;
   flex-direction: row;
+  padding-left: 0px;
   overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
-.dt-attachment-carousel--media-list::-webkit-scrollbar {
-  display: none;
-}
-.dt-attachment-carousel--left-arrow {
+
+.dt-attachment-carousel__arrow {
   position: absolute;
+  opacity: 0;
+
+  .dt-attachment-carousel:hover & {
+    opacity: 1;
+  }
   background-color: var(--dt-color-neutral-white);
   top: var(--dt-space-30-percent);
-  left: var(--dt-space-300);
   border: var(--dt-space-100) solid;
   border-width: var(--dt-size-100);
   border-color: var(--bc-default);
 }
-.dt-attachment-carousel--right-arrow {
-  position: absolute;
-  background-color: var(--dt-color-neutral-white);
-  top: var(--dt-space-30-percent);
-  right: var(--dt-space-300);
-  border: var(--dt-space-100) solid;
-  border-width: var(--dt-size-100);
-  border-color: var(--dt-color-border-default);
+.dt-attachment-carousel__arrow--left {
+  left: var(--dt-space-300);
 }
-.dt-attachment-carousel--image-viewer {
+.dt-attachment-carousel__arrow--right {
+  right: var(--dt-space-300);
+}
+
+.dt-attachment-carousel__image-viewer {
   height: var(--dt-size-700);
   width: var(--dt-size-700);
   border-radius: var(--br4);
