@@ -1,34 +1,41 @@
-import { DtTooltip } from '@/components/tooltip';
-import { Portal } from '@linusborg/vue-simple-portal';
-const DEFAULT_PLACEMENT = 'bottom';
-
-// const isValidBindingTextValue = (value) => {
-//   return value ||
-//     (typeof value === 'string' && value.trim()) ||
-//     (typeof value === 'object' && value.text.trim());
-// };
-// const isValidBindingPlacementValue = (value) => {
-//   return value ||
-//     (typeof value === 'object' && TOOLTIP_DIRECTIONS.includes(value.placement));
-// };
+import { DtTooltip, TOOLTIP_DIRECTIONS } from '@/components/tooltip';
+import { getUniqueString } from '@/common/utils';
 
 export const DtTooltipDirective = {
   name: 'dt-tooltip-directive',
-  config: {},
   install (Vue) {
-    let currentTooltipId = 1;
     const mountPoint = document.createElement('div');
-    mountPoint.id = 'dt-tooltip-directive-app';
     document.body.appendChild(mountPoint);
 
+    const DEFAULT_PLACEMENT = 'top';
     const DtTooltipDirectiveApp = new Vue({
       el: mountPoint,
       name: 'DtTooltipDirectiveApp',
-      components: { DtTooltip, Portal },
+      components: { DtTooltip },
       data () {
         return {
           tooltips: [],
         };
+      },
+
+      methods: {
+        addTooltip (id, message, placement) {
+          this.tooltips.push({ id, message, placement, show: false });
+        },
+
+        hideTooltip (id) {
+          const tooltipIndex = this.tooltips.findIndex(tooltip => tooltip.id === id);
+          this.tooltips[tooltipIndex].show = false;
+        },
+
+        removeTooltip (id) {
+          this.tooltips = this.tooltips.filter(tooltip => tooltip.id !== id);
+        },
+
+        showTooltip (id) {
+          const tooltipIndex = this.tooltips.findIndex(tooltip => tooltip.id === id);
+          this.tooltips[tooltipIndex].show = true;
+        },
       },
 
       render (h) {
@@ -37,54 +44,91 @@ export const DtTooltipDirective = {
             domProps: { id: 'dt-tooltip-directive-app' },
           },
           [
-            this.tooltips.map(({ id, vnode, message, placement }) => {
-              vnode.data.attrs = { 'data-dt-tooltip-inserted': id };
-              // vnode.elm.setAttribute('data-dt-tooltip-inserted', 'true');
-              // _removeTooltipDirective(vnode);
-              return h('Portal', {
+            this.tooltips.map(({ id, message, placement, show }) => {
+              return h(DtTooltip, {
+                key: id,
                 props: {
-                  selector: `[data-dt-tooltip-id="${id}"]`,
+                  message,
+                  placement,
+                  show,
+                  externalAnchor: `[data-dt-tooltip-id="${id}"]`,
                 },
-              }, [
-                h(DtTooltip, {
-                  props: { message, placement },
-                }, [h('span', { slot: 'anchor' }, [vnode])]),
-              ]);
+              });
             }),
           ],
         );
       },
     });
 
+    const isValidBindingTextValue = (value) => {
+      return typeof value === 'string' && value?.trim();
+    };
+    const isValidBindingPlacementValue = (value) => {
+      return value === undefined || TOOLTIP_DIRECTIONS.includes(value);
+    };
+
+    function showTooltipListener (event) {
+      const tooltipId = event.target.getAttribute('data-dt-tooltip-id');
+      DtTooltipDirectiveApp.showTooltip(tooltipId);
+    }
+
+    function hideTooltipListener (event) {
+      if (event.type === 'keydown' && event.code !== 'Escape') return;
+      const tooltipId = event.target.getAttribute('data-dt-tooltip-id');
+      DtTooltipDirectiveApp.hideTooltip(tooltipId);
+    }
+
+    function addAnchorEventListeners (anchor) {
+      ['focusin', 'mouseenter'].forEach(listener => {
+        anchor.addEventListener(listener, (event) => showTooltipListener(event));
+      });
+      ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
+        anchor.addEventListener(listener, (event) => hideTooltipListener(event));
+      });
+    }
+
+    function removeAnchorEventListeners (anchor) {
+      ['focusin', 'mouseenter'].forEach(listener => {
+        anchor.removeEventListener(listener, (event) => showTooltipListener(event));
+      });
+      ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
+        anchor.removeEventListener(listener, (event) => hideTooltipListener(event));
+      });
+    }
+
     Vue.directive('dt-tooltip', {
-      bind (anchor, binding, vnode) {
-        if (anchor.hasAttribute('data-dt-tooltip-inserted')) return;
-        console.log('bind');
-        // if (!isValidBindingTextValue(binding.value)) {
-        //   console.warn('Missing value for v-dt-tooltip directive on: ', anchor, 'received value: ', binding.value);
-        //   return;
-        // }
-        // if (!isValidBindingPlacementValue(binding.value)) {
-        //   console.warn(
-        //     'Wrong placement value provided for v-dt-tooltip directive on: '
-        //     , anchor,
-        //     'received value: ',
-        //     binding.value.placement);
-        // }
+      bind (anchor, binding) {
+        if (!isValidBindingTextValue(binding.value)) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            'Missing value for v-dt-tooltip directive on: ',
+            anchor,
+            'received value: ',
+            binding.value,
+          );
+          return;
+        }
+        if (!isValidBindingPlacementValue(binding.arg)) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            'Wrong placement value provided for v-dt-tooltip directive on: '
+            , anchor,
+            'received value: ',
+            binding.arg);
+          return;
+        }
+
+        const tooltipId = getUniqueString();
+        const message = binding.value;
+        const placement = binding.arg || DEFAULT_PLACEMENT;
+
+        anchor.setAttribute('data-dt-tooltip-id', tooltipId);
+        DtTooltipDirectiveApp.addTooltip(tooltipId, message, placement);
+        addAnchorEventListeners(anchor);
       },
-      inserted: function (anchor, binding, vnode) {
-        if (anchor.hasAttribute('data-dt-tooltip-inserted')) return;
-        anchor.setAttribute('data-dt-tooltip-inserted', currentTooltipId);
-        // if (!isValidBindingTextValue(binding)) return;
-
-        const message = binding.value?.text || binding.value;
-        const placement = binding.value?.placement || DEFAULT_PLACEMENT;
-        const wrapper = document.createElement('span');
-        wrapper.setAttribute('data-dt-tooltip-id', `${currentTooltipId}`);
-        anchor.replaceWith(wrapper);
-
-        DtTooltipDirectiveApp.tooltips.push({ id: currentTooltipId, message, placement, vnode });
-        currentTooltipId += 1;
+      unbind (anchor) {
+        removeAnchorEventListeners(anchor);
+        DtTooltipDirectiveApp.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
       },
     });
   },

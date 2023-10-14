@@ -5,14 +5,14 @@
     class="d-mt64"
   >
     <dt-button
-      v-dt-tooltip="{ placement: 'top-start', text: 'Tooltip text on button top-start' }"
+      v-dt-tooltip:top-end="'Tooltip text on top-end'"
       importance="clear"
       kind="danger"
     >
       Trying complex examples
     </dt-button>
-    <span v-dt-tooltip="'Simple example'">More text</span>
-    <dt-button v-dt-tooltip="'Tooltip text on button'">
+    <span v-dt-tooltip="'Text with default placement'">More text</span>
+    <dt-button v-dt-tooltip:bottom="'Tooltip text on bottom'">
       Button with tooltip
     </dt-button>
   </dt-stack>
