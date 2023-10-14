@@ -4,6 +4,7 @@
          elements within the span rather than on the span itself -->
     <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
     <span
+      v-if="!externalAnchor"
       ref="anchor"
       data-qa="dt-tooltip-anchor"
       @focusin="onEnterAnchor"
@@ -56,8 +57,7 @@ import {
 import { getUniqueString } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show.vue';
 import {
-  createTippy,
-  getAnchor,
+  createTippy, getAnchor,
   getPopperOptions,
 } from '../popover/tippy_utils';
 
@@ -217,6 +217,15 @@ export default {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * External anchor id to use in those cases the anchor can't be provided via the slot.
+     * For instance, using the combobox's input as the anchor for the popover.
+     */
+    externalAnchor: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: [
@@ -251,6 +260,8 @@ export default {
       // the placement prop when there is not enough available room for the tip
       // to display and it uses a fallback placement.
       currentPlacement: this.placement,
+
+      anchorEl: null,
     };
   },
 
@@ -320,7 +331,8 @@ export default {
   },
 
   mounted () {
-    this.tip = createTippy(getAnchor(this.$refs.anchor), this.initOptions());
+    this.setTooltipAnchor();
+    this.tip = createTippy(this.anchorEl, this.initOptions());
 
     // immediate watcher fires before mounted, so have this here in case
     // show prop was initially set to true.
@@ -350,7 +362,7 @@ export default {
     },
 
     hasVisibleFocus () {
-      return getAnchor(this.$refs.anchor).matches(':focus-visible');
+      return this.anchorEl.matches(':focus-visible');
     },
 
     onEnterAnchor (e) {
@@ -429,6 +441,14 @@ export default {
         onMount: this.onMount,
         ...this.tippyProps,
       };
+    },
+
+    setTooltipAnchor () {
+      if (this.externalAnchor) {
+        this.anchorEl = document.querySelector(this.externalAnchor);
+      } else {
+        this.anchorEl = getAnchor(this.$refs.anchor);
+      }
     },
   },
 };

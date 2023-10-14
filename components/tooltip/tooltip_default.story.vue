@@ -20,6 +20,7 @@
         :transition="transition"
         :show="showTooltip"
         :delay="delay"
+        :external-anchor="externalAnchor"
         @shown="onShown"
       >
         <template
