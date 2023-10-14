@@ -22,6 +22,7 @@
         :transition="$attrs.transition"
         :show.sync="$attrs.show"
         :delay="$attrs.delay"
+        :external-anchor="$attrs.externalAnchor"
         @shown="$attrs.onShown"
       >
         <template #anchor>
