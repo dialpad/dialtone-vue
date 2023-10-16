@@ -9,6 +9,8 @@
     :close-aria-label="$attrs.closeAriaLabel"
     :click-to-open-aria-label="$attrs.clickToOpenAriaLabel"
     :progressbar-aria-label="$attrs.progressbarAriaLabel"
+    :left-arrow-aria-label="$attrs.leftArrowAriaLabel"
+    :right-arrow-aria-label="$attrs.rightArrowAriaLabel"
     @remove-media="removeMedia"
   />
 </template>

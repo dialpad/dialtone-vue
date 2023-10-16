@@ -28,6 +28,7 @@
     <dt-button
       v-show="showLeftArrow"
       tabindex="-1"
+      :aria-label="leftArrowAriaLabel"
       class="dt-attachment-carousel__arrow dt-attachment-carousel__arrow--left"
       circle
       size="xs"
@@ -44,6 +45,7 @@
     <dt-button
       v-show="showRightArrow"
       tabindex="-1"
+      :aria-label="rightArrowAriaLabel"
       class="dt-attachment-carousel__arrow dt-attachment-carousel__arrow--right"
       circle
       size="xs"
@@ -111,6 +113,16 @@ export default {
     },
 
     progressbarAriaLabel: {
+      type: String,
+      required: true,
+    },
+
+    leftArrowAriaLabel: {
+      type: String,
+      required: true,
+    },
+
+    rightArrowAriaLabel: {
       type: String,
       required: true,
     },
