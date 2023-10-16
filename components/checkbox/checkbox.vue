@@ -1,5 +1,5 @@
 <template>
-  <label>
+  <label class="dt-checkbox-wrapper">
     <div :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
       <div class="d-checkbox__input">
         <input
@@ -175,3 +175,11 @@ export default {
   },
 };
 </script>
+
+<style>
+/* our html structure between dialtone and dialtone-vue is vastly different for checkbox/radio right now.. setting a
+local style here until we can get this fixed up. */
+.dt-checkbox-wrapper {
+  display: block;
+}
+</style>
