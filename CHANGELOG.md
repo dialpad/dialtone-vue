@@ -1,3 +1,22 @@
+## [2.101.1](https://github.com/dialpad/dialtone-vue/compare/v2.101.0...v2.101.1) (2023-10-16)
+
+
+### Bug Fixes
+
+* **Radio, Checkbox:** apply fieldset class ([#1259](https://github.com/dialpad/dialtone-vue/issues/1259)) ([61a6899](https://github.com/dialpad/dialtone-vue/commit/61a68997442164c901bf60c095082ba546d2f506))
+
+# [2.101.0](https://github.com/dialpad/dialtone-vue/compare/v2.100.1...v2.101.0) (2023-10-16)
+
+
+### Bug Fixes
+
+* **Root Layout:** convert to pure CSS grid method ([#1253](https://github.com/dialpad/dialtone-vue/issues/1253)) ([db3ba06](https://github.com/dialpad/dialtone-vue/commit/db3ba0677f7b4999e220fdb34635959f5f086ad3))
+
+
+### Features
+
+* **Dt Recipe Ivr Node:** change z-index and docs ([#1257](https://github.com/dialpad/dialtone-vue/issues/1257)) ([1d5c703](https://github.com/dialpad/dialtone-vue/commit/1d5c7038a5a50f8b23b90c8681a71bc09acbe451))
+
 ## [2.100.1](https://github.com/dialpad/dialtone-vue/compare/v2.100.0...v2.100.1) (2023-10-06)
 
 
