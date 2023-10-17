@@ -193,7 +193,7 @@ export default {
      * Controls whether the tooltip is shown. Leaving this null will have the tooltip trigger on mouseover by default.
      * If you set this value, the default mouseover behavior will be disabled and you can control it as you need.
      * Supports .sync modifier
-     * @values true, false
+     * @values null, true, false
      */
     show: {
       type: Boolean,
@@ -224,7 +224,7 @@ export default {
      */
     externalAnchor: {
       type: String,
-      default: '',
+      default: null,
     },
   },
 
@@ -330,8 +330,9 @@ export default {
     },
   },
 
-  mounted () {
+  async mounted () {
     this.setTooltipAnchor();
+    await this.$nextTick();
     this.tip = createTippy(this.anchorEl, this.initOptions());
 
     // immediate watcher fires before mounted, so have this here in case
