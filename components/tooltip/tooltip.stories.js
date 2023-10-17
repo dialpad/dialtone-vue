@@ -63,6 +63,18 @@ export const argTypesData = {
       },
     },
   },
+  show: {
+    options: [null, true, false],
+    type: 'select',
+  },
+
+  inverted: {
+    type: 'boolean',
+  },
+
+  delay: {
+    type: 'boolean',
+  },
 
   transition: {
     options: ['', 'fade', 'pop', 'shake'],
