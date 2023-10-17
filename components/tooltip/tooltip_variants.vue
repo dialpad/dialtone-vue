@@ -60,6 +60,7 @@
           <dt-button
             aria-labelledby="circle-button-tooltip-label"
             circle
+            importance="outlined"
           >
             <template #icon>
               <dt-icon
