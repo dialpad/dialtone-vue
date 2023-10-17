@@ -57,7 +57,8 @@ import {
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import DtLazyShow from '../lazy_show/lazy_show.vue';
 import {
-  createTippy, getAnchor,
+  createTippy,
+  getAnchor,
   getPopperOptions,
 } from '../popover/tippy_utils';
 
@@ -270,8 +271,6 @@ export default {
       // the placement prop when there is not enough available room for the tip
       // to display and it uses a fallback placement.
       currentPlacement: this.placement,
-
-      anchorEl: null,
     };
   },
 
@@ -291,7 +290,6 @@ export default {
     tippyProps () {
       return {
         offset: this.offset,
-        appendTo: this.anchorEl?.getRootNode()?.querySelector('body'),
         interactive: false,
         trigger: 'manual',
         placement: this.placement,
@@ -302,6 +300,10 @@ export default {
           onChangePlacement: this.onChangePlacement,
         }),
       };
+    },
+
+    anchor () {
+      return this.externalAnchor ? document.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
     },
   },
 
@@ -338,10 +340,8 @@ export default {
     },
   },
 
-  async mounted () {
-    this.setTooltipAnchor();
-    await this.$nextTick();
-    this.tip = createTippy(this.anchorEl, this.initOptions());
+  mounted () {
+    this.tip = createTippy(this.anchor, this.initOptions());
 
     // immediate watcher fires before mounted, so have this here in case
     // show prop was initially set to true.
@@ -371,7 +371,7 @@ export default {
     },
 
     hasVisibleFocus () {
-      return this.anchorEl.matches(':focus-visible');
+      return this.anchor.matches(':focus-visible');
     },
 
     onEnterAnchor (e) {
@@ -450,14 +450,6 @@ export default {
         onMount: this.onMount,
         ...this.tippyProps,
       };
-    },
-
-    setTooltipAnchor () {
-      if (this.externalAnchor) {
-        this.anchorEl = document.querySelector(this.externalAnchor);
-      } else {
-        this.anchorEl = getAnchor(this.$refs.anchor);
-      }
     },
   },
 };
