@@ -60,13 +60,13 @@ export const DtTooltipDirective = {
 
     function showTooltipListener (event) {
       const tooltipId = event.target.getAttribute('data-dt-tooltip-id');
-      DtTooltipDirectiveApp._instance.ctx.showTooltip(tooltipId);
+      DtTooltipDirectiveApp._instance?.ctx.showTooltip(tooltipId);
     }
 
     function hideTooltipListener (event) {
       if (event.type === 'keydown' && event.code !== 'Escape') return;
       const tooltipId = event.target.getAttribute('data-dt-tooltip-id');
-      DtTooltipDirectiveApp._instance.ctx.hideTooltip(tooltipId);
+      DtTooltipDirectiveApp._instance?.ctx.hideTooltip(tooltipId);
     }
 
     function addAnchorEventListeners (anchor) {
