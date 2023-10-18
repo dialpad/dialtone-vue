@@ -1,15 +1,15 @@
 import { DtTooltip, TOOLTIP_DIRECTIONS } from '@/components/tooltip';
 import { getUniqueString } from '@/common/utils';
+import { createApp, h } from 'vue';
 
 export const DtTooltipDirective = {
   name: 'dt-tooltip-directive',
-  install (Vue) {
+  install (app) {
     const mountPoint = document.createElement('div');
     document.body.appendChild(mountPoint);
 
     const DEFAULT_PLACEMENT = 'top';
-    const DtTooltipDirectiveApp = new Vue({
-      el: mountPoint,
+    const DtTooltipDirectiveApp = createApp({
       name: 'DtTooltipDirectiveApp',
       components: { DtTooltip },
       data () {
@@ -38,44 +38,35 @@ export const DtTooltipDirective = {
         },
       },
 
-      render (h) {
+      render () {
         return h('div',
-          {
-            domProps: { id: 'dt-tooltip-directive-app' },
-          },
-          [
-            this.tooltips.map(({ id, message, placement, show }) => {
-              return h(DtTooltip, {
-                key: id,
-                props: {
-                  message,
-                  placement,
-                  show,
-                  externalAnchor: `[data-dt-tooltip-id="${id}"]`,
-                },
-              });
-            }),
-          ],
+          this.tooltips.map(({ id, message, placement, show }) => {
+            return h(DtTooltip, {
+              key: id,
+              message,
+              placement,
+              show,
+              externalAnchor: `[data-dt-tooltip-id="${id}"]`,
+            });
+          }),
         );
       },
     });
 
-    const isValidBindingTextValue = (value) => {
-      return typeof value === 'string' && value?.trim();
-    };
-    const isValidBindingPlacementValue = (value) => {
-      return value === undefined || TOOLTIP_DIRECTIONS.includes(value);
-    };
+    DtTooltipDirectiveApp.mount(mountPoint);
+
+    const isValidBindingTextValue = (value) => typeof value === 'string' && value?.trim();
+    const isValidBindingPlacementValue = (value) => value === undefined || TOOLTIP_DIRECTIONS.includes(value);
 
     function showTooltipListener (event) {
       const tooltipId = event.target.getAttribute('data-dt-tooltip-id');
-      DtTooltipDirectiveApp.showTooltip(tooltipId);
+      DtTooltipDirectiveApp._instance.ctx.showTooltip(tooltipId);
     }
 
     function hideTooltipListener (event) {
       if (event.type === 'keydown' && event.code !== 'Escape') return;
       const tooltipId = event.target.getAttribute('data-dt-tooltip-id');
-      DtTooltipDirectiveApp.hideTooltip(tooltipId);
+      DtTooltipDirectiveApp._instance.ctx.hideTooltip(tooltipId);
     }
 
     function addAnchorEventListeners (anchor) {
@@ -96,8 +87,8 @@ export const DtTooltipDirective = {
       });
     }
 
-    Vue.directive('dt-tooltip', {
-      bind (anchor, binding) {
+    app.directive('dt-tooltip', {
+      beforeMount (anchor, binding) {
         if (!isValidBindingTextValue(binding.value)) {
           // eslint-disable-next-line no-console
           console.warn(
@@ -123,12 +114,12 @@ export const DtTooltipDirective = {
         const placement = binding.arg || DEFAULT_PLACEMENT;
 
         anchor.setAttribute('data-dt-tooltip-id', tooltipId);
-        DtTooltipDirectiveApp.addTooltip(tooltipId, message, placement);
+        DtTooltipDirectiveApp._instance.ctx.addTooltip(tooltipId, message, placement);
         addAnchorEventListeners(anchor);
       },
-      unbind (anchor) {
+      unmounted (anchor) {
         removeAnchorEventListeners(anchor);
-        DtTooltipDirectiveApp.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
+        DtTooltipDirectiveApp._instance.ctx.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
       },
     });
   },
