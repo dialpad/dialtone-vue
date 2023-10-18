@@ -67,6 +67,7 @@ describe('DtTooltipDirective Tests', () => {
 
   afterEach(() => {
     wrapper.destroy();
+    document.body.outerHTML = '';
   });
 
   afterAll(() => {
@@ -79,7 +80,7 @@ describe('DtTooltipDirective Tests', () => {
     describe('when tooltip is open', () => {
       beforeEach(async () => {
         updateWrapper();
-        await anchor.trigger('focus');
+        await anchor.trigger('focusin');
       });
 
       it('should render the component', () => {
@@ -104,7 +105,7 @@ describe('DtTooltipDirective Tests', () => {
           beforeEach(async () => {
             mockProps = { placement };
             updateWrapper();
-            await anchor.trigger('focus');
+            await anchor.trigger('focusin');
           });
 
           it('should have correct arrow direction class', () => {
