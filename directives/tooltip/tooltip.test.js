@@ -1,15 +1,10 @@
-import { createLocalVue, mount } from '@vue/test-utils';
-import { DtTooltipDirective } from '@/directives';
+import { mount } from '@vue/test-utils';
+import { DtTooltipDirective } from './tooltip';
 
 import {
   TOOLTIP_DIRECTIONS,
 } from '@/components/tooltip/tooltip_constants';
 
-const MOCK_TRANSITION_STUB = () => ({
-  render: function (h) {
-    return this.$options._renderChildren;
-  },
-});
 const MOCK_TOOLTIP_TEXT = 'Tooltip text content';
 const MOCK_ANCHOR_TEXT = 'Button placeholder';
 
@@ -36,19 +31,18 @@ const baseProps = {};
 
 let mockProps = {};
 
-const testContext = {};
-
 describe('DtTooltipDirective Tests', () => {
   let wrapper;
   let anchor;
 
   const updateWrapper = () => {
     wrapper = mount(WrapperComponent, {
-      localVue: testContext.localVue,
-      propsData: { ...baseProps, ...mockProps },
-      stubs: {
-        // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
-        transition: MOCK_TRANSITION_STUB(),
+      props: { ...baseProps, ...mockProps },
+      global: {
+        stubs: {
+          transition: false,
+        },
+        plugins: [DtTooltipDirective],
       },
       attachTo: document.body,
     });
@@ -56,17 +50,16 @@ describe('DtTooltipDirective Tests', () => {
     anchor = wrapper.find('button');
   };
 
+  afterEach(() => {
+    wrapper.unmount();
+    document.body.outerHTML = '';
+  });
+
   beforeAll(() => {
-    testContext.localVue = createLocalVue();
-    testContext.localVue.use(DtTooltipDirective);
     // RequestAnimationFrame and cancelAnimationFrame are undefined in the scope
     // Need to mock them to avoid error
     global.requestAnimationFrame = vi.fn();
     global.cancelAnimationFrame = vi.fn();
-  });
-
-  afterEach(() => {
-    wrapper.destroy();
   });
 
   afterAll(() => {
@@ -79,7 +72,7 @@ describe('DtTooltipDirective Tests', () => {
     describe('when tooltip is open', () => {
       beforeEach(async () => {
         updateWrapper();
-        await anchor.trigger('focus');
+        await anchor.trigger('focusin');
       });
 
       it('should render the component', () => {
@@ -104,7 +97,7 @@ describe('DtTooltipDirective Tests', () => {
           beforeEach(async () => {
             mockProps = { placement };
             updateWrapper();
-            await anchor.trigger('focus');
+            await anchor.trigger('focusin');
           });
 
           it('should have correct arrow direction class', () => {
