@@ -18,7 +18,7 @@
               <template #left>
                 <dt-icon
                   size="300"
-                  class="dt-feed-item-pill--icon d-pr8"
+                  class="dt-feed-item-pill--icon d-pr8 d-box-content"
                   data-qa="dt-feed-item-pill-icon"
                   :name="computedIcon"
                 />
@@ -103,6 +103,11 @@ export default {
       default: () => true,
     },
 
+    defaultToggled: {
+      type: Boolean,
+      default: () => false,
+    },
+
     /**
      * Callbox border color
      * @values default, ai, critical
@@ -117,7 +122,7 @@ export default {
   data () {
     return {
       hover: false,
-      expanded: false,
+      expanded: this.defaultToggled,
     };
   },
 

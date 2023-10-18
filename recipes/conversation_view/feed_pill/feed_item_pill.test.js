@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
-import { beforeEach } from 'vitest';
+import { beforeEach, describe } from 'vitest';
 
 describe('DtRecipeFeedItemPill Tests', function () {
   let wrapper, feedItemPill, icon;
@@ -14,6 +14,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
     ariaLabel: MOCK_ARIA_LABEL,
     buttonClass: '',
     toggleable: true,
+    defaultToggled: false,
   };
   const baseAttrs = {};
   const baseSlots = {
@@ -111,6 +112,32 @@ describe('DtRecipeFeedItemPill Tests', function () {
       it('should show a different icon', () => {
         expect(icon.exists()).toBe(true);
         expect(icon.attributes('data-name')).toBe('Chevron Right');
+      });
+    });
+
+    describe('Default toggled state close', function () {
+      beforeAll(() => {
+        mockProps = {
+          defaultToggled: false,
+        };
+      });
+
+      it('content slot should not exist', () => {
+        expect(wrapper.exists()).toBe(true);
+        expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(false);
+      });
+    });
+
+    describe('Default toggled state open', function () {
+      beforeAll(() => {
+        mockProps = {
+          defaultToggled: true,
+        };
+      });
+
+      it('content slot should exist', () => {
+        expect(wrapper.exists()).toBe(true);
+        expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(true);
       });
     });
   });

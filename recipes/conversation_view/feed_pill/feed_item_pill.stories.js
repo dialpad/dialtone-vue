@@ -73,6 +73,31 @@ export const Default = {
   },
 };
 
+export const DefaultToggledVariant = {
+  render: DefaultTemplate,
+  parameters: { a11y: { disable: true } },
+  args: {
+    iconName: 'video',
+    title: 'This meeting has ended',
+    wrapperClass: 'd-w628',
+    ariaLabel: 'Click to expand',
+    toggleable: true,
+    defaultToggled: true,
+  },
+};
+
+export const DefaultToggledVariantNonToggleable = {
+  render: DefaultTemplate,
+  parameters: { a11y: { disable: true } },
+  args: {
+    iconName: 'video',
+    title: 'This meeting has ended',
+    wrapperClass: 'd-w628',
+    toggleable: false,
+    defaultToggled: true,
+  },
+};
+
 export const AiBorderGradient = {
   render: DefaultTemplate,
   parameters: { options: { showPanel: false }, controls: { disable: true }, a11y: { disable: true } },
