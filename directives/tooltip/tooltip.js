@@ -114,12 +114,12 @@ export const DtTooltipDirective = {
         const placement = binding.arg || DEFAULT_PLACEMENT;
 
         anchor.setAttribute('data-dt-tooltip-id', tooltipId);
-        DtTooltipDirectiveApp._instance.ctx.addTooltip(tooltipId, message, placement);
+        DtTooltipDirectiveApp._instance?.ctx.addTooltip(tooltipId, message, placement);
         addAnchorEventListeners(anchor);
       },
       unmounted (anchor) {
         removeAnchorEventListeners(anchor);
-        DtTooltipDirectiveApp._instance.ctx.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
+        DtTooltipDirectiveApp._instance?.ctx.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
       },
     });
   },
