@@ -90,6 +90,7 @@ export default {
         const isDark = useDarkMode();
         return <DocsContainer context={props.context} theme={isDark ? dialtoneDarkTheme : dialtoneLightTheme}>{children}</DocsContainer>;
       }
-    }
+    },
+    percy: { globalShow: true }
   },
 }
