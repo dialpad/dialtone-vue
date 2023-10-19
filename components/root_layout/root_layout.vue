@@ -1,6 +1,14 @@
 <template>
   <div
-    :class="['root-layout d-root-layout', { 'd-root-layout--fixed': fixed }, responsiveClass]"
+    :class="[
+      'root-layout',
+      'd-root-layout',
+      {
+        'd-root-layout--fixed': fixed,
+        'd-root-layout--inverted': isInverted,
+        [`d-root-layout__responsive--${responsiveBreakpoint}`]: !!responsiveBreakpoint,
+      },
+    ]"
     data-qa="dt-root-layout"
   >
     <header
@@ -11,29 +19,23 @@
         if you want a fixed height. -->
       <slot name="header" />
     </header>
-    <div
-      ref="root-layout-body"
-      :class="['d-root-layout__body', bodyClasses]"
-      data-qa="dt-root-layout-body"
+    <aside
+      ref="root-layout-sidebar"
+      :class="['d-root-layout__sidebar', sidebarClass]"
+      data-qa="dt-root-layout-sidebar"
     >
-      <aside
-        ref="root-layout-sidebar"
-        :class="['d-root-layout__sidebar', { 'd-root-layout__sidebar--sticky': fixed }, sidebarClass]"
-        data-qa="dt-root-layout-sidebar"
-      >
-        <!-- @slot Slot for sidebar content, be sure to set a width on the element within this. -->
-        <slot name="sidebar" />
-      </aside>
-      <main
-        ref="root-layout-content"
-        :class="['d-root-layout__content', contentClass]"
-        data-qa="dt-root-layout-content"
-        tabindex="0"
-      >
-        <!-- @slot Slot for the main content -->
-        <slot />
-      </main>
-    </div>
+      <!-- @slot Slot for sidebar content, be sure to set a width on the element within this. -->
+      <slot name="sidebar" />
+    </aside>
+    <main
+      ref="root-layout-content"
+      :class="['d-root-layout__content', contentClass]"
+      data-qa="dt-root-layout-content"
+      tabindex="0"
+    >
+      <!-- @slot Slot for the main content -->
+      <slot />
+    </main>
     <footer
       :class="['d-root-layout__footer', footerClass]"
       data-qa="dt-root-layout-footer"
@@ -115,7 +117,7 @@ export default {
     },
 
     /**
-     * DEPRECATED: set the height of the inner element instead.
+     * DEPRECATED: set the min-width of the inner element instead.
      */
     sidebarWidth: {
       type: String,
@@ -161,16 +163,8 @@ export default {
   },
 
   computed: {
-    responsiveClass () {
-      if (!this.responsiveBreakpoint) return;
-      return `d-root-layout__responsive--${this.responsiveBreakpoint}`;
-    },
-
-    bodyClasses () {
-      return [
-        this.bodyClass,
-        { 'd-root-layout__body--invert': this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT },
-      ];
+    isInverted () {
+      return this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT;
     },
   },
 };

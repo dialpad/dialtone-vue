@@ -1,3 +1,35 @@
+# [3.91.0](https://github.com/dialpad/dialtone-vue/compare/v3.90.0...v3.91.0) (2023-10-19)
+
+
+### Bug Fixes
+
+* click event on leftbar group row ([#1265](https://github.com/dialpad/dialtone-vue/issues/1265)) ([d31bf5d](https://github.com/dialpad/dialtone-vue/commit/d31bf5d3d2257a9eb1547e2c911893cb9de373c0))
+* **Radio, Checkbox:** apply fieldset class ([#1260](https://github.com/dialpad/dialtone-vue/issues/1260)) ([7e2f0f6](https://github.com/dialpad/dialtone-vue/commit/7e2f0f6c25312d0d2d40318efb8771b8f6d7eacf))
+
+
+### Features
+
+* attachment carousel for generic media files ([#1209](https://github.com/dialpad/dialtone-vue/issues/1209)) ([ef195ae](https://github.com/dialpad/dialtone-vue/commit/ef195aef72eee49c22a73f4c5b832897df869e94))
+
+# [3.90.0](https://github.com/dialpad/dialtone-vue/compare/v3.89.0...v3.90.0) (2023-10-16)
+
+
+### Features
+
+* **Dt Recipe Ivr Node:** change z-index and docs ([#1258](https://github.com/dialpad/dialtone-vue/issues/1258)) ([d9b4559](https://github.com/dialpad/dialtone-vue/commit/d9b45594b3dc27629febc6ea487b8b9e0cef33f6))
+
+# [3.89.0](https://github.com/dialpad/dialtone-vue/compare/v3.88.1...v3.89.0) (2023-10-13)
+
+
+### Bug Fixes
+
+* **Root Layout:** convert to pure CSS grid method ([#1254](https://github.com/dialpad/dialtone-vue/issues/1254)) ([3dbd0be](https://github.com/dialpad/dialtone-vue/commit/3dbd0be47fdf4717fa226bfda1485a8ca54f4fe9))
+
+
+### Features
+
+* **Rich Text Editor:** contact mentions ([#1248](https://github.com/dialpad/dialtone-vue/issues/1248)) ([19a99fb](https://github.com/dialpad/dialtone-vue/commit/19a99fb2f8de554b83997b232b1e0a2c0f726e24))
+
 ## [3.88.1](https://github.com/dialpad/dialtone-vue/compare/v3.88.0...v3.88.1) (2023-10-06)
 
 
