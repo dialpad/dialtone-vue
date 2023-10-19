@@ -7,7 +7,7 @@
     >
       <dt-list-item
         v-for="(item, index) in items"
-        :key="index"
+        :key="`suggestionItem-${index}`"
         :class="[
           'dt-suggestion-list--item',
           { 'dt-list-item--highlighted': index === selectedIndex },
@@ -25,7 +25,6 @@
   </div>
 </template>
 
-import type { resolveFocusPosition } from '@tiptap/vue-3';
 <script>
 import { DtListItem } from '@/components/list_item';
 
@@ -92,18 +91,16 @@ export default {
     upHandler () {
       this.selectedIndex = ((this.selectedIndex + this.items.length) - 1) % this.items.length;
 
-      const activeElement = this.$refs.suggestionList.querySelector('.dt-list-item--highlighted');
-      if (activeElement) {
-        activeElement.scrollIntoView({
-          behaviour: 'smooth',
-          block: 'center',
-        });
-      }
+      this.scrollActiveElementIntoView();
     },
 
     downHandler () {
       this.selectedIndex = (this.selectedIndex + 1) % this.items.length;
 
+      this.scrollActiveElementIntoView();
+    },
+
+    scrollActiveElementIntoView () {
       const activeElement = this.$refs.suggestionList.querySelector('.dt-list-item--highlighted');
       if (activeElement) {
         activeElement.scrollIntoView({
