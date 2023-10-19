@@ -21,4 +21,8 @@ const DefaultTemplate = (args, { argTypes }) =>
 // Stories
 export const Default = {
   render: DefaultTemplate,
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
+  },
 };
