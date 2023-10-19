@@ -123,20 +123,12 @@ const TooltipVariantsTemplate = (args) =>
 export const Default = {
   render: TooltipDefaultTemplate,
   args: {},
-  parameters: {
-    percy: {
-      args: {
-        show: true,
-      },
-    },
-  },
 };
 
 export const Variants = {
   render: TooltipVariantsTemplate,
   args: {},
   parameters: {
-    ...Default.parameters,
     options: { showPanel: false },
     controls: { disable: true },
   },
@@ -150,7 +142,6 @@ export const Flip = {
   },
 
   parameters: {
-    ...Default.parameters,
     options: { showPanel: false },
     controls: { disable: true },
   },
