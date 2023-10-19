@@ -125,7 +125,7 @@ export default {
      * The only required key is the items function which is used to query the contacts for suggestion.
      * items({ query }) => { return [ContactObject]; }
      * ContactObject format:
-     * { name: string, avatarSrc: string, contactId: string }
+     * { name: string, avatarSrc: string, id: string }
      *
      * When null, it does not add the plugin.
      */

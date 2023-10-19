@@ -7,7 +7,7 @@
     >
       <dt-list-item
         v-for="(item, index) in items"
-        :key="`suggestionItem-${index}`"
+        :key="item.id"
         :class="[
           'dt-suggestion-list--item',
           { 'dt-list-item--highlighted': index === selectedIndex },
@@ -119,10 +119,10 @@ export default {
 
       switch (this.itemType) {
         case 'emoji':
-          this.command({ code: item });
+          this.command(item);
           return;
         case 'mention':
-          this.command({ name: item.name, contactId: item.contactId, avatarSrc: item.avatarSrc });
+          this.command({ name: item.name, id: item.contactId, avatarSrc: item.avatarSrc });
           break;
       }
     },
