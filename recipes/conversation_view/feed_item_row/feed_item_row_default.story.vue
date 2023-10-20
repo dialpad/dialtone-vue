@@ -16,8 +16,8 @@
       </template>
       <template #avatar>
         <span
-          v-if="avatar"
-          v-html="avatar"
+          v-if="$attrs.avatar"
+          v-html="$attrs.avatar"
         />
       </template>
       <template
