@@ -1,24 +1,25 @@
 import { mount } from '@vue/test-utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
-import { beforeEach, describe } from 'vitest';
+import { FEED_ITEM_PILL_DATA_QA } from './feed_item_pill_constants';
 
 describe('DtRecipeFeedItemPill Tests', function () {
   let wrapper, feedItemPill, icon;
 
   const MOCK_ARIA_LABEL = 'Click to expand';
   const MOCK_ICON_NAME = 'Video';
+  const DATA_QA = {
+    ...FEED_ITEM_PILL_DATA_QA,
+    CONTENT_ELEMENT: 'content-element',
+  };
 
   const baseProps = {
     iconName: MOCK_ICON_NAME,
     title: 'This meeting has ended',
     ariaLabel: MOCK_ARIA_LABEL,
-    buttonClass: '',
-    toggleable: true,
-    defaultToggled: false,
   };
   const baseAttrs = {};
   const baseSlots = {
-    content: '<div data-qa="content-element"> content </div>',
+    content: `<div data-qa="${DATA_QA.CONTENT_ELEMENT}"> content </div>`,
   };
   const baseProvide = {};
 
@@ -36,8 +37,8 @@ describe('DtRecipeFeedItemPill Tests', function () {
         provide: { ...baseProvide, ...mockProvide },
       },
     });
-    feedItemPill = wrapper.find('[data-qa="dt-feed-item-pill"]');
-    icon = wrapper.find('[data-qa="dt-feed-item-pill-icon"]');
+    feedItemPill = wrapper.find(`[data-qa="${DATA_QA.PILL}"]`);
+    icon = wrapper.find(`[data-qa="${DATA_QA.PILL_ICON}"]`);
   };
 
   beforeEach(function () {
@@ -61,7 +62,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
         expect(feedItemPill.exists()).toBeTruthy();
         expect(icon.exists()).toBe(true);
         expect(icon.attributes('data-name')).toBe(MOCK_ICON_NAME);
-        expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(false);
+        expect(wrapper.find(`[data-qa="${DATA_QA.CONTENT_ELEMENT}"]`).exists()).toBe(false);
       });
     });
   });
@@ -80,7 +81,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
         await feedItemPill.trigger('click');
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(true);
+        expect(wrapper.find(`[data-qa="${DATA_QA.CONTENT_ELEMENT}"]`).exists()).toBe(true);
       });
 
       describe('toggleable false', function () {
@@ -98,7 +99,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
           expect(feedItemPill.exists()).toBeTruthy();
           expect(icon.exists()).toBe(true);
           expect(icon.attributes('data-name')).toBe(MOCK_ICON_NAME);
-          expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(false);
+          expect(wrapper.find(`[data-qa="${DATA_QA.CONTENT_ELEMENT}"]`).exists()).toBe(false);
         });
       });
     });
@@ -106,7 +107,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
     describe('Hover Feed Item Pill event', function () {
       beforeEach(async () => {
         await feedItemPill.trigger('focusin');
-        icon = wrapper.find('[data-qa="dt-feed-item-pill-icon"]');
+        icon = wrapper.find(`[data-qa="${DATA_QA.PILL_ICON}"]`);
       });
 
       it('should show a different icon', () => {
@@ -116,15 +117,9 @@ describe('DtRecipeFeedItemPill Tests', function () {
     });
 
     describe('Default toggled state close', function () {
-      beforeAll(() => {
-        mockProps = {
-          defaultToggled: false,
-        };
-      });
-
       it('content slot should not exist', () => {
         expect(wrapper.exists()).toBe(true);
-        expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(false);
+        expect(wrapper.find(`[data-qa="${DATA_QA.CONTENT_ELEMENT}"]`).exists()).toBe(false);
       });
     });
 
@@ -137,7 +132,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
 
       it('content slot should exist', () => {
         expect(wrapper.exists()).toBe(true);
-        expect(wrapper.find('[data-qa="content-element"]').exists()).toBe(true);
+        expect(wrapper.find(`[data-qa="${DATA_QA.CONTENT_ELEMENT}"]`).exists()).toBe(true);
       });
     });
   });
