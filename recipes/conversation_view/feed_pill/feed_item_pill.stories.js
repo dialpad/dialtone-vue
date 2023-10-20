@@ -3,10 +3,14 @@ import DtRecipeFeedItemPill from './feed_item_pill.vue';
 import DtRecipeFeedItemPillDefaultTemplate from './feed_item_pill_default.story.vue';
 
 // Default Prop Values
-export const argsData = {
+const args = {
+  iconName: 'phone',
+  title: 'This meeting has ended',
+  ariaLabel: 'Click to expand',
+  wrapperClass: 'd-w628',
 };
 
-export const argTypesData = {
+const argTypes = {
   // Slots
   subtitle: {
     control: 'text',
@@ -46,8 +50,8 @@ export const argTypesData = {
 export default {
   title: 'Recipes/Conversation View/Feed Item Pill',
   component: DtRecipeFeedItemPill,
-  args: argsData,
-  argTypes: argTypesData,
+  args,
+  argTypes,
   excludeStories: /.*Data$/,
 };
 
@@ -61,38 +65,21 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 // Stories
 export const Default = {
   render: DefaultTemplate,
-  parameters: { a11y: { disable: true } },
-  args: {
-    iconName: 'video',
-    title: 'This meeting has ended',
-    ariaLabel: 'Click to expand',
-    buttonClass: '',
-    toggleable: true,
-    wrapperClass: 'd-w628',
-    borderColor: 'default',
-  },
+  parameters: { options: { showPanel: false }, a11y: { disable: true }, controls: { disable: true } },
 };
 
 export const DefaultToggledVariant = {
   render: DefaultTemplate,
-  parameters: { a11y: { disable: true } },
+  parameters: Default.parameters,
   args: {
-    iconName: 'video',
-    title: 'This meeting has ended',
-    wrapperClass: 'd-w628',
-    ariaLabel: 'Click to expand',
-    toggleable: true,
     defaultToggled: true,
   },
 };
 
 export const DefaultToggledVariantNonToggleable = {
   render: DefaultTemplate,
-  parameters: { a11y: { disable: true } },
+  parameters: Default.parameters,
   args: {
-    iconName: 'video',
-    title: 'This meeting has ended',
-    wrapperClass: 'd-w628',
     toggleable: false,
     defaultToggled: true,
   },
@@ -100,27 +87,16 @@ export const DefaultToggledVariantNonToggleable = {
 
 export const AiBorderGradient = {
   render: DefaultTemplate,
-  parameters: { options: { showPanel: false }, controls: { disable: true }, a11y: { disable: true } },
+  parameters: Default.parameters,
   args: {
-    iconName: 'video',
-    title: 'This meeting has ended',
-    wrapperClass: 'd-w628',
-    buttonClass: '',
-    ariaLabel: 'Click to expand',
-    toggleable: true,
     borderColor: 'ai',
   },
 };
 
 export const NoToggleVariant = {
   render: DefaultTemplate,
-  parameters: { options: { showPanel: false }, controls: { disable: true }, a11y: { disable: true } },
+  parameters: Default.parameters,
   args: {
-    iconName: 'video',
-    title: 'This meeting has ended',
-    wrapperClass: 'd-w628',
-    expanded: false,
-    ariaLabel: 'Click to expand',
     toggleable: false,
     borderColor: 'critical',
   },

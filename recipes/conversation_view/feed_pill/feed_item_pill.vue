@@ -1,25 +1,25 @@
 <template>
-  <div :class="['dt-feed-item-pill--border', borderClass, wrapperClass]">
-    <div class="d-p8 d-bgc-secondary">
+  <div :class="['dt-recipe-feed-item-pill--border', borderClass, wrapperClass]">
+    <div class="dt-recipe-feed-item-pill--wrapper">
       <dt-collapsible :open="expanded">
         <template #anchor>
           <button
             :aria-label="ariaLabel"
-            data-qa="dt-feed-item-pill"
-            :class="['d-baw0 d-bgc-moderate d-bar-pill d-w100p d-ta-left d-btn--circle', toggleableClass, buttonClass]"
+            :data-qa="DATA_QA.PILL"
+            :class="['dt-recipe-feed-item-pill--button', toggleableClass, buttonClass]"
             @focusin="hover = true"
             @focusout="hover = false"
             @mouseenter="hover = true"
             @mouseleave="hover = false"
             @click="onClick"
           >
-            <dt-item-layout class="d-w100p d-p8">
+            <dt-item-layout class="dt-recipe-feed-item-pill--layout">
               <span class="d-fw-bold">{{ title }}</span>
               <template #left>
                 <dt-icon
                   size="300"
-                  class="dt-feed-item-pill--icon d-pr8 d-box-content"
-                  data-qa="dt-feed-item-pill-icon"
+                  class="dt-recipe-feed-item-pill--icon"
+                  :data-qa="DATA_QA.PILL_ICON"
                   :name="computedIcon"
                 />
               </template>
@@ -36,7 +36,7 @@
           </button>
         </template>
         <template #content>
-          <div class="d-jc-center d-d-flex">
+          <div class="dt-recipe-feed-item-pill--content d-jc-center d-d-flex">
             <slot name="content" />
           </div>
         </template>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { FEED_ITEM_PILL_BORDER_COLORS } from './feed_item_pill_constants';
+import { FEED_ITEM_PILL_BORDER_COLORS, FEED_ITEM_PILL_DATA_QA } from './feed_item_pill_constants';
 import { DtIcon, DtItemLayout, DtCollapsible } from '@/index';
 
 export default {
@@ -123,6 +123,7 @@ export default {
     return {
       hover: false,
       expanded: this.defaultToggled,
+      DATA_QA: FEED_ITEM_PILL_DATA_QA,
     };
   },
 
@@ -155,8 +156,42 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.dt-recipe-feed-item-pill {
+  &--wrapper {
+    background-color: var(--dt-color-surface-secondary);
+    padding: var(--dt-space-400);
+  }
+
+  &--button {
+    background-color: var(--dt-color-surface-moderate);
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    border-width: 0;
+    border-radius: var(--dt-size-radius-pill);
+    --button-padding-x: var(--button-padding-y-md);
+    --button-padding-y: var(--button-padding-y-md);
+    --button-color-text: var(--dt-action-color-foreground-muted-default);
+    --button-border-radius: var(--dt-size-radius-circle);
+  }
+
+  &--layout {
+    padding: var(--dt-space-400);
+    width: 100%;
+  }
+
+  &--icon {
+    animation: fade 0.15s ease-in;
+    margin-right: var(--dt-space-400);
+  }
+
+  &--content {
+    display: flex;
+    justify-content: center;
+  }
+
   // Gradient radius solution taken from https://stackoverflow.com/a/53037637
-  .dt-feed-item-pill--border {
+  &--border {
     border: double 1px transparent;
     border-radius: 4.8rem; // Special value determined by designer here where it works in both expanded and collapsed
     background-origin: border-box;
@@ -164,26 +199,23 @@ export default {
     overflow: hidden;
   }
 
-  .dt-feed-item-pill--border-default {
+  &--border-default {
     background: var(--dt-color-border-default)
   }
 
-  .dt-feed-item-pill--border-ai {
+  &--border-ai {
     background-image:
       linear-gradient(var(--dt-color-surface-primary), var(--dt-color-surface-primary)),
       var(--dt-badge-color-background-ai);
   }
 
-  .dt-feed-item-pill--border-critical {
+  &--border-critical {
     background: var(--dt-color-foreground-critical);
-  }
-
-  .dt-feed-item-pill--icon {
-    animation: fade 0.15s ease-in;
   }
 
   @keyframes fade {
     0%   {transform: scale(0);}
     100% {transform: scale(1);}
   }
+}
 </style>
