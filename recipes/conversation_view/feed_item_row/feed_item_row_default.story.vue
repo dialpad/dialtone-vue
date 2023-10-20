@@ -14,9 +14,11 @@
       <template v-if="$attrs.default">
         <span v-html="$attrs.default" />
       </template>
-      <template #avatar>
+      <template
+        v-if="$attrs.avatar"
+        #avatar
+      >
         <span
-          v-if="$attrs.avatar"
           v-html="$attrs.avatar"
         />
       </template>
