@@ -14,6 +14,12 @@
       <template v-if="$attrs.default">
         <span v-html="$attrs.default" />
       </template>
+      <template #avatar>
+        <span
+          v-if="avatar"
+          v-html="avatar"
+        />
+      </template>
       <template
         v-if="$attrs.threading"
         #threading
