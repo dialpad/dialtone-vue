@@ -1,25 +1,25 @@
 <template>
-  <div :class="['dt-recipe-feed-item-pill--border', borderClass, wrapperClass]">
-    <div class="dt-recipe-feed-item-pill--wrapper">
+  <div :class="['dt-recipe-feed-item-pill__border', borderClass, wrapperClass]">
+    <div class="dt-recipe-feed-item-pill__wrapper">
       <dt-collapsible :open="expanded">
         <template #anchor>
           <button
+            data-qa="dt-recipe-feed-item-pill"
             :aria-label="ariaLabel"
-            :data-qa="DATA_QA.PILL"
-            :class="['dt-recipe-feed-item-pill--button', toggleableClass, buttonClass]"
+            :class="['dt-recipe-feed-item-pill__button', toggleableClass, buttonClass]"
             @focusin="hover = true"
             @focusout="hover = false"
             @mouseenter="hover = true"
             @mouseleave="hover = false"
             @click="onClick"
           >
-            <dt-item-layout class="dt-recipe-feed-item-pill--layout">
-              <span class="d-fw-bold">{{ title }}</span>
+            <dt-item-layout class="dt-recipe-feed-item-pill__layout">
+              <span class="dt-recipe-feed-item-pill__title">{{ title }}</span>
               <template #left>
                 <dt-icon
+                  data-qa="dt-recipe-feed-item-pill__icon"
                   size="300"
-                  class="dt-recipe-feed-item-pill--icon"
-                  :data-qa="DATA_QA.PILL_ICON"
+                  class="dt-recipe-feed-item-pill__icon"
                   :name="computedIcon"
                 />
               </template>
@@ -36,7 +36,7 @@
           </button>
         </template>
         <template #content>
-          <div class="dt-recipe-feed-item-pill--content d-jc-center d-d-flex">
+          <div class="dt-recipe-feed-item-pill__content">
             <slot name="content" />
           </div>
         </template>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { FEED_ITEM_PILL_BORDER_COLORS, FEED_ITEM_PILL_DATA_QA } from './feed_item_pill_constants';
+import { FEED_ITEM_PILL_BORDER_COLORS } from './feed_item_pill_constants';
 import { DtIcon, DtItemLayout, DtCollapsible } from '@/index';
 
 export default {
@@ -123,7 +123,6 @@ export default {
     return {
       hover: false,
       expanded: this.defaultToggled,
-      DATA_QA: FEED_ITEM_PILL_DATA_QA,
     };
   },
 
@@ -157,59 +156,63 @@ export default {
 
 <style lang="less" scoped>
 .dt-recipe-feed-item-pill {
-  &--wrapper {
+  &__wrapper {
     background-color: var(--dt-color-surface-secondary);
     padding: var(--dt-space-400);
   }
 
-  &--button {
+  &__button {
     background-color: var(--dt-color-surface-moderate);
     text-align: left;
     width: 100%;
     cursor: pointer;
     border-width: 0;
-    border-radius: var(--dt-size-radius-pill);
+    border-radius: var(--dt-size-radius-600);
     --button-padding-x: var(--button-padding-y-md);
     --button-padding-y: var(--button-padding-y-md);
     --button-color-text: var(--dt-action-color-foreground-muted-default);
-    --button-border-radius: var(--dt-size-radius-circle);
+    --button-border-radius: var(--dt-size-radius-600);
   }
 
-  &--layout {
+  &__layout {
     padding: var(--dt-space-400);
     width: 100%;
   }
 
-  &--icon {
+  &__icon {
     animation: fade 0.15s ease-in;
     margin-right: var(--dt-space-400);
   }
 
-  &--content {
+  &__content {
     display: flex;
     justify-content: center;
   }
 
+  &__title {
+    font-weight: var(--dt-font-weight-bold);
+  }
+
   // Gradient radius solution taken from https://stackoverflow.com/a/53037637
-  &--border {
+  &__border {
     border: double 1px transparent;
-    border-radius: 4.8rem; // Special value determined by designer here where it works in both expanded and collapsed
+    border-radius: var(--dt-size-radius-600);
     background-origin: border-box;
     background-clip: content-box, border-box;
     overflow: hidden;
   }
 
-  &--border-default {
+  &__border-default {
     background: var(--dt-color-border-default)
   }
 
-  &--border-ai {
+  &__border-ai {
     background-image:
       linear-gradient(var(--dt-color-surface-primary), var(--dt-color-surface-primary)),
       var(--dt-badge-color-background-ai);
   }
 
-  &--border-critical {
+  &__border-critical {
     background: var(--dt-color-foreground-critical);
   }
 

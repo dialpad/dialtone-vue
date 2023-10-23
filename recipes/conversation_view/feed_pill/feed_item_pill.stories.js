@@ -1,13 +1,15 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 import DtRecipeFeedItemPillDefaultTemplate from './feed_item_pill_default.story.vue';
+import DtRecipeFeedItemPillVariantsTemplate from './feed_item_pill_variants.story.vue';
 
 // Default Prop Values
 const args = {
-  iconName: 'phone',
+  iconName: 'video',
   title: 'This meeting has ended',
   ariaLabel: 'Click to expand',
   wrapperClass: 'd-w628',
+  buttonClass: 'd-bar24',
 };
 
 const argTypes = {
@@ -62,42 +64,28 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtRecipeFeedItemPillDefaultTemplate,
 );
 
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeFeedItemPillVariantsTemplate,
+);
+
 // Stories
 export const Default = {
   render: DefaultTemplate,
-  parameters: { options: { showPanel: false }, a11y: { disable: true }, controls: { disable: true } },
-};
-
-export const DefaultToggledVariant = {
-  render: DefaultTemplate,
-  parameters: Default.parameters,
-  args: {
-    defaultToggled: true,
+  parameters: {
+    options: { showPanel: false },
+    a11y: { disable: true },
+    percy: {
+      args: { seed: 'seed' },
+    },
   },
 };
 
-export const DefaultToggledVariantNonToggleable = {
-  render: DefaultTemplate,
-  parameters: Default.parameters,
-  args: {
-    toggleable: false,
-    defaultToggled: true,
-  },
-};
-
-export const AiBorderGradient = {
-  render: DefaultTemplate,
-  parameters: Default.parameters,
-  args: {
-    borderColor: 'ai',
-  },
-};
-
-export const NoToggleVariant = {
-  render: DefaultTemplate,
-  parameters: Default.parameters,
-  args: {
-    toggleable: false,
-    borderColor: 'critical',
+export const Variants = {
+  render: VariantsTemplate,
+  parameters: {
+    ...Default.parameters,
+    controls: { disable: true },
   },
 };
