@@ -73,18 +73,15 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = {
   render: DefaultTemplate,
   parameters: {
-    options: { showPanel: false },
     a11y: { disable: true },
-    percy: {
-      args: { seed: 'seed' },
-    },
   },
 };
 
 export const Variants = {
   render: VariantsTemplate,
   parameters: {
-    ...Default.parameters,
+    options: { showPanel: false },
+    a11y: { disable: true },
     controls: { disable: true },
   },
 };
