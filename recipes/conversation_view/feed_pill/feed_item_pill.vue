@@ -14,7 +14,9 @@
             @click="onClick"
           >
             <dt-item-layout class="dt-recipe-feed-item-pill__layout">
-              <span class="dt-recipe-feed-item-pill__title">{{ title }}</span>
+              <slot name="title">
+                <span class="dt-recipe-feed-item-pill__title">{{ title }}</span>
+              </slot>
               <template #left>
                 <dt-icon
                   data-qa="dt-recipe-feed-item-pill__icon"
