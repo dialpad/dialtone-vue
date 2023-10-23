@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
-import { FEED_ITEM_PILL_DATA_QA } from './feed_item_pill_constants';
 
 describe('DtRecipeFeedItemPill Tests', function () {
   let wrapper, feedItemPill, icon;
@@ -8,7 +7,8 @@ describe('DtRecipeFeedItemPill Tests', function () {
   const MOCK_ARIA_LABEL = 'Click to expand';
   const MOCK_ICON_NAME = 'Video';
   const DATA_QA = {
-    ...FEED_ITEM_PILL_DATA_QA,
+    PILL: 'dt-recipe-feed-item-pill',
+    PILL_ICON: 'dt-recipe-feed-item-pill__icon',
     CONTENT_ELEMENT: 'content-element',
   };
 
