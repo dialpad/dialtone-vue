@@ -9,7 +9,6 @@ export const DtTooltipDirective = {
 
     const DEFAULT_PLACEMENT = 'top';
     const DtTooltipDirectiveApp = new Vue({
-      el: mountPoint,
       name: 'DtTooltipDirectiveApp',
       components: { DtTooltip },
       data () {
@@ -50,12 +49,10 @@ export const DtTooltipDirective = {
       },
     });
 
-    const isValidBindingTextValue = (value) => {
-      return typeof value === 'string' && value?.trim();
-    };
-    const isValidBindingPlacementValue = (value) => {
-      return value === undefined || TOOLTIP_DIRECTIONS.includes(value);
-    };
+    DtTooltipDirectiveApp.$mount(mountPoint);
+
+    const isValidBindingTextValue = (value) => typeof value === 'string' && value?.trim();
+    const isValidBindingPlacementValue = (value) => value === undefined || TOOLTIP_DIRECTIONS.includes(value);
 
     Vue.directive('dt-tooltip', {
       bind (anchor, binding) {
