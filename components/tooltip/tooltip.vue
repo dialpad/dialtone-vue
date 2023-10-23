@@ -341,6 +341,7 @@ export default {
   },
 
   mounted () {
+    this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
 
     // immediate watcher fires before mounted, so have this here in case
@@ -351,6 +352,7 @@ export default {
   },
 
   beforeUnmount () {
+    this.externalAnchor && this.removeExternalAnchorEventListeners();
     if (this.tip) {
       this.tip?.destroy();
     }
@@ -450,6 +452,24 @@ export default {
         onMount: this.onMount,
         ...this.tippyProps,
       };
+    },
+
+    addExternalAnchorEventListeners () {
+      ['focusin', 'mouseenter'].forEach(listener => {
+        this.anchor.addEventListener(listener, (event) => this.onEnterAnchor(event));
+      });
+      ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
+        this.anchor.addEventListener(listener, (event) => this.onLeaveAnchor(event));
+      });
+    },
+
+    removeExternalAnchorEventListeners () {
+      ['focusin', 'mouseenter'].forEach(listener => {
+        this.anchor.removeEventListener(listener, (event) => this.onEnterAnchor(event));
+      });
+      ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
+        this.anchor.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
+      });
     },
   },
 };
