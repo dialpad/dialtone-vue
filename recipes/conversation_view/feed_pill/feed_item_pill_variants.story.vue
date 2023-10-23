@@ -246,13 +246,6 @@ import DtRecipeFeedItemPill from './feed_item_pill.vue';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 
-const DEFAULT_PROPS = {
-  iconName: 'phone',
-  title: 'This meeting has ended',
-  ariaLabel: 'Click to expand',
-  wrapperClass: 'd-w628',
-};
-
 export default {
   name: 'DtRecipeFeedItemPillVariants',
 
@@ -260,12 +253,6 @@ export default {
     DtRecipeFeedItemPill,
     DtButton,
     DtIcon,
-  },
-
-  computed: {
-    DEFAULT_PROPS () {
-      return DEFAULT_PROPS;
-    },
   },
 };
 </script>
