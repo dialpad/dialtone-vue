@@ -20,21 +20,11 @@ export const DtTooltipDirective = {
 
       methods: {
         addTooltip (id, message, placement) {
-          this.tooltips.push({ id, message, placement, show: false });
-        },
-
-        hideTooltip (id) {
-          const tooltipIndex = this.tooltips.findIndex(tooltip => tooltip.id === id);
-          this.tooltips[tooltipIndex].show = false;
+          this.tooltips.push({ id, message, placement });
         },
 
         removeTooltip (id) {
           this.tooltips = this.tooltips.filter(tooltip => tooltip.id !== id);
-        },
-
-        showTooltip (id) {
-          const tooltipIndex = this.tooltips.findIndex(tooltip => tooltip.id === id);
-          this.tooltips[tooltipIndex].show = true;
         },
       },
 
@@ -67,35 +57,6 @@ export const DtTooltipDirective = {
       return value === undefined || TOOLTIP_DIRECTIONS.includes(value);
     };
 
-    function showTooltipListener (event) {
-      const tooltipId = event.target.getAttribute('data-dt-tooltip-id');
-      DtTooltipDirectiveApp.showTooltip(tooltipId);
-    }
-
-    function hideTooltipListener (event) {
-      if (event.type === 'keydown' && event.code !== 'Escape') return;
-      const tooltipId = event.target.getAttribute('data-dt-tooltip-id');
-      DtTooltipDirectiveApp.hideTooltip(tooltipId);
-    }
-
-    function addAnchorEventListeners (anchor) {
-      ['focusin', 'mouseenter'].forEach(listener => {
-        anchor.addEventListener(listener, (event) => showTooltipListener(event));
-      });
-      ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
-        anchor.addEventListener(listener, (event) => hideTooltipListener(event));
-      });
-    }
-
-    function removeAnchorEventListeners (anchor) {
-      ['focusin', 'mouseenter'].forEach(listener => {
-        anchor.removeEventListener(listener, (event) => showTooltipListener(event));
-      });
-      ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
-        anchor.removeEventListener(listener, (event) => hideTooltipListener(event));
-      });
-    }
-
     Vue.directive('dt-tooltip', {
       bind (anchor, binding) {
         if (!isValidBindingTextValue(binding.value)) {
@@ -124,10 +85,8 @@ export const DtTooltipDirective = {
 
         anchor.setAttribute('data-dt-tooltip-id', tooltipId);
         DtTooltipDirectiveApp.addTooltip(tooltipId, message, placement);
-        addAnchorEventListeners(anchor);
       },
       unbind (anchor) {
-        removeAnchorEventListeners(anchor);
         DtTooltipDirectiveApp.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
       },
     });
