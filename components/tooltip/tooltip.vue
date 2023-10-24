@@ -198,7 +198,7 @@ export default {
      */
     enabled: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
