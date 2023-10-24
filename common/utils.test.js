@@ -484,5 +484,8 @@ describe('Util Tests', () => {
     it('should capitalize the first letter of a string with dutch locale', () => {
       expect(capitalizeFirstLetter('ĳsselmeer', 'nl')).toBe('Ĳsselmeer');
     });
+    it('should not change japanese since it does not have capitals', () => {
+      expect(capitalizeFirstLetter('送り仮名', 'ja')).toBe('送り仮名');
+    });
   });
 });
