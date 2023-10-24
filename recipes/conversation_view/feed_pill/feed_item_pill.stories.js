@@ -63,9 +63,8 @@ const DefaultTemplate = (args) => createTemplateFromVueFile(
   DtRecipeFeedItemPillDefaultTemplate,
 );
 
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const VariantsTemplate = (args) => createTemplateFromVueFile(
   args,
-  argTypes,
   DtRecipeFeedItemPillVariantsTemplate,
 );
 
