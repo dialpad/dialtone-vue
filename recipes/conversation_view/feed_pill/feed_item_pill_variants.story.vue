@@ -3,13 +3,14 @@
     <div>
       <h2>Call pill</h2>
       <h3 class="d-mt8 d-mb4">
-        With summary
+        With call recap
       </h3>
       <dt-recipe-feed-item-pill
         default-toggled
         title="Ben called you"
         icon-name="phone-outgoing"
         wrapper-class="d-w628"
+        border-color="ai"
       >
         <template #subtitle>
           Lasted 8 min • Ended at 11:56 AM
@@ -149,13 +150,14 @@
       </h2>
 
       <h3 class="d-mt8 d-mb4">
-        With summary
+        With call recap
       </h3>
       <dt-recipe-feed-item-pill
         title="Ben started a meeting"
         icon-name="video"
         button-class="d-bar24"
         wrapper-class="d-w628"
+        border-color="ai"
         :default-toggled="true"
       >
         <template #subtitle>
