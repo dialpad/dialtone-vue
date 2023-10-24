@@ -21,7 +21,7 @@
         :content-appear="$attrs.contentAppear"
         :transition="$attrs.transition"
         :show.sync="$attrs.show"
-        :disabled="$attrs.disabled"
+        :enabled="$attrs.enabled"
         :delay="$attrs.delay"
         :external-anchor="$attrs.externalAnchor"
         v-bind="$attrs"
