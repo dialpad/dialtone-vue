@@ -371,13 +371,6 @@ export default {
     }
   },
 
-  beforeCreate () {
-    if (this.$props.disabled != null && this.$props.show != null) {
-      console.warn('Tooltip: You cannot use both the disabled and show props at the same time.');
-      console.warn('The show prop will be ignored.');
-    }
-  },
-
   beforeUnmount () {
     this.externalAnchor && this.removeExternalAnchorEventListeners();
     if (this.tip) {
