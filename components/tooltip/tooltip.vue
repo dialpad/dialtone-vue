@@ -193,6 +193,7 @@ export default {
     /**
      * Controls whether hover/focus causes the tooltip to appear.
      * Cannot be combined with the show prop. show value will be ignored.
+     * by default this is true, if you override with false, the tooltip will never show up.
      */
     enabled: {
       type: Boolean,
@@ -342,6 +343,10 @@ export default {
   },
 
   mounted () {
+    if (!this.enabled && this.show != null) {
+      console.warn('Tooltip: You cannot use both the enabled and show props at the same time.');
+      console.warn('The show prop will be ignored.');
+    }
     this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
 
