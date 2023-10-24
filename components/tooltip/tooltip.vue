@@ -21,7 +21,7 @@
     <dt-lazy-show
       :id="id"
       ref="content"
-      :show="isShown && enabled && (!!message.trim() || !!$slots.default)"
+      :show="isVisible"
       role="tooltip"
       aria-hidden="false"
       data-qa="dt-tooltip"
@@ -275,6 +275,11 @@ export default {
   },
 
   computed: {
+    // whether the tooltip is visible or not.
+    isVisible () {
+      return this.isShown && this.enabled && (!!this.message.trim() || !!this.$slots.default);
+    },
+
     tooltipListeners () {
       return {
         ...this.$listeners,
