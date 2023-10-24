@@ -9,6 +9,7 @@ export const DtTooltipDirective = {
 
     const DEFAULT_PLACEMENT = 'top';
     const DtTooltipDirectiveApp = new Vue({
+      el: mountPoint,
       name: 'DtTooltipDirectiveApp',
       components: { DtTooltip },
       data () {
@@ -33,13 +34,16 @@ export const DtTooltipDirective = {
             domProps: { id: 'dt-tooltip-directive-app' },
           },
           [
-            this.tooltips.map(({ id, message, placement, show }) => {
+            this.tooltips.map(({ id, message, placement }) => {
               return h(DtTooltip, {
                 key: id,
                 props: {
                   message,
                   placement,
-                  show,
+                  /**
+                   * Set the delay to false when running tests only.
+                   */
+                  delay: process.env.NODE_ENV !== 'test',
                   externalAnchor: `[data-dt-tooltip-id="${id}"]`,
                 },
               });
@@ -48,8 +52,6 @@ export const DtTooltipDirective = {
         );
       },
     });
-
-    DtTooltipDirectiveApp.$mount(mountPoint);
 
     const isValidBindingTextValue = (value) => typeof value === 'string' && value?.trim();
     const isValidBindingPlacementValue = (value) => value === undefined || TOOLTIP_DIRECTIONS.includes(value);
