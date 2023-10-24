@@ -52,6 +52,7 @@ describe('DtTooltipDirective Tests', () => {
   };
 
   afterEach(() => {
+    mockProps = {};
     wrapper.destroy();
   });
 
