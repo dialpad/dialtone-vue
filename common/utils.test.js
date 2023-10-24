@@ -13,6 +13,7 @@ import {
   isPhoneNumber,
   isURL,
   isEmailAddress,
+  capitalizeFirstLetter,
 } from './utils';
 
 describe('Util Tests', () => {
@@ -473,6 +474,15 @@ describe('Util Tests', () => {
       ])('should return true for "%s"', async (input) => {
         expect(isEmailAddress(input)).toBe(true);
       });
+    });
+  });
+
+  describe('capitalizeFirstLetter', () => {
+    it('should capitalize the first letter of a string', () => {
+      expect(capitalizeFirstLetter('hello')).toBe('Hello');
+    });
+    it('should capitalize the first letter of a string with dutch locale', () => {
+      expect(capitalizeFirstLetter('ĳsselmeer', 'nl')).toBe('Ĳsselmeer');
     });
   });
 });
