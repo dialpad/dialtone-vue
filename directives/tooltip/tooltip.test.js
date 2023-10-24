@@ -43,6 +43,9 @@ describe('DtTooltipDirective Tests', () => {
     wrapper = mount(WrapperComponent, {
       props: { ...baseProps, ...mockProps },
       global: {
+        stubs: {
+          transition: false,
+        },
         plugins: [DtTooltipDirective],
       },
       attachTo: document.body,
@@ -52,6 +55,7 @@ describe('DtTooltipDirective Tests', () => {
   };
 
   afterEach(() => {
+    mockProps = {};
     wrapper.unmount();
   });
 
