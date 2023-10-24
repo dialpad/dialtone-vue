@@ -303,7 +303,7 @@ export default {
     },
 
     anchor () {
-      return this.externalAnchor ? document.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
+      return this.externalAnchor ? document.body.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
     },
   },
 
@@ -379,10 +379,10 @@ export default {
     onEnterAnchor (e) {
       if (this.delay) {
         this.inTimer = setTimeout(function (event) {
-          return this.triggerShow(event);
+          this.triggerShow(event);
         }.bind(this, e), TOOLTIP_DELAY_MS);
       } else {
-        return this.triggerShow(e);
+        this.triggerShow(e);
       }
     },
 
@@ -403,9 +403,11 @@ export default {
       }
     },
 
-    onLeaveAnchor () {
+    onLeaveAnchor (e) {
+      if (e.type === 'keydown' && e.code !== 'Escape') return;
+
       clearTimeout(this.inTimer);
-      return this.triggerHide();
+      this.triggerHide();
     },
 
     triggerHide () {
