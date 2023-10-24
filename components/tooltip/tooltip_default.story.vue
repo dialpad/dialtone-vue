@@ -19,7 +19,7 @@
         :content-class="contentClass"
         :transition="transition"
         :show="showTooltip"
-        :disabled="disabled"
+        :enabled="enabled"
         :delay="delay"
         :external-anchor="externalAnchor"
         v-bind="$attrs"

@@ -64,7 +64,7 @@ export const argTypesData = {
     },
   },
 
-  disabled: {
+  enabled: {
     type: 'boolean',
   },
   show: {

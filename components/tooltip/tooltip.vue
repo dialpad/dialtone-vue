@@ -21,7 +21,7 @@
     <dt-lazy-show
       :id="id"
       ref="content"
-      :show="isShown && !disabled && (!!message.trim() || !!$slots.default)"
+      :show="isShown && enabled && (!!message.trim() || !!$slots.default)"
       role="tooltip"
       aria-hidden="false"
       data-qa="dt-tooltip"
@@ -194,9 +194,9 @@ export default {
      * Controls whether hover/focus causes the tooltip to appear.
      * Cannot be combined with the show prop. show value will be ignored.
      */
-    disabled: {
+    enabled: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -349,13 +349,6 @@ export default {
     // show prop was initially set to true.
     if (this.isShown) {
       this.tip.show();
-    }
-  },
-
-  beforeCreate () {
-    if (this.$props.disabled != null && this.$props.show != null) {
-      console.warn('Tooltip: You cannot use both the disabled and show props at the same time.');
-      console.warn('The show prop will be ignored.');
     }
   },
 
