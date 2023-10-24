@@ -21,7 +21,7 @@
     <dt-lazy-show
       :id="id"
       ref="content"
-      :show="isShown && (!!message.trim() || hasSlotContent($slots.default))"
+      :show="isShown && !disabled && (!!message.trim() || hasSlotContent($slots.default))"
       role="tooltip"
       aria-hidden="false"
       data-qa="dt-tooltip"
@@ -192,6 +192,15 @@ export default {
     },
 
     /**
+     * Controls whether hover/focus causes the tooltip to appear.
+     * Cannot be combined with the show prop. show value will be ignored.
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Controls whether the tooltip is shown. Leaving this null will have the tooltip trigger on mouseover by default.
      * If you set this value, the default mouseover behavior will be disabled and you can control it as you need.
      * Supports .sync modifier
@@ -348,6 +357,13 @@ export default {
     // show prop was initially set to true.
     if (this.isShown) {
       this.tip.show();
+    }
+  },
+
+  beforeCreate () {
+    if (this.$props.disabled != null && this.$props.show != null) {
+      console.warn('Tooltip: You cannot use both the disabled and show props at the same time.');
+      console.warn('The show prop will be ignored.');
     }
   },
 
