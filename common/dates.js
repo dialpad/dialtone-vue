@@ -69,7 +69,7 @@ export function getDateMedium (date) {
  * @param {number} durationInSeconds The duration of the call in seconds
  * @returns {string} A human readable string representing the duration of the call
  */
-export function callDurationToHumanReadable (durationInSeconds) {
+export function durationInHHMM (durationInSeconds) {
   if (durationInSeconds < 60) {
     // returns 'less than a minute', we're doing it like this instead of returning a string
     // so datefns handles i18n.
@@ -121,7 +121,7 @@ function _getRelativeDaysText (days) {
  * @param {Date} date The timestamp of the item's date
  * @returns {string} A human readable string representing the distance between the date and now
  */
-export function dateRelativeToNow (date) {
+export function relativeDate (date) {
   if (isToday(date)) {
     return _getRelativeDaysText(0);
   } else if (isYesterday(date)) {
