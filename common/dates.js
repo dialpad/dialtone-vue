@@ -6,7 +6,7 @@ import {
   isToday,
   isYesterday,
   isThisWeek,
-  isSameYear,
+  isThisYear,
 } from 'date-fns';
 import { capitalizeFirstLetter } from './utils';
 
@@ -83,6 +83,17 @@ export function callDurationToHumanReadable (durationInSeconds) {
 }
 
 /**
+ * gets the human readable name of the day relative to the current time. For example, if you pass in -1 it will
+ * say "Yesterday" if you pass in 0 it will say "Today", if you pass in 1 it will say "Tomorrow".
+ * @param {number} days The number of days relative to the current time
+ * @returns {string} A human readable string representing the distance between the date and now
+ */
+function _getRelativeDaysText (days) {
+  const rtl = new Intl.RelativeTimeFormat(global.locale.code, { numeric: 'auto' });
+  return capitalizeFirstLetter(rtl.formatToParts(days, 'day')[0].value, global.locale.code);
+}
+
+/**
  * Returns the distance between the passed in date and now in a human readable format, typically used
  * when showing a history of items in a log such as a feed list.
  *
@@ -112,14 +123,12 @@ export function callDurationToHumanReadable (durationInSeconds) {
  */
 export function dateRelativeToNow (date) {
   if (isToday(date)) {
-    const rtl = new Intl.RelativeTimeFormat(global.locale.code, { numeric: 'auto' });
-    return capitalizeFirstLetter(rtl.formatToParts(0, 'day')[0].value, global.locale.code);
+    return _getRelativeDaysText(0);
   } else if (isYesterday(date)) {
-    const rtl = new Intl.RelativeTimeFormat(global.locale.code, { numeric: 'auto' });
-    return capitalizeFirstLetter(rtl.formatToParts(-1, 'day')[0].value, global.locale.code);
+    return _getRelativeDaysText(-1);
   } else if (isThisWeek(date)) {
     return _baseFormat(date, 'EEEE');
-  } else if (isSameYear(date, Date.now())) {
+  } else if (isThisYear(date)) {
     return _baseFormat(date, 'EEEE, MMMM d');
   } else {
     return _baseFormat(date, 'MMMM d, y');
