@@ -24,7 +24,7 @@
       <div
         v-if="!showHeader"
         v-show="isActive"
-        class="d-fs-100 d-fw-normal d-ws-nowrap d-lh-100 d-fc-tertiary d-mb6 d-h100p d-mt16"
+        class="dt-feed-item-row__left-time"
         data-qa="dt-feed-item-row--left-time"
       >
         {{ shortTime }}
@@ -249,6 +249,16 @@ export default {
 <style lang="less" scoped>
 .dt-feed-item-row {
   transition-duration: 2s !important;
+
+  &__left-time {
+    color: var(--dt-color-foreground-tertiary)!important;
+    padding-top: var(--dt-space-350)!important;
+    line-height: var(--dt-font-line-height-400)!important;
+    font-size: var(--dt-font-size-100)!important;
+    font-weight: var(--dt-font-weight-normal)!important;
+    white-space: nowrap!important;
+    height: 100% !important;
+  }
 
   .content-text-wrapper-class:not(img) {
     line-height: 1.6rem;
