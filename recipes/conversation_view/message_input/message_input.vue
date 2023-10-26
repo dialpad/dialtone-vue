@@ -150,12 +150,12 @@
             :enabled="characterLimitWarningMessage && (characterLimitCount - inputLength < 0)"
             placement="top-end"
             :message="characterLimitWarningMessage"
-            class="d-fc-error d-mr16 d-as-center dt-message-input--remaining-char"
             :offset="[10, -8]"
           >
             <template #anchor>
               <p
                 v-if="displayCharacterLimitWarning"
+                class="d-fc-error d-mr16 d-as-center dt-message-input--remaining-char"
                 data-qa="dt-message-input-character-limit"
               >
                 {{ characterLimitCount - inputLength }}
