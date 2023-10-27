@@ -109,7 +109,7 @@ export default {
     },
 
     /**
-     * DEPRECATED: set the min-width of the inner element instead.
+     * DEPRECATED: set the width of the inner element instead.
      */
     sidebarWidth: {
       type: String,
