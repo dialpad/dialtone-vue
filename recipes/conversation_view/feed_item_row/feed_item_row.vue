@@ -251,13 +251,13 @@ export default {
   transition-duration: 2s !important;
 
   &__left-time {
-    color: var(--dt-color-foreground-tertiary)!important;
-    padding-top: var(--dt-space-350)!important;
-    line-height: var(--dt-font-line-height-400)!important;
-    font-size: var(--dt-font-size-100)!important;
-    font-weight: var(--dt-font-weight-normal)!important;
-    white-space: nowrap!important;
-    height: 100% !important;
+    color: var(--dt-color-foreground-tertiary);
+    padding-top: var(--dt-space-350);
+    line-height: var(--dt-font-line-height-400);
+    font-size: var(--dt-font-size-100);
+    font-weight: var(--dt-font-weight-normal);
+    white-space: nowrap;
+    height: 100%;
   }
 
   .content-text-wrapper-class:not(img) {
