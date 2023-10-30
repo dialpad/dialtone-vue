@@ -21,6 +21,7 @@
     </header>
     <aside
       ref="root-layout-sidebar"
+      tabindex="0"
       :class="['d-root-layout__sidebar', sidebarClass]"
       data-qa="dt-root-layout-sidebar"
     >
