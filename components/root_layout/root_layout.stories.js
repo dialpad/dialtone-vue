@@ -17,7 +17,7 @@ export const argsData = {
   sidebarPosition: 'left',
   header: '<div class="d-h64">Header</div>',
   headerClass: 'd-bgc-purple-200',
-  footer: '<div class="d-bgc-gold-200 d-h64">Footer</div>',
+  footer: '<div class="d-h64">Footer</div>',
   footerClass: 'd-bgc-gold-200',
   sidebar: `<div class="d-w264">${sidebarItems}</div>`,
   sidebarClass: 'd-bgc-black-200',
