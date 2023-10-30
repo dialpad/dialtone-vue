@@ -7,7 +7,7 @@
       v-if="defaultSlot"
       :html="defaultSlot"
     />
-    <template v-if="alignment === 'end'">
+    <template v-else-if="alignment === 'end'">
       <dt-button
         importance="outlined"
       >
