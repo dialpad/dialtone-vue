@@ -19,7 +19,7 @@
         :close-button-props="buttonCloseProps"
         :visually-hidden-close="$attrs.visuallyHiddenClose"
         :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
-        @close="onClose($event)"
+        @close="$attrs.onClose($event)"
       >
         <span
           v-if="$attrs.default"
@@ -101,7 +101,7 @@ export default {
 
     buttonCloseProps () {
       return {
-        ...this.closeButtonProps,
+        ...this.$attrs.closeButtonProps,
         kind: this.buttonKind,
         ariaLabel: 'Close',
       };

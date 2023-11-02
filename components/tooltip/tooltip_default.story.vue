@@ -3,7 +3,7 @@
     :class="[
       'd-fl-center d-fd-column d-pt64',
       {
-        'd-bgc-purple-600 d-pb64': inverted,
+        'd-bgc-purple-600 d-pb64': $attrs.inverted,
       },
     ]"
   >
@@ -32,7 +32,7 @@
             importance="outlined"
             :kind="$attrs.buttonKind"
           >
-            {{ anchor }}
+            {{ $attrs.anchor }}
           </dt-button>
         </template>
         <template v-if="$attrs.default">
@@ -58,11 +58,11 @@ export default {
 
   computed: {
     buttonKind () {
-      return this.inverted ? 'inverted' : 'default';
+      return this.$attrs.inverted ? 'inverted' : 'default';
     },
 
     showTooltip () {
-      return this.globalShow ?? this.show;
+      return this.$attrs.globalShow ?? this.$attrs.show;
     },
   },
 };

@@ -5,7 +5,7 @@
     :close-aria-label="$attrs.closeAriaLabel"
     :image-button-class="$attrs.imageButtonClass"
     :aria-label="$attrs.ariaLabel"
-    :open.sync="$attrs.isOpen"
+    :open.sync="isOpen"
     @opened="$attrs.onOpened"
   />
 </template>
@@ -18,7 +18,7 @@ export default {
   components: { DtImageViewer },
   data: function () {
     return {
-      isOpen: this.open,
+      isOpen: this.$attrs.open,
     };
   },
 

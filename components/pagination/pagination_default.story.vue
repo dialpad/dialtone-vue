@@ -19,7 +19,7 @@ export default {
   components: { DtPagination },
   methods: {
     getPageNumberAriaLabel (page) {
-      return page === this.totalPages ? `Last page ${page}` : `Page ${page}`;
+      return page === this.$attrs.totalPages ? `Last page ${page}` : `Page ${page}`;
     },
   },
 };

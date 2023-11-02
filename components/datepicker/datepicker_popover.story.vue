@@ -36,7 +36,7 @@
           :select-day-label="$attrs.selectDayLabel"
           :change-to-label="$attrs.changeToLabel"
           :selected-date="$attrs.currentSelectedDate"
-          @selected-date="currentSelectedDate = $event; onSelectedDate($event)"
+          @selected-date="currentSelectedDate = $event; $attrs.onSelectedDate($event)"
           @close-datepicker="$attrs.onCloseDatepicker"
         />
       </template>
@@ -56,8 +56,8 @@ export default {
 
   data () {
     return {
-      currentSelectedDate: this.date,
-      datepickerOpened: this.opened,
+      currentSelectedDate: this.$attrs.date,
+      datepickerOpened: this.$attrs.opened,
     };
   },
 

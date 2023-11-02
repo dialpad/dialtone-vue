@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     :direction="$attrs.direction"
-    :as="$attrs.stackElement"
+    :as="stackElement"
     :gap="$attrs.gap"
   >
     <div class="d-bgc-magenta-100">

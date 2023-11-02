@@ -21,7 +21,7 @@
       />
     </template>
     <template
-      v-else-if="avatar"
+      v-else-if="$attrs.avatar"
       slot="avatar"
     >
       <dt-avatar

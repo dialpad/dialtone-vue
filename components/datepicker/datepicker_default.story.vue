@@ -68,7 +68,7 @@ export default {
 
   data () {
     return {
-      currentSelectedDate: this.date,
+      currentSelectedDate: this.$attrs.date,
     };
   },
 

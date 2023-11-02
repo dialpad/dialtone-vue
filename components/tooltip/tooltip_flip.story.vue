@@ -20,7 +20,7 @@
           >
             <dt-button
               importance="outlined"
-              :kind="$attrs.buttonKind"
+              :kind="buttonKind"
               v-bind="attrs"
             >
               Click me to see a tooltip

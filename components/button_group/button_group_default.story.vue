@@ -7,7 +7,7 @@
       v-if="$attrs.default"
       :html="$attrs.default"
     />
-    <template v-else-if="alignment === 'end'">
+    <template v-else-if="$attrs.alignment === 'end'">
       <dt-button
         importance="outlined"
       >

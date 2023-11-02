@@ -1,6 +1,6 @@
 <template>
   <dt-dropdown
-    :open.sync="$attrs.isOpen"
+    :open.sync="isOpen"
     :placement="$attrs.placement"
     :fallback-placements="$attrs.fallbackPlacements"
     :content-width="$attrs.contentWidth"
@@ -70,7 +70,7 @@ export default {
   data () {
     return {
       LIST_ITEM_NAVIGATION_TYPES,
-      isOpen: this.open,
+      isOpen: this.$attrs.open,
     };
   },
 

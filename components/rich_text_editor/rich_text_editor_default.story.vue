@@ -26,7 +26,7 @@ export default {
 
   data () {
     return {
-      inputValue: this.value,
+      inputValue: this.$attrs.value,
     };
   },
 
