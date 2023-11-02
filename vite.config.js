@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import svgPlugin from 'unplugin-svg-vue-component/vite';
 import vue from '@vitejs/plugin-vue2';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
@@ -25,7 +26,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue()],
+  plugins: [vue(), svgPlugin()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),
