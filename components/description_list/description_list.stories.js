@@ -12,12 +12,6 @@ export const argTypesData = {
       },
     },
   },
-  descriptionClass: {
-    control: 'text',
-  },
-  termClass: {
-    control: 'text',
-  },
 };
 
 export const argsData = {
