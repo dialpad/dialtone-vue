@@ -1,6 +1,8 @@
 import { mount } from '@vue/test-utils';
 import DtDescriptionList from './description_list.vue';
 
+let MOCK_LIST = null;
+
 const baseProps = {
   items: [{
     term: 'Customer Intent',
@@ -15,7 +17,6 @@ let mockProps = {};
 
 describe('DtDescriptionList Tests', () => {
   let wrapper;
-  let list;
 
   const updateWrapper = () => {
     wrapper = mount(DtDescriptionList, {
@@ -60,21 +61,21 @@ describe('DtDescriptionList Tests', () => {
 
   describe('Accessibility Tests', () => {
     beforeEach(() => {
-      list = wrapper.find('dl');
+      MOCK_LIST = wrapper.find('dl');
 
       updateWrapper();
     });
 
     it('Should render a <dl> tag', () => {
-      expect(list.exists()).toBe(true);
+      expect(MOCK_LIST.exists()).toBe(true);
     });
 
     it('Should contain two <dt> tags', () => {
-      expect(list.findAll('dt').length).toBe(2);
+      expect(MOCK_LIST.findAll('dt').length).toBe(2);
     });
 
     it('Should contain two <dd> tags', () => {
-      expect(list.findAll('dd').length).toBe(2);
+      expect(MOCK_LIST.findAll('dd').length).toBe(2);
     });
   });
 
@@ -125,23 +126,27 @@ describe('DtDescriptionList Tests', () => {
   describe('Extendability Tests', () => {
     const customClass = 'my-custom-class';
 
-    describe('When an term class is provided', () => {
+    describe('When a term class is provided', () => {
       it('should apply custom class to child', () => {
         mockProps = { termClass: customClass };
 
         updateWrapper();
 
-        expect(wrapper.find('dt').classes().includes(customClass)).toBe(true);
+        const dtElement = wrapper.find('dt');
+
+        expect(dtElement.classes().includes(customClass)).toBe(true);
       });
     });
 
-    describe('When an description class is provided', () => {
+    describe('When a description class is provided', () => {
       it('should apply custom class to child', () => {
         mockProps = { descriptionClass: customClass };
 
         updateWrapper();
 
-        expect(wrapper.find('dd').classes().includes(customClass)).toBe(true);
+        const ddElement = wrapper.find('dd');
+
+        expect(ddElement.classes().includes(customClass)).toBe(true);
       });
     });
   });
