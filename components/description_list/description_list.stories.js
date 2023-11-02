@@ -1,4 +1,5 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { DT_STACK_GAP } from '@/components/stack/stack_constants';
 import DtDescriptionList from './description_list.vue';
 import DtDescriptionListDefaultTemplate from './description_list_default.story.vue';
 
@@ -10,6 +11,16 @@ export const argTypesData = {
       defaultValue: {
         summary: '{ term: string, description: string }[]',
       },
+    },
+  },
+  direction: {
+    options: ['row', 'column'],
+    control: { type: 'radio' },
+  },
+  gap: {
+    options: DT_STACK_GAP,
+    control: {
+      type: 'select',
     },
   },
 };
