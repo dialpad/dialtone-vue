@@ -1,14 +1,14 @@
 <template>
   <dt-recipe-ivr-node
-    :node-label="label"
-    :node-type="nodeType"
-    :is-selected="isSelected"
-    :dtmf-key="dtmfKey"
-    :menu-button-aria-label="menuButtonAriaLabel"
+    :node-label="$attrs.label"
+    :node-type="$attrs.nodeType"
+    :is-selected="$attrs.isSelected"
+    :dtmf-key="$attrs.dtmfKey"
+    :menu-button-aria-label="$attrs.menuButtonAriaLabel"
     @click="onClick($event)"
   >
     <template
-      v-if="connector"
+      v-if="$attrs.connector"
       #connector
     >
       <div
@@ -18,16 +18,16 @@
       </div>
     </template>
     <template
-      v-if="content"
+      v-if="$attrs.content"
       #content
     >
-      <span v-html="content" />
+      <span v-html="$attrs.content" />
     </template>
     <template
       v-else
       #content
     >
-      <div v-if="expert">
+      <div v-if="$attrs.expert">
         <p class="d-fw-bold">
           Account Issues
         </p>
@@ -48,11 +48,11 @@
           </template>
         </dt-button>
       </div>
-      <div v-if="transfer">
+      <div v-if="$attrs.transfer">
         <div class="d-d-flex d-ai-center d-gg8">
           <dt-avatar
             full-name="Person Avatar"
-            :image-src="defaultImage"
+            :image-src="$attrs.defaultImage"
             seed="seed"
           />
           <p>Carolina Garcia Rodriguez</p>
@@ -66,7 +66,7 @@
           Description
         </p>
       </div>
-      <div v-if="play">
+      <div v-if="$attrs.play">
         <p class="d-fc-purple-700">
           2022-Greeting.mp3
         </p>
@@ -81,10 +81,10 @@
       </div>
     </template>
     <template
-      v-if="menuItems"
+      v-if="$attrs.menuItems"
       #menuItems
     >
-      <span v-html="menuItems" />
+      <span v-html="$attrs.menuItems" />
     </template>
     <template
       v-else

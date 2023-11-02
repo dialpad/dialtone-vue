@@ -1,19 +1,19 @@
 <template>
   <dt-combobox
-    :empty-state-message="emptyStateMessage"
-    :loading="loading"
+    :empty-state-message="$attrs.emptyStateMessage"
+    :loading="$attrs.loading"
     :show-list="!!value && showList"
-    :label="label"
-    :label-visible="labelVisible"
-    :size="size"
-    :description="description"
-    :empty-list="emptyList"
-    :empty-state-class="emptyStateClass"
-    :click-on-select="clickOnSelect"
+    :label="$attrs.label"
+    :label-visible="$attrs.labelVisible"
+    :size="$attrs.size"
+    :description="$attrs.description"
+    :empty-list="$attrs.emptyList"
+    :empty-state-class="$attrs.emptyStateClass"
+    :click-on-select="$attrs.clickOnSelect"
     @escape="onComboboxEscape"
-    @highlight="onHighlight"
+    @highlight="$attrs.onHighlight"
     @select="onComboboxSelect"
-    @opened="onOpened"
+    @opened="$attrs.onOpened"
   >
     <template
       slot="input"
@@ -51,10 +51,10 @@
       </ol>
     </template>
     <template
-      v-if="emptyListItem"
+      v-if="$attrs.emptyListItem"
       slot="emptyListItem"
     >
-      <span v-html="emptyListItem" />
+      <span v-html="$attrs.emptyListItem" />
     </template>
   </dt-combobox>
 </template>

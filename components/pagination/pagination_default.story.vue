@@ -1,13 +1,13 @@
 <template>
   <dt-pagination
-    :total-pages="totalPages"
-    :active-page="activePage"
-    :max-visible="maxVisible"
-    :aria-label="ariaLabel"
-    :prev-aria-label="prevAriaLabel"
-    :next-aria-label="nextAriaLabel"
-    :page-number-aria-label="getPageNumberAriaLabel"
-    @change="onChange"
+    :total-pages="$attrs.totalPages"
+    :active-page="$attrs.activePage"
+    :max-visible="$attrs.maxVisible"
+    :aria-label="$attrs.ariaLabel"
+    :prev-aria-label="$attrs.prevAriaLabel"
+    :next-aria-label="$attrs.nextAriaLabel"
+    :page-number-aria-label="$attrs.getPageNumberAriaLabel"
+    @change="$attrs.onChange"
   />
 </template>
 

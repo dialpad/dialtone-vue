@@ -1,8 +1,8 @@
 <template>
   <dt-stack
-    :direction="direction"
-    :as="stackElement"
-    :gap="gap"
+    :direction="$attrs.direction"
+    :as="$attrs.stackElement"
+    :gap="$attrs.gap"
   >
     <div class="d-bgc-magenta-100">
       Stack item 1

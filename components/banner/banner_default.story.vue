@@ -9,59 +9,59 @@
 
     <dt-banner
       v-show="displayBanner"
-      :kind="kind"
-      :title="title"
-      :title-id="titleId"
-      :content-id="contentId"
-      :important="important"
-      :pinned="pinned"
-      :hide-close="hideClose"
-      :close-button-props="buttonCloseProps"
+      :kind="$attrs.kind"
+      :title="$attrs.title"
+      :title-id="$attrs.titleId"
+      :content-id="$attrs.contentId"
+      :important="$attrs.important"
+      :pinned="$attrs.pinned"
+      :hide-close="$attrs.hideClose"
+      :close-button-props="$attrs.buttonCloseProps"
       :class="{ 'd-ps-sticky': show }"
-      :hide-icon="hideIcon"
-      :background-image="backgroundImage"
-      :background-size="backgroundSize"
-      :dialog-class="dialogClass"
-      :visually-hidden-close="visuallyHiddenClose"
-      :visually-hidden-close-label="visuallyHiddenCloseLabel"
+      :hide-icon="$attrs.hideIcon"
+      :background-image="$attrs.backgroundImage"
+      :background-size="$attrs.backgroundSize"
+      :dialog-class="$attrs.dialogClass"
+      :visually-hidden-close="$attrs.visuallyHiddenClose"
+      :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
       @close="displayBanner = false; onClose($event)"
     >
       <span
-        v-if="defaultSlot"
-        v-html="defaultSlot"
+        v-if="$attrs.default"
+        v-html="$attrs.default"
       />
       <span v-else>
         Message body with
         <a
           href="#"
           class="d-link"
-          :class="linkClass"
+          :class="$attrs.linkClass"
         >a link</a>.
       </span>
 
       <template
-        v-if="action"
+        v-if="$attrs.action"
         slot="action"
       >
         <dt-button
-          :kind="buttonKind"
+          :kind="$attrs.buttonKind"
           importance="outlined"
-          @click="onClick"
+          @click="$attrs.onClick"
         >
           {{ action }}
         </dt-button>
       </template>
       <template
-        v-if="icon"
+        v-if="$attrs.icon"
         slot="icon"
       >
-        <dt-icon :name="icon" />
+        <dt-icon :name="$attrs.icon" />
       </template>
       <template
-        v-if="titleOverride"
+        v-if="$attrs.titleOverride"
         slot="titleOverride"
       >
-        <span v-html="titleOverride" />
+        <span v-html="$attrs.titleOverride" />
       </template>
     </dt-banner>
   </div>

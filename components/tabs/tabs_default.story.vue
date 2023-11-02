@@ -5,13 +5,13 @@
     }"
   >
     <dt-tab-group
-      :size="size"
-      :inverted="inverted"
-      :borderless="borderless"
-      :disabled="disabled"
-      :tab-list-class="tabListClass"
-      :tab-list-child-props="tabListChildProps"
-      @change="onChange"
+      :size="$attrs.size"
+      :inverted="$attrs.inverted"
+      :borderless="$attrs.borderless"
+      :disabled="$attrs.disabled"
+      :tab-list-class="$attrs.tabListClass"
+      :tab-list-child-props="$attrs.tabListChildProps"
+      @change="$attrs.onChange"
     >
       <template slot="tabs">
         <dt-tab
@@ -20,8 +20,8 @@
           selected
         >
           <p
-            v-if="tabs"
-            v-html="tabs"
+            v-if="$attrs.tabs"
+            v-html="$attrs.tabs"
           />
           <p v-else>
             First
@@ -32,8 +32,8 @@
           panel-id="4"
         >
           <p
-            v-if="tabs"
-            v-html="tabs"
+            v-if="$attrs.tabs"
+            v-html="$attrs.tabs"
           />
           <p v-else>
             Second
@@ -45,8 +45,8 @@
           label="Third Label"
         >
           <p
-            v-if="tabs"
-            v-html="tabs"
+            v-if="$attrs.tabs"
+            v-html="$attrs.tabs"
           />
           <p v-else>
             Third
@@ -64,8 +64,8 @@
           tab-id="1"
         >
           <p
-            v-if="defaultSlot"
-            v-html="defaultSlot"
+            v-if="$attrs.default"
+            v-html="$attrs.default"
           />
           <p v-else>
             First Panel
@@ -76,8 +76,8 @@
           tab-id="3"
         >
           <p
-            v-if="defaultSlot"
-            v-html="defaultSlot"
+            v-if="$attrs.default"
+            v-html="$attrs.default"
           />
           <p v-else>
             Second Panel
@@ -88,8 +88,8 @@
           tab-id="5"
         >
           <p
-            v-if="defaultSlot"
-            v-html="defaultSlot"
+            v-if="$attrs.default"
+            v-html="$attrs.default"
           />
           <p v-else>
             Third Panel

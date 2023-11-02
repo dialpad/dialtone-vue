@@ -9,34 +9,34 @@
   >
     <div class="d-pt16">
       <dt-tooltip
-        :id="id"
-        :placement="placement"
-        :inverted="inverted"
-        :message="message"
-        :fallback-placements="fallbackPlacements"
-        :offset="offset"
-        :sticky="sticky"
-        :content-class="contentClass"
-        :transition="transition"
-        :show="showTooltip"
-        :enabled="enabled"
-        :delay="delay"
-        :external-anchor="externalAnchor"
+        :id="$attrs.id"
+        :placement="$attrs.placement"
+        :inverted="$attrs.inverted"
+        :message="$attrs.message"
+        :fallback-placements="$attrs.fallbackPlacements"
+        :offset="$attrs.offset"
+        :sticky="$attrs.sticky"
+        :content-class="$attrs.contentClass"
+        :transition="$attrs.transition"
+        :show="$attrs.showTooltip"
+        :enabled="$attrs.enabled"
+        :delay="$attrs.delay"
+        :external-anchor="$attrs.externalAnchor"
         v-bind="$attrs"
-        @shown="onShown"
+        @shown="$attrs.onShown"
       >
         <template
           slot="anchor"
         >
           <dt-button
             importance="outlined"
-            :kind="buttonKind"
+            :kind="$attrs.buttonKind"
           >
             {{ anchor }}
           </dt-button>
         </template>
-        <template v-if="defaultSlot">
-          {{ defaultSlot }}
+        <template v-if="$attrs.default">
+          {{ $attrs.default }}
         </template>
       </dt-tooltip>
     </div>

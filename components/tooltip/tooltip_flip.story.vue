@@ -7,12 +7,12 @@
       <div class="some-text" />
       <div class="some-text">
         <dt-tooltip
-          :id="id"
-          :placement="placement"
+          :id="$attrs.id"
+          :placement="$attrs.placement"
           class="tooltip"
           :fallback-placements="['right', 'bottom']"
-          :offset="offset"
-          :show="true"
+          :offset="$attrs.offset"
+          :show="$attrs.true"
         >
           <template
             slot="anchor"
@@ -20,7 +20,7 @@
           >
             <dt-button
               importance="outlined"
-              :kind="buttonKind"
+              :kind="$attrs.buttonKind"
               v-bind="attrs"
             >
               Click me to see a tooltip
@@ -28,7 +28,7 @@
           </template>
           <template slot="default">
             <div>
-              {{ defaultSlot }}
+              {{ $attrs.default }}
             </div>
           </template>
         </dt-tooltip>
