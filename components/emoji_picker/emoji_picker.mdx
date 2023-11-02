@@ -1,0 +1,48 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as DtEmojiPickerStories from './emoji_picker.stories.js';
+
+<Meta of={DtEmojiPickerStories}/>
+
+# DtEmojiPicker
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas of={DtEmojiPickerStories.Default} />
+
+## Variants
+
+<Canvas of={DtEmojiPickerStories.Variants} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtEmojiPicker } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```jsx
+<dt-emoji-picker
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```jsx
+<dt-emoji-picker
+  some-other="variant"
+/>
+```
