@@ -1,7 +1,7 @@
 <template>
   <component
-    :is="currentIcon"
-    v-if="currentIcon"
+    :is="icon"
+    v-if="icon"
     data-qa="dt-icon"
     :aria-hidden="ariaLabel ? 'false' : 'true'"
     :aria-label="ariaLabel"
@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import { ICON_SIZE_MODIFIERS, DIALTONE_ICONS } from './icon_constants';
-import { kebabCaseToPascalCase } from '@/common/utils';
+import { ICON_SIZE_MODIFIERS } from './icon_constants';
+import { defineAsyncComponent } from 'vue';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -48,17 +48,27 @@ export default {
     },
   },
 
+  data () {
+    return {
+      icon: null,
+    };
+  },
+
   computed: {
     iconSize () {
       return ICON_SIZE_MODIFIERS[this.size];
     },
+  },
 
-    iconName () {
-      return kebabCaseToPascalCase(this.name);
-    },
-
-    currentIcon () {
-      return DIALTONE_ICONS[this.iconName];
+  watch: {
+    name: {
+      immediate: true,
+      handler () {
+        this.icon = defineAsyncComponent({
+          loader: () => import(`../../node_modules/@dialpad/dialtone-icons/dist/svg/${this.name}.svg`),
+          onError: () => {},
+        });
+      },
     },
   },
 };
