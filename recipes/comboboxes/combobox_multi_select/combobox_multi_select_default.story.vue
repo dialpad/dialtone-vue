@@ -96,7 +96,7 @@ export default {
     },
 
     onComboboxMaxSelected () {
-      this.onMaxSelected();
+      this.$attrs.onMaxSelected();
     },
 
     onComboboxRemove (item) {

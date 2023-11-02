@@ -1,13 +1,13 @@
 <template>
   <div>
-    <dt-button @click="$attrs.buttonClicked">
+    <dt-button @click="buttonClicked">
       Click to show!
     </dt-button>
 
     <aside class="d-toast-wrapper">
       <dt-toast
         ref="toast"
-        :show.sync="$attrs.isShown"
+        :show.sync="isShown"
         :kind="$attrs.kind"
         :title="$attrs.title"
         :message="$attrs.message"
@@ -16,7 +16,7 @@
         :important="$attrs.important"
         :hide-close="$attrs.hideClose"
         :duration="$attrs.duration"
-        :close-button-props="$attrs.buttonCloseProps"
+        :close-button-props="buttonCloseProps"
         :visually-hidden-close="$attrs.visuallyHiddenClose"
         :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
         @close="onClose($event)"
@@ -30,7 +30,7 @@
           <a
             href="#"
             class="d-link"
-            :class="$attrs.linkClass"
+            :class="linkClass"
           >a link</a>.
         </span>
 
@@ -43,7 +43,7 @@
             v-else
             size="sm"
             importance="outlined"
-            :kind="$attrs.buttonKind"
+            :kind="buttonKind"
             @click="$attrs.onClick"
           >
             Action
@@ -78,17 +78,17 @@ export default {
 
   data () {
     return {
-      isShown: this.show,
+      isShown: this.$attrs.show,
     };
   },
 
   computed: {
     shouldInvertButton () {
-      return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
+      return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
     },
 
     isInverted () {
-      return this.important && this.shouldInvertButton;
+      return this.$attrs.important && this.shouldInvertButton;
     },
 
     buttonKind () {

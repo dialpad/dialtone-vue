@@ -58,7 +58,7 @@
         #reactions
       >
         <dt-recipe-emoji-row
-          :reactions="$attrs.mockReactions"
+          :reactions="mockReactions"
         />
       </template>
       <template #menu>

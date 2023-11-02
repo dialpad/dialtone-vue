@@ -4,7 +4,7 @@
       :title="$attrs.title"
       :banner-title="$attrs.bannerTitle"
       :close-button-props="buttonCloseProps"
-      :show="$attrs.isOpen"
+      :show="isOpen"
       :kind="$attrs.kind"
       :size="$attrs.size"
       :copy="$attrs.copy"
@@ -20,7 +20,7 @@
       :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
       :close-on-click="$attrs.closeOnClick"
       :initial-focus-element="$attrs.initialFocusElement"
-      @update:show="$attrs.updateShow"
+      @update:show="updateShow"
     >
       <template
         v-if="$attrs.banner"
@@ -109,7 +109,7 @@ export default {
     },
 
     secondaryButtonKind () {
-      return this.kind === 'danger' ? 'muted' : 'default';
+      return this.$attrs.kind === 'danger' ? 'muted' : 'default';
     },
   },
 
@@ -124,7 +124,7 @@ export default {
   methods: {
     updateShow (open) {
       this.isOpen = open;
-      this.toggleOpen(open);
+      this.$attrs.toggleOpen(open);
     },
   },
 

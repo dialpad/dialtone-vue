@@ -129,7 +129,7 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Admin view / listening in
       </p>
-      <dt-recipe-contact-info :avatar-list="$attrs.adminListenInAvatars">
+      <dt-recipe-contact-info :avatar-list="adminListenInAvatars">
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
             <div class="d-fw-bold d-fs-200">
@@ -228,7 +228,7 @@
       <p class="d-my16 d-fs-200 d-fw-bold">
         Group call
       </p>
-      <dt-recipe-contact-info :avatar-list="$attrs.groupCallAvatars">
+      <dt-recipe-contact-info :avatar-list="groupCallAvatars">
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
             <div class="d-fw-bold d-fs-200">

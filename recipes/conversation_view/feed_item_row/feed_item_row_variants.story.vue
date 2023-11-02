@@ -53,7 +53,7 @@
             #reactions
           >
             <dt-recipe-emoji-row
-              :reactions="$attrs.mockReactions"
+              :reactions="mockReactions"
             />
           </template>
           <template
@@ -95,7 +95,7 @@
           :display-name="$attrs.displayName"
           :time="$attrs.time"
           :short-time="$attrs.shortTime"
-          :is-active="$attrs.true"
+          :is-active="true"
           @hover="$attrs.onHover"
           @focus="$attrs.onFocus"
         >
@@ -121,7 +121,7 @@
                 <dt-avatar
                   v-for="person of persons"
                   :key="person"
-                  :full-name="$attrs.person"
+                  :full-name="person"
                   seed="seed"
                   size="sm"
                 />
@@ -156,7 +156,7 @@
           :display-name="$attrs.displayName"
           :time="$attrs.time"
           :short-time="$attrs.shortTime"
-          :is-active="$attrs.true"
+          :is-active="true"
           state="ERROR"
           @hover="$attrs.onHover"
           @focus="$attrs.onFocus"

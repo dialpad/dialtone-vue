@@ -16,7 +16,7 @@
       :important="$attrs.important"
       :pinned="$attrs.pinned"
       :hide-close="$attrs.hideClose"
-      :close-button-props="$attrs.buttonCloseProps"
+      :close-button-props="buttonCloseProps"
       :class="{ 'd-ps-sticky': show }"
       :hide-icon="$attrs.hideIcon"
       :background-image="$attrs.backgroundImage"
@@ -24,7 +24,7 @@
       :dialog-class="$attrs.dialogClass"
       :visually-hidden-close="$attrs.visuallyHiddenClose"
       :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
-      @close="displayBanner = false; onClose($event)"
+      @close="displayBanner = false; $attrs.onClose($event)"
     >
       <span
         v-if="$attrs.default"
@@ -35,7 +35,7 @@
         <a
           href="#"
           class="d-link"
-          :class="$attrs.linkClass"
+          :class="linkClass"
         >a link</a>.
       </span>
 
@@ -44,11 +44,11 @@
         slot="action"
       >
         <dt-button
-          :kind="$attrs.buttonKind"
+          :kind="buttonKind"
           importance="outlined"
           @click="$attrs.onClick"
         >
-          {{ action }}
+          {{ $attrs.action }}
         </dt-button>
       </template>
       <template
@@ -86,17 +86,17 @@ export default {
 
   data () {
     return {
-      displayBanner: this.show,
+      displayBanner: this.$attrs.show,
     };
   },
 
   computed: {
     shouldInvertButton () {
-      return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
+      return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
     },
 
     isInverted () {
-      return this.important && this.shouldInvertButton;
+      return this.$attrs.important && this.shouldInvertButton;
     },
 
     buttonKind () {
@@ -109,8 +109,8 @@ export default {
 
     buttonCloseProps () {
       return {
-        ...this.closeButtonProps,
-        kind: this.buttonKind,
+        ...this.$attrs.closeButtonProps,
+        kind: this.$attrs.buttonKind,
         ariaLabel: 'Close',
       };
     },

@@ -2,7 +2,7 @@
   <dt-combobox
     :empty-state-message="$attrs.emptyStateMessage"
     :loading="$attrs.loading"
-    :show-list="!!value && showList"
+    :show-list="!!value && $attrs.showList"
     :label="$attrs.label"
     :label-visible="$attrs.labelVisible"
     :size="$attrs.size"
@@ -83,24 +83,24 @@ export default {
 
   computed: {
     displayItems () {
-      return this.items;
+      return this.$attrs.items;
     },
   },
 
   methods: {
     onComboboxSelect (i) {
-      this.value = this.items[i].name;
-      this.onSelect(i);
+      this.value = this.$attrs.items[i].name;
+      this.$attrs.onSelect(i);
     },
 
     onListItemSelect (i) {
-      this.value = this.items[i].name;
-      this.onItemClick(i);
+      this.value = this.$attrs.items[i].name;
+      this.$attrs.onItemClick(i);
     },
 
     onComboboxEscape () {
       this.value = '';
-      this.onEscape();
+      this.$attrs.onEscape();
     },
   },
 };

@@ -5,7 +5,7 @@
         v-for="(variant, i) in variants.placement"
         :key="i"
         class="d-mr8"
-        :placement="$attrs.variant"
+        :placement="variant"
         :padding="$attrs.padding"
         :navigation-type="$attrs.navigationType"
         :transition="$attrs.transition"

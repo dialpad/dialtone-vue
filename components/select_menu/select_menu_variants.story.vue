@@ -54,7 +54,7 @@
       label="With Slotted Options"
     >
       <option
-        v-for="option in options"
+        v-for="option in $attrs.options"
         :key="`with-slotted-options-${option.value}`"
         :value="option.value"
       >

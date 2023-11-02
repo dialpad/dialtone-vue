@@ -428,7 +428,7 @@
       class="d-my128 d-jc-flex-end"
       max-height="20rem"
       max-width="50rem"
-      :open.sync="$attrs.openPopoverWithTriggerOverride"
+      :open.sync="openPopoverWithTriggerOverride"
     >
       <template #anchor="{ attrs }">
         <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
@@ -470,7 +470,7 @@ export default {
 
   data () {
     return {
-      openPopoverWithTriggerOverride: this.open,
+      openPopoverWithTriggerOverride: this.$attrs.open,
       sampleText: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Consequuntur delectus distinctio id iure labore,
             maiores mollitia reprehenderit sunt tempore veritatis.

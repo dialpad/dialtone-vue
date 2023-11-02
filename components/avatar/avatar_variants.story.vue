@@ -7,7 +7,7 @@
           v-for="size in avatarSizes"
           :key="`image-${size}`"
           :seed="$attrs.seed"
-          :size="$attrs.size"
+          :size="size"
           full-name="Avatar Image"
           :image-src="$attrs.imageSrc"
         />
@@ -20,7 +20,7 @@
           v-for="size in avatarSizes"
           :key="`initials-${size}`"
           :seed="$attrs.seed"
-          :size="$attrs.size"
+          :size="size"
           full-name="Avatar Icon"
         />
       </div>
@@ -32,7 +32,7 @@
           v-for="size in avatarSizes"
           :key="`icon-${size}`"
           :seed="$attrs.seed"
-          :size="$attrs.size"
+          :size="size"
           full-name="Avatar Icon"
           icon-name="user"
         />
@@ -48,7 +48,7 @@
           size="md"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
-          :presence="$attrs.state"
+          :presence="state"
         />
       </div>
     </div>
@@ -99,18 +99,18 @@
         <dt-avatar
           :seed="$attrs.seed"
           full-name="Person avatar"
-          group="3"
+          :group="3"
         />
         <dt-avatar
           :seed="$attrs.seed"
           icon-name="user"
-          group="10"
+          :group="10"
         />
         <dt-avatar
           :seed="$attrs.seed"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
-          group="100"
+          :group="100"
         />
       </div>
     </div>

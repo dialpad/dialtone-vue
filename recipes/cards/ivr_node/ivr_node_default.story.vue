@@ -1,7 +1,7 @@
 <template>
   <dt-recipe-ivr-node
-    :node-label="$attrs.label"
-    :node-type="$attrs.nodeType"
+    :node-label="label"
+    :node-type="nodeType"
     :is-selected="$attrs.isSelected"
     :dtmf-key="$attrs.dtmfKey"
     :menu-button-aria-label="$attrs.menuButtonAriaLabel"
@@ -27,7 +27,7 @@
       v-else
       #content
     >
-      <div v-if="$attrs.expert">
+      <div v-if="expert">
         <p class="d-fw-bold">
           Account Issues
         </p>
@@ -48,7 +48,7 @@
           </template>
         </dt-button>
       </div>
-      <div v-if="$attrs.transfer">
+      <div v-if="transfer">
         <div class="d-d-flex d-ai-center d-gg8">
           <dt-avatar
             full-name="Person Avatar"
@@ -66,7 +66,7 @@
           Description
         </p>
       </div>
-      <div v-if="$attrs.play">
+      <div v-if="play">
         <p class="d-fc-purple-700">
           2022-Greeting.mp3
         </p>
@@ -195,7 +195,7 @@ export default {
     },
 
     label () {
-      return this.nodeLabel || IVR_NODE_LABELS[this.nodeType];
+      return this.$attrs.nodeLabel || IVR_NODE_LABELS[this.nodeType];
     },
 
     fileName () {
