@@ -80,7 +80,7 @@ export default {
     },
 
     getGapClass () {
-      return DT_STACK_GAP.includes(this.gap) ? `dt-description-list--gap-${this.gap}` : null;
+      return `dt-description-list--gap-${this.gap}`;
     },
   },
 };
@@ -91,10 +91,16 @@ export default {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: var(--dt-space-400);
   flex-direction: row;
-  line-height: var(--lh2);
+  line-height: var(--dt-font-line-height-300);
   font-size: var(--dt-font-size-100);
+  --description-list-gap: var(--dt-space-400);
+  gap: var(--description-list-gap);
+  each(range(0, 600, 100), {
+    &--gap-@{value} {
+     --description-list-gap: ~"var(--dt-space-@{value})";
+    }
+  });
   &--column {
     flex-direction: column;
   }
