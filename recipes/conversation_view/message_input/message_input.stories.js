@@ -80,6 +80,7 @@ export const argsData = {
   inputAriaLabel: 'Input text field',
   noticeMessage: 'Files must be less than 32 MB to be sent as Dialpad messages.',
   maxHeight: '40vh',
+  characterLimitWarningMessage: 'You have reached the character limit.',
   onSubmit: action('submit'),
   onFocus: action('focus'),
   onBlur: action('blur'),
@@ -99,8 +100,9 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args) => createTemplateFromVueFile(
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
+  argTypes,
   DtRecipeMessageInputDefaultTemplate,
 );
 
