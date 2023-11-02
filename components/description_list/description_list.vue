@@ -1,16 +1,17 @@
-<!-- eslint-disable vue/require-v-for-key -->
 <template>
   <dl :class="['dt-description-list', getDirectionClass, getGapClass]">
     <template
       v-for="item in items"
     >
       <dt
-        :class="['dt-description-list__term', termClass]"
+        :key="`dt-${item.term}`"
+        :class="dtClass"
       >
         {{ item.term }}
       </dt>
       <dd
-        :class="['dt-description-list__description', descriptionClass]"
+        :key="`dd-${item.term}`"
+        :class="ddClass"
       >
         {{ item.description }}
       </dd>
@@ -75,6 +76,14 @@ export default {
   },
 
   computed: {
+    dtClass () {
+      return ['dt-description-list__term', this.termClass];
+    },
+
+    ddClass () {
+      return ['dt-description-list__description', this.descriptionClass];
+    },
+
     getDirectionClass () {
       return `dt-description-list--${this.direction}`;
     },
