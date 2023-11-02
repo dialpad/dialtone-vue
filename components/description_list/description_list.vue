@@ -118,9 +118,4 @@ export default {
     margin-left: 0;
   }
 }
-each(range(0, 600, 100), {
-  .dt-description-list--gap-@{value} {
-    gap: ~"var(--dt-space-@{value})";
-  }
-});
 </style>
