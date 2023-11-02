@@ -86,7 +86,7 @@ export default {
 
   data () {
     return {
-      displayBanner: this.$attrs.show,
+      displayBanner: this.show,
     };
   },
 

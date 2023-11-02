@@ -80,7 +80,7 @@
       label="With Error Messages Hidden"
       :options="$attrs.options"
       :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
-      :show-messages="$attrs.false"
+      :show-messages="false"
     />
     <!-- With Error Messages Hidden -->
 

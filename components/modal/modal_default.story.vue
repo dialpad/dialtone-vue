@@ -96,14 +96,14 @@ export default {
 
   data () {
     return {
-      isOpen: this.show,
+      isOpen: this.$attrs.show,
     };
   },
 
   computed: {
     buttonCloseProps () {
       return {
-        ...this.closeButtonProps,
+        ...this.$attrs.closeButtonProps,
         ariaLabel: 'Close',
       };
     },
@@ -116,7 +116,7 @@ export default {
   watch: {
     show: {
       handler () {
-        this.isOpen = this.show;
+        this.isOpen = this.$attrs.show;
       },
     },
   },

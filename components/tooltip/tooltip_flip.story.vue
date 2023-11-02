@@ -12,7 +12,7 @@
           class="tooltip"
           :fallback-placements="['right', 'bottom']"
           :offset="$attrs.offset"
-          :show="$attrs.true"
+          :show="true"
         >
           <template
             slot="anchor"

@@ -9,7 +9,7 @@
     :close-button-props="computedCloseButtonProps"
     :visually-hidden-close="$attrs.visuallyHiddenClose"
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
-    @close="onClose($event)"
+    @close="$attrs.onClose($event)"
   >
     <span
       v-if="$attrs.default"
@@ -65,11 +65,11 @@ export default {
 
   computed: {
     shouldInvertButton () {
-      return this.kind === 'base' || this.kind === 'error' || this.kind === 'info';
+      return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
     },
 
     isInverted () {
-      return this.important && this.shouldInvertButton;
+      return this.$attrs.important && this.shouldInvertButton;
     },
 
     buttonKind () {
@@ -82,7 +82,7 @@ export default {
 
     computedCloseButtonProps () {
       return {
-        ...this.closeButtonProps,
+        ...this.$attrs.closeButtonProps,
         kind: this.buttonKind,
         ariaLabel: 'Close',
       };

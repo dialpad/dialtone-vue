@@ -176,7 +176,7 @@
           :padding="$attrs.padding"
           :navigation-type="$attrs.navigationType"
           :open="$attrs.open"
-          :open-on-context="$attrs.true"
+          :open-on-context="true"
           :transition="$attrs.transition"
         >
           <template

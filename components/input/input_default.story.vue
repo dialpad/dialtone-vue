@@ -17,7 +17,7 @@
     :retain-warning="$attrs.retainWarning"
     :input-wrapper-class="$attrs.inputWrapperClass"
     :current-length="$attrs.currentLength"
-    :validate="$attrs.validationConfig"
+    :validate="validationConfig"
     @blur="$attrs.onBlur"
     @input="$attrs.onInput"
     @clear="$attrs.onClear"
@@ -72,7 +72,7 @@ export default {
 
   computed: {
     validationMessage () {
-      const remainingCharacters = this.validate?.length?.max - this.inputLength;
+      const remainingCharacters = this.$attrs?.validate?.length?.max - this.inputLength;
 
       if (remainingCharacters < 0) {
         return `${Math.abs(remainingCharacters)} characters over limit`;
@@ -82,16 +82,16 @@ export default {
     },
 
     validationConfig () {
-      if (!this?.validate?.length) {
+      if (!this?.$attrs?.validate?.length) {
         return null;
       }
 
       // Deep clone validate object
-      const validateConfigData = JSON.parse(JSON.stringify(this.validate));
+      const validateConfigData = JSON.parse(JSON.stringify(this.$attrs.validate));
 
       // Adds validation message
-      validateConfigData.length.message = this?.validate?.length?.message
-        ? this.validate.length.message
+      validateConfigData.length.message = this?.$attrs?.validate?.length?.message
+        ? this.$attrs.validate.length.message
         : this.validationMessage;
 
       return validateConfigData;
@@ -107,7 +107,7 @@ export default {
   methods: {
     updateLength ($event) {
       this.inputLength = $event;
-      this.onUpdateLength($event);
+      this.$attrs.onUpdateLength($event);
     },
   },
 };
