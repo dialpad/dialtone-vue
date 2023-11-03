@@ -1,0 +1,2 @@
+import{o as e,k as o,e as t}from"./vue.esm-bundler-4299d4fa.js";const a={"aria-hidden":"true",role:"img","data-name":"Stop Filled",class:"d-icon d-icon--stop-filled",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"},s=t("path",{fill:"currentColor",d:"M8 2H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"},null,-1),l=[s];function n(r,c){return e(),o("svg",a,l)}const i={render:n};export{i as default,n as render};
+//# sourceMappingURL=stop-filled-ae4f44e5.js.map

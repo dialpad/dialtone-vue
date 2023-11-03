@@ -1,0 +1,2 @@
+import{o as e,k as o,e as r}from"./vue.esm-bundler-4299d4fa.js";const t={"aria-hidden":"true",role:"img","data-name":"More Horizontal",class:"d-icon d-icon--more-horizontal",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"},n=r("path",{fill:"currentColor","fill-rule":"evenodd",d:"M1.502 6a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm3.5 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm3.5 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z","clip-rule":"evenodd"},null,-1),a=[n];function l(c,d){return e(),o("svg",t,a)}const s={render:l};export{s as default,l as render};
+//# sourceMappingURL=more-horizontal-31d7336e.js.map

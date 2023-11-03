@@ -1,0 +1,2 @@
+import{o as e,k as o,e as a}from"./vue.esm-bundler-4299d4fa.js";const t={"aria-hidden":"true",role:"img","data-name":"Dash",class:"d-icon d-icon--dash",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"},n=a("path",{fill:"currentColor","fill-rule":"evenodd",d:"M1.5 6a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1H2a.5.5 0 0 1-.5-.5Z","clip-rule":"evenodd"},null,-1),r=[n];function s(d,c){return e(),o("svg",t,r)}const i={render:s};export{i as default,s as render};
+//# sourceMappingURL=dash-cdf59cdc.js.map

@@ -1,0 +1,2 @@
+import{o as e,k as o,e as n}from"./vue.esm-bundler-4299d4fa.js";const r={"aria-hidden":"true",role:"img","data-name":"Signal Zero",class:"d-icon d-icon--signal-zero",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"},a=n("path",{fill:"currentColor","fill-rule":"evenodd",d:"M.5 10a.5.5 0 0 1 .5-.5h.005a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5Z","clip-rule":"evenodd"},null,-1),t=[a];function l(s,c){return e(),o("svg",r,t)}const i={render:l};export{i as default,l as render};
+//# sourceMappingURL=signal-zero-16d73c51.js.map
