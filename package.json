@@ -35,7 +35,7 @@
     "CHANGELOG.json"
   ],
   "dependencies": {
-    "@dialpad/dialtone-icons": "^3.4.0",
+    "@dialpad/dialtone-icons": "^4.0.0",
     "@tiptap/extension-code-block": "^2.0.3",
     "@tiptap/extension-document": "^2.0.3",
     "@tiptap/extension-hard-break": "^2.0.3",
@@ -49,6 +49,7 @@
     "date-fns": "^2.30.0",
     "emoji-regex": "^10.2.1",
     "emoji-toolkit": "^6.6.0",
+    "string-hash": "^1.1.3",
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
@@ -107,6 +108,7 @@
     "typedoc": "^0.25.2",
     "typedoc-plugin-markdown": "^3.16.0",
     "vite": "^4.4.9",
+    "vite-svg-loader": "^4.0.0",
     "vitest": "0.33.0",
     "vue": "^3.3.4",
     "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
