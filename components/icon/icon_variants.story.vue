@@ -10,7 +10,7 @@
       />
       <dt-icon
         v-for="icon in Object.keys(icons)"
-        :key="icon"
+        :key="`${category}-${icon}`"
         size="600"
         :name="icon"
         class="d-m8"
