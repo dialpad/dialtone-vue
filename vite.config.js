@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import hash from 'string-hash';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,10 +21,11 @@ export default defineConfig({
       },
     },
     rollupOptions: {
+      plugins: [nodeResolve()],
       external: [
         'vue',
         '@dialpad/dialtone',
-        '@dialpad/dialtone-icons',
+        /node_modules/,
       ],
       output: {
         globals: {
