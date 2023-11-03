@@ -21,17 +21,18 @@ describe('DtNoticeIcon tests', () => {
   let propsData;
   let slotsData;
 
-  const _setWrappers = () => {
+  const _setWrappers = async () => {
     wrapper = mount(DtNoticeIcon, {
       components: { DtIcon },
       propsData,
       slots: slotsData,
       localVue: testContext.localVue,
     });
-    _setChildWrappers();
+    await _setChildWrappers();
   };
 
-  const _setChildWrappers = () => {
+  const _setChildWrappers = async () => {
+    await vi.dynamicImportSettled();
     icon = wrapper.findComponent(DtIcon);
   };
 
@@ -39,10 +40,10 @@ describe('DtNoticeIcon tests', () => {
     testContext.localVue = createLocalVue();
   });
 
-  beforeEach(() => {
+  beforeEach(async function () {
     propsData = basePropsData;
     slotsData = baseSlotsData;
-    _setWrappers();
+    await _setWrappers();
   });
 
   describe('Presentation Tests', () => {
@@ -63,7 +64,7 @@ describe('DtNoticeIcon tests', () => {
     describe('When kind is base', () => {
       beforeEach(async () => {
         await wrapper.setProps({ kind: 'base' });
-        _setChildWrappers();
+        await _setChildWrappers();
       });
 
       it('Should render base icon', () => {
@@ -76,7 +77,7 @@ describe('DtNoticeIcon tests', () => {
         slotsData = {
           default: '<dt-icon name="accessibility" />',
         };
-        _setWrappers();
+        await _setWrappers();
       });
 
       it('Should render correctly', async () => {
