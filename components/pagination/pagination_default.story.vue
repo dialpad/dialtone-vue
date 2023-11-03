@@ -6,7 +6,7 @@
     :aria-label="$attrs.ariaLabel"
     :prev-aria-label="$attrs.prevAriaLabel"
     :next-aria-label="$attrs.nextAriaLabel"
-    :page-number-aria-label="$attrs.getPageNumberAriaLabel"
+    :page-number-aria-label="getPageNumberAriaLabel"
     @change="$attrs.onChange"
   />
 </template>
