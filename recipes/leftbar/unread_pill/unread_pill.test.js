@@ -91,10 +91,11 @@ describe('DtRecipeUnreadPill Tests', () => {
     describe('When the direction is up', () => {
       beforeEach(async () => {
         await wrapper.setProps({ direction: 'up' });
+        await _setChildWrappers();
       });
 
       it('should contain the correct class', () => {
-        expect(wrapper.classes('d-icon--arrow-up')).toBe(true);
+        expect(unreadPillIcon.classes('d-icon--arrow-up')).toBe(true);
       });
     });
 
@@ -105,7 +106,7 @@ describe('DtRecipeUnreadPill Tests', () => {
       });
 
       it('should contain the correct class', () => {
-        expect(wrapper.classes('d-icon--arrow-down')).toBe(true);
+        expect(unreadPillIcon.classes('d-icon--arrow-down')).toBe(true);
       });
     });
   });
