@@ -60,6 +60,12 @@ export default {
     },
   },
 
+  data () {
+    return {
+      icon: null,
+    };
+  },
+
   computed: {
     iconSize () {
       return ICON_SIZE_MODIFIERS[this.size];
@@ -69,16 +75,12 @@ export default {
   watch: {
     name: {
       immediate: true,
-      handler () {
+      handler (name) {
         this.icon = defineAsyncComponent(() =>
-          import(`../../node_modules/@dialpad/dialtone-icons/dist/svg/${this.name}.svg`),
+          import(`../../node_modules/@dialpad/dialtone-icons/dist/svg/${name}.svg`),
         );
       },
     },
-  },
-
-  beforeCreate () {
-    this.icon = null;
   },
 };
 </script>
