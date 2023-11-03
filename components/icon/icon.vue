@@ -60,12 +60,6 @@ export default {
     },
   },
 
-  data () {
-    return {
-      icon: null,
-    };
-  },
-
   computed: {
     iconSize () {
       return ICON_SIZE_MODIFIERS[this.size];
@@ -81,6 +75,10 @@ export default {
         );
       },
     },
+  },
+
+  beforeCreate () {
+    this.icon = null;
   },
 };
 </script>
