@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite';
-import svgPlugin from 'unplugin-svg-vue-component/vite';
+import { createSvgPlugin } from 'vite-plugin-vue2-svg';
 import vue from '@vitejs/plugin-vue2';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
+import hash from 'string-hash';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,7 +27,22 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue(), svgPlugin()],
+  plugins: [vue(), createSvgPlugin({
+    svgoConfig: {
+      plugins: [
+        {
+          name: 'prefixIds',
+          params: {
+            delim: '',
+            prefix: (_, extra) => {
+              return `dt-icon${hash(extra.path)}`;
+            },
+            prefixClassNames: false,
+          },
+        },
+      ],
+    },
+  })],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),

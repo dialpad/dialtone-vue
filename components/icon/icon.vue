@@ -2,6 +2,7 @@
   <component
     :is="icon"
     v-if="icon"
+    :id="id"
     data-qa="dt-icon"
     :aria-hidden="ariaLabel ? 'false' : 'true'"
     :aria-label="ariaLabel"
@@ -12,6 +13,7 @@
 <script>
 import { ICON_SIZE_MODIFIERS } from './icon_constants';
 import { defineAsyncComponent } from 'vue';
+import { getUniqueString } from '@/common/utils.js';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -21,6 +23,16 @@ export default {
   name: 'DtIcon',
 
   props: {
+    /**
+     * DtIcon identifier
+     */
+    id: {
+      type: String,
+      default () {
+        return getUniqueString();
+      },
+    },
+
     /**
      * The size of the icon.
      * @values 100, 200, 300, 400, 500, 600, 700, 800
@@ -64,10 +76,9 @@ export default {
     name: {
       immediate: true,
       handler () {
-        this.icon = defineAsyncComponent({
-          loader: () => import(`../../node_modules/@dialpad/dialtone-icons/dist/svg/${this.name}.svg`),
-          onError: () => {},
-        });
+        this.icon = defineAsyncComponent(() =>
+          import(`../../node_modules/@dialpad/dialtone-icons/dist/svg/${this.name}.svg`),
+        );
       },
     },
   },
