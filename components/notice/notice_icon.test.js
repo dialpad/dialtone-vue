@@ -2,37 +2,30 @@ import DtNoticeIcon from './notice_icon.vue';
 import { createLocalVue, mount } from '@vue/test-utils';
 import { DtIcon } from '@/components/icon';
 
-// Constants
-const basePropsData = {
+const baseProps = {
   kind: 'warning',
 };
+const baseSlots = {};
 
-const baseSlotsData = {};
+let mockProps = {};
+let mockSlots = {};
+
+const testContext = {};
 
 describe('DtNoticeIcon tests', () => {
-  let testContext;
-
-  beforeAll(() => {
-    testContext = {};
-  });
-
   let wrapper;
   let icon;
-  let propsData;
-  let slotsData;
 
-  const _setWrappers = async () => {
+  const updateWrapper = async () => {
     wrapper = mount(DtNoticeIcon, {
       components: { DtIcon },
-      propsData,
-      slots: slotsData,
+      propsData: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
       localVue: testContext.localVue,
     });
-    await _setChildWrappers();
-  };
 
-  const _setChildWrappers = async () => {
     await vi.dynamicImportSettled();
+
     icon = wrapper.findComponent(DtIcon);
   };
 
@@ -41,9 +34,12 @@ describe('DtNoticeIcon tests', () => {
   });
 
   beforeEach(async function () {
-    propsData = basePropsData;
-    slotsData = baseSlotsData;
-    await _setWrappers();
+    await updateWrapper();
+  });
+
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
   });
 
   describe('Presentation Tests', () => {
@@ -63,8 +59,9 @@ describe('DtNoticeIcon tests', () => {
 
     describe('When kind is base', () => {
       beforeEach(async () => {
-        await wrapper.setProps({ kind: 'base' });
-        await _setChildWrappers();
+        mockProps = { kind: 'base' };
+
+        await updateWrapper();
       });
 
       it('Should render base icon', () => {
@@ -74,10 +71,8 @@ describe('DtNoticeIcon tests', () => {
 
     describe('When custom icon is passed into the slot', () => {
       beforeEach(async () => {
-        slotsData = {
-          default: '<dt-icon name="accessibility" />',
-        };
-        await _setWrappers();
+        mockSlots = { default: '<dt-icon name="accessibility" />' };
+        await updateWrapper();
       });
 
       it('Should render correctly', async () => {

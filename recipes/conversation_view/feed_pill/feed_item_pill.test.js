@@ -64,8 +64,8 @@ describe('DtRecipeFeedItemPill Tests', function () {
       it('should render a feed item pill', async () => {
         expect(feedItemPill.exists()).toBeTruthy();
         expect(icon.exists()).toBe(true);
-        // expect(icon.attributes('data-name')).toBe(MOCK_ICON_NAME);
-        // expect(wrapper.find(`[data-qa="${DATA_QA.CONTENT_ELEMENT}"]`).exists()).toBe(false);
+        expect(icon.classes()).toContain(`d-icon--${MOCK_ICON_NAME}`);
+        expect(wrapper.find(`[data-qa="${DATA_QA.CONTENT_ELEMENT}"]`).exists()).toBe(false);
       });
     });
   });
