@@ -15,17 +15,49 @@
         @keydown.esc="emits('close')"
       />
     </div>
+    <div class="d-emoji-picker--body">
+      <emoji-search
+        ref="searchInputRef"
+        v-model="searchQuery"
+        :search-placeholder-label="searchPlaceholderLabel"
+        @select-first-emoji="emits('selected-emoji', highlightedEmoji)"
+        @focus-tabset="$refs.tabsetRef.focusTabset()"
+        @focus-emoji-selector="$refs.emojiSelectorRef.focusEmojiSelector()"
+        @keydown.esc="emits('close')"
+      />
+      <emoji-selector
+        ref="emojiSelectorRef"
+        :emoji-filter="searchQuery"
+        :skin-tone="skinTone"
+        :tabset-labels="tabSetLabels"
+        :search-results-label="searchResultsLabel"
+        :search-no-results-label="searchNoResultsLabel"
+        :recently-used-emojis="recentlyUsedEmojis"
+        :selected-tabset="selectedTabset"
+        @scroll-into-tab="updateScrollIntoTab"
+        @is-scrolling="updateIsScrolling"
+        @highlighted-emoji="updateHighlightedEmoji"
+        @selected-emoji="emits('selected-emoji', $event)"
+        @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
+        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
+        @keydown.esc="emits('close')"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import EmojiTabset from './modules/emoji_tabset.vue';
+import EmojiSearch from './modules/emoji_search.vue';
+import EmojiSelector from './modules/emoji_selector.vue';
 
 export default {
   name: 'DtEmojiPicker',
 
   components: {
     EmojiTabset,
+    EmojiSearch,
+    EmojiSelector,
   },
 
   props: {
