@@ -1,10 +1,14 @@
 <template>
-  <dt-recipe-image-upload-preview :images="images.value" />
+  <dt-recipe-image-upload-preview
+    class=""
+    :images="images.value"
+  />
 </template>
 
 <script>
 import { ref } from 'vue';
 import DtRecipeImageUploadPreview from './image_upload_preview.vue';
+import defaultImage from '@/common/assets/test.jpg';
 
 async function createFile (url) {
   const response = await fetch(url);
@@ -21,7 +25,7 @@ async function createFile (url) {
 const images = ref([]);
 
 async function testData () {
-  images.value.push(await createFile('https://fastly.picsum.photos/id/816/200/300.jpg'));
+  images.value.push(await createFile(defaultImage));
 }
 
 testData();
