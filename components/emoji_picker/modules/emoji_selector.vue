@@ -152,11 +152,23 @@ export default {
       fixedLabel: '',
       filteredEmojis: [],
       TABS_DATA: ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'],
-      currentEmojis: [],
     };
   },
 
   computed: {
+    currentEmojis () {
+      return [
+        ...this.emojis[`People${this.skinTone}`] || [],
+        ...this.emojis.Nature || [],
+        ...this.emojis.Food || [],
+        ...this.emojis[`Activity${this.skinTone}`] || [],
+        ...this.emojis.Travel || [],
+        ...this.emojis[`Objects${this.skinTone}`] || [],
+        ...this.emojis.Symbols || [],
+        ...this.emojis.Flags || [],
+      ];
+    },
+
     emojis () {
       return emojisImported;
     },
@@ -219,6 +231,11 @@ export default {
     },
   },
 
+  created () {
+    // Initialize the debounced function in the created hook
+    this.debouncedSearch = this.debounce(this.searchByNameAndKeywords, 300);
+  },
+
   mounted () {
     this.$nextTick(() => {
       this.setupEmojiRefs();
@@ -247,7 +264,6 @@ export default {
     },
 
     setupEmojiRefs () {
-      // Assuming tabs is a reactive data property of your component
       for (let i = 0; i < this.tabs.length; i++) {
         const refKey = `emojiRef-${i}`;
         if (this.$refs[refKey]) {
@@ -261,9 +277,8 @@ export default {
     },
 
     searchByNameAndKeywords: function () {
-      const vm = this; // 'vm' refers to the Vue instance
-      const searchStr = vm.emojiFilter.toLowerCase();
-      vm.filteredEmojis = vm.currentEmojis.filter(function (obj) {
+      const searchStr = this.emojiFilter.toLowerCase();
+      this.filteredEmojis = this.currentEmojis.filter(function (obj) {
         const nameIncludesSearchStr = obj.name.toLowerCase().includes(searchStr);
         const keywordsIncludeSearchStr = obj.keywords.some(function (keyword) {
           return keyword.toLowerCase().includes(searchStr);
@@ -272,13 +287,13 @@ export default {
       });
       this.$nextTick(function () {
         if (searchStr) {
-          vm.hoverEmoji(vm.filteredEmojis[0], true);
+          this.hoverEmoji(this.filteredEmojis[0], true);
         }
       });
     },
 
     debounce: function (fn, delay) {
-      if (delay === void 0) { delay = 300; }
+      if (delay === undefined) { delay = 300; }
       let timeout;
       return function () {
         const args = []; let len = arguments.length;
@@ -286,7 +301,7 @@ export default {
 
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-          fn.apply(void 0, args);
+          fn.apply(undefined, args);
         }, delay);
       };
     },

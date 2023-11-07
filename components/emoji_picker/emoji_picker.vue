@@ -18,8 +18,9 @@
     <div class="d-emoji-picker--body">
       <emoji-search
         ref="searchInputRef"
-        v-model="searchQuery"
+        :model-value="searchQuery"
         :search-placeholder-label="searchPlaceholderLabel"
+        @update:model-value="newValue => searchQuery = newValue"
         @select-first-emoji="emits('selected-emoji', highlightedEmoji)"
         @focus-tabset="$refs.tabsetRef.focusTabset()"
         @focus-emoji-selector="$refs.emojiSelectorRef.focusEmojiSelector()"

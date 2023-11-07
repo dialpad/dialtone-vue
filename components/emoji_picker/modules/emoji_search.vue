@@ -53,13 +53,13 @@ export default {
     },
   },
 
-  // mounted () {
-  //   this.focusSearchInput();
-  // },
+  mounted () {
+    this.focusSearchInput();
+  },
 
   methods: {
     updateModelValue (value) {
-      this.$emit('update:modelValue', value);
+      this.$emit('update:model-value', value);
     },
 
     focusEmojiSelector () {
@@ -75,13 +75,13 @@ export default {
     },
 
     clearSearch () {
-      this.$emit('update:modelValue', '');
-      // this.focusSearchInput();
+      this.$emit('update:model-value', '');
+      this.focusSearchInput();
     },
 
-    // focusSearchInput () {
-    //   this.$refs.searchInputRef.focus();
-    // },
+    focusSearchInput () {
+      this.$refs.searchInputRef.focus();
+    },
   },
 };
 </script>
