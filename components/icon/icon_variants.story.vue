@@ -9,9 +9,8 @@
         v-text="category"
       />
       <dt-icon
-        v-for="icon in Object.keys(icons)"
+        v-for="icon in Object.keys(icons).slice(0, $attrs.limit)"
         :key="`${category}-${icon}`"
-        size="600"
         :name="icon"
         class="d-m8"
       />
