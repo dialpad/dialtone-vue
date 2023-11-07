@@ -1,4 +1,28 @@
 <template>
+  <Teleport
+    v-if="showImagePreview"
+    to="body"
+  >
+    <div
+      :aria-hidden="!showImagePreview ? 'true' : 'false'"
+      class="d-modal"
+      data-qa="dt-modal"
+      v-on="modalListeners"
+    >
+      <div
+        class="d-p0 d-bar0 d-wmx80p d-hmx80p"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div class="d-wmx100p d-hmx100p">
+          <dt-recipe-image-upload-preview
+            :images="pendingImages"
+            @done="attachImage"
+          />
+        </div>
+      </div>
+    </div>
+  </Teleport>
   <dt-notice
     v-if="showNotice"
     data-qa="dt-message-input-error-notice"
@@ -235,6 +259,7 @@ import { DtInput } from '@/components/input/index';
 import { DtNotice } from '@/components/notice/index';
 import { NOTICE_KINDS } from '@/components/notice/notice_constants';
 import { DtTooltip } from '@/components/tooltip/index';
+import { DtRecipeImageUploadPreview } from '../image_upload_preview';
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -248,6 +273,7 @@ export default {
     DtPopover,
     DtRichTextEditor,
     DtTooltip,
+    DtRecipeImageUploadPreview,
   },
 
   mixins: [],
@@ -554,6 +580,8 @@ export default {
       emojiPickerFocus: false,
       sendButtonFocus: false,
       emojiPickerOpened: false,
+      showImagePreview: false,
+      pendingImages: [],
     };
   },
 
@@ -618,8 +646,10 @@ export default {
 
       const dt = e.dataTransfer;
       const files = Array.from(dt.files);
-      const fileNames = files.map(file => file.name);
-      this.$emit('add-media', fileNames);
+      // const fileNames = files.map(file => file.name);
+
+      this.whyDoTheseTwoNotCallTheSameFunction(files);
+      // this.$emit('add-media', fileNames);
     },
 
     onSelectEmoji (emoji) {
@@ -643,7 +673,18 @@ export default {
     },
 
     onImageUpload (val) {
+      this.whyDoTheseTwoNotCallTheSameFunction(val);
       this.$emit('select-media', val);
+    },
+
+    whyDoTheseTwoNotCallTheSameFunction (val) {
+      this.showImagePreview = true;
+      this.pendingImages = val;
+    },
+
+    attachImage () {
+      this.showImagePreview = false;
+      this.pendingImages = undefined;
     },
 
     toggleEmojiPicker () {

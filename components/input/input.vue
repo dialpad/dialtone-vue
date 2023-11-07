@@ -413,7 +413,8 @@ export default {
           let val = event.target.value;
           if (this.type === INPUT_TYPES.FILE) {
             const files = Array.from(event.target.files);
-            val = files.map(file => file.name);
+            // val = files.map(file => file.name);
+            val = files;
           }
           this.$emit('input', val);
           this.$emit('update:modelValue', val);

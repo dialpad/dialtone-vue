@@ -36,6 +36,7 @@
   ],
   "dependencies": {
     "@dialpad/dialtone-icons": "^3.4.0",
+    "@pqina/vue-pintura": "^9.0.1",
     "@tiptap/extension-code-block": "^2.0.3",
     "@tiptap/extension-document": "^2.0.3",
     "@tiptap/extension-hard-break": "^2.0.3",
@@ -49,7 +50,8 @@
     "date-fns": "^2.30.0",
     "emoji-regex": "^10.2.1",
     "emoji-toolkit": "^6.6.0",
-    "tippy.js": "^6.3.7"
+    "tippy.js": "^6.3.7",
+    "tui-image-editor": "^3.15.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",

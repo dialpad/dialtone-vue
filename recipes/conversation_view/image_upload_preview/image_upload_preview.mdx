@@ -1,0 +1,22 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as DtRecipeImageUploadPreviewStories from './image_upload_preview.stories.js';
+
+<Meta of={DtRecipeImageUploadPreviewStories}/>
+
+# Image Upload Preview
+
+## Base Style
+
+<Canvas of={DtRecipeImageUploadPreviewStories.Default} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeImageUploadPreview } from '@dialpad/dialtone-vue';
+```
