@@ -9,11 +9,10 @@
     v-for="(image, index) of images"
     :key="index"
   >
-    <pintura-image-editor :image-url="toURL(image)" />
-    <!-- <img
-      alt=""
-      :src="toURL(image)"
-    > -->
+    <pintura-image-editor
+      :image-url="toURL(image)"
+      @done="updateImage"
+    />
     <div>
       <dt-button
         @click="done"
@@ -91,6 +90,10 @@ export default {
   methods: {
     toURL (file) {
       return URL.createObjectURL(file);
+    },
+
+    updateImage (file) {
+      this.$emit('done', file);
     },
 
     done () {

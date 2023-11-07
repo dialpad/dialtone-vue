@@ -21,7 +21,6 @@
       </dt-button>
     </div>
   </div>
-
   <div
     v-if="isEditing"
     class="pintura-image-editor"
@@ -60,6 +59,10 @@ export default {
     },
   },
 
+  emits: [
+    'done',
+  ],
+
   data () {
     return {
       props: getEditorDefaults(),
@@ -85,6 +88,7 @@ export default {
         imagePreview: URL.createObjectURL(dest),
         imageState,
       };
+      this.$emit('done', dest);
       this.isEditing = false;
     },
   },

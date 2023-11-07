@@ -32,18 +32,18 @@
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
       @select-media="$attrs.onSelectMedia"
-      @add-media="$attrs.onAddMedia"
+      @add-media="onAddMedia"
       @notice-close="$attrs.onNoticeClose"
     >
       <template #middle>
         <dt-recipe-attachment-carousel
-          :media-list="mediaList"
+          v-if="mediaList.value.length > 0"
+          :media-list="mediaList.value"
           close-aria-label="Click to close"
           click-to-open-aria-label="Click to open"
           progressbar-aria-label="Progress"
           left-arrow-aria-label="Left Arrow"
           right-arrow-aria-label="Right Arrow"
-          @remove-media="removeMedia"
         />
       </template>
       <template
@@ -70,27 +70,33 @@
 <script>
 import DtRecipeMessageInput from './message_input.vue';
 import DtRecipeAttachmentCarousel from '../attachment_carousel/attachment_carousel.vue';
+import { ref } from 'vue';
+
+const mediaList = ref([]);
 
 export default {
   name: 'DtRecipeMessageInputDefault',
   components: { DtRecipeMessageInput, DtRecipeAttachmentCarousel },
   data () {
     return {
-      mediaList: [
-        // {
-        //   type: 'image',
-        //   path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
-        //   altText: 'Image Alt Text',
-        // },
-        // {
-        //   type: 'image',
-        //   isUploading: true,
-        //   progress: 97,
-        //   path: 'https://vue.dialpad.design/assets/test-078acfea.jpg',
-        //   altText: 'Image Alt Text',
-        // },
-      ],
     };
+  },
+
+  computed: {
+    mediaList: () => mediaList,
+  },
+
+  methods: {
+    onAddMedia: (media) => {
+      mediaList.value = [
+
+        {
+          type: 'image',
+          path: URL.createObjectURL(media),
+          altText: 'Image Alt Text',
+        },
+      ];
+    },
   },
 };
 </script>

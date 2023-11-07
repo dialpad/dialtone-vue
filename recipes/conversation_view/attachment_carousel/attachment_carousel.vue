@@ -154,7 +154,7 @@ export default {
   },
 
   mounted: function () {
-    this.showLeftArrow = this.$refs.carousel?.scrollLeft > 0;
+    this.showLeftArrow = this.$refs.carousel.scrollLeft > 0;
     this.showRightArrow = this.$refs.carousel.scrollWidth > this.$refs.carousel.clientWidth;
   },
 

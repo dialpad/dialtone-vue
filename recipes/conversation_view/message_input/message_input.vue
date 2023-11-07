@@ -682,7 +682,8 @@ export default {
       this.pendingImages = val;
     },
 
-    attachImage () {
+    attachImage (file) {
+      this.$emit('add-media', file);
       this.showImagePreview = false;
       this.pendingImages = undefined;
     },
