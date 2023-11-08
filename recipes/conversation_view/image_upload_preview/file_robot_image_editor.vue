@@ -58,6 +58,27 @@ export default {
     mount () {
       const config = {
         source: this.imageUrl,
+        theme: {
+          palette: {
+            'bg-secondary': '#E9E9E9',
+            'bg-primary': '#ffffff',
+            'bg-primary-active': '#AB7EFF',
+            'accent-primary': '#AB7EFF',
+            'accent-primary-active': '#3A1D95',
+            // 'icons-primary': '....',
+            // 'icons-secondary': '....',
+            // 'borders-secondary': '....',
+            // 'borders-primary': '....',
+            // 'borders-strong': '....',
+            // 'light-shadow': '....',
+            warning: '#815008',
+          },
+
+          typography: {
+            fontFamily: 'Sans-serif',
+          },
+        },
+
         onBeforeSave: () => {
           return false;
         },
@@ -76,7 +97,7 @@ export default {
           fill: '#ff0000',
         },
 
-        Text: { text: 'Filerobot...' },
+        Text: { text: '' },
         Rotate: { angle: 90, componentType: 'slider' },
         translations: {
           profile: 'Profile',
@@ -104,8 +125,8 @@ export default {
           presetsFolders: [],
         },
 
-        tabsIds: [TABS.ADJUST, TABS.ANNOTATE, TABS.WATERMARK], // or ['Adjust', 'Annotate', 'Watermark']
-        defaultTabId: TABS.ANNOTATE, // or 'Annotate'
+        tabsIds: [TABS.ADJUST, TABS.ANNOTATE], // or ['Adjust', 'Annotate', 'Watermark']
+        defaultTabId: TABS.ADJUST, // or 'Annotate'
         defaultToolId: TOOLS.TEXT, // or 'Text'
       };
 
@@ -133,4 +154,11 @@ export default {
 </script>
 
 <style>
+  #editor_container{
+    .FIE_topbar-save-button {
+      span {
+        font-family: sans-serif !important;
+      }
+    }
+  }
 </style>
