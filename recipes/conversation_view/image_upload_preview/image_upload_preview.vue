@@ -1,12 +1,14 @@
 <!-- eslint-disable vue/no-bare-strings-in-template -->
 <template>
-  <!-- <toast-image-editor
-    :include-ui="true"
-    :options="imageEditorOptions"
+  Image Editor Preview
+  <file-robot-image-editor
+    v-if="whichEditor === 'filerobot'"
     :image-file="selectedImage"
-  /> -->
+    @done="updateImage"
+  />
   <div
     v-for="(image, index) of images"
+    v-else
     :key="index"
   >
     <pintura-image-editor
@@ -24,7 +26,7 @@
 </template>
 
 <script>
-// import ToastImageEditor from './toast_image_editor.vue';
+import FileRobotImageEditor from './file_robot_image_editor.vue';
 import PinturaImageEditor from './pintura_image_editor.vue';
 import { DtButton } from '@/components/button';
 
@@ -32,7 +34,7 @@ export default {
   name: 'DtRecipeImageUploadPreview',
 
   components: {
-    // ToastImageEditor,
+    FileRobotImageEditor,
     PinturaImageEditor,
     DtButton,
   },
@@ -45,6 +47,11 @@ export default {
     images: {
       type: Array,
       default: undefined,
+    },
+
+    whichEditor: {
+      type: String,
+      default: 'filerobot',
     },
   },
 
@@ -60,30 +67,6 @@ export default {
   computed: {
     selectedImage () {
       return this.images[0] ?? undefined;
-    },
-
-    imageEditorOptions () {
-      if (this.selectedImage) {
-        return {
-          includeUI: {
-            loadImage: {
-              path: this.toURL(this.selectedImage),
-              name: 'sampleImage2',
-            },
-
-            initMenu: 'crop',
-            uiSize: {
-              width: '500px',
-              height: '300px',
-            },
-          },
-
-          // cssMaxWidth: 700,
-          // cssMaxHeight: 500,
-        };
-      } else {
-        return undefined;
-      }
     },
   },
 
