@@ -1,2 +1,0 @@
-var t=function(){var e=this,a=e.$createElement,r=e._self._c||a;return r("svg",e._g({staticClass:"d-icon d-icon--chevron-up",attrs:{"aria-hidden":"true",role:"img","data-name":"Chevron Up",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"}},e.$listeners),[r("path",{attrs:{fill:"currentColor","fill-rule":"evenodd",d:"M5.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 1 1-.708.708L6 5.207 3.354 7.854a.5.5 0 1 1-.708-.708l3-3Z","clip-rule":"evenodd"}})])};t._withStripped=!0;const n={render:t};export{n as default};
-//# sourceMappingURL=chevron-up-025252f4.js.map

@@ -1,2 +1,0 @@
-var r=function(){var t=this,a=t.$createElement,e=t._self._c||a;return e("svg",t._g({staticClass:"d-icon d-icon--stop-filled",attrs:{"aria-hidden":"true",role:"img","data-name":"Stop Filled",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"}},t.$listeners),[e("path",{attrs:{fill:"currentColor",d:"M8 2H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"}})])};r._withStripped=!0;const i={render:r};export{i as default};
-//# sourceMappingURL=stop-filled-06c6766a.js.map
