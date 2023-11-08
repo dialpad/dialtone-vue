@@ -1,0 +1,2 @@
+var a=function(){var e=this,n=e.$createElement,r=e._self._c||n;return r("svg",e._g({staticClass:"d-icon d-icon--chevron-down",attrs:{"aria-hidden":"true",role:"img","data-name":"Chevron Down",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"}},e.$listeners),[r("path",{attrs:{fill:"currentColor","fill-rule":"evenodd",d:"M2.646 4.146a.5.5 0 0 1 .708 0L6 6.793l2.646-2.647a.5.5 0 1 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708Z","clip-rule":"evenodd"}})])};const t={render:a};export{t as default};
+//# sourceMappingURL=chevron-down-2fa7ac5a.js.map

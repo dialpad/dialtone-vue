@@ -1,0 +1,2 @@
+var a=function(){var r=this,t=r.$createElement,e=r._self._c||t;return e("svg",r._g({staticClass:"d-icon d-icon--more-horizontal",attrs:{"aria-hidden":"true",role:"img","data-name":"More Horizontal",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"}},r.$listeners),[e("path",{attrs:{fill:"currentColor","fill-rule":"evenodd",d:"M1.502 6a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm3.5 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm3.5 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z","clip-rule":"evenodd"}})])};const o={render:a};export{o as default};
+//# sourceMappingURL=more-horizontal-385ffa1d.js.map
