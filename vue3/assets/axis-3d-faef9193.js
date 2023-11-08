@@ -1,0 +1,2 @@
+import{o as e,k as o,e as a}from"./vue.esm-bundler-15c892b6.js";const t={"aria-hidden":"true",role:"img","data-name":"Axis 3d",class:"d-icon d-icon--axis-3d",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"},d=a("path",{fill:"currentColor","fill-rule":"evenodd",d:"M2 1.5a.5.5 0 0 1 .5.5v6.793l2.646-2.647a.5.5 0 1 1 .708.708L3.207 9.5H10a.5.5 0 0 1 0 1H2a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 .5-.5Z","clip-rule":"evenodd"},null,-1),n=[d];function r(s,l){return e(),o("svg",t,n)}const i={render:r};export{i as default,r as render};
+//# sourceMappingURL=axis-3d-faef9193.js.map
