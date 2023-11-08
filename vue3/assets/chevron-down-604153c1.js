@@ -1,2 +1,0 @@
-import{o as e,k as o,e as n}from"./vue.esm-bundler-15c892b6.js";const r={"aria-hidden":"true",role:"img","data-name":"Chevron Down",class:"d-icon d-icon--chevron-down",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"},t=n("path",{fill:"currentColor","fill-rule":"evenodd",d:"M2.646 4.146a.5.5 0 0 1 .708 0L6 6.793l2.646-2.647a.5.5 0 1 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708Z","clip-rule":"evenodd"},null,-1),a=[t];function l(c,d){return e(),o("svg",r,a)}const i={render:l};export{i as default,l as render};
-//# sourceMappingURL=chevron-down-604153c1.js.map

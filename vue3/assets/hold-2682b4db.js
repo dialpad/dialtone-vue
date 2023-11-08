@@ -1,2 +1,0 @@
-import{o as e,k as o,e as t}from"./vue.esm-bundler-15c892b6.js";const a={"aria-hidden":"true",role:"img","data-name":"Hold",class:"d-icon d-icon--hold",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"},d=t("path",{fill:"currentColor","fill-rule":"evenodd",d:"M8 3a.5.5 0 0 1 .5.5v5a.5.5 0 1 1-1 0v-5A.5.5 0 0 1 8 3ZM4 3a.5.5 0 0 1 .5.5v5a.5.5 0 1 1-1 0v-5A.5.5 0 0 1 4 3Z","clip-rule":"evenodd"},null,-1),l=[d];function n(r,c){return e(),o("svg",a,l)}const i={render:n};export{i as default,n as render};
-//# sourceMappingURL=hold-2682b4db.js.map
