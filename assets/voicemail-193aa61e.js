@@ -1,2 +1,0 @@
-var t=function(){var e=this,r=e.$createElement,a=e._self._c||r;return a("svg",e._g({staticClass:"d-icon d-icon--voicemail",attrs:{"aria-hidden":"true",role:"img","data-name":"Voicemail",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 13 12"}},e.$listeners),[a("path",{attrs:{fill:"currentColor","fill-rule":"evenodd",d:"M3.5 4.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm2 3a2.5 2.5 0 1 0-2 1h6a2.5 2.5 0 1 0-2-1h-2Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z","clip-rule":"evenodd"}})])};const i={render:t};export{i as default};
-//# sourceMappingURL=voicemail-193aa61e.js.map

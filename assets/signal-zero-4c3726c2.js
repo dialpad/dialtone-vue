@@ -1,2 +1,0 @@
-var t=function(){var e=this,a=e.$createElement,r=e._self._c||a;return r("svg",e._g({staticClass:"d-icon d-icon--signal-zero",attrs:{"aria-hidden":"true",role:"img","data-name":"Signal Zero",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"}},e.$listeners),[r("path",{attrs:{fill:"currentColor","fill-rule":"evenodd",d:"M.5 10a.5.5 0 0 1 .5-.5h.005a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5Z","clip-rule":"evenodd"}})])};const n={render:t};export{n as default};
-//# sourceMappingURL=signal-zero-4c3726c2.js.map

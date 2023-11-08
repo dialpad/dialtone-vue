@@ -1,2 +1,0 @@
-var t=function(){var e=this,r=e.$createElement,a=e._self._c||r;return a("svg",e._g({staticClass:"d-icon d-icon--axis-3d",attrs:{"aria-hidden":"true",role:"img","data-name":"Axis 3d",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 12 12"}},e.$listeners),[a("path",{attrs:{fill:"currentColor","fill-rule":"evenodd",d:"M2 1.5a.5.5 0 0 1 .5.5v6.793l2.646-2.647a.5.5 0 1 1 .708.708L3.207 9.5H10a.5.5 0 0 1 0 1H2a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 .5-.5Z","clip-rule":"evenodd"}})])};const s={render:t};export{s as default};
-//# sourceMappingURL=axis-3d-9034dd51.js.map
