@@ -90,6 +90,8 @@ export default {
             editedImageObject.fullName,
           );
 
+          filerobotImageEditor.terminate();
+
           this.$emit('done', file);
         },
 
@@ -140,6 +142,7 @@ export default {
         onClose: (closingReason) => {
           console.log('Closing reason', closingReason);
           filerobotImageEditor.terminate();
+          this.$emit('done');
         },
       });
     },

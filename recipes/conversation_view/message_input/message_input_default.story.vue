@@ -38,6 +38,7 @@
       <template #middle>
         <dt-recipe-attachment-carousel
           v-if="mediaList.value.length > 0"
+          class="d-pl16"
           :media-list="mediaList.value"
           close-aria-label="Click to close"
           click-to-open-aria-label="Click to open"
@@ -88,14 +89,15 @@ export default {
 
   methods: {
     onAddMedia: (media) => {
-      mediaList.value = [
-
-        {
-          type: 'image',
-          path: URL.createObjectURL(media),
-          altText: 'Image Alt Text',
-        },
-      ];
+      if (media.length > 0) {
+        mediaList.value = media.map((m) => {
+          return {
+            type: 'image',
+            path: URL.createObjectURL(m),
+            altText: 'Image Alt Text',
+          };
+        });
+      }
     },
   },
 };
