@@ -2,6 +2,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtTooltip from './tooltip.vue';
 import DtTooltipFlipTemplate from './tooltip_flip.story.vue';
 import DtTooltipDefault from './tooltip_default.story.vue';
+import DtTooltipChangeOnClick from './tooltip_change_on_click.story.vue';
 import DtTooltipVariantsTemplate from './tooltip_variants.vue';
 import { action } from '@storybook/addon-actions';
 
@@ -123,7 +124,10 @@ const TooltipDefaultTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTooltipDefault);
 const TooltipVariantsTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTooltipVariantsTemplate);
+const TooltipChangeOnClick = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTooltipChangeOnClick);
 
+// Stories
 export const Default = {
   render: TooltipDefaultTemplate,
   args: {},
@@ -148,5 +152,13 @@ export const Flip = {
   parameters: {
     options: { showPanel: false },
     controls: { disable: true },
+  },
+};
+
+export const ChangeOnClick = {
+  render: TooltipChangeOnClick,
+  args: {
+    anchor: 'Click to see the tooltip content change',
+    sticky: 'popper',
   },
 };
