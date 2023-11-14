@@ -10,7 +10,7 @@
       @keydown.down.prevent="focusEmojiSelector"
       @keydown.enter="selectFirstEmoji"
     >
-      <template slot="leftIcon">
+      <template #leftIcon>
         <dt-icon name="search" />
       </template>
       <template

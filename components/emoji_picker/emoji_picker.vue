@@ -44,6 +44,18 @@
         @keydown.esc="emits('close')"
       />
     </div>
+    <div class="d-emoji-picker--footer">
+      <emoji-description :emoji="highlightedEmoji" />
+      <emoji-skin-selector
+        ref="skinSelectorRef"
+        :is-hovering="!!highlightedEmoji"
+        :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
+        :skin-tone="skinTone"
+        @skin-tone="emits('skin-tone', $event)"
+        @focus-tabset="$refs.tabsetRef.focusTabset()"
+        @keydown.esc="emits('close')"
+      />
+    </div>
   </div>
 </template>
 
@@ -51,6 +63,8 @@
 import EmojiTabset from './modules/emoji_tabset.vue';
 import EmojiSearch from './modules/emoji_search.vue';
 import EmojiSelector from './modules/emoji_selector.vue';
+import EmojiDescription from './modules/emoji_description.vue';
+import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
 
 export default {
   name: 'DtEmojiPicker',
@@ -59,6 +73,8 @@ export default {
     EmojiTabset,
     EmojiSearch,
     EmojiSelector,
+    EmojiDescription,
+    EmojiSkinSelector,
   },
 
   props: {

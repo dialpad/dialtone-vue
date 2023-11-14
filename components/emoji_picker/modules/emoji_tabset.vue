@@ -127,7 +127,7 @@ export default {
 
     // setTabsetRef (ref) {
     // if (ref) {
-    //   this.tabsetRef.push(ref.$el); // Assuming $el is the button element
+    //   this.tabsetRef.push(ref.$el);
     // }
     // },
 
@@ -151,7 +151,6 @@ export default {
       }
 
       if (event.key === 'ArrowDown') {
-        // Jump to search input
         this.$emit('focus-search-input');
       }
     },

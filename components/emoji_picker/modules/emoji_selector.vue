@@ -214,7 +214,7 @@ export default {
           this.isFiltering = false;
           this.$emit('highlighted-emoji', null);
         }
-        // Make sure debouncedSearch is bound in the created/mounted lifecycle hook or is a method
+
         this.debouncedSearch();
       },
 
@@ -227,12 +227,11 @@ export default {
       },
 
       deep: true,
-      immediate: true, // Add this if you want the watcher to trigger immediately like in Vue 3
+      immediate: true,
     },
   },
 
   created () {
-    // Initialize the debounced function in the created hook
     this.debouncedSearch = this.debounce(this.searchByNameAndKeywords, 300);
   },
 
@@ -355,19 +354,16 @@ export default {
       container.scrollTop = 0;
     },
 
-    // Focus the first emoji on the selector
     focusEmojiSelector: function () {
       this.focusEmoji(0, 0);
     },
 
-    // Method to handle hovering over an emoji
     hoverEmoji: function (emoji, isFirst) {
-      if (isFirst === void 0) { isFirst = false; }
+      if (isFirst === undefined) { isFirst = false; }
       this.hoverFirstEmoji = isFirst;
       this.$emit('highlighted-emoji', emoji);
     },
 
-    // Set a ref for an emoji
     setEmojiRef: function (el, indexTab, indexEmoji) {
       if (!this.emojiRefs[indexTab]) {
         this.$set(this.emojiRefs, indexTab, []);
@@ -375,12 +371,10 @@ export default {
       this.$set(this.emojiRefs[indexTab], indexEmoji, el);
     },
 
-    // Set a ref for a filtered emoji
     setFilteredRef: function (el, index) {
       this.$set(this.emojiFilteredRefs, index, el);
     },
 
-    // Focus an emoji given its tab and index
     focusEmoji: function (indexTab, indexEmoji) {
       const emojiRef = this.isFiltering ? this.emojiFilteredRefs[indexEmoji] : this.emojiRefs[indexTab] && this.emojiRefs[indexTab][indexEmoji];
 
