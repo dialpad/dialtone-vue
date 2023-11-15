@@ -58,6 +58,7 @@
         <!-- Left content -->
         <div class="d-d-flex">
           <dt-tooltip
+            v-if="!isEdit"
             placement="top-start"
             :message="imageTooltipLabel"
             :offset="[-4, -4]"
@@ -166,11 +167,32 @@
             </template>
           </dt-tooltip>
 
+          <!-- Cancel button for edit mode -->
+          <dt-tooltip
+            v-if="isEdit"
+            :message="cancelTooltipMessage"
+            :offset="[0, -8]"
+          >
+            <template #anchor>
+              <dt-button
+                data-qa="dt-message-input-cancel-button"
+                class="dt-message-input--cancel-button"
+                size="sm"
+                importance="clear"
+                :aria-label="cancelButtonAriaLabel"
+                @click="onCancel"
+              >
+                <p>{{ cancelButtonText }}</p>
+              </dt-button>
+            </template>
+          </dt-tooltip>
+
+          <!-- Send button -->
           <dt-tooltip
             placement="top-end"
             :message="sendTooltipLabel"
             :show="!isSendDisabled && sendButtonFocus"
-            :offset="[6, -4]"
+            :offset="[6, -8]"
           >
             <template #anchor>
               <!-- Right positioned UI - send button -->
@@ -178,7 +200,7 @@
                 data-qa="dt-message-input-send-btn"
                 size="sm"
                 :kind="!isSendDisabled ? 'default' : 'muted'"
-                circle
+                :circle="!isEdit"
                 importance="primary"
                 :class="{
                   'message-input-button__disabled d-fc-muted': isSendDisabled,
@@ -191,11 +213,19 @@
                 @focusin="sendButtonFocus = true"
                 @focusout="sendButtonFocus = false"
               >
-                <template #icon>
+                <template
+                  v-if="!isEdit"
+                  #icon
+                >
                   <dt-icon
                     name="send"
                     size="300"
                   />
+                </template>
+                <template
+                  v-if="isEdit"
+                >
+                  <p>{{ 'Save Changes' }}</p>
                 </template>
               </dt-button>
             </template>
@@ -203,7 +233,10 @@
         </div>
       </section>
     </div>
-    <section class="d-d-flex d-jc-space-between d-h24 d-ai-center">
+    <section
+      v-if="!isEdit"
+      class="d-d-flex d-jc-space-between d-h24 d-ai-center"
+    >
       <div
         data-qa="dt-message-input-footer-left"
       >
@@ -508,6 +541,38 @@ export default {
       type: String,
       default: 'Send',
     },
+
+    /**
+     * isEdit
+     */
+    isEdit: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * i18n Cancel message string
+    */
+    cancelTooltipMessage: {
+      type: String,
+      default: 'Cancel',
+    },
+
+    /**
+     * Cancel aria label
+     */
+    cancelButtonAriaLabel: {
+      type: String,
+      default: 'Cancel button',
+    },
+
+    /**
+     * Cancel button i18n text
+    */
+    cancelButtonText: {
+      type: String,
+      default: 'Cancel',
+    },
   },
 
   emits: [
@@ -543,6 +608,14 @@ export default {
      * @type {Boolean}
      */
     'notice-close',
+
+    /**
+     * Fires when cancel button is pressed (only on edit mode)
+     *
+     * @event cancel
+     * @type {Boolean}
+     */
+    'cancel',
   ],
 
   data () {
@@ -657,6 +730,10 @@ export default {
       this.$emit('submit', this.internalInputValue);
     },
 
+    onCancel () {
+      this.$emit('cancel');
+    },
+
     noticeClose () {
       this.$emit('notice-close', true);
     },
@@ -682,5 +759,8 @@ export default {
 
 .dt-message-input-notice .d-notice__icon {
   margin-right: 8px;
+}
+.dt-message-input--cancel-button {
+  color: var(--dt-color-black-500);
 }
 </style>
