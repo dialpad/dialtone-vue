@@ -29,6 +29,7 @@
       :image-button-aria-label="$attrs.imageButtonAriaLabel"
       :max-height="$attrs.maxHeight"
       :is-edit="$attrs.isEdit"
+      :save-changes-button-text="$attrs.saveChangesButtonText"
       :cancel-message="$attrs.cancelMessage"
       :cancel-button-aria-label="$attrs.cancelButtonAriaLabel"
       :cancel-button-text="$attrs.cancelButtonText"

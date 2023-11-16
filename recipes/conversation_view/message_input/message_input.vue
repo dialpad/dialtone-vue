@@ -225,7 +225,7 @@
                 <template
                   v-if="isEdit"
                 >
-                  <p>{{ 'Save Changes' }}</p>
+                  <p>{{ saveChangesButtonText }}</p>
                 </template>
               </dt-button>
             </template>
@@ -548,6 +548,14 @@ export default {
     isEdit: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * i18n Save changes button text
+    */
+    saveChangesButtonText: {
+      type: String,
+      default: 'Save changes',
     },
 
     /**
