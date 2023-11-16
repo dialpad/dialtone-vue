@@ -7,13 +7,13 @@
       <button
         v-for="(skin, index) in skinList"
         :key="skin.name"
+        :ref="`skinRef-${index}`"
         :class="{
           'selected': skinSelected.skinCode === skin.skinCode,
         }"
         @click="selectSkin(skin)"
+        @keydown="event => handleKeyDown(event, skin, index)"
       >
-        <!--        @keydown="event => handleKeyDown(event, skin, index)" -->
-        <!--        :ref="el => { if (el) setSkinsRef(el) }" -->
         <img
           class="d-icon d-icon--size-500"
           :alt="skin.name"
@@ -35,8 +35,8 @@
             :aria-label="skinSelectorButtonTooltipLabel"
             tabindex="-1"
             @click="toggleSkinList"
+            @keydown="event => handleKeyDown(event)"
           >
-            <!--            @keydown="event => handleKeyDown(event)" -->
             <img
               class="d-icon d-icon--size-500"
               :alt="skinSelected.name"
@@ -151,13 +151,19 @@ export default {
 
   mounted () {
     this.skinSelected = this.skinPassedIn;
+    this.$nextTick(() => {
+      this.setupSkinRefs();
+    });
   },
 
   methods: {
-    setSkinsRef (el) {
-      if (el) {
-        this.skinsRef.push(el);
-      }
+    setupSkinRefs () {
+      this.skinList.forEach((skin, index) => {
+        const refKey = `skinRef-${index}`;
+        if (this.$refs[refKey]) {
+          this.$set(this.skinsRef, index, this.$refs[refKey][0]);
+        }
+      });
     },
 
     focusSkinSelector () {
@@ -179,12 +185,13 @@ export default {
       event.preventDefault();
 
       if (event.key === 'ArrowLeft') {
-        if (index === 0) this.skinsRef.value[this.skinsRef.value.length - 1]?.focus();
-        this.skinsRef.value[index - 1]?.focus();
+        if (index === 0) this.skinsRef[this.skinsRef.length - 1]?.focus();
+        this.skinsRef[index - 1]?.focus();
       }
 
       if (event.key === 'ArrowRight') {
-        this.skinsRef.value[index + 1]?.focus();
+        if (this.skinsRef.length) this.skinsRef[0]?.focus();
+        this.skinsRef[index + 1]?.focus();
       }
 
       if (event.key === 'Enter') {

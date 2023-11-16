@@ -8,6 +8,7 @@
         <dt-tab
           v-for="(tab, index) in tabs"
           :id="tab.id"
+          :ref="`tabsetRef-${index}`"
           :key="tab.id"
           :panel-id="tab.panelId"
           :label="tab.label"
@@ -16,7 +17,6 @@
           @click.capture.stop="selectTabset(tab.id)"
           @keydown="handleKeyDown($event, tab.id)"
         >
-          <!-- :ref="el => { if (el) setTabsetRef(el) }" -->
           <dt-icon
             size="400"
             :name="tab.icon"
@@ -72,7 +72,7 @@ export default {
   data () {
     return {
       selectedTab: '1',
-      // tabsetRef: [],
+      tabsetRef: [],
       TABS_DATA: [
         { label: EMOJI_CATEGORIES.MOST_RECENTLY_USED, icon: 'clock' },
         { label: EMOJI_CATEGORIES.SMILEYS_AND_PEOPLE, icon: 'satisfied' },
@@ -117,6 +117,12 @@ export default {
     },
   },
 
+  mounted () {
+    this.$nextTick(() => {
+      this.setTabsetRef();
+    });
+  },
+
   methods: {
     selectTabset (id) {
       if (!this.isScrolling) {
@@ -125,24 +131,27 @@ export default {
       this.$emit('selected-tabset', id);
     },
 
-    // setTabsetRef (ref) {
-    // if (ref) {
-    //   this.tabsetRef.push(ref.$el);
-    // }
-    // },
+    setTabsetRef () {
+      this.tabs.forEach((skin, index) => {
+        const refKey = `tabsetRef-${index}`;
+        if (this.$refs[refKey]) {
+          this.$set(this.tabsetRef, index, this.$refs[refKey][0].$el);
+        }
+      });
+    },
 
-    // focusTabset () {
-    //   if (this.tabsetRef[0]) {
-    //     this.tabsetRef[0].focus();
-    //   }
-    // },
+    focusTabset () {
+      if (this.tabsetRef[0]) {
+        this.tabsetRef[0].focus();
+      }
+    },
 
     handleKeyDown (event, tabId) {
       if (event.key === 'Enter') {
         this.selectTabset(tabId);
-        // if (this.tabsetRef[tabId - 1]) {
-        //   this.tabsetRef[tabId - 1].blur();
-        // }
+        if (this.tabsetRef[tabId - 1]) {
+          this.tabsetRef[tabId - 1].blur();
+        }
       }
 
       if (event.key === 'Tab') {
