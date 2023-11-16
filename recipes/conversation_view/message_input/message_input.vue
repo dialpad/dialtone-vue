@@ -168,28 +168,23 @@
           </dt-tooltip>
 
           <!-- Cancel button for edit mode -->
-          <dt-tooltip
+          <dt-button
             v-if="isEdit"
-            :message="cancelTooltipMessage"
-            :offset="[0, -8]"
+            data-qa="dt-message-input-cancel-button"
+            class="dt-message-input--cancel-button"
+            size="sm"
+            kind="muted"
+            importance="clear"
+            :aria-label="cancelButtonAriaLabel"
+            @click="onCancel"
           >
-            <template #anchor>
-              <dt-button
-                data-qa="dt-message-input-cancel-button"
-                class="dt-message-input--cancel-button"
-                size="sm"
-                importance="clear"
-                :aria-label="cancelButtonAriaLabel"
-                @click="onCancel"
-              >
-                <p>{{ cancelButtonText }}</p>
-              </dt-button>
-            </template>
-          </dt-tooltip>
+            <p>{{ cancelButtonText }}</p>
+          </dt-button>
 
           <!-- Send button -->
           <dt-tooltip
             placement="top-end"
+            :enabled="!isEdit"
             :message="sendTooltipLabel"
             :show="!isSendDisabled && sendButtonFocus"
             :offset="[6, -8]"
@@ -199,7 +194,7 @@
               <dt-button
                 data-qa="dt-message-input-send-btn"
                 size="sm"
-                :kind="!isSendDisabled ? 'default' : 'muted'"
+                :kind="sendButtonKind"
                 :circle="!isEdit"
                 importance="primary"
                 :class="{
@@ -559,14 +554,6 @@ export default {
     },
 
     /**
-     * i18n Cancel message string
-    */
-    cancelTooltipMessage: {
-      type: String,
-      default: 'Cancel',
-    },
-
-    /**
      * Cancel aria label
      */
     cancelButtonAriaLabel: {
@@ -679,6 +666,10 @@ export default {
     emojiPickerHovered () {
       return this.emojiPickerFocus || this.emojiPickerOpened;
     },
+
+    sendButtonKind () {
+      return !this.isSendDisabled ? 'default' : 'muted';
+    },
   },
 
   watch: {
@@ -770,5 +761,6 @@ export default {
 }
 .dt-message-input--cancel-button {
   color: var(--dt-color-black-500);
+  margin-right: var(--dt-space-300);
 }
 </style>
