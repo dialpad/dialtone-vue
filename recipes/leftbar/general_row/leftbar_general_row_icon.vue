@@ -15,7 +15,7 @@
   >
     <dt-icon
       name="dialbot"
-      class="d-svg--size24"
+      size="500"
     />
   </div>
 </template>
@@ -74,8 +74,6 @@ export default {
 
     dialbotClasses () {
       return [
-        'd-w24',
-        'd-h24',
         'd-d-flex',
         'd-ai-center',
         'd-jc-center',
