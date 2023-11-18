@@ -140,7 +140,7 @@
                 :search-results-label="emojiSearchResultsLabel"
                 :search-placeholder-label="emojiSearchPlaceholderLabel"
                 :skin-tone="skinTone"
-                @skin-tone="skinTone = $event"
+                @skin-tone="onSkinTone"
                 @selected-emoji="onSelectEmoji"
               />
             </template>
@@ -568,6 +568,14 @@ export default {
       type: String,
       default: 'Cancel',
     },
+
+    /**
+     * Skin tone to display in the emoji picker
+     */
+    skinTone: {
+      type: String,
+      default: 'Default',
+    },
   },
 
   emits: [
@@ -611,11 +619,18 @@ export default {
      * @type {Boolean}
      */
     'cancel',
+
+    /**
+     * Fires when skin tone is selected from the emoji picker
+     *
+     * @event select-skin-tone
+     * @type {String}
+     */
+    'select-skin-tone',
   ],
 
   data () {
     return {
-      skinTone: 'Default',
       internalInputValue: this.modelValue, // internal input content
       hasFocus: false,
       imagePickerFocus: false,
@@ -692,6 +707,10 @@ export default {
       const files = Array.from(dt.files);
       const fileNames = files.map(file => file.name);
       this.$emit('add-media', fileNames);
+    },
+
+    onSkinTone (skinTone) {
+      this.$emit('select-skin-tone', skinTone);
     },
 
     onSelectEmoji (emoji) {
