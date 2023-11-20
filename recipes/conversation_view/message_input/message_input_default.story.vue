@@ -38,7 +38,7 @@
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
       @select-media="$attrs.onSelectMedia"
-      @select-skin-tone="$attrs.onSelectSkinTone"
+      @skin-tone="$attrs.onSkinTone"
       @add-media="$attrs.onAddMedia"
       @notice-close="$attrs.onNoticeClose"
       @cancel="$attrs.onCancel"

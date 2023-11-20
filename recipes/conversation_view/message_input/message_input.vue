@@ -623,10 +623,10 @@ export default {
     /**
      * Fires when skin tone is selected from the emoji picker
      *
-     * @event select-skin-tone
+     * @event skin-tone
      * @type {String}
      */
-    'select-skin-tone',
+    'skin-tone',
   ],
 
   data () {
@@ -710,7 +710,7 @@ export default {
     },
 
     onSkinTone (skinTone) {
-      this.$emit('select-skin-tone', skinTone);
+      this.$emit('skin-tone', skinTone);
     },
 
     onSelectEmoji (emoji) {

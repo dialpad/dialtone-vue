@@ -78,7 +78,7 @@ export const argTypesData = {
     },
   },
 
-  onSelectSkinTone: {
+  onSkinTone: {
     table: {
       disable: true,
     },
@@ -101,7 +101,7 @@ export const argsData = {
   onSelectMedia: action('select-media'),
   onAddMedia: action('add-media'),
   onNoticeClose: action('notice-close'),
-  onSelectSkinTone: action('select-skin-tone'),
+  onSkinTone: action('skin-tone'),
   onCancel: action('cancel'),
 };
 
