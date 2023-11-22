@@ -1,3 +1,55 @@
+const componentsList = [
+  'DtDatepicker.vue',
+  'avatar.vue',
+  'badge.vue',
+  'banner.vue',
+  'breadcrumbs.vue',
+  'button.vue',
+  'button_group.vue',
+  'card.vue',
+  'checkbox.vue',
+  'checkbox_group.vue',
+  'chip.vue',
+  'codeblock.vue',
+  'collapsible.vue',
+  'combobox.vue',
+  'description_list.vue',
+  'dropdown.vue',
+  'emoji.vue',
+  'emoji_picker.vue',
+  'emoji_text_wrapper.vue',
+  'icon.vue',
+  'input.vue',
+  'input_group.vue',
+  'item_layout.vue',
+  'keyboard_shortcut.vue',
+  'lazy_show.vue',
+  'link.vue',
+  'list_item.vue',
+  'list_section.vue',
+  'modal.vue',
+  'notice.vue',
+  'pagination.vue',
+  'popover.vue',
+  'presence.vue',
+  'radio.vue',
+  'radio_group.vue',
+  'root_layout.vue',
+  'scroller.vue',
+  'select_menu.vue',
+  'skeleton.vue',
+  'stack.vue',
+  'tab.vue',
+  'tab_group.vue',
+  'tab_panel.vue',
+  'toast.vue',
+  'toggle.vue',
+  'tooltip.vue',
+  'validation_messages.vue',
+];
+
+const componentsNames = componentsList.map(name => name.replace('_', '-').replace('.vue', ''));
+
 module.exports = {
   extends: [
     'standard',
@@ -145,6 +197,7 @@ module.exports = {
       nonwords: false,
     }],
     'vue/template-curly-spacing': ['error', 'never'],
+    'vue/no-restricted-class': ['error', `/^d-(?!(${componentsNames.join('|')})).*/`],
   },
   overrides: [
     {
@@ -171,6 +224,9 @@ module.exports = {
       ],
       rules: {
         'vue/no-bare-strings-in-template': [
+          'off',
+        ],
+        'vue/no-restricted-class': [
           'off',
         ],
       },
