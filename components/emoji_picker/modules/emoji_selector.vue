@@ -51,7 +51,14 @@
             @mouseleave="$emit('highlighted-emoji', null)"
             @keydown="event => handleKeyDown(event, indexTab, indexEmoji, emoji)"
           >
-            a
+            <img
+              class="d-icon d-icon--size-500"
+              :alt="emoji.name"
+              :aria-label="emoji.name"
+              :title="emoji.name"
+              :src="getImgSrc(emoji.unicode_character)"
+              @error="handleImageError"
+            >
           </button>
         </div>
       </div>
@@ -77,6 +84,7 @@
             @focusout="$emit('highlighted-emoji', null)"
             @mouseover="hoverEmoji(emoji)"
             @mouseleave="hoverEmoji(null)"
+            @keydown="event => handleKeyDownFilteredEmojis(event, index, emoji)"
           >
             <img
               class="d-icon d-icon--size-500"
@@ -518,6 +526,54 @@ export default {
         if (!this.focusEmoji(indexTab + 1, 0)) {
           this.focusEmoji(0, 0);
         }
+      }
+    },
+
+    handleKeyDownFilteredEmojis: function (event, indexEmoji, emoji) {
+      event.preventDefault();
+      this.hoverFirstEmoji = false;
+
+      if (event.key === 'ArrowUp') {
+        const position = indexEmoji % this.EMOJIS_PER_ROW;
+
+        if (!this.focusEmoji(0, indexEmoji - this.EMOJIS_PER_ROW)) {
+          const lastEmojiPosition =
+        this.emojiFilteredRefs.length - (this.emojiFilteredRefs.length % this.EMOJIS_PER_ROW) + position;
+
+          this.focusEmoji(0, lastEmojiPosition);
+
+          if (!this.focusEmoji(0, lastEmojiPosition)) {
+            this.focusEmoji(0, this.emojiFilteredRefs.length - 1);
+          }
+        }
+      }
+
+      if (event.key === 'ArrowDown') {
+        if (!this.focusEmoji(0, indexEmoji + this.EMOJIS_PER_ROW)) {
+          const position = indexEmoji % this.EMOJIS_PER_ROW;
+
+          if (this.emojiFilteredRefs?.[indexEmoji + (this.EMOJIS_PER_ROW - position)]) {
+            this.focusEmoji(0, this.emojiFilteredRefs.length - 1);
+          } else {
+            this.focusEmoji(0, position);
+          }
+        }
+      }
+
+      if (event.key === 'ArrowLeft') {
+        this.handleHorizontalNavigation('left', 0, indexEmoji);
+      }
+
+      if (event.key === 'ArrowRight') {
+        this.handleHorizontalNavigation('right', 0, indexEmoji);
+      }
+
+      if (event.key === 'Tab') {
+        this.$emit('focus-skin-selector');
+      }
+
+      if (event.key === 'Enter') {
+        this.$emit('selected-emoji', emoji);
       }
     },
   },
