@@ -80,7 +80,6 @@ export default {
   props: {
     recentlyUsedEmojis: {
       type: Array,
-      default: () => ([]),
     },
 
     searchPlaceholderLabel: {
@@ -105,7 +104,6 @@ export default {
 
     skinTone: {
       type: String,
-      default: 'Default',
     },
 
     skinSelectorButtonTooltipLabel: {

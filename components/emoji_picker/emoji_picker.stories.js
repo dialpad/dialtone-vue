@@ -72,6 +72,7 @@ export const argsData = {
   searchNoResultsLabel: 'No results',
   searchResultsLabel: 'Search results',
   searchPlaceholderLabel: 'Search...',
+  skinTone: 'Default',
 };
 
 export const argTypesData = {

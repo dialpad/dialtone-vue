@@ -1,14 +1,14 @@
 <template>
   <div>
     <dt-emoji-picker
-      :skin-tone="skinTone"
+      :skin-tone.sync="isSkinTone"
       :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
       :tab-set-labels="tabSetLabels"
       :recently-used-emojis="recentlyUsedEmojis"
       :search-results-label="searchResultsLabel"
       :search-no-results-label="searchNoResultsLabel"
       :search-placeholder-label="searchPlaceholderLabel"
-      @skin-tone="skinTone = $event;"
+      @skin-tone="isSkinTone = $event;"
     />
   </div>
 </template>
@@ -25,8 +25,14 @@ export default {
 
   data () {
     return {
-      skinTone: 'Default',
+      isSkinTone: this.skinTone,
     };
+  },
+
+  watch: {
+    skinTone (value) {
+      this.isSkinTone = value;
+    },
   },
 };
 </script>
