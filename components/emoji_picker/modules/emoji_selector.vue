@@ -49,15 +49,9 @@
             @focusout="$emit('highlighted-emoji', null)"
             @mouseover="$emit('highlighted-emoji', emoji)"
             @mouseleave="$emit('highlighted-emoji', null)"
+            @keydown="event => handleKeyDown(event, indexTab, indexEmoji, emoji)"
           >
-            <img
-              class="d-icon d-icon--size-500"
-              :alt="emoji.name"
-              :aria-label="emoji.name"
-              :title="emoji.name"
-              :src="getImgSrc(emoji.unicode_character)"
-              @error="handleImageError"
-            >
+            a
           </button>
         </div>
       </div>
@@ -384,6 +378,147 @@ export default {
       }
 
       return false;
+    },
+
+    handleKeyDown: function (event, indexTab, indexEmoji, emoji) {
+      const EMOJIS_PER_ROW = 9;
+
+      event.preventDefault();
+
+      if (event.key === 'ArrowUp') {
+        const position = indexEmoji % EMOJIS_PER_ROW;
+
+        if (indexTab === 0) {
+          // we are on the first emoji tab, then we should jump to the last row of the last emoji tab
+          const numberOfMissingEmojis =
+        EMOJIS_PER_ROW - (this.emojiRefs[this.emojiRefs.length - 1].length % EMOJIS_PER_ROW);
+
+          const emojiToJump =
+        this.emojiRefs[this.emojiRefs.length - 1].length + numberOfMissingEmojis - (EMOJIS_PER_ROW - position);
+
+          if (!this.focusEmoji(this.emojiRefs.length - 1, emojiToJump)) {
+            // if there is no emoji in this position, jump to the last emoji of the row
+            this.focusEmoji(this.emojiRefs.length - 1, this.emojiRefs[this.emojiRefs.length - 1].length - 1);
+          }
+          return;
+        }
+
+        // if we are not on the first tab, we should jump to the previous row of the current tab
+        if (!this.focusEmoji(indexTab, indexEmoji - EMOJIS_PER_ROW)) {
+          // if there is no previous row, we should jump to emoji in the sampe position of the previous tab
+          const previousTab = indexTab - 1 < 0 ? 0 : indexTab - 1;
+          const emojisInPreviousTab = this.emojiRefs[previousTab].length;
+          const lastEmojiPosition = emojisInPreviousTab - (emojisInPreviousTab % EMOJIS_PER_ROW) + position;
+
+          if (!this.focusEmoji(previousTab, lastEmojiPosition)) {
+            // if there is no emoji in this position, jump to the last emoji of the row
+            this.focusEmoji(indexTab - 1, this.emojiRefs[indexTab - 1].length - 1);
+          }
+        }
+      }
+
+      if (event.key === 'ArrowDown') {
+        if (!this.focusEmoji(indexTab, indexEmoji + EMOJIS_PER_ROW)) {
+          // if cannot go down
+
+          // Calculate position from cell 0 to cell 8
+          const position = indexEmoji % EMOJIS_PER_ROW;
+
+          // check if it exists a next row in the current tab
+          if (this.emojiRefs?.[indexTab]?.[indexEmoji + (EMOJIS_PER_ROW - position)]) {
+            // if it exists, we should focus the last emoji of the next row in the current tab
+            this.focusEmoji(indexTab, this.emojiRefs[indexTab].length - 1);
+            // if we are at the end of the list it will do nothing
+          } else {
+            // We don't have next row, we are in the last of the tab, then jump
+            // to the next tab but in the equal emoji position in row 0.
+
+            if (!this.focusEmoji(indexTab + 1, position)) {
+              // We are on the bottom!, should jump to the same position emoji in the first row of the first tabset
+              // if it doesn't has, jump to the last
+              if (!this.focusEmoji(0, position)) {
+                this.focusEmoji(0, this.emojiRefs[0].length - 1);
+              }
+            }
+          }
+        }
+      }
+
+      if (event.key === 'ArrowLeft') {
+        this.handleHorizontalNavigation('left', indexTab, indexEmoji);
+      }
+
+      if (event.key === 'ArrowRight') {
+        this.handleHorizontalNavigation('right', indexTab, indexEmoji);
+      }
+
+      if (event.key === 'Tab') {
+        if (this.focusEmoji(indexTab + 1, 0)) {
+          this.scrollToTab((indexTab + 1) + 1, false);
+        } else {
+          // We are on the last emoji tabset, jump to the skin selector
+          this.$emit('focus-skin-selector');
+        }
+      }
+
+      if (event.key === 'Tab' && event.shiftKey) {
+        if (this.focusEmoji(indexTab, 0) && indexTab > 0) {
+          this.scrollToTab(indexTab, true);
+        } else {
+          this.scrollToTab(1, false);
+          this.$emit('focus-search-input');
+        }
+      }
+
+      if (event.key === 'Enter') {
+        this.$emit('selected-emoji', emoji);
+      }
+    },
+
+    handleHorizontalNavigation: function (direction, indexTab, indexEmoji) {
+      if (this.isFiltering) {
+        if (direction === 'left') {
+          this.handleArrowLeftFiltered(indexTab, indexEmoji);
+        } else if (direction === 'right') {
+          this.handleArrowRightFiltered(indexTab, indexEmoji);
+        }
+      } else {
+        if (direction === 'left') {
+          this.handleArrowLeft(indexTab, indexEmoji);
+        } else if (direction === 'right') {
+          this.handleArrowRight(indexTab, indexEmoji);
+        }
+      }
+    },
+
+    handleArrowLeftFiltered: function (indexTab, indexEmoji) {
+      if (!this.focusEmoji(0, indexEmoji - 1)) {
+        this.focusEmoji(0, this.emojiFilteredRefs.length - 1);
+      }
+    },
+
+    handleArrowRightFiltered: function (indexTab, indexEmoji) {
+      if (!this.focusEmoji(0, indexEmoji + 1)) {
+        this.focusEmoji(0, 0);
+      }
+    },
+
+    handleArrowLeft: function (indexTab, indexEmoji) {
+      if (!this.focusEmoji(indexTab, indexEmoji - 1)) {
+        if (this.emojiRefs[indexTab - 1]) {
+          this.focusEmoji(indexTab - 1, this.emojiRefs[indexTab - 1].length - 1);
+        } else {
+          this.focusEmoji(this.emojiRefs.length - 1, this.emojiRefs[this.emojiRefs.length - 1].length - 1);
+        }
+      }
+    },
+
+    handleArrowRight: function (indexTab, indexEmoji) {
+      if (!this.focusEmoji(indexTab, indexEmoji + 1)) {
+        if (!this.focusEmoji(indexTab + 1, 0)) {
+          this.focusEmoji(0, 0);
+        }
+      }
     },
   },
 };
