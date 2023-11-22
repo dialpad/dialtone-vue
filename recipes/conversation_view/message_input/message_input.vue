@@ -134,12 +134,7 @@
             </template>
             <template #content>
               <dt-emoji-picker
-                :tab-set-labels="emojiTabSetLabels"
-                :skin-selector-button-tooltip-label="emojiSkinSelectorButtonTooltipLabel"
-                :search-no-results-label="emojiSearchNoResultsLabel"
-                :search-results-label="emojiSearchResultsLabel"
-                :search-placeholder-label="emojiSearchPlaceholderLabel"
-                :skin-tone="skinTone"
+                v-bind="emojiPickerProps"
                 @skin-tone="onSkinTone"
                 @selected-emoji="onSelectEmoji"
               />
@@ -262,6 +257,24 @@ import { DtPopover } from '@/components/popover';
 import { DtInput } from '@/components/input';
 import { DtNotice, NOTICE_KINDS } from '@/components/notice';
 import { DtTooltip } from '@/components/tooltip';
+
+const DEFAULT_EMOJI_PROPS = {
+  tabSetLabels: [
+    'Most recently used',
+    'Smileys and people',
+    'Nature',
+    'Food',
+    'Activity',
+    'Travel',
+    'Objects',
+    'Symbols',
+    'Flags',
+  ],
+  skinSelectorButtonTooltipLabel: 'Change default skin tone',
+  searchNoResultsLabel: 'No results',
+  searchResultsLabel: 'Search results',
+  searchPlaceholderLabel: 'Search...',
+};
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -452,44 +465,15 @@ export default {
       default: 'unset',
     },
 
-    // Emoji picker props
-
     /**
-     * tab labels for emoji
+     * Props to pass into the emoji picker.
      */
-    emojiTabSetLabels: {
-      type: Array,
-      default: () => [
-        'Most recently used',
-        'Smileys and people',
-        'Nature',
-        'Food',
-        'Activity',
-        'Travel',
-        'Objects',
-        'Symbols',
-        'Flags',
-      ],
-    },
-
-    emojiSkinSelectorButtonTooltipLabel: {
-      type: String,
-      default: 'Change default skin tone',
-    },
-
-    emojiSearchNoResultsLabel: {
-      type: String,
-      default: 'No results',
-    },
-
-    emojiSearchResultsLabel: {
-      type: String,
-      default: 'Search results',
-    },
-
-    emojiSearchPlaceholderLabel: {
-      type: String,
-      default: 'Search...',
+    emojiPickerProps: {
+      type: Object,
+      default: () => DEFAULT_EMOJI_PROPS,
+      validate (emojiPickerProps) {
+        return Object.keys(DEFAULT_EMOJI_PROPS).every(prop => emojiPickerProps[prop] != null);
+      },
     },
 
     /**
@@ -567,14 +551,6 @@ export default {
       type: String,
       default: 'Cancel',
     },
-
-    /**
-     * Skin tone to display in the emoji picker
-     */
-    skinTone: {
-      type: String,
-      default: 'Default',
-    },
   },
 
   emits: [
@@ -626,6 +602,14 @@ export default {
      * @type {String}
      */
     'skin-tone',
+
+    /**
+     * Fires when emoji is selected from the emoji picker
+     *
+     * @event selected-emoji
+     * @type {String}
+     */
+    'selected-emoji',
   ],
 
   data () {
@@ -726,6 +710,7 @@ export default {
         },
       });
       this.emojiPickerOpened = false;
+      this.$emit('selected-emoji', emoji);
     },
 
     onSelectImage () {

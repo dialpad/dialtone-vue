@@ -29,6 +29,31 @@ export const argTypesData = {
       type: 'select',
     },
   },
+
+  emojiPickerProps: {
+    table: {
+      defaultValue: {
+        summary: JSON.stringify({
+          tabSetLabels: [
+            'Most recently used',
+            'Smileys and people',
+            'Nature',
+            'Food',
+            'Activity',
+            'Travel',
+            'Objects',
+            'Symbols',
+            'Flags',
+          ],
+          skinSelectorButtonTooltipLabel: 'Change default skin tone',
+          searchNoResultsLabel: 'No results',
+          searchResultsLabel: 'Search results',
+          searchPlaceholderLabel: 'Search...',
+        }, null, '\t'),
+      },
+    },
+  },
+
   // Events
   onSubmit: {
     table: {
@@ -72,6 +97,12 @@ export const argTypesData = {
     },
   },
 
+  onSelectedEmoji: {
+    table: {
+      disable: true,
+    },
+  },
+
   onCancel: {
     table: {
       disable: true,
@@ -99,6 +130,7 @@ export const argsData = {
   onBlur: action('blur'),
   onInput: action('input'),
   onSelectMedia: action('select-media'),
+  onSelectedEmoji: action('selected-emoji'),
   onAddMedia: action('add-media'),
   onNoticeClose: action('notice-close'),
   onSkinTone: action('skin-tone'),
