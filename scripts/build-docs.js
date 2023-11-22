@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 const componentsRootFolder = join(__dirname, '../components');
 const outputPath = join(__dirname, '../dist/component-documentation.json');
-const componentsList = [
+export const componentsList = [
   'DtDatepicker.vue',
   'avatar.vue',
   'badge.vue',
