@@ -119,7 +119,7 @@ export default {
       required: true,
     },
 
-    tabsetLabels: {
+    tabSetLabels: {
       type: Array,
       required: true,
     },
@@ -181,8 +181,8 @@ export default {
 
     tabLabels () {
       return this.recentlyUsedEmojis.length
-        ? this.tabsetLabels.map((label, index) => ({ label, ref: this.$refs[`tabLabelRef-${index}`] }))
-        : this.tabsetLabels.slice(1).map((label, index) => ({ label, ref: this.$refs[`tabLabelRef-${index}`] }));
+        ? this.tabSetLabels.map((label, index) => ({ label, ref: this.$refs[`tabLabelRef-${index}`] }))
+        : this.tabSetLabels.slice(1).map((label, index) => ({ label, ref: this.$refs[`tabLabelRef-${index}`] }));
     },
 
     tabs () {
@@ -247,7 +247,7 @@ export default {
 
   methods: {
     setupTabLabelRefs () {
-      this.tabsetLabels?.forEach((label, index) => {
+      this.tabSetLabels?.forEach((label, index) => {
         const refKey = `tabLabelRef-${index}`;
         if (this.$refs[refKey]) {
           this.$set(this.tabLabels, index, { label, ref: this.$refs[refKey] });

@@ -2,13 +2,14 @@
   <div
     class="d-emoji-picker"
   >
+    {{ tabSetLabels }}
     <div class="d-emoji-picker--header">
       <emoji-tabset
         ref="tabsetRef"
         :emoji-filter="searchQuery"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
-        :tabset-labels="tabSetLabels"
+        :tab-set-labels="tabSetLabels"
         :is-scrolling="isScrolling"
         @focus-search-input="$refs.searchInputRef.focusSearchInput()"
         @selected-tabset="scrollToSelectedTabset"
@@ -30,7 +31,7 @@
         ref="emojiSelectorRef"
         :emoji-filter="searchQuery"
         :skin-tone="skinTone"
-        :tabset-labels="tabSetLabels"
+        :tab-set-labels="tabSetLabels"
         :search-results-label="searchResultsLabel"
         :search-no-results-label="searchNoResultsLabel"
         :recently-used-emojis="recentlyUsedEmojis"

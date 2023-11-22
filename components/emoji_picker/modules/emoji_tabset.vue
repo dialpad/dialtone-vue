@@ -63,7 +63,7 @@ export default {
       default: '',
     },
 
-    tabsetLabels: {
+    tabSetLabels: {
       type: Array,
       required: true,
     },
@@ -92,7 +92,7 @@ export default {
       const tabsData = this.showRecentlyUsedTab ? this.TABS_DATA : this.TABS_DATA.slice(1);
       return tabsData.map((tab, index) => ({
         ...tab,
-        label: this.tabsetLabels[index],
+        label: this.tabSetLabels[index],
         id: (index + 1).toString(),
         panelId: (index + 1).toString(),
       }));
