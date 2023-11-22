@@ -1,5 +1,29 @@
 <template>
   <div>
+    <pre>
+    {{ skinSelectorButtonTooltipLabel }}
+    </pre>
+    <br>
+    <pre>
+    {{ tabSetLabels }}
+    </pre>
+    <br>
+    <pre>
+    {{ recentlyUsedEmojis }}
+    </pre>
+    <br>
+    <pre>
+    {{ searchResultsLabel }}
+    </pre>
+    <br>
+    <pre>
+    {{ searchNoResultsLabel }}
+    </pre>
+    <br>
+    <pre>
+    {{ searchPlaceholderLabel }}
+    </pre>
+    <br>
     <dt-emoji-picker
       :skin-tone.sync="isSkinTone"
       :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
