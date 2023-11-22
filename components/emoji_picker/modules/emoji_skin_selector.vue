@@ -9,7 +9,7 @@
         :key="skin.name"
         :ref="`skinRef-${index}`"
         :class="{
-          'selected': skinSelected.skinCode === skin.skinCode,
+          'selected': skinSelected?.skinCode === skin.skinCode,
         }"
         @click="selectSkin(skin)"
         @keydown="event => handleKeyDown(event, skin, index)"
