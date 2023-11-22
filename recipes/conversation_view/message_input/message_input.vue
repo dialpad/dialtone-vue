@@ -258,24 +258,6 @@ import { DtInput } from '@/components/input';
 import { DtNotice, NOTICE_KINDS } from '@/components/notice';
 import { DtTooltip } from '@/components/tooltip';
 
-const DEFAULT_EMOJI_PROPS = {
-  tabSetLabels: [
-    'Most recently used',
-    'Smileys and people',
-    'Nature',
-    'Food',
-    'Activity',
-    'Travel',
-    'Objects',
-    'Symbols',
-    'Flags',
-  ],
-  skinSelectorButtonTooltipLabel: 'Change default skin tone',
-  searchNoResultsLabel: 'No results',
-  searchResultsLabel: 'Search results',
-  searchPlaceholderLabel: 'Search...',
-};
-
 export default {
   name: 'DtRecipeMessageInput',
 
@@ -465,14 +447,42 @@ export default {
       default: 'unset',
     },
 
+    // Emoji picker props
+
     /**
      * Props to pass into the emoji picker.
      */
     emojiPickerProps: {
       type: Object,
-      default: () => DEFAULT_EMOJI_PROPS,
+      default: () => ({
+        searchNoResultsLabel: 'No results',
+        searchResultsLabel: 'Search results',
+        searchPlaceholderLabel: 'Search...',
+        skinSelectorButtonTooltipLabel: 'Change default skin tone',
+        tabSetLabels: [
+          'Most recently used',
+          'Smileys and people',
+          'Nature',
+          'Food',
+          'Activity',
+          'Travel',
+          'Objects',
+          'Symbols',
+          'Flags',
+        ],
+
+        // Optional props
+        skinTone: 'Default',
+      }),
+
       validate (emojiPickerProps) {
-        return Object.keys(DEFAULT_EMOJI_PROPS).every(prop => emojiPickerProps[prop] != null);
+        return [
+          'searchNoResultsLabel',
+          'searchResultsLabel',
+          'searchPlaceholderLabel',
+          'skinSelectorButtonTooltipLabel',
+          'tabSetLabels',
+        ].every(prop => emojiPickerProps[prop] != null);
       },
     },
 

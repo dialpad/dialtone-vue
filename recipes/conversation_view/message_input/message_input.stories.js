@@ -29,31 +29,6 @@ export const argTypesData = {
       type: 'select',
     },
   },
-
-  emojiPickerProps: {
-    table: {
-      defaultValue: {
-        summary: JSON.stringify({
-          tabSetLabels: [
-            'Most recently used',
-            'Smileys and people',
-            'Nature',
-            'Food',
-            'Activity',
-            'Travel',
-            'Objects',
-            'Symbols',
-            'Flags',
-          ],
-          skinSelectorButtonTooltipLabel: 'Change default skin tone',
-          searchNoResultsLabel: 'No results',
-          searchResultsLabel: 'Search results',
-          searchPlaceholderLabel: 'Search...',
-        }, null, '\t'),
-      },
-    },
-  },
-
   // Events
   onSubmit: {
     table: {
