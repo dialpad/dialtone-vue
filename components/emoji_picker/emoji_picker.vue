@@ -2,7 +2,6 @@
   <div
     class="d-emoji-picker"
   >
-    {{ tabSetLabels }}
     <div class="d-emoji-picker--header">
       <emoji-tabset
         ref="tabsetRef"
@@ -13,7 +12,7 @@
         :is-scrolling="isScrolling"
         @focus-search-input="$refs.searchInputRef.focusSearchInput()"
         @selected-tabset="scrollToSelectedTabset"
-        @keydown.esc="emits('close')"
+        @keydown.esc.native="$emit('close')"
       />
     </div>
     <div class="d-emoji-picker--body">
@@ -22,10 +21,10 @@
         :model-value="searchQuery"
         :search-placeholder-label="searchPlaceholderLabel"
         @update:model-value="newValue => searchQuery = newValue"
-        @select-first-emoji="emits('selected-emoji', highlightedEmoji)"
+        @select-first-emoji="$emit('selected-emoji', highlightedEmoji)"
         @focus-tabset="$refs.tabsetRef.focusTabset()"
         @focus-emoji-selector="$refs.emojiSelectorRef.focusEmojiSelector()"
-        @keydown.esc="emits('close')"
+        @keydown.esc.native="$emit('close')"
       />
       <emoji-selector
         ref="emojiSelectorRef"
@@ -39,10 +38,10 @@
         @scroll-into-tab="updateScrollIntoTab"
         @is-scrolling="updateIsScrolling"
         @highlighted-emoji="updateHighlightedEmoji"
-        @selected-emoji="emits('selected-emoji', $event)"
+        @selected-emoji="$emit('selected-emoji', $event)"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
         @focus-search-input="$refs.searchInputRef.focusSearchInput()"
-        @keydown.esc="emits('close')"
+        @keydown.esc.native="$emit('close')"
       />
     </div>
     <div class="d-emoji-picker--footer">
@@ -52,9 +51,9 @@
         :is-hovering="!!highlightedEmoji"
         :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
         :skin-tone="skinTone"
-        @skin-tone="emits('skin-tone', $event)"
+        @skin-tone="$emit('skin-tone', $event)"
         @focus-tabset="$refs.tabsetRef.focusTabset()"
-        @keydown.esc="emits('close')"
+        @keydown.esc.native="$emit('close')"
       />
     </div>
   </div>
@@ -147,23 +146,6 @@ export default {
 
     updateHighlightedEmoji (emoji) {
       this.highlightedEmoji = emoji;
-    },
-
-    emitSelectedEmoji (emoji) {
-      this.$emit('selected-emoji', emoji);
-    },
-
-    emitSkinTone (skin) {
-      this.$emit('skin-tone', skin);
-    },
-
-    emitClose () {
-      this.$emit('close');
-    },
-
-    // Utility method for emitting events
-    emits (event, payload = null) {
-      this.$emit(event, payload);
     },
   },
 };
