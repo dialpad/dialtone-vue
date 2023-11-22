@@ -118,5 +118,7 @@ const DefaultTemplate = (args, { argTypes }) =>
 // Stories
 export const Default = {
   render: DefaultTemplate,
-  args: {},
+  args: {
+    ...argsData,
+  },
 };
