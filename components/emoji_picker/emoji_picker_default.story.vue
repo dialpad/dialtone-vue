@@ -1,15 +1,16 @@
 <template>
-  <dt-emoji-picker
-    :skin-tone="skinTone"
-    :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
-    :tab-set-labels="tabSetLabels"
-    :recently-used-emojis="recentlyUsedEmojis"
-    :search-results-label="searchResultsLabel"
-    :search-no-results-label="searchNoResultsLabel"
-    :search-placeholder-label="searchPlaceholderLabel"
-    @skin-tone="skinTone = $event"
-    @selected-emoji="selectedEmoji"
-  />
+  <div>
+    <dt-emoji-picker
+      :skin-tone="skinTone"
+      :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
+      :tab-set-labels="tabSetLabels"
+      :recently-used-emojis="recentlyUsedEmojis"
+      :search-results-label="searchResultsLabel"
+      :search-no-results-label="searchNoResultsLabel"
+      :search-placeholder-label="searchPlaceholderLabel"
+      @skin-tone="skinTone = $event;"
+    />
+  </div>
 </template>
 
 <script>
@@ -22,10 +23,10 @@ export default {
     DtEmojiPicker,
   },
 
-  // data () {
-  //   return {
-  //     skinTone: 'Default',
-  //   };
-  // },
+  data () {
+    return {
+      skinTone: 'Default',
+    };
+  },
 };
 </script>
