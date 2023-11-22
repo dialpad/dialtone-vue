@@ -247,7 +247,7 @@ export default {
 
   methods: {
     setupTabLabelRefs () {
-      this.tabsetLabels.forEach((label, index) => {
+      this.tabsetLabels?.forEach((label, index) => {
         const refKey = `tabLabelRef-${index}`;
         if (this.$refs[refKey]) {
           this.$set(this.tabLabels, index, { label, ref: this.$refs[refKey] });
