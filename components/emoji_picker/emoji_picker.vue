@@ -2,7 +2,6 @@
   <div
     class="d-emoji-picker"
   >
-    {{ tabSetLabels }}
     <div class="d-emoji-picker--header">
       <emoji-tabset
         ref="tabsetRef"
