@@ -1,60 +1,11 @@
-const componentsList = [
-  'DtDatepicker.vue',
-  'avatar.vue',
-  'badge.vue',
-  'banner.vue',
-  'breadcrumbs.vue',
-  'button.vue',
-  'button_group.vue',
-  'card.vue',
-  'checkbox.vue',
-  'checkbox_group.vue',
-  'chip.vue',
-  'codeblock.vue',
-  'collapsible.vue',
-  'combobox.vue',
-  'description_list.vue',
-  'dropdown.vue',
-  'emoji.vue',
-  'emoji_picker.vue',
-  'emoji_text_wrapper.vue',
-  'icon.vue',
-  'input.vue',
-  'input_group.vue',
-  'item_layout.vue',
-  'keyboard_shortcut.vue',
-  'lazy_show.vue',
-  'link.vue',
-  'list_item.vue',
-  'list_section.vue',
-  'modal.vue',
-  'notice.vue',
-  'pagination.vue',
-  'popover.vue',
-  'presence.vue',
-  'radio.vue',
-  'radio_group.vue',
-  'root_layout.vue',
-  'scroller.vue',
-  'select_menu.vue',
-  'skeleton.vue',
-  'stack.vue',
-  'tab.vue',
-  'tab_group.vue',
-  'tab_panel.vue',
-  'toast.vue',
-  'toggle.vue',
-  'tooltip.vue',
-  'validation_messages.vue',
-];
-
+const componentsList = require('./common/components_list.cjs');
 const componentsNames = componentsList.map(name => name.replace('_', '-').replace('.vue', ''));
 
 module.exports = {
   extends: [
     'standard',
     'semistandard',
-    'plugin:vue/vue3-recommended',
+    'plugin:vue/recommended',
     'plugin:vuejs-accessibility/recommended',
     'plugin:storybook/recommended',
   ],
@@ -78,9 +29,6 @@ module.exports = {
     'max-len': ['error', {
       code: 120,
       tabWidth: 2,
-      ignoreComments: true,
-      ignoreStrings: true,
-      ignoreTemplateLiterals: true,
     }],
     'prefer-promise-reject-errors': ['error', {
       allowEmptyReject: true,
@@ -94,13 +42,12 @@ module.exports = {
       required: {
         some: ['nesting', 'id'],
       },
+      allowChildren: true,
     }],
-    'vue/no-deprecated-destroyed-lifecycle': 'warn',
-    'vue/no-deprecated-dollar-listeners-api': 'warn',
-    'vue/no-deprecated-v-bind-sync': 'warn',
     'vue/new-line-between-multi-line-property': ['warn'],
     'vue/html-comment-content-spacing': ['warn'],
     'vue/no-potential-component-option-typo': ['warn'],
+    'vue/multi-word-component-names': ['off'],
     'vue/no-reserved-component-names': ['error', {
       disallowVueBuiltInComponents: true,
       disallowVue3BuiltInComponents: true,
@@ -225,9 +172,6 @@ module.exports = {
       ],
       rules: {
         'vue/no-bare-strings-in-template': [
-          'off',
-        ],
-        'vue/no-restricted-class': [
           'off',
         ],
       },
