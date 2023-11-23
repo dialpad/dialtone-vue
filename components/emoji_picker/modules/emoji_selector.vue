@@ -230,7 +230,6 @@ export default {
       },
 
       deep: true,
-      immediate: true,
     },
   },
 
@@ -593,15 +592,12 @@ export default {
 
           if (entry.isIntersecting && target.offsetTop <= this.$refs.tabCategoryRef?.offsetTop + 50) {
             this.fixedLabel = this.tabLabels[index - 1]?.label ?? this.tabLabels[0]?.label;
-            console.log(1);
             this.$emit('scroll-into-tab', index - 1);
           } else if (entry.boundingClientRect.bottom <= this.$refs.tabCategoryRef?.getBoundingClientRect().bottom) {
             this.$emit('scroll-into-tab', index);
-            console.log(2);
             this.fixedLabel = this.tabLabels[index]?.label;
           } else if (index === 1) {
             this.$emit('scroll-into-tab', index);
-            console.log(3);
             this.fixedLabel = this.tabLabels[0]?.label;
           }
         });

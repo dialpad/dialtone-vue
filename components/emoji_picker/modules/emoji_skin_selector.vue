@@ -39,10 +39,10 @@
       >
         <img
           class="d-icon d-icon--size-500"
-          :alt="skinSelected.name"
-          :aria-label="skinSelected.name"
-          :title="skinSelected.name"
-          :src="`${cdnUrl + skinSelected.unicode_output}.png`"
+          :alt="skinSelected?.name"
+          :aria-label="skinSelected?.name"
+          :title="skinSelected?.name"
+          :src="`${cdnUrl + skinSelected?.unicode_output}.png`"
         >
       </button>
       <!--        </template> -->
