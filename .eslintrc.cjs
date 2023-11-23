@@ -174,6 +174,19 @@ module.exports = {
         'vue/no-bare-strings-in-template': [
           'off',
         ],
+        'vue/no-restricted-class': [
+          'off',
+        ],
+      },
+    },
+    {
+      files: [
+        'common/**',
+      ],
+      rules: {
+        'vue/no-restricted-class': [
+          'off',
+        ],
       },
     },
   ],
