@@ -1,5 +1,5 @@
 module.exports = [
-  'DtDatepicker.vue',
+  'datepicker.vue',
   'avatar.vue',
   'badge.vue',
   'banner.vue',
