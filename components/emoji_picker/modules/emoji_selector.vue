@@ -154,6 +154,7 @@ export default {
       fixedLabel: '',
       filteredEmojis: [],
       TABS_DATA: ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'],
+      tabLabelObserver: null,
     };
   },
 
@@ -242,7 +243,14 @@ export default {
       this.setupEmojiRefs();
       this.setupFilteredRefs();
       this.setupTabLabelRefs();
+      this.setTabLabelObserver();
     });
+  },
+
+  beforeDestroy () {
+    if (this.tabLabelObserver) {
+      this.tabLabelObserver.disconnect();
+    }
   },
 
   methods: {
@@ -576,6 +584,38 @@ export default {
         this.$emit('selected-emoji', emoji);
       }
     },
+
+    setTabLabelObserver () {
+      this.tabLabelObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const { target } = entry;
+          const index = parseInt(target.dataset.index);
+
+          if (entry.isIntersecting && target.offsetTop <= this.$refs.tabCategoryRef?.offsetTop + 50) {
+            this.fixedLabel = this.tabLabels[index - 1]?.label ?? this.tabLabels[0]?.label;
+            console.log(1);
+            this.$emit('scroll-into-tab', index - 1);
+          } else if (entry.boundingClientRect.bottom <= this.$refs.tabCategoryRef?.getBoundingClientRect().bottom) {
+            this.$emit('scroll-into-tab', index);
+            console.log(2);
+            this.fixedLabel = this.tabLabels[index]?.label;
+          } else if (index === 1) {
+            this.$emit('scroll-into-tab', index);
+            console.log(3);
+            this.fixedLabel = this.tabLabels[0]?.label;
+          }
+        });
+      });
+
+      this.tabLabelObserver.observe(this.$refs.tabCategoryRef);
+
+      Array.from(this.$refs.listRef.children).forEach((child, index) => {
+        this.tabLabelObserver.observe(child);
+        child.dataset.index = index;
+      });
+    },
+
   },
+
 };
 </script>

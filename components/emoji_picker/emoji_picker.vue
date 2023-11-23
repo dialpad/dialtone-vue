@@ -26,35 +26,35 @@
         @focus-emoji-selector="$refs.emojiSelectorRef.focusEmojiSelector()"
         @keydown.esc.native="$emit('close')"
       />
-      <!--      <emoji-selector -->
-      <!--        ref="emojiSelectorRef" -->
-      <!--        :emoji-filter="searchQuery" -->
-      <!--        :skin-tone="skinTone" -->
-      <!--        :tab-set-labels="tabSetLabels" -->
-      <!--        :search-results-label="searchResultsLabel" -->
-      <!--        :search-no-results-label="searchNoResultsLabel" -->
-      <!--        :recently-used-emojis="recentlyUsedEmojis" -->
-      <!--        :selected-tabset="selectedTabset" -->
-      <!--        @scroll-into-tab="updateScrollIntoTab" -->
-      <!--        @is-scrolling="updateIsScrolling" -->
-      <!--        @highlighted-emoji="updateHighlightedEmoji" -->
-      <!--        @selected-emoji="$emit('selected-emoji', $event)" -->
-      <!--        @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()" -->
-      <!--        @focus-search-input="$refs.searchInputRef.focusSearchInput()" -->
-      <!--        @keydown.esc.native="$emit('close')" -->
-      <!--      /> -->
+      <emoji-selector
+        ref="emojiSelectorRef"
+        :emoji-filter="searchQuery"
+        :skin-tone="skinTone"
+        :tab-set-labels="tabSetLabels"
+        :search-results-label="searchResultsLabel"
+        :search-no-results-label="searchNoResultsLabel"
+        :recently-used-emojis="recentlyUsedEmojis"
+        :selected-tabset="selectedTabset"
+        @scroll-into-tab="updateScrollIntoTab"
+        @is-scrolling="updateIsScrolling"
+        @highlighted-emoji="updateHighlightedEmoji"
+        @selected-emoji="$emit('selected-emoji', $event)"
+        @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
+        @focus-search-input="$refs.searchInputRef.focusSearchInput()"
+        @keydown.esc.native="$emit('close')"
+      />
     </div>
     <div class="d-emoji-picker--footer">
       <emoji-description :emoji="highlightedEmoji" />
-      <!--      <emoji-skin-selector -->
-      <!--        ref="skinSelectorRef" -->
-      <!--        :is-hovering="!!highlightedEmoji" -->
-      <!--        :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel" -->
-      <!--        :skin-tone="skinTone" -->
-      <!--        @skin-tone="$emit('skin-tone', $event)" -->
-      <!--        @focus-tabset="$refs.tabsetRef.focusTabset()" -->
-      <!--        @keydown.esc.native="$emit('close')" -->
-      <!--      /> -->
+      <emoji-skin-selector
+        ref="skinSelectorRef"
+        :is-hovering="!!highlightedEmoji"
+        :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
+        :skin-tone="skinTone"
+        @skin-tone="$emit('skin-tone', $event)"
+        @focus-tabset="$refs.tabsetRef.focusTabset()"
+        @keydown.esc.native="$emit('close')"
+      />
     </div>
   </div>
 </template>
