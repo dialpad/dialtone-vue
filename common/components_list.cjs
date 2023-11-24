@@ -19,6 +19,7 @@ module.exports = [
   'emoji_picker.vue',
   'emoji_text_wrapper.vue',
   'icon.vue',
+  'image_viewer.vue',
   'input.vue',
   'input_group.vue',
   'item_layout.vue',
