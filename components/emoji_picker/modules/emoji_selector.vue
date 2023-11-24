@@ -383,6 +383,7 @@ export default {
     },
 
     focusEmoji: function (indexTab, indexEmoji) {
+      // eslint-disable-next-line max-len
       const emojiRef = this.isFiltering ? this.emojiFilteredRefs[indexEmoji] : this.emojiRefs[indexTab] && this.emojiRefs[indexTab][indexEmoji];
 
       if (emojiRef) {
