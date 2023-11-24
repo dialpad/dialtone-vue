@@ -76,15 +76,6 @@ export const argsData = {
 };
 
 export const argTypesData = {
-  skinSelectorButtonTooltipLabel: {
-    control: 'text',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'String',
-      },
-    },
-  },
   skinTone: {
     options: ['Default', 'Light', 'MediumLight', 'Medium', 'MediumDark', 'Dark'],
     control: 'select',
