@@ -1,5 +1,4 @@
 import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
-import DtTooltip from './tooltip.vue';
 
 import * as TooltipStories from './tooltip.stories';
 
@@ -39,6 +38,14 @@ A tooltip has two slots:
 
 <Canvas>
     <Story of={TooltipStories.Flip} />
+</Canvas>
+
+## Dinamically change the position when the content changes
+
+This is achieved by setting the property `sticky` to "popper"
+
+<Canvas>
+    <Story of={TooltipStories.ChangeOnClick} />
 </Canvas>
 
 ## Props & Slots

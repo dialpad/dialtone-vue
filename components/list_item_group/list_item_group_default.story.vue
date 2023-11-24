@@ -4,9 +4,9 @@
     aria-label="list"
   >
     <dt-list-item-group
-      :heading="heading"
-      :heading-class="headingClass"
-      :list-class="listClass"
+      :heading="$attrs.heading"
+      :heading-class="$attrs.headingClass"
+      :list-class="$attrs.listClass"
     >
       <dt-list-item
         class="d-pl8"
@@ -30,18 +30,18 @@
         item3
       </dt-list-item>
       <template
-        v-if="headingSlot"
+        v-if="$attrs.headingSlot"
         slot="headingSlot"
       >
-        <span v-html="headingSlot" />
+        <span v-html="$attrs.headingSlot" />
       </template>
     </dt-list-item-group>
   </div>
 </template>
 
 <script>
-import DtListItemGroup from './list_item_group.vue';
-import DtListItem from '../list_item/list_item.vue';
+import { DtListItemGroup } from '@/components/list_item_group';
+import { DtListItem } from '@/components/list_item';
 
 export default {
   name: 'DtListItemGroupDefault',
