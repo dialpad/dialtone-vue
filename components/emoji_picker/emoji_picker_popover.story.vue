@@ -24,14 +24,14 @@
       <dt-emoji-picker
         ref="emojiPickerRef"
         :skin-tone="isSkinTone"
-        :skin-selector-button-tooltip-label="skinSelectorButtonTooltipLabel"
-        :tab-set-labels="tabSetLabels"
-        :recently-used-emojis="recentlyUsedEmojis"
-        :search-results-label="searchResultsLabel"
-        :search-no-results-label="searchNoResultsLabel"
-        :search-placeholder-label="searchPlaceholderLabel"
+        :skin-selector-button-tooltip-label="$attrs.skinSelectorButtonTooltipLabel"
+        :tab-set-labels="$attrs.tabSetLabels"
+        :recently-used-emojis="$attrs.recentlyUsedEmojis"
+        :search-results-label="$attrs.searchResultsLabel"
+        :search-no-results-label="$attrs.searchNoResultsLabel"
+        :search-placeholder-label="$attrs.searchPlaceholderLabel"
         @skin-tone="isSkinTone = $event"
-        @selected-emoji="selectedEmoji"
+        @selected-emoji="$attrs.selectedEmoji"
       />
     </template>
   </dt-popover>
@@ -55,7 +55,7 @@ export default {
 
   data () {
     return {
-      isSkinTone: this.skinTone,
+      isSkinTone: this.$attrs.skinTone,
       emojiPickerOpened: false,
     };
   },
