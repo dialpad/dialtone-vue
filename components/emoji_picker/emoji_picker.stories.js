@@ -52,7 +52,6 @@ const recentlyUsedEmojis = [
   },
 ];
 
-// Default Prop Values
 export const argsData = {
   onSkinTone: action('skin-tone'),
   onSelectedEmoji: action('selected-emoji'),
@@ -77,6 +76,15 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  skinSelectorButtonTooltipLabel: {
+    control: 'text',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'String',
+      },
+    },
+  },
   skinTone: {
     options: ['Default', 'Light', 'MediumLight', 'Medium', 'MediumDark', 'Dark'],
     control: 'select',
@@ -98,7 +106,6 @@ export const argTypesData = {
   },
 };
 
-// Story Collection
 export default {
   title: 'Components/Emoji Picker',
   component: DtEmojiPicker,
@@ -113,14 +120,21 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtEmojiPickerDefaultTemplate);
+const Template = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtEmojiPickerDefaultTemplate,
+);
 
-const WithPopoverTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtEmojiPickerWithPopoverTemplate);
+const WithPopoverTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtEmojiPickerWithPopoverTemplate,
+);
+
 // Stories
 export const Default = {
-  render: DefaultTemplate,
+  render: Template,
   args: {},
 };
 
