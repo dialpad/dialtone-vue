@@ -56,7 +56,7 @@ export default {
   data () {
     return {
       isSkinTone: this.$attrs.skinTone,
-      emojiPickerOpened: false,
+      emojiPickerOpened: true,
     };
   },
 
