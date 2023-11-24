@@ -220,8 +220,6 @@ export default {
 
         this.debouncedSearch();
       },
-
-      immediate: true,
     },
 
     selectedTabset: {
