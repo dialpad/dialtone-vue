@@ -132,5 +132,17 @@ export const Default = {
 export const WithPopover = {
   render: WithPopoverTemplate,
   args: {},
-  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    controls: {
+      disable: true,
+    },
+    percy: {
+      args: {
+        showPopover: true,
+      },
+    },
+  },
 };
