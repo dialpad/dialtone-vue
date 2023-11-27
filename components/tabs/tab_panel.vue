@@ -7,7 +7,7 @@
     :aria-hidden="`${hidePanel}`"
     :class="[
       {
-        'd-d-none': hidePanel,
+        'd-tab-panel--hidden': hidePanel,
       },
       tabPanelClass,
     ]"
