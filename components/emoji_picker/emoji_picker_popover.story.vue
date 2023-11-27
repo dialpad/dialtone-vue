@@ -1,6 +1,6 @@
 <template>
   <dt-popover
-    :open.sync="emojiPickerOpened"
+    :open="emojiPickerOpened"
     initial-focus-element="#searchInput"
     padding="none"
     @opened="(open) => { emojiPickerOpened = open }"
@@ -63,10 +63,6 @@ export default {
   watch: {
     skinTone (value) {
       this.isSkinTone = value;
-    },
-
-    showPopover (value) {
-      this.emojiPickerOpened = value;
     },
   },
 
