@@ -32,6 +32,7 @@
           <dt-icon
             :name=" isOpen ? 'chevron-down' : 'chevron-right'"
             class="d-collapsible__icon"
+            size="300"
           />
           <span
             class="d-collapsible__anchor-text"
