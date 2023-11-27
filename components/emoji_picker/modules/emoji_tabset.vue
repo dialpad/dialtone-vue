@@ -31,7 +31,7 @@
 import DtTabGroup from '@/components/tabs/tab_group.vue';
 import DtTab from '@/components/tabs/tab.vue';
 import DtIcon from '@/components/icon/icon.vue';
-import { EMOJI_CATEGORIES } from '@/components/emoji_picker/emoji_picker_constants';
+import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker/emoji_picker_constants';
 
 export default {
   name: 'EmojiTabset',
@@ -74,15 +74,15 @@ export default {
       selectedTab: '1',
       tabsetRef: [],
       TABS_DATA: [
-        { label: EMOJI_CATEGORIES.MOST_RECENTLY_USED, icon: 'clock' },
-        { label: EMOJI_CATEGORIES.SMILEYS_AND_PEOPLE, icon: 'satisfied' },
-        { label: EMOJI_CATEGORIES.NATURE, icon: 'living-thing' },
-        { label: EMOJI_CATEGORIES.FOOD, icon: 'food' },
-        { label: EMOJI_CATEGORIES.ACTIVITY, icon: 'object' },
-        { label: EMOJI_CATEGORIES.TRAVEL, icon: 'transportation' },
-        { label: EMOJI_CATEGORIES.OBJECTS, icon: 'lightbulb' },
-        { label: EMOJI_CATEGORIES.SYMBOLS, icon: 'heart' },
-        { label: EMOJI_CATEGORIES.FLAGS, icon: 'flag' },
+        { label: EMOJI_PICKER_CATEGORIES.MOST_RECENTLY_USED, icon: 'clock' },
+        { label: EMOJI_PICKER_CATEGORIES.SMILEYS_AND_PEOPLE, icon: 'satisfied' },
+        { label: EMOJI_PICKER_CATEGORIES.NATURE, icon: 'living-thing' },
+        { label: EMOJI_PICKER_CATEGORIES.FOOD, icon: 'food' },
+        { label: EMOJI_PICKER_CATEGORIES.ACTIVITY, icon: 'object' },
+        { label: EMOJI_PICKER_CATEGORIES.TRAVEL, icon: 'transportation' },
+        { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: 'lightbulb' },
+        { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: 'heart' },
+        { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: 'flag' },
       ],
     };
   },
