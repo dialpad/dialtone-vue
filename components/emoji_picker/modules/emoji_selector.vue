@@ -103,7 +103,7 @@
 <script>
 // eslint-disable max-len
 import { emojisGrouped as emojisImported } from '@/components/emoji_picker/emojis';
-import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
+import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker/emoji_picker_constants';
 
 export default {
   name: 'EmojiSelector',
@@ -261,6 +261,9 @@ export default {
     },
 
     setupFilteredRefs () {
+      // it is necessary to clean the array before setting the new refs
+      this.emojiFilteredRefs = [];
+
       this.filteredEmojis.forEach((emoji, index) => {
         const refKey = `filteredEmoji-${index}`;
         if (this.$refs[refKey]) {
@@ -294,6 +297,7 @@ export default {
       this.$nextTick(function () {
         if (searchStr) {
           this.hoverEmoji(this.filteredEmojis[0], true);
+          this.setupFilteredRefs();
         }
       });
     },
@@ -384,8 +388,7 @@ export default {
 
     focusEmoji: function (indexTab, indexEmoji) {
       // eslint-disable-next-line max-len
-      const emojiRef = this.isFiltering ? this.emojiFilteredRefs[indexEmoji] : this.emojiRefs[indexTab] && this.emojiRefs[indexTab][indexEmoji];
-
+      const emojiRef = this.isFiltering ? this.emojiFilteredRefs[indexEmoji]?.[0] : this.emojiRefs[indexTab] && this.emojiRefs[indexTab][indexEmoji];
       if (emojiRef) {
         emojiRef.focus();
         return true;
@@ -395,8 +398,6 @@ export default {
     },
 
     handleKeyDown: function (event, indexTab, indexEmoji, emoji) {
-      const EMOJIS_PER_ROW = 9;
-
       event.preventDefault();
 
       if (event.key === 'ArrowUp') {
@@ -540,11 +541,10 @@ export default {
       this.hoverFirstEmoji = false;
 
       if (event.key === 'ArrowUp') {
-        const position = indexEmoji % this.EMOJIS_PER_ROW;
-
-        if (!this.focusEmoji(0, indexEmoji - this.EMOJIS_PER_ROW)) {
+        const position = indexEmoji % EMOJIS_PER_ROW;
+        if (!this.focusEmoji(0, indexEmoji - EMOJIS_PER_ROW)) {
           const lastEmojiPosition =
-        this.emojiFilteredRefs.length - (this.emojiFilteredRefs.length % this.EMOJIS_PER_ROW) + position;
+          this.emojiFilteredRefs.length - (this.emojiFilteredRefs.length % EMOJIS_PER_ROW) + position;
 
           this.focusEmoji(0, lastEmojiPosition);
 
@@ -555,10 +555,10 @@ export default {
       }
 
       if (event.key === 'ArrowDown') {
-        if (!this.focusEmoji(0, indexEmoji + this.EMOJIS_PER_ROW)) {
-          const position = indexEmoji % this.EMOJIS_PER_ROW;
+        if (!this.focusEmoji(0, indexEmoji + EMOJIS_PER_ROW)) {
+          const position = indexEmoji % EMOJIS_PER_ROW;
 
-          if (this.emojiFilteredRefs?.[indexEmoji + (this.EMOJIS_PER_ROW - position)]) {
+          if (this.emojiFilteredRefs?.[indexEmoji + (EMOJIS_PER_ROW - position)]) {
             this.focusEmoji(0, this.emojiFilteredRefs.length - 1);
           } else {
             this.focusEmoji(0, position);
