@@ -7,7 +7,9 @@
     :search-results-label="$attrs.searchResultsLabel"
     :search-no-results-label="$attrs.searchNoResultsLabel"
     :search-placeholder-label="$attrs.searchPlaceholderLabel"
-    @skin-tone="isSkinTone = $event;"
+    @skin-tone="isSkinTone = $event; $attrs.onSkinTone($event)"
+    @close="$attrs.onClose($event)"
+    @selected-emoji="$attrs.onSelectedEmoji($event)"
   />
 </template>
 
