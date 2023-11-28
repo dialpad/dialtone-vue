@@ -172,9 +172,7 @@ describe('DtEmojiPicker Tests', () => {
         expect(skinToneSelectorImg.attributes('aria-label')).toBe(':wave_tone1:');
 
         await skinToneSelectorButton.trigger('click');
-        await wrapper.vm.$nextTick();
         await skinToneMediumLightButton.trigger('click');
-        await wrapper.vm.$nextTick();
 
         expect(skinToneSelectorImg.exists()).toBe(true);
         expect(skinToneSelectorImg.attributes('aria-label')).toBe(':wave_tone2:');
@@ -185,9 +183,7 @@ describe('DtEmojiPicker Tests', () => {
         expect(skinToneSelectorImg.attributes('aria-label')).toBe(':wave_tone1:');
 
         await skinToneSelectorButton.trigger('click');
-        await wrapper.vm.$nextTick();
         await skinToneMediumLightButton.trigger('click');
-        await wrapper.vm.$nextTick();
 
         expect(skinToneSelectorImg.exists()).toBe(true);
         expect(skinToneSelectorImg.attributes('aria-label')).toBe(':wave_tone2:');
@@ -234,7 +230,6 @@ describe('DtEmojiPicker Tests', () => {
       expect(emoji.exists()).toBe(true);
 
       await emoji.trigger('click');
-      await wrapper.vm.$nextTick();
 
       expect(wrapper.emitted('selected-emoji')).toBeTruthy();
     });
@@ -246,7 +241,6 @@ describe('DtEmojiPicker Tests', () => {
         searchInput.setValue('tube');
 
         await searchInput.trigger('input');
-        await wrapper.vm.$nextTick();
 
         const fixedLabel = wrapper.find('.d-emoji-picker__search-label');
 
@@ -258,9 +252,7 @@ describe('DtEmojiPicker Tests', () => {
 
         expect(wrapper.find('[data-qa="filtered-emojis"]').exists()).toBe(false);
 
-        searchInput.setValue('tube');
-
-        await wrapper.vm.$nextTick();
+        await searchInput.setValue('tube');
 
         expect(wrapper.find('[data-qa="filtered-emojis"]').exists()).toBe(true);
       });
@@ -273,7 +265,6 @@ describe('DtEmojiPicker Tests', () => {
       expect(emoji.exists()).toBe(true);
 
       await emoji.trigger('mouseover');
-      await wrapper.vm.$nextTick();
 
       expect(emojiData.text()).toBe('thumbs up');
     });
@@ -286,7 +277,6 @@ describe('DtEmojiPicker Tests', () => {
         expect(skinToneSelector.attributes('style')).toMatch('display: none');
 
         await skinToneSelectorButton.trigger('click');
-        await wrapper.vm.$nextTick();
 
         expect(skinToneSelector.attributes('style')).not.toMatch('display: none');
       });
@@ -297,9 +287,7 @@ describe('DtEmojiPicker Tests', () => {
         const skinTone = skinToneSelector.findAll('button').at(1);
 
         await skinToneSelectorButton.trigger('click');
-        await wrapper.vm.$nextTick();
         await skinTone.trigger('click');
-        await wrapper.vm.$nextTick();
 
         expect(wrapper.emitted('skin-tone')).toBeTruthy();
         expect(wrapper.emitted('skin-tone')[0]).toEqual(['MediumLight']);
@@ -308,6 +296,18 @@ describe('DtEmojiPicker Tests', () => {
   });
 
   describe('Accessibility Tests', () => {
+    const emojiCategories = [
+      { name: 'Recently Used', childIndex: 2, emoji: 'Thumbs up' },
+      { name: 'People', childIndex: 3, emoji: 'Skull and crossbones' },
+      { name: 'Nature', childIndex: 4, emoji: 'Sun' },
+      { name: 'Food', childIndex: 5, emoji: 'Coffee' },
+      { name: 'Activity', childIndex: 6, emoji: 'Soccer ball' },
+      { name: 'Travel', childIndex: 7, emoji: 'Anchor' },
+      { name: 'Objects', childIndex: 8, emoji: 'Keyboard' },
+      { name: 'Symbols', childIndex: 9, emoji: 'Exclamation question mark' },
+      { name: 'Flags', childIndex: 10, emoji: 'White flag' },
+    ];
+
     it('Input search should be focus on mount', () => {
       const searchInput = wrapper.find('.d-emoji-picker__search input');
 
@@ -323,57 +323,18 @@ describe('DtEmojiPicker Tests', () => {
       expect(document.activeElement).toBe(emoji.element);
     });
 
-    it('Should jump through all the first emojis of each tab', async () => {
-      // Thumbs up emoji - Recently used
-      const firstRecentlyUsed = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(2) button');
-      // Skull and crossbones - People
-      const firstPeople = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(3) button');
-      // Sun - Nature
-      const firstNature = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(4) button');
-      // Coffe - Food
-      const firstFood = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(5) button');
-      // Soccer ball - Activity
-      const firstActivity = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(6) button');
-      // Anchor - Travel
-      const firstTravel = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(7) button');
-      // Keyboard - Objects
-      const firstObjects = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(8) button');
-      // Exclamation question mark - Symbols
-      const firstSymbols = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(9) button');
-      // White flag - Flags
-      const firstFlags = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(10) button');
+    it.each(emojiCategories)('Should jump to the first emoji of the $name tab', async ({ childIndex }) => {
+      const currentEmoji = wrapper.find(`.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(${childIndex}) button`);
 
-      await firstRecentlyUsed.trigger('keydown.tab');
+      if (childIndex !== 10) {
+        const nextChildIndex = childIndex + 1;
 
-      expect(document.activeElement).toBe(firstPeople.element);
+        const nextEmoji = wrapper.find(`.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(${nextChildIndex}) button`);
 
-      await firstPeople.trigger('keydown.tab');
+        await currentEmoji.trigger('keydown.tab');
 
-      expect(document.activeElement).toBe(firstNature.element);
-
-      await firstNature.trigger('keydown.tab');
-
-      expect(document.activeElement).toBe(firstFood.element);
-
-      await firstFood.trigger('keydown.tab');
-
-      expect(document.activeElement).toBe(firstActivity.element);
-
-      await firstActivity.trigger('keydown.tab');
-
-      expect(document.activeElement).toBe(firstTravel.element);
-
-      await firstTravel.trigger('keydown.tab');
-
-      expect(document.activeElement).toBe(firstObjects.element);
-
-      await firstObjects.trigger('keydown.tab');
-
-      expect(document.activeElement).toBe(firstSymbols.element);
-
-      await firstSymbols.trigger('keydown.tab');
-
-      expect(document.activeElement).toBe(firstFlags.element);
+        expect(document.activeElement).toBe(nextEmoji.element);
+      }
     });
 
     it('Should jump to skin selector from emoji-selector', async () => {

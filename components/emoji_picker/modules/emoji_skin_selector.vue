@@ -27,39 +27,39 @@
       v-show="!isOpen"
       class="d-emoji-picker__skin-selected"
     >
-      <!--      <dt-tooltip placement="top-end"> -->
-      <!--      {{ // skinSelectorButtonTooltipLabel }} -->
-      <!--        <template #anchor> -->
-      <button
-        ref="skinSelectorRef"
-        :aria-label="skinSelectorButtonTooltipLabel"
-        tabindex="-1"
-        @click="toggleSkinList"
-        @keydown="event => handleKeyDown(event)"
-      >
-        <img
-          class="d-icon d-icon--size-500"
-          :alt="skinSelected?.name"
-          :aria-label="skinSelected?.name"
-          :title="skinSelected?.name"
-          :src="`${cdnUrl + skinSelected?.unicode_output}.png`"
-        >
-      </button>
-      <!--        </template> -->
-      <!--      </dt-tooltip> -->
+      <dt-tooltip placement="top-end">
+        {{ skinSelectorButtonTooltipLabel }}
+        <template #anchor>
+          <button
+            ref="skinSelectorRef"
+            :aria-label="skinSelectorButtonTooltipLabel"
+            tabindex="-1"
+            @click="toggleSkinList"
+            @keydown="event => handleKeyDown(event)"
+          >
+            <img
+              class="d-icon d-icon--size-500"
+              :alt="skinSelected?.name"
+              :aria-label="skinSelected?.name"
+              :title="skinSelected?.name"
+              :src="`${cdnUrl + skinSelected?.unicode_output}.png`"
+            >
+          </button>
+        </template>
+      </dt-tooltip>
     </div>
   </div>
 </template>
 
 <script>
-// import DtTooltip from '@/components/tooltip/tooltip.vue';
+import DtTooltip from '@/components/tooltip/tooltip.vue';
 import { CDN_URL, EMOJI_PICKER_SKIN_TONE_MODIFIERS } from '@/components/emoji_picker/emoji_picker_constants';
 
 export default {
   name: 'EmojiSkinSelector',
 
   components: {
-    // DtTooltip,
+    DtTooltip,
   },
 
   props: {
