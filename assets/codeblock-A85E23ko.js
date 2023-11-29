@@ -1,3 +1,0 @@
-import{n}from"./_plugin-vue2_normalizer-XBmYDgEh.js";const t={name:"DtCodeblock",props:{text:{type:String,required:!0}}};var s=function(){var e=this,o=e._self._c;return o("pre",[e._v("  "),o("code",{staticClass:"d-d-block d-bgc-secondary d-ws-pre-wrap d-p8 d-ba d-bc-subtle d-bar8 d-fs-200 d-ff-mono d-lh-400 d-fc-secondary"},[e._v(e._s(e.text))]),e._v(`
-`)])},d=[],r=n(t,s,d,!1,null,null,null,null);const l=r.exports;r.exports.__docgenInfo={displayName:"DtCodeblock",exportName:"default",description:"",tags:{},props:[{name:"text",type:{name:"string"},required:!0}],sourceFiles:["/home/runner/work/dialtone-vue/dialtone-vue/components/codeblock/codeblock.vue"]};export{l as D};
-//# sourceMappingURL=codeblock-A85E23ko.js.map
