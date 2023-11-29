@@ -73,6 +73,7 @@ export const argsData = {
   searchResultsLabel: 'Search results',
   searchPlaceholderLabel: 'Search...',
   skinTone: 'Default',
+  showPopover: false,
 };
 
 export const argTypesData = {
