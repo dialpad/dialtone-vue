@@ -58,14 +58,16 @@
 
     <template #bottom>
       <div
-        class="d-d-flex d-fw-wrap"
+        class="dt-feed-item-row__reactions"
         data-qa="dt-feed-item-row--reactions"
       >
         <!-- @slot Slot for reactions row component -->
         <slot name="reactions" />
       </div>
-      <!-- @slot Slot for threading row component -->
-      <slot name="threading" />
+      <div class="dt-feed-item-row__threading">
+        <!-- @slot Slot for threading row component -->
+        <slot name="threading" />
+      </div>
     </template>
 
     <!-- Action menu -->
@@ -262,8 +264,24 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.dt-feed-item-row :deep(.dt-item-layout--left) {
+  align-self: baseline;
+}
+
 .dt-feed-item-row {
   transition-duration: 2s !important;
+
+  &__reactions {
+    padding-top: var(--dt-space-200);
+    padding-bottom: var(--dt-space-200);
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__threading {
+    padding-top: var(--dt-space-200);
+    padding-bottom: var(--dt-space-200);
+  }
 
   &__left-time {
     color: var(--dt-color-foreground-tertiary);

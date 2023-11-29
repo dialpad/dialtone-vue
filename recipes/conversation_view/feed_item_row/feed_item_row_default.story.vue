@@ -172,7 +172,8 @@ export default {
       }
     }
     &__thread{
-      height: 32px;
+      padding-top: .3rem;
+      padding-bottom: .3rem;
     }
     &__reply{
       color: var(--dt-color-foreground-tertiary);
