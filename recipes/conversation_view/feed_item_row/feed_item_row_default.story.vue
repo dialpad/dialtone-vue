@@ -64,6 +64,7 @@
             <dt-button
               importance="clear"
               size="sm"
+              aria-label="Add reaction"
               data-qa="feed-item-reaction-button"
               class="dt-emoji-row__reaction dt-emoji-row__picker"
             >
