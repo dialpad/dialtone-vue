@@ -5,13 +5,9 @@
     :tabindex="isFirstElementFocusable ? -1 : 0"
     :aria-labelledby="`dt-tab-${tabId}`"
     :aria-hidden="`${hidePanel}`"
-    :class="[
-      {
-        'd-tab-panel--hidden': hidePanel,
-      },
-      tabPanelClass,
-    ]"
+    :class="tabPanelClass"
     data-qa="dt-tab-panel"
+    :style="[hidePanel ? { 'display': 'none' } : {}]"
   >
     <!-- @slot Default slot for Tab Panel -->
     <slot v-show="!hidden" />
