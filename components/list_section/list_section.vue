@@ -4,13 +4,12 @@
     role="group"
     :aria-labelledby="`${id}-list-section-header`"
     tabindex="-1"
-    :class="['dt-list-section', 'd-fs-200', 'd-lh6', 'd-py6', 'd-bc-black-400',
-             { 'd-bb': separator }]"
+    :class="['dt-list-section', { 'dt-list-section__separator': separator }]"
   >
     <h3
       v-if="header"
       :id="`${id}-list-section-header`"
-      class="d-pl12 d-mt6"
+      class="dt-list-section__header"
     >
       {{ header }}
     </h3>
@@ -27,13 +26,13 @@
       <vnodes :vnodes="displayedItems" />
     </ol>
     <div
-      class="d-d-flex"
+      class="dt-list-section__show-more"
     >
       <dt-button
         v-if="isCollapsible"
         :id="`${id}-list-section-show-more-less`"
         link
-        class="d-ml12 d-py6"
+        class="dt-list-section__show-more-button"
         @click="showMoreLessClicked"
       >
         {{ showMoreLessText }}
@@ -151,6 +150,34 @@ export default {
 </script>
 
 <style lang="less">
+.dt-list-section {
+  font-size: var(--dt-font-size-200);
+  line-height: var(--lh6);
+  padding-top: var(--dt-space-350);
+  padding-bottom: var(--dt-space-350);
+  --bco: 100%;
+  border-color: hsla(var(--dt-color-black-400-h)
+    var(--dt-color-black-400-s) var(--dt-color-black-400-l) / var(--bco));
+
+  &__separator {
+    border-bottom: var(--dt-size-100) solid
+  }
+
+  &__header {
+    padding-left: var(--dt-space-450);
+    margin-top: var(--dt-space-350);
+  }
+
+  &__show-more {
+    display: flex;
+  }
+
+  &__show-more-button {
+    margin-left: var(--dt-space-450);
+    padding-top: var(--dt-space-350);
+    padding-bottom: var(--dt-space-350);
+  }
+}
 .dt-list-section[tabindex="-1"]:focus {
   outline: none;
 }
