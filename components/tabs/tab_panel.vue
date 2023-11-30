@@ -8,7 +8,6 @@
     :aria-hidden="`${hidePanel}`"
     :class="tabPanelClass"
     data-qa="dt-tab-panel"
-    :style="[hidePanel ? { 'display': 'none' } : {}]"
   >
     <!-- @slot Default slot for Tab Panel -->
     <slot />
