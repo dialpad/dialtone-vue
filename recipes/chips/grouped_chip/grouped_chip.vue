@@ -105,9 +105,7 @@ export default {
   &--right {
     border-top-right-radius: var(--dt-size-radius-pill);
     border-bottom-right-radius: var(--dt-size-radius-pill);
-    --bgo: 100%;
-    background-color: hsla(var(--dt-color-purple-200-h)
-      var(--dt-color-purple-200-s) var(--dt-color-purple-200-l) / var(--bgo));
+    background-color: var(--dt-color-purple-200);
     max-width: var(--dt-size-730);
   }
 }

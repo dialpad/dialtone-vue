@@ -253,9 +253,7 @@ export default {
     width: var(--dt-size-550);
     height: var(--dt-size-550);
     margin-bottom: var(--dt-space-450-negative);
-    --fco: 100%;
-    color: hsla(var(--dt-color-neutral-white-h)
-      var(--dt-color-neutral-white-s) var(--dt-color-neutral-white-l) / var(--fco));
+    color: var(--dt-color-neutral-white);
     font-size: var(--dt-font-size-200);
 
     &--selected {

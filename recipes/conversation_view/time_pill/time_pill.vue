@@ -49,8 +49,7 @@ export default {
   border-radius: var(--dt-size-radius-pill);
   border-width: var(--dt-size-100);
   --bco: 100%;
-  border-color: hsla(var(--dt-color-black-300-h)
-    var(--dt-color-black-300-s) var(--dt-color-black-300-l) / var(--bco));
+  border-color: var(--dt-color-black-300);
   padding-left: var(--dt-space-500);
   padding-right: var(--dt-space-500);
   padding-top: var(--dt-space-300);
