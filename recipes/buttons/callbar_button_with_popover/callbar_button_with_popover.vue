@@ -342,8 +342,7 @@ export default {
   }
 
   &__icon {
-    --fco: 100%;
-    color: hsla(var(--dt-color-black-800-h) var(--dt-color-black-800-s) var(--dt-color-black-800-l) / var(--fco));
+    color: var(--dt-color-black-800);
   }
 }
 
