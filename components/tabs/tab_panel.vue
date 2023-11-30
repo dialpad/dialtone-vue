@@ -1,5 +1,6 @@
 <template>
   <div
+    v-show="!hidePanel"
     :id="`dt-panel-${id}`"
     role="tabpanel"
     :tabindex="isFirstElementFocusable ? -1 : 0"
@@ -7,7 +8,6 @@
     :aria-hidden="`${hidePanel}`"
     :class="tabPanelClass"
     data-qa="dt-tab-panel"
-    :style="[hidePanel ? { 'display': 'none' } : {}]"
   >
     <!-- @slot Default slot for Tab Panel -->
     <slot v-show="!hidden" />
