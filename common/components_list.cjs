@@ -27,7 +27,6 @@ module.exports = [
   'lazy_show.vue',
   'link.vue',
   'list_item.vue',
-  'list_section.vue',
   'modal.vue',
   'notice.vue',
   'pagination.vue',
