@@ -377,7 +377,6 @@ export default {
     listClasses () {
       return [
         'd-ps-relative',
-        'd-stack2',
         'd-m4',
         'd-px0',
         DROPDOWN_PADDING_CLASSES[this.padding],
