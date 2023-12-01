@@ -6,7 +6,7 @@ module.exports = {
   extends: [
     'standard',
     'semistandard',
-    'plugin:vue/recommended',
+    'plugin:vue/vue3-recommended',
     'plugin:vuejs-accessibility/recommended',
     'plugin:storybook/recommended',
   ],
@@ -46,12 +46,13 @@ module.exports = {
       required: {
         some: ['nesting', 'id'],
       },
-      allowChildren: true,
     }],
+    'vue/no-deprecated-destroyed-lifecycle': 'warn',
+    'vue/no-deprecated-dollar-listeners-api': 'warn',
+    'vue/no-deprecated-v-bind-sync': 'warn',
     'vue/new-line-between-multi-line-property': ['warn'],
     'vue/html-comment-content-spacing': ['warn'],
     'vue/no-potential-component-option-typo': ['warn'],
-    'vue/multi-word-component-names': ['off'],
     'vue/no-reserved-component-names': ['error', {
       disallowVueBuiltInComponents: true,
       disallowVue3BuiltInComponents: true,
