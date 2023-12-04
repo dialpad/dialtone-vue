@@ -1,6 +1,6 @@
 <template>
   <div
-    v-show="!hidden"
+    v-show="!hidePanel"
     :id="`dt-panel-${id}`"
     role="tabpanel"
     :tabindex="isFirstElementFocusable ? -1 : 0"
