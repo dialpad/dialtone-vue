@@ -1,7 +1,8 @@
 # ⚠️ Dialtone-vue repository is now part of a monorepo
 
 This repository has been deprecated and the files have been moved to 
-[Design system monorepo](https://github.com/dialpad/design-system/tree/staging/packages/dialtone-vue2) on Dec. 4th, 2023.
+[Design system monorepo](https://github.com/dialpad/design-system/tree/staging/packages/dialtone-vue3) 
+on Dec. 4th, 2023.
 
 # Dialtone Vue 📞
 
