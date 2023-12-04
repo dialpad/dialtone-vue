@@ -1,3 +1,8 @@
+# ⚠️ Dialtone-vue repository is now part of a monorepo
+
+This repository has been deprecated and the files have been moved to 
+[Design system monorepo](https://github.com/dialpad/design-system/tree/staging/packages/dialtone-vue2) on Dec. 4th, 2023.
+
 # Dialtone Vue 📞
 
 Dialtone Vue is a library of Vue components for [Dialtone][dt]. The goal is to simplify and standardize the use of common UI patterns and behaviour across all Dialpad projects.
